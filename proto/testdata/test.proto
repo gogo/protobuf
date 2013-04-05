@@ -239,9 +239,9 @@ message MyMessage {
   repeated OtherMessage others = 6;
 
   enum Color {
-    RED = 0;
-    GREEN = 1;
-    BLUE = 2;
+    MyMessage_RED = 0;
+    MyMessage_GREEN = 1;
+    MyMessage_BLUE = 2;
   };
   optional Color bikeshed = 7;
 
@@ -322,7 +322,7 @@ message SubDefaults {
 
 message RepeatedEnum {
   enum Color {
-    RED = 1;
+    RepeatedEnum_RED = 1;
   }
   repeated Color color = 1;
 }
@@ -333,4 +333,20 @@ message MoreRepeated {
   repeated int32 ints = 3;
   repeated int32 ints_packed = 4 [packed=true];
   repeated string strings = 5;
+}
+
+// GroupOld and GroupNew have the same wire format.
+// GroupNew has a new field inside a group.
+
+message GroupOld {
+  optional group G = 1 {
+    optional int32 x = 2;
+  }
+}
+
+message GroupNew {
+  optional group G = 1 {
+    optional int32 x = 2;
+    optional int32 y = 3;
+  }
 }

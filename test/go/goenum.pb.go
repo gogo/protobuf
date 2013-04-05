@@ -54,96 +54,18 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type TheTestEnumUint32 int32
-
-const (
-	TheTestEnumUint32_D TheTestEnumUint32 = 0
-	TheTestEnumUint32_E TheTestEnumUint32 = 1
-	TheTestEnumUint32_F TheTestEnumUint32 = 2
-)
-
-var TheTestEnumUint32_name = map[int32]string{
-	0: "D",
-	1: "E",
-	2: "F",
-}
-var TheTestEnumUint32_value = map[string]int32{
-	"D": 0,
-	"E": 1,
-	"F": 2,
-}
-
-func (x TheTestEnumUint32) Enum() *TheTestEnumUint32 {
-	p := new(TheTestEnumUint32)
-	*p = x
-	return p
-}
-func (x TheTestEnumUint32) String() string {
-	return proto.EnumName(TheTestEnumUint32_name, int32(x))
-}
-func (x TheTestEnumUint32) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
-}
-func (x *TheTestEnumUint32) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(TheTestEnumUint32_value, data, "TheTestEnumUint32")
-	if err != nil {
-		return err
-	}
-	*x = TheTestEnumUint32(value)
-	return nil
-}
-
-type TheTestEnumUint16 int32
-
-const (
-	TheTestEnumUint16_G TheTestEnumUint16 = 0
-	TheTestEnumUint16_H TheTestEnumUint16 = 1
-	TheTestEnumUint16_I TheTestEnumUint16 = 2
-)
-
-var TheTestEnumUint16_name = map[int32]string{
-	0: "G",
-	1: "H",
-	2: "I",
-}
-var TheTestEnumUint16_value = map[string]int32{
-	"G": 0,
-	"H": 1,
-	"I": 2,
-}
-
-func (x TheTestEnumUint16) Enum() *TheTestEnumUint16 {
-	p := new(TheTestEnumUint16)
-	*p = x
-	return p
-}
-func (x TheTestEnumUint16) String() string {
-	return proto.EnumName(TheTestEnumUint16_name, int32(x))
-}
-func (x TheTestEnumUint16) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
-}
-func (x *TheTestEnumUint16) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(TheTestEnumUint16_value, data, "TheTestEnumUint16")
-	if err != nil {
-		return err
-	}
-	*x = TheTestEnumUint16(value)
-	return nil
-}
-
 type NidOptEnum struct {
 	Field1           *TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
-func (this *NidOptEnum) Reset()         { *this = NidOptEnum{} }
-func (this *NidOptEnum) String() string { return proto.CompactTextString(this) }
-func (*NidOptEnum) ProtoMessage()       {}
+func (m *NidOptEnum) Reset()         { *m = NidOptEnum{} }
+func (m *NidOptEnum) String() string { return proto.CompactTextString(m) }
+func (*NidOptEnum) ProtoMessage()    {}
 
-func (this *NidOptEnum) GetField1() TheTestEnum {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NidOptEnum) GetField1() TheTestEnum {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
@@ -153,13 +75,13 @@ type NinOptEnum struct {
 	XXX_unrecognized []byte       `json:"-"`
 }
 
-func (this *NinOptEnum) Reset()         { *this = NinOptEnum{} }
-func (this *NinOptEnum) String() string { return proto.CompactTextString(this) }
-func (*NinOptEnum) ProtoMessage()       {}
+func (m *NinOptEnum) Reset()         { *m = NinOptEnum{} }
+func (m *NinOptEnum) String() string { return proto.CompactTextString(m) }
+func (*NinOptEnum) ProtoMessage()    {}
 
-func (this *NinOptEnum) GetField1() TheTestEnum {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NinOptEnum) GetField1() TheTestEnum {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
@@ -169,121 +91,33 @@ type NidRepEnum struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NidRepEnum) Reset()         { *this = NidRepEnum{} }
-func (this *NidRepEnum) String() string { return proto.CompactTextString(this) }
-func (*NidRepEnum) ProtoMessage()       {}
+func (m *NidRepEnum) Reset()         { *m = NidRepEnum{} }
+func (m *NidRepEnum) String() string { return proto.CompactTextString(m) }
+func (*NidRepEnum) ProtoMessage()    {}
+
+func (m *NidRepEnum) GetField1() []TheTestEnum {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
 
 type NinRepEnum struct {
 	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NinRepEnum) Reset()         { *this = NinRepEnum{} }
-func (this *NinRepEnum) String() string { return proto.CompactTextString(this) }
-func (*NinRepEnum) ProtoMessage()       {}
+func (m *NinRepEnum) Reset()         { *m = NinRepEnum{} }
+func (m *NinRepEnum) String() string { return proto.CompactTextString(m) }
+func (*NinRepEnum) ProtoMessage()    {}
 
-type NidOptEnumUint32 struct {
-	Field1           *TheTestEnumUint32 `protobuf:"varint,1,opt,enum=test.TheTestEnumUint32" json:"Field1,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
-}
-
-func (this *NidOptEnumUint32) Reset()         { *this = NidOptEnumUint32{} }
-func (this *NidOptEnumUint32) String() string { return proto.CompactTextString(this) }
-func (*NidOptEnumUint32) ProtoMessage()       {}
-
-func (this *NidOptEnumUint32) GetField1() TheTestEnumUint32 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NinRepEnum) GetField1() []TheTestEnum {
+	if m != nil {
+		return m.Field1
 	}
-	return 0
+	return nil
 }
-
-type NinOptEnumUint32 struct {
-	Field1           *TheTestEnumUint32 `protobuf:"varint,1,opt,enum=test.TheTestEnumUint32" json:"Field1,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
-}
-
-func (this *NinOptEnumUint32) Reset()         { *this = NinOptEnumUint32{} }
-func (this *NinOptEnumUint32) String() string { return proto.CompactTextString(this) }
-func (*NinOptEnumUint32) ProtoMessage()       {}
-
-func (this *NinOptEnumUint32) GetField1() TheTestEnumUint32 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
-	}
-	return 0
-}
-
-type NidRepEnumUint32 struct {
-	Field1           []TheTestEnumUint32 `protobuf:"varint,1,rep,enum=test.TheTestEnumUint32" json:"Field1,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (this *NidRepEnumUint32) Reset()         { *this = NidRepEnumUint32{} }
-func (this *NidRepEnumUint32) String() string { return proto.CompactTextString(this) }
-func (*NidRepEnumUint32) ProtoMessage()       {}
-
-type NinRepEnumUint32 struct {
-	Field1           []TheTestEnumUint32 `protobuf:"varint,1,rep,enum=test.TheTestEnumUint32" json:"Field1,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (this *NinRepEnumUint32) Reset()         { *this = NinRepEnumUint32{} }
-func (this *NinRepEnumUint32) String() string { return proto.CompactTextString(this) }
-func (*NinRepEnumUint32) ProtoMessage()       {}
-
-type NidOptEnumUint16 struct {
-	Field1           *TheTestEnumUint16 `protobuf:"varint,1,opt,enum=test.TheTestEnumUint16" json:"Field1,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
-}
-
-func (this *NidOptEnumUint16) Reset()         { *this = NidOptEnumUint16{} }
-func (this *NidOptEnumUint16) String() string { return proto.CompactTextString(this) }
-func (*NidOptEnumUint16) ProtoMessage()       {}
-
-func (this *NidOptEnumUint16) GetField1() TheTestEnumUint16 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
-	}
-	return 0
-}
-
-type NinOptEnumUint16 struct {
-	Field1           *TheTestEnumUint16 `protobuf:"varint,1,opt,enum=test.TheTestEnumUint16" json:"Field1,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
-}
-
-func (this *NinOptEnumUint16) Reset()         { *this = NinOptEnumUint16{} }
-func (this *NinOptEnumUint16) String() string { return proto.CompactTextString(this) }
-func (*NinOptEnumUint16) ProtoMessage()       {}
-
-func (this *NinOptEnumUint16) GetField1() TheTestEnumUint16 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
-	}
-	return 0
-}
-
-type NidRepEnumUint16 struct {
-	Field1           []TheTestEnumUint16 `protobuf:"varint,1,rep,enum=test.TheTestEnumUint16" json:"Field1,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (this *NidRepEnumUint16) Reset()         { *this = NidRepEnumUint16{} }
-func (this *NidRepEnumUint16) String() string { return proto.CompactTextString(this) }
-func (*NidRepEnumUint16) ProtoMessage()       {}
-
-type NinRepEnumUint16 struct {
-	Field1           []TheTestEnumUint16 `protobuf:"varint,1,rep,enum=test.TheTestEnumUint16" json:"Field1,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (this *NinRepEnumUint16) Reset()         { *this = NinRepEnumUint16{} }
-func (this *NinRepEnumUint16) String() string { return proto.CompactTextString(this) }
-func (*NinRepEnumUint16) ProtoMessage()       {}
 
 func init() {
 	proto.RegisterEnum("test.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
-	proto.RegisterEnum("test.TheTestEnumUint32", TheTestEnumUint32_name, TheTestEnumUint32_value)
-	proto.RegisterEnum("test.TheTestEnumUint16", TheTestEnumUint16_name, TheTestEnumUint16_value)
 }

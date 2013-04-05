@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2012 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -340,65 +343,4 @@ func (v *word64Slice) Index(i int) uint64 { return (*v)[i] }
 
 func structPointer_Word64Slice(p structPointer, f field) *word64Slice {
 	return (*word64Slice)(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
-// A word16 is the address of a "pointer to 16-bit value" field.
-type word16 **uint16
-
-func word16_IsNil(p word16) bool {
-	return *p == nil
-}
-
-func word16_Set(p word16, o *Buffer, x uint16) {
-	if len(o.uint16s) == 0 {
-		o.uint16s = make([]uint16, uint16PoolSize)
-	}
-	o.uint16s[0] = x
-	*p = &o.uint16s[0]
-	o.uint16s = o.uint16s[1:]
-}
-
-func word16_Get(p word16) uint16 {
-	return **p
-}
-
-// Word16 returns the address of a *int16, *uint16, or *enum field in the struct.
-func structPointer_Word16(p structPointer, f field) word16 {
-	return word16((**uint16)(unsafe.Pointer(uintptr(p) + uintptr(f))))
-}
-
-type refWord16 *uint16
-
-func refWord16_IsNil(p refWord16) bool {
-	return p == nil
-}
-
-func refWord16_Set(p refWord16, o *Buffer, x uint16) {
-	if len(o.uint16s) == 0 {
-		o.uint16s = make([]uint16, uint16PoolSize)
-	}
-	o.uint16s[0] = x
-	*p = o.uint16s[0]
-	o.uint16s = o.uint16s[1:]
-}
-
-func refWord16_Get(p refWord16) uint16 {
-	return *p
-}
-
-// RefWord16 returns the address of a int16, uint16 of enum field in the struct.
-func structPointer_RefWord16(p structPointer, f field) refWord16 {
-	return refWord16((*uint16)(unsafe.Pointer(uintptr(p) + uintptr(f))))
-}
-
-// A word16Slice is a slice of 16-bit values.
-type word16Slice []uint16
-
-func (v *word16Slice) Append(x uint16)    { *v = append(*v, x) }
-func (v *word16Slice) Len() int           { return len(*v) }
-func (v *word16Slice) Index(i int) uint16 { return (*v)[i] }
-
-// Word16Slice returns the address of a []int16, []uint16 or []enum field in the struct.
-func structPointer_Word16Slice(p structPointer, f field) *word16Slice {
-	return (*word16Slice)(unsafe.Pointer(uintptr(p) + uintptr(f)))
 }

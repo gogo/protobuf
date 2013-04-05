@@ -45,6 +45,7 @@ import (
 
 	"code.google.com/p/gogoprotobuf/proto"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+	_ "code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin/strings"
 )
 
 func main() {

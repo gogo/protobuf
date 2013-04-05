@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -441,7 +444,6 @@ func (o *Buffer) unmarshalType(st reflect.Type, prop *StructProperties, is_group
 // on at least 16-byte boundaries.
 const (
 	boolPoolSize   = 16
-	uint16PoolSize = 8
 	uint32PoolSize = 8
 	uint64PoolSize = 4
 )
@@ -486,16 +488,6 @@ func (o *Buffer) dec_int32(p *Properties, base structPointer) error {
 	return nil
 }
 
-// Decode an int32 pointer into an int16 pointer.
-func (o *Buffer) dec_int32_to_int16(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	word16_Set(structPointer_Word16(base, p.field), o, uint16(u))
-	return nil
-}
-
 // Decode a reference to an int32 pointer.
 func (o *Buffer) dec_ref_int32(p *Properties, base structPointer) error {
 	u, err := p.valDec(o)
@@ -503,16 +495,6 @@ func (o *Buffer) dec_ref_int32(p *Properties, base structPointer) error {
 		return err
 	}
 	refWord32_Set(structPointer_RefWord32(base, p.field), o, uint32(u))
-	return nil
-}
-
-// Decode an int32 into a reference to an int16 pointer.
-func (o *Buffer) dec_ref_int32_to_int16(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	refWord16_Set(structPointer_RefWord16(base, p.field), o, uint16(u))
 	return nil
 }
 
@@ -612,16 +594,6 @@ func (o *Buffer) dec_slice_int32(p *Properties, base structPointer) error {
 	return nil
 }
 
-// Decode a slice of int32s ([]int32) into a slice of int16s ([]int16).
-func (o *Buffer) dec_slice_int32_to_int16(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	structPointer_Word16Slice(base, p.field).Append(uint16(u))
-	return nil
-}
-
 // Decode a slice of int32s ([]int32) in packed format.
 func (o *Buffer) dec_slice_packed_int32(p *Properties, base structPointer) error {
 	v := structPointer_Word32Slice(base, p.field)
@@ -639,27 +611,6 @@ func (o *Buffer) dec_slice_packed_int32(p *Properties, base structPointer) error
 			return err
 		}
 		v.Append(uint32(u))
-	}
-	return nil
-}
-
-// Decode a slice of int32s ([]int32) in packed format into a slice of int16s ([]int16).
-func (o *Buffer) dec_slice_packed_int32_to_int16(p *Properties, base structPointer) error {
-	v := structPointer_Word16Slice(base, p.field)
-
-	nn, err := o.DecodeVarint()
-	if err != nil {
-		return err
-	}
-	nb := int(nn) // number of bytes of encoded int32s
-
-	fin := o.index + nb
-	for o.index < fin {
-		u, err := p.valDec(o)
-		if err != nil {
-			return err
-		}
-		v.Append(uint16(u))
 	}
 	return nil
 }
@@ -895,62 +846,14 @@ func setCustomType(base structPointer, f field, value interface{}) {
 	}
 }
 
-func (o *Buffer) dec_custom_string(p *Properties, base structPointer) error {
-	s, err := o.DecodeStringBytes()
-	if err != nil {
-		return err
-	}
-	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomStringType)
-	if err := custom.UnmarshalFromString(&s); err != nil {
-		return err
-	}
-	setPtrCustomType(base, p.field, custom)
-	return nil
-}
-
-func (o *Buffer) dec_custom_ref_string(p *Properties, base structPointer) error {
-	s, err := o.DecodeStringBytes()
-	if err != nil {
-		return err
-	}
-	i := reflect.New(p.ctype).Interface()
-	custom := (i).(CustomStringType)
-	if err := custom.UnmarshalFromString(&s); err != nil {
-		return err
-	}
-	if custom != nil {
-		setCustomType(base, p.field, custom)
-	}
-	return nil
-}
-
-// Decode a slice of strings ([]string) into a slice of custom types.
-func (o *Buffer) dec_custom_slice_string(p *Properties, base structPointer) error {
-	s, err := o.DecodeStringBytes()
-	if err != nil {
-		return err
-	}
-	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomStringType)
-	if err := custom.UnmarshalFromString(&s); err != nil {
-		return err
-	}
-	newBas := appendStructPointer(base, p.field, p.ctype)
-
-	setCustomType(newBas, 0, custom)
-
-	return nil
-}
-
 func (o *Buffer) dec_custom_bytes(p *Properties, base structPointer) error {
 	b, err := o.DecodeRawBytes(true)
 	if err != nil {
 		return err
 	}
 	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomBytesType)
-	if err := custom.UnmarshalFromBytes(b); err != nil {
+	custom := (i).(Unmarshaler)
+	if err := custom.Unmarshal(b); err != nil {
 		return err
 	}
 	setPtrCustomType(base, p.field, custom)
@@ -963,8 +866,8 @@ func (o *Buffer) dec_custom_ref_bytes(p *Properties, base structPointer) error {
 		return err
 	}
 	i := reflect.New(p.ctype).Interface()
-	custom := (i).(CustomBytesType)
-	if err := custom.UnmarshalFromBytes(b); err != nil {
+	custom := (i).(Unmarshaler)
+	if err := custom.Unmarshal(b); err != nil {
 		return err
 	}
 	if custom != nil {
@@ -980,59 +883,8 @@ func (o *Buffer) dec_custom_slice_bytes(p *Properties, base structPointer) error
 		return err
 	}
 	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomBytesType)
-	if err := custom.UnmarshalFromBytes(b); err != nil {
-		return err
-	}
-	newBas := appendStructPointer(base, p.field, p.ctype)
-
-	setCustomType(newBas, 0, custom)
-
-	return nil
-}
-
-func (o *Buffer) dec_custom_uint32(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	u32 := uint32(u)
-	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomUint32Type)
-	if err := custom.UnmarshalFromUint32(&u32); err != nil {
-		return err
-	}
-	setPtrCustomType(base, p.field, custom)
-	return nil
-}
-
-func (o *Buffer) dec_custom_ref_uint32(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	u32 := uint32(u)
-	i := reflect.New(p.ctype).Interface()
-	custom := (i).(CustomUint32Type)
-	if err := custom.UnmarshalFromUint32(&u32); err != nil {
-		return err
-	}
-	if custom != nil {
-		setCustomType(base, p.field, custom)
-	}
-	return nil
-}
-
-// Decode a slice of strings ([]string).
-func (o *Buffer) dec_custom_slice_uint32(p *Properties, base structPointer) error {
-	u, err := p.valDec(o)
-	if err != nil {
-		return err
-	}
-	u32 := uint32(u)
-	i := reflect.New(p.ctype.Elem()).Interface()
-	custom := (i).(CustomUint32Type)
-	if err := custom.UnmarshalFromUint32(&u32); err != nil {
+	custom := (i).(Unmarshaler)
+	if err := custom.Unmarshal(b); err != nil {
 		return err
 	}
 	newBas := appendStructPointer(base, p.field, p.ctype)

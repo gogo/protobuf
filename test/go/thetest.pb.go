@@ -16,33 +16,33 @@ var _ = &json.SyntaxError{}
 var _ = math.Inf
 
 type SimpleMessage struct {
-	Id               *string `protobuf:"bytes,1,opt" json:"Id,omitempty"`
+	Id               []byte  `protobuf:"bytes,1,opt" json:"Id,omitempty"`
 	SimpleName       *string `protobuf:"bytes,2,opt" json:"SimpleName,omitempty"`
 	Time             *int64  `protobuf:"varint,3,opt" json:"Time,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (this *SimpleMessage) Reset()         { *this = SimpleMessage{} }
-func (this *SimpleMessage) String() string { return proto.CompactTextString(this) }
-func (*SimpleMessage) ProtoMessage()       {}
+func (m *SimpleMessage) Reset()         { *m = SimpleMessage{} }
+func (m *SimpleMessage) String() string { return proto.CompactTextString(m) }
+func (*SimpleMessage) ProtoMessage()    {}
 
-func (this *SimpleMessage) GetId() string {
-	if this != nil && this.Id != nil {
-		return *this.Id
+func (m *SimpleMessage) GetId() []byte {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
+
+func (m *SimpleMessage) GetSimpleName() string {
+	if m != nil && m.SimpleName != nil {
+		return *m.SimpleName
 	}
 	return ""
 }
 
-func (this *SimpleMessage) GetSimpleName() string {
-	if this != nil && this.SimpleName != nil {
-		return *this.SimpleName
-	}
-	return ""
-}
-
-func (this *SimpleMessage) GetTime() int64 {
-	if this != nil && this.Time != nil {
-		return *this.Time
+func (m *SimpleMessage) GetTime() int64 {
+	if m != nil && m.Time != nil {
+		return *m.Time
 	}
 	return 0
 }
@@ -66,111 +66,111 @@ type NidOptNative struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NidOptNative) Reset()         { *this = NidOptNative{} }
-func (this *NidOptNative) String() string { return proto.CompactTextString(this) }
-func (*NidOptNative) ProtoMessage()       {}
+func (m *NidOptNative) Reset()         { *m = NidOptNative{} }
+func (m *NidOptNative) String() string { return proto.CompactTextString(m) }
+func (*NidOptNative) ProtoMessage()    {}
 
-func (this *NidOptNative) GetField1() float64 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NidOptNative) GetField1() float64 {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField2() float32 {
-	if this != nil && this.Field2 != nil {
-		return *this.Field2
+func (m *NidOptNative) GetField2() float32 {
+	if m != nil && m.Field2 != nil {
+		return *m.Field2
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField3() int32 {
-	if this != nil && this.Field3 != nil {
-		return *this.Field3
+func (m *NidOptNative) GetField3() int32 {
+	if m != nil && m.Field3 != nil {
+		return *m.Field3
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField4() int64 {
-	if this != nil && this.Field4 != nil {
-		return *this.Field4
+func (m *NidOptNative) GetField4() int64 {
+	if m != nil && m.Field4 != nil {
+		return *m.Field4
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField5() uint32 {
-	if this != nil && this.Field5 != nil {
-		return *this.Field5
+func (m *NidOptNative) GetField5() uint32 {
+	if m != nil && m.Field5 != nil {
+		return *m.Field5
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField6() uint64 {
-	if this != nil && this.Field6 != nil {
-		return *this.Field6
+func (m *NidOptNative) GetField6() uint64 {
+	if m != nil && m.Field6 != nil {
+		return *m.Field6
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField7() int32 {
-	if this != nil && this.Field7 != nil {
-		return *this.Field7
+func (m *NidOptNative) GetField7() int32 {
+	if m != nil && m.Field7 != nil {
+		return *m.Field7
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField8() int64 {
-	if this != nil && this.Field8 != nil {
-		return *this.Field8
+func (m *NidOptNative) GetField8() int64 {
+	if m != nil && m.Field8 != nil {
+		return *m.Field8
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField9() uint32 {
-	if this != nil && this.Field9 != nil {
-		return *this.Field9
+func (m *NidOptNative) GetField9() uint32 {
+	if m != nil && m.Field9 != nil {
+		return *m.Field9
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField10() int32 {
-	if this != nil && this.Field10 != nil {
-		return *this.Field10
+func (m *NidOptNative) GetField10() int32 {
+	if m != nil && m.Field10 != nil {
+		return *m.Field10
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField11() uint64 {
-	if this != nil && this.Field11 != nil {
-		return *this.Field11
+func (m *NidOptNative) GetField11() uint64 {
+	if m != nil && m.Field11 != nil {
+		return *m.Field11
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField12() int64 {
-	if this != nil && this.Field12 != nil {
-		return *this.Field12
+func (m *NidOptNative) GetField12() int64 {
+	if m != nil && m.Field12 != nil {
+		return *m.Field12
 	}
 	return 0
 }
 
-func (this *NidOptNative) GetField13() bool {
-	if this != nil && this.Field13 != nil {
-		return *this.Field13
+func (m *NidOptNative) GetField13() bool {
+	if m != nil && m.Field13 != nil {
+		return *m.Field13
 	}
 	return false
 }
 
-func (this *NidOptNative) GetField14() string {
-	if this != nil && this.Field14 != nil {
-		return *this.Field14
+func (m *NidOptNative) GetField14() string {
+	if m != nil && m.Field14 != nil {
+		return *m.Field14
 	}
 	return ""
 }
 
-func (this *NidOptNative) GetField15() []byte {
-	if this != nil {
-		return this.Field15
+func (m *NidOptNative) GetField15() []byte {
+	if m != nil {
+		return m.Field15
 	}
 	return nil
 }
@@ -194,111 +194,111 @@ type NinOptNative struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NinOptNative) Reset()         { *this = NinOptNative{} }
-func (this *NinOptNative) String() string { return proto.CompactTextString(this) }
-func (*NinOptNative) ProtoMessage()       {}
+func (m *NinOptNative) Reset()         { *m = NinOptNative{} }
+func (m *NinOptNative) String() string { return proto.CompactTextString(m) }
+func (*NinOptNative) ProtoMessage()    {}
 
-func (this *NinOptNative) GetField1() float64 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NinOptNative) GetField1() float64 {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField2() float32 {
-	if this != nil && this.Field2 != nil {
-		return *this.Field2
+func (m *NinOptNative) GetField2() float32 {
+	if m != nil && m.Field2 != nil {
+		return *m.Field2
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField3() int32 {
-	if this != nil && this.Field3 != nil {
-		return *this.Field3
+func (m *NinOptNative) GetField3() int32 {
+	if m != nil && m.Field3 != nil {
+		return *m.Field3
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField4() int64 {
-	if this != nil && this.Field4 != nil {
-		return *this.Field4
+func (m *NinOptNative) GetField4() int64 {
+	if m != nil && m.Field4 != nil {
+		return *m.Field4
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField5() uint32 {
-	if this != nil && this.Field5 != nil {
-		return *this.Field5
+func (m *NinOptNative) GetField5() uint32 {
+	if m != nil && m.Field5 != nil {
+		return *m.Field5
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField6() uint64 {
-	if this != nil && this.Field6 != nil {
-		return *this.Field6
+func (m *NinOptNative) GetField6() uint64 {
+	if m != nil && m.Field6 != nil {
+		return *m.Field6
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField7() int32 {
-	if this != nil && this.Field7 != nil {
-		return *this.Field7
+func (m *NinOptNative) GetField7() int32 {
+	if m != nil && m.Field7 != nil {
+		return *m.Field7
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField8() int64 {
-	if this != nil && this.Field8 != nil {
-		return *this.Field8
+func (m *NinOptNative) GetField8() int64 {
+	if m != nil && m.Field8 != nil {
+		return *m.Field8
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField9() uint32 {
-	if this != nil && this.Field9 != nil {
-		return *this.Field9
+func (m *NinOptNative) GetField9() uint32 {
+	if m != nil && m.Field9 != nil {
+		return *m.Field9
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField10() int32 {
-	if this != nil && this.Field10 != nil {
-		return *this.Field10
+func (m *NinOptNative) GetField10() int32 {
+	if m != nil && m.Field10 != nil {
+		return *m.Field10
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField11() uint64 {
-	if this != nil && this.Field11 != nil {
-		return *this.Field11
+func (m *NinOptNative) GetField11() uint64 {
+	if m != nil && m.Field11 != nil {
+		return *m.Field11
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField12() int64 {
-	if this != nil && this.Field12 != nil {
-		return *this.Field12
+func (m *NinOptNative) GetField12() int64 {
+	if m != nil && m.Field12 != nil {
+		return *m.Field12
 	}
 	return 0
 }
 
-func (this *NinOptNative) GetField13() bool {
-	if this != nil && this.Field13 != nil {
-		return *this.Field13
+func (m *NinOptNative) GetField13() bool {
+	if m != nil && m.Field13 != nil {
+		return *m.Field13
 	}
 	return false
 }
 
-func (this *NinOptNative) GetField14() string {
-	if this != nil && this.Field14 != nil {
-		return *this.Field14
+func (m *NinOptNative) GetField14() string {
+	if m != nil && m.Field14 != nil {
+		return *m.Field14
 	}
 	return ""
 }
 
-func (this *NinOptNative) GetField15() []byte {
-	if this != nil {
-		return this.Field15
+func (m *NinOptNative) GetField15() []byte {
+	if m != nil {
+		return m.Field15
 	}
 	return nil
 }
@@ -322,9 +322,114 @@ type NidRepNative struct {
 	XXX_unrecognized []byte    `json:"-"`
 }
 
-func (this *NidRepNative) Reset()         { *this = NidRepNative{} }
-func (this *NidRepNative) String() string { return proto.CompactTextString(this) }
-func (*NidRepNative) ProtoMessage()       {}
+func (m *NidRepNative) Reset()         { *m = NidRepNative{} }
+func (m *NidRepNative) String() string { return proto.CompactTextString(m) }
+func (*NidRepNative) ProtoMessage()    {}
+
+func (m *NidRepNative) GetField1() []float64 {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField2() []float32 {
+	if m != nil {
+		return m.Field2
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField3() []int32 {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField4() []int64 {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField5() []uint32 {
+	if m != nil {
+		return m.Field5
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField6() []uint64 {
+	if m != nil {
+		return m.Field6
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField7() []int32 {
+	if m != nil {
+		return m.Field7
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField8() []int64 {
+	if m != nil {
+		return m.Field8
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField9() []uint32 {
+	if m != nil {
+		return m.Field9
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField10() []int32 {
+	if m != nil {
+		return m.Field10
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField11() []uint64 {
+	if m != nil {
+		return m.Field11
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField12() []int64 {
+	if m != nil {
+		return m.Field12
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField14() []string {
+	if m != nil {
+		return m.Field14
+	}
+	return nil
+}
+
+func (m *NidRepNative) GetField15() [][]byte {
+	if m != nil {
+		return m.Field15
+	}
+	return nil
+}
 
 type NinRepNative struct {
 	Field1           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
@@ -345,9 +450,114 @@ type NinRepNative struct {
 	XXX_unrecognized []byte    `json:"-"`
 }
 
-func (this *NinRepNative) Reset()         { *this = NinRepNative{} }
-func (this *NinRepNative) String() string { return proto.CompactTextString(this) }
-func (*NinRepNative) ProtoMessage()       {}
+func (m *NinRepNative) Reset()         { *m = NinRepNative{} }
+func (m *NinRepNative) String() string { return proto.CompactTextString(m) }
+func (*NinRepNative) ProtoMessage()    {}
+
+func (m *NinRepNative) GetField1() []float64 {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField2() []float32 {
+	if m != nil {
+		return m.Field2
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField3() []int32 {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField4() []int64 {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField5() []uint32 {
+	if m != nil {
+		return m.Field5
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField6() []uint64 {
+	if m != nil {
+		return m.Field6
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField7() []int32 {
+	if m != nil {
+		return m.Field7
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField8() []int64 {
+	if m != nil {
+		return m.Field8
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField9() []uint32 {
+	if m != nil {
+		return m.Field9
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField10() []int32 {
+	if m != nil {
+		return m.Field10
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField11() []uint64 {
+	if m != nil {
+		return m.Field11
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField12() []int64 {
+	if m != nil {
+		return m.Field12
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField14() []string {
+	if m != nil {
+		return m.Field14
+	}
+	return nil
+}
+
+func (m *NinRepNative) GetField15() [][]byte {
+	if m != nil {
+		return m.Field15
+	}
+	return nil
+}
 
 type NidRepPackedNative struct {
 	Field3           []int32 `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
@@ -356,9 +566,30 @@ type NidRepPackedNative struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (this *NidRepPackedNative) Reset()         { *this = NidRepPackedNative{} }
-func (this *NidRepPackedNative) String() string { return proto.CompactTextString(this) }
-func (*NidRepPackedNative) ProtoMessage()       {}
+func (m *NidRepPackedNative) Reset()         { *m = NidRepPackedNative{} }
+func (m *NidRepPackedNative) String() string { return proto.CompactTextString(m) }
+func (*NidRepPackedNative) ProtoMessage()    {}
+
+func (m *NidRepPackedNative) GetField3() []int32 {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NidRepPackedNative) GetField4() []int64 {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NidRepPackedNative) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
 
 type NinRepPackedNative struct {
 	Field3           []int32 `protobuf:"varint,3,rep" json:"Field3,omitempty"`
@@ -367,9 +598,30 @@ type NinRepPackedNative struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (this *NinRepPackedNative) Reset()         { *this = NinRepPackedNative{} }
-func (this *NinRepPackedNative) String() string { return proto.CompactTextString(this) }
-func (*NinRepPackedNative) ProtoMessage()       {}
+func (m *NinRepPackedNative) Reset()         { *m = NinRepPackedNative{} }
+func (m *NinRepPackedNative) String() string { return proto.CompactTextString(m) }
+func (*NinRepPackedNative) ProtoMessage()    {}
+
+func (m *NinRepPackedNative) GetField3() []int32 {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NinRepPackedNative) GetField4() []int64 {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NinRepPackedNative) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
 
 type NidOptStruct struct {
 	Field1           *float64      `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
@@ -385,76 +637,76 @@ type NidOptStruct struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NidOptStruct) Reset()         { *this = NidOptStruct{} }
-func (this *NidOptStruct) String() string { return proto.CompactTextString(this) }
-func (*NidOptStruct) ProtoMessage()       {}
+func (m *NidOptStruct) Reset()         { *m = NidOptStruct{} }
+func (m *NidOptStruct) String() string { return proto.CompactTextString(m) }
+func (*NidOptStruct) ProtoMessage()    {}
 
-func (this *NidOptStruct) GetField1() float64 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NidOptStruct) GetField1() float64 {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
 
-func (this *NidOptStruct) GetField2() float32 {
-	if this != nil && this.Field2 != nil {
-		return *this.Field2
+func (m *NidOptStruct) GetField2() float32 {
+	if m != nil && m.Field2 != nil {
+		return *m.Field2
 	}
 	return 0
 }
 
-func (this *NidOptStruct) GetField3() *NidOptNative {
-	if this != nil {
-		return this.Field3
+func (m *NidOptStruct) GetField3() *NidOptNative {
+	if m != nil {
+		return m.Field3
 	}
 	return nil
 }
 
-func (this *NidOptStruct) GetField4() *NinOptNative {
-	if this != nil {
-		return this.Field4
+func (m *NidOptStruct) GetField4() *NinOptNative {
+	if m != nil {
+		return m.Field4
 	}
 	return nil
 }
 
-func (this *NidOptStruct) GetField6() uint64 {
-	if this != nil && this.Field6 != nil {
-		return *this.Field6
+func (m *NidOptStruct) GetField6() uint64 {
+	if m != nil && m.Field6 != nil {
+		return *m.Field6
 	}
 	return 0
 }
 
-func (this *NidOptStruct) GetField7() int32 {
-	if this != nil && this.Field7 != nil {
-		return *this.Field7
+func (m *NidOptStruct) GetField7() int32 {
+	if m != nil && m.Field7 != nil {
+		return *m.Field7
 	}
 	return 0
 }
 
-func (this *NidOptStruct) GetField8() *NidOptNative {
-	if this != nil {
-		return this.Field8
+func (m *NidOptStruct) GetField8() *NidOptNative {
+	if m != nil {
+		return m.Field8
 	}
 	return nil
 }
 
-func (this *NidOptStruct) GetField13() bool {
-	if this != nil && this.Field13 != nil {
-		return *this.Field13
+func (m *NidOptStruct) GetField13() bool {
+	if m != nil && m.Field13 != nil {
+		return *m.Field13
 	}
 	return false
 }
 
-func (this *NidOptStruct) GetField14() string {
-	if this != nil && this.Field14 != nil {
-		return *this.Field14
+func (m *NidOptStruct) GetField14() string {
+	if m != nil && m.Field14 != nil {
+		return *m.Field14
 	}
 	return ""
 }
 
-func (this *NidOptStruct) GetField15() []byte {
-	if this != nil {
-		return this.Field15
+func (m *NidOptStruct) GetField15() []byte {
+	if m != nil {
+		return m.Field15
 	}
 	return nil
 }
@@ -473,76 +725,76 @@ type NinOptStruct struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NinOptStruct) Reset()         { *this = NinOptStruct{} }
-func (this *NinOptStruct) String() string { return proto.CompactTextString(this) }
-func (*NinOptStruct) ProtoMessage()       {}
+func (m *NinOptStruct) Reset()         { *m = NinOptStruct{} }
+func (m *NinOptStruct) String() string { return proto.CompactTextString(m) }
+func (*NinOptStruct) ProtoMessage()    {}
 
-func (this *NinOptStruct) GetField1() float64 {
-	if this != nil && this.Field1 != nil {
-		return *this.Field1
+func (m *NinOptStruct) GetField1() float64 {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
 	}
 	return 0
 }
 
-func (this *NinOptStruct) GetField2() float32 {
-	if this != nil && this.Field2 != nil {
-		return *this.Field2
+func (m *NinOptStruct) GetField2() float32 {
+	if m != nil && m.Field2 != nil {
+		return *m.Field2
 	}
 	return 0
 }
 
-func (this *NinOptStruct) GetField3() *NidOptNative {
-	if this != nil {
-		return this.Field3
+func (m *NinOptStruct) GetField3() *NidOptNative {
+	if m != nil {
+		return m.Field3
 	}
 	return nil
 }
 
-func (this *NinOptStruct) GetField4() *NinOptNative {
-	if this != nil {
-		return this.Field4
+func (m *NinOptStruct) GetField4() *NinOptNative {
+	if m != nil {
+		return m.Field4
 	}
 	return nil
 }
 
-func (this *NinOptStruct) GetField6() uint64 {
-	if this != nil && this.Field6 != nil {
-		return *this.Field6
+func (m *NinOptStruct) GetField6() uint64 {
+	if m != nil && m.Field6 != nil {
+		return *m.Field6
 	}
 	return 0
 }
 
-func (this *NinOptStruct) GetField7() int32 {
-	if this != nil && this.Field7 != nil {
-		return *this.Field7
+func (m *NinOptStruct) GetField7() int32 {
+	if m != nil && m.Field7 != nil {
+		return *m.Field7
 	}
 	return 0
 }
 
-func (this *NinOptStruct) GetField8() *NidOptNative {
-	if this != nil {
-		return this.Field8
+func (m *NinOptStruct) GetField8() *NidOptNative {
+	if m != nil {
+		return m.Field8
 	}
 	return nil
 }
 
-func (this *NinOptStruct) GetField13() bool {
-	if this != nil && this.Field13 != nil {
-		return *this.Field13
+func (m *NinOptStruct) GetField13() bool {
+	if m != nil && m.Field13 != nil {
+		return *m.Field13
 	}
 	return false
 }
 
-func (this *NinOptStruct) GetField14() string {
-	if this != nil && this.Field14 != nil {
-		return *this.Field14
+func (m *NinOptStruct) GetField14() string {
+	if m != nil && m.Field14 != nil {
+		return *m.Field14
 	}
 	return ""
 }
 
-func (this *NinOptStruct) GetField15() []byte {
-	if this != nil {
-		return this.Field15
+func (m *NinOptStruct) GetField15() []byte {
+	if m != nil {
+		return m.Field15
 	}
 	return nil
 }
@@ -561,9 +813,79 @@ type NidRepStruct struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (this *NidRepStruct) Reset()         { *this = NidRepStruct{} }
-func (this *NidRepStruct) String() string { return proto.CompactTextString(this) }
-func (*NidRepStruct) ProtoMessage()       {}
+func (m *NidRepStruct) Reset()         { *m = NidRepStruct{} }
+func (m *NidRepStruct) String() string { return proto.CompactTextString(m) }
+func (*NidRepStruct) ProtoMessage()    {}
+
+func (m *NidRepStruct) GetField1() []float64 {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField2() []float32 {
+	if m != nil {
+		return m.Field2
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField3() []*NidOptNative {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField4() []*NinOptNative {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField6() []uint64 {
+	if m != nil {
+		return m.Field6
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField7() []int32 {
+	if m != nil {
+		return m.Field7
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField8() []*NidOptNative {
+	if m != nil {
+		return m.Field8
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField14() []string {
+	if m != nil {
+		return m.Field14
+	}
+	return nil
+}
+
+func (m *NidRepStruct) GetField15() [][]byte {
+	if m != nil {
+		return m.Field15
+	}
+	return nil
+}
 
 type NinRepStruct struct {
 	Field1           []float64       `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
@@ -579,9 +901,79 @@ type NinRepStruct struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (this *NinRepStruct) Reset()         { *this = NinRepStruct{} }
-func (this *NinRepStruct) String() string { return proto.CompactTextString(this) }
-func (*NinRepStruct) ProtoMessage()       {}
+func (m *NinRepStruct) Reset()         { *m = NinRepStruct{} }
+func (m *NinRepStruct) String() string { return proto.CompactTextString(m) }
+func (*NinRepStruct) ProtoMessage()    {}
+
+func (m *NinRepStruct) GetField1() []float64 {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField2() []float32 {
+	if m != nil {
+		return m.Field2
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField3() []*NidOptNative {
+	if m != nil {
+		return m.Field3
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField4() []*NinOptNative {
+	if m != nil {
+		return m.Field4
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField6() []uint64 {
+	if m != nil {
+		return m.Field6
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField7() []int32 {
+	if m != nil {
+		return m.Field7
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField8() []*NidOptNative {
+	if m != nil {
+		return m.Field8
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField13() []bool {
+	if m != nil {
+		return m.Field13
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField14() []string {
+	if m != nil {
+		return m.Field14
+	}
+	return nil
+}
+
+func (m *NinRepStruct) GetField15() [][]byte {
+	if m != nil {
+		return m.Field15
+	}
+	return nil
+}
 
 type NidEmbeddedStruct struct {
 	Field1           *NidOptNative `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
@@ -590,27 +982,27 @@ type NidEmbeddedStruct struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NidEmbeddedStruct) Reset()         { *this = NidEmbeddedStruct{} }
-func (this *NidEmbeddedStruct) String() string { return proto.CompactTextString(this) }
-func (*NidEmbeddedStruct) ProtoMessage()       {}
+func (m *NidEmbeddedStruct) Reset()         { *m = NidEmbeddedStruct{} }
+func (m *NidEmbeddedStruct) String() string { return proto.CompactTextString(m) }
+func (*NidEmbeddedStruct) ProtoMessage()    {}
 
-func (this *NidEmbeddedStruct) GetField1() *NidOptNative {
-	if this != nil {
-		return this.Field1
+func (m *NidEmbeddedStruct) GetField1() *NidOptNative {
+	if m != nil {
+		return m.Field1
 	}
 	return nil
 }
 
-func (this *NidEmbeddedStruct) GetField200() *NidOptNative {
-	if this != nil {
-		return this.Field200
+func (m *NidEmbeddedStruct) GetField200() *NidOptNative {
+	if m != nil {
+		return m.Field200
 	}
 	return nil
 }
 
-func (this *NidEmbeddedStruct) GetField210() bool {
-	if this != nil && this.Field210 != nil {
-		return *this.Field210
+func (m *NidEmbeddedStruct) GetField210() bool {
+	if m != nil && m.Field210 != nil {
+		return *m.Field210
 	}
 	return false
 }
@@ -622,27 +1014,27 @@ type NinEmbeddedStruct struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (this *NinEmbeddedStruct) Reset()         { *this = NinEmbeddedStruct{} }
-func (this *NinEmbeddedStruct) String() string { return proto.CompactTextString(this) }
-func (*NinEmbeddedStruct) ProtoMessage()       {}
+func (m *NinEmbeddedStruct) Reset()         { *m = NinEmbeddedStruct{} }
+func (m *NinEmbeddedStruct) String() string { return proto.CompactTextString(m) }
+func (*NinEmbeddedStruct) ProtoMessage()    {}
 
-func (this *NinEmbeddedStruct) GetField1() *NidOptNative {
-	if this != nil {
-		return this.Field1
+func (m *NinEmbeddedStruct) GetField1() *NidOptNative {
+	if m != nil {
+		return m.Field1
 	}
 	return nil
 }
 
-func (this *NinEmbeddedStruct) GetField200() *NidOptNative {
-	if this != nil {
-		return this.Field200
+func (m *NinEmbeddedStruct) GetField200() *NidOptNative {
+	if m != nil {
+		return m.Field200
 	}
 	return nil
 }
 
-func (this *NinEmbeddedStruct) GetField210() bool {
-	if this != nil && this.Field210 != nil {
-		return *this.Field210
+func (m *NinEmbeddedStruct) GetField210() bool {
+	if m != nil && m.Field210 != nil {
+		return *m.Field210
 	}
 	return false
 }
@@ -653,13 +1045,20 @@ type NidNestedStruct struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (this *NidNestedStruct) Reset()         { *this = NidNestedStruct{} }
-func (this *NidNestedStruct) String() string { return proto.CompactTextString(this) }
-func (*NidNestedStruct) ProtoMessage()       {}
+func (m *NidNestedStruct) Reset()         { *m = NidNestedStruct{} }
+func (m *NidNestedStruct) String() string { return proto.CompactTextString(m) }
+func (*NidNestedStruct) ProtoMessage()    {}
 
-func (this *NidNestedStruct) GetField1() *NidOptStruct {
-	if this != nil {
-		return this.Field1
+func (m *NidNestedStruct) GetField1() *NidOptStruct {
+	if m != nil {
+		return m.Field1
+	}
+	return nil
+}
+
+func (m *NidNestedStruct) GetField2() []*NidRepStruct {
+	if m != nil {
+		return m.Field2
 	}
 	return nil
 }
@@ -670,179 +1069,36 @@ type NinNestedStruct struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (this *NinNestedStruct) Reset()         { *this = NinNestedStruct{} }
-func (this *NinNestedStruct) String() string { return proto.CompactTextString(this) }
-func (*NinNestedStruct) ProtoMessage()       {}
+func (m *NinNestedStruct) Reset()         { *m = NinNestedStruct{} }
+func (m *NinNestedStruct) String() string { return proto.CompactTextString(m) }
+func (*NinNestedStruct) ProtoMessage()    {}
 
-func (this *NinNestedStruct) GetField1() *NidOptStruct {
-	if this != nil {
-		return this.Field1
+func (m *NinNestedStruct) GetField1() *NidOptStruct {
+	if m != nil {
+		return m.Field1
 	}
 	return nil
 }
 
-type NidOptUuid struct {
-	Id               *string `protobuf:"bytes,1,opt" json:"Id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NidOptUuid) Reset()         { *this = NidOptUuid{} }
-func (this *NidOptUuid) String() string { return proto.CompactTextString(this) }
-func (*NidOptUuid) ProtoMessage()       {}
-
-func (this *NidOptUuid) GetId() string {
-	if this != nil && this.Id != nil {
-		return *this.Id
+func (m *NinNestedStruct) GetField2() []*NidRepStruct {
+	if m != nil {
+		return m.Field2
 	}
-	return ""
+	return nil
 }
-
-type NinOptUuid struct {
-	Id               *string `protobuf:"bytes,1,opt" json:"Id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NinOptUuid) Reset()         { *this = NinOptUuid{} }
-func (this *NinOptUuid) String() string { return proto.CompactTextString(this) }
-func (*NinOptUuid) ProtoMessage()       {}
-
-func (this *NinOptUuid) GetId() string {
-	if this != nil && this.Id != nil {
-		return *this.Id
-	}
-	return ""
-}
-
-type NidRepUuid struct {
-	Id               []string `protobuf:"bytes,1,rep" json:"Id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NidRepUuid) Reset()         { *this = NidRepUuid{} }
-func (this *NidRepUuid) String() string { return proto.CompactTextString(this) }
-func (*NidRepUuid) ProtoMessage()       {}
-
-type NinRepUuid struct {
-	Id               []string `protobuf:"bytes,1,rep" json:"Id,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NinRepUuid) Reset()         { *this = NinRepUuid{} }
-func (this *NinRepUuid) String() string { return proto.CompactTextString(this) }
-func (*NinRepUuid) ProtoMessage()       {}
-
-type NidOptUint128 struct {
-	Value            *string `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NidOptUint128) Reset()         { *this = NidOptUint128{} }
-func (this *NidOptUint128) String() string { return proto.CompactTextString(this) }
-func (*NidOptUint128) ProtoMessage()       {}
-
-func (this *NidOptUint128) GetValue() string {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return ""
-}
-
-type NinOptUint128 struct {
-	Value            *string `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NinOptUint128) Reset()         { *this = NinOptUint128{} }
-func (this *NinOptUint128) String() string { return proto.CompactTextString(this) }
-func (*NinOptUint128) ProtoMessage()       {}
-
-func (this *NinOptUint128) GetValue() string {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return ""
-}
-
-type NidRepUint128 struct {
-	Value            []string `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NidRepUint128) Reset()         { *this = NidRepUint128{} }
-func (this *NidRepUint128) String() string { return proto.CompactTextString(this) }
-func (*NidRepUint128) ProtoMessage()       {}
-
-type NinRepUint128 struct {
-	Value            []string `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NinRepUint128) Reset()         { *this = NinRepUint128{} }
-func (this *NinRepUint128) String() string { return proto.CompactTextString(this) }
-func (*NinRepUint128) ProtoMessage()       {}
-
-type NidOptUint16 struct {
-	Value            *string `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NidOptUint16) Reset()         { *this = NidOptUint16{} }
-func (this *NidOptUint16) String() string { return proto.CompactTextString(this) }
-func (*NidOptUint16) ProtoMessage()       {}
-
-func (this *NidOptUint16) GetValue() string {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return ""
-}
-
-type NinOptUint16 struct {
-	Value            *string `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NinOptUint16) Reset()         { *this = NinOptUint16{} }
-func (this *NinOptUint16) String() string { return proto.CompactTextString(this) }
-func (*NinOptUint16) ProtoMessage()       {}
-
-func (this *NinOptUint16) GetValue() string {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return ""
-}
-
-type NidRepUint16 struct {
-	Value            []string `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NidRepUint16) Reset()         { *this = NidRepUint16{} }
-func (this *NidRepUint16) String() string { return proto.CompactTextString(this) }
-func (*NidRepUint16) ProtoMessage()       {}
-
-type NinRepUint16 struct {
-	Value            []string `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NinRepUint16) Reset()         { *this = NinRepUint16{} }
-func (this *NinRepUint16) String() string { return proto.CompactTextString(this) }
-func (*NinRepUint16) ProtoMessage()       {}
 
 type NidOptUuidAsBytes struct {
 	Id               []byte `protobuf:"bytes,1,opt" json:"Id,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (this *NidOptUuidAsBytes) Reset()         { *this = NidOptUuidAsBytes{} }
-func (this *NidOptUuidAsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidOptUuidAsBytes) ProtoMessage()       {}
+func (m *NidOptUuidAsBytes) Reset()         { *m = NidOptUuidAsBytes{} }
+func (m *NidOptUuidAsBytes) String() string { return proto.CompactTextString(m) }
+func (*NidOptUuidAsBytes) ProtoMessage()    {}
 
-func (this *NidOptUuidAsBytes) GetId() []byte {
-	if this != nil {
-		return this.Id
+func (m *NidOptUuidAsBytes) GetId() []byte {
+	if m != nil {
+		return m.Id
 	}
 	return nil
 }
@@ -852,13 +1108,13 @@ type NinOptUuidAsBytes struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (this *NinOptUuidAsBytes) Reset()         { *this = NinOptUuidAsBytes{} }
-func (this *NinOptUuidAsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinOptUuidAsBytes) ProtoMessage()       {}
+func (m *NinOptUuidAsBytes) Reset()         { *m = NinOptUuidAsBytes{} }
+func (m *NinOptUuidAsBytes) String() string { return proto.CompactTextString(m) }
+func (*NinOptUuidAsBytes) ProtoMessage()    {}
 
-func (this *NinOptUuidAsBytes) GetId() []byte {
-	if this != nil {
-		return this.Id
+func (m *NinOptUuidAsBytes) GetId() []byte {
+	if m != nil {
+		return m.Id
 	}
 	return nil
 }
@@ -868,31 +1124,45 @@ type NidRepUuidAsBytes struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NidRepUuidAsBytes) Reset()         { *this = NidRepUuidAsBytes{} }
-func (this *NidRepUuidAsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidRepUuidAsBytes) ProtoMessage()       {}
+func (m *NidRepUuidAsBytes) Reset()         { *m = NidRepUuidAsBytes{} }
+func (m *NidRepUuidAsBytes) String() string { return proto.CompactTextString(m) }
+func (*NidRepUuidAsBytes) ProtoMessage()    {}
+
+func (m *NidRepUuidAsBytes) GetId() [][]byte {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
 
 type NinRepUuidAsBytes struct {
 	Id               [][]byte `protobuf:"bytes,1,rep" json:"Id,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NinRepUuidAsBytes) Reset()         { *this = NinRepUuidAsBytes{} }
-func (this *NinRepUuidAsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinRepUuidAsBytes) ProtoMessage()       {}
+func (m *NinRepUuidAsBytes) Reset()         { *m = NinRepUuidAsBytes{} }
+func (m *NinRepUuidAsBytes) String() string { return proto.CompactTextString(m) }
+func (*NinRepUuidAsBytes) ProtoMessage()    {}
+
+func (m *NinRepUuidAsBytes) GetId() [][]byte {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
 
 type NidOptUint128AsBytes struct {
 	Value            []byte `protobuf:"bytes,1,opt" json:"Value,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (this *NidOptUint128AsBytes) Reset()         { *this = NidOptUint128AsBytes{} }
-func (this *NidOptUint128AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidOptUint128AsBytes) ProtoMessage()       {}
+func (m *NidOptUint128AsBytes) Reset()         { *m = NidOptUint128AsBytes{} }
+func (m *NidOptUint128AsBytes) String() string { return proto.CompactTextString(m) }
+func (*NidOptUint128AsBytes) ProtoMessage()    {}
 
-func (this *NidOptUint128AsBytes) GetValue() []byte {
-	if this != nil {
-		return this.Value
+func (m *NidOptUint128AsBytes) GetValue() []byte {
+	if m != nil {
+		return m.Value
 	}
 	return nil
 }
@@ -902,13 +1172,13 @@ type NinOptUint128AsBytes struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (this *NinOptUint128AsBytes) Reset()         { *this = NinOptUint128AsBytes{} }
-func (this *NinOptUint128AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinOptUint128AsBytes) ProtoMessage()       {}
+func (m *NinOptUint128AsBytes) Reset()         { *m = NinOptUint128AsBytes{} }
+func (m *NinOptUint128AsBytes) String() string { return proto.CompactTextString(m) }
+func (*NinOptUint128AsBytes) ProtoMessage()    {}
 
-func (this *NinOptUint128AsBytes) GetValue() []byte {
-	if this != nil {
-		return this.Value
+func (m *NinOptUint128AsBytes) GetValue() []byte {
+	if m != nil {
+		return m.Value
 	}
 	return nil
 }
@@ -918,118 +1188,32 @@ type NidRepUint128AsBytes struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NidRepUint128AsBytes) Reset()         { *this = NidRepUint128AsBytes{} }
-func (this *NidRepUint128AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidRepUint128AsBytes) ProtoMessage()       {}
+func (m *NidRepUint128AsBytes) Reset()         { *m = NidRepUint128AsBytes{} }
+func (m *NidRepUint128AsBytes) String() string { return proto.CompactTextString(m) }
+func (*NidRepUint128AsBytes) ProtoMessage()    {}
+
+func (m *NidRepUint128AsBytes) GetValue() [][]byte {
+	if m != nil {
+		return m.Value
+	}
+	return nil
+}
 
 type NinRepUint128AsBytes struct {
 	Value            [][]byte `protobuf:"bytes,1,rep" json:"Value,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (this *NinRepUint128AsBytes) Reset()         { *this = NinRepUint128AsBytes{} }
-func (this *NinRepUint128AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinRepUint128AsBytes) ProtoMessage()       {}
+func (m *NinRepUint128AsBytes) Reset()         { *m = NinRepUint128AsBytes{} }
+func (m *NinRepUint128AsBytes) String() string { return proto.CompactTextString(m) }
+func (*NinRepUint128AsBytes) ProtoMessage()    {}
 
-type NidOptUint16AsBytes struct {
-	Value            []byte `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (this *NidOptUint16AsBytes) Reset()         { *this = NidOptUint16AsBytes{} }
-func (this *NidOptUint16AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidOptUint16AsBytes) ProtoMessage()       {}
-
-func (this *NidOptUint16AsBytes) GetValue() []byte {
-	if this != nil {
-		return this.Value
+func (m *NinRepUint128AsBytes) GetValue() [][]byte {
+	if m != nil {
+		return m.Value
 	}
 	return nil
 }
-
-type NinOptUint16AsBytes struct {
-	Value            []byte `protobuf:"bytes,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (this *NinOptUint16AsBytes) Reset()         { *this = NinOptUint16AsBytes{} }
-func (this *NinOptUint16AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinOptUint16AsBytes) ProtoMessage()       {}
-
-func (this *NinOptUint16AsBytes) GetValue() []byte {
-	if this != nil {
-		return this.Value
-	}
-	return nil
-}
-
-type NidRepUint16AsBytes struct {
-	Value            [][]byte `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NidRepUint16AsBytes) Reset()         { *this = NidRepUint16AsBytes{} }
-func (this *NidRepUint16AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NidRepUint16AsBytes) ProtoMessage()       {}
-
-type NinRepUint16AsBytes struct {
-	Value            [][]byte `protobuf:"bytes,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NinRepUint16AsBytes) Reset()         { *this = NinRepUint16AsBytes{} }
-func (this *NinRepUint16AsBytes) String() string { return proto.CompactTextString(this) }
-func (*NinRepUint16AsBytes) ProtoMessage()       {}
-
-type NidOptUint16AsUint32 struct {
-	Value            *uint32 `protobuf:"varint,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NidOptUint16AsUint32) Reset()         { *this = NidOptUint16AsUint32{} }
-func (this *NidOptUint16AsUint32) String() string { return proto.CompactTextString(this) }
-func (*NidOptUint16AsUint32) ProtoMessage()       {}
-
-func (this *NidOptUint16AsUint32) GetValue() uint32 {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return 0
-}
-
-type NinOptUint16AsUint32 struct {
-	Value            *uint32 `protobuf:"varint,1,opt" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (this *NinOptUint16AsUint32) Reset()         { *this = NinOptUint16AsUint32{} }
-func (this *NinOptUint16AsUint32) String() string { return proto.CompactTextString(this) }
-func (*NinOptUint16AsUint32) ProtoMessage()       {}
-
-func (this *NinOptUint16AsUint32) GetValue() uint32 {
-	if this != nil && this.Value != nil {
-		return *this.Value
-	}
-	return 0
-}
-
-type NidRepUint16AsUint32 struct {
-	Value            []uint32 `protobuf:"varint,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NidRepUint16AsUint32) Reset()         { *this = NidRepUint16AsUint32{} }
-func (this *NidRepUint16AsUint32) String() string { return proto.CompactTextString(this) }
-func (*NidRepUint16AsUint32) ProtoMessage()       {}
-
-type NinRepUint16AsUint32 struct {
-	Value            []uint32 `protobuf:"varint,1,rep" json:"Value,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (this *NinRepUint16AsUint32) Reset()         { *this = NinRepUint16AsUint32{} }
-func (this *NinRepUint16AsUint32) String() string { return proto.CompactTextString(this) }
-func (*NinRepUint16AsUint32) ProtoMessage()       {}
 
 func init() {
 }

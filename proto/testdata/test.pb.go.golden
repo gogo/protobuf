@@ -231,7 +231,7 @@ type GoEnum struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *GoEnum) Reset()      { *m = GoEnum{} }
+func (this *GoEnum) Reset()   { *this = GoEnum{} }
 func (*GoEnum) ProtoMessage() {}
 
 type GoTestField struct {
@@ -240,7 +240,7 @@ type GoTestField struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *GoTestField) Reset()      { *m = GoTestField{} }
+func (this *GoTestField) Reset()   { *this = GoTestField{} }
 func (*GoTestField) ProtoMessage() {}
 
 type GoTest struct {
@@ -319,7 +319,7 @@ type GoTest struct {
 	XXX_unrecognized        []byte                  `json:"-"`
 }
 
-func (m *GoTest) Reset()      { *m = GoTest{} }
+func (this *GoTest) Reset()   { *this = GoTest{} }
 func (*GoTest) ProtoMessage() {}
 
 const Default_GoTest_F_BoolDefaulted bool = true
@@ -339,25 +339,22 @@ const Default_GoTest_F_Sint32Defaulted int32 = -32
 const Default_GoTest_F_Sint64Defaulted int64 = -64
 
 type GoTest_RequiredGroup struct {
-	RequiredField    *string `protobuf:"bytes,71,req" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField *string `protobuf:"bytes,71,req" json:"RequiredField,omitempty"`
 }
 
-func (m *GoTest_RequiredGroup) Reset() { *m = GoTest_RequiredGroup{} }
+func (this *GoTest_RequiredGroup) Reset() { *this = GoTest_RequiredGroup{} }
 
 type GoTest_RepeatedGroup struct {
-	RequiredField    *string `protobuf:"bytes,81,req" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField *string `protobuf:"bytes,81,req" json:"RequiredField,omitempty"`
 }
 
-func (m *GoTest_RepeatedGroup) Reset() { *m = GoTest_RepeatedGroup{} }
+func (this *GoTest_RepeatedGroup) Reset() { *this = GoTest_RepeatedGroup{} }
 
 type GoTest_OptionalGroup struct {
-	RequiredField    *string `protobuf:"bytes,91,req" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField *string `protobuf:"bytes,91,req" json:"RequiredField,omitempty"`
 }
 
-func (m *GoTest_OptionalGroup) Reset() { *m = GoTest_OptionalGroup{} }
+func (this *GoTest_OptionalGroup) Reset() { *this = GoTest_OptionalGroup{} }
 
 type GoSkipTest struct {
 	SkipInt32        *int32                `protobuf:"varint,11,req,name=skip_int32" json:"skip_int32,omitempty"`
@@ -368,23 +365,22 @@ type GoSkipTest struct {
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *GoSkipTest) Reset()      { *m = GoSkipTest{} }
+func (this *GoSkipTest) Reset()   { *this = GoSkipTest{} }
 func (*GoSkipTest) ProtoMessage() {}
 
 type GoSkipTest_SkipGroup struct {
-	GroupInt32       *int32  `protobuf:"varint,16,req,name=group_int32" json:"group_int32,omitempty"`
-	GroupString      *string `protobuf:"bytes,17,req,name=group_string" json:"group_string,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	GroupInt32  *int32  `protobuf:"varint,16,req,name=group_int32" json:"group_int32,omitempty"`
+	GroupString *string `protobuf:"bytes,17,req,name=group_string" json:"group_string,omitempty"`
 }
 
-func (m *GoSkipTest_SkipGroup) Reset() { *m = GoSkipTest_SkipGroup{} }
+func (this *GoSkipTest_SkipGroup) Reset() { *this = GoSkipTest_SkipGroup{} }
 
 type NonPackedTest struct {
 	A                []int32 `protobuf:"varint,1,rep,name=a" json:"a,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NonPackedTest) Reset()      { *m = NonPackedTest{} }
+func (this *NonPackedTest) Reset()   { *this = NonPackedTest{} }
 func (*NonPackedTest) ProtoMessage() {}
 
 type PackedTest struct {
@@ -392,7 +388,7 @@ type PackedTest struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *PackedTest) Reset()      { *m = PackedTest{} }
+func (this *PackedTest) Reset()   { *this = PackedTest{} }
 func (*PackedTest) ProtoMessage() {}
 
 type MaxTag struct {
@@ -400,7 +396,7 @@ type MaxTag struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *MaxTag) Reset()      { *m = MaxTag{} }
+func (this *MaxTag) Reset()   { *this = MaxTag{} }
 func (*MaxTag) ProtoMessage() {}
 
 type OldMessage struct {
@@ -408,7 +404,7 @@ type OldMessage struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *OldMessage) Reset()      { *m = OldMessage{} }
+func (this *OldMessage) Reset()   { *this = OldMessage{} }
 func (*OldMessage) ProtoMessage() {}
 
 type OldMessage_Nested struct {
@@ -416,7 +412,7 @@ type OldMessage_Nested struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *OldMessage_Nested) Reset()      { *m = OldMessage_Nested{} }
+func (this *OldMessage_Nested) Reset()   { *this = OldMessage_Nested{} }
 func (*OldMessage_Nested) ProtoMessage() {}
 
 type NewMessage struct {
@@ -424,7 +420,7 @@ type NewMessage struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *NewMessage) Reset()      { *m = NewMessage{} }
+func (this *NewMessage) Reset()   { *this = NewMessage{} }
 func (*NewMessage) ProtoMessage() {}
 
 type NewMessage_Nested struct {
@@ -433,7 +429,7 @@ type NewMessage_Nested struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NewMessage_Nested) Reset()      { *m = NewMessage_Nested{} }
+func (this *NewMessage_Nested) Reset()   { *this = NewMessage_Nested{} }
 func (*NewMessage_Nested) ProtoMessage() {}
 
 type InnerMessage struct {
@@ -443,7 +439,7 @@ type InnerMessage struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *InnerMessage) Reset()      { *m = InnerMessage{} }
+func (this *InnerMessage) Reset()   { *this = InnerMessage{} }
 func (*InnerMessage) ProtoMessage() {}
 
 const Default_InnerMessage_Port int32 = 4000
@@ -456,7 +452,7 @@ type OtherMessage struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (m *OtherMessage) Reset()      { *m = OtherMessage{} }
+func (this *OtherMessage) Reset()   { *this = OtherMessage{} }
 func (*OtherMessage) ProtoMessage() {}
 
 type MyMessage struct {
@@ -474,7 +470,7 @@ type MyMessage struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *MyMessage) Reset()      { *m = MyMessage{} }
+func (this *MyMessage) Reset()   { *this = MyMessage{} }
 func (*MyMessage) ProtoMessage() {}
 
 var extRange_MyMessage = []proto.ExtensionRange{
@@ -484,26 +480,25 @@ var extRange_MyMessage = []proto.ExtensionRange{
 func (*MyMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyMessage
 }
-func (m *MyMessage) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
+func (this *MyMessage) ExtensionMap() map[int32]proto.Extension {
+	if this.XXX_extensions == nil {
+		this.XXX_extensions = make(map[int32]proto.Extension)
 	}
-	return m.XXX_extensions
+	return this.XXX_extensions
 }
 
 type MyMessage_SomeGroup struct {
-	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field" json:"group_field,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	GroupField *int32 `protobuf:"varint,9,opt,name=group_field" json:"group_field,omitempty"`
 }
 
-func (m *MyMessage_SomeGroup) Reset() { *m = MyMessage_SomeGroup{} }
+func (this *MyMessage_SomeGroup) Reset() { *this = MyMessage_SomeGroup{} }
 
 type Ext struct {
 	Data             *string `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Ext) Reset()      { *m = Ext{} }
+func (this *Ext) Reset()   { *this = Ext{} }
 func (*Ext) ProtoMessage() {}
 
 var E_Ext_More = &proto.ExtensionDesc{
@@ -535,16 +530,15 @@ type MessageList struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *MessageList) Reset()      { *m = MessageList{} }
+func (this *MessageList) Reset()   { *this = MessageList{} }
 func (*MessageList) ProtoMessage() {}
 
 type MessageList_Message struct {
-	Name             *string `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
-	Count            *int32  `protobuf:"varint,3,req,name=count" json:"count,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Name  *string `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
+	Count *int32  `protobuf:"varint,3,req,name=count" json:"count,omitempty"`
 }
 
-func (m *MessageList_Message) Reset() { *m = MessageList_Message{} }
+func (this *MessageList_Message) Reset() { *this = MessageList_Message{} }
 
 type Strings struct {
 	StringField      *string `protobuf:"bytes,1,opt,name=string_field" json:"string_field,omitempty"`
@@ -552,7 +546,7 @@ type Strings struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Strings) Reset()      { *m = Strings{} }
+func (this *Strings) Reset()   { *this = Strings{} }
 func (*Strings) ProtoMessage() {}
 
 type Defaults struct {
@@ -577,7 +571,7 @@ type Defaults struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *Defaults) Reset()      { *m = Defaults{} }
+func (this *Defaults) Reset()   { *this = Defaults{} }
 func (*Defaults) ProtoMessage() {}
 
 const Default_Defaults_F_Bool bool = true
@@ -606,7 +600,7 @@ type SubDefaults struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *SubDefaults) Reset()      { *m = SubDefaults{} }
+func (this *SubDefaults) Reset()   { *this = SubDefaults{} }
 func (*SubDefaults) ProtoMessage() {}
 
 const Default_SubDefaults_N int64 = 7
@@ -616,7 +610,7 @@ type RepeatedEnum struct {
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *RepeatedEnum) Reset()      { *m = RepeatedEnum{} }
+func (this *RepeatedEnum) Reset()   { *this = RepeatedEnum{} }
 func (*RepeatedEnum) ProtoMessage() {}
 
 type MoreRepeated struct {
@@ -628,7 +622,7 @@ type MoreRepeated struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *MoreRepeated) Reset()      { *m = MoreRepeated{} }
+func (this *MoreRepeated) Reset()   { *this = MoreRepeated{} }
 func (*MoreRepeated) ProtoMessage() {}
 
 type GroupOld struct {
@@ -636,31 +630,29 @@ type GroupOld struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupOld) Reset()      { *m = GroupOld{} }
+func (this *GroupOld) Reset()   { *this = GroupOld{} }
 func (*GroupOld) ProtoMessage() {}
 
 type GroupOld_G struct {
-	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
 }
 
-func (m *GroupOld_G) Reset() { *m = GroupOld_G{} }
+func (this *GroupOld_G) Reset() { *this = GroupOld_G{} }
 
 type GroupNew struct {
 	G                *GroupNew_G `protobuf:"group,1,opt" json:"g,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupNew) Reset()      { *m = GroupNew{} }
+func (this *GroupNew) Reset()   { *this = GroupNew{} }
 func (*GroupNew) ProtoMessage() {}
 
 type GroupNew_G struct {
-	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,3,opt,name=y" json:"y,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
+	Y *int32 `protobuf:"varint,3,opt,name=y" json:"y,omitempty"`
 }
 
-func (m *GroupNew_G) Reset() { *m = GroupNew_G{} }
+func (this *GroupNew_G) Reset() { *this = GroupNew_G{} }
 
 var E_Greeting = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),

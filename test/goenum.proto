@@ -11,9 +11,6 @@
 // copyright notice, this list of conditions and the following disclaimer
 // in the documentation and/or other materials provided with the
 // distribution.
-//     * Neither the name of Google Inc. nor the names of its
-// contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -51,50 +48,4 @@ message NidRepEnum {
 
 message NinRepEnum {
 	repeated TheTestEnum Field1 = 1;
-}
-
-enum TheTestEnumUint32 {
-	option (gogoproto.customenumtype) = "uint32";
-    D = 0;
-    E = 1;
-    F = 2;
-}
-
-message NidOptEnumUint32 {
-	optional TheTestEnumUint32 Field1 = 1 [(gogoproto.nullable) = false];
-}
-
-message NinOptEnumUint32 {
-	optional TheTestEnumUint32 Field1 = 1;
-}
-
-message NidRepEnumUint32 {
-	repeated TheTestEnumUint32 Field1 = 1 [(gogoproto.nullable) = false];
-}
-
-message NinRepEnumUint32 {
-	repeated TheTestEnumUint32 Field1 = 1;
-}
-
-enum TheTestEnumUint16 {
-	option (gogoproto.customenumtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16";
-    G = 0;
-    H = 1;
-    I = 2;
-}
-
-message NidOptEnumUint16 {
-	optional TheTestEnumUint16 Field1 = 1 [(gogoproto.nullable) = false];
-}
-
-message NinOptEnumUint16 {
-	optional TheTestEnumUint16 Field1 = 1;
-}
-
-message NidRepEnumUint16 {
-	repeated TheTestEnumUint16 Field1 = 1 [(gogoproto.nullable) = false];
-}
-
-message NinRepEnumUint16 {
-	repeated TheTestEnumUint16 Field1 = 1;
 }

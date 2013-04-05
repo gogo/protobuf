@@ -36,7 +36,7 @@ import (
 	"testing"
 
 	pb "./testdata"
-	. "code.google.com/p/goprotobuf/proto"
+	. "code.google.com/p/gogoprotobuf/proto"
 )
 
 var messageWithExtension1 = &pb.MyMessage{Count: Int32(7)}
@@ -54,6 +54,7 @@ func init() {
 
 	// Force messageWithExtension3 to have the extension encoded.
 	Marshal(messageWithExtension3)
+
 }
 
 var SizeTests = []struct {
@@ -77,7 +78,7 @@ var SizeTests = []struct {
 	{"bytes, empty", &pb.Defaults{F_Bytes: []byte{}}},
 	{"sint32", &pb.Defaults{F_Sint32: Int32(65)}},
 	{"sint64", &pb.Defaults{F_Sint64: Int64(67)}},
-	{"enum", &pb.Defaults{F_Enum: pb.Defaults_BLUE.Enum()}},
+	{"enum", &pb.Defaults{F_Enum: pb.BLUE.Enum()}},
 	// Repeated.
 	{"empty repeated bool", &pb.MoreRepeated{Bools: []bool{}}},
 	{"repeated bool", &pb.MoreRepeated{Bools: []bool{false, true, true, false}}},

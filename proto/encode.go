@@ -1,7 +1,10 @@
+// Extensions for Protocol Buffers to create more go like structures.
+//
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
 // Go support for Protocol Buffers - Google's data interchange format
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
-// 
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
 //
@@ -256,18 +259,6 @@ func (o *Buffer) enc_int32(p *Properties, base structPointer) error {
 	return nil
 }
 
-// Encode an int16 to int32 pointer.
-func (o *Buffer) enc_int16_to_int32(p *Properties, base structPointer) error {
-	v := structPointer_Word16(base, p.field)
-	if word16_IsNil(v) {
-		return ErrNil
-	}
-	x := word16_Get(v)
-	o.buf = append(o.buf, p.tagcode...)
-	p.valEnc(o, uint64(int16(x)))
-	return nil
-}
-
 // Encode a reference to int32 pointer.
 func (o *Buffer) enc_ref_int32(p *Properties, base structPointer) error {
 	v := structPointer_RefWord32(base, p.field)
@@ -277,18 +268,6 @@ func (o *Buffer) enc_ref_int32(p *Properties, base structPointer) error {
 	x := refWord32_Get(v)
 	o.buf = append(o.buf, p.tagcode...)
 	p.valEnc(o, uint64(int32(x)))
-	return nil
-}
-
-// Encode a reference to an int16 to an int32 pointer.
-func (o *Buffer) enc_ref_int16_to_int32(p *Properties, base structPointer) error {
-	v := structPointer_RefWord16(base, p.field)
-	if refWord16_IsNil(v) {
-		return ErrNil
-	}
-	x := refWord16_Get(v)
-	o.buf = append(o.buf, p.tagcode...)
-	p.valEnc(o, uint64(int16(x)))
 	return nil
 }
 
@@ -504,43 +483,9 @@ func (o *Buffer) enc_slice_int32(p *Properties, base structPointer) error {
 	return nil
 }
 
-// Encode a slice of int16 ([]int16) to a slice of int32 ([]int32)
-func (o *Buffer) enc_slice_int16_to_int32(p *Properties, base structPointer) error {
-	s := structPointer_Word16Slice(base, p.field)
-	l := s.Len()
-	if l == 0 {
-		return ErrNil
-	}
-	for i := 0; i < l; i++ {
-		o.buf = append(o.buf, p.tagcode...)
-		x := s.Index(i)
-		p.valEnc(o, uint64(x))
-	}
-	return nil
-}
-
 // Encode a slice of int32s ([]int32) in packed format.
 func (o *Buffer) enc_slice_packed_int32(p *Properties, base structPointer) error {
 	s := structPointer_Word32Slice(base, p.field)
-	l := s.Len()
-	if l == 0 {
-		return ErrNil
-	}
-	// TODO: Reuse a Buffer.
-	buf := NewBuffer(nil)
-	for i := 0; i < l; i++ {
-		p.valEnc(buf, uint64(s.Index(i)))
-	}
-
-	o.buf = append(o.buf, p.tagcode...)
-	o.EncodeVarint(uint64(len(buf.buf)))
-	o.buf = append(o.buf, buf.buf...)
-	return nil
-}
-
-// Encode a slice of int16 ([]in16) to a slice of int32 ([]int32) in packed format.
-func (o *Buffer) enc_slice_packed_int16_to_int32(p *Properties, base structPointer) error {
-	s := structPointer_Word16Slice(base, p.field)
 	l := s.Len()
 	if l == 0 {
 		return ErrNil
@@ -796,65 +741,13 @@ func (o *Buffer) enc_struct(t reflect.Type, prop *StructProperties, base structP
 	return nil
 }
 
-func (o *Buffer) enc_custom_string(p *Properties, base structPointer) error {
-	i := structPointer_InterfaceRef(base, p.field, p.ctype)
-	if i == nil {
-		return ErrNil
-	}
-	custom := i.(CustomStringType)
-	str, err := custom.MarshalToString()
-	if err != nil {
-		return err
-	}
-	if str == nil {
-		return ErrNil
-	}
-	o.buf = append(o.buf, p.tagcode...)
-	o.EncodeStringBytes(*str)
-	return nil
-}
-
-func (o *Buffer) enc_custom_ref_string(p *Properties, base structPointer) error {
-	custom := structPointer_InterfaceAt(base, p.field, p.ctype).(CustomStringType)
-	str, err := custom.MarshalToString()
-	if err != nil {
-		return err
-	}
-	if str == nil {
-		return ErrNil
-	}
-	o.buf = append(o.buf, p.tagcode...)
-	o.EncodeStringBytes(*str)
-	return nil
-}
-
-func (o *Buffer) enc_custom_slice_string(p *Properties, base structPointer) error {
-	inter := structPointer_InterfaceRef(base, p.field, p.ctype)
-	if inter == nil {
-		return ErrNil
-	}
-	slice := reflect.ValueOf(inter)
-	l := slice.Len()
-	for i := 0; i < l; i++ {
-		v := slice.Index(i)
-		custom := v.Interface().(CustomMarshalToStringType)
-		str, err := custom.MarshalToString()
-		if err != nil {
-			return err
-		}
-		o.buf = append(o.buf, p.tagcode...)
-		o.EncodeStringBytes(*str)
-	}
-	return nil
-}
-
 func (o *Buffer) enc_custom_bytes(p *Properties, base structPointer) error {
 	i := structPointer_InterfaceRef(base, p.field, p.ctype)
 	if i == nil {
 		return ErrNil
 	}
-	custom := i.(CustomMarshalToBytesType)
-	data, err := custom.MarshalToBytes()
+	custom := i.(Marshaler)
+	data, err := custom.Marshal()
 	if err != nil {
 		return err
 	}
@@ -867,8 +760,8 @@ func (o *Buffer) enc_custom_bytes(p *Properties, base structPointer) error {
 }
 
 func (o *Buffer) enc_custom_ref_bytes(p *Properties, base structPointer) error {
-	custom := structPointer_InterfaceAt(base, p.field, p.ctype).(CustomMarshalToBytesType)
-	data, err := custom.MarshalToBytes()
+	custom := structPointer_InterfaceAt(base, p.field, p.ctype).(Marshaler)
+	data, err := custom.Marshal()
 	if err != nil {
 		return err
 	}
@@ -889,65 +782,13 @@ func (o *Buffer) enc_custom_slice_bytes(p *Properties, base structPointer) error
 	l := slice.Len()
 	for i := 0; i < l; i++ {
 		v := slice.Index(i)
-		custom := v.Interface().(CustomMarshalToBytesType)
-		data, err := custom.MarshalToBytes()
+		custom := v.Interface().(Marshaler)
+		data, err := custom.Marshal()
 		if err != nil {
 			return err
 		}
 		o.buf = append(o.buf, p.tagcode...)
 		o.EncodeRawBytes(data)
-	}
-	return nil
-}
-
-func (o *Buffer) enc_custom_uint32(p *Properties, base structPointer) error {
-	i := structPointer_InterfaceRef(base, p.field, p.ctype)
-	if i == nil {
-		return ErrNil
-	}
-	custom := i.(CustomMarshalToUint32Type)
-	v, err := custom.MarshalToUint32()
-	if err != nil {
-		return err
-	}
-	if v == nil {
-		return ErrNil
-	}
-	o.buf = append(o.buf, p.tagcode...)
-	p.valEnc(o, uint64(int32(*v)))
-	return nil
-}
-
-func (o *Buffer) enc_custom_ref_uint32(p *Properties, base structPointer) error {
-	custom := structPointer_InterfaceAt(base, p.field, p.ctype).(CustomMarshalToUint32Type)
-	v, err := custom.MarshalToUint32()
-	if err != nil {
-		return err
-	}
-	if v == nil {
-		return ErrNil
-	}
-	o.buf = append(o.buf, p.tagcode...)
-	p.valEnc(o, uint64(int32(*v)))
-	return nil
-}
-
-func (o *Buffer) enc_custom_slice_uint32(p *Properties, base structPointer) error {
-	inter := structPointer_InterfaceRef(base, p.field, p.ctype)
-	if inter == nil {
-		return ErrNil
-	}
-	slice := reflect.ValueOf(inter)
-	l := slice.Len()
-	for i := 0; i < l; i++ {
-		v := slice.Index(i)
-		custom := v.Interface().(CustomMarshalToUint32Type)
-		data, err := custom.MarshalToUint32()
-		if err != nil {
-			return err
-		}
-		o.buf = append(o.buf, p.tagcode...)
-		p.valEnc(o, uint64(*data))
 	}
 	return nil
 }

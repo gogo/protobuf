@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013, Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -106,8 +109,12 @@ type Descriptor struct {
 	nested   []*Descriptor          // Inner messages, if any.
 	ext      []*ExtensionDescriptor // Extensions, if any.
 	typename []string               // Cached typename vector.
-	index    int                    // If a top-level message, the index into message_type.
+	index    int                    // The index into the container, whether the file or another message.
 	group    bool
+}
+
+func (d *Descriptor) IsGroup() bool {
+	return d.group
 }
 
 // TypeName returns the elements of the dotted type name.
@@ -289,24 +296,24 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 	remoteSym := pkg + "." + ms.sym
 
 	g.P("type ", ms.sym, " ", remoteSym)
-	g.P("func (this *", ms.sym, ") Reset() { (*", remoteSym, ")(this).Reset() }")
-	g.P("func (this *", ms.sym, ") String() string { return (*", remoteSym, ")(this).String() }")
+	g.P("func (m *", ms.sym, ") Reset() { (*", remoteSym, ")(m).Reset() }")
+	g.P("func (m *", ms.sym, ") String() string { return (*", remoteSym, ")(m).String() }")
 	g.P("func (*", ms.sym, ") ProtoMessage() {}")
 	if ms.hasExtensions {
 		g.P("func (*", ms.sym, ") ExtensionRangeArray() []", g.Pkg["proto"], ".ExtensionRange ",
 			"{ return (*", remoteSym, ")(nil).ExtensionRangeArray() }")
-		g.P("func (this *", ms.sym, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension ",
-			"{ return (*", remoteSym, ")(this).ExtensionMap() }")
+		g.P("func (m *", ms.sym, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension ",
+			"{ return (*", remoteSym, ")(m).ExtensionMap() }")
 		if ms.isMessageSet {
-			g.P("func (this *", ms.sym, ") Marshal() ([]byte, error) ",
-				"{ return (*", remoteSym, ")(this).Marshal() }")
-			g.P("func (this *", ms.sym, ") Unmarshal(buf []byte) error ",
-				"{ return (*", remoteSym, ")(this).Unmarshal(buf) }")
+			g.P("func (m *", ms.sym, ") Marshal() ([]byte, error) ",
+				"{ return (*", remoteSym, ")(m).Marshal() }")
+			g.P("func (m *", ms.sym, ") Unmarshal(buf []byte) error ",
+				"{ return (*", remoteSym, ")(m).Unmarshal(buf) }")
 		}
 	}
 	for _, get := range ms.getters {
 		typ := get.typ
-		val := "(*" + remoteSym + ")(this)." + get.name + "()"
+		val := "(*" + remoteSym + ")(m)." + get.name + "()"
 		if get.genType {
 			// typ will be "*pkg.T" (message/group) or "pkg.T" (enum).
 			// Drop the package qualifier since we have hoisted the type into this package.
@@ -319,7 +326,7 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 			val = "(" + typ + ")(" + val + ")"
 		}
 
-		g.P("func (this *", ms.sym, ") ", get.name, "() ", typ, " { return ", val, " }")
+		g.P("func (m *", ms.sym, ") ", get.name, "() ", typ, " { return ", val, " }")
 		if get.typeName != "" {
 			g.RecordTypeUse(get.typeName)
 		}
@@ -656,7 +663,12 @@ func (g *Generator) buildNestedDescriptors(descs []*Descriptor) {
 
 // Construct the Descriptor and add it to the slice
 func addDescriptor(sl []*Descriptor, desc *descriptor.DescriptorProto, parent *Descriptor, file *descriptor.FileDescriptorProto, index int) []*Descriptor {
-	d := &Descriptor{common{file}, desc, parent, nil, nil, nil, index, false}
+	d := &Descriptor{
+		common:          common{file},
+		DescriptorProto: desc,
+		parent:          parent,
+		index:           index,
+	}
 
 	// The only way to distinguish a group from a message is whether
 	// the containing message has a TYPE_GROUP field that matches.
@@ -695,8 +707,8 @@ func wrapDescriptors(file *descriptor.FileDescriptorProto) []*Descriptor {
 func wrapThisDescriptor(sl []*Descriptor, desc *descriptor.DescriptorProto, parent *Descriptor, file *descriptor.FileDescriptorProto, index int) []*Descriptor {
 	sl = addDescriptor(sl, desc, parent, file, index)
 	me := sl[len(sl)-1]
-	for _, nested := range desc.NestedType {
-		sl = wrapThisDescriptor(sl, nested, me, file, 0)
+	for i, nested := range desc.NestedType {
+		sl = wrapThisDescriptor(sl, nested, me, file, i)
 	}
 	return sl
 }
@@ -770,6 +782,14 @@ func (g *Generator) BuildTypeNameMap() {
 			g.typeNameToObject[name] = desc
 		}
 	}
+}
+
+func (g *Generator) TypeNameByObject(typeName string) Object {
+	o, ok := g.typeNameToObject[typeName]
+	if !ok {
+		g.Fail("can't find object with type", typeName)
+	}
+	return o
 }
 
 // ObjectNamed, given a fully-qualified input type name as it appears in the input data,
@@ -1128,24 +1148,6 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	ccPrefix = ""
 
 	enumType := "int32"
-	if enum.Options != nil {
-		v, err := proto.GetExtension(enum.Options, gogoproto.E_Customenumtype)
-		if err == nil && v.(*string) != nil {
-			ctype := *(v.(*string))
-			ss := strings.Split(ctype, ".")
-			if len(ss) == 1 {
-				enumType = ctype
-			} else if len(ss) >= 2 {
-				packageName := strings.Join(ss[0:len(ss)-1], ".")
-				typeName := ss[len(ss)-1]
-				importStr := strings.Replace(strings.Replace(packageName, "/", "_", -1), ".", "_", -1)
-				enumType = importStr + "." + typeName
-				g.customImports = append(g.customImports, packageName)
-			} else {
-				g.Fail("custom enum type is not specified correctly needs and import and type seperated by a dot")
-			}
-		}
-	}
 
 	g.P("type ", ccTypeName, " ", enumType)
 	g.file.addExport(enum, enumSymbol(ccTypeName))
@@ -1261,7 +1263,6 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 		defaultValue = ",def=" + defaultValue
 	}
 	enum := ""
-	customenum := ""
 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_ENUM {
 		// We avoid using obj.PackageName(), because we want to use the
 		// original (proto-world) package name.
@@ -1271,13 +1272,6 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 			enum += pkg + "."
 		}
 		enum += CamelCaseSlice(obj.TypeName())
-		e := obj.(*EnumDescriptor)
-		if e.Options != nil {
-			v, err := proto.GetExtension(e.Options, gogoproto.E_Customenumtype)
-			if err == nil && v.(*string) != nil {
-				customenum = ",customenum=" + *(v.(*string))
-			}
-		}
 	}
 	packed := ""
 	if field.Options != nil && field.Options.GetPacked() {
@@ -1313,20 +1307,11 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, gogoproto.E_Customtype)
 		if err == nil && (v.(*string)) != nil {
-			switch *field.Type {
-			case descriptor.FieldDescriptorProto_TYPE_STRING:
-				ctype = ",custommarshal=string"
-			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				ctype = ",custommarshal=bytes"
-			case descriptor.FieldDescriptorProto_TYPE_UINT32:
-				ctype = ",custommarshal=uint32"
-			default:
-				panic("custom type cannot marshal to this type")
-			}
+			ctype = ",customtype=" + *(v.(*string))
 		}
 	}
 
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1335,8 +1320,7 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 		enum,
 		defaultValue,
 		embed,
-		ctype,
-		customenum))
+		ctype))
 }
 
 // TypeName is the printed name appropriate for an item. If the object is in the current file,
@@ -1380,7 +1364,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		typ, wire = "string", "bytes"
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
 		desc := g.ObjectNamed(field.GetTypeName())
-		typ, wire = "*"+g.TypeName(desc), "group"
+		typ, wire = g.TypeName(desc), "group"
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		desc := g.ObjectNamed(field.GetTypeName())
 		typ, wire = g.TypeName(desc), "bytes"
@@ -1421,7 +1405,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			}
 		}
 	}
-	if isRepeated(field) && (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) {
+	if isRepeated(field) && (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) && (*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		typ = "[]" + typ
 	} else if *field.Type != descriptor.FieldDescriptorProto_TYPE_BYTES || customType {
 		if field.Options != nil {
@@ -1474,16 +1458,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		usedNames[n] = true
 	}
 	fieldNames := make(map[*descriptor.FieldDescriptorProto]string)
+	fieldGetterNames := make(map[*descriptor.FieldDescriptorProto]string)
 	g.P("type ", ccTypeName, " struct {")
 	g.In()
 
 	for _, field := range message.Field {
-		fieldname := CamelCase(*field.Name)
-		for usedNames[fieldname] {
-			fieldname += "_"
+		fieldName := CamelCase(*field.Name)
+		for usedNames[fieldName] {
+			fieldName += "_"
 		}
-		usedNames[fieldname] = true
-		fieldNames[field] = fieldname
+		fieldGetterName := fieldName
+		usedNames[fieldName] = true
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
 		tag := fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName+",omitempty")
@@ -1491,23 +1476,26 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if field.Options != nil {
 				v, err := proto.GetExtension(field.Options, gogoproto.E_Embed)
 				if err == nil && *(v.(*bool)) {
-					fieldname = ""
+					fieldName = ""
 				}
 			}
 		}
-		g.P(fieldname, "\t", typename, "\t", tag)
+		fieldNames[field] = fieldName
+		fieldGetterNames[field] = fieldGetterName
+		g.P(fieldName, "\t", typename, "\t", tag)
 		g.RecordTypeUse(field.GetTypeName())
 	}
 	if len(message.ExtensionRange) > 0 {
 		g.P("XXX_extensions\t\tmap[int32]", g.Pkg["proto"], ".Extension `json:\"-\"`")
 	}
+	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 	g.Out()
 	g.P("}")
 
 	// Reset, String and ProtoMessage methods.
-	g.P("func (this *", ccTypeName, ") Reset() { *this = ", ccTypeName, "{} }")
+	g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
 	if !message.group {
-		g.P("func (this *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(this) }")
+		//g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 		g.P("func (*", ccTypeName, ") ProtoMessage() {}")
 	}
 
@@ -1519,14 +1507,14 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if opts := message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 			isMessageSet = true
 			g.P()
-			g.P("func (this *", ccTypeName, ") Marshal() ([]byte, error) {")
+			g.P("func (m *", ccTypeName, ") Marshal() ([]byte, error) {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".MarshalMessageSet(this.ExtensionMap())")
+			g.P("return ", g.Pkg["proto"], ".MarshalMessageSet(m.ExtensionMap())")
 			g.Out()
 			g.P("}")
-			g.P("func (this *", ccTypeName, ") Unmarshal(buf []byte) error {")
+			g.P("func (m *", ccTypeName, ") Unmarshal(buf []byte) error {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSet(buf, this.ExtensionMap())")
+			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSet(buf, m.ExtensionMap())")
 			g.Out()
 			g.P("}")
 			g.P("// ensure ", ccTypeName, " satisfies proto.Marshaler and proto.Unmarshaler")
@@ -1548,14 +1536,14 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("return extRange_", ccTypeName)
 		g.Out()
 		g.P("}")
-		g.P("func (this *", ccTypeName, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension {")
+		g.P("func (m *", ccTypeName, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension {")
 		g.In()
-		g.P("if this.XXX_extensions == nil {")
+		g.P("if m.XXX_extensions == nil {")
 		g.In()
-		g.P("this.XXX_extensions = make(map[int32]", g.Pkg["proto"], ".Extension)")
+		g.P("m.XXX_extensions = make(map[int32]", g.Pkg["proto"], ".Extension)")
 		g.Out()
 		g.P("}")
-		g.P("return this.XXX_extensions")
+		g.P("return m.XXX_extensions")
 		g.Out()
 		g.P("}")
 	}
@@ -1603,7 +1591,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				log.Print("don't know how to generate constant for", fieldname)
 				continue
 			}
-			def = g.DefaultPackageName(enum) + enum.prefix() + def
+			def = g.DefaultPackageName(enum) + def
 		}
 		g.P(kind, fieldname, " ", typename, " = ", def)
 		g.file.addExport(message, constOrVarSymbol{fieldname, kind})

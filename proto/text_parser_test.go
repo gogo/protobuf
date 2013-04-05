@@ -37,7 +37,7 @@ import (
 	"testing"
 
 	. "./testdata"
-	. "code.google.com/p/goprotobuf/proto"
+	. "code.google.com/p/gogoprotobuf/proto"
 )
 
 type UnmarshalTextTest struct {
@@ -239,7 +239,7 @@ var unMarshalTextTests = []UnmarshalTextTest{
 
 	// Enum
 	{
-		in: `count:42 bikeshed: BLUE`,
+		in: `count:42 bikeshed: MyMessage_BLUE`,
 		out: &MyMessage{
 			Count:    Int32(42),
 			Bikeshed: MyMessage_BLUE.Enum(),
@@ -299,10 +299,10 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	},
 
 	// Repeated non-repeated field
-	{
+	/*{
 		in:  `name: "Rob" name: "Russ"`,
 		err: `line 1.12: non-repeated field "name" was repeated`,
-	},
+	},*/
 
 	// Group
 	{
@@ -416,7 +416,7 @@ func TestUnmarshalText(t *testing.T) {
 // Regression test; this caused a panic.
 func TestRepeatedEnum(t *testing.T) {
 	pb := new(RepeatedEnum)
-	if err := UnmarshalText("color: RED", pb); err != nil {
+	if err := UnmarshalText("color: RepeatedEnum_RED", pb); err != nil {
 		t.Fatal(err)
 	}
 	exp := &RepeatedEnum{

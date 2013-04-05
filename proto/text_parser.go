@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -507,16 +510,17 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError
 				return p.errorf("unknown field name %q in %v", tok.value, st)
 			}
 
+			dst := sv.Field(fi)
+			//isDstNil := isNil(dst)
+
 			// Check that it's not already set if it's not a repeated field.
-			//if !props.Repeated && !isNil(sv.Field(fi)) {
+			//if !props.Repeated && !isDstNil {
 			//	return p.errorf("non-repeated field %q was repeated", tok.value)
 			//}
 
 			if err := p.checkForColon(props, st.Field(fi).Type); err != nil {
 				return err
 			}
-
-			dst := sv.Field(fi)
 
 			// Parse into the field.
 			if err := p.readAny(dst, props); err != nil {
@@ -552,210 +556,44 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) *ParseError {
 	if tok.value == "" {
 		return p.errorf("unexpected EOF")
 	}
-	if len(props.CustomMarshal) > 0 {
-		if props.CustomMarshal == "string" {
-			if props.Repeated {
-				t := reflect.TypeOf(v.Interface())
-				if t.Kind() == reflect.Slice {
-					tc := reflect.TypeOf(new(CustomMarshalToStringType))
-					ok := t.Elem().Implements(tc.Elem())
-					if ok {
-						fv := v
-						flen := fv.Len()
-						if flen == fv.Cap() {
-							nav := reflect.MakeSlice(v.Type(), flen, 2*flen+1)
-							reflect.Copy(nav, fv)
-							fv.Set(nav)
-						}
-						fv.SetLen(flen + 1)
-
-						// Read one.
-						p.back()
-						return p.readAny(fv.Index(flen), props)
-					}
-				}
-			}
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				custom := reflect.New(props.ctype.Elem()).Interface().(CustomStringType)
-				err := custom.UnmarshalFromString(&tok.unquoted)
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.ValueOf(custom))
-			} else {
-
-				custom := reflect.New(reflect.TypeOf(v.Interface())).Interface().(CustomStringType)
-				err := custom.UnmarshalFromString(&tok.unquoted)
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.Indirect(reflect.ValueOf(custom)))
-			}
-			return nil
-		} else if props.CustomMarshal == "bytes" {
-			if props.Repeated {
-				t := reflect.TypeOf(v.Interface())
-				if t.Kind() == reflect.Slice {
-					tc := reflect.TypeOf(new(CustomMarshalToBytesType))
-					ok := t.Elem().Implements(tc.Elem())
-					if ok {
-						fv := v
-						flen := fv.Len()
-						if flen == fv.Cap() {
-							nav := reflect.MakeSlice(v.Type(), flen, 2*flen+1)
-							reflect.Copy(nav, fv)
-							fv.Set(nav)
-						}
-						fv.SetLen(flen + 1)
-
-						// Read one.
-						p.back()
-						return p.readAny(fv.Index(flen), props)
-					}
-				}
-			}
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				custom := reflect.New(props.ctype.Elem()).Interface().(CustomBytesType)
-				err := custom.UnmarshalFromBytes([]byte(tok.unquoted))
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.ValueOf(custom))
-			} else {
-
-				custom := reflect.New(reflect.TypeOf(v.Interface())).Interface().(CustomBytesType)
-				err := custom.UnmarshalFromBytes([]byte(tok.unquoted))
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.Indirect(reflect.ValueOf(custom)))
-			}
-			return nil
-		} else if props.CustomMarshal == "uint32" {
-			if props.Repeated {
-				t := reflect.TypeOf(v.Interface())
-				if t.Kind() == reflect.Slice {
-					tc := reflect.TypeOf(new(CustomMarshalToUint32Type))
-					ok := t.Elem().Implements(tc.Elem())
-					if ok {
-						fv := v
-						flen := fv.Len()
-						if flen == fv.Cap() {
-							nav := reflect.MakeSlice(v.Type(), flen, 2*flen+1)
-							reflect.Copy(nav, fv)
-							fv.Set(nav)
-						}
-						fv.SetLen(flen + 1)
-
-						// Read one.
-						p.back()
-						return p.readAny(fv.Index(flen), props)
-					}
-				}
-			}
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				x, err := strconv.ParseInt(tok.value, 0, 32)
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				u32 := uint32(x)
-				custom := reflect.New(props.ctype.Elem()).Interface().(CustomUint32Type)
-				if err := custom.UnmarshalFromUint32(&u32); err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.ValueOf(custom))
-			} else {
-				x, err := strconv.ParseInt(tok.value, 0, 32)
-				if err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				u32 := uint32(x)
-				custom := reflect.New(reflect.TypeOf(v.Interface())).Interface().(CustomUint32Type)
-				if err := custom.UnmarshalFromUint32(&u32); err != nil {
-					return p.errorf("%v %v: %v", err, v.Type(), tok.value)
-				}
-				v.Set(reflect.Indirect(reflect.ValueOf(custom)))
-			}
-			return nil
-		}
-	}
-	if len(props.CustomEnum) > 0 {
+	if len(props.CustomType) > 0 {
 		if props.Repeated {
 			t := reflect.TypeOf(v.Interface())
 			if t.Kind() == reflect.Slice {
-				fv := v
-				flen := fv.Len()
-				if flen == fv.Cap() {
-					nav := reflect.MakeSlice(v.Type(), flen, 2*flen+1)
-					reflect.Copy(nav, fv)
-					fv.Set(nav)
+				tc := reflect.TypeOf(new(Marshaler))
+				ok := t.Elem().Implements(tc.Elem())
+				if ok {
+					fv := v
+					flen := fv.Len()
+					if flen == fv.Cap() {
+						nav := reflect.MakeSlice(v.Type(), flen, 2*flen+1)
+						reflect.Copy(nav, fv)
+						fv.Set(nav)
+					}
+					fv.SetLen(flen + 1)
+
+					// Read one.
+					p.back()
+					return p.readAny(fv.Index(flen), props)
 				}
-				fv.SetLen(flen + 1)
-				// Read one.
-				p.back()
-				return p.readAny(fv.Index(flen), props)
 			}
 		}
-		val := v.Interface()
-		typ := reflect.TypeOf(val)
-		if typ.Kind() == reflect.Ptr {
-			t2 := typ.Elem()
-			switch t2.Kind() {
-			case reflect.Uint32:
-				if len(props.Enum) == 0 {
-					break
-				}
-				m, ok := enumValueMaps[props.Enum]
-				if !ok {
-					break
-				}
-				x, ok := m[tok.value]
-				if !ok {
-					break
-				}
-				u32 := uint32(x)
-				vu32 := reflect.ValueOf(&u32).Convert(reflect.TypeOf(v.Interface()))
-				v.Set(vu32)
-				return nil
-			case reflect.Uint16:
-				if len(props.Enum) == 0 {
-					break
-				}
-				m, ok := enumValueMaps[props.Enum]
-				if !ok {
-					break
-				}
-				x, ok := m[tok.value]
-				if !ok {
-					break
-				}
-				u16 := uint16(x)
-				vu16 := reflect.ValueOf(&u16).Convert(reflect.TypeOf(v.Interface()))
-				v.Set(vu16)
-				return nil
-			default:
-				panic("unsupported custom enum")
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			custom := reflect.New(props.ctype.Elem()).Interface().(Unmarshaler)
+			err := custom.Unmarshal([]byte(tok.unquoted))
+			if err != nil {
+				return p.errorf("%v %v: %v", err, v.Type(), tok.value)
 			}
+			v.Set(reflect.ValueOf(custom))
 		} else {
-			switch typ.Kind() {
-			case reflect.Uint32, reflect.Uint16:
-				if len(props.Enum) == 0 {
-					break
-				}
-				m, ok := enumValueMaps[props.Enum]
-				if !ok {
-					break
-				}
-				x, ok := m[tok.value]
-				if !ok {
-					break
-				}
-				v.SetUint(uint64(x))
-				return nil
-			default:
-				panic("unsupported custom enum")
+			custom := reflect.New(reflect.TypeOf(v.Interface())).Interface().(Unmarshaler)
+			err := custom.Unmarshal([]byte(tok.unquoted))
+			if err != nil {
+				return p.errorf("%v %v: %v", err, v.Type(), tok.value)
 			}
+			v.Set(reflect.Indirect(reflect.ValueOf(custom)))
 		}
+		return nil
 	}
 	switch fv := v; fv.Kind() {
 	case reflect.Slice:

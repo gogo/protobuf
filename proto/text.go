@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -44,7 +47,6 @@ import (
 	"os"
 	"reflect"
 	"sort"
-	"strconv"
 	"strings"
 )
 
@@ -186,8 +188,10 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 	sprops := GetProperties(st)
 	for i := 0; i < sv.NumField(); i++ {
 		fv := sv.Field(i)
-		if name := st.Field(i).Name; strings.HasPrefix(name, "XXX_") {
-			// There's only two XXX_ fields:
+		props := sprops.Prop[i]
+		name := st.Field(i).Name
+		if strings.HasPrefix(name, "XXX_") {
+			// There are two XXX_ fields:
 			//   XXX_unrecognized []byte
 			//   XXX_extensions   map[int32]proto.Extension
 			// The first is handled here;
@@ -199,7 +203,6 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 			}
 			continue
 		}
-		props := sprops.Prop[i]
 		if fv.Kind() == reflect.Ptr && fv.IsNil() {
 			// Field not filled in. This could be an optional field or
 			// a required field that wasn't filled in. Either way, there
@@ -323,73 +326,27 @@ func writeAny(w *textWriter, v reflect.Value, props *Properties) error {
 
 	// We don't attempt to serialise every possible value type; only those
 	// that can occur in protocol buffers, plus a few extra that were easy.
-	if len(props.CustomMarshal) > 0 {
-		if props.CustomMarshal == "string" {
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				custom := v.Interface().(CustomStringType)
-				str, err := custom.MarshalToString()
-				if err != nil {
-					return err
-				}
-				if err := writeString(w, *str); err != nil {
-					return err
-				}
-			} else {
-				custom := v.Interface().(CustomMarshalToStringType)
-				str, err := custom.MarshalToString()
-				if err != nil {
-					return err
-				}
-				if err := writeString(w, *str); err != nil {
-					return err
-				}
+	if props != nil && len(props.CustomType) > 0 {
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			custom := v.Interface().(Marshaler)
+			data, err := custom.Marshal()
+			if err != nil {
+				return err
 			}
-			return nil
-		} else if props.CustomMarshal == "bytes" {
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				custom := v.Interface().(CustomBytesType)
-				data, err := custom.MarshalToBytes()
-				if err != nil {
-					return err
-				}
-				if err := writeString(w, string(data)); err != nil {
-					return err
-				}
-			} else {
-				custom := v.Interface().(CustomMarshalToBytesType)
-				data, err := custom.MarshalToBytes()
-				if err != nil {
-					return err
-				}
-				if err := writeString(w, string(data)); err != nil {
-					return err
-				}
+			if err := writeString(w, string(data)); err != nil {
+				return err
 			}
-			return nil
-		} else if props.CustomMarshal == "uint32" {
-			if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-				custom := v.Interface().(CustomUint32Type)
-				u32, err := custom.MarshalToUint32()
-				if err != nil {
-					return err
-				}
-				if _, err := fmt.Fprint(w, strconv.FormatUint(uint64(*u32), 10)); err != nil {
-					return err
-				}
-			} else {
-				custom := v.Interface().(CustomMarshalToUint32Type)
-				u32, err := custom.MarshalToUint32()
-				if err != nil {
-					return err
-				}
-				if _, err := fmt.Fprint(w, strconv.FormatUint(uint64(*u32), 10)); err != nil {
-					return err
-				}
-			}
-			return nil
 		} else {
-			panic("unsupported custom marshal")
+			custom := v.Interface().(Marshaler)
+			data, err := custom.Marshal()
+			if err != nil {
+				return err
+			}
+			if err := writeString(w, string(data)); err != nil {
+				return err
+			}
 		}
+		return nil
 	}
 	switch v.Kind() {
 	case reflect.Slice:
@@ -535,7 +492,7 @@ func writeUnknownStruct(w *textWriter, data []byte) (err error) {
 			}
 			continue
 		}
-		if _, err := fmt.Fprintf(w, "tag%d", tag); err != nil {
+		if _, err := fmt.Fprint(w, tag); err != nil {
 			return err
 		}
 		if wire != WireStartGroup {

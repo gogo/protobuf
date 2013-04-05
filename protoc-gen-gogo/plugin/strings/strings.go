@@ -1,3 +1,5 @@
+// Extensions for Protocol Buffers to create more go like structures.
+//
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://code.google.com/p/gogoprotobuf/gogoproto
 //
@@ -24,22 +26,50 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-//This package tests and provides a specification for how gogoprotobuf interacts with goprotobuf.
-//Most tests have some comments above, like so:
-//
-//Optional Native
-//Values are available
-//Nullable is false
-//GoGo -> GoGo
-//
-//"Optional Native" describes the type of struct begin tested.
-//"Values are available" describes the values that have been set in the struct.
-//"Nullable is false" implies that the struct was generated where all fields has a nullable extension value set to false.
-//"GoGo -> Go" implies that a gogoprotobuf generated struct is being marshalled and unmarshalled by a goprotobuf generated struct.
-//
-//The variable names also has some shorthand, which describes some of the same things as the comments.
-//nid = nil is default (nullable = false)
-//nin = nil is nil (nullable = true) [typical]
-//vis = value is set
-//vim = value is missing
-package test
+package strings
+
+import (
+	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+)
+
+type plugin struct {
+	*generator.Generator
+	imports map[string]bool
+}
+
+func NewPlugin() *plugin {
+	return &plugin{
+		imports: make(map[string]bool),
+	}
+}
+
+func (p *plugin) Name() string {
+	return "strings"
+}
+
+func (p *plugin) Init(g *generator.Generator) {
+	p.Generator = g
+}
+
+func (p *plugin) Generate(file *generator.FileDescriptor) {
+	p.imports = make(map[string]bool)
+	fileOf := p.FileOf(file.FileDescriptorProto)
+	for _, msg := range fileOf.Messages() {
+		p.generateMessage(msg)
+	}
+}
+
+func (p *plugin) generateMessage(message *generator.Descriptor) {
+	typeName := message.TypeName()
+	ccTypeName := generator.CamelCaseSlice(typeName)
+	if !message.IsGroup() {
+		p.P("func (m *", ccTypeName, ") String() string { return ", p.Pkg["proto"], ".CompactTextString(m) }")
+	}
+}
+
+func (p *plugin) GenerateImports(file *generator.FileDescriptor) {
+}
+
+func init() {
+	generator.RegisterPlugin(NewPlugin())
+}

@@ -34,7 +34,7 @@ package proto_test
 import (
 	"testing"
 
-	"code.google.com/p/goprotobuf/proto"
+	"code.google.com/p/gogoprotobuf/proto"
 
 	pb "./testdata"
 )

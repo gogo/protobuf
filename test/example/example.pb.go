@@ -17,64 +17,24 @@ var _ = proto.Marshal
 var _ = &json.SyntaxError{}
 var _ = math.Inf
 
-type Cuint32 uint32
-
-const (
-	D Cuint32 = 0
-	E Cuint32 = 1
-	F Cuint32 = 2
-)
-
-var Cuint32_name = map[int32]string{
-	0: "D",
-	1: "E",
-	2: "F",
-}
-var Cuint32_value = map[string]int32{
-	"D": 0,
-	"E": 1,
-	"F": 2,
-}
-
-func (x Cuint32) Enum() *Cuint32 {
-	p := new(Cuint32)
-	*p = x
-	return p
-}
-func (x Cuint32) String() string {
-	return proto.EnumName(Cuint32_name, int32(x))
-}
-func (x Cuint32) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
-}
-func (x *Cuint32) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Cuint32_value, data, "Cuint32")
-	if err != nil {
-		return err
-	}
-	*x = Cuint32(value)
-	return nil
-}
-
 type A struct {
 	Description string                                          `protobuf:"bytes,1,opt" json:"Description,omitempty"`
 	Number      int64                                           `protobuf:"varint,2,opt" json:"Number,omitempty"`
-	Id          code_google_com_p_gogoprotobuf_test_custom.Uuid `protobuf:"bytes,3,opt,custommarshal=string" json:"Id,omitempty"`
+	Id          code_google_com_p_gogoprotobuf_test_custom.Uuid `protobuf:"bytes,3,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uuid" json:"Id,omitempty"`
 }
 
-func (this *A) Reset()         { *this = A{} }
-func (this *A) String() string { return proto.CompactTextString(this) }
-func (*A) ProtoMessage()       {}
+func (this *A) Reset()   { *this = A{} }
+func (*A) ProtoMessage() {}
 
 type B struct {
 	A `protobuf:"bytes,1,opt,embedded=A" json:"A,omitempty"`
-	G []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,custommarshal=bytes" json:"G,omitempty"`
+	G []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"G,omitempty"`
 }
 
-func (this *B) Reset()         { *this = B{} }
-func (this *B) String() string { return proto.CompactTextString(this) }
-func (*B) ProtoMessage()       {}
+func (this *B) Reset()   { *this = B{} }
+func (*B) ProtoMessage() {}
 
 func init() {
-	proto.RegisterEnum("test.Cuint32", Cuint32_name, Cuint32_value)
 }
+func (this *A) String() string { return proto.CompactTextString(this) }
+func (this *B) String() string { return proto.CompactTextString(this) }

@@ -11,9 +11,6 @@
 // copyright notice, this list of conditions and the following disclaimer
 // in the documentation and/or other materials provided with the
 // distribution.
-//     * Neither the name of Google Inc. nor the names of its
-// contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -40,7 +37,7 @@ import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
 //vim = value is missing
 
 message SimpleMessage {
-	optional string Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	optional bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
 	optional string SimpleName = 2 [(gogoproto.nullable) = false];
 	optional int64 Time = 3;
 }
@@ -203,54 +200,6 @@ message NinNestedStruct {
 	repeated NidRepStruct Field2 = 2;
 }
 
-message NidOptUuid {
-	optional string Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-}
-
-message NinOptUuid {
-	optional string Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid"];
-}
-
-message NidRepUuid {
-	repeated string Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-}
-
-message NinRepUuid {
-	repeated string Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid"];
-}
-
-message NidOptUint128 {
-	optional string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-}
-
-message NinOptUint128 {
-	optional string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
-}
-
-message NidRepUint128 {
-	repeated string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-}
-
-message NinRepUint128 {
-	repeated string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
-}
-
-message NidOptUint16 {
-	optional string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinOptUint16 {
-	optional string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
-}
-
-message NidRepUint16 {
-	repeated string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinRepUint16 {
-	repeated string Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
-}
-
 message NidOptUuidAsBytes {
 	optional bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
 }
@@ -281,38 +230,6 @@ message NidRepUint128AsBytes {
 
 message NinRepUint128AsBytes {
 	repeated bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
-}
-
-message NidOptUint16AsBytes {
-	optional bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinOptUint16AsBytes {
-	optional bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
-}
-
-message NidRepUint16AsBytes {
-	repeated bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinRepUint16AsBytes {
-	repeated bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
-}
-
-message NidOptUint16AsUint32 {
-	optional uint32 Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinOptUint16AsUint32 {
-	optional uint32 Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
-}
-
-message NidRepUint16AsUint32 {
-	repeated uint32 Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16", (gogoproto.nullable) = false];
-}
-
-message NinRepUint16AsUint32 {
-	repeated uint32 Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint16"];
 }
 
 

@@ -1,6 +1,9 @@
-// Go support for Protocol Buffers - Google's data interchange format
+// Extensions for Protocol Buffers to create more go like structures.
 //
-// Copyright 2013 Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
 // http://code.google.com/p/goprotobuf/
@@ -138,20 +141,19 @@ func (sp *StructProperties) Swap(i, j int) { sp.order[i], sp.order[j] = sp.order
 
 // Properties represents the protocol-specific behavior of a single struct field.
 type Properties struct {
-	Name          string // name of the field, for error messages
-	OrigName      string // original name before protocol compiler (always set)
-	Wire          string
-	WireType      int
-	Tag           int
-	Required      bool
-	Optional      bool
-	Repeated      bool
-	Packed        bool   // relevant for repeated primitives only
-	Enum          string // set for enum types only
-	Default       string // default value
-	CustomMarshal string
-	CustomEnum    string
-	def_uint64    uint64
+	Name       string // name of the field, for error messages
+	OrigName   string // original name before protocol compiler (always set)
+	Wire       string
+	WireType   int
+	Tag        int
+	Required   bool
+	Optional   bool
+	Repeated   bool
+	Packed     bool   // relevant for repeated primitives only
+	Enum       string // set for enum types only
+	Default    string // default value
+	CustomType string
+	def_uint64 uint64
 
 	enc           encoder
 	valEnc        valueEncoder // set for bool and numeric types only
@@ -258,22 +260,20 @@ func (p *Properties) Parse(s string) {
 		case f == "packed":
 			p.Packed = true
 		case strings.HasPrefix(f, "name="):
-			p.OrigName = f[5:len(f)]
+			p.OrigName = f[5:]
 		case strings.HasPrefix(f, "enum="):
-			p.Enum = f[5:len(f)]
+			p.Enum = f[5:]
 		case strings.HasPrefix(f, "def="):
-			p.Default = f[4:len(f)] // rest of string
+			p.Default = f[4:] // rest of string
 			if i+1 < len(fields) {
 				// Commas aren't escaped, and def is always last.
-				p.Default += "," + strings.Join(fields[i+1:len(fields)], ",")
+				p.Default += "," + strings.Join(fields[i+1:], ",")
 				break
 			}
 		case strings.HasPrefix(f, "embedded="):
 			p.OrigName = strings.Split(f, "=")[1]
-		case strings.HasPrefix(f, "custommarshal="):
-			p.CustomMarshal = strings.Split(f, "=")[1]
-		case strings.HasPrefix(f, "customenum="):
-			p.CustomEnum = strings.Split(f, "=")[1]
+		case strings.HasPrefix(f, "customtype="):
+			p.CustomType = strings.Split(f, "=")[1]
 		}
 	}
 }
@@ -288,89 +288,17 @@ var protoMessageType = reflect.TypeOf((*Message)(nil)).Elem()
 func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 	p.enc = nil
 	p.dec = nil
-	if len(p.CustomMarshal) > 0 {
+	if len(p.CustomType) > 0 {
 		p.ctype = typ
-		if p.CustomMarshal == "string" {
-			if p.Repeated {
-				p.enc = (*Buffer).enc_custom_slice_string
-				p.dec = (*Buffer).dec_custom_slice_string
-			} else if typ.Kind() == reflect.Ptr {
-				p.enc = (*Buffer).enc_custom_string
-				p.dec = (*Buffer).dec_custom_string
-			} else {
-				p.enc = (*Buffer).enc_custom_ref_string
-				p.dec = (*Buffer).dec_custom_ref_string
-			}
-		} else if p.CustomMarshal == "bytes" {
-			if p.Repeated {
-				p.enc = (*Buffer).enc_custom_slice_bytes
-				p.dec = (*Buffer).dec_custom_slice_bytes
-			} else if typ.Kind() == reflect.Ptr {
-				p.enc = (*Buffer).enc_custom_bytes
-				p.dec = (*Buffer).dec_custom_bytes
-			} else {
-				p.enc = (*Buffer).enc_custom_ref_bytes
-				p.dec = (*Buffer).dec_custom_ref_bytes
-			}
-		} else if p.CustomMarshal == "uint32" {
-			if p.Repeated {
-				p.enc = (*Buffer).enc_custom_slice_uint32
-				p.dec = (*Buffer).dec_custom_slice_uint32
-			} else if typ.Kind() == reflect.Ptr {
-				p.enc = (*Buffer).enc_custom_uint32
-				p.dec = (*Buffer).dec_custom_uint32
-			} else {
-				p.enc = (*Buffer).enc_custom_ref_uint32
-				p.dec = (*Buffer).dec_custom_ref_uint32
-			}
+		if p.Repeated {
+			p.enc = (*Buffer).enc_custom_slice_bytes
+			p.dec = (*Buffer).dec_custom_slice_bytes
+		} else if typ.Kind() == reflect.Ptr {
+			p.enc = (*Buffer).enc_custom_bytes
+			p.dec = (*Buffer).dec_custom_bytes
 		} else {
-			panic(fmt.Sprintf("custom marshalling to %v not supported", p.CustomMarshal))
-		}
-	} else if len(p.CustomEnum) > 0 {
-		switch t1 := typ; t1.Kind() {
-		default:
-			switch t1.Kind() {
-			case reflect.Uint32:
-				p.enc = (*Buffer).enc_ref_int32
-				p.dec = (*Buffer).dec_ref_int32
-			case reflect.Uint16:
-				p.enc = (*Buffer).enc_ref_int16_to_int32
-				p.dec = (*Buffer).dec_ref_int32_to_int16
-			default:
-				panic(fmt.Sprintf("custom enum to %v not supported for %T", p.CustomEnum, t1))
-			}
-		case reflect.Ptr:
-			switch t2 := t1.Elem(); t2.Kind() {
-			case reflect.Uint32:
-				p.enc = (*Buffer).enc_int32
-				p.dec = (*Buffer).dec_int32
-			case reflect.Uint16:
-				p.enc = (*Buffer).enc_int16_to_int32
-				p.dec = (*Buffer).dec_int32_to_int16
-			default:
-				panic(fmt.Sprintf("custom enum to %v pointer not supported for %T", p.CustomEnum, t2))
-			}
-		case reflect.Slice:
-			switch t2 := t1.Elem(); t2.Kind() {
-			case reflect.Uint32:
-				if p.Packed {
-					p.enc = (*Buffer).enc_slice_packed_int32
-				} else {
-					p.enc = (*Buffer).enc_slice_int32
-				}
-				p.dec = (*Buffer).dec_slice_int32
-				p.packedDec = (*Buffer).dec_slice_packed_int32
-			case reflect.Uint16:
-				if p.Packed {
-					p.enc = (*Buffer).enc_slice_packed_int16_to_int32
-				} else {
-					p.enc = (*Buffer).enc_slice_int16_to_int32
-				}
-				p.dec = (*Buffer).dec_slice_int32_to_int16
-				p.packedDec = (*Buffer).dec_slice_packed_int32_to_int16
-			default:
-				panic(fmt.Sprintf("custom enum to %v slice not supported for %T", p.CustomEnum, t2))
-			}
+			p.enc = (*Buffer).enc_custom_ref_bytes
+			p.dec = (*Buffer).dec_custom_ref_bytes
 		}
 	} else {
 		switch t1 := typ; t1.Kind() {
@@ -402,10 +330,10 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 					p.enc = (*Buffer).enc_ref_struct_message
 					p.dec = (*Buffer).dec_ref_struct_message
 				} else {
-					fmt.Fprintf(os.Stderr, "proto: no coders for %T\n", t1)
+					fmt.Fprintf(os.Stderr, "proto: no coders for struct %T\n", t1)
 				}
 			default:
-				fmt.Fprintf(os.Stderr, "proto: no coders for %T\n", t1)
+				fmt.Fprintf(os.Stderr, "proto: no coders for unknown %T\n", t1)
 			}
 		case reflect.Ptr:
 			switch t2 := t1.Elem(); t2.Kind() {
@@ -587,57 +515,6 @@ func isUnmarshaler(t reflect.Type) bool {
 	return t.Implements(unmarshalerType)
 }
 
-type CustomMarshalToStringType interface {
-	MarshalToString() (*string, error)
-}
-
-type CustomStringType interface {
-	CustomMarshalToStringType
-	UnmarshalFromString(*string) error
-}
-
-var (
-	customStringTypeType = reflect.TypeOf((*CustomStringType)(nil)).Elem()
-)
-
-func isCustomStringType(t reflect.Type) bool {
-	return t.Implements(customStringTypeType)
-}
-
-type CustomMarshalToBytesType interface {
-	MarshalToBytes() ([]byte, error)
-}
-
-type CustomBytesType interface {
-	CustomMarshalToBytesType
-	UnmarshalFromBytes([]byte) error
-}
-
-var (
-	customBytesTypeType = reflect.TypeOf((*CustomBytesType)(nil)).Elem()
-)
-
-func isCustomBytesType(t reflect.Type) bool {
-	return t.Implements(customBytesTypeType)
-}
-
-type CustomMarshalToUint32Type interface {
-	MarshalToUint32() (*uint32, error)
-}
-
-type CustomUint32Type interface {
-	CustomMarshalToUint32Type
-	UnmarshalFromUint32(*uint32) error
-}
-
-var (
-	customUint32TypeType = reflect.TypeOf((*CustomUint32Type)(nil)).Elem()
-)
-
-func isCustomUint32Type(t reflect.Type) bool {
-	return t.Implements(customUint32TypeType)
-}
-
 // Init populates the properties from a protocol buffer struct tag.
 func (p *Properties) Init(typ reflect.Type, name, tag string, f *reflect.StructField) {
 	p.init(typ, name, tag, f, true)
@@ -694,7 +571,9 @@ func getPropertiesLocked(t reflect.Type) *StructProperties {
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
 		p := new(Properties)
-		p.init(f.Type, f.Name, f.Tag.Get("protobuf"), &f, false)
+		name := f.Name
+		p.init(f.Type, name, f.Tag.Get("protobuf"), &f, false)
+
 		if f.Name == "XXX_extensions" { // special case
 			p.enc = (*Buffer).enc_map
 			p.dec = nil // not needed

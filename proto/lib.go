@@ -246,7 +246,6 @@ type Buffer struct {
 
 	// pools of basic types to amortize allocation.
 	bools   []bool
-	uint16s []uint16
 	uint32s []uint32
 	uint64s []uint64
 

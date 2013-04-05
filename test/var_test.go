@@ -11,9 +11,6 @@
 // copyright notice, this list of conditions and the following disclaimer
 // in the documentation and/or other materials provided with the
 // distribution.
-//     * Neither the name of Google Inc. nor the names of its
-// contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -45,36 +42,13 @@ import (
 //if true files are written with the encoded gogo messages, this is useful for testing against another language
 var gogoFiles bool = false
 
-func testStr(t *testing.T, a gogoproto.CustomStringType, astr string) {
-	mastr, err := a.MarshalToString()
-	if err != nil {
-		panic(err)
-	}
-	if mastr == nil {
-		t.Fatalf("MarshalToSring returned nil")
-	}
-	if *mastr != astr {
-		t.Fatalf("%v != %v", mastr, astr)
-	}
-	ptr := reflect.New(reflect.TypeOf(a).Elem())
-	b := ptr.Interface().(gogoproto.CustomStringType)
-	if err := b.UnmarshalFromString(mastr); err != nil {
-		panic(err)
-	}
-	mastr, err = b.MarshalToString()
-	if err != nil {
-		panic(err)
-	}
-	if mastr == nil {
-		t.Fatalf("MarshalToSring returned nil after UnmarshalFromString")
-	}
-	if *mastr != astr {
-		t.Fatalf("After UnmarshalFromString %v != %v", mastr, astr)
-	}
+type M interface {
+	gogoproto.Marshaler
+	gogoproto.Unmarshaler
 }
 
-func testBytes(t *testing.T, a gogoproto.CustomBytesType, astr []byte) {
-	mastr, err := a.MarshalToBytes()
+func testBytes(t *testing.T, a M, astr []byte) {
+	mastr, err := a.Marshal()
 	if err != nil {
 		panic(err)
 	}
@@ -82,11 +56,11 @@ func testBytes(t *testing.T, a gogoproto.CustomBytesType, astr []byte) {
 		t.Fatalf("%v != %v", mastr, astr)
 	}
 	ptr := reflect.New(reflect.TypeOf(a).Elem())
-	b := ptr.Interface().(gogoproto.CustomBytesType)
-	if err := b.UnmarshalFromBytes(mastr); err != nil {
+	b := ptr.Interface().(M)
+	if err := b.Unmarshal(mastr); err != nil {
 		panic(err)
 	}
-	mastr, err = b.MarshalToBytes()
+	mastr, err = b.Marshal()
 	if err != nil {
 		panic(err)
 	}
@@ -104,11 +78,6 @@ var id2 = custom.Uuid{0, 1, 2, 3, 4, 5, 70, 7, 136, 9, 10, 11, 12, 15, 14, 15}
 var idstr1 = "00010203-0405-4607-8809-0a0b0c0d0e0f"
 var idstr2 = "00010203-0405-4607-8809-0a0b0c0f0e0f"
 
-func TestVarUuidStr(t *testing.T) {
-	testStr(t, &id1, idstr1)
-	testStr(t, &id2, idstr2)
-}
-
 var idbytes1 = []byte(id1)
 var idbytes2 = []byte(id2)
 
@@ -125,11 +94,6 @@ var uint128stra = fmt.Sprintf("%v-%v", uint64(math.MaxUint64), uint64(math.MaxUi
 var uint128strb = "0-2"
 var zerouint128str = "0-0"
 
-func TestVarUint128Str(t *testing.T) {
-	testStr(t, &uint128a, uint128stra)
-	testStr(t, &uint128b, uint128strb)
-}
-
 var uint128bytesa = []byte{255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255}
 var uint128bytesb = []byte{0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0}
 var zerouint128bytes = []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -140,72 +104,12 @@ func TestVarUint128Bytes(t *testing.T) {
 	testBytes(t, &zerouint128, zerouint128bytes)
 }
 
-var uint16a = custom.Uint16(uint16(math.MaxUint16))
-var uint16b = custom.Uint16(uint16(2))
-var zerouint16 = custom.Uint16(uint16(0))
-
-var uint16stra = fmt.Sprintf("%v", math.MaxUint16)
-var uint16strb = "2"
-var zerouint16str = "0"
-
-func TestVarUint16Str(t *testing.T) {
-	testStr(t, &uint16a, uint16stra)
-	testStr(t, &uint16b, uint16strb)
-}
-
-var uint16bytesa = []byte{255, 255}
-var uint16bytesb = []byte{2, 0}
-var zerouint16bytes = []byte{0, 0}
-
-func TestVarUint16Bytes(t *testing.T) {
-	testBytes(t, &uint16a, uint16bytesa)
-	testBytes(t, &uint16b, uint16bytesb)
-	testBytes(t, &zerouint16, zerouint16bytes)
-}
-
-var uint16u32a = uint32(math.MaxUint16)
-var uint16u32b = uint32(2)
-var zerouint16u32 = uint32(0)
-
-func testUint32(t *testing.T, a gogoproto.CustomUint32Type, astr uint32) {
-	mastr, err := a.MarshalToUint32()
-	if err != nil {
-		panic(err)
-	}
-	if mastr == nil {
-		t.Fatalf("MarshalToUint32 returned nil")
-	}
-	if *mastr != astr {
-		t.Fatalf("%v != %v", mastr, astr)
-	}
-	ptr := reflect.New(reflect.TypeOf(a).Elem())
-	b := ptr.Interface().(gogoproto.CustomUint32Type)
-	if err := b.UnmarshalFromUint32(mastr); err != nil {
-		panic(err)
-	}
-	mastr, err = b.MarshalToUint32()
-	if err != nil {
-		panic(err)
-	}
-	if mastr == nil {
-		t.Fatalf("MarshalToUint32 returned nil after UnmarshalFromUint32")
-	}
-	if *mastr != astr {
-		t.Fatalf("After UnmarshalFromUint32 %v != %v", mastr, astr)
-	}
-}
-
-func TestVarUint16u32(t *testing.T) {
-	testUint32(t, &uint16a, uint16u32a)
-	testUint32(t, &uint16b, uint16u32b)
-}
-
 var (
 	newGoProtoSimpleMsg = func() goproto.Message { return &gotest.SimpleMessage{} }
 )
 
 var gosimplemsg = &gotest.SimpleMessage{
-	Id:         &idstr1,
+	Id:         idbytes1,
 	SimpleName: &name,
 	Time:       &time,
 }
@@ -969,74 +873,6 @@ var (
 )
 
 var (
-	newGoProtoNidOptUuid   = func() goproto.Message { return &gotest.NidOptUuid{} }
-	newGoGoProtoNidOptUuid = func() gogoproto.Message { return &gogotest.NidOptUuid{} }
-	newGoProtoNinOptUuid   = func() goproto.Message { return &gotest.NinOptUuid{} }
-	newGoGoProtoNinOptUuid = func() gogoproto.Message { return &gogotest.NinOptUuid{} }
-)
-
-var (
-	govisNidOptUuid = &gotest.NidOptUuid{
-		Id: &idstr1,
-	}
-	gogovisNidOptUuid = &gogotest.NidOptUuid{
-		Id: id1,
-	}
-	govimNidOptUuid = &gotest.NidOptUuid{
-		Id: nil,
-	}
-	gogovimNidOptUuid = &gogotest.NidOptUuid{
-		Id: nil,
-	}
-	govisNinOptUuid = &gotest.NinOptUuid{
-		Id: &idstr1,
-	}
-	gogovisNinOptUuid = &gogotest.NinOptUuid{
-		Id: &id1,
-	}
-	govimNinOptUuid = &gotest.NinOptUuid{
-		Id: nil,
-	}
-	gogovimNinOptUuid = &gogotest.NinOptUuid{
-		Id: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepUuid   = func() goproto.Message { return &gotest.NidRepUuid{} }
-	newGoGoProtoNidRepUuid = func() gogoproto.Message { return &gogotest.NidRepUuid{} }
-	newGoProtoNinRepUuid   = func() goproto.Message { return &gotest.NinRepUuid{} }
-	newGoGoProtoNinRepUuid = func() gogoproto.Message { return &gogotest.NinRepUuid{} }
-)
-
-var (
-	govisNidRepUuid = &gotest.NidRepUuid{
-		Id: []string{idstr1, idstr2},
-	}
-	gogovisNidRepUuid = &gogotest.NidRepUuid{
-		Id: []custom.Uuid{id1, id2},
-	}
-	govimNidRepUuid = &gotest.NidRepUuid{
-		Id: nil,
-	}
-	gogovimNidRepUuid = &gogotest.NidRepUuid{
-		Id: nil,
-	}
-	govisNinRepUuid = &gotest.NinRepUuid{
-		Id: []string{idstr1, idstr2},
-	}
-	gogovisNinRepUuid = &gogotest.NinRepUuid{
-		Id: []custom.Uuid{id1, id2},
-	}
-	govimNinRepUuid = &gotest.NinRepUuid{
-		Id: nil,
-	}
-	gogovimNinRepUuid = &gogotest.NinRepUuid{
-		Id: nil,
-	}
-)
-
-var (
 	newGoProtoNidNestedStruct   = func() goproto.Message { return &gotest.NidNestedStruct{} }
 	newGoGoProtoNidNestedStruct = func() gogoproto.Message { return &gogotest.NidNestedStruct{} }
 	newGoProtoNinNestedStruct   = func() goproto.Message { return &gotest.NinNestedStruct{} }
@@ -1150,148 +986,6 @@ var (
 	}
 	gogovimNinRepEnum = &gogotest.NinRepEnum{
 		Field1: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptUint128   = func() goproto.Message { return &gotest.NidOptUint128{} }
-	newGoGoProtoNidOptUint128 = func() gogoproto.Message { return &gogotest.NidOptUint128{} }
-	newGoProtoNinOptUint128   = func() goproto.Message { return &gotest.NinOptUint128{} }
-	newGoGoProtoNinOptUint128 = func() gogoproto.Message { return &gogotest.NinOptUint128{} }
-)
-
-var (
-	govisNidOptUint128 = &gotest.NidOptUint128{
-		Value: &uint128stra,
-	}
-	gogovisNidOptUint128 = &gogotest.NidOptUint128{
-		Value: uint128a,
-	}
-	govimNidOptUint128 = &gotest.NidOptUint128{
-		Value: nil,
-	}
-	gozeroOptUint128 = &gotest.NidOptUint128{
-		Value: &zerouint128str,
-	}
-	gogovimNidOptUint128 = &gogotest.NidOptUint128{
-		Value: custom.Uint128{},
-	}
-	govisNinOptUint128 = &gotest.NinOptUint128{
-		Value: &uint128stra,
-	}
-	gogovisNinOptUint128 = &gogotest.NinOptUint128{
-		Value: &uint128a,
-	}
-	govimNinOptUint128 = &gotest.NinOptUint128{
-		Value: nil,
-	}
-	gogovimNinOptUint128 = &gogotest.NinOptUint128{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepUint128   = func() goproto.Message { return &gotest.NidRepUint128{} }
-	newGoGoProtoNidRepUint128 = func() gogoproto.Message { return &gogotest.NidRepUint128{} }
-	newGoProtoNinRepUint128   = func() goproto.Message { return &gotest.NinRepUint128{} }
-	newGoGoProtoNinRepUint128 = func() gogoproto.Message { return &gogotest.NinRepUint128{} }
-)
-
-var (
-	govisNidRepUint128 = &gotest.NidRepUint128{
-		Value: []string{uint128stra, uint128strb},
-	}
-	gogovisNidRepUint128 = &gogotest.NidRepUint128{
-		Value: []custom.Uint128{uint128a, uint128b},
-	}
-	govimNidRepUint128 = &gotest.NidRepUint128{
-		Value: nil,
-	}
-	gogovimNidRepUint128 = &gogotest.NidRepUint128{
-		Value: nil,
-	}
-	govisNinRepUint128 = &gotest.NinRepUint128{
-		Value: []string{uint128stra, uint128strb},
-	}
-	gogovisNinRepUint128 = &gogotest.NinRepUint128{
-		Value: []custom.Uint128{uint128a, uint128b},
-	}
-	govimNinRepUint128 = &gotest.NinRepUint128{
-		Value: nil,
-	}
-	gogovimNinRepUint128 = &gogotest.NinRepUint128{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptUint16   = func() goproto.Message { return &gotest.NidOptUint16{} }
-	newGoGoProtoNidOptUint16 = func() gogoproto.Message { return &gogotest.NidOptUint16{} }
-	newGoProtoNinOptUint16   = func() goproto.Message { return &gotest.NinOptUint16{} }
-	newGoGoProtoNinOptUint16 = func() gogoproto.Message { return &gogotest.NinOptUint16{} }
-)
-
-var (
-	govisNidOptUint16 = &gotest.NidOptUint16{
-		Value: &uint16stra,
-	}
-	gogovisNidOptUint16 = &gogotest.NidOptUint16{
-		Value: uint16a,
-	}
-	govimNidOptUint16 = &gotest.NidOptUint16{
-		Value: nil,
-	}
-	gozeroOptUint16 = &gotest.NidOptUint16{
-		Value: &zerouint16str,
-	}
-	gogovimNidOptUint16 = &gogotest.NidOptUint16{
-		Value: 0,
-	}
-	govisNinOptUint16 = &gotest.NinOptUint16{
-		Value: &uint16stra,
-	}
-	gogovisNinOptUint16 = &gogotest.NinOptUint16{
-		Value: &uint16a,
-	}
-	govimNinOptUint16 = &gotest.NinOptUint16{
-		Value: nil,
-	}
-	gogovimNinOptUint16 = &gogotest.NinOptUint16{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepUint16   = func() goproto.Message { return &gotest.NidRepUint16{} }
-	newGoGoProtoNidRepUint16 = func() gogoproto.Message { return &gogotest.NidRepUint16{} }
-	newGoProtoNinRepUint16   = func() goproto.Message { return &gotest.NinRepUint16{} }
-	newGoGoProtoNinRepUint16 = func() gogoproto.Message { return &gogotest.NinRepUint16{} }
-)
-
-var (
-	govisNidRepUint16 = &gotest.NidRepUint16{
-		Value: []string{uint16stra, uint16strb},
-	}
-	gogovisNidRepUint16 = &gogotest.NidRepUint16{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNidRepUint16 = &gotest.NidRepUint16{
-		Value: nil,
-	}
-	gogovimNidRepUint16 = &gogotest.NidRepUint16{
-		Value: nil,
-	}
-	govisNinRepUint16 = &gotest.NinRepUint16{
-		Value: []string{uint16stra, uint16strb},
-	}
-	gogovisNinRepUint16 = &gogotest.NinRepUint16{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNinRepUint16 = &gotest.NinRepUint16{
-		Value: nil,
-	}
-	gogovimNinRepUint16 = &gogotest.NinRepUint16{
-		Value: nil,
 	}
 )
 
@@ -1431,289 +1125,5 @@ var (
 	}
 	gogovimNinRepUint128AsBytes = &gogotest.NinRepUint128AsBytes{
 		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptUint16AsBytes   = func() goproto.Message { return &gotest.NidOptUint16AsBytes{} }
-	newGoGoProtoNidOptUint16AsBytes = func() gogoproto.Message { return &gogotest.NidOptUint16AsBytes{} }
-	newGoProtoNinOptUint16AsBytes   = func() goproto.Message { return &gotest.NinOptUint16AsBytes{} }
-	newGoGoProtoNinOptUint16AsBytes = func() gogoproto.Message { return &gogotest.NinOptUint16AsBytes{} }
-)
-
-var (
-	govisNidOptUint16AsBytes = &gotest.NidOptUint16AsBytes{
-		Value: uint16bytesa,
-	}
-	gogovisNidOptUint16AsBytes = &gogotest.NidOptUint16AsBytes{
-		Value: uint16a,
-	}
-	govimNidOptUint16AsBytes = &gotest.NidOptUint16AsBytes{
-		Value: nil,
-	}
-	gozeroOptUint16AsBytes = &gotest.NidOptUint16AsBytes{
-		Value: zerouint16bytes,
-	}
-	gogovimNidOptUint16AsBytes = &gogotest.NidOptUint16AsBytes{
-		Value: 0,
-	}
-	govisNinOptUint16AsBytes = &gotest.NinOptUint16AsBytes{
-		Value: uint16bytesa,
-	}
-	gogovisNinOptUint16AsBytes = &gogotest.NinOptUint16AsBytes{
-		Value: &uint16a,
-	}
-	govimNinOptUint16AsBytes = &gotest.NinOptUint16AsBytes{
-		Value: nil,
-	}
-	gogovimNinOptUint16AsBytes = &gogotest.NinOptUint16AsBytes{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepUint16AsBytes   = func() goproto.Message { return &gotest.NidRepUint16AsBytes{} }
-	newGoGoProtoNidRepUint16AsBytes = func() gogoproto.Message { return &gogotest.NidRepUint16AsBytes{} }
-	newGoProtoNinRepUint16AsBytes   = func() goproto.Message { return &gotest.NinRepUint16AsBytes{} }
-	newGoGoProtoNinRepUint16AsBytes = func() gogoproto.Message { return &gogotest.NinRepUint16AsBytes{} }
-)
-
-var (
-	govisNidRepUint16AsBytes = &gotest.NidRepUint16AsBytes{
-		Value: [][]byte{uint16bytesa, uint16bytesb},
-	}
-	gogovisNidRepUint16AsBytes = &gogotest.NidRepUint16AsBytes{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNidRepUint16AsBytes = &gotest.NidRepUint16AsBytes{
-		Value: nil,
-	}
-	gogovimNidRepUint16AsBytes = &gogotest.NidRepUint16AsBytes{
-		Value: nil,
-	}
-	govisNinRepUint16AsBytes = &gotest.NinRepUint16AsBytes{
-		Value: [][]byte{uint16bytesa, uint16bytesb},
-	}
-	gogovisNinRepUint16AsBytes = &gogotest.NinRepUint16AsBytes{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNinRepUint16AsBytes = &gotest.NinRepUint16AsBytes{
-		Value: nil,
-	}
-	gogovimNinRepUint16AsBytes = &gogotest.NinRepUint16AsBytes{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptUint16AsUint32   = func() goproto.Message { return &gotest.NidOptUint16AsUint32{} }
-	newGoGoProtoNidOptUint16AsUint32 = func() gogoproto.Message { return &gogotest.NidOptUint16AsUint32{} }
-	newGoProtoNinOptUint16AsUint32   = func() goproto.Message { return &gotest.NinOptUint16AsUint32{} }
-	newGoGoProtoNinOptUint16AsUint32 = func() gogoproto.Message { return &gogotest.NinOptUint16AsUint32{} }
-)
-
-var (
-	govisNidOptUint16AsUint32 = &gotest.NidOptUint16AsUint32{
-		Value: &uint16u32a,
-	}
-	gogovisNidOptUint16AsUint32 = &gogotest.NidOptUint16AsUint32{
-		Value: uint16a,
-	}
-	govimNidOptUint16AsUint32 = &gotest.NidOptUint16AsUint32{
-		Value: nil,
-	}
-	gozeroOptUint16AsUint32 = &gotest.NidOptUint16AsUint32{
-		Value: &zerouint16u32,
-	}
-	gogovimNidOptUint16AsUint32 = &gogotest.NidOptUint16AsUint32{
-		Value: 0,
-	}
-	govisNinOptUint16AsUint32 = &gotest.NinOptUint16AsUint32{
-		Value: &uint16u32a,
-	}
-	gogovisNinOptUint16AsUint32 = &gogotest.NinOptUint16AsUint32{
-		Value: &uint16a,
-	}
-	govimNinOptUint16AsUint32 = &gotest.NinOptUint16AsUint32{
-		Value: nil,
-	}
-	gogovimNinOptUint16AsUint32 = &gogotest.NinOptUint16AsUint32{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepUint16AsUint32   = func() goproto.Message { return &gotest.NidRepUint16AsUint32{} }
-	newGoGoProtoNidRepUint16AsUint32 = func() gogoproto.Message { return &gogotest.NidRepUint16AsUint32{} }
-	newGoProtoNinRepUint16AsUint32   = func() goproto.Message { return &gotest.NinRepUint16AsUint32{} }
-	newGoGoProtoNinRepUint16AsUint32 = func() gogoproto.Message { return &gogotest.NinRepUint16AsUint32{} }
-)
-
-var (
-	govisNidRepUint16AsUint32 = &gotest.NidRepUint16AsUint32{
-		Value: []uint32{uint16u32a, uint16u32b},
-	}
-	gogovisNidRepUint16AsUint32 = &gogotest.NidRepUint16AsUint32{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNidRepUint16AsUint32 = &gotest.NidRepUint16AsUint32{
-		Value: nil,
-	}
-	gogovimNidRepUint16AsUint32 = &gogotest.NidRepUint16AsUint32{
-		Value: nil,
-	}
-	govisNinRepUint16AsUint32 = &gotest.NinRepUint16AsUint32{
-		Value: []uint32{uint16u32a, uint16u32b},
-	}
-	gogovisNinRepUint16AsUint32 = &gogotest.NinRepUint16AsUint32{
-		Value: []custom.Uint16{uint16a, uint16b},
-	}
-	govimNinRepUint16AsUint32 = &gotest.NinRepUint16AsUint32{
-		Value: nil,
-	}
-	gogovimNinRepUint16AsUint32 = &gogotest.NinRepUint16AsUint32{
-		Value: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptEnumUint32   = func() goproto.Message { return &gotest.NidOptEnumUint32{} }
-	newGoGoProtoNidOptEnumUint32 = func() gogoproto.Message { return &gogotest.NidOptEnumUint32{} }
-	newGoProtoNinOptEnumUint32   = func() goproto.Message { return &gotest.NinOptEnumUint32{} }
-	newGoGoProtoNinOptEnumUint32 = func() gogoproto.Message { return &gogotest.NinOptEnumUint32{} }
-)
-
-var (
-	govisNidOptEnumUint32 = &gotest.NidOptEnumUint32{
-		Field1: gotest.TheTestEnumUint32_E.Enum(),
-	}
-	gogovisNidOptEnumUint32 = &gogotest.NidOptEnumUint32{
-		Field1: gogotest.E,
-	}
-	govimNidOptEnumUint32 = &gotest.NidOptEnumUint32{
-		Field1: nil,
-	}
-	gozeroNidOptEnumUint32 = &gotest.NidOptEnumUint32{
-		Field1: gotest.TheTestEnumUint32_D.Enum(),
-	}
-	gogovimNidOptEnumUint32 = &gogotest.NidOptEnumUint32{
-		Field1: gogotest.D,
-	}
-	govisNinOptEnumUint32 = &gotest.NinOptEnumUint32{
-		Field1: gotest.TheTestEnumUint32_E.Enum(),
-	}
-	gogovisNinOptEnumUint32 = &gogotest.NinOptEnumUint32{
-		Field1: gogotest.E.Enum(),
-	}
-	govimNinOptEnumUint32 = &gotest.NinOptEnumUint32{
-		Field1: nil,
-	}
-	gogovimNinOptEnumUint32 = &gogotest.NinOptEnumUint32{
-		Field1: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepEnumUint32   = func() goproto.Message { return &gotest.NidRepEnumUint32{} }
-	newGoGoProtoNidRepEnumUint32 = func() gogoproto.Message { return &gogotest.NidRepEnumUint32{} }
-	newGoProtoNinRepEnumUint32   = func() goproto.Message { return &gotest.NinRepEnumUint32{} }
-	newGoGoProtoNinRepEnumUint32 = func() gogoproto.Message { return &gogotest.NinRepEnumUint32{} }
-)
-
-var (
-	govisNidRepEnumUint32 = &gotest.NidRepEnumUint32{
-		Field1: []gotest.TheTestEnumUint32{gotest.TheTestEnumUint32_E, gotest.TheTestEnumUint32_F},
-	}
-	gogovisNidRepEnumUint32 = &gogotest.NidRepEnumUint32{
-		Field1: []gogotest.TheTestEnumUint32{gogotest.E, gogotest.F},
-	}
-	govimNidRepEnumUint32 = &gotest.NidRepEnumUint32{
-		Field1: nil,
-	}
-	gogovimNidRepEnumUint32 = &gogotest.NidRepEnumUint32{
-		Field1: nil,
-	}
-	govisNinRepEnumUint32 = &gotest.NinRepEnumUint32{
-		Field1: []gotest.TheTestEnumUint32{gotest.TheTestEnumUint32_E, gotest.TheTestEnumUint32_F},
-	}
-	gogovisNinRepEnumUint32 = &gogotest.NinRepEnumUint32{
-		Field1: []gogotest.TheTestEnumUint32{gogotest.E, gogotest.F},
-	}
-	govimNinRepEnumUint32 = &gotest.NinRepEnumUint32{
-		Field1: nil,
-	}
-	gogovimNinRepEnumUint32 = &gogotest.NinRepEnumUint32{
-		Field1: nil,
-	}
-)
-
-var (
-	newGoProtoNidOptEnumUint16   = func() goproto.Message { return &gotest.NidOptEnumUint16{} }
-	newGoGoProtoNidOptEnumUint16 = func() gogoproto.Message { return &gogotest.NidOptEnumUint16{} }
-	newGoProtoNinOptEnumUint16   = func() goproto.Message { return &gotest.NinOptEnumUint16{} }
-	newGoGoProtoNinOptEnumUint16 = func() gogoproto.Message { return &gogotest.NinOptEnumUint16{} }
-)
-
-var (
-	govisNidOptEnumUint16 = &gotest.NidOptEnumUint16{
-		Field1: gotest.TheTestEnumUint16_H.Enum(),
-	}
-	gogovisNidOptEnumUint16 = &gogotest.NidOptEnumUint16{
-		Field1: gogotest.H,
-	}
-	govimNidOptEnumUint16 = &gotest.NidOptEnumUint16{
-		Field1: nil,
-	}
-	gozeroNidOptEnumUint16 = &gotest.NidOptEnumUint16{
-		Field1: gotest.TheTestEnumUint16_G.Enum(),
-	}
-	gogovimNidOptEnumUint16 = &gogotest.NidOptEnumUint16{
-		Field1: gogotest.G,
-	}
-	govisNinOptEnumUint16 = &gotest.NinOptEnumUint16{
-		Field1: gotest.TheTestEnumUint16_H.Enum(),
-	}
-	gogovisNinOptEnumUint16 = &gogotest.NinOptEnumUint16{
-		Field1: gogotest.H.Enum(),
-	}
-	govimNinOptEnumUint16 = &gotest.NinOptEnumUint16{
-		Field1: nil,
-	}
-	gogovimNinOptEnumUint16 = &gogotest.NinOptEnumUint16{
-		Field1: nil,
-	}
-)
-
-var (
-	newGoProtoNidRepEnumUint16   = func() goproto.Message { return &gotest.NidRepEnumUint16{} }
-	newGoGoProtoNidRepEnumUint16 = func() gogoproto.Message { return &gogotest.NidRepEnumUint16{} }
-	newGoProtoNinRepEnumUint16   = func() goproto.Message { return &gotest.NinRepEnumUint16{} }
-	newGoGoProtoNinRepEnumUint16 = func() gogoproto.Message { return &gogotest.NinRepEnumUint16{} }
-)
-
-var (
-	govisNidRepEnumUint16 = &gotest.NidRepEnumUint16{
-		Field1: []gotest.TheTestEnumUint16{gotest.TheTestEnumUint16_H, gotest.TheTestEnumUint16_I},
-	}
-	gogovisNidRepEnumUint16 = &gogotest.NidRepEnumUint16{
-		Field1: []gogotest.TheTestEnumUint16{gogotest.H, gogotest.I},
-	}
-	govimNidRepEnumUint16 = &gotest.NidRepEnumUint16{
-		Field1: nil,
-	}
-	gogovimNidRepEnumUint16 = &gogotest.NidRepEnumUint16{
-		Field1: nil,
-	}
-	govisNinRepEnumUint16 = &gotest.NinRepEnumUint16{
-		Field1: []gotest.TheTestEnumUint16{gotest.TheTestEnumUint16_H, gotest.TheTestEnumUint16_I},
-	}
-	gogovisNinRepEnumUint16 = &gogotest.NinRepEnumUint16{
-		Field1: []gogotest.TheTestEnumUint16{gogotest.H, gogotest.I},
-	}
-	govimNinRepEnumUint16 = &gotest.NinRepEnumUint16{
-		Field1: nil,
-	}
-	gogovimNinRepEnumUint16 = &gogotest.NinRepEnumUint16{
-		Field1: nil,
 	}
 )
