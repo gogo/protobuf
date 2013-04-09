@@ -103,7 +103,6 @@
 
 	Gogoprotobuf also has lost some features which should be brought back with time:
 
-	  - Full Json Support
 	  - Marshalling and unmarshalling with reflect and without the unsafe package,
 	  this requires work in pointer_reflect.go
 

@@ -511,12 +511,12 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError
 			}
 
 			dst := sv.Field(fi)
-			//isDstNil := isNil(dst)
+			isDstNil := isNil(dst)
 
 			// Check that it's not already set if it's not a repeated field.
-			//if !props.Repeated && !isDstNil {
-			//	return p.errorf("non-repeated field %q was repeated", tok.value)
-			//}
+			if !props.Repeated && !isDstNil && dst.Kind() == reflect.Ptr {
+				return p.errorf("non-repeated field %q was repeated", tok.value)
+			}
 
 			if err := p.checkForColon(props, st.Field(fi).Type); err != nil {
 				return err

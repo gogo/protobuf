@@ -33,7 +33,7 @@ package proto_test
 
 import (
 	"bytes"
-	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"math"
 	"math/rand"
@@ -1358,7 +1358,6 @@ func TestMaximumTagNumber(t *testing.T) {
 	}
 }
 
-/*
 func TestJSON(t *testing.T) {
 	m := &MyMessage{
 		Count: Int32(4),
@@ -1368,7 +1367,7 @@ func TestJSON(t *testing.T) {
 		},
 		Bikeshed: MyMessage_GREEN.Enum(),
 	}
-	const expected = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":"GREEN"}`
+	const expected = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":"MyMessage_GREEN"}`
 
 	b, err := json.Marshal(m)
 	if err != nil {
@@ -1397,7 +1396,6 @@ func TestJSON(t *testing.T) {
 		t.Fatalf("got %s, want %s", received, m)
 	}
 }
-*/
 
 func TestBadWireType(t *testing.T) {
 	b := []byte{7<<3 | 6} // field 7, wire type 6

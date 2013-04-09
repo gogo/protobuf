@@ -55,7 +55,7 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 }
 
 type NidOptEnum struct {
-	Field1           TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field1           TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -71,7 +71,7 @@ func (m *NinOptEnum) Reset()      { *m = NinOptEnum{} }
 func (*NinOptEnum) ProtoMessage() {}
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 

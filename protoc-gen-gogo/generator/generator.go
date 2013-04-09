@@ -1144,12 +1144,8 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	typeName := enum.TypeName()
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
-	ccPrefix := enum.prefix()
-	ccPrefix = ""
-
-	enumType := "int32"
-
-	g.P("type ", ccTypeName, " ", enumType)
+	ccPrefix := ""
+	g.P("type ", ccTypeName, " int32")
 	g.file.addExport(enum, enumSymbol(ccTypeName))
 	g.P("const (")
 	g.In()
@@ -1471,7 +1467,18 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		usedNames[fieldName] = true
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
+		nullable := true
+		if field.Options != nil {
+			nullable = false
+			v, err := proto.GetExtension(field.Options, gogoproto.E_Nullable)
+			if err != nil || *(v.(*bool)) {
+				nullable = true
+			}
+		}
 		tag := fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName+",omitempty")
+		if !nullable {
+			tag = fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName)
+		}
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 			if field.Options != nil {
 				v, err := proto.GetExtension(field.Options, gogoproto.E_Embed)

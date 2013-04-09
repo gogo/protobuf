@@ -477,6 +477,7 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 			}
 		}
 	}
+
 	// precalculate tag code
 	wire := p.WireType
 	if p.Packed {
@@ -568,6 +569,7 @@ func getPropertiesLocked(t reflect.Type) *StructProperties {
 	prop.unrecField = invalidField
 	prop.Prop = make([]*Properties, t.NumField())
 	prop.order = make([]int, t.NumField())
+
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
 		p := new(Properties)

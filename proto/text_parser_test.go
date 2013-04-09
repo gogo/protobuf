@@ -299,10 +299,10 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	},
 
 	// Repeated non-repeated field
-	/*{
+	{
 		in:  `name: "Rob" name: "Russ"`,
 		err: `line 1.12: non-repeated field "name" was repeated`,
-	},*/
+	},
 
 	// Group
 	{

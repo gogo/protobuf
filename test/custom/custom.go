@@ -31,6 +31,7 @@
 package custom
 
 import (
+	"encoding/json"
 	"unsafe"
 )
 
@@ -83,6 +84,23 @@ func (u *Uint128) Unmarshal(data []byte) error {
 	return nil
 }
 
+func (u Uint128) MarshalJSON() ([]byte, error) {
+	data, err := u.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(data)
+}
+
+func (u *Uint128) UnmarshalJSON(data []byte) error {
+	v := new([]byte)
+	err := json.Unmarshal(data, v)
+	if err != nil {
+		return err
+	}
+	return u.Unmarshal(*v)
+}
+
 func (this Uint128) Equal(that Uint128) bool {
 	return this == that
 }
@@ -101,4 +119,17 @@ func (uuid *Uuid) Unmarshal(data []byte) error {
 	id := Uuid(data)
 	*uuid = id
 	return nil
+}
+
+func (uuid Uuid) MarshalJSON() ([]byte, error) {
+	return json.Marshal([]byte(uuid))
+}
+
+func (uuid *Uuid) UnmarshalJSON(data []byte) error {
+	v := new([]byte)
+	err := json.Unmarshal(data, v)
+	if err != nil {
+		return err
+	}
+	return uuid.Unmarshal(*v)
 }
