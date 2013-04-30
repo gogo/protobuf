@@ -18,8 +18,8 @@ var _ = math.Inf
 type HatType int32
 
 const (
-	FEDORA HatType = 1
-	FEZ    HatType = 2
+	HatType_FEDORA HatType = 1
+	HatType_FEZ    HatType = 2
 )
 
 var HatType_name = map[int32]string{
@@ -54,9 +54,9 @@ func (x *HatType) UnmarshalJSON(data []byte) error {
 type Days int32
 
 const (
-	MONDAY  Days = 1
-	TUESDAY Days = 2
-	LUNDI   Days = 1
+	Days_MONDAY  Days = 1
+	Days_TUESDAY Days = 2
+	Days_LUNDI   Days = 1
 )
 
 var Days_name = map[int32]string{
@@ -93,9 +93,9 @@ func (x *Days) UnmarshalJSON(data []byte) error {
 type Request_Color int32
 
 const (
-	RED   Request_Color = 0
-	GREEN Request_Color = 1
-	BLUE  Request_Color = 2
+	Request_RED   Request_Color = 0
+	Request_GREEN Request_Color = 1
+	Request_BLUE  Request_Color = 2
 )
 
 var Request_Color_name = map[int32]string{
@@ -132,8 +132,8 @@ func (x *Request_Color) UnmarshalJSON(data []byte) error {
 type Reply_Entry_Game int32
 
 const (
-	FOOTBALL Reply_Entry_Game = 1
-	TENNIS   Reply_Entry_Game = 2
+	Reply_Entry_FOOTBALL Reply_Entry_Game = 1
+	Reply_Entry_TENNIS   Reply_Entry_Game = 2
 )
 
 var Reply_Entry_Game_name = map[int32]string{
@@ -175,12 +175,55 @@ type Request struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *Request) Reset()      { *m = Request{} }
-func (*Request) ProtoMessage() {}
+func (m *Request) Reset()         { *m = Request{} }
+func (m *Request) String() string { return proto.CompactTextString(m) }
+func (*Request) ProtoMessage()    {}
 
-const Default_Request_Hat HatType = FEDORA
+const Default_Request_Hat HatType = HatType_FEDORA
 
 var Default_Request_Deadline float32 = float32(math.Inf(1))
+
+func (m *Request) GetKey() []int64 {
+	if m != nil {
+		return m.Key
+	}
+	return nil
+}
+
+func (m *Request) GetHue() Request_Color {
+	if m != nil && m.Hue != nil {
+		return *m.Hue
+	}
+	return 0
+}
+
+func (m *Request) GetHat() HatType {
+	if m != nil && m.Hat != nil {
+		return *m.Hat
+	}
+	return Default_Request_Hat
+}
+
+func (m *Request) GetDeadline() float32 {
+	if m != nil && m.Deadline != nil {
+		return *m.Deadline
+	}
+	return Default_Request_Deadline
+}
+
+func (m *Request) GetSomegroup() *Request_SomeGroup {
+	if m != nil {
+		return m.Somegroup
+	}
+	return nil
+}
+
+func (m *Request) GetReset_() int32 {
+	if m != nil && m.Reset_ != nil {
+		return *m.Reset_
+	}
+	return 0
+}
 
 type Request_SomeGroup struct {
 	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field" json:"group_field,omitempty"`
@@ -189,6 +232,13 @@ type Request_SomeGroup struct {
 
 func (m *Request_SomeGroup) Reset() { *m = Request_SomeGroup{} }
 
+func (m *Request_SomeGroup) GetGroupField() int32 {
+	if m != nil && m.GroupField != nil {
+		return *m.GroupField
+	}
+	return 0
+}
+
 type Reply struct {
 	Found            []*Reply_Entry            `protobuf:"bytes,1,rep,name=found" json:"found,omitempty"`
 	CompactKeys      []int32                   `protobuf:"varint,2,rep,packed,name=compact_keys" json:"compact_keys,omitempty"`
@@ -196,8 +246,9 @@ type Reply struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *Reply) Reset()      { *m = Reply{} }
-func (*Reply) ProtoMessage() {}
+func (m *Reply) Reset()         { *m = Reply{} }
+func (m *Reply) String() string { return proto.CompactTextString(m) }
+func (*Reply) ProtoMessage()    {}
 
 var extRange_Reply = []proto.ExtensionRange{
 	{100, 536870911},
@@ -213,6 +264,20 @@ func (m *Reply) ExtensionMap() map[int32]proto.Extension {
 	return m.XXX_extensions
 }
 
+func (m *Reply) GetFound() []*Reply_Entry {
+	if m != nil {
+		return m.Found
+	}
+	return nil
+}
+
+func (m *Reply) GetCompactKeys() []int32 {
+	if m != nil {
+		return m.CompactKeys
+	}
+	return nil
+}
+
 type Reply_Entry struct {
 	KeyThatNeeds_1234Camel_CasIng *int64 `protobuf:"varint,1,req,name=key_that_needs_1234camel_CasIng" json:"key_that_needs_1234camel_CasIng,omitempty"`
 	Value                         *int64 `protobuf:"varint,2,opt,name=value,def=7" json:"value,omitempty"`
@@ -220,17 +285,40 @@ type Reply_Entry struct {
 	XXX_unrecognized              []byte `json:"-"`
 }
 
-func (m *Reply_Entry) Reset()      { *m = Reply_Entry{} }
-func (*Reply_Entry) ProtoMessage() {}
+func (m *Reply_Entry) Reset()         { *m = Reply_Entry{} }
+func (m *Reply_Entry) String() string { return proto.CompactTextString(m) }
+func (*Reply_Entry) ProtoMessage()    {}
 
 const Default_Reply_Entry_Value int64 = 7
+
+func (m *Reply_Entry) GetKeyThatNeeds_1234Camel_CasIng() int64 {
+	if m != nil && m.KeyThatNeeds_1234Camel_CasIng != nil {
+		return *m.KeyThatNeeds_1234Camel_CasIng
+	}
+	return 0
+}
+
+func (m *Reply_Entry) GetValue() int64 {
+	if m != nil && m.Value != nil {
+		return *m.Value
+	}
+	return Default_Reply_Entry_Value
+}
+
+func (m *Reply_Entry) GetXMyFieldName_2() int64 {
+	if m != nil && m.XMyFieldName_2 != nil {
+		return *m.XMyFieldName_2
+	}
+	return 0
+}
 
 type ReplyExtensions struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *ReplyExtensions) Reset()      { *m = ReplyExtensions{} }
-func (*ReplyExtensions) ProtoMessage() {}
+func (m *ReplyExtensions) Reset()         { *m = ReplyExtensions{} }
+func (m *ReplyExtensions) String() string { return proto.CompactTextString(m) }
+func (*ReplyExtensions) ProtoMessage()    {}
 
 var E_ReplyExtensions_Time = &proto.ExtensionDesc{
 	ExtendedType:  (*Reply)(nil),
@@ -245,8 +333,9 @@ type OldReply struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *OldReply) Reset()      { *m = OldReply{} }
-func (*OldReply) ProtoMessage() {}
+func (m *OldReply) Reset()         { *m = OldReply{} }
+func (m *OldReply) String() string { return proto.CompactTextString(m) }
+func (*OldReply) ProtoMessage()    {}
 
 func (m *OldReply) Marshal() ([]byte, error) {
 	return proto.MarshalMessageSet(m.ExtensionMap())
@@ -289,8 +378,3 @@ func init() {
 	proto.RegisterExtension(E_ReplyExtensions_Time)
 	proto.RegisterExtension(E_Tag)
 }
-func (m *Request) String() string         { return proto.CompactTextString(m) }
-func (m *Reply) String() string           { return proto.CompactTextString(m) }
-func (m *Reply_Entry) String() string     { return proto.CompactTextString(m) }
-func (m *ReplyExtensions) String() string { return proto.CompactTextString(m) }
-func (m *OldReply) String() string        { return proto.CompactTextString(m) }

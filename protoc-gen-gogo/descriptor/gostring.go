@@ -47,139 +47,139 @@ func (this *FileDescriptorSet) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&FileDescriptorSet{` + `File:` + strings.Replace(fmt.Sprintf("%#v", this.File), "FileDescriptorProto", "FileDescriptorProto", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.FileDescriptorSet{` + `File:` + fmt.Sprintf("%#v", this.File) + `}`}, ", ")
 	return s
 }
 func (this *FileDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&FileDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Package:` + goStringValue(this.Package, "string"), `Dependency:` + fmt.Sprintf("%#v", this.Dependency), `PublicDependency:` + fmt.Sprintf("%#v", this.PublicDependency), `WeakDependency:` + fmt.Sprintf("%#v", this.WeakDependency), `MessageType:` + strings.Replace(fmt.Sprintf("%#v", this.MessageType), "DescriptorProto", "DescriptorProto", 1), `EnumType:` + strings.Replace(fmt.Sprintf("%#v", this.EnumType), "EnumDescriptorProto", "EnumDescriptorProto", 1), `Service:` + strings.Replace(fmt.Sprintf("%#v", this.Service), "ServiceDescriptorProto", "ServiceDescriptorProto", 1), `Extension:` + strings.Replace(fmt.Sprintf("%#v", this.Extension), "FieldDescriptorProto", "FieldDescriptorProto", 1), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "FileOptions", "FileOptions", 1), `SourceCodeInfo:` + strings.Replace(fmt.Sprintf("%#v", this.SourceCodeInfo), "SourceCodeInfo", "SourceCodeInfo", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.FileDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Package:` + goStringValue(this.Package, "string"), `Dependency:` + fmt.Sprintf("%#v", this.Dependency), `PublicDependency:` + fmt.Sprintf("%#v", this.PublicDependency), `WeakDependency:` + fmt.Sprintf("%#v", this.WeakDependency), `MessageType:` + fmt.Sprintf("%#v", this.MessageType), `EnumType:` + fmt.Sprintf("%#v", this.EnumType), `Service:` + fmt.Sprintf("%#v", this.Service), `Extension:` + fmt.Sprintf("%#v", this.Extension), `Options:` + fmt.Sprintf("%#v", this.Options), `SourceCodeInfo:` + fmt.Sprintf("%#v", this.SourceCodeInfo) + `}`}, ", ")
 	return s
 }
 func (this *DescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&DescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Field:` + strings.Replace(fmt.Sprintf("%#v", this.Field), "FieldDescriptorProto", "FieldDescriptorProto", 1), `Extension:` + strings.Replace(fmt.Sprintf("%#v", this.Extension), "FieldDescriptorProto", "FieldDescriptorProto", 1), `NestedType:` + strings.Replace(fmt.Sprintf("%#v", this.NestedType), "DescriptorProto", "DescriptorProto", 1), `EnumType:` + strings.Replace(fmt.Sprintf("%#v", this.EnumType), "EnumDescriptorProto", "EnumDescriptorProto", 1), `ExtensionRange:` + strings.Replace(fmt.Sprintf("%#v", this.ExtensionRange), "DescriptorProto_ExtensionRange", "DescriptorProto_ExtensionRange", 1), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "MessageOptions", "MessageOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.DescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Field:` + fmt.Sprintf("%#v", this.Field), `Extension:` + fmt.Sprintf("%#v", this.Extension), `NestedType:` + fmt.Sprintf("%#v", this.NestedType), `EnumType:` + fmt.Sprintf("%#v", this.EnumType), `ExtensionRange:` + fmt.Sprintf("%#v", this.ExtensionRange), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *DescriptorProto_ExtensionRange) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&DescriptorProto_ExtensionRange{` + `Start:` + goStringValue(this.Start, "int32"), `End:` + goStringValue(this.End, "int32") + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.DescriptorProto_ExtensionRange{` + `Start:` + goStringValue(this.Start, "int32"), `End:` + goStringValue(this.End, "int32") + `}`}, ", ")
 	return s
 }
 func (this *FieldDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&FieldDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Number:` + goStringValue(this.Number, "int32"), `Label:` + goStringValue(this.Label, "FieldDescriptorProto_Label"), `Type:` + goStringValue(this.Type, "FieldDescriptorProto_Type"), `TypeName:` + goStringValue(this.TypeName, "string"), `Extendee:` + goStringValue(this.Extendee, "string"), `DefaultValue:` + goStringValue(this.DefaultValue, "string"), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "FieldOptions", "FieldOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.FieldDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Number:` + goStringValue(this.Number, "int32"), `Label:` + goStringValue(this.Label, "google_protobuf.FieldDescriptorProto_Label"), `Type:` + goStringValue(this.Type, "google_protobuf.FieldDescriptorProto_Type"), `TypeName:` + goStringValue(this.TypeName, "string"), `Extendee:` + goStringValue(this.Extendee, "string"), `DefaultValue:` + goStringValue(this.DefaultValue, "string"), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *EnumDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&EnumDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Value:` + strings.Replace(fmt.Sprintf("%#v", this.Value), "EnumValueDescriptorProto", "EnumValueDescriptorProto", 1), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "EnumOptions", "EnumOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.EnumDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Value:` + fmt.Sprintf("%#v", this.Value), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *EnumValueDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&EnumValueDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Number:` + goStringValue(this.Number, "int32"), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "EnumValueOptions", "EnumValueOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.EnumValueDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Number:` + goStringValue(this.Number, "int32"), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *ServiceDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ServiceDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Method:` + strings.Replace(fmt.Sprintf("%#v", this.Method), "MethodDescriptorProto", "MethodDescriptorProto", 1), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "ServiceOptions", "ServiceOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.ServiceDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `Method:` + fmt.Sprintf("%#v", this.Method), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *MethodDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&MethodDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `InputType:` + goStringValue(this.InputType, "string"), `OutputType:` + goStringValue(this.OutputType, "string"), `Options:` + strings.Replace(fmt.Sprintf("%#v", this.Options), "MethodOptions", "MethodOptions", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.MethodDescriptorProto{` + `Name:` + goStringValue(this.Name, "string"), `InputType:` + goStringValue(this.InputType, "string"), `OutputType:` + goStringValue(this.OutputType, "string"), `Options:` + fmt.Sprintf("%#v", this.Options) + `}`}, ", ")
 	return s
 }
 func (this *FileOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&FileOptions{` + `JavaPackage:` + goStringValue(this.JavaPackage, "string"), `JavaOuterClassname:` + goStringValue(this.JavaOuterClassname, "string"), `JavaMultipleFiles:` + goStringValue(this.JavaMultipleFiles, "bool"), `JavaGenerateEqualsAndHash:` + goStringValue(this.JavaGenerateEqualsAndHash, "bool"), `OptimizeFor:` + goStringValue(this.OptimizeFor, "FileOptions_OptimizeMode"), `GoPackage:` + goStringValue(this.GoPackage, "string"), `CcGenericServices:` + goStringValue(this.CcGenericServices, "bool"), `JavaGenericServices:` + goStringValue(this.JavaGenericServices, "bool"), `PyGenericServices:` + goStringValue(this.PyGenericServices, "bool"), `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.FileOptions{` + `JavaPackage:` + goStringValue(this.JavaPackage, "string"), `JavaOuterClassname:` + goStringValue(this.JavaOuterClassname, "string"), `JavaMultipleFiles:` + goStringValue(this.JavaMultipleFiles, "bool"), `JavaGenerateEqualsAndHash:` + goStringValue(this.JavaGenerateEqualsAndHash, "bool"), `OptimizeFor:` + goStringValue(this.OptimizeFor, "google_protobuf.FileOptions_OptimizeMode"), `GoPackage:` + goStringValue(this.GoPackage, "string"), `CcGenericServices:` + goStringValue(this.CcGenericServices, "bool"), `JavaGenericServices:` + goStringValue(this.JavaGenericServices, "bool"), `PyGenericServices:` + goStringValue(this.PyGenericServices, "bool"), `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *MessageOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&MessageOptions{` + `MessageSetWireFormat:` + goStringValue(this.MessageSetWireFormat, "bool"), `NoStandardDescriptorAccessor:` + goStringValue(this.NoStandardDescriptorAccessor, "bool"), `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.MessageOptions{` + `MessageSetWireFormat:` + goStringValue(this.MessageSetWireFormat, "bool"), `NoStandardDescriptorAccessor:` + goStringValue(this.NoStandardDescriptorAccessor, "bool"), `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *FieldOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&FieldOptions{` + `Ctype:` + goStringValue(this.Ctype, "FieldOptions_CType"), `Packed:` + goStringValue(this.Packed, "bool"), `Lazy:` + goStringValue(this.Lazy, "bool"), `Deprecated:` + goStringValue(this.Deprecated, "bool"), `ExperimentalMapKey:` + goStringValue(this.ExperimentalMapKey, "string"), `Weak:` + goStringValue(this.Weak, "bool"), `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.FieldOptions{` + `Ctype:` + goStringValue(this.Ctype, "google_protobuf.FieldOptions_CType"), `Packed:` + goStringValue(this.Packed, "bool"), `Lazy:` + goStringValue(this.Lazy, "bool"), `Deprecated:` + goStringValue(this.Deprecated, "bool"), `ExperimentalMapKey:` + goStringValue(this.ExperimentalMapKey, "string"), `Weak:` + goStringValue(this.Weak, "bool"), `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *EnumOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&EnumOptions{` + `AllowAlias:` + goStringValue(this.AllowAlias, "bool"), `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.EnumOptions{` + `AllowAlias:` + goStringValue(this.AllowAlias, "bool"), `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *EnumValueOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&EnumValueOptions{` + `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.EnumValueOptions{` + `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *ServiceOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ServiceOptions{` + `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.ServiceOptions{` + `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *MethodOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&MethodOptions{` + `UninterpretedOption:` + strings.Replace(fmt.Sprintf("%#v", this.UninterpretedOption), "UninterpretedOption", "UninterpretedOption", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.MethodOptions{` + `UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption) + `}`}, ", ")
 	return s
 }
 func (this *UninterpretedOption) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&UninterpretedOption{` + `Name:` + strings.Replace(fmt.Sprintf("%#v", this.Name), "UninterpretedOption_NamePart", "UninterpretedOption_NamePart", 1), `IdentifierValue:` + goStringValue(this.IdentifierValue, "string"), `PositiveIntValue:` + goStringValue(this.PositiveIntValue, "uint64"), `NegativeIntValue:` + goStringValue(this.NegativeIntValue, "int64"), `DoubleValue:` + goStringValue(this.DoubleValue, "float64"), `StringValue:` + goStringValue(this.StringValue, "[]byte"), `AggregateValue:` + goStringValue(this.AggregateValue, "string") + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.UninterpretedOption{` + `Name:` + fmt.Sprintf("%#v", this.Name), `IdentifierValue:` + goStringValue(this.IdentifierValue, "string"), `PositiveIntValue:` + goStringValue(this.PositiveIntValue, "uint64"), `NegativeIntValue:` + goStringValue(this.NegativeIntValue, "int64"), `DoubleValue:` + goStringValue(this.DoubleValue, "float64"), `StringValue:` + goStringValue(this.StringValue, "[]byte"), `AggregateValue:` + goStringValue(this.AggregateValue, "string") + `}`}, ", ")
 	return s
 }
 func (this *UninterpretedOption_NamePart) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&UninterpretedOption_NamePart{` + `NamePart:` + goStringValue(this.NamePart, "string"), `IsExtension:` + goStringValue(this.IsExtension, "bool") + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.UninterpretedOption_NamePart{` + `NamePart:` + goStringValue(this.NamePart, "string"), `IsExtension:` + goStringValue(this.IsExtension, "bool") + `}`}, ", ")
 	return s
 }
 func (this *SourceCodeInfo) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SourceCodeInfo{` + `Location:` + strings.Replace(fmt.Sprintf("%#v", this.Location), "SourceCodeInfo_Location", "SourceCodeInfo_Location", 1) + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.SourceCodeInfo{` + `Location:` + fmt.Sprintf("%#v", this.Location) + `}`}, ", ")
 	return s
 }
 func (this *SourceCodeInfo_Location) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SourceCodeInfo_Location{` + `Path:` + fmt.Sprintf("%#v", this.Path), `Span:` + fmt.Sprintf("%#v", this.Span), `LeadingComments:` + goStringValue(this.LeadingComments, "string"), `TrailingComments:` + goStringValue(this.TrailingComments, "string") + `}`}, ", ")
+	s := strings.Join([]string{`&google_protobuf.SourceCodeInfo_Location{` + `Path:` + fmt.Sprintf("%#v", this.Path), `Span:` + fmt.Sprintf("%#v", this.Span), `LeadingComments:` + goStringValue(this.LeadingComments, "string"), `TrailingComments:` + goStringValue(this.TrailingComments, "string") + `}`}, ", ")
 	return s
 }

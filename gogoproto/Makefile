@@ -27,8 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	echo WARNING! THIS RULE IS PROBABLY NOT RIGHT FOR YOUR INSTALLATION
-	protoc --go_out=. --proto_path=../../../../:. *.proto
+	protoc --gogo_out=. --proto_path=../../../../:. *.proto
 
 restore:
 	cp gogo.pb.golden gogo.pb.go

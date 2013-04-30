@@ -16,7 +16,7 @@ var _ = math.Inf
 type FOO int32
 
 const (
-	FOO1 FOO = 1
+	FOO_FOO1 FOO = 1
 )
 
 var FOO_name = map[int32]string{
@@ -49,19 +49,19 @@ func (x *FOO) UnmarshalJSON(data []byte) error {
 type GoTest_KIND int32
 
 const (
-	VOID        GoTest_KIND = 0
-	BOOL        GoTest_KIND = 1
-	BYTES       GoTest_KIND = 2
-	FINGERPRINT GoTest_KIND = 3
-	FLOAT       GoTest_KIND = 4
-	INT         GoTest_KIND = 5
-	STRING      GoTest_KIND = 6
-	TIME        GoTest_KIND = 7
-	TUPLE       GoTest_KIND = 8
-	ARRAY       GoTest_KIND = 9
-	MAP         GoTest_KIND = 10
-	TABLE       GoTest_KIND = 11
-	FUNCTION    GoTest_KIND = 12
+	GoTest_VOID        GoTest_KIND = 0
+	GoTest_BOOL        GoTest_KIND = 1
+	GoTest_BYTES       GoTest_KIND = 2
+	GoTest_FINGERPRINT GoTest_KIND = 3
+	GoTest_FLOAT       GoTest_KIND = 4
+	GoTest_INT         GoTest_KIND = 5
+	GoTest_STRING      GoTest_KIND = 6
+	GoTest_TIME        GoTest_KIND = 7
+	GoTest_TUPLE       GoTest_KIND = 8
+	GoTest_ARRAY       GoTest_KIND = 9
+	GoTest_MAP         GoTest_KIND = 10
+	GoTest_TABLE       GoTest_KIND = 11
+	GoTest_FUNCTION    GoTest_KIND = 12
 )
 
 var GoTest_KIND_name = map[int32]string{
@@ -124,14 +124,14 @@ const (
 )
 
 var MyMessage_Color_name = map[int32]string{
-	0: "MyMessage_RED",
-	1: "MyMessage_GREEN",
-	2: "MyMessage_BLUE",
+	0: "RED",
+	1: "GREEN",
+	2: "BLUE",
 }
 var MyMessage_Color_value = map[string]int32{
-	"MyMessage_RED":   0,
-	"MyMessage_GREEN": 1,
-	"MyMessage_BLUE":  2,
+	"RED":   0,
+	"GREEN": 1,
+	"BLUE":  2,
 }
 
 func (x MyMessage_Color) Enum() *MyMessage_Color {
@@ -157,9 +157,9 @@ func (x *MyMessage_Color) UnmarshalJSON(data []byte) error {
 type Defaults_Color int32
 
 const (
-	RED   Defaults_Color = 0
-	GREEN Defaults_Color = 1
-	BLUE  Defaults_Color = 2
+	Defaults_RED   Defaults_Color = 0
+	Defaults_GREEN Defaults_Color = 1
+	Defaults_BLUE  Defaults_Color = 2
 )
 
 var Defaults_Color_name = map[int32]string{
@@ -200,10 +200,10 @@ const (
 )
 
 var RepeatedEnum_Color_name = map[int32]string{
-	1: "RepeatedEnum_RED",
+	1: "RED",
 }
 var RepeatedEnum_Color_value = map[string]int32{
-	"RepeatedEnum_RED": 1,
+	"RED": 1,
 }
 
 func (x RepeatedEnum_Color) Enum() *RepeatedEnum_Color {
@@ -231,8 +231,16 @@ type GoEnum struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *GoEnum) Reset()      { *m = GoEnum{} }
-func (*GoEnum) ProtoMessage() {}
+func (m *GoEnum) Reset()         { *m = GoEnum{} }
+func (m *GoEnum) String() string { return proto.CompactTextString(m) }
+func (*GoEnum) ProtoMessage()    {}
+
+func (m *GoEnum) GetFoo() FOO {
+	if m != nil && m.Foo != nil {
+		return *m.Foo
+	}
+	return 0
+}
 
 type GoTestField struct {
 	Label            *string `protobuf:"bytes,1,req" json:"Label,omitempty"`
@@ -240,8 +248,23 @@ type GoTestField struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *GoTestField) Reset()      { *m = GoTestField{} }
-func (*GoTestField) ProtoMessage() {}
+func (m *GoTestField) Reset()         { *m = GoTestField{} }
+func (m *GoTestField) String() string { return proto.CompactTextString(m) }
+func (*GoTestField) ProtoMessage()    {}
+
+func (m *GoTestField) GetLabel() string {
+	if m != nil && m.Label != nil {
+		return *m.Label
+	}
+	return ""
+}
+
+func (m *GoTestField) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
 
 type GoTest struct {
 	Kind                    *GoTest_KIND            `protobuf:"varint,1,req,enum=testdata.GoTest_KIND" json:"Kind,omitempty"`
@@ -319,8 +342,9 @@ type GoTest struct {
 	XXX_unrecognized        []byte                  `json:"-"`
 }
 
-func (m *GoTest) Reset()      { *m = GoTest{} }
-func (*GoTest) ProtoMessage() {}
+func (m *GoTest) Reset()         { *m = GoTest{} }
+func (m *GoTest) String() string { return proto.CompactTextString(m) }
+func (*GoTest) ProtoMessage()    {}
 
 const Default_GoTest_F_BoolDefaulted bool = true
 const Default_GoTest_F_Int32Defaulted int32 = 32
@@ -338,12 +362,523 @@ var Default_GoTest_F_BytesDefaulted []byte = []byte("Bignose")
 const Default_GoTest_F_Sint32Defaulted int32 = -32
 const Default_GoTest_F_Sint64Defaulted int64 = -64
 
+func (m *GoTest) GetKind() GoTest_KIND {
+	if m != nil && m.Kind != nil {
+		return *m.Kind
+	}
+	return 0
+}
+
+func (m *GoTest) GetTable() string {
+	if m != nil && m.Table != nil {
+		return *m.Table
+	}
+	return ""
+}
+
+func (m *GoTest) GetParam() int32 {
+	if m != nil && m.Param != nil {
+		return *m.Param
+	}
+	return 0
+}
+
+func (m *GoTest) GetRequiredField() *GoTestField {
+	if m != nil {
+		return m.RequiredField
+	}
+	return nil
+}
+
+func (m *GoTest) GetRepeatedField() []*GoTestField {
+	if m != nil {
+		return m.RepeatedField
+	}
+	return nil
+}
+
+func (m *GoTest) GetOptionalField() *GoTestField {
+	if m != nil {
+		return m.OptionalField
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_BoolRequired() bool {
+	if m != nil && m.F_BoolRequired != nil {
+		return *m.F_BoolRequired
+	}
+	return false
+}
+
+func (m *GoTest) GetF_Int32Required() int32 {
+	if m != nil && m.F_Int32Required != nil {
+		return *m.F_Int32Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Int64Required() int64 {
+	if m != nil && m.F_Int64Required != nil {
+		return *m.F_Int64Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Fixed32Required() uint32 {
+	if m != nil && m.F_Fixed32Required != nil {
+		return *m.F_Fixed32Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Fixed64Required() uint64 {
+	if m != nil && m.F_Fixed64Required != nil {
+		return *m.F_Fixed64Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Uint32Required() uint32 {
+	if m != nil && m.F_Uint32Required != nil {
+		return *m.F_Uint32Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Uint64Required() uint64 {
+	if m != nil && m.F_Uint64Required != nil {
+		return *m.F_Uint64Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_FloatRequired() float32 {
+	if m != nil && m.F_FloatRequired != nil {
+		return *m.F_FloatRequired
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_DoubleRequired() float64 {
+	if m != nil && m.F_DoubleRequired != nil {
+		return *m.F_DoubleRequired
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_StringRequired() string {
+	if m != nil && m.F_StringRequired != nil {
+		return *m.F_StringRequired
+	}
+	return ""
+}
+
+func (m *GoTest) GetF_BytesRequired() []byte {
+	if m != nil {
+		return m.F_BytesRequired
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint32Required() int32 {
+	if m != nil && m.F_Sint32Required != nil {
+		return *m.F_Sint32Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Sint64Required() int64 {
+	if m != nil && m.F_Sint64Required != nil {
+		return *m.F_Sint64Required
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_BoolRepeated() []bool {
+	if m != nil {
+		return m.F_BoolRepeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Int32Repeated() []int32 {
+	if m != nil {
+		return m.F_Int32Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Int64Repeated() []int64 {
+	if m != nil {
+		return m.F_Int64Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Fixed32Repeated() []uint32 {
+	if m != nil {
+		return m.F_Fixed32Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Fixed64Repeated() []uint64 {
+	if m != nil {
+		return m.F_Fixed64Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Uint32Repeated() []uint32 {
+	if m != nil {
+		return m.F_Uint32Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Uint64Repeated() []uint64 {
+	if m != nil {
+		return m.F_Uint64Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_FloatRepeated() []float32 {
+	if m != nil {
+		return m.F_FloatRepeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_DoubleRepeated() []float64 {
+	if m != nil {
+		return m.F_DoubleRepeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_StringRepeated() []string {
+	if m != nil {
+		return m.F_StringRepeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_BytesRepeated() [][]byte {
+	if m != nil {
+		return m.F_BytesRepeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint32Repeated() []int32 {
+	if m != nil {
+		return m.F_Sint32Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint64Repeated() []int64 {
+	if m != nil {
+		return m.F_Sint64Repeated
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_BoolOptional() bool {
+	if m != nil && m.F_BoolOptional != nil {
+		return *m.F_BoolOptional
+	}
+	return false
+}
+
+func (m *GoTest) GetF_Int32Optional() int32 {
+	if m != nil && m.F_Int32Optional != nil {
+		return *m.F_Int32Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Int64Optional() int64 {
+	if m != nil && m.F_Int64Optional != nil {
+		return *m.F_Int64Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Fixed32Optional() uint32 {
+	if m != nil && m.F_Fixed32Optional != nil {
+		return *m.F_Fixed32Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Fixed64Optional() uint64 {
+	if m != nil && m.F_Fixed64Optional != nil {
+		return *m.F_Fixed64Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Uint32Optional() uint32 {
+	if m != nil && m.F_Uint32Optional != nil {
+		return *m.F_Uint32Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Uint64Optional() uint64 {
+	if m != nil && m.F_Uint64Optional != nil {
+		return *m.F_Uint64Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_FloatOptional() float32 {
+	if m != nil && m.F_FloatOptional != nil {
+		return *m.F_FloatOptional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_DoubleOptional() float64 {
+	if m != nil && m.F_DoubleOptional != nil {
+		return *m.F_DoubleOptional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_StringOptional() string {
+	if m != nil && m.F_StringOptional != nil {
+		return *m.F_StringOptional
+	}
+	return ""
+}
+
+func (m *GoTest) GetF_BytesOptional() []byte {
+	if m != nil {
+		return m.F_BytesOptional
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint32Optional() int32 {
+	if m != nil && m.F_Sint32Optional != nil {
+		return *m.F_Sint32Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_Sint64Optional() int64 {
+	if m != nil && m.F_Sint64Optional != nil {
+		return *m.F_Sint64Optional
+	}
+	return 0
+}
+
+func (m *GoTest) GetF_BoolDefaulted() bool {
+	if m != nil && m.F_BoolDefaulted != nil {
+		return *m.F_BoolDefaulted
+	}
+	return Default_GoTest_F_BoolDefaulted
+}
+
+func (m *GoTest) GetF_Int32Defaulted() int32 {
+	if m != nil && m.F_Int32Defaulted != nil {
+		return *m.F_Int32Defaulted
+	}
+	return Default_GoTest_F_Int32Defaulted
+}
+
+func (m *GoTest) GetF_Int64Defaulted() int64 {
+	if m != nil && m.F_Int64Defaulted != nil {
+		return *m.F_Int64Defaulted
+	}
+	return Default_GoTest_F_Int64Defaulted
+}
+
+func (m *GoTest) GetF_Fixed32Defaulted() uint32 {
+	if m != nil && m.F_Fixed32Defaulted != nil {
+		return *m.F_Fixed32Defaulted
+	}
+	return Default_GoTest_F_Fixed32Defaulted
+}
+
+func (m *GoTest) GetF_Fixed64Defaulted() uint64 {
+	if m != nil && m.F_Fixed64Defaulted != nil {
+		return *m.F_Fixed64Defaulted
+	}
+	return Default_GoTest_F_Fixed64Defaulted
+}
+
+func (m *GoTest) GetF_Uint32Defaulted() uint32 {
+	if m != nil && m.F_Uint32Defaulted != nil {
+		return *m.F_Uint32Defaulted
+	}
+	return Default_GoTest_F_Uint32Defaulted
+}
+
+func (m *GoTest) GetF_Uint64Defaulted() uint64 {
+	if m != nil && m.F_Uint64Defaulted != nil {
+		return *m.F_Uint64Defaulted
+	}
+	return Default_GoTest_F_Uint64Defaulted
+}
+
+func (m *GoTest) GetF_FloatDefaulted() float32 {
+	if m != nil && m.F_FloatDefaulted != nil {
+		return *m.F_FloatDefaulted
+	}
+	return Default_GoTest_F_FloatDefaulted
+}
+
+func (m *GoTest) GetF_DoubleDefaulted() float64 {
+	if m != nil && m.F_DoubleDefaulted != nil {
+		return *m.F_DoubleDefaulted
+	}
+	return Default_GoTest_F_DoubleDefaulted
+}
+
+func (m *GoTest) GetF_StringDefaulted() string {
+	if m != nil && m.F_StringDefaulted != nil {
+		return *m.F_StringDefaulted
+	}
+	return Default_GoTest_F_StringDefaulted
+}
+
+func (m *GoTest) GetF_BytesDefaulted() []byte {
+	if m != nil && m.F_BytesDefaulted != nil {
+		return m.F_BytesDefaulted
+	}
+	return append([]byte(nil), Default_GoTest_F_BytesDefaulted...)
+}
+
+func (m *GoTest) GetF_Sint32Defaulted() int32 {
+	if m != nil && m.F_Sint32Defaulted != nil {
+		return *m.F_Sint32Defaulted
+	}
+	return Default_GoTest_F_Sint32Defaulted
+}
+
+func (m *GoTest) GetF_Sint64Defaulted() int64 {
+	if m != nil && m.F_Sint64Defaulted != nil {
+		return *m.F_Sint64Defaulted
+	}
+	return Default_GoTest_F_Sint64Defaulted
+}
+
+func (m *GoTest) GetF_BoolRepeatedPacked() []bool {
+	if m != nil {
+		return m.F_BoolRepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Int32RepeatedPacked() []int32 {
+	if m != nil {
+		return m.F_Int32RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Int64RepeatedPacked() []int64 {
+	if m != nil {
+		return m.F_Int64RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Fixed32RepeatedPacked() []uint32 {
+	if m != nil {
+		return m.F_Fixed32RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Fixed64RepeatedPacked() []uint64 {
+	if m != nil {
+		return m.F_Fixed64RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Uint32RepeatedPacked() []uint32 {
+	if m != nil {
+		return m.F_Uint32RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Uint64RepeatedPacked() []uint64 {
+	if m != nil {
+		return m.F_Uint64RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_FloatRepeatedPacked() []float32 {
+	if m != nil {
+		return m.F_FloatRepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_DoubleRepeatedPacked() []float64 {
+	if m != nil {
+		return m.F_DoubleRepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint32RepeatedPacked() []int32 {
+	if m != nil {
+		return m.F_Sint32RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetF_Sint64RepeatedPacked() []int64 {
+	if m != nil {
+		return m.F_Sint64RepeatedPacked
+	}
+	return nil
+}
+
+func (m *GoTest) GetRequiredgroup() *GoTest_RequiredGroup {
+	if m != nil {
+		return m.Requiredgroup
+	}
+	return nil
+}
+
+func (m *GoTest) GetRepeatedgroup() []*GoTest_RepeatedGroup {
+	if m != nil {
+		return m.Repeatedgroup
+	}
+	return nil
+}
+
+func (m *GoTest) GetOptionalgroup() *GoTest_OptionalGroup {
+	if m != nil {
+		return m.Optionalgroup
+	}
+	return nil
+}
+
 type GoTest_RequiredGroup struct {
 	RequiredField    *string `protobuf:"bytes,71,req" json:"RequiredField,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *GoTest_RequiredGroup) Reset() { *m = GoTest_RequiredGroup{} }
+
+func (m *GoTest_RequiredGroup) GetRequiredField() string {
+	if m != nil && m.RequiredField != nil {
+		return *m.RequiredField
+	}
+	return ""
+}
 
 type GoTest_RepeatedGroup struct {
 	RequiredField    *string `protobuf:"bytes,81,req" json:"RequiredField,omitempty"`
@@ -352,12 +887,26 @@ type GoTest_RepeatedGroup struct {
 
 func (m *GoTest_RepeatedGroup) Reset() { *m = GoTest_RepeatedGroup{} }
 
+func (m *GoTest_RepeatedGroup) GetRequiredField() string {
+	if m != nil && m.RequiredField != nil {
+		return *m.RequiredField
+	}
+	return ""
+}
+
 type GoTest_OptionalGroup struct {
 	RequiredField    *string `protobuf:"bytes,91,req" json:"RequiredField,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *GoTest_OptionalGroup) Reset() { *m = GoTest_OptionalGroup{} }
+
+func (m *GoTest_OptionalGroup) GetRequiredField() string {
+	if m != nil && m.RequiredField != nil {
+		return *m.RequiredField
+	}
+	return ""
+}
 
 type GoSkipTest struct {
 	SkipInt32        *int32                `protobuf:"varint,11,req,name=skip_int32" json:"skip_int32,omitempty"`
@@ -368,8 +917,44 @@ type GoSkipTest struct {
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *GoSkipTest) Reset()      { *m = GoSkipTest{} }
-func (*GoSkipTest) ProtoMessage() {}
+func (m *GoSkipTest) Reset()         { *m = GoSkipTest{} }
+func (m *GoSkipTest) String() string { return proto.CompactTextString(m) }
+func (*GoSkipTest) ProtoMessage()    {}
+
+func (m *GoSkipTest) GetSkipInt32() int32 {
+	if m != nil && m.SkipInt32 != nil {
+		return *m.SkipInt32
+	}
+	return 0
+}
+
+func (m *GoSkipTest) GetSkipFixed32() uint32 {
+	if m != nil && m.SkipFixed32 != nil {
+		return *m.SkipFixed32
+	}
+	return 0
+}
+
+func (m *GoSkipTest) GetSkipFixed64() uint64 {
+	if m != nil && m.SkipFixed64 != nil {
+		return *m.SkipFixed64
+	}
+	return 0
+}
+
+func (m *GoSkipTest) GetSkipString() string {
+	if m != nil && m.SkipString != nil {
+		return *m.SkipString
+	}
+	return ""
+}
+
+func (m *GoSkipTest) GetSkipgroup() *GoSkipTest_SkipGroup {
+	if m != nil {
+		return m.Skipgroup
+	}
+	return nil
+}
 
 type GoSkipTest_SkipGroup struct {
 	GroupInt32       *int32  `protobuf:"varint,16,req,name=group_int32" json:"group_int32,omitempty"`
@@ -379,53 +964,115 @@ type GoSkipTest_SkipGroup struct {
 
 func (m *GoSkipTest_SkipGroup) Reset() { *m = GoSkipTest_SkipGroup{} }
 
+func (m *GoSkipTest_SkipGroup) GetGroupInt32() int32 {
+	if m != nil && m.GroupInt32 != nil {
+		return *m.GroupInt32
+	}
+	return 0
+}
+
+func (m *GoSkipTest_SkipGroup) GetGroupString() string {
+	if m != nil && m.GroupString != nil {
+		return *m.GroupString
+	}
+	return ""
+}
+
 type NonPackedTest struct {
 	A                []int32 `protobuf:"varint,1,rep,name=a" json:"a,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NonPackedTest) Reset()      { *m = NonPackedTest{} }
-func (*NonPackedTest) ProtoMessage() {}
+func (m *NonPackedTest) Reset()         { *m = NonPackedTest{} }
+func (m *NonPackedTest) String() string { return proto.CompactTextString(m) }
+func (*NonPackedTest) ProtoMessage()    {}
+
+func (m *NonPackedTest) GetA() []int32 {
+	if m != nil {
+		return m.A
+	}
+	return nil
+}
 
 type PackedTest struct {
 	B                []int32 `protobuf:"varint,1,rep,packed,name=b" json:"b,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *PackedTest) Reset()      { *m = PackedTest{} }
-func (*PackedTest) ProtoMessage() {}
+func (m *PackedTest) Reset()         { *m = PackedTest{} }
+func (m *PackedTest) String() string { return proto.CompactTextString(m) }
+func (*PackedTest) ProtoMessage()    {}
+
+func (m *PackedTest) GetB() []int32 {
+	if m != nil {
+		return m.B
+	}
+	return nil
+}
 
 type MaxTag struct {
 	LastField        *string `protobuf:"bytes,536870911,opt,name=last_field" json:"last_field,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *MaxTag) Reset()      { *m = MaxTag{} }
-func (*MaxTag) ProtoMessage() {}
+func (m *MaxTag) Reset()         { *m = MaxTag{} }
+func (m *MaxTag) String() string { return proto.CompactTextString(m) }
+func (*MaxTag) ProtoMessage()    {}
+
+func (m *MaxTag) GetLastField() string {
+	if m != nil && m.LastField != nil {
+		return *m.LastField
+	}
+	return ""
+}
 
 type OldMessage struct {
 	Nested           *OldMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *OldMessage) Reset()      { *m = OldMessage{} }
-func (*OldMessage) ProtoMessage() {}
+func (m *OldMessage) Reset()         { *m = OldMessage{} }
+func (m *OldMessage) String() string { return proto.CompactTextString(m) }
+func (*OldMessage) ProtoMessage()    {}
+
+func (m *OldMessage) GetNested() *OldMessage_Nested {
+	if m != nil {
+		return m.Nested
+	}
+	return nil
+}
 
 type OldMessage_Nested struct {
 	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *OldMessage_Nested) Reset()      { *m = OldMessage_Nested{} }
-func (*OldMessage_Nested) ProtoMessage() {}
+func (m *OldMessage_Nested) Reset()         { *m = OldMessage_Nested{} }
+func (m *OldMessage_Nested) String() string { return proto.CompactTextString(m) }
+func (*OldMessage_Nested) ProtoMessage()    {}
+
+func (m *OldMessage_Nested) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
 
 type NewMessage struct {
 	Nested           *NewMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *NewMessage) Reset()      { *m = NewMessage{} }
-func (*NewMessage) ProtoMessage() {}
+func (m *NewMessage) Reset()         { *m = NewMessage{} }
+func (m *NewMessage) String() string { return proto.CompactTextString(m) }
+func (*NewMessage) ProtoMessage()    {}
+
+func (m *NewMessage) GetNested() *NewMessage_Nested {
+	if m != nil {
+		return m.Nested
+	}
+	return nil
+}
 
 type NewMessage_Nested struct {
 	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
@@ -433,8 +1080,23 @@ type NewMessage_Nested struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NewMessage_Nested) Reset()      { *m = NewMessage_Nested{} }
-func (*NewMessage_Nested) ProtoMessage() {}
+func (m *NewMessage_Nested) Reset()         { *m = NewMessage_Nested{} }
+func (m *NewMessage_Nested) String() string { return proto.CompactTextString(m) }
+func (*NewMessage_Nested) ProtoMessage()    {}
+
+func (m *NewMessage_Nested) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *NewMessage_Nested) GetFoodGroup() string {
+	if m != nil && m.FoodGroup != nil {
+		return *m.FoodGroup
+	}
+	return ""
+}
 
 type InnerMessage struct {
 	Host             *string `protobuf:"bytes,1,req,name=host" json:"host,omitempty"`
@@ -443,10 +1105,32 @@ type InnerMessage struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *InnerMessage) Reset()      { *m = InnerMessage{} }
-func (*InnerMessage) ProtoMessage() {}
+func (m *InnerMessage) Reset()         { *m = InnerMessage{} }
+func (m *InnerMessage) String() string { return proto.CompactTextString(m) }
+func (*InnerMessage) ProtoMessage()    {}
 
 const Default_InnerMessage_Port int32 = 4000
+
+func (m *InnerMessage) GetHost() string {
+	if m != nil && m.Host != nil {
+		return *m.Host
+	}
+	return ""
+}
+
+func (m *InnerMessage) GetPort() int32 {
+	if m != nil && m.Port != nil {
+		return *m.Port
+	}
+	return Default_InnerMessage_Port
+}
+
+func (m *InnerMessage) GetConnected() bool {
+	if m != nil && m.Connected != nil {
+		return *m.Connected
+	}
+	return false
+}
 
 type OtherMessage struct {
 	Key              *int64        `protobuf:"varint,1,opt,name=key" json:"key,omitempty"`
@@ -456,8 +1140,37 @@ type OtherMessage struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (m *OtherMessage) Reset()      { *m = OtherMessage{} }
-func (*OtherMessage) ProtoMessage() {}
+func (m *OtherMessage) Reset()         { *m = OtherMessage{} }
+func (m *OtherMessage) String() string { return proto.CompactTextString(m) }
+func (*OtherMessage) ProtoMessage()    {}
+
+func (m *OtherMessage) GetKey() int64 {
+	if m != nil && m.Key != nil {
+		return *m.Key
+	}
+	return 0
+}
+
+func (m *OtherMessage) GetValue() []byte {
+	if m != nil {
+		return m.Value
+	}
+	return nil
+}
+
+func (m *OtherMessage) GetWeight() float32 {
+	if m != nil && m.Weight != nil {
+		return *m.Weight
+	}
+	return 0
+}
+
+func (m *OtherMessage) GetInner() *InnerMessage {
+	if m != nil {
+		return m.Inner
+	}
+	return nil
+}
 
 type MyMessage struct {
 	Count            *int32                    `protobuf:"varint,1,req,name=count" json:"count,omitempty"`
@@ -474,8 +1187,9 @@ type MyMessage struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *MyMessage) Reset()      { *m = MyMessage{} }
-func (*MyMessage) ProtoMessage() {}
+func (m *MyMessage) Reset()         { *m = MyMessage{} }
+func (m *MyMessage) String() string { return proto.CompactTextString(m) }
+func (*MyMessage) ProtoMessage()    {}
 
 var extRange_MyMessage = []proto.ExtensionRange{
 	{100, 536870911},
@@ -491,6 +1205,76 @@ func (m *MyMessage) ExtensionMap() map[int32]proto.Extension {
 	return m.XXX_extensions
 }
 
+func (m *MyMessage) GetCount() int32 {
+	if m != nil && m.Count != nil {
+		return *m.Count
+	}
+	return 0
+}
+
+func (m *MyMessage) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *MyMessage) GetQuote() string {
+	if m != nil && m.Quote != nil {
+		return *m.Quote
+	}
+	return ""
+}
+
+func (m *MyMessage) GetPet() []string {
+	if m != nil {
+		return m.Pet
+	}
+	return nil
+}
+
+func (m *MyMessage) GetInner() *InnerMessage {
+	if m != nil {
+		return m.Inner
+	}
+	return nil
+}
+
+func (m *MyMessage) GetOthers() []*OtherMessage {
+	if m != nil {
+		return m.Others
+	}
+	return nil
+}
+
+func (m *MyMessage) GetBikeshed() MyMessage_Color {
+	if m != nil && m.Bikeshed != nil {
+		return *m.Bikeshed
+	}
+	return 0
+}
+
+func (m *MyMessage) GetSomegroup() *MyMessage_SomeGroup {
+	if m != nil {
+		return m.Somegroup
+	}
+	return nil
+}
+
+func (m *MyMessage) GetRepBytes() [][]byte {
+	if m != nil {
+		return m.RepBytes
+	}
+	return nil
+}
+
+func (m *MyMessage) GetBigfloat() float64 {
+	if m != nil && m.Bigfloat != nil {
+		return *m.Bigfloat
+	}
+	return 0
+}
+
 type MyMessage_SomeGroup struct {
 	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field" json:"group_field,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
@@ -498,13 +1282,28 @@ type MyMessage_SomeGroup struct {
 
 func (m *MyMessage_SomeGroup) Reset() { *m = MyMessage_SomeGroup{} }
 
+func (m *MyMessage_SomeGroup) GetGroupField() int32 {
+	if m != nil && m.GroupField != nil {
+		return *m.GroupField
+	}
+	return 0
+}
+
 type Ext struct {
 	Data             *string `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Ext) Reset()      { *m = Ext{} }
-func (*Ext) ProtoMessage() {}
+func (m *Ext) Reset()         { *m = Ext{} }
+func (m *Ext) String() string { return proto.CompactTextString(m) }
+func (*Ext) ProtoMessage()    {}
+
+func (m *Ext) GetData() string {
+	if m != nil && m.Data != nil {
+		return *m.Data
+	}
+	return ""
+}
 
 var E_Ext_More = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
@@ -535,8 +1334,16 @@ type MessageList struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *MessageList) Reset()      { *m = MessageList{} }
-func (*MessageList) ProtoMessage() {}
+func (m *MessageList) Reset()         { *m = MessageList{} }
+func (m *MessageList) String() string { return proto.CompactTextString(m) }
+func (*MessageList) ProtoMessage()    {}
+
+func (m *MessageList) GetMessage() []*MessageList_Message {
+	if m != nil {
+		return m.Message
+	}
+	return nil
+}
 
 type MessageList_Message struct {
 	Name             *string `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
@@ -546,14 +1353,43 @@ type MessageList_Message struct {
 
 func (m *MessageList_Message) Reset() { *m = MessageList_Message{} }
 
+func (m *MessageList_Message) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *MessageList_Message) GetCount() int32 {
+	if m != nil && m.Count != nil {
+		return *m.Count
+	}
+	return 0
+}
+
 type Strings struct {
 	StringField      *string `protobuf:"bytes,1,opt,name=string_field" json:"string_field,omitempty"`
 	BytesField       []byte  `protobuf:"bytes,2,opt,name=bytes_field" json:"bytes_field,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Strings) Reset()      { *m = Strings{} }
-func (*Strings) ProtoMessage() {}
+func (m *Strings) Reset()         { *m = Strings{} }
+func (m *Strings) String() string { return proto.CompactTextString(m) }
+func (*Strings) ProtoMessage()    {}
+
+func (m *Strings) GetStringField() string {
+	if m != nil && m.StringField != nil {
+		return *m.StringField
+	}
+	return ""
+}
+
+func (m *Strings) GetBytesField() []byte {
+	if m != nil {
+		return m.BytesField
+	}
+	return nil
+}
 
 type Defaults struct {
 	F_Bool           *bool           `protobuf:"varint,1,opt,def=1" json:"F_Bool,omitempty"`
@@ -577,8 +1413,9 @@ type Defaults struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *Defaults) Reset()      { *m = Defaults{} }
-func (*Defaults) ProtoMessage() {}
+func (m *Defaults) Reset()         { *m = Defaults{} }
+func (m *Defaults) String() string { return proto.CompactTextString(m) }
+func (*Defaults) ProtoMessage()    {}
 
 const Default_Defaults_F_Bool bool = true
 const Default_Defaults_F_Int32 int32 = 32
@@ -595,29 +1432,171 @@ var Default_Defaults_F_Bytes []byte = []byte("Bignose")
 
 const Default_Defaults_F_Sint32 int32 = -32
 const Default_Defaults_F_Sint64 int64 = -64
-const Default_Defaults_F_Enum Defaults_Color = GREEN
+const Default_Defaults_F_Enum Defaults_Color = Defaults_GREEN
 
 var Default_Defaults_F_Pinf float32 = float32(math.Inf(1))
 var Default_Defaults_F_Ninf float32 = float32(math.Inf(-1))
 var Default_Defaults_F_Nan float32 = float32(math.NaN())
+
+func (m *Defaults) GetF_Bool() bool {
+	if m != nil && m.F_Bool != nil {
+		return *m.F_Bool
+	}
+	return Default_Defaults_F_Bool
+}
+
+func (m *Defaults) GetF_Int32() int32 {
+	if m != nil && m.F_Int32 != nil {
+		return *m.F_Int32
+	}
+	return Default_Defaults_F_Int32
+}
+
+func (m *Defaults) GetF_Int64() int64 {
+	if m != nil && m.F_Int64 != nil {
+		return *m.F_Int64
+	}
+	return Default_Defaults_F_Int64
+}
+
+func (m *Defaults) GetF_Fixed32() uint32 {
+	if m != nil && m.F_Fixed32 != nil {
+		return *m.F_Fixed32
+	}
+	return Default_Defaults_F_Fixed32
+}
+
+func (m *Defaults) GetF_Fixed64() uint64 {
+	if m != nil && m.F_Fixed64 != nil {
+		return *m.F_Fixed64
+	}
+	return Default_Defaults_F_Fixed64
+}
+
+func (m *Defaults) GetF_Uint32() uint32 {
+	if m != nil && m.F_Uint32 != nil {
+		return *m.F_Uint32
+	}
+	return Default_Defaults_F_Uint32
+}
+
+func (m *Defaults) GetF_Uint64() uint64 {
+	if m != nil && m.F_Uint64 != nil {
+		return *m.F_Uint64
+	}
+	return Default_Defaults_F_Uint64
+}
+
+func (m *Defaults) GetF_Float() float32 {
+	if m != nil && m.F_Float != nil {
+		return *m.F_Float
+	}
+	return Default_Defaults_F_Float
+}
+
+func (m *Defaults) GetF_Double() float64 {
+	if m != nil && m.F_Double != nil {
+		return *m.F_Double
+	}
+	return Default_Defaults_F_Double
+}
+
+func (m *Defaults) GetF_String() string {
+	if m != nil && m.F_String != nil {
+		return *m.F_String
+	}
+	return Default_Defaults_F_String
+}
+
+func (m *Defaults) GetF_Bytes() []byte {
+	if m != nil && m.F_Bytes != nil {
+		return m.F_Bytes
+	}
+	return append([]byte(nil), Default_Defaults_F_Bytes...)
+}
+
+func (m *Defaults) GetF_Sint32() int32 {
+	if m != nil && m.F_Sint32 != nil {
+		return *m.F_Sint32
+	}
+	return Default_Defaults_F_Sint32
+}
+
+func (m *Defaults) GetF_Sint64() int64 {
+	if m != nil && m.F_Sint64 != nil {
+		return *m.F_Sint64
+	}
+	return Default_Defaults_F_Sint64
+}
+
+func (m *Defaults) GetF_Enum() Defaults_Color {
+	if m != nil && m.F_Enum != nil {
+		return *m.F_Enum
+	}
+	return Default_Defaults_F_Enum
+}
+
+func (m *Defaults) GetF_Pinf() float32 {
+	if m != nil && m.F_Pinf != nil {
+		return *m.F_Pinf
+	}
+	return Default_Defaults_F_Pinf
+}
+
+func (m *Defaults) GetF_Ninf() float32 {
+	if m != nil && m.F_Ninf != nil {
+		return *m.F_Ninf
+	}
+	return Default_Defaults_F_Ninf
+}
+
+func (m *Defaults) GetF_Nan() float32 {
+	if m != nil && m.F_Nan != nil {
+		return *m.F_Nan
+	}
+	return Default_Defaults_F_Nan
+}
+
+func (m *Defaults) GetSub() *SubDefaults {
+	if m != nil {
+		return m.Sub
+	}
+	return nil
+}
 
 type SubDefaults struct {
 	N                *int64 `protobuf:"varint,1,opt,name=n,def=7" json:"n,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *SubDefaults) Reset()      { *m = SubDefaults{} }
-func (*SubDefaults) ProtoMessage() {}
+func (m *SubDefaults) Reset()         { *m = SubDefaults{} }
+func (m *SubDefaults) String() string { return proto.CompactTextString(m) }
+func (*SubDefaults) ProtoMessage()    {}
 
 const Default_SubDefaults_N int64 = 7
+
+func (m *SubDefaults) GetN() int64 {
+	if m != nil && m.N != nil {
+		return *m.N
+	}
+	return Default_SubDefaults_N
+}
 
 type RepeatedEnum struct {
 	Color            []RepeatedEnum_Color `protobuf:"varint,1,rep,name=color,enum=testdata.RepeatedEnum_Color" json:"color,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *RepeatedEnum) Reset()      { *m = RepeatedEnum{} }
-func (*RepeatedEnum) ProtoMessage() {}
+func (m *RepeatedEnum) Reset()         { *m = RepeatedEnum{} }
+func (m *RepeatedEnum) String() string { return proto.CompactTextString(m) }
+func (*RepeatedEnum) ProtoMessage()    {}
+
+func (m *RepeatedEnum) GetColor() []RepeatedEnum_Color {
+	if m != nil {
+		return m.Color
+	}
+	return nil
+}
 
 type MoreRepeated struct {
 	Bools            []bool   `protobuf:"varint,1,rep,name=bools" json:"bools,omitempty"`
@@ -628,16 +1607,60 @@ type MoreRepeated struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *MoreRepeated) Reset()      { *m = MoreRepeated{} }
-func (*MoreRepeated) ProtoMessage() {}
+func (m *MoreRepeated) Reset()         { *m = MoreRepeated{} }
+func (m *MoreRepeated) String() string { return proto.CompactTextString(m) }
+func (*MoreRepeated) ProtoMessage()    {}
+
+func (m *MoreRepeated) GetBools() []bool {
+	if m != nil {
+		return m.Bools
+	}
+	return nil
+}
+
+func (m *MoreRepeated) GetBoolsPacked() []bool {
+	if m != nil {
+		return m.BoolsPacked
+	}
+	return nil
+}
+
+func (m *MoreRepeated) GetInts() []int32 {
+	if m != nil {
+		return m.Ints
+	}
+	return nil
+}
+
+func (m *MoreRepeated) GetIntsPacked() []int32 {
+	if m != nil {
+		return m.IntsPacked
+	}
+	return nil
+}
+
+func (m *MoreRepeated) GetStrings() []string {
+	if m != nil {
+		return m.Strings
+	}
+	return nil
+}
 
 type GroupOld struct {
 	G                *GroupOld_G `protobuf:"group,1,opt" json:"g,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupOld) Reset()      { *m = GroupOld{} }
-func (*GroupOld) ProtoMessage() {}
+func (m *GroupOld) Reset()         { *m = GroupOld{} }
+func (m *GroupOld) String() string { return proto.CompactTextString(m) }
+func (*GroupOld) ProtoMessage()    {}
+
+func (m *GroupOld) GetG() *GroupOld_G {
+	if m != nil {
+		return m.G
+	}
+	return nil
+}
 
 type GroupOld_G struct {
 	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
@@ -646,13 +1669,28 @@ type GroupOld_G struct {
 
 func (m *GroupOld_G) Reset() { *m = GroupOld_G{} }
 
+func (m *GroupOld_G) GetX() int32 {
+	if m != nil && m.X != nil {
+		return *m.X
+	}
+	return 0
+}
+
 type GroupNew struct {
 	G                *GroupNew_G `protobuf:"group,1,opt" json:"g,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupNew) Reset()      { *m = GroupNew{} }
-func (*GroupNew) ProtoMessage() {}
+func (m *GroupNew) Reset()         { *m = GroupNew{} }
+func (m *GroupNew) String() string { return proto.CompactTextString(m) }
+func (*GroupNew) ProtoMessage()    {}
+
+func (m *GroupNew) GetG() *GroupNew_G {
+	if m != nil {
+		return m.G
+	}
+	return nil
+}
 
 type GroupNew_G struct {
 	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
@@ -661,6 +1699,20 @@ type GroupNew_G struct {
 }
 
 func (m *GroupNew_G) Reset() { *m = GroupNew_G{} }
+
+func (m *GroupNew_G) GetX() int32 {
+	if m != nil && m.X != nil {
+		return *m.X
+	}
+	return 0
+}
+
+func (m *GroupNew_G) GetY() int32 {
+	if m != nil && m.Y != nil {
+		return *m.Y
+	}
+	return 0
+}
 
 var E_Greeting = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
@@ -681,26 +1733,3 @@ func init() {
 	proto.RegisterExtension(E_Ext_Number)
 	proto.RegisterExtension(E_Greeting)
 }
-func (this *GoEnum) String() string            { return proto.CompactTextString(this) }
-func (this *GoTestField) String() string       { return proto.CompactTextString(this) }
-func (this *GoTest) String() string            { return proto.CompactTextString(this) }
-func (this *GoSkipTest) String() string        { return proto.CompactTextString(this) }
-func (this *NonPackedTest) String() string     { return proto.CompactTextString(this) }
-func (this *PackedTest) String() string        { return proto.CompactTextString(this) }
-func (this *MaxTag) String() string            { return proto.CompactTextString(this) }
-func (this *OldMessage) String() string        { return proto.CompactTextString(this) }
-func (this *OldMessage_Nested) String() string { return proto.CompactTextString(this) }
-func (this *NewMessage) String() string        { return proto.CompactTextString(this) }
-func (this *NewMessage_Nested) String() string { return proto.CompactTextString(this) }
-func (this *InnerMessage) String() string      { return proto.CompactTextString(this) }
-func (this *OtherMessage) String() string      { return proto.CompactTextString(this) }
-func (this *MyMessage) String() string         { return proto.CompactTextString(this) }
-func (this *Ext) String() string               { return proto.CompactTextString(this) }
-func (this *MessageList) String() string       { return proto.CompactTextString(this) }
-func (this *Strings) String() string           { return proto.CompactTextString(this) }
-func (this *Defaults) String() string          { return proto.CompactTextString(this) }
-func (this *SubDefaults) String() string       { return proto.CompactTextString(this) }
-func (this *RepeatedEnum) String() string      { return proto.CompactTextString(this) }
-func (this *MoreRepeated) String() string      { return proto.CompactTextString(this) }
-func (this *GroupOld) String() string          { return proto.CompactTextString(this) }
-func (this *GroupNew) String() string          { return proto.CompactTextString(this) }

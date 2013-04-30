@@ -239,9 +239,9 @@ message MyMessage {
   repeated OtherMessage others = 6;
 
   enum Color {
-    MyMessage_RED = 0;
-    MyMessage_GREEN = 1;
-    MyMessage_BLUE = 2;
+    RED = 0;
+    GREEN = 1;
+    BLUE = 2;
   };
   optional Color bikeshed = 7;
 
@@ -322,7 +322,7 @@ message SubDefaults {
 
 message RepeatedEnum {
   enum Color {
-    RepeatedEnum_RED = 1;
+    RED = 1;
   }
   repeated Color color = 1;
 }

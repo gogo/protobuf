@@ -32,8 +32,6 @@
 all:
 	@echo run make test
 
-include ../../Make.protobuf
-
 test:	golden testbuild
 
 #test:	golden testbuild extension_test

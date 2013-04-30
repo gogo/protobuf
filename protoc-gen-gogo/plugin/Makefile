@@ -33,11 +33,7 @@
 # at protobuf-2.3.0/src/google/protobuf/compiler/plugin.proto
 # Also we need to fix an import.
 regenerate:
-	echo WARNING! THIS RULE IS PROBABLY NOT RIGHT FOR YOUR INSTALLATION
-	cd $(HOME)/src/protobuf-2.3.0/src && \
-	protoc --go_out=. ./google/protobuf/compiler/plugin.proto && \
-	cat ./google/protobuf/compiler/plugin.pb.go | \
-		sed '/^import/s;google/protobuf/descriptor.pb;code.google.com/p/goprotobuf/protoc-gen-go/descriptor;' > $(GOPATH)/src/code.google.com/p/goprotobuf/protoc-gen-go/plugin/plugin.pb.go
+	(cd ../../../../../ && protoc --gogo_out=. ./code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin/plugin.proto)
 
 restore:
 	cp plugin.pb.golden plugin.pb.go

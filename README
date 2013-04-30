@@ -1,8 +1,11 @@
+GoGoProtobuf http://code.google.com/p/gogoprotobuf extends 
+GoProtobuf http://code.google.com/p/goprotobuf/
+
 Go support for Protocol Buffers - Google's data interchange format
 Copyright 2010 The Go Authors.
 http://code.google.com/p/goprotobuf/
 
-This software implements Go bindings for protocol buffers.  For
+GoProtobuf software implements Go bindings for protocol buffers.  For
 information about protocol buffers themselves, see
 	http://code.google.com/apis/protocolbuffers/
 To use this software, you must first install the standard C++
@@ -15,7 +18,7 @@ See
 for details or, if you are using gccgo, follow the instructions at
 	http://golang.org/doc/gccgo_install.html
 
-This software has two parts: a 'protocol compiler plugin' that
+GoProtobuf software has two parts: a 'protocol compiler plugin' that
 generates Go source files that, once compiled, can access and manage
 protocol buffers; and a library that implements run-time support for
 encoding (marshaling), decoding (unmarshaling), and accessing protocol
@@ -26,14 +29,17 @@ once a standard RPC protocol develops for protobufs.
 
 There are no insertion points in the plugin.
 
+GoGoProtobuf provides extensions for protocol buffers and GoProtobuf
+see http://code.google.com/p/gogoprotobuf/gogoproto/doc.go
+
 To install this code:
 
 The simplest way is to run go get.
 
 	# Grab the code from the repository and install the proto package.
-	go get -u code.google.com/p/gogoprotobuf/{proto,protoc-gen-gogo,gogoproto,test}
+	go get -u code.google.com/p/gogoprotobuf/{proto,protoc-gen-gogo,gogoproto}
 
-The compiler plugin, protoc-gen-go, will be installed in $GOBIN,
+The compiler plugin, protoc-gen-gogo, will be installed in $GOBIN,
 defaulting to $GOPATH/bin.  It must be in your $PATH for the protocol
 compiler, protoc, to find it.
 
@@ -48,15 +54,6 @@ parameter set to the directory you want to output the Go code to.
 
 The generated files will be suffixed .pb.go.  See the Test code below
 for an example using such a file.
-
-This repository uses the same code review mechanism as Go, so
-if you wish to submit changes add the equivalent of these two lines
-to $GOROOT/src/pkg/code.google.com/p/goprotobuf/.hg/hgrc
-
-	[extensions]
-	codereview = $GOROOT/lib/codereview/codereview.py
-
-*where $GOROOT is the expanded text, such as /usr/foo/go*.
 
 The package comment for the proto library contains text describing
 the interface provided in Go for protocol buffers. Here is an edited
@@ -118,20 +115,6 @@ Consider file test.proto, containing
 	  }
 	}
 
-To build a package from test.proto and some other Go files, write a
-Makefile like this:
-
-	include $(GOROOT)/src/Make.$(GOARCH)
-
-	TARG=path/to/example
-	GOFILES=\
-		test.pb.go\
-		other.go
-
-	include $(GOROOT)/src/Make.pkg
-	include $(GOROOT)/src/pkg/code.google.com/p/goprotobuf/Make.protobuf
-
-
 To create and play with a Test object from the example package,
 
 	package main
@@ -139,7 +122,7 @@ To create and play with a Test object from the example package,
 	import (
 		"log"
 
-		"code.google.com/p/goprotobuf/proto"
+		"code.google.com/p/gogoprotobuf/proto"
 		"path/to/example"
 	)
 

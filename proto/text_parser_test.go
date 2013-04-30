@@ -239,7 +239,7 @@ var unMarshalTextTests = []UnmarshalTextTest{
 
 	// Enum
 	{
-		in: `count:42 bikeshed: MyMessage_BLUE`,
+		in: `count:42 bikeshed: BLUE`,
 		out: &MyMessage{
 			Count:    Int32(42),
 			Bikeshed: MyMessage_BLUE.Enum(),
@@ -416,7 +416,7 @@ func TestUnmarshalText(t *testing.T) {
 // Regression test; this caused a panic.
 func TestRepeatedEnum(t *testing.T) {
 	pb := new(RepeatedEnum)
-	if err := UnmarshalText("color: RepeatedEnum_RED", pb); err != nil {
+	if err := UnmarshalText("color: RED", pb); err != nil {
 		t.Fatal(err)
 	}
 	exp := &RepeatedEnum{

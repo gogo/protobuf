@@ -18,23 +18,25 @@ var _ = &json.SyntaxError{}
 var _ = math.Inf
 
 type A struct {
-	Description string                                          `protobuf:"bytes,1,opt" json:"Description,omitempty"`
-	Number      int64                                           `protobuf:"varint,2,opt" json:"Number,omitempty"`
-	Id          code_google_com_p_gogoprotobuf_test_custom.Uuid `protobuf:"bytes,3,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uuid" json:"Id,omitempty"`
+	Description      string                                          `protobuf:"bytes,1,opt" json:"Description"`
+	Number           int64                                           `protobuf:"varint,2,opt" json:"Number"`
+	Id               code_google_com_p_gogoprotobuf_test_custom.Uuid `protobuf:"bytes,3,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uuid" json:"Id"`
+	XXX_unrecognized []byte                                          `json:"-"`
 }
 
-func (this *A) Reset()   { *this = A{} }
-func (*A) ProtoMessage() {}
+func (m *A) Reset()         { *m = A{} }
+func (m *A) String() string { return proto.CompactTextString(m) }
+func (*A) ProtoMessage()    {}
 
 type B struct {
-	A `protobuf:"bytes,1,opt,embedded=A" json:"A,omitempty"`
-	G []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"G,omitempty"`
+	A                `protobuf:"bytes,1,opt,embedded=A" json:"A"`
+	G                []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"G"`
+	XXX_unrecognized []byte                                               `json:"-"`
 }
 
-func (this *B) Reset()   { *this = B{} }
-func (*B) ProtoMessage() {}
+func (m *B) Reset()         { *m = B{} }
+func (m *B) String() string { return proto.CompactTextString(m) }
+func (*B) ProtoMessage()    {}
 
 func init() {
 }
-func (this *A) String() string { return proto.CompactTextString(this) }
-func (this *B) String() string { return proto.CompactTextString(this) }

@@ -30,7 +30,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	protoc --go_out=. ./descriptor.proto
+	protoc --gogo_out=. ./descriptor.proto
 
 restore:
 	cp descriptor.pb.golden descriptor.pb.go

@@ -123,7 +123,7 @@ others: <
     port: 8002
   >
 >
-bikeshed: MyMessage_BLUE
+bikeshed: BLUE
 SomeGroup {
   group_field: 8
 }

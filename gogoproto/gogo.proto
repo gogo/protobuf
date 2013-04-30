@@ -28,9 +28,24 @@ package gogoproto;
 
 import "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto";
 
+extend google.protobuf.EnumOptions {
+	optional bool enumprefix = 62001;
+}
+
+extend google.protobuf.FileOptions {
+	optional bool getters_all = 63001;
+	optional bool enumprefix_all = 63002;
+	optional bool msgstringmethod_all = 63003;
+}
+
+extend google.protobuf.MessageOptions {
+	optional bool getters = 64001;
+	optional bool msgstringmethod = 64003;
+}
+
 extend google.protobuf.FieldOptions {
-  optional bool nullable = 51235;
-  optional bool embed = 51236;
-  optional string customtype = 51237;
+  optional bool nullable = 65001;
+  optional bool embed = 65002;
+  optional string customtype = 65003;
 }
 

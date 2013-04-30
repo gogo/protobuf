@@ -11,9 +11,6 @@
 // copyright notice, this list of conditions and the following disclaimer
 // in the documentation and/or other materials provided with the
 // distribution.
-//     * Neither the name of Google Inc. nor the names of its
-// contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,33 +24,25 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package test
+package proto
 
 import (
-	"bytes"
-	gogoproto "code.google.com/p/gogoprotobuf/proto"
-	"encoding/gob"
 	"reflect"
-	"testing"
 )
 
-type testGobGoGo struct {
-	msg    gogoproto.Message
-	newMsg func() gogoproto.Message
-}
-
-func (this testGobGoGo) test(t *testing.T) {
-	buf := bytes.NewBuffer(nil)
-	encoder := gob.NewEncoder(buf)
-	if err := encoder.Encode(this.msg); err != nil {
-		panic(err)
+func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset bool) bool {
+	if reflect.ValueOf(pb).IsNil() {
+		return ifnotset
 	}
-	decoder := gob.NewDecoder(buf)
-	msg := this.newMsg()
-	if err := decoder.Decode(msg); err != nil {
-		panic(err)
+	value, err := GetExtension(pb, extension)
+	if err != nil {
+		return ifnotset
 	}
-	if !reflect.DeepEqual(msg, this.msg) {
-		t.Fatalf("%#v != %#v", msg, this.msg)
+	if value == nil {
+		return ifnotset
 	}
+	if value.(*bool) == nil {
+		return ifnotset
+	}
+	return *(value.(*bool))
 }
