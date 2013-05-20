@@ -262,7 +262,6 @@ Please look at these plugins as examples of how to create your own.
 A good idea is to let each plugin generate its own tests.
 
 */
-
 package testgen
 
 import (
