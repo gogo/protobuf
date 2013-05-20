@@ -429,6 +429,8 @@ func New() *Generator {
 	g.Buffer = new(bytes.Buffer)
 	g.Request = new(plugin.CodeGeneratorRequest)
 	g.Response = new(plugin.CodeGeneratorResponse)
+	uniquePackageName = make(map[*descriptor.FileDescriptorProto]string)
+	pkgNamesInUse = make(map[string]bool)
 	return g
 }
 
@@ -1266,7 +1268,7 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 	}
 
 	embed := ""
-	if isEmbed(field) {
+	if gogoproto.IsEmbed(field) {
 		embed = ",embedded=" + fieldName
 	}
 
@@ -1296,10 +1298,10 @@ func needsStar(field *descriptor.FieldDescriptorProto) bool {
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
 	}
-	if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !isCustomType(field) {
+	if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field) {
 		return false
 	}
-	if !isNullable(field) {
+	if !gogoproto.IsNullable(field) {
 		return false
 	}
 	return true
@@ -1366,7 +1368,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	default:
 		g.Fail("unknown type for", field.GetName())
 	}
-	if isCustomType(field) {
+	if gogoproto.IsCustomType(field) {
 		var packageName string
 		var err error
 		typ, packageName, err = getCustomType(field)
@@ -1433,10 +1435,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
 		tag := fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName+",omitempty")
-		if !isNullable(field) {
+		if !gogoproto.IsNullable(field) {
 			tag = fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName)
 		}
-		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && isEmbed(field) {
+		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 			fieldName = ""
 		}
 		fieldNames[field] = fieldName
@@ -1453,14 +1455,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	// Reset, String and ProtoMessage methods.
 	g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
-	if !message.group {
-		fileMsgStringMethodEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_MsgstringmethodAll, true)
-		msgStringMethodEnabled := proto.GetBoolExtension(message.DescriptorProto.Options, gogoproto.E_Msgstringmethod, fileMsgStringMethodEnabled)
-		if msgStringMethodEnabled {
-			g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
-		}
-		g.P("func (*", ccTypeName, ") ProtoMessage() {}")
+	fileMsgStringMethodEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_MsgstringmethodAll, true)
+	msgStringMethodEnabled := proto.GetBoolExtension(message.DescriptorProto.Options, gogoproto.E_Msgstringmethod, fileMsgStringMethodEnabled)
+	if msgStringMethodEnabled {
+		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
+	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
 
 	// Extension support methods
 	var hasExtensions, isMessageSet bool
@@ -1577,7 +1577,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if !gettersEnabled {
 			break
 		}
-		if !isNullable(field) || isEmbed(field) || isCustomType(field) {
+		if !gogoproto.IsNullable(field) ||
+			gogoproto.IsEmbed(field) ||
+			gogoproto.IsCustomType(field) {
 			continue
 		}
 		fname := fieldNames[field]

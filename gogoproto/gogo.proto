@@ -36,11 +36,33 @@ extend google.protobuf.FileOptions {
 	optional bool getters_all = 63001;
 	optional bool enumprefix_all = 63002;
 	optional bool msgstringmethod_all = 63003;
+	optional bool verbose_equal_all = 63004;
+	optional bool face_all = 63005;
+	optional bool gostring_all = 63006;
+	optional bool populate_all = 63007;
+	optional bool stringgen_all = 63008;
+	optional bool union_all = 63009;
+
+	optional bool equal_all = 63013;
+	optional bool description_all = 63014;
+	optional bool testgen_all = 63015;
+	optional bool benchgen_all = 63016;
 }
 
 extend google.protobuf.MessageOptions {
 	optional bool getters = 64001;
 	optional bool msgstringmethod = 64003;
+	optional bool verbose_equal = 64004;
+	optional bool face = 64005;
+	optional bool gostring = 64006;
+	optional bool populate = 64007;
+  	optional bool stringgen = 67008;
+	optional bool union = 64009;
+
+	optional bool equal = 64013;
+	optional bool description = 64014;
+	optional bool testgen = 64015;
+	optional bool benchgen = 64016;
 }
 
 extend google.protobuf.FieldOptions {

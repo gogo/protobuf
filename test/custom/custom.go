@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://code.google.com/p/gogoprotobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -31,6 +31,7 @@
 package custom
 
 import (
+	"bytes"
 	"encoding/json"
 	"unsafe"
 )
@@ -105,6 +106,19 @@ func (this Uint128) Equal(that Uint128) bool {
 	return this == that
 }
 
+type randy interface {
+	Intn(n int) int
+}
+
+func NewPopulatedUint128(r randy) *Uint128 {
+	data := make([]byte, 16)
+	for i := 0; i < 16; i++ {
+		data[i] = byte(r.Intn(255))
+	}
+	u := Uint128(GetLittleEndianUint128(data, 0))
+	return &u
+}
+
 type Uuid []byte
 
 func (uuid Uuid) Marshal() ([]byte, error) {
@@ -132,4 +146,30 @@ func (uuid *Uuid) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return uuid.Unmarshal(*v)
+}
+
+func (uuid Uuid) Equal(other Uuid) bool {
+	return bytes.Equal(uuid[0:], other[0:])
+}
+
+type int63 interface {
+	Int63() int64
+}
+
+func NewPopulatedUuid(r int63) *Uuid {
+	u := RandV4(r)
+	return &u
+}
+
+func RandV4(r int63) Uuid {
+	uuid := make(Uuid, 16)
+	uuid.RandV4(r)
+	return uuid
+}
+
+func (uuid Uuid) RandV4(r int63) {
+	PutLittleEndianUint64(uuid, 0, uint64(r.Int63()))
+	PutLittleEndianUint64(uuid, 8, uint64(r.Int63()))
+	uuid[6] = (uuid[6] & 0xf) | 0x40
+	uuid[8] = (uuid[8] & 0x3f) | 0x80
 }

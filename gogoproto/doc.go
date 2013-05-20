@@ -27,96 +27,110 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-	Package gogoproto provides extensions for protocol buffers which help
-	to create more canonical Go structures.
+Package gogoproto provides extensions for protocol buffers to achieve:
 
-	All the extensions are FieldOptions:
+  - more canonical Go structures.
+  - goprotobuf compatibility
+  - less typing by optionally generating extra helper code.
+  - peace of mind by optionally generating test and benchmark code.
 
-	  - embed
-	  - nullable (WARNING this breaks protocol buffer specifications, more below)
-	  - customtype
+More Canonical Go Structures
 
-	If you do not use any of these extension the code that is generated
-	will be mostly the same as if goprotobuf has generated it.
+A lot of time working with a goprotobuf struct will lead you to a place where you create another struct that is easier to work with and then have a function to copy the values between the two structs.
+You might also find that basic structs that started their life as part of an API need to be sent over the wire. With gob, you could just send it. With goprotobuf, you need to make a parallel struct.
+Gogoprotobuf tries to fix these problems with the nullable, embed and customtype field extensions.
 
-	The most complete way to see examples is to look at
+  - nullable, if false, a field is generated without a pointer (see warning below).
+  - embed, if true, the field is generated as an embedded field.
+  - customtype, It works with the Marshal and Unmarshal methods, to allow you to have your own types in your struct, but marshal to bytes. For example, custom.Uuid or custom.Fixed128
 
-		code.google.com/p/gogoprotobuf/test/thetest.proto
+Warning about nullable: According to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set. It can be seen as a layer on top of Protocol Buffers, where before and after marshalling all non-nullable fields are set and they cannot be unset.
 
-	and its output generated in
+Let us look at:
 
-		code.google.com/p/gogoprotobuf/test/gogo by gogoprotobuf
+	code.google.com/p/gogoprotobuf/test/example/example.proto
 
-	and to compare
+for a quicker overview.
 
-		code.google.com/p/gogoprotobuf/test/go by goprotobuf
+The following message:
 
-	Let us look at:
+	message A {
+		optional string Description = 1 [(gogoproto.nullable) = false];
+		optional int64 Number = 2 [(gogoproto.nullable) = false];
+		optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	}
 
-		code.google.com/p/gogoprotobuf/test/example.proto
+Will generate a go struct which looks a lot like this:
 
-	for a quicker overview.
+	type A struct {
+		Description string
+		Number      int64
+		Id          code_google_com_p_gogoprotobuf_test_custom.Uuid
+	}
 
-	The following message:
+You will see there are no pointers, since all fields are non-nullable.
+You will also see a custom type which marshals to a string.
 
-		message A {
-			optional string Description = 1 [(gogoproto.nullable) = false];
-			optional int64 Number = 2 [(gogoproto.nullable) = false];
-			optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-		}
+Next we will embed the message A in message B.
 
-	Will generate a go struct which looks a lot like this:
+	message B {
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	}
 
-		type A struct {
-			Description string
-			Number      int64
-			Id          code_google_com_p_gogoprotobuf_test_custom.Uuid
-		}
+See below that A is embedded in B.
 
-	You will see there are no pointers, since all fields are non-nullable.
-	You will also see a custom type which marshals to a string.
+	type B struct {
+		A
+		G []code_google_com_p_gogoprotobuf_test_custom.Uint128
+	}
 
-	Next we will embed the message A in message B.
+Also see the repeated custom type.
 
-		message B {
-			optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-			repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-		}
+	type Uint128 [2]uint64
 
-	See below that A is embedded in B.
+Gogoprotobuf also has some more subtle changes, these could be changed back:
 
-		type B struct {
-			A
-			G []code_google_com_p_gogoprotobuf_test_custom.Uint128
-		}
+  - the generated package name for imports do not have the extra /filename.pb,
+  but are actually the imports specified in the .proto file.
 
-	Also see the repeated custom type.
+Gogoprotobuf also has lost some features which should be brought back with time:
 
-		type Uint128 [2]uint64
+  - Marshalling and unmarshalling with reflect and without the unsafe package,
+  this requires work in pointer_reflect.go
 
-	Gogoprotobuf also has some more subtle changes, these could be changed back:
+Why does nullable break protocol buffer specifications:
 
-	  - the generated package name for imports do not have the extra /filename.pb,
-	  but are actually the imports specified in the .proto file.
-	  - getters are not generated.
-	  - enum value names are generated without the enumtype underscore as a prefix.
+The protocol buffer specification states, somewhere, that you should be able to tell whether a
+field is set or unset.  With the option nullable=false this feature is lost,
+since your non-nullable fields will always be set.  It can be seen as a layer on top of
+protocol buffers, where before and after marshalling all non-nullable fields are set
+and they cannot be unset.
 
-	Gogoprotobuf also has lost some features which should be brought back with time:
+Goprotobuf Compatibility:
 
-	  - Marshalling and unmarshalling with reflect and without the unsafe package,
-	  this requires work in pointer_reflect.go
+Gogoprotobuf is compatible with Goprotobuf, because it is compatible with protocol buffers.
+Gogoprotobuf generates the same code as goprotobuf if no extensions are used.
+The enumprefix, getters and msgstringmethod extensions can be used to remove some of the unnecessary code generated by goprotobuf:
 
-	Possible future plans:
+  - enumprefix, if false, generates the enum constant names without the messagetype prefix
+  - getters, if false, the message is generated without get methods, this is useful when you would rather want to use face
+  - msgstringmethod, if false, the message is generated without the default string method, this is useful for rather using stringgen
 
-	  - Generate all marshalling and unmarshalling code, this could be done with a plugin.
+Less Typing and Peace of Mind is explained in their specific plugin folders godoc:
 
-	Why does nullable break protocol buffer specifications:
+	- code.google.com/p/gogoprotobuf/plugin/<extension_name>
 
-	The protocol buffer specification states, somewhere, that you should be able to tell whether a
-	field is set or unset.  With the option nullable=false this feature is lost,
-	since your non-nullable fields will always be set.  It can be seen as a layer on top of
-	protocol buffers, where before and after marshalling all non-nullable fields are set
-	and they cannot be unset.
+If you do not use any of these extension the code that is generated
+will be the same as if goprotobuf has generated it.
+
+The most complete way to see examples is to look at
+
+	code.google.com/p/gogoprotobuf/test/thetest.proto
+
+Gogoprototest is a seperate project,
+because we want to keep gogoprotobuf independant of goprotobuf,
+but we still want to test it thoroughly.
 
 */
 package gogoproto

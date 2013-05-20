@@ -1,8 +1,3 @@
-// Extensions for Protocol Buffers to create more go like structures.
-//
-// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
-//
 // Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2012 The Go Authors.  All rights reserved.
@@ -73,51 +68,6 @@ func structPointer_Interface(p structPointer, t reflect.Type) interface{} {
 	return reflect.NewAt(t, unsafe.Pointer(p)).Interface()
 }
 
-func structPointer_InterfaceAt(p structPointer, f field, t reflect.Type) interface{} {
-	point := unsafe.Pointer(uintptr(p) + uintptr(f))
-	r := reflect.NewAt(t, point)
-	return r.Interface()
-}
-
-func structPointer_InterfaceRef(p structPointer, f field, t reflect.Type) interface{} {
-	point := unsafe.Pointer(uintptr(p) + uintptr(f))
-	r := reflect.NewAt(t, point)
-	if r.Elem().IsNil() {
-		return nil
-	}
-	return r.Elem().Interface()
-}
-
-func copyUintPtr(oldptr, newptr uintptr, size int) {
-	for j := 0; j < size; j++ {
-		oldb := (*byte)(unsafe.Pointer(oldptr + uintptr(j)))
-		*(*byte)(unsafe.Pointer(newptr + uintptr(j))) = *oldb
-	}
-}
-
-func structPointer_Copy(oldptr structPointer, newptr structPointer, size int) {
-	copyUintPtr(uintptr(oldptr), uintptr(newptr), size)
-}
-
-func appendStructPointer(base structPointer, f field, typ reflect.Type) structPointer {
-	size := typ.Elem().Size()
-	oldHeader := structPointer_GetSliceHeader(base, f)
-	newLen := oldHeader.Len + 1
-	slice := reflect.MakeSlice(typ, newLen, newLen)
-	bas := toStructPointer(slice)
-	for i := 0; i < oldHeader.Len; i++ {
-		newElemptr := uintptr(bas) + uintptr(i)*size
-		oldElemptr := oldHeader.Data + uintptr(i)*size
-		copyUintPtr(oldElemptr, newElemptr, int(size))
-	}
-
-	oldHeader.Data = uintptr(bas)
-	oldHeader.Len = newLen
-	oldHeader.Cap = newLen
-
-	return structPointer(unsafe.Pointer(uintptr(unsafe.Pointer(bas)) + uintptr(uintptr(newLen-1)*size)))
-}
-
 // A field identifies a field in a struct, accessible from a structPointer.
 // In this implementation, a field is identified by its byte offset from the start of the struct.
 type field uintptr
@@ -150,11 +100,6 @@ func structPointer_Bool(p structPointer, f field) **bool {
 	return (**bool)(unsafe.Pointer(uintptr(p) + uintptr(f)))
 }
 
-// RefBool returns a *bool field in the struct.
-func structPointer_RefBool(p structPointer, f field) *bool {
-	return (*bool)(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
 // BoolSlice returns the address of a []bool field in the struct.
 func structPointer_BoolSlice(p structPointer, f field) *[]bool {
 	return (*[]bool)(unsafe.Pointer(uintptr(p) + uintptr(f)))
@@ -163,11 +108,6 @@ func structPointer_BoolSlice(p structPointer, f field) *[]bool {
 // String returns the address of a *string field in the struct.
 func structPointer_String(p structPointer, f field) **string {
 	return (**string)(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
-// RefString returns the address of a string field in the struct.
-func structPointer_RefString(p structPointer, f field) *string {
-	return (*string)(unsafe.Pointer(uintptr(p) + uintptr(f)))
 }
 
 // StringSlice returns the address of a []string field in the struct.
@@ -185,29 +125,9 @@ func structPointer_SetStructPointer(p structPointer, f field, q structPointer) {
 	*(*structPointer)(unsafe.Pointer(uintptr(p) + uintptr(f))) = q
 }
 
-func structPointer_FieldPointer(p structPointer, f field) structPointer {
-	return structPointer(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
 // GetStructPointer reads a *struct field in the struct.
 func structPointer_GetStructPointer(p structPointer, f field) structPointer {
 	return *(*structPointer)(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
-func structPointer_GetRefStructPointer(p structPointer, f field) structPointer {
-	return structPointer((*structPointer)(unsafe.Pointer(uintptr(p) + uintptr(f))))
-}
-
-func structPointer_GetSliceHeader(p structPointer, f field) *reflect.SliceHeader {
-	return (*reflect.SliceHeader)(unsafe.Pointer(uintptr(p) + uintptr(f)))
-}
-
-func structPointer_Add(p structPointer, size field) structPointer {
-	return structPointer(unsafe.Pointer(uintptr(p) + uintptr(size)))
-}
-
-func structPointer_Len(p structPointer, f field) int {
-	return len(*(*[]interface{})(unsafe.Pointer(structPointer_GetRefStructPointer(p, f))))
 }
 
 // StructPointerSlice the address of a []*struct field in the struct.
@@ -250,30 +170,6 @@ func structPointer_Word32(p structPointer, f field) word32 {
 	return word32((**uint32)(unsafe.Pointer(uintptr(p) + uintptr(f))))
 }
 
-// refWord32 is the address of a 32-bit value field.
-type refWord32 *uint32
-
-func refWord32_IsNil(p refWord32) bool {
-	return p == nil
-}
-
-func refWord32_Set(p refWord32, o *Buffer, x uint32) {
-	if len(o.uint32s) == 0 {
-		o.uint32s = make([]uint32, uint32PoolSize)
-	}
-	o.uint32s[0] = x
-	*p = o.uint32s[0]
-	o.uint32s = o.uint32s[1:]
-}
-
-func refWord32_Get(p refWord32) uint32 {
-	return *p
-}
-
-func structPointer_RefWord32(p structPointer, f field) refWord32 {
-	return refWord32((*uint32)(unsafe.Pointer(uintptr(p) + uintptr(f))))
-}
-
 // A word32Slice is a slice of 32-bit values.
 type word32Slice []uint32
 
@@ -308,30 +204,6 @@ func word64_Get(p word64) uint64 {
 
 func structPointer_Word64(p structPointer, f field) word64 {
 	return word64((**uint64)(unsafe.Pointer(uintptr(p) + uintptr(f))))
-}
-
-// refWord64 is like refWord32 but for 32-bit values.
-type refWord64 *uint64
-
-func refWord64_Set(p refWord64, o *Buffer, x uint64) {
-	if len(o.uint64s) == 0 {
-		o.uint64s = make([]uint64, uint64PoolSize)
-	}
-	o.uint64s[0] = x
-	*p = o.uint64s[0]
-	o.uint64s = o.uint64s[1:]
-}
-
-func refWord64_IsNil(p refWord64) bool {
-	return p == nil
-}
-
-func refWord64_Get(p refWord64) uint64 {
-	return *p
-}
-
-func structPointer_RefWord64(p structPointer, f field) refWord64 {
-	return refWord64((*uint64)(unsafe.Pointer(uintptr(p) + uintptr(f))))
 }
 
 // word64Slice is like word32Slice but for 64-bit values.

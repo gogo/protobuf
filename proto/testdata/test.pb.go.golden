@@ -8,6 +8,8 @@ import proto "code.google.com/p/gogoprotobuf/proto"
 import json "encoding/json"
 import math "math"
 
+import ()
+
 // Reference proto, json, and math imports to suppress error if they are not otherwise used.
 var _ = proto.Marshal
 var _ = &json.SyntaxError{}
@@ -16,7 +18,7 @@ var _ = math.Inf
 type FOO int32
 
 const (
-	FOO1 FOO = 1
+	FOO_FOO1 FOO = 1
 )
 
 var FOO_name = map[int32]string{
@@ -49,19 +51,19 @@ func (x *FOO) UnmarshalJSON(data []byte) error {
 type GoTest_KIND int32
 
 const (
-	VOID        GoTest_KIND = 0
-	BOOL        GoTest_KIND = 1
-	BYTES       GoTest_KIND = 2
-	FINGERPRINT GoTest_KIND = 3
-	FLOAT       GoTest_KIND = 4
-	INT         GoTest_KIND = 5
-	STRING      GoTest_KIND = 6
-	TIME        GoTest_KIND = 7
-	TUPLE       GoTest_KIND = 8
-	ARRAY       GoTest_KIND = 9
-	MAP         GoTest_KIND = 10
-	TABLE       GoTest_KIND = 11
-	FUNCTION    GoTest_KIND = 12
+	GoTest_VOID        GoTest_KIND = 0
+	GoTest_BOOL        GoTest_KIND = 1
+	GoTest_BYTES       GoTest_KIND = 2
+	GoTest_FINGERPRINT GoTest_KIND = 3
+	GoTest_FLOAT       GoTest_KIND = 4
+	GoTest_INT         GoTest_KIND = 5
+	GoTest_STRING      GoTest_KIND = 6
+	GoTest_TIME        GoTest_KIND = 7
+	GoTest_TUPLE       GoTest_KIND = 8
+	GoTest_ARRAY       GoTest_KIND = 9
+	GoTest_MAP         GoTest_KIND = 10
+	GoTest_TABLE       GoTest_KIND = 11
+	GoTest_FUNCTION    GoTest_KIND = 12
 )
 
 var GoTest_KIND_name = map[int32]string{
@@ -124,14 +126,14 @@ const (
 )
 
 var MyMessage_Color_name = map[int32]string{
-	0: "MyMessage_RED",
-	1: "MyMessage_GREEN",
-	2: "MyMessage_BLUE",
+	0: "RED",
+	1: "GREEN",
+	2: "BLUE",
 }
 var MyMessage_Color_value = map[string]int32{
-	"MyMessage_RED":   0,
-	"MyMessage_GREEN": 1,
-	"MyMessage_BLUE":  2,
+	"RED":   0,
+	"GREEN": 1,
+	"BLUE":  2,
 }
 
 func (x MyMessage_Color) Enum() *MyMessage_Color {
@@ -157,9 +159,9 @@ func (x *MyMessage_Color) UnmarshalJSON(data []byte) error {
 type Defaults_Color int32
 
 const (
-	RED   Defaults_Color = 0
-	GREEN Defaults_Color = 1
-	BLUE  Defaults_Color = 2
+	Defaults_RED   Defaults_Color = 0
+	Defaults_GREEN Defaults_Color = 1
+	Defaults_BLUE  Defaults_Color = 2
 )
 
 var Defaults_Color_name = map[int32]string{
@@ -200,10 +202,10 @@ const (
 )
 
 var RepeatedEnum_Color_name = map[int32]string{
-	1: "RepeatedEnum_RED",
+	1: "RED",
 }
 var RepeatedEnum_Color_value = map[string]int32{
-	"RepeatedEnum_RED": 1,
+	"RED": 1,
 }
 
 func (x RepeatedEnum_Color) Enum() *RepeatedEnum_Color {
@@ -231,8 +233,9 @@ type GoEnum struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *GoEnum) Reset()      { *m = GoEnum{} }
-func (*GoEnum) ProtoMessage() {}
+func (m *GoEnum) Reset()         { *m = GoEnum{} }
+func (m *GoEnum) String() string { return proto.CompactTextString(m) }
+func (*GoEnum) ProtoMessage()    {}
 
 func (m *GoEnum) GetFoo() FOO {
 	if m != nil && m.Foo != nil {
@@ -247,8 +250,9 @@ type GoTestField struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *GoTestField) Reset()      { *m = GoTestField{} }
-func (*GoTestField) ProtoMessage() {}
+func (m *GoTestField) Reset()         { *m = GoTestField{} }
+func (m *GoTestField) String() string { return proto.CompactTextString(m) }
+func (*GoTestField) ProtoMessage()    {}
 
 func (m *GoTestField) GetLabel() string {
 	if m != nil && m.Label != nil {
@@ -340,8 +344,9 @@ type GoTest struct {
 	XXX_unrecognized        []byte                  `json:"-"`
 }
 
-func (m *GoTest) Reset()      { *m = GoTest{} }
-func (*GoTest) ProtoMessage() {}
+func (m *GoTest) Reset()         { *m = GoTest{} }
+func (m *GoTest) String() string { return proto.CompactTextString(m) }
+func (*GoTest) ProtoMessage()    {}
 
 const Default_GoTest_F_BoolDefaulted bool = true
 const Default_GoTest_F_Int32Defaulted int32 = 32
@@ -914,8 +919,9 @@ type GoSkipTest struct {
 	XXX_unrecognized []byte                `json:"-"`
 }
 
-func (m *GoSkipTest) Reset()      { *m = GoSkipTest{} }
-func (*GoSkipTest) ProtoMessage() {}
+func (m *GoSkipTest) Reset()         { *m = GoSkipTest{} }
+func (m *GoSkipTest) String() string { return proto.CompactTextString(m) }
+func (*GoSkipTest) ProtoMessage()    {}
 
 func (m *GoSkipTest) GetSkipInt32() int32 {
 	if m != nil && m.SkipInt32 != nil {
@@ -979,8 +985,9 @@ type NonPackedTest struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NonPackedTest) Reset()      { *m = NonPackedTest{} }
-func (*NonPackedTest) ProtoMessage() {}
+func (m *NonPackedTest) Reset()         { *m = NonPackedTest{} }
+func (m *NonPackedTest) String() string { return proto.CompactTextString(m) }
+func (*NonPackedTest) ProtoMessage()    {}
 
 func (m *NonPackedTest) GetA() []int32 {
 	if m != nil {
@@ -994,8 +1001,9 @@ type PackedTest struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *PackedTest) Reset()      { *m = PackedTest{} }
-func (*PackedTest) ProtoMessage() {}
+func (m *PackedTest) Reset()         { *m = PackedTest{} }
+func (m *PackedTest) String() string { return proto.CompactTextString(m) }
+func (*PackedTest) ProtoMessage()    {}
 
 func (m *PackedTest) GetB() []int32 {
 	if m != nil {
@@ -1009,8 +1017,9 @@ type MaxTag struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *MaxTag) Reset()      { *m = MaxTag{} }
-func (*MaxTag) ProtoMessage() {}
+func (m *MaxTag) Reset()         { *m = MaxTag{} }
+func (m *MaxTag) String() string { return proto.CompactTextString(m) }
+func (*MaxTag) ProtoMessage()    {}
 
 func (m *MaxTag) GetLastField() string {
 	if m != nil && m.LastField != nil {
@@ -1024,8 +1033,9 @@ type OldMessage struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *OldMessage) Reset()      { *m = OldMessage{} }
-func (*OldMessage) ProtoMessage() {}
+func (m *OldMessage) Reset()         { *m = OldMessage{} }
+func (m *OldMessage) String() string { return proto.CompactTextString(m) }
+func (*OldMessage) ProtoMessage()    {}
 
 func (m *OldMessage) GetNested() *OldMessage_Nested {
 	if m != nil {
@@ -1039,8 +1049,9 @@ type OldMessage_Nested struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *OldMessage_Nested) Reset()      { *m = OldMessage_Nested{} }
-func (*OldMessage_Nested) ProtoMessage() {}
+func (m *OldMessage_Nested) Reset()         { *m = OldMessage_Nested{} }
+func (m *OldMessage_Nested) String() string { return proto.CompactTextString(m) }
+func (*OldMessage_Nested) ProtoMessage()    {}
 
 func (m *OldMessage_Nested) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1054,8 +1065,9 @@ type NewMessage struct {
 	XXX_unrecognized []byte             `json:"-"`
 }
 
-func (m *NewMessage) Reset()      { *m = NewMessage{} }
-func (*NewMessage) ProtoMessage() {}
+func (m *NewMessage) Reset()         { *m = NewMessage{} }
+func (m *NewMessage) String() string { return proto.CompactTextString(m) }
+func (*NewMessage) ProtoMessage()    {}
 
 func (m *NewMessage) GetNested() *NewMessage_Nested {
 	if m != nil {
@@ -1070,8 +1082,9 @@ type NewMessage_Nested struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *NewMessage_Nested) Reset()      { *m = NewMessage_Nested{} }
-func (*NewMessage_Nested) ProtoMessage() {}
+func (m *NewMessage_Nested) Reset()         { *m = NewMessage_Nested{} }
+func (m *NewMessage_Nested) String() string { return proto.CompactTextString(m) }
+func (*NewMessage_Nested) ProtoMessage()    {}
 
 func (m *NewMessage_Nested) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1094,8 +1107,9 @@ type InnerMessage struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *InnerMessage) Reset()      { *m = InnerMessage{} }
-func (*InnerMessage) ProtoMessage() {}
+func (m *InnerMessage) Reset()         { *m = InnerMessage{} }
+func (m *InnerMessage) String() string { return proto.CompactTextString(m) }
+func (*InnerMessage) ProtoMessage()    {}
 
 const Default_InnerMessage_Port int32 = 4000
 
@@ -1128,8 +1142,9 @@ type OtherMessage struct {
 	XXX_unrecognized []byte        `json:"-"`
 }
 
-func (m *OtherMessage) Reset()      { *m = OtherMessage{} }
-func (*OtherMessage) ProtoMessage() {}
+func (m *OtherMessage) Reset()         { *m = OtherMessage{} }
+func (m *OtherMessage) String() string { return proto.CompactTextString(m) }
+func (*OtherMessage) ProtoMessage()    {}
 
 func (m *OtherMessage) GetKey() int64 {
 	if m != nil && m.Key != nil {
@@ -1174,8 +1189,9 @@ type MyMessage struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *MyMessage) Reset()      { *m = MyMessage{} }
-func (*MyMessage) ProtoMessage() {}
+func (m *MyMessage) Reset()         { *m = MyMessage{} }
+func (m *MyMessage) String() string { return proto.CompactTextString(m) }
+func (*MyMessage) ProtoMessage()    {}
 
 var extRange_MyMessage = []proto.ExtensionRange{
 	{100, 536870911},
@@ -1280,8 +1296,9 @@ type Ext struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Ext) Reset()      { *m = Ext{} }
-func (*Ext) ProtoMessage() {}
+func (m *Ext) Reset()         { *m = Ext{} }
+func (m *Ext) String() string { return proto.CompactTextString(m) }
+func (*Ext) ProtoMessage()    {}
 
 func (m *Ext) GetData() string {
 	if m != nil && m.Data != nil {
@@ -1319,8 +1336,9 @@ type MessageList struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *MessageList) Reset()      { *m = MessageList{} }
-func (*MessageList) ProtoMessage() {}
+func (m *MessageList) Reset()         { *m = MessageList{} }
+func (m *MessageList) String() string { return proto.CompactTextString(m) }
+func (*MessageList) ProtoMessage()    {}
 
 func (m *MessageList) GetMessage() []*MessageList_Message {
 	if m != nil {
@@ -1357,8 +1375,9 @@ type Strings struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Strings) Reset()      { *m = Strings{} }
-func (*Strings) ProtoMessage() {}
+func (m *Strings) Reset()         { *m = Strings{} }
+func (m *Strings) String() string { return proto.CompactTextString(m) }
+func (*Strings) ProtoMessage()    {}
 
 func (m *Strings) GetStringField() string {
 	if m != nil && m.StringField != nil {
@@ -1396,8 +1415,9 @@ type Defaults struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *Defaults) Reset()      { *m = Defaults{} }
-func (*Defaults) ProtoMessage() {}
+func (m *Defaults) Reset()         { *m = Defaults{} }
+func (m *Defaults) String() string { return proto.CompactTextString(m) }
+func (*Defaults) ProtoMessage()    {}
 
 const Default_Defaults_F_Bool bool = true
 const Default_Defaults_F_Int32 int32 = 32
@@ -1414,7 +1434,7 @@ var Default_Defaults_F_Bytes []byte = []byte("Bignose")
 
 const Default_Defaults_F_Sint32 int32 = -32
 const Default_Defaults_F_Sint64 int64 = -64
-const Default_Defaults_F_Enum Defaults_Color = GREEN
+const Default_Defaults_F_Enum Defaults_Color = Defaults_GREEN
 
 var Default_Defaults_F_Pinf float32 = float32(math.Inf(1))
 var Default_Defaults_F_Ninf float32 = float32(math.Inf(-1))
@@ -1551,8 +1571,9 @@ type SubDefaults struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *SubDefaults) Reset()      { *m = SubDefaults{} }
-func (*SubDefaults) ProtoMessage() {}
+func (m *SubDefaults) Reset()         { *m = SubDefaults{} }
+func (m *SubDefaults) String() string { return proto.CompactTextString(m) }
+func (*SubDefaults) ProtoMessage()    {}
 
 const Default_SubDefaults_N int64 = 7
 
@@ -1568,8 +1589,9 @@ type RepeatedEnum struct {
 	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *RepeatedEnum) Reset()      { *m = RepeatedEnum{} }
-func (*RepeatedEnum) ProtoMessage() {}
+func (m *RepeatedEnum) Reset()         { *m = RepeatedEnum{} }
+func (m *RepeatedEnum) String() string { return proto.CompactTextString(m) }
+func (*RepeatedEnum) ProtoMessage()    {}
 
 func (m *RepeatedEnum) GetColor() []RepeatedEnum_Color {
 	if m != nil {
@@ -1587,8 +1609,9 @@ type MoreRepeated struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *MoreRepeated) Reset()      { *m = MoreRepeated{} }
-func (*MoreRepeated) ProtoMessage() {}
+func (m *MoreRepeated) Reset()         { *m = MoreRepeated{} }
+func (m *MoreRepeated) String() string { return proto.CompactTextString(m) }
+func (*MoreRepeated) ProtoMessage()    {}
 
 func (m *MoreRepeated) GetBools() []bool {
 	if m != nil {
@@ -1630,8 +1653,9 @@ type GroupOld struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupOld) Reset()      { *m = GroupOld{} }
-func (*GroupOld) ProtoMessage() {}
+func (m *GroupOld) Reset()         { *m = GroupOld{} }
+func (m *GroupOld) String() string { return proto.CompactTextString(m) }
+func (*GroupOld) ProtoMessage()    {}
 
 func (m *GroupOld) GetG() *GroupOld_G {
 	if m != nil {
@@ -1659,8 +1683,9 @@ type GroupNew struct {
 	XXX_unrecognized []byte      `json:"-"`
 }
 
-func (m *GroupNew) Reset()      { *m = GroupNew{} }
-func (*GroupNew) ProtoMessage() {}
+func (m *GroupNew) Reset()         { *m = GroupNew{} }
+func (m *GroupNew) String() string { return proto.CompactTextString(m) }
+func (*GroupNew) ProtoMessage()    {}
 
 func (m *GroupNew) GetG() *GroupNew_G {
 	if m != nil {
@@ -1710,26 +1735,3 @@ func init() {
 	proto.RegisterExtension(E_Ext_Number)
 	proto.RegisterExtension(E_Greeting)
 }
-func (m *GoEnum) String() string            { return proto.CompactTextString(m) }
-func (m *GoTestField) String() string       { return proto.CompactTextString(m) }
-func (m *GoTest) String() string            { return proto.CompactTextString(m) }
-func (m *GoSkipTest) String() string        { return proto.CompactTextString(m) }
-func (m *NonPackedTest) String() string     { return proto.CompactTextString(m) }
-func (m *PackedTest) String() string        { return proto.CompactTextString(m) }
-func (m *MaxTag) String() string            { return proto.CompactTextString(m) }
-func (m *OldMessage) String() string        { return proto.CompactTextString(m) }
-func (m *OldMessage_Nested) String() string { return proto.CompactTextString(m) }
-func (m *NewMessage) String() string        { return proto.CompactTextString(m) }
-func (m *NewMessage_Nested) String() string { return proto.CompactTextString(m) }
-func (m *InnerMessage) String() string      { return proto.CompactTextString(m) }
-func (m *OtherMessage) String() string      { return proto.CompactTextString(m) }
-func (m *MyMessage) String() string         { return proto.CompactTextString(m) }
-func (m *Ext) String() string               { return proto.CompactTextString(m) }
-func (m *MessageList) String() string       { return proto.CompactTextString(m) }
-func (m *Strings) String() string           { return proto.CompactTextString(m) }
-func (m *Defaults) String() string          { return proto.CompactTextString(m) }
-func (m *SubDefaults) String() string       { return proto.CompactTextString(m) }
-func (m *RepeatedEnum) String() string      { return proto.CompactTextString(m) }
-func (m *MoreRepeated) String() string      { return proto.CompactTextString(m) }
-func (m *GroupOld) String() string          { return proto.CompactTextString(m) }
-func (m *GroupNew) String() string          { return proto.CompactTextString(m) }

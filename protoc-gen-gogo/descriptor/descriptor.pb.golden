@@ -219,8 +219,9 @@ type FileDescriptorSet struct {
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
-func (m *FileDescriptorSet) Reset()      { *m = FileDescriptorSet{} }
-func (*FileDescriptorSet) ProtoMessage() {}
+func (m *FileDescriptorSet) Reset()         { *m = FileDescriptorSet{} }
+func (m *FileDescriptorSet) String() string { return proto.CompactTextString(m) }
+func (*FileDescriptorSet) ProtoMessage()    {}
 
 func (m *FileDescriptorSet) GetFile() []*FileDescriptorProto {
 	if m != nil {
@@ -244,8 +245,9 @@ type FileDescriptorProto struct {
 	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *FileDescriptorProto) Reset()      { *m = FileDescriptorProto{} }
-func (*FileDescriptorProto) ProtoMessage() {}
+func (m *FileDescriptorProto) Reset()         { *m = FileDescriptorProto{} }
+func (m *FileDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*FileDescriptorProto) ProtoMessage()    {}
 
 func (m *FileDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -335,8 +337,9 @@ type DescriptorProto struct {
 	XXX_unrecognized []byte                            `json:"-"`
 }
 
-func (m *DescriptorProto) Reset()      { *m = DescriptorProto{} }
-func (*DescriptorProto) ProtoMessage() {}
+func (m *DescriptorProto) Reset()         { *m = DescriptorProto{} }
+func (m *DescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*DescriptorProto) ProtoMessage()    {}
 
 func (m *DescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -393,8 +396,9 @@ type DescriptorProto_ExtensionRange struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *DescriptorProto_ExtensionRange) Reset()      { *m = DescriptorProto_ExtensionRange{} }
-func (*DescriptorProto_ExtensionRange) ProtoMessage() {}
+func (m *DescriptorProto_ExtensionRange) Reset()         { *m = DescriptorProto_ExtensionRange{} }
+func (m *DescriptorProto_ExtensionRange) String() string { return proto.CompactTextString(m) }
+func (*DescriptorProto_ExtensionRange) ProtoMessage()    {}
 
 func (m *DescriptorProto_ExtensionRange) GetStart() int32 {
 	if m != nil && m.Start != nil {
@@ -422,8 +426,9 @@ type FieldDescriptorProto struct {
 	XXX_unrecognized []byte                      `json:"-"`
 }
 
-func (m *FieldDescriptorProto) Reset()      { *m = FieldDescriptorProto{} }
-func (*FieldDescriptorProto) ProtoMessage() {}
+func (m *FieldDescriptorProto) Reset()         { *m = FieldDescriptorProto{} }
+func (m *FieldDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*FieldDescriptorProto) ProtoMessage()    {}
 
 func (m *FieldDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -488,8 +493,9 @@ type EnumDescriptorProto struct {
 	XXX_unrecognized []byte                      `json:"-"`
 }
 
-func (m *EnumDescriptorProto) Reset()      { *m = EnumDescriptorProto{} }
-func (*EnumDescriptorProto) ProtoMessage() {}
+func (m *EnumDescriptorProto) Reset()         { *m = EnumDescriptorProto{} }
+func (m *EnumDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*EnumDescriptorProto) ProtoMessage()    {}
 
 func (m *EnumDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -519,8 +525,9 @@ type EnumValueDescriptorProto struct {
 	XXX_unrecognized []byte            `json:"-"`
 }
 
-func (m *EnumValueDescriptorProto) Reset()      { *m = EnumValueDescriptorProto{} }
-func (*EnumValueDescriptorProto) ProtoMessage() {}
+func (m *EnumValueDescriptorProto) Reset()         { *m = EnumValueDescriptorProto{} }
+func (m *EnumValueDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*EnumValueDescriptorProto) ProtoMessage()    {}
 
 func (m *EnumValueDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -550,8 +557,9 @@ type ServiceDescriptorProto struct {
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
-func (m *ServiceDescriptorProto) Reset()      { *m = ServiceDescriptorProto{} }
-func (*ServiceDescriptorProto) ProtoMessage() {}
+func (m *ServiceDescriptorProto) Reset()         { *m = ServiceDescriptorProto{} }
+func (m *ServiceDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*ServiceDescriptorProto) ProtoMessage()    {}
 
 func (m *ServiceDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -582,8 +590,9 @@ type MethodDescriptorProto struct {
 	XXX_unrecognized []byte         `json:"-"`
 }
 
-func (m *MethodDescriptorProto) Reset()      { *m = MethodDescriptorProto{} }
-func (*MethodDescriptorProto) ProtoMessage() {}
+func (m *MethodDescriptorProto) Reset()         { *m = MethodDescriptorProto{} }
+func (m *MethodDescriptorProto) String() string { return proto.CompactTextString(m) }
+func (*MethodDescriptorProto) ProtoMessage()    {}
 
 func (m *MethodDescriptorProto) GetName() string {
 	if m != nil && m.Name != nil {
@@ -628,8 +637,9 @@ type FileOptions struct {
 	XXX_unrecognized          []byte                    `json:"-"`
 }
 
-func (m *FileOptions) Reset()      { *m = FileOptions{} }
-func (*FileOptions) ProtoMessage() {}
+func (m *FileOptions) Reset()         { *m = FileOptions{} }
+func (m *FileOptions) String() string { return proto.CompactTextString(m) }
+func (*FileOptions) ProtoMessage()    {}
 
 var extRange_FileOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -730,8 +740,9 @@ type MessageOptions struct {
 	XXX_unrecognized             []byte                    `json:"-"`
 }
 
-func (m *MessageOptions) Reset()      { *m = MessageOptions{} }
-func (*MessageOptions) ProtoMessage() {}
+func (m *MessageOptions) Reset()         { *m = MessageOptions{} }
+func (m *MessageOptions) String() string { return proto.CompactTextString(m) }
+func (*MessageOptions) ProtoMessage()    {}
 
 var extRange_MessageOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -783,8 +794,9 @@ type FieldOptions struct {
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
-func (m *FieldOptions) Reset()      { *m = FieldOptions{} }
-func (*FieldOptions) ProtoMessage() {}
+func (m *FieldOptions) Reset()         { *m = FieldOptions{} }
+func (m *FieldOptions) String() string { return proto.CompactTextString(m) }
+func (*FieldOptions) ProtoMessage()    {}
 
 var extRange_FieldOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -861,8 +873,9 @@ type EnumOptions struct {
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
-func (m *EnumOptions) Reset()      { *m = EnumOptions{} }
-func (*EnumOptions) ProtoMessage() {}
+func (m *EnumOptions) Reset()         { *m = EnumOptions{} }
+func (m *EnumOptions) String() string { return proto.CompactTextString(m) }
+func (*EnumOptions) ProtoMessage()    {}
 
 var extRange_EnumOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -900,8 +913,9 @@ type EnumValueOptions struct {
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
-func (m *EnumValueOptions) Reset()      { *m = EnumValueOptions{} }
-func (*EnumValueOptions) ProtoMessage() {}
+func (m *EnumValueOptions) Reset()         { *m = EnumValueOptions{} }
+func (m *EnumValueOptions) String() string { return proto.CompactTextString(m) }
+func (*EnumValueOptions) ProtoMessage()    {}
 
 var extRange_EnumValueOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -930,8 +944,9 @@ type ServiceOptions struct {
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
-func (m *ServiceOptions) Reset()      { *m = ServiceOptions{} }
-func (*ServiceOptions) ProtoMessage() {}
+func (m *ServiceOptions) Reset()         { *m = ServiceOptions{} }
+func (m *ServiceOptions) String() string { return proto.CompactTextString(m) }
+func (*ServiceOptions) ProtoMessage()    {}
 
 var extRange_ServiceOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -960,8 +975,9 @@ type MethodOptions struct {
 	XXX_unrecognized    []byte                    `json:"-"`
 }
 
-func (m *MethodOptions) Reset()      { *m = MethodOptions{} }
-func (*MethodOptions) ProtoMessage() {}
+func (m *MethodOptions) Reset()         { *m = MethodOptions{} }
+func (m *MethodOptions) String() string { return proto.CompactTextString(m) }
+func (*MethodOptions) ProtoMessage()    {}
 
 var extRange_MethodOptions = []proto.ExtensionRange{
 	{1000, 536870911},
@@ -995,8 +1011,9 @@ type UninterpretedOption struct {
 	XXX_unrecognized []byte                          `json:"-"`
 }
 
-func (m *UninterpretedOption) Reset()      { *m = UninterpretedOption{} }
-func (*UninterpretedOption) ProtoMessage() {}
+func (m *UninterpretedOption) Reset()         { *m = UninterpretedOption{} }
+func (m *UninterpretedOption) String() string { return proto.CompactTextString(m) }
+func (*UninterpretedOption) ProtoMessage()    {}
 
 func (m *UninterpretedOption) GetName() []*UninterpretedOption_NamePart {
 	if m != nil {
@@ -1053,8 +1070,9 @@ type UninterpretedOption_NamePart struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *UninterpretedOption_NamePart) Reset()      { *m = UninterpretedOption_NamePart{} }
-func (*UninterpretedOption_NamePart) ProtoMessage() {}
+func (m *UninterpretedOption_NamePart) Reset()         { *m = UninterpretedOption_NamePart{} }
+func (m *UninterpretedOption_NamePart) String() string { return proto.CompactTextString(m) }
+func (*UninterpretedOption_NamePart) ProtoMessage()    {}
 
 func (m *UninterpretedOption_NamePart) GetNamePart() string {
 	if m != nil && m.NamePart != nil {
@@ -1075,8 +1093,9 @@ type SourceCodeInfo struct {
 	XXX_unrecognized []byte                     `json:"-"`
 }
 
-func (m *SourceCodeInfo) Reset()      { *m = SourceCodeInfo{} }
-func (*SourceCodeInfo) ProtoMessage() {}
+func (m *SourceCodeInfo) Reset()         { *m = SourceCodeInfo{} }
+func (m *SourceCodeInfo) String() string { return proto.CompactTextString(m) }
+func (*SourceCodeInfo) ProtoMessage()    {}
 
 func (m *SourceCodeInfo) GetLocation() []*SourceCodeInfo_Location {
 	if m != nil {
@@ -1093,8 +1112,9 @@ type SourceCodeInfo_Location struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *SourceCodeInfo_Location) Reset()      { *m = SourceCodeInfo_Location{} }
-func (*SourceCodeInfo_Location) ProtoMessage() {}
+func (m *SourceCodeInfo_Location) Reset()         { *m = SourceCodeInfo_Location{} }
+func (m *SourceCodeInfo_Location) String() string { return proto.CompactTextString(m) }
+func (*SourceCodeInfo_Location) ProtoMessage()    {}
 
 func (m *SourceCodeInfo_Location) GetPath() []int32 {
 	if m != nil {
@@ -1130,23 +1150,3 @@ func init() {
 	proto.RegisterEnum("google.protobuf.FileOptions_OptimizeMode", FileOptions_OptimizeMode_name, FileOptions_OptimizeMode_value)
 	proto.RegisterEnum("google.protobuf.FieldOptions_CType", FieldOptions_CType_name, FieldOptions_CType_value)
 }
-func (m *FileDescriptorSet) String() string              { return proto.CompactTextString(m) }
-func (m *FileDescriptorProto) String() string            { return proto.CompactTextString(m) }
-func (m *DescriptorProto) String() string                { return proto.CompactTextString(m) }
-func (m *DescriptorProto_ExtensionRange) String() string { return proto.CompactTextString(m) }
-func (m *FieldDescriptorProto) String() string           { return proto.CompactTextString(m) }
-func (m *EnumDescriptorProto) String() string            { return proto.CompactTextString(m) }
-func (m *EnumValueDescriptorProto) String() string       { return proto.CompactTextString(m) }
-func (m *ServiceDescriptorProto) String() string         { return proto.CompactTextString(m) }
-func (m *MethodDescriptorProto) String() string          { return proto.CompactTextString(m) }
-func (m *FileOptions) String() string                    { return proto.CompactTextString(m) }
-func (m *MessageOptions) String() string                 { return proto.CompactTextString(m) }
-func (m *FieldOptions) String() string                   { return proto.CompactTextString(m) }
-func (m *EnumOptions) String() string                    { return proto.CompactTextString(m) }
-func (m *EnumValueOptions) String() string               { return proto.CompactTextString(m) }
-func (m *ServiceOptions) String() string                 { return proto.CompactTextString(m) }
-func (m *MethodOptions) String() string                  { return proto.CompactTextString(m) }
-func (m *UninterpretedOption) String() string            { return proto.CompactTextString(m) }
-func (m *UninterpretedOption_NamePart) String() string   { return proto.CompactTextString(m) }
-func (m *SourceCodeInfo) String() string                 { return proto.CompactTextString(m) }
-func (m *SourceCodeInfo_Location) String() string        { return proto.CompactTextString(m) }

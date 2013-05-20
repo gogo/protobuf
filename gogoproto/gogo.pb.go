@@ -46,6 +46,86 @@ var E_MsgstringmethodAll = &proto.ExtensionDesc{
 	Tag:           "varint,63003,opt,name=msgstringmethod_all",
 }
 
+var E_VerboseEqualAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63004,
+	Name:          "gogoproto.verbose_equal_all",
+	Tag:           "varint,63004,opt,name=verbose_equal_all",
+}
+
+var E_FaceAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63005,
+	Name:          "gogoproto.face_all",
+	Tag:           "varint,63005,opt,name=face_all",
+}
+
+var E_GostringAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63006,
+	Name:          "gogoproto.gostring_all",
+	Tag:           "varint,63006,opt,name=gostring_all",
+}
+
+var E_PopulateAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63007,
+	Name:          "gogoproto.populate_all",
+	Tag:           "varint,63007,opt,name=populate_all",
+}
+
+var E_StringgenAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63008,
+	Name:          "gogoproto.stringgen_all",
+	Tag:           "varint,63008,opt,name=stringgen_all",
+}
+
+var E_UnionAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63009,
+	Name:          "gogoproto.union_all",
+	Tag:           "varint,63009,opt,name=union_all",
+}
+
+var E_EqualAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63013,
+	Name:          "gogoproto.equal_all",
+	Tag:           "varint,63013,opt,name=equal_all",
+}
+
+var E_DescriptionAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63014,
+	Name:          "gogoproto.description_all",
+	Tag:           "varint,63014,opt,name=description_all",
+}
+
+var E_TestgenAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63015,
+	Name:          "gogoproto.testgen_all",
+	Tag:           "varint,63015,opt,name=testgen_all",
+}
+
+var E_BenchgenAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63016,
+	Name:          "gogoproto.benchgen_all",
+	Tag:           "varint,63016,opt,name=benchgen_all",
+}
+
 var E_Getters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -60,6 +140,86 @@ var E_Msgstringmethod = &proto.ExtensionDesc{
 	Field:         64003,
 	Name:          "gogoproto.msgstringmethod",
 	Tag:           "varint,64003,opt,name=msgstringmethod",
+}
+
+var E_VerboseEqual = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64004,
+	Name:          "gogoproto.verbose_equal",
+	Tag:           "varint,64004,opt,name=verbose_equal",
+}
+
+var E_Face = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64005,
+	Name:          "gogoproto.face",
+	Tag:           "varint,64005,opt,name=face",
+}
+
+var E_Gostring = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64006,
+	Name:          "gogoproto.gostring",
+	Tag:           "varint,64006,opt,name=gostring",
+}
+
+var E_Populate = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64007,
+	Name:          "gogoproto.populate",
+	Tag:           "varint,64007,opt,name=populate",
+}
+
+var E_Stringgen = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         67008,
+	Name:          "gogoproto.stringgen",
+	Tag:           "varint,67008,opt,name=stringgen",
+}
+
+var E_Union = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64009,
+	Name:          "gogoproto.union",
+	Tag:           "varint,64009,opt,name=union",
+}
+
+var E_Equal = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64013,
+	Name:          "gogoproto.equal",
+	Tag:           "varint,64013,opt,name=equal",
+}
+
+var E_Description = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64014,
+	Name:          "gogoproto.description",
+	Tag:           "varint,64014,opt,name=description",
+}
+
+var E_Testgen = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64015,
+	Name:          "gogoproto.testgen",
+	Tag:           "varint,64015,opt,name=testgen",
+}
+
+var E_Benchgen = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64016,
+	Name:          "gogoproto.benchgen",
+	Tag:           "varint,64016,opt,name=benchgen",
 }
 
 var E_Nullable = &proto.ExtensionDesc{
@@ -91,8 +251,28 @@ func init() {
 	proto.RegisterExtension(E_GettersAll)
 	proto.RegisterExtension(E_EnumprefixAll)
 	proto.RegisterExtension(E_MsgstringmethodAll)
+	proto.RegisterExtension(E_VerboseEqualAll)
+	proto.RegisterExtension(E_FaceAll)
+	proto.RegisterExtension(E_GostringAll)
+	proto.RegisterExtension(E_PopulateAll)
+	proto.RegisterExtension(E_StringgenAll)
+	proto.RegisterExtension(E_UnionAll)
+	proto.RegisterExtension(E_EqualAll)
+	proto.RegisterExtension(E_DescriptionAll)
+	proto.RegisterExtension(E_TestgenAll)
+	proto.RegisterExtension(E_BenchgenAll)
 	proto.RegisterExtension(E_Getters)
 	proto.RegisterExtension(E_Msgstringmethod)
+	proto.RegisterExtension(E_VerboseEqual)
+	proto.RegisterExtension(E_Face)
+	proto.RegisterExtension(E_Gostring)
+	proto.RegisterExtension(E_Populate)
+	proto.RegisterExtension(E_Stringgen)
+	proto.RegisterExtension(E_Union)
+	proto.RegisterExtension(E_Equal)
+	proto.RegisterExtension(E_Description)
+	proto.RegisterExtension(E_Testgen)
+	proto.RegisterExtension(E_Benchgen)
 	proto.RegisterExtension(E_Nullable)
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)

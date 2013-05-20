@@ -33,13 +33,13 @@
 	A plugin for the Google protocol buffer compiler to generate Go code.
 	Run it by building this program and putting it in your path with the name
 		protoc-gen-gogo
-	That word 'go' at the end becomes part of the option string set for the
+	That word 'gogo' at the end becomes part of the option string set for the
 	protocol compiler, so once the protocol compiler (protoc) is installed
 	you can run
 		protoc --gogo_out=output_directory input_directory/file.proto
 	to generate Go bindings for the protocol defined by file.proto.
 	With that input, the output will be written to
-		output_directory/file.pb.go
+		output_directory/go_package/file.pb.go
 
 	The generated code is documented in the package comment for
 	the library.

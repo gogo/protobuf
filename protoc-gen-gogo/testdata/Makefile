@@ -39,7 +39,7 @@ test:	golden testbuild
 #	@echo PASS
 
 golden:
-	make -B my_test/test.pb.go
+	protoc --gogo_out=. ./my_test/test.proto
 	diff -w my_test/test.pb.go my_test/test.pb.go.golden
 
 nuke:	clean

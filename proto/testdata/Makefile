@@ -29,14 +29,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-include ../../Make.protobuf
-
 all:	regenerate
 
 regenerate:
 	rm -f test.pb.go
-	make test.pb.go
+	protoc --gogo_out=. test.proto
 	
 # The following rules are just aids to development. Not needed for typical testing.
 

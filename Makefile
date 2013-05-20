@@ -15,8 +15,8 @@
 # distribution.
 #     * Neither the name of Google Inc. nor the names of its
 # contributors may be used to endorse or promote products derived from
-# this software without specific prior written permission.#
-
+# this software without specific prior written permission.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -34,6 +34,7 @@ all:	install
 
 install:
 	go install ./proto
+	go install ./gogoproto
 	go install ./protoc-gen-gogo
 
 test:
@@ -49,4 +50,7 @@ nuke:
 regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
+	make -C gogoproto regenerate
 	make -C proto/testdata regenerate
+	make -C test regenerate
+	make -C test/example regenerate

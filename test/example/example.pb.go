@@ -12,6 +12,20 @@ import math "math"
 
 import code_google_com_p_gogoprotobuf_test_custom "code.google.com/p/gogoprotobuf/test/custom"
 
+import fmt "fmt"
+import strings "strings"
+import reflect "reflect"
+
+import fmt1 "fmt"
+import strings1 "strings"
+import reflect1 "reflect"
+
+import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+
+import fmt2 "fmt"
+
+import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
+
 // Reference proto, json, and math imports to suppress error if they are not otherwise used.
 var _ = proto.Marshal
 var _ = &json.SyntaxError{}
@@ -24,9 +38,8 @@ type A struct {
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
-func (m *A) Reset()         { *m = A{} }
-func (m *A) String() string { return proto.CompactTextString(m) }
-func (*A) ProtoMessage()    {}
+func (m *A) Reset()      { *m = A{} }
+func (*A) ProtoMessage() {}
 
 type B struct {
 	A                `protobuf:"bytes,1,opt,embedded=A" json:"A"`
@@ -34,9 +47,414 @@ type B struct {
 	XXX_unrecognized []byte                                               `json:"-"`
 }
 
-func (m *B) Reset()         { *m = B{} }
-func (m *B) String() string { return proto.CompactTextString(m) }
-func (*B) ProtoMessage()    {}
+func (m *B) Reset()      { *m = B{} }
+func (*B) ProtoMessage() {}
+
+type U struct {
+	A                *A     `protobuf:"bytes,1,opt" json:"A,omitempty"`
+	B                *B     `protobuf:"bytes,2,opt" json:"B,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *U) Reset()      { *m = U{} }
+func (*U) ProtoMessage() {}
+
+func (m *U) GetA() *A {
+	if m != nil {
+		return m.A
+	}
+	return nil
+}
+
+func (m *U) GetB() *B {
+	if m != nil {
+		return m.B
+	}
+	return nil
+}
 
 func init() {
+}
+func (this *U) GetValue() interface{} {
+	if this.A != nil {
+		return this.A
+	}
+	if this.B != nil {
+		return this.B
+	}
+	return nil
+}
+
+func (this *U) SetValue(value interface{}) bool {
+	switch vt := value.(type) {
+	case *A:
+		this.A = vt
+	case *B:
+		this.B = vt
+	default:
+		return false
+	}
+	return true
+}
+func (this *A) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&A{`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`Number:` + fmt.Sprintf("%v", this.Number) + `,`,
+		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *B) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&B{`,
+		`A:` + strings.Replace(strings.Replace(this.A.String(), "A", "A", 1), `&`, ``, 1) + `,`,
+		`G:` + fmt.Sprintf("%v", this.G) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *U) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&U{`,
+		`A:` + strings.Replace(fmt.Sprintf("%v", this.A), "A", "A", 1) + `,`,
+		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToString(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
+}
+func NewPopulatedA(r randy) *A {
+	this := &A{}
+	this.Description = randString(r)
+	this.Number = r.Int63()
+	v1 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
+	this.Id = *v1
+	return this
+}
+
+func NewPopulatedB(r randy) *B {
+	this := &B{}
+	v2 := NewPopulatedA(r)
+	this.A = *v2
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(10)
+		this.G = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v3)
+		for i := 0; i < v3; i++ {
+			v4 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			this.G[i] = *v4
+		}
+	}
+	return this
+}
+
+func NewPopulatedU(r randy) *U {
+	this := &U{}
+	fieldNum := r.Intn(2)
+	switch fieldNum {
+	case 0:
+		this.A = NewPopulatedA(r)
+	case 1:
+		this.B = NewPopulatedB(r)
+	}
+	return this
+}
+
+type randy interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8Rune(r randy) rune {
+	res := rune(r.Uint32() % 1112064)
+	if 55296 <= res {
+		res += 2047
+	}
+	return res
+}
+func randString(r randy) string {
+	v5 := r.Intn(100)
+	tmps := make([]rune, v5)
+	for i := 0; i < v5; i++ {
+		tmps[i] = randUTF8Rune(r)
+	}
+	return string(tmps)
+}
+func (this *A) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.A{` + `Description:` + fmt1.Sprintf("%#v", this.Description), `Number:` + fmt1.Sprintf("%#v", this.Number), `Id:` + fmt1.Sprintf("%#v", this.Id) + `}`}, ", ")
+	return s
+}
+func (this *B) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.B{` + `A:` + strings1.Replace(this.A.GoString(), `&`, ``, 1), `G:` + fmt1.Sprintf("%#v", this.G) + `}`}, ", ")
+	return s
+}
+func (this *U) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.U{` + `A:` + fmt1.Sprintf("%#v", this.A), `B:` + fmt1.Sprintf("%#v", this.B) + `}`}, ", ")
+	return s
+}
+func valueToGoString(v interface{}, typ string) string {
+	rv := reflect1.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect1.Indirect(rv).Interface()
+	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+
+type AFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetDescription() string
+	GetNumber() int64
+	GetId() code_google_com_p_gogoprotobuf_test_custom.Uuid
+}
+
+func (this *A) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewAFromFace(this)
+}
+
+func (this *A) GetDescription() string {
+	return this.Description
+}
+
+func (this *A) GetNumber() int64 {
+	return this.Number
+}
+
+func (this *A) GetId() code_google_com_p_gogoprotobuf_test_custom.Uuid {
+	return this.Id
+}
+
+func NewAFromFace(that AFace) *A {
+	this := &A{}
+	this.Description = that.GetDescription()
+	this.Number = that.GetNumber()
+	this.Id = that.GetId()
+	return this
+}
+
+func (this *A) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*A)
+	if !ok {
+		return fmt2.Errorf("that is not of type *A")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *A but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Abut is not nil && this == nil")
+	}
+	if this.Description != that1.Description {
+		return fmt2.Errorf("Description this(%v) Not Equal that(%v)", this.Description, that1.Description)
+	}
+	if this.Number != that1.Number {
+		return fmt2.Errorf("Number this(%v) Not Equal that(%v)", this.Number, that1.Number)
+	}
+	if !this.Id.Equal(that1.Id) {
+		return fmt2.Errorf("Id this(%v) Not Equal that(%v)", this.Id, that1.Id)
+	}
+	return nil
+}
+func (this *A) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*A)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	if this.Number != that1.Number {
+		return false
+	}
+	if !this.Id.Equal(that1.Id) {
+		return false
+	}
+	return true
+}
+func (this *B) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*B)
+	if !ok {
+		return fmt2.Errorf("that is not of type *B")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *B but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Bbut is not nil && this == nil")
+	}
+	if !this.A.Equal(&that1.A) {
+		return fmt2.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
+	}
+	if len(this.G) != len(that1.G) {
+		return fmt2.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
+	}
+	for i := range this.G {
+		if !this.G[i].Equal(that1.G[i]) {
+			return fmt2.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
+		}
+	}
+	return nil
+}
+func (this *B) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*B)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.A.Equal(&that1.A) {
+		return false
+	}
+	if len(this.G) != len(that1.G) {
+		return false
+	}
+	for i := range this.G {
+		if !this.G[i].Equal(that1.G[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *U) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*U)
+	if !ok {
+		return fmt2.Errorf("that is not of type *U")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *U but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Ubut is not nil && this == nil")
+	}
+	if !this.A.Equal(that1.A) {
+		return fmt2.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
+	}
+	if !this.B.Equal(that1.B) {
+		return fmt2.Errorf("B this(%v) Not Equal that(%v)", this.B, that1.B)
+	}
+	return nil
+}
+func (this *U) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*U)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.A.Equal(that1.A) {
+		return false
+	}
+	if !this.B.Equal(that1.B) {
+		return false
+	}
+	return true
+}
+func (this *B) Description() (desc *google_protobuf.DescriptorProto) {
+	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("B"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.A"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("G"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
 }
