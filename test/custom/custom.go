@@ -40,8 +40,13 @@ type Uint128 [2]uint64
 
 func (u Uint128) Marshal() ([]byte, error) {
 	buffer := make([]byte, 16)
-	PutLittleEndianUint128(buffer, 0, u)
+	u.MarshalTo(buffer)
 	return buffer, nil
+}
+
+func (u Uint128) MarshalTo(data []byte) (n int, err error) {
+	PutLittleEndianUint128(data, 0, u)
+	return 16, nil
 }
 
 func GetLittleEndianUint64(b []byte, offset int) uint64 {
@@ -93,6 +98,10 @@ func (u Uint128) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
+func (u *Uint128) Size() int {
+	return 16
+}
+
 func (u *Uint128) UnmarshalJSON(data []byte) error {
 	v := new([]byte)
 	err := json.Unmarshal(data, v)
@@ -123,6 +132,11 @@ type Uuid []byte
 
 func (uuid Uuid) Marshal() ([]byte, error) {
 	return []byte(uuid), nil
+}
+
+func (uuid Uuid) MarshalTo(data []byte) (n int, err error) {
+	copy(data, uuid)
+	return 16, nil
 }
 
 func (uuid *Uuid) Unmarshal(data []byte) error {
@@ -172,4 +186,8 @@ func (uuid Uuid) RandV4(r int63) {
 	PutLittleEndianUint64(uuid, 8, uint64(r.Int63()))
 	uuid[6] = (uuid[6] & 0xf) | 0x40
 	uuid[8] = (uuid[8] & 0x3f) | 0x80
+}
+
+func (uuid *Uuid) Size() int {
+	return 16
 }

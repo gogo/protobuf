@@ -1,0 +1,117 @@
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+package embedcheck
+
+import (
+	"code.google.com/p/gogoprotobuf/gogoproto"
+	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+	"fmt"
+	"os"
+)
+
+type plugin struct {
+	*generator.Generator
+}
+
+func NewPlugin() *plugin {
+	return &plugin{}
+}
+
+func (p *plugin) Name() string {
+	return "embedcheck"
+}
+
+func (p *plugin) Init(g *generator.Generator) {
+	p.Generator = g
+}
+
+var overwriters map[string]gogoproto.EnableFunc = map[string]gogoproto.EnableFunc{
+	"marshaler":    gogoproto.IsMarshaler,
+	"stringer":     gogoproto.IsStringer,
+	"gostring":     gogoproto.HasGoString,
+	"equal":        gogoproto.HasEqual,
+	"verboseequal": gogoproto.HasVerboseEqual,
+	"unmarshaler":  gogoproto.IsUnmarshaler,
+}
+
+func (p *plugin) Generate(file *generator.FileDescriptor) {
+	for _, msg := range file.Messages() {
+		for name, overwriter := range overwriters {
+			if !overwriter(file.FileDescriptorProto, msg.DescriptorProto) {
+				p.checkOverwrite(msg, overwriter, name)
+			}
+		}
+		p.checkNameSpace(msg)
+	}
+}
+
+func (p *plugin) checkNameSpace(message *generator.Descriptor) map[string]bool {
+	ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	names := make(map[string]bool)
+	for _, field := range message.Field {
+		fieldname := generator.CamelCase(*field.Name)
+		if gogoproto.IsEmbed(field) {
+			desc := p.ObjectNamed(field.GetTypeName())
+			moreNames := p.checkNameSpace(desc.(*generator.Descriptor))
+			for another, _ := range moreNames {
+				if names[another] {
+					fmt.Fprintf(os.Stderr, "ERROR: duplicate embedded fieldname %v in type %v\n", fieldname, ccTypeName)
+					os.Exit(1)
+				}
+				names[another] = true
+			}
+		} else {
+			if names[fieldname] {
+				fmt.Fprintf(os.Stderr, "ERROR: duplicate embedded fieldname %v in type %v\n", fieldname, ccTypeName)
+				os.Exit(1)
+			}
+			names[fieldname] = true
+		}
+	}
+	return names
+}
+
+func (p *plugin) checkOverwrite(message *generator.Descriptor, enabled gogoproto.EnableFunc, errStr string) {
+	ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	for _, field := range message.Field {
+		if gogoproto.IsEmbed(field) {
+			fieldname := generator.CamelCase(*field.Name)
+			desc := p.ObjectNamed(field.GetTypeName())
+			msg := desc.(*generator.Descriptor)
+			if enabled(msg.File(), msg.DescriptorProto) {
+				fmt.Fprintf(os.Stderr, "WARNING: found non-%v %v with embedded %v %v\n", errStr, ccTypeName, errStr, fieldname)
+			}
+			p.checkOverwrite(msg, enabled, errStr)
+		}
+	}
+}
+
+func (p *plugin) GenerateImports(*generator.FileDescriptor) {}
+
+func init() {
+	generator.RegisterPlugin(NewPlugin())
+}

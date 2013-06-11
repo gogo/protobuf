@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package stringgen
+package stringer
 
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
@@ -48,7 +48,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 	fmtPkg := imports.NewImport("fmt")
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		if !gogoproto.HasString(file.FileDescriptorProto, message.DescriptorProto) {
+		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
 
@@ -74,17 +74,19 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			p.P(`func Benchmark`, ccTypeName, `StringGen(b *`, testingPkg.Use(), `.B) {`)
 			p.In()
 			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
-			p.P(`data := p.String()`)
-			p.P(`b.SetBytes(int64(len(data)))`)
-			p.P(`b.StopTimer()`)
+			p.P(`total := 0`)
 			p.P(`b.ResetTimer()`)
-			p.P(`b.StartTimer()`)
+			p.P(`b.StopTimer()`)
 			p.P(`for i := 0; i < b.N; i++ {`)
 			p.In()
-			p.P(`p.String()`)
+			p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
+			p.P(`b.StartTimer()`)
+			p.P(`data := p.String()`)
+			p.P(`b.StopTimer()`)
+			p.P(`total += len(data)`)
 			p.Out()
 			p.P(`}`)
+			p.P(`b.SetBytes(int64(total / b.N))`)
 			p.Out()
 			p.P(`}`)
 			p.P()

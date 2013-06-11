@@ -135,7 +135,7 @@ type plugin struct {
 	generator.PluginImports
 	varGen     VarGen
 	atleastOne bool
-	localNum   string
+	localName  string
 }
 
 func NewPlugin() *plugin {
@@ -279,7 +279,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				p.P(`}`)
 			}
 		} else if field.IsString() {
-			val := fmt.Sprintf("randString%v(r)", p.localNum)
+			val := fmt.Sprintf("randString%v(r)", p.localName)
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -362,11 +362,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.varGen = NewVarGen()
 
-	index := p.PackageIndex(file)
-	p.localNum = ""
-	if index > 0 {
-		p.localNum = fmt.Sprintf("%d", index)
-	}
+	p.localName = generator.FileName(file)
 
 	for _, message := range file.Messages() {
 		if !gogoproto.HasPopulate(file.FileDescriptorProto, message.DescriptorProto) {
@@ -374,7 +370,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localNum, `) *`, ccTypeName, ` {`)
+		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `) *`, ccTypeName, ` {`)
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
 		if gogoproto.IsUnion(message.File(), message.DescriptorProto) && len(message.Field) > 0 {
@@ -429,7 +425,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-	p.P(`type randy`, p.localNum, ` interface {`)
+	p.P(`type randy`, p.localName, ` interface {`)
 	p.In()
 	p.P(`Float32() float32`)
 	p.P(`Float64() float64`)
@@ -459,7 +455,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	surrogateRange := surrogateMax - surrogateMin
 	maxRand := maxRune - surrogateRange
 
-	p.P(`func randUTF8Rune`, p.localNum, `(r randy`, p.localNum, `) rune {`)
+	p.P(`func randUTF8Rune`, p.localName, `(r randy`, p.localName, `) rune {`)
 	p.In()
 	p.P(`res := rune(r.Uint32() % `, fmt.Sprintf("%d", maxRand), `)`)
 	p.P(`if `, fmt.Sprintf("%d", surrogateMin), ` <= res {`)
@@ -471,13 +467,13 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.Out()
 	p.P(`}`)
 
-	p.P(`func randString`, p.localNum, `(r randy`, p.localNum, `) string {`)
+	p.P(`func randString`, p.localName, `(r randy`, p.localName, `) string {`)
 	p.In()
 	p.P(p.varGen.Next(), ` := r.Intn(100)`)
 	p.P(`tmps := make([]rune, `, p.varGen.Current(), `)`)
 	p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 	p.In()
-	p.P(`tmps[i] = randUTF8Rune`, p.localNum, `(r)`)
+	p.P(`tmps[i] = randUTF8Rune`, p.localName, `(r)`)
 	p.Out()
 	p.P(`}`)
 	p.P(`return string(tmps)`)

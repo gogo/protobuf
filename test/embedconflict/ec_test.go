@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://code.google.com/p/gogoprotobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -24,37 +24,28 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package test;
+package embedconflict
 
-import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
+import (
+	"os/exec"
+	"strings"
+	"testing"
+)
 
-option (gogoproto.gostring_all) = true;
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.msgstringmethod_all) = false;
-option (gogoproto.stringer_all) =  true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.testgen_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-
-message A {
-	option (gogoproto.face) = true;
-	option (gogoproto.getters) = false;
-	optional string Description = 1 [(gogoproto.nullable) = false];
-	optional int64 Number = 2 [(gogoproto.nullable) = false];
-	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+func TestEmbedConflict(t *testing.T) {
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", "ec.proto")
+	data, err := cmd.CombinedOutput()
+	if err == nil {
+		t.Fatalf("Expected error")
+	}
+	t.Logf("received expected error = %v and output = %v", err, string(data))
 }
 
-message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+func TestEmbedMarshaler(t *testing.T) {
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", "em.proto")
+	data, err := cmd.CombinedOutput()
+	t.Logf("received error = %v and output = %v", err, string(data))
+	if !strings.Contains(string(data), "WARNING: found non-marshaler") {
+		t.Fatalf("Expected WARNING: found non-marshaler C with embedded marshaler D")
+	}
 }
-
-message U {
-	option (gogoproto.union) = true;
-	optional A A = 1;
-	optional B B = 2;
-}
-

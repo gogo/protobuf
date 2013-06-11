@@ -55,6 +55,8 @@ func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {
 	return ""
 }
 
+type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
+
 func HasGetters(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Getters, proto.GetBoolExtension(file.Options, E_GettersAll, true))
 }
@@ -75,8 +77,8 @@ func HasVerboseEqual(file *google_protobuf.FileDescriptorProto, message *google_
 	return proto.GetBoolExtension(message.Options, E_VerboseEqual, proto.GetBoolExtension(file.Options, E_VerboseEqualAll, false))
 }
 
-func HasString(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
-	return proto.GetBoolExtension(message.Options, E_Stringgen, proto.GetBoolExtension(file.Options, E_StringgenAll, false))
+func IsStringer(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Stringer, proto.GetBoolExtension(file.Options, E_StringerAll, false))
 }
 
 func HasOldString(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
@@ -101,4 +103,20 @@ func HasTestGen(file *google_protobuf.FileDescriptorProto, message *google_proto
 
 func HasBenchGen(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Benchgen, proto.GetBoolExtension(file.Options, E_BenchgenAll, false))
+}
+
+func IsMarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Marshaler, proto.GetBoolExtension(file.Options, E_MarshalerAll, false))
+}
+
+func IsUnmarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Unmarshaler, proto.GetBoolExtension(file.Options, E_UnmarshalerAll, false))
+}
+
+func HasBufferTo(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Bufferto, proto.GetBoolExtension(file.Options, E_BuffertoAll, false))
+}
+
+func IsSizer(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Sizer, proto.GetBoolExtension(file.Options, E_SizerAll, false))
 }

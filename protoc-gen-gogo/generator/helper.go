@@ -39,6 +39,7 @@ import (
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	plugin "code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin"
 	"errors"
+	"path"
 )
 
 func (d *FileDescriptor) Messages() []*Descriptor {
@@ -188,6 +189,10 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	}
 }
 
+func GetCustomType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	return getCustomType(field)
+}
+
 func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, gogoproto.E_Customtype)
@@ -210,15 +215,15 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 	return "", "", err
 }
 
-func (g *Generator) PackageIndex(file *FileDescriptor) int {
-	index := 0
-	for _, f := range g.allFiles {
-		if f == file {
-			return index
-		}
-		if f.GetPackage() == file.GetPackage() {
-			index++
-		}
+func FileName(file *FileDescriptor) string {
+	return CamelCase(strings.Replace(path.Base(file.FileDescriptorProto.GetName()), ".proto", "", -1))
+}
+
+func (g *Generator) AllFiles() *descriptor.FileDescriptorSet {
+	set := &descriptor.FileDescriptorSet{}
+	set.File = make([]*descriptor.FileDescriptorProto, len(g.allFiles))
+	for i := range g.allFiles {
+		set.File[i] = g.allFiles[i].FileDescriptorProto
 	}
-	panic("unreachable")
+	return set
 }

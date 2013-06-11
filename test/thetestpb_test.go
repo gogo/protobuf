@@ -39,9 +39,6 @@ import math_rand8 "math/rand"
 import time8 "time"
 import testing8 "testing"
 import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
-import math_rand9 "math/rand"
-import time9 "time"
-import testing9 "testing"
 
 func TestNidOptNativeProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -54,6 +51,9 @@ func TestNidOptNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -61,42 +61,41 @@ func TestNidOptNativeProto(t *testing.T) {
 
 func BenchmarkNidOptNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeProto(t *testing.T) {
@@ -110,6 +109,9 @@ func TestNinOptNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -117,42 +119,41 @@ func TestNinOptNativeProto(t *testing.T) {
 
 func BenchmarkNinOptNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepNativeProto(t *testing.T) {
@@ -166,6 +167,9 @@ func TestNidRepNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -173,42 +177,41 @@ func TestNidRepNativeProto(t *testing.T) {
 
 func BenchmarkNidRepNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeProto(t *testing.T) {
@@ -222,6 +225,9 @@ func TestNinRepNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -229,42 +235,41 @@ func TestNinRepNativeProto(t *testing.T) {
 
 func BenchmarkNinRepNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepPackedNativeProto(t *testing.T) {
@@ -278,6 +283,9 @@ func TestNidRepPackedNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -285,42 +293,41 @@ func TestNidRepPackedNativeProto(t *testing.T) {
 
 func BenchmarkNidRepPackedNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepPackedNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepPackedNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepPackedNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepPackedNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeProto(t *testing.T) {
@@ -334,6 +341,9 @@ func TestNinRepPackedNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -341,42 +351,41 @@ func TestNinRepPackedNativeProto(t *testing.T) {
 
 func BenchmarkNinRepPackedNativeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepPackedNativeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepPackedNative{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepPackedNative(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepPackedNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptStructProto(t *testing.T) {
@@ -390,6 +399,9 @@ func TestNidOptStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -397,42 +409,41 @@ func TestNidOptStructProto(t *testing.T) {
 
 func BenchmarkNidOptStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructProto(t *testing.T) {
@@ -446,6 +457,9 @@ func TestNinOptStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -453,42 +467,41 @@ func TestNinOptStructProto(t *testing.T) {
 
 func BenchmarkNinOptStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepStructProto(t *testing.T) {
@@ -502,6 +515,9 @@ func TestNidRepStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -509,42 +525,41 @@ func TestNidRepStructProto(t *testing.T) {
 
 func BenchmarkNidRepStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructProto(t *testing.T) {
@@ -558,6 +573,9 @@ func TestNinRepStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -565,42 +583,41 @@ func TestNinRepStructProto(t *testing.T) {
 
 func BenchmarkNinRepStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidEmbeddedStructProto(t *testing.T) {
@@ -614,6 +631,9 @@ func TestNidEmbeddedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -621,42 +641,41 @@ func TestNidEmbeddedStructProto(t *testing.T) {
 
 func BenchmarkNidEmbeddedStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidEmbeddedStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidEmbeddedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidEmbeddedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructProto(t *testing.T) {
@@ -670,6 +689,9 @@ func TestNinEmbeddedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -677,42 +699,41 @@ func TestNinEmbeddedStructProto(t *testing.T) {
 
 func BenchmarkNinEmbeddedStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinEmbeddedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinEmbeddedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidNestedStructProto(t *testing.T) {
@@ -726,6 +747,9 @@ func TestNidNestedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -733,42 +757,41 @@ func TestNidNestedStructProto(t *testing.T) {
 
 func BenchmarkNidNestedStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidNestedStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidNestedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidNestedStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidNestedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructProto(t *testing.T) {
@@ -782,6 +805,9 @@ func TestNinNestedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -789,42 +815,41 @@ func TestNinNestedStructProto(t *testing.T) {
 
 func BenchmarkNinNestedStructProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinNestedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStruct(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinNestedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptCustomProto(t *testing.T) {
@@ -838,6 +863,9 @@ func TestNidOptCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -845,42 +873,41 @@ func TestNidOptCustomProto(t *testing.T) {
 
 func BenchmarkNidOptCustomProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptCustomProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptCustom(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomProto(t *testing.T) {
@@ -894,6 +921,9 @@ func TestNinOptCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -901,42 +931,41 @@ func TestNinOptCustomProto(t *testing.T) {
 
 func BenchmarkNinOptCustomProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptCustomProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptCustom(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepCustomProto(t *testing.T) {
@@ -950,6 +979,9 @@ func TestNidRepCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -957,42 +989,41 @@ func TestNidRepCustomProto(t *testing.T) {
 
 func BenchmarkNidRepCustomProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepCustomProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepCustom(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomProto(t *testing.T) {
@@ -1006,6 +1037,9 @@ func TestNinRepCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1013,42 +1047,41 @@ func TestNinRepCustomProto(t *testing.T) {
 
 func BenchmarkNinRepCustomProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepCustomProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepCustom(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionProto(t *testing.T) {
@@ -1062,6 +1095,9 @@ func TestNinOptNativeUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1069,42 +1105,41 @@ func TestNinOptNativeUnionProto(t *testing.T) {
 
 func BenchmarkNinOptNativeUnionProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeUnionProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptNativeUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptNativeUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionProto(t *testing.T) {
@@ -1118,6 +1153,9 @@ func TestNinOptStructUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1125,42 +1163,41 @@ func TestNinOptStructUnionProto(t *testing.T) {
 
 func BenchmarkNinOptStructUnionProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructUnionProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStructUnion(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructUnionProto(t *testing.T) {
@@ -1174,6 +1211,9 @@ func TestNinEmbeddedStructUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1181,42 +1221,41 @@ func TestNinEmbeddedStructUnionProto(t *testing.T) {
 
 func BenchmarkNinEmbeddedStructUnionProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinEmbeddedStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinEmbeddedStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionProto(t *testing.T) {
@@ -1230,6 +1269,9 @@ func TestNinNestedStructUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1237,42 +1279,41 @@ func TestNinNestedStructUnionProto(t *testing.T) {
 
 func BenchmarkNinNestedStructUnionProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructUnionProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinNestedStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinNestedStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestTreeProto(t *testing.T) {
@@ -1286,6 +1327,9 @@ func TestTreeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1293,42 +1337,41 @@ func TestTreeProto(t *testing.T) {
 
 func BenchmarkTreeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkTreeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Tree{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTree(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Tree{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchProto(t *testing.T) {
@@ -1342,6 +1385,9 @@ func TestOrBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1349,42 +1395,41 @@ func TestOrBranchProto(t *testing.T) {
 
 func BenchmarkOrBranchProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkOrBranchProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &OrBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOrBranch(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &OrBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndBranchProto(t *testing.T) {
@@ -1398,6 +1443,9 @@ func TestAndBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1405,42 +1453,41 @@ func TestAndBranchProto(t *testing.T) {
 
 func BenchmarkAndBranchProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndBranchProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &AndBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndBranch(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &AndBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafProto(t *testing.T) {
@@ -1454,6 +1501,9 @@ func TestLeafProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1461,42 +1511,41 @@ func TestLeafProto(t *testing.T) {
 
 func BenchmarkLeafProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkLeafProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Leaf{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedLeaf(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Leaf{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepTreeProto(t *testing.T) {
@@ -1510,6 +1559,9 @@ func TestDeepTreeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1517,42 +1569,41 @@ func TestDeepTreeProto(t *testing.T) {
 
 func BenchmarkDeepTreeProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepTreeProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &DeepTree{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepTree(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &DeepTree{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchProto(t *testing.T) {
@@ -1566,6 +1617,9 @@ func TestADeepBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1573,42 +1627,41 @@ func TestADeepBranchProto(t *testing.T) {
 
 func BenchmarkADeepBranchProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkADeepBranchProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &ADeepBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedADeepBranch(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &ADeepBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndDeepBranchProto(t *testing.T) {
@@ -1622,6 +1675,9 @@ func TestAndDeepBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1629,42 +1685,41 @@ func TestAndDeepBranchProto(t *testing.T) {
 
 func BenchmarkAndDeepBranchProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndDeepBranchProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &AndDeepBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndDeepBranch(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &AndDeepBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafProto(t *testing.T) {
@@ -1678,6 +1733,9 @@ func TestDeepLeafProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1685,42 +1743,41 @@ func TestDeepLeafProto(t *testing.T) {
 
 func BenchmarkDeepLeafProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepLeafProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &DeepLeaf{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepLeaf(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &DeepLeaf{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNilProto(t *testing.T) {
@@ -1734,6 +1791,9 @@ func TestNilProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -1741,42 +1801,331 @@ func TestNilProto(t *testing.T) {
 
 func BenchmarkNilProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNilProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Nil{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNil(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Nil{}
+		total += len(data)
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidOptEnumProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNidOptEnumProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidOptEnumProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptEnum(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinOptEnumProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNinOptEnumProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinOptEnumProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptEnum(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidRepEnumProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNidRepEnumProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidRepEnumProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepEnum(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinRepEnumProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNinRepEnumProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinRepEnumProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepEnum(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestTimerProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &Timer{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkTimerProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkTimerProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTimer(popr)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Timer{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptNativeJSON(t *testing1.T) {
@@ -1791,48 +2140,50 @@ func TestNidOptNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidOptNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeJSON(t *testing1.T) {
@@ -1847,48 +2198,50 @@ func TestNinOptNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinOptNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepNativeJSON(t *testing1.T) {
@@ -1903,48 +2256,50 @@ func TestNidRepNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidRepNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeJSON(t *testing1.T) {
@@ -1959,48 +2314,50 @@ func TestNinRepNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinRepNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepPackedNativeJSON(t *testing1.T) {
@@ -2015,48 +2372,50 @@ func TestNidRepPackedNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidRepPackedNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepPackedNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepPackedNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepPackedNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepPackedNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeJSON(t *testing1.T) {
@@ -2071,48 +2430,50 @@ func TestNinRepPackedNativeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinRepPackedNativeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepPackedNativeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepPackedNative{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepPackedNative(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepPackedNative{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptStructJSON(t *testing1.T) {
@@ -2127,48 +2488,50 @@ func TestNidOptStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidOptStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructJSON(t *testing1.T) {
@@ -2183,48 +2546,50 @@ func TestNinOptStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinOptStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepStructJSON(t *testing1.T) {
@@ -2239,48 +2604,50 @@ func TestNidRepStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidRepStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructJSON(t *testing1.T) {
@@ -2295,48 +2662,50 @@ func TestNinRepStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinRepStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidEmbeddedStructJSON(t *testing1.T) {
@@ -2351,48 +2720,50 @@ func TestNidEmbeddedStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidEmbeddedStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidEmbeddedStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidEmbeddedStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidEmbeddedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructJSON(t *testing1.T) {
@@ -2407,48 +2778,50 @@ func TestNinEmbeddedStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinEmbeddedStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinEmbeddedStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinEmbeddedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidNestedStructJSON(t *testing1.T) {
@@ -2463,48 +2836,50 @@ func TestNidNestedStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidNestedStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidNestedStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidNestedStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidNestedStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidNestedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructJSON(t *testing1.T) {
@@ -2519,48 +2894,50 @@ func TestNinNestedStructJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinNestedStructJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinNestedStruct{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStruct(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinNestedStruct{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptCustomJSON(t *testing1.T) {
@@ -2575,48 +2952,50 @@ func TestNidOptCustomJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidOptCustomJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptCustomJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidOptCustom{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptCustom(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomJSON(t *testing1.T) {
@@ -2631,48 +3010,50 @@ func TestNinOptCustomJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinOptCustomJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptCustomJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptCustom{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptCustom(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepCustomJSON(t *testing1.T) {
@@ -2687,48 +3068,50 @@ func TestNidRepCustomJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNidRepCustomJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepCustomJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NidRepCustom{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepCustom(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomJSON(t *testing1.T) {
@@ -2743,48 +3126,50 @@ func TestNinRepCustomJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinRepCustomJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepCustomJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinRepCustom{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepCustom(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepCustom{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionJSON(t *testing1.T) {
@@ -2799,48 +3184,50 @@ func TestNinOptNativeUnionJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinOptNativeUnionJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeUnionJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptNativeUnion{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptNativeUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionJSON(t *testing1.T) {
@@ -2855,48 +3242,50 @@ func TestNinOptStructUnionJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinOptStructUnionJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructUnionJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinOptStructUnion{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStructUnion(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructUnionJSON(t *testing1.T) {
@@ -2911,48 +3300,50 @@ func TestNinEmbeddedStructUnionJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinEmbeddedStructUnionJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructUnionJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinEmbeddedStructUnion{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinEmbeddedStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionJSON(t *testing1.T) {
@@ -2967,48 +3358,50 @@ func TestNinNestedStructUnionJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNinNestedStructUnionJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructUnionJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &NinNestedStructUnion{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinNestedStructUnion{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestTreeJSON(t *testing1.T) {
@@ -3023,48 +3416,50 @@ func TestTreeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkTreeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkTreeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Tree{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTree(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Tree{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchJSON(t *testing1.T) {
@@ -3079,48 +3474,50 @@ func TestOrBranchJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkOrBranchJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkOrBranchJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &OrBranch{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOrBranch(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &OrBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndBranchJSON(t *testing1.T) {
@@ -3135,48 +3532,50 @@ func TestAndBranchJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkAndBranchJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndBranchJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &AndBranch{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndBranch(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &AndBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafJSON(t *testing1.T) {
@@ -3191,48 +3590,50 @@ func TestLeafJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkLeafJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkLeafJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Leaf{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedLeaf(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Leaf{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepTreeJSON(t *testing1.T) {
@@ -3247,48 +3648,50 @@ func TestDeepTreeJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkDeepTreeJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepTreeJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &DeepTree{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepTree(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &DeepTree{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchJSON(t *testing1.T) {
@@ -3303,48 +3706,50 @@ func TestADeepBranchJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkADeepBranchJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkADeepBranchJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &ADeepBranch{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedADeepBranch(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &ADeepBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndDeepBranchJSON(t *testing1.T) {
@@ -3359,48 +3764,50 @@ func TestAndDeepBranchJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkAndDeepBranchJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndDeepBranchJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &AndDeepBranch{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndDeepBranch(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &AndDeepBranch{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafJSON(t *testing1.T) {
@@ -3415,48 +3822,50 @@ func TestDeepLeafJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkDeepLeafJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepLeafJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &DeepLeaf{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepLeaf(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &DeepLeaf{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNilJSON(t *testing1.T) {
@@ -3471,48 +3880,340 @@ func TestNilJSON(t *testing1.T) {
 	if err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
 func BenchmarkNilJSONMarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNilJSONUnmarshal(b *testing1.B) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &Nil{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNil(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Nil{}
+		total += len(data)
+		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidOptEnumJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidOptEnum{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkNidOptEnumJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidOptEnumJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptEnum(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidOptEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinOptEnumJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinOptEnum{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkNinOptEnumJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinOptEnumJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptEnum(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinOptEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidRepEnumJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidRepEnum{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkNidRepEnumJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidRepEnumJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepEnum(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NidRepEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinRepEnumJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinRepEnum{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkNinRepEnumJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinRepEnumJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepEnum(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &NinRepEnum{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestTimerJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &Timer{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkTimerJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkTimerJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTimer(popr)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &Timer{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptNativeProtoText(t *testing2.T) {
@@ -3522,6 +4223,9 @@ func TestNidOptNativeProtoText(t *testing2.T) {
 	msg := &NidOptNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3536,6 +4240,9 @@ func TestNidOptNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3543,48 +4250,51 @@ func TestNidOptNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidOptNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidOptNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidOptNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeProtoText(t *testing2.T) {
@@ -3594,6 +4304,9 @@ func TestNinOptNativeProtoText(t *testing2.T) {
 	msg := &NinOptNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3608,6 +4321,9 @@ func TestNinOptNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3615,48 +4331,51 @@ func TestNinOptNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinOptNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinOptNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepNativeProtoText(t *testing2.T) {
@@ -3666,6 +4385,9 @@ func TestNidRepNativeProtoText(t *testing2.T) {
 	msg := &NidRepNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3680,6 +4402,9 @@ func TestNidRepNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3687,48 +4412,51 @@ func TestNidRepNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidRepNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidRepNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidRepNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeProtoText(t *testing2.T) {
@@ -3738,6 +4466,9 @@ func TestNinRepNativeProtoText(t *testing2.T) {
 	msg := &NinRepNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3752,6 +4483,9 @@ func TestNinRepNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3759,48 +4493,51 @@ func TestNinRepNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinRepNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinRepNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinRepNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepPackedNativeProtoText(t *testing2.T) {
@@ -3810,6 +4547,9 @@ func TestNidRepPackedNativeProtoText(t *testing2.T) {
 	msg := &NidRepPackedNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3824,6 +4564,9 @@ func TestNidRepPackedNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3831,48 +4574,51 @@ func TestNidRepPackedNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidRepPackedNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepPackedNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepPackedNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidRepPackedNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepPackedNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidRepPackedNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeProtoText(t *testing2.T) {
@@ -3882,6 +4628,9 @@ func TestNinRepPackedNativeProtoText(t *testing2.T) {
 	msg := &NinRepPackedNative{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3896,6 +4645,9 @@ func TestNinRepPackedNativeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3903,48 +4655,51 @@ func TestNinRepPackedNativeProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinRepPackedNativeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepPackedNativeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepPackedNativeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinRepPackedNative{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepPackedNative(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinRepPackedNative{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptStructProtoText(t *testing2.T) {
@@ -3954,6 +4709,9 @@ func TestNidOptStructProtoText(t *testing2.T) {
 	msg := &NidOptStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -3968,6 +4726,9 @@ func TestNidOptStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -3975,48 +4736,51 @@ func TestNidOptStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidOptStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidOptStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidOptStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructProtoText(t *testing2.T) {
@@ -4026,6 +4790,9 @@ func TestNinOptStructProtoText(t *testing2.T) {
 	msg := &NinOptStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4040,6 +4807,9 @@ func TestNinOptStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4047,48 +4817,51 @@ func TestNinOptStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinOptStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinOptStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepStructProtoText(t *testing2.T) {
@@ -4098,6 +4871,9 @@ func TestNidRepStructProtoText(t *testing2.T) {
 	msg := &NidRepStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4112,6 +4888,9 @@ func TestNidRepStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4119,48 +4898,51 @@ func TestNidRepStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidRepStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidRepStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidRepStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructProtoText(t *testing2.T) {
@@ -4170,6 +4952,9 @@ func TestNinRepStructProtoText(t *testing2.T) {
 	msg := &NinRepStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4184,6 +4969,9 @@ func TestNinRepStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4191,48 +4979,51 @@ func TestNinRepStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinRepStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinRepStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinRepStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidEmbeddedStructProtoText(t *testing2.T) {
@@ -4242,6 +5033,9 @@ func TestNidEmbeddedStructProtoText(t *testing2.T) {
 	msg := &NidEmbeddedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4256,6 +5050,9 @@ func TestNidEmbeddedStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4263,48 +5060,51 @@ func TestNidEmbeddedStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidEmbeddedStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidEmbeddedStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidEmbeddedStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidEmbeddedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidEmbeddedStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructProtoText(t *testing2.T) {
@@ -4314,6 +5114,9 @@ func TestNinEmbeddedStructProtoText(t *testing2.T) {
 	msg := &NinEmbeddedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4328,6 +5131,9 @@ func TestNinEmbeddedStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4335,48 +5141,51 @@ func TestNinEmbeddedStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinEmbeddedStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinEmbeddedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinEmbeddedStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidNestedStructProtoText(t *testing2.T) {
@@ -4386,6 +5195,9 @@ func TestNidNestedStructProtoText(t *testing2.T) {
 	msg := &NidNestedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4400,6 +5212,9 @@ func TestNidNestedStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4407,48 +5222,51 @@ func TestNidNestedStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidNestedStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidNestedStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidNestedStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidNestedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidNestedStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidNestedStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructProtoText(t *testing2.T) {
@@ -4458,6 +5276,9 @@ func TestNinNestedStructProtoText(t *testing2.T) {
 	msg := &NinNestedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4472,6 +5293,9 @@ func TestNinNestedStructProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4479,48 +5303,51 @@ func TestNinNestedStructProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinNestedStructProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinNestedStruct{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStruct(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinNestedStruct{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptCustomProtoText(t *testing2.T) {
@@ -4530,6 +5357,9 @@ func TestNidOptCustomProtoText(t *testing2.T) {
 	msg := &NidOptCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4544,6 +5374,9 @@ func TestNidOptCustomProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4551,48 +5384,51 @@ func TestNidOptCustomProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidOptCustomProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptCustomProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptCustomProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidOptCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptCustom(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidOptCustom{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomProtoText(t *testing2.T) {
@@ -4602,6 +5438,9 @@ func TestNinOptCustomProtoText(t *testing2.T) {
 	msg := &NinOptCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4616,6 +5455,9 @@ func TestNinOptCustomProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4623,48 +5465,51 @@ func TestNinOptCustomProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinOptCustomProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptCustomProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptCustomProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinOptCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptCustom(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptCustom{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepCustomProtoText(t *testing2.T) {
@@ -4674,6 +5519,9 @@ func TestNidRepCustomProtoText(t *testing2.T) {
 	msg := &NidRepCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4688,6 +5536,9 @@ func TestNidRepCustomProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4695,48 +5546,51 @@ func TestNidRepCustomProtoCompactText(t *testing2.T) {
 
 func BenchmarkNidRepCustomProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepCustomProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidRepCustomProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NidRepCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepCustom(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidRepCustom{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomProtoText(t *testing2.T) {
@@ -4746,6 +5600,9 @@ func TestNinRepCustomProtoText(t *testing2.T) {
 	msg := &NinRepCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4760,6 +5617,9 @@ func TestNinRepCustomProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4767,48 +5627,51 @@ func TestNinRepCustomProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinRepCustomProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepCustomProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinRepCustomProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinRepCustom{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepCustom(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinRepCustom{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionProtoText(t *testing2.T) {
@@ -4818,6 +5681,9 @@ func TestNinOptNativeUnionProtoText(t *testing2.T) {
 	msg := &NinOptNativeUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4832,6 +5698,9 @@ func TestNinOptNativeUnionProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4839,48 +5708,51 @@ func TestNinOptNativeUnionProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinOptNativeUnionProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeUnionProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptNativeUnionProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinOptNativeUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptNativeUnion{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionProtoText(t *testing2.T) {
@@ -4890,6 +5762,9 @@ func TestNinOptStructUnionProtoText(t *testing2.T) {
 	msg := &NinOptStructUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4904,6 +5779,9 @@ func TestNinOptStructUnionProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4911,48 +5789,51 @@ func TestNinOptStructUnionProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinOptStructUnionProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructUnionProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinOptStructUnionProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinOptStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStructUnion(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptStructUnion{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructUnionProtoText(t *testing2.T) {
@@ -4962,6 +5843,9 @@ func TestNinEmbeddedStructUnionProtoText(t *testing2.T) {
 	msg := &NinEmbeddedStructUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -4976,6 +5860,9 @@ func TestNinEmbeddedStructUnionProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -4983,48 +5870,51 @@ func TestNinEmbeddedStructUnionProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinEmbeddedStructUnionProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructUnionProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinEmbeddedStructUnionProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinEmbeddedStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinEmbeddedStructUnion{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionProtoText(t *testing2.T) {
@@ -5034,6 +5924,9 @@ func TestNinNestedStructUnionProtoText(t *testing2.T) {
 	msg := &NinNestedStructUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5048,6 +5941,9 @@ func TestNinNestedStructUnionProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5055,48 +5951,51 @@ func TestNinNestedStructUnionProtoCompactText(t *testing2.T) {
 
 func BenchmarkNinNestedStructUnionProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructUnionProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNinNestedStructUnionProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &NinNestedStructUnion{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinNestedStructUnion{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestTreeProtoText(t *testing2.T) {
@@ -5106,6 +6005,9 @@ func TestTreeProtoText(t *testing2.T) {
 	msg := &Tree{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5120,6 +6022,9 @@ func TestTreeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5127,48 +6032,51 @@ func TestTreeProtoCompactText(t *testing2.T) {
 
 func BenchmarkTreeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkTreeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkTreeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &Tree{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTree(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &Tree{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchProtoText(t *testing2.T) {
@@ -5178,6 +6086,9 @@ func TestOrBranchProtoText(t *testing2.T) {
 	msg := &OrBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5192,6 +6103,9 @@ func TestOrBranchProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5199,48 +6113,51 @@ func TestOrBranchProtoCompactText(t *testing2.T) {
 
 func BenchmarkOrBranchProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkOrBranchProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkOrBranchProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &OrBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOrBranch(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &OrBranch{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndBranchProtoText(t *testing2.T) {
@@ -5250,6 +6167,9 @@ func TestAndBranchProtoText(t *testing2.T) {
 	msg := &AndBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5264,6 +6184,9 @@ func TestAndBranchProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5271,48 +6194,51 @@ func TestAndBranchProtoCompactText(t *testing2.T) {
 
 func BenchmarkAndBranchProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndBranchProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndBranchProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &AndBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndBranch(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &AndBranch{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafProtoText(t *testing2.T) {
@@ -5322,6 +6248,9 @@ func TestLeafProtoText(t *testing2.T) {
 	msg := &Leaf{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5336,6 +6265,9 @@ func TestLeafProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5343,48 +6275,51 @@ func TestLeafProtoCompactText(t *testing2.T) {
 
 func BenchmarkLeafProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkLeafProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkLeafProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &Leaf{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedLeaf(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &Leaf{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepTreeProtoText(t *testing2.T) {
@@ -5394,6 +6329,9 @@ func TestDeepTreeProtoText(t *testing2.T) {
 	msg := &DeepTree{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5408,6 +6346,9 @@ func TestDeepTreeProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5415,48 +6356,51 @@ func TestDeepTreeProtoCompactText(t *testing2.T) {
 
 func BenchmarkDeepTreeProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepTreeProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepTreeProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &DeepTree{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepTree(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &DeepTree{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchProtoText(t *testing2.T) {
@@ -5466,6 +6410,9 @@ func TestADeepBranchProtoText(t *testing2.T) {
 	msg := &ADeepBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5480,6 +6427,9 @@ func TestADeepBranchProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5487,48 +6437,51 @@ func TestADeepBranchProtoCompactText(t *testing2.T) {
 
 func BenchmarkADeepBranchProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkADeepBranchProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkADeepBranchProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &ADeepBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedADeepBranch(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &ADeepBranch{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndDeepBranchProtoText(t *testing2.T) {
@@ -5538,6 +6491,9 @@ func TestAndDeepBranchProtoText(t *testing2.T) {
 	msg := &AndDeepBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5552,6 +6508,9 @@ func TestAndDeepBranchProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5559,48 +6518,51 @@ func TestAndDeepBranchProtoCompactText(t *testing2.T) {
 
 func BenchmarkAndDeepBranchProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndDeepBranchProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkAndDeepBranchProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &AndDeepBranch{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndDeepBranch(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &AndDeepBranch{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafProtoText(t *testing2.T) {
@@ -5610,6 +6572,9 @@ func TestDeepLeafProtoText(t *testing2.T) {
 	msg := &DeepLeaf{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5624,6 +6589,9 @@ func TestDeepLeafProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5631,48 +6599,51 @@ func TestDeepLeafProtoCompactText(t *testing2.T) {
 
 func BenchmarkDeepLeafProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepLeafProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkDeepLeafProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &DeepLeaf{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepLeaf(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &DeepLeaf{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNilProtoText(t *testing2.T) {
@@ -5682,6 +6653,9 @@ func TestNilProtoText(t *testing2.T) {
 	msg := &Nil{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
@@ -5696,6 +6670,9 @@ func TestNilProtoCompactText(t *testing2.T) {
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
@@ -5703,48 +6680,456 @@ func TestNilProtoCompactText(t *testing2.T) {
 
 func BenchmarkNilProtoTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNilProtoCompactTextMarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNilProtoTextUnmarshal(b *testing2.B) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &Nil{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNil(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &Nil{}
+		total += len(data)
 		msg.Reset()
+		b.StartTimer()
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(fmt.Sprintf("%v given %v", err, data))
 		}
 	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidOptEnumProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &NidOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestNidOptEnumProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &NidOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNidOptEnumProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidOptEnumProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidOptEnumProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptEnum(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidOptEnum{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinOptEnumProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &NinOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestNinOptEnumProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &NinOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNinOptEnumProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinOptEnumProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinOptEnumProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptEnum(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinOptEnum{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidRepEnumProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &NidRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestNidRepEnumProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &NidRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNidRepEnumProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidRepEnumProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNidRepEnumProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepEnum(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NidRepEnum{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinRepEnumProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &NinRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestNinRepEnumProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &NinRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkNinRepEnumProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinRepEnumProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkNinRepEnumProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepEnum(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &NinRepEnum{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestTimerProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &Timer{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestTimerProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &Timer{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkTimerProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkTimerProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkTimerProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTimer(popr)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &Timer{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionUnion(t *testing3.T) {
@@ -5830,15 +7215,17 @@ func TestNidOptNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNidOptNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeStringGen(t *testing4.T) {
@@ -5852,15 +7239,17 @@ func TestNinOptNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNinOptNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepNativeStringGen(t *testing4.T) {
@@ -5874,15 +7263,17 @@ func TestNidRepNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNidRepNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeStringGen(t *testing4.T) {
@@ -5896,15 +7287,17 @@ func TestNinRepNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNinRepNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepPackedNativeStringGen(t *testing4.T) {
@@ -5918,15 +7311,17 @@ func TestNidRepPackedNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNidRepPackedNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeStringGen(t *testing4.T) {
@@ -5940,15 +7335,17 @@ func TestNinRepPackedNativeStringGen(t *testing4.T) {
 }
 func BenchmarkNinRepPackedNativeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptStructStringGen(t *testing4.T) {
@@ -5962,15 +7359,17 @@ func TestNidOptStructStringGen(t *testing4.T) {
 }
 func BenchmarkNidOptStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructStringGen(t *testing4.T) {
@@ -5984,15 +7383,17 @@ func TestNinOptStructStringGen(t *testing4.T) {
 }
 func BenchmarkNinOptStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepStructStringGen(t *testing4.T) {
@@ -6006,15 +7407,17 @@ func TestNidRepStructStringGen(t *testing4.T) {
 }
 func BenchmarkNidRepStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructStringGen(t *testing4.T) {
@@ -6028,15 +7431,17 @@ func TestNinRepStructStringGen(t *testing4.T) {
 }
 func BenchmarkNinRepStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidEmbeddedStructStringGen(t *testing4.T) {
@@ -6050,15 +7455,17 @@ func TestNidEmbeddedStructStringGen(t *testing4.T) {
 }
 func BenchmarkNidEmbeddedStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructStringGen(t *testing4.T) {
@@ -6072,15 +7479,17 @@ func TestNinEmbeddedStructStringGen(t *testing4.T) {
 }
 func BenchmarkNinEmbeddedStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidNestedStructStringGen(t *testing4.T) {
@@ -6094,15 +7503,17 @@ func TestNidNestedStructStringGen(t *testing4.T) {
 }
 func BenchmarkNidNestedStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructStringGen(t *testing4.T) {
@@ -6116,15 +7527,17 @@ func TestNinNestedStructStringGen(t *testing4.T) {
 }
 func BenchmarkNinNestedStructStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptCustomStringGen(t *testing4.T) {
@@ -6138,15 +7551,17 @@ func TestNidOptCustomStringGen(t *testing4.T) {
 }
 func BenchmarkNidOptCustomStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomStringGen(t *testing4.T) {
@@ -6160,15 +7575,17 @@ func TestNinOptCustomStringGen(t *testing4.T) {
 }
 func BenchmarkNinOptCustomStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepCustomStringGen(t *testing4.T) {
@@ -6182,15 +7599,17 @@ func TestNidRepCustomStringGen(t *testing4.T) {
 }
 func BenchmarkNidRepCustomStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomStringGen(t *testing4.T) {
@@ -6204,15 +7623,17 @@ func TestNinRepCustomStringGen(t *testing4.T) {
 }
 func BenchmarkNinRepCustomStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionStringGen(t *testing4.T) {
@@ -6226,15 +7647,17 @@ func TestNinOptNativeUnionStringGen(t *testing4.T) {
 }
 func BenchmarkNinOptNativeUnionStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionStringGen(t *testing4.T) {
@@ -6248,15 +7671,17 @@ func TestNinOptStructUnionStringGen(t *testing4.T) {
 }
 func BenchmarkNinOptStructUnionStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructUnionStringGen(t *testing4.T) {
@@ -6270,15 +7695,17 @@ func TestNinEmbeddedStructUnionStringGen(t *testing4.T) {
 }
 func BenchmarkNinEmbeddedStructUnionStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionStringGen(t *testing4.T) {
@@ -6292,15 +7719,17 @@ func TestNinNestedStructUnionStringGen(t *testing4.T) {
 }
 func BenchmarkNinNestedStructUnionStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestTreeStringGen(t *testing4.T) {
@@ -6314,15 +7743,17 @@ func TestTreeStringGen(t *testing4.T) {
 }
 func BenchmarkTreeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchStringGen(t *testing4.T) {
@@ -6336,15 +7767,17 @@ func TestOrBranchStringGen(t *testing4.T) {
 }
 func BenchmarkOrBranchStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndBranchStringGen(t *testing4.T) {
@@ -6358,15 +7791,17 @@ func TestAndBranchStringGen(t *testing4.T) {
 }
 func BenchmarkAndBranchStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafStringGen(t *testing4.T) {
@@ -6380,15 +7815,17 @@ func TestLeafStringGen(t *testing4.T) {
 }
 func BenchmarkLeafStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepTreeStringGen(t *testing4.T) {
@@ -6402,15 +7839,17 @@ func TestDeepTreeStringGen(t *testing4.T) {
 }
 func BenchmarkDeepTreeStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchStringGen(t *testing4.T) {
@@ -6424,15 +7863,17 @@ func TestADeepBranchStringGen(t *testing4.T) {
 }
 func BenchmarkADeepBranchStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndDeepBranchStringGen(t *testing4.T) {
@@ -6446,15 +7887,17 @@ func TestAndDeepBranchStringGen(t *testing4.T) {
 }
 func BenchmarkAndDeepBranchStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafStringGen(t *testing4.T) {
@@ -6468,15 +7911,17 @@ func TestDeepLeafStringGen(t *testing4.T) {
 }
 func BenchmarkDeepLeafStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNilStringGen(t *testing4.T) {
@@ -6490,15 +7935,137 @@ func TestNilStringGen(t *testing4.T) {
 }
 func BenchmarkNilStringGen(b *testing4.B) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.String()
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidOptEnumStringGen(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkNidOptEnumStringGen(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinOptEnumStringGen(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkNinOptEnumStringGen(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidRepEnumStringGen(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkNidRepEnumStringGen(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinRepEnumStringGen(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkNinRepEnumStringGen(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestTimerStringGen(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkTimerStringGen(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func BenchmarkNidOptNativePopulate(b *testing5.B) {
@@ -6811,6 +8378,56 @@ func BenchmarkNilPopulate(b *testing5.B) {
 	}
 }
 
+func BenchmarkNidOptEnumPopulate(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedNidOptEnum(popr)
+	}
+}
+
+func BenchmarkNinOptEnumPopulate(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedNinOptEnum(popr)
+	}
+}
+
+func BenchmarkNidRepEnumPopulate(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedNidRepEnum(popr)
+	}
+}
+
+func BenchmarkNinRepEnumPopulate(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedNinRepEnum(popr)
+	}
+}
+
+func BenchmarkTimerPopulate(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedTimer(popr)
+	}
+}
+
 func TestNidOptNativeGoString(t *testing6.T) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr)
@@ -6826,15 +8443,17 @@ func TestNidOptNativeGoString(t *testing6.T) {
 }
 func BenchmarkNidOptNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeGoString(t *testing6.T) {
@@ -6852,15 +8471,17 @@ func TestNinOptNativeGoString(t *testing6.T) {
 }
 func BenchmarkNinOptNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepNativeGoString(t *testing6.T) {
@@ -6878,15 +8499,17 @@ func TestNidRepNativeGoString(t *testing6.T) {
 }
 func BenchmarkNidRepNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeGoString(t *testing6.T) {
@@ -6904,15 +8527,17 @@ func TestNinRepNativeGoString(t *testing6.T) {
 }
 func BenchmarkNinRepNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepPackedNativeGoString(t *testing6.T) {
@@ -6930,15 +8555,17 @@ func TestNidRepPackedNativeGoString(t *testing6.T) {
 }
 func BenchmarkNidRepPackedNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeGoString(t *testing6.T) {
@@ -6956,15 +8583,17 @@ func TestNinRepPackedNativeGoString(t *testing6.T) {
 }
 func BenchmarkNinRepPackedNativeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptStructGoString(t *testing6.T) {
@@ -6982,15 +8611,17 @@ func TestNidOptStructGoString(t *testing6.T) {
 }
 func BenchmarkNidOptStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructGoString(t *testing6.T) {
@@ -7008,15 +8639,17 @@ func TestNinOptStructGoString(t *testing6.T) {
 }
 func BenchmarkNinOptStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepStructGoString(t *testing6.T) {
@@ -7034,15 +8667,17 @@ func TestNidRepStructGoString(t *testing6.T) {
 }
 func BenchmarkNidRepStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructGoString(t *testing6.T) {
@@ -7060,15 +8695,17 @@ func TestNinRepStructGoString(t *testing6.T) {
 }
 func BenchmarkNinRepStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidEmbeddedStructGoString(t *testing6.T) {
@@ -7086,15 +8723,17 @@ func TestNidEmbeddedStructGoString(t *testing6.T) {
 }
 func BenchmarkNidEmbeddedStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructGoString(t *testing6.T) {
@@ -7112,15 +8751,17 @@ func TestNinEmbeddedStructGoString(t *testing6.T) {
 }
 func BenchmarkNinEmbeddedStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidNestedStructGoString(t *testing6.T) {
@@ -7138,15 +8779,17 @@ func TestNidNestedStructGoString(t *testing6.T) {
 }
 func BenchmarkNidNestedStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructGoString(t *testing6.T) {
@@ -7164,15 +8807,17 @@ func TestNinNestedStructGoString(t *testing6.T) {
 }
 func BenchmarkNinNestedStructGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptCustomGoString(t *testing6.T) {
@@ -7190,15 +8835,17 @@ func TestNidOptCustomGoString(t *testing6.T) {
 }
 func BenchmarkNidOptCustomGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomGoString(t *testing6.T) {
@@ -7216,15 +8863,17 @@ func TestNinOptCustomGoString(t *testing6.T) {
 }
 func BenchmarkNinOptCustomGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepCustomGoString(t *testing6.T) {
@@ -7242,15 +8891,17 @@ func TestNidRepCustomGoString(t *testing6.T) {
 }
 func BenchmarkNidRepCustomGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomGoString(t *testing6.T) {
@@ -7268,15 +8919,17 @@ func TestNinRepCustomGoString(t *testing6.T) {
 }
 func BenchmarkNinRepCustomGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionGoString(t *testing6.T) {
@@ -7294,15 +8947,17 @@ func TestNinOptNativeUnionGoString(t *testing6.T) {
 }
 func BenchmarkNinOptNativeUnionGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionGoString(t *testing6.T) {
@@ -7320,15 +8975,17 @@ func TestNinOptStructUnionGoString(t *testing6.T) {
 }
 func BenchmarkNinOptStructUnionGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructUnionGoString(t *testing6.T) {
@@ -7346,15 +9003,17 @@ func TestNinEmbeddedStructUnionGoString(t *testing6.T) {
 }
 func BenchmarkNinEmbeddedStructUnionGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionGoString(t *testing6.T) {
@@ -7372,15 +9031,17 @@ func TestNinNestedStructUnionGoString(t *testing6.T) {
 }
 func BenchmarkNinNestedStructUnionGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestTreeGoString(t *testing6.T) {
@@ -7398,15 +9059,17 @@ func TestTreeGoString(t *testing6.T) {
 }
 func BenchmarkTreeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchGoString(t *testing6.T) {
@@ -7424,15 +9087,17 @@ func TestOrBranchGoString(t *testing6.T) {
 }
 func BenchmarkOrBranchGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndBranchGoString(t *testing6.T) {
@@ -7450,15 +9115,17 @@ func TestAndBranchGoString(t *testing6.T) {
 }
 func BenchmarkAndBranchGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafGoString(t *testing6.T) {
@@ -7476,15 +9143,17 @@ func TestLeafGoString(t *testing6.T) {
 }
 func BenchmarkLeafGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepTreeGoString(t *testing6.T) {
@@ -7502,15 +9171,17 @@ func TestDeepTreeGoString(t *testing6.T) {
 }
 func BenchmarkDeepTreeGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchGoString(t *testing6.T) {
@@ -7528,15 +9199,17 @@ func TestADeepBranchGoString(t *testing6.T) {
 }
 func BenchmarkADeepBranchGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestAndDeepBranchGoString(t *testing6.T) {
@@ -7554,15 +9227,17 @@ func TestAndDeepBranchGoString(t *testing6.T) {
 }
 func BenchmarkAndDeepBranchGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafGoString(t *testing6.T) {
@@ -7580,15 +9255,17 @@ func TestDeepLeafGoString(t *testing6.T) {
 }
 func BenchmarkDeepLeafGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNilGoString(t *testing6.T) {
@@ -7606,15 +9283,157 @@ func TestNilGoString(t *testing6.T) {
 }
 func BenchmarkNilGoString(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
+	total := 0
 	b.ResetTimer()
-	b.StartTimer()
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		p.GoString()
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
 	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidOptEnumGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkNidOptEnumGoString(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinOptEnumGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkNinOptEnumGoString(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNidRepEnumGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkNidRepEnumGoString(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestNinRepEnumGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkNinRepEnumGoString(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestTimerGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkTimerGoString(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptNativeFace(t *testing7.T) {
@@ -7627,11 +9446,11 @@ func TestNidOptNativeFace(t *testing7.T) {
 }
 func BenchmarkNidOptNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7646,11 +9465,11 @@ func TestNinOptNativeFace(t *testing7.T) {
 }
 func BenchmarkNinOptNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7665,11 +9484,11 @@ func TestNidRepNativeFace(t *testing7.T) {
 }
 func BenchmarkNidRepNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7684,11 +9503,11 @@ func TestNinRepNativeFace(t *testing7.T) {
 }
 func BenchmarkNinRepNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7703,11 +9522,11 @@ func TestNidRepPackedNativeFace(t *testing7.T) {
 }
 func BenchmarkNidRepPackedNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7722,11 +9541,11 @@ func TestNinRepPackedNativeFace(t *testing7.T) {
 }
 func BenchmarkNinRepPackedNativeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7741,11 +9560,11 @@ func TestNidOptStructFace(t *testing7.T) {
 }
 func BenchmarkNidOptStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7760,11 +9579,11 @@ func TestNinOptStructFace(t *testing7.T) {
 }
 func BenchmarkNinOptStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7779,11 +9598,11 @@ func TestNidRepStructFace(t *testing7.T) {
 }
 func BenchmarkNidRepStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7798,11 +9617,11 @@ func TestNinRepStructFace(t *testing7.T) {
 }
 func BenchmarkNinRepStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7817,11 +9636,11 @@ func TestNidEmbeddedStructFace(t *testing7.T) {
 }
 func BenchmarkNidEmbeddedStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7836,11 +9655,11 @@ func TestNinEmbeddedStructFace(t *testing7.T) {
 }
 func BenchmarkNinEmbeddedStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7855,11 +9674,11 @@ func TestNidNestedStructFace(t *testing7.T) {
 }
 func BenchmarkNidNestedStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7874,11 +9693,11 @@ func TestNinNestedStructFace(t *testing7.T) {
 }
 func BenchmarkNinNestedStructFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7893,11 +9712,11 @@ func TestNidOptCustomFace(t *testing7.T) {
 }
 func BenchmarkNidOptCustomFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7912,11 +9731,11 @@ func TestNinOptCustomFace(t *testing7.T) {
 }
 func BenchmarkNinOptCustomFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7931,11 +9750,11 @@ func TestNidRepCustomFace(t *testing7.T) {
 }
 func BenchmarkNidRepCustomFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7950,11 +9769,11 @@ func TestNinRepCustomFace(t *testing7.T) {
 }
 func BenchmarkNinRepCustomFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7969,11 +9788,11 @@ func TestNinOptNativeUnionFace(t *testing7.T) {
 }
 func BenchmarkNinOptNativeUnionFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -7988,11 +9807,11 @@ func TestNinOptStructUnionFace(t *testing7.T) {
 }
 func BenchmarkNinOptStructUnionFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8007,11 +9826,11 @@ func TestNinEmbeddedStructUnionFace(t *testing7.T) {
 }
 func BenchmarkNinEmbeddedStructUnionFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8026,11 +9845,11 @@ func TestNinNestedStructUnionFace(t *testing7.T) {
 }
 func BenchmarkNinNestedStructUnionFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8045,11 +9864,11 @@ func TestTreeFace(t *testing7.T) {
 }
 func BenchmarkTreeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8064,11 +9883,11 @@ func TestOrBranchFace(t *testing7.T) {
 }
 func BenchmarkOrBranchFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8083,11 +9902,11 @@ func TestAndBranchFace(t *testing7.T) {
 }
 func BenchmarkAndBranchFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8102,11 +9921,11 @@ func TestLeafFace(t *testing7.T) {
 }
 func BenchmarkLeafFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8121,11 +9940,11 @@ func TestDeepTreeFace(t *testing7.T) {
 }
 func BenchmarkDeepTreeFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8140,11 +9959,11 @@ func TestADeepBranchFace(t *testing7.T) {
 }
 func BenchmarkADeepBranchFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8159,11 +9978,11 @@ func TestAndDeepBranchFace(t *testing7.T) {
 }
 func BenchmarkAndDeepBranchFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8178,11 +9997,11 @@ func TestDeepLeafFace(t *testing7.T) {
 }
 func BenchmarkDeepLeafFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8197,11 +10016,106 @@ func TestNilFace(t *testing7.T) {
 }
 func BenchmarkNilFace(b *testing7.B) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
+		p.TestProto()
+	}
+}
+
+func TestNidOptEnumFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func BenchmarkNidOptEnumFace(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		p.TestProto()
+	}
+}
+
+func TestNinOptEnumFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func BenchmarkNinOptEnumFace(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		p.TestProto()
+	}
+}
+
+func TestNidRepEnumFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func BenchmarkNidRepEnumFace(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		p.TestProto()
+	}
+}
+
+func TestNinRepEnumFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func BenchmarkNinRepEnumFace(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		p.TestProto()
+	}
+}
+
+func TestTimerFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func BenchmarkTimerFace(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
 		p.TestProto()
 	}
 }
@@ -8223,11 +10137,11 @@ func TestNidOptNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidOptNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8249,11 +10163,11 @@ func TestNinOptNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinOptNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8275,11 +10189,11 @@ func TestNidRepNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidRepNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8301,11 +10215,11 @@ func TestNinRepNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinRepNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8327,11 +10241,11 @@ func TestNidRepPackedNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidRepPackedNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepPackedNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8353,11 +10267,11 @@ func TestNinRepPackedNativeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinRepPackedNativeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepPackedNative(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8379,11 +10293,11 @@ func TestNidOptStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidOptStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8405,11 +10319,11 @@ func TestNinOptStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinOptStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8431,11 +10345,11 @@ func TestNidRepStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidRepStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8457,11 +10371,11 @@ func TestNinRepStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinRepStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8483,11 +10397,11 @@ func TestNidEmbeddedStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidEmbeddedStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidEmbeddedStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8509,11 +10423,11 @@ func TestNinEmbeddedStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinEmbeddedStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8535,11 +10449,11 @@ func TestNidNestedStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidNestedStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidNestedStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8561,11 +10475,11 @@ func TestNinNestedStructVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinNestedStructEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStruct(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8587,11 +10501,11 @@ func TestNidOptCustomVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidOptCustomEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptCustom(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8613,11 +10527,11 @@ func TestNinOptCustomVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinOptCustomEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptCustom(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8639,11 +10553,11 @@ func TestNidRepCustomVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNidRepCustomEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepCustom(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8665,11 +10579,11 @@ func TestNinRepCustomVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinRepCustomEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepCustom(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8691,11 +10605,11 @@ func TestNinOptNativeUnionVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinOptNativeUnionEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptNativeUnion(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8717,11 +10631,11 @@ func TestNinOptStructUnionVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinOptStructUnionEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptStructUnion(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8743,11 +10657,11 @@ func TestNinEmbeddedStructUnionVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinEmbeddedStructUnionEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinEmbeddedStructUnion(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8769,11 +10683,11 @@ func TestNinNestedStructUnionVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNinNestedStructUnionEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinNestedStructUnion(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8795,11 +10709,11 @@ func TestTreeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkTreeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTree(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8821,11 +10735,11 @@ func TestOrBranchVerboseEqual(t *testing8.T) {
 }
 func BenchmarkOrBranchEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOrBranch(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8847,11 +10761,11 @@ func TestAndBranchVerboseEqual(t *testing8.T) {
 }
 func BenchmarkAndBranchEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndBranch(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8873,11 +10787,11 @@ func TestLeafVerboseEqual(t *testing8.T) {
 }
 func BenchmarkLeafEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedLeaf(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8899,11 +10813,11 @@ func TestDeepTreeVerboseEqual(t *testing8.T) {
 }
 func BenchmarkDeepTreeEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepTree(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8925,11 +10839,11 @@ func TestADeepBranchVerboseEqual(t *testing8.T) {
 }
 func BenchmarkADeepBranchEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedADeepBranch(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8951,11 +10865,11 @@ func TestAndDeepBranchVerboseEqual(t *testing8.T) {
 }
 func BenchmarkAndDeepBranchEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedAndDeepBranch(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -8977,11 +10891,11 @@ func TestDeepLeafVerboseEqual(t *testing8.T) {
 }
 func BenchmarkDeepLeafEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedDeepLeaf(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
@@ -9003,169 +10917,143 @@ func TestNilVerboseEqual(t *testing8.T) {
 }
 func BenchmarkNilEqual(b *testing8.B) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	b.StopTimer()
 	b.ResetTimer()
-	b.StartTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNil(popr)
+		b.StartTimer()
 		p.Equal(p)
 	}
 }
 
-func TestNidOptNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidOptNative(popr)
-	p.Description()
+func TestNidOptEnumVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedNidOptEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
 }
-func TestNinOptNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinOptNative(popr)
-	p.Description()
+func BenchmarkNidOptEnumEqual(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidOptEnum(popr)
+		b.StartTimer()
+		p.Equal(p)
+	}
 }
-func TestNidRepNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidRepNative(popr)
-	p.Description()
+
+func TestNinOptEnumVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedNinOptEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinOptEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
 }
-func TestNinRepNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinRepNative(popr)
-	p.Description()
+func BenchmarkNinOptEnumEqual(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinOptEnum(popr)
+		b.StartTimer()
+		p.Equal(p)
+	}
 }
-func TestNidRepPackedNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidRepPackedNative(popr)
-	p.Description()
+
+func TestNidRepEnumVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedNidRepEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NidRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
 }
-func TestNinRepPackedNativeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinRepPackedNative(popr)
-	p.Description()
+func BenchmarkNidRepEnumEqual(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNidRepEnum(popr)
+		b.StartTimer()
+		p.Equal(p)
+	}
 }
-func TestNidOptStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidOptStruct(popr)
-	p.Description()
+
+func TestNinRepEnumVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedNinRepEnum(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &NinRepEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
 }
-func TestNinOptStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinOptStruct(popr)
-	p.Description()
+func BenchmarkNinRepEnumEqual(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedNinRepEnum(popr)
+		b.StartTimer()
+		p.Equal(p)
+	}
 }
-func TestNidRepStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidRepStruct(popr)
-	p.Description()
+
+func TestTimerVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedTimer(popr)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &Timer{}
+	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
 }
-func TestNinRepStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinRepStruct(popr)
-	p.Description()
-}
-func TestNidEmbeddedStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidEmbeddedStruct(popr)
-	p.Description()
-}
-func TestNinEmbeddedStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStruct(popr)
-	p.Description()
-}
-func TestNidNestedStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidNestedStruct(popr)
-	p.Description()
-}
-func TestNinNestedStructDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinNestedStruct(popr)
-	p.Description()
-}
-func TestNidOptCustomDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidOptCustom(popr)
-	p.Description()
-}
-func TestNinOptCustomDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinOptCustom(popr)
-	p.Description()
-}
-func TestNidRepCustomDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNidRepCustom(popr)
-	p.Description()
-}
-func TestNinRepCustomDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinRepCustom(popr)
-	p.Description()
-}
-func TestNinOptNativeUnionDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinOptNativeUnion(popr)
-	p.Description()
-}
-func TestNinOptStructUnionDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinOptStructUnion(popr)
-	p.Description()
-}
-func TestNinEmbeddedStructUnionDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinEmbeddedStructUnion(popr)
-	p.Description()
-}
-func TestNinNestedStructUnionDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNinNestedStructUnion(popr)
-	p.Description()
-}
-func TestTreeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedTree(popr)
-	p.Description()
-}
-func TestOrBranchDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedOrBranch(popr)
-	p.Description()
-}
-func TestAndBranchDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedAndBranch(popr)
-	p.Description()
-}
-func TestLeafDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedLeaf(popr)
-	p.Description()
-}
-func TestDeepTreeDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedDeepTree(popr)
-	p.Description()
-}
-func TestADeepBranchDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedADeepBranch(popr)
-	p.Description()
-}
-func TestAndDeepBranchDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedAndDeepBranch(popr)
-	p.Description()
-}
-func TestDeepLeafDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedDeepLeaf(popr)
-	p.Description()
-}
-func TestNilDescription(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	p := NewPopulatedNil(popr)
-	p.Description()
+func BenchmarkTimerEqual(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedTimer(popr)
+		b.StartTimer()
+		p.Equal(p)
+	}
 }
 
 //These tests are generated by code.google.com/p/gogoprotobuf/plugin/testgen

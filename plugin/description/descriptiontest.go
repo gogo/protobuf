@@ -42,22 +42,18 @@ func NewTest(g *generator.Generator) testgen.TestPlugin {
 
 func (p *test) Generate(imports generator.PluginImports, file *generator.FileDescriptor) bool {
 	used := false
-	randPkg := imports.NewImport("math/rand")
-	timePkg := imports.NewImport("time")
 	testingPkg := imports.NewImport("testing")
 	for _, message := range file.Messages() {
 		if !gogoproto.HasDescription(file.FileDescriptorProto, message.DescriptorProto) ||
 			!gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
-		used = true
-		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	}
 
-		p.P(`func Test`, ccTypeName, `Description(t *`, testingPkg.Use(), `.T) {`)
+	if used {
+		p.P(`func TestDescription(t *`, testingPkg.Use(), `.T) {`)
 		p.In()
-		p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-		p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
-		p.P(`p.Description()`)
+		p.P(`Description()`)
 		p.Out()
 		p.P(`}`)
 

@@ -78,12 +78,12 @@ var E_PopulateAll = &proto.ExtensionDesc{
 	Tag:           "varint,63007,opt,name=populate_all",
 }
 
-var E_StringgenAll = &proto.ExtensionDesc{
+var E_StringerAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63008,
-	Name:          "gogoproto.stringgen_all",
-	Tag:           "varint,63008,opt,name=stringgen_all",
+	Name:          "gogoproto.stringer_all",
+	Tag:           "varint,63008,opt,name=stringer_all",
 }
 
 var E_UnionAll = &proto.ExtensionDesc{
@@ -124,6 +124,38 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
 	Tag:           "varint,63016,opt,name=benchgen_all",
+}
+
+var E_MarshalerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63017,
+	Name:          "gogoproto.marshaler_all",
+	Tag:           "varint,63017,opt,name=marshaler_all",
+}
+
+var E_UnmarshalerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63018,
+	Name:          "gogoproto.unmarshaler_all",
+	Tag:           "varint,63018,opt,name=unmarshaler_all",
+}
+
+var E_BuffertoAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63019,
+	Name:          "gogoproto.bufferto_all",
+	Tag:           "varint,63019,opt,name=bufferto_all",
+}
+
+var E_SizerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63020,
+	Name:          "gogoproto.sizer_all",
+	Tag:           "varint,63020,opt,name=sizer_all",
 }
 
 var E_Getters = &proto.ExtensionDesc{
@@ -174,12 +206,12 @@ var E_Populate = &proto.ExtensionDesc{
 	Tag:           "varint,64007,opt,name=populate",
 }
 
-var E_Stringgen = &proto.ExtensionDesc{
+var E_Stringer = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         67008,
-	Name:          "gogoproto.stringgen",
-	Tag:           "varint,67008,opt,name=stringgen",
+	Name:          "gogoproto.stringer",
+	Tag:           "varint,67008,opt,name=stringer",
 }
 
 var E_Union = &proto.ExtensionDesc{
@@ -222,6 +254,38 @@ var E_Benchgen = &proto.ExtensionDesc{
 	Tag:           "varint,64016,opt,name=benchgen",
 }
 
+var E_Marshaler = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64017,
+	Name:          "gogoproto.marshaler",
+	Tag:           "varint,64017,opt,name=marshaler",
+}
+
+var E_Unmarshaler = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64018,
+	Name:          "gogoproto.unmarshaler",
+	Tag:           "varint,64018,opt,name=unmarshaler",
+}
+
+var E_Bufferto = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64019,
+	Name:          "gogoproto.bufferto",
+	Tag:           "varint,64019,opt,name=bufferto",
+}
+
+var E_Sizer = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64020,
+	Name:          "gogoproto.sizer",
+	Tag:           "varint,64020,opt,name=sizer",
+}
+
 var E_Nullable = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -255,24 +319,32 @@ func init() {
 	proto.RegisterExtension(E_FaceAll)
 	proto.RegisterExtension(E_GostringAll)
 	proto.RegisterExtension(E_PopulateAll)
-	proto.RegisterExtension(E_StringgenAll)
+	proto.RegisterExtension(E_StringerAll)
 	proto.RegisterExtension(E_UnionAll)
 	proto.RegisterExtension(E_EqualAll)
 	proto.RegisterExtension(E_DescriptionAll)
 	proto.RegisterExtension(E_TestgenAll)
 	proto.RegisterExtension(E_BenchgenAll)
+	proto.RegisterExtension(E_MarshalerAll)
+	proto.RegisterExtension(E_UnmarshalerAll)
+	proto.RegisterExtension(E_BuffertoAll)
+	proto.RegisterExtension(E_SizerAll)
 	proto.RegisterExtension(E_Getters)
 	proto.RegisterExtension(E_Msgstringmethod)
 	proto.RegisterExtension(E_VerboseEqual)
 	proto.RegisterExtension(E_Face)
 	proto.RegisterExtension(E_Gostring)
 	proto.RegisterExtension(E_Populate)
-	proto.RegisterExtension(E_Stringgen)
+	proto.RegisterExtension(E_Stringer)
 	proto.RegisterExtension(E_Union)
 	proto.RegisterExtension(E_Equal)
 	proto.RegisterExtension(E_Description)
 	proto.RegisterExtension(E_Testgen)
 	proto.RegisterExtension(E_Benchgen)
+	proto.RegisterExtension(E_Marshaler)
+	proto.RegisterExtension(E_Unmarshaler)
+	proto.RegisterExtension(E_Bufferto)
+	proto.RegisterExtension(E_Sizer)
 	proto.RegisterExtension(E_Nullable)
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)

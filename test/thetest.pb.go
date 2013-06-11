@@ -12,9 +12,14 @@ import math "math"
 
 import code_google_com_p_gogoprotobuf_test_custom "code.google.com/p/gogoprotobuf/test/custom"
 
+import io "io"
+import math1 "math"
+
 import fmt "fmt"
 import strings "strings"
 import reflect "reflect"
+
+import math2 "math"
 
 import fmt1 "fmt"
 import strings1 "strings"
@@ -31,6 +36,45 @@ import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descripto
 var _ = proto.Marshal
 var _ = &json.SyntaxError{}
 var _ = math.Inf
+
+type TheTestEnum int32
+
+const (
+	A TheTestEnum = 0
+	B TheTestEnum = 1
+	C TheTestEnum = 2
+)
+
+var TheTestEnum_name = map[int32]string{
+	0: "A",
+	1: "B",
+	2: "C",
+}
+var TheTestEnum_value = map[string]int32{
+	"A": 0,
+	"B": 1,
+	"C": 2,
+}
+
+func (x TheTestEnum) Enum() *TheTestEnum {
+	p := new(TheTestEnum)
+	*p = x
+	return p
+}
+func (x TheTestEnum) String() string {
+	return proto.EnumName(TheTestEnum_name, int32(x))
+}
+func (x TheTestEnum) MarshalJSON() ([]byte, error) {
+	return json.Marshal(x.String())
+}
+func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
+	if err != nil {
+		return err
+	}
+	*x = TheTestEnum(value)
+	return nil
+}
 
 type NidOptNative struct {
 	Field1           float64 `protobuf:"fixed64,1,opt" json:"Field1"`
@@ -121,20 +165,40 @@ func (m *NinRepNative) Reset()      { *m = NinRepNative{} }
 func (*NinRepNative) ProtoMessage() {}
 
 type NidRepPackedNative struct {
-	Field3           []int32 `protobuf:"varint,3,rep,packed" json:"Field3"`
-	Field4           []int64 `protobuf:"varint,4,rep,packed" json:"Field4"`
-	Field13          []bool  `protobuf:"varint,13,rep,packed" json:"Field13"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13"`
+	XXX_unrecognized []byte    `json:"-"`
 }
 
 func (m *NidRepPackedNative) Reset()      { *m = NidRepPackedNative{} }
 func (*NidRepPackedNative) ProtoMessage() {}
 
 type NinRepPackedNative struct {
-	Field3           []int32 `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	Field4           []int64 `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	Field13          []bool  `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
 }
 
 func (m *NinRepPackedNative) Reset()      { *m = NinRepPackedNative{} }
@@ -209,7 +273,7 @@ func (m *NinRepStruct) Reset()      { *m = NinRepStruct{} }
 func (*NinRepStruct) ProtoMessage() {}
 
 type NidEmbeddedStruct struct {
-	NidOptNative     `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1"`
+	*NidOptNative    `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1,omitempty"`
 	Field200         NidOptNative `protobuf:"bytes,200,opt" json:"Field200"`
 	Field210         bool         `protobuf:"varint,210,opt" json:"Field210"`
 	XXX_unrecognized []byte       `json:"-"`
@@ -413,7 +477,5153 @@ type Nil struct {
 func (m *Nil) Reset()      { *m = Nil{} }
 func (*Nil) ProtoMessage() {}
 
+type NidOptEnum struct {
+	Field1           TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1"`
+	XXX_unrecognized []byte      `json:"-"`
+}
+
+func (m *NidOptEnum) Reset()      { *m = NidOptEnum{} }
+func (*NidOptEnum) ProtoMessage() {}
+
+type NinOptEnum struct {
+	Field1           *TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	XXX_unrecognized []byte       `json:"-"`
+}
+
+func (m *NinOptEnum) Reset()      { *m = NinOptEnum{} }
+func (*NinOptEnum) ProtoMessage() {}
+
+type NidRepEnum struct {
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *NidRepEnum) Reset()      { *m = NidRepEnum{} }
+func (*NidRepEnum) ProtoMessage() {}
+
+type NinRepEnum struct {
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *NinRepEnum) Reset()      { *m = NinRepEnum{} }
+func (*NinRepEnum) ProtoMessage() {}
+
+type Timer struct {
+	Time1            int64  `protobuf:"fixed64,1,opt" json:"Time1"`
+	Time2            int64  `protobuf:"fixed64,2,opt" json:"Time2"`
+	Data             []byte `protobuf:"bytes,3,opt" json:"Data"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *Timer) Reset()      { *m = Timer{} }
+func (*Timer) ProtoMessage() {}
+
 func init() {
+	proto.RegisterEnum("test.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
+}
+func (m *NidOptNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			m.Field1 = math1.Float64frombits(v)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			m.Field2 = math1.Float32frombits(v)
+		case 3:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field3 |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field4 |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field5 |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field6 |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = v
+		case 8:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			m.Field8 = int64(v)
+		case 9:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Field9 = uint32(data[i-4])
+			m.Field9 |= uint32(data[i-3]) << 8
+			m.Field9 |= uint32(data[i-2]) << 16
+			m.Field9 |= uint32(data[i-1]) << 24
+		case 10:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Field10 = int32(data[i-4])
+			m.Field10 |= int32(data[i-3]) << 8
+			m.Field10 |= int32(data[i-2]) << 16
+			m.Field10 |= int32(data[i-1]) << 24
+		case 11:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Field11 = uint64(data[i-8])
+			m.Field11 |= uint64(data[i-7]) << 8
+			m.Field11 |= uint64(data[i-6]) << 16
+			m.Field11 |= uint64(data[i-5]) << 24
+			m.Field11 |= uint64(data[i-4]) << 32
+			m.Field11 |= uint64(data[i-3]) << 40
+			m.Field11 |= uint64(data[i-2]) << 48
+			m.Field11 |= uint64(data[i-1]) << 56
+		case 12:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Field12 = int64(data[i-8])
+			m.Field12 |= int64(data[i-7]) << 8
+			m.Field12 |= int64(data[i-6]) << 16
+			m.Field12 |= int64(data[i-5]) << 24
+			m.Field12 |= int64(data[i-4]) << 32
+			m.Field12 |= int64(data[i-3]) << 40
+			m.Field12 |= int64(data[i-2]) << 48
+			m.Field12 |= int64(data[i-1]) << 56
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = bool(v != 0)
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = string(data[index:postIndex])
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = &v2
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = &v2
+		case 3:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = &v
+		case 4:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field4 = &v
+		case 5:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field5 = &v
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = &v
+		case 8:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			v2 := int64(v)
+			m.Field8 = &v2
+		case 9:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			m.Field9 = &v
+		case 10:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int32(data[i-4])
+			v |= int32(data[i-3]) << 8
+			v |= int32(data[i-2]) << 16
+			v |= int32(data[i-1]) << 24
+			m.Field10 = &v
+		case 11:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			m.Field11 = &v
+		case 12:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int64(data[i-8])
+			v |= int64(data[i-7]) << 8
+			v |= int64(data[i-6]) << 16
+			v |= int64(data[i-5]) << 24
+			v |= int64(data[i-4]) << 32
+			v |= int64(data[i-3]) << 40
+			v |= int64(data[i-2]) << 48
+			v |= int64(data[i-1]) << 56
+			m.Field12 = &v
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field13 = &b
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[index:postIndex])
+			m.Field14 = &s
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidRepNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = append(m.Field1, v2)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = append(m.Field2, v2)
+		case 3:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = append(m.Field3, v)
+		case 4:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field4 = append(m.Field4, v)
+		case 5:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field5 = append(m.Field5, v)
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = append(m.Field6, v)
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v)
+		case 8:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			m.Field8 = append(m.Field8, int64(v))
+		case 9:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			m.Field9 = append(m.Field9, v)
+		case 10:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int32(data[i-4])
+			v |= int32(data[i-3]) << 8
+			v |= int32(data[i-2]) << 16
+			v |= int32(data[i-1]) << 24
+			m.Field10 = append(m.Field10, v)
+		case 11:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			m.Field11 = append(m.Field11, v)
+		case 12:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int64(data[i-8])
+			v |= int64(data[i-7]) << 8
+			v |= int64(data[i-6]) << 16
+			v |= int64(data[i-5]) << 24
+			v |= int64(data[i-4]) << 32
+			v |= int64(data[i-3]) << 40
+			v |= int64(data[i-2]) << 48
+			v |= int64(data[i-1]) << 56
+			m.Field12 = append(m.Field12, v)
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = append(m.Field13, bool(v != 0))
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = append(m.Field14, string(data[index:postIndex]))
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = append(m.Field15, data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinRepNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = append(m.Field1, v2)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = append(m.Field2, v2)
+		case 3:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = append(m.Field3, v)
+		case 4:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field4 = append(m.Field4, v)
+		case 5:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field5 = append(m.Field5, v)
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = append(m.Field6, v)
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v)
+		case 8:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			m.Field8 = append(m.Field8, int64(v))
+		case 9:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			m.Field9 = append(m.Field9, v)
+		case 10:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int32(data[i-4])
+			v |= int32(data[i-3]) << 8
+			v |= int32(data[i-2]) << 16
+			v |= int32(data[i-1]) << 24
+			m.Field10 = append(m.Field10, v)
+		case 11:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			m.Field11 = append(m.Field11, v)
+		case 12:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = int64(data[i-8])
+			v |= int64(data[i-7]) << 8
+			v |= int64(data[i-6]) << 16
+			v |= int64(data[i-5]) << 24
+			v |= int64(data[i-4]) << 32
+			v |= int64(data[i-3]) << 40
+			v |= int64(data[i-2]) << 48
+			v |= int64(data[i-1]) << 56
+			m.Field12 = append(m.Field12, v)
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = append(m.Field13, bool(v != 0))
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = append(m.Field14, string(data[index:postIndex]))
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = append(m.Field15, data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidRepPackedNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint64(data[i-8])
+				v |= uint64(data[i-7]) << 8
+				v |= uint64(data[i-6]) << 16
+				v |= uint64(data[i-5]) << 24
+				v |= uint64(data[i-4]) << 32
+				v |= uint64(data[i-3]) << 40
+				v |= uint64(data[i-2]) << 48
+				v |= uint64(data[i-1]) << 56
+				v2 := math1.Float64frombits(v)
+				m.Field1 = append(m.Field1, v2)
+			}
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint32(data[i-4])
+				v |= uint32(data[i-3]) << 8
+				v |= uint32(data[i-2]) << 16
+				v |= uint32(data[i-1]) << 24
+				v2 := math1.Float32frombits(v)
+				m.Field2 = append(m.Field2, v2)
+			}
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field3 = append(m.Field3, v)
+			}
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field4 = append(m.Field4, v)
+			}
+		case 5:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field5 = append(m.Field5, v)
+			}
+		case 6:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field6 = append(m.Field6, v)
+			}
+		case 7:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+				m.Field7 = append(m.Field7, v)
+			}
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+				m.Field8 = append(m.Field8, int64(v))
+			}
+		case 9:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint32(data[i-4])
+				v |= uint32(data[i-3]) << 8
+				v |= uint32(data[i-2]) << 16
+				v |= uint32(data[i-1]) << 24
+				m.Field9 = append(m.Field9, v)
+			}
+		case 10:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = int32(data[i-4])
+				v |= int32(data[i-3]) << 8
+				v |= int32(data[i-2]) << 16
+				v |= int32(data[i-1]) << 24
+				m.Field10 = append(m.Field10, v)
+			}
+		case 11:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint64(data[i-8])
+				v |= uint64(data[i-7]) << 8
+				v |= uint64(data[i-6]) << 16
+				v |= uint64(data[i-5]) << 24
+				v |= uint64(data[i-4]) << 32
+				v |= uint64(data[i-3]) << 40
+				v |= uint64(data[i-2]) << 48
+				v |= uint64(data[i-1]) << 56
+				m.Field11 = append(m.Field11, v)
+			}
+		case 12:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = int64(data[i-8])
+				v |= int64(data[i-7]) << 8
+				v |= int64(data[i-6]) << 16
+				v |= int64(data[i-5]) << 24
+				v |= int64(data[i-4]) << 32
+				v |= int64(data[i-3]) << 40
+				v |= int64(data[i-2]) << 48
+				v |= int64(data[i-1]) << 56
+				m.Field12 = append(m.Field12, v)
+			}
+		case 13:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field13 = append(m.Field13, bool(v != 0))
+			}
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinRepPackedNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint64(data[i-8])
+				v |= uint64(data[i-7]) << 8
+				v |= uint64(data[i-6]) << 16
+				v |= uint64(data[i-5]) << 24
+				v |= uint64(data[i-4]) << 32
+				v |= uint64(data[i-3]) << 40
+				v |= uint64(data[i-2]) << 48
+				v |= uint64(data[i-1]) << 56
+				v2 := math1.Float64frombits(v)
+				m.Field1 = append(m.Field1, v2)
+			}
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint32(data[i-4])
+				v |= uint32(data[i-3]) << 8
+				v |= uint32(data[i-2]) << 16
+				v |= uint32(data[i-1]) << 24
+				v2 := math1.Float32frombits(v)
+				m.Field2 = append(m.Field2, v2)
+			}
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field3 = append(m.Field3, v)
+			}
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field4 = append(m.Field4, v)
+			}
+		case 5:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field5 = append(m.Field5, v)
+			}
+		case 6:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field6 = append(m.Field6, v)
+			}
+		case 7:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int32(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+				m.Field7 = append(m.Field7, v)
+			}
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+				m.Field8 = append(m.Field8, int64(v))
+			}
+		case 9:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint32(data[i-4])
+				v |= uint32(data[i-3]) << 8
+				v |= uint32(data[i-2]) << 16
+				v |= uint32(data[i-1]) << 24
+				m.Field9 = append(m.Field9, v)
+			}
+		case 10:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int32
+				i := index + 4
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = int32(data[i-4])
+				v |= int32(data[i-3]) << 8
+				v |= int32(data[i-2]) << 16
+				v |= int32(data[i-1]) << 24
+				m.Field10 = append(m.Field10, v)
+			}
+		case 11:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v uint64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = uint64(data[i-8])
+				v |= uint64(data[i-7]) << 8
+				v |= uint64(data[i-6]) << 16
+				v |= uint64(data[i-5]) << 24
+				v |= uint64(data[i-4]) << 32
+				v |= uint64(data[i-3]) << 40
+				v |= uint64(data[i-2]) << 48
+				v |= uint64(data[i-1]) << 56
+				m.Field11 = append(m.Field11, v)
+			}
+		case 12:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int64
+				i := index + 8
+				if i > l {
+					return io.ErrUnexpectedEOF
+				}
+				index = i
+				v = int64(data[i-8])
+				v |= int64(data[i-7]) << 8
+				v |= int64(data[i-6]) << 16
+				v |= int64(data[i-5]) << 24
+				v |= int64(data[i-4]) << 32
+				v |= int64(data[i-3]) << 40
+				v |= int64(data[i-2]) << 48
+				v |= int64(data[i-1]) << 56
+				m.Field12 = append(m.Field12, v)
+			}
+		case 13:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var packedLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				packedLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + packedLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			for index < postIndex {
+				var v int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					v |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Field13 = append(m.Field13, bool(v != 0))
+			}
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidOptStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			m.Field1 = math1.Float64frombits(v)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			m.Field2 = math1.Float32frombits(v)
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Field3.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Field4.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field6 |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = v
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Field8.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = bool(v != 0)
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = string(data[index:postIndex])
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = &v2
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = &v2
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field3 = &NidOptNative{}
+			if err := m.Field3.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field4 = &NinOptNative{}
+			if err := m.Field4.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = &v
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field8 = &NidOptNative{}
+			if err := m.Field8.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field13 = &b
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[index:postIndex])
+			m.Field14 = &s
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidRepStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = append(m.Field1, v2)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = append(m.Field2, v2)
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field3 = append(m.Field3, NidOptNative{})
+			m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field4 = append(m.Field4, NinOptNative{})
+			m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = append(m.Field6, v)
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v)
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field8 = append(m.Field8, NidOptNative{})
+			m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = append(m.Field13, bool(v != 0))
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = append(m.Field14, string(data[index:postIndex]))
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = append(m.Field15, data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinRepStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = append(m.Field1, v2)
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = append(m.Field2, v2)
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field3 = append(m.Field3, &NidOptNative{})
+			m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field4 = append(m.Field4, &NinOptNative{})
+			m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = append(m.Field6, v)
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v)
+		case 8:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field8 = append(m.Field8, &NidOptNative{})
+			m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field13 = append(m.Field13, bool(v != 0))
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field14 = append(m.Field14, string(data[index:postIndex]))
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = append(m.Field15, data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NidOptNative = &NidOptNative{}
+			if err := m.NidOptNative.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 200:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Field200.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 210:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field210 = bool(v != 0)
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NidOptNative = &NidOptNative{}
+			if err := m.NidOptNative.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 200:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field200 = &NidOptNative{}
+			if err := m.Field200.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 210:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field210 = &b
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidNestedStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Field1.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field2 = append(m.Field2, NidRepStruct{})
+			m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinNestedStruct) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field1 = &NidOptStruct{}
+			if err := m.Field1.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field2 = append(m.Field2, &NidRepStruct{})
+			m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidOptCustom) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Id.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Value.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptCustom) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = &code_google_com_p_gogoprotobuf_test_custom.Uuid{}
+			if err := m.Id.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Value = &code_google_com_p_gogoprotobuf_test_custom.Uint128{}
+			if err := m.Value.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidRepCustom) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = append(m.Id, code_google_com_p_gogoprotobuf_test_custom.Uuid{})
+			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Value = append(m.Value, code_google_com_p_gogoprotobuf_test_custom.Uint128{})
+			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinRepCustom) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = append(m.Id, code_google_com_p_gogoprotobuf_test_custom.Uuid{})
+			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Value = append(m.Value, code_google_com_p_gogoprotobuf_test_custom.Uint128{})
+			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = &v2
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = &v2
+		case 3:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = &v
+		case 4:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field4 = &v
+		case 5:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field5 = &v
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field13 = &b
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[index:postIndex])
+			m.Field14 = &s
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptStructUnion) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field1 = &v2
+		case 2:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field2 = &v2
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field3 = &NidOptNative{}
+			if err := m.Field3.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 4:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field4 = &NinOptNative{}
+			if err := m.Field4.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = &v
+		case 13:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field13 = &b
+		case 14:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[index:postIndex])
+			m.Field14 = &s
+			index = postIndex
+		case 15:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field15 = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NidOptNative = &NidOptNative{}
+			if err := m.NidOptNative.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 200:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field200 = &NinOptNative{}
+			if err := m.Field200.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 210:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Field210 = &b
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field1 = &NinOptNativeUnion{}
+			if err := m.Field1.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field2 = &NinOptStructUnion{}
+			if err := m.Field2.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field3 = &NinEmbeddedStructUnion{}
+			if err := m.Field3.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *Tree) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Or = &OrBranch{}
+			if err := m.Or.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.And = &AndBranch{}
+			if err := m.And.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Leaf = &Leaf{}
+			if err := m.Leaf.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *OrBranch) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Left.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Right.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *AndBranch) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Left.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Right.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *Leaf) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Value |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StrValue = string(data[index:postIndex])
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *DeepTree) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Down = &ADeepBranch{}
+			if err := m.Down.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.And = &AndDeepBranch{}
+			if err := m.And.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Leaf = &DeepLeaf{}
+			if err := m.Leaf.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *ADeepBranch) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Down.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *AndDeepBranch) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Left.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Right.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *DeepLeaf) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Tree.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *Nil) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		switch fieldNum {
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidOptEnum) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				m.Field1 |= (TheTestEnum(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinOptEnum) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v TheTestEnum
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (TheTestEnum(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NidRepEnum) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v TheTestEnum
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (TheTestEnum(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = append(m.Field1, v)
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *NinRepEnum) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v TheTestEnum
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (TheTestEnum(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = append(m.Field1, v)
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
+}
+func (m *Timer) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Time1 = int64(data[i-8])
+			m.Time1 |= int64(data[i-7]) << 8
+			m.Time1 |= int64(data[i-6]) << 16
+			m.Time1 |= int64(data[i-5]) << 24
+			m.Time1 |= int64(data[i-4]) << 32
+			m.Time1 |= int64(data[i-3]) << 40
+			m.Time1 |= int64(data[i-2]) << 48
+			m.Time1 |= int64(data[i-1]) << 56
+		case 2:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			m.Time2 = int64(data[i-8])
+			m.Time2 |= int64(data[i-7]) << 8
+			m.Time2 |= int64(data[i-6]) << 16
+			m.Time2 |= int64(data[i-5]) << 24
+			m.Time2 |= int64(data[i-4]) << 32
+			m.Time2 |= int64(data[i-3]) << 40
+			m.Time2 |= int64(data[i-2]) << 48
+			m.Time2 |= int64(data[i-1]) << 56
+		case 3:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Data = data[index:postIndex]
+			index = postIndex
+		default:
+			panic("not implemented")
+		}
+	}
+	return nil
 }
 func (this *NinOptNativeUnion) GetValue() interface{} {
 	if this.Field1 != nil {
@@ -675,21 +5885,21 @@ func (this *NinOptNative) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinOptNative{`,
-		`Field1:` + valueToString(this.Field1) + `,`,
-		`Field2:` + valueToString(this.Field2) + `,`,
-		`Field3:` + valueToString(this.Field3) + `,`,
-		`Field4:` + valueToString(this.Field4) + `,`,
-		`Field5:` + valueToString(this.Field5) + `,`,
-		`Field6:` + valueToString(this.Field6) + `,`,
-		`Field7:` + valueToString(this.Field7) + `,`,
-		`Field8:` + valueToString(this.Field8) + `,`,
-		`Field9:` + valueToString(this.Field9) + `,`,
-		`Field10:` + valueToString(this.Field10) + `,`,
-		`Field11:` + valueToString(this.Field11) + `,`,
-		`Field12:` + valueToString(this.Field12) + `,`,
-		`Field13:` + valueToString(this.Field13) + `,`,
-		`Field14:` + valueToString(this.Field14) + `,`,
-		`Field15:` + valueToString(this.Field15) + `,`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
+		`Field3:` + valueToStringThetest(this.Field3) + `,`,
+		`Field4:` + valueToStringThetest(this.Field4) + `,`,
+		`Field5:` + valueToStringThetest(this.Field5) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field7:` + valueToStringThetest(this.Field7) + `,`,
+		`Field8:` + valueToStringThetest(this.Field8) + `,`,
+		`Field9:` + valueToStringThetest(this.Field9) + `,`,
+		`Field10:` + valueToStringThetest(this.Field10) + `,`,
+		`Field11:` + valueToStringThetest(this.Field11) + `,`,
+		`Field12:` + valueToStringThetest(this.Field12) + `,`,
+		`Field13:` + valueToStringThetest(this.Field13) + `,`,
+		`Field14:` + valueToStringThetest(this.Field14) + `,`,
+		`Field15:` + valueToStringThetest(this.Field15) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -747,8 +5957,18 @@ func (this *NidRepPackedNative) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NidRepPackedNative{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
 		`Field4:` + fmt.Sprintf("%v", this.Field4) + `,`,
+		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
+		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`Field8:` + fmt.Sprintf("%v", this.Field8) + `,`,
+		`Field9:` + fmt.Sprintf("%v", this.Field9) + `,`,
+		`Field10:` + fmt.Sprintf("%v", this.Field10) + `,`,
+		`Field11:` + fmt.Sprintf("%v", this.Field11) + `,`,
+		`Field12:` + fmt.Sprintf("%v", this.Field12) + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`}`,
 	}, "")
@@ -759,8 +5979,18 @@ func (this *NinRepPackedNative) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinRepPackedNative{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
 		`Field4:` + fmt.Sprintf("%v", this.Field4) + `,`,
+		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
+		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`Field8:` + fmt.Sprintf("%v", this.Field8) + `,`,
+		`Field9:` + fmt.Sprintf("%v", this.Field9) + `,`,
+		`Field10:` + fmt.Sprintf("%v", this.Field10) + `,`,
+		`Field11:` + fmt.Sprintf("%v", this.Field11) + `,`,
+		`Field12:` + fmt.Sprintf("%v", this.Field12) + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`}`,
 	}, "")
@@ -790,16 +6020,16 @@ func (this *NinOptStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinOptStruct{`,
-		`Field1:` + valueToString(this.Field1) + `,`,
-		`Field2:` + valueToString(this.Field2) + `,`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
-		`Field6:` + valueToString(this.Field6) + `,`,
-		`Field7:` + valueToString(this.Field7) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field7:` + valueToStringThetest(this.Field7) + `,`,
 		`Field8:` + strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field13:` + valueToString(this.Field13) + `,`,
-		`Field14:` + valueToString(this.Field14) + `,`,
-		`Field15:` + valueToString(this.Field15) + `,`,
+		`Field13:` + valueToStringThetest(this.Field13) + `,`,
+		`Field14:` + valueToStringThetest(this.Field14) + `,`,
+		`Field15:` + valueToStringThetest(this.Field15) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -847,7 +6077,7 @@ func (this *NidEmbeddedStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NidEmbeddedStruct{`,
-		`NidOptNative:` + strings.Replace(strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
+		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
 		`Field210:` + fmt.Sprintf("%v", this.Field210) + `,`,
 		`}`,
@@ -861,7 +6091,7 @@ func (this *NinEmbeddedStruct) String() string {
 	s := strings.Join([]string{`&NinEmbeddedStruct{`,
 		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field210:` + valueToString(this.Field210) + `,`,
+		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -904,8 +6134,8 @@ func (this *NinOptCustom) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinOptCustom{`,
-		`Id:` + valueToString(this.Id) + `,`,
-		`Value:` + valueToString(this.Value) + `,`,
+		`Id:` + valueToStringThetest(this.Id) + `,`,
+		`Value:` + valueToStringThetest(this.Value) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -937,15 +6167,15 @@ func (this *NinOptNativeUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinOptNativeUnion{`,
-		`Field1:` + valueToString(this.Field1) + `,`,
-		`Field2:` + valueToString(this.Field2) + `,`,
-		`Field3:` + valueToString(this.Field3) + `,`,
-		`Field4:` + valueToString(this.Field4) + `,`,
-		`Field5:` + valueToString(this.Field5) + `,`,
-		`Field6:` + valueToString(this.Field6) + `,`,
-		`Field13:` + valueToString(this.Field13) + `,`,
-		`Field14:` + valueToString(this.Field14) + `,`,
-		`Field15:` + valueToString(this.Field15) + `,`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
+		`Field3:` + valueToStringThetest(this.Field3) + `,`,
+		`Field4:` + valueToStringThetest(this.Field4) + `,`,
+		`Field5:` + valueToStringThetest(this.Field5) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field13:` + valueToStringThetest(this.Field13) + `,`,
+		`Field14:` + valueToStringThetest(this.Field14) + `,`,
+		`Field15:` + valueToStringThetest(this.Field15) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -955,15 +6185,15 @@ func (this *NinOptStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinOptStructUnion{`,
-		`Field1:` + valueToString(this.Field1) + `,`,
-		`Field2:` + valueToString(this.Field2) + `,`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
-		`Field6:` + valueToString(this.Field6) + `,`,
-		`Field7:` + valueToString(this.Field7) + `,`,
-		`Field13:` + valueToString(this.Field13) + `,`,
-		`Field14:` + valueToString(this.Field14) + `,`,
-		`Field15:` + valueToString(this.Field15) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field7:` + valueToStringThetest(this.Field7) + `,`,
+		`Field13:` + valueToStringThetest(this.Field13) + `,`,
+		`Field14:` + valueToStringThetest(this.Field14) + `,`,
+		`Field15:` + valueToStringThetest(this.Field15) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -975,7 +6205,7 @@ func (this *NinEmbeddedStructUnion) String() string {
 	s := strings.Join([]string{`&NinEmbeddedStructUnion{`,
 		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NinOptNative", "NinOptNative", 1) + `,`,
-		`Field210:` + valueToString(this.Field210) + `,`,
+		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1089,7 +6319,59 @@ func (this *Nil) String() string {
 	}, "")
 	return s
 }
-func valueToString(v interface{}) string {
+func (this *NidOptEnum) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NidOptEnum{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *NinOptEnum) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NinOptEnum{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *NidRepEnum) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NidRepEnum{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *NinRepEnum) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NinRepEnum{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Timer) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Timer{`,
+		`Time1:` + fmt.Sprintf("%v", this.Time1) + `,`,
+		`Time2:` + fmt.Sprintf("%v", this.Time2) + `,`,
+		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringThetest(v interface{}) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
 		return "nil"
@@ -1097,7 +6379,882 @@ func valueToString(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func NewPopulatedNidOptNative(r randy) *NidOptNative {
+func (m *NidOptNative) Size() (n int) {
+	var l int
+	_ = l
+	n += 9
+	n += 5
+	n += 1 + sovThetest(uint64(m.Field3))
+	n += 1 + sovThetest(uint64(m.Field4))
+	n += 1 + sovThetest(uint64(m.Field5))
+	n += 1 + sovThetest(uint64(m.Field6))
+	n += 1 + sozThetest(uint64(m.Field7))
+	n += 1 + sozThetest(uint64(m.Field8))
+	n += 5
+	n += 5
+	n += 9
+	n += 9
+	n += 2
+	l = len([]byte(m.Field14))
+	n += 1 + l + sovThetest(uint64(l))
+	l = len(m.Field15)
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *NinOptNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		n += 1 + sovThetest(uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		n += 1 + sovThetest(uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		n += 1 + sovThetest(uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovThetest(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 1 + sozThetest(uint64(*m.Field7))
+	}
+	if m.Field8 != nil {
+		n += 1 + sozThetest(uint64(*m.Field8))
+	}
+	if m.Field9 != nil {
+		n += 5
+	}
+	if m.Field10 != nil {
+		n += 5
+	}
+	if m.Field11 != nil {
+		n += 9
+	}
+	if m.Field12 != nil {
+		n += 9
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len([]byte(*m.Field14))
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *NidRepNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9 * len(m.Field1)
+	}
+	if m.Field2 != nil {
+		n += 5 * len(m.Field2)
+	}
+	if m.Field3 != nil {
+		for _, e := range m.Field3 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field4 != nil {
+		for _, e := range m.Field4 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field5 != nil {
+		for _, e := range m.Field5 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field6 != nil {
+		for _, e := range m.Field6 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field7 != nil {
+		for _, e := range m.Field7 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field8 != nil {
+		for _, e := range m.Field8 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field9 != nil {
+		n += 5 * len(m.Field9)
+	}
+	if m.Field10 != nil {
+		n += 5 * len(m.Field10)
+	}
+	if m.Field11 != nil {
+		n += 9 * len(m.Field11)
+	}
+	if m.Field12 != nil {
+		n += 9 * len(m.Field12)
+	}
+	if m.Field13 != nil {
+		n += 2 * len(m.Field13)
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			l = len([]byte(s))
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NinRepNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9 * len(m.Field1)
+	}
+	if m.Field2 != nil {
+		n += 5 * len(m.Field2)
+	}
+	if m.Field3 != nil {
+		for _, e := range m.Field3 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field4 != nil {
+		for _, e := range m.Field4 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field5 != nil {
+		for _, e := range m.Field5 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field6 != nil {
+		for _, e := range m.Field6 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field7 != nil {
+		for _, e := range m.Field7 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field8 != nil {
+		for _, e := range m.Field8 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field9 != nil {
+		n += 5 * len(m.Field9)
+	}
+	if m.Field10 != nil {
+		n += 5 * len(m.Field10)
+	}
+	if m.Field11 != nil {
+		n += 9 * len(m.Field11)
+	}
+	if m.Field12 != nil {
+		n += 9 * len(m.Field12)
+	}
+	if m.Field13 != nil {
+		n += 2 * len(m.Field13)
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			l = len([]byte(s))
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NidRepPackedNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field1)*8)) + len(m.Field1)*8
+	}
+	if m.Field2 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field2)*4)) + len(m.Field2)*4
+	}
+	if m.Field3 != nil {
+		l = 0
+		for _, e := range m.Field3 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field4 != nil {
+		l = 0
+		for _, e := range m.Field4 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field5 != nil {
+		l = 0
+		for _, e := range m.Field5 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field6 != nil {
+		l = 0
+		for _, e := range m.Field6 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field7 != nil {
+		l = 0
+		for _, e := range m.Field7 {
+			l += sozThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field8 != nil {
+		l = 0
+		for _, e := range m.Field8 {
+			l += sozThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field9 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field9)*4)) + len(m.Field9)*4
+	}
+	if m.Field10 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field10)*4)) + len(m.Field10)*4
+	}
+	if m.Field11 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field11)*8)) + len(m.Field11)*8
+	}
+	if m.Field12 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field12)*8)) + len(m.Field12)*8
+	}
+	if m.Field13 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
+	}
+	return n
+}
+func (m *NinRepPackedNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field1)*8)) + len(m.Field1)*8
+	}
+	if m.Field2 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field2)*4)) + len(m.Field2)*4
+	}
+	if m.Field3 != nil {
+		l = 0
+		for _, e := range m.Field3 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field4 != nil {
+		l = 0
+		for _, e := range m.Field4 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field5 != nil {
+		l = 0
+		for _, e := range m.Field5 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field6 != nil {
+		l = 0
+		for _, e := range m.Field6 {
+			l += sovThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field7 != nil {
+		l = 0
+		for _, e := range m.Field7 {
+			l += sozThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field8 != nil {
+		l = 0
+		for _, e := range m.Field8 {
+			l += sozThetest(uint64(e))
+		}
+		n += 1 + sovThetest(uint64(l)) + l
+	}
+	if m.Field9 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field9)*4)) + len(m.Field9)*4
+	}
+	if m.Field10 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field10)*4)) + len(m.Field10)*4
+	}
+	if m.Field11 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field11)*8)) + len(m.Field11)*8
+	}
+	if m.Field12 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field12)*8)) + len(m.Field12)*8
+	}
+	if m.Field13 != nil {
+		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
+	}
+	return n
+}
+func (m *NidOptStruct) Size() (n int) {
+	var l int
+	_ = l
+	n += 9
+	n += 5
+	l = m.Field3.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	l = m.Field4.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	n += 1 + sovThetest(uint64(m.Field6))
+	n += 1 + sozThetest(uint64(m.Field7))
+	l = m.Field8.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	n += 2
+	l = len([]byte(m.Field14))
+	n += 1 + l + sovThetest(uint64(l))
+	l = len(m.Field15)
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *NinOptStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		l = m.Field3.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field4 != nil {
+		l = m.Field4.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovThetest(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 1 + sozThetest(uint64(*m.Field7))
+	}
+	if m.Field8 != nil {
+		l = m.Field8.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len([]byte(*m.Field14))
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *NidRepStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9 * len(m.Field1)
+	}
+	if m.Field2 != nil {
+		n += 5 * len(m.Field2)
+	}
+	if m.Field3 != nil {
+		for _, e := range m.Field3 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field4 != nil {
+		for _, e := range m.Field4 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field6 != nil {
+		for _, e := range m.Field6 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field7 != nil {
+		for _, e := range m.Field7 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field8 != nil {
+		for _, e := range m.Field8 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field13 != nil {
+		n += 2 * len(m.Field13)
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			l = len([]byte(s))
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NinRepStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9 * len(m.Field1)
+	}
+	if m.Field2 != nil {
+		n += 5 * len(m.Field2)
+	}
+	if m.Field3 != nil {
+		for _, e := range m.Field3 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field4 != nil {
+		for _, e := range m.Field4 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field6 != nil {
+		for _, e := range m.Field6 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	if m.Field7 != nil {
+		for _, e := range m.Field7 {
+			n += 1 + sozThetest(uint64(e))
+		}
+	}
+	if m.Field8 != nil {
+		for _, e := range m.Field8 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field13 != nil {
+		n += 2 * len(m.Field13)
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			l = len([]byte(s))
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NidEmbeddedStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		l = m.NidOptNative.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	l = m.Field200.Size()
+	n += 2 + l + sovThetest(uint64(l))
+	n += 3
+	return n
+}
+func (m *NinEmbeddedStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		l = m.NidOptNative.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field200 != nil {
+		l = m.Field200.Size()
+		n += 2 + l + sovThetest(uint64(l))
+	}
+	if m.Field210 != nil {
+		n += 3
+	}
+	return n
+}
+func (m *NidNestedStruct) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Field1.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	if m.Field2 != nil {
+		for _, e := range m.Field2 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NinNestedStruct) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		l = m.Field1.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field2 != nil {
+		for _, e := range m.Field2 {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NidOptCustom) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Id.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	l = m.Value.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *NinOptCustom) Size() (n int) {
+	var l int
+	_ = l
+	if m.Id != nil {
+		l = m.Id.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Value != nil {
+		l = m.Value.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *NidRepCustom) Size() (n int) {
+	var l int
+	_ = l
+	if m.Id != nil {
+		for _, e := range m.Id {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Value != nil {
+		for _, e := range m.Value {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NinRepCustom) Size() (n int) {
+	var l int
+	_ = l
+	if m.Id != nil {
+		for _, e := range m.Id {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	if m.Value != nil {
+		for _, e := range m.Value {
+			l = e.Size()
+			n += 1 + l + sovThetest(uint64(l))
+		}
+	}
+	return n
+}
+func (m *NinOptNativeUnion) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		n += 1 + sovThetest(uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		n += 1 + sovThetest(uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		n += 1 + sovThetest(uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovThetest(uint64(*m.Field6))
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len([]byte(*m.Field14))
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *NinOptStructUnion) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		l = m.Field3.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field4 != nil {
+		l = m.Field4.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovThetest(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 1 + sozThetest(uint64(*m.Field7))
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len([]byte(*m.Field14))
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *NinEmbeddedStructUnion) Size() (n int) {
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		l = m.NidOptNative.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field200 != nil {
+		l = m.Field200.Size()
+		n += 2 + l + sovThetest(uint64(l))
+	}
+	if m.Field210 != nil {
+		n += 3
+	}
+	return n
+}
+func (m *NinNestedStructUnion) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		l = m.Field1.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field2 != nil {
+		l = m.Field2.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field3 != nil {
+		l = m.Field3.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *Tree) Size() (n int) {
+	var l int
+	_ = l
+	if m.Or != nil {
+		l = m.Or.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.And != nil {
+		l = m.And.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Leaf != nil {
+		l = m.Leaf.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *OrBranch) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Left.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	l = m.Right.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *AndBranch) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Left.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	l = m.Right.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *Leaf) Size() (n int) {
+	var l int
+	_ = l
+	n += 1 + sovThetest(uint64(m.Value))
+	l = len([]byte(m.StrValue))
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *DeepTree) Size() (n int) {
+	var l int
+	_ = l
+	if m.Down != nil {
+		l = m.Down.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.And != nil {
+		l = m.And.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Leaf != nil {
+		l = m.Leaf.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	return n
+}
+func (m *ADeepBranch) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Down.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *AndDeepBranch) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Left.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	l = m.Right.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *DeepLeaf) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Tree.Size()
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+func (m *Nil) Size() (n int) {
+	var l int
+	_ = l
+	return n
+}
+func (m *NidOptEnum) Size() (n int) {
+	var l int
+	_ = l
+	n += 1 + sovThetest(uint64(m.Field1))
+	return n
+}
+func (m *NinOptEnum) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	return n
+}
+func (m *NidRepEnum) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, e := range m.Field1 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	return n
+}
+func (m *NinRepEnum) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, e := range m.Field1 {
+			n += 1 + sovThetest(uint64(e))
+		}
+	}
+	return n
+}
+func (m *Timer) Size() (n int) {
+	var l int
+	_ = l
+	n += 9
+	n += 9
+	l = len(m.Data)
+	n += 1 + l + sovThetest(uint64(l))
+	return n
+}
+
+func sovThetest(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozThetest(x uint64) (n int) {
+	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func NewPopulatedNidOptNative(r randyThetest) *NidOptNative {
 	this := &NidOptNative{}
 	this.Field1 = r.Float64()
 	this.Field2 = r.Float32()
@@ -1112,7 +7269,7 @@ func NewPopulatedNidOptNative(r randy) *NidOptNative {
 	this.Field11 = uint64(r.Uint32())
 	this.Field12 = r.Int63()
 	this.Field13 = bool(r.Intn(2) == 0)
-	this.Field14 = randString(r)
+	this.Field14 = randStringThetest(r)
 	v1 := r.Intn(100)
 	this.Field15 = make([]byte, v1)
 	for i := 0; i < v1; i++ {
@@ -1121,7 +7278,7 @@ func NewPopulatedNidOptNative(r randy) *NidOptNative {
 	return this
 }
 
-func NewPopulatedNinOptNative(r randy) *NinOptNative {
+func NewPopulatedNinOptNative(r randyThetest) *NinOptNative {
 	this := &NinOptNative{}
 	if r.Intn(10) != 0 {
 		v2 := r.Float64()
@@ -1176,7 +7333,7 @@ func NewPopulatedNinOptNative(r randy) *NinOptNative {
 		this.Field13 = &v14
 	}
 	if r.Intn(10) != 0 {
-		v15 := randString(r)
+		v15 := randStringThetest(r)
 		this.Field14 = &v15
 	}
 	if r.Intn(10) != 0 {
@@ -1189,7 +7346,7 @@ func NewPopulatedNinOptNative(r randy) *NinOptNative {
 	return this
 }
 
-func NewPopulatedNidRepNative(r randy) *NidRepNative {
+func NewPopulatedNidRepNative(r randyThetest) *NidRepNative {
 	this := &NidRepNative{}
 	if r.Intn(10) != 0 {
 		v17 := r.Intn(100)
@@ -1286,7 +7443,7 @@ func NewPopulatedNidRepNative(r randy) *NidRepNative {
 		v30 := r.Intn(10)
 		this.Field14 = make([]string, v30)
 		for i := 0; i < v30; i++ {
-			this.Field14[i] = randString(r)
+			this.Field14[i] = randStringThetest(r)
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -1303,7 +7460,7 @@ func NewPopulatedNidRepNative(r randy) *NidRepNative {
 	return this
 }
 
-func NewPopulatedNinRepNative(r randy) *NinRepNative {
+func NewPopulatedNinRepNative(r randyThetest) *NinRepNative {
 	this := &NinRepNative{}
 	if r.Intn(10) != 0 {
 		v33 := r.Intn(100)
@@ -1400,7 +7557,7 @@ func NewPopulatedNinRepNative(r randy) *NinRepNative {
 		v46 := r.Intn(10)
 		this.Field14 = make([]string, v46)
 		for i := 0; i < v46; i++ {
-			this.Field14[i] = randString(r)
+			this.Field14[i] = randStringThetest(r)
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -1417,89 +7574,229 @@ func NewPopulatedNinRepNative(r randy) *NinRepNative {
 	return this
 }
 
-func NewPopulatedNidRepPackedNative(r randy) *NidRepPackedNative {
+func NewPopulatedNidRepPackedNative(r randyThetest) *NidRepPackedNative {
 	this := &NidRepPackedNative{}
 	if r.Intn(10) != 0 {
 		v49 := r.Intn(100)
-		this.Field3 = make([]int32, v49)
+		this.Field1 = make([]float64, v49)
 		for i := 0; i < v49; i++ {
-			this.Field3[i] = r.Int31()
+			this.Field1[i] = r.Float64()
 		}
 	}
 	if r.Intn(10) != 0 {
 		v50 := r.Intn(100)
-		this.Field4 = make([]int64, v50)
+		this.Field2 = make([]float32, v50)
 		for i := 0; i < v50; i++ {
-			this.Field4[i] = r.Int63()
+			this.Field2[i] = r.Float32()
 		}
 	}
 	if r.Intn(10) != 0 {
 		v51 := r.Intn(100)
-		this.Field13 = make([]bool, v51)
+		this.Field3 = make([]int32, v51)
 		for i := 0; i < v51; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
-		}
-	}
-	return this
-}
-
-func NewPopulatedNinRepPackedNative(r randy) *NinRepPackedNative {
-	this := &NinRepPackedNative{}
-	if r.Intn(10) != 0 {
-		v52 := r.Intn(100)
-		this.Field3 = make([]int32, v52)
-		for i := 0; i < v52; i++ {
 			this.Field3[i] = r.Int31()
 		}
 	}
 	if r.Intn(10) != 0 {
-		v53 := r.Intn(100)
-		this.Field4 = make([]int64, v53)
-		for i := 0; i < v53; i++ {
+		v52 := r.Intn(100)
+		this.Field4 = make([]int64, v52)
+		for i := 0; i < v52; i++ {
 			this.Field4[i] = r.Int63()
 		}
 	}
 	if r.Intn(10) != 0 {
+		v53 := r.Intn(100)
+		this.Field5 = make([]uint32, v53)
+		for i := 0; i < v53; i++ {
+			this.Field5[i] = r.Uint32()
+		}
+	}
+	if r.Intn(10) != 0 {
 		v54 := r.Intn(100)
-		this.Field13 = make([]bool, v54)
+		this.Field6 = make([]uint64, v54)
 		for i := 0; i < v54; i++ {
+			this.Field6[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v55 := r.Intn(100)
+		this.Field7 = make([]int32, v55)
+		for i := 0; i < v55; i++ {
+			this.Field7[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v56 := r.Intn(100)
+		this.Field8 = make([]int64, v56)
+		for i := 0; i < v56; i++ {
+			this.Field8[i] = r.Int63()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v57 := r.Intn(100)
+		this.Field9 = make([]uint32, v57)
+		for i := 0; i < v57; i++ {
+			this.Field9[i] = r.Uint32()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v58 := r.Intn(100)
+		this.Field10 = make([]int32, v58)
+		for i := 0; i < v58; i++ {
+			this.Field10[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v59 := r.Intn(100)
+		this.Field11 = make([]uint64, v59)
+		for i := 0; i < v59; i++ {
+			this.Field11[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v60 := r.Intn(100)
+		this.Field12 = make([]int64, v60)
+		for i := 0; i < v60; i++ {
+			this.Field12[i] = r.Int63()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v61 := r.Intn(100)
+		this.Field13 = make([]bool, v61)
+		for i := 0; i < v61; i++ {
 			this.Field13[i] = bool(r.Intn(2) == 0)
 		}
 	}
 	return this
 }
 
-func NewPopulatedNidOptStruct(r randy) *NidOptStruct {
+func NewPopulatedNinRepPackedNative(r randyThetest) *NinRepPackedNative {
+	this := &NinRepPackedNative{}
+	if r.Intn(10) != 0 {
+		v62 := r.Intn(100)
+		this.Field1 = make([]float64, v62)
+		for i := 0; i < v62; i++ {
+			this.Field1[i] = r.Float64()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v63 := r.Intn(100)
+		this.Field2 = make([]float32, v63)
+		for i := 0; i < v63; i++ {
+			this.Field2[i] = r.Float32()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v64 := r.Intn(100)
+		this.Field3 = make([]int32, v64)
+		for i := 0; i < v64; i++ {
+			this.Field3[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v65 := r.Intn(100)
+		this.Field4 = make([]int64, v65)
+		for i := 0; i < v65; i++ {
+			this.Field4[i] = r.Int63()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v66 := r.Intn(100)
+		this.Field5 = make([]uint32, v66)
+		for i := 0; i < v66; i++ {
+			this.Field5[i] = r.Uint32()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v67 := r.Intn(100)
+		this.Field6 = make([]uint64, v67)
+		for i := 0; i < v67; i++ {
+			this.Field6[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v68 := r.Intn(100)
+		this.Field7 = make([]int32, v68)
+		for i := 0; i < v68; i++ {
+			this.Field7[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v69 := r.Intn(100)
+		this.Field8 = make([]int64, v69)
+		for i := 0; i < v69; i++ {
+			this.Field8[i] = r.Int63()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v70 := r.Intn(100)
+		this.Field9 = make([]uint32, v70)
+		for i := 0; i < v70; i++ {
+			this.Field9[i] = r.Uint32()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v71 := r.Intn(100)
+		this.Field10 = make([]int32, v71)
+		for i := 0; i < v71; i++ {
+			this.Field10[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v72 := r.Intn(100)
+		this.Field11 = make([]uint64, v72)
+		for i := 0; i < v72; i++ {
+			this.Field11[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v73 := r.Intn(100)
+		this.Field12 = make([]int64, v73)
+		for i := 0; i < v73; i++ {
+			this.Field12[i] = r.Int63()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v74 := r.Intn(100)
+		this.Field13 = make([]bool, v74)
+		for i := 0; i < v74; i++ {
+			this.Field13[i] = bool(r.Intn(2) == 0)
+		}
+	}
+	return this
+}
+
+func NewPopulatedNidOptStruct(r randyThetest) *NidOptStruct {
 	this := &NidOptStruct{}
 	this.Field1 = r.Float64()
 	this.Field2 = r.Float32()
-	v55 := NewPopulatedNidOptNative(r)
-	this.Field3 = *v55
-	v56 := NewPopulatedNinOptNative(r)
-	this.Field4 = *v56
+	v75 := NewPopulatedNidOptNative(r)
+	this.Field3 = *v75
+	v76 := NewPopulatedNinOptNative(r)
+	this.Field4 = *v76
 	this.Field6 = uint64(r.Uint32())
 	this.Field7 = r.Int31()
-	v57 := NewPopulatedNidOptNative(r)
-	this.Field8 = *v57
+	v77 := NewPopulatedNidOptNative(r)
+	this.Field8 = *v77
 	this.Field13 = bool(r.Intn(2) == 0)
-	this.Field14 = randString(r)
-	v58 := r.Intn(100)
-	this.Field15 = make([]byte, v58)
-	for i := 0; i < v58; i++ {
+	this.Field14 = randStringThetest(r)
+	v78 := r.Intn(100)
+	this.Field15 = make([]byte, v78)
+	for i := 0; i < v78; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	return this
 }
 
-func NewPopulatedNinOptStruct(r randy) *NinOptStruct {
+func NewPopulatedNinOptStruct(r randyThetest) *NinOptStruct {
 	this := &NinOptStruct{}
 	if r.Intn(10) != 0 {
-		v59 := r.Float64()
-		this.Field1 = &v59
+		v79 := r.Float64()
+		this.Field1 = &v79
 	}
 	if r.Intn(10) != 0 {
-		v60 := r.Float32()
-		this.Field2 = &v60
+		v80 := r.Float32()
+		this.Field2 = &v80
 	}
 	if r.Intn(10) != 0 {
 		this.Field3 = NewPopulatedNidOptNative(r)
@@ -1508,188 +7805,109 @@ func NewPopulatedNinOptStruct(r randy) *NinOptStruct {
 		this.Field4 = NewPopulatedNinOptNative(r)
 	}
 	if r.Intn(10) != 0 {
-		v61 := uint64(r.Uint32())
-		this.Field6 = &v61
+		v81 := uint64(r.Uint32())
+		this.Field6 = &v81
 	}
 	if r.Intn(10) != 0 {
-		v62 := r.Int31()
-		this.Field7 = &v62
+		v82 := r.Int31()
+		this.Field7 = &v82
 	}
 	if r.Intn(10) != 0 {
 		this.Field8 = NewPopulatedNidOptNative(r)
 	}
 	if r.Intn(10) != 0 {
-		v63 := bool(r.Intn(2) == 0)
-		this.Field13 = &v63
+		v83 := bool(r.Intn(2) == 0)
+		this.Field13 = &v83
 	}
 	if r.Intn(10) != 0 {
-		v64 := randString(r)
-		this.Field14 = &v64
+		v84 := randStringThetest(r)
+		this.Field14 = &v84
 	}
 	if r.Intn(10) != 0 {
-		v65 := r.Intn(100)
-		this.Field15 = make([]byte, v65)
-		for i := 0; i < v65; i++ {
+		v85 := r.Intn(100)
+		this.Field15 = make([]byte, v85)
+		for i := 0; i < v85; i++ {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
 	return this
 }
 
-func NewPopulatedNidRepStruct(r randy) *NidRepStruct {
+func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
 	this := &NidRepStruct{}
 	if r.Intn(10) != 0 {
-		v66 := r.Intn(100)
-		this.Field1 = make([]float64, v66)
-		for i := 0; i < v66; i++ {
-			this.Field1[i] = r.Float64()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v67 := r.Intn(100)
-		this.Field2 = make([]float32, v67)
-		for i := 0; i < v67; i++ {
-			this.Field2[i] = r.Float32()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v68 := r.Intn(10)
-		this.Field3 = make([]NidOptNative, v68)
-		for i := 0; i < v68; i++ {
-			v69 := NewPopulatedNidOptNative(r)
-			this.Field3[i] = *v69
-		}
-	}
-	if r.Intn(10) != 0 {
-		v70 := r.Intn(10)
-		this.Field4 = make([]NinOptNative, v70)
-		for i := 0; i < v70; i++ {
-			v71 := NewPopulatedNinOptNative(r)
-			this.Field4[i] = *v71
-		}
-	}
-	if r.Intn(10) != 0 {
-		v72 := r.Intn(100)
-		this.Field6 = make([]uint64, v72)
-		for i := 0; i < v72; i++ {
-			this.Field6[i] = uint64(r.Uint32())
-		}
-	}
-	if r.Intn(10) != 0 {
-		v73 := r.Intn(100)
-		this.Field7 = make([]int32, v73)
-		for i := 0; i < v73; i++ {
-			this.Field7[i] = r.Int31()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v74 := r.Intn(10)
-		this.Field8 = make([]NidOptNative, v74)
-		for i := 0; i < v74; i++ {
-			v75 := NewPopulatedNidOptNative(r)
-			this.Field8[i] = *v75
-		}
-	}
-	if r.Intn(10) != 0 {
-		v76 := r.Intn(100)
-		this.Field13 = make([]bool, v76)
-		for i := 0; i < v76; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v77 := r.Intn(10)
-		this.Field14 = make([]string, v77)
-		for i := 0; i < v77; i++ {
-			this.Field14[i] = randString(r)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v78 := r.Intn(100)
-		this.Field15 = make([][]byte, v78)
-		for i := 0; i < v78; i++ {
-			v79 := r.Intn(100)
-			this.Field15[i] = make([]byte, v79)
-			for j := 0; j < v79; j++ {
-				this.Field15[i][j] = byte(r.Intn(256))
-			}
-		}
-	}
-	return this
-}
-
-func NewPopulatedNinRepStruct(r randy) *NinRepStruct {
-	this := &NinRepStruct{}
-	if r.Intn(10) != 0 {
-		v80 := r.Intn(100)
-		this.Field1 = make([]float64, v80)
-		for i := 0; i < v80; i++ {
-			this.Field1[i] = r.Float64()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v81 := r.Intn(100)
-		this.Field2 = make([]float32, v81)
-		for i := 0; i < v81; i++ {
-			this.Field2[i] = r.Float32()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v82 := r.Intn(10)
-		this.Field3 = make([]*NidOptNative, v82)
-		for i := 0; i < v82; i++ {
-			this.Field3[i] = NewPopulatedNidOptNative(r)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v83 := r.Intn(10)
-		this.Field4 = make([]*NinOptNative, v83)
-		for i := 0; i < v83; i++ {
-			this.Field4[i] = NewPopulatedNinOptNative(r)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v84 := r.Intn(100)
-		this.Field6 = make([]uint64, v84)
-		for i := 0; i < v84; i++ {
-			this.Field6[i] = uint64(r.Uint32())
-		}
-	}
-	if r.Intn(10) != 0 {
-		v85 := r.Intn(100)
-		this.Field7 = make([]int32, v85)
-		for i := 0; i < v85; i++ {
-			this.Field7[i] = r.Int31()
-		}
-	}
-	if r.Intn(10) != 0 {
-		v86 := r.Intn(10)
-		this.Field8 = make([]*NidOptNative, v86)
+		v86 := r.Intn(100)
+		this.Field1 = make([]float64, v86)
 		for i := 0; i < v86; i++ {
-			this.Field8[i] = NewPopulatedNidOptNative(r)
+			this.Field1[i] = r.Float64()
 		}
 	}
 	if r.Intn(10) != 0 {
 		v87 := r.Intn(100)
-		this.Field13 = make([]bool, v87)
+		this.Field2 = make([]float32, v87)
 		for i := 0; i < v87; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
+			this.Field2[i] = r.Float32()
 		}
 	}
 	if r.Intn(10) != 0 {
 		v88 := r.Intn(10)
-		this.Field14 = make([]string, v88)
+		this.Field3 = make([]NidOptNative, v88)
 		for i := 0; i < v88; i++ {
-			this.Field14[i] = randString(r)
+			v89 := NewPopulatedNidOptNative(r)
+			this.Field3[i] = *v89
 		}
 	}
 	if r.Intn(10) != 0 {
-		v89 := r.Intn(100)
-		this.Field15 = make([][]byte, v89)
-		for i := 0; i < v89; i++ {
-			v90 := r.Intn(100)
-			this.Field15[i] = make([]byte, v90)
-			for j := 0; j < v90; j++ {
+		v90 := r.Intn(10)
+		this.Field4 = make([]NinOptNative, v90)
+		for i := 0; i < v90; i++ {
+			v91 := NewPopulatedNinOptNative(r)
+			this.Field4[i] = *v91
+		}
+	}
+	if r.Intn(10) != 0 {
+		v92 := r.Intn(100)
+		this.Field6 = make([]uint64, v92)
+		for i := 0; i < v92; i++ {
+			this.Field6[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v93 := r.Intn(100)
+		this.Field7 = make([]int32, v93)
+		for i := 0; i < v93; i++ {
+			this.Field7[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v94 := r.Intn(10)
+		this.Field8 = make([]NidOptNative, v94)
+		for i := 0; i < v94; i++ {
+			v95 := NewPopulatedNidOptNative(r)
+			this.Field8[i] = *v95
+		}
+	}
+	if r.Intn(10) != 0 {
+		v96 := r.Intn(100)
+		this.Field13 = make([]bool, v96)
+		for i := 0; i < v96; i++ {
+			this.Field13[i] = bool(r.Intn(2) == 0)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v97 := r.Intn(10)
+		this.Field14 = make([]string, v97)
+		for i := 0; i < v97; i++ {
+			this.Field14[i] = randStringThetest(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v98 := r.Intn(100)
+		this.Field15 = make([][]byte, v98)
+		for i := 0; i < v98; i++ {
+			v99 := r.Intn(100)
+			this.Field15[i] = make([]byte, v99)
+			for j := 0; j < v99; j++ {
 				this.Field15[i][j] = byte(r.Intn(256))
 			}
 		}
@@ -1697,17 +7915,97 @@ func NewPopulatedNinRepStruct(r randy) *NinRepStruct {
 	return this
 }
 
-func NewPopulatedNidEmbeddedStruct(r randy) *NidEmbeddedStruct {
+func NewPopulatedNinRepStruct(r randyThetest) *NinRepStruct {
+	this := &NinRepStruct{}
+	if r.Intn(10) != 0 {
+		v100 := r.Intn(100)
+		this.Field1 = make([]float64, v100)
+		for i := 0; i < v100; i++ {
+			this.Field1[i] = r.Float64()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v101 := r.Intn(100)
+		this.Field2 = make([]float32, v101)
+		for i := 0; i < v101; i++ {
+			this.Field2[i] = r.Float32()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v102 := r.Intn(10)
+		this.Field3 = make([]*NidOptNative, v102)
+		for i := 0; i < v102; i++ {
+			this.Field3[i] = NewPopulatedNidOptNative(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v103 := r.Intn(10)
+		this.Field4 = make([]*NinOptNative, v103)
+		for i := 0; i < v103; i++ {
+			this.Field4[i] = NewPopulatedNinOptNative(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v104 := r.Intn(100)
+		this.Field6 = make([]uint64, v104)
+		for i := 0; i < v104; i++ {
+			this.Field6[i] = uint64(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v105 := r.Intn(100)
+		this.Field7 = make([]int32, v105)
+		for i := 0; i < v105; i++ {
+			this.Field7[i] = r.Int31()
+		}
+	}
+	if r.Intn(10) != 0 {
+		v106 := r.Intn(10)
+		this.Field8 = make([]*NidOptNative, v106)
+		for i := 0; i < v106; i++ {
+			this.Field8[i] = NewPopulatedNidOptNative(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v107 := r.Intn(100)
+		this.Field13 = make([]bool, v107)
+		for i := 0; i < v107; i++ {
+			this.Field13[i] = bool(r.Intn(2) == 0)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v108 := r.Intn(10)
+		this.Field14 = make([]string, v108)
+		for i := 0; i < v108; i++ {
+			this.Field14[i] = randStringThetest(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v109 := r.Intn(100)
+		this.Field15 = make([][]byte, v109)
+		for i := 0; i < v109; i++ {
+			v110 := r.Intn(100)
+			this.Field15[i] = make([]byte, v110)
+			for j := 0; j < v110; j++ {
+				this.Field15[i][j] = byte(r.Intn(256))
+			}
+		}
+	}
+	return this
+}
+
+func NewPopulatedNidEmbeddedStruct(r randyThetest) *NidEmbeddedStruct {
 	this := &NidEmbeddedStruct{}
-	v91 := NewPopulatedNidOptNative(r)
-	this.NidOptNative = *v91
-	v92 := NewPopulatedNidOptNative(r)
-	this.Field200 = *v92
+	if r.Intn(10) != 0 {
+		this.NidOptNative = NewPopulatedNidOptNative(r)
+	}
+	v111 := NewPopulatedNidOptNative(r)
+	this.Field200 = *v111
 	this.Field210 = bool(r.Intn(2) == 0)
 	return this
 }
 
-func NewPopulatedNinEmbeddedStruct(r randy) *NinEmbeddedStruct {
+func NewPopulatedNinEmbeddedStruct(r randyThetest) *NinEmbeddedStruct {
 	this := &NinEmbeddedStruct{}
 	if r.Intn(10) != 0 {
 		this.NidOptNative = NewPopulatedNidOptNative(r)
@@ -1716,52 +8014,52 @@ func NewPopulatedNinEmbeddedStruct(r randy) *NinEmbeddedStruct {
 		this.Field200 = NewPopulatedNidOptNative(r)
 	}
 	if r.Intn(10) != 0 {
-		v93 := bool(r.Intn(2) == 0)
-		this.Field210 = &v93
+		v112 := bool(r.Intn(2) == 0)
+		this.Field210 = &v112
 	}
 	return this
 }
 
-func NewPopulatedNidNestedStruct(r randy) *NidNestedStruct {
+func NewPopulatedNidNestedStruct(r randyThetest) *NidNestedStruct {
 	this := &NidNestedStruct{}
-	v94 := NewPopulatedNidOptStruct(r)
-	this.Field1 = *v94
+	v113 := NewPopulatedNidOptStruct(r)
+	this.Field1 = *v113
 	if r.Intn(10) != 0 {
-		v95 := r.Intn(10)
-		this.Field2 = make([]NidRepStruct, v95)
-		for i := 0; i < v95; i++ {
-			v96 := NewPopulatedNidRepStruct(r)
-			this.Field2[i] = *v96
+		v114 := r.Intn(10)
+		this.Field2 = make([]NidRepStruct, v114)
+		for i := 0; i < v114; i++ {
+			v115 := NewPopulatedNidRepStruct(r)
+			this.Field2[i] = *v115
 		}
 	}
 	return this
 }
 
-func NewPopulatedNinNestedStruct(r randy) *NinNestedStruct {
+func NewPopulatedNinNestedStruct(r randyThetest) *NinNestedStruct {
 	this := &NinNestedStruct{}
 	if r.Intn(10) != 0 {
 		this.Field1 = NewPopulatedNidOptStruct(r)
 	}
 	if r.Intn(10) != 0 {
-		v97 := r.Intn(10)
-		this.Field2 = make([]*NidRepStruct, v97)
-		for i := 0; i < v97; i++ {
+		v116 := r.Intn(10)
+		this.Field2 = make([]*NidRepStruct, v116)
+		for i := 0; i < v116; i++ {
 			this.Field2[i] = NewPopulatedNidRepStruct(r)
 		}
 	}
 	return this
 }
 
-func NewPopulatedNidOptCustom(r randy) *NidOptCustom {
+func NewPopulatedNidOptCustom(r randyThetest) *NidOptCustom {
 	this := &NidOptCustom{}
-	v98 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
-	this.Id = *v98
-	v99 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
-	this.Value = *v99
+	v117 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
+	this.Id = *v117
+	v118 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+	this.Value = *v118
 	return this
 }
 
-func NewPopulatedNinOptCustom(r randy) *NinOptCustom {
+func NewPopulatedNinOptCustom(r randyThetest) *NinOptCustom {
 	this := &NinOptCustom{}
 	if r.Intn(10) != 0 {
 		this.Id = code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
@@ -1772,123 +8070,123 @@ func NewPopulatedNinOptCustom(r randy) *NinOptCustom {
 	return this
 }
 
-func NewPopulatedNidRepCustom(r randy) *NidRepCustom {
+func NewPopulatedNidRepCustom(r randyThetest) *NidRepCustom {
 	this := &NidRepCustom{}
 	if r.Intn(10) != 0 {
-		v100 := r.Intn(10)
-		this.Id = make([]code_google_com_p_gogoprotobuf_test_custom.Uuid, v100)
-		for i := 0; i < v100; i++ {
-			v101 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
-			this.Id[i] = *v101
+		v119 := r.Intn(10)
+		this.Id = make([]code_google_com_p_gogoprotobuf_test_custom.Uuid, v119)
+		for i := 0; i < v119; i++ {
+			v120 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
+			this.Id[i] = *v120
 		}
 	}
 	if r.Intn(10) != 0 {
-		v102 := r.Intn(10)
-		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v102)
-		for i := 0; i < v102; i++ {
-			v103 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
-			this.Value[i] = *v103
+		v121 := r.Intn(10)
+		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v121)
+		for i := 0; i < v121; i++ {
+			v122 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			this.Value[i] = *v122
 		}
 	}
 	return this
 }
 
-func NewPopulatedNinRepCustom(r randy) *NinRepCustom {
+func NewPopulatedNinRepCustom(r randyThetest) *NinRepCustom {
 	this := &NinRepCustom{}
 	if r.Intn(10) != 0 {
-		v104 := r.Intn(10)
-		this.Id = make([]code_google_com_p_gogoprotobuf_test_custom.Uuid, v104)
-		for i := 0; i < v104; i++ {
-			v105 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
-			this.Id[i] = *v105
+		v123 := r.Intn(10)
+		this.Id = make([]code_google_com_p_gogoprotobuf_test_custom.Uuid, v123)
+		for i := 0; i < v123; i++ {
+			v124 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
+			this.Id[i] = *v124
 		}
 	}
 	if r.Intn(10) != 0 {
-		v106 := r.Intn(10)
-		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v106)
-		for i := 0; i < v106; i++ {
-			v107 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
-			this.Value[i] = *v107
+		v125 := r.Intn(10)
+		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v125)
+		for i := 0; i < v125; i++ {
+			v126 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			this.Value[i] = *v126
 		}
 	}
 	return this
 }
 
-func NewPopulatedNinOptNativeUnion(r randy) *NinOptNativeUnion {
+func NewPopulatedNinOptNativeUnion(r randyThetest) *NinOptNativeUnion {
 	this := &NinOptNativeUnion{}
 	fieldNum := r.Intn(9)
 	switch fieldNum {
 	case 0:
-		v108 := r.Float64()
-		this.Field1 = &v108
+		v127 := r.Float64()
+		this.Field1 = &v127
 	case 1:
-		v109 := r.Float32()
-		this.Field2 = &v109
+		v128 := r.Float32()
+		this.Field2 = &v128
 	case 2:
-		v110 := r.Int31()
-		this.Field3 = &v110
+		v129 := r.Int31()
+		this.Field3 = &v129
 	case 3:
-		v111 := r.Int63()
-		this.Field4 = &v111
+		v130 := r.Int63()
+		this.Field4 = &v130
 	case 4:
-		v112 := r.Uint32()
-		this.Field5 = &v112
+		v131 := r.Uint32()
+		this.Field5 = &v131
 	case 5:
-		v113 := uint64(r.Uint32())
-		this.Field6 = &v113
+		v132 := uint64(r.Uint32())
+		this.Field6 = &v132
 	case 6:
-		v114 := bool(r.Intn(2) == 0)
-		this.Field13 = &v114
+		v133 := bool(r.Intn(2) == 0)
+		this.Field13 = &v133
 	case 7:
-		v115 := randString(r)
-		this.Field14 = &v115
+		v134 := randStringThetest(r)
+		this.Field14 = &v134
 	case 8:
-		v116 := r.Intn(100)
-		this.Field15 = make([]byte, v116)
-		for i := 0; i < v116; i++ {
+		v135 := r.Intn(100)
+		this.Field15 = make([]byte, v135)
+		for i := 0; i < v135; i++ {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
 	return this
 }
 
-func NewPopulatedNinOptStructUnion(r randy) *NinOptStructUnion {
+func NewPopulatedNinOptStructUnion(r randyThetest) *NinOptStructUnion {
 	this := &NinOptStructUnion{}
 	fieldNum := r.Intn(9)
 	switch fieldNum {
 	case 0:
-		v117 := r.Float64()
-		this.Field1 = &v117
+		v136 := r.Float64()
+		this.Field1 = &v136
 	case 1:
-		v118 := r.Float32()
-		this.Field2 = &v118
+		v137 := r.Float32()
+		this.Field2 = &v137
 	case 2:
 		this.Field3 = NewPopulatedNidOptNative(r)
 	case 3:
 		this.Field4 = NewPopulatedNinOptNative(r)
 	case 4:
-		v119 := uint64(r.Uint32())
-		this.Field6 = &v119
+		v138 := uint64(r.Uint32())
+		this.Field6 = &v138
 	case 5:
-		v120 := r.Int31()
-		this.Field7 = &v120
+		v139 := r.Int31()
+		this.Field7 = &v139
 	case 6:
-		v121 := bool(r.Intn(2) == 0)
-		this.Field13 = &v121
+		v140 := bool(r.Intn(2) == 0)
+		this.Field13 = &v140
 	case 7:
-		v122 := randString(r)
-		this.Field14 = &v122
+		v141 := randStringThetest(r)
+		this.Field14 = &v141
 	case 8:
-		v123 := r.Intn(100)
-		this.Field15 = make([]byte, v123)
-		for i := 0; i < v123; i++ {
+		v142 := r.Intn(100)
+		this.Field15 = make([]byte, v142)
+		for i := 0; i < v142; i++ {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
 	return this
 }
 
-func NewPopulatedNinEmbeddedStructUnion(r randy) *NinEmbeddedStructUnion {
+func NewPopulatedNinEmbeddedStructUnion(r randyThetest) *NinEmbeddedStructUnion {
 	this := &NinEmbeddedStructUnion{}
 	fieldNum := r.Intn(3)
 	switch fieldNum {
@@ -1897,13 +8195,13 @@ func NewPopulatedNinEmbeddedStructUnion(r randy) *NinEmbeddedStructUnion {
 	case 1:
 		this.Field200 = NewPopulatedNinOptNative(r)
 	case 2:
-		v124 := bool(r.Intn(2) == 0)
-		this.Field210 = &v124
+		v143 := bool(r.Intn(2) == 0)
+		this.Field210 = &v143
 	}
 	return this
 }
 
-func NewPopulatedNinNestedStructUnion(r randy) *NinNestedStructUnion {
+func NewPopulatedNinNestedStructUnion(r randyThetest) *NinNestedStructUnion {
 	this := &NinNestedStructUnion{}
 	fieldNum := r.Intn(3)
 	switch fieldNum {
@@ -1917,7 +8215,7 @@ func NewPopulatedNinNestedStructUnion(r randy) *NinNestedStructUnion {
 	return this
 }
 
-func NewPopulatedTree(r randy) *Tree {
+func NewPopulatedTree(r randyThetest) *Tree {
 	this := &Tree{}
 	fieldNum := r.Intn(102)
 	switch fieldNum {
@@ -1931,32 +8229,32 @@ func NewPopulatedTree(r randy) *Tree {
 	return this
 }
 
-func NewPopulatedOrBranch(r randy) *OrBranch {
+func NewPopulatedOrBranch(r randyThetest) *OrBranch {
 	this := &OrBranch{}
-	v125 := NewPopulatedTree(r)
-	this.Left = *v125
-	v126 := NewPopulatedTree(r)
-	this.Right = *v126
+	v144 := NewPopulatedTree(r)
+	this.Left = *v144
+	v145 := NewPopulatedTree(r)
+	this.Right = *v145
 	return this
 }
 
-func NewPopulatedAndBranch(r randy) *AndBranch {
+func NewPopulatedAndBranch(r randyThetest) *AndBranch {
 	this := &AndBranch{}
-	v127 := NewPopulatedTree(r)
-	this.Left = *v127
-	v128 := NewPopulatedTree(r)
-	this.Right = *v128
+	v146 := NewPopulatedTree(r)
+	this.Left = *v146
+	v147 := NewPopulatedTree(r)
+	this.Right = *v147
 	return this
 }
 
-func NewPopulatedLeaf(r randy) *Leaf {
+func NewPopulatedLeaf(r randyThetest) *Leaf {
 	this := &Leaf{}
 	this.Value = r.Int63()
-	this.StrValue = randString(r)
+	this.StrValue = randStringThetest(r)
 	return this
 }
 
-func NewPopulatedDeepTree(r randy) *DeepTree {
+func NewPopulatedDeepTree(r randyThetest) *DeepTree {
 	this := &DeepTree{}
 	fieldNum := r.Intn(102)
 	switch fieldNum {
@@ -1970,35 +8268,86 @@ func NewPopulatedDeepTree(r randy) *DeepTree {
 	return this
 }
 
-func NewPopulatedADeepBranch(r randy) *ADeepBranch {
+func NewPopulatedADeepBranch(r randyThetest) *ADeepBranch {
 	this := &ADeepBranch{}
-	v129 := NewPopulatedDeepTree(r)
-	this.Down = *v129
+	v148 := NewPopulatedDeepTree(r)
+	this.Down = *v148
 	return this
 }
 
-func NewPopulatedAndDeepBranch(r randy) *AndDeepBranch {
+func NewPopulatedAndDeepBranch(r randyThetest) *AndDeepBranch {
 	this := &AndDeepBranch{}
-	v130 := NewPopulatedDeepTree(r)
-	this.Left = *v130
-	v131 := NewPopulatedDeepTree(r)
-	this.Right = *v131
+	v149 := NewPopulatedDeepTree(r)
+	this.Left = *v149
+	v150 := NewPopulatedDeepTree(r)
+	this.Right = *v150
 	return this
 }
 
-func NewPopulatedDeepLeaf(r randy) *DeepLeaf {
+func NewPopulatedDeepLeaf(r randyThetest) *DeepLeaf {
 	this := &DeepLeaf{}
-	v132 := NewPopulatedTree(r)
-	this.Tree = *v132
+	v151 := NewPopulatedTree(r)
+	this.Tree = *v151
 	return this
 }
 
-func NewPopulatedNil(r randy) *Nil {
+func NewPopulatedNil(r randyThetest) *Nil {
 	this := &Nil{}
 	return this
 }
 
-type randy interface {
+func NewPopulatedNidOptEnum(r randyThetest) *NidOptEnum {
+	this := &NidOptEnum{}
+	this.Field1 = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+	return this
+}
+
+func NewPopulatedNinOptEnum(r randyThetest) *NinOptEnum {
+	this := &NinOptEnum{}
+	if r.Intn(10) != 0 {
+		v152 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		this.Field1 = &v152
+	}
+	return this
+}
+
+func NewPopulatedNidRepEnum(r randyThetest) *NidRepEnum {
+	this := &NidRepEnum{}
+	if r.Intn(10) != 0 {
+		v153 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, v153)
+		for i := 0; i < v153; i++ {
+			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		}
+	}
+	return this
+}
+
+func NewPopulatedNinRepEnum(r randyThetest) *NinRepEnum {
+	this := &NinRepEnum{}
+	if r.Intn(10) != 0 {
+		v154 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, v154)
+		for i := 0; i < v154; i++ {
+			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		}
+	}
+	return this
+}
+
+func NewPopulatedTimer(r randyThetest) *Timer {
+	this := &Timer{}
+	this.Time1 = r.Int63()
+	this.Time2 = r.Int63()
+	v155 := r.Intn(100)
+	this.Data = make([]byte, v155)
+	for i := 0; i < v155; i++ {
+		this.Data[i] = byte(r.Intn(256))
+	}
+	return this
+}
+
+type randyThetest interface {
 	Float32() float32
 	Float64() float64
 	Int63() int64
@@ -2007,20 +8356,3724 @@ type randy interface {
 	Intn(n int) int
 }
 
-func randUTF8Rune(r randy) rune {
+func randUTF8RuneThetest(r randyThetest) rune {
 	res := rune(r.Uint32() % 1112064)
 	if 55296 <= res {
 		res += 2047
 	}
 	return res
 }
-func randString(r randy) string {
-	v133 := r.Intn(100)
-	tmps := make([]rune, v133)
-	for i := 0; i < v133; i++ {
-		tmps[i] = randUTF8Rune(r)
+func randStringThetest(r randyThetest) string {
+	v156 := r.Intn(100)
+	tmps := make([]rune, v156)
+	for i := 0; i < v156; i++ {
+		tmps[i] = randUTF8RuneThetest(r)
 	}
 	return string(tmps)
+}
+func (m *NidOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidOptNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x9
+	i++
+	f1 := math2.Float64bits(m.Field1)
+	data[i] = uint8(f1)
+	i++
+	data[i] = uint8(f1 >> 8)
+	i++
+	data[i] = uint8(f1 >> 16)
+	i++
+	data[i] = uint8(f1 >> 24)
+	i++
+	data[i] = uint8(f1 >> 32)
+	i++
+	data[i] = uint8(f1 >> 40)
+	i++
+	data[i] = uint8(f1 >> 48)
+	i++
+	data[i] = uint8(f1 >> 56)
+	i++
+	data[i] = 0x15
+	i++
+	f2 := math2.Float32bits(m.Field2)
+	data[i] = uint8(f2)
+	i++
+	data[i] = uint8(f2 >> 8)
+	i++
+	data[i] = uint8(f2 >> 16)
+	i++
+	data[i] = uint8(f2 >> 24)
+	i++
+	data[i] = 0x18
+	i++
+	x3 := uint64(m.Field3)
+	for x3 >= 1<<7 {
+		data[i] = uint8(uint64(x3)&0x7f | 0x80)
+		x3 >>= 7
+		i++
+	}
+	data[i] = uint8(x3)
+	i++
+	data[i] = 0x20
+	i++
+	x4 := uint64(m.Field4)
+	for x4 >= 1<<7 {
+		data[i] = uint8(uint64(x4)&0x7f | 0x80)
+		x4 >>= 7
+		i++
+	}
+	data[i] = uint8(x4)
+	i++
+	data[i] = 0x28
+	i++
+	x5 := uint64(m.Field5)
+	for x5 >= 1<<7 {
+		data[i] = uint8(uint64(x5)&0x7f | 0x80)
+		x5 >>= 7
+		i++
+	}
+	data[i] = uint8(x5)
+	i++
+	data[i] = 0x30
+	i++
+	x6 := uint64(m.Field6)
+	for x6 >= 1<<7 {
+		data[i] = uint8(uint64(x6)&0x7f | 0x80)
+		x6 >>= 7
+		i++
+	}
+	data[i] = uint8(x6)
+	i++
+	data[i] = 0x38
+	i++
+	x7 := (uint32(m.Field7) << 1) ^ uint32((m.Field7 >> 31))
+	for x7 >= 1<<7 {
+		data[i] = uint8(uint64(x7)&0x7f | 0x80)
+		x7 >>= 7
+		i++
+	}
+	data[i] = uint8(x7)
+	i++
+	data[i] = 0x40
+	i++
+	x8 := (uint64(m.Field8) << 1) ^ uint64((m.Field8 >> 63))
+	for x8 >= 1<<7 {
+		data[i] = uint8(uint64(x8)&0x7f | 0x80)
+		x8 >>= 7
+		i++
+	}
+	data[i] = uint8(x8)
+	i++
+	data[i] = 0x4d
+	i++
+	data[i] = uint8(m.Field9)
+	i++
+	data[i] = uint8(m.Field9 >> 8)
+	i++
+	data[i] = uint8(m.Field9 >> 16)
+	i++
+	data[i] = uint8(m.Field9 >> 24)
+	i++
+	data[i] = 0x55
+	i++
+	data[i] = uint8(m.Field10)
+	i++
+	data[i] = uint8(m.Field10 >> 8)
+	i++
+	data[i] = uint8(m.Field10 >> 16)
+	i++
+	data[i] = uint8(m.Field10 >> 24)
+	i++
+	data[i] = 0x59
+	i++
+	data[i] = uint8(m.Field11)
+	i++
+	data[i] = uint8(m.Field11 >> 8)
+	i++
+	data[i] = uint8(m.Field11 >> 16)
+	i++
+	data[i] = uint8(m.Field11 >> 24)
+	i++
+	data[i] = uint8(m.Field11 >> 32)
+	i++
+	data[i] = uint8(m.Field11 >> 40)
+	i++
+	data[i] = uint8(m.Field11 >> 48)
+	i++
+	data[i] = uint8(m.Field11 >> 56)
+	i++
+	data[i] = 0x61
+	i++
+	data[i] = uint8(m.Field12)
+	i++
+	data[i] = uint8(m.Field12 >> 8)
+	i++
+	data[i] = uint8(m.Field12 >> 16)
+	i++
+	data[i] = uint8(m.Field12 >> 24)
+	i++
+	data[i] = uint8(m.Field12 >> 32)
+	i++
+	data[i] = uint8(m.Field12 >> 40)
+	i++
+	data[i] = uint8(m.Field12 >> 48)
+	i++
+	data[i] = uint8(m.Field12 >> 56)
+	i++
+	data[i] = 0x68
+	i++
+	if m.Field13 {
+		data[i] = 1
+	}
+	i++
+	s9 := []byte(m.Field14)
+	l = len(s9)
+	data[i] = 0x72
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], s9)
+	i += len(s9)
+	l = len(m.Field15)
+	data[i] = 0x7a
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], m.Field15)
+	i += len(m.Field15)
+	return i, nil
+}
+func (m *NinOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x9
+		i++
+		f10 := math2.Float64bits(*m.Field1)
+		data[i] = uint8(f10)
+		i++
+		data[i] = uint8(f10 >> 8)
+		i++
+		data[i] = uint8(f10 >> 16)
+		i++
+		data[i] = uint8(f10 >> 24)
+		i++
+		data[i] = uint8(f10 >> 32)
+		i++
+		data[i] = uint8(f10 >> 40)
+		i++
+		data[i] = uint8(f10 >> 48)
+		i++
+		data[i] = uint8(f10 >> 56)
+		i++
+	}
+	if m.Field2 != nil {
+		data[i] = 0x15
+		i++
+		f11 := math2.Float32bits(*m.Field2)
+		data[i] = uint8(f11)
+		i++
+		data[i] = uint8(f11 >> 8)
+		i++
+		data[i] = uint8(f11 >> 16)
+		i++
+		data[i] = uint8(f11 >> 24)
+		i++
+	}
+	if m.Field3 != nil {
+		data[i] = 0x18
+		i++
+		x12 := uint64(*m.Field3)
+		for x12 >= 1<<7 {
+			data[i] = uint8(uint64(x12)&0x7f | 0x80)
+			x12 >>= 7
+			i++
+		}
+		data[i] = uint8(x12)
+		i++
+	}
+	if m.Field4 != nil {
+		data[i] = 0x20
+		i++
+		x13 := uint64(*m.Field4)
+		for x13 >= 1<<7 {
+			data[i] = uint8(uint64(x13)&0x7f | 0x80)
+			x13 >>= 7
+			i++
+		}
+		data[i] = uint8(x13)
+		i++
+	}
+	if m.Field5 != nil {
+		data[i] = 0x28
+		i++
+		x14 := uint64(*m.Field5)
+		for x14 >= 1<<7 {
+			data[i] = uint8(uint64(x14)&0x7f | 0x80)
+			x14 >>= 7
+			i++
+		}
+		data[i] = uint8(x14)
+		i++
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x15 := uint64(*m.Field6)
+		for x15 >= 1<<7 {
+			data[i] = uint8(uint64(x15)&0x7f | 0x80)
+			x15 >>= 7
+			i++
+		}
+		data[i] = uint8(x15)
+		i++
+	}
+	if m.Field7 != nil {
+		data[i] = 0x38
+		i++
+		x16 := (uint32(*m.Field7) << 1) ^ uint32((*m.Field7 >> 31))
+		for x16 >= 1<<7 {
+			data[i] = uint8(uint64(x16)&0x7f | 0x80)
+			x16 >>= 7
+			i++
+		}
+		data[i] = uint8(x16)
+		i++
+	}
+	if m.Field8 != nil {
+		data[i] = 0x40
+		i++
+		x17 := (uint64(*m.Field8) << 1) ^ uint64((*m.Field8 >> 63))
+		for x17 >= 1<<7 {
+			data[i] = uint8(uint64(x17)&0x7f | 0x80)
+			x17 >>= 7
+			i++
+		}
+		data[i] = uint8(x17)
+		i++
+	}
+	if m.Field9 != nil {
+		data[i] = 0x4d
+		i++
+		data[i] = uint8(*m.Field9)
+		i++
+		data[i] = uint8(*m.Field9 >> 8)
+		i++
+		data[i] = uint8(*m.Field9 >> 16)
+		i++
+		data[i] = uint8(*m.Field9 >> 24)
+		i++
+	}
+	if m.Field10 != nil {
+		data[i] = 0x55
+		i++
+		data[i] = uint8(*m.Field10)
+		i++
+		data[i] = uint8(*m.Field10 >> 8)
+		i++
+		data[i] = uint8(*m.Field10 >> 16)
+		i++
+		data[i] = uint8(*m.Field10 >> 24)
+		i++
+	}
+	if m.Field11 != nil {
+		data[i] = 0x59
+		i++
+		data[i] = uint8(*m.Field11)
+		i++
+		data[i] = uint8(*m.Field11 >> 8)
+		i++
+		data[i] = uint8(*m.Field11 >> 16)
+		i++
+		data[i] = uint8(*m.Field11 >> 24)
+		i++
+		data[i] = uint8(*m.Field11 >> 32)
+		i++
+		data[i] = uint8(*m.Field11 >> 40)
+		i++
+		data[i] = uint8(*m.Field11 >> 48)
+		i++
+		data[i] = uint8(*m.Field11 >> 56)
+		i++
+	}
+	if m.Field12 != nil {
+		data[i] = 0x61
+		i++
+		data[i] = uint8(*m.Field12)
+		i++
+		data[i] = uint8(*m.Field12 >> 8)
+		i++
+		data[i] = uint8(*m.Field12 >> 16)
+		i++
+		data[i] = uint8(*m.Field12 >> 24)
+		i++
+		data[i] = uint8(*m.Field12 >> 32)
+		i++
+		data[i] = uint8(*m.Field12 >> 40)
+		i++
+		data[i] = uint8(*m.Field12 >> 48)
+		i++
+		data[i] = uint8(*m.Field12 >> 56)
+		i++
+	}
+	if m.Field13 != nil {
+		data[i] = 0x68
+		i++
+		if *m.Field13 {
+			data[i] = 1
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		s18 := []byte(*m.Field14)
+		l = len(s18)
+		data[i] = 0x72
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], s18)
+		i += len(s18)
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		data[i] = 0x7a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], m.Field15)
+		i += len(m.Field15)
+	}
+	return i, nil
+}
+func (m *NidRepNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidRepNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x9
+			i++
+			f19 := math2.Float64bits(num)
+			data[i] = uint8(f19)
+			i++
+			data[i] = uint8(f19 >> 8)
+			i++
+			data[i] = uint8(f19 >> 16)
+			i++
+			data[i] = uint8(f19 >> 24)
+			i++
+			data[i] = uint8(f19 >> 32)
+			i++
+			data[i] = uint8(f19 >> 40)
+			i++
+			data[i] = uint8(f19 >> 48)
+			i++
+			data[i] = uint8(f19 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		for _, num := range m.Field2 {
+			data[i] = 0x15
+			i++
+			f20 := math2.Float32bits(num)
+			data[i] = uint8(f20)
+			i++
+			data[i] = uint8(f20 >> 8)
+			i++
+			data[i] = uint8(f20 >> 16)
+			i++
+			data[i] = uint8(f20 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		for _, num := range m.Field3 {
+			data[i] = 0x18
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field4 != nil {
+		for _, num := range m.Field4 {
+			data[i] = 0x20
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field5 != nil {
+		for _, num := range m.Field5 {
+			data[i] = 0x28
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field6 != nil {
+		for _, num := range m.Field6 {
+			data[i] = 0x30
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x38
+			i++
+			x21 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x21 >= 1<<7 {
+				data[i] = uint8(uint64(x21)&0x7f | 0x80)
+				x21 >>= 7
+				i++
+			}
+			data[i] = uint8(x21)
+			i++
+		}
+	}
+	if m.Field8 != nil {
+		for _, num := range m.Field8 {
+			data[i] = 0x40
+			i++
+			x22 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x22 >= 1<<7 {
+				data[i] = uint8(uint64(x22)&0x7f | 0x80)
+				x22 >>= 7
+				i++
+			}
+			data[i] = uint8(x22)
+			i++
+		}
+	}
+	if m.Field9 != nil {
+		for _, num := range m.Field9 {
+			data[i] = 0x4d
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field10 != nil {
+		for _, num := range m.Field10 {
+			data[i] = 0x55
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field11 != nil {
+		for _, num := range m.Field11 {
+			data[i] = 0x59
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field12 != nil {
+		for _, num := range m.Field12 {
+			data[i] = 0x61
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field13 != nil {
+		for _, b := range m.Field13 {
+			data[i] = 0x68
+			i++
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			s23 := []byte(s)
+			l = len(s23)
+			data[i] = 0x72
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], s23)
+			i += len(s23)
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			data[i] = 0x7a
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], b)
+			i += len(b)
+		}
+	}
+	return i, nil
+}
+func (m *NinRepNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinRepNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x9
+			i++
+			f24 := math2.Float64bits(num)
+			data[i] = uint8(f24)
+			i++
+			data[i] = uint8(f24 >> 8)
+			i++
+			data[i] = uint8(f24 >> 16)
+			i++
+			data[i] = uint8(f24 >> 24)
+			i++
+			data[i] = uint8(f24 >> 32)
+			i++
+			data[i] = uint8(f24 >> 40)
+			i++
+			data[i] = uint8(f24 >> 48)
+			i++
+			data[i] = uint8(f24 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		for _, num := range m.Field2 {
+			data[i] = 0x15
+			i++
+			f25 := math2.Float32bits(num)
+			data[i] = uint8(f25)
+			i++
+			data[i] = uint8(f25 >> 8)
+			i++
+			data[i] = uint8(f25 >> 16)
+			i++
+			data[i] = uint8(f25 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		for _, num := range m.Field3 {
+			data[i] = 0x18
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field4 != nil {
+		for _, num := range m.Field4 {
+			data[i] = 0x20
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field5 != nil {
+		for _, num := range m.Field5 {
+			data[i] = 0x28
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field6 != nil {
+		for _, num := range m.Field6 {
+			data[i] = 0x30
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x38
+			i++
+			x26 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x26 >= 1<<7 {
+				data[i] = uint8(uint64(x26)&0x7f | 0x80)
+				x26 >>= 7
+				i++
+			}
+			data[i] = uint8(x26)
+			i++
+		}
+	}
+	if m.Field8 != nil {
+		for _, num := range m.Field8 {
+			data[i] = 0x40
+			i++
+			x27 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x27 >= 1<<7 {
+				data[i] = uint8(uint64(x27)&0x7f | 0x80)
+				x27 >>= 7
+				i++
+			}
+			data[i] = uint8(x27)
+			i++
+		}
+	}
+	if m.Field9 != nil {
+		for _, num := range m.Field9 {
+			data[i] = 0x4d
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field10 != nil {
+		for _, num := range m.Field10 {
+			data[i] = 0x55
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field11 != nil {
+		for _, num := range m.Field11 {
+			data[i] = 0x59
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field12 != nil {
+		for _, num := range m.Field12 {
+			data[i] = 0x61
+			i++
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field13 != nil {
+		for _, b := range m.Field13 {
+			data[i] = 0x68
+			i++
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			s28 := []byte(s)
+			l = len(s28)
+			data[i] = 0x72
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], s28)
+			i += len(s28)
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			data[i] = 0x7a
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], b)
+			i += len(b)
+		}
+	}
+	return i, nil
+}
+func (m *NidRepPackedNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidRepPackedNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		l = len(m.Field1) * 8
+		data[i] = 0xa
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field1 {
+			f29 := math2.Float64bits(num)
+			data[i] = uint8(f29)
+			i++
+			data[i] = uint8(f29 >> 8)
+			i++
+			data[i] = uint8(f29 >> 16)
+			i++
+			data[i] = uint8(f29 >> 24)
+			i++
+			data[i] = uint8(f29 >> 32)
+			i++
+			data[i] = uint8(f29 >> 40)
+			i++
+			data[i] = uint8(f29 >> 48)
+			i++
+			data[i] = uint8(f29 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		l = len(m.Field2) * 4
+		data[i] = 0x12
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field2 {
+			f30 := math2.Float32bits(num)
+			data[i] = uint8(f30)
+			i++
+			data[i] = uint8(f30 >> 8)
+			i++
+			data[i] = uint8(f30 >> 16)
+			i++
+			data[i] = uint8(f30 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		data32 := make([]byte, len(m.Field3)*10)
+		var j31 int
+		for _, num := range m.Field3 {
+			for num >= 1<<7 {
+				data32[j31] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j31++
+			}
+			data32[j31] = uint8(num)
+			j31++
+		}
+		l = j31
+		data[i] = 0x1a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data32[:j31])
+		i += j31
+	}
+	if m.Field4 != nil {
+		data34 := make([]byte, len(m.Field4)*10)
+		var j33 int
+		for _, num := range m.Field4 {
+			for num >= 1<<7 {
+				data34[j33] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j33++
+			}
+			data34[j33] = uint8(num)
+			j33++
+		}
+		l = j33
+		data[i] = 0x22
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data34[:j33])
+		i += j33
+	}
+	if m.Field5 != nil {
+		data36 := make([]byte, len(m.Field5)*10)
+		var j35 int
+		for _, num := range m.Field5 {
+			for num >= 1<<7 {
+				data36[j35] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j35++
+			}
+			data36[j35] = uint8(num)
+			j35++
+		}
+		l = j35
+		data[i] = 0x2a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data36[:j35])
+		i += j35
+	}
+	if m.Field6 != nil {
+		data38 := make([]byte, len(m.Field6)*10)
+		var j37 int
+		for _, num := range m.Field6 {
+			for num >= 1<<7 {
+				data38[j37] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j37++
+			}
+			data38[j37] = uint8(num)
+			j37++
+		}
+		l = j37
+		data[i] = 0x32
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data38[:j37])
+		i += j37
+	}
+	if m.Field7 != nil {
+		data39 := make([]byte, len(m.Field7)*5)
+		var j40 int
+		for _, num := range m.Field7 {
+			x41 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x41 >= 1<<7 {
+				data39[j40] = uint8(uint64(x41)&0x7f | 0x80)
+				j40++
+				x41 >>= 7
+			}
+			data39[j40] = uint8(x41)
+			j40++
+		}
+		l = j40
+		data[i] = 0x3a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data39[:j40])
+		i += j40
+	}
+	if m.Field8 != nil {
+		var j42 int
+		data44 := make([]byte, len(m.Field8)*10)
+		for _, num := range m.Field8 {
+			x43 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x43 >= 1<<7 {
+				data44[j42] = uint8(uint64(x43)&0x7f | 0x80)
+				j42++
+				x43 >>= 7
+			}
+			data44[j42] = uint8(x43)
+			j42++
+		}
+		l = j42
+		data[i] = 0x42
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data44[:j42])
+		i += j42
+	}
+	if m.Field9 != nil {
+		l = len(m.Field9) * 4
+		data[i] = 0x4a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field9 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field10 != nil {
+		l = len(m.Field10) * 4
+		data[i] = 0x52
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field10 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field11 != nil {
+		l = len(m.Field11) * 8
+		data[i] = 0x5a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field11 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field12 != nil {
+		l = len(m.Field12) * 8
+		data[i] = 0x62
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field12 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field13 != nil {
+		l = len(m.Field13)
+		data[i] = 0x6a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, b := range m.Field13 {
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	return i, nil
+}
+func (m *NinRepPackedNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinRepPackedNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		l = len(m.Field1) * 8
+		data[i] = 0xa
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field1 {
+			f45 := math2.Float64bits(num)
+			data[i] = uint8(f45)
+			i++
+			data[i] = uint8(f45 >> 8)
+			i++
+			data[i] = uint8(f45 >> 16)
+			i++
+			data[i] = uint8(f45 >> 24)
+			i++
+			data[i] = uint8(f45 >> 32)
+			i++
+			data[i] = uint8(f45 >> 40)
+			i++
+			data[i] = uint8(f45 >> 48)
+			i++
+			data[i] = uint8(f45 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		l = len(m.Field2) * 4
+		data[i] = 0x12
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field2 {
+			f46 := math2.Float32bits(num)
+			data[i] = uint8(f46)
+			i++
+			data[i] = uint8(f46 >> 8)
+			i++
+			data[i] = uint8(f46 >> 16)
+			i++
+			data[i] = uint8(f46 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		data48 := make([]byte, len(m.Field3)*10)
+		var j47 int
+		for _, num := range m.Field3 {
+			for num >= 1<<7 {
+				data48[j47] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j47++
+			}
+			data48[j47] = uint8(num)
+			j47++
+		}
+		l = j47
+		data[i] = 0x1a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data48[:j47])
+		i += j47
+	}
+	if m.Field4 != nil {
+		data50 := make([]byte, len(m.Field4)*10)
+		var j49 int
+		for _, num := range m.Field4 {
+			for num >= 1<<7 {
+				data50[j49] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j49++
+			}
+			data50[j49] = uint8(num)
+			j49++
+		}
+		l = j49
+		data[i] = 0x22
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data50[:j49])
+		i += j49
+	}
+	if m.Field5 != nil {
+		data52 := make([]byte, len(m.Field5)*10)
+		var j51 int
+		for _, num := range m.Field5 {
+			for num >= 1<<7 {
+				data52[j51] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j51++
+			}
+			data52[j51] = uint8(num)
+			j51++
+		}
+		l = j51
+		data[i] = 0x2a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data52[:j51])
+		i += j51
+	}
+	if m.Field6 != nil {
+		data54 := make([]byte, len(m.Field6)*10)
+		var j53 int
+		for _, num := range m.Field6 {
+			for num >= 1<<7 {
+				data54[j53] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j53++
+			}
+			data54[j53] = uint8(num)
+			j53++
+		}
+		l = j53
+		data[i] = 0x32
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data54[:j53])
+		i += j53
+	}
+	if m.Field7 != nil {
+		data55 := make([]byte, len(m.Field7)*5)
+		var j56 int
+		for _, num := range m.Field7 {
+			x57 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x57 >= 1<<7 {
+				data55[j56] = uint8(uint64(x57)&0x7f | 0x80)
+				j56++
+				x57 >>= 7
+			}
+			data55[j56] = uint8(x57)
+			j56++
+		}
+		l = j56
+		data[i] = 0x3a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data55[:j56])
+		i += j56
+	}
+	if m.Field8 != nil {
+		var j58 int
+		data60 := make([]byte, len(m.Field8)*10)
+		for _, num := range m.Field8 {
+			x59 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x59 >= 1<<7 {
+				data60[j58] = uint8(uint64(x59)&0x7f | 0x80)
+				j58++
+				x59 >>= 7
+			}
+			data60[j58] = uint8(x59)
+			j58++
+		}
+		l = j58
+		data[i] = 0x42
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], data60[:j58])
+		i += j58
+	}
+	if m.Field9 != nil {
+		l = len(m.Field9) * 4
+		data[i] = 0x4a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field9 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field10 != nil {
+		l = len(m.Field10) * 4
+		data[i] = 0x52
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field10 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+		}
+	}
+	if m.Field11 != nil {
+		l = len(m.Field11) * 8
+		data[i] = 0x5a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field11 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field12 != nil {
+		l = len(m.Field12) * 8
+		data[i] = 0x62
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, num := range m.Field12 {
+			data[i] = uint8(num)
+			i++
+			data[i] = uint8(num >> 8)
+			i++
+			data[i] = uint8(num >> 16)
+			i++
+			data[i] = uint8(num >> 24)
+			i++
+			data[i] = uint8(num >> 32)
+			i++
+			data[i] = uint8(num >> 40)
+			i++
+			data[i] = uint8(num >> 48)
+			i++
+			data[i] = uint8(num >> 56)
+			i++
+		}
+	}
+	if m.Field13 != nil {
+		l = len(m.Field13)
+		data[i] = 0x6a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		for _, b := range m.Field13 {
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	return i, nil
+}
+func (m *NidOptStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidOptStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x9
+	i++
+	f61 := math2.Float64bits(m.Field1)
+	data[i] = uint8(f61)
+	i++
+	data[i] = uint8(f61 >> 8)
+	i++
+	data[i] = uint8(f61 >> 16)
+	i++
+	data[i] = uint8(f61 >> 24)
+	i++
+	data[i] = uint8(f61 >> 32)
+	i++
+	data[i] = uint8(f61 >> 40)
+	i++
+	data[i] = uint8(f61 >> 48)
+	i++
+	data[i] = uint8(f61 >> 56)
+	i++
+	data[i] = 0x15
+	i++
+	f62 := math2.Float32bits(m.Field2)
+	data[i] = uint8(f62)
+	i++
+	data[i] = uint8(f62 >> 8)
+	i++
+	data[i] = uint8(f62 >> 16)
+	i++
+	data[i] = uint8(f62 >> 24)
+	i++
+	data[i] = 0x1a
+	i++
+	l = m.Field3.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n63, err := m.Field3.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n63
+	data[i] = 0x22
+	i++
+	l = m.Field4.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n64, err := m.Field4.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n64
+	data[i] = 0x30
+	i++
+	x65 := uint64(m.Field6)
+	for x65 >= 1<<7 {
+		data[i] = uint8(uint64(x65)&0x7f | 0x80)
+		x65 >>= 7
+		i++
+	}
+	data[i] = uint8(x65)
+	i++
+	data[i] = 0x38
+	i++
+	x66 := (uint32(m.Field7) << 1) ^ uint32((m.Field7 >> 31))
+	for x66 >= 1<<7 {
+		data[i] = uint8(uint64(x66)&0x7f | 0x80)
+		x66 >>= 7
+		i++
+	}
+	data[i] = uint8(x66)
+	i++
+	data[i] = 0x42
+	i++
+	l = m.Field8.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n67, err := m.Field8.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n67
+	data[i] = 0x68
+	i++
+	if m.Field13 {
+		data[i] = 1
+	}
+	i++
+	s68 := []byte(m.Field14)
+	l = len(s68)
+	data[i] = 0x72
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], s68)
+	i += len(s68)
+	l = len(m.Field15)
+	data[i] = 0x7a
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], m.Field15)
+	i += len(m.Field15)
+	return i, nil
+}
+func (m *NinOptStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x9
+		i++
+		f69 := math2.Float64bits(*m.Field1)
+		data[i] = uint8(f69)
+		i++
+		data[i] = uint8(f69 >> 8)
+		i++
+		data[i] = uint8(f69 >> 16)
+		i++
+		data[i] = uint8(f69 >> 24)
+		i++
+		data[i] = uint8(f69 >> 32)
+		i++
+		data[i] = uint8(f69 >> 40)
+		i++
+		data[i] = uint8(f69 >> 48)
+		i++
+		data[i] = uint8(f69 >> 56)
+		i++
+	}
+	if m.Field2 != nil {
+		data[i] = 0x15
+		i++
+		f70 := math2.Float32bits(*m.Field2)
+		data[i] = uint8(f70)
+		i++
+		data[i] = uint8(f70 >> 8)
+		i++
+		data[i] = uint8(f70 >> 16)
+		i++
+		data[i] = uint8(f70 >> 24)
+		i++
+	}
+	if m.Field3 != nil {
+		data[i] = 0x1a
+		i++
+		l = m.Field3.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n71, err := m.Field3.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n71
+	}
+	if m.Field4 != nil {
+		data[i] = 0x22
+		i++
+		l = m.Field4.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n72, err := m.Field4.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n72
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x73 := uint64(*m.Field6)
+		for x73 >= 1<<7 {
+			data[i] = uint8(uint64(x73)&0x7f | 0x80)
+			x73 >>= 7
+			i++
+		}
+		data[i] = uint8(x73)
+		i++
+	}
+	if m.Field7 != nil {
+		data[i] = 0x38
+		i++
+		x74 := (uint32(*m.Field7) << 1) ^ uint32((*m.Field7 >> 31))
+		for x74 >= 1<<7 {
+			data[i] = uint8(uint64(x74)&0x7f | 0x80)
+			x74 >>= 7
+			i++
+		}
+		data[i] = uint8(x74)
+		i++
+	}
+	if m.Field8 != nil {
+		data[i] = 0x42
+		i++
+		l = m.Field8.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n75, err := m.Field8.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n75
+	}
+	if m.Field13 != nil {
+		data[i] = 0x68
+		i++
+		if *m.Field13 {
+			data[i] = 1
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		s76 := []byte(*m.Field14)
+		l = len(s76)
+		data[i] = 0x72
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], s76)
+		i += len(s76)
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		data[i] = 0x7a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], m.Field15)
+		i += len(m.Field15)
+	}
+	return i, nil
+}
+func (m *NidRepStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidRepStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x9
+			i++
+			f77 := math2.Float64bits(num)
+			data[i] = uint8(f77)
+			i++
+			data[i] = uint8(f77 >> 8)
+			i++
+			data[i] = uint8(f77 >> 16)
+			i++
+			data[i] = uint8(f77 >> 24)
+			i++
+			data[i] = uint8(f77 >> 32)
+			i++
+			data[i] = uint8(f77 >> 40)
+			i++
+			data[i] = uint8(f77 >> 48)
+			i++
+			data[i] = uint8(f77 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		for _, num := range m.Field2 {
+			data[i] = 0x15
+			i++
+			f78 := math2.Float32bits(num)
+			data[i] = uint8(f78)
+			i++
+			data[i] = uint8(f78 >> 8)
+			i++
+			data[i] = uint8(f78 >> 16)
+			i++
+			data[i] = uint8(f78 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		for _, msg := range m.Field3 {
+			data[i] = 0x1a
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field4 != nil {
+		for _, msg := range m.Field4 {
+			data[i] = 0x22
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field6 != nil {
+		for _, num := range m.Field6 {
+			data[i] = 0x30
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x38
+			i++
+			x79 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x79 >= 1<<7 {
+				data[i] = uint8(uint64(x79)&0x7f | 0x80)
+				x79 >>= 7
+				i++
+			}
+			data[i] = uint8(x79)
+			i++
+		}
+	}
+	if m.Field8 != nil {
+		for _, msg := range m.Field8 {
+			data[i] = 0x42
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field13 != nil {
+		for _, b := range m.Field13 {
+			data[i] = 0x68
+			i++
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			s80 := []byte(s)
+			l = len(s80)
+			data[i] = 0x72
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], s80)
+			i += len(s80)
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			data[i] = 0x7a
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], b)
+			i += len(b)
+		}
+	}
+	return i, nil
+}
+func (m *NinRepStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinRepStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x9
+			i++
+			f81 := math2.Float64bits(num)
+			data[i] = uint8(f81)
+			i++
+			data[i] = uint8(f81 >> 8)
+			i++
+			data[i] = uint8(f81 >> 16)
+			i++
+			data[i] = uint8(f81 >> 24)
+			i++
+			data[i] = uint8(f81 >> 32)
+			i++
+			data[i] = uint8(f81 >> 40)
+			i++
+			data[i] = uint8(f81 >> 48)
+			i++
+			data[i] = uint8(f81 >> 56)
+			i++
+		}
+	}
+	if m.Field2 != nil {
+		for _, num := range m.Field2 {
+			data[i] = 0x15
+			i++
+			f82 := math2.Float32bits(num)
+			data[i] = uint8(f82)
+			i++
+			data[i] = uint8(f82 >> 8)
+			i++
+			data[i] = uint8(f82 >> 16)
+			i++
+			data[i] = uint8(f82 >> 24)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		for _, msg := range m.Field3 {
+			data[i] = 0x1a
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field4 != nil {
+		for _, msg := range m.Field4 {
+			data[i] = 0x22
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field6 != nil {
+		for _, num := range m.Field6 {
+			data[i] = 0x30
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x38
+			i++
+			x83 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x83 >= 1<<7 {
+				data[i] = uint8(uint64(x83)&0x7f | 0x80)
+				x83 >>= 7
+				i++
+			}
+			data[i] = uint8(x83)
+			i++
+		}
+	}
+	if m.Field8 != nil {
+		for _, msg := range m.Field8 {
+			data[i] = 0x42
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field13 != nil {
+		for _, b := range m.Field13 {
+			data[i] = 0x68
+			i++
+			if b {
+				data[i] = 1
+			}
+			i++
+		}
+	}
+	if m.Field14 != nil {
+		for _, s := range m.Field14 {
+			s84 := []byte(s)
+			l = len(s84)
+			data[i] = 0x72
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], s84)
+			i += len(s84)
+		}
+	}
+	if m.Field15 != nil {
+		for _, b := range m.Field15 {
+			l = len(b)
+			data[i] = 0x7a
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], b)
+			i += len(b)
+		}
+	}
+	return i, nil
+}
+func (m *NidEmbeddedStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidEmbeddedStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		data[i] = 0xa
+		i++
+		l = m.NidOptNative.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n85, err := m.NidOptNative.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n85
+	}
+	data[i] = 0xc2
+	i++
+	data[i] = 0xc
+	i++
+	l = m.Field200.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n86, err := m.Field200.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n86
+	data[i] = 0x90
+	i++
+	data[i] = 0xd
+	i++
+	if m.Field210 {
+		data[i] = 1
+	}
+	i++
+	return i, nil
+}
+func (m *NinEmbeddedStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinEmbeddedStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		data[i] = 0xa
+		i++
+		l = m.NidOptNative.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n87, err := m.NidOptNative.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n87
+	}
+	if m.Field200 != nil {
+		data[i] = 0xc2
+		i++
+		data[i] = 0xc
+		i++
+		l = m.Field200.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n88, err := m.Field200.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n88
+	}
+	if m.Field210 != nil {
+		data[i] = 0x90
+		i++
+		data[i] = 0xd
+		i++
+		if *m.Field210 {
+			data[i] = 1
+		}
+		i++
+	}
+	return i, nil
+}
+func (m *NidNestedStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidNestedStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Field1.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n89, err := m.Field1.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n89
+	if m.Field2 != nil {
+		for _, msg := range m.Field2 {
+			data[i] = 0x12
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	return i, nil
+}
+func (m *NinNestedStruct) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinNestedStruct) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0xa
+		i++
+		l = m.Field1.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n90, err := m.Field1.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n90
+	}
+	if m.Field2 != nil {
+		for _, msg := range m.Field2 {
+			data[i] = 0x12
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	return i, nil
+}
+func (m *NidOptCustom) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidOptCustom) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Id.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n91, err := m.Id.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n91
+	data[i] = 0x12
+	i++
+	l = m.Value.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n92, err := m.Value.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n92
+	return i, nil
+}
+func (m *NinOptCustom) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptCustom) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Id != nil {
+		data[i] = 0xa
+		i++
+		l = m.Id.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n93, err := m.Id.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n93
+	}
+	if m.Value != nil {
+		data[i] = 0x12
+		i++
+		l = m.Value.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n94, err := m.Value.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n94
+	}
+	return i, nil
+}
+func (m *NidRepCustom) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidRepCustom) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Id != nil {
+		for _, msg := range m.Id {
+			data[i] = 0xa
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Value != nil {
+		for _, msg := range m.Value {
+			data[i] = 0x12
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	return i, nil
+}
+func (m *NinRepCustom) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinRepCustom) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Id != nil {
+		for _, msg := range m.Id {
+			data[i] = 0xa
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Value != nil {
+		for _, msg := range m.Value {
+			data[i] = 0x12
+			i++
+			l = msg.Size()
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	return i, nil
+}
+func (m *NinOptNativeUnion) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptNativeUnion) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x9
+		i++
+		f95 := math2.Float64bits(*m.Field1)
+		data[i] = uint8(f95)
+		i++
+		data[i] = uint8(f95 >> 8)
+		i++
+		data[i] = uint8(f95 >> 16)
+		i++
+		data[i] = uint8(f95 >> 24)
+		i++
+		data[i] = uint8(f95 >> 32)
+		i++
+		data[i] = uint8(f95 >> 40)
+		i++
+		data[i] = uint8(f95 >> 48)
+		i++
+		data[i] = uint8(f95 >> 56)
+		i++
+	}
+	if m.Field2 != nil {
+		data[i] = 0x15
+		i++
+		f96 := math2.Float32bits(*m.Field2)
+		data[i] = uint8(f96)
+		i++
+		data[i] = uint8(f96 >> 8)
+		i++
+		data[i] = uint8(f96 >> 16)
+		i++
+		data[i] = uint8(f96 >> 24)
+		i++
+	}
+	if m.Field3 != nil {
+		data[i] = 0x18
+		i++
+		x97 := uint64(*m.Field3)
+		for x97 >= 1<<7 {
+			data[i] = uint8(uint64(x97)&0x7f | 0x80)
+			x97 >>= 7
+			i++
+		}
+		data[i] = uint8(x97)
+		i++
+	}
+	if m.Field4 != nil {
+		data[i] = 0x20
+		i++
+		x98 := uint64(*m.Field4)
+		for x98 >= 1<<7 {
+			data[i] = uint8(uint64(x98)&0x7f | 0x80)
+			x98 >>= 7
+			i++
+		}
+		data[i] = uint8(x98)
+		i++
+	}
+	if m.Field5 != nil {
+		data[i] = 0x28
+		i++
+		x99 := uint64(*m.Field5)
+		for x99 >= 1<<7 {
+			data[i] = uint8(uint64(x99)&0x7f | 0x80)
+			x99 >>= 7
+			i++
+		}
+		data[i] = uint8(x99)
+		i++
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x100 := uint64(*m.Field6)
+		for x100 >= 1<<7 {
+			data[i] = uint8(uint64(x100)&0x7f | 0x80)
+			x100 >>= 7
+			i++
+		}
+		data[i] = uint8(x100)
+		i++
+	}
+	if m.Field13 != nil {
+		data[i] = 0x68
+		i++
+		if *m.Field13 {
+			data[i] = 1
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		s101 := []byte(*m.Field14)
+		l = len(s101)
+		data[i] = 0x72
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], s101)
+		i += len(s101)
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		data[i] = 0x7a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], m.Field15)
+		i += len(m.Field15)
+	}
+	return i, nil
+}
+func (m *NinOptStructUnion) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptStructUnion) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x9
+		i++
+		f102 := math2.Float64bits(*m.Field1)
+		data[i] = uint8(f102)
+		i++
+		data[i] = uint8(f102 >> 8)
+		i++
+		data[i] = uint8(f102 >> 16)
+		i++
+		data[i] = uint8(f102 >> 24)
+		i++
+		data[i] = uint8(f102 >> 32)
+		i++
+		data[i] = uint8(f102 >> 40)
+		i++
+		data[i] = uint8(f102 >> 48)
+		i++
+		data[i] = uint8(f102 >> 56)
+		i++
+	}
+	if m.Field2 != nil {
+		data[i] = 0x15
+		i++
+		f103 := math2.Float32bits(*m.Field2)
+		data[i] = uint8(f103)
+		i++
+		data[i] = uint8(f103 >> 8)
+		i++
+		data[i] = uint8(f103 >> 16)
+		i++
+		data[i] = uint8(f103 >> 24)
+		i++
+	}
+	if m.Field3 != nil {
+		data[i] = 0x1a
+		i++
+		l = m.Field3.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n104, err := m.Field3.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n104
+	}
+	if m.Field4 != nil {
+		data[i] = 0x22
+		i++
+		l = m.Field4.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n105, err := m.Field4.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n105
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x106 := uint64(*m.Field6)
+		for x106 >= 1<<7 {
+			data[i] = uint8(uint64(x106)&0x7f | 0x80)
+			x106 >>= 7
+			i++
+		}
+		data[i] = uint8(x106)
+		i++
+	}
+	if m.Field7 != nil {
+		data[i] = 0x38
+		i++
+		x107 := (uint32(*m.Field7) << 1) ^ uint32((*m.Field7 >> 31))
+		for x107 >= 1<<7 {
+			data[i] = uint8(uint64(x107)&0x7f | 0x80)
+			x107 >>= 7
+			i++
+		}
+		data[i] = uint8(x107)
+		i++
+	}
+	if m.Field13 != nil {
+		data[i] = 0x68
+		i++
+		if *m.Field13 {
+			data[i] = 1
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		s108 := []byte(*m.Field14)
+		l = len(s108)
+		data[i] = 0x72
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], s108)
+		i += len(s108)
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		data[i] = 0x7a
+		i++
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		copy(data[i:], m.Field15)
+		i += len(m.Field15)
+	}
+	return i, nil
+}
+func (m *NinEmbeddedStructUnion) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinEmbeddedStructUnion) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		data[i] = 0xa
+		i++
+		l = m.NidOptNative.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n109, err := m.NidOptNative.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n109
+	}
+	if m.Field200 != nil {
+		data[i] = 0xc2
+		i++
+		data[i] = 0xc
+		i++
+		l = m.Field200.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n110, err := m.Field200.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n110
+	}
+	if m.Field210 != nil {
+		data[i] = 0x90
+		i++
+		data[i] = 0xd
+		i++
+		if *m.Field210 {
+			data[i] = 1
+		}
+		i++
+	}
+	return i, nil
+}
+func (m *NinNestedStructUnion) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinNestedStructUnion) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0xa
+		i++
+		l = m.Field1.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n111, err := m.Field1.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n111
+	}
+	if m.Field2 != nil {
+		data[i] = 0x12
+		i++
+		l = m.Field2.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n112, err := m.Field2.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n112
+	}
+	if m.Field3 != nil {
+		data[i] = 0x1a
+		i++
+		l = m.Field3.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n113, err := m.Field3.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n113
+	}
+	return i, nil
+}
+func (m *Tree) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Tree) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Or != nil {
+		data[i] = 0xa
+		i++
+		l = m.Or.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n114, err := m.Or.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n114
+	}
+	if m.And != nil {
+		data[i] = 0x12
+		i++
+		l = m.And.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n115, err := m.And.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n115
+	}
+	if m.Leaf != nil {
+		data[i] = 0x1a
+		i++
+		l = m.Leaf.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n116, err := m.Leaf.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n116
+	}
+	return i, nil
+}
+func (m *OrBranch) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *OrBranch) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Left.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n117, err := m.Left.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n117
+	data[i] = 0x12
+	i++
+	l = m.Right.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n118, err := m.Right.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n118
+	return i, nil
+}
+func (m *AndBranch) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *AndBranch) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Left.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n119, err := m.Left.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n119
+	data[i] = 0x12
+	i++
+	l = m.Right.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n120, err := m.Right.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n120
+	return i, nil
+}
+func (m *Leaf) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Leaf) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x8
+	i++
+	x121 := uint64(m.Value)
+	for x121 >= 1<<7 {
+		data[i] = uint8(uint64(x121)&0x7f | 0x80)
+		x121 >>= 7
+		i++
+	}
+	data[i] = uint8(x121)
+	i++
+	s122 := []byte(m.StrValue)
+	l = len(s122)
+	data[i] = 0x12
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], s122)
+	i += len(s122)
+	return i, nil
+}
+func (m *DeepTree) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *DeepTree) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Down != nil {
+		data[i] = 0xa
+		i++
+		l = m.Down.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n123, err := m.Down.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n123
+	}
+	if m.And != nil {
+		data[i] = 0x12
+		i++
+		l = m.And.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n124, err := m.And.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n124
+	}
+	if m.Leaf != nil {
+		data[i] = 0x1a
+		i++
+		l = m.Leaf.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n125, err := m.Leaf.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n125
+	}
+	return i, nil
+}
+func (m *ADeepBranch) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *ADeepBranch) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x12
+	i++
+	l = m.Down.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n126, err := m.Down.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n126
+	return i, nil
+}
+func (m *AndDeepBranch) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *AndDeepBranch) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Left.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n127, err := m.Left.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n127
+	data[i] = 0x12
+	i++
+	l = m.Right.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n128, err := m.Right.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n128
+	return i, nil
+}
+func (m *DeepLeaf) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *DeepLeaf) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	l = m.Tree.Size()
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	n129, err := m.Tree.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n129
+	return i, nil
+}
+func (m *Nil) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Nil) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	return i, nil
+}
+func (m *NidOptEnum) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidOptEnum) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x8
+	i++
+	x130 := uint64(m.Field1)
+	for x130 >= 1<<7 {
+		data[i] = uint8(uint64(x130)&0x7f | 0x80)
+		x130 >>= 7
+		i++
+	}
+	data[i] = uint8(x130)
+	i++
+	return i, nil
+}
+func (m *NinOptEnum) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptEnum) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x8
+		i++
+		x131 := uint64(*m.Field1)
+		for x131 >= 1<<7 {
+			data[i] = uint8(uint64(x131)&0x7f | 0x80)
+			x131 >>= 7
+			i++
+		}
+		data[i] = uint8(x131)
+		i++
+	}
+	return i, nil
+}
+func (m *NidRepEnum) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidRepEnum) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x8
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	return i, nil
+}
+func (m *NinRepEnum) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinRepEnum) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		for _, num := range m.Field1 {
+			data[i] = 0x8
+			i++
+			for num >= 1<<7 {
+				data[i] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				i++
+			}
+			data[i] = uint8(num)
+			i++
+		}
+	}
+	return i, nil
+}
+func (m *Timer) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Timer) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x9
+	i++
+	data[i] = uint8(m.Time1)
+	i++
+	data[i] = uint8(m.Time1 >> 8)
+	i++
+	data[i] = uint8(m.Time1 >> 16)
+	i++
+	data[i] = uint8(m.Time1 >> 24)
+	i++
+	data[i] = uint8(m.Time1 >> 32)
+	i++
+	data[i] = uint8(m.Time1 >> 40)
+	i++
+	data[i] = uint8(m.Time1 >> 48)
+	i++
+	data[i] = uint8(m.Time1 >> 56)
+	i++
+	data[i] = 0x11
+	i++
+	data[i] = uint8(m.Time2)
+	i++
+	data[i] = uint8(m.Time2 >> 8)
+	i++
+	data[i] = uint8(m.Time2 >> 16)
+	i++
+	data[i] = uint8(m.Time2 >> 24)
+	i++
+	data[i] = uint8(m.Time2 >> 32)
+	i++
+	data[i] = uint8(m.Time2 >> 40)
+	i++
+	data[i] = uint8(m.Time2 >> 48)
+	i++
+	data[i] = uint8(m.Time2 >> 56)
+	i++
+	l = len(m.Data)
+	data[i] = 0x1a
+	i++
+	for l >= 1<<7 {
+		data[i] = uint8(uint64(l)&0x7f | 0x80)
+		l >>= 7
+		i++
+	}
+	data[i] = uint8(l)
+	i++
+	copy(data[i:], m.Data)
+	i += len(m.Data)
+	return i, nil
 }
 func (this *NidOptNative) GoString() string {
 	if this == nil {
@@ -2033,7 +12086,7 @@ func (this *NinOptNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptNative{` + `Field1:` + valueToGoString(this.Field1, "float64"), `Field2:` + valueToGoString(this.Field2, "float32"), `Field3:` + valueToGoString(this.Field3, "int32"), `Field4:` + valueToGoString(this.Field4, "int64"), `Field5:` + valueToGoString(this.Field5, "uint32"), `Field6:` + valueToGoString(this.Field6, "uint64"), `Field7:` + valueToGoString(this.Field7, "int32"), `Field8:` + valueToGoString(this.Field8, "int64"), `Field9:` + valueToGoString(this.Field9, "uint32"), `Field10:` + valueToGoString(this.Field10, "int32"), `Field11:` + valueToGoString(this.Field11, "uint64"), `Field12:` + valueToGoString(this.Field12, "int64"), `Field13:` + valueToGoString(this.Field13, "bool"), `Field14:` + valueToGoString(this.Field14, "string"), `Field15:` + valueToGoString(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptNative{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + valueToGoStringThetest(this.Field8, "int64"), `Field9:` + valueToGoStringThetest(this.Field9, "uint32"), `Field10:` + valueToGoStringThetest(this.Field10, "int32"), `Field11:` + valueToGoStringThetest(this.Field11, "uint64"), `Field12:` + valueToGoStringThetest(this.Field12, "int64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
 	return s
 }
 func (this *NidRepNative) GoString() string {
@@ -2054,14 +12107,14 @@ func (this *NidRepPackedNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepPackedNative{` + `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
 	return s
 }
 func (this *NinRepPackedNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepPackedNative{` + `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
 	return s
 }
 func (this *NidOptStruct) GoString() string {
@@ -2075,7 +12128,7 @@ func (this *NinOptStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptStruct{` + `Field1:` + valueToGoString(this.Field1, "float64"), `Field2:` + valueToGoString(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoString(this.Field6, "uint64"), `Field7:` + valueToGoString(this.Field7, "int32"), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + valueToGoString(this.Field13, "bool"), `Field14:` + valueToGoString(this.Field14, "string"), `Field15:` + valueToGoString(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptStruct{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
 	return s
 }
 func (this *NidRepStruct) GoString() string {
@@ -2096,14 +12149,14 @@ func (this *NidEmbeddedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidEmbeddedStruct{` + `NidOptNative:` + strings1.Replace(this.NidOptNative.GoString(), `&`, ``, 1), `Field200:` + strings1.Replace(this.Field200.GoString(), `&`, ``, 1), `Field210:` + fmt1.Sprintf("%#v", this.Field210) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + strings1.Replace(this.Field200.GoString(), `&`, ``, 1), `Field210:` + fmt1.Sprintf("%#v", this.Field210) + `}`}, ", ")
 	return s
 }
 func (this *NinEmbeddedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoString(this.Field210, "bool") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool") + `}`}, ", ")
 	return s
 }
 func (this *NidNestedStruct) GoString() string {
@@ -2131,7 +12184,7 @@ func (this *NinOptCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoString(this.Id, "code_google_com_p_gogoprotobuf_test_custom.Uuid"), `Value:` + valueToGoString(this.Value, "code_google_com_p_gogoprotobuf_test_custom.Uint128") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoStringThetest(this.Id, "code_google_com_p_gogoprotobuf_test_custom.Uuid"), `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom.Uint128") + `}`}, ", ")
 	return s
 }
 func (this *NidRepCustom) GoString() string {
@@ -2152,21 +12205,21 @@ func (this *NinOptNativeUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptNativeUnion{` + `Field1:` + valueToGoString(this.Field1, "float64"), `Field2:` + valueToGoString(this.Field2, "float32"), `Field3:` + valueToGoString(this.Field3, "int32"), `Field4:` + valueToGoString(this.Field4, "int64"), `Field5:` + valueToGoString(this.Field5, "uint32"), `Field6:` + valueToGoString(this.Field6, "uint64"), `Field13:` + valueToGoString(this.Field13, "bool"), `Field14:` + valueToGoString(this.Field14, "string"), `Field15:` + valueToGoString(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptNativeUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
 	return s
 }
 func (this *NinOptStructUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptStructUnion{` + `Field1:` + valueToGoString(this.Field1, "float64"), `Field2:` + valueToGoString(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoString(this.Field6, "uint64"), `Field7:` + valueToGoString(this.Field7, "int32"), `Field13:` + valueToGoString(this.Field13, "bool"), `Field14:` + valueToGoString(this.Field14, "string"), `Field15:` + valueToGoString(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptStructUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
 	return s
 }
 func (this *NinEmbeddedStructUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinEmbeddedStructUnion{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoString(this.Field210, "bool") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinEmbeddedStructUnion{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool") + `}`}, ", ")
 	return s
 }
 func (this *NinNestedStructUnion) GoString() string {
@@ -2239,7 +12292,42 @@ func (this *Nil) GoString() string {
 	s := strings1.Join([]string{`&test.Nil{` + `}`}, ", ")
 	return s
 }
-func valueToGoString(v interface{}, typ string) string {
+func (this *NidOptEnum) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NidOptEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	return s
+}
+func (this *NinOptEnum) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NinOptEnum{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.TheTestEnum") + `}`}, ", ")
+	return s
+}
+func (this *NidRepEnum) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NidRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	return s
+}
+func (this *NinRepEnum) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NinRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	return s
+}
+func (this *Timer) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.Timer{` + `Time1:` + fmt1.Sprintf("%#v", this.Time1), `Time2:` + fmt1.Sprintf("%#v", this.Time2), `Data:` + fmt1.Sprintf("%#v", this.Data) + `}`}, ", ")
+	return s
+}
+func valueToGoStringThetest(v interface{}, typ string) string {
 	rv := reflect1.ValueOf(v)
 	if rv.IsNil() {
 		return "nil"
@@ -2678,8 +12766,18 @@ func NewNinRepNativeFromFace(that NinRepNativeFace) *NinRepNative {
 
 type NidRepPackedNativeFace interface {
 	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() []float64
+	GetField2() []float32
 	GetField3() []int32
 	GetField4() []int64
+	GetField5() []uint32
+	GetField6() []uint64
+	GetField7() []int32
+	GetField8() []int64
+	GetField9() []uint32
+	GetField10() []int32
+	GetField11() []uint64
+	GetField12() []int64
 	GetField13() []bool
 }
 
@@ -2691,6 +12789,14 @@ func (this *NidRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto
 	return NewNidRepPackedNativeFromFace(this)
 }
 
+func (this *NidRepPackedNative) GetField1() []float64 {
+	return this.Field1
+}
+
+func (this *NidRepPackedNative) GetField2() []float32 {
+	return this.Field2
+}
+
 func (this *NidRepPackedNative) GetField3() []int32 {
 	return this.Field3
 }
@@ -2699,22 +12805,74 @@ func (this *NidRepPackedNative) GetField4() []int64 {
 	return this.Field4
 }
 
+func (this *NidRepPackedNative) GetField5() []uint32 {
+	return this.Field5
+}
+
+func (this *NidRepPackedNative) GetField6() []uint64 {
+	return this.Field6
+}
+
+func (this *NidRepPackedNative) GetField7() []int32 {
+	return this.Field7
+}
+
+func (this *NidRepPackedNative) GetField8() []int64 {
+	return this.Field8
+}
+
+func (this *NidRepPackedNative) GetField9() []uint32 {
+	return this.Field9
+}
+
+func (this *NidRepPackedNative) GetField10() []int32 {
+	return this.Field10
+}
+
+func (this *NidRepPackedNative) GetField11() []uint64 {
+	return this.Field11
+}
+
+func (this *NidRepPackedNative) GetField12() []int64 {
+	return this.Field12
+}
+
 func (this *NidRepPackedNative) GetField13() []bool {
 	return this.Field13
 }
 
 func NewNidRepPackedNativeFromFace(that NidRepPackedNativeFace) *NidRepPackedNative {
 	this := &NidRepPackedNative{}
+	this.Field1 = that.GetField1()
+	this.Field2 = that.GetField2()
 	this.Field3 = that.GetField3()
 	this.Field4 = that.GetField4()
+	this.Field5 = that.GetField5()
+	this.Field6 = that.GetField6()
+	this.Field7 = that.GetField7()
+	this.Field8 = that.GetField8()
+	this.Field9 = that.GetField9()
+	this.Field10 = that.GetField10()
+	this.Field11 = that.GetField11()
+	this.Field12 = that.GetField12()
 	this.Field13 = that.GetField13()
 	return this
 }
 
 type NinRepPackedNativeFace interface {
 	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() []float64
+	GetField2() []float32
 	GetField3() []int32
 	GetField4() []int64
+	GetField5() []uint32
+	GetField6() []uint64
+	GetField7() []int32
+	GetField8() []int64
+	GetField9() []uint32
+	GetField10() []int32
+	GetField11() []uint64
+	GetField12() []int64
 	GetField13() []bool
 }
 
@@ -2726,6 +12884,14 @@ func (this *NinRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto
 	return NewNinRepPackedNativeFromFace(this)
 }
 
+func (this *NinRepPackedNative) GetField1() []float64 {
+	return this.Field1
+}
+
+func (this *NinRepPackedNative) GetField2() []float32 {
+	return this.Field2
+}
+
 func (this *NinRepPackedNative) GetField3() []int32 {
 	return this.Field3
 }
@@ -2734,14 +12900,56 @@ func (this *NinRepPackedNative) GetField4() []int64 {
 	return this.Field4
 }
 
+func (this *NinRepPackedNative) GetField5() []uint32 {
+	return this.Field5
+}
+
+func (this *NinRepPackedNative) GetField6() []uint64 {
+	return this.Field6
+}
+
+func (this *NinRepPackedNative) GetField7() []int32 {
+	return this.Field7
+}
+
+func (this *NinRepPackedNative) GetField8() []int64 {
+	return this.Field8
+}
+
+func (this *NinRepPackedNative) GetField9() []uint32 {
+	return this.Field9
+}
+
+func (this *NinRepPackedNative) GetField10() []int32 {
+	return this.Field10
+}
+
+func (this *NinRepPackedNative) GetField11() []uint64 {
+	return this.Field11
+}
+
+func (this *NinRepPackedNative) GetField12() []int64 {
+	return this.Field12
+}
+
 func (this *NinRepPackedNative) GetField13() []bool {
 	return this.Field13
 }
 
 func NewNinRepPackedNativeFromFace(that NinRepPackedNativeFace) *NinRepPackedNative {
 	this := &NinRepPackedNative{}
+	this.Field1 = that.GetField1()
+	this.Field2 = that.GetField2()
 	this.Field3 = that.GetField3()
 	this.Field4 = that.GetField4()
+	this.Field5 = that.GetField5()
+	this.Field6 = that.GetField6()
+	this.Field7 = that.GetField7()
+	this.Field8 = that.GetField8()
+	this.Field9 = that.GetField9()
+	this.Field10 = that.GetField10()
+	this.Field11 = that.GetField11()
+	this.Field12 = that.GetField12()
 	this.Field13 = that.GetField13()
 	return this
 }
@@ -3056,7 +13264,7 @@ func NewNinRepStructFromFace(that NinRepStructFace) *NinRepStruct {
 
 type NidEmbeddedStructFace interface {
 	Proto() code_google_com_p_gogoprotobuf_proto.Message
-	GetNidOptNative() NidOptNative
+	GetNidOptNative() *NidOptNative
 	GetField200() NidOptNative
 	GetField210() bool
 }
@@ -3069,7 +13277,7 @@ func (this *NidEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto.
 	return NewNidEmbeddedStructFromFace(this)
 }
 
-func (this *NidEmbeddedStruct) GetNidOptNative() NidOptNative {
+func (this *NidEmbeddedStruct) GetNidOptNative() *NidOptNative {
 	return this.NidOptNative
 }
 
@@ -3756,6 +13964,133 @@ func (this *Nil) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
 
 func NewNilFromFace(that NilFace) *Nil {
 	this := &Nil{}
+	return this
+}
+
+type NidOptEnumFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() TheTestEnum
+}
+
+func (this *NidOptEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *NidOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewNidOptEnumFromFace(this)
+}
+
+func (this *NidOptEnum) GetField1() TheTestEnum {
+	return this.Field1
+}
+
+func NewNidOptEnumFromFace(that NidOptEnumFace) *NidOptEnum {
+	this := &NidOptEnum{}
+	this.Field1 = that.GetField1()
+	return this
+}
+
+type NinOptEnumFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() *TheTestEnum
+}
+
+func (this *NinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *NinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewNinOptEnumFromFace(this)
+}
+
+func (this *NinOptEnum) GetField1() *TheTestEnum {
+	return this.Field1
+}
+
+func NewNinOptEnumFromFace(that NinOptEnumFace) *NinOptEnum {
+	this := &NinOptEnum{}
+	this.Field1 = that.GetField1()
+	return this
+}
+
+type NidRepEnumFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() []TheTestEnum
+}
+
+func (this *NidRepEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *NidRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewNidRepEnumFromFace(this)
+}
+
+func (this *NidRepEnum) GetField1() []TheTestEnum {
+	return this.Field1
+}
+
+func NewNidRepEnumFromFace(that NidRepEnumFace) *NidRepEnum {
+	this := &NidRepEnum{}
+	this.Field1 = that.GetField1()
+	return this
+}
+
+type NinRepEnumFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetField1() []TheTestEnum
+}
+
+func (this *NinRepEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *NinRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewNinRepEnumFromFace(this)
+}
+
+func (this *NinRepEnum) GetField1() []TheTestEnum {
+	return this.Field1
+}
+
+func NewNinRepEnumFromFace(that NinRepEnumFace) *NinRepEnum {
+	this := &NinRepEnum{}
+	this.Field1 = that.GetField1()
+	return this
+}
+
+type TimerFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	GetTime1() int64
+	GetTime2() int64
+	GetData() []byte
+}
+
+func (this *Timer) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+	return this
+}
+
+func (this *Timer) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+	return NewTimerFromFace(this)
+}
+
+func (this *Timer) GetTime1() int64 {
+	return this.Time1
+}
+
+func (this *Timer) GetTime2() int64 {
+	return this.Time2
+}
+
+func (this *Timer) GetData() []byte {
+	return this.Data
+}
+
+func NewTimerFromFace(that TimerFace) *Timer {
+	this := &Timer{}
+	this.Time1 = that.GetTime1()
+	this.Time2 = that.GetTime2()
+	this.Data = that.GetData()
 	return this
 }
 
@@ -4783,6 +15118,22 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt2.Errorf("that is type *NidRepPackedNativebut is not nil && this == nil")
 	}
+	if len(this.Field1) != len(that1.Field1) {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
 	if len(this.Field3) != len(that1.Field3) {
 		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", len(this.Field3), len(that1.Field3))
 	}
@@ -4797,6 +15148,70 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 	for i := range this.Field4 {
 		if this.Field4[i] != that1.Field4[i] {
 			return fmt2.Errorf("Field4 this[%v](%v) Not Equal that[%v](%v)", i, this.Field4[i], i, that1.Field4[i])
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return fmt2.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			return fmt2.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", len(this.Field6), len(that1.Field6))
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			return fmt2.Errorf("Field6 this[%v](%v) Not Equal that[%v](%v)", i, this.Field6[i], i, that1.Field6[i])
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		return fmt2.Errorf("Field8 this(%v) Not Equal that(%v)", len(this.Field8), len(that1.Field8))
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			return fmt2.Errorf("Field8 this[%v](%v) Not Equal that[%v](%v)", i, this.Field8[i], i, that1.Field8[i])
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		return fmt2.Errorf("Field9 this(%v) Not Equal that(%v)", len(this.Field9), len(that1.Field9))
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			return fmt2.Errorf("Field9 this[%v](%v) Not Equal that[%v](%v)", i, this.Field9[i], i, that1.Field9[i])
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		return fmt2.Errorf("Field10 this(%v) Not Equal that(%v)", len(this.Field10), len(that1.Field10))
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			return fmt2.Errorf("Field10 this[%v](%v) Not Equal that[%v](%v)", i, this.Field10[i], i, that1.Field10[i])
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		return fmt2.Errorf("Field11 this(%v) Not Equal that(%v)", len(this.Field11), len(that1.Field11))
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			return fmt2.Errorf("Field11 this[%v](%v) Not Equal that[%v](%v)", i, this.Field11[i], i, that1.Field11[i])
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		return fmt2.Errorf("Field12 this(%v) Not Equal that(%v)", len(this.Field12), len(that1.Field12))
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			return fmt2.Errorf("Field12 this[%v](%v) Not Equal that[%v](%v)", i, this.Field12[i], i, that1.Field12[i])
 		}
 	}
 	if len(this.Field13) != len(that1.Field13) {
@@ -4829,6 +15244,22 @@ func (this *NidRepPackedNative) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if len(this.Field1) != len(that1.Field1) {
+		return false
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return false
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
 	if len(this.Field3) != len(that1.Field3) {
 		return false
 	}
@@ -4842,6 +15273,70 @@ func (this *NidRepPackedNative) Equal(that interface{}) bool {
 	}
 	for i := range this.Field4 {
 		if this.Field4[i] != that1.Field4[i] {
+			return false
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return false
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			return false
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		return false
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			return false
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		return false
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			return false
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		return false
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			return false
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		return false
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			return false
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		return false
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			return false
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		return false
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
 			return false
 		}
 	}
@@ -4875,6 +15370,22 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt2.Errorf("that is type *NinRepPackedNativebut is not nil && this == nil")
 	}
+	if len(this.Field1) != len(that1.Field1) {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
 	if len(this.Field3) != len(that1.Field3) {
 		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", len(this.Field3), len(that1.Field3))
 	}
@@ -4889,6 +15400,70 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 	for i := range this.Field4 {
 		if this.Field4[i] != that1.Field4[i] {
 			return fmt2.Errorf("Field4 this[%v](%v) Not Equal that[%v](%v)", i, this.Field4[i], i, that1.Field4[i])
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return fmt2.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			return fmt2.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", len(this.Field6), len(that1.Field6))
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			return fmt2.Errorf("Field6 this[%v](%v) Not Equal that[%v](%v)", i, this.Field6[i], i, that1.Field6[i])
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		return fmt2.Errorf("Field8 this(%v) Not Equal that(%v)", len(this.Field8), len(that1.Field8))
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			return fmt2.Errorf("Field8 this[%v](%v) Not Equal that[%v](%v)", i, this.Field8[i], i, that1.Field8[i])
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		return fmt2.Errorf("Field9 this(%v) Not Equal that(%v)", len(this.Field9), len(that1.Field9))
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			return fmt2.Errorf("Field9 this[%v](%v) Not Equal that[%v](%v)", i, this.Field9[i], i, that1.Field9[i])
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		return fmt2.Errorf("Field10 this(%v) Not Equal that(%v)", len(this.Field10), len(that1.Field10))
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			return fmt2.Errorf("Field10 this[%v](%v) Not Equal that[%v](%v)", i, this.Field10[i], i, that1.Field10[i])
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		return fmt2.Errorf("Field11 this(%v) Not Equal that(%v)", len(this.Field11), len(that1.Field11))
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			return fmt2.Errorf("Field11 this[%v](%v) Not Equal that[%v](%v)", i, this.Field11[i], i, that1.Field11[i])
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		return fmt2.Errorf("Field12 this(%v) Not Equal that(%v)", len(this.Field12), len(that1.Field12))
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			return fmt2.Errorf("Field12 this[%v](%v) Not Equal that[%v](%v)", i, this.Field12[i], i, that1.Field12[i])
 		}
 	}
 	if len(this.Field13) != len(that1.Field13) {
@@ -4921,6 +15496,22 @@ func (this *NinRepPackedNative) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if len(this.Field1) != len(that1.Field1) {
+		return false
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return false
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
 	if len(this.Field3) != len(that1.Field3) {
 		return false
 	}
@@ -4934,6 +15525,70 @@ func (this *NinRepPackedNative) Equal(that interface{}) bool {
 	}
 	for i := range this.Field4 {
 		if this.Field4[i] != that1.Field4[i] {
+			return false
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return false
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			return false
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		return false
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			return false
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		return false
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			return false
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		return false
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			return false
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		return false
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			return false
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		return false
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			return false
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		return false
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
 			return false
 		}
 	}
@@ -5655,7 +16310,7 @@ func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt2.Errorf("that is type *NidEmbeddedStructbut is not nil && this == nil")
 	}
-	if !this.NidOptNative.Equal(&that1.NidOptNative) {
+	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return fmt2.Errorf("NidOptNative this(%v) Not Equal that(%v)", this.NidOptNative, that1.NidOptNative)
 	}
 	if !this.Field200.Equal(&that1.Field200) {
@@ -5686,7 +16341,7 @@ func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if !this.NidOptNative.Equal(&that1.NidOptNative) {
+	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return false
 	}
 	if !this.Field200.Equal(&that1.Field200) {
@@ -7175,752 +17830,1536 @@ func (this *Nil) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *NidOptNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NidOptEnum) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NidOptEnum)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NidOptEnum")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NidOptEnum but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NidOptEnumbut is not nil && this == nil")
+	}
+	if this.Field1 != that1.Field1 {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	return nil
 }
-func (this *NinOptNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NidOptEnum) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NidOptEnum)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != that1.Field1 {
+		return false
+	}
+	return true
 }
-func (this *NidRepNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NinOptEnum) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NinOptEnum)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NinOptEnum")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NinOptEnum but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NinOptEnumbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	return nil
 }
-func (this *NinRepNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NinOptEnum) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NinOptEnum)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	return true
 }
-func (this *NidRepPackedNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepPackedNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NidRepEnum) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NidRepEnum)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NidRepEnum")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NidRepEnum but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NidRepEnumbut is not nil && this == nil")
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
+		}
+	}
+	return nil
 }
-func (this *NinRepPackedNative) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepPackedNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NidRepEnum) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NidRepEnum)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		return false
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return false
+		}
+	}
+	return true
 }
-func (this *NidOptStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NinRepEnum) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NinRepEnum)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NinRepEnum")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NinRepEnum but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NinRepEnumbut is not nil && this == nil")
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
+		}
+	}
+	return nil
 }
-func (this *NinOptStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *NinRepEnum) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NinRepEnum)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		return false
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			return false
+		}
+	}
+	return true
 }
-func (this *NidRepStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+func (this *Timer) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Timer)
+	if !ok {
+		return fmt2.Errorf("that is not of type *Timer")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *Timer but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Timerbut is not nil && this == nil")
+	}
+	if this.Time1 != that1.Time1 {
+		return fmt2.Errorf("Time1 this(%v) Not Equal that(%v)", this.Time1, that1.Time1)
+	}
+	if this.Time2 != that1.Time2 {
+		return fmt2.Errorf("Time2 this(%v) Not Equal that(%v)", this.Time2, that1.Time2)
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return fmt2.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
+	}
+	return nil
 }
-func (this *NinRepStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+func (this *Timer) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Timer)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Time1 != that1.Time1 {
+		return false
+	}
+	if this.Time2 != that1.Time2 {
+		return false
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return false
+	}
+	return true
+}
+func Description() (desc *google_protobuf.FileDescriptorSet) {
+	return &google_protobuf.FileDescriptorSet{File: []*google_protobuf.FileDescriptorProto{&google_protobuf.FileDescriptorProto{Name: func(v string) *string { return &v }("code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto"), Package: func(v string) *string { return &v }("google.protobuf"), Dependency: []string(nil), PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{&google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("FileDescriptorSet"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("file"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FileDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("FileDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("package"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("dependency"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("public_dependency"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("weak_dependency"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("message_type"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.DescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("enum_type"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.EnumDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("service"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.ServiceDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("extension"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FileOptions"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("source_code_info"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.SourceCodeInfo"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("DescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("field"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("extension"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NidEmbeddedStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidEmbeddedStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NinEmbeddedStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinEmbeddedStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NidNestedStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidNestedStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptStruct"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("nested_type"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidRepStruct"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NinNestedStruct) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinNestedStruct"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptStruct"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.DescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("enum_type"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidRepStruct"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NidOptCustom) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NinOptCustom) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NidRepCustom) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.EnumDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("extension_range"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.DescriptorProto.ExtensionRange"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto{&google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("ExtensionRange"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("start"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("end"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("FieldDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("number"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("label"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldDescriptorProto.Label"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("type"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldDescriptorProto.Type"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("type_name"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("extendee"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("default_value"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto{&google_protobuf.EnumDescriptorProto{Name: func(v string) *string { return &v }("Type"), Value: []*google_protobuf.EnumValueDescriptorProto{&google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_DOUBLE"), Number: func(v int32) *int32 { return &v }(1), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_FLOAT"), Number: func(v int32) *int32 { return &v }(2), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_INT64"), Number: func(v int32) *int32 { return &v }(3), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_UINT64"), Number: func(v int32) *int32 { return &v }(4), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_INT32"), Number: func(v int32) *int32 { return &v }(5), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_FIXED64"), Number: func(v int32) *int32 { return &v }(6), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_FIXED32"), Number: func(v int32) *int32 { return &v }(7), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_BOOL"), Number: func(v int32) *int32 { return &v }(8), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_STRING"), Number: func(v int32) *int32 { return &v }(9), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_GROUP"), Number: func(v int32) *int32 { return &v }(10), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_MESSAGE"), Number: func(v int32) *int32 { return &v }(11), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_BYTES"), Number: func(v int32) *int32 { return &v }(12), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_UINT32"), Number: func(v int32) *int32 { return &v }(13), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_ENUM"), Number: func(v int32) *int32 { return &v }(14), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_SFIXED32"), Number: func(v int32) *int32 { return &v }(15), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_SFIXED64"), Number: func(v int32) *int32 { return &v }(16), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_SINT32"), Number: func(v int32) *int32 { return &v }(17), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("TYPE_SINT64"), Number: func(v int32) *int32 { return &v }(18), Options: nil}}, Options: nil}, &google_protobuf.EnumDescriptorProto{Name: func(v string) *string { return &v }("Label"), Value: []*google_protobuf.EnumValueDescriptorProto{&google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("LABEL_OPTIONAL"), Number: func(v int32) *int32 { return &v }(1), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("LABEL_REQUIRED"), Number: func(v int32) *int32 { return &v }(2), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("LABEL_REPEATED"), Number: func(v int32) *int32 { return &v }(3), Options: nil}}, Options: nil}}, ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("EnumDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NinRepCustom) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.EnumValueDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.EnumOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("EnumValueDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("number"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.EnumValueOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("ServiceDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("method"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.MethodDescriptorProto"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.ServiceOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("MethodDescriptorProto"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("input_type"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("output_type"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("options"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.MethodOptions"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("FileOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("java_package"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("java_outer_classname"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("java_multiple_files"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("java_generate_equals_and_hash"), Number: func(v int32) *int32 { return &v }(20), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("optimize_for"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".google.protobuf.FileOptions.OptimizeMode"), Extendee: nil, DefaultValue: func(v string) *string { return &v }("SPEED"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("go_package"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("cc_generic_services"), Number: func(v int32) *int32 { return &v }(16), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("java_generic_services"), Number: func(v int32) *int32 { return &v }(17), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("py_generic_services"), Number: func(v int32) *int32 { return &v }(18), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *NinOptNativeUnion) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptNativeUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto{&google_protobuf.EnumDescriptorProto{Name: func(v string) *string { return &v }("OptimizeMode"), Value: []*google_protobuf.EnumValueDescriptorProto{&google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("SPEED"), Number: func(v int32) *int32 { return &v }(1), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("CODE_SIZE"), Number: func(v int32) *int32 { return &v }(2), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("LITE_RUNTIME"), Number: func(v int32) *int32 { return &v }(3), Options: nil}}, Options: nil}}, ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("MessageOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("message_set_wire_format"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("no_standard_descriptor_accessor"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("FieldOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("ctype"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(14), TypeName: func(v string) *string { return &v }(".google.protobuf.FieldOptions.CType"), Extendee: nil, DefaultValue: func(v string) *string { return &v }("STRING"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("packed"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("lazy"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("deprecated"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("experimental_map_key"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("weak"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("false"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto{&google_protobuf.EnumDescriptorProto{Name: func(v string) *string { return &v }("CType"), Value: []*google_protobuf.EnumValueDescriptorProto{&google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("STRING"), Number: func(v int32) *int32 { return &v }(0), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("CORD"), Number: func(v int32) *int32 { return &v }(1), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("STRING_PIECE"), Number: func(v int32) *int32 { return &v }(2), Options: nil}}, Options: nil}}, ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("EnumOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("allow_alias"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *NinOptStructUnion) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("true"), Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("EnumValueOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("ServiceOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("MethodOptions"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("uninterpreted_option"), Number: func(v int32) *int32 { return &v }(999), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{&google_protobuf.DescriptorProto_ExtensionRange{Start: func(v int32) *int32 { return &v }(1000), End: func(v int32) *int32 { return &v }(536870912)}}, Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("UninterpretedOption"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.UninterpretedOption.NamePart"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("identifier_value"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("positive_int_value"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("negative_int_value"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("double_value"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("string_value"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("aggregate_value"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto{&google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NamePart"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("name_part"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(2), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("is_extension"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(2), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("SourceCodeInfo"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("location"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".google.protobuf.SourceCodeInfo.Location"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto{&google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Location"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("path"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("span"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("leading_comments"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("trailing_comments"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"), JavaOuterClassname: func(v string) *string { return &v }("DescriptorProtos"), JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: func(v google_protobuf.FileOptions_OptimizeMode) *google_protobuf.FileOptions_OptimizeMode { return &v }(1), GoPackage: func(v string) *string { return &v }("com.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"), CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}, SourceCodeInfo: &google_protobuf.SourceCodeInfo{Location: []*google_protobuf.SourceCodeInfo_Location{&google_protobuf.SourceCodeInfo_Location{Path: []int32(nil), Span: []int32{40, 0, 620, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{2}, Span: []int32{40, 8, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{41, 0, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0}, Span: []int32{41, 0, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2}, Span: []int32{41, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2, 0}, Span: []int32{41, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2, 0, 1}, Span: []int32{41, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 7}, Span: []int32{41, 22, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{42, 0, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1}, Span: []int32{42, 0, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2}, Span: []int32{42, 7, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2, 0}, Span: []int32{42, 7, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2, 0, 1}, Span: []int32{42, 7, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 7}, Span: []int32{42, 30, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{43, 0, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2}, Span: []int32{43, 0, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2}, Span: []int32{43, 7, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2, 0}, Span: []int32{43, 7, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2, 0, 1}, Span: []int32{43, 7, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 7}, Span: []int32{43, 20, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{47, 0, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3}, Span: []int32{47, 0, 28}, LeadingComments: func(v string) *string { return &v }(" descriptor.proto must be optimized for speed because reflection-based\n algorithms don't work during bootstrapping.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2}, Span: []int32{47, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2, 0}, Span: []int32{47, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2, 0, 1}, Span: []int32{47, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 3}, Span: []int32{47, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0}, Span: []int32{51, 0, 53, 1}, LeadingComments: func(v string) *string { return &v }(" The protocol compiler can output a FileDescriptorSet containing the .proto\n files it parses.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 1}, Span: []int32{51, 8, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0}, Span: []int32{52, 2, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 4}, Span: []int32{52, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 6}, Span: []int32{52, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 1}, Span: []int32{52, 31, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 3}, Span: []int32{52, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1}, Span: []int32{56, 0, 81, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a complete .proto file.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 1}, Span: []int32{56, 8, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0}, Span: []int32{57, 2, 27}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" file name, relative to root of source tree\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 4}, Span: []int32{57, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 5}, Span: []int32{57, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 1}, Span: []int32{57, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 3}, Span: []int32{57, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1}, Span: []int32{58, 2, 30}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" e.g. \"foo\", \"foo.bar\", etc.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 4}, Span: []int32{58, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 5}, Span: []int32{58, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 1}, Span: []int32{58, 18, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 3}, Span: []int32{58, 28, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2}, Span: []int32{61, 2, 33}, LeadingComments: func(v string) *string { return &v }(" Names of files imported by this file.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 4}, Span: []int32{61, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 5}, Span: []int32{61, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 1}, Span: []int32{61, 18, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 3}, Span: []int32{61, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3}, Span: []int32{63, 2, 40}, LeadingComments: func(v string) *string { return &v }(" Indexes of the public imported files in the dependency list above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 4}, Span: []int32{63, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 5}, Span: []int32{63, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 1}, Span: []int32{63, 17, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 3}, Span: []int32{63, 37, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4}, Span: []int32{66, 2, 38}, LeadingComments: func(v string) *string { return &v }(" Indexes of the weak imported files in the dependency list.\n For Google-internal migration only. Do not use.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 4}, Span: []int32{66, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 5}, Span: []int32{66, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 1}, Span: []int32{66, 17, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 3}, Span: []int32{66, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5}, Span: []int32{69, 2, 44}, LeadingComments: func(v string) *string { return &v }(" All top-level definitions in this file.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 4}, Span: []int32{69, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 6}, Span: []int32{69, 11, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 1}, Span: []int32{69, 27, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 3}, Span: []int32{69, 42, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6}, Span: []int32{70, 2, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 4}, Span: []int32{70, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 6}, Span: []int32{70, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 1}, Span: []int32{70, 31, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 3}, Span: []int32{70, 43, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7}, Span: []int32{71, 2, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 4}, Span: []int32{71, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 6}, Span: []int32{71, 11, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 1}, Span: []int32{71, 34, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 3}, Span: []int32{71, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8}, Span: []int32{72, 2, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 4}, Span: []int32{72, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 6}, Span: []int32{72, 11, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 1}, Span: []int32{72, 32, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 3}, Span: []int32{72, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9}, Span: []int32{74, 2, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 4}, Span: []int32{74, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 6}, Span: []int32{74, 11, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 1}, Span: []int32{74, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 3}, Span: []int32{74, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10}, Span: []int32{80, 2, 47}, LeadingComments: func(v string) *string { return &v }(" This field contains optional information about the original source code.\n You may safely remove this entire field whithout harming runtime\n functionality of the descriptors -- the information is needed only by\n development tools.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 4}, Span: []int32{80, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 6}, Span: []int32{80, 11, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 1}, Span: []int32{80, 26, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 3}, Span: []int32{80, 45, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2}, Span: []int32{84, 0, 100, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a message type.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 1}, Span: []int32{84, 8, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0}, Span: []int32{85, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 4}, Span: []int32{85, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 5}, Span: []int32{85, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 1}, Span: []int32{85, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 3}, Span: []int32{85, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1}, Span: []int32{87, 2, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 4}, Span: []int32{87, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 6}, Span: []int32{87, 11, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 1}, Span: []int32{87, 32, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 3}, Span: []int32{87, 40, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2}, Span: []int32{88, 2, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 4}, Span: []int32{88, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 6}, Span: []int32{88, 11, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 1}, Span: []int32{88, 32, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 3}, Span: []int32{88, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3}, Span: []int32{90, 2, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 4}, Span: []int32{90, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 6}, Span: []int32{90, 11, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 1}, Span: []int32{90, 27, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 3}, Span: []int32{90, 41, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4}, Span: []int32{91, 2, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 4}, Span: []int32{91, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 6}, Span: []int32{91, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 1}, Span: []int32{91, 31, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 3}, Span: []int32{91, 43, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0}, Span: []int32{93, 2, 96, 3}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 1}, Span: []int32{93, 10, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 0}, Span: []int32{94, 4, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 0, 4}, Span: []int32{94, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 0, 5}, Span: []int32{94, 13, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 0, 1}, Span: []int32{94, 19, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 0, 3}, Span: []int32{94, 27, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 1}, Span: []int32{95, 4, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 1, 4}, Span: []int32{95, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 1, 5}, Span: []int32{95, 13, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 1, 1}, Span: []int32{95, 19, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 3, 0, 2, 1, 3}, Span: []int32{95, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5}, Span: []int32{97, 2, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 4}, Span: []int32{97, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 6}, Span: []int32{97, 11, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 1}, Span: []int32{97, 26, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 3}, Span: []int32{97, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6}, Span: []int32{99, 2, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 4}, Span: []int32{99, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 6}, Span: []int32{99, 11, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 1}, Span: []int32{99, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 3}, Span: []int32{99, 36, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3}, Span: []int32{103, 0, 168, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a field within a message.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 1}, Span: []int32{103, 8, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0}, Span: []int32{104, 2, 131, 3}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 1}, Span: []int32{104, 7, 11}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 0}, Span: []int32{107, 4, 28}, LeadingComments: func(v string) *string { return &v }(" 0 is reserved for errors.\n Order is weird for historical reasons.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 0, 1}, Span: []int32{107, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 0, 2}, Span: []int32{107, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 1}, Span: []int32{108, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 1, 1}, Span: []int32{108, 4, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 1, 2}, Span: []int32{108, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 2}, Span: []int32{111, 4, 28}, LeadingComments: func(v string) *string { return &v }(" Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if\n negative values are likely.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 2, 1}, Span: []int32{111, 4, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 2, 2}, Span: []int32{111, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 3}, Span: []int32{112, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 3, 1}, Span: []int32{112, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 3, 2}, Span: []int32{112, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 4}, Span: []int32{115, 4, 28}, LeadingComments: func(v string) *string { return &v }(" Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if\n negative values are likely.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 4, 1}, Span: []int32{115, 4, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 4, 2}, Span: []int32{115, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 5}, Span: []int32{116, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 5, 1}, Span: []int32{116, 4, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 5, 2}, Span: []int32{116, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 6}, Span: []int32{117, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 6, 1}, Span: []int32{117, 4, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 6, 2}, Span: []int32{117, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 7}, Span: []int32{118, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 7, 1}, Span: []int32{118, 4, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 7, 2}, Span: []int32{118, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 8}, Span: []int32{119, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 8, 1}, Span: []int32{119, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 8, 2}, Span: []int32{119, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 9}, Span: []int32{120, 4, 29}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Tag-delimited aggregate.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 9, 1}, Span: []int32{120, 4, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 9, 2}, Span: []int32{120, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 10}, Span: []int32{121, 4, 29}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Length-delimited aggregate.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 10, 1}, Span: []int32{121, 4, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 10, 2}, Span: []int32{121, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 11}, Span: []int32{124, 4, 29}, LeadingComments: func(v string) *string { return &v }(" New in version 2.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 11, 1}, Span: []int32{124, 4, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 11, 2}, Span: []int32{124, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 12}, Span: []int32{125, 4, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 12, 1}, Span: []int32{125, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 12, 2}, Span: []int32{125, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 13}, Span: []int32{126, 4, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 13, 1}, Span: []int32{126, 4, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 13, 2}, Span: []int32{126, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 14}, Span: []int32{127, 4, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 14, 1}, Span: []int32{127, 4, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 14, 2}, Span: []int32{127, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 15}, Span: []int32{128, 4, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 15, 1}, Span: []int32{128, 4, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 15, 2}, Span: []int32{128, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 16}, Span: []int32{129, 4, 29}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Uses ZigZag encoding.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 16, 1}, Span: []int32{129, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 16, 2}, Span: []int32{129, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 17}, Span: []int32{130, 4, 29}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Uses ZigZag encoding.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 17, 1}, Span: []int32{130, 4, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 0, 2, 17, 2}, Span: []int32{130, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1}, Span: []int32{133, 2, 139, 3}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 1}, Span: []int32{133, 7, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 0}, Span: []int32{135, 4, 28}, LeadingComments: func(v string) *string { return &v }(" 0 is reserved for errors\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 0, 1}, Span: []int32{135, 4, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 0, 2}, Span: []int32{135, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 1}, Span: []int32{136, 4, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 1, 1}, Span: []int32{136, 4, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 1, 2}, Span: []int32{136, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 2}, Span: []int32{137, 4, 28}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" TODO(sanjay): Should we add LABEL_MAP?\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 2, 1}, Span: []int32{137, 4, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 4, 1, 2, 2, 2}, Span: []int32{137, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0}, Span: []int32{141, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 4}, Span: []int32{141, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 5}, Span: []int32{141, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 1}, Span: []int32{141, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 3}, Span: []int32{141, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1}, Span: []int32{142, 2, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 4}, Span: []int32{142, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 5}, Span: []int32{142, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 1}, Span: []int32{142, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 3}, Span: []int32{142, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2}, Span: []int32{143, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 4}, Span: []int32{143, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 6}, Span: []int32{143, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 1}, Span: []int32{143, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 3}, Span: []int32{143, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3}, Span: []int32{147, 2, 25}, LeadingComments: func(v string) *string { return &v }(" If type_name is set, this need not be set.  If both this and type_name\n are set, this must be either TYPE_ENUM or TYPE_MESSAGE.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 4}, Span: []int32{147, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 6}, Span: []int32{147, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 1}, Span: []int32{147, 16, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 3}, Span: []int32{147, 23, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4}, Span: []int32{154, 2, 32}, LeadingComments: func(v string) *string { return &v }(" For message and enum types, this is the name of the type.  If the name\n starts with a '.', it is fully-qualified.  Otherwise, C++-like scoping\n rules are used to find the type (i.e. first the nested types within this\n message are searched, then within the parent, on up to the root\n namespace).\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 4}, Span: []int32{154, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 5}, Span: []int32{154, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 1}, Span: []int32{154, 18, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 3}, Span: []int32{154, 30, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5}, Span: []int32{158, 2, 31}, LeadingComments: func(v string) *string { return &v }(" For extensions, this is the name of the type being extended.  It is\n resolved in the same manner as type_name.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 4}, Span: []int32{158, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 5}, Span: []int32{158, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 1}, Span: []int32{158, 18, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 3}, Span: []int32{158, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6}, Span: []int32{165, 2, 36}, LeadingComments: func(v string) *string { return &v }(" For numeric types, contains the original text representation of the value.\n For booleans, \"true\" or \"false\".\n For strings, contains the default text contents (not escaped in any way).\n For bytes, contains the C escaped value.  All bytes >= 128 are escaped.\n TODO(kenton):  Base-64 encode?\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 4}, Span: []int32{165, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 5}, Span: []int32{165, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 1}, Span: []int32{165, 18, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 3}, Span: []int32{165, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7}, Span: []int32{167, 2, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 4}, Span: []int32{167, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 6}, Span: []int32{167, 11, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 1}, Span: []int32{167, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 3}, Span: []int32{167, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4}, Span: []int32{171, 0, 177, 1}, LeadingComments: func(v string) *string { return &v }(" Describes an enum type.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 1}, Span: []int32{171, 8, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0}, Span: []int32{172, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 4}, Span: []int32{172, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 5}, Span: []int32{172, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 1}, Span: []int32{172, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 3}, Span: []int32{172, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1}, Span: []int32{174, 2, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 4}, Span: []int32{174, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 6}, Span: []int32{174, 11, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 1}, Span: []int32{174, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 3}, Span: []int32{174, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2}, Span: []int32{176, 2, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 4}, Span: []int32{176, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 6}, Span: []int32{176, 11, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 1}, Span: []int32{176, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 3}, Span: []int32{176, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5}, Span: []int32{180, 0, 185, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a value within an enum.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 1}, Span: []int32{180, 8, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0}, Span: []int32{181, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 4}, Span: []int32{181, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 5}, Span: []int32{181, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 1}, Span: []int32{181, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 3}, Span: []int32{181, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1}, Span: []int32{182, 2, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 4}, Span: []int32{182, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 5}, Span: []int32{182, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 1}, Span: []int32{182, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 3}, Span: []int32{182, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2}, Span: []int32{184, 2, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 4}, Span: []int32{184, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 6}, Span: []int32{184, 11, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 1}, Span: []int32{184, 28, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 3}, Span: []int32{184, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6}, Span: []int32{188, 0, 193, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a service.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 1}, Span: []int32{188, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0}, Span: []int32{189, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 4}, Span: []int32{189, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 5}, Span: []int32{189, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 1}, Span: []int32{189, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 3}, Span: []int32{189, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1}, Span: []int32{190, 2, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 4}, Span: []int32{190, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 6}, Span: []int32{190, 11, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 1}, Span: []int32{190, 33, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 3}, Span: []int32{190, 42, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2}, Span: []int32{192, 2, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 4}, Span: []int32{192, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 6}, Span: []int32{192, 11, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 1}, Span: []int32{192, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 3}, Span: []int32{192, 36, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7}, Span: []int32{196, 0, 205, 1}, LeadingComments: func(v string) *string { return &v }(" Describes a method of a service.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 1}, Span: []int32{196, 8, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0}, Span: []int32{197, 2, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 4}, Span: []int32{197, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 5}, Span: []int32{197, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 1}, Span: []int32{197, 18, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 3}, Span: []int32{197, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1}, Span: []int32{201, 2, 33}, LeadingComments: func(v string) *string { return &v }(" Input and output type names.  These are resolved in the same way as\n FieldDescriptorProto.type_name, but must refer to a message type.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 4}, Span: []int32{201, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 5}, Span: []int32{201, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 1}, Span: []int32{201, 18, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 3}, Span: []int32{201, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2}, Span: []int32{202, 2, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 4}, Span: []int32{202, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 5}, Span: []int32{202, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 1}, Span: []int32{202, 18, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 3}, Span: []int32{202, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3}, Span: []int32{204, 2, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 4}, Span: []int32{204, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 6}, Span: []int32{204, 11, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 1}, Span: []int32{204, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 3}, Span: []int32{204, 35, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8}, Span: []int32{241, 0, 305, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 1}, Span: []int32{241, 8, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0}, Span: []int32{247, 2, 35}, LeadingComments: func(v string) *string { return &v }(" Sets the Java package where classes generated from this .proto will be\n placed.  By default, the proto package is used, but this is often\n inappropriate because proto packages do not normally start with backwards\n domain names.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 4}, Span: []int32{247, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 5}, Span: []int32{247, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 1}, Span: []int32{247, 18, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 3}, Span: []int32{247, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1}, Span: []int32{255, 2, 43}, LeadingComments: func(v string) *string { return &v }(" If set, all the classes from the .proto file are wrapped in a single\n outer class with the given name.  This applies to both Proto1\n (equivalent to the old \"--one_java_file\" option) and Proto2 (where\n a .proto always translates to a single class, but you may want to\n explicitly choose the class name).\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 4}, Span: []int32{255, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 5}, Span: []int32{255, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 1}, Span: []int32{255, 18, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 3}, Span: []int32{255, 41, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2}, Span: []int32{263, 2, 57}, LeadingComments: func(v string) *string { return &v }(" If set true, then the Java code generator will generate a separate .java\n file for each top-level message, enum, and service defined in the .proto\n file.  Thus, these types will *not* be nested inside the outer class\n named by java_outer_classname.  However, the outer class will still be\n generated to contain the file's getDescriptor() method as well as any\n top-level extensions defined in the file.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 4}, Span: []int32{263, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 5}, Span: []int32{263, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 1}, Span: []int32{263, 16, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 3}, Span: []int32{263, 38, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8}, Span: []int32{263, 41, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 7}, Span: []int32{263, 50, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3}, Span: []int32{269, 2, 67}, LeadingComments: func(v string) *string { return &v }(" If set true, then the Java code generator will generate equals() and\n hashCode() methods for all messages defined in the .proto file. This is\n purely a speed optimization, as the AbstractMessage base class includes\n reflection-based implementations of these methods.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 4}, Span: []int32{269, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 5}, Span: []int32{269, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 1}, Span: []int32{269, 16, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 3}, Span: []int32{269, 48, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8}, Span: []int32{269, 51, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 7}, Span: []int32{269, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0}, Span: []int32{272, 2, 277, 3}, LeadingComments: func(v string) *string { return &v }(" Generated classes can be optimized for speed or code size.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 1}, Span: []int32{272, 7, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 0}, Span: []int32{273, 4, 14}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Generate complete code for parsing, serialization,\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 0, 1}, Span: []int32{273, 4, 9}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 0, 2}, Span: []int32{273, 12, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 1}, Span: []int32{275, 4, 18}, LeadingComments: func(v string) *string { return &v }(" etc.\n"), TrailingComments: func(v string) *string { return &v }(" Use ReflectionOps to implement these methods.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 1, 1}, Span: []int32{275, 4, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 1, 2}, Span: []int32{275, 16, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 2}, Span: []int32{276, 4, 21}, LeadingComments: nil, TrailingComments: func(v string) *string { return &v }(" Generate code using MessageLite and the lite runtime.\n")}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 2, 1}, Span: []int32{276, 4, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 4, 0, 2, 2, 2}, Span: []int32{276, 19, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4}, Span: []int32{278, 2, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 4}, Span: []int32{278, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 6}, Span: []int32{278, 11, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 1}, Span: []int32{278, 24, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 3}, Span: []int32{278, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8}, Span: []int32{278, 41, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 7}, Span: []int32{278, 50, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5}, Span: []int32{282, 2, 34}, LeadingComments: func(v string) *string { return &v }(" Sets the Go package where structs generated from this .proto will be\n placed.  There is no default.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 4}, Span: []int32{282, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 5}, Span: []int32{282, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 1}, Span: []int32{282, 18, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 3}, Span: []int32{282, 31, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6}, Span: []int32{296, 2, 57}, LeadingComments: func(v string) *string { return &v }(" Should generic services be generated in each language?  \"Generic\" services\n are not specific to any particular RPC system.  They are generated by the\n main code generators in each language (without additional plugins).\n Generic services were the only kind of service generation supported by\n early versions of proto2.\n\n Generic services are now considered deprecated in favor of using plugins\n that generate code specific to your particular RPC system.  Therefore,\n these default to false.  Old code which depends on generic services should\n explicitly set them to true.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 4}, Span: []int32{296, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 5}, Span: []int32{296, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 1}, Span: []int32{296, 16, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 3}, Span: []int32{296, 38, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8}, Span: []int32{296, 41, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 7}, Span: []int32{296, 50, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7}, Span: []int32{297, 2, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 4}, Span: []int32{297, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 5}, Span: []int32{297, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 1}, Span: []int32{297, 16, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 3}, Span: []int32{297, 40, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8}, Span: []int32{297, 43, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 7}, Span: []int32{297, 52, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8}, Span: []int32{298, 2, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 4}, Span: []int32{298, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 5}, Span: []int32{298, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 1}, Span: []int32{298, 16, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 3}, Span: []int32{298, 38, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8}, Span: []int32{298, 41, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 7}, Span: []int32{298, 50, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9}, Span: []int32{301, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 4}, Span: []int32{301, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 6}, Span: []int32{301, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 1}, Span: []int32{301, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 3}, Span: []int32{301, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 5}, Span: []int32{304, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 5, 0}, Span: []int32{304, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 5, 0, 1}, Span: []int32{304, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 5, 0, 2}, Span: []int32{304, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9}, Span: []int32{307, 0, 338, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 1}, Span: []int32{307, 8, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0}, Span: []int32{326, 2, 60}, LeadingComments: func(v string) *string { return &v }(" Set true to use the old proto1 MessageSet wire format for extensions.\n This is provided for backwards-compatibility with the MessageSet wire\n format.  You should not use this for any other reason:  It's less\n efficient, has fewer features, and is more complicated.\n\n The message must be defined exactly as follows:\n   message Foo {\n     option message_set_wire_format = true;\n     extensions 4 to max;\n   }\n Note that the message cannot have any defined fields; MessageSets only\n have extensions.\n\n All extensions of your type must be singular messages; e.g. they cannot\n be int32s, enums, or repeated messages.\n\n Because this is an option, the above two restrictions are not enforced by\n the protocol compiler.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 4}, Span: []int32{326, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 5}, Span: []int32{326, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 1}, Span: []int32{326, 16, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 3}, Span: []int32{326, 42, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 8}, Span: []int32{326, 44, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 7}, Span: []int32{326, 53, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1}, Span: []int32{331, 2, 68}, LeadingComments: func(v string) *string { return &v }(" Disables the generation of the standard \"descriptor()\" accessor, which can\n conflict with a field of the same name.  This is meant to make migration\n from proto1 easier; new code should avoid fields named \"descriptor\".\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 4}, Span: []int32{331, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 5}, Span: []int32{331, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 1}, Span: []int32{331, 16, 47}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 3}, Span: []int32{331, 50, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 8}, Span: []int32{331, 52, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 7}, Span: []int32{331, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2}, Span: []int32{334, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 4}, Span: []int32{334, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 6}, Span: []int32{334, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 1}, Span: []int32{334, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 3}, Span: []int32{334, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 5}, Span: []int32{337, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 5, 0}, Span: []int32{337, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 5, 0, 1}, Span: []int32{337, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 5, 0, 2}, Span: []int32{337, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10}, Span: []int32{340, 0, 420, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 1}, Span: []int32{340, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0}, Span: []int32{345, 2, 46}, LeadingComments: func(v string) *string { return &v }(" The ctype option instructs the C++ code generator to use a different\n representation of the field than it normally would.  See the specific\n options below.  This option is not yet implemented in the open source\n release -- sorry, we'll try to include it in a future version!\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 4}, Span: []int32{345, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 6}, Span: []int32{345, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 1}, Span: []int32{345, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 3}, Span: []int32{345, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8}, Span: []int32{345, 27, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 7}, Span: []int32{345, 38, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0}, Span: []int32{346, 2, 353, 3}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 1}, Span: []int32{346, 7, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 0}, Span: []int32{348, 4, 15}, LeadingComments: func(v string) *string { return &v }(" Default mode.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 0, 1}, Span: []int32{348, 4, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 0, 2}, Span: []int32{348, 13, 14}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 1}, Span: []int32{350, 4, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 1, 1}, Span: []int32{350, 4, 8}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 1, 2}, Span: []int32{350, 11, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 2}, Span: []int32{352, 4, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 2, 1}, Span: []int32{352, 4, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 4, 0, 2, 2, 2}, Span: []int32{352, 19, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1}, Span: []int32{358, 2, 27}, LeadingComments: func(v string) *string { return &v }(" The packed option can be enabled for repeated primitive fields to enable\n a more efficient representation on the wire. Rather than repeatedly\n writing the tag and type for each element, the entire array is encoded as\n a single length-delimited blob.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 4}, Span: []int32{358, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 5}, Span: []int32{358, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 1}, Span: []int32{358, 16, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 3}, Span: []int32{358, 25, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2}, Span: []int32{390, 2, 41}, LeadingComments: func(v string) *string { return &v }(" Should this field be parsed lazily?  Lazy applies only to message-type\n fields.  It means that when the outer message is initially parsed, the\n inner message's contents will not be parsed but instead stored in encoded\n form.  The inner message will actually be parsed when it is first accessed.\n\n This is only a hint.  Implementations are free to choose whether to use\n eager or lazy parsing regardless of the value of this option.  However,\n setting this option true suggests that the protocol author believes that\n using lazy parsing on this field is worth the additional bookkeeping\n overhead typically needed to implement it.\n\n This option does not affect the public interface of any generated code;\n all method signatures remain the same.  Furthermore, thread-safety of the\n interface is not affected by this option; const methods remain safe to\n call from multiple threads concurrently, while non-const methods continue\n to require exclusive access.\n\n\n Note that implementations may choose not to check required fields within\n a lazy sub-message.  That is, calling IsInitialized() on the outher message\n may return true even if the inner message has missing required fields.\n This is necessary because otherwise the inner message would have to be\n parsed in order to perform the check, defeating the purpose of lazy\n parsing.  An implementation which chooses not to check required fields\n must be consistent about it.  That is, for any particular sub-message, the\n implementation must either *always* check its required fields, or *never*\n check its required fields, regardless of whether or not the message has\n been parsed.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 4}, Span: []int32{390, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 5}, Span: []int32{390, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 1}, Span: []int32{390, 16, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 3}, Span: []int32{390, 23, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8}, Span: []int32{390, 25, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 7}, Span: []int32{390, 34, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3}, Span: []int32{396, 2, 47}, LeadingComments: func(v string) *string { return &v }(" Is this field deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for accessors, or it will be completely ignored; in the very least, this\n is a formalization for deprecating fields.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 4}, Span: []int32{396, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 5}, Span: []int32{396, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 1}, Span: []int32{396, 16, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 3}, Span: []int32{396, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 8}, Span: []int32{396, 31, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 3, 7}, Span: []int32{396, 40, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 4}, Span: []int32{410, 2, 43}, LeadingComments: func(v string) *string { return &v }(" EXPERIMENTAL.  DO NOT USE.\n For \"map\" fields, the name of the field in the enclosed type that\n is the key for this map.  For example, suppose we have:\n   message Item {\n     required string name = 1;\n     required string value = 2;\n   }\n   message Config {\n     repeated Item items = 1 [experimental_map_key=\"name\"];\n   }\n In this situation, the map key for Item will be set to \"name\".\n TODO: Fully-implement this, then remove the \"experimental_\" prefix.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 4, 4}, Span: []int32{410, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 4, 5}, Span: []int32{410, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 4, 1}, Span: []int32{410, 18, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 4, 3}, Span: []int32{410, 41, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5}, Span: []int32{413, 2, 42}, LeadingComments: func(v string) *string { return &v }(" For Google-internal migration only. Do not use.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 4}, Span: []int32{413, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 5}, Span: []int32{413, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 1}, Span: []int32{413, 16, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 3}, Span: []int32{413, 23, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 8}, Span: []int32{413, 26, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 5, 7}, Span: []int32{413, 35, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 6}, Span: []int32{416, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 6, 4}, Span: []int32{416, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 6, 6}, Span: []int32{416, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 6, 1}, Span: []int32{416, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 6, 3}, Span: []int32{416, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 5}, Span: []int32{419, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 5, 0}, Span: []int32{419, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 5, 0, 1}, Span: []int32{419, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 5, 0, 2}, Span: []int32{419, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11}, Span: []int32{422, 0, 433, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 1}, Span: []int32{422, 8, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0}, Span: []int32{426, 2, 47}, LeadingComments: func(v string) *string { return &v }(" Set this option to false to disallow mapping different tag names to a same\n value.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 4}, Span: []int32{426, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 5}, Span: []int32{426, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 1}, Span: []int32{426, 16, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 3}, Span: []int32{426, 30, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8}, Span: []int32{426, 32, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 7}, Span: []int32{426, 41, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1}, Span: []int32{429, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 4}, Span: []int32{429, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 6}, Span: []int32{429, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 1}, Span: []int32{429, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 3}, Span: []int32{429, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 5}, Span: []int32{432, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 5, 0}, Span: []int32{432, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 5, 0, 1}, Span: []int32{432, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 5, 0, 2}, Span: []int32{432, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12}, Span: []int32{435, 0, 441, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 1}, Span: []int32{435, 8, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0}, Span: []int32{437, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 4}, Span: []int32{437, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 6}, Span: []int32{437, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 1}, Span: []int32{437, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 3}, Span: []int32{437, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 5}, Span: []int32{440, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 5, 0}, Span: []int32{440, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 5, 0, 1}, Span: []int32{440, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 5, 0, 2}, Span: []int32{440, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13}, Span: []int32{443, 0, 455, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 1}, Span: []int32{443, 8, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0}, Span: []int32{451, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 4}, Span: []int32{451, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 6}, Span: []int32{451, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 1}, Span: []int32{451, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 3}, Span: []int32{451, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 5}, Span: []int32{454, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 5, 0}, Span: []int32{454, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 5, 0, 1}, Span: []int32{454, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 5, 0, 2}, Span: []int32{454, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14}, Span: []int32{457, 0, 469, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 1}, Span: []int32{457, 8, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0}, Span: []int32{465, 2, 58}, LeadingComments: func(v string) *string { return &v }(" The parser stores options it doesn't recognize here. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 4}, Span: []int32{465, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 6}, Span: []int32{465, 11, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 1}, Span: []int32{465, 31, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 3}, Span: []int32{465, 54, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 5}, Span: []int32{468, 2, 25}, LeadingComments: func(v string) *string { return &v }(" Clients can define custom options in extensions of this message. See above.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 5, 0}, Span: []int32{468, 13, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 5, 0, 1}, Span: []int32{468, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 5, 0, 2}, Span: []int32{468, 21, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15}, Span: []int32{478, 0, 498, 1}, LeadingComments: func(v string) *string { return &v }(" A message representing a option the parser does not recognize. This only\n appears in options protos created by the compiler::Parser class.\n DescriptorPool resolves these when building Descriptor objects. Therefore,\n options protos in descriptor objects (e.g. returned by Descriptor::options(),\n or produced by Descriptor::CopyTo()) will never have UninterpretedOptions\n in them.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 1}, Span: []int32{478, 8, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0}, Span: []int32{484, 2, 487, 3}, LeadingComments: func(v string) *string { return &v }(" The name of the uninterpreted option.  Each string represents a segment in\n a dot-separated name.  is_extension is true iff a segment represents an\n extension (denoted with parentheses in options specs in .proto files).\n E.g.,{ [\"foo\", false], [\"bar.baz\", true], [\"qux\", false] } represents\n \"foo.(bar.baz).qux\".\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 1}, Span: []int32{484, 10, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 0}, Span: []int32{485, 4, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 0, 4}, Span: []int32{485, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 0, 5}, Span: []int32{485, 13, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 0, 1}, Span: []int32{485, 20, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 0, 3}, Span: []int32{485, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 1}, Span: []int32{486, 4, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 1, 4}, Span: []int32{486, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 1, 5}, Span: []int32{486, 13, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 1, 1}, Span: []int32{486, 18, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 3, 0, 2, 1, 3}, Span: []int32{486, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0}, Span: []int32{488, 2, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 4}, Span: []int32{488, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 6}, Span: []int32{488, 11, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 1}, Span: []int32{488, 20, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 3}, Span: []int32{488, 27, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1}, Span: []int32{492, 2, 39}, LeadingComments: func(v string) *string { return &v }(" The value of the uninterpreted option, in whatever type the tokenizer\n identified it as during parsing. Exactly one of these should be set.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 4}, Span: []int32{492, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 5}, Span: []int32{492, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 1}, Span: []int32{492, 18, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 3}, Span: []int32{492, 37, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 2}, Span: []int32{493, 2, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 2, 4}, Span: []int32{493, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 2, 5}, Span: []int32{493, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 2, 1}, Span: []int32{493, 18, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 2, 3}, Span: []int32{493, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 3}, Span: []int32{494, 2, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 3, 4}, Span: []int32{494, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 3, 5}, Span: []int32{494, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 3, 1}, Span: []int32{494, 17, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 3, 3}, Span: []int32{494, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 4}, Span: []int32{495, 2, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 4, 4}, Span: []int32{495, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 4, 5}, Span: []int32{495, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 4, 1}, Span: []int32{495, 18, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 4, 3}, Span: []int32{495, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 5}, Span: []int32{496, 2, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 5, 4}, Span: []int32{496, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 5, 5}, Span: []int32{496, 11, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 5, 1}, Span: []int32{496, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 5, 3}, Span: []int32{496, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 6}, Span: []int32{497, 2, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 6, 4}, Span: []int32{497, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 6, 5}, Span: []int32{497, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 6, 1}, Span: []int32{497, 18, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 6, 3}, Span: []int32{497, 36, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16}, Span: []int32{505, 0, 620, 1}, LeadingComments: func(v string) *string { return &v }(" Encapsulates information about the original source file from which a\n FileDescriptorProto was generated.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 1}, Span: []int32{505, 8, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0}, Span: []int32{549, 2, 33}, LeadingComments: func(v string) *string { return &v }(" A Location identifies a piece of source code in a .proto file which\n corresponds to a particular definition.  This information is intended\n to be useful to IDEs, code indexers, documentation generators, and similar\n tools.\n\n For example, say we have a file like:\n   message Foo {\n     optional string foo = 1;\n   }\n Let's look at just the field definition:\n   optional string foo = 1;\n   ^       ^^     ^^  ^  ^^^\n   a       bc     de  f  ghi\n We have the following locations:\n   span   path               represents\n   [a,i)  [ 4, 0, 2, 0 ]     The whole field definition.\n   [a,b)  [ 4, 0, 2, 0, 4 ]  The label (optional).\n   [c,d)  [ 4, 0, 2, 0, 5 ]  The type (string).\n   [e,f)  [ 4, 0, 2, 0, 1 ]  The name (foo).\n   [g,h)  [ 4, 0, 2, 0, 3 ]  The number (1).\n\n Notes:\n - A location may refer to a repeated field itself (i.e. not to any\n   particular index within it).  This is used whenever a set of elements are\n   logically enclosed in a single code segment.  For example, an entire\n   extend block (possibly containing multiple extension definitions) will\n   have an outer location whose path refers to the \"extensions\" repeated\n   field without an index.\n - Multiple locations may have the same path.  This happens when a single\n   logical declaration is spread out across multiple places.  The most\n   obvious example is the \"extend\" block again -- there may be multiple\n   extend blocks in the same scope, each of which will have the same path.\n - A location's span is not always a subset of its parent's span.  For\n   example, the \"extendee\" of an extension declaration appears at the\n   beginning of the \"extend\" block and is shared by all extensions within\n   the block.\n - Just because a location's span is a subset of some other location's span\n   does not mean that it is a descendent.  For example, a \"group\" defines\n   both a type and a field in a single declaration.  Thus, the locations\n   corresponding to the type and field and their components will overlap.\n - Code which tries to interpret locations should probably be designed to\n   ignore those that it doesn't understand, as more types of locations could\n   be recorded in the future.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 4}, Span: []int32{549, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 6}, Span: []int32{549, 11, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 1}, Span: []int32{549, 20, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 3}, Span: []int32{549, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0}, Span: []int32{550, 2, 619, 3}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 1}, Span: []int32{550, 10, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0}, Span: []int32{574, 4, 42}, LeadingComments: func(v string) *string { return &v }(" Identifies which part of the FileDescriptorProto was defined at this\n location.\n\n Each element is a field number or an index.  They form a path from\n the root FileDescriptorProto to the place where the definition.  For\n example, this path:\n   [ 4, 3, 2, 7, 1 ]\n refers to:\n   file.message_type(3)  // 4, 3\n       .field(7)         // 2, 7\n       .name()           // 1\n This is because FileDescriptorProto.message_type has field number 4:\n   repeated DescriptorProto message_type = 4;\n and DescriptorProto.field has field number 2:\n   repeated FieldDescriptorProto field = 2;\n and FieldDescriptorProto.name has field number 1:\n   optional string name = 1;\n\n Thus, the above path gives the location of a field name.  If we removed\n the last element:\n   [ 4, 3, 2, 7 ]\n this path refers to the whole field declaration (from the beginning\n of the label to the terminating semicolon).\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 4}, Span: []int32{574, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 5}, Span: []int32{574, 13, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 1}, Span: []int32{574, 19, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 3}, Span: []int32{574, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8}, Span: []int32{574, 28, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8, 999, 0}, Span: []int32{574, 29, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8, 999, 0, 2}, Span: []int32{574, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{574, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{574, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 0, 8, 999, 0, 3}, Span: []int32{574, 36, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1}, Span: []int32{581, 4, 42}, LeadingComments: func(v string) *string { return &v }(" Always has exactly three or four elements: start line, start column,\n end line (optional, otherwise assumed same as start line), end column.\n These are packed into a single field for efficiency.  Note that line\n and column numbers are zero-based -- typically you will want to add\n 1 to each before displaying to a user.\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 4}, Span: []int32{581, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 5}, Span: []int32{581, 13, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 1}, Span: []int32{581, 19, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 3}, Span: []int32{581, 26, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8}, Span: []int32{581, 28, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8, 999, 0}, Span: []int32{581, 29, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8, 999, 0, 2}, Span: []int32{581, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{581, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{581, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 1, 8, 999, 0, 3}, Span: []int32{581, 36, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 2}, Span: []int32{617, 4, 41}, LeadingComments: func(v string) *string { return &v }(" If this SourceCodeInfo represents a complete declaration, these are any\n comments appearing before and after the declaration which appear to be\n attached to the declaration.\n\n A series of line comments appearing on consecutive lines, with no other\n tokens appearing on those lines, will be treated as a single comment.\n\n Only the comment content is provided; comment markers (e.g. //) are\n stripped out.  For block comments, leading whitespace and an asterisk\n will be stripped from the beginning of each line other than the first.\n Newlines are included in the output.\n\n Examples:\n\n   optional int32 foo = 1;  // Comment attached to foo.\n   // Comment attached to bar.\n   optional int32 bar = 2;\n\n   optional string baz = 3;\n   // Comment attached to baz.\n   // Another line attached to baz.\n\n   // Comment attached to qux.\n   //\n   // Another line attached to qux.\n   optional double qux = 4;\n\n   optional string corge = 5;\n   /* Block comment attached\n    * to corge.  Leading asterisks\n    * will be removed. */\n   /* Block comment attached to\n    * grault. */\n   optional int32 grault = 6;\n"), TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 2, 4}, Span: []int32{617, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 2, 5}, Span: []int32{617, 13, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 2, 1}, Span: []int32{617, 20, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 2, 3}, Span: []int32{617, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 3}, Span: []int32{618, 4, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 3, 4}, Span: []int32{618, 4, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 3, 5}, Span: []int32{618, 13, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 3, 1}, Span: []int32{618, 20, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 3, 0, 2, 3, 3}, Span: []int32{618, 40, 41}, LeadingComments: nil, TrailingComments: nil}}}}, &google_protobuf.FileDescriptorProto{Name: func(v string) *string { return &v }("code.google.com/p/gogoprotobuf/gogoproto/gogo.proto"), Package: func(v string) *string { return &v }("gogoproto"), Dependency: []string{"code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("enumprefix"), Number: func(v int32) *int32 { return &v }(62001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *NinEmbeddedStructUnion) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinEmbeddedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.EnumOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("getters_all"), Number: func(v int32) *int32 { return &v }(63001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("enumprefix_all"), Number: func(v int32) *int32 { return &v }(63002), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("msgstringmethod_all"), Number: func(v int32) *int32 { return &v }(63003), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *NinNestedStructUnion) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinNestedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("verbose_equal_all"), Number: func(v int32) *int32 { return &v }(63004), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNativeUnion"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("face_all"), Number: func(v int32) *int32 { return &v }(63005), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptStructUnion"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("gostring_all"), Number: func(v int32) *int32 { return &v }(63006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NinEmbeddedStructUnion"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *Tree) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Tree"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Or"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("populate_all"), Number: func(v int32) *int32 { return &v }(63007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.OrBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("And"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("stringer_all"), Number: func(v int32) *int32 { return &v }(63008), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.AndBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Leaf"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("union_all"), Number: func(v int32) *int32 { return &v }(63009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Leaf"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *OrBranch) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("OrBranch"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("equal_all"), Number: func(v int32) *int32 { return &v }(63013), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("description_all"), Number: func(v int32) *int32 { return &v }(63014), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *AndBranch) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("AndBranch"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("testgen_all"), Number: func(v int32) *int32 { return &v }(63015), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("benchgen_all"), Number: func(v int32) *int32 { return &v }(63016), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *Leaf) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Leaf"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("marshaler_all"), Number: func(v int32) *int32 { return &v }(63017), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("StrValue"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("unmarshaler_all"), Number: func(v int32) *int32 { return &v }(63018), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *DeepTree) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("DeepTree"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Down"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("bufferto_all"), Number: func(v int32) *int32 { return &v }(63019), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.ADeepBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("And"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("sizer_all"), Number: func(v int32) *int32 { return &v }(63020), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.AndDeepBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Leaf"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("getters"), Number: func(v int32) *int32 { return &v }(64001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.DeepLeaf"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
-}
-func (this *ADeepBranch) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("ADeepBranch"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Down"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("msgstringmethod"), Number: func(v int32) *int32 { return &v }(64003), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *AndDeepBranch) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("AndDeepBranch"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("verbose_equal"), Number: func(v int32) *int32 { return &v }(64004), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("face"), Number: func(v int32) *int32 { return &v }(64005), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *DeepLeaf) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("DeepLeaf"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Tree"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("gostring"), Number: func(v int32) *int32 { return &v }(64006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
-}
-func (this *Nil) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Nil"), Field: []*google_protobuf.FieldDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("populate"), Number: func(v int32) *int32 { return &v }(64007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("stringer"), Number: func(v int32) *int32 { return &v }(67008), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("union"), Number: func(v int32) *int32 { return &v }(64009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("equal"), Number: func(v int32) *int32 { return &v }(64013), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("description"), Number: func(v int32) *int32 { return &v }(64014), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("testgen"), Number: func(v int32) *int32 { return &v }(64015), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("benchgen"), Number: func(v int32) *int32 { return &v }(64016), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("marshaler"), Number: func(v int32) *int32 { return &v }(64017), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("unmarshaler"), Number: func(v int32) *int32 { return &v }(64018), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("bufferto"), Number: func(v int32) *int32 { return &v }(64019), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("sizer"), Number: func(v int32) *int32 { return &v }(64020), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("nullable"), Number: func(v int32) *int32 { return &v }(65001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("embed"), Number: func(v int32) *int32 { return &v }(65002), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("customtype"), Number: func(v int32) *int32 { return &v }(65003), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil}}, Options: nil, SourceCodeInfo: &google_protobuf.SourceCodeInfo{Location: []*google_protobuf.SourceCodeInfo_Location{&google_protobuf.SourceCodeInfo_Location{Path: []int32(nil), Span: []int32{26, 0, 79, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{2}, Span: []int32{26, 8, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{3, 0}, Span: []int32{28, 7, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7}, Span: []int32{30, 0, 32, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0}, Span: []int32{31, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0, 2}, Span: []int32{30, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0, 4}, Span: []int32{31, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0, 5}, Span: []int32{31, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0, 1}, Span: []int32{31, 22, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 0, 3}, Span: []int32{31, 35, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7}, Span: []int32{34, 0, 53, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1}, Span: []int32{35, 8, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1, 4}, Span: []int32{35, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1, 5}, Span: []int32{35, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1, 1}, Span: []int32{35, 22, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 1, 3}, Span: []int32{35, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2}, Span: []int32{36, 8, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2, 4}, Span: []int32{36, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2, 5}, Span: []int32{36, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2, 1}, Span: []int32{36, 22, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 2, 3}, Span: []int32{36, 39, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3}, Span: []int32{37, 8, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3, 4}, Span: []int32{37, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3, 5}, Span: []int32{37, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3, 1}, Span: []int32{37, 22, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 3, 3}, Span: []int32{37, 44, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4}, Span: []int32{38, 8, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4, 4}, Span: []int32{38, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4, 5}, Span: []int32{38, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4, 1}, Span: []int32{38, 22, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 4, 3}, Span: []int32{38, 42, 47}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5}, Span: []int32{39, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5, 4}, Span: []int32{39, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5, 5}, Span: []int32{39, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5, 1}, Span: []int32{39, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 5, 3}, Span: []int32{39, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6}, Span: []int32{40, 8, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6, 4}, Span: []int32{40, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6, 5}, Span: []int32{40, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6, 1}, Span: []int32{40, 22, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 6, 3}, Span: []int32{40, 37, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7}, Span: []int32{41, 8, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7, 4}, Span: []int32{41, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7, 5}, Span: []int32{41, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7, 1}, Span: []int32{41, 22, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 7, 3}, Span: []int32{41, 37, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8}, Span: []int32{42, 8, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8, 4}, Span: []int32{42, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8, 5}, Span: []int32{42, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8, 1}, Span: []int32{42, 22, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 8, 3}, Span: []int32{42, 37, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9}, Span: []int32{43, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9, 4}, Span: []int32{43, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9, 5}, Span: []int32{43, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9, 1}, Span: []int32{43, 22, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 9, 3}, Span: []int32{43, 34, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10}, Span: []int32{45, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10, 4}, Span: []int32{45, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10, 5}, Span: []int32{45, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10, 1}, Span: []int32{45, 22, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 10, 3}, Span: []int32{45, 34, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11}, Span: []int32{46, 8, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11, 4}, Span: []int32{46, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11, 5}, Span: []int32{46, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11, 1}, Span: []int32{46, 22, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 11, 3}, Span: []int32{46, 40, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12}, Span: []int32{47, 8, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12, 4}, Span: []int32{47, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12, 5}, Span: []int32{47, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12, 1}, Span: []int32{47, 22, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 12, 3}, Span: []int32{47, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13}, Span: []int32{48, 8, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13, 4}, Span: []int32{48, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13, 5}, Span: []int32{48, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13, 1}, Span: []int32{48, 22, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 13, 3}, Span: []int32{48, 37, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14}, Span: []int32{49, 8, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14, 4}, Span: []int32{49, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14, 5}, Span: []int32{49, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14, 1}, Span: []int32{49, 22, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 14, 3}, Span: []int32{49, 38, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15}, Span: []int32{50, 8, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15, 4}, Span: []int32{50, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15, 5}, Span: []int32{50, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15, 1}, Span: []int32{50, 22, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 15, 3}, Span: []int32{50, 40, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16}, Span: []int32{51, 8, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16, 4}, Span: []int32{51, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16, 5}, Span: []int32{51, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16, 1}, Span: []int32{51, 22, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 16, 3}, Span: []int32{51, 37, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17}, Span: []int32{52, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17, 2}, Span: []int32{34, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17, 4}, Span: []int32{52, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17, 5}, Span: []int32{52, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17, 1}, Span: []int32{52, 22, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 17, 3}, Span: []int32{52, 34, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7}, Span: []int32{55, 0, 73, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18}, Span: []int32{56, 8, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18, 4}, Span: []int32{56, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18, 5}, Span: []int32{56, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18, 1}, Span: []int32{56, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 18, 3}, Span: []int32{56, 32, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19}, Span: []int32{57, 8, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19, 4}, Span: []int32{57, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19, 5}, Span: []int32{57, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19, 1}, Span: []int32{57, 22, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 19, 3}, Span: []int32{57, 40, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20}, Span: []int32{58, 8, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20, 4}, Span: []int32{58, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20, 5}, Span: []int32{58, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20, 1}, Span: []int32{58, 22, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 20, 3}, Span: []int32{58, 38, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21}, Span: []int32{59, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21, 4}, Span: []int32{59, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21, 5}, Span: []int32{59, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21, 1}, Span: []int32{59, 22, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 21, 3}, Span: []int32{59, 29, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22}, Span: []int32{60, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22, 4}, Span: []int32{60, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22, 5}, Span: []int32{60, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22, 1}, Span: []int32{60, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 22, 3}, Span: []int32{60, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23}, Span: []int32{61, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23, 4}, Span: []int32{61, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23, 5}, Span: []int32{61, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23, 1}, Span: []int32{61, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 23, 3}, Span: []int32{61, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24}, Span: []int32{62, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24, 4}, Span: []int32{62, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24, 5}, Span: []int32{62, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24, 1}, Span: []int32{62, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 24, 3}, Span: []int32{62, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25}, Span: []int32{63, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25, 4}, Span: []int32{63, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25, 5}, Span: []int32{63, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25, 1}, Span: []int32{63, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 25, 3}, Span: []int32{63, 30, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26}, Span: []int32{65, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26, 4}, Span: []int32{65, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26, 5}, Span: []int32{65, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26, 1}, Span: []int32{65, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 26, 3}, Span: []int32{65, 30, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27}, Span: []int32{66, 8, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27, 4}, Span: []int32{66, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27, 5}, Span: []int32{66, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27, 1}, Span: []int32{66, 22, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 27, 3}, Span: []int32{66, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28}, Span: []int32{67, 8, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28, 4}, Span: []int32{67, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28, 5}, Span: []int32{67, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28, 1}, Span: []int32{67, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 28, 3}, Span: []int32{67, 32, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29}, Span: []int32{68, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29, 4}, Span: []int32{68, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29, 5}, Span: []int32{68, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29, 1}, Span: []int32{68, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 29, 3}, Span: []int32{68, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30}, Span: []int32{69, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30, 4}, Span: []int32{69, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30, 5}, Span: []int32{69, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30, 1}, Span: []int32{69, 22, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 30, 3}, Span: []int32{69, 34, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31}, Span: []int32{70, 8, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31, 4}, Span: []int32{70, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31, 5}, Span: []int32{70, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31, 1}, Span: []int32{70, 22, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 31, 3}, Span: []int32{70, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32}, Span: []int32{71, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32, 4}, Span: []int32{71, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32, 5}, Span: []int32{71, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32, 1}, Span: []int32{71, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 32, 3}, Span: []int32{71, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33}, Span: []int32{72, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33, 2}, Span: []int32{55, 7, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33, 4}, Span: []int32{72, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33, 5}, Span: []int32{72, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33, 1}, Span: []int32{72, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 33, 3}, Span: []int32{72, 30, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7}, Span: []int32{75, 0, 79, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34}, Span: []int32{76, 2, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34, 2}, Span: []int32{75, 7, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34, 4}, Span: []int32{76, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34, 5}, Span: []int32{76, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34, 1}, Span: []int32{76, 16, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 34, 3}, Span: []int32{76, 27, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35}, Span: []int32{77, 2, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35, 2}, Span: []int32{75, 7, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35, 4}, Span: []int32{77, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35, 5}, Span: []int32{77, 11, 15}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35, 1}, Span: []int32{77, 16, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 35, 3}, Span: []int32{77, 24, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36}, Span: []int32{78, 2, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36, 2}, Span: []int32{75, 7, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36, 4}, Span: []int32{78, 2, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36, 5}, Span: []int32{78, 11, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36, 1}, Span: []int32{78, 18, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{7, 36, 3}, Span: []int32{78, 31, 36}, LeadingComments: nil, TrailingComments: nil}}}}, &google_protobuf.FileDescriptorProto{Name: func(v string) *string { return &v }("thetest.proto"), Package: func(v string) *string { return &v }("test"), Dependency: []string{"code.google.com/p/gogoprotobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{&google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepPackedNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepPackedNative"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: func(v bool) *bool { return &v }(true), Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidEmbeddedStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinEmbeddedStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidNestedStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptStruct"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidRepStruct"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinNestedStruct"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptStruct"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidRepStruct"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptNativeUnion"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinEmbeddedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NidOptNative"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field200"), Number: func(v int32) *int32 { return &v }(200), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNative"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field210"), Number: func(v int32) *int32 { return &v }(210), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinNestedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptNativeUnion"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinOptStructUnion"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.NinEmbeddedStructUnion"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Tree"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Or"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.OrBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("And"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.AndBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Leaf"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Leaf"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("OrBranch"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("AndBranch"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Leaf"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("StrValue"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("DeepTree"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Down"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.ADeepBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("And"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.AndDeepBranch"), Extendee: nil, DefaultValue: nil, Options: nil}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Leaf"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.DeepLeaf"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("ADeepBranch"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Down"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("AndDeepBranch"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Left"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Right"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.DeepTree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("DeepLeaf"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Tree"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".test.Tree"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Nil"), Field: []*google_protobuf.FieldDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidOptEnum"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinOptEnum"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NidRepEnum"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("NinRepEnum"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("Timer"), Field: []*google_protobuf.FieldDescriptorProto{&google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Time1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Time2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, &google_protobuf.FieldDescriptorProto{Name: func(v string) *string { return &v }("Data"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto{&google_protobuf.EnumDescriptorProto{Name: func(v string) *string { return &v }("TheTestEnum"), Value: []*google_protobuf.EnumValueDescriptorProto{&google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(0), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Options: nil}, &google_protobuf.EnumValueDescriptorProto{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(2), Options: nil}}, Options: nil}}, Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}, SourceCodeInfo: &google_protobuf.SourceCodeInfo{Location: []*google_protobuf.SourceCodeInfo_Location{&google_protobuf.SourceCodeInfo_Location{Path: []int32(nil), Span: []int32{26, 0, 358, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{2}, Span: []int32{26, 8, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{3, 0}, Span: []int32{28, 7, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2, 0}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 2, 0, 1}, Span: []int32{30, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 0, 3}, Span: []int32{30, 41, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2, 0}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 2, 0, 1}, Span: []int32{31, 8, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 1, 3}, Span: []int32{31, 36, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2, 0}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 2, 0, 1}, Span: []int32{32, 8, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 2, 3}, Span: []int32{32, 33, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2, 0}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 2, 0, 1}, Span: []int32{34, 8, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 3, 3}, Span: []int32{34, 31, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 4}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 4, 2}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 4, 2, 0}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 4, 2, 0, 1}, Span: []int32{35, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 4, 3}, Span: []int32{35, 39, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 5}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 5, 2}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 5, 2, 0}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 5, 2, 0, 1}, Span: []int32{36, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 5, 3}, Span: []int32{36, 34, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 6}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 6, 2}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 6, 2, 0}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 6, 2, 0, 1}, Span: []int32{37, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 6, 3}, Span: []int32{37, 34, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{38, 0, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 7}, Span: []int32{38, 0, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 7, 2}, Span: []int32{38, 7, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 7, 2, 0}, Span: []int32{38, 7, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 7, 2, 0, 1}, Span: []int32{38, 8, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 7, 3}, Span: []int32{38, 30, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{39, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 8}, Span: []int32{39, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 8, 2}, Span: []int32{39, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 8, 2, 0}, Span: []int32{39, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 8, 2, 0, 1}, Span: []int32{39, 8, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 8, 3}, Span: []int32{39, 37, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{41, 0, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 9}, Span: []int32{41, 0, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 9, 2}, Span: []int32{41, 7, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 9, 2, 0}, Span: []int32{41, 7, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 9, 2, 0, 1}, Span: []int32{41, 8, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 9, 3}, Span: []int32{41, 33, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{42, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 10}, Span: []int32{42, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 10, 2}, Span: []int32{42, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 10, 2, 0}, Span: []int32{42, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 10, 2, 0, 1}, Span: []int32{42, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 10, 3}, Span: []int32{42, 34, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{43, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 11}, Span: []int32{43, 0, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 11, 2}, Span: []int32{43, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 11, 2, 0}, Span: []int32{43, 7, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 11, 2, 0, 1}, Span: []int32{43, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 11, 3}, Span: []int32{43, 34, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{44, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 12}, Span: []int32{44, 0, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 12, 2}, Span: []int32{44, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 12, 2, 0}, Span: []int32{44, 7, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 12, 2, 0, 1}, Span: []int32{44, 8, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 12, 3}, Span: []int32{44, 37, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{45, 0, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 13}, Span: []int32{45, 0, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 13, 2}, Span: []int32{45, 7, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 13, 2, 0}, Span: []int32{45, 7, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 13, 2, 0, 1}, Span: []int32{45, 8, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 13, 3}, Span: []int32{45, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8}, Span: []int32{46, 0, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 14}, Span: []int32{46, 0, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 14, 2}, Span: []int32{46, 7, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 14, 2, 0}, Span: []int32{46, 7, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 14, 2, 0, 1}, Span: []int32{46, 8, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{8, 999, 14, 3}, Span: []int32{46, 31, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0}, Span: []int32{48, 0, 64, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 1}, Span: []int32{48, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0}, Span: []int32{49, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 4}, Span: []int32{49, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 5}, Span: []int32{49, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 1}, Span: []int32{49, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 3}, Span: []int32{49, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8}, Span: []int32{49, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8, 999, 0}, Span: []int32{49, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8, 999, 0, 2}, Span: []int32{49, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{49, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{49, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 0, 8, 999, 0, 3}, Span: []int32{49, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1}, Span: []int32{50, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 4}, Span: []int32{50, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 5}, Span: []int32{50, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 1}, Span: []int32{50, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 3}, Span: []int32{50, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8}, Span: []int32{50, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8, 999, 0}, Span: []int32{50, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8, 999, 0, 2}, Span: []int32{50, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{50, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{50, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 1, 8, 999, 0, 3}, Span: []int32{50, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2}, Span: []int32{51, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 4}, Span: []int32{51, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 5}, Span: []int32{51, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 1}, Span: []int32{51, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 3}, Span: []int32{51, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8}, Span: []int32{51, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8, 999, 0}, Span: []int32{51, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8, 999, 0, 2}, Span: []int32{51, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{51, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{51, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 2, 8, 999, 0, 3}, Span: []int32{51, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3}, Span: []int32{52, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 4}, Span: []int32{52, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 5}, Span: []int32{52, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 1}, Span: []int32{52, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 3}, Span: []int32{52, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8}, Span: []int32{52, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8, 999, 0}, Span: []int32{52, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8, 999, 0, 2}, Span: []int32{52, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{52, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{52, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 3, 8, 999, 0, 3}, Span: []int32{52, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4}, Span: []int32{53, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 4}, Span: []int32{53, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 5}, Span: []int32{53, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 1}, Span: []int32{53, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 3}, Span: []int32{53, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8}, Span: []int32{53, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8, 999, 0}, Span: []int32{53, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8, 999, 0, 2}, Span: []int32{53, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{53, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{53, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 4, 8, 999, 0, 3}, Span: []int32{53, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5}, Span: []int32{54, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 4}, Span: []int32{54, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 5}, Span: []int32{54, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 1}, Span: []int32{54, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 3}, Span: []int32{54, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8}, Span: []int32{54, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8, 999, 0}, Span: []int32{54, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8, 999, 0, 2}, Span: []int32{54, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{54, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{54, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 5, 8, 999, 0, 3}, Span: []int32{54, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6}, Span: []int32{55, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 4}, Span: []int32{55, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 5}, Span: []int32{55, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 1}, Span: []int32{55, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 3}, Span: []int32{55, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8}, Span: []int32{55, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8, 999, 0}, Span: []int32{55, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8, 999, 0, 2}, Span: []int32{55, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{55, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{55, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 6, 8, 999, 0, 3}, Span: []int32{55, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7}, Span: []int32{56, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 4}, Span: []int32{56, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 5}, Span: []int32{56, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 1}, Span: []int32{56, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 3}, Span: []int32{56, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8}, Span: []int32{56, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8, 999, 0}, Span: []int32{56, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8, 999, 0, 2}, Span: []int32{56, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{56, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{56, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 7, 8, 999, 0, 3}, Span: []int32{56, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8}, Span: []int32{57, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 4}, Span: []int32{57, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 5}, Span: []int32{57, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 1}, Span: []int32{57, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 3}, Span: []int32{57, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8}, Span: []int32{57, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8, 999, 0}, Span: []int32{57, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8, 999, 0, 2}, Span: []int32{57, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{57, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{57, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 8, 8, 999, 0, 3}, Span: []int32{57, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9}, Span: []int32{58, 8, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 4}, Span: []int32{58, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 5}, Span: []int32{58, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 1}, Span: []int32{58, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 3}, Span: []int32{58, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8}, Span: []int32{58, 39, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8, 999, 0}, Span: []int32{58, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8, 999, 0, 2}, Span: []int32{58, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{58, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{58, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 9, 8, 999, 0, 3}, Span: []int32{58, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10}, Span: []int32{59, 8, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 4}, Span: []int32{59, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 5}, Span: []int32{59, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 1}, Span: []int32{59, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 3}, Span: []int32{59, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8}, Span: []int32{59, 38, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8, 999, 0}, Span: []int32{59, 39, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8, 999, 0, 2}, Span: []int32{59, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8, 999, 0, 2, 0}, Span: []int32{59, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8, 999, 0, 2, 0, 1}, Span: []int32{59, 40, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 10, 8, 999, 0, 3}, Span: []int32{59, 62, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11}, Span: []int32{60, 8, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 4}, Span: []int32{60, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 5}, Span: []int32{60, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 1}, Span: []int32{60, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 3}, Span: []int32{60, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8}, Span: []int32{60, 39, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8, 999, 0}, Span: []int32{60, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8, 999, 0, 2}, Span: []int32{60, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8, 999, 0, 2, 0}, Span: []int32{60, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8, 999, 0, 2, 0, 1}, Span: []int32{60, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 11, 8, 999, 0, 3}, Span: []int32{60, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12}, Span: []int32{61, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 4}, Span: []int32{61, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 5}, Span: []int32{61, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 1}, Span: []int32{61, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 3}, Span: []int32{61, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8}, Span: []int32{61, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8, 999, 0}, Span: []int32{61, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8, 999, 0, 2}, Span: []int32{61, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8, 999, 0, 2, 0}, Span: []int32{61, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8, 999, 0, 2, 0, 1}, Span: []int32{61, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 12, 8, 999, 0, 3}, Span: []int32{61, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13}, Span: []int32{62, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 4}, Span: []int32{62, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 5}, Span: []int32{62, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 1}, Span: []int32{62, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 3}, Span: []int32{62, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8}, Span: []int32{62, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8, 999, 0}, Span: []int32{62, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8, 999, 0, 2}, Span: []int32{62, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8, 999, 0, 2, 0}, Span: []int32{62, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8, 999, 0, 2, 0, 1}, Span: []int32{62, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 13, 8, 999, 0, 3}, Span: []int32{62, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14}, Span: []int32{63, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 4}, Span: []int32{63, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 5}, Span: []int32{63, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 1}, Span: []int32{63, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 3}, Span: []int32{63, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8}, Span: []int32{63, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8, 999, 0}, Span: []int32{63, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8, 999, 0, 2}, Span: []int32{63, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8, 999, 0, 2, 0}, Span: []int32{63, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8, 999, 0, 2, 0, 1}, Span: []int32{63, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 0, 2, 14, 8, 999, 0, 3}, Span: []int32{63, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1}, Span: []int32{66, 0, 82, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 1}, Span: []int32{66, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0}, Span: []int32{67, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 4}, Span: []int32{67, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 5}, Span: []int32{67, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 1}, Span: []int32{67, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 0, 3}, Span: []int32{67, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1}, Span: []int32{68, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 4}, Span: []int32{68, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 5}, Span: []int32{68, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 1}, Span: []int32{68, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 1, 3}, Span: []int32{68, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2}, Span: []int32{69, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 4}, Span: []int32{69, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 5}, Span: []int32{69, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 1}, Span: []int32{69, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 2, 3}, Span: []int32{69, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3}, Span: []int32{70, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 4}, Span: []int32{70, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 5}, Span: []int32{70, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 1}, Span: []int32{70, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 3, 3}, Span: []int32{70, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4}, Span: []int32{71, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 4}, Span: []int32{71, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 5}, Span: []int32{71, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 1}, Span: []int32{71, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 4, 3}, Span: []int32{71, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5}, Span: []int32{72, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 4}, Span: []int32{72, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 5}, Span: []int32{72, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 1}, Span: []int32{72, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 5, 3}, Span: []int32{72, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6}, Span: []int32{73, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 4}, Span: []int32{73, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 5}, Span: []int32{73, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 1}, Span: []int32{73, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 6, 3}, Span: []int32{73, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7}, Span: []int32{74, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 4}, Span: []int32{74, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 5}, Span: []int32{74, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 1}, Span: []int32{74, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 7, 3}, Span: []int32{74, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8}, Span: []int32{75, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 4}, Span: []int32{75, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 5}, Span: []int32{75, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 1}, Span: []int32{75, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 8, 3}, Span: []int32{75, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9}, Span: []int32{76, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 4}, Span: []int32{76, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 5}, Span: []int32{76, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 1}, Span: []int32{76, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 9, 3}, Span: []int32{76, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10}, Span: []int32{77, 8, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 4}, Span: []int32{77, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 5}, Span: []int32{77, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 1}, Span: []int32{77, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 10, 3}, Span: []int32{77, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 11}, Span: []int32{78, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 11, 4}, Span: []int32{78, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 11, 5}, Span: []int32{78, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 11, 1}, Span: []int32{78, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 11, 3}, Span: []int32{78, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 12}, Span: []int32{79, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 12, 4}, Span: []int32{79, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 12, 5}, Span: []int32{79, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 12, 1}, Span: []int32{79, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 12, 3}, Span: []int32{79, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 13}, Span: []int32{80, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 13, 4}, Span: []int32{80, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 13, 5}, Span: []int32{80, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 13, 1}, Span: []int32{80, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 13, 3}, Span: []int32{80, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 14}, Span: []int32{81, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 14, 4}, Span: []int32{81, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 14, 5}, Span: []int32{81, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 14, 1}, Span: []int32{81, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 1, 2, 14, 3}, Span: []int32{81, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2}, Span: []int32{84, 0, 100, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 1}, Span: []int32{84, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0}, Span: []int32{85, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 4}, Span: []int32{85, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 5}, Span: []int32{85, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 1}, Span: []int32{85, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 3}, Span: []int32{85, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8}, Span: []int32{85, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8, 999, 0}, Span: []int32{85, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8, 999, 0, 2}, Span: []int32{85, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{85, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{85, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 0, 8, 999, 0, 3}, Span: []int32{85, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1}, Span: []int32{86, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 4}, Span: []int32{86, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 5}, Span: []int32{86, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 1}, Span: []int32{86, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 3}, Span: []int32{86, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8}, Span: []int32{86, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8, 999, 0}, Span: []int32{86, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8, 999, 0, 2}, Span: []int32{86, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{86, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{86, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 1, 8, 999, 0, 3}, Span: []int32{86, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2}, Span: []int32{87, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 4}, Span: []int32{87, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 5}, Span: []int32{87, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 1}, Span: []int32{87, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 3}, Span: []int32{87, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8}, Span: []int32{87, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8, 999, 0}, Span: []int32{87, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8, 999, 0, 2}, Span: []int32{87, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{87, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{87, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 2, 8, 999, 0, 3}, Span: []int32{87, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3}, Span: []int32{88, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 4}, Span: []int32{88, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 5}, Span: []int32{88, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 1}, Span: []int32{88, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 3}, Span: []int32{88, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8}, Span: []int32{88, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8, 999, 0}, Span: []int32{88, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8, 999, 0, 2}, Span: []int32{88, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{88, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{88, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 3, 8, 999, 0, 3}, Span: []int32{88, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4}, Span: []int32{89, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 4}, Span: []int32{89, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 5}, Span: []int32{89, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 1}, Span: []int32{89, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 3}, Span: []int32{89, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8}, Span: []int32{89, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8, 999, 0}, Span: []int32{89, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8, 999, 0, 2}, Span: []int32{89, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{89, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{89, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 4, 8, 999, 0, 3}, Span: []int32{89, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5}, Span: []int32{90, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 4}, Span: []int32{90, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 5}, Span: []int32{90, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 1}, Span: []int32{90, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 3}, Span: []int32{90, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8}, Span: []int32{90, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8, 999, 0}, Span: []int32{90, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8, 999, 0, 2}, Span: []int32{90, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{90, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{90, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 5, 8, 999, 0, 3}, Span: []int32{90, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6}, Span: []int32{91, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 4}, Span: []int32{91, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 5}, Span: []int32{91, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 1}, Span: []int32{91, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 3}, Span: []int32{91, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8}, Span: []int32{91, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8, 999, 0}, Span: []int32{91, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8, 999, 0, 2}, Span: []int32{91, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{91, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{91, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 6, 8, 999, 0, 3}, Span: []int32{91, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7}, Span: []int32{92, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 4}, Span: []int32{92, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 5}, Span: []int32{92, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 1}, Span: []int32{92, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 3}, Span: []int32{92, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8}, Span: []int32{92, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8, 999, 0}, Span: []int32{92, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8, 999, 0, 2}, Span: []int32{92, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{92, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{92, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 7, 8, 999, 0, 3}, Span: []int32{92, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8}, Span: []int32{93, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 4}, Span: []int32{93, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 5}, Span: []int32{93, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 1}, Span: []int32{93, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 3}, Span: []int32{93, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8}, Span: []int32{93, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8, 999, 0}, Span: []int32{93, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8, 999, 0, 2}, Span: []int32{93, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{93, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{93, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 8, 8, 999, 0, 3}, Span: []int32{93, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9}, Span: []int32{94, 8, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 4}, Span: []int32{94, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 5}, Span: []int32{94, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 1}, Span: []int32{94, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 3}, Span: []int32{94, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8}, Span: []int32{94, 39, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8, 999, 0}, Span: []int32{94, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8, 999, 0, 2}, Span: []int32{94, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{94, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{94, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 9, 8, 999, 0, 3}, Span: []int32{94, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10}, Span: []int32{95, 8, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 4}, Span: []int32{95, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 5}, Span: []int32{95, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 1}, Span: []int32{95, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 3}, Span: []int32{95, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8}, Span: []int32{95, 38, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8, 999, 0}, Span: []int32{95, 39, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8, 999, 0, 2}, Span: []int32{95, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8, 999, 0, 2, 0}, Span: []int32{95, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8, 999, 0, 2, 0, 1}, Span: []int32{95, 40, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 10, 8, 999, 0, 3}, Span: []int32{95, 62, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11}, Span: []int32{96, 8, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 4}, Span: []int32{96, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 5}, Span: []int32{96, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 1}, Span: []int32{96, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 3}, Span: []int32{96, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8}, Span: []int32{96, 39, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8, 999, 0}, Span: []int32{96, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8, 999, 0, 2}, Span: []int32{96, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8, 999, 0, 2, 0}, Span: []int32{96, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8, 999, 0, 2, 0, 1}, Span: []int32{96, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 11, 8, 999, 0, 3}, Span: []int32{96, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12}, Span: []int32{97, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 4}, Span: []int32{97, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 5}, Span: []int32{97, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 1}, Span: []int32{97, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 3}, Span: []int32{97, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8}, Span: []int32{97, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8, 999, 0}, Span: []int32{97, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8, 999, 0, 2}, Span: []int32{97, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8, 999, 0, 2, 0}, Span: []int32{97, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8, 999, 0, 2, 0, 1}, Span: []int32{97, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 12, 8, 999, 0, 3}, Span: []int32{97, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13}, Span: []int32{98, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 4}, Span: []int32{98, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 5}, Span: []int32{98, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 1}, Span: []int32{98, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 3}, Span: []int32{98, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8}, Span: []int32{98, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8, 999, 0}, Span: []int32{98, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8, 999, 0, 2}, Span: []int32{98, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8, 999, 0, 2, 0}, Span: []int32{98, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8, 999, 0, 2, 0, 1}, Span: []int32{98, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 13, 8, 999, 0, 3}, Span: []int32{98, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14}, Span: []int32{99, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 4}, Span: []int32{99, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 5}, Span: []int32{99, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 1}, Span: []int32{99, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 3}, Span: []int32{99, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8}, Span: []int32{99, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8, 999, 0}, Span: []int32{99, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8, 999, 0, 2}, Span: []int32{99, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8, 999, 0, 2, 0}, Span: []int32{99, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8, 999, 0, 2, 0, 1}, Span: []int32{99, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 2, 2, 14, 8, 999, 0, 3}, Span: []int32{99, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3}, Span: []int32{102, 0, 118, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 1}, Span: []int32{102, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0}, Span: []int32{103, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 4}, Span: []int32{103, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 5}, Span: []int32{103, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 1}, Span: []int32{103, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 0, 3}, Span: []int32{103, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1}, Span: []int32{104, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 4}, Span: []int32{104, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 5}, Span: []int32{104, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 1}, Span: []int32{104, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 1, 3}, Span: []int32{104, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2}, Span: []int32{105, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 4}, Span: []int32{105, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 5}, Span: []int32{105, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 1}, Span: []int32{105, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 2, 3}, Span: []int32{105, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3}, Span: []int32{106, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 4}, Span: []int32{106, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 5}, Span: []int32{106, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 1}, Span: []int32{106, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 3, 3}, Span: []int32{106, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4}, Span: []int32{107, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 4}, Span: []int32{107, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 5}, Span: []int32{107, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 1}, Span: []int32{107, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 4, 3}, Span: []int32{107, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5}, Span: []int32{108, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 4}, Span: []int32{108, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 5}, Span: []int32{108, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 1}, Span: []int32{108, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 5, 3}, Span: []int32{108, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6}, Span: []int32{109, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 4}, Span: []int32{109, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 5}, Span: []int32{109, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 1}, Span: []int32{109, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 6, 3}, Span: []int32{109, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7}, Span: []int32{110, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 4}, Span: []int32{110, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 5}, Span: []int32{110, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 1}, Span: []int32{110, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 7, 3}, Span: []int32{110, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 8}, Span: []int32{111, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 8, 4}, Span: []int32{111, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 8, 5}, Span: []int32{111, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 8, 1}, Span: []int32{111, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 8, 3}, Span: []int32{111, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 9}, Span: []int32{112, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 9, 4}, Span: []int32{112, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 9, 5}, Span: []int32{112, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 9, 1}, Span: []int32{112, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 9, 3}, Span: []int32{112, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 10}, Span: []int32{113, 8, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 10, 4}, Span: []int32{113, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 10, 5}, Span: []int32{113, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 10, 1}, Span: []int32{113, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 10, 3}, Span: []int32{113, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 11}, Span: []int32{114, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 11, 4}, Span: []int32{114, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 11, 5}, Span: []int32{114, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 11, 1}, Span: []int32{114, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 11, 3}, Span: []int32{114, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 12}, Span: []int32{115, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 12, 4}, Span: []int32{115, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 12, 5}, Span: []int32{115, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 12, 1}, Span: []int32{115, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 12, 3}, Span: []int32{115, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 13}, Span: []int32{116, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 13, 4}, Span: []int32{116, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 13, 5}, Span: []int32{116, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 13, 1}, Span: []int32{116, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 13, 3}, Span: []int32{116, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 14}, Span: []int32{117, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 14, 4}, Span: []int32{117, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 14, 5}, Span: []int32{117, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 14, 1}, Span: []int32{117, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 3, 2, 14, 3}, Span: []int32{117, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4}, Span: []int32{120, 0, 134, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 1}, Span: []int32{120, 8, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0}, Span: []int32{121, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 4}, Span: []int32{121, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 5}, Span: []int32{121, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 1}, Span: []int32{121, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 3}, Span: []int32{121, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8}, Span: []int32{121, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 0}, Span: []int32{121, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 0, 2}, Span: []int32{121, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{121, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{121, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 0, 3}, Span: []int32{121, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 1}, Span: []int32{121, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 1, 2}, Span: []int32{121, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 1, 2, 0}, Span: []int32{121, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 1, 2, 0, 1}, Span: []int32{121, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 0, 8, 999, 1, 3}, Span: []int32{121, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1}, Span: []int32{122, 8, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 4}, Span: []int32{122, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 5}, Span: []int32{122, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 1}, Span: []int32{122, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 3}, Span: []int32{122, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8}, Span: []int32{122, 34, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 0}, Span: []int32{122, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 0, 2}, Span: []int32{122, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{122, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{122, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 0, 3}, Span: []int32{122, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 1}, Span: []int32{122, 65, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 1, 2}, Span: []int32{122, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 1, 2, 0}, Span: []int32{122, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 1, 2, 0, 1}, Span: []int32{122, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 1, 8, 999, 1, 3}, Span: []int32{122, 74, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2}, Span: []int32{123, 8, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 4}, Span: []int32{123, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 5}, Span: []int32{123, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 1}, Span: []int32{123, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 3}, Span: []int32{123, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8}, Span: []int32{123, 34, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 0}, Span: []int32{123, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 0, 2}, Span: []int32{123, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{123, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{123, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 0, 3}, Span: []int32{123, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 1}, Span: []int32{123, 65, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 1, 2}, Span: []int32{123, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 1, 2, 0}, Span: []int32{123, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 1, 2, 0, 1}, Span: []int32{123, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 2, 8, 999, 1, 3}, Span: []int32{123, 74, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3}, Span: []int32{124, 8, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 4}, Span: []int32{124, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 5}, Span: []int32{124, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 1}, Span: []int32{124, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 3}, Span: []int32{124, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8}, Span: []int32{124, 34, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 0}, Span: []int32{124, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 0, 2}, Span: []int32{124, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{124, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{124, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 0, 3}, Span: []int32{124, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 1}, Span: []int32{124, 65, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 1, 2}, Span: []int32{124, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 1, 2, 0}, Span: []int32{124, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 1, 2, 0, 1}, Span: []int32{124, 65, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 3, 8, 999, 1, 3}, Span: []int32{124, 74, 78}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4}, Span: []int32{125, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 4}, Span: []int32{125, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 5}, Span: []int32{125, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 1}, Span: []int32{125, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 3}, Span: []int32{125, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8}, Span: []int32{125, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 0}, Span: []int32{125, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 0, 2}, Span: []int32{125, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{125, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{125, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 0, 3}, Span: []int32{125, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 1}, Span: []int32{125, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 1, 2}, Span: []int32{125, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 1, 2, 0}, Span: []int32{125, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 1, 2, 0, 1}, Span: []int32{125, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 4, 8, 999, 1, 3}, Span: []int32{125, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5}, Span: []int32{126, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 4}, Span: []int32{126, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 5}, Span: []int32{126, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 1}, Span: []int32{126, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 3}, Span: []int32{126, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8}, Span: []int32{126, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 0}, Span: []int32{126, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 0, 2}, Span: []int32{126, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{126, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{126, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 0, 3}, Span: []int32{126, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 1}, Span: []int32{126, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 1, 2}, Span: []int32{126, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 1, 2, 0}, Span: []int32{126, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 1, 2, 0, 1}, Span: []int32{126, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 5, 8, 999, 1, 3}, Span: []int32{126, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6}, Span: []int32{127, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 4}, Span: []int32{127, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 5}, Span: []int32{127, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 1}, Span: []int32{127, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 3}, Span: []int32{127, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8}, Span: []int32{127, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 0}, Span: []int32{127, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 0, 2}, Span: []int32{127, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{127, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{127, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 0, 3}, Span: []int32{127, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 1}, Span: []int32{127, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 1, 2}, Span: []int32{127, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 1, 2, 0}, Span: []int32{127, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 1, 2, 0, 1}, Span: []int32{127, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 6, 8, 999, 1, 3}, Span: []int32{127, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7}, Span: []int32{128, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 4}, Span: []int32{128, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 5}, Span: []int32{128, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 1}, Span: []int32{128, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 3}, Span: []int32{128, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8}, Span: []int32{128, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 0}, Span: []int32{128, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 0, 2}, Span: []int32{128, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{128, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{128, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 0, 3}, Span: []int32{128, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 1}, Span: []int32{128, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 1, 2}, Span: []int32{128, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 1, 2, 0}, Span: []int32{128, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 1, 2, 0, 1}, Span: []int32{128, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 7, 8, 999, 1, 3}, Span: []int32{128, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8}, Span: []int32{129, 8, 82}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 4}, Span: []int32{129, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 5}, Span: []int32{129, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 1}, Span: []int32{129, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 3}, Span: []int32{129, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8}, Span: []int32{129, 36, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 0}, Span: []int32{129, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 0, 2}, Span: []int32{129, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{129, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{129, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 0, 3}, Span: []int32{129, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 1}, Span: []int32{129, 67, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 1, 2}, Span: []int32{129, 67, 73}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 1, 2, 0}, Span: []int32{129, 67, 73}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 1, 2, 0, 1}, Span: []int32{129, 67, 73}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 8, 8, 999, 1, 3}, Span: []int32{129, 76, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9}, Span: []int32{130, 8, 85}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 4}, Span: []int32{130, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 5}, Span: []int32{130, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 1}, Span: []int32{130, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 3}, Span: []int32{130, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8}, Span: []int32{130, 39, 84}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 0}, Span: []int32{130, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 0, 2}, Span: []int32{130, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{130, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{130, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 0, 3}, Span: []int32{130, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 1}, Span: []int32{130, 70, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 1, 2}, Span: []int32{130, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 1, 2, 0}, Span: []int32{130, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 1, 2, 0, 1}, Span: []int32{130, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 9, 8, 999, 1, 3}, Span: []int32{130, 79, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10}, Span: []int32{131, 8, 84}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 4}, Span: []int32{131, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 5}, Span: []int32{131, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 1}, Span: []int32{131, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 3}, Span: []int32{131, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8}, Span: []int32{131, 38, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 0}, Span: []int32{131, 39, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 0, 2}, Span: []int32{131, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 0, 2, 0}, Span: []int32{131, 39, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 0, 2, 0, 1}, Span: []int32{131, 40, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 0, 3}, Span: []int32{131, 62, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 1}, Span: []int32{131, 69, 82}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 1, 2}, Span: []int32{131, 69, 75}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 1, 2, 0}, Span: []int32{131, 69, 75}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 1, 2, 0, 1}, Span: []int32{131, 69, 75}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 10, 8, 999, 1, 3}, Span: []int32{131, 78, 82}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11}, Span: []int32{132, 8, 85}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 4}, Span: []int32{132, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 5}, Span: []int32{132, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 1}, Span: []int32{132, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 3}, Span: []int32{132, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8}, Span: []int32{132, 39, 84}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 0}, Span: []int32{132, 40, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 0, 2}, Span: []int32{132, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 0, 2, 0}, Span: []int32{132, 40, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 0, 2, 0, 1}, Span: []int32{132, 41, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 0, 3}, Span: []int32{132, 63, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 1}, Span: []int32{132, 70, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 1, 2}, Span: []int32{132, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 1, 2, 0}, Span: []int32{132, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 1, 2, 0, 1}, Span: []int32{132, 70, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 11, 8, 999, 1, 3}, Span: []int32{132, 79, 83}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12}, Span: []int32{133, 8, 81}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 4}, Span: []int32{133, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 5}, Span: []int32{133, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 1}, Span: []int32{133, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 3}, Span: []int32{133, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8}, Span: []int32{133, 35, 80}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 0}, Span: []int32{133, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 0, 2}, Span: []int32{133, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 0, 2, 0}, Span: []int32{133, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 0, 2, 0, 1}, Span: []int32{133, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 0, 3}, Span: []int32{133, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 1}, Span: []int32{133, 66, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 1, 2}, Span: []int32{133, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 1, 2, 0}, Span: []int32{133, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 1, 2, 0, 1}, Span: []int32{133, 66, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 4, 2, 12, 8, 999, 1, 3}, Span: []int32{133, 75, 79}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5}, Span: []int32{136, 0, 150, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 1}, Span: []int32{136, 8, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0}, Span: []int32{137, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 4}, Span: []int32{137, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 5}, Span: []int32{137, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 1}, Span: []int32{137, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 3}, Span: []int32{137, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8}, Span: []int32{137, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8, 999, 0}, Span: []int32{137, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8, 999, 0, 2}, Span: []int32{137, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{137, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{137, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 0, 8, 999, 0, 3}, Span: []int32{137, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1}, Span: []int32{138, 8, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 4}, Span: []int32{138, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 5}, Span: []int32{138, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 1}, Span: []int32{138, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 3}, Span: []int32{138, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8}, Span: []int32{138, 34, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8, 999, 0}, Span: []int32{138, 35, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8, 999, 0, 2}, Span: []int32{138, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{138, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{138, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 1, 8, 999, 0, 3}, Span: []int32{138, 44, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2}, Span: []int32{139, 8, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 4}, Span: []int32{139, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 5}, Span: []int32{139, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 1}, Span: []int32{139, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 3}, Span: []int32{139, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8}, Span: []int32{139, 34, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8, 999, 0}, Span: []int32{139, 35, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8, 999, 0, 2}, Span: []int32{139, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{139, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{139, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 2, 8, 999, 0, 3}, Span: []int32{139, 44, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3}, Span: []int32{140, 8, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 4}, Span: []int32{140, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 5}, Span: []int32{140, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 1}, Span: []int32{140, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 3}, Span: []int32{140, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8}, Span: []int32{140, 34, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8, 999, 0}, Span: []int32{140, 35, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8, 999, 0, 2}, Span: []int32{140, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{140, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{140, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 3, 8, 999, 0, 3}, Span: []int32{140, 44, 48}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4}, Span: []int32{141, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 4}, Span: []int32{141, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 5}, Span: []int32{141, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 1}, Span: []int32{141, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 3}, Span: []int32{141, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8}, Span: []int32{141, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8, 999, 0}, Span: []int32{141, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8, 999, 0, 2}, Span: []int32{141, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{141, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{141, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 4, 8, 999, 0, 3}, Span: []int32{141, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5}, Span: []int32{142, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 4}, Span: []int32{142, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 5}, Span: []int32{142, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 1}, Span: []int32{142, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 3}, Span: []int32{142, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8}, Span: []int32{142, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8, 999, 0}, Span: []int32{142, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8, 999, 0, 2}, Span: []int32{142, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{142, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{142, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 5, 8, 999, 0, 3}, Span: []int32{142, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6}, Span: []int32{143, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 4}, Span: []int32{143, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 5}, Span: []int32{143, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 1}, Span: []int32{143, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 3}, Span: []int32{143, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8}, Span: []int32{143, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8, 999, 0}, Span: []int32{143, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8, 999, 0, 2}, Span: []int32{143, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{143, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{143, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 6, 8, 999, 0, 3}, Span: []int32{143, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7}, Span: []int32{144, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 4}, Span: []int32{144, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 5}, Span: []int32{144, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 1}, Span: []int32{144, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 3}, Span: []int32{144, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8}, Span: []int32{144, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8, 999, 0}, Span: []int32{144, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8, 999, 0, 2}, Span: []int32{144, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{144, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{144, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 7, 8, 999, 0, 3}, Span: []int32{144, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8}, Span: []int32{145, 8, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 4}, Span: []int32{145, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 5}, Span: []int32{145, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 1}, Span: []int32{145, 25, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 3}, Span: []int32{145, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8}, Span: []int32{145, 36, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8, 999, 0}, Span: []int32{145, 37, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8, 999, 0, 2}, Span: []int32{145, 37, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{145, 37, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{145, 37, 43}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 8, 8, 999, 0, 3}, Span: []int32{145, 46, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9}, Span: []int32{146, 8, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 4}, Span: []int32{146, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 5}, Span: []int32{146, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 1}, Span: []int32{146, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 3}, Span: []int32{146, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8}, Span: []int32{146, 39, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8, 999, 0}, Span: []int32{146, 40, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8, 999, 0, 2}, Span: []int32{146, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{146, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{146, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 9, 8, 999, 0, 3}, Span: []int32{146, 49, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10}, Span: []int32{147, 8, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 4}, Span: []int32{147, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 5}, Span: []int32{147, 17, 24}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 1}, Span: []int32{147, 25, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 3}, Span: []int32{147, 35, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8}, Span: []int32{147, 38, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8, 999, 0}, Span: []int32{147, 39, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8, 999, 0, 2}, Span: []int32{147, 39, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8, 999, 0, 2, 0}, Span: []int32{147, 39, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8, 999, 0, 2, 0, 1}, Span: []int32{147, 39, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 10, 8, 999, 0, 3}, Span: []int32{147, 48, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11}, Span: []int32{148, 8, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 4}, Span: []int32{148, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 5}, Span: []int32{148, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 1}, Span: []int32{148, 26, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 3}, Span: []int32{148, 36, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8}, Span: []int32{148, 39, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8, 999, 0}, Span: []int32{148, 40, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8, 999, 0, 2}, Span: []int32{148, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8, 999, 0, 2, 0}, Span: []int32{148, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8, 999, 0, 2, 0, 1}, Span: []int32{148, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 11, 8, 999, 0, 3}, Span: []int32{148, 49, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12}, Span: []int32{149, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 4}, Span: []int32{149, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 5}, Span: []int32{149, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 1}, Span: []int32{149, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 3}, Span: []int32{149, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8}, Span: []int32{149, 35, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8, 999, 0}, Span: []int32{149, 36, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8, 999, 0, 2}, Span: []int32{149, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8, 999, 0, 2, 0}, Span: []int32{149, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8, 999, 0, 2, 0, 1}, Span: []int32{149, 36, 42}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 5, 2, 12, 8, 999, 0, 3}, Span: []int32{149, 45, 49}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6}, Span: []int32{152, 0, 163, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 1}, Span: []int32{152, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0}, Span: []int32{153, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 4}, Span: []int32{153, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 5}, Span: []int32{153, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 1}, Span: []int32{153, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 3}, Span: []int32{153, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8}, Span: []int32{153, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8, 999, 0}, Span: []int32{153, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8, 999, 0, 2}, Span: []int32{153, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{153, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{153, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 0, 8, 999, 0, 3}, Span: []int32{153, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1}, Span: []int32{154, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 4}, Span: []int32{154, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 5}, Span: []int32{154, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 1}, Span: []int32{154, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 3}, Span: []int32{154, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8}, Span: []int32{154, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8, 999, 0}, Span: []int32{154, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8, 999, 0, 2}, Span: []int32{154, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{154, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{154, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 1, 8, 999, 0, 3}, Span: []int32{154, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2}, Span: []int32{155, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 4}, Span: []int32{155, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 6}, Span: []int32{155, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 1}, Span: []int32{155, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 3}, Span: []int32{155, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8}, Span: []int32{155, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8, 999, 0}, Span: []int32{155, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8, 999, 0, 2}, Span: []int32{155, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{155, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{155, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 2, 8, 999, 0, 3}, Span: []int32{155, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3}, Span: []int32{156, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 4}, Span: []int32{156, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 6}, Span: []int32{156, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 1}, Span: []int32{156, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 3}, Span: []int32{156, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8}, Span: []int32{156, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8, 999, 0}, Span: []int32{156, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8, 999, 0, 2}, Span: []int32{156, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{156, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{156, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 3, 8, 999, 0, 3}, Span: []int32{156, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4}, Span: []int32{157, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 4}, Span: []int32{157, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 5}, Span: []int32{157, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 1}, Span: []int32{157, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 3}, Span: []int32{157, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8}, Span: []int32{157, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8, 999, 0}, Span: []int32{157, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8, 999, 0, 2}, Span: []int32{157, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{157, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{157, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 4, 8, 999, 0, 3}, Span: []int32{157, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5}, Span: []int32{158, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 4}, Span: []int32{158, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 5}, Span: []int32{158, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 1}, Span: []int32{158, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 3}, Span: []int32{158, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8}, Span: []int32{158, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8, 999, 0}, Span: []int32{158, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8, 999, 0, 2}, Span: []int32{158, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{158, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{158, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 5, 8, 999, 0, 3}, Span: []int32{158, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6}, Span: []int32{159, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 4}, Span: []int32{159, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 6}, Span: []int32{159, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 1}, Span: []int32{159, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 3}, Span: []int32{159, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8}, Span: []int32{159, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8, 999, 0}, Span: []int32{159, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8, 999, 0, 2}, Span: []int32{159, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{159, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{159, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 6, 8, 999, 0, 3}, Span: []int32{159, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7}, Span: []int32{160, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 4}, Span: []int32{160, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 5}, Span: []int32{160, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 1}, Span: []int32{160, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 3}, Span: []int32{160, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8}, Span: []int32{160, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8, 999, 0}, Span: []int32{160, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8, 999, 0, 2}, Span: []int32{160, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{160, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{160, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 7, 8, 999, 0, 3}, Span: []int32{160, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8}, Span: []int32{161, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 4}, Span: []int32{161, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 5}, Span: []int32{161, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 1}, Span: []int32{161, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 3}, Span: []int32{161, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8}, Span: []int32{161, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8, 999, 0}, Span: []int32{161, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8, 999, 0, 2}, Span: []int32{161, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{161, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{161, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 8, 8, 999, 0, 3}, Span: []int32{161, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9}, Span: []int32{162, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 4}, Span: []int32{162, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 5}, Span: []int32{162, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 1}, Span: []int32{162, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 3}, Span: []int32{162, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8}, Span: []int32{162, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8, 999, 0}, Span: []int32{162, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8, 999, 0, 2}, Span: []int32{162, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{162, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{162, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 6, 2, 9, 8, 999, 0, 3}, Span: []int32{162, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7}, Span: []int32{165, 0, 176, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 1}, Span: []int32{165, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0}, Span: []int32{166, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 4}, Span: []int32{166, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 5}, Span: []int32{166, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 1}, Span: []int32{166, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 0, 3}, Span: []int32{166, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1}, Span: []int32{167, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 4}, Span: []int32{167, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 5}, Span: []int32{167, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 1}, Span: []int32{167, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 1, 3}, Span: []int32{167, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2}, Span: []int32{168, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 4}, Span: []int32{168, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 6}, Span: []int32{168, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 1}, Span: []int32{168, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 2, 3}, Span: []int32{168, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3}, Span: []int32{169, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 4}, Span: []int32{169, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 6}, Span: []int32{169, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 1}, Span: []int32{169, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 3, 3}, Span: []int32{169, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 4}, Span: []int32{170, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 4, 4}, Span: []int32{170, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 4, 5}, Span: []int32{170, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 4, 1}, Span: []int32{170, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 4, 3}, Span: []int32{170, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 5}, Span: []int32{171, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 5, 4}, Span: []int32{171, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 5, 5}, Span: []int32{171, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 5, 1}, Span: []int32{171, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 5, 3}, Span: []int32{171, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 6}, Span: []int32{172, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 6, 4}, Span: []int32{172, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 6, 6}, Span: []int32{172, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 6, 1}, Span: []int32{172, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 6, 3}, Span: []int32{172, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 7}, Span: []int32{173, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 7, 4}, Span: []int32{173, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 7, 5}, Span: []int32{173, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 7, 1}, Span: []int32{173, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 7, 3}, Span: []int32{173, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 8}, Span: []int32{174, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 8, 4}, Span: []int32{174, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 8, 5}, Span: []int32{174, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 8, 1}, Span: []int32{174, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 8, 3}, Span: []int32{174, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 9}, Span: []int32{175, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 9, 4}, Span: []int32{175, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 9, 5}, Span: []int32{175, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 9, 1}, Span: []int32{175, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 7, 2, 9, 3}, Span: []int32{175, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8}, Span: []int32{178, 0, 189, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 1}, Span: []int32{178, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0}, Span: []int32{179, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 4}, Span: []int32{179, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 5}, Span: []int32{179, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 1}, Span: []int32{179, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 3}, Span: []int32{179, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8}, Span: []int32{179, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8, 999, 0}, Span: []int32{179, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8, 999, 0, 2}, Span: []int32{179, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{179, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{179, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 0, 8, 999, 0, 3}, Span: []int32{179, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1}, Span: []int32{180, 8, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 4}, Span: []int32{180, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 5}, Span: []int32{180, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 1}, Span: []int32{180, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 3}, Span: []int32{180, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8}, Span: []int32{180, 34, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8, 999, 0}, Span: []int32{180, 35, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8, 999, 0, 2}, Span: []int32{180, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{180, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{180, 36, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 1, 8, 999, 0, 3}, Span: []int32{180, 58, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2}, Span: []int32{181, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 4}, Span: []int32{181, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 6}, Span: []int32{181, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 1}, Span: []int32{181, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 3}, Span: []int32{181, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8}, Span: []int32{181, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8, 999, 0}, Span: []int32{181, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8, 999, 0, 2}, Span: []int32{181, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{181, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{181, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 2, 8, 999, 0, 3}, Span: []int32{181, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3}, Span: []int32{182, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 4}, Span: []int32{182, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 6}, Span: []int32{182, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 1}, Span: []int32{182, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 3}, Span: []int32{182, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8}, Span: []int32{182, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8, 999, 0}, Span: []int32{182, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8, 999, 0, 2}, Span: []int32{182, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8, 999, 0, 2, 0}, Span: []int32{182, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8, 999, 0, 2, 0, 1}, Span: []int32{182, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 3, 8, 999, 0, 3}, Span: []int32{182, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4}, Span: []int32{183, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 4}, Span: []int32{183, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 5}, Span: []int32{183, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 1}, Span: []int32{183, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 3}, Span: []int32{183, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8}, Span: []int32{183, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8, 999, 0}, Span: []int32{183, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8, 999, 0, 2}, Span: []int32{183, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8, 999, 0, 2, 0}, Span: []int32{183, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8, 999, 0, 2, 0, 1}, Span: []int32{183, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 4, 8, 999, 0, 3}, Span: []int32{183, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5}, Span: []int32{184, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 4}, Span: []int32{184, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 5}, Span: []int32{184, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 1}, Span: []int32{184, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 3}, Span: []int32{184, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8}, Span: []int32{184, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8, 999, 0}, Span: []int32{184, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8, 999, 0, 2}, Span: []int32{184, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8, 999, 0, 2, 0}, Span: []int32{184, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8, 999, 0, 2, 0, 1}, Span: []int32{184, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 5, 8, 999, 0, 3}, Span: []int32{184, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6}, Span: []int32{185, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 4}, Span: []int32{185, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 6}, Span: []int32{185, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 1}, Span: []int32{185, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 3}, Span: []int32{185, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8}, Span: []int32{185, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8, 999, 0}, Span: []int32{185, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8, 999, 0, 2}, Span: []int32{185, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8, 999, 0, 2, 0}, Span: []int32{185, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8, 999, 0, 2, 0, 1}, Span: []int32{185, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 6, 8, 999, 0, 3}, Span: []int32{185, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7}, Span: []int32{186, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 4}, Span: []int32{186, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 5}, Span: []int32{186, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 1}, Span: []int32{186, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 3}, Span: []int32{186, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8}, Span: []int32{186, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8, 999, 0}, Span: []int32{186, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8, 999, 0, 2}, Span: []int32{186, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8, 999, 0, 2, 0}, Span: []int32{186, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8, 999, 0, 2, 0, 1}, Span: []int32{186, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 7, 8, 999, 0, 3}, Span: []int32{186, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8}, Span: []int32{187, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 4}, Span: []int32{187, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 5}, Span: []int32{187, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 1}, Span: []int32{187, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 3}, Span: []int32{187, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8}, Span: []int32{187, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8, 999, 0}, Span: []int32{187, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8, 999, 0, 2}, Span: []int32{187, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8, 999, 0, 2, 0}, Span: []int32{187, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8, 999, 0, 2, 0, 1}, Span: []int32{187, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 8, 8, 999, 0, 3}, Span: []int32{187, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9}, Span: []int32{188, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 4}, Span: []int32{188, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 5}, Span: []int32{188, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 1}, Span: []int32{188, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 3}, Span: []int32{188, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8}, Span: []int32{188, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8, 999, 0}, Span: []int32{188, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8, 999, 0, 2}, Span: []int32{188, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8, 999, 0, 2, 0}, Span: []int32{188, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8, 999, 0, 2, 0, 1}, Span: []int32{188, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 8, 2, 9, 8, 999, 0, 3}, Span: []int32{188, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9}, Span: []int32{191, 0, 202, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 1}, Span: []int32{191, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0}, Span: []int32{192, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 4}, Span: []int32{192, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 5}, Span: []int32{192, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 1}, Span: []int32{192, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 0, 3}, Span: []int32{192, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1}, Span: []int32{193, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 4}, Span: []int32{193, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 5}, Span: []int32{193, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 1}, Span: []int32{193, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 1, 3}, Span: []int32{193, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2}, Span: []int32{194, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 4}, Span: []int32{194, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 6}, Span: []int32{194, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 1}, Span: []int32{194, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 2, 3}, Span: []int32{194, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 3}, Span: []int32{195, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 3, 4}, Span: []int32{195, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 3, 6}, Span: []int32{195, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 3, 1}, Span: []int32{195, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 3, 3}, Span: []int32{195, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 4}, Span: []int32{196, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 4, 4}, Span: []int32{196, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 4, 5}, Span: []int32{196, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 4, 1}, Span: []int32{196, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 4, 3}, Span: []int32{196, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 5}, Span: []int32{197, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 5, 4}, Span: []int32{197, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 5, 5}, Span: []int32{197, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 5, 1}, Span: []int32{197, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 5, 3}, Span: []int32{197, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 6}, Span: []int32{198, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 6, 4}, Span: []int32{198, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 6, 6}, Span: []int32{198, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 6, 1}, Span: []int32{198, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 6, 3}, Span: []int32{198, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 7}, Span: []int32{199, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 7, 4}, Span: []int32{199, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 7, 5}, Span: []int32{199, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 7, 1}, Span: []int32{199, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 7, 3}, Span: []int32{199, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 8}, Span: []int32{200, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 8, 4}, Span: []int32{200, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 8, 5}, Span: []int32{200, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 8, 1}, Span: []int32{200, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 8, 3}, Span: []int32{200, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 9}, Span: []int32{201, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 9, 4}, Span: []int32{201, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 9, 5}, Span: []int32{201, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 9, 1}, Span: []int32{201, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 9, 2, 9, 3}, Span: []int32{201, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10}, Span: []int32{204, 0, 208, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 1}, Span: []int32{204, 8, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0}, Span: []int32{205, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 4}, Span: []int32{205, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 6}, Span: []int32{205, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 1}, Span: []int32{205, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 3}, Span: []int32{205, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8}, Span: []int32{205, 41, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8, 999, 0}, Span: []int32{205, 42, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8, 999, 0, 2}, Span: []int32{205, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{205, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{205, 43, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 0, 8, 999, 0, 3}, Span: []int32{205, 62, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1}, Span: []int32{206, 8, 76}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 4}, Span: []int32{206, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 6}, Span: []int32{206, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 1}, Span: []int32{206, 30, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 3}, Span: []int32{206, 41, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8}, Span: []int32{206, 45, 75}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8, 999, 0}, Span: []int32{206, 46, 74}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8, 999, 0, 2}, Span: []int32{206, 46, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{206, 46, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{206, 47, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 1, 8, 999, 0, 3}, Span: []int32{206, 69, 74}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2}, Span: []int32{207, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 4}, Span: []int32{207, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 5}, Span: []int32{207, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 1}, Span: []int32{207, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 3}, Span: []int32{207, 33, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8}, Span: []int32{207, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8, 999, 0}, Span: []int32{207, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8, 999, 0, 2}, Span: []int32{207, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{207, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{207, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 10, 2, 2, 8, 999, 0, 3}, Span: []int32{207, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11}, Span: []int32{210, 0, 214, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 1}, Span: []int32{210, 8, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0}, Span: []int32{211, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 4}, Span: []int32{211, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 6}, Span: []int32{211, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 1}, Span: []int32{211, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 3}, Span: []int32{211, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8}, Span: []int32{211, 41, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8, 999, 0}, Span: []int32{211, 42, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8, 999, 0, 2}, Span: []int32{211, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{211, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{211, 43, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 0, 8, 999, 0, 3}, Span: []int32{211, 62, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1}, Span: []int32{212, 8, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 4}, Span: []int32{212, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 6}, Span: []int32{212, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 1}, Span: []int32{212, 30, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 1, 3}, Span: []int32{212, 41, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 2}, Span: []int32{213, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 2, 4}, Span: []int32{213, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 2, 5}, Span: []int32{213, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 2, 1}, Span: []int32{213, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 11, 2, 2, 3}, Span: []int32{213, 33, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12}, Span: []int32{216, 0, 219, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 1}, Span: []int32{216, 8, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0}, Span: []int32{217, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 4}, Span: []int32{217, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 6}, Span: []int32{217, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 1}, Span: []int32{217, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 3}, Span: []int32{217, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8}, Span: []int32{217, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8, 999, 0}, Span: []int32{217, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8, 999, 0, 2}, Span: []int32{217, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{217, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{217, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 0, 8, 999, 0, 3}, Span: []int32{217, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1}, Span: []int32{218, 8, 72}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 4}, Span: []int32{218, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 6}, Span: []int32{218, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 1}, Span: []int32{218, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 3}, Span: []int32{218, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8}, Span: []int32{218, 41, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8, 999, 0}, Span: []int32{218, 42, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8, 999, 0, 2}, Span: []int32{218, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{218, 42, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{218, 43, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 12, 2, 1, 8, 999, 0, 3}, Span: []int32{218, 65, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13}, Span: []int32{221, 0, 224, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 1}, Span: []int32{221, 8, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0}, Span: []int32{222, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 4}, Span: []int32{222, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 6}, Span: []int32{222, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 1}, Span: []int32{222, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 0, 3}, Span: []int32{222, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 1}, Span: []int32{223, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 1, 4}, Span: []int32{223, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 1, 6}, Span: []int32{223, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 1, 1}, Span: []int32{223, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 13, 2, 1, 3}, Span: []int32{223, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14}, Span: []int32{226, 0, 229, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 1}, Span: []int32{226, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0}, Span: []int32{227, 8, 137}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 4}, Span: []int32{227, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 5}, Span: []int32{227, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 1}, Span: []int32{227, 23, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 3}, Span: []int32{227, 28, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8}, Span: []int32{227, 30, 136}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 0}, Span: []int32{227, 31, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 0, 2}, Span: []int32{227, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{227, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{227, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 0, 7}, Span: []int32{227, 56, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 1}, Span: []int32{227, 107, 135}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 1, 2}, Span: []int32{227, 107, 127}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 1, 2, 0}, Span: []int32{227, 107, 127}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 1, 2, 0, 1}, Span: []int32{227, 108, 126}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 0, 8, 999, 1, 3}, Span: []int32{227, 130, 135}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1}, Span: []int32{228, 8, 143}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 4}, Span: []int32{228, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 5}, Span: []int32{228, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 1}, Span: []int32{228, 23, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 3}, Span: []int32{228, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8}, Span: []int32{228, 33, 142}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 0}, Span: []int32{228, 34, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 0, 2}, Span: []int32{228, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{228, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{228, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 0, 7}, Span: []int32{228, 59, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 1}, Span: []int32{228, 113, 141}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 1, 2}, Span: []int32{228, 113, 133}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 1, 2, 0}, Span: []int32{228, 113, 133}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 1, 2, 0, 1}, Span: []int32{228, 114, 132}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 14, 2, 1, 8, 999, 1, 3}, Span: []int32{228, 136, 141}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15}, Span: []int32{231, 0, 234, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 1}, Span: []int32{231, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0}, Span: []int32{232, 8, 107}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 4}, Span: []int32{232, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 5}, Span: []int32{232, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 1}, Span: []int32{232, 23, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 3}, Span: []int32{232, 28, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8}, Span: []int32{232, 30, 106}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8, 999, 0}, Span: []int32{232, 31, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8, 999, 0, 2}, Span: []int32{232, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{232, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{232, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 0, 8, 999, 0, 7}, Span: []int32{232, 56, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1}, Span: []int32{233, 8, 113}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 4}, Span: []int32{233, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 5}, Span: []int32{233, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 1}, Span: []int32{233, 23, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 3}, Span: []int32{233, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8}, Span: []int32{233, 33, 112}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8, 999, 0}, Span: []int32{233, 34, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8, 999, 0, 2}, Span: []int32{233, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{233, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{233, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 15, 2, 1, 8, 999, 0, 7}, Span: []int32{233, 59, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16}, Span: []int32{236, 0, 239, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 1}, Span: []int32{236, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0}, Span: []int32{237, 8, 137}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 4}, Span: []int32{237, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 5}, Span: []int32{237, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 1}, Span: []int32{237, 23, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 3}, Span: []int32{237, 28, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8}, Span: []int32{237, 30, 136}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 0}, Span: []int32{237, 31, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 0, 2}, Span: []int32{237, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{237, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{237, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 0, 7}, Span: []int32{237, 56, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 1}, Span: []int32{237, 107, 135}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 1, 2}, Span: []int32{237, 107, 127}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 1, 2, 0}, Span: []int32{237, 107, 127}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 1, 2, 0, 1}, Span: []int32{237, 108, 126}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 0, 8, 999, 1, 3}, Span: []int32{237, 130, 135}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1}, Span: []int32{238, 8, 143}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 4}, Span: []int32{238, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 5}, Span: []int32{238, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 1}, Span: []int32{238, 23, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 3}, Span: []int32{238, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8}, Span: []int32{238, 33, 142}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 0}, Span: []int32{238, 34, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 0, 2}, Span: []int32{238, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{238, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{238, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 0, 7}, Span: []int32{238, 59, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 1}, Span: []int32{238, 113, 141}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 1, 2}, Span: []int32{238, 113, 133}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 1, 2, 0}, Span: []int32{238, 113, 133}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 1, 2, 0, 1}, Span: []int32{238, 114, 132}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 16, 2, 1, 8, 999, 1, 3}, Span: []int32{238, 136, 141}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17}, Span: []int32{241, 0, 244, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 1}, Span: []int32{241, 8, 20}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0}, Span: []int32{242, 8, 107}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 4}, Span: []int32{242, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 5}, Span: []int32{242, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 1}, Span: []int32{242, 23, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 3}, Span: []int32{242, 28, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8}, Span: []int32{242, 30, 106}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8, 999, 0}, Span: []int32{242, 31, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8, 999, 0, 2}, Span: []int32{242, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{242, 31, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{242, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 0, 8, 999, 0, 7}, Span: []int32{242, 56, 105}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1}, Span: []int32{243, 8, 113}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 4}, Span: []int32{243, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 5}, Span: []int32{243, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 1}, Span: []int32{243, 23, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 3}, Span: []int32{243, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8}, Span: []int32{243, 33, 112}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8, 999, 0}, Span: []int32{243, 34, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8, 999, 0, 2}, Span: []int32{243, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{243, 34, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{243, 35, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 17, 2, 1, 8, 999, 0, 7}, Span: []int32{243, 59, 111}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18}, Span: []int32{246, 0, 257, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 1}, Span: []int32{246, 8, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7}, Span: []int32{247, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7, 999, 0}, Span: []int32{247, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7, 999, 0, 2}, Span: []int32{247, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7, 999, 0, 2, 0}, Span: []int32{247, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7, 999, 0, 2, 0, 1}, Span: []int32{247, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 7, 999, 0, 3}, Span: []int32{247, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 0}, Span: []int32{248, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 0, 4}, Span: []int32{248, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 0, 5}, Span: []int32{248, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 0, 1}, Span: []int32{248, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 0, 3}, Span: []int32{248, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 1}, Span: []int32{249, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 1, 4}, Span: []int32{249, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 1, 5}, Span: []int32{249, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 1, 1}, Span: []int32{249, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 1, 3}, Span: []int32{249, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 2}, Span: []int32{250, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 2, 4}, Span: []int32{250, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 2, 5}, Span: []int32{250, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 2, 1}, Span: []int32{250, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 2, 3}, Span: []int32{250, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 3}, Span: []int32{251, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 3, 4}, Span: []int32{251, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 3, 5}, Span: []int32{251, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 3, 1}, Span: []int32{251, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 3, 3}, Span: []int32{251, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 4}, Span: []int32{252, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 4, 4}, Span: []int32{252, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 4, 5}, Span: []int32{252, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 4, 1}, Span: []int32{252, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 4, 3}, Span: []int32{252, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 5}, Span: []int32{253, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 5, 4}, Span: []int32{253, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 5, 5}, Span: []int32{253, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 5, 1}, Span: []int32{253, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 5, 3}, Span: []int32{253, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 6}, Span: []int32{254, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 6, 4}, Span: []int32{254, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 6, 5}, Span: []int32{254, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 6, 1}, Span: []int32{254, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 6, 3}, Span: []int32{254, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 7}, Span: []int32{255, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 7, 4}, Span: []int32{255, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 7, 5}, Span: []int32{255, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 7, 1}, Span: []int32{255, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 7, 3}, Span: []int32{255, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 8}, Span: []int32{256, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 8, 4}, Span: []int32{256, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 8, 5}, Span: []int32{256, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 8, 1}, Span: []int32{256, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 18, 2, 8, 3}, Span: []int32{256, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19}, Span: []int32{259, 0, 270, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 1}, Span: []int32{259, 8, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7}, Span: []int32{260, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7, 999, 0}, Span: []int32{260, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7, 999, 0, 2}, Span: []int32{260, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7, 999, 0, 2, 0}, Span: []int32{260, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7, 999, 0, 2, 0, 1}, Span: []int32{260, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 7, 999, 0, 3}, Span: []int32{260, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 0}, Span: []int32{261, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 0, 4}, Span: []int32{261, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 0, 5}, Span: []int32{261, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 0, 1}, Span: []int32{261, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 0, 3}, Span: []int32{261, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 1}, Span: []int32{262, 8, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 1, 4}, Span: []int32{262, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 1, 5}, Span: []int32{262, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 1, 1}, Span: []int32{262, 23, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 1, 3}, Span: []int32{262, 32, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 2}, Span: []int32{263, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 2, 4}, Span: []int32{263, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 2, 6}, Span: []int32{263, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 2, 1}, Span: []int32{263, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 2, 3}, Span: []int32{263, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 3}, Span: []int32{264, 8, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 3, 4}, Span: []int32{264, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 3, 6}, Span: []int32{264, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 3, 1}, Span: []int32{264, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 3, 3}, Span: []int32{264, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 4}, Span: []int32{265, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 4, 4}, Span: []int32{265, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 4, 5}, Span: []int32{265, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 4, 1}, Span: []int32{265, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 4, 3}, Span: []int32{265, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 5}, Span: []int32{266, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 5, 4}, Span: []int32{266, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 5, 5}, Span: []int32{266, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 5, 1}, Span: []int32{266, 24, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 5, 3}, Span: []int32{266, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 6}, Span: []int32{267, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 6, 4}, Span: []int32{267, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 6, 5}, Span: []int32{267, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 6, 1}, Span: []int32{267, 22, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 6, 3}, Span: []int32{267, 32, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 7}, Span: []int32{268, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 7, 4}, Span: []int32{268, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 7, 5}, Span: []int32{268, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 7, 1}, Span: []int32{268, 24, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 7, 3}, Span: []int32{268, 34, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 8}, Span: []int32{269, 8, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 8, 4}, Span: []int32{269, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 8, 5}, Span: []int32{269, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 8, 1}, Span: []int32{269, 23, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 19, 2, 8, 3}, Span: []int32{269, 33, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20}, Span: []int32{272, 0, 277, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 1}, Span: []int32{272, 8, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7}, Span: []int32{273, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7, 999, 0}, Span: []int32{273, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7, 999, 0, 2}, Span: []int32{273, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7, 999, 0, 2, 0}, Span: []int32{273, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7, 999, 0, 2, 0, 1}, Span: []int32{273, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 7, 999, 0, 3}, Span: []int32{273, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0}, Span: []int32{274, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 4}, Span: []int32{274, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 6}, Span: []int32{274, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 1}, Span: []int32{274, 30, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 3}, Span: []int32{274, 39, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8}, Span: []int32{274, 41, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8, 999, 0}, Span: []int32{274, 42, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8, 999, 0, 2}, Span: []int32{274, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{274, 42, 59}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{274, 43, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 0, 8, 999, 0, 3}, Span: []int32{274, 62, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 1}, Span: []int32{275, 8, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 1, 4}, Span: []int32{275, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 1, 6}, Span: []int32{275, 17, 29}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 1, 1}, Span: []int32{275, 30, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 1, 3}, Span: []int32{275, 41, 44}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 2}, Span: []int32{276, 8, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 2, 4}, Span: []int32{276, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 2, 5}, Span: []int32{276, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 2, 1}, Span: []int32{276, 22, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 20, 2, 2, 3}, Span: []int32{276, 33, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21}, Span: []int32{279, 0, 284, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 1}, Span: []int32{279, 8, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7}, Span: []int32{280, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7, 999, 0}, Span: []int32{280, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7, 999, 0, 2}, Span: []int32{280, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7, 999, 0, 2, 0}, Span: []int32{280, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7, 999, 0, 2, 0, 1}, Span: []int32{280, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 7, 999, 0, 3}, Span: []int32{280, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 0}, Span: []int32{281, 8, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 0, 4}, Span: []int32{281, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 0, 6}, Span: []int32{281, 17, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 0, 1}, Span: []int32{281, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 0, 3}, Span: []int32{281, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 1}, Span: []int32{282, 8, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 1, 4}, Span: []int32{282, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 1, 6}, Span: []int32{282, 17, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 1, 1}, Span: []int32{282, 35, 41}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 1, 3}, Span: []int32{282, 44, 45}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 2}, Span: []int32{283, 8, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 2, 4}, Span: []int32{283, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 2, 6}, Span: []int32{283, 17, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 2, 1}, Span: []int32{283, 40, 46}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 21, 2, 2, 3}, Span: []int32{283, 49, 50}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22}, Span: []int32{286, 0, 291, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 1}, Span: []int32{286, 8, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7}, Span: []int32{287, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7, 999, 0}, Span: []int32{287, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7, 999, 0, 2}, Span: []int32{287, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7, 999, 0, 2, 0}, Span: []int32{287, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7, 999, 0, 2, 0, 1}, Span: []int32{287, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 7, 999, 0, 3}, Span: []int32{287, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 0}, Span: []int32{288, 8, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 0, 4}, Span: []int32{288, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 0, 6}, Span: []int32{288, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 0, 1}, Span: []int32{288, 26, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 0, 3}, Span: []int32{288, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 1}, Span: []int32{289, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 1, 4}, Span: []int32{289, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 1, 6}, Span: []int32{289, 17, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 1, 1}, Span: []int32{289, 27, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 1, 3}, Span: []int32{289, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 2}, Span: []int32{290, 8, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 2, 4}, Span: []int32{290, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 2, 6}, Span: []int32{290, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 2, 1}, Span: []int32{290, 22, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 22, 2, 2, 3}, Span: []int32{290, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23}, Span: []int32{293, 0, 296, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 1}, Span: []int32{293, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0}, Span: []int32{294, 8, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 4}, Span: []int32{294, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 6}, Span: []int32{294, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 1}, Span: []int32{294, 22, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 3}, Span: []int32{294, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8}, Span: []int32{294, 31, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8, 999, 0}, Span: []int32{294, 32, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8, 999, 0, 2}, Span: []int32{294, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{294, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{294, 33, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 0, 8, 999, 0, 3}, Span: []int32{294, 55, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1}, Span: []int32{295, 8, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 4}, Span: []int32{295, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 6}, Span: []int32{295, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 1}, Span: []int32{295, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 3}, Span: []int32{295, 30, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8}, Span: []int32{295, 32, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8, 999, 0}, Span: []int32{295, 33, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8, 999, 0, 2}, Span: []int32{295, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{295, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{295, 34, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 23, 2, 1, 8, 999, 0, 3}, Span: []int32{295, 56, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24}, Span: []int32{298, 0, 301, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 1}, Span: []int32{298, 8, 17}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0}, Span: []int32{299, 8, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 4}, Span: []int32{299, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 6}, Span: []int32{299, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 1}, Span: []int32{299, 22, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 3}, Span: []int32{299, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8}, Span: []int32{299, 31, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8, 999, 0}, Span: []int32{299, 32, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8, 999, 0, 2}, Span: []int32{299, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{299, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{299, 33, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 0, 8, 999, 0, 3}, Span: []int32{299, 55, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1}, Span: []int32{300, 8, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 4}, Span: []int32{300, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 6}, Span: []int32{300, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 1}, Span: []int32{300, 22, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 3}, Span: []int32{300, 30, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8}, Span: []int32{300, 32, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8, 999, 0}, Span: []int32{300, 33, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8, 999, 0, 2}, Span: []int32{300, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{300, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{300, 34, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 24, 2, 1, 8, 999, 0, 3}, Span: []int32{300, 56, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25}, Span: []int32{303, 0, 306, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 1}, Span: []int32{303, 8, 12}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0}, Span: []int32{304, 8, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 4}, Span: []int32{304, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 5}, Span: []int32{304, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 1}, Span: []int32{304, 23, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 3}, Span: []int32{304, 31, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8}, Span: []int32{304, 33, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8, 999, 0}, Span: []int32{304, 34, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8, 999, 0, 2}, Span: []int32{304, 34, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{304, 34, 54}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{304, 35, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 0, 8, 999, 0, 3}, Span: []int32{304, 57, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1}, Span: []int32{305, 8, 68}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 4}, Span: []int32{305, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 5}, Span: []int32{305, 17, 23}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 1}, Span: []int32{305, 24, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 3}, Span: []int32{305, 35, 36}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8}, Span: []int32{305, 37, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8, 999, 0}, Span: []int32{305, 38, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8, 999, 0, 2}, Span: []int32{305, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{305, 38, 58}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{305, 39, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 25, 2, 1, 8, 999, 0, 3}, Span: []int32{305, 61, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26}, Span: []int32{308, 0, 313, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 1}, Span: []int32{308, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7}, Span: []int32{309, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7, 999, 0}, Span: []int32{309, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7, 999, 0, 2}, Span: []int32{309, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7, 999, 0, 2, 0}, Span: []int32{309, 15, 32}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7, 999, 0, 2, 0, 1}, Span: []int32{309, 16, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 7, 999, 0, 3}, Span: []int32{309, 35, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 0}, Span: []int32{310, 8, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 0, 4}, Span: []int32{310, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 0, 6}, Span: []int32{310, 17, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 0, 1}, Span: []int32{310, 29, 33}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 0, 3}, Span: []int32{310, 36, 37}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 1}, Span: []int32{311, 8, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 1, 4}, Span: []int32{311, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 1, 6}, Span: []int32{311, 17, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 1, 1}, Span: []int32{311, 31, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 1, 3}, Span: []int32{311, 37, 38}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 2}, Span: []int32{312, 8, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 2, 4}, Span: []int32{312, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 2, 6}, Span: []int32{312, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 2, 1}, Span: []int32{312, 26, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 26, 2, 2, 3}, Span: []int32{312, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27}, Span: []int32{315, 0, 317, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 1}, Span: []int32{315, 8, 19}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0}, Span: []int32{316, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 4}, Span: []int32{316, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 6}, Span: []int32{316, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 1}, Span: []int32{316, 26, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 3}, Span: []int32{316, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8}, Span: []int32{316, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8, 999, 0}, Span: []int32{316, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8, 999, 0, 2}, Span: []int32{316, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{316, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{316, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 27, 2, 0, 8, 999, 0, 3}, Span: []int32{316, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28}, Span: []int32{319, 0, 322, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 1}, Span: []int32{319, 8, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0}, Span: []int32{320, 8, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 4}, Span: []int32{320, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 6}, Span: []int32{320, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 1}, Span: []int32{320, 26, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 3}, Span: []int32{320, 33, 34}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8}, Span: []int32{320, 35, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8, 999, 0}, Span: []int32{320, 36, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8, 999, 0, 2}, Span: []int32{320, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{320, 36, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{320, 37, 55}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 0, 8, 999, 0, 3}, Span: []int32{320, 59, 64}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1}, Span: []int32{321, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 4}, Span: []int32{321, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 6}, Span: []int32{321, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 1}, Span: []int32{321, 26, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 3}, Span: []int32{321, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8}, Span: []int32{321, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8, 999, 0}, Span: []int32{321, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8, 999, 0, 2}, Span: []int32{321, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{321, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{321, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 28, 2, 1, 8, 999, 0, 3}, Span: []int32{321, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29}, Span: []int32{324, 0, 326, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 1}, Span: []int32{324, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0}, Span: []int32{325, 8, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 4}, Span: []int32{325, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 6}, Span: []int32{325, 17, 21}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 1}, Span: []int32{325, 22, 26}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 3}, Span: []int32{325, 29, 30}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8}, Span: []int32{325, 31, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8, 999, 0}, Span: []int32{325, 32, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8, 999, 0, 2}, Span: []int32{325, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{325, 32, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{325, 33, 51}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 29, 2, 0, 8, 999, 0, 3}, Span: []int32{325, 55, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 30}, Span: []int32{328, 0, 330, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 30, 1}, Span: []int32{328, 8, 11}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0}, Span: []int32{332, 0, 336, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 1}, Span: []int32{332, 5, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 0}, Span: []int32{333, 4, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 0, 1}, Span: []int32{333, 4, 5}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 0, 2}, Span: []int32{333, 8, 9}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 1}, Span: []int32{334, 4, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 1, 1}, Span: []int32{334, 4, 5}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 1, 2}, Span: []int32{334, 8, 9}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 2}, Span: []int32{335, 4, 10}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 2, 1}, Span: []int32{335, 4, 5}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{5, 0, 2, 2, 2}, Span: []int32{335, 8, 9}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31}, Span: []int32{338, 0, 340, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 1}, Span: []int32{338, 8, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0}, Span: []int32{339, 8, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 4}, Span: []int32{339, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 6}, Span: []int32{339, 17, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 1}, Span: []int32{339, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 3}, Span: []int32{339, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8}, Span: []int32{339, 40, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8, 999, 0}, Span: []int32{339, 41, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8, 999, 0, 2}, Span: []int32{339, 41, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{339, 41, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{339, 42, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 31, 2, 0, 8, 999, 0, 3}, Span: []int32{339, 64, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32}, Span: []int32{342, 0, 344, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 1}, Span: []int32{342, 8, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 2, 0}, Span: []int32{343, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 2, 0, 4}, Span: []int32{343, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 2, 0, 6}, Span: []int32{343, 17, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 2, 0, 1}, Span: []int32{343, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 32, 2, 0, 3}, Span: []int32{343, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33}, Span: []int32{346, 0, 348, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 1}, Span: []int32{346, 8, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0}, Span: []int32{347, 8, 71}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 4}, Span: []int32{347, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 6}, Span: []int32{347, 17, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 1}, Span: []int32{347, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 3}, Span: []int32{347, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8}, Span: []int32{347, 40, 70}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8, 999, 0}, Span: []int32{347, 41, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8, 999, 0, 2}, Span: []int32{347, 41, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{347, 41, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{347, 42, 60}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 33, 2, 0, 8, 999, 0, 3}, Span: []int32{347, 64, 69}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34}, Span: []int32{350, 0, 352, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 1}, Span: []int32{350, 8, 18}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 2, 0}, Span: []int32{351, 8, 40}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 2, 0, 4}, Span: []int32{351, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 2, 0, 6}, Span: []int32{351, 17, 28}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 2, 0, 1}, Span: []int32{351, 29, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 34, 2, 0, 3}, Span: []int32{351, 38, 39}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35}, Span: []int32{354, 0, 358, 1}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 1}, Span: []int32{354, 8, 13}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0}, Span: []int32{355, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 4}, Span: []int32{355, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 5}, Span: []int32{355, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 1}, Span: []int32{355, 26, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 3}, Span: []int32{355, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8}, Span: []int32{355, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8, 999, 0}, Span: []int32{355, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8, 999, 0, 2}, Span: []int32{355, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8, 999, 0, 2, 0}, Span: []int32{355, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8, 999, 0, 2, 0, 1}, Span: []int32{355, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 0, 8, 999, 0, 3}, Span: []int32{355, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1}, Span: []int32{356, 8, 67}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 4}, Span: []int32{356, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 5}, Span: []int32{356, 17, 25}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 1}, Span: []int32{356, 26, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 3}, Span: []int32{356, 34, 35}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8}, Span: []int32{356, 36, 66}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8, 999, 0}, Span: []int32{356, 37, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8, 999, 0, 2}, Span: []int32{356, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8, 999, 0, 2, 0}, Span: []int32{356, 37, 57}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8, 999, 0, 2, 0, 1}, Span: []int32{356, 38, 56}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 1, 8, 999, 0, 3}, Span: []int32{356, 60, 65}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2}, Span: []int32{357, 8, 63}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 4}, Span: []int32{357, 8, 16}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 5}, Span: []int32{357, 17, 22}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 1}, Span: []int32{357, 23, 27}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 3}, Span: []int32{357, 30, 31}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8}, Span: []int32{357, 32, 62}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8, 999, 0}, Span: []int32{357, 33, 61}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8, 999, 0, 2}, Span: []int32{357, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8, 999, 0, 2, 0}, Span: []int32{357, 33, 53}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8, 999, 0, 2, 0, 1}, Span: []int32{357, 34, 52}, LeadingComments: nil, TrailingComments: nil}, &google_protobuf.SourceCodeInfo_Location{Path: []int32{4, 35, 2, 2, 8, 999, 0, 3}, Span: []int32{357, 56, 61}, LeadingComments: nil, TrailingComments: nil}}}}}}
 }

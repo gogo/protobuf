@@ -104,12 +104,11 @@ Typically fmt.Printf("%v") will stop to print when it reaches a pointer and
 not print their values, while the generated String method will always print all values, recursively.
 
 */
-package stringgen
+package stringer
 
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
-	"fmt"
 	"strings"
 )
 
@@ -117,7 +116,7 @@ type stringgen struct {
 	*generator.Generator
 	generator.PluginImports
 	atleastOne bool
-	localNum   string
+	localName  string
 }
 
 func NewStringGen() *stringgen {
@@ -136,17 +135,13 @@ func (p *stringgen) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
-	index := p.PackageIndex(file)
-	p.localNum = ""
-	if index > 0 {
-		p.localNum = fmt.Sprintf("%d", index)
-	}
+	p.localName = generator.FileName(file)
 
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
 	reflectPkg := p.NewImport("reflect")
 	for _, message := range file.Messages() {
-		if !gogoproto.HasString(file.FileDescriptorProto, message.DescriptorProto) {
+		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
 		if gogoproto.HasOldString(file.FileDescriptorProto, message.DescriptorProto) {
@@ -183,7 +178,7 @@ func (p *stringgen) Generate(file *generator.FileDescriptor) {
 				}
 			} else {
 				if nullable && !repeated {
-					p.P("`", fieldname, ":`", ` + valueToString`, p.localNum, `(this.`, fieldname, ") + `,", "`,")
+					p.P("`", fieldname, ":`", ` + valueToString`, p.localName, `(this.`, fieldname, ") + `,", "`,")
 				} else {
 					p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
 				}
@@ -201,7 +196,7 @@ func (p *stringgen) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-	p.P(`func valueToString`, p.localNum, `(v interface{}) string {`)
+	p.P(`func valueToString`, p.localName, `(v interface{}) string {`)
 	p.In()
 	p.P(`rv := `, reflectPkg.Use(), `.ValueOf(v)`)
 	p.P(`if rv.IsNil() {`)

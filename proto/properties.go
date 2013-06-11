@@ -324,8 +324,8 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 				p.enc = (*Buffer).enc_ref_string
 			case reflect.Struct:
 				p.stype = t1
-				p.isMarshaler = isMarshaler(t1)
-				p.isUnmarshaler = isUnmarshaler(t1)
+				p.isMarshaler = isMarshaler(reflect.PtrTo(t1))
+				p.isUnmarshaler = isUnmarshaler(reflect.PtrTo(t1))
 				if p.Wire == "bytes" {
 					p.enc = (*Buffer).enc_ref_struct_message
 					p.dec = (*Buffer).dec_ref_struct_message

@@ -47,12 +47,16 @@ import (
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 
 	_ "code.google.com/p/gogoprotobuf/plugin/description"
+	_ "code.google.com/p/gogoprotobuf/plugin/embedcheck"
 	_ "code.google.com/p/gogoprotobuf/plugin/equal"
 	_ "code.google.com/p/gogoprotobuf/plugin/face"
 	_ "code.google.com/p/gogoprotobuf/plugin/gostring"
+	_ "code.google.com/p/gogoprotobuf/plugin/marshalto"
 	_ "code.google.com/p/gogoprotobuf/plugin/populate"
-	_ "code.google.com/p/gogoprotobuf/plugin/stringgen"
+	_ "code.google.com/p/gogoprotobuf/plugin/size"
+	_ "code.google.com/p/gogoprotobuf/plugin/stringer"
 	_ "code.google.com/p/gogoprotobuf/plugin/union"
+	_ "code.google.com/p/gogoprotobuf/plugin/unmarshal"
 
 	"code.google.com/p/gogoprotobuf/plugin/testgen"
 

@@ -113,10 +113,12 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		p.used = true
-		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		p.P(`func (this *`, ccTypeName, `) Description() (desc *google_protobuf.DescriptorProto) {`)
+	}
+
+	if p.used {
+		p.P(`func Description() (desc *google_protobuf.FileDescriptorSet) {`)
 		p.In()
-		s := fmt.Sprintf("%#v", message.DescriptorProto)
+		s := fmt.Sprintf("%#v", p.Generator.AllFiles())
 		p.P(`return `, s)
 		p.Out()
 		p.P(`}`)

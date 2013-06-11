@@ -114,7 +114,6 @@ package gostring
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
-	"fmt"
 	"strings"
 )
 
@@ -122,7 +121,7 @@ type gostring struct {
 	*generator.Generator
 	generator.PluginImports
 	atleastOne bool
-	localNum   string
+	localName  string
 }
 
 func NewGoString() *gostring {
@@ -141,11 +140,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
-	index := p.PackageIndex(file)
-	p.localNum = ""
-	if index > 0 {
-		p.localNum = fmt.Sprintf("%d", index)
-	}
+	p.localName = generator.FileName(file)
 
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
@@ -196,14 +191,14 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				if field.IsEnum() {
 					if nullable && !repeated {
 						goTyp, _ := p.GoType(message, field)
-						out += strings.Join([]string{`valueToGoString`, p.localNum, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						out += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {
 						out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
 					}
 				} else {
 					if nullable && !repeated {
 						goTyp, _ := p.GoType(message, field)
-						out += strings.Join([]string{`valueToGoString`, p.localNum, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						out += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {
 						out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
 					}
@@ -225,7 +220,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-	p.P(`func valueToGoString`, p.localNum, `(v interface{}, typ string) string {`)
+	p.P(`func valueToGoString`, p.localName, `(v interface{}, typ string) string {`)
 	p.In()
 	p.P(`rv := `, reflectPkg.Use(), `.ValueOf(v)`)
 	p.P(`if rv.IsNil() {`)
