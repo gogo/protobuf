@@ -60,7 +60,10 @@ regenerate:
 	gofmt -l -s -w .
 
 testall:
+	go test -v ./test/example
 	go test -v ./test
 	go test -v ./proto
+	go test -v ./test/embedconflict
+	go test -v ./test/example
 	make -C protoc-gen-gogo/testdata test
 
