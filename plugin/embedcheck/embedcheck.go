@@ -77,7 +77,7 @@ func (p *plugin) checkNameSpace(message *generator.Descriptor) map[string]bool {
 		if gogoproto.IsEmbed(field) {
 			desc := p.ObjectNamed(field.GetTypeName())
 			moreNames := p.checkNameSpace(desc.(*generator.Descriptor))
-			for another, _ := range moreNames {
+			for another := range moreNames {
 				if names[another] {
 					fmt.Fprintf(os.Stderr, "ERROR: duplicate embedded fieldname %v in type %v\n", fieldname, ccTypeName)
 					os.Exit(1)

@@ -29,9 +29,14 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-all:	install
+all:	clean nuke install regenerate reinstall testall
 
 install:
+	go install ./proto
+	go install ./gogoproto
+	go install ./protoc-gen-gogo
+
+reinstall:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
@@ -42,6 +47,9 @@ clean:
 nuke:
 	go clean -i ./...
 
+fmt:
+	gofmt -l -s -w .
+
 regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
@@ -49,6 +57,7 @@ regenerate:
 	make -C proto/testdata regenerate
 	make -C test regenerate
 	make -C test/example regenerate
+	gofmt -l -s -w .
 
 testall:
 	go test -v ./test
