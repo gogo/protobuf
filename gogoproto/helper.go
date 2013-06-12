@@ -57,6 +57,14 @@ func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {
 
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
+func EnabledEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
+	return proto.GetBoolExtension(enum.Options, E_Enumprefix, proto.GetBoolExtension(file.Options, E_EnumprefixAll, true))
+}
+
+func EnabledMsgStringMethod(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Msgstringmethod, proto.GetBoolExtension(file.Options, E_MsgstringmethodAll, true))
+}
+
 func HasGetters(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Getters, proto.GetBoolExtension(file.Options, E_GettersAll, true))
 }

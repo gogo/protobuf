@@ -289,195 +289,151 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 	p.enc = nil
 	p.dec = nil
 	if len(p.CustomType) > 0 {
-		p.ctype = typ
-		if p.Repeated {
-			p.enc = (*Buffer).enc_custom_slice_bytes
-			p.dec = (*Buffer).dec_custom_slice_bytes
-		} else if typ.Kind() == reflect.Ptr {
-			p.enc = (*Buffer).enc_custom_bytes
-			p.dec = (*Buffer).dec_custom_bytes
-		} else {
-			p.enc = (*Buffer).enc_custom_ref_bytes
-			p.dec = (*Buffer).dec_custom_ref_bytes
+		p.setCustomEncAndDec(typ)
+		p.setTag(lockGetProp)
+		return
+	}
+	switch t1 := typ; t1.Kind() {
+	default:
+		if !p.setNonNullableEncAndDec(t1) {
+			fmt.Fprintf(os.Stderr, "proto: no coders for %T\n", t1)
 		}
-	} else {
-		switch t1 := typ; t1.Kind() {
+	case reflect.Ptr:
+		switch t2 := t1.Elem(); t2.Kind() {
 		default:
-			switch t1.Kind() {
-			case reflect.Bool:
-				p.enc = (*Buffer).enc_ref_bool
-				p.dec = (*Buffer).dec_ref_bool
-			case reflect.Int32, reflect.Uint32:
-				p.enc = (*Buffer).enc_ref_int32
-				p.dec = (*Buffer).dec_ref_int32
-			case reflect.Int64, reflect.Uint64:
-				p.enc = (*Buffer).enc_ref_int64
-				p.dec = (*Buffer).dec_ref_int64
-			case reflect.Float32:
-				p.enc = (*Buffer).enc_ref_int32 // can just treat them as bits
-				p.dec = (*Buffer).dec_ref_int32
-			case reflect.Float64:
-				p.enc = (*Buffer).enc_ref_int64 // can just treat them as bits
-				p.dec = (*Buffer).dec_ref_int64
-			case reflect.String:
-				p.dec = (*Buffer).dec_ref_string
-				p.enc = (*Buffer).enc_ref_string
-			case reflect.Struct:
-				p.stype = t1
-				p.isMarshaler = isMarshaler(reflect.PtrTo(t1))
-				p.isUnmarshaler = isUnmarshaler(reflect.PtrTo(t1))
-				if p.Wire == "bytes" {
-					p.enc = (*Buffer).enc_ref_struct_message
-					p.dec = (*Buffer).dec_ref_struct_message
-				} else {
-					fmt.Fprintf(os.Stderr, "proto: no coders for struct %T\n", t1)
-				}
-			default:
-				fmt.Fprintf(os.Stderr, "proto: no coders for unknown %T\n", t1)
+			fmt.Fprintf(os.Stderr, "proto: no encoder function for %T -> %T\n", t1, t2)
+			break
+		case reflect.Bool:
+			p.enc = (*Buffer).enc_bool
+			p.dec = (*Buffer).dec_bool
+		case reflect.Int32, reflect.Uint32:
+			p.enc = (*Buffer).enc_int32
+			p.dec = (*Buffer).dec_int32
+		case reflect.Int64, reflect.Uint64:
+			p.enc = (*Buffer).enc_int64
+			p.dec = (*Buffer).dec_int64
+		case reflect.Float32:
+			p.enc = (*Buffer).enc_int32 // can just treat them as bits
+			p.dec = (*Buffer).dec_int32
+		case reflect.Float64:
+			p.enc = (*Buffer).enc_int64 // can just treat them as bits
+			p.dec = (*Buffer).dec_int64
+		case reflect.String:
+			p.enc = (*Buffer).enc_string
+			p.dec = (*Buffer).dec_string
+		case reflect.Struct:
+			p.stype = t1.Elem()
+			p.isMarshaler = isMarshaler(t1)
+			p.isUnmarshaler = isUnmarshaler(t1)
+			if p.Wire == "bytes" {
+				p.enc = (*Buffer).enc_struct_message
+				p.dec = (*Buffer).dec_struct_message
+			} else {
+				p.enc = (*Buffer).enc_struct_group
+				p.dec = (*Buffer).dec_struct_group
 			}
-		case reflect.Ptr:
-			switch t2 := t1.Elem(); t2.Kind() {
-			default:
-				fmt.Fprintf(os.Stderr, "proto: no encoder function for %T -> %T\n", t1, t2)
-				break
-			case reflect.Bool:
-				p.enc = (*Buffer).enc_bool
-				p.dec = (*Buffer).dec_bool
-			case reflect.Int32, reflect.Uint32:
-				p.enc = (*Buffer).enc_int32
-				p.dec = (*Buffer).dec_int32
-			case reflect.Int64, reflect.Uint64:
-				p.enc = (*Buffer).enc_int64
-				p.dec = (*Buffer).dec_int64
-			case reflect.Float32:
-				p.enc = (*Buffer).enc_int32 // can just treat them as bits
-				p.dec = (*Buffer).dec_int32
-			case reflect.Float64:
-				p.enc = (*Buffer).enc_int64 // can just treat them as bits
-				p.dec = (*Buffer).dec_int64
-			case reflect.String:
-				p.enc = (*Buffer).enc_string
-				p.dec = (*Buffer).dec_string
-			case reflect.Struct:
-				p.stype = t1.Elem()
-				p.isMarshaler = isMarshaler(t1)
-				p.isUnmarshaler = isUnmarshaler(t1)
-				if p.Wire == "bytes" {
-					p.enc = (*Buffer).enc_struct_message
-					p.dec = (*Buffer).dec_struct_message
-				} else {
-					p.enc = (*Buffer).enc_struct_group
-					p.dec = (*Buffer).dec_struct_group
-				}
-			}
+		}
 
-		case reflect.Slice:
-			switch t2 := t1.Elem(); t2.Kind() {
+	case reflect.Slice:
+		switch t2 := t1.Elem(); t2.Kind() {
+		default:
+			logNoSliceEnc(t1, t2)
+			break
+		case reflect.Bool:
+			if p.Packed {
+				p.enc = (*Buffer).enc_slice_packed_bool
+			} else {
+				p.enc = (*Buffer).enc_slice_bool
+			}
+			p.dec = (*Buffer).dec_slice_bool
+			p.packedDec = (*Buffer).dec_slice_packed_bool
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+			switch t2.Bits() {
+			case 32:
+				if p.Packed {
+					p.enc = (*Buffer).enc_slice_packed_int32
+				} else {
+					p.enc = (*Buffer).enc_slice_int32
+				}
+				p.dec = (*Buffer).dec_slice_int32
+				p.packedDec = (*Buffer).dec_slice_packed_int32
+			case 64:
+				if p.Packed {
+					p.enc = (*Buffer).enc_slice_packed_int64
+				} else {
+					p.enc = (*Buffer).enc_slice_int64
+				}
+				p.dec = (*Buffer).dec_slice_int64
+				p.packedDec = (*Buffer).dec_slice_packed_int64
+			case 8:
+				if t2.Kind() == reflect.Uint8 {
+					p.enc = (*Buffer).enc_slice_byte
+					p.dec = (*Buffer).dec_slice_byte
+				}
 			default:
 				logNoSliceEnc(t1, t2)
 				break
-			case reflect.Bool:
+			}
+		case reflect.Float32, reflect.Float64:
+			switch t2.Bits() {
+			case 32:
+				// can just treat them as bits
 				if p.Packed {
-					p.enc = (*Buffer).enc_slice_packed_bool
+					p.enc = (*Buffer).enc_slice_packed_int32
 				} else {
-					p.enc = (*Buffer).enc_slice_bool
+					p.enc = (*Buffer).enc_slice_int32
 				}
-				p.dec = (*Buffer).dec_slice_bool
-				p.packedDec = (*Buffer).dec_slice_packed_bool
-			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
-				switch t2.Bits() {
-				case 32:
-					if p.Packed {
-						p.enc = (*Buffer).enc_slice_packed_int32
-					} else {
-						p.enc = (*Buffer).enc_slice_int32
-					}
-					p.dec = (*Buffer).dec_slice_int32
-					p.packedDec = (*Buffer).dec_slice_packed_int32
-				case 64:
-					if p.Packed {
-						p.enc = (*Buffer).enc_slice_packed_int64
-					} else {
-						p.enc = (*Buffer).enc_slice_int64
-					}
-					p.dec = (*Buffer).dec_slice_int64
-					p.packedDec = (*Buffer).dec_slice_packed_int64
-				case 8:
-					if t2.Kind() == reflect.Uint8 {
-						p.enc = (*Buffer).enc_slice_byte
-						p.dec = (*Buffer).dec_slice_byte
-					}
-				default:
-					logNoSliceEnc(t1, t2)
-					break
+				p.dec = (*Buffer).dec_slice_int32
+				p.packedDec = (*Buffer).dec_slice_packed_int32
+			case 64:
+				// can just treat them as bits
+				if p.Packed {
+					p.enc = (*Buffer).enc_slice_packed_int64
+				} else {
+					p.enc = (*Buffer).enc_slice_int64
 				}
-			case reflect.Float32, reflect.Float64:
-				switch t2.Bits() {
-				case 32:
-					// can just treat them as bits
-					if p.Packed {
-						p.enc = (*Buffer).enc_slice_packed_int32
-					} else {
-						p.enc = (*Buffer).enc_slice_int32
-					}
-					p.dec = (*Buffer).dec_slice_int32
-					p.packedDec = (*Buffer).dec_slice_packed_int32
-				case 64:
-					// can just treat them as bits
-					if p.Packed {
-						p.enc = (*Buffer).enc_slice_packed_int64
-					} else {
-						p.enc = (*Buffer).enc_slice_int64
-					}
-					p.dec = (*Buffer).dec_slice_int64
-					p.packedDec = (*Buffer).dec_slice_packed_int64
-				default:
-					logNoSliceEnc(t1, t2)
-					break
-				}
-			case reflect.String:
-				p.enc = (*Buffer).enc_slice_string
-				p.dec = (*Buffer).dec_slice_string
-			case reflect.Ptr:
-				switch t3 := t2.Elem(); t3.Kind() {
-				default:
-					fmt.Fprintf(os.Stderr, "proto: no ptr oenc for %T -> %T -> %T\n", t1, t2, t3)
-					break
-				case reflect.Struct:
-					p.sstype = t1
-					p.stype = t2.Elem()
-					p.isMarshaler = isMarshaler(t2)
-					p.isUnmarshaler = isUnmarshaler(t2)
-					p.enc = (*Buffer).enc_slice_struct_group
-					p.dec = (*Buffer).dec_slice_struct_group
-					if p.Wire == "bytes" {
-						p.enc = (*Buffer).enc_slice_struct_message
-						p.dec = (*Buffer).dec_slice_struct_message
-					}
-				}
-			case reflect.Slice:
-				switch t2.Elem().Kind() {
-				default:
-					fmt.Fprintf(os.Stderr, "proto: no slice elem oenc for %T -> %T -> %T\n", t1, t2, t2.Elem())
-					break
-				case reflect.Uint8:
-					p.enc = (*Buffer).enc_slice_slice_byte
-					p.dec = (*Buffer).dec_slice_slice_byte
-				}
+				p.dec = (*Buffer).dec_slice_int64
+				p.packedDec = (*Buffer).dec_slice_packed_int64
+			default:
+				logNoSliceEnc(t1, t2)
+				break
+			}
+		case reflect.String:
+			p.enc = (*Buffer).enc_slice_string
+			p.dec = (*Buffer).dec_slice_string
+		case reflect.Ptr:
+			switch t3 := t2.Elem(); t3.Kind() {
+			default:
+				fmt.Fprintf(os.Stderr, "proto: no ptr oenc for %T -> %T -> %T\n", t1, t2, t3)
+				break
 			case reflect.Struct:
-				p.sstype = t1
-				p.stype = t2
+				p.stype = t2.Elem()
 				p.isMarshaler = isMarshaler(t2)
 				p.isUnmarshaler = isUnmarshaler(t2)
-				p.enc = (*Buffer).enc_slice_ref_struct_message
-				p.dec = (*Buffer).dec_slice_ref_struct_message
-				if p.Wire != "bytes" {
-					fmt.Fprintf(os.Stderr, "proto: no ptr oenc for %T -> %T \n", t1, t2)
+				p.enc = (*Buffer).enc_slice_struct_group
+				p.dec = (*Buffer).dec_slice_struct_group
+				if p.Wire == "bytes" {
+					p.enc = (*Buffer).enc_slice_struct_message
+					p.dec = (*Buffer).dec_slice_struct_message
 				}
 			}
+		case reflect.Slice:
+			switch t2.Elem().Kind() {
+			default:
+				fmt.Fprintf(os.Stderr, "proto: no slice elem oenc for %T -> %T -> %T\n", t1, t2, t2.Elem())
+				break
+			case reflect.Uint8:
+				p.enc = (*Buffer).enc_slice_slice_byte
+				p.dec = (*Buffer).dec_slice_slice_byte
+			}
+		case reflect.Struct:
+			p.setSliceOfNonPointerStructs(t1)
 		}
 	}
+	p.setTag(lockGetProp)
+}
 
+func (p *Properties) setTag(lockGetProp bool) {
 	// precalculate tag code
 	wire := p.WireType
 	if p.Packed {

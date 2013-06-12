@@ -36,10 +36,6 @@ install:
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
 
-test:
-	go test ./proto
-	make -C protoc-gen-gogo/testdata test
-
 clean:
 	go clean ./...
 
@@ -53,3 +49,9 @@ regenerate:
 	make -C proto/testdata regenerate
 	make -C test regenerate
 	make -C test/example regenerate
+
+testall:
+	go test -v ./test
+	go test -v ./proto
+	make -C protoc-gen-gogo/testdata test
+

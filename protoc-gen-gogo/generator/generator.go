@@ -1047,10 +1047,9 @@ func (g *Generator) generateImports() {
 		}
 		if _, ok := g.usedPackages[fd.PackageName()]; ok {
 			if strings.Contains(filename, "/") {
-				ss := strings.Split(filename, "/")
-				ss1 := strings.Join(ss[:len(ss)-1], "/")
-				g.P("import ", fd.PackageName(), " ", strconv.Quote(ss1))
-				c[ss1] = true
+				dir, _ := path.Split(filename)
+				g.P("import ", fd.PackageName(), " ", strconv.Quote(path.Clean(dir)))
+				c[path.Clean(dir)] = true
 			} else {
 				g.P("import ", fd.PackageName(), " ", strconv.Quote(filename))
 			}
@@ -1116,9 +1115,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
 	ccPrefix := enum.prefix()
-	filePrefixEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_EnumprefixAll, true)
-	prefixEnabled := proto.GetBoolExtension(enum.Options, gogoproto.E_Enumprefix, filePrefixEnabled)
-	if !prefixEnabled {
+	if !gogoproto.EnabledEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		ccPrefix = ""
 	}
 	g.P("type ", ccTypeName, " int32")
@@ -1455,9 +1452,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	// Reset, String and ProtoMessage methods.
 	g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
-	fileMsgStringMethodEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_MsgstringmethodAll, true)
-	msgStringMethodEnabled := proto.GetBoolExtension(message.DescriptorProto.Options, gogoproto.E_Msgstringmethod, fileMsgStringMethodEnabled)
-	if msgStringMethodEnabled {
+	if gogoproto.EnabledMsgStringMethod(g.file.FileDescriptorProto, message.DescriptorProto) {
 		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
 	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
@@ -1554,9 +1549,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				log.Print("don't know how to generate constant for", fieldname)
 				continue
 			}
-			filePrefixEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_EnumprefixAll, true)
-			prefixEnabled := proto.GetBoolExtension(enum.Options, gogoproto.E_Enumprefix, filePrefixEnabled)
-			if prefixEnabled {
+			if gogoproto.EnabledEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 				def = g.DefaultPackageName(enum) + enum.prefix() + def
 			} else {
 				def = g.DefaultPackageName(enum) + def
@@ -1568,13 +1561,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 	g.P()
 
-	fileGettersEnabled := proto.GetBoolExtension(g.file.FileDescriptorProto.Options, gogoproto.E_GettersAll, true)
-	gettersEnabled := proto.GetBoolExtension(message.DescriptorProto.Options, gogoproto.E_Getters, fileGettersEnabled)
 	// Field getters
 	var getters []getterSymbol
-
 	for _, field := range message.Field {
-		if !gettersEnabled {
+		if !gogoproto.HasGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
 			break
 		}
 		if !gogoproto.IsNullable(field) ||

@@ -86,8 +86,10 @@ var SizeTests = []struct {
 	{"repeated int32", &pb.MoreRepeated{Ints: []int32{1, 12203, 1729}}},
 	{"repeated int32 packed", &pb.MoreRepeated{IntsPacked: []int32{1, 12203, 1729}}},
 	{"repeated string", &pb.MoreRepeated{Strings: []string{"r", "ken", "gri"}}},
+	{"repeated fixed", &pb.MoreRepeated{Fixeds: []uint32{1, 2, 3, 4}}},
 	// Nested.
 	{"nested", &pb.OldMessage{Nested: &pb.OldMessage_Nested{Name: String("whatever")}}},
+	{"group", &pb.GroupOld{G: &pb.GroupOld_G{X: Int32(12345)}}},
 	// Other things.
 	{"unrecognized", &pb.MoreRepeated{XXX_unrecognized: []byte{13<<3 | 0, 4}}},
 	{"extension (unencoded)", messageWithExtension1},
