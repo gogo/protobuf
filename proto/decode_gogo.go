@@ -83,7 +83,7 @@ func (o *Buffer) dec_ref_struct_message(p *Properties, base structPointer) (err 
 	}
 
 	// If the object can unmarshal itself, let it.
-	if p.isMarshaler {
+	if p.isUnmarshaler {
 		panic("not supported, since this is a pointer receiver")
 	}
 

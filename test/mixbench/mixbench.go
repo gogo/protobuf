@@ -1,0 +1,101 @@
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// http://code.google.com/p/gogoprotobuf/gogoproto
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"os/exec"
+	"strings"
+)
+
+type MixMatch struct {
+	Old []string
+	New []string
+}
+
+func (this *MixMatch) Regenerate() {
+	fmt.Printf("mixbench\n")
+	data, err := ioutil.ReadFile("../thetest.proto")
+	if err != nil {
+		panic(err)
+	}
+	content := string(data)
+	for i, old := range this.Old {
+		content = strings.Replace(content, old, this.New[i], -1)
+	}
+	if err := ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
+		panic(err)
+	}
+	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../../../../:.", "./testdata/thetest.proto")
+	fmt.Printf("regenerating\n")
+	out, err := regenerate.CombinedOutput()
+	fmt.Printf("regenerate output: %v\n", string(out))
+	if err != nil {
+		panic(err)
+	}
+}
+
+func (this *MixMatch) Bench(rgx string, outFileName string) {
+	this.Regenerate()
+	var test = exec.Command("go", "test", "-test.timeout=20m", "-test.v", "-test.run=XXX", "-test.bench="+rgx, "./testdata/")
+	fmt.Printf("benching\n")
+	out, err := test.CombinedOutput()
+	fmt.Printf("bench output: %v\n", string(out))
+	if err != nil {
+		panic(err)
+	}
+	if err := ioutil.WriteFile(outFileName, out, 0666); err != nil {
+		panic(err)
+	}
+}
+
+func NewMixMatch(marshaler bool, unmarshaler bool) *MixMatch {
+	mm := &MixMatch{}
+	if marshaler {
+		mm.Old = append(mm.Old, "option (gogoproto.marshaler_all) = false;")
+		mm.New = append(mm.New, "option (gogoproto.marshaler_all) = true;")
+	} else {
+		mm.Old = append(mm.Old, "option (gogoproto.marshaler_all) = true;")
+		mm.New = append(mm.New, "option (gogoproto.marshaler_all) = false;")
+	}
+	if unmarshaler {
+		mm.Old = append(mm.Old, "option (gogoproto.unmarshaler_all) = false;")
+		mm.New = append(mm.New, "option (gogoproto.unmarshaler_all) = true;")
+	} else {
+		mm.Old = append(mm.Old, "option (gogoproto.unmarshaler_all) = true;")
+		mm.New = append(mm.New, "option (gogoproto.unmarshaler_all) = false;")
+	}
+	return mm
+}
+
+func main() {
+	NewMixMatch(true, true).Bench("ProtoMarshal", "marshaler.txt")
+	NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
+	NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
+	NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
+}

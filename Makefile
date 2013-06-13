@@ -29,14 +29,15 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-all:	clean nuke install regenerate reinstall testall
-
 install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
 
+all:	reinstall regenerate install tests
+
 reinstall:
+	go clean -i ./...
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
@@ -59,11 +60,21 @@ regenerate:
 	make -C test/example regenerate
 	gofmt -l -s -w .
 
+tests:
+	go test -v ./test
+	go test -v ./proto
+	go test -v ./test/embedconflict
+	make -C protoc-gen-gogo/testdata test
+
 testall:
 	go test -v ./test/example
 	go test -v ./test
 	go test -v ./proto
 	go test -v ./test/embedconflict
-	go test -v ./test/example
 	make -C protoc-gen-gogo/testdata test
+	go test -v ./test/mixmatch
+
+bench:
+	(cd test/mixbench && go build .)
+	(cd test/mixbench && ./mixbench)
 

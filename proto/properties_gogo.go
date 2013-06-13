@@ -68,8 +68,8 @@ func (p *Properties) setNonNullableEncAndDec(typ reflect.Type) bool {
 		p.enc = (*Buffer).enc_ref_string
 	case reflect.Struct:
 		p.stype = typ
-		p.isMarshaler = isMarshaler(reflect.PtrTo(typ))
-		p.isUnmarshaler = isUnmarshaler(reflect.PtrTo(typ))
+		p.isMarshaler = isMarshaler(typ)
+		p.isUnmarshaler = isUnmarshaler(typ)
 		if p.Wire == "bytes" {
 			p.enc = (*Buffer).enc_ref_struct_message
 			p.dec = (*Buffer).dec_ref_struct_message
