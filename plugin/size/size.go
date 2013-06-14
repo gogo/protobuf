@@ -288,6 +288,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 			}
 		}
+		p.P(`if m.XXX_unrecognized != nil {`)
+		p.In()
+		p.P(`n+=len(m.XXX_unrecognized)`)
+		p.Out()
+		p.P(`}`)
 		p.P(`return n`)
 		p.Out()
 		p.P(`}`)

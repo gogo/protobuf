@@ -58,12 +58,14 @@ regenerate:
 	make -C proto/testdata regenerate
 	make -C test regenerate
 	make -C test/example regenerate
+	make -C test/unrecognized regenerate
 	gofmt -l -s -w .
 
 tests:
 	go test -v ./test
 	go test -v ./proto
 	go test -v ./test/embedconflict
+	go test -v ./test/unrecognized
 	make -C protoc-gen-gogo/testdata test
 
 testall:
@@ -71,6 +73,7 @@ testall:
 	go test -v ./test
 	go test -v ./proto
 	go test -v ./test/embedconflict
+	go test -v ./test/unrecognized
 	make -C protoc-gen-gogo/testdata test
 	go test -v ./test/mixmatch
 

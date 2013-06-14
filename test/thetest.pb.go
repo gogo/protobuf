@@ -1291,6 +1291,9 @@ func (m *NidOptNative) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = len(m.Field15)
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinOptNative) Size() (n int) {
@@ -1342,6 +1345,9 @@ func (m *NinOptNative) Size() (n int) {
 	if m.Field15 != nil {
 		l = len(m.Field15)
 		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1411,6 +1417,9 @@ func (m *NidRepNative) Size() (n int) {
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinRepNative) Size() (n int) {
@@ -1478,6 +1487,9 @@ func (m *NinRepNative) Size() (n int) {
 			l = len(b)
 			n += 1 + l + sovThetest(uint64(l))
 		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1547,6 +1559,9 @@ func (m *NidRepPackedNative) Size() (n int) {
 	if m.Field13 != nil {
 		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinRepPackedNative) Size() (n int) {
@@ -1615,6 +1630,9 @@ func (m *NinRepPackedNative) Size() (n int) {
 	if m.Field13 != nil {
 		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NidOptStruct) Size() (n int) {
@@ -1635,6 +1653,9 @@ func (m *NidOptStruct) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = len(m.Field15)
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinOptStruct) Size() (n int) {
@@ -1674,6 +1695,9 @@ func (m *NinOptStruct) Size() (n int) {
 	if m.Field15 != nil {
 		l = len(m.Field15)
 		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1729,6 +1753,9 @@ func (m *NidRepStruct) Size() (n int) {
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinRepStruct) Size() (n int) {
@@ -1783,6 +1810,9 @@ func (m *NinRepStruct) Size() (n int) {
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NidEmbeddedStruct) Size() (n int) {
@@ -1795,6 +1825,9 @@ func (m *NidEmbeddedStruct) Size() (n int) {
 	l = m.Field200.Size()
 	n += 2 + l + sovThetest(uint64(l))
 	n += 3
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinEmbeddedStruct) Size() (n int) {
@@ -1811,6 +1844,9 @@ func (m *NinEmbeddedStruct) Size() (n int) {
 	if m.Field210 != nil {
 		n += 3
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NidNestedStruct) Size() (n int) {
@@ -1823,6 +1859,9 @@ func (m *NidNestedStruct) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1839,6 +1878,9 @@ func (m *NinNestedStruct) Size() (n int) {
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NidOptCustom) Size() (n int) {
@@ -1848,6 +1890,9 @@ func (m *NidOptCustom) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = m.Value.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinOptCustom) Size() (n int) {
@@ -1860,6 +1905,9 @@ func (m *NinOptCustom) Size() (n int) {
 	if m.Value != nil {
 		l = m.Value.Size()
 		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1878,6 +1926,9 @@ func (m *NidRepCustom) Size() (n int) {
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinRepCustom) Size() (n int) {
@@ -1894,6 +1945,9 @@ func (m *NinRepCustom) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1928,6 +1982,9 @@ func (m *NinOptNativeUnion) Size() (n int) {
 	if m.Field15 != nil {
 		l = len(m.Field15)
 		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1965,6 +2022,9 @@ func (m *NinOptStructUnion) Size() (n int) {
 		l = len(m.Field15)
 		n += 1 + l + sovThetest(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinEmbeddedStructUnion) Size() (n int) {
@@ -1980,6 +2040,9 @@ func (m *NinEmbeddedStructUnion) Size() (n int) {
 	}
 	if m.Field210 != nil {
 		n += 3
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1998,6 +2061,9 @@ func (m *NinNestedStructUnion) Size() (n int) {
 		l = m.Field3.Size()
 		n += 1 + l + sovThetest(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *Tree) Size() (n int) {
@@ -2015,6 +2081,9 @@ func (m *Tree) Size() (n int) {
 		l = m.Leaf.Size()
 		n += 1 + l + sovThetest(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *OrBranch) Size() (n int) {
@@ -2024,6 +2093,9 @@ func (m *OrBranch) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = m.Right.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *AndBranch) Size() (n int) {
@@ -2033,6 +2105,9 @@ func (m *AndBranch) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = m.Right.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *Leaf) Size() (n int) {
@@ -2041,6 +2116,9 @@ func (m *Leaf) Size() (n int) {
 	n += 1 + sovThetest(uint64(m.Value))
 	l = len([]byte(m.StrValue))
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *DeepTree) Size() (n int) {
@@ -2058,6 +2136,9 @@ func (m *DeepTree) Size() (n int) {
 		l = m.Leaf.Size()
 		n += 1 + l + sovThetest(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *ADeepBranch) Size() (n int) {
@@ -2065,6 +2146,9 @@ func (m *ADeepBranch) Size() (n int) {
 	_ = l
 	l = m.Down.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *AndDeepBranch) Size() (n int) {
@@ -2074,6 +2158,9 @@ func (m *AndDeepBranch) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = m.Right.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *DeepLeaf) Size() (n int) {
@@ -2081,17 +2168,26 @@ func (m *DeepLeaf) Size() (n int) {
 	_ = l
 	l = m.Tree.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *Nil) Size() (n int) {
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NidOptEnum) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sovThetest(uint64(m.Field1))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinOptEnum) Size() (n int) {
@@ -2099,6 +2195,9 @@ func (m *NinOptEnum) Size() (n int) {
 	_ = l
 	if m.Field1 != nil {
 		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2110,6 +2209,9 @@ func (m *NidRepEnum) Size() (n int) {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *NinRepEnum) Size() (n int) {
@@ -2120,6 +2222,9 @@ func (m *NinRepEnum) Size() (n int) {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 func (m *Timer) Size() (n int) {
@@ -2129,6 +2234,9 @@ func (m *Timer) Size() (n int) {
 	n += 9
 	l = len(m.Data)
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 
