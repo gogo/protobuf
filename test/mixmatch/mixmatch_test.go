@@ -29,6 +29,7 @@ package mixbench
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"strings"
 	"testing"
@@ -62,12 +63,18 @@ func (this MixMatch) Regenerate() {
 }
 
 func (this MixMatch) Test(t *testing.T) {
+	if err := os.MkdirAll("./testdata", 0777); err != nil {
+		panic(err)
+	}
 	this.Regenerate()
 	var test = exec.Command("go", "test", "-v", "./testdata/")
 	fmt.Printf("testing\n")
 	out, err := test.CombinedOutput()
 	fmt.Printf("test output: %v\n", string(out))
 	if err != nil {
+		panic(err)
+	}
+	if err := os.RemoveAll("./testdata"); err != nil {
 		panic(err)
 	}
 }

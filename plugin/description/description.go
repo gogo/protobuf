@@ -108,15 +108,23 @@ func (p *plugin) Init(g *generator.Generator) {
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
+	localName := generator.FileName(file)
 	for _, message := range file.Messages() {
 		if !gogoproto.HasDescription(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
 		p.used = true
+		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		p.P(`func (this *`, ccTypeName, `) Description() (desc *google_protobuf.FileDescriptorSet) {`)
+		p.In()
+		p.P(`return `, localName, `Description()`)
+		p.Out()
+		p.P(`}`)
 	}
 
 	if p.used {
-		p.P(`func Description() (desc *google_protobuf.FileDescriptorSet) {`)
+
+		p.P(`func `, localName, `Description() (desc *google_protobuf.FileDescriptorSet) {`)
 		p.In()
 		s := fmt.Sprintf("%#v", p.Generator.AllFiles())
 		p.P(`return `, s)

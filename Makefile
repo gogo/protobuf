@@ -48,7 +48,7 @@ clean:
 nuke:
 	go clean -i ./...
 
-fmt:
+gofmt:
 	gofmt -l -s -w .
 
 regenerate:

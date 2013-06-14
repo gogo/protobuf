@@ -29,6 +29,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -61,6 +62,9 @@ func (this *MixMatch) Regenerate() {
 }
 
 func (this *MixMatch) Bench(rgx string, outFileName string) {
+	if err := os.MkdirAll("./testdata", 0777); err != nil {
+		panic(err)
+	}
 	this.Regenerate()
 	var test = exec.Command("go", "test", "-test.timeout=20m", "-test.v", "-test.run=XXX", "-test.bench="+rgx, "./testdata/")
 	fmt.Printf("benching\n")
@@ -70,6 +74,9 @@ func (this *MixMatch) Bench(rgx string, outFileName string) {
 		panic(err)
 	}
 	if err := ioutil.WriteFile(outFileName, out, 0666); err != nil {
+		panic(err)
+	}
+	if err := os.RemoveAll("./testdata"); err != nil {
 		panic(err)
 	}
 }
@@ -98,4 +105,7 @@ func main() {
 	NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
 	NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
 	NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
+	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
+	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
+	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")
 }

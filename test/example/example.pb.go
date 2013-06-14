@@ -682,7 +682,10 @@ func (this *U) Equal(that interface{}) bool {
 	}
 	return true
 }
-func Description() (desc *google_protobuf.FileDescriptorSet) {
+func (this *B) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ExampleDescription()
+}
+func ExampleDescription() (desc *google_protobuf.FileDescriptorSet) {
 	return &google_protobuf.FileDescriptorSet{File: []*google_protobuf.FileDescriptorProto{{Name: func(v string) *string { return &v }("code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto"), Package: func(v string) *string { return &v }("google.protobuf"), Dependency: []string(nil), PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("FileDescriptorSet"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("file"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
