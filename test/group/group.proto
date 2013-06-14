@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package unrecognized;
+package group;
 
 import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
 
@@ -45,44 +45,17 @@ option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 
-message A {
-	optional int64 Field1 = 2;
-	repeated B B = 1;
+message Groups1 {
+  repeated group G = 1 {
+    optional int64 Field1 = 1;
+    optional double Field2 = 2;
+  }
 }
 
-message B {
-	optional C C = 1;
-	optional D D = 2;
-	optional OldC F = 5;
+message Groups2 {
+  optional group G = 1 {
+    optional int64 Field1 = 1;
+    repeated double Field2 = 2;
+  }
 }
 
-message D {
-	optional int64 Field1 = 1;
-}
-
-message C {
-	optional double Field2 = 2;
-	optional string Field3 = 3;
-	optional double Field4 = 4;
-	repeated bytes Field5 = 5;
-	optional int64 Field6 = 6;
-	repeated float Field7 = 7;
-}
-
-message OldA {
-	optional int64 Field1 = 2;
-	repeated OldB B = 1;
-}
-
-message OldB {
-	optional OldC C = 1;
-	optional OldC F = 5;
-}
-
-message OldC {
-	optional int64 Field1 = 1;
-	optional double Field2 = 2;
-	optional string Field3 = 3;
-	optional int64 Field6 = 6;
-	repeated float Field7 = 7;
-}

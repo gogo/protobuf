@@ -50,6 +50,13 @@ func (d *Descriptor) IsGroup() bool {
 	return d.group
 }
 
+func (g *Generator) IsGroup(field *descriptor.FieldDescriptorProto) bool {
+	if d, ok := g.typeNameToObject[field.GetTypeName()].(*Descriptor); ok {
+		return d.IsGroup()
+	}
+	return false
+}
+
 func (g *Generator) TypeNameByObject(typeName string) Object {
 	o, ok := g.typeNameToObject[typeName]
 	if !ok {

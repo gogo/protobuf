@@ -176,7 +176,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 		fieldname = generator.EmbedFieldName(goTyp)
 	}
 	goTypName := generator.GoTypeToName(goTyp)
-	if field.IsMessage() {
+	if field.IsMessage() || p.IsGroup(field) {
 		funcName := "NewPopulated" + goTypName
 		goTypNames := strings.Split(goTypName, ".")
 		if len(goTypNames) == 2 {
@@ -315,7 +315,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 }
 
 func (p *plugin) hasLoop(field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor) *generator.Descriptor {
-	if field.IsMessage() {
+	if field.IsMessage() || p.IsGroup(field) {
 		fieldMessage := p.ObjectNamed(field.GetTypeName()).(*generator.Descriptor)
 		fieldTypeName := generator.CamelCaseSlice(fieldMessage.TypeName())
 		for _, message := range visited {

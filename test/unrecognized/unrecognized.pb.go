@@ -12,6 +12,7 @@ import math "math"
 
 import io "io"
 import math1 "math"
+import errors "errors"
 
 import fmt "fmt"
 import strings "strings"
@@ -24,6 +25,7 @@ import strings1 "strings"
 import reflect1 "reflect"
 
 import fmt2 "fmt"
+import bytes "bytes"
 
 import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 
@@ -44,6 +46,7 @@ func (*A) ProtoMessage() {}
 type B struct {
 	C                *C     `protobuf:"bytes,1,opt" json:"C,omitempty"`
 	D                *D     `protobuf:"bytes,2,opt" json:"D,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -59,9 +62,13 @@ func (m *D) Reset()      { *m = D{} }
 func (*D) ProtoMessage() {}
 
 type C struct {
-	Field2           *float64 `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
-	Field3           *string  `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field2           *float64  `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
+	Field4           *float64  `protobuf:"fixed64,4,opt" json:"Field4,omitempty"`
+	Field5           [][]byte  `protobuf:"bytes,5,rep" json:"Field5,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep" json:"Field7,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
 }
 
 func (m *C) Reset()      { *m = C{} }
@@ -78,6 +85,7 @@ func (*OldA) ProtoMessage() {}
 
 type OldB struct {
 	C                *OldC  `protobuf:"bytes,1,opt" json:"C,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -85,10 +93,12 @@ func (m *OldB) Reset()      { *m = OldB{} }
 func (*OldB) ProtoMessage() {}
 
 type OldC struct {
-	Field1           *int64   `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	Field2           *float64 `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
-	Field3           *string  `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field1           *int64    `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field2           *float64  `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep" json:"Field7,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
 }
 
 func (m *OldC) Reset()      { *m = OldC{} }
@@ -194,7 +204,43 @@ func (m *A) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -274,6 +320,31 @@ func (m *B) Unmarshal(data []byte) error {
 				return err
 			}
 			index = postIndex
+		case 5:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.F = &OldC{}
+			if err := m.F.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
 		default:
 			key := uint32(fieldNum)<<3 | uint32(wireType)
 			for key > 127 {
@@ -313,7 +384,43 @@ func (m *B) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -399,7 +506,43 @@ func (m *D) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -472,6 +615,81 @@ func (m *C) Unmarshal(data []byte) error {
 			s := string(data[index:postIndex])
 			m.Field3 = &s
 			index = postIndex
+		case 4:
+			if wireType != 1 {
+				return proto.ErrWrongType
+			}
+			var v uint64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint64(data[i-8])
+			v |= uint64(data[i-7]) << 8
+			v |= uint64(data[i-6]) << 16
+			v |= uint64(data[i-5]) << 24
+			v |= uint64(data[i-4]) << 32
+			v |= uint64(data[i-3]) << 40
+			v |= uint64(data[i-2]) << 48
+			v |= uint64(data[i-1]) << 56
+			v2 := math1.Float64frombits(v)
+			m.Field4 = &v2
+		case 5:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field5 = append(m.Field5, data[index:postIndex])
+			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field7 = append(m.Field7, v2)
 		default:
 			key := uint32(fieldNum)<<3 | uint32(wireType)
 			for key > 127 {
@@ -511,7 +729,43 @@ func (m *C) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -620,7 +874,43 @@ func (m *OldA) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -675,6 +965,31 @@ func (m *OldB) Unmarshal(data []byte) error {
 				return err
 			}
 			index = postIndex
+		case 5:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.F = &OldC{}
+			if err := m.F.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
 		default:
 			key := uint32(fieldNum)<<3 | uint32(wireType)
 			for key > 127 {
@@ -714,7 +1029,43 @@ func (m *OldB) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -804,6 +1155,39 @@ func (m *OldC) Unmarshal(data []byte) error {
 			s := string(data[index:postIndex])
 			m.Field3 = &s
 			index = postIndex
+		case 6:
+			if wireType != 0 {
+				return proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 5 {
+				return proto.ErrWrongType
+			}
+			var v uint32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = uint32(data[i-4])
+			v |= uint32(data[i-3]) << 8
+			v |= uint32(data[i-2]) << 16
+			v |= uint32(data[i-1]) << 24
+			v2 := math1.Float32frombits(v)
+			m.Field7 = append(m.Field7, v2)
 		default:
 			key := uint32(fieldNum)<<3 | uint32(wireType)
 			for key > 127 {
@@ -843,7 +1227,43 @@ func (m *OldC) Unmarshal(data []byte) error {
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
 				index += length
 			case 3:
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
+				index += length
+				for {
+					if index >= l {
+						return io.ErrUnexpectedEOF
+					}
+					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
 			case 4:
+				return errors.New("unexpected end of group")
 			case 5:
 				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
 				index += 4
@@ -872,6 +1292,7 @@ func (this *B) String() string {
 	s := strings.Join([]string{`&B{`,
 		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "C", "C", 1) + `,`,
 		`D:` + strings.Replace(fmt.Sprintf("%v", this.D), "D", "D", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -893,6 +1314,10 @@ func (this *C) String() string {
 	s := strings.Join([]string{`&C{`,
 		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`Field4:` + valueToStringUnrecognized(this.Field4) + `,`,
+		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
+		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -914,6 +1339,7 @@ func (this *OldB) String() string {
 	}
 	s := strings.Join([]string{`&OldB{`,
 		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -926,6 +1352,8 @@ func (this *OldC) String() string {
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
 		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -966,6 +1394,10 @@ func (m *B) Size() (n int) {
 		l = m.D.Size()
 		n += 1 + l + sovUnrecognized(uint64(l))
 	}
+	if m.F != nil {
+		l = m.F.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -991,6 +1423,21 @@ func (m *C) Size() (n int) {
 	if m.Field3 != nil {
 		l = len([]byte(*m.Field3))
 		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.Field4 != nil {
+		n += 9
+	}
+	if m.Field5 != nil {
+		for _, b := range m.Field5 {
+			l = len(b)
+			n += 1 + l + sovUnrecognized(uint64(l))
+		}
+	}
+	if m.Field6 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 5 * len(m.Field7)
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -1021,6 +1468,10 @@ func (m *OldB) Size() (n int) {
 		l = m.C.Size()
 		n += 1 + l + sovUnrecognized(uint64(l))
 	}
+	if m.F != nil {
+		l = m.F.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1038,6 +1489,12 @@ func (m *OldC) Size() (n int) {
 	if m.Field3 != nil {
 		l = len([]byte(*m.Field3))
 		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 5 * len(m.Field7)
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -1083,6 +1540,9 @@ func NewPopulatedB(r randyUnrecognized) *B {
 	if r.Intn(10) != 0 {
 		this.D = NewPopulatedD(r)
 	}
+	if r.Intn(10) != 0 {
+		this.F = NewPopulatedOldC(r)
+	}
 	return this
 }
 
@@ -1105,19 +1565,45 @@ func NewPopulatedC(r randyUnrecognized) *C {
 		v5 := randStringUnrecognized(r)
 		this.Field3 = &v5
 	}
+	if r.Intn(10) != 0 {
+		v6 := r.Float64()
+		this.Field4 = &v6
+	}
+	if r.Intn(10) != 0 {
+		v7 := r.Intn(100)
+		this.Field5 = make([][]byte, v7)
+		for i := 0; i < v7; i++ {
+			v8 := r.Intn(100)
+			this.Field5[i] = make([]byte, v8)
+			for j := 0; j < v8; j++ {
+				this.Field5[i][j] = byte(r.Intn(256))
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v9 := r.Int63()
+		this.Field6 = &v9
+	}
+	if r.Intn(10) != 0 {
+		v10 := r.Intn(100)
+		this.Field7 = make([]float32, v10)
+		for i := 0; i < v10; i++ {
+			this.Field7[i] = r.Float32()
+		}
+	}
 	return this
 }
 
 func NewPopulatedOldA(r randyUnrecognized) *OldA {
 	this := &OldA{}
 	if r.Intn(10) != 0 {
-		v6 := r.Int63()
-		this.Field1 = &v6
+		v11 := r.Int63()
+		this.Field1 = &v11
 	}
 	if r.Intn(10) != 0 {
-		v7 := r.Intn(10)
-		this.B = make([]*OldB, v7)
-		for i := 0; i < v7; i++ {
+		v12 := r.Intn(10)
+		this.B = make([]*OldB, v12)
+		for i := 0; i < v12; i++ {
 			this.B[i] = NewPopulatedOldB(r)
 		}
 	}
@@ -1129,22 +1615,36 @@ func NewPopulatedOldB(r randyUnrecognized) *OldB {
 	if r.Intn(10) != 0 {
 		this.C = NewPopulatedOldC(r)
 	}
+	if r.Intn(10) != 0 {
+		this.F = NewPopulatedOldC(r)
+	}
 	return this
 }
 
 func NewPopulatedOldC(r randyUnrecognized) *OldC {
 	this := &OldC{}
 	if r.Intn(10) != 0 {
-		v8 := r.Int63()
-		this.Field1 = &v8
+		v13 := r.Int63()
+		this.Field1 = &v13
 	}
 	if r.Intn(10) != 0 {
-		v9 := r.Float64()
-		this.Field2 = &v9
+		v14 := r.Float64()
+		this.Field2 = &v14
 	}
 	if r.Intn(10) != 0 {
-		v10 := randStringUnrecognized(r)
-		this.Field3 = &v10
+		v15 := randStringUnrecognized(r)
+		this.Field3 = &v15
+	}
+	if r.Intn(10) != 0 {
+		v16 := r.Int63()
+		this.Field6 = &v16
+	}
+	if r.Intn(10) != 0 {
+		v17 := r.Intn(100)
+		this.Field7 = make([]float32, v17)
+		for i := 0; i < v17; i++ {
+			this.Field7[i] = r.Float32()
+		}
 	}
 	return this
 }
@@ -1166,9 +1666,9 @@ func randUTF8RuneUnrecognized(r randyUnrecognized) rune {
 	return res
 }
 func randStringUnrecognized(r randyUnrecognized) string {
-	v11 := r.Intn(100)
-	tmps := make([]rune, v11)
-	for i := 0; i < v11; i++ {
+	v18 := r.Intn(100)
+	tmps := make([]rune, v18)
+	for i := 0; i < v18; i++ {
 		tmps[i] = randUTF8RuneUnrecognized(r)
 	}
 	return string(tmps)
@@ -1274,6 +1774,23 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 		}
 		i += n3
 	}
+	if m.F != nil {
+		data[i] = 0x2a
+		i++
+		l = m.F.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n4, err := m.F.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n4
+	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
 		i += len(m.XXX_unrecognized)
@@ -1298,13 +1815,13 @@ func (m *D) MarshalTo(data []byte) (n int, err error) {
 	if m.Field1 != nil {
 		data[i] = 0x8
 		i++
-		x4 := uint64(*m.Field1)
-		for x4 >= 1<<7 {
-			data[i] = uint8(uint64(x4)&0x7f | 0x80)
-			x4 >>= 7
+		x5 := uint64(*m.Field1)
+		for x5 >= 1<<7 {
+			data[i] = uint8(uint64(x5)&0x7f | 0x80)
+			x5 >>= 7
 			i++
 		}
-		data[i] = uint8(x4)
+		data[i] = uint8(x5)
 		i++
 	}
 	if m.XXX_unrecognized != nil {
@@ -1331,27 +1848,27 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 	if m.Field2 != nil {
 		data[i] = 0x11
 		i++
-		f5 := math2.Float64bits(*m.Field2)
-		data[i] = uint8(f5)
+		f6 := math2.Float64bits(*m.Field2)
+		data[i] = uint8(f6)
 		i++
-		data[i] = uint8(f5 >> 8)
+		data[i] = uint8(f6 >> 8)
 		i++
-		data[i] = uint8(f5 >> 16)
+		data[i] = uint8(f6 >> 16)
 		i++
-		data[i] = uint8(f5 >> 24)
+		data[i] = uint8(f6 >> 24)
 		i++
-		data[i] = uint8(f5 >> 32)
+		data[i] = uint8(f6 >> 32)
 		i++
-		data[i] = uint8(f5 >> 40)
+		data[i] = uint8(f6 >> 40)
 		i++
-		data[i] = uint8(f5 >> 48)
+		data[i] = uint8(f6 >> 48)
 		i++
-		data[i] = uint8(f5 >> 56)
+		data[i] = uint8(f6 >> 56)
 		i++
 	}
 	if m.Field3 != nil {
-		s6 := []byte(*m.Field3)
-		l = len(s6)
+		s7 := []byte(*m.Field3)
+		l = len(s7)
 		data[i] = 0x1a
 		i++
 		for l >= 1<<7 {
@@ -1361,8 +1878,72 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		}
 		data[i] = uint8(l)
 		i++
-		copy(data[i:], s6)
-		i += len(s6)
+		copy(data[i:], s7)
+		i += len(s7)
+	}
+	if m.Field4 != nil {
+		data[i] = 0x21
+		i++
+		f8 := math2.Float64bits(*m.Field4)
+		data[i] = uint8(f8)
+		i++
+		data[i] = uint8(f8 >> 8)
+		i++
+		data[i] = uint8(f8 >> 16)
+		i++
+		data[i] = uint8(f8 >> 24)
+		i++
+		data[i] = uint8(f8 >> 32)
+		i++
+		data[i] = uint8(f8 >> 40)
+		i++
+		data[i] = uint8(f8 >> 48)
+		i++
+		data[i] = uint8(f8 >> 56)
+		i++
+	}
+	if m.Field5 != nil {
+		for _, b := range m.Field5 {
+			l = len(b)
+			data[i] = 0x2a
+			i++
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			copy(data[i:], b)
+			i += len(b)
+		}
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x9 := uint64(*m.Field6)
+		for x9 >= 1<<7 {
+			data[i] = uint8(uint64(x9)&0x7f | 0x80)
+			x9 >>= 7
+			i++
+		}
+		data[i] = uint8(x9)
+		i++
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x3d
+			i++
+			f10 := math2.Float32bits(num)
+			data[i] = uint8(f10)
+			i++
+			data[i] = uint8(f10 >> 8)
+			i++
+			data[i] = uint8(f10 >> 16)
+			i++
+			data[i] = uint8(f10 >> 24)
+			i++
+		}
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
@@ -1388,13 +1969,13 @@ func (m *OldA) MarshalTo(data []byte) (n int, err error) {
 	if m.Field1 != nil {
 		data[i] = 0x10
 		i++
-		x7 := uint64(*m.Field1)
-		for x7 >= 1<<7 {
-			data[i] = uint8(uint64(x7)&0x7f | 0x80)
-			x7 >>= 7
+		x11 := uint64(*m.Field1)
+		for x11 >= 1<<7 {
+			data[i] = uint8(uint64(x11)&0x7f | 0x80)
+			x11 >>= 7
 			i++
 		}
-		data[i] = uint8(x7)
+		data[i] = uint8(x11)
 		i++
 	}
 	if m.B != nil {
@@ -1448,11 +2029,28 @@ func (m *OldB) MarshalTo(data []byte) (n int, err error) {
 		}
 		data[i] = uint8(l)
 		i++
-		n8, err := m.C.MarshalTo(data[i:])
+		n12, err := m.C.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n8
+		i += n12
+	}
+	if m.F != nil {
+		data[i] = 0x2a
+		i++
+		l = m.F.Size()
+		for l >= 1<<7 {
+			data[i] = uint8(uint64(l)&0x7f | 0x80)
+			l >>= 7
+			i++
+		}
+		data[i] = uint8(l)
+		i++
+		n13, err := m.F.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n13
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
@@ -1478,39 +2076,39 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 	if m.Field1 != nil {
 		data[i] = 0x8
 		i++
-		x9 := uint64(*m.Field1)
-		for x9 >= 1<<7 {
-			data[i] = uint8(uint64(x9)&0x7f | 0x80)
-			x9 >>= 7
+		x14 := uint64(*m.Field1)
+		for x14 >= 1<<7 {
+			data[i] = uint8(uint64(x14)&0x7f | 0x80)
+			x14 >>= 7
 			i++
 		}
-		data[i] = uint8(x9)
+		data[i] = uint8(x14)
 		i++
 	}
 	if m.Field2 != nil {
 		data[i] = 0x11
 		i++
-		f10 := math2.Float64bits(*m.Field2)
-		data[i] = uint8(f10)
+		f15 := math2.Float64bits(*m.Field2)
+		data[i] = uint8(f15)
 		i++
-		data[i] = uint8(f10 >> 8)
+		data[i] = uint8(f15 >> 8)
 		i++
-		data[i] = uint8(f10 >> 16)
+		data[i] = uint8(f15 >> 16)
 		i++
-		data[i] = uint8(f10 >> 24)
+		data[i] = uint8(f15 >> 24)
 		i++
-		data[i] = uint8(f10 >> 32)
+		data[i] = uint8(f15 >> 32)
 		i++
-		data[i] = uint8(f10 >> 40)
+		data[i] = uint8(f15 >> 40)
 		i++
-		data[i] = uint8(f10 >> 48)
+		data[i] = uint8(f15 >> 48)
 		i++
-		data[i] = uint8(f10 >> 56)
+		data[i] = uint8(f15 >> 56)
 		i++
 	}
 	if m.Field3 != nil {
-		s11 := []byte(*m.Field3)
-		l = len(s11)
+		s16 := []byte(*m.Field3)
+		l = len(s16)
 		data[i] = 0x1a
 		i++
 		for l >= 1<<7 {
@@ -1520,8 +2118,35 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 		}
 		data[i] = uint8(l)
 		i++
-		copy(data[i:], s11)
-		i += len(s11)
+		copy(data[i:], s16)
+		i += len(s16)
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		x17 := uint64(*m.Field6)
+		for x17 >= 1<<7 {
+			data[i] = uint8(uint64(x17)&0x7f | 0x80)
+			x17 >>= 7
+			i++
+		}
+		data[i] = uint8(x17)
+		i++
+	}
+	if m.Field7 != nil {
+		for _, num := range m.Field7 {
+			data[i] = 0x3d
+			i++
+			f18 := math2.Float32bits(num)
+			data[i] = uint8(f18)
+			i++
+			data[i] = uint8(f18 >> 8)
+			i++
+			data[i] = uint8(f18 >> 16)
+			i++
+			data[i] = uint8(f18 >> 24)
+			i++
+		}
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
@@ -1540,7 +2165,7 @@ func (this *B) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.B{` + `C:` + fmt1.Sprintf("%#v", this.C), `D:` + fmt1.Sprintf("%#v", this.D) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.B{` + `C:` + fmt1.Sprintf("%#v", this.C), `D:` + fmt1.Sprintf("%#v", this.D), `F:` + fmt1.Sprintf("%#v", this.F) + `}`}, ", ")
 	return s
 }
 func (this *D) GoString() string {
@@ -1554,7 +2179,7 @@ func (this *C) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.C{` + `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string") + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.C{` + `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7) + `}`}, ", ")
 	return s
 }
 func (this *OldA) GoString() string {
@@ -1568,14 +2193,14 @@ func (this *OldB) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldB{` + `C:` + fmt1.Sprintf("%#v", this.C) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.OldB{` + `C:` + fmt1.Sprintf("%#v", this.C), `F:` + fmt1.Sprintf("%#v", this.F) + `}`}, ", ")
 	return s
 }
 func (this *OldC) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldC{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string") + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.OldC{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnrecognized(v interface{}, typ string) string {
@@ -1690,6 +2315,9 @@ func (this *B) VerboseEqual(that interface{}) error {
 	if !this.D.Equal(that1.D) {
 		return fmt2.Errorf("D this(%v) Not Equal that(%v)", this.D, that1.D)
 	}
+	if !this.F.Equal(that1.F) {
+		return fmt2.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
 	return nil
 }
 func (this *B) Equal(that interface{}) bool {
@@ -1716,6 +2344,9 @@ func (this *B) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.D.Equal(that1.D) {
+		return false
+	}
+	if !this.F.Equal(that1.F) {
 		return false
 	}
 	return true
@@ -1820,6 +2451,40 @@ func (this *C) VerboseEqual(that interface{}) error {
 	} else if that1.Field3 != nil {
 		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return fmt2.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
+		}
+	} else if this.Field4 != nil {
+		return fmt2.Errorf("this.Field4 == nil && that.Field4 != nil")
+	} else if that1.Field4 != nil {
+		return fmt2.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return fmt2.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
+	}
+	for i := range this.Field5 {
+		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
+			return fmt2.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
+		}
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+		}
+	} else if this.Field6 != nil {
+		return fmt2.Errorf("this.Field6 == nil && that.Field6 != nil")
+	} else if that1.Field6 != nil {
+		return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
 	return nil
 }
 func (this *C) Equal(that interface{}) bool {
@@ -1859,6 +2524,40 @@ func (this *C) Equal(that interface{}) bool {
 		return false
 	} else if that1.Field3 != nil {
 		return false
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return false
+		}
+	} else if this.Field4 != nil {
+		return false
+	} else if that1.Field4 != nil {
+		return false
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return false
+	}
+	for i := range this.Field5 {
+		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
+			return false
+		}
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return false
+		}
+	} else if this.Field6 != nil {
+		return false
+	} else if that1.Field6 != nil {
+		return false
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
 	}
 	return true
 }
@@ -1963,6 +2662,9 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 	if !this.C.Equal(that1.C) {
 		return fmt2.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
 	}
+	if !this.F.Equal(that1.F) {
+		return fmt2.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
 	return nil
 }
 func (this *OldB) Equal(that interface{}) bool {
@@ -1986,6 +2688,9 @@ func (this *OldB) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.C.Equal(that1.C) {
+		return false
+	}
+	if !this.F.Equal(that1.F) {
 		return false
 	}
 	return true
@@ -2037,6 +2742,23 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 	} else if that1.Field3 != nil {
 		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+		}
+	} else if this.Field6 != nil {
+		return fmt2.Errorf("this.Field6 == nil && that.Field6 != nil")
+	} else if that1.Field6 != nil {
+		return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
 	return nil
 }
 func (this *OldC) Equal(that interface{}) bool {
@@ -2085,6 +2807,23 @@ func (this *OldC) Equal(that interface{}) bool {
 		return false
 	} else if that1.Field3 != nil {
 		return false
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return false
+		}
+	} else if this.Field6 != nil {
+		return false
+	} else if that1.Field6 != nil {
+		return false
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
 	}
 	return true
 }
@@ -2598,7 +3337,11 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.D"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, {Name: func(v string) *string { return &v }("D"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.D"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("F"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.OldC"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, {Name: func(v string) *string { return &v }("D"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -2610,7 +3353,23 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, {Name: func(v string) *string { return &v }("OldA"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, {Name: func(v string) *string { return &v }("OldA"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -2619,6 +3378,10 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.OldB"), Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}, {Name: func(v string) *string { return &v }("OldB"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.OldC"), Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("F"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -2634,5 +3397,13 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}, SourceCodeInfo: &google_protobuf.SourceCodeInfo{Location: []*google_protobuf.SourceCodeInfo_Location{{Path: []int32(nil), Span: []int32{26, 0, 79, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{2}, Span: []int32{26, 8, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{3, 0}, Span: []int32{28, 7, 60}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2, 0}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2, 0, 1}, Span: []int32{30, 8, 37}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 3}, Span: []int32{30, 41, 46}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2, 0}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2, 0, 1}, Span: []int32{31, 8, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 3}, Span: []int32{31, 36, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2, 0}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2, 0, 1}, Span: []int32{32, 8, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 3}, Span: []int32{32, 33, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2, 0}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2, 0, 1}, Span: []int32{34, 8, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 3}, Span: []int32{34, 31, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2, 0}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2, 0, 1}, Span: []int32{35, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 3}, Span: []int32{35, 39, 43}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2, 0}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2, 0, 1}, Span: []int32{36, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 3}, Span: []int32{36, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2, 0}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2, 0, 1}, Span: []int32{37, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 3}, Span: []int32{37, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{38, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7}, Span: []int32{38, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2}, Span: []int32{38, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2, 0}, Span: []int32{38, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2, 0, 1}, Span: []int32{38, 8, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 3}, Span: []int32{38, 37, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{40, 0, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8}, Span: []int32{40, 0, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2}, Span: []int32{40, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2, 0}, Span: []int32{40, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2, 0, 1}, Span: []int32{40, 8, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 3}, Span: []int32{40, 33, 37}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{41, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9}, Span: []int32{41, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2}, Span: []int32{41, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2, 0}, Span: []int32{41, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2, 0, 1}, Span: []int32{41, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 3}, Span: []int32{41, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{43, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10}, Span: []int32{43, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2}, Span: []int32{43, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2, 0}, Span: []int32{43, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2, 0, 1}, Span: []int32{43, 8, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 3}, Span: []int32{43, 37, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{44, 0, 40}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11}, Span: []int32{44, 0, 40}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2}, Span: []int32{44, 7, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2, 0}, Span: []int32{44, 7, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2, 0, 1}, Span: []int32{44, 8, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 3}, Span: []int32{44, 35, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{45, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12}, Span: []int32{45, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2}, Span: []int32{45, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2, 0}, Span: []int32{45, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2, 0, 1}, Span: []int32{45, 8, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 3}, Span: []int32{45, 31, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0}, Span: []int32{47, 0, 50, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 1}, Span: []int32{47, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0}, Span: []int32{48, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 4}, Span: []int32{48, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 5}, Span: []int32{48, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 1}, Span: []int32{48, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 3}, Span: []int32{48, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1}, Span: []int32{49, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 4}, Span: []int32{49, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 6}, Span: []int32{49, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 1}, Span: []int32{49, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 3}, Span: []int32{49, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1}, Span: []int32{52, 0, 55, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 1}, Span: []int32{52, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0}, Span: []int32{53, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 4}, Span: []int32{53, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 6}, Span: []int32{53, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 1}, Span: []int32{53, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 3}, Span: []int32{53, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1}, Span: []int32{54, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 4}, Span: []int32{54, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 6}, Span: []int32{54, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 1}, Span: []int32{54, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 3}, Span: []int32{54, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2}, Span: []int32{57, 0, 59, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 1}, Span: []int32{57, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0}, Span: []int32{58, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 4}, Span: []int32{58, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 5}, Span: []int32{58, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 1}, Span: []int32{58, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 3}, Span: []int32{58, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3}, Span: []int32{61, 0, 64, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 1}, Span: []int32{61, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0}, Span: []int32{62, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 4}, Span: []int32{62, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 5}, Span: []int32{62, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 1}, Span: []int32{62, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 3}, Span: []int32{62, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1}, Span: []int32{63, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 4}, Span: []int32{63, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 5}, Span: []int32{63, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 1}, Span: []int32{63, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 3}, Span: []int32{63, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4}, Span: []int32{66, 0, 69, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 1}, Span: []int32{66, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0}, Span: []int32{67, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 4}, Span: []int32{67, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 5}, Span: []int32{67, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 1}, Span: []int32{67, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 3}, Span: []int32{67, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1}, Span: []int32{68, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 4}, Span: []int32{68, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 6}, Span: []int32{68, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 1}, Span: []int32{68, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 3}, Span: []int32{68, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5}, Span: []int32{71, 0, 73, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 1}, Span: []int32{71, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0}, Span: []int32{72, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 4}, Span: []int32{72, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 6}, Span: []int32{72, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 1}, Span: []int32{72, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 3}, Span: []int32{72, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6}, Span: []int32{75, 0, 79, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 1}, Span: []int32{75, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0}, Span: []int32{76, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 4}, Span: []int32{76, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 5}, Span: []int32{76, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 1}, Span: []int32{76, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 3}, Span: []int32{76, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1}, Span: []int32{77, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 4}, Span: []int32{77, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 5}, Span: []int32{77, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 1}, Span: []int32{77, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 3}, Span: []int32{77, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2}, Span: []int32{78, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 4}, Span: []int32{78, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 5}, Span: []int32{78, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 1}, Span: []int32{78, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 3}, Span: []int32{78, 33, 34}, LeadingComments: nil, TrailingComments: nil}}}}}}
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}, SourceCodeInfo: &google_protobuf.SourceCodeInfo{Location: []*google_protobuf.SourceCodeInfo_Location{{Path: []int32(nil), Span: []int32{26, 0, 87, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{2}, Span: []int32{26, 8, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{3, 0}, Span: []int32{28, 7, 60}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0}, Span: []int32{30, 0, 47}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2, 0}, Span: []int32{30, 7, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 2, 0, 1}, Span: []int32{30, 8, 37}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 0, 3}, Span: []int32{30, 41, 46}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1}, Span: []int32{31, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2, 0}, Span: []int32{31, 7, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 2, 0, 1}, Span: []int32{31, 8, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 1, 3}, Span: []int32{31, 36, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2}, Span: []int32{32, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2, 0}, Span: []int32{32, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 2, 0, 1}, Span: []int32{32, 8, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 2, 3}, Span: []int32{32, 33, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3}, Span: []int32{34, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2, 0}, Span: []int32{34, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 2, 0, 1}, Span: []int32{34, 8, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 3, 3}, Span: []int32{34, 31, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4}, Span: []int32{35, 0, 44}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2, 0}, Span: []int32{35, 7, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 2, 0, 1}, Span: []int32{35, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 4, 3}, Span: []int32{35, 39, 43}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5}, Span: []int32{36, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2, 0}, Span: []int32{36, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 2, 0, 1}, Span: []int32{36, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 5, 3}, Span: []int32{36, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6}, Span: []int32{37, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2, 0}, Span: []int32{37, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 2, 0, 1}, Span: []int32{37, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 6, 3}, Span: []int32{37, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{38, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7}, Span: []int32{38, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2}, Span: []int32{38, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2, 0}, Span: []int32{38, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 2, 0, 1}, Span: []int32{38, 8, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 7, 3}, Span: []int32{38, 37, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{40, 0, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8}, Span: []int32{40, 0, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2}, Span: []int32{40, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2, 0}, Span: []int32{40, 7, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 2, 0, 1}, Span: []int32{40, 8, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 8, 3}, Span: []int32{40, 33, 37}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{41, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9}, Span: []int32{41, 0, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2}, Span: []int32{41, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2, 0}, Span: []int32{41, 7, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 2, 0, 1}, Span: []int32{41, 8, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 9, 3}, Span: []int32{41, 34, 38}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{43, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10}, Span: []int32{43, 0, 42}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2}, Span: []int32{43, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2, 0}, Span: []int32{43, 7, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 2, 0, 1}, Span: []int32{43, 8, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 10, 3}, Span: []int32{43, 37, 41}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{44, 0, 40}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11}, Span: []int32{44, 0, 40}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2}, Span: []int32{44, 7, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2, 0}, Span: []int32{44, 7, 32}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 2, 0, 1}, Span: []int32{44, 8, 31}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 11, 3}, Span: []int32{44, 35, 39}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8}, Span: []int32{45, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12}, Span: []int32{45, 0, 36}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2}, Span: []int32{45, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2, 0}, Span: []int32{45, 7, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 2, 0, 1}, Span: []int32{45, 8, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{8, 999, 12, 3}, Span: []int32{45, 31, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0}, Span: []int32{47, 0, 50, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 1}, Span: []int32{47, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0}, Span: []int32{48, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 4}, Span: []int32{48, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 5}, Span: []int32{48, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 1}, Span: []int32{48, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 0, 3}, Span: []int32{48, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1}, Span: []int32{49, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 4}, Span: []int32{49, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 6}, Span: []int32{49, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 1}, Span: []int32{49, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 0, 2, 1, 3}, Span: []int32{49, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1}, Span: []int32{52, 0, 56, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 1}, Span: []int32{52, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0}, Span: []int32{53, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 4}, Span: []int32{53, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 6}, Span: []int32{53, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 1}, Span: []int32{53, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 0, 3}, Span: []int32{53, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1}, Span: []int32{54, 8, 25}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 4}, Span: []int32{54, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 6}, Span: []int32{54, 17, 18}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 1}, Span: []int32{54, 19, 20}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 1, 3}, Span: []int32{54, 23, 24}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 2}, Span: []int32{55, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 2, 4}, Span: []int32{55, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 2, 6}, Span: []int32{55, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 2, 1}, Span: []int32{55, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 1, 2, 2, 3}, Span: []int32{55, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2}, Span: []int32{58, 0, 60, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 1}, Span: []int32{58, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0}, Span: []int32{59, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 4}, Span: []int32{59, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 5}, Span: []int32{59, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 1}, Span: []int32{59, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 2, 2, 0, 3}, Span: []int32{59, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3}, Span: []int32{62, 0, 69, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 1}, Span: []int32{62, 8, 9}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0}, Span: []int32{63, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 4}, Span: []int32{63, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 5}, Span: []int32{63, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 1}, Span: []int32{63, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 0, 3}, Span: []int32{63, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1}, Span: []int32{64, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 4}, Span: []int32{64, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 5}, Span: []int32{64, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 1}, Span: []int32{64, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 1, 3}, Span: []int32{64, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 2}, Span: []int32{65, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 2, 4}, Span: []int32{65, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 2, 5}, Span: []int32{65, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 2, 1}, Span: []int32{65, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 2, 3}, Span: []int32{65, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 3}, Span: []int32{66, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 3, 4}, Span: []int32{66, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 3, 5}, Span: []int32{66, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 3, 1}, Span: []int32{66, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 3, 3}, Span: []int32{66, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 4}, Span: []int32{67, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 4, 4}, Span: []int32{67, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 4, 5}, Span: []int32{67, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 4, 1}, Span: []int32{67, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 4, 3}, Span: []int32{67, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 5}, Span: []int32{68, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 5, 4}, Span: []int32{68, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 5, 5}, Span: []int32{68, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 5, 1}, Span: []int32{68, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 3, 2, 5, 3}, Span: []int32{68, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4}, Span: []int32{71, 0, 74, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 1}, Span: []int32{71, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0}, Span: []int32{72, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 4}, Span: []int32{72, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 5}, Span: []int32{72, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 1}, Span: []int32{72, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 0, 3}, Span: []int32{72, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1}, Span: []int32{73, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 4}, Span: []int32{73, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 6}, Span: []int32{73, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 1}, Span: []int32{73, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 4, 2, 1, 3}, Span: []int32{73, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5}, Span: []int32{76, 0, 79, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 1}, Span: []int32{76, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0}, Span: []int32{77, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 4}, Span: []int32{77, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 6}, Span: []int32{77, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 1}, Span: []int32{77, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 0, 3}, Span: []int32{77, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 1}, Span: []int32{78, 8, 28}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 1, 4}, Span: []int32{78, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 1, 6}, Span: []int32{78, 17, 21}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 1, 1}, Span: []int32{78, 22, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 5, 2, 1, 3}, Span: []int32{78, 26, 27}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6}, Span: []int32{81, 0, 87, 1}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 1}, Span: []int32{81, 8, 12}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0}, Span: []int32{82, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 4}, Span: []int32{82, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 5}, Span: []int32{82, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 1}, Span: []int32{82, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 0, 3}, Span: []int32{82, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1}, Span: []int32{83, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 4}, Span: []int32{83, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 5}, Span: []int32{83, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 1}, Span: []int32{83, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 1, 3}, Span: []int32{83, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2}, Span: []int32{84, 8, 35}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 4}, Span: []int32{84, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 5}, Span: []int32{84, 17, 23}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 1}, Span: []int32{84, 24, 30}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 2, 3}, Span: []int32{84, 33, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 3}, Span: []int32{85, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 3, 4}, Span: []int32{85, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 3, 5}, Span: []int32{85, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 3, 1}, Span: []int32{85, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 3, 3}, Span: []int32{85, 32, 33}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 4}, Span: []int32{86, 8, 34}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 4, 4}, Span: []int32{86, 8, 16}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 4, 5}, Span: []int32{86, 17, 22}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 4, 1}, Span: []int32{86, 23, 29}, LeadingComments: nil, TrailingComments: nil}, {Path: []int32{4, 6, 2, 4, 3}, Span: []int32{86, 32, 33}, LeadingComments: nil, TrailingComments: nil}}}}}}
 }

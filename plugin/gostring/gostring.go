@@ -170,7 +170,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := generator.CamelCase(*field.Name)
-			if field.IsMessage() {
+			if field.IsMessage() || p.IsGroup(field) {
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
 				msgnames := strings.Split(msgname, ".")

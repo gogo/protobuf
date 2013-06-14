@@ -132,10 +132,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
-	//fileName := path.Base(file.GetName())
-	//packageName := file.PackageName()
 	p.ioPkg = p.NewImport("io")
 	mathPkg := p.NewImport("math")
+	errorsPkg := p.NewImport("errors")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
@@ -319,7 +318,47 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				}
 				p.P(`index = postIndex`)
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-				panic("groups are not supported")
+				desc := p.ObjectNamed(field.GetTypeName())
+				msgname := p.TypeName(desc)
+				msgnames := strings.Split(msgname, ".")
+				typeName := msgnames[len(msgnames)-1]
+				if gogoproto.IsEmbed(field) {
+					fieldname = typeName
+				}
+				p.P(`var somegroupvar int`)
+				p.decodeVarint("somegroupvar", "int")
+				p.P(`var msglen int`)
+				p.decodeVarint("msglen", "int")
+				p.P(`postIndex := index + msglen`)
+				p.P(`if postIndex > l {`)
+				p.In()
+				p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+				p.Out()
+				p.P(`}`)
+				if repeated {
+					if nullable {
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
+					} else {
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, msgname, `{})`)
+					}
+					p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
+				} else if nullable {
+					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+					p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
+					p.In()
+					p.P(`return err`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
+					p.In()
+					p.P(`return err`)
+					p.Out()
+					p.P(`}`)
+				}
+				p.P(`index = postIndex`)
+				p.P(`somegroupvar = 0`)
+				p.decodeVarint("somegroupvar", "int")
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
@@ -550,10 +589,69 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 		p.P(`case 3:`)
 		p.In()
+
+		p.P(`for {`)
+		p.In()
+		p.P(`if index >= l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
+		p.P(`index++`)
+		p.P(`if data[index-1] < 0x80 {`)
+		p.In()
+		p.P(`break`)
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`}`)
+
+		p.P(`var length int`)
+		p.P(`for shift := uint(0); ; shift += 7 {`)
+		p.In()
+		p.P(`if index >= l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		p.P(`b := data[index]`)
+		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, b)`)
+		p.P(`index++`)
+		p.P(`length |= (int(b) & 0x7F) << shift`)
+		p.P(`if b < 0x80 {`)
+		p.In()
+		p.P(`break`)
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`}`)
+
+		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)`)
+		p.P(`index+=length`)
+
+		p.P(`for {`)
+		p.In()
+		p.P(`if index >= l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
+		p.P(`index++`)
+		p.P(`if data[index-1] < 0x80 {`)
+		p.In()
+		p.P(`break`)
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`}`)
+
 		p.Out()
 
 		p.P(`case 4:`)
 		p.In()
+		p.P(`return `, errorsPkg.Use(), `.New("unexpected end of group")`)
 		p.Out()
 
 		p.P(`case 5:`)

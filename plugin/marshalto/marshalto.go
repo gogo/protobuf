@@ -434,7 +434,38 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`i+=len(s`, numGen.Current(), `)`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-				panic("not supported")
+
+				if repeated {
+					p.P(`for _, msg := range m.`, fieldname, ` {`)
+					p.In()
+					p.encodeKey(fieldNumber, proto.WireStartGroup)
+					p.encodeKey(fieldNumber, wireType)
+					p.P(`l = msg.Size()`)
+					p.encodeVarint("l")
+					p.P(`n, err := msg.MarshalTo(data[i:])`)
+					p.P(`if err != nil {`)
+					p.In()
+					p.P(`return 0, err`)
+					p.Out()
+					p.P(`}`)
+					p.P(`i+=n`)
+					p.encodeKey(fieldNumber, proto.WireEndGroup)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.encodeKey(fieldNumber, proto.WireStartGroup)
+					p.encodeKey(fieldNumber, wireType)
+					p.P(`l = m.`, fieldname, `.Size()`)
+					p.encodeVarint("l")
+					p.P(`n`, numGen.Next(), `, err := m.`, fieldname, `.MarshalTo(data[i:])`)
+					p.P(`if err != nil {`)
+					p.In()
+					p.P(`return 0, err`)
+					p.Out()
+					p.P(`}`)
+					p.P(`i+=n`, numGen.Current())
+					p.encodeKey(fieldNumber, proto.WireEndGroup)
+				}
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				if repeated {
 					p.P(`for _, msg := range m.`, fieldname, ` {`)
