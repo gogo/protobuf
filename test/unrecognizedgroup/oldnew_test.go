@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package unrecognized
+package unrecognizedgroup
 
 import (
 	code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
@@ -35,12 +35,12 @@ import (
 
 func TestNewOld(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	newer := NewPopulatedA(popr)
+	newer := NewPopulatedNewNoGroup(popr)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
 	if err != nil {
 		panic(err)
 	}
-	older := &OldA{}
+	older := &OldWithGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, older); err != nil {
 		panic(err)
 	}
@@ -48,7 +48,7 @@ func TestNewOld(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	bluer := &A{}
+	bluer := &NewNoGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
@@ -59,12 +59,12 @@ func TestNewOld(t *testing.T) {
 
 func TestOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	older := NewPopulatedOldA(popr)
+	older := NewPopulatedOldWithGroup(popr)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
 	if err != nil {
 		panic(err)
 	}
-	newer := &A{}
+	newer := &NewNoGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
@@ -72,7 +72,7 @@ func TestOldNew(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	bluer := &OldA{}
+	bluer := &OldWithGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
@@ -83,12 +83,12 @@ func TestOldNew(t *testing.T) {
 
 func TestOldNewOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	older := NewPopulatedOldA(popr)
+	older := NewPopulatedOldWithGroup(popr)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
 	if err != nil {
 		panic(err)
 	}
-	newer := &A{}
+	newer := &NewNoGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
@@ -96,7 +96,7 @@ func TestOldNewOldNew(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	bluer := &OldA{}
+	bluer := &OldWithGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
@@ -108,7 +108,7 @@ func TestOldNewOldNew(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	purple := &A{}
+	purple := &NewNoGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data3, purple); err != nil {
 		panic(err)
 	}
@@ -116,7 +116,7 @@ func TestOldNewOldNew(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	magenta := &OldA{}
+	magenta := &OldWithGroup{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data4, magenta); err != nil {
 		panic(err)
 	}

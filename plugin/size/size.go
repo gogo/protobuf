@@ -31,6 +31,7 @@ import (
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -220,21 +221,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-				if repeated {
-					p.P(`for _, e := range m.`, fieldname, ` { `)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(keySize(fieldNumber, proto.WireStartGroup)))
-					p.P(`l=e.Size()`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					p.P(`n+=`, strconv.Itoa(keySize(fieldNumber, proto.WireEndGroup)))
-					p.Out()
-					p.P(`}`)
-				} else {
-					p.P(`n+=`, strconv.Itoa(keySize(fieldNumber, proto.WireStartGroup)))
-					p.P(`l=m.`, fieldname, `.Size()`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					p.P(`n+=`, strconv.Itoa(keySize(fieldNumber, proto.WireEndGroup)))
-				}
+				panic(fmt.Errorf("size does not support group %v", fieldname))
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				if repeated {
 					p.P(`for _, e := range m.`, fieldname, ` { `)

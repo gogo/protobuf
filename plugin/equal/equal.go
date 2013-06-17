@@ -374,7 +374,7 @@ func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool) {
 			if ctype {
 				p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 			} else {
-				if field.IsMessage() {
+				if field.IsMessage() || p.IsGroup(field) {
 					if nullable {
 						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 					} else {

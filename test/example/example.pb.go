@@ -13,7 +13,7 @@ import math "math"
 import code_google_com_p_gogoprotobuf_test_custom "code.google.com/p/gogoprotobuf/test/custom"
 
 import io "io"
-import errors "errors"
+import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
 
 import fmt "fmt"
 import strings "strings"
@@ -23,7 +23,7 @@ import fmt1 "fmt"
 import strings1 "strings"
 import reflect1 "reflect"
 
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
 
 import fmt2 "fmt"
 
@@ -159,87 +159,21 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			index = postIndex
 		default:
-			key := uint32(fieldNum)<<3 | uint32(wireType)
-			for key > 127 {
-				m.XXX_unrecognized = append(m.XXX_unrecognized, 0x80|uint8(key&0x7F))
-				key >>= 7
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, uint8(key))
-			switch wireType {
-			case 0:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 1:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)
-				index += 8
-			case 2:
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-			case 3:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 4:
-				return errors.New("unexpected end of group")
-			case 5:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
-				index += 4
-			default:
-				panic("not implemented")
+			index -= sizeOfWire
+			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
 		}
 	}
 	return nil
@@ -311,87 +245,21 @@ func (m *B) Unmarshal(data []byte) error {
 			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
-			key := uint32(fieldNum)<<3 | uint32(wireType)
-			for key > 127 {
-				m.XXX_unrecognized = append(m.XXX_unrecognized, 0x80|uint8(key&0x7F))
-				key >>= 7
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, uint8(key))
-			switch wireType {
-			case 0:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 1:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)
-				index += 8
-			case 2:
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-			case 3:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 4:
-				return errors.New("unexpected end of group")
-			case 5:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
-				index += 4
-			default:
-				panic("not implemented")
+			index -= sizeOfWire
+			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
 		}
 	}
 	return nil
@@ -466,87 +334,21 @@ func (m *U) Unmarshal(data []byte) error {
 			}
 			index = postIndex
 		default:
-			key := uint32(fieldNum)<<3 | uint32(wireType)
-			for key > 127 {
-				m.XXX_unrecognized = append(m.XXX_unrecognized, 0x80|uint8(key&0x7F))
-				key >>= 7
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, uint8(key))
-			switch wireType {
-			case 0:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 1:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)
-				index += 8
-			case 2:
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-			case 3:
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-				var length int
-				for shift := uint(0); ; shift += 7 {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := data[index]
-					m.XXX_unrecognized = append(m.XXX_unrecognized, b)
-					index++
-					length |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)
-				index += length
-				for {
-					if index >= l {
-						return io.ErrUnexpectedEOF
-					}
-					m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])
-					index++
-					if data[index-1] < 0x80 {
-						break
-					}
-				}
-			case 4:
-				return errors.New("unexpected end of group")
-			case 5:
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)
-				index += 4
-			default:
-				panic("not implemented")
+			index -= sizeOfWire
+			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
 		}
 	}
 	return nil
@@ -705,17 +507,17 @@ func valueToGoStringExample(v interface{}, typ string) string {
 }
 
 type AFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetDescription() string
 	GetNumber() int64
 	GetId() code_google_com_p_gogoprotobuf_test_custom.Uuid
 }
 
-func (this *A) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *A) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewAFromFace(this)
 }
 

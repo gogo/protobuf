@@ -31,7 +31,7 @@ import (
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
-	//"path"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -134,7 +134,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 	p.ioPkg = p.NewImport("io")
 	mathPkg := p.NewImport("math")
-	errorsPkg := p.NewImport("errors")
+	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
@@ -166,20 +166,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.In()
 			_, wire := p.GoType(message, field)
 			wireType := wireToType(wire)
-			if !packed {
-				p.P(`if wireType != `, strconv.Itoa(wireType), `{`)
-				p.In()
-				p.P(`return proto.ErrWrongType`)
-				p.Out()
-				p.P(`}`)
-			} else {
+			if packed {
 				p.P(`if wireType != `, strconv.Itoa(proto.WireBytes), `{`)
 				p.In()
 				p.P(`return proto.ErrWrongType`)
 				p.Out()
 				p.P(`}`)
-			}
-			if packed {
 				p.P(`var packedLen int`)
 				p.decodeVarint("packedLen", "int")
 				p.P(`postIndex := index + packedLen`)
@@ -190,6 +182,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 				p.P(`for index < postIndex {`)
 				p.In()
+			} else {
+				p.P(`if wireType != `, strconv.Itoa(wireType), `{`)
+				p.In()
+				p.P(`return proto.ErrWrongType`)
+				p.Out()
+				p.P(`}`)
 			}
 			switch *field.Type {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
@@ -318,47 +316,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				}
 				p.P(`index = postIndex`)
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-				desc := p.ObjectNamed(field.GetTypeName())
-				msgname := p.TypeName(desc)
-				msgnames := strings.Split(msgname, ".")
-				typeName := msgnames[len(msgnames)-1]
-				if gogoproto.IsEmbed(field) {
-					fieldname = typeName
-				}
-				p.P(`var somegroupvar int`)
-				p.decodeVarint("somegroupvar", "int")
-				p.P(`var msglen int`)
-				p.decodeVarint("msglen", "int")
-				p.P(`postIndex := index + msglen`)
-				p.P(`if postIndex > l {`)
-				p.In()
-				p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-				p.Out()
-				p.P(`}`)
-				if repeated {
-					if nullable {
-						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
-					} else {
-						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, msgname, `{})`)
-					}
-					p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
-				} else if nullable {
-					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
-					p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
-					p.In()
-					p.P(`return err`)
-					p.Out()
-					p.P(`}`)
-				} else {
-					p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
-					p.In()
-					p.P(`return err`)
-					p.Out()
-					p.P(`}`)
-				}
-				p.P(`index = postIndex`)
-				p.P(`somegroupvar = 0`)
-				p.decodeVarint("somegroupvar", "int")
+				panic(fmt.Errorf("unmarshaler does not support group %v", fieldname))
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
@@ -521,150 +479,27 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`default:`)
 		p.In()
-
-		p.P(`key := uint32(fieldNum)<<3 | uint32(wireType)`)
-		p.P(`for key > 127 {`)
-		p.In()
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, 0x80|uint8(key&0x7F))`)
-		p.P(`key >>= 7`)
-		p.Out()
-		p.P(`}`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, uint8(key))`)
-
-		p.P(`switch wireType {`)
-
-		p.P(`case 0:`)
-		p.In()
+		p.P(`var sizeOfWire int`)
 		p.P(`for {`)
 		p.In()
-		p.P(`if index >= l {`)
-		p.In()
-		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-		p.Out()
-		p.P(`}`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
-		p.P(`index++`)
-		p.P(`if data[index-1] < 0x80 {`)
+		p.P(`sizeOfWire++`)
+		p.P(`wire >>= 7`)
+		p.P(`if wire == 0 {`)
 		p.In()
 		p.P(`break`)
 		p.Out()
 		p.P(`}`)
 		p.Out()
 		p.P(`}`)
-		p.Out()
-
-		p.P(`case 1:`)
+		p.P(`index-=sizeOfWire`)
+		p.P(`skippy, err := `, protoPkg.Use(), `.Skip(data[index:])`)
+		p.P(`if err != nil {`)
 		p.In()
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)`)
-		p.P(`index+=8`)
-		p.Out()
-
-		p.P(`case 2:`)
-		p.In()
-
-		p.P(`var length int`)
-		p.P(`for shift := uint(0); ; shift += 7 {`)
-		p.In()
-		p.P(`if index >= l {`)
-		p.In()
-		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.P(`return err`)
 		p.Out()
 		p.P(`}`)
-		p.P(`b := data[index]`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, b)`)
-		p.P(`index++`)
-		p.P(`length |= (int(b) & 0x7F) << shift`)
-		p.P(`if b < 0x80 {`)
-		p.In()
-		p.P(`break`)
-		p.Out()
-		p.P(`}`)
-		p.Out()
-		p.P(`}`)
-
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)`)
-		p.P(`index+=length`)
-
-		p.Out()
-
-		p.P(`case 3:`)
-		p.In()
-
-		p.P(`for {`)
-		p.In()
-		p.P(`if index >= l {`)
-		p.In()
-		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-		p.Out()
-		p.P(`}`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
-		p.P(`index++`)
-		p.P(`if data[index-1] < 0x80 {`)
-		p.In()
-		p.P(`break`)
-		p.Out()
-		p.P(`}`)
-		p.Out()
-		p.P(`}`)
-
-		p.P(`var length int`)
-		p.P(`for shift := uint(0); ; shift += 7 {`)
-		p.In()
-		p.P(`if index >= l {`)
-		p.In()
-		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-		p.Out()
-		p.P(`}`)
-		p.P(`b := data[index]`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, b)`)
-		p.P(`index++`)
-		p.P(`length |= (int(b) & 0x7F) << shift`)
-		p.P(`if b < 0x80 {`)
-		p.In()
-		p.P(`break`)
-		p.Out()
-		p.P(`}`)
-		p.Out()
-		p.P(`}`)
-
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)`)
-		p.P(`index+=length`)
-
-		p.P(`for {`)
-		p.In()
-		p.P(`if index >= l {`)
-		p.In()
-		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-		p.Out()
-		p.P(`}`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
-		p.P(`index++`)
-		p.P(`if data[index-1] < 0x80 {`)
-		p.In()
-		p.P(`break`)
-		p.Out()
-		p.P(`}`)
-		p.Out()
-		p.P(`}`)
-
-		p.Out()
-
-		p.P(`case 4:`)
-		p.In()
-		p.P(`return `, errorsPkg.Use(), `.New("unexpected end of group")`)
-		p.Out()
-
-		p.P(`case 5:`)
-		p.In()
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)`)
-		p.P(`index+=4`)
-		p.Out()
-
-		p.P(`default:`)
-		p.In()
-		p.P(`panic("not implemented")`)
-		p.Out()
-		p.P(`}`)
+		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)`)
+		p.P(`index += skippy`)
 		p.Out()
 		p.Out()
 		p.P(`}`)
@@ -679,6 +514,60 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
+}
+
+func (p *unmarshal) skipFixed32() {
+	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)`)
+	p.P(`index+=4`)
+}
+
+func (p *unmarshal) skipLengthDelimited() {
+	p.P(`var length int`)
+	p.P(`for shift := uint(0); ; shift += 7 {`)
+	p.In()
+	p.P(`if index >= l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(`b := data[index]`)
+	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, b)`)
+	p.P(`index++`)
+	p.P(`length |= (int(b) & 0x7F) << shift`)
+	p.P(`if b < 0x80 {`)
+	p.In()
+	p.P(`break`)
+	p.Out()
+	p.P(`}`)
+	p.Out()
+	p.P(`}`)
+
+	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)`)
+	p.P(`index+=length`)
+}
+
+func (p *unmarshal) skipFixed64() {
+	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)`)
+	p.P(`index+=8`)
+}
+
+func (p *unmarshal) skipVarint() {
+	p.P(`for {`)
+	p.In()
+	p.P(`if index >= l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
+	p.P(`index++`)
+	p.P(`if data[index-1] < 0x80 {`)
+	p.In()
+	p.P(`break`)
+	p.Out()
+	p.P(`}`)
+	p.Out()
+	p.P(`}`)
 }
 
 func init() {
