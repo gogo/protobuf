@@ -27,6 +27,7 @@
 package proto
 
 import (
+	"bytes"
 	"reflect"
 )
 
@@ -45,4 +46,8 @@ func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset boo
 		return ifnotset
 	}
 	return *(value.(*bool))
+}
+
+func (this *Extension) Equal(that *Extension) bool {
+	return bytes.Equal(this.enc, that.enc)
 }

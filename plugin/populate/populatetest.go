@@ -61,7 +61,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			p.P(`b.StartTimer()`)
 			p.P(`for i := 0; i < b.N; i++ {`)
 			p.In()
-			p.P(`NewPopulated`, ccTypeName, `(popr)`)
+			p.P(`NewPopulated`, ccTypeName, `(popr, false)`)
 			p.Out()
 			p.P(`}`)
 			p.Out()

@@ -768,6 +768,7 @@ func (this *NidOptNative) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -792,6 +793,7 @@ func (this *NinOptNative) String() string {
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -816,6 +818,7 @@ func (this *NidRepNative) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -840,6 +843,7 @@ func (this *NinRepNative) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -862,6 +866,7 @@ func (this *NidRepPackedNative) String() string {
 		`Field11:` + fmt.Sprintf("%v", this.Field11) + `,`,
 		`Field12:` + fmt.Sprintf("%v", this.Field12) + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -884,6 +889,7 @@ func (this *NinRepPackedNative) String() string {
 		`Field11:` + fmt.Sprintf("%v", this.Field11) + `,`,
 		`Field12:` + fmt.Sprintf("%v", this.Field12) + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -903,6 +909,7 @@ func (this *NidOptStruct) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -922,6 +929,7 @@ func (this *NinOptStruct) String() string {
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -941,6 +949,7 @@ func (this *NidRepStruct) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -960,6 +969,7 @@ func (this *NinRepStruct) String() string {
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -972,6 +982,7 @@ func (this *NidEmbeddedStruct) String() string {
 		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
 		`Field210:` + fmt.Sprintf("%v", this.Field210) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -984,6 +995,7 @@ func (this *NinEmbeddedStruct) String() string {
 		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -995,6 +1007,7 @@ func (this *NidNestedStruct) String() string {
 	s := strings.Join([]string{`&NidNestedStruct{`,
 		`Field1:` + strings.Replace(strings.Replace(this.Field1.String(), "NidOptStruct", "NidOptStruct", 1), `&`, ``, 1) + `,`,
 		`Field2:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field2), "NidRepStruct", "NidRepStruct", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1006,6 +1019,7 @@ func (this *NinNestedStruct) String() string {
 	s := strings.Join([]string{`&NinNestedStruct{`,
 		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NidOptStruct", "NidOptStruct", 1) + `,`,
 		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NidRepStruct", "NidRepStruct", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1017,6 +1031,7 @@ func (this *NidOptCustom) String() string {
 	s := strings.Join([]string{`&NidOptCustom{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1028,6 +1043,7 @@ func (this *NinOptCustom) String() string {
 	s := strings.Join([]string{`&NinOptCustom{`,
 		`Id:` + valueToStringThetest(this.Id) + `,`,
 		`Value:` + valueToStringThetest(this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1039,6 +1055,7 @@ func (this *NidRepCustom) String() string {
 	s := strings.Join([]string{`&NidRepCustom{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1050,6 +1067,7 @@ func (this *NinRepCustom) String() string {
 	s := strings.Join([]string{`&NinRepCustom{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1068,6 +1086,7 @@ func (this *NinOptNativeUnion) String() string {
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1086,6 +1105,7 @@ func (this *NinOptStructUnion) String() string {
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1098,6 +1118,7 @@ func (this *NinEmbeddedStructUnion) String() string {
 		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1110,6 +1131,7 @@ func (this *NinNestedStructUnion) String() string {
 		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NinOptNativeUnion", "NinOptNativeUnion", 1) + `,`,
 		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NinOptStructUnion", "NinOptStructUnion", 1) + `,`,
 		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NinEmbeddedStructUnion", "NinEmbeddedStructUnion", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1122,6 +1144,7 @@ func (this *Tree) String() string {
 		`Or:` + strings.Replace(fmt.Sprintf("%v", this.Or), "OrBranch", "OrBranch", 1) + `,`,
 		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndBranch", "AndBranch", 1) + `,`,
 		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "Leaf", "Leaf", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1133,6 +1156,7 @@ func (this *OrBranch) String() string {
 	s := strings.Join([]string{`&OrBranch{`,
 		`Left:` + strings.Replace(strings.Replace(this.Left.String(), "Tree", "Tree", 1), `&`, ``, 1) + `,`,
 		`Right:` + strings.Replace(strings.Replace(this.Right.String(), "Tree", "Tree", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1144,6 +1168,7 @@ func (this *AndBranch) String() string {
 	s := strings.Join([]string{`&AndBranch{`,
 		`Left:` + strings.Replace(strings.Replace(this.Left.String(), "Tree", "Tree", 1), `&`, ``, 1) + `,`,
 		`Right:` + strings.Replace(strings.Replace(this.Right.String(), "Tree", "Tree", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1155,6 +1180,7 @@ func (this *Leaf) String() string {
 	s := strings.Join([]string{`&Leaf{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
 		`StrValue:` + fmt.Sprintf("%v", this.StrValue) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1167,6 +1193,7 @@ func (this *DeepTree) String() string {
 		`Down:` + strings.Replace(fmt.Sprintf("%v", this.Down), "ADeepBranch", "ADeepBranch", 1) + `,`,
 		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndDeepBranch", "AndDeepBranch", 1) + `,`,
 		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "DeepLeaf", "DeepLeaf", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1177,6 +1204,7 @@ func (this *ADeepBranch) String() string {
 	}
 	s := strings.Join([]string{`&ADeepBranch{`,
 		`Down:` + strings.Replace(strings.Replace(this.Down.String(), "DeepTree", "DeepTree", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1188,6 +1216,7 @@ func (this *AndDeepBranch) String() string {
 	s := strings.Join([]string{`&AndDeepBranch{`,
 		`Left:` + strings.Replace(strings.Replace(this.Left.String(), "DeepTree", "DeepTree", 1), `&`, ``, 1) + `,`,
 		`Right:` + strings.Replace(strings.Replace(this.Right.String(), "DeepTree", "DeepTree", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1198,6 +1227,7 @@ func (this *DeepLeaf) String() string {
 	}
 	s := strings.Join([]string{`&DeepLeaf{`,
 		`Tree:` + strings.Replace(strings.Replace(this.Tree.String(), "Tree", "Tree", 1), `&`, ``, 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1207,6 +1237,7 @@ func (this *Nil) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Nil{`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1217,6 +1248,7 @@ func (this *NidOptEnum) String() string {
 	}
 	s := strings.Join([]string{`&NidOptEnum{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1227,6 +1259,7 @@ func (this *NinOptEnum) String() string {
 	}
 	s := strings.Join([]string{`&NinOptEnum{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1237,6 +1270,7 @@ func (this *NidRepEnum) String() string {
 	}
 	s := strings.Join([]string{`&NidRepEnum{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1247,6 +1281,7 @@ func (this *NinRepEnum) String() string {
 	}
 	s := strings.Join([]string{`&NinRepEnum{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1259,6 +1294,7 @@ func (this *Timer) String() string {
 		`Time1:` + fmt.Sprintf("%v", this.Time1) + `,`,
 		`Time2:` + fmt.Sprintf("%v", this.Time2) + `,`,
 		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2254,7 +2290,7 @@ func sozThetest(x uint64) (n int) {
 	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func NewPopulatedNidOptNative(r randyThetest) *NidOptNative {
+func NewPopulatedNidOptNative(r randyThetest, easy bool) *NidOptNative {
 	this := &NidOptNative{}
 	this.Field1 = r.Float64()
 	this.Field2 = r.Float32()
@@ -2275,10 +2311,13 @@ func NewPopulatedNidOptNative(r randyThetest) *NidOptNative {
 	for i := 0; i < v1; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNinOptNative(r randyThetest) *NinOptNative {
+func NewPopulatedNinOptNative(r randyThetest, easy bool) *NinOptNative {
 	this := &NinOptNative{}
 	if r.Intn(10) != 0 {
 		v2 := r.Float64()
@@ -2343,10 +2382,13 @@ func NewPopulatedNinOptNative(r randyThetest) *NinOptNative {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNidRepNative(r randyThetest) *NidRepNative {
+func NewPopulatedNidRepNative(r randyThetest, easy bool) *NidRepNative {
 	this := &NidRepNative{}
 	if r.Intn(10) != 0 {
 		v17 := r.Intn(100)
@@ -2457,10 +2499,13 @@ func NewPopulatedNidRepNative(r randyThetest) *NidRepNative {
 			}
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNinRepNative(r randyThetest) *NinRepNative {
+func NewPopulatedNinRepNative(r randyThetest, easy bool) *NinRepNative {
 	this := &NinRepNative{}
 	if r.Intn(10) != 0 {
 		v33 := r.Intn(100)
@@ -2571,10 +2616,13 @@ func NewPopulatedNinRepNative(r randyThetest) *NinRepNative {
 			}
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNidRepPackedNative(r randyThetest) *NidRepPackedNative {
+func NewPopulatedNidRepPackedNative(r randyThetest, easy bool) *NidRepPackedNative {
 	this := &NidRepPackedNative{}
 	if r.Intn(10) != 0 {
 		v49 := r.Intn(100)
@@ -2667,10 +2715,13 @@ func NewPopulatedNidRepPackedNative(r randyThetest) *NidRepPackedNative {
 			this.Field13[i] = bool(r.Intn(2) == 0)
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 14)
+	}
 	return this
 }
 
-func NewPopulatedNinRepPackedNative(r randyThetest) *NinRepPackedNative {
+func NewPopulatedNinRepPackedNative(r randyThetest, easy bool) *NinRepPackedNative {
 	this := &NinRepPackedNative{}
 	if r.Intn(10) != 0 {
 		v62 := r.Intn(100)
@@ -2763,20 +2814,23 @@ func NewPopulatedNinRepPackedNative(r randyThetest) *NinRepPackedNative {
 			this.Field13[i] = bool(r.Intn(2) == 0)
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 14)
+	}
 	return this
 }
 
-func NewPopulatedNidOptStruct(r randyThetest) *NidOptStruct {
+func NewPopulatedNidOptStruct(r randyThetest, easy bool) *NidOptStruct {
 	this := &NidOptStruct{}
 	this.Field1 = r.Float64()
 	this.Field2 = r.Float32()
-	v75 := NewPopulatedNidOptNative(r)
+	v75 := NewPopulatedNidOptNative(r, easy)
 	this.Field3 = *v75
-	v76 := NewPopulatedNinOptNative(r)
+	v76 := NewPopulatedNinOptNative(r, easy)
 	this.Field4 = *v76
 	this.Field6 = uint64(r.Uint32())
 	this.Field7 = r.Int31()
-	v77 := NewPopulatedNidOptNative(r)
+	v77 := NewPopulatedNidOptNative(r, easy)
 	this.Field8 = *v77
 	this.Field13 = bool(r.Intn(2) == 0)
 	this.Field14 = randStringThetest(r)
@@ -2785,10 +2839,13 @@ func NewPopulatedNidOptStruct(r randyThetest) *NidOptStruct {
 	for i := 0; i < v78; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNinOptStruct(r randyThetest) *NinOptStruct {
+func NewPopulatedNinOptStruct(r randyThetest, easy bool) *NinOptStruct {
 	this := &NinOptStruct{}
 	if r.Intn(10) != 0 {
 		v79 := r.Float64()
@@ -2799,10 +2856,10 @@ func NewPopulatedNinOptStruct(r randyThetest) *NinOptStruct {
 		this.Field2 = &v80
 	}
 	if r.Intn(10) != 0 {
-		this.Field3 = NewPopulatedNidOptNative(r)
+		this.Field3 = NewPopulatedNidOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Field4 = NewPopulatedNinOptNative(r)
+		this.Field4 = NewPopulatedNinOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v81 := uint64(r.Uint32())
@@ -2813,7 +2870,7 @@ func NewPopulatedNinOptStruct(r randyThetest) *NinOptStruct {
 		this.Field7 = &v82
 	}
 	if r.Intn(10) != 0 {
-		this.Field8 = NewPopulatedNidOptNative(r)
+		this.Field8 = NewPopulatedNidOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v83 := bool(r.Intn(2) == 0)
@@ -2830,10 +2887,13 @@ func NewPopulatedNinOptStruct(r randyThetest) *NinOptStruct {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
+func NewPopulatedNidRepStruct(r randyThetest, easy bool) *NidRepStruct {
 	this := &NidRepStruct{}
 	if r.Intn(10) != 0 {
 		v86 := r.Intn(100)
@@ -2853,7 +2913,7 @@ func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
 		v88 := r.Intn(10)
 		this.Field3 = make([]NidOptNative, v88)
 		for i := 0; i < v88; i++ {
-			v89 := NewPopulatedNidOptNative(r)
+			v89 := NewPopulatedNidOptNative(r, easy)
 			this.Field3[i] = *v89
 		}
 	}
@@ -2861,7 +2921,7 @@ func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
 		v90 := r.Intn(10)
 		this.Field4 = make([]NinOptNative, v90)
 		for i := 0; i < v90; i++ {
-			v91 := NewPopulatedNinOptNative(r)
+			v91 := NewPopulatedNinOptNative(r, easy)
 			this.Field4[i] = *v91
 		}
 	}
@@ -2883,7 +2943,7 @@ func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
 		v94 := r.Intn(10)
 		this.Field8 = make([]NidOptNative, v94)
 		for i := 0; i < v94; i++ {
-			v95 := NewPopulatedNidOptNative(r)
+			v95 := NewPopulatedNidOptNative(r, easy)
 			this.Field8[i] = *v95
 		}
 	}
@@ -2912,10 +2972,13 @@ func NewPopulatedNidRepStruct(r randyThetest) *NidRepStruct {
 			}
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNinRepStruct(r randyThetest) *NinRepStruct {
+func NewPopulatedNinRepStruct(r randyThetest, easy bool) *NinRepStruct {
 	this := &NinRepStruct{}
 	if r.Intn(10) != 0 {
 		v100 := r.Intn(100)
@@ -2935,14 +2998,14 @@ func NewPopulatedNinRepStruct(r randyThetest) *NinRepStruct {
 		v102 := r.Intn(10)
 		this.Field3 = make([]*NidOptNative, v102)
 		for i := 0; i < v102; i++ {
-			this.Field3[i] = NewPopulatedNidOptNative(r)
+			this.Field3[i] = NewPopulatedNidOptNative(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v103 := r.Intn(10)
 		this.Field4 = make([]*NinOptNative, v103)
 		for i := 0; i < v103; i++ {
-			this.Field4[i] = NewPopulatedNinOptNative(r)
+			this.Field4[i] = NewPopulatedNinOptNative(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -2963,7 +3026,7 @@ func NewPopulatedNinRepStruct(r randyThetest) *NinRepStruct {
 		v106 := r.Intn(10)
 		this.Field8 = make([]*NidOptNative, v106)
 		for i := 0; i < v106; i++ {
-			this.Field8[i] = NewPopulatedNidOptNative(r)
+			this.Field8[i] = NewPopulatedNidOptNative(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -2991,75 +3054,93 @@ func NewPopulatedNinRepStruct(r randyThetest) *NinRepStruct {
 			}
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
+	}
 	return this
 }
 
-func NewPopulatedNidEmbeddedStruct(r randyThetest) *NidEmbeddedStruct {
+func NewPopulatedNidEmbeddedStruct(r randyThetest, easy bool) *NidEmbeddedStruct {
 	this := &NidEmbeddedStruct{}
 	if r.Intn(10) != 0 {
-		this.NidOptNative = NewPopulatedNidOptNative(r)
+		this.NidOptNative = NewPopulatedNidOptNative(r, easy)
 	}
-	v111 := NewPopulatedNidOptNative(r)
+	v111 := NewPopulatedNidOptNative(r, easy)
 	this.Field200 = *v111
 	this.Field210 = bool(r.Intn(2) == 0)
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 211)
+	}
 	return this
 }
 
-func NewPopulatedNinEmbeddedStruct(r randyThetest) *NinEmbeddedStruct {
+func NewPopulatedNinEmbeddedStruct(r randyThetest, easy bool) *NinEmbeddedStruct {
 	this := &NinEmbeddedStruct{}
 	if r.Intn(10) != 0 {
-		this.NidOptNative = NewPopulatedNidOptNative(r)
+		this.NidOptNative = NewPopulatedNidOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Field200 = NewPopulatedNidOptNative(r)
+		this.Field200 = NewPopulatedNidOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v112 := bool(r.Intn(2) == 0)
 		this.Field210 = &v112
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 211)
+	}
 	return this
 }
 
-func NewPopulatedNidNestedStruct(r randyThetest) *NidNestedStruct {
+func NewPopulatedNidNestedStruct(r randyThetest, easy bool) *NidNestedStruct {
 	this := &NidNestedStruct{}
-	v113 := NewPopulatedNidOptStruct(r)
+	v113 := NewPopulatedNidOptStruct(r, easy)
 	this.Field1 = *v113
 	if r.Intn(10) != 0 {
 		v114 := r.Intn(10)
 		this.Field2 = make([]NidRepStruct, v114)
 		for i := 0; i < v114; i++ {
-			v115 := NewPopulatedNidRepStruct(r)
+			v115 := NewPopulatedNidRepStruct(r, easy)
 			this.Field2[i] = *v115
 		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
 	}
 	return this
 }
 
-func NewPopulatedNinNestedStruct(r randyThetest) *NinNestedStruct {
+func NewPopulatedNinNestedStruct(r randyThetest, easy bool) *NinNestedStruct {
 	this := &NinNestedStruct{}
 	if r.Intn(10) != 0 {
-		this.Field1 = NewPopulatedNidOptStruct(r)
+		this.Field1 = NewPopulatedNidOptStruct(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v116 := r.Intn(10)
 		this.Field2 = make([]*NidRepStruct, v116)
 		for i := 0; i < v116; i++ {
-			this.Field2[i] = NewPopulatedNidRepStruct(r)
+			this.Field2[i] = NewPopulatedNidRepStruct(r, easy)
 		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
 	}
 	return this
 }
 
-func NewPopulatedNidOptCustom(r randyThetest) *NidOptCustom {
+func NewPopulatedNidOptCustom(r randyThetest, easy bool) *NidOptCustom {
 	this := &NidOptCustom{}
 	v117 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
 	this.Id = *v117
 	v118 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
 	this.Value = *v118
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedNinOptCustom(r randyThetest) *NinOptCustom {
+func NewPopulatedNinOptCustom(r randyThetest, easy bool) *NinOptCustom {
 	this := &NinOptCustom{}
 	if r.Intn(10) != 0 {
 		this.Id = code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUuid(r)
@@ -3067,10 +3148,13 @@ func NewPopulatedNinOptCustom(r randyThetest) *NinOptCustom {
 	if r.Intn(10) != 0 {
 		this.Value = code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedNidRepCustom(r randyThetest) *NidRepCustom {
+func NewPopulatedNidRepCustom(r randyThetest, easy bool) *NidRepCustom {
 	this := &NidRepCustom{}
 	if r.Intn(10) != 0 {
 		v119 := r.Intn(10)
@@ -3088,10 +3172,13 @@ func NewPopulatedNidRepCustom(r randyThetest) *NidRepCustom {
 			this.Value[i] = *v122
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedNinRepCustom(r randyThetest) *NinRepCustom {
+func NewPopulatedNinRepCustom(r randyThetest, easy bool) *NinRepCustom {
 	this := &NinRepCustom{}
 	if r.Intn(10) != 0 {
 		v123 := r.Intn(10)
@@ -3109,10 +3196,13 @@ func NewPopulatedNinRepCustom(r randyThetest) *NinRepCustom {
 			this.Value[i] = *v126
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedNinOptNativeUnion(r randyThetest) *NinOptNativeUnion {
+func NewPopulatedNinOptNativeUnion(r randyThetest, easy bool) *NinOptNativeUnion {
 	this := &NinOptNativeUnion{}
 	fieldNum := r.Intn(9)
 	switch fieldNum {
@@ -3150,7 +3240,7 @@ func NewPopulatedNinOptNativeUnion(r randyThetest) *NinOptNativeUnion {
 	return this
 }
 
-func NewPopulatedNinOptStructUnion(r randyThetest) *NinOptStructUnion {
+func NewPopulatedNinOptStructUnion(r randyThetest, easy bool) *NinOptStructUnion {
 	this := &NinOptStructUnion{}
 	fieldNum := r.Intn(9)
 	switch fieldNum {
@@ -3161,9 +3251,9 @@ func NewPopulatedNinOptStructUnion(r randyThetest) *NinOptStructUnion {
 		v137 := r.Float32()
 		this.Field2 = &v137
 	case 2:
-		this.Field3 = NewPopulatedNidOptNative(r)
+		this.Field3 = NewPopulatedNidOptNative(r, easy)
 	case 3:
-		this.Field4 = NewPopulatedNinOptNative(r)
+		this.Field4 = NewPopulatedNinOptNative(r, easy)
 	case 4:
 		v138 := uint64(r.Uint32())
 		this.Field6 = &v138
@@ -3186,14 +3276,14 @@ func NewPopulatedNinOptStructUnion(r randyThetest) *NinOptStructUnion {
 	return this
 }
 
-func NewPopulatedNinEmbeddedStructUnion(r randyThetest) *NinEmbeddedStructUnion {
+func NewPopulatedNinEmbeddedStructUnion(r randyThetest, easy bool) *NinEmbeddedStructUnion {
 	this := &NinEmbeddedStructUnion{}
 	fieldNum := r.Intn(3)
 	switch fieldNum {
 	case 0:
-		this.NidOptNative = NewPopulatedNidOptNative(r)
+		this.NidOptNative = NewPopulatedNidOptNative(r, easy)
 	case 1:
-		this.Field200 = NewPopulatedNinOptNative(r)
+		this.Field200 = NewPopulatedNinOptNative(r, easy)
 	case 2:
 		v143 := bool(r.Intn(2) == 0)
 		this.Field210 = &v143
@@ -3201,117 +3291,144 @@ func NewPopulatedNinEmbeddedStructUnion(r randyThetest) *NinEmbeddedStructUnion 
 	return this
 }
 
-func NewPopulatedNinNestedStructUnion(r randyThetest) *NinNestedStructUnion {
+func NewPopulatedNinNestedStructUnion(r randyThetest, easy bool) *NinNestedStructUnion {
 	this := &NinNestedStructUnion{}
 	fieldNum := r.Intn(3)
 	switch fieldNum {
 	case 0:
-		this.Field1 = NewPopulatedNinOptNativeUnion(r)
+		this.Field1 = NewPopulatedNinOptNativeUnion(r, easy)
 	case 1:
-		this.Field2 = NewPopulatedNinOptStructUnion(r)
+		this.Field2 = NewPopulatedNinOptStructUnion(r, easy)
 	case 2:
-		this.Field3 = NewPopulatedNinEmbeddedStructUnion(r)
+		this.Field3 = NewPopulatedNinEmbeddedStructUnion(r, easy)
 	}
 	return this
 }
 
-func NewPopulatedTree(r randyThetest) *Tree {
+func NewPopulatedTree(r randyThetest, easy bool) *Tree {
 	this := &Tree{}
 	fieldNum := r.Intn(102)
 	switch fieldNum {
 	case 0:
-		this.Or = NewPopulatedOrBranch(r)
+		this.Or = NewPopulatedOrBranch(r, easy)
 	case 1:
-		this.And = NewPopulatedAndBranch(r)
+		this.And = NewPopulatedAndBranch(r, easy)
 	case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101:
-		this.Leaf = NewPopulatedLeaf(r)
+		this.Leaf = NewPopulatedLeaf(r, easy)
 	}
 	return this
 }
 
-func NewPopulatedOrBranch(r randyThetest) *OrBranch {
+func NewPopulatedOrBranch(r randyThetest, easy bool) *OrBranch {
 	this := &OrBranch{}
-	v144 := NewPopulatedTree(r)
+	v144 := NewPopulatedTree(r, easy)
 	this.Left = *v144
-	v145 := NewPopulatedTree(r)
+	v145 := NewPopulatedTree(r, easy)
 	this.Right = *v145
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedAndBranch(r randyThetest) *AndBranch {
+func NewPopulatedAndBranch(r randyThetest, easy bool) *AndBranch {
 	this := &AndBranch{}
-	v146 := NewPopulatedTree(r)
+	v146 := NewPopulatedTree(r, easy)
 	this.Left = *v146
-	v147 := NewPopulatedTree(r)
+	v147 := NewPopulatedTree(r, easy)
 	this.Right = *v147
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedLeaf(r randyThetest) *Leaf {
+func NewPopulatedLeaf(r randyThetest, easy bool) *Leaf {
 	this := &Leaf{}
 	this.Value = r.Int63()
 	this.StrValue = randStringThetest(r)
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedDeepTree(r randyThetest) *DeepTree {
+func NewPopulatedDeepTree(r randyThetest, easy bool) *DeepTree {
 	this := &DeepTree{}
 	fieldNum := r.Intn(102)
 	switch fieldNum {
 	case 0:
-		this.Down = NewPopulatedADeepBranch(r)
+		this.Down = NewPopulatedADeepBranch(r, easy)
 	case 1:
-		this.And = NewPopulatedAndDeepBranch(r)
+		this.And = NewPopulatedAndDeepBranch(r, easy)
 	case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101:
-		this.Leaf = NewPopulatedDeepLeaf(r)
+		this.Leaf = NewPopulatedDeepLeaf(r, easy)
 	}
 	return this
 }
 
-func NewPopulatedADeepBranch(r randyThetest) *ADeepBranch {
+func NewPopulatedADeepBranch(r randyThetest, easy bool) *ADeepBranch {
 	this := &ADeepBranch{}
-	v148 := NewPopulatedDeepTree(r)
+	v148 := NewPopulatedDeepTree(r, easy)
 	this.Down = *v148
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedAndDeepBranch(r randyThetest) *AndDeepBranch {
+func NewPopulatedAndDeepBranch(r randyThetest, easy bool) *AndDeepBranch {
 	this := &AndDeepBranch{}
-	v149 := NewPopulatedDeepTree(r)
+	v149 := NewPopulatedDeepTree(r, easy)
 	this.Left = *v149
-	v150 := NewPopulatedDeepTree(r)
+	v150 := NewPopulatedDeepTree(r, easy)
 	this.Right = *v150
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedDeepLeaf(r randyThetest) *DeepLeaf {
+func NewPopulatedDeepLeaf(r randyThetest, easy bool) *DeepLeaf {
 	this := &DeepLeaf{}
-	v151 := NewPopulatedTree(r)
+	v151 := NewPopulatedTree(r, easy)
 	this.Tree = *v151
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedNil(r randyThetest) *Nil {
+func NewPopulatedNil(r randyThetest, easy bool) *Nil {
 	this := &Nil{}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 1)
+	}
 	return this
 }
 
-func NewPopulatedNidOptEnum(r randyThetest) *NidOptEnum {
+func NewPopulatedNidOptEnum(r randyThetest, easy bool) *NidOptEnum {
 	this := &NidOptEnum{}
 	this.Field1 = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedNinOptEnum(r randyThetest) *NinOptEnum {
+func NewPopulatedNinOptEnum(r randyThetest, easy bool) *NinOptEnum {
 	this := &NinOptEnum{}
 	if r.Intn(10) != 0 {
 		v152 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
 		this.Field1 = &v152
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedNidRepEnum(r randyThetest) *NidRepEnum {
+func NewPopulatedNidRepEnum(r randyThetest, easy bool) *NidRepEnum {
 	this := &NidRepEnum{}
 	if r.Intn(10) != 0 {
 		v153 := r.Intn(10)
@@ -3320,10 +3437,13 @@ func NewPopulatedNidRepEnum(r randyThetest) *NidRepEnum {
 			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedNinRepEnum(r randyThetest) *NinRepEnum {
+func NewPopulatedNinRepEnum(r randyThetest, easy bool) *NinRepEnum {
 	this := &NinRepEnum{}
 	if r.Intn(10) != 0 {
 		v154 := r.Intn(10)
@@ -3332,10 +3452,13 @@ func NewPopulatedNinRepEnum(r randyThetest) *NinRepEnum {
 			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedTimer(r randyThetest) *Timer {
+func NewPopulatedTimer(r randyThetest, easy bool) *Timer {
 	this := &Timer{}
 	this.Time1 = r.Int63()
 	this.Time2 = r.Int63()
@@ -3343,6 +3466,9 @@ func NewPopulatedTimer(r randyThetest) *Timer {
 	this.Data = make([]byte, v155)
 	for i := 0; i < v155; i++ {
 		this.Data[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 4)
 	}
 	return this
 }
@@ -3371,256 +3497,294 @@ func randStringThetest(r randyThetest) string {
 	}
 	return string(tmps)
 }
+func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (data []byte) {
+	l := 1
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		key := uint32(fieldNumber)<<3 | uint32(wire)
+		switch wire {
+		case 0:
+			data = encodeVarintThetest(data, uint64(key))
+			data = encodeVarintThetest(data, uint64(r.Int63()))
+		case 1:
+			data = encodeVarintThetest(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		case 2:
+			data = encodeVarintThetest(data, uint64(key))
+			ll := r.Intn(100)
+			data = encodeVarintThetest(data, uint64(ll))
+			for j := 0; j < ll; j++ {
+				data = append(data, byte(r.Intn(256)))
+			}
+		default:
+			data = encodeVarintThetest(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		}
+	}
+	return data
+}
+func encodeVarintThetest(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
 func (this *NidOptNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidOptNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidOptNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptNative{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + valueToGoStringThetest(this.Field8, "int64"), `Field9:` + valueToGoStringThetest(this.Field9, "uint32"), `Field10:` + valueToGoStringThetest(this.Field10, "int32"), `Field11:` + valueToGoStringThetest(this.Field11, "uint64"), `Field12:` + valueToGoStringThetest(this.Field12, "int64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptNative{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + valueToGoStringThetest(this.Field8, "int64"), `Field9:` + valueToGoStringThetest(this.Field9, "uint32"), `Field10:` + valueToGoStringThetest(this.Field10, "int32"), `Field11:` + valueToGoStringThetest(this.Field11, "uint64"), `Field12:` + valueToGoStringThetest(this.Field12, "int64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinRepNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepPackedNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinRepPackedNative) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepPackedNative{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field9:` + fmt1.Sprintf("%#v", this.Field9), `Field10:` + fmt1.Sprintf("%#v", this.Field10), `Field11:` + fmt1.Sprintf("%#v", this.Field11), `Field12:` + fmt1.Sprintf("%#v", this.Field12), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidOptStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidOptStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + strings1.Replace(this.Field3.GoString(), `&`, ``, 1), `Field4:` + strings1.Replace(this.Field4.GoString(), `&`, ``, 1), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + strings1.Replace(this.Field8.GoString(), `&`, ``, 1), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidOptStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + strings1.Replace(this.Field3.GoString(), `&`, ``, 1), `Field4:` + strings1.Replace(this.Field4.GoString(), `&`, ``, 1), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + strings1.Replace(this.Field8.GoString(), `&`, ``, 1), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptStruct{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptStruct{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field3), `&`, ``, 1), `Field4:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field4), `&`, ``, 1), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field8), `&`, ``, 1), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field3), `&`, ``, 1), `Field4:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field4), `&`, ``, 1), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field8), `&`, ``, 1), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinRepStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + fmt1.Sprintf("%#v", this.Field6), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `Field8:` + fmt1.Sprintf("%#v", this.Field8), `Field13:` + fmt1.Sprintf("%#v", this.Field13), `Field14:` + fmt1.Sprintf("%#v", this.Field14), `Field15:` + fmt1.Sprintf("%#v", this.Field15), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidEmbeddedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + strings1.Replace(this.Field200.GoString(), `&`, ``, 1), `Field210:` + fmt1.Sprintf("%#v", this.Field210) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + strings1.Replace(this.Field200.GoString(), `&`, ``, 1), `Field210:` + fmt1.Sprintf("%#v", this.Field210), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinEmbeddedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinEmbeddedStruct{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidNestedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidNestedStruct{` + `Field1:` + strings1.Replace(this.Field1.GoString(), `&`, ``, 1), `Field2:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field2), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidNestedStruct{` + `Field1:` + strings1.Replace(this.Field1.GoString(), `&`, ``, 1), `Field2:` + strings1.Replace(fmt1.Sprintf("%#v", this.Field2), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinNestedStruct) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinNestedStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinNestedStruct{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidOptCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidOptCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidOptCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoStringThetest(this.Id, "code_google_com_p_gogoprotobuf_test_custom.Uuid"), `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom.Uint128") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoStringThetest(this.Id, "code_google_com_p_gogoprotobuf_test_custom.Uuid"), `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom.Uint128"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinRepCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptNativeUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptNativeUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptNativeUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptStructUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptStructUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptStructUnion{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Field4:` + fmt1.Sprintf("%#v", this.Field4), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinEmbeddedStructUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinEmbeddedStructUnion{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinEmbeddedStructUnion{` + `NidOptNative:` + fmt1.Sprintf("%#v", this.NidOptNative), `Field200:` + fmt1.Sprintf("%#v", this.Field200), `Field210:` + valueToGoStringThetest(this.Field210, "bool"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinNestedStructUnion) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinNestedStructUnion{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinNestedStructUnion{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Tree) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.Tree{` + `Or:` + fmt1.Sprintf("%#v", this.Or), `And:` + fmt1.Sprintf("%#v", this.And), `Leaf:` + fmt1.Sprintf("%#v", this.Leaf) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.Tree{` + `Or:` + fmt1.Sprintf("%#v", this.Or), `And:` + fmt1.Sprintf("%#v", this.And), `Leaf:` + fmt1.Sprintf("%#v", this.Leaf), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OrBranch) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.OrBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.OrBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *AndBranch) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.AndBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.AndBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Leaf) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.Leaf{` + `Value:` + fmt1.Sprintf("%#v", this.Value), `StrValue:` + fmt1.Sprintf("%#v", this.StrValue) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.Leaf{` + `Value:` + fmt1.Sprintf("%#v", this.Value), `StrValue:` + fmt1.Sprintf("%#v", this.StrValue), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *DeepTree) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.DeepTree{` + `Down:` + fmt1.Sprintf("%#v", this.Down), `And:` + fmt1.Sprintf("%#v", this.And), `Leaf:` + fmt1.Sprintf("%#v", this.Leaf) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.DeepTree{` + `Down:` + fmt1.Sprintf("%#v", this.Down), `And:` + fmt1.Sprintf("%#v", this.And), `Leaf:` + fmt1.Sprintf("%#v", this.Leaf), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *ADeepBranch) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.ADeepBranch{` + `Down:` + strings1.Replace(this.Down.GoString(), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.ADeepBranch{` + `Down:` + strings1.Replace(this.Down.GoString(), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *AndDeepBranch) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.AndDeepBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.AndDeepBranch{` + `Left:` + strings1.Replace(this.Left.GoString(), `&`, ``, 1), `Right:` + strings1.Replace(this.Right.GoString(), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *DeepLeaf) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.DeepLeaf{` + `Tree:` + strings1.Replace(this.Tree.GoString(), `&`, ``, 1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.DeepLeaf{` + `Tree:` + strings1.Replace(this.Tree.GoString(), `&`, ``, 1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Nil) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.Nil{` + `}`}, ", ")
+	s := strings1.Join([]string{`&test.Nil{` + `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidOptEnum) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidOptEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidOptEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptEnum) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptEnum{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.TheTestEnum") + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptEnum{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.TheTestEnum"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepEnum) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NidRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NidRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinRepEnum) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Timer) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.Timer{` + `Time1:` + fmt1.Sprintf("%#v", this.Time1), `Time2:` + fmt1.Sprintf("%#v", this.Time2), `Data:` + fmt1.Sprintf("%#v", this.Data) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.Timer{` + `Time1:` + fmt1.Sprintf("%#v", this.Time1), `Time2:` + fmt1.Sprintf("%#v", this.Time2), `Data:` + fmt1.Sprintf("%#v", this.Data), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringThetest(v interface{}, typ string) string {
@@ -5455,6 +5619,9 @@ func (this *NidOptNative) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidOptNative) Equal(that interface{}) bool {
@@ -5520,6 +5687,9 @@ func (this *NidOptNative) Equal(that interface{}) bool {
 		return false
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -5673,6 +5843,9 @@ func (this *NinOptNative) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinOptNative) Equal(that interface{}) bool {
@@ -5824,6 +5997,9 @@ func (this *NinOptNative) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidRepNative) VerboseEqual(that interface{}) error {
@@ -5965,6 +6141,9 @@ func (this *NidRepNative) VerboseEqual(that interface{}) error {
 		if !bytes.Equal(this.Field15[i], that1.Field15[i]) {
 			return fmt2.Errorf("Field15 this[%v](%v) Not Equal that[%v](%v)", i, this.Field15[i], i, that1.Field15[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -6108,6 +6287,9 @@ func (this *NidRepNative) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinRepNative) VerboseEqual(that interface{}) error {
@@ -6249,6 +6431,9 @@ func (this *NinRepNative) VerboseEqual(that interface{}) error {
 		if !bytes.Equal(this.Field15[i], that1.Field15[i]) {
 			return fmt2.Errorf("Field15 this[%v](%v) Not Equal that[%v](%v)", i, this.Field15[i], i, that1.Field15[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -6392,6 +6577,9 @@ func (this *NinRepNative) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
@@ -6517,6 +6705,9 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 		if this.Field13[i] != that1.Field13[i] {
 			return fmt2.Errorf("Field13 this[%v](%v) Not Equal that[%v](%v)", i, this.Field13[i], i, that1.Field13[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -6644,6 +6835,9 @@ func (this *NidRepPackedNative) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
@@ -6769,6 +6963,9 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 		if this.Field13[i] != that1.Field13[i] {
 			return fmt2.Errorf("Field13 this[%v](%v) Not Equal that[%v](%v)", i, this.Field13[i], i, that1.Field13[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -6896,6 +7093,9 @@ func (this *NinRepPackedNative) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidOptStruct) VerboseEqual(that interface{}) error {
@@ -6948,6 +7148,9 @@ func (this *NidOptStruct) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidOptStruct) Equal(that interface{}) bool {
@@ -6998,6 +7201,9 @@ func (this *NidOptStruct) Equal(that interface{}) bool {
 		return false
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -7088,6 +7294,9 @@ func (this *NinOptStruct) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinOptStruct) Equal(that interface{}) bool {
@@ -7174,6 +7383,9 @@ func (this *NinOptStruct) Equal(that interface{}) bool {
 		return false
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -7278,6 +7490,9 @@ func (this *NidRepStruct) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field15 this[%v](%v) Not Equal that[%v](%v)", i, this.Field15[i], i, that1.Field15[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidRepStruct) Equal(that interface{}) bool {
@@ -7379,6 +7594,9 @@ func (this *NidRepStruct) Equal(that interface{}) bool {
 		if !bytes.Equal(this.Field15[i], that1.Field15[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -7482,6 +7700,9 @@ func (this *NinRepStruct) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field15 this[%v](%v) Not Equal that[%v](%v)", i, this.Field15[i], i, that1.Field15[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinRepStruct) Equal(that interface{}) bool {
@@ -7584,6 +7805,9 @@ func (this *NinRepStruct) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
@@ -7615,6 +7839,9 @@ func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
 	if this.Field210 != that1.Field210 {
 		return fmt2.Errorf("Field210 this(%v) Not Equal that(%v)", this.Field210, that1.Field210)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
@@ -7644,6 +7871,9 @@ func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Field210 != that1.Field210 {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -7683,6 +7913,9 @@ func (this *NinEmbeddedStruct) VerboseEqual(that interface{}) error {
 	} else if that1.Field210 != nil {
 		return fmt2.Errorf("Field210 this(%v) Not Equal that(%v)", this.Field210, that1.Field210)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinEmbeddedStruct) Equal(that interface{}) bool {
@@ -7720,6 +7953,9 @@ func (this *NinEmbeddedStruct) Equal(that interface{}) bool {
 	} else if that1.Field210 != nil {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidNestedStruct) VerboseEqual(that interface{}) error {
@@ -7752,6 +7988,9 @@ func (this *NidNestedStruct) VerboseEqual(that interface{}) error {
 		if !this.Field2[i].Equal(&that1.Field2[i]) {
 			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -7786,6 +8025,9 @@ func (this *NidNestedStruct) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinNestedStruct) VerboseEqual(that interface{}) error {
@@ -7818,6 +8060,9 @@ func (this *NinNestedStruct) VerboseEqual(that interface{}) error {
 		if !this.Field2[i].Equal(that1.Field2[i]) {
 			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -7852,6 +8097,9 @@ func (this *NinNestedStruct) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NidOptCustom) VerboseEqual(that interface{}) error {
@@ -7880,6 +8128,9 @@ func (this *NidOptCustom) VerboseEqual(that interface{}) error {
 	if !this.Value.Equal(that1.Value) {
 		return fmt2.Errorf("Value this(%v) Not Equal that(%v)", this.Value, that1.Value)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidOptCustom) Equal(that interface{}) bool {
@@ -7906,6 +8157,9 @@ func (this *NidOptCustom) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Value.Equal(that1.Value) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -7944,6 +8198,9 @@ func (this *NinOptCustom) VerboseEqual(that interface{}) error {
 	} else if !this.Value.Equal(*that1.Value) {
 		return fmt2.Errorf("Value this(%v) Not Equal that(%v)", this.Value, that1.Value)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinOptCustom) Equal(that interface{}) bool {
@@ -7978,6 +8235,9 @@ func (this *NinOptCustom) Equal(that interface{}) bool {
 			return false
 		}
 	} else if !this.Value.Equal(*that1.Value) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -8018,6 +8278,9 @@ func (this *NidRepCustom) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Value this[%v](%v) Not Equal that[%v](%v)", i, this.Value[i], i, that1.Value[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidRepCustom) Equal(that interface{}) bool {
@@ -8055,6 +8318,9 @@ func (this *NidRepCustom) Equal(that interface{}) bool {
 		if !this.Value[i].Equal(that1.Value[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -8094,6 +8360,9 @@ func (this *NinRepCustom) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Value this[%v](%v) Not Equal that[%v](%v)", i, this.Value[i], i, that1.Value[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinRepCustom) Equal(that interface{}) bool {
@@ -8131,6 +8400,9 @@ func (this *NinRepCustom) Equal(that interface{}) bool {
 		if !this.Value[i].Equal(that1.Value[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -8229,6 +8501,9 @@ func (this *NinOptNativeUnion) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinOptNativeUnion) Equal(that interface{}) bool {
@@ -8326,6 +8601,9 @@ func (this *NinOptNativeUnion) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinOptStructUnion) VerboseEqual(that interface{}) error {
@@ -8410,6 +8688,9 @@ func (this *NinOptStructUnion) VerboseEqual(that interface{}) error {
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -8496,6 +8777,9 @@ func (this *NinOptStructUnion) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinEmbeddedStructUnion) VerboseEqual(that interface{}) error {
@@ -8532,6 +8816,9 @@ func (this *NinEmbeddedStructUnion) VerboseEqual(that interface{}) error {
 		return fmt2.Errorf("this.Field210 == nil && that.Field210 != nil")
 	} else if that1.Field210 != nil {
 		return fmt2.Errorf("Field210 this(%v) Not Equal that(%v)", this.Field210, that1.Field210)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -8570,6 +8857,9 @@ func (this *NinEmbeddedStructUnion) Equal(that interface{}) bool {
 	} else if that1.Field210 != nil {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *NinNestedStructUnion) VerboseEqual(that interface{}) error {
@@ -8601,6 +8891,9 @@ func (this *NinNestedStructUnion) VerboseEqual(that interface{}) error {
 	if !this.Field3.Equal(that1.Field3) {
 		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinNestedStructUnion) Equal(that interface{}) bool {
@@ -8630,6 +8923,9 @@ func (this *NinNestedStructUnion) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Field3.Equal(that1.Field3) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -8663,6 +8959,9 @@ func (this *Tree) VerboseEqual(that interface{}) error {
 	if !this.Leaf.Equal(that1.Leaf) {
 		return fmt2.Errorf("Leaf this(%v) Not Equal that(%v)", this.Leaf, that1.Leaf)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Tree) Equal(that interface{}) bool {
@@ -8694,6 +8993,9 @@ func (this *Tree) Equal(that interface{}) bool {
 	if !this.Leaf.Equal(that1.Leaf) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OrBranch) VerboseEqual(that interface{}) error {
@@ -8722,6 +9024,9 @@ func (this *OrBranch) VerboseEqual(that interface{}) error {
 	if !this.Right.Equal(&that1.Right) {
 		return fmt2.Errorf("Right this(%v) Not Equal that(%v)", this.Right, that1.Right)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OrBranch) Equal(that interface{}) bool {
@@ -8748,6 +9053,9 @@ func (this *OrBranch) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Right.Equal(&that1.Right) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -8778,6 +9086,9 @@ func (this *AndBranch) VerboseEqual(that interface{}) error {
 	if !this.Right.Equal(&that1.Right) {
 		return fmt2.Errorf("Right this(%v) Not Equal that(%v)", this.Right, that1.Right)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *AndBranch) Equal(that interface{}) bool {
@@ -8804,6 +9115,9 @@ func (this *AndBranch) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Right.Equal(&that1.Right) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -8834,6 +9148,9 @@ func (this *Leaf) VerboseEqual(that interface{}) error {
 	if this.StrValue != that1.StrValue {
 		return fmt2.Errorf("StrValue this(%v) Not Equal that(%v)", this.StrValue, that1.StrValue)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Leaf) Equal(that interface{}) bool {
@@ -8860,6 +9177,9 @@ func (this *Leaf) Equal(that interface{}) bool {
 		return false
 	}
 	if this.StrValue != that1.StrValue {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -8893,6 +9213,9 @@ func (this *DeepTree) VerboseEqual(that interface{}) error {
 	if !this.Leaf.Equal(that1.Leaf) {
 		return fmt2.Errorf("Leaf this(%v) Not Equal that(%v)", this.Leaf, that1.Leaf)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *DeepTree) Equal(that interface{}) bool {
@@ -8924,6 +9247,9 @@ func (this *DeepTree) Equal(that interface{}) bool {
 	if !this.Leaf.Equal(that1.Leaf) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *ADeepBranch) VerboseEqual(that interface{}) error {
@@ -8949,6 +9275,9 @@ func (this *ADeepBranch) VerboseEqual(that interface{}) error {
 	if !this.Down.Equal(&that1.Down) {
 		return fmt2.Errorf("Down this(%v) Not Equal that(%v)", this.Down, that1.Down)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *ADeepBranch) Equal(that interface{}) bool {
@@ -8972,6 +9301,9 @@ func (this *ADeepBranch) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Down.Equal(&that1.Down) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -9002,6 +9334,9 @@ func (this *AndDeepBranch) VerboseEqual(that interface{}) error {
 	if !this.Right.Equal(&that1.Right) {
 		return fmt2.Errorf("Right this(%v) Not Equal that(%v)", this.Right, that1.Right)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *AndDeepBranch) Equal(that interface{}) bool {
@@ -9030,6 +9365,9 @@ func (this *AndDeepBranch) Equal(that interface{}) bool {
 	if !this.Right.Equal(&that1.Right) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *DeepLeaf) VerboseEqual(that interface{}) error {
@@ -9054,6 +9392,9 @@ func (this *DeepLeaf) VerboseEqual(that interface{}) error {
 	}
 	if !this.Tree.Equal(&that1.Tree) {
 		return fmt2.Errorf("Tree this(%v) Not Equal that(%v)", this.Tree, that1.Tree)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -9080,6 +9421,9 @@ func (this *DeepLeaf) Equal(that interface{}) bool {
 	if !this.Tree.Equal(&that1.Tree) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Nil) VerboseEqual(that interface{}) error {
@@ -9102,6 +9446,9 @@ func (this *Nil) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt2.Errorf("that is type *Nilbut is not nil && this == nil")
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Nil) Equal(that interface{}) bool {
@@ -9122,6 +9469,9 @@ func (this *Nil) Equal(that interface{}) bool {
 		}
 		return false
 	} else if this == nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -9149,6 +9499,9 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 	if this.Field1 != that1.Field1 {
 		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidOptEnum) Equal(that interface{}) bool {
@@ -9172,6 +9525,9 @@ func (this *NidOptEnum) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Field1 != that1.Field1 {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -9205,6 +9561,9 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 	} else if that1.Field1 != nil {
 		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinOptEnum) Equal(that interface{}) bool {
@@ -9234,6 +9593,9 @@ func (this *NinOptEnum) Equal(that interface{}) bool {
 	} else if this.Field1 != nil {
 		return false
 	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -9266,6 +9628,9 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NidRepEnum) Equal(that interface{}) bool {
@@ -9295,6 +9660,9 @@ func (this *NidRepEnum) Equal(that interface{}) bool {
 		if this.Field1[i] != that1.Field1[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -9326,6 +9694,9 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field1 this[%v](%v) Not Equal that[%v](%v)", i, this.Field1[i], i, that1.Field1[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NinRepEnum) Equal(that interface{}) bool {
@@ -9355,6 +9726,9 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 		if this.Field1[i] != that1.Field1[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -9387,6 +9761,9 @@ func (this *Timer) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Data, that1.Data) {
 		return fmt2.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Timer) Equal(that interface{}) bool {
@@ -9416,6 +9793,9 @@ func (this *Timer) Equal(that interface{}) bool {
 		return false
 	}
 	if !bytes.Equal(this.Data, that1.Data) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true

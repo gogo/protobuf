@@ -184,7 +184,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 		} else if len(goTypNames) != 1 {
 			panic(fmt.Errorf("unreachable: too many dots in %v", goTypName))
 		}
-		funcCall := funcName + "(r)"
+		funcCall := funcName + "(r, easy)"
 		if field.IsRepeated() {
 			p.P(p.varGen.Next(), ` := r.Intn(10)`)
 			p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -370,7 +370,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `) *`, ccTypeName, ` {`)
+		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
 		if gogoproto.IsUnion(message.File(), message.DescriptorProto) && len(message.Field) > 0 {
@@ -403,6 +403,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			}
 			p.P(`}`)
 		} else {
+			var maxFieldNumber int32
 			for _, field := range message.Field {
 				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) {
 					p.GenerateField(message, field)
@@ -413,7 +414,15 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					p.Out()
 					p.P(`}`)
 				}
+				if field.GetNumber() > maxFieldNumber {
+					maxFieldNumber = field.GetNumber()
+				}
 			}
+			p.P(`if !easy && r.Intn(10) != 0 {`)
+			p.In()
+			p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
+			p.Out()
+			p.P(`}`)
 		}
 		p.P(`return this`)
 		p.Out()
@@ -436,22 +445,6 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.Out()
 	p.P(`}`)
 
-	/*
-		// unicode/utf8
-		// ValidRune reports whether r can be legally encoded as UTF-8.
-		// Code points that are out of range or a surrogate half are illegal.
-		func ValidRune(r rune) bool {
-			switch {
-			case r < 0:
-				return false
-			case surrogateMin <= r && r <= surrogateMax:
-				return false
-			case r > MaxRune:
-				return false
-			}
-			return true
-		}
-	*/
 	surrogateRange := surrogateMax - surrogateMin
 	maxRand := maxRune - surrogateRange
 
@@ -479,6 +472,64 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.P(`return string(tmps)`)
 	p.Out()
 	p.P(`}`)
+
+	p.P(`func randUnrecognized`, p.localName, `(r randy`, p.localName, `, maxFieldNumber int) (data []byte) {`)
+	p.In()
+	//p.P(`l := r.Intn(10)`)
+	p.P(`l := 1`)
+	p.P(`for i := 0; i < l; i++ {`)
+	p.In()
+	p.P(`wire := r.Intn(4)`)
+	p.P(`if wire == 3 { wire = 5 }`)
+	p.P(`fieldNumber := maxFieldNumber + r.Intn(100)`)
+	p.P(`key := uint32(fieldNumber)<<3 | uint32(wire)`)
+	p.P(`switch wire {`)
+	p.P(`case 0:`)
+	p.In()
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(key))`)
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(r.Int63()))`)
+	p.Out()
+	p.P(`case 1:`)
+	p.In()
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(key))`)
+	p.P(`data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
+	p.Out()
+	p.P(`case 2:`)
+	p.In()
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(key))`)
+	p.P(`ll := r.Intn(100)`)
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(ll))`)
+	p.P(`for j := 0; j < ll; j++ {`)
+	p.In()
+	p.P(`data = append(data, byte(r.Intn(256)))`)
+	p.Out()
+	p.P(`}`)
+	p.Out()
+	p.P(`default:`)
+	p.In()
+	p.P(`data = encodeVarint`, p.localName, `(data, uint64(key))`)
+	p.P(`data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
+	p.Out()
+	p.P(`}`)
+	p.Out()
+	p.P(`}`)
+	p.P(`return data`)
+	p.Out()
+	p.P(`}`)
+
+	p.P(`func encodeVarint`, p.localName, `(data []byte, v uint64) []byte {`)
+	p.In()
+	p.P(`for v >= 1<<7 {`)
+	p.In()
+	p.P(`data = append(data, uint8(uint64(v)&0x7f|0x80))`)
+	p.P(`v >>= 7`)
+	p.Out()
+	p.P(`}`)
+	p.P(`data = append(data, uint8(v))`)
+	p.P(`return data`)
+	p.Out()
+	p.P(`}`)
+
 }
 
 func init() {

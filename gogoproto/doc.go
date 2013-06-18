@@ -115,7 +115,7 @@ The enumprefix, getters and msgstringmethod extensions can be used to remove som
 
   - enumprefix, if false, generates the enum constant names without the messagetype prefix
   - getters, if false, the message is generated without get methods, this is useful when you would rather want to use face
-  - msgstringmethod, if false, the message is generated without the default string method, this is useful for rather using stringgen
+  - msgstringmethod, if false, the message is generated without the default string method, this is useful for rather using stringer
 
 Less Typing and Peace of Mind is explained in their specific plugin folders godoc:
 

@@ -32,7 +32,7 @@ import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/pro
 
 func TestAProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -51,7 +51,7 @@ func TestAProto(t *testing.T) {
 
 func TestBProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -70,7 +70,7 @@ func TestBProto(t *testing.T) {
 
 func TestDProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -89,7 +89,7 @@ func TestDProto(t *testing.T) {
 
 func TestCProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -108,7 +108,7 @@ func TestCProto(t *testing.T) {
 
 func TestOldAProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -127,7 +127,7 @@ func TestOldAProto(t *testing.T) {
 
 func TestOldBProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -146,7 +146,7 @@ func TestOldBProto(t *testing.T) {
 
 func TestOldCProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -165,7 +165,7 @@ func TestOldCProto(t *testing.T) {
 
 func TestAJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -184,7 +184,7 @@ func TestAJSON(t *testing1.T) {
 }
 func TestBJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -203,7 +203,7 @@ func TestBJSON(t *testing1.T) {
 }
 func TestDJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -222,7 +222,7 @@ func TestDJSON(t *testing1.T) {
 }
 func TestCJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -241,7 +241,7 @@ func TestCJSON(t *testing1.T) {
 }
 func TestOldAJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -260,7 +260,7 @@ func TestOldAJSON(t *testing1.T) {
 }
 func TestOldBJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -279,7 +279,7 @@ func TestOldBJSON(t *testing1.T) {
 }
 func TestOldCJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -298,7 +298,7 @@ func TestOldCJSON(t *testing1.T) {
 }
 func TestAProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &A{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -314,7 +314,7 @@ func TestAProtoText(t *testing2.T) {
 
 func TestAProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &A{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -330,7 +330,7 @@ func TestAProtoCompactText(t *testing2.T) {
 
 func TestBProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &B{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -346,7 +346,7 @@ func TestBProtoText(t *testing2.T) {
 
 func TestBProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &B{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -362,7 +362,7 @@ func TestBProtoCompactText(t *testing2.T) {
 
 func TestDProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &D{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -378,7 +378,7 @@ func TestDProtoText(t *testing2.T) {
 
 func TestDProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &D{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -394,7 +394,7 @@ func TestDProtoCompactText(t *testing2.T) {
 
 func TestCProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &C{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -410,7 +410,7 @@ func TestCProtoText(t *testing2.T) {
 
 func TestCProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &C{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -426,7 +426,7 @@ func TestCProtoCompactText(t *testing2.T) {
 
 func TestOldAProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &OldA{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -442,7 +442,7 @@ func TestOldAProtoText(t *testing2.T) {
 
 func TestOldAProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &OldA{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -458,7 +458,7 @@ func TestOldAProtoCompactText(t *testing2.T) {
 
 func TestOldBProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &OldB{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -474,7 +474,7 @@ func TestOldBProtoText(t *testing2.T) {
 
 func TestOldBProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &OldB{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -490,7 +490,7 @@ func TestOldBProtoCompactText(t *testing2.T) {
 
 func TestOldCProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
 	msg := &OldC{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -506,7 +506,7 @@ func TestOldCProtoText(t *testing2.T) {
 
 func TestOldCProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, true)
 	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
 	msg := &OldC{}
 	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
@@ -520,63 +520,63 @@ func TestOldCProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestAStringGen(t *testing3.T) {
+func TestAStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestBStringGen(t *testing3.T) {
+func TestBStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestDStringGen(t *testing3.T) {
+func TestDStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestCStringGen(t *testing3.T) {
+func TestCStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldAStringGen(t *testing3.T) {
+func TestOldAStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldBStringGen(t *testing3.T) {
+func TestOldBStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldCStringGen(t *testing3.T) {
+func TestOldCStringer(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
@@ -585,7 +585,7 @@ func TestOldCStringGen(t *testing3.T) {
 }
 func TestAGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -598,7 +598,7 @@ func TestAGoString(t *testing4.T) {
 }
 func TestBGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -611,7 +611,7 @@ func TestBGoString(t *testing4.T) {
 }
 func TestDGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -624,7 +624,7 @@ func TestDGoString(t *testing4.T) {
 }
 func TestCGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -637,7 +637,7 @@ func TestCGoString(t *testing4.T) {
 }
 func TestOldAGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -650,7 +650,7 @@ func TestOldAGoString(t *testing4.T) {
 }
 func TestOldBGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -663,7 +663,7 @@ func TestOldBGoString(t *testing4.T) {
 }
 func TestOldCGoString(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -676,7 +676,7 @@ func TestOldCGoString(t *testing4.T) {
 }
 func TestAVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedA(popr)
+	p := NewPopulatedA(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -691,7 +691,7 @@ func TestAVerboseEqual(t *testing5.T) {
 }
 func TestBVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedB(popr)
+	p := NewPopulatedB(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -706,7 +706,7 @@ func TestBVerboseEqual(t *testing5.T) {
 }
 func TestDVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedD(popr)
+	p := NewPopulatedD(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -721,7 +721,7 @@ func TestDVerboseEqual(t *testing5.T) {
 }
 func TestCVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedC(popr)
+	p := NewPopulatedC(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -736,7 +736,7 @@ func TestCVerboseEqual(t *testing5.T) {
 }
 func TestOldAVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedOldA(popr)
+	p := NewPopulatedOldA(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -751,7 +751,7 @@ func TestOldAVerboseEqual(t *testing5.T) {
 }
 func TestOldBVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedOldB(popr)
+	p := NewPopulatedOldB(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -766,7 +766,7 @@ func TestOldBVerboseEqual(t *testing5.T) {
 }
 func TestOldCVerboseEqual(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
-	p := NewPopulatedOldC(popr)
+	p := NewPopulatedOldC(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)

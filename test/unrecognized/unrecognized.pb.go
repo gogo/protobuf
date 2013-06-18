@@ -819,6 +819,7 @@ func (this *A) String() string {
 	s := strings.Join([]string{`&A{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
 		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -831,6 +832,7 @@ func (this *B) String() string {
 		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "C", "C", 1) + `,`,
 		`D:` + strings.Replace(fmt.Sprintf("%v", this.D), "D", "D", 1) + `,`,
 		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -841,6 +843,7 @@ func (this *D) String() string {
 	}
 	s := strings.Join([]string{`&D{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -856,6 +859,7 @@ func (this *C) String() string {
 		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
 		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -867,6 +871,7 @@ func (this *OldA) String() string {
 	s := strings.Join([]string{`&OldA{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
 		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "OldB", "OldB", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -878,6 +883,7 @@ func (this *OldB) String() string {
 	s := strings.Join([]string{`&OldB{`,
 		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
 		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -892,6 +898,7 @@ func (this *OldC) String() string {
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
 		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1054,7 +1061,7 @@ func sozUnrecognized(x uint64) (n int) {
 	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func NewPopulatedA(r randyUnrecognized) *A {
+func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
 		v1 := r.Int63()
@@ -1064,36 +1071,45 @@ func NewPopulatedA(r randyUnrecognized) *A {
 		v2 := r.Intn(10)
 		this.B = make([]*B, v2)
 		for i := 0; i < v2; i++ {
-			this.B[i] = NewPopulatedB(r)
+			this.B[i] = NewPopulatedB(r, easy)
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedB(r randyUnrecognized) *B {
+func NewPopulatedB(r randyUnrecognized, easy bool) *B {
 	this := &B{}
 	if r.Intn(10) != 0 {
-		this.C = NewPopulatedC(r)
+		this.C = NewPopulatedC(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.D = NewPopulatedD(r)
+		this.D = NewPopulatedD(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.F = NewPopulatedOldC(r)
+		this.F = NewPopulatedOldC(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
 	}
 	return this
 }
 
-func NewPopulatedD(r randyUnrecognized) *D {
+func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 	this := &D{}
 	if r.Intn(10) != 0 {
 		v3 := r.Int63()
 		this.Field1 = &v3
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedC(r randyUnrecognized) *C {
+func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	this := &C{}
 	if r.Intn(10) != 0 {
 		v4 := r.Float64()
@@ -1129,10 +1145,13 @@ func NewPopulatedC(r randyUnrecognized) *C {
 			this.Field7[i] = r.Float32()
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
+	}
 	return this
 }
 
-func NewPopulatedOldA(r randyUnrecognized) *OldA {
+func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
 	this := &OldA{}
 	if r.Intn(10) != 0 {
 		v11 := r.Int63()
@@ -1142,24 +1161,30 @@ func NewPopulatedOldA(r randyUnrecognized) *OldA {
 		v12 := r.Intn(10)
 		this.B = make([]*OldB, v12)
 		for i := 0; i < v12; i++ {
-			this.B[i] = NewPopulatedOldB(r)
+			this.B[i] = NewPopulatedOldB(r, easy)
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
+	}
 	return this
 }
 
-func NewPopulatedOldB(r randyUnrecognized) *OldB {
+func NewPopulatedOldB(r randyUnrecognized, easy bool) *OldB {
 	this := &OldB{}
 	if r.Intn(10) != 0 {
-		this.C = NewPopulatedOldC(r)
+		this.C = NewPopulatedOldC(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.F = NewPopulatedOldC(r)
+		this.F = NewPopulatedOldC(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
 	}
 	return this
 }
 
-func NewPopulatedOldC(r randyUnrecognized) *OldC {
+func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 	this := &OldC{}
 	if r.Intn(10) != 0 {
 		v13 := r.Int63()
@@ -1183,6 +1208,9 @@ func NewPopulatedOldC(r randyUnrecognized) *OldC {
 		for i := 0; i < v17; i++ {
 			this.Field7[i] = r.Float32()
 		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
 	}
 	return this
 }
@@ -1210,6 +1238,44 @@ func randStringUnrecognized(r randyUnrecognized) string {
 		tmps[i] = randUTF8RuneUnrecognized(r)
 	}
 	return string(tmps)
+}
+func randUnrecognizedUnrecognized(r randyUnrecognized, maxFieldNumber int) (data []byte) {
+	l := 1
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		key := uint32(fieldNumber)<<3 | uint32(wire)
+		switch wire {
+		case 0:
+			data = encodeVarintUnrecognized(data, uint64(key))
+			data = encodeVarintUnrecognized(data, uint64(r.Int63()))
+		case 1:
+			data = encodeVarintUnrecognized(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		case 2:
+			data = encodeVarintUnrecognized(data, uint64(key))
+			ll := r.Intn(100)
+			data = encodeVarintUnrecognized(data, uint64(ll))
+			for j := 0; j < ll; j++ {
+				data = append(data, byte(r.Intn(256)))
+			}
+		default:
+			data = encodeVarintUnrecognized(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		}
+	}
+	return data
+}
+func encodeVarintUnrecognized(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
 }
 func (m *A) Marshal() (data []byte, err error) {
 	size := m.Size()
@@ -1696,49 +1762,49 @@ func (this *A) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.A{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `B:` + fmt1.Sprintf("%#v", this.B) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.A{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `B:` + fmt1.Sprintf("%#v", this.B), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *B) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.B{` + `C:` + fmt1.Sprintf("%#v", this.C), `D:` + fmt1.Sprintf("%#v", this.D), `F:` + fmt1.Sprintf("%#v", this.F) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.B{` + `C:` + fmt1.Sprintf("%#v", this.C), `D:` + fmt1.Sprintf("%#v", this.D), `F:` + fmt1.Sprintf("%#v", this.F), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *D) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.D{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64") + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.D{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *C) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.C{` + `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.C{` + `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"), `Field5:` + fmt1.Sprintf("%#v", this.Field5), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldA) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldA{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `B:` + fmt1.Sprintf("%#v", this.B) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.OldA{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `B:` + fmt1.Sprintf("%#v", this.B), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldB) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldB{` + `C:` + fmt1.Sprintf("%#v", this.C), `F:` + fmt1.Sprintf("%#v", this.F) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.OldB{` + `C:` + fmt1.Sprintf("%#v", this.C), `F:` + fmt1.Sprintf("%#v", this.F), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldC) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldC{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognized.OldC{` + `Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"), `Field3:` + valueToGoStringUnrecognized(this.Field3, "string"), `Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"), `Field7:` + fmt1.Sprintf("%#v", this.Field7), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnrecognized(v interface{}, typ string) string {
@@ -1786,6 +1852,9 @@ func (this *A) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *A) Equal(that interface{}) bool {
@@ -1825,6 +1894,9 @@ func (this *A) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *B) VerboseEqual(that interface{}) error {
@@ -1856,6 +1928,9 @@ func (this *B) VerboseEqual(that interface{}) error {
 	if !this.F.Equal(that1.F) {
 		return fmt2.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *B) Equal(that interface{}) bool {
@@ -1885,6 +1960,9 @@ func (this *B) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.F.Equal(that1.F) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1918,6 +1996,9 @@ func (this *D) VerboseEqual(that interface{}) error {
 	} else if that1.Field1 != nil {
 		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *D) Equal(that interface{}) bool {
@@ -1947,6 +2028,9 @@ func (this *D) Equal(that interface{}) bool {
 	} else if this.Field1 != nil {
 		return false
 	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -2023,6 +2107,9 @@ func (this *C) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *C) Equal(that interface{}) bool {
@@ -2097,6 +2184,9 @@ func (this *C) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OldA) VerboseEqual(that interface{}) error {
@@ -2135,6 +2225,9 @@ func (this *OldA) VerboseEqual(that interface{}) error {
 		if !this.B[i].Equal(that1.B[i]) {
 			return fmt2.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -2175,6 +2268,9 @@ func (this *OldA) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OldB) VerboseEqual(that interface{}) error {
@@ -2203,6 +2299,9 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 	if !this.F.Equal(that1.F) {
 		return fmt2.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OldB) Equal(that interface{}) bool {
@@ -2229,6 +2328,9 @@ func (this *OldB) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.F.Equal(that1.F) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -2297,6 +2399,9 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OldC) Equal(that interface{}) bool {
@@ -2362,6 +2467,9 @@ func (this *OldC) Equal(that interface{}) bool {
 		if this.Field7[i] != that1.Field7[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }

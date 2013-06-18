@@ -54,10 +54,10 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
-			p.P(`func Test`, ccTypeName, `StringGen(t *`, testingPkg.Use(), `.T) {`)
+			p.P(`func Test`, ccTypeName, `Stringer(t *`, testingPkg.Use(), `.T) {`)
 			p.In()
 			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
+			p.P(`p := NewPopulated`, ccTypeName, `(popr, false)`)
 			p.P(`s1 := p.String()`)
 			p.P(`s2 := `, fmtPkg.Use(), `.Sprintf("%v", p)`)
 			p.P(`if s1 != s2 {`)
@@ -71,7 +71,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 
 		if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
-			p.P(`func Benchmark`, ccTypeName, `StringGen(b *`, testingPkg.Use(), `.B) {`)
+			p.P(`func Benchmark`, ccTypeName, `Stringer(b *`, testingPkg.Use(), `.B) {`)
 			p.In()
 			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
 			p.P(`total := 0`)
@@ -79,7 +79,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			p.P(`b.StopTimer()`)
 			p.P(`for i := 0; i < b.N; i++ {`)
 			p.In()
-			p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
+			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
 			p.P(`b.StartTimer()`)
 			p.P(`data := p.String()`)
 			p.P(`b.StopTimer()`)

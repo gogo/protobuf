@@ -25,6 +25,7 @@ import strings1 "strings"
 import reflect1 "reflect"
 
 import fmt2 "fmt"
+import bytes "bytes"
 
 import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 
@@ -248,6 +249,7 @@ func (this *NewNoGroup) String() string {
 		`Field1:` + valueToStringUnrecognizedgroup(this.Field1) + `,`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
 		`A:` + strings.Replace(fmt.Sprintf("%v", this.A), "A", "A", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -258,6 +260,7 @@ func (this *A) String() string {
 	}
 	s := strings.Join([]string{`&A{`,
 		`AField:` + valueToStringUnrecognizedgroup(this.AField) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -271,6 +274,7 @@ func (this *OldWithGroup) String() string {
 		`Group1:` + strings.Replace(fmt.Sprintf("%v", this.Group1), "OldWithGroup_Group1", "OldWithGroup_Group1", 1) + `,`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
 		`Group2:` + strings.Replace(fmt.Sprintf("%v", this.Group2), "OldWithGroup_Group2", "OldWithGroup_Group2", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -283,6 +287,7 @@ func (this *OldWithGroup_Group1) String() string {
 		`Field1:` + valueToStringUnrecognizedgroup(this.Field1) + `,`,
 		`Field2:` + valueToStringUnrecognizedgroup(this.Field2) + `,`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -294,6 +299,7 @@ func (this *OldWithGroup_Group2) String() string {
 	s := strings.Join([]string{`&OldWithGroup_Group2{`,
 		`Field1:` + valueToStringUnrecognizedgroup(this.Field1) + `,`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -350,7 +356,7 @@ func sozUnrecognizedgroup(x uint64) (n int) {
 	return sovUnrecognizedgroup(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	return sovUnrecognizedgroup(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func NewPopulatedNewNoGroup(r randyUnrecognizedgroup) *NewNoGroup {
+func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 	this := &NewNoGroup{}
 	if r.Intn(10) != 0 {
 		v1 := r.Int63()
@@ -364,28 +370,34 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup) *NewNoGroup {
 		}
 	}
 	if r.Intn(10) != 0 {
-		this.A = NewPopulatedA(r)
+		this.A = NewPopulatedA(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 6)
 	}
 	return this
 }
 
-func NewPopulatedA(r randyUnrecognizedgroup) *A {
+func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
 		v3 := r.Int63()
 		this.AField = &v3
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 2)
+	}
 	return this
 }
 
-func NewPopulatedOldWithGroup(r randyUnrecognizedgroup) *OldWithGroup {
+func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup {
 	this := &OldWithGroup{}
 	if r.Intn(10) != 0 {
 		v4 := r.Int63()
 		this.Field1 = &v4
 	}
 	if r.Intn(10) != 0 {
-		this.Group1 = NewPopulatedOldWithGroup_Group1(r)
+		this.Group1 = NewPopulatedOldWithGroup_Group1(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v5 := r.Intn(100)
@@ -395,12 +407,15 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup) *OldWithGroup {
 		}
 	}
 	if r.Intn(10) != 0 {
-		this.Group2 = NewPopulatedOldWithGroup_Group2(r)
+		this.Group2 = NewPopulatedOldWithGroup_Group2(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 5)
 	}
 	return this
 }
 
-func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup) *OldWithGroup_Group1 {
+func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group1 {
 	this := &OldWithGroup_Group1{}
 	if r.Intn(10) != 0 {
 		v6 := r.Int63()
@@ -417,10 +432,13 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup) *OldWithGroup_Gro
 			this.Field3[i] = r.Float64()
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 4)
+	}
 	return this
 }
 
-func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup) *OldWithGroup_Group2 {
+func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group2 {
 	this := &OldWithGroup_Group2{}
 	if r.Intn(10) != 0 {
 		v9 := r.Int63()
@@ -432,6 +450,9 @@ func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup) *OldWithGroup_Gro
 		for i := 0; i < v10; i++ {
 			this.Field2[i] = r.Float64()
 		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 3)
 	}
 	return this
 }
@@ -459,6 +480,44 @@ func randStringUnrecognizedgroup(r randyUnrecognizedgroup) string {
 		tmps[i] = randUTF8RuneUnrecognizedgroup(r)
 	}
 	return string(tmps)
+}
+func randUnrecognizedUnrecognizedgroup(r randyUnrecognizedgroup, maxFieldNumber int) (data []byte) {
+	l := 1
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		key := uint32(fieldNumber)<<3 | uint32(wire)
+		switch wire {
+		case 0:
+			data = encodeVarintUnrecognizedgroup(data, uint64(key))
+			data = encodeVarintUnrecognizedgroup(data, uint64(r.Int63()))
+		case 1:
+			data = encodeVarintUnrecognizedgroup(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		case 2:
+			data = encodeVarintUnrecognizedgroup(data, uint64(key))
+			ll := r.Intn(100)
+			data = encodeVarintUnrecognizedgroup(data, uint64(ll))
+			for j := 0; j < ll; j++ {
+				data = append(data, byte(r.Intn(256)))
+			}
+		default:
+			data = encodeVarintUnrecognizedgroup(data, uint64(key))
+			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		}
+	}
+	return data
+}
+func encodeVarintUnrecognizedgroup(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
 }
 func (m *NewNoGroup) Marshal() (data []byte, err error) {
 	size := m.Size()
@@ -570,35 +629,35 @@ func (this *NewNoGroup) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.NewNoGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `A:` + fmt1.Sprintf("%#v", this.A) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.NewNoGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `A:` + fmt1.Sprintf("%#v", this.A), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *A) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.A{` + `AField:` + valueToGoStringUnrecognizedgroup(this.AField, "int64") + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.A{` + `AField:` + valueToGoStringUnrecognizedgroup(this.AField, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Group1:` + fmt1.Sprintf("%#v", this.Group1), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Group2:` + fmt1.Sprintf("%#v", this.Group2) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Group1:` + fmt1.Sprintf("%#v", this.Group1), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `Group2:` + fmt1.Sprintf("%#v", this.Group2), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup_Group1) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group1{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognizedgroup(this.Field2, "int32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group1{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognizedgroup(this.Field2, "int32"), `Field3:` + fmt1.Sprintf("%#v", this.Field3), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup_Group2) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group2{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + fmt1.Sprintf("%#v", this.Field2) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group2{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + fmt1.Sprintf("%#v", this.Field2), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnrecognizedgroup(v interface{}, typ string) string {
@@ -649,6 +708,9 @@ func (this *NewNoGroup) VerboseEqual(that interface{}) error {
 	if !this.A.Equal(that1.A) {
 		return fmt2.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NewNoGroup) Equal(that interface{}) bool {
@@ -691,6 +753,9 @@ func (this *NewNoGroup) Equal(that interface{}) bool {
 	if !this.A.Equal(that1.A) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *A) VerboseEqual(that interface{}) error {
@@ -722,6 +787,9 @@ func (this *A) VerboseEqual(that interface{}) error {
 	} else if that1.AField != nil {
 		return fmt2.Errorf("AField this(%v) Not Equal that(%v)", this.AField, that1.AField)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *A) Equal(that interface{}) bool {
@@ -751,6 +819,9 @@ func (this *A) Equal(that interface{}) bool {
 	} else if this.AField != nil {
 		return false
 	} else if that1.AField != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -798,6 +869,9 @@ func (this *OldWithGroup) VerboseEqual(that interface{}) error {
 	if !this.Group2.Equal(that1.Group2) {
 		return fmt2.Errorf("Group2 this(%v) Not Equal that(%v)", this.Group2, that1.Group2)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OldWithGroup) Equal(that interface{}) bool {
@@ -841,6 +915,9 @@ func (this *OldWithGroup) Equal(that interface{}) bool {
 		}
 	}
 	if !this.Group2.Equal(that1.Group2) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -891,6 +968,9 @@ func (this *OldWithGroup_Group1) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field3 this[%v](%v) Not Equal that[%v](%v)", i, this.Field3[i], i, that1.Field3[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OldWithGroup_Group1) Equal(that interface{}) bool {
@@ -939,6 +1019,9 @@ func (this *OldWithGroup_Group1) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OldWithGroup_Group2) VerboseEqual(that interface{}) error {
@@ -978,6 +1061,9 @@ func (this *OldWithGroup_Group2) VerboseEqual(that interface{}) error {
 			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *OldWithGroup_Group2) Equal(that interface{}) bool {
@@ -1016,6 +1102,9 @@ func (this *OldWithGroup_Group2) Equal(that interface{}) bool {
 		if this.Field2[i] != that1.Field2[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }

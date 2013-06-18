@@ -35,7 +35,7 @@ import (
 
 func TestNewOld(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	newer := NewPopulatedA(popr)
+	newer := NewPopulatedA(popr, true)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
 	if err != nil {
 		panic(err)
@@ -59,7 +59,7 @@ func TestNewOld(t *testing.T) {
 
 func TestOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	older := NewPopulatedOldA(popr)
+	older := NewPopulatedOldA(popr, true)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
 	if err != nil {
 		panic(err)
@@ -83,7 +83,7 @@ func TestOldNew(t *testing.T) {
 
 func TestOldNewOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	older := NewPopulatedOldA(popr)
+	older := NewPopulatedOldA(popr, true)
 	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
 	if err != nil {
 		panic(err)

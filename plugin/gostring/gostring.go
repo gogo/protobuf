@@ -162,11 +162,8 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		plus := "+"
-		if len(message.Field) == 0 {
-			plus = ""
-		}
 		out := strings.Join([]string{"s := ", stringsPkg.Use(), ".Join([]string{`&", packageName, ".", ccTypeName, "{` ", plus, " "}, "")
-		for i, field := range message.Field {
+		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := generator.CamelCase(*field.Name)
@@ -204,10 +201,12 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 					}
 				}
 			}
-			if (i + 1) != len(message.Field) {
-				out += ", "
-			}
+			out += ", "
 		}
+		if message.DescriptorProto.HasExtension() {
+			out += strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions)`, ", "}, "")
+		}
+		out += strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, "")
 		out += "+ `}`"
 		out = strings.Join([]string{out, `}`, `,", "`, ")"}, "")
 		p.P(out)

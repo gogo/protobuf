@@ -400,6 +400,58 @@ func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool) {
 			p.P(`}`)
 		}
 	}
+	if message.DescriptorProto.HasExtension() {
+		fieldname := "XXX_extensions"
+		p.P(`for k, v := range this.`, fieldname, ` {`)
+		p.In()
+		p.P(`if v2, ok := that1.`, fieldname, `[k]; ok {`)
+		p.In()
+		p.P(`if !v.Equal(&v2) {`)
+		p.In()
+		if verbose {
+			p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this[%v](%v) Not Equal that[%v](%v)", k, this.`, fieldname, `[k], k, that1.`, fieldname, `[k])`)
+		} else {
+			p.P(`return false`)
+		}
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`} else  {`)
+		p.In()
+		if verbose {
+			p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, `[%v] Not In that", k)`)
+		} else {
+			p.P(`return false`)
+		}
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`}`)
+
+		p.P(`for k, _ := range that1.`, fieldname, ` {`)
+		p.In()
+		p.P(`if _, ok := this.`, fieldname, `[k]; !ok {`)
+		p.In()
+		if verbose {
+			p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, `[%v] Not In this", k)`)
+		} else {
+			p.P(`return false`)
+		}
+		p.Out()
+		p.P(`}`)
+		p.Out()
+		p.P(`}`)
+	}
+	fieldname := "XXX_unrecognized"
+	p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
+	p.In()
+	if verbose {
+		p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+	} else {
+		p.P(`return false`)
+	}
+	p.Out()
+	p.P(`}`)
 	if verbose {
 		p.P(`return nil`)
 	} else {

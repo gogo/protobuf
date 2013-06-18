@@ -25,14 +25,14 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The stringgen plugin generates a String method for each message.
+The stringer plugin generates a String method for each message.
 
 It is enabled by the following extensions:
 
-  - stringgen
-  - stringgen_all
+  - stringer
+  - stringer_all
 
-The stringgen plugin also generates a test given it is enabled using one of the following extensions:
+The stringer plugin also generates a test given it is enabled using one of the following extensions:
 
   - testgen
   - testgen_all
@@ -53,7 +53,7 @@ Btw all the output can be seen at:
 The following message:
 
 option (gogoproto.msgstringmethod_all) = false;
-option (gogoproto.stringgen_all) =  true;
+option (gogoproto.stringer_all) =  true;
 
 message A {
 	optional string Description = 1 [(gogoproto.nullable) = false];
@@ -61,7 +61,7 @@ message A {
 	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
 }
 
-given to the stringgen stringgen, will generate the following code:
+given to the stringer stringer, will generate the following code:
 
   func (this *A) String() string {
 	if this == nil {
@@ -78,7 +78,7 @@ given to the stringgen stringgen, will generate the following code:
 
 and the following test code:
 
-  func TestAStringGen(t *testing.T) {
+  func TestAStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr)
 	s1 := p.String()
@@ -87,7 +87,7 @@ and the following test code:
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
   }
-  func BenchmarkAStringGen(b *testing.B) {
+  func BenchmarkAStringer(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr)
 	data := p.String()
@@ -112,26 +112,26 @@ import (
 	"strings"
 )
 
-type stringgen struct {
+type stringer struct {
 	*generator.Generator
 	generator.PluginImports
 	atleastOne bool
 	localName  string
 }
 
-func NewStringGen() *stringgen {
-	return &stringgen{}
+func NewStringer() *stringer {
+	return &stringer{}
 }
 
-func (p *stringgen) Name() string {
-	return "stringgen"
+func (p *stringer) Name() string {
+	return "stringer"
 }
 
-func (p *stringgen) Init(g *generator.Generator) {
+func (p *stringer) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-func (p *stringgen) Generate(file *generator.FileDescriptor) {
+func (p *stringer) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
@@ -183,8 +183,11 @@ func (p *stringgen) Generate(file *generator.FileDescriptor) {
 					p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
 				}
 			}
-
 		}
+		if message.DescriptorProto.HasExtension() {
+			p.P("`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_extensions) + `, "`,`,")
+		}
+		p.P("`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_unrecognized) + `, "`,`,")
 		p.P("`}`,")
 		p.P(`}`, `,""`, ")")
 		p.P(`return s`)
@@ -212,5 +215,5 @@ func (p *stringgen) Generate(file *generator.FileDescriptor) {
 }
 
 func init() {
-	generator.RegisterPlugin(NewStringGen())
+	generator.RegisterPlugin(NewStringer())
 }

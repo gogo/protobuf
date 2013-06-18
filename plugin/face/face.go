@@ -172,6 +172,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsFace(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		if message.DescriptorProto.HasExtension() {
+			panic("face does not support message with extensions")
+		}
 		if gogoproto.HasGetters(file.FileDescriptorProto, message.DescriptorProto) {
 			panic("face requires getters to be disabled please use gogoproto.getters or gogoproto.getters_all and set it to false")
 		}

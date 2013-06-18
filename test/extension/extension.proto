@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://code.google.com/p/gogoprotobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -24,36 +24,32 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package google_protobuf
+package extension;
 
-func (f *FieldDescriptorProto) IsEnum() bool {
-	return *f.Type == FieldDescriptorProto_TYPE_ENUM
+import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
+
+option (gogoproto.msgstringmethod_all) = false;
+option (gogoproto.enumprefix_all) = false;
+option (gogoproto.getters_all) = false;
+
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.stringer_all) = true;
+option (gogoproto.gostring_all) = true;
+option (gogoproto.description_all) = true;
+
+option (gogoproto.testgen_all) = true;
+option (gogoproto.populate_all) = true;
+
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+message MyExtendable {
+	optional int64 Field1 = 1;
+	extensions 100 to 199;
 }
 
-func (f *FieldDescriptorProto) IsMessage() bool {
-	return *f.Type == FieldDescriptorProto_TYPE_MESSAGE
-}
-
-func (f *FieldDescriptorProto) IsBytes() bool {
-	return *f.Type == FieldDescriptorProto_TYPE_BYTES
-}
-
-func (f *FieldDescriptorProto) IsRepeated() bool {
-	return f.Label != nil && *f.Label == FieldDescriptorProto_LABEL_REPEATED
-}
-
-func (f *FieldDescriptorProto) IsString() bool {
-	return *f.Type == FieldDescriptorProto_TYPE_STRING
-}
-
-func (f *FieldDescriptorProto) IsRequired() bool {
-	return f.Label != nil && *f.Label == FieldDescriptorProto_LABEL_REQUIRED
-}
-
-func (f *FieldDescriptorProto) IsPacked() bool {
-	return f.Options != nil && f.GetOptions().GetPacked()
-}
-
-func (m *DescriptorProto) HasExtension() bool {
-	return len(m.ExtensionRange) > 0
+extend MyExtendable {
+	optional double Field2 = 100;
 }

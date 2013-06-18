@@ -56,7 +56,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 		p.P(`func Test`, ccTypeName, `Union(t *`, testingPkg.Use(), `.T) {`)
 		p.In()
 		p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-		p.P(`p := NewPopulated`, ccTypeName, `(popr)`)
+		p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
 		p.P(`v := p.GetValue()`)
 		p.P(`msg := &`, ccTypeName, `{}`)
 		p.P(`if !msg.SetValue(v) {`)
