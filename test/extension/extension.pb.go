@@ -14,6 +14,8 @@ import fmt "fmt"
 import strings "strings"
 import reflect "reflect"
 
+import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+
 import fmt1 "fmt"
 import strings1 "strings"
 import reflect1 "reflect"
@@ -89,7 +91,19 @@ func NewPopulatedMyExtendable(r randyExtension, easy bool) *MyExtendable {
 		this.Field1 = &v1
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedExtension(r, 2)
+		l := r.Intn(5)
+		for i := 0; i < l; i++ {
+			fieldNumber := r.Intn(100) + 100
+			wire := r.Intn(4)
+			if wire == 3 {
+				wire = 5
+			}
+			data := randFieldExtension(nil, r, fieldNumber, wire)
+			code_google_com_p_gogoprotobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedExtension(r, 201)
 	}
 	return this
 }
@@ -119,32 +133,36 @@ func randStringExtension(r randyExtension) string {
 	return string(tmps)
 }
 func randUnrecognizedExtension(r randyExtension, maxFieldNumber int) (data []byte) {
-	l := 1
+	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
 		if wire == 3 {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		key := uint32(fieldNumber)<<3 | uint32(wire)
-		switch wire {
-		case 0:
-			data = encodeVarintExtension(data, uint64(key))
-			data = encodeVarintExtension(data, uint64(r.Int63()))
-		case 1:
-			data = encodeVarintExtension(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-		case 2:
-			data = encodeVarintExtension(data, uint64(key))
-			ll := r.Intn(100)
-			data = encodeVarintExtension(data, uint64(ll))
-			for j := 0; j < ll; j++ {
-				data = append(data, byte(r.Intn(256)))
-			}
-		default:
-			data = encodeVarintExtension(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		data = randFieldExtension(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldExtension(data []byte, r randyExtension, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintExtension(data, uint64(key))
+		data = encodeVarintExtension(data, uint64(r.Int63()))
+	case 1:
+		data = encodeVarintExtension(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintExtension(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintExtension(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
 		}
+	default:
+		data = encodeVarintExtension(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }

@@ -487,32 +487,36 @@ func randStringExample(r randyExample) string {
 	return string(tmps)
 }
 func randUnrecognizedExample(r randyExample, maxFieldNumber int) (data []byte) {
-	l := 1
+	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
 		if wire == 3 {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		key := uint32(fieldNumber)<<3 | uint32(wire)
-		switch wire {
-		case 0:
-			data = encodeVarintExample(data, uint64(key))
-			data = encodeVarintExample(data, uint64(r.Int63()))
-		case 1:
-			data = encodeVarintExample(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-		case 2:
-			data = encodeVarintExample(data, uint64(key))
-			ll := r.Intn(100)
-			data = encodeVarintExample(data, uint64(ll))
-			for j := 0; j < ll; j++ {
-				data = append(data, byte(r.Intn(256)))
-			}
-		default:
-			data = encodeVarintExample(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		data = randFieldExample(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldExample(data []byte, r randyExample, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintExample(data, uint64(key))
+		data = encodeVarintExample(data, uint64(r.Int63()))
+	case 1:
+		data = encodeVarintExample(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintExample(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintExample(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
 		}
+	default:
+		data = encodeVarintExample(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }

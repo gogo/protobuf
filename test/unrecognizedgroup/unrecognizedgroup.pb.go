@@ -482,32 +482,36 @@ func randStringUnrecognizedgroup(r randyUnrecognizedgroup) string {
 	return string(tmps)
 }
 func randUnrecognizedUnrecognizedgroup(r randyUnrecognizedgroup, maxFieldNumber int) (data []byte) {
-	l := 1
+	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
 		if wire == 3 {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		key := uint32(fieldNumber)<<3 | uint32(wire)
-		switch wire {
-		case 0:
-			data = encodeVarintUnrecognizedgroup(data, uint64(key))
-			data = encodeVarintUnrecognizedgroup(data, uint64(r.Int63()))
-		case 1:
-			data = encodeVarintUnrecognizedgroup(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-		case 2:
-			data = encodeVarintUnrecognizedgroup(data, uint64(key))
-			ll := r.Intn(100)
-			data = encodeVarintUnrecognizedgroup(data, uint64(ll))
-			for j := 0; j < ll; j++ {
-				data = append(data, byte(r.Intn(256)))
-			}
-		default:
-			data = encodeVarintUnrecognizedgroup(data, uint64(key))
-			data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		data = randFieldUnrecognizedgroup(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldUnrecognizedgroup(data []byte, r randyUnrecognizedgroup, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = encodeVarintUnrecognizedgroup(data, uint64(r.Int63()))
+	case 1:
+		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintUnrecognizedgroup(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
 		}
+	default:
+		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }

@@ -363,6 +363,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.varGen = NewVarGen()
 
 	p.localName = generator.FileName(file)
+	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.HasPopulate(file.FileDescriptorProto, message.DescriptorProto) {
@@ -418,11 +419,50 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					maxFieldNumber = field.GetNumber()
 				}
 			}
-			p.P(`if !easy && r.Intn(10) != 0 {`)
-			p.In()
-			p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
-			p.Out()
-			p.P(`}`)
+			if message.DescriptorProto.HasExtension() {
+				p.P(`if !easy && r.Intn(10) != 0 {`)
+				p.In()
+				p.P(`l := r.Intn(5)`)
+				p.P(`for i := 0; i < l; i++ {`)
+				p.In()
+				if len(message.DescriptorProto.GetExtensionRange()) > 1 {
+					p.P(`eIndex := r.Intn(`, strconv.Itoa(len(message.DescriptorProto.GetExtensionRange())), `)`)
+					p.P(`fieldNumber := 0`)
+					p.P(`switch eIndex {`)
+					for i, e := range message.DescriptorProto.GetExtensionRange() {
+						p.P(`case `, strconv.Itoa(i), `:`)
+						p.In()
+						p.P(`fieldNumber = r.Intn(`, strconv.Itoa(int(e.GetEnd()-e.GetStart())), `) + `, strconv.Itoa(int(e.GetStart())))
+						p.Out()
+						if e.GetEnd() > maxFieldNumber {
+							maxFieldNumber = e.GetEnd()
+						}
+					}
+					p.P(`}`)
+				} else {
+					e := message.DescriptorProto.GetExtensionRange()[0]
+					p.P(`fieldNumber := r.Intn(`, strconv.Itoa(int(e.GetEnd()-e.GetStart())), `) + `, strconv.Itoa(int(e.GetStart())))
+					if e.GetEnd() > maxFieldNumber {
+						maxFieldNumber = e.GetEnd()
+					}
+				}
+				p.P(`wire := r.Intn(4)`)
+				p.P(`if wire == 3 { wire = 5 }`)
+				p.P(`data := randField`, p.localName, `(nil, r, fieldNumber, wire)`)
+				p.P(protoPkg.Use(), `.SetRawExtension(this, int32(fieldNumber), data)`)
+				p.Out()
+				p.P(`}`)
+				p.Out()
+				p.P(`}`)
+			}
+
+			if maxFieldNumber < (1 << 10) {
+				p.P(`if !easy && r.Intn(10) != 0 {`)
+				p.In()
+				p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
+				p.Out()
+				p.P(`}`)
+			}
 		}
 		p.P(`return this`)
 		p.Out()
@@ -475,13 +515,21 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 
 	p.P(`func randUnrecognized`, p.localName, `(r randy`, p.localName, `, maxFieldNumber int) (data []byte) {`)
 	p.In()
-	//p.P(`l := r.Intn(10)`)
-	p.P(`l := 1`)
+	p.P(`l := r.Intn(5)`)
 	p.P(`for i := 0; i < l; i++ {`)
 	p.In()
 	p.P(`wire := r.Intn(4)`)
 	p.P(`if wire == 3 { wire = 5 }`)
 	p.P(`fieldNumber := maxFieldNumber + r.Intn(100)`)
+	p.P(`data = randField`, p.localName, `(data, r, fieldNumber, wire)`)
+	p.Out()
+	p.P(`}`)
+	p.P(`return data`)
+	p.Out()
+	p.P(`}`)
+
+	p.P(`func randField`, p.localName, `(data []byte, r randy`, p.localName, `, fieldNumber int, wire int) []byte {`)
+	p.In()
 	p.P(`key := uint32(fieldNumber)<<3 | uint32(wire)`)
 	p.P(`switch wire {`)
 	p.P(`case 0:`)
@@ -509,8 +557,6 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.In()
 	p.P(`data = encodeVarint`, p.localName, `(data, uint64(key))`)
 	p.P(`data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
-	p.Out()
-	p.P(`}`)
 	p.Out()
 	p.P(`}`)
 	p.P(`return data`)
