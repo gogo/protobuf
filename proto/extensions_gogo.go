@@ -28,6 +28,7 @@ package proto
 
 import (
 	"bytes"
+	"fmt"
 	"reflect"
 )
 
@@ -50,4 +51,12 @@ func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset boo
 
 func (this *Extension) Equal(that *Extension) bool {
 	return bytes.Equal(this.enc, that.enc)
+}
+
+func NewExtension(e []byte) Extension {
+	return Extension{enc: e}
+}
+
+func (this Extension) GoString() string {
+	return fmt.Sprintf("proto.NewExtension(%#v)", this.enc)
 }

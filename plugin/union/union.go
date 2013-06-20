@@ -134,6 +134,9 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsUnion(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		if message.DescriptorProto.HasExtension() {
+			panic("union does not currently support extensions")
+		}
 
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (this *`, ccTypeName, `) GetValue() interface{} {`)

@@ -144,6 +144,9 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
+	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
+	sortPkg := p.NewImport("sort")
+	strconvPkg := p.NewImport("strconv")
 	reflectPkg := p.NewImport("reflect")
 
 	for _, message := range file.Messages() {
@@ -204,7 +207,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			out += ", "
 		}
 		if message.DescriptorProto.HasExtension() {
-			out += strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions)`, ", "}, "")
+			out += strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions),`}, "")
 		}
 		out += strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, "")
 		out += "+ `}`"
@@ -229,6 +232,28 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 	p.P(`}`)
 	p.P(`pv := `, reflectPkg.Use(), `.Indirect(rv).Interface()`)
 	p.P(`return `, fmtPkg.Use(), `.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)`)
+	p.Out()
+	p.P(`}`)
+
+	p.P(`func extensionToGoString`, p.localName, `(e map[int32]`, protoPkg.Use(), `.Extension) string {`)
+	p.In()
+	p.P(`if e == nil { return "nil" }`)
+	p.P(`s := "map[int32]proto.Extension{"`)
+	p.P(`keys := make([]int, 0, len(e))`)
+	p.P(`for k := range e {`)
+	p.In()
+	p.P(`keys = append(keys, int(k))`)
+	p.Out()
+	p.P(`}`)
+	p.P(sortPkg.Use(), `.Ints(keys)`)
+	p.P(`ss := []string{}`)
+	p.P(`for _, k := range keys {`)
+	p.In()
+	p.P(`ss = append(ss, `, strconvPkg.Use(), `.Itoa(k) + ": " + e[int32(k)].GoString())`)
+	p.Out()
+	p.P(`}`)
+	p.P(`s+=`, stringsPkg.Use(), `.Join(ss, ",") + "}"`)
+	p.P(`return s`)
 	p.Out()
 	p.P(`}`)
 

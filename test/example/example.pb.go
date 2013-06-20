@@ -21,9 +21,12 @@ import reflect "reflect"
 
 import fmt1 "fmt"
 import strings1 "strings"
+import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import sort "sort"
+import strconv "strconv"
 import reflect1 "reflect"
 
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
 
 import fmt2 "fmt"
 import bytes "bytes"
@@ -557,19 +560,36 @@ func valueToGoStringExample(v interface{}, typ string) string {
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+func extensionToGoStringExample(e map[int32]code_google_com_p_gogoprotobuf_proto1.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings1.Join(ss, ",") + "}"
+	return s
+}
 
 type AFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto1.Message
+	Proto() code_google_com_p_gogoprotobuf_proto2.Message
 	GetDescription() string
 	GetNumber() int64
 	GetId() code_google_com_p_gogoprotobuf_test_custom.Uuid
 }
 
-func (this *A) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
+func (this *A) Proto() code_google_com_p_gogoprotobuf_proto2.Message {
 	return this
 }
 
-func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
+func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto2.Message {
 	return NewAFromFace(this)
 }
 

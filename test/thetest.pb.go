@@ -18,9 +18,12 @@ import reflect "reflect"
 
 import fmt1 "fmt"
 import strings1 "strings"
+import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import sort "sort"
+import strconv "strconv"
 import reflect1 "reflect"
 
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
 
 import fmt2 "fmt"
 import bytes "bytes"
@@ -3799,9 +3802,26 @@ func valueToGoStringThetest(v interface{}, typ string) string {
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+func extensionToGoStringThetest(e map[int32]code_google_com_p_gogoprotobuf_proto.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings1.Join(ss, ",") + "}"
+	return s
+}
 
 type NidOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() int32
@@ -3819,11 +3839,11 @@ type NidOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidOptNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidOptNativeFromFace(this)
 }
 
@@ -3908,7 +3928,7 @@ func NewNidOptNativeFromFace(that NidOptNativeFace) *NidOptNative {
 }
 
 type NinOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -3926,11 +3946,11 @@ type NinOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptNativeFromFace(this)
 }
 
@@ -4015,7 +4035,7 @@ func NewNinOptNativeFromFace(that NinOptNativeFace) *NinOptNative {
 }
 
 type NidRepNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -4033,11 +4053,11 @@ type NidRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidRepNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidRepNativeFromFace(this)
 }
 
@@ -4122,7 +4142,7 @@ func NewNidRepNativeFromFace(that NidRepNativeFace) *NidRepNative {
 }
 
 type NinRepNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -4140,11 +4160,11 @@ type NinRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinRepNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinRepNativeFromFace(this)
 }
 
@@ -4229,7 +4249,7 @@ func NewNinRepNativeFromFace(that NinRepNativeFace) *NinRepNative {
 }
 
 type NidRepPackedNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -4245,11 +4265,11 @@ type NidRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NidRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidRepPackedNativeFromFace(this)
 }
 
@@ -4324,7 +4344,7 @@ func NewNidRepPackedNativeFromFace(that NidRepPackedNativeFace) *NidRepPackedNat
 }
 
 type NinRepPackedNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -4340,11 +4360,11 @@ type NinRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NinRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinRepPackedNativeFromFace(this)
 }
 
@@ -4419,7 +4439,7 @@ func NewNinRepPackedNativeFromFace(that NinRepPackedNativeFace) *NinRepPackedNat
 }
 
 type NidOptStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() NidOptNative
@@ -4432,11 +4452,11 @@ type NidOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidOptStructFromFace(this)
 }
 
@@ -4496,7 +4516,7 @@ func NewNidOptStructFromFace(that NidOptStructFace) *NidOptStruct {
 }
 
 type NinOptStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -4509,11 +4529,11 @@ type NinOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptStructFromFace(this)
 }
 
@@ -4573,7 +4593,7 @@ func NewNinOptStructFromFace(that NinOptStructFace) *NinOptStruct {
 }
 
 type NidRepStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []NidOptNative
@@ -4586,11 +4606,11 @@ type NidRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidRepStructFromFace(this)
 }
 
@@ -4650,7 +4670,7 @@ func NewNidRepStructFromFace(that NidRepStructFace) *NidRepStruct {
 }
 
 type NinRepStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []*NidOptNative
@@ -4663,11 +4683,11 @@ type NinRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinRepStructFromFace(this)
 }
 
@@ -4727,17 +4747,17 @@ func NewNinRepStructFromFace(that NinRepStructFace) *NinRepStruct {
 }
 
 type NidEmbeddedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() NidOptNative
 	GetField210() bool
 }
 
-func (this *NidEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidEmbeddedStructFromFace(this)
 }
 
@@ -4762,17 +4782,17 @@ func NewNidEmbeddedStructFromFace(that NidEmbeddedStructFace) *NidEmbeddedStruct
 }
 
 type NinEmbeddedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NidOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinEmbeddedStructFromFace(this)
 }
 
@@ -4797,16 +4817,16 @@ func NewNinEmbeddedStructFromFace(that NinEmbeddedStructFace) *NinEmbeddedStruct
 }
 
 type NidNestedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() NidOptStruct
 	GetField2() []NidRepStruct
 }
 
-func (this *NidNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidNestedStructFromFace(this)
 }
 
@@ -4826,16 +4846,16 @@ func NewNidNestedStructFromFace(that NidNestedStructFace) *NidNestedStruct {
 }
 
 type NinNestedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *NidOptStruct
 	GetField2() []*NidRepStruct
 }
 
-func (this *NinNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinNestedStructFromFace(this)
 }
 
@@ -4855,16 +4875,16 @@ func NewNinNestedStructFromFace(that NinNestedStructFace) *NinNestedStruct {
 }
 
 type NidOptCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetId() code_google_com_p_gogoprotobuf_test_custom.Uuid
 	GetValue() code_google_com_p_gogoprotobuf_test_custom.Uint128
 }
 
-func (this *NidOptCustom) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptCustom) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidOptCustomFromFace(this)
 }
 
@@ -4884,16 +4904,16 @@ func NewNidOptCustomFromFace(that NidOptCustomFace) *NidOptCustom {
 }
 
 type NinOptCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetId() *code_google_com_p_gogoprotobuf_test_custom.Uuid
 	GetValue() *code_google_com_p_gogoprotobuf_test_custom.Uint128
 }
 
-func (this *NinOptCustom) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptCustom) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptCustomFromFace(this)
 }
 
@@ -4913,16 +4933,16 @@ func NewNinOptCustomFromFace(that NinOptCustomFace) *NinOptCustom {
 }
 
 type NidRepCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetId() []code_google_com_p_gogoprotobuf_test_custom.Uuid
 	GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128
 }
 
-func (this *NidRepCustom) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepCustom) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidRepCustomFromFace(this)
 }
 
@@ -4942,16 +4962,16 @@ func NewNidRepCustomFromFace(that NidRepCustomFace) *NidRepCustom {
 }
 
 type NinRepCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetId() []code_google_com_p_gogoprotobuf_test_custom.Uuid
 	GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128
 }
 
-func (this *NinRepCustom) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepCustom) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinRepCustomFromFace(this)
 }
 
@@ -4971,7 +4991,7 @@ func NewNinRepCustomFromFace(that NinRepCustomFace) *NinRepCustom {
 }
 
 type NinOptNativeUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -4983,11 +5003,11 @@ type NinOptNativeUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNativeUnion) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptNativeUnion) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptNativeUnion) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptNativeUnion) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptNativeUnionFromFace(this)
 }
 
@@ -5042,7 +5062,7 @@ func NewNinOptNativeUnionFromFace(that NinOptNativeUnionFace) *NinOptNativeUnion
 }
 
 type NinOptStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -5054,11 +5074,11 @@ type NinOptStructUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStructUnion) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptStructUnion) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptStructUnionFromFace(this)
 }
 
@@ -5113,17 +5133,17 @@ func NewNinOptStructUnionFromFace(that NinOptStructUnionFace) *NinOptStructUnion
 }
 
 type NinEmbeddedStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NinOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinEmbeddedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinEmbeddedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinEmbeddedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinEmbeddedStructUnionFromFace(this)
 }
 
@@ -5148,17 +5168,17 @@ func NewNinEmbeddedStructUnionFromFace(that NinEmbeddedStructUnionFace) *NinEmbe
 }
 
 type NinNestedStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *NinOptNativeUnion
 	GetField2() *NinOptStructUnion
 	GetField3() *NinEmbeddedStructUnion
 }
 
-func (this *NinNestedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinNestedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinNestedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinNestedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinNestedStructUnionFromFace(this)
 }
 
@@ -5183,17 +5203,17 @@ func NewNinNestedStructUnionFromFace(that NinNestedStructUnionFace) *NinNestedSt
 }
 
 type TreeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetOr() *OrBranch
 	GetAnd() *AndBranch
 	GetLeaf() *Leaf
 }
 
-func (this *Tree) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Tree) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *Tree) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Tree) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewTreeFromFace(this)
 }
 
@@ -5218,16 +5238,16 @@ func NewTreeFromFace(that TreeFace) *Tree {
 }
 
 type OrBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *OrBranch) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *OrBranch) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *OrBranch) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *OrBranch) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewOrBranchFromFace(this)
 }
 
@@ -5247,16 +5267,16 @@ func NewOrBranchFromFace(that OrBranchFace) *OrBranch {
 }
 
 type AndBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *AndBranch) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *AndBranch) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *AndBranch) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *AndBranch) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewAndBranchFromFace(this)
 }
 
@@ -5276,16 +5296,16 @@ func NewAndBranchFromFace(that AndBranchFace) *AndBranch {
 }
 
 type LeafFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetValue() int64
 	GetStrValue() string
 }
 
-func (this *Leaf) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Leaf) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *Leaf) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Leaf) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewLeafFromFace(this)
 }
 
@@ -5305,17 +5325,17 @@ func NewLeafFromFace(that LeafFace) *Leaf {
 }
 
 type DeepTreeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetDown() *ADeepBranch
 	GetAnd() *AndDeepBranch
 	GetLeaf() *DeepLeaf
 }
 
-func (this *DeepTree) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *DeepTree) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *DeepTree) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *DeepTree) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewDeepTreeFromFace(this)
 }
 
@@ -5340,15 +5360,15 @@ func NewDeepTreeFromFace(that DeepTreeFace) *DeepTree {
 }
 
 type ADeepBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetDown() DeepTree
 }
 
-func (this *ADeepBranch) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *ADeepBranch) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *ADeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *ADeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewADeepBranchFromFace(this)
 }
 
@@ -5363,16 +5383,16 @@ func NewADeepBranchFromFace(that ADeepBranchFace) *ADeepBranch {
 }
 
 type AndDeepBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetLeft() DeepTree
 	GetRight() DeepTree
 }
 
-func (this *AndDeepBranch) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *AndDeepBranch) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *AndDeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *AndDeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewAndDeepBranchFromFace(this)
 }
 
@@ -5392,15 +5412,15 @@ func NewAndDeepBranchFromFace(that AndDeepBranchFace) *AndDeepBranch {
 }
 
 type DeepLeafFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetTree() Tree
 }
 
-func (this *DeepLeaf) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *DeepLeaf) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *DeepLeaf) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *DeepLeaf) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewDeepLeafFromFace(this)
 }
 
@@ -5415,14 +5435,14 @@ func NewDeepLeafFromFace(that DeepLeafFace) *DeepLeaf {
 }
 
 type NilFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 }
 
-func (this *Nil) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Nil) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *Nil) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Nil) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNilFromFace(this)
 }
 
@@ -5432,15 +5452,15 @@ func NewNilFromFace(that NilFace) *Nil {
 }
 
 type NidOptEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() TheTestEnum
 }
 
-func (this *NidOptEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptEnum) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidOptEnumFromFace(this)
 }
 
@@ -5455,15 +5475,15 @@ func NewNidOptEnumFromFace(that NidOptEnumFace) *NidOptEnum {
 }
 
 type NinOptEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() *TheTestEnum
 }
 
-func (this *NinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinOptEnumFromFace(this)
 }
 
@@ -5478,15 +5498,15 @@ func NewNinOptEnumFromFace(that NinOptEnumFace) *NinOptEnum {
 }
 
 type NidRepEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []TheTestEnum
 }
 
-func (this *NidRepEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepEnum) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NidRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NidRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNidRepEnumFromFace(this)
 }
 
@@ -5501,15 +5521,15 @@ func NewNidRepEnumFromFace(that NidRepEnumFace) *NidRepEnum {
 }
 
 type NinRepEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetField1() []TheTestEnum
 }
 
-func (this *NinRepEnum) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepEnum) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *NinRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *NinRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewNinRepEnumFromFace(this)
 }
 
@@ -5524,17 +5544,17 @@ func NewNinRepEnumFromFace(that NinRepEnumFace) *NinRepEnum {
 }
 
 type TimerFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto.Message
+	Proto() code_google_com_p_gogoprotobuf_proto1.Message
 	GetTime1() int64
 	GetTime2() int64
 	GetData() []byte
 }
 
-func (this *Timer) Proto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Timer) Proto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return this
 }
 
-func (this *Timer) TestProto() code_google_com_p_gogoprotobuf_proto.Message {
+func (this *Timer) TestProto() code_google_com_p_gogoprotobuf_proto1.Message {
 	return NewTimerFromFace(this)
 }
 

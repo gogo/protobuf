@@ -18,6 +18,9 @@ import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/prot
 
 import fmt1 "fmt"
 import strings1 "strings"
+import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import sort "sort"
+import strconv "strconv"
 import reflect1 "reflect"
 
 import fmt2 "fmt"
@@ -178,7 +181,7 @@ func (this *MyExtendable) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&extension.MyExtendable{` + `Field1:` + valueToGoStringExtension(this.Field1, "int64"), `XXX_extensions:` + fmt1.Sprintf("%#v", this.XXX_extensions), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&extension.MyExtendable{` + `Field1:` + valueToGoStringExtension(this.Field1, "int64"), `XXX_extensions: ` + extensionToGoStringExtension(this.XXX_extensions), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringExtension(v interface{}, typ string) string {
@@ -188,6 +191,23 @@ func valueToGoStringExtension(v interface{}, typ string) string {
 	}
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringExtension(e map[int32]code_google_com_p_gogoprotobuf_proto1.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings1.Join(ss, ",") + "}"
+	return s
 }
 func (this *MyExtendable) VerboseEqual(that interface{}) error {
 	if that == nil {
