@@ -46,6 +46,10 @@ func (d *FileDescriptor) Messages() []*Descriptor {
 	return d.desc
 }
 
+func (d *FileDescriptor) Enums() []*EnumDescriptor {
+	return d.enum
+}
+
 func (d *Descriptor) IsGroup() bool {
 	return d.group
 }

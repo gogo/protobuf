@@ -1160,11 +1160,13 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	g.Out()
 	g.P("}")
 
-	g.P("func (x ", ccTypeName, ") String() string {")
-	g.In()
-	g.P("return ", g.Pkg["proto"], ".EnumName(", ccTypeName, "_name, int32(x))")
-	g.Out()
-	g.P("}")
+	if gogoproto.IsOldEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+		g.P("func (x ", ccTypeName, ") String() string {")
+		g.In()
+		g.P("return ", g.Pkg["proto"], ".EnumName(", ccTypeName, "_name, int32(x))")
+		g.Out()
+		g.P("}")
+	}
 
 	g.P("func (x ", ccTypeName, ") MarshalJSON() ([]byte, error) {")
 	g.In()

@@ -48,6 +48,7 @@ import (
 
 	_ "code.google.com/p/gogoprotobuf/plugin/description"
 	_ "code.google.com/p/gogoprotobuf/plugin/embedcheck"
+	_ "code.google.com/p/gogoprotobuf/plugin/enumstringer"
 	_ "code.google.com/p/gogoprotobuf/plugin/equal"
 	_ "code.google.com/p/gogoprotobuf/plugin/face"
 	_ "code.google.com/p/gogoprotobuf/plugin/gostring"

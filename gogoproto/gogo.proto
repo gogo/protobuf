@@ -30,6 +30,8 @@ import "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.pro
 
 extend google.protobuf.EnumOptions {
 	optional bool enumprefix = 62001;
+	optional bool old_enum_stringer = 62021;
+	optional bool enum_stringer = 62022;
 }
 
 extend google.protobuf.FileOptions {
@@ -51,6 +53,9 @@ extend google.protobuf.FileOptions {
 	optional bool unmarshaler_all = 63018;
 	optional bool bufferto_all = 63019;
 	optional bool sizer_all = 63020;
+
+	optional bool old_enum_stringer_all = 63021;
+	optional bool enum_stringer_all = 63022;
 }
 
 extend google.protobuf.MessageOptions {

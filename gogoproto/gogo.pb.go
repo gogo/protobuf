@@ -22,6 +22,22 @@ var E_Enumprefix = &proto.ExtensionDesc{
 	Tag:           "varint,62001,opt,name=enumprefix",
 }
 
+var E_OldEnumStringer = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         62021,
+	Name:          "gogoproto.old_enum_stringer",
+	Tag:           "varint,62021,opt,name=old_enum_stringer",
+}
+
+var E_EnumStringer = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         62022,
+	Name:          "gogoproto.enum_stringer",
+	Tag:           "varint,62022,opt,name=enum_stringer",
+}
+
 var E_GettersAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -156,6 +172,22 @@ var E_SizerAll = &proto.ExtensionDesc{
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
 	Tag:           "varint,63020,opt,name=sizer_all",
+}
+
+var E_OldEnumStringerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63021,
+	Name:          "gogoproto.old_enum_stringer_all",
+	Tag:           "varint,63021,opt,name=old_enum_stringer_all",
+}
+
+var E_EnumStringerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63022,
+	Name:          "gogoproto.enum_stringer_all",
+	Tag:           "varint,63022,opt,name=enum_stringer_all",
 }
 
 var E_Getters = &proto.ExtensionDesc{
@@ -312,6 +344,8 @@ var E_Customtype = &proto.ExtensionDesc{
 
 func init() {
 	proto.RegisterExtension(E_Enumprefix)
+	proto.RegisterExtension(E_OldEnumStringer)
+	proto.RegisterExtension(E_EnumStringer)
 	proto.RegisterExtension(E_GettersAll)
 	proto.RegisterExtension(E_EnumprefixAll)
 	proto.RegisterExtension(E_MsgstringmethodAll)
@@ -329,6 +363,8 @@ func init() {
 	proto.RegisterExtension(E_UnmarshalerAll)
 	proto.RegisterExtension(E_BuffertoAll)
 	proto.RegisterExtension(E_SizerAll)
+	proto.RegisterExtension(E_OldEnumStringerAll)
+	proto.RegisterExtension(E_EnumStringerAll)
 	proto.RegisterExtension(E_Getters)
 	proto.RegisterExtension(E_Msgstringmethod)
 	proto.RegisterExtension(E_VerboseEqual)
