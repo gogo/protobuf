@@ -1311,7 +1311,7 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(x1)
 		i++
 	}
-	if m.B != nil {
+	if len(m.B) > 0 {
 		for _, msg := range m.B {
 			data[i] = 0xa
 			i++
@@ -1513,7 +1513,7 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(f8 >> 56)
 		i++
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		for _, b := range m.Field5 {
 			l = len(b)
 			data[i] = 0x2a
@@ -1541,7 +1541,7 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(x9)
 		i++
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++
@@ -1589,7 +1589,7 @@ func (m *OldA) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(x11)
 		i++
 	}
-	if m.B != nil {
+	if len(m.B) > 0 {
 		for _, msg := range m.B {
 			data[i] = 0xa
 			i++
@@ -1744,7 +1744,7 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(x17)
 		i++
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++

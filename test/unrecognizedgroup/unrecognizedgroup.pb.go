@@ -553,7 +553,7 @@ func (m *NewNoGroup) MarshalTo(data []byte) (n int, err error) {
 		data[i] = uint8(x1)
 		i++
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		for _, num := range m.Field3 {
 			data[i] = 0x19
 			i++
