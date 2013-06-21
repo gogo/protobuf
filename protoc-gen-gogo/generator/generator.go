@@ -1117,7 +1117,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
 	ccPrefix := enum.prefix()
-	if !gogoproto.EnabledEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+	if !gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		ccPrefix = ""
 	}
 	g.P("type ", ccTypeName, " int32")
@@ -1160,7 +1160,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	g.Out()
 	g.P("}")
 
-	if gogoproto.IsOldEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+	if gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		g.P("func (x ", ccTypeName, ") String() string {")
 		g.In()
 		g.P("return ", g.Pkg["proto"], ".EnumName(", ccTypeName, "_name, int32(x))")
@@ -1456,7 +1456,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	// Reset, String and ProtoMessage methods.
 	g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
-	if gogoproto.EnabledMsgStringMethod(g.file.FileDescriptorProto, message.DescriptorProto) {
+	if gogoproto.EnabledGoStringer(g.file.FileDescriptorProto, message.DescriptorProto) {
 		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
 	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
@@ -1553,7 +1553,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				log.Print("don't know how to generate constant for", fieldname)
 				continue
 			}
-			if gogoproto.EnabledEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+			if gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 				def = g.DefaultPackageName(enum) + enum.prefix() + def
 			} else {
 				def = g.DefaultPackageName(enum) + def
@@ -1568,7 +1568,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// Field getters
 	var getters []getterSymbol
 	for _, field := range message.Field {
-		if !gogoproto.HasGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
+		if !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
 			break
 		}
 		if !gogoproto.IsNullable(field) ||

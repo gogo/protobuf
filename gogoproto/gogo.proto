@@ -29,15 +29,15 @@ package gogoproto;
 import "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto";
 
 extend google.protobuf.EnumOptions {
-	optional bool enumprefix = 62001;
-	optional bool old_enum_stringer = 62021;
+	optional bool goproto_enum_prefix = 62001;
+	optional bool goproto_enum_stringer = 62021;
 	optional bool enum_stringer = 62022;
 }
 
 extend google.protobuf.FileOptions {
-	optional bool getters_all = 63001;
-	optional bool enumprefix_all = 63002;
-	optional bool msgstringmethod_all = 63003;
+	optional bool goproto_getters_all = 63001;
+	optional bool goproto_enum_prefix_all = 63002;
+	optional bool goproto_stringer_all = 63003;
 	optional bool verbose_equal_all = 63004;
 	optional bool face_all = 63005;
 	optional bool gostring_all = 63006;
@@ -54,13 +54,13 @@ extend google.protobuf.FileOptions {
 	optional bool bufferto_all = 63019;
 	optional bool sizer_all = 63020;
 
-	optional bool old_enum_stringer_all = 63021;
+	optional bool goproto_enum_stringer_all = 63021;
 	optional bool enum_stringer_all = 63022;
 }
 
 extend google.protobuf.MessageOptions {
-	optional bool getters = 64001;
-	optional bool msgstringmethod = 64003;
+	optional bool goproto_getters = 64001;
+	optional bool goproto_stringer = 64003;
 	optional bool verbose_equal = 64004;
 	optional bool face = 64005;
 	optional bool gostring = 64006;

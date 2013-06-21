@@ -62,7 +62,7 @@ func (p *enumstringer) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsEnumStringer(file.FileDescriptorProto, enum.EnumDescriptorProto) {
 			continue
 		}
-		if gogoproto.IsOldEnumStringer(file.FileDescriptorProto, enum.EnumDescriptorProto) {
+		if gogoproto.IsGoEnumStringer(file.FileDescriptorProto, enum.EnumDescriptorProto) {
 			panic("old enum string method needs to be disabled, please use gogoproto.old_enum_stringer or gogoproto.old_enum_string_all and set it to false")
 		}
 		p.atleastOne = true

@@ -144,7 +144,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
-		if gogoproto.HasOldString(file.FileDescriptorProto, message.DescriptorProto) {
+		if gogoproto.EnabledGoStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			panic("old string method needs to be disabled, please use gogoproto.msgstringmethod or gogoproto.msgstringmethod_all and set it to false")
 		}
 		p.atleastOne = true

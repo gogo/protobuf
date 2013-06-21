@@ -14,20 +14,20 @@ var _ = proto.Marshal
 var _ = &json.SyntaxError{}
 var _ = math.Inf
 
-var E_Enumprefix = &proto.ExtensionDesc{
+var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62001,
-	Name:          "gogoproto.enumprefix",
-	Tag:           "varint,62001,opt,name=enumprefix",
+	Name:          "gogoproto.goproto_enum_prefix",
+	Tag:           "varint,62001,opt,name=goproto_enum_prefix",
 }
 
-var E_OldEnumStringer = &proto.ExtensionDesc{
+var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62021,
-	Name:          "gogoproto.old_enum_stringer",
-	Tag:           "varint,62021,opt,name=old_enum_stringer",
+	Name:          "gogoproto.goproto_enum_stringer",
+	Tag:           "varint,62021,opt,name=goproto_enum_stringer",
 }
 
 var E_EnumStringer = &proto.ExtensionDesc{
@@ -38,28 +38,28 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	Tag:           "varint,62022,opt,name=enum_stringer",
 }
 
-var E_GettersAll = &proto.ExtensionDesc{
+var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63001,
-	Name:          "gogoproto.getters_all",
-	Tag:           "varint,63001,opt,name=getters_all",
+	Name:          "gogoproto.goproto_getters_all",
+	Tag:           "varint,63001,opt,name=goproto_getters_all",
 }
 
-var E_EnumprefixAll = &proto.ExtensionDesc{
+var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63002,
-	Name:          "gogoproto.enumprefix_all",
-	Tag:           "varint,63002,opt,name=enumprefix_all",
+	Name:          "gogoproto.goproto_enum_prefix_all",
+	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all",
 }
 
-var E_MsgstringmethodAll = &proto.ExtensionDesc{
+var E_GoprotoStringerAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63003,
-	Name:          "gogoproto.msgstringmethod_all",
-	Tag:           "varint,63003,opt,name=msgstringmethod_all",
+	Name:          "gogoproto.goproto_stringer_all",
+	Tag:           "varint,63003,opt,name=goproto_stringer_all",
 }
 
 var E_VerboseEqualAll = &proto.ExtensionDesc{
@@ -174,12 +174,12 @@ var E_SizerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63020,opt,name=sizer_all",
 }
 
-var E_OldEnumStringerAll = &proto.ExtensionDesc{
+var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63021,
-	Name:          "gogoproto.old_enum_stringer_all",
-	Tag:           "varint,63021,opt,name=old_enum_stringer_all",
+	Name:          "gogoproto.goproto_enum_stringer_all",
+	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all",
 }
 
 var E_EnumStringerAll = &proto.ExtensionDesc{
@@ -190,20 +190,20 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63022,opt,name=enum_stringer_all",
 }
 
-var E_Getters = &proto.ExtensionDesc{
+var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64001,
-	Name:          "gogoproto.getters",
-	Tag:           "varint,64001,opt,name=getters",
+	Name:          "gogoproto.goproto_getters",
+	Tag:           "varint,64001,opt,name=goproto_getters",
 }
 
-var E_Msgstringmethod = &proto.ExtensionDesc{
+var E_GoprotoStringer = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64003,
-	Name:          "gogoproto.msgstringmethod",
-	Tag:           "varint,64003,opt,name=msgstringmethod",
+	Name:          "gogoproto.goproto_stringer",
+	Tag:           "varint,64003,opt,name=goproto_stringer",
 }
 
 var E_VerboseEqual = &proto.ExtensionDesc{
@@ -343,12 +343,12 @@ var E_Customtype = &proto.ExtensionDesc{
 }
 
 func init() {
-	proto.RegisterExtension(E_Enumprefix)
-	proto.RegisterExtension(E_OldEnumStringer)
+	proto.RegisterExtension(E_GoprotoEnumPrefix)
+	proto.RegisterExtension(E_GoprotoEnumStringer)
 	proto.RegisterExtension(E_EnumStringer)
-	proto.RegisterExtension(E_GettersAll)
-	proto.RegisterExtension(E_EnumprefixAll)
-	proto.RegisterExtension(E_MsgstringmethodAll)
+	proto.RegisterExtension(E_GoprotoGettersAll)
+	proto.RegisterExtension(E_GoprotoEnumPrefixAll)
+	proto.RegisterExtension(E_GoprotoStringerAll)
 	proto.RegisterExtension(E_VerboseEqualAll)
 	proto.RegisterExtension(E_FaceAll)
 	proto.RegisterExtension(E_GostringAll)
@@ -363,10 +363,10 @@ func init() {
 	proto.RegisterExtension(E_UnmarshalerAll)
 	proto.RegisterExtension(E_BuffertoAll)
 	proto.RegisterExtension(E_SizerAll)
-	proto.RegisterExtension(E_OldEnumStringerAll)
+	proto.RegisterExtension(E_GoprotoEnumStringerAll)
 	proto.RegisterExtension(E_EnumStringerAll)
-	proto.RegisterExtension(E_Getters)
-	proto.RegisterExtension(E_Msgstringmethod)
+	proto.RegisterExtension(E_GoprotoGetters)
+	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)
 	proto.RegisterExtension(E_Face)
 	proto.RegisterExtension(E_Gostring)
