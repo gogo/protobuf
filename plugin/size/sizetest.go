@@ -70,12 +70,6 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			p.P(`t.Fatalf("size %v != marshalled size %v", size, len(data))`)
 			p.Out()
 			p.P(`}`)
-			/*p.P(`protoSize := `, protoPkg.Use(), `.Size(p)`)
-			p.P(`if protoSize != size {`)
-			p.In()
-			p.P(`t.Fatalf("size %v != proto.Size %v", size, protoSize)`)
-			p.Out()
-			p.P(`}`)*/
 			p.Out()
 			p.P(`}`)
 			p.P()
