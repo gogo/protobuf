@@ -8081,7 +8081,7 @@ func TestNidOptNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8109,7 +8109,7 @@ func TestNinOptNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8137,7 +8137,7 @@ func TestNidRepNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8165,7 +8165,7 @@ func TestNinRepNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8193,7 +8193,7 @@ func TestNidRepPackedNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8221,7 +8221,7 @@ func TestNinRepPackedNativeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8249,7 +8249,7 @@ func TestNidOptStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8277,7 +8277,7 @@ func TestNinOptStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8305,7 +8305,7 @@ func TestNidRepStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8333,7 +8333,7 @@ func TestNinRepStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8361,7 +8361,7 @@ func TestNidEmbeddedStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8389,7 +8389,7 @@ func TestNinEmbeddedStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8417,7 +8417,7 @@ func TestNidNestedStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8445,7 +8445,7 @@ func TestNinNestedStructSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8473,7 +8473,7 @@ func TestNidOptCustomSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8501,7 +8501,7 @@ func TestNinOptCustomSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8529,7 +8529,7 @@ func TestNidRepCustomSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8557,7 +8557,7 @@ func TestNinRepCustomSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8585,7 +8585,7 @@ func TestNinOptNativeUnionSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8613,7 +8613,7 @@ func TestNinOptStructUnionSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8641,7 +8641,7 @@ func TestNinEmbeddedStructUnionSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8669,7 +8669,7 @@ func TestNinNestedStructUnionSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8697,7 +8697,7 @@ func TestTreeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8725,7 +8725,7 @@ func TestOrBranchSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8753,7 +8753,7 @@ func TestAndBranchSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8781,7 +8781,7 @@ func TestLeafSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8809,7 +8809,7 @@ func TestDeepTreeSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8837,7 +8837,7 @@ func TestADeepBranchSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8865,7 +8865,7 @@ func TestAndDeepBranchSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8893,7 +8893,7 @@ func TestDeepLeafSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8921,7 +8921,7 @@ func TestNilSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8949,7 +8949,7 @@ func TestNidOptEnumSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -8977,7 +8977,7 @@ func TestNinOptEnumSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -9005,7 +9005,7 @@ func TestNidRepEnumSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -9033,7 +9033,7 @@ func TestNinRepEnumSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -9061,7 +9061,7 @@ func TestTimerSize(t *testing5.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 

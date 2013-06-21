@@ -1393,64 +1393,64 @@ func (m *NinOptNative) Size() (n int) {
 func (m *NidRepNative) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 9 * len(m.Field1)
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 5 * len(m.Field2)
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		for _, e := range m.Field4 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		for _, e := range m.Field5 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		for _, e := range m.Field6 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, e := range m.Field7 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		for _, e := range m.Field8 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field9 != nil {
+	if len(m.Field9) > 0 {
 		n += 5 * len(m.Field9)
 	}
-	if m.Field10 != nil {
+	if len(m.Field10) > 0 {
 		n += 5 * len(m.Field10)
 	}
-	if m.Field11 != nil {
+	if len(m.Field11) > 0 {
 		n += 9 * len(m.Field11)
 	}
-	if m.Field12 != nil {
+	if len(m.Field12) > 0 {
 		n += 9 * len(m.Field12)
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 2 * len(m.Field13)
 	}
-	if m.Field14 != nil {
+	if len(m.Field14) > 0 {
 		for _, s := range m.Field14 {
 			l = len([]byte(s))
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field15 != nil {
+	if len(m.Field15) > 0 {
 		for _, b := range m.Field15 {
 			l = len(b)
 			n += 1 + l + sovThetest(uint64(l))
@@ -1464,64 +1464,64 @@ func (m *NidRepNative) Size() (n int) {
 func (m *NinRepNative) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 9 * len(m.Field1)
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 5 * len(m.Field2)
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		for _, e := range m.Field4 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		for _, e := range m.Field5 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		for _, e := range m.Field6 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, e := range m.Field7 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		for _, e := range m.Field8 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field9 != nil {
+	if len(m.Field9) > 0 {
 		n += 5 * len(m.Field9)
 	}
-	if m.Field10 != nil {
+	if len(m.Field10) > 0 {
 		n += 5 * len(m.Field10)
 	}
-	if m.Field11 != nil {
+	if len(m.Field11) > 0 {
 		n += 9 * len(m.Field11)
 	}
-	if m.Field12 != nil {
+	if len(m.Field12) > 0 {
 		n += 9 * len(m.Field12)
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 2 * len(m.Field13)
 	}
-	if m.Field14 != nil {
+	if len(m.Field14) > 0 {
 		for _, s := range m.Field14 {
 			l = len([]byte(s))
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field15 != nil {
+	if len(m.Field15) > 0 {
 		for _, b := range m.Field15 {
 			l = len(b)
 			n += 1 + l + sovThetest(uint64(l))
@@ -1535,67 +1535,67 @@ func (m *NinRepNative) Size() (n int) {
 func (m *NidRepPackedNative) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field1)*8)) + len(m.Field1)*8
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field2)*4)) + len(m.Field2)*4
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		l = 0
 		for _, e := range m.Field3 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		l = 0
 		for _, e := range m.Field4 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		l = 0
 		for _, e := range m.Field5 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		l = 0
 		for _, e := range m.Field6 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		l = 0
 		for _, e := range m.Field7 {
 			l += sozThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		l = 0
 		for _, e := range m.Field8 {
 			l += sozThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field9 != nil {
+	if len(m.Field9) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field9)*4)) + len(m.Field9)*4
 	}
-	if m.Field10 != nil {
+	if len(m.Field10) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field10)*4)) + len(m.Field10)*4
 	}
-	if m.Field11 != nil {
+	if len(m.Field11) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field11)*8)) + len(m.Field11)*8
 	}
-	if m.Field12 != nil {
+	if len(m.Field12) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field12)*8)) + len(m.Field12)*8
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
 	}
 	if m.XXX_unrecognized != nil {
@@ -1606,67 +1606,67 @@ func (m *NidRepPackedNative) Size() (n int) {
 func (m *NinRepPackedNative) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field1)*8)) + len(m.Field1)*8
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field2)*4)) + len(m.Field2)*4
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		l = 0
 		for _, e := range m.Field3 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		l = 0
 		for _, e := range m.Field4 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		l = 0
 		for _, e := range m.Field5 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		l = 0
 		for _, e := range m.Field6 {
 			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		l = 0
 		for _, e := range m.Field7 {
 			l += sozThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		l = 0
 		for _, e := range m.Field8 {
 			l += sozThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
-	if m.Field9 != nil {
+	if len(m.Field9) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field9)*4)) + len(m.Field9)*4
 	}
-	if m.Field10 != nil {
+	if len(m.Field10) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field10)*4)) + len(m.Field10)*4
 	}
-	if m.Field11 != nil {
+	if len(m.Field11) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field11)*8)) + len(m.Field11)*8
 	}
-	if m.Field12 != nil {
+	if len(m.Field12) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field12)*8)) + len(m.Field12)*8
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 1 + sovThetest(uint64(len(m.Field13))) + len(m.Field13)*1
 	}
 	if m.XXX_unrecognized != nil {
@@ -1743,50 +1743,50 @@ func (m *NinOptStruct) Size() (n int) {
 func (m *NidRepStruct) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 9 * len(m.Field1)
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 5 * len(m.Field2)
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		for _, e := range m.Field4 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		for _, e := range m.Field6 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, e := range m.Field7 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		for _, e := range m.Field8 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 2 * len(m.Field13)
 	}
-	if m.Field14 != nil {
+	if len(m.Field14) > 0 {
 		for _, s := range m.Field14 {
 			l = len([]byte(s))
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field15 != nil {
+	if len(m.Field15) > 0 {
 		for _, b := range m.Field15 {
 			l = len(b)
 			n += 1 + l + sovThetest(uint64(l))
@@ -1800,50 +1800,50 @@ func (m *NidRepStruct) Size() (n int) {
 func (m *NinRepStruct) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		n += 9 * len(m.Field1)
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		n += 5 * len(m.Field2)
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field4 != nil {
+	if len(m.Field4) > 0 {
 		for _, e := range m.Field4 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field6 != nil {
+	if len(m.Field6) > 0 {
 		for _, e := range m.Field6 {
 			n += 1 + sovThetest(uint64(e))
 		}
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		for _, e := range m.Field7 {
 			n += 1 + sozThetest(uint64(e))
 		}
 	}
-	if m.Field8 != nil {
+	if len(m.Field8) > 0 {
 		for _, e := range m.Field8 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field13 != nil {
+	if len(m.Field13) > 0 {
 		n += 2 * len(m.Field13)
 	}
-	if m.Field14 != nil {
+	if len(m.Field14) > 0 {
 		for _, s := range m.Field14 {
 			l = len([]byte(s))
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Field15 != nil {
+	if len(m.Field15) > 0 {
 		for _, b := range m.Field15 {
 			l = len(b)
 			n += 1 + l + sovThetest(uint64(l))
@@ -1893,7 +1893,7 @@ func (m *NidNestedStruct) Size() (n int) {
 	_ = l
 	l = m.Field1.Size()
 	n += 1 + l + sovThetest(uint64(l))
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		for _, e := range m.Field2 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
@@ -1911,7 +1911,7 @@ func (m *NinNestedStruct) Size() (n int) {
 		l = m.Field1.Size()
 		n += 1 + l + sovThetest(uint64(l))
 	}
-	if m.Field2 != nil {
+	if len(m.Field2) > 0 {
 		for _, e := range m.Field2 {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
@@ -1953,13 +1953,13 @@ func (m *NinOptCustom) Size() (n int) {
 func (m *NidRepCustom) Size() (n int) {
 	var l int
 	_ = l
-	if m.Id != nil {
+	if len(m.Id) > 0 {
 		for _, e := range m.Id {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Value != nil {
+	if len(m.Value) > 0 {
 		for _, e := range m.Value {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
@@ -1973,13 +1973,13 @@ func (m *NidRepCustom) Size() (n int) {
 func (m *NinRepCustom) Size() (n int) {
 	var l int
 	_ = l
-	if m.Id != nil {
+	if len(m.Id) > 0 {
 		for _, e := range m.Id {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
 		}
 	}
-	if m.Value != nil {
+	if len(m.Value) > 0 {
 		for _, e := range m.Value {
 			l = e.Size()
 			n += 1 + l + sovThetest(uint64(l))
@@ -2243,7 +2243,7 @@ func (m *NinOptEnum) Size() (n int) {
 func (m *NidRepEnum) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		for _, e := range m.Field1 {
 			n += 1 + sovThetest(uint64(e))
 		}
@@ -2256,7 +2256,7 @@ func (m *NidRepEnum) Size() (n int) {
 func (m *NinRepEnum) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != nil {
+	if len(m.Field1) > 0 {
 		for _, e := range m.Field1 {
 			n += 1 + sovThetest(uint64(e))
 		}

@@ -321,7 +321,7 @@ func (m *NewNoGroup) Size() (n int) {
 	if m.Field1 != nil {
 		n += 1 + sovUnrecognizedgroup(uint64(*m.Field1))
 	}
-	if m.Field3 != nil {
+	if len(m.Field3) > 0 {
 		n += 9 * len(m.Field3)
 	}
 	if m.A != nil {

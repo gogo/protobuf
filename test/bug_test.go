@@ -32,7 +32,7 @@ import (
 	"testing"
 )
 
-func TestUint32Varint(t *testing.T) {
+func TestUint32VarintSize(t *testing.T) {
 	temp := uint32(math.MaxUint32)
 	n := &NinOptNative{}
 	n.Field5 = &temp
@@ -42,5 +42,19 @@ func TestUint32Varint(t *testing.T) {
 	}
 	if len(data) != 6 {
 		t.Fatalf("data should be length 6, but its %#v", data)
+	}
+}
+
+func TestZeroLengthSliceSize(t *testing.T) {
+	n := &NinRepPackedNative{
+		Field8: []int64{},
+	}
+	size := n.Size()
+	data, err := proto.Marshal(n)
+	if err != nil {
+		panic(err)
+	}
+	if len(data) != size {
+		t.Fatalf("expected %v, but got %v", len(data), size)
 	}
 }

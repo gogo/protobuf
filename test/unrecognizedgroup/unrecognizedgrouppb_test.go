@@ -438,7 +438,7 @@ func TestNewNoGroupSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -451,7 +451,7 @@ func TestASize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 

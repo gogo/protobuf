@@ -920,7 +920,7 @@ func (m *A) Size() (n int) {
 	if m.Field1 != nil {
 		n += 1 + sovUnrecognized(uint64(*m.Field1))
 	}
-	if m.B != nil {
+	if len(m.B) > 0 {
 		for _, e := range m.B {
 			l = e.Size()
 			n += 1 + l + sovUnrecognized(uint64(l))
@@ -975,7 +975,7 @@ func (m *C) Size() (n int) {
 	if m.Field4 != nil {
 		n += 9
 	}
-	if m.Field5 != nil {
+	if len(m.Field5) > 0 {
 		for _, b := range m.Field5 {
 			l = len(b)
 			n += 1 + l + sovUnrecognized(uint64(l))
@@ -984,7 +984,7 @@ func (m *C) Size() (n int) {
 	if m.Field6 != nil {
 		n += 1 + sovUnrecognized(uint64(*m.Field6))
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		n += 5 * len(m.Field7)
 	}
 	if m.XXX_unrecognized != nil {
@@ -998,7 +998,7 @@ func (m *OldA) Size() (n int) {
 	if m.Field1 != nil {
 		n += 1 + sovUnrecognized(uint64(*m.Field1))
 	}
-	if m.B != nil {
+	if len(m.B) > 0 {
 		for _, e := range m.B {
 			l = e.Size()
 			n += 1 + l + sovUnrecognized(uint64(l))
@@ -1041,7 +1041,7 @@ func (m *OldC) Size() (n int) {
 	if m.Field6 != nil {
 		n += 1 + sovUnrecognized(uint64(*m.Field6))
 	}
-	if m.Field7 != nil {
+	if len(m.Field7) > 0 {
 		n += 5 * len(m.Field7)
 	}
 	if m.XXX_unrecognized != nil {

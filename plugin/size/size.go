@@ -135,7 +135,10 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			}
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
-			if nullable || repeated {
+			if repeated {
+				p.P(`if len(m.`, fieldname, `) > 0 {`)
+				p.In()
+			} else if nullable {
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
 			}

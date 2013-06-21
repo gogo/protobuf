@@ -596,7 +596,7 @@ func TestASize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -609,7 +609,7 @@ func TestBSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -622,7 +622,7 @@ func TestDSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -635,7 +635,7 @@ func TestCSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -648,7 +648,7 @@ func TestOldASize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -661,7 +661,7 @@ func TestOldBSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
@@ -674,7 +674,7 @@ func TestOldCSize(t *testing4.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
 	}
 }
 
