@@ -2132,6 +2132,122 @@ func BenchmarkTimerProtoUnmarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestMyExtendableProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &MyExtendable{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkMyExtendableProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, true)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkMyExtendableProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedMyExtendable(popr, true)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &MyExtendable{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &OtherExtenable{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkOtherExtenableProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, true)
+		b.StartTimer()
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkOtherExtenableProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOtherExtenable(popr, true)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &OtherExtenable{}
+		total += len(data)
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestNidOptNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -4211,6 +4327,122 @@ func BenchmarkTimerJSONUnmarshal(b *testing1.B) {
 			panic(err)
 		}
 		msg := &Timer{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestMyExtendableJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &MyExtendable{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkMyExtendableJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, true)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkMyExtendableJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedMyExtendable(popr, true)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &MyExtendable{}
+		total += len(data)
+		b.StartTimer()
+		if err := encoding_json.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &OtherExtenable{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func BenchmarkOtherExtenableJSONMarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, true)
+		b.StartTimer()
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkOtherExtenableJSONUnmarshal(b *testing1.B) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOtherExtenable(popr, true)
+		data, err := encoding_json.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &OtherExtenable{}
 		total += len(data)
 		b.StartTimer()
 		if err := encoding_json.Unmarshal(data, msg); err != nil {
@@ -7136,6 +7368,168 @@ func BenchmarkTimerProtoTextUnmarshal(b *testing2.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestMyExtendableProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &MyExtendable{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestMyExtendableProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &MyExtendable{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkMyExtendableProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, true)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkMyExtendableProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, true)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkMyExtendableProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedMyExtendable(popr, true)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &MyExtendable{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &OtherExtenable{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestOtherExtenableProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &OtherExtenable{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkOtherExtenableProtoTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, true)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkOtherExtenableProtoCompactTextMarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, true)
+		b.StartTimer()
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkOtherExtenableProtoTextUnmarshal(b *testing2.B) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOtherExtenable(popr, true)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &OtherExtenable{}
+		total += len(data)
+		msg.Reset()
+		b.StartTimer()
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(fmt.Sprintf("%v given %v", err, data))
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestNinOptNativeUnionUnion(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
@@ -8064,6 +8458,54 @@ func BenchmarkTimerStringer(b *testing4.B) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
 		p := NewPopulatedTimer(popr, true)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestMyExtendableStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, false)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkMyExtendableStringer(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, true)
+		b.StartTimer()
+		data := p.String()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, false)
+	s1 := p.String()
+	s2 := fmt1.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func BenchmarkOtherExtenableStringer(b *testing4.B) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, true)
 		b.StartTimer()
 		data := p.String()
 		b.StopTimer()
@@ -9080,6 +9522,62 @@ func BenchmarkTimerSize(b *testing5.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestMyExtendableSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+}
+
+func BenchmarkMyExtendableSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, false)
+		b.StartTimer()
+		size := p.Size()
+		b.StopTimer()
+		total += size
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+}
+
+func BenchmarkOtherExtenableSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, false)
+		b.StartTimer()
+		size := p.Size()
+		b.StopTimer()
+		total += size
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func BenchmarkNidOptNativePopulate(b *testing6.B) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	b.StopTimer()
@@ -9437,6 +9935,26 @@ func BenchmarkTimerPopulate(b *testing6.B) {
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		NewPopulatedTimer(popr, false)
+	}
+}
+
+func BenchmarkMyExtendablePopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedMyExtendable(popr, false)
+	}
+}
+
+func BenchmarkOtherExtenablePopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	b.StopTimer()
+	b.ResetTimer()
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		NewPopulatedOtherExtenable(popr, false)
 	}
 }
 
@@ -10440,6 +10958,62 @@ func BenchmarkTimerGoString(b *testing7.B) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
 		p := NewPopulatedTimer(popr, false)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestMyExtendableGoString(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, false)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkMyExtendableGoString(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedMyExtendable(popr, false)
+		b.StartTimer()
+		data := p.GoString()
+		b.StopTimer()
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestOtherExtenableGoString(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, false)
+	s1 := p.GoString()
+	s2 := fmt2.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func BenchmarkOtherExtenableGoString(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedOtherExtenable(popr, false)
 		b.StartTimer()
 		data := p.GoString()
 		b.StopTimer()
@@ -12063,6 +12637,58 @@ func BenchmarkTimerEqual(b *testing9.B) {
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		p := NewPopulatedTimer(popr, false)
+		b.StartTimer()
+		p.Equal(p)
+	}
+}
+
+func TestMyExtendableVerboseEqual(t *testing9.T) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+	p := NewPopulatedMyExtendable(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &MyExtendable{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func BenchmarkMyExtendableEqual(b *testing9.B) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedMyExtendable(popr, false)
+		b.StartTimer()
+		p.Equal(p)
+	}
+}
+
+func TestOtherExtenableVerboseEqual(t *testing9.T) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+	p := NewPopulatedOtherExtenable(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &OtherExtenable{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func BenchmarkOtherExtenableEqual(b *testing9.B) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := NewPopulatedOtherExtenable(popr, false)
 		b.StartTimer()
 		p.Equal(p)
 	}

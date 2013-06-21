@@ -357,3 +357,22 @@ message Timer {
 	optional sfixed64 Time2 = 2 [(gogoproto.nullable) = false];
 	optional bytes Data = 3 [(gogoproto.nullable) = false];
 }
+
+message MyExtendable {
+	option (gogoproto.face) = false;
+	optional int64 Field1 = 1;
+	extensions 100 to 199;
+}
+
+extend MyExtendable {
+	optional double Field2 = 100;
+}
+
+message OtherExtenable {
+	option (gogoproto.face) = false;
+	optional int64 Field2 = 2;
+	extensions 14 to 16;
+	optional int64 Field13 = 13;
+	extensions 10 to 12;
+	optional MyExtendable M = 1;
+}
