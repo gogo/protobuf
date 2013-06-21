@@ -30,6 +30,7 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"sort"
 )
 
 func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset bool) bool {
@@ -64,6 +65,21 @@ func SizeOfExtensionMap(m map[int32]Extension) (n int) {
 		n += ms
 	}
 	return n
+}
+
+func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {
+	if err := encodeExtensionMap(m); err != nil {
+		return 0, err
+	}
+	keys := make([]int, 0, len(m))
+	for k := range m {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	for _, k := range keys {
+		n += copy(data[n:], m[int32(k)].enc)
+	}
+	return n, nil
 }
 
 func NewExtension(e []byte) Extension {
