@@ -24,52 +24,23 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package proto
+package test
 
 import (
-	"bytes"
-	"fmt"
-	"reflect"
+	"code.google.com/p/gogoprotobuf/proto"
+	"math"
+	"testing"
 )
 
-func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset bool) bool {
-	if reflect.ValueOf(pb).IsNil() {
-		return ifnotset
-	}
-	value, err := GetExtension(pb, extension)
+func TestUint32Varint(t *testing.T) {
+	temp := uint32(math.MaxUint32)
+	n := &NinOptNative{}
+	n.Field5 = &temp
+	data, err := proto.Marshal(n)
 	if err != nil {
-		return ifnotset
+		panic(err)
 	}
-	if value == nil {
-		return ifnotset
+	if len(data) != 6 {
+		t.Fatalf("data should be length 6, but its %#v", data)
 	}
-	if value.(*bool) == nil {
-		return ifnotset
-	}
-	return *(value.(*bool))
-}
-
-func (this *Extension) Equal(that *Extension) bool {
-	return bytes.Equal(this.enc, that.enc)
-}
-
-func SizeOfExtensionMap(m map[int32]Extension) (n int) {
-	for _, ext := range m {
-		ms := len(ext.enc)
-		if ext.enc == nil {
-			props := new(Properties)
-			props.Init(reflect.TypeOf(ext.desc.ExtensionType), "x", ext.desc.Tag, nil)
-			ms = len(props.tagcode) + sizeField(reflect.ValueOf(ext.value), props)
-		}
-		n += ms
-	}
-	return n
-}
-
-func NewExtension(e []byte) Extension {
-	return Extension{enc: e}
-}
-
-func (this Extension) GoString() string {
-	return fmt.Sprintf("proto.NewExtension(%#v)", this.enc)
 }

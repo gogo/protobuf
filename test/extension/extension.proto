@@ -43,7 +43,7 @@ option (gogoproto.populate_all) = true;
 
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.sizer_all) = true;
 
 message MyExtendable {
 	optional int64 Field1 = 1;
@@ -52,4 +52,12 @@ message MyExtendable {
 
 extend MyExtendable {
 	optional double Field2 = 100;
+}
+
+message OtherExtenable {
+	optional int64 Field2 = 2;
+	extensions 14 to 16;
+	optional int64 Field13 = 13;
+	extensions 10 to 12;
+	optional MyExtendable M = 1;
 }

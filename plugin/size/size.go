@@ -110,6 +110,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
+	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 	for _, message := range file.Messages() {
 		if !gogoproto.IsSizer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
@@ -288,6 +289,13 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 			}
+		}
+		if message.DescriptorProto.HasExtension() {
+			p.P(`if m.XXX_extensions != nil {`)
+			p.In()
+			p.P(`n += `, protoPkg.Use(), `.SizeOfExtensionMap(m.XXX_extensions)`)
+			p.Out()
+			p.P(`}`)
 		}
 		p.P(`if m.XXX_unrecognized != nil {`)
 		p.In()

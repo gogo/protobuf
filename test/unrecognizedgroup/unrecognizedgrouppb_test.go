@@ -23,12 +23,16 @@ import fmt "fmt"
 import math_rand4 "math/rand"
 import time4 "time"
 import testing4 "testing"
-import fmt1 "fmt"
-import go_parser "go/parser"
+import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
 import math_rand5 "math/rand"
 import time5 "time"
 import testing5 "testing"
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import fmt1 "fmt"
+import go_parser "go/parser"
+import math_rand6 "math/rand"
+import time6 "time"
+import testing6 "testing"
+import code_google_com_p_gogoprotobuf_proto3 "code.google.com/p/gogoprotobuf/proto"
 
 func TestNewNoGroupProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -425,8 +429,34 @@ func TestOldWithGroup_Group2Stringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestNewNoGroupGoString(t *testing4.T) {
+func TestNewNoGroupSize(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedNewNoGroup(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+	}
+}
+
+func TestASize(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedA(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("data = %#v size %v != marshalled size %v", data, size, len(data))
+	}
+}
+
+func TestNewNoGroupGoString(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -438,8 +468,8 @@ func TestNewNoGroupGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestAGoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestAGoString(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -451,8 +481,8 @@ func TestAGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroupGoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestOldWithGroupGoString(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -464,8 +494,8 @@ func TestOldWithGroupGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroup_Group1GoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestOldWithGroup_Group1GoString(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -477,8 +507,8 @@ func TestOldWithGroup_Group1GoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroup_Group2GoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestOldWithGroup_Group2GoString(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -490,75 +520,75 @@ func TestOldWithGroup_Group2GoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestNewNoGroupVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestNewNoGroupVerboseEqual(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NewNoGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestAVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestAVerboseEqual(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroupVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroupVerboseEqual(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroup_Group1VerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroup_Group1VerboseEqual(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup_Group1{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroup_Group2VerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroup_Group2VerboseEqual(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup_Group2{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
