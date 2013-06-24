@@ -63,6 +63,12 @@ func (this MixMatch) Regenerate() {
 }
 
 func (this MixMatch) Test(t *testing.T) {
+	if _, err := exec.LookPath("protoc"); err != nil {
+		t.Skipf("cannot find protoc in PATH")
+	}
+	if _, err := exec.LookPath("go"); err != nil {
+		t.Skipf("cannot find go in PATH")
+	}
 	if err := os.MkdirAll("./testdata", 0777); err != nil {
 		panic(err)
 	}
