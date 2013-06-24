@@ -459,7 +459,7 @@ func TestGroups2_GVerboseEqual(t *testing5.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestDescription(t *testing6.T) {
+func TestGroupDescription(t *testing6.T) {
 	GroupDescription()
 }
 

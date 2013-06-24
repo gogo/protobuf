@@ -1015,7 +1015,7 @@ func BenchmarkUEqual(b *testing9.B) {
 	}
 }
 
-func TestDescription(t *testing10.T) {
+func TestExampleDescription(t *testing10.T) {
 	ExampleDescription()
 }
 

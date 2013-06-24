@@ -53,7 +53,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 
 	if used {
 		localName := generator.FileName(file)
-		p.P(`func TestDescription(t *`, testingPkg.Use(), `.T) {`)
+		p.P(`func Test`, localName, `Description(t *`, testingPkg.Use(), `.T) {`)
 		p.In()
 		p.P(localName, `Description()`)
 		p.Out()

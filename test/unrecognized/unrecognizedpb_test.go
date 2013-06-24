@@ -875,7 +875,7 @@ func TestOldCVerboseEqual(t *testing6.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestDescription(t *testing7.T) {
+func TestUnrecognizedDescription(t *testing7.T) {
 	UnrecognizedDescription()
 }
 

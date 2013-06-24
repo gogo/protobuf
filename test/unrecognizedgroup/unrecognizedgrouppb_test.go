@@ -596,7 +596,7 @@ func TestOldWithGroup_Group2VerboseEqual(t *testing6.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestDescription(t *testing7.T) {
+func TestUnrecognizedgroupDescription(t *testing7.T) {
 	UnrecognizedgroupDescription()
 }
 
