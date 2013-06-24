@@ -58,182 +58,203 @@ The following message:
 
 given to the testgen plugin, will generate the following test code:
 
-  func TestAProto(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	if !p.Equal(msg) {
-		t.Fatalf("%#v !Proto %#v", msg, p)
-	}
-  }
-  func BenchmarkAProtoMarshal(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		if _, err := code_google_com_p_gogoprotobuf_proto.Marshal(p); err != nil {
+	func TestAProto(t *testing.T) {
+		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+		p := NewPopulatedA(popr, false)
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
-	}
-  }
-  func BenchmarkAProtoUnmarshal(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
+		msg := &A{}
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
-	}
-  }
-
-  func TestAJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	jsondata, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	msg := &A{}
-	err = encoding_json.Unmarshal(jsondata, msg)
-	if err != nil {
-		panic(err)
-	}
-	if !p.Equal(msg) {
-		t.Fatalf("%#v !Json Equal %#v", msg, p)
-	}
-  }
-  func BenchmarkAJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		if _, err := encoding_json.Marshal(p); err != nil {
-			panic(err)
+		if err := p.VerboseEqual(msg); err != nil {
+			t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+		}
+		if !p.Equal(msg) {
+			t.Fatalf("%#v !Proto %#v", msg, p)
 		}
 	}
-  }
-  func BenchmarkAJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data, err := encoding_json.Marshal(p)
-	if err != nil {
-		panic(err)
+
+	func BenchmarkAProtoMarshal(b *testing.B) {
+		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+			if err != nil {
+				panic(err)
+			}
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
 	}
-	msg := &A{}
-	if err := encoding_json.Unmarshal(data, msg); err != nil {
-		panic(err)
+
+	func BenchmarkAProtoUnmarshal(b *testing.B) {
+		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			b.StopTimer()
+			p := NewPopulatedA(popr, true)
+			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+			if err != nil {
+				panic(err)
+			}
+			msg := &A{}
+			total += len(data)
+			b.StartTimer()
+			if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+				panic(err)
+			}
+		}
+		b.SetBytes(int64(total / b.N))
 	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
+
+
+	func TestAJSON(t *testing1.T) {
+		popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+		p := NewPopulatedA(popr, true)
+		jsondata, err := encoding_json.Marshal(p)
+		if err != nil {
 			panic(err)
 		}
+		msg := &A{}
+		err = encoding_json.Unmarshal(jsondata, msg)
+		if err != nil {
+			panic(err)
+		}
+		if err := p.VerboseEqual(msg); err != nil {
+			t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+		}
+		if !p.Equal(msg) {
+			t.Fatalf("%#v !Json Equal %#v", msg, p)
+		}
 	}
-  }
+	func BenchmarkAJSONMarshal(b *testing1.B) {
+		popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			data, err := encoding_json.Marshal(p)
+			if err != nil {
+				panic(err)
+			}
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
+	}
 
-  func TestAProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
+	func BenchmarkAJSONUnmarshal(b *testing1.B) {
+		popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			b.StopTimer()
+			p := NewPopulatedA(popr, true)
+			data, err := encoding_json.Marshal(p)
+			if err != nil {
+				panic(err)
+			}
+			msg := &A{}
+			total += len(data)
+			b.StartTimer()
+			if err := encoding_json.Unmarshal(data, msg); err != nil {
+				panic(err)
+			}
+		}
+		b.SetBytes(int64(total / b.N))
 	}
-	if !p.Equal(msg) {
-		t.Fatalf("%#v !Proto %#v", msg, p)
-	}
-  }
-  func TestAProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	if !p.Equal(msg) {
-		t.Fatalf("%#v !Proto %#v", msg, p)
-	}
-  }
-  func BenchmarkAProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	}
-  }
-  func BenchmarkAProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-	}
-  }
-  func BenchmarkAProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-		panic(err)
-	}
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		msg.Reset()
+
+	func TestAProtoText(t *testing2.T) {
+		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+		p := NewPopulatedA(popr, true)
+		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		msg := &A{}
 		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
+			panic(err)
+		}
+		if err := p.VerboseEqual(msg); err != nil {
+			t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+		}
+		if !p.Equal(msg) {
+			t.Fatalf("%#v !Proto %#v", msg, p)
 		}
 	}
-  }
+
+	func TestAProtoCompactText(t *testing2.T) {
+		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+		p := NewPopulatedA(popr, true)
+		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		msg := &A{}
+		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+			panic(err)
+		}
+		if err := p.VerboseEqual(msg); err != nil {
+			t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+		}
+		if !p.Equal(msg) {
+			t.Fatalf("%#v !Proto %#v", msg, p)
+		}
+	}
+
+	func BenchmarkAProtoTextMarshal(b *testing2.B) {
+		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
+	}
+
+	func BenchmarkAProtoCompactTextMarshal(b *testing2.B) {
+		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
+	}
+
+	func BenchmarkAProtoTextUnmarshal(b *testing2.B) {
+		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			b.StopTimer()
+			p := NewPopulatedA(popr, true)
+			data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+			msg := &A{}
+			total += len(data)
+			msg.Reset()
+			b.StartTimer()
+			if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+				panic(fmt.Sprintf("%v given %v", err, data))
+			}
+		}
+		b.SetBytes(int64(total / b.N))
+	}
 
 Other registered tests are also generated.
 Tests are registered to this test plugin by calling the following function.

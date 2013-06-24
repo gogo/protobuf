@@ -57,9 +57,9 @@ option (gogoproto.populate_all) = true;
 
 given to the populate plugin, will generate code the following code:
 
-  func NewPopulatedB(r randy) *B {
+  func NewPopulatedB(r randyExample, easy bool) *B {
 	this := &B{}
-	v2 := NewPopulatedA(r)
+	v2 := NewPopulatedA(r, easy)
 	this.A = *v2
 	if r.Intn(10) != 0 {
 		v3 := r.Intn(10)
@@ -69,25 +69,31 @@ given to the populate plugin, will generate code the following code:
 			this.G[i] = *v4
 		}
 	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedExample(r, 3)
+	}
 	return this
   }
 
 and the following test code:
 
-  func BenchmarkBPopulate(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+  func BenchmarkBPopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	b.StopTimer()
 	b.ResetTimer()
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
-		NewPopulatedB(popr)
+		NewPopulatedB(popr, false)
 	}
   }
 
 The idea that is useful for testing.
 Most of the other plugins' generated test code uses it.
 You will still be able to use the generated test code of other packages
-if you tunn off the popluate plugin and write your own custom NewPopulated function.
+if you turn off the popluate plugin and write your own custom NewPopulated function.
+
+If the easy flag is not set the XXX_unrecognized and XXX_extensions fields are also populated.
+These have caused problems with JSON marshalling and unmarshalling tests.
 
 */
 package populate

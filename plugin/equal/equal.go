@@ -76,34 +76,38 @@ given to the equal plugin, will generate the following code:
 			if this == nil {
 				return nil
 			}
-			return fmt.Errorf("that == nil && this != nil")
+			return fmt2.Errorf("that == nil && this != nil")
 		}
 
 		that1, ok := that.(*B)
 		if !ok {
-			return fmt.Errorf("that is not of type *B")
+			return fmt2.Errorf("that is not of type *B")
 		}
 		if that1 == nil {
 			if this == nil {
 				return nil
 			}
-			return fmt.Errorf("that is type *B but is nil && this != nil")
+			return fmt2.Errorf("that is type *B but is nil && this != nil")
 		} else if this == nil {
-			return fmt.Errorf("that is type *Bbut is not nil && this == nil")
+			return fmt2.Errorf("that is type *Bbut is not nil && this == nil")
 		}
 		if !this.A.Equal(&that1.A) {
-			return fmt.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
+			return fmt2.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
 		}
 		if len(this.G) != len(that1.G) {
-			return fmt.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
+			return fmt2.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
 		}
 		for i := range this.G {
 			if !this.G[i].Equal(that1.G[i]) {
-				return fmt.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
+				return fmt2.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
 			}
+		}
+		if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+			return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 		}
 		return nil
 	}
+
 	func (this *B) Equal(that interface{}) bool {
 		if that == nil {
 			if this == nil {
@@ -135,37 +139,40 @@ given to the equal plugin, will generate the following code:
 				return false
 			}
 		}
+		if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+			return false
+		}
 		return true
 	}
 
 and the following test code:
 
-  func TestBVerboseEqual(t *testing8.T) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedB(popr)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
-	if err != nil {
-		panic(err)
+	func TestBVerboseEqual(t *testing8.T) {
+		popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+		p := NewPopulatedB(popr, false)
+		data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		msg := &B{}
+		if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+			panic(err)
+		}
+		if err := p.VerboseEqual(msg); err != nil {
+			t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
-	msg := &B{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
-		panic(err)
-	}
-	if err := p.VerboseEqual(msg); err != nil {
-		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
-	}
-  }
 
-  func BenchmarkBEqual(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	p := NewPopulatedB(popr)
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		p.Equal(p)
 	}
-  }
+	func BenchmarkBEqual(b *testing8.B) {
+		popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			b.StopTimer()
+			p := NewPopulatedB(popr, false)
+			b.StartTimer()
+			p.Equal(p)
+		}
+	}
 
 */
 package equal

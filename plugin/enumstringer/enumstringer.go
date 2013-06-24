@@ -24,6 +24,17 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+/*
+The enumstringer plugin generates a String method for each enum.
+
+It is enabled by the following extensions:
+
+  - enum_stringer
+  - enum_stringer_all
+
+This package is subject to change.
+
+*/
 package enumstringer
 
 import (

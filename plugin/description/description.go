@@ -26,8 +26,8 @@
 
 /*
 The description plugin generates a Description method for each message.
-The Description method returns a populated google_protobuf.DescriptorProto struct.
-This contains the description of the specific message.
+The Description method returns a populated google_protobuf.FileDescriptorSet struct.
+This contains the description of the files used to generate this message.
 
 It is enabled by the following extensions:
 
@@ -57,28 +57,18 @@ The following message:
 
 given to the description plugin, will generate the following code:
 
-  func (this *B) Description() (desc *google_protobuf.DescriptorProto) {
-	return &google_protobuf.DescriptorProto{Name: func(v string) *string { return &v }("B"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.A"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}, {Name: func(v string) *string { return &v }("G"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil)}}
+  func (this *B) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ExampleDescription()
   }
 
 and the following test code:
 
-  func TestBDescription(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedB(popr)
-	p.Description()
+  func TestDescription(t *testing9.T) {
+	ExampleDescription()
   }
 
 The hope is to use this struct in some way instead of reflect.
-This package is subject to change, since a use has not been figured out yet and might require a bigger desciptor, like a FileDescriptorSet.
+This package is subject to change, since a use has not been figured out yet.
 
 */
 package description

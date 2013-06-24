@@ -27,18 +27,23 @@ import fmt1 "fmt"
 import math_rand5 "math/rand"
 import time5 "time"
 import testing5 "testing"
+import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
 import math_rand6 "math/rand"
 import time6 "time"
 import testing6 "testing"
-import fmt2 "fmt"
-import go_parser "go/parser"
 import math_rand7 "math/rand"
 import time7 "time"
 import testing7 "testing"
+import fmt2 "fmt"
+import go_parser "go/parser"
 import math_rand8 "math/rand"
 import time8 "time"
 import testing8 "testing"
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import math_rand9 "math/rand"
+import time9 "time"
+import testing9 "testing"
+import code_google_com_p_gogoprotobuf_proto3 "code.google.com/p/gogoprotobuf/proto"
+import testing10 "testing"
 
 func TestAProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -715,8 +720,92 @@ func BenchmarkUStringer(b *testing4.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func BenchmarkAPopulate(b *testing5.B) {
+func TestASize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedA(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+}
+
+func BenchmarkASize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedA(popr, false)
+		b.StartTimer()
+		size := p.Size()
+		b.StopTimer()
+		total += size
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestBSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedB(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+}
+
+func BenchmarkBSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedB(popr, false)
+		b.StartTimer()
+		size := p.Size()
+		b.StopTimer()
+		total += size
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestUSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedU(popr, true)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+}
+
+func BenchmarkUSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	total := 0
+	b.ResetTimer()
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		p := NewPopulatedU(popr, false)
+		b.StartTimer()
+		size := p.Size()
+		b.StopTimer()
+		total += size
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkAPopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	b.StopTimer()
 	b.ResetTimer()
 	b.StartTimer()
@@ -725,8 +814,8 @@ func BenchmarkAPopulate(b *testing5.B) {
 	}
 }
 
-func BenchmarkBPopulate(b *testing5.B) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func BenchmarkBPopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	b.StopTimer()
 	b.ResetTimer()
 	b.StartTimer()
@@ -735,8 +824,8 @@ func BenchmarkBPopulate(b *testing5.B) {
 	}
 }
 
-func BenchmarkUPopulate(b *testing5.B) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func BenchmarkUPopulate(b *testing6.B) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	b.StopTimer()
 	b.ResetTimer()
 	b.StartTimer()
@@ -745,8 +834,8 @@ func BenchmarkUPopulate(b *testing5.B) {
 	}
 }
 
-func TestAGoString(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestAGoString(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	s1 := p.GoString()
 	s2 := fmt2.Sprintf("%#v", p)
@@ -758,8 +847,8 @@ func TestAGoString(t *testing6.T) {
 		panic(err)
 	}
 }
-func BenchmarkAGoString(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func BenchmarkAGoString(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	total := 0
 	b.ResetTimer()
 	b.StopTimer()
@@ -773,8 +862,8 @@ func BenchmarkAGoString(b *testing6.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func TestBGoString(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestBGoString(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedB(popr, false)
 	s1 := p.GoString()
 	s2 := fmt2.Sprintf("%#v", p)
@@ -786,8 +875,8 @@ func TestBGoString(t *testing6.T) {
 		panic(err)
 	}
 }
-func BenchmarkBGoString(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func BenchmarkBGoString(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	total := 0
 	b.ResetTimer()
 	b.StopTimer()
@@ -801,8 +890,8 @@ func BenchmarkBGoString(b *testing6.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func TestUGoString(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestUGoString(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
 	s1 := p.GoString()
 	s2 := fmt2.Sprintf("%#v", p)
@@ -814,8 +903,8 @@ func TestUGoString(t *testing6.T) {
 		panic(err)
 	}
 }
-func BenchmarkUGoString(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func BenchmarkUGoString(b *testing7.B) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	total := 0
 	b.ResetTimer()
 	b.StopTimer()
@@ -829,16 +918,16 @@ func BenchmarkUGoString(b *testing6.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func TestAFace(t *testing7.T) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+func TestAFace(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkAFace(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+func BenchmarkAFace(b *testing8.B) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -848,23 +937,23 @@ func BenchmarkAFace(b *testing7.B) {
 	}
 }
 
-func TestAVerboseEqual(t *testing8.T) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func TestAVerboseEqual(t *testing9.T) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &A{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkAEqual(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func BenchmarkAEqual(b *testing9.B) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -874,23 +963,23 @@ func BenchmarkAEqual(b *testing8.B) {
 	}
 }
 
-func TestBVerboseEqual(t *testing8.T) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func TestBVerboseEqual(t *testing9.T) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedB(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &B{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkBEqual(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func BenchmarkBEqual(b *testing9.B) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -900,23 +989,23 @@ func BenchmarkBEqual(b *testing8.B) {
 	}
 }
 
-func TestUVerboseEqual(t *testing8.T) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func TestUVerboseEqual(t *testing9.T) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &U{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkUEqual(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func BenchmarkUEqual(b *testing9.B) {
+	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -924,6 +1013,10 @@ func BenchmarkUEqual(b *testing8.B) {
 		b.StartTimer()
 		p.Equal(p)
 	}
+}
+
+func TestDescription(t *testing10.T) {
+	ExampleDescription()
 }
 
 //These tests are generated by code.google.com/p/gogoprotobuf/plugin/testgen

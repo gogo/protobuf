@@ -24,6 +24,23 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+/*
+The embedcheck plugin is used to check whether embed is not used incorrectly.
+For instance:
+An embedded message has a generated string method, but the is a member of a message which does not.
+This causes a warning.
+An error is caused by a namespace conflict.
+
+It is enabled by the following extensions:
+
+  - embed
+  - embed_all
+
+For incorrect usage of embed with tests see:
+
+  code.google.com/p/gogoprotobuf/test/embedconflict
+
+*/
 package embedcheck
 
 import (

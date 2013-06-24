@@ -24,6 +24,135 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+/*
+The unmarshal plugin generates a Unmarshal method for each message.
+The `Unmarshal([]byte) error` method results in the fact that the message
+implements the Unmarshaler interface.
+The allows proto.Unmarshal to be faster by calling the generated Unmarshal method rather than using reflect.
+
+If is enabled by the following extensions:
+
+  - unmarshaler
+  - unmarshaler_all
+
+The generation of unmarshalling tests are enabled using one of the following extensions:
+
+  - testgen
+  - testgen_all
+
+And benchmarks given it is enabled using one of the following extensions:
+
+  - benchgen
+  - benchgen_all
+
+Let us look at:
+
+  code.google.com/p/gogoprotobuf/test/example/example.proto
+
+Btw all the output can be seen at:
+
+  code.google.com/p/gogoprotobuf/test/example/*
+
+The following message:
+
+  option (gogoproto.unmarshaler_all) = true;
+
+  message B {
+	option (gogoproto.description) = true;
+	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+  }
+
+given to the unmarshal plugin, will generate the following code:
+
+  func (m *B) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.A.Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return proto.ErrWrongType
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.G = append(m.G, code_google_com_p_gogoprotobuf_test_custom.Uint128{})
+			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
+		}
+	}
+	return nil
+  }
+
+*/
 package unmarshal
 
 import (

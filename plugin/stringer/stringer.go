@@ -52,7 +52,7 @@ Btw all the output can be seen at:
 
 The following message:
 
-option (gogoproto.msgstringmethod_all) = false;
+option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.stringer_all) =  true;
 
 message A {
@@ -71,6 +71,7 @@ given to the stringer stringer, will generate the following code:
 		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
 		`Number:` + fmt.Sprintf("%v", this.Number) + `,`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -78,27 +79,29 @@ given to the stringer stringer, will generate the following code:
 
 and the following test code:
 
-  func TestAStringer(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	s1 := p.String()
-	s2 := fmt.Sprintf("%v", p)
-	if s1 != s2 {
-		t.Fatalf("String want %v got %v", s1, s2)
+	func TestAStringer(t *testing4.T) {
+		popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+		p := NewPopulatedA(popr, false)
+		s1 := p.String()
+		s2 := fmt1.Sprintf("%v", p)
+		if s1 != s2 {
+			t.Fatalf("String want %v got %v", s1, s2)
+		}
 	}
-  }
-  func BenchmarkAStringer(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := p.String()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		p.String()
+	func BenchmarkAStringer(b *testing4.B) {
+		popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			data := p.String()
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
 	}
-  }
 
 Typically fmt.Printf("%v") will stop to print when it reaches a pointer and
 not print their values, while the generated String method will always print all values, recursively.

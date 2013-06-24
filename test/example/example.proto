@@ -36,6 +36,8 @@ option (gogoproto.stringer_all) =  true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
 option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 
 message A {

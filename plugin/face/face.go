@@ -108,24 +108,24 @@ given to the face plugin, will generate the following code:
 
 and the following test code:
 
-  func TestAFace(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	msg := p.TestProto()
-	if !p.Equal(msg) {
-		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	func TestAFace(t *testing7.T) {
+		popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+		p := NewPopulatedA(popr, true)
+		msg := p.TestProto()
+		if !p.Equal(msg) {
+			t.Fatalf("%#v !Face Equal %#v", msg, p)
+		}
 	}
-  }
-  func BenchmarkAFace(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		p.TestProto()
+	func BenchmarkAFace(b *testing7.B) {
+		popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			b.StopTimer()
+			p := NewPopulatedA(popr, true)
+			b.StartTimer()
+			p.TestProto()
+		}
 	}
-  }
 
 The struct A, representing the message, will also be generated just like always.
 As you can see A satisfies its own Face, AFace.

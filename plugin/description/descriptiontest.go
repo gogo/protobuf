@@ -48,12 +48,14 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			!gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		used = true
 	}
 
 	if used {
+		localName := generator.FileName(file)
 		p.P(`func TestDescription(t *`, testingPkg.Use(), `.T) {`)
 		p.In()
-		p.P(`Description()`)
+		p.P(localName, `Description()`)
 		p.Out()
 		p.P(`}`)
 

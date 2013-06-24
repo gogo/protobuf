@@ -25,7 +25,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The gostring plugin generates a GoString method for each method.
+The gostring plugin generates a GoString method for each message.
 The GoString method is called whenever you use a fmt.Printf as such:
 
   fmt.Printf("%#v", mymessage)
@@ -73,37 +73,39 @@ given to the gostring plugin, will generate the following code:
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&test.A{` + `Description:` + fmt.Sprintf("%#v", this.Description), `Number:` + fmt.Sprintf("%#v", this.Number), `Id:` + fmt.Sprintf("%#v", this.Id) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.A{` + `Description:` + fmt1.Sprintf("%#v", this.Description), `Number:` + fmt1.Sprintf("%#v", this.Number), `Id:` + fmt1.Sprintf("%#v", this.Id), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
   }
 
 and the following test code:
 
-  func TestAGoString(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	s1 := p.GoString()
-	s2 := fmt.Sprintf("%#v", p)
-	if s1 != s2 {
-		t.Fatalf("GoString want %v got %v", s1, s2)
+	func TestAGoString(t *testing6.T) {
+		popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+		p := NewPopulatedA(popr, false)
+		s1 := p.GoString()
+		s2 := fmt2.Sprintf("%#v", p)
+		if s1 != s2 {
+			t.Fatalf("GoString want %v got %v", s1, s2)
+		}
+		_, err := go_parser.ParseExpr(s1)
+		if err != nil {
+			panic(err)
+		}
 	}
-	_, err := go_parser.ParseExpr(s1)
-	if err != nil {
-		panic(err)
+	func BenchmarkAGoString(b *testing6.B) {
+		popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+		total := 0
+		b.ResetTimer()
+		b.StopTimer()
+		for i := 0; i < b.N; i++ {
+			p := NewPopulatedA(popr, false)
+			b.StartTimer()
+			data := p.GoString()
+			b.StopTimer()
+			total += len(data)
+		}
+		b.SetBytes(int64(total / b.N))
 	}
-  }
-  func BenchmarkAGoString(b *testing.B) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedA(popr)
-	data := p.GoString()
-	b.SetBytes(int64(len(data)))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		p.GoString()
-	}
-  }
 
 Typically fmt.Printf("%#v") will stop to print when it reaches a pointer and
 not print their values, while the generated GoString method will always print all values, recursively.
