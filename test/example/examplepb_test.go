@@ -56,6 +56,9 @@ func TestAProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -114,6 +117,9 @@ func TestBProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -171,6 +177,9 @@ func TestUProto(t *testing.T) {
 	msg := &U{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

@@ -46,6 +46,9 @@ func TestNewNoGroupProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -64,6 +67,9 @@ func TestAProto(t *testing.T) {
 	msg := &A{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -84,6 +90,9 @@ func TestOldWithGroupProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -103,6 +112,9 @@ func TestOldWithGroup_Group1Proto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -121,6 +133,9 @@ func TestOldWithGroup_Group2Proto(t *testing.T) {
 	msg := &OldWithGroup_Group2{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

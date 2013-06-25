@@ -144,7 +144,8 @@ func (uuid *Uuid) Unmarshal(data []byte) error {
 		uuid = nil
 		return nil
 	}
-	id := Uuid(data)
+	id := Uuid(make([]byte, 16))
+	copy(id, data)
 	*uuid = id
 	return nil
 }

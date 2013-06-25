@@ -83,7 +83,9 @@ func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {
 }
 
 func NewExtension(e []byte) Extension {
-	return Extension{enc: e}
+	ee := Extension{enc: make([]byte, len(e))}
+	copy(ee.enc, e)
+	return ee
 }
 
 func (this Extension) GoString() string {

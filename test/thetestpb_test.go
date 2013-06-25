@@ -56,6 +56,9 @@ func TestNidOptNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -113,6 +116,9 @@ func TestNinOptNativeProto(t *testing.T) {
 	msg := &NinOptNative{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -172,6 +178,9 @@ func TestNidRepNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -229,6 +238,9 @@ func TestNinRepNativeProto(t *testing.T) {
 	msg := &NinRepNative{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -288,6 +300,9 @@ func TestNidRepPackedNativeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -345,6 +360,9 @@ func TestNinRepPackedNativeProto(t *testing.T) {
 	msg := &NinRepPackedNative{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -404,6 +422,9 @@ func TestNidOptStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -461,6 +482,9 @@ func TestNinOptStructProto(t *testing.T) {
 	msg := &NinOptStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -520,6 +544,9 @@ func TestNidRepStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -577,6 +604,9 @@ func TestNinRepStructProto(t *testing.T) {
 	msg := &NinRepStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -636,6 +666,9 @@ func TestNidEmbeddedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -693,6 +726,9 @@ func TestNinEmbeddedStructProto(t *testing.T) {
 	msg := &NinEmbeddedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -752,6 +788,9 @@ func TestNidNestedStructProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -809,6 +848,9 @@ func TestNinNestedStructProto(t *testing.T) {
 	msg := &NinNestedStruct{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -868,6 +910,9 @@ func TestNidOptCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -925,6 +970,9 @@ func TestNinOptCustomProto(t *testing.T) {
 	msg := &NinOptCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -984,6 +1032,9 @@ func TestNidRepCustomProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1041,6 +1092,9 @@ func TestNinRepCustomProto(t *testing.T) {
 	msg := &NinRepCustom{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1100,6 +1154,9 @@ func TestNinOptNativeUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1157,6 +1214,9 @@ func TestNinOptStructUnionProto(t *testing.T) {
 	msg := &NinOptStructUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1216,6 +1276,9 @@ func TestNinEmbeddedStructUnionProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1273,6 +1336,9 @@ func TestNinNestedStructUnionProto(t *testing.T) {
 	msg := &NinNestedStructUnion{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1332,6 +1398,9 @@ func TestTreeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1389,6 +1458,9 @@ func TestOrBranchProto(t *testing.T) {
 	msg := &OrBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1448,6 +1520,9 @@ func TestAndBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1505,6 +1580,9 @@ func TestLeafProto(t *testing.T) {
 	msg := &Leaf{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1564,6 +1642,9 @@ func TestDeepTreeProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1621,6 +1702,9 @@ func TestADeepBranchProto(t *testing.T) {
 	msg := &ADeepBranch{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1680,6 +1764,9 @@ func TestAndDeepBranchProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1737,6 +1824,9 @@ func TestDeepLeafProto(t *testing.T) {
 	msg := &DeepLeaf{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1796,6 +1886,9 @@ func TestNilProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1853,6 +1946,9 @@ func TestNidOptEnumProto(t *testing.T) {
 	msg := &NidOptEnum{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -1912,6 +2008,9 @@ func TestNinOptEnumProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -1969,6 +2068,9 @@ func TestNidRepEnumProto(t *testing.T) {
 	msg := &NidRepEnum{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -2028,6 +2130,9 @@ func TestNinRepEnumProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -2085,6 +2190,9 @@ func TestTimerProto(t *testing.T) {
 	msg := &Timer{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -2144,6 +2252,9 @@ func TestMyExtendableProto(t *testing.T) {
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 	}
@@ -2201,6 +2312,9 @@ func TestOtherExtenableProto(t *testing.T) {
 	msg := &OtherExtenable{}
 	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

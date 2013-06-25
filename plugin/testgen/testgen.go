@@ -69,6 +69,9 @@ given to the testgen plugin, will generate the following test code:
 		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
+		for i := range data {
+			data[i] = byte(popr.Intn(256))
+		}
 		if err := p.VerboseEqual(msg); err != nil {
 			t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
 		}
@@ -371,6 +374,11 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 			p.P(`if err := `, protoPkg.Use(), `.Unmarshal(data, msg); err != nil {`)
 			p.In()
 			p.P(`panic(err)`)
+			p.Out()
+			p.P(`}`)
+			p.P(`for i := range data {`)
+			p.In()
+			p.P(`data[i] = byte(popr.Intn(256))`)
 			p.Out()
 			p.P(`}`)
 			if gogoproto.HasVerboseEqual(file.FileDescriptorProto, message.DescriptorProto) {

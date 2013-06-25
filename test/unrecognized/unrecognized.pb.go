@@ -460,7 +460,8 @@ func (m *C) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field5 = append(m.Field5, data[index:postIndex])
+			m.Field5 = append(m.Field5, make([]byte, postIndex-index))
+			copy(m.Field5[len(m.Field5)-1], data[index:postIndex])
 			index = postIndex
 		case 6:
 			if wireType != 0 {

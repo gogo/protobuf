@@ -495,11 +495,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 				if !gogoproto.IsCustomType(field) {
 					if repeated {
-						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex])`)
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-index))`)
+						p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[index:postIndex])`)
 					} else if nullable {
-						p.P(`m.`, fieldname, ` = data[index:postIndex]`)
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex]...)`)
 					} else {
-						p.P(`m.`, fieldname, ` = data[index:postIndex]`)
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex]...)`)
 					}
 				} else {
 					packageName, _, err := generator.GetCustomType(field)
