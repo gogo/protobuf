@@ -25,7 +25,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The description plugin generates a Description method for each message.
+The description (experimental) plugin generates a Description method for each message.
 The Description method returns a populated google_protobuf.FileDescriptorSet struct.
 This contains the description of the files used to generate this message.
 

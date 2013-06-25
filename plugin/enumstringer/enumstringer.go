@@ -25,7 +25,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The enumstringer plugin generates a String method for each enum.
+The enumstringer (experimental) plugin generates a String method for each enum.
 
 It is enabled by the following extensions:
 
