@@ -302,12 +302,7 @@ func writeAny(w *textWriter, v reflect.Value, props *Properties) error {
 	v = reflect.Indirect(v)
 
 	if props != nil && len(props.CustomType) > 0 {
-		var custom Marshaler
-		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
-			custom = v.Interface().(Marshaler)
-		} else {
-			custom = v.Interface().(Marshaler)
-		}
+		var custom Marshaler = v.Interface().(Marshaler)
 		data, err := custom.Marshal()
 		if err != nil {
 			return err

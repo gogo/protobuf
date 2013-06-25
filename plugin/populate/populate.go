@@ -48,7 +48,7 @@ Btw all the output can be seen at:
 
 The following message:
 
-option (gogoproto.populate_all) = true;
+  option (gogoproto.populate_all) = true;
 
   message B {
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];

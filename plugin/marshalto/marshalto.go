@@ -65,7 +65,7 @@ message B {
 
 given to the marshalto plugin, will generate the following code:
 
-func (m *B) Marshal() (data []byte, err error) {
+  func (m *B) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
 	n, err := m.MarshalTo(data)
@@ -73,9 +73,9 @@ func (m *B) Marshal() (data []byte, err error) {
 		return nil, err
 	}
 	return data[:n], nil
-}
+  }
 
-func (m *B) MarshalTo(data []byte) (n int, err error) {
+  func (m *B) MarshalTo(data []byte) (n int, err error) {
 	var i int
 	_ = i
 	var l int
@@ -119,7 +119,7 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 		i += len(m.XXX_unrecognized)
 	}
 	return i, nil
-}
+  }
 
 As shown above Marshal calculates the size of the not yet marshalled message
 and allocates the appropriate buffer.
@@ -129,7 +129,7 @@ The MarshalTo method allows a user to rather preallocated a reusable buffer.
 The Size method is generated using the size plugin and the gogoproto.sizer, gogoproto.sizer_all extensions.
 The user can also using the generated Size method to check that his reusable buffer is still big enough.
 
-The generated tests and benchmarks will be you safe and show that this is really a significant speed improvement.
+The generated tests and benchmarks will keep you safe and show that this is really a significant speed improvement.
 
 */
 package marshalto

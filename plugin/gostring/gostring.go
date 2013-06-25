@@ -59,13 +59,13 @@ Btw all the output can be seen at:
 
 The following message:
 
-option (gogoproto.gostring_all) = true;
+  option (gogoproto.gostring_all) = true;
 
-message A {
+  message A {
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
 	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-}
+  }
 
 given to the gostring plugin, will generate the following code:
 

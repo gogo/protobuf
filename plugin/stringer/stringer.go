@@ -52,14 +52,14 @@ Btw all the output can be seen at:
 
 The following message:
 
-option (gogoproto.goproto_stringer_all) = false;
-option (gogoproto.stringer_all) =  true;
+  option (gogoproto.goproto_stringer_all) = false;
+  option (gogoproto.stringer_all) =  true;
 
-message A {
+  message A {
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
 	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-}
+  }
 
 given to the stringer stringer, will generate the following code:
 

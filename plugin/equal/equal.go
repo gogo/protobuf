@@ -61,13 +61,13 @@ Btw all the output can be seen at:
 
 The following message:
 
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
+  option (gogoproto.equal_all) = true;
+  option (gogoproto.verbose_equal_all) = true;
 
-message B {
+  message B {
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
 	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-}
+  }
 
 given to the equal plugin, will generate the following code:
 
