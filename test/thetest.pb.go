@@ -66,7 +66,7 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 	return p
 }
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
+	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
 func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")

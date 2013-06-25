@@ -230,7 +230,11 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 						return err
 					}
 				}
-				if err := writeAny(w, fv.Index(j), props); err != nil {
+				if len(props.Enum) > 0 {
+					if err := writeEnum(w, fv.Index(j), props); err != nil {
+						return err
+					}
+				} else if err := writeAny(w, fv.Index(j), props); err != nil {
 					return err
 				}
 				if err := w.WriteByte('\n'); err != nil {
@@ -255,8 +259,11 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 			continue
 		}
 
-		// Enums have a String method, so writeAny will work fine.
-		if err := writeAny(w, fv, props); err != nil {
+		if len(props.Enum) > 0 {
+			if err := writeEnum(w, fv, props); err != nil {
+				return err
+			}
+		} else if err := writeAny(w, fv, props); err != nil {
 			return err
 		}
 
