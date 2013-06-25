@@ -3,42 +3,42 @@ warning: building out-of-date packages:
 installing these packages with 'go test -i ./testdata/' will speed future tests.
 
 PASS
-BenchmarkNidOptNativeProtoMarshal	 2000000	       989 ns/op	 340.62 MB/s
-BenchmarkNinOptNativeProtoMarshal	 1000000	      1142 ns/op	 265.32 MB/s
-BenchmarkNidRepNativeProtoMarshal	  100000	     13856 ns/op	 506.70 MB/s
-BenchmarkNinRepNativeProtoMarshal	  200000	     13348 ns/op	 526.36 MB/s
-BenchmarkNidRepPackedNativeProtoMarshal	  200000	     12661 ns/op	 266.72 MB/s
-BenchmarkNinRepPackedNativeProtoMarshal	  200000	     12642 ns/op	 267.28 MB/s
-BenchmarkNidOptStructProtoMarshal	  500000	      3744 ns/op	 337.28 MB/s
-BenchmarkNinOptStructProtoMarshal	  500000	      3397 ns/op	 334.97 MB/s
-BenchmarkNidRepStructProtoMarshal	  100000	     20302 ns/op	 410.26 MB/s
-BenchmarkNinRepStructProtoMarshal	  100000	     19789 ns/op	 421.03 MB/s
-BenchmarkNidEmbeddedStructProtoMarshal	 1000000	      2071 ns/op	 313.71 MB/s
-BenchmarkNinEmbeddedStructProtoMarshal	 1000000	      1959 ns/op	 314.30 MB/s
-BenchmarkNidNestedStructProtoMarshal	   10000	    106215 ns/op	 330.00 MB/s
-BenchmarkNinNestedStructProtoMarshal	   10000	    107227 ns/op	 327.70 MB/s
-BenchmarkNidOptCustomProtoMarshal	 5000000	       333 ns/op	 107.87 MB/s
-BenchmarkNinOptCustomProtoMarshal	10000000	       291 ns/op	 109.60 MB/s
-BenchmarkNidRepCustomProtoMarshal	 2000000	       831 ns/op	 174.38 MB/s
-BenchmarkNinRepCustomProtoMarshal	 2000000	       845 ns/op	 171.47 MB/s
-BenchmarkNinOptNativeUnionProtoMarshal	10000000	       300 ns/op	 106.39 MB/s
-BenchmarkNinOptStructUnionProtoMarshal	 5000000	       554 ns/op	 183.87 MB/s
-BenchmarkNinEmbeddedStructUnionProtoMarshal	 2000000	       975 ns/op	 221.37 MB/s
-BenchmarkNinNestedStructUnionProtoMarshal	 2000000	       780 ns/op	 152.53 MB/s
-BenchmarkTreeProtoMarshal	 2000000	       921 ns/op	 232.24 MB/s
-BenchmarkOrBranchProtoMarshal	 1000000	      2170 ns/op	 199.95 MB/s
-BenchmarkAndBranchProtoMarshal	 1000000	      2165 ns/op	 200.90 MB/s
-BenchmarkLeafProtoMarshal	 5000000	       660 ns/op	 313.30 MB/s
-BenchmarkDeepTreeProtoMarshal	 1000000	      1391 ns/op	 159.59 MB/s
-BenchmarkADeepBranchProtoMarshal	 1000000	      1610 ns/op	 139.70 MB/s
-BenchmarkAndDeepBranchProtoMarshal	  500000	      3205 ns/op	 140.39 MB/s
-BenchmarkDeepLeafProtoMarshal	 1000000	      1136 ns/op	 190.89 MB/s
-BenchmarkNilProtoMarshal	20000000	        82.3 ns/op
-BenchmarkNidOptEnumProtoMarshal	10000000	       179 ns/op	  11.12 MB/s
-BenchmarkNinOptEnumProtoMarshal	10000000	       166 ns/op	   6.01 MB/s
-BenchmarkNidRepEnumProtoMarshal	10000000	       220 ns/op	  36.31 MB/s
-BenchmarkNinRepEnumProtoMarshal	10000000	       224 ns/op	  35.61 MB/s
-BenchmarkTimerProtoMarshal	 5000000	       290 ns/op	 237.38 MB/s
-BenchmarkMyExtendableProtoMarshal	10000000	       197 ns/op	  40.55 MB/s
-BenchmarkOtherExtenableProtoMarshal	 5000000	       352 ns/op	  76.50 MB/s
-ok  	code.google.com/p/gogoprotobuf/test/mixbench/testdata	636.242s
+BenchmarkNidOptNativeProtoMarshal	 2000000	       889 ns/op	 378.86 MB/s
+BenchmarkNinOptNativeProtoMarshal	 1000000	      1015 ns/op	 298.42 MB/s
+BenchmarkNidRepNativeProtoMarshal	  200000	     12519 ns/op	 561.20 MB/s
+BenchmarkNinRepNativeProtoMarshal	  200000	     12354 ns/op	 568.23 MB/s
+BenchmarkNidRepPackedNativeProtoMarshal	  200000	     11902 ns/op	 283.97 MB/s
+BenchmarkNinRepPackedNativeProtoMarshal	  200000	     11969 ns/op	 282.31 MB/s
+BenchmarkNidOptStructProtoMarshal	  500000	      3727 ns/op	 339.07 MB/s
+BenchmarkNinOptStructProtoMarshal	  500000	      3481 ns/op	 326.57 MB/s
+BenchmarkNidRepStructProtoMarshal	  100000	     19492 ns/op	 427.49 MB/s
+BenchmarkNinRepStructProtoMarshal	  100000	     19043 ns/op	 437.69 MB/s
+BenchmarkNidEmbeddedStructProtoMarshal	 1000000	      2050 ns/op	 317.56 MB/s
+BenchmarkNinEmbeddedStructProtoMarshal	 1000000	      2000 ns/op	 307.99 MB/s
+BenchmarkNidNestedStructProtoMarshal	   10000	    103604 ns/op	 337.86 MB/s
+BenchmarkNinNestedStructProtoMarshal	   10000	    102069 ns/op	 344.45 MB/s
+BenchmarkNidOptCustomProtoMarshal	 5000000	       310 ns/op	 116.03 MB/s
+BenchmarkNinOptCustomProtoMarshal	10000000	       277 ns/op	 115.38 MB/s
+BenchmarkNidRepCustomProtoMarshal	 2000000	       763 ns/op	 189.80 MB/s
+BenchmarkNinRepCustomProtoMarshal	 2000000	       769 ns/op	 188.40 MB/s
+BenchmarkNinOptNativeUnionProtoMarshal	10000000	       303 ns/op	 105.39 MB/s
+BenchmarkNinOptStructUnionProtoMarshal	 5000000	       521 ns/op	 195.76 MB/s
+BenchmarkNinEmbeddedStructUnionProtoMarshal	 2000000	       884 ns/op	 245.26 MB/s
+BenchmarkNinNestedStructUnionProtoMarshal	 2000000	       743 ns/op	 160.06 MB/s
+BenchmarkTreeProtoMarshal	 2000000	       838 ns/op	 255.12 MB/s
+BenchmarkOrBranchProtoMarshal	 1000000	      2012 ns/op	 216.10 MB/s
+BenchmarkAndBranchProtoMarshal	 1000000	      1996 ns/op	 217.89 MB/s
+BenchmarkLeafProtoMarshal	 5000000	       606 ns/op	 341.53 MB/s
+BenchmarkDeepTreeProtoMarshal	 1000000	      1283 ns/op	 173.03 MB/s
+BenchmarkADeepBranchProtoMarshal	 1000000	      1492 ns/op	 150.78 MB/s
+BenchmarkAndDeepBranchProtoMarshal	 1000000	      2922 ns/op	 153.98 MB/s
+BenchmarkDeepLeafProtoMarshal	 1000000	      1016 ns/op	 213.41 MB/s
+BenchmarkNilProtoMarshal	20000000	        76.7 ns/op
+BenchmarkNidOptEnumProtoMarshal	10000000	       152 ns/op	  13.16 MB/s
+BenchmarkNinOptEnumProtoMarshal	10000000	       158 ns/op	   6.30 MB/s
+BenchmarkNidRepEnumProtoMarshal	10000000	       207 ns/op	  38.50 MB/s
+BenchmarkNinRepEnumProtoMarshal	10000000	       213 ns/op	  37.53 MB/s
+BenchmarkTimerProtoMarshal	10000000	       271 ns/op	 253.87 MB/s
+BenchmarkMyExtendableProtoMarshal	10000000	       185 ns/op	  43.08 MB/s
+BenchmarkOtherExtenableProtoMarshal	 5000000	       332 ns/op	  81.09 MB/s
+ok  	code.google.com/p/gogoprotobuf/test/mixbench/testdata	627.613s
