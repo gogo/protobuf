@@ -170,7 +170,7 @@ type unmarshal struct {
 	generator.PluginImports
 	atleastOne bool
 	ioPkg      generator.Single
-	localNum   string
+	localName  string
 }
 
 func NewUnmarshal() *unmarshal {

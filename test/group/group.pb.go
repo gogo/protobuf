@@ -222,25 +222,25 @@ func randFieldGroup(data []byte, r randyGroup, fieldNumber int, wire int) []byte
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintGroup(data, uint64(key))
-		data = encodeVarintGroup(data, uint64(r.Int63()))
+		data = encodeVarintPopulateGroup(data, uint64(key))
+		data = encodeVarintPopulateGroup(data, uint64(r.Int63()))
 	case 1:
-		data = encodeVarintGroup(data, uint64(key))
+		data = encodeVarintPopulateGroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintGroup(data, uint64(key))
+		data = encodeVarintPopulateGroup(data, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintGroup(data, uint64(ll))
+		data = encodeVarintPopulateGroup(data, uint64(ll))
 		for j := 0; j < ll; j++ {
 			data = append(data, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintGroup(data, uint64(key))
+		data = encodeVarintPopulateGroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }
-func encodeVarintGroup(data []byte, v uint64) []byte {
+func encodeVarintPopulateGroup(data []byte, v uint64) []byte {
 	for v >= 1<<7 {
 		data = append(data, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7

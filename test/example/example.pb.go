@@ -565,25 +565,25 @@ func randFieldExample(data []byte, r randyExample, fieldNumber int, wire int) []
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintExample(data, uint64(key))
-		data = encodeVarintExample(data, uint64(r.Int63()))
+		data = encodeVarintPopulateExample(data, uint64(key))
+		data = encodeVarintPopulateExample(data, uint64(r.Int63()))
 	case 1:
-		data = encodeVarintExample(data, uint64(key))
+		data = encodeVarintPopulateExample(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintExample(data, uint64(key))
+		data = encodeVarintPopulateExample(data, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintExample(data, uint64(ll))
+		data = encodeVarintPopulateExample(data, uint64(ll))
 		for j := 0; j < ll; j++ {
 			data = append(data, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintExample(data, uint64(key))
+		data = encodeVarintPopulateExample(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }
-func encodeVarintExample(data []byte, v uint64) []byte {
+func encodeVarintPopulateExample(data []byte, v uint64) []byte {
 	for v >= 1<<7 {
 		data = append(data, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
@@ -607,43 +607,21 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 	var l int
 	_ = l
 	s1 := []byte(m.Description)
-	l = len(s1)
 	data[i] = 0xa
 	i++
-	for l >= 1<<7 {
-		data[i] = uint8(uint64(l)&0x7f | 0x80)
-		l >>= 7
-		i++
-	}
-	data[i] = uint8(l)
-	i++
-	copy(data[i:], s1)
-	i += len(s1)
+	i = encodeVarintExample(data, i, uint64(len(s1)))
+	i += copy(data[i:], s1)
 	data[i] = 0x10
 	i++
-	x2 := uint64(m.Number)
-	for x2 >= 1<<7 {
-		data[i] = uint8(uint64(x2)&0x7f | 0x80)
-		x2 >>= 7
-		i++
-	}
-	data[i] = uint8(x2)
-	i++
+	i = encodeVarintExample(data, i, uint64(m.Number))
 	data[i] = 0x1a
 	i++
-	l = m.Id.Size()
-	for l >= 1<<7 {
-		data[i] = uint8(uint64(l)&0x7f | 0x80)
-		l >>= 7
-		i++
-	}
-	data[i] = uint8(l)
-	i++
-	n3, err := m.Id.MarshalTo(data[i:])
+	i = encodeVarintExample(data, i, uint64(m.Id.Size()))
+	n2, err := m.Id.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n3
+	i += n2
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
 		i += len(m.XXX_unrecognized)
@@ -667,19 +645,12 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 	_ = l
 	data[i] = 0xa
 	i++
-	l = m.A.Size()
-	for l >= 1<<7 {
-		data[i] = uint8(uint64(l)&0x7f | 0x80)
-		l >>= 7
-		i++
-	}
-	data[i] = uint8(l)
-	i++
-	n4, err := m.A.MarshalTo(data[i:])
+	i = encodeVarintExample(data, i, uint64(m.A.Size()))
+	n3, err := m.A.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n4
+	i += n3
 	if len(m.G) > 0 {
 		for _, msg := range m.G {
 			data[i] = 0x12
@@ -723,42 +694,55 @@ func (m *U) MarshalTo(data []byte) (n int, err error) {
 	if m.A != nil {
 		data[i] = 0xa
 		i++
-		l = m.A.Size()
-		for l >= 1<<7 {
-			data[i] = uint8(uint64(l)&0x7f | 0x80)
-			l >>= 7
-			i++
-		}
-		data[i] = uint8(l)
-		i++
-		n5, err := m.A.MarshalTo(data[i:])
+		i = encodeVarintExample(data, i, uint64(m.A.Size()))
+		n4, err := m.A.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n5
+		i += n4
 	}
 	if m.B != nil {
 		data[i] = 0x12
 		i++
-		l = m.B.Size()
-		for l >= 1<<7 {
-			data[i] = uint8(uint64(l)&0x7f | 0x80)
-			l >>= 7
-			i++
-		}
-		data[i] = uint8(l)
-		i++
-		n6, err := m.B.MarshalTo(data[i:])
+		i = encodeVarintExample(data, i, uint64(m.B.Size()))
+		n5, err := m.B.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n6
+		i += n5
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
 		i += len(m.XXX_unrecognized)
 	}
 	return i, nil
+}
+func encodeFixed64Example(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Example(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintExample(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
 }
 func (this *A) GoString() string {
 	if this == nil {

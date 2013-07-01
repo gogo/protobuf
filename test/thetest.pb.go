@@ -3700,25 +3700,25 @@ func randFieldThetest(data []byte, r randyThetest, fieldNumber int, wire int) []
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintThetest(data, uint64(key))
-		data = encodeVarintThetest(data, uint64(r.Int63()))
+		data = encodeVarintPopulateThetest(data, uint64(key))
+		data = encodeVarintPopulateThetest(data, uint64(r.Int63()))
 	case 1:
-		data = encodeVarintThetest(data, uint64(key))
+		data = encodeVarintPopulateThetest(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintThetest(data, uint64(key))
+		data = encodeVarintPopulateThetest(data, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintThetest(data, uint64(ll))
+		data = encodeVarintPopulateThetest(data, uint64(ll))
 		for j := 0; j < ll; j++ {
 			data = append(data, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintThetest(data, uint64(key))
+		data = encodeVarintPopulateThetest(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }
-func encodeVarintThetest(data []byte, v uint64) []byte {
+func encodeVarintPopulateThetest(data []byte, v uint64) []byte {
 	for v >= 1<<7 {
 		data = append(data, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7

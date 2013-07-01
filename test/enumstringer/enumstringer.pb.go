@@ -198,25 +198,25 @@ func randFieldEnumstringer(data []byte, r randyEnumstringer, fieldNumber int, wi
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintEnumstringer(data, uint64(key))
-		data = encodeVarintEnumstringer(data, uint64(r.Int63()))
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
+		data = encodeVarintPopulateEnumstringer(data, uint64(r.Int63()))
 	case 1:
-		data = encodeVarintEnumstringer(data, uint64(key))
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintEnumstringer(data, uint64(key))
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintEnumstringer(data, uint64(ll))
+		data = encodeVarintPopulateEnumstringer(data, uint64(ll))
 		for j := 0; j < ll; j++ {
 			data = append(data, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintEnumstringer(data, uint64(key))
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }
-func encodeVarintEnumstringer(data []byte, v uint64) []byte {
+func encodeVarintPopulateEnumstringer(data []byte, v uint64) []byte {
 	for v >= 1<<7 {
 		data = append(data, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7

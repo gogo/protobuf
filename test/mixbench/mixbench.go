@@ -102,9 +102,9 @@ func NewMixMatch(marshaler bool, unmarshaler bool) *MixMatch {
 
 func main() {
 	NewMixMatch(true, true).Bench("ProtoMarshal", "marshaler.txt")
-	NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
-	NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
-	NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
+	//NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
+	//NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
+	//NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
 	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
 	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
 	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")

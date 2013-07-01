@@ -500,25 +500,25 @@ func randFieldUnrecognizedgroup(data []byte, r randyUnrecognizedgroup, fieldNumb
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintUnrecognizedgroup(data, uint64(key))
-		data = encodeVarintUnrecognizedgroup(data, uint64(r.Int63()))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(r.Int63()))
 	case 1:
-		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintUnrecognizedgroup(data, uint64(ll))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(ll))
 		for j := 0; j < ll; j++ {
 			data = append(data, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintUnrecognizedgroup(data, uint64(key))
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
 	return data
 }
-func encodeVarintUnrecognizedgroup(data []byte, v uint64) []byte {
+func encodeVarintPopulateUnrecognizedgroup(data []byte, v uint64) []byte {
 	for v >= 1<<7 {
 		data = append(data, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
@@ -544,54 +544,40 @@ func (m *NewNoGroup) MarshalTo(data []byte) (n int, err error) {
 	if m.Field1 != nil {
 		data[i] = 0x8
 		i++
-		x1 := uint64(*m.Field1)
-		for x1 >= 1<<7 {
-			data[i] = uint8(uint64(x1)&0x7f | 0x80)
-			x1 >>= 7
-			i++
-		}
-		data[i] = uint8(x1)
-		i++
+		i = encodeVarintUnrecognizedgroup(data, i, uint64(*m.Field1))
 	}
 	if len(m.Field3) > 0 {
 		for _, num := range m.Field3 {
 			data[i] = 0x19
 			i++
-			f2 := math2.Float64bits(num)
-			data[i] = uint8(f2)
+			f1 := math2.Float64bits(num)
+			data[i] = uint8(f1)
 			i++
-			data[i] = uint8(f2 >> 8)
+			data[i] = uint8(f1 >> 8)
 			i++
-			data[i] = uint8(f2 >> 16)
+			data[i] = uint8(f1 >> 16)
 			i++
-			data[i] = uint8(f2 >> 24)
+			data[i] = uint8(f1 >> 24)
 			i++
-			data[i] = uint8(f2 >> 32)
+			data[i] = uint8(f1 >> 32)
 			i++
-			data[i] = uint8(f2 >> 40)
+			data[i] = uint8(f1 >> 40)
 			i++
-			data[i] = uint8(f2 >> 48)
+			data[i] = uint8(f1 >> 48)
 			i++
-			data[i] = uint8(f2 >> 56)
+			data[i] = uint8(f1 >> 56)
 			i++
 		}
 	}
 	if m.A != nil {
 		data[i] = 0x2a
 		i++
-		l = m.A.Size()
-		for l >= 1<<7 {
-			data[i] = uint8(uint64(l)&0x7f | 0x80)
-			l >>= 7
-			i++
-		}
-		data[i] = uint8(l)
-		i++
-		n3, err := m.A.MarshalTo(data[i:])
+		i = encodeVarintUnrecognizedgroup(data, i, uint64(m.A.Size()))
+		n2, err := m.A.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n3
+		i += n2
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
@@ -617,20 +603,40 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 	if m.AField != nil {
 		data[i] = 0x8
 		i++
-		x4 := uint64(*m.AField)
-		for x4 >= 1<<7 {
-			data[i] = uint8(uint64(x4)&0x7f | 0x80)
-			x4 >>= 7
-			i++
-		}
-		data[i] = uint8(x4)
-		i++
+		i = encodeVarintUnrecognizedgroup(data, i, uint64(*m.AField))
 	}
 	if m.XXX_unrecognized != nil {
 		copy(data[i:], m.XXX_unrecognized)
 		i += len(m.XXX_unrecognized)
 	}
 	return i, nil
+}
+func encodeFixed64Unrecognizedgroup(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Unrecognizedgroup(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintUnrecognizedgroup(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
 }
 func (this *NewNoGroup) GoString() string {
 	if this == nil {
