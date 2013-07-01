@@ -340,9 +340,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			switch *field.Type {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 				if packed {
-					p.P(`l = len(m.`, fieldname, `) * 8`)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
+					p.callVarint(`len(m.`, fieldname, `) * 8`)
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
 					p.P(`f`, numGen.Next(), ` := `, mathPkg.Use(), `.Float64bits(num)`)
@@ -366,9 +365,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 				if packed {
-					p.P(`l = len(m.`, fieldname, `) * 4`)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
+					p.callVarint(`len(m.`, fieldname, `) * 4`)
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
 					p.P(`f`, numGen.Next(), ` := `, mathPkg.Use(), `.Float32bits(num)`)
@@ -412,11 +410,9 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(jvar, `++`)
 					p.Out()
 					p.P(`}`)
-					p.P(`l = `, jvar)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
-					p.P(`copy(data[i:], data`, numGen.Current(), `[:`, jvar, `])`)
-					p.P(`i += `, jvar)
+					p.callVarint(jvar)
+					p.P(`i += copy(data[i:], data`, numGen.Current(), `[:`, jvar, `])`)
 				} else if repeated {
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
@@ -434,9 +430,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
 				if packed {
-					p.P(`l = len(m.`, fieldname, `) * 8`)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
+					p.callVarint(`len(m.`, fieldname, `) * 8`)
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
 					p.encodeFixed64("num")
@@ -459,9 +454,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_FIXED32,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED32:
 				if packed {
-					p.P(`l = len(m.`, fieldname, `) * 4`)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
+					p.callVarint(`len(m.`, fieldname, `) * 4`)
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
 					p.encodeFixed32("num")
@@ -483,9 +477,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				if packed {
-					p.P(`l = len(m.`, fieldname, `)`)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
+					p.callVarint(`len(m.`, fieldname, `)`)
 					p.P(`for _, b := range m.`, fieldname, ` {`)
 					p.In()
 					p.P(`if b {`)
@@ -640,11 +633,9 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(jvar, `++`)
 					p.Out()
 					p.P(`}`)
-					p.P(`l = `, jvar)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
-					p.P(`copy(data[i:], `, datavar, `[:`, jvar, `])`)
-					p.P(`i+=`, jvar)
+					p.callVarint(jvar)
+					p.P(`i+=copy(data[i:], `, datavar, `[:`, jvar, `])`)
 				} else if repeated {
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
@@ -681,11 +672,9 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(jvar, `++`)
 					p.Out()
 					p.P(`}`)
-					p.P(`l = `, jvar)
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("l")
-					p.P(`copy(data[i:], `, datavar, `[:`, jvar, `])`)
-					p.P(`i+=`, jvar)
+					p.callVarint(jvar)
+					p.P(`i+=copy(data[i:], `, datavar, `[:`, jvar, `])`)
 				} else if repeated {
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
