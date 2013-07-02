@@ -56,6 +56,9 @@ extend google.protobuf.FileOptions {
 
 	optional bool goproto_enum_stringer_all = 63021;
 	optional bool enum_stringer_all = 63022;
+
+	optional bool unsafe_marshaler_all = 63023;
+	optional bool unsafe_unmarshaler_all = 63024;
 }
 
 extend google.protobuf.MessageOptions {
@@ -76,6 +79,9 @@ extend google.protobuf.MessageOptions {
 	optional bool unmarshaler = 64018;
 	optional bool bufferto = 64019;
 	optional bool sizer = 64020;
+
+	optional bool unsafe_marshaler = 64023;
+	optional bool unsafe_unmarshaler = 64024;
 }
 
 extend google.protobuf.FieldOptions {

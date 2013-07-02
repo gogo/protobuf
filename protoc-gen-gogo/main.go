@@ -58,6 +58,8 @@ import (
 	_ "code.google.com/p/gogoprotobuf/plugin/stringer"
 	_ "code.google.com/p/gogoprotobuf/plugin/union"
 	_ "code.google.com/p/gogoprotobuf/plugin/unmarshal"
+	_ "code.google.com/p/gogoprotobuf/plugin/unsafemarshaler"
+	_ "code.google.com/p/gogoprotobuf/plugin/unsafeunmarshaler"
 
 	"code.google.com/p/gogoprotobuf/plugin/testgen"
 

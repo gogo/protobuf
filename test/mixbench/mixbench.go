@@ -101,7 +101,7 @@ func NewMixMatch(marshaler bool, unmarshaler bool) *MixMatch {
 }
 
 func main() {
-	NewMixMatch(true, true).Bench("ProtoMarshal", "marshaler.txt")
+	NewMixMatch(false, false).Bench("ProtoMarshal", "marshaler.txt")
 	//NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
 	//NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
 	//NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")

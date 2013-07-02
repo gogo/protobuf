@@ -190,6 +190,22 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63022,opt,name=enum_stringer_all",
 }
 
+var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63023,
+	Name:          "gogoproto.unsafe_marshaler_all",
+	Tag:           "varint,63023,opt,name=unsafe_marshaler_all",
+}
+
+var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63024,
+	Name:          "gogoproto.unsafe_unmarshaler_all",
+	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -318,6 +334,22 @@ var E_Sizer = &proto.ExtensionDesc{
 	Tag:           "varint,64020,opt,name=sizer",
 }
 
+var E_UnsafeMarshaler = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64023,
+	Name:          "gogoproto.unsafe_marshaler",
+	Tag:           "varint,64023,opt,name=unsafe_marshaler",
+}
+
+var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64024,
+	Name:          "gogoproto.unsafe_unmarshaler",
+	Tag:           "varint,64024,opt,name=unsafe_unmarshaler",
+}
+
 var E_Nullable = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -365,6 +397,8 @@ func init() {
 	proto.RegisterExtension(E_SizerAll)
 	proto.RegisterExtension(E_GoprotoEnumStringerAll)
 	proto.RegisterExtension(E_EnumStringerAll)
+	proto.RegisterExtension(E_UnsafeMarshalerAll)
+	proto.RegisterExtension(E_UnsafeUnmarshalerAll)
 	proto.RegisterExtension(E_GoprotoGetters)
 	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)
@@ -381,6 +415,8 @@ func init() {
 	proto.RegisterExtension(E_Unmarshaler)
 	proto.RegisterExtension(E_Bufferto)
 	proto.RegisterExtension(E_Sizer)
+	proto.RegisterExtension(E_UnsafeMarshaler)
+	proto.RegisterExtension(E_UnsafeUnmarshaler)
 	proto.RegisterExtension(E_Nullable)
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)
