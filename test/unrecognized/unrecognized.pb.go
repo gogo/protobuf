@@ -1318,8 +1318,7 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1369,8 +1368,7 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 		i += n3
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1395,8 +1393,7 @@ func (m *D) MarshalTo(data []byte) (n int, err error) {
 		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1421,11 +1418,10 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		i = encodeFixed64Unrecognized(data, i, uint64(math2.Float64bits(*m.Field2)))
 	}
 	if m.Field3 != nil {
-		s4 := []byte(*m.Field3)
 		data[i] = 0x1a
 		i++
-		i = encodeVarintUnrecognized(data, i, uint64(len(s4)))
-		i += copy(data[i:], s4)
+		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
+		i += copy(data[i:], *m.Field3)
 	}
 	if m.Field4 != nil {
 		data[i] = 0x21
@@ -1449,20 +1445,19 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++
-			f5 := math2.Float32bits(num)
-			data[i] = uint8(f5)
+			f4 := math2.Float32bits(num)
+			data[i] = uint8(f4)
 			i++
-			data[i] = uint8(f5 >> 8)
+			data[i] = uint8(f4 >> 8)
 			i++
-			data[i] = uint8(f5 >> 16)
+			data[i] = uint8(f4 >> 16)
 			i++
-			data[i] = uint8(f5 >> 24)
+			data[i] = uint8(f4 >> 24)
 			i++
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1499,8 +1494,7 @@ func (m *OldA) MarshalTo(data []byte) (n int, err error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1523,25 +1517,24 @@ func (m *OldB) MarshalTo(data []byte) (n int, err error) {
 		data[i] = 0xa
 		i++
 		i = encodeVarintUnrecognized(data, i, uint64(m.C.Size()))
-		n6, err := m.C.MarshalTo(data[i:])
+		n5, err := m.C.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n6
+		i += n5
 	}
 	if m.F != nil {
 		data[i] = 0x2a
 		i++
 		i = encodeVarintUnrecognized(data, i, uint64(m.F.Size()))
-		n7, err := m.F.MarshalTo(data[i:])
+		n6, err := m.F.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n7
+		i += n6
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1571,11 +1564,10 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 		i = encodeFixed64Unrecognized(data, i, uint64(math2.Float64bits(*m.Field2)))
 	}
 	if m.Field3 != nil {
-		s8 := []byte(*m.Field3)
 		data[i] = 0x1a
 		i++
-		i = encodeVarintUnrecognized(data, i, uint64(len(s8)))
-		i += copy(data[i:], s8)
+		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
+		i += copy(data[i:], *m.Field3)
 	}
 	if m.Field6 != nil {
 		data[i] = 0x30
@@ -1586,20 +1578,19 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++
-			f9 := math2.Float32bits(num)
-			data[i] = uint8(f9)
+			f7 := math2.Float32bits(num)
+			data[i] = uint8(f7)
 			i++
-			data[i] = uint8(f9 >> 8)
+			data[i] = uint8(f7 >> 8)
 			i++
-			data[i] = uint8(f9 >> 16)
+			data[i] = uint8(f7 >> 16)
 			i++
-			data[i] = uint8(f9 >> 24)
+			data[i] = uint8(f7 >> 24)
 			i++
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }

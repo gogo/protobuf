@@ -580,8 +580,7 @@ func (m *NewNoGroup) MarshalTo(data []byte) (n int, err error) {
 		i += n2
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -606,8 +605,7 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 		i = encodeVarintUnrecognizedgroup(data, i, uint64(*m.AField))
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }

@@ -606,25 +606,23 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 	_ = i
 	var l int
 	_ = l
-	s1 := []byte(m.Description)
 	data[i] = 0xa
 	i++
-	i = encodeVarintExample(data, i, uint64(len(s1)))
-	i += copy(data[i:], s1)
+	i = encodeVarintExample(data, i, uint64(len(m.Description)))
+	i += copy(data[i:], m.Description)
 	data[i] = 0x10
 	i++
 	i = encodeVarintExample(data, i, uint64(m.Number))
 	data[i] = 0x1a
 	i++
 	i = encodeVarintExample(data, i, uint64(m.Id.Size()))
-	n2, err := m.Id.MarshalTo(data[i:])
+	n1, err := m.Id.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n2
+	i += n1
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -646,23 +644,16 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 	data[i] = 0xa
 	i++
 	i = encodeVarintExample(data, i, uint64(m.A.Size()))
-	n3, err := m.A.MarshalTo(data[i:])
+	n2, err := m.A.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n3
+	i += n2
 	if len(m.G) > 0 {
 		for _, msg := range m.G {
 			data[i] = 0x12
 			i++
-			l = msg.Size()
-			for l >= 1<<7 {
-				data[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			data[i] = uint8(l)
-			i++
+			i = encodeVarintExample(data, i, uint64(msg.Size()))
 			n, err := msg.MarshalTo(data[i:])
 			if err != nil {
 				return 0, err
@@ -671,8 +662,7 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -695,25 +685,24 @@ func (m *U) MarshalTo(data []byte) (n int, err error) {
 		data[i] = 0xa
 		i++
 		i = encodeVarintExample(data, i, uint64(m.A.Size()))
-		n4, err := m.A.MarshalTo(data[i:])
+		n3, err := m.A.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n4
+		i += n3
 	}
 	if m.B != nil {
 		data[i] = 0x12
 		i++
 		i = encodeVarintExample(data, i, uint64(m.B.Size()))
-		n5, err := m.B.MarshalTo(data[i:])
+		n4, err := m.B.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n5
+		i += n4
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
