@@ -49,7 +49,7 @@ func TestEmbedMarshaler(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", "em.proto")
 	data, err := cmd.CombinedOutput()
 	t.Logf("received error = %v and output = %v", err, string(data))
-	if !strings.Contains(string(data), "WARNING: found non-marshaler") {
+	if !strings.Contains(string(data), "WARNING: found non-[marshaler unsafe_marshaler]") {
 		t.Errorf("Expected WARNING: found non-marshaler C with embedded marshaler D")
 	}
 	if err := os.Remove("em.pb.go"); err != nil {

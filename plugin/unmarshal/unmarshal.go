@@ -269,9 +269,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+			panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+		}
 		p.atleastOne = true
 
-		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
 		p.P(`l := len(data)`)

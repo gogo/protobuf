@@ -82,31 +82,17 @@ given to the marshalto plugin, will generate the following code:
 	_ = l
 	data[i] = 0xa
 	i++
-	l = m.A.Size()
-	for l >= 1<<7 {
-		data[i] = uint8(uint64(l)&0x7f | 0x80)
-		l >>= 7
-		i++
-	}
-	data[i] = uint8(l)
-	i++
-	n4, err := m.A.MarshalTo(data[i:])
+	i = encodeVarintExample(data, i, uint64(m.A.Size()))
+	n2, err := m.A.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n4
+	i += n2
 	if len(m.G) > 0 {
 		for _, msg := range m.G {
 			data[i] = 0x12
 			i++
-			l = msg.Size()
-			for l >= 1<<7 {
-				data[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			data[i] = uint8(l)
-			i++
+			i = encodeVarintExample(data, i, uint64(msg.Size()))
 			n, err := msg.MarshalTo(data[i:])
 			if err != nil {
 				return 0, err
@@ -115,8 +101,7 @@ given to the marshalto plugin, will generate the following code:
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		copy(data[i:], m.XXX_unrecognized)
-		i += len(m.XXX_unrecognized)
+		i += copy(data[i:], m.XXX_unrecognized)
 	}
 	return i, nil
   }
@@ -287,9 +272,12 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.IsMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if gogoproto.IsUnsafeMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+			panic(fmt.Sprintf("unsafe_marshaler and marshaler enabled for %v", ccTypeName))
+		}
 		p.atleastOne = true
 
-		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) Marshal() (data []byte, err error) {`)
 		p.In()
 		p.P(`size := m.Size()`)

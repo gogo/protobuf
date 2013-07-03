@@ -81,7 +81,7 @@ func (this *MixMatch) Bench(rgx string, outFileName string) {
 	}
 }
 
-func NewMixMatch(marshaler bool, unmarshaler bool) *MixMatch {
+func NewMixMatch(marshaler, unmarshaler, unsafe_marshaler, unsafe_unmarshaler bool) *MixMatch {
 	mm := &MixMatch{}
 	if marshaler {
 		mm.Old = append(mm.Old, "option (gogoproto.marshaler_all) = false;")
@@ -97,15 +97,33 @@ func NewMixMatch(marshaler bool, unmarshaler bool) *MixMatch {
 		mm.Old = append(mm.Old, "option (gogoproto.unmarshaler_all) = true;")
 		mm.New = append(mm.New, "option (gogoproto.unmarshaler_all) = false;")
 	}
+	if unsafe_marshaler {
+		mm.Old = append(mm.Old, "option (gogoproto.unsafe_marshaler_all) = false;")
+		mm.New = append(mm.New, "option (gogoproto.unsafe_marshaler_all) = true;")
+	} else {
+		mm.Old = append(mm.Old, "option (gogoproto.unsafe_marshaler_all) = true;")
+		mm.New = append(mm.New, "option (gogoproto.unsafe_marshaler_all) = false;")
+	}
+	if unsafe_unmarshaler {
+		mm.Old = append(mm.Old, "option (gogoproto.unsafe_unmarshaler_all) = false;")
+		mm.New = append(mm.New, "option (gogoproto.unsafe_unmarshaler_all) = true;")
+	} else {
+		mm.Old = append(mm.Old, "option (gogoproto.unsafe_unmarshaler_all) = true;")
+		mm.New = append(mm.New, "option (gogoproto.unsafe_unmarshaler_all) = false;")
+	}
 	return mm
 }
 
 func main() {
-	NewMixMatch(false, false).Bench("ProtoMarshal", "marshaler.txt")
-	//NewMixMatch(false, false).Bench("ProtoMarshal", "marshal.txt")
-	//NewMixMatch(true, true).Bench("ProtoUnmarshal", "unmarshaler.txt")
-	//NewMixMatch(false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
+	NewMixMatch(true, true, false, false).Bench("ProtoMarshal", "marshaler.txt")
+	NewMixMatch(false, false, false, false).Bench("ProtoMarshal", "marshal.txt")
+	NewMixMatch(false, false, true, true).Bench("ProtoMarshal", "unsafe_marshaler.txt")
+	NewMixMatch(true, true, false, false).Bench("ProtoUnmarshal", "unmarshaler.txt")
+	NewMixMatch(false, false, false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
+	NewMixMatch(true, true, true, true).Bench("ProtoUnmarshal", "unsafe_unmarshaler.txt")
 	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
 	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
 	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")
+	fmt.Println("$GOROOT/misc/benchcmp marshal.txt unsafe_marshaler.txt")
+	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unsafe_unmarshaler.txt")
 }

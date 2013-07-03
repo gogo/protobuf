@@ -49,8 +49,8 @@ option (gogoproto.sizer_all) = true;
 option (gogoproto.goproto_enum_stringer_all) = false;
 option (gogoproto.enum_stringer_all) = true;
 
-option (gogoproto.unsafe_marshaler_all) = true;
-option (gogoproto.unsafe_unmarshaler_all) = true;
+option (gogoproto.unsafe_marshaler_all) = false;
+option (gogoproto.unsafe_unmarshaler_all) = false;
 
 message NidOptNative {
 	optional double Field1 = 1 [(gogoproto.nullable) = false];

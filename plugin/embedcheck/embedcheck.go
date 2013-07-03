@@ -66,20 +66,43 @@ func (p *plugin) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-var overwriters map[string]gogoproto.EnableFunc = map[string]gogoproto.EnableFunc{
-	"marshaler":    gogoproto.IsMarshaler,
-	"stringer":     gogoproto.IsStringer,
-	"gostring":     gogoproto.HasGoString,
-	"equal":        gogoproto.HasEqual,
-	"verboseequal": gogoproto.HasVerboseEqual,
-	"unmarshaler":  gogoproto.IsUnmarshaler,
+var overwriters []map[string]gogoproto.EnableFunc = []map[string]gogoproto.EnableFunc{
+	{
+		"stringer": gogoproto.IsStringer,
+	},
+	{
+		"gostring": gogoproto.HasGoString,
+	},
+	{
+		"equal": gogoproto.HasEqual,
+	},
+	{
+		"verboseequal": gogoproto.HasVerboseEqual,
+	},
+	{
+		"size": gogoproto.IsSizer,
+	},
+	{
+		"unmarshaler":        gogoproto.IsUnmarshaler,
+		"unsafe_unmarshaler": gogoproto.IsUnsafeUnmarshaler,
+	},
+	{
+		"marshaler":        gogoproto.IsMarshaler,
+		"unsafe_marshaler": gogoproto.IsUnsafeMarshaler,
+	},
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
 	for _, msg := range file.Messages() {
-		for name, overwriter := range overwriters {
-			if !overwriter(file.FileDescriptorProto, msg.DescriptorProto) {
-				p.checkOverwrite(msg, overwriter, name)
+		for _, os := range overwriters {
+			possible := true
+			for _, overwriter := range os {
+				if overwriter(file.FileDescriptorProto, msg.DescriptorProto) {
+					possible = false
+				}
+			}
+			if possible {
+				p.checkOverwrite(msg, os)
 			}
 		}
 		p.checkNameSpace(msg)
@@ -112,17 +135,23 @@ func (p *plugin) checkNameSpace(message *generator.Descriptor) map[string]bool {
 	return names
 }
 
-func (p *plugin) checkOverwrite(message *generator.Descriptor, enabled gogoproto.EnableFunc, errStr string) {
+func (p *plugin) checkOverwrite(message *generator.Descriptor, enablers map[string]gogoproto.EnableFunc) {
 	ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	names := []string{}
+	for name := range enablers {
+		names = append(names, name)
+	}
 	for _, field := range message.Field {
 		if gogoproto.IsEmbed(field) {
 			fieldname := generator.CamelCase(*field.Name)
 			desc := p.ObjectNamed(field.GetTypeName())
 			msg := desc.(*generator.Descriptor)
-			if enabled(msg.File(), msg.DescriptorProto) {
-				fmt.Fprintf(os.Stderr, "WARNING: found non-%v %v with embedded %v %v\n", errStr, ccTypeName, errStr, fieldname)
+			for errStr, enabled := range enablers {
+				if enabled(msg.File(), msg.DescriptorProto) {
+					fmt.Fprintf(os.Stderr, "WARNING: found non-%v %v with embedded %v %v\n", names, ccTypeName, errStr, fieldname)
+				}
 			}
-			p.checkOverwrite(msg, enabled, errStr)
+			p.checkOverwrite(msg, enablers)
 		}
 	}
 }

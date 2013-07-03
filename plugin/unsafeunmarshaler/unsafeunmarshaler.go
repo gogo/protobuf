@@ -29,6 +29,8 @@ The unmarshal plugin generates a Unmarshal method for each message.
 The `Unmarshal([]byte) error` method results in the fact that the message
 implements the Unmarshaler interface.
 The allows proto.Unmarshal to be faster by calling the generated Unmarshal method rather than using reflect.
+It also uses the unsafe package in the generated code.
+The speed up using the unsafe package is not very significant.
 
 If is enabled by the following extensions:
 
@@ -45,112 +47,8 @@ And benchmarks given it is enabled using one of the following extensions:
   - benchgen
   - benchgen_all
 
-Let us look at:
-
-  code.google.com/p/gogoprotobuf/test/example/example.proto
-
-Btw all the output can be seen at:
-
-  code.google.com/p/gogoprotobuf/test/example/*
-
-The following message:
-
-  option (gogoproto.unmarshaler_all) = true;
-
-  message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-  }
-
-given to the unmarshal plugin, will generate the following code:
-
-  func (m *B) Unmarshal(data []byte) error {
-	l := len(data)
-	index := 0
-	for index < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if index >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[index]
-			index++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return proto.ErrWrongType
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if index >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[index]
-				index++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := index + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.A.Unmarshal(data[index:postIndex]); err != nil {
-				return err
-			}
-			index = postIndex
-		case 2:
-			if wireType != 2 {
-				return proto.ErrWrongType
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if index >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[index]
-				index++
-				byteLen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := index + byteLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.G = append(m.G, code_google_com_p_gogoprotobuf_test_custom.Uint128{})
-			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
-			index = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
-			if err != nil {
-				return err
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
-			index += skippy
-		}
-	}
-	return nil
-  }
+This replaces the unmarshal plugin.
+Please check it for more details.
 
 */
 package unsafeunmarshaler
@@ -170,6 +68,7 @@ type unmarshal struct {
 	generator.PluginImports
 	atleastOne bool
 	ioPkg      generator.Single
+	unsafePkg  generator.Single
 	localName  string
 }
 
@@ -178,7 +77,7 @@ func NewUnmarshal() *unmarshal {
 }
 
 func (p *unmarshal) Name() string {
-	return "unmarshal"
+	return "unsafeunmarshaler"
 }
 
 func (p *unmarshal) Init(g *generator.Generator) {
@@ -239,6 +138,16 @@ func (p *unmarshal) decodeFixed32(varName string, typeName string) {
 	p.P(varName, ` |= `, typeName, `(data[i-1]) << 24`)
 }
 
+func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
+	p.P(`if index + 4 > l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[index]))`)
+	p.P(`index += 4`)
+}
+
 func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(`i := index + 8`)
 	p.P(`if i > l {`)
@@ -257,21 +166,34 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(varName, ` |= `, typeName, `(data[i-1]) << 56`)
 }
 
+func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
+	p.P(`if index + 8 > l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[index]))`)
+	p.P(`index += 8`)
+}
+
 func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
 	p.ioPkg = p.NewImport("io")
-	mathPkg := p.NewImport("math")
+	p.unsafePkg = p.NewImport("unsafe")
 	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+			panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+		}
 		p.atleastOne = true
 
-		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
 		p.P(`l := len(data)`)
@@ -321,35 +243,27 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			switch *field.Type {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 				if repeated {
-					p.P(`var v uint64`)
-					p.decodeFixed64("v", "uint64")
-					p.P(`v2 := `, mathPkg.Use(), `.Float64frombits(v)`)
-					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
+					p.P(`var v float64`)
+					p.unsafeFixed64("v", "float64")
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
-					p.P(`var v uint64`)
-					p.decodeFixed64("v", "uint64")
-					p.P(`v2 := `, mathPkg.Use(), `.Float64frombits(v)`)
-					p.P(`m.`, fieldname, ` = &v2`)
+					p.P(`var v float64`)
+					p.unsafeFixed64("v", "float64")
+					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.P(`var v uint64`)
-					p.decodeFixed64("v", "uint64")
-					p.P(`m.`, fieldname, ` = `, mathPkg.Use(), `.Float64frombits(v)`)
+					p.unsafeFixed64(`m.`+fieldname, "float64")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 				if repeated {
-					p.P(`var v uint32`)
-					p.decodeFixed32("v", "uint32")
-					p.P(`v2 := `, mathPkg.Use(), `.Float32frombits(v)`)
-					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
+					p.P(`var v float32`)
+					p.unsafeFixed32("v", "float32")
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
-					p.P(`var v uint32`)
-					p.decodeFixed32("v", "uint32")
-					p.P(`v2 := `, mathPkg.Use(), `.Float32frombits(v)`)
-					p.P(`m.`, fieldname, ` = &v2`)
+					p.P(`var v float32`)
+					p.unsafeFixed32("v", "float32")
+					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.P(`var v uint32`)
-					p.decodeFixed32("v", "uint32")
-					p.P(`m.`, fieldname, ` = `, mathPkg.Use(), `.Float32frombits(v)`)
+					p.unsafeFixed32("m."+fieldname, "float32")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_INT64:
 				if repeated {
@@ -390,26 +304,26 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_FIXED64:
 				if repeated {
 					p.P(`var v uint64`)
-					p.decodeFixed64("v", "uint64")
+					p.unsafeFixed64("v", "uint64")
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
 					p.P(`var v uint64`)
-					p.decodeFixed64("v", "uint64")
+					p.unsafeFixed64("v", "uint64")
 					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.decodeFixed64("m."+fieldname, "uint64")
+					p.unsafeFixed64("m."+fieldname, "uint64")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FIXED32:
 				if repeated {
 					p.P(`var v uint32`)
-					p.decodeFixed32("v", "uint32")
+					p.unsafeFixed32("v", "uint32")
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
 					p.P(`var v uint32`)
-					p.decodeFixed32("v", "uint32")
+					p.unsafeFixed32("v", "uint32")
 					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.decodeFixed32("m."+fieldname, "uint32")
+					p.unsafeFixed32("m."+fieldname, "uint32")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				if repeated {
@@ -554,26 +468,26 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
 				if repeated {
 					p.P(`var v int32`)
-					p.decodeFixed32("v", "int32")
+					p.unsafeFixed32("v", "int32")
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
 					p.P(`var v int32`)
-					p.decodeFixed32("v", "int32")
+					p.unsafeFixed32("v", "int32")
 					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.decodeFixed32("m."+fieldname, "int32")
+					p.unsafeFixed32("m."+fieldname, "int32")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
 				if repeated {
 					p.P(`var v int64`)
-					p.decodeFixed64("v", "int64")
+					p.unsafeFixed64("v", "int64")
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				} else if nullable {
 					p.P(`var v int64`)
-					p.decodeFixed64("v", "int64")
+					p.unsafeFixed64("v", "int64")
 					p.P(`m.`, fieldname, ` = &v`)
 				} else {
-					p.decodeFixed64("m."+fieldname, "int64")
+					p.unsafeFixed64("m."+fieldname, "int64")
 				}
 			case descriptor.FieldDescriptorProto_TYPE_SINT32:
 				p.P(`var v int32`)

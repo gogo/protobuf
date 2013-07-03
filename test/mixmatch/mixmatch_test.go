@@ -90,10 +90,14 @@ func TestNeither(t *testing.T) {
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
 			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
 	}.Test(t)
 }
@@ -103,10 +107,14 @@ func TestMarshaler(t *testing.T) {
 		Old: []string{
 			"option (gogoproto.marshaler_all) = false;",
 			"option (gogoproto.unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
 		New: []string{
 			"option (gogoproto.marshaler_all) = true;",
 			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
 	}.Test(t)
 }
@@ -116,10 +124,14 @@ func TestUnmarshaler(t *testing.T) {
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
 			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
 	}.Test(t)
 }
@@ -129,10 +141,65 @@ func TestBoth(t *testing.T) {
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
 			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
+		},
+	}.Test(t)
+}
+
+func TestUnsafeMarshaler(t *testing.T) {
+	MixMatch{
+		Old: []string{
+			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
+		},
+		New: []string{
+			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
+		},
+	}.Test(t)
+}
+
+func TestUnsafeUnMarshaler(t *testing.T) {
+	MixMatch{
+		Old: []string{
+			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
+		},
+		New: []string{
+			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
+		},
+	}.Test(t)
+}
+
+func TestBothUnsafe(t *testing.T) {
+	MixMatch{
+		Old: []string{
+			"option (gogoproto.unmarshaler_all) = true;",
+			"option (gogoproto.marshaler_all) = true;",
+			"option (gogoproto.unsafe_unmarshaler_all) = false;",
+			"option (gogoproto.unsafe_marshaler_all) = false;",
+		},
+		New: []string{
+			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.marshaler_all) = false;",
+			"option (gogoproto.unsafe_unmarshaler_all) = true;",
+			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
 	}.Test(t)
 }
