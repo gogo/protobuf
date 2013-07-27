@@ -398,6 +398,54 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 			p.P()
 		}
 
+		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
+			if gogoproto.IsMarshaler(file.FileDescriptorProto, message.DescriptorProto) || gogoproto.IsUnsafeMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				p.P(`func Test`, ccTypeName, `MarshalTo(t *`, testingPkg.Use(), `.T) {`)
+				p.In()
+				p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
+				p.P(`p := NewPopulated`, ccTypeName, `(popr, false)`)
+				p.P(`size := p.Size()`)
+				p.P(`data := make([]byte, size)`)
+				p.P(`for i := range data {`)
+				p.In()
+				p.P(`data[i] = byte(popr.Intn(256))`)
+				p.Out()
+				p.P(`}`)
+				p.P(`_, err := p.MarshalTo(data)`)
+				p.P(`if err != nil {`)
+				p.In()
+				p.P(`panic(err)`)
+				p.Out()
+				p.P(`}`)
+				p.P(`msg := &`, ccTypeName, `{}`)
+				p.P(`if err := `, protoPkg.Use(), `.Unmarshal(data, msg); err != nil {`)
+				p.In()
+				p.P(`panic(err)`)
+				p.Out()
+				p.P(`}`)
+				p.P(`for i := range data {`)
+				p.In()
+				p.P(`data[i] = byte(popr.Intn(256))`)
+				p.Out()
+				p.P(`}`)
+				if gogoproto.HasVerboseEqual(file.FileDescriptorProto, message.DescriptorProto) {
+					p.P(`if err := p.VerboseEqual(msg); err != nil {`)
+					p.In()
+					p.P(`t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)`)
+					p.Out()
+					p.P(`}`)
+				}
+				p.P(`if !p.Equal(msg) {`)
+				p.In()
+				p.P(`t.Fatalf("%#v !Proto %#v", msg, p)`)
+				p.Out()
+				p.P(`}`)
+				p.Out()
+				p.P(`}`)
+				p.P()
+			}
+		}
+
 		if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 			p.P(`func Benchmark`, ccTypeName, `ProtoMarshal(b *`, testingPkg.Use(), `.B) {`)

@@ -105,26 +105,6 @@ func (p *marshalto) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-func wireToType(wire string) int {
-	switch wire {
-	case "fixed64":
-		return proto.WireFixed64
-	case "fixed32":
-		return proto.WireFixed32
-	case "varint":
-		return proto.WireVarint
-	case "bytes":
-		return proto.WireBytes
-	case "group":
-		return proto.WireBytes
-	case "zigzag32":
-		return proto.WireVarint
-	case "zigzag64":
-		return proto.WireVarint
-	}
-	panic("unreachable")
-}
-
 func (p *marshalto) callFixed64(varName ...string) {
 	p.P(`i = encodeFixed64`, p.localName, `(data, i, uint64(`, strings.Join(varName, ""), `))`)
 }
@@ -264,8 +244,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				p.In()
 			}
 			packed := field.IsPacked()
-			_, wire := p.GoType(message, field)
-			wireType := wireToType(wire)
+			wireType := field.WireType()
 			fieldNumber := field.GetNumber()
 			if packed {
 				wireType = proto.WireBytes
@@ -422,6 +401,10 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.In()
 					p.P(`data[i] = 1`)
 					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`data[i] = 0`)
+					p.Out()
 					p.P(`}`)
 					p.P(`i++`)
 					p.Out()
@@ -434,6 +417,10 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.In()
 					p.P(`data[i] = 1`)
 					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`data[i] = 0`)
+					p.Out()
 					p.P(`}`)
 					p.P(`i++`)
 					p.Out()
@@ -444,6 +431,10 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.In()
 					p.P(`data[i] = 1`)
 					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`data[i] = 0`)
+					p.Out()
 					p.P(`}`)
 					p.P(`i++`)
 				} else {
@@ -451,6 +442,10 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`if m.`, fieldname, ` {`)
 					p.In()
 					p.P(`data[i] = 1`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`data[i] = 0`)
 					p.Out()
 					p.P(`}`)
 					p.P(`i++`)

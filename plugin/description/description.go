@@ -93,11 +93,11 @@ func (p *plugin) Name() string {
 }
 
 func (p *plugin) Init(g *generator.Generator) {
-	p.used = false
 	p.Generator = g
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
+	p.used = false
 	localName := generator.FileName(file)
 	for _, message := range file.Messages() {
 		if !gogoproto.HasDescription(file.FileDescriptorProto, message.DescriptorProto) {

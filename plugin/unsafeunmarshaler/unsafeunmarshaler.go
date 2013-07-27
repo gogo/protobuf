@@ -84,26 +84,6 @@ func (p *unmarshal) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-func wireToType(wire string) int {
-	switch wire {
-	case "fixed64":
-		return proto.WireFixed64
-	case "fixed32":
-		return proto.WireFixed32
-	case "varint":
-		return proto.WireVarint
-	case "bytes":
-		return proto.WireBytes
-	case "group":
-		return proto.WireBytes
-	case "zigzag32":
-		return proto.WireVarint
-	case "zigzag64":
-		return proto.WireVarint
-	}
-	panic("unreachable")
-}
-
 func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`for shift := uint(0); ; shift += 7 {`)
 	p.In()
@@ -215,8 +195,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			packed := field.IsPacked()
 			p.P(`case `, strconv.Itoa(int(field.GetNumber())), `:`)
 			p.In()
-			_, wire := p.GoType(message, field)
-			wireType := wireToType(wire)
+			wireType := field.WireType()
 			if packed {
 				p.P(`if wireType != `, strconv.Itoa(proto.WireBytes), `{`)
 				p.In()
