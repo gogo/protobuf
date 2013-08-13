@@ -46,11 +46,6 @@ The face plugin also generates a test given it is enabled using one of the follo
   - testgen
   - testgen_all
 
-And a benchmark given it is enabled using one of the following extensions:
-
-  - benchgen
-  - benchgen_all
-
 Let us look at:
 
   code.google.com/p/gogoprotobuf/test/example/example.proto
@@ -114,16 +109,6 @@ and the following test code:
 		msg := p.TestProto()
 		if !p.Equal(msg) {
 			t.Fatalf("%#v !Face Equal %#v", msg, p)
-		}
-	}
-	func BenchmarkAFace(b *testing7.B) {
-		popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
-			b.StopTimer()
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			p.TestProto()
 		}
 	}
 

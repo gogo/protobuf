@@ -16,14 +16,13 @@ import testing2 "testing"
 import math_rand2 "math/rand"
 import time2 "time"
 import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
-import fmt "fmt"
 import math_rand3 "math/rand"
 import time3 "time"
 import testing3 "testing"
 import math_rand4 "math/rand"
 import time4 "time"
 import testing4 "testing"
-import fmt1 "fmt"
+import fmt "fmt"
 import math_rand5 "math/rand"
 import time5 "time"
 import testing5 "testing"
@@ -34,7 +33,7 @@ import testing6 "testing"
 import math_rand7 "math/rand"
 import time7 "time"
 import testing7 "testing"
-import fmt2 "fmt"
+import fmt1 "fmt"
 import go_parser "go/parser"
 import math_rand8 "math/rand"
 import time8 "time"
@@ -2382,45 +2381,6 @@ func TestNidOptNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidOptNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, true)
@@ -2440,45 +2400,6 @@ func TestNinOptNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, true)
@@ -2498,45 +2419,6 @@ func TestNidRepNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidRepNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, true)
@@ -2556,45 +2438,6 @@ func TestNinRepNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinRepNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepPackedNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, true)
@@ -2614,45 +2457,6 @@ func TestNidRepPackedNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepPackedNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepPackedNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidRepPackedNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepPackedNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, true)
@@ -2672,45 +2476,6 @@ func TestNinRepPackedNativeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepPackedNativeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepPackedNativeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinRepPackedNative{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, true)
@@ -2730,45 +2495,6 @@ func TestNidOptStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidOptStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, true)
@@ -2788,45 +2514,6 @@ func TestNinOptStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, true)
@@ -2846,45 +2533,6 @@ func TestNidRepStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidRepStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, true)
@@ -2904,45 +2552,6 @@ func TestNinRepStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinRepStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidEmbeddedStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
@@ -2962,45 +2571,6 @@ func TestNidEmbeddedStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidEmbeddedStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidEmbeddedStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidEmbeddedStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, true)
@@ -3020,45 +2590,6 @@ func TestNinEmbeddedStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinEmbeddedStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinEmbeddedStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidNestedStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, true)
@@ -3078,45 +2609,6 @@ func TestNidNestedStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidNestedStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidNestedStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidNestedStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidNestedStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidNestedStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, true)
@@ -3136,45 +2628,6 @@ func TestNinNestedStructJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinNestedStructJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStruct(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStruct(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinNestedStruct{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptCustomJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, true)
@@ -3194,45 +2647,6 @@ func TestNidOptCustomJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptCustomJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptCustom(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptCustomJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptCustom(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidOptCustom{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptCustomJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, true)
@@ -3252,45 +2666,6 @@ func TestNinOptCustomJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptCustomJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptCustom(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptCustomJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptCustom(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptCustom{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepCustomJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, true)
@@ -3310,45 +2685,6 @@ func TestNidRepCustomJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepCustomJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepCustom(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepCustomJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepCustom(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidRepCustom{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepCustomJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, true)
@@ -3368,45 +2704,6 @@ func TestNinRepCustomJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepCustomJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepCustom(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepCustomJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepCustom(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinRepCustom{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeUnionJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
@@ -3426,45 +2723,6 @@ func TestNinOptNativeUnionJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptNativeUnionJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeUnionJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptNativeUnion{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructUnionJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, true)
@@ -3484,45 +2742,6 @@ func TestNinOptStructUnionJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptStructUnionJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructUnionJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptStructUnion{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructUnionJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
@@ -3542,45 +2761,6 @@ func TestNinEmbeddedStructUnionJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinEmbeddedStructUnionJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructUnionJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinEmbeddedStructUnion{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructUnionJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, true)
@@ -3600,45 +2780,6 @@ func TestNinNestedStructUnionJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinNestedStructUnionJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructUnionJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinNestedStructUnion{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTreeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedTree(popr, true)
@@ -3658,45 +2799,6 @@ func TestTreeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkTreeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTree(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTreeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTree(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &Tree{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOrBranchJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, true)
@@ -3716,45 +2818,6 @@ func TestOrBranchJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkOrBranchJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOrBranch(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOrBranchJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOrBranch(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &OrBranch{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndBranchJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, true)
@@ -3774,45 +2837,6 @@ func TestAndBranchJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkAndBranchJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndBranch(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndBranchJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndBranch(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &AndBranch{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestLeafJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, true)
@@ -3832,45 +2856,6 @@ func TestLeafJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkLeafJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedLeaf(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkLeafJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedLeaf(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &Leaf{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepTreeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, true)
@@ -3890,45 +2875,6 @@ func TestDeepTreeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkDeepTreeJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepTree(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepTreeJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepTree(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &DeepTree{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestADeepBranchJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, true)
@@ -3948,45 +2894,6 @@ func TestADeepBranchJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkADeepBranchJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedADeepBranch(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkADeepBranchJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedADeepBranch(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &ADeepBranch{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndDeepBranchJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, true)
@@ -4006,45 +2913,6 @@ func TestAndDeepBranchJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkAndDeepBranchJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndDeepBranch(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndDeepBranchJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndDeepBranch(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &AndDeepBranch{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepLeafJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, true)
@@ -4064,45 +2932,6 @@ func TestDeepLeafJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkDeepLeafJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepLeaf(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepLeafJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepLeaf(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &DeepLeaf{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNilJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNil(popr, true)
@@ -4122,45 +2951,6 @@ func TestNilJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNilJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNil(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNilJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNil(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &Nil{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptEnumJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
@@ -4180,45 +2970,6 @@ func TestNidOptEnumJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptEnumJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptEnum(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptEnumJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptEnum(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidOptEnum{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptEnumJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
@@ -4238,45 +2989,6 @@ func TestNinOptEnumJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptEnumJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptEnum(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptEnumJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptEnum(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinOptEnum{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepEnumJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
@@ -4296,45 +3008,6 @@ func TestNidRepEnumJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepEnumJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepEnum(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepEnumJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepEnum(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NidRepEnum{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepEnumJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
@@ -4354,45 +3027,6 @@ func TestNinRepEnumJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepEnumJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepEnum(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepEnumJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepEnum(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &NinRepEnum{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTimerJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, true)
@@ -4412,45 +3046,6 @@ func TestTimerJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkTimerJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTimer(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTimerJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTimer(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &Timer{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestMyExtendableJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, true)
@@ -4470,45 +3065,6 @@ func TestMyExtendableJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkMyExtendableJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedMyExtendable(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkMyExtendableJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedMyExtendable(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &MyExtendable{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOtherExtenableJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, true)
@@ -4528,45 +3084,6 @@ func TestOtherExtenableJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func BenchmarkOtherExtenableJSONMarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOtherExtenable(popr, true)
-		b.StartTimer()
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOtherExtenableJSONUnmarshal(b *testing1.B) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOtherExtenable(popr, true)
-		data, err := encoding_json.Marshal(p)
-		if err != nil {
-			panic(err)
-		}
-		msg := &OtherExtenable{}
-		total += len(data)
-		b.StartTimer()
-		if err := encoding_json.Unmarshal(data, msg); err != nil {
-			panic(err)
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptNativeProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -4597,55 +3114,6 @@ func TestNidOptNativeProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidOptNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidOptNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeProtoText(t *testing2.T) {
@@ -4680,55 +3148,6 @@ func TestNinOptNativeProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinOptNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepNativeProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, true)
@@ -4759,55 +3178,6 @@ func TestNidRepNativeProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidRepNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidRepNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepNativeProtoText(t *testing2.T) {
@@ -4842,55 +3212,6 @@ func TestNinRepNativeProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinRepNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinRepNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepPackedNativeProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, true)
@@ -4921,55 +3242,6 @@ func TestNidRepPackedNativeProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidRepPackedNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepPackedNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepPackedNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidRepPackedNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepPackedNativeProtoText(t *testing2.T) {
@@ -5004,55 +3276,6 @@ func TestNinRepPackedNativeProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinRepPackedNativeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepPackedNativeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepPackedNativeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinRepPackedNative{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptStructProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, true)
@@ -5083,55 +3306,6 @@ func TestNidOptStructProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidOptStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidOptStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructProtoText(t *testing2.T) {
@@ -5166,55 +3340,6 @@ func TestNinOptStructProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinOptStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepStructProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, true)
@@ -5245,55 +3370,6 @@ func TestNidRepStructProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidRepStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidRepStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepStructProtoText(t *testing2.T) {
@@ -5328,55 +3404,6 @@ func TestNinRepStructProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinRepStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinRepStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidEmbeddedStructProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
@@ -5407,55 +3434,6 @@ func TestNidEmbeddedStructProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidEmbeddedStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidEmbeddedStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidEmbeddedStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidEmbeddedStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinEmbeddedStructProtoText(t *testing2.T) {
@@ -5490,55 +3468,6 @@ func TestNinEmbeddedStructProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinEmbeddedStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinEmbeddedStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidNestedStructProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, true)
@@ -5569,55 +3498,6 @@ func TestNidNestedStructProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidNestedStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidNestedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidNestedStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidNestedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidNestedStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidNestedStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidNestedStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructProtoText(t *testing2.T) {
@@ -5652,55 +3532,6 @@ func TestNinNestedStructProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinNestedStructProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStruct(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStruct(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinNestedStruct{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptCustomProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, true)
@@ -5731,55 +3562,6 @@ func TestNidOptCustomProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidOptCustomProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptCustomProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptCustomProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptCustom(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidOptCustom{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptCustomProtoText(t *testing2.T) {
@@ -5814,55 +3596,6 @@ func TestNinOptCustomProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinOptCustomProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptCustomProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptCustomProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptCustom(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptCustom{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepCustomProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, true)
@@ -5893,55 +3626,6 @@ func TestNidRepCustomProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNidRepCustomProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepCustomProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepCustomProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepCustom(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidRepCustom{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinRepCustomProtoText(t *testing2.T) {
@@ -5976,55 +3660,6 @@ func TestNinRepCustomProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinRepCustomProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepCustomProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepCustom(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepCustomProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepCustom(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinRepCustom{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeUnionProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
@@ -6055,55 +3690,6 @@ func TestNinOptNativeUnionProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNinOptNativeUnionProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeUnionProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptNativeUnionProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptNativeUnion{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptStructUnionProtoText(t *testing2.T) {
@@ -6138,55 +3724,6 @@ func TestNinOptStructUnionProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinOptStructUnionProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructUnionProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptStructUnionProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptStructUnion{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructUnionProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
@@ -6217,55 +3754,6 @@ func TestNinEmbeddedStructUnionProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNinEmbeddedStructUnionProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructUnionProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinEmbeddedStructUnionProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinEmbeddedStructUnion{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinNestedStructUnionProtoText(t *testing2.T) {
@@ -6300,55 +3788,6 @@ func TestNinNestedStructUnionProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNinNestedStructUnionProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructUnionProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinNestedStructUnionProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinNestedStructUnion{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTreeProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedTree(popr, true)
@@ -6379,55 +3818,6 @@ func TestTreeProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkTreeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTree(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTreeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTree(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTreeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTree(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &Tree{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestOrBranchProtoText(t *testing2.T) {
@@ -6462,55 +3852,6 @@ func TestOrBranchProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkOrBranchProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOrBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOrBranchProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOrBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOrBranchProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOrBranch(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &OrBranch{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndBranchProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, true)
@@ -6541,55 +3882,6 @@ func TestAndBranchProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkAndBranchProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndBranchProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndBranchProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndBranch(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &AndBranch{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestLeafProtoText(t *testing2.T) {
@@ -6624,55 +3916,6 @@ func TestLeafProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkLeafProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedLeaf(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkLeafProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedLeaf(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkLeafProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedLeaf(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &Leaf{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepTreeProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, true)
@@ -6703,55 +3946,6 @@ func TestDeepTreeProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkDeepTreeProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepTree(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepTreeProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepTree(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepTreeProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepTree(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &DeepTree{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestADeepBranchProtoText(t *testing2.T) {
@@ -6786,55 +3980,6 @@ func TestADeepBranchProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkADeepBranchProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedADeepBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkADeepBranchProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedADeepBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkADeepBranchProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedADeepBranch(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &ADeepBranch{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndDeepBranchProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, true)
@@ -6865,55 +4010,6 @@ func TestAndDeepBranchProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkAndDeepBranchProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndDeepBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndDeepBranchProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndDeepBranch(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkAndDeepBranchProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndDeepBranch(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &AndDeepBranch{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestDeepLeafProtoText(t *testing2.T) {
@@ -6948,55 +4044,6 @@ func TestDeepLeafProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkDeepLeafProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepLeaf(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepLeafProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepLeaf(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkDeepLeafProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepLeaf(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &DeepLeaf{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNilProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNil(popr, true)
@@ -7027,55 +4074,6 @@ func TestNilProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNilProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNil(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNilProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNil(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNilProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNil(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &Nil{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidOptEnumProtoText(t *testing2.T) {
@@ -7110,55 +4108,6 @@ func TestNidOptEnumProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNidOptEnumProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptEnumProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidOptEnumProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptEnum(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidOptEnum{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
@@ -7189,55 +4138,6 @@ func TestNinOptEnumProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNinOptEnumProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptEnumProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinOptEnumProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptEnum(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinOptEnum{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNidRepEnumProtoText(t *testing2.T) {
@@ -7272,55 +4172,6 @@ func TestNidRepEnumProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkNidRepEnumProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepEnumProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNidRepEnumProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepEnum(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NidRepEnum{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
@@ -7351,55 +4202,6 @@ func TestNinRepEnumProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkNinRepEnumProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepEnumProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepEnum(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkNinRepEnumProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepEnum(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &NinRepEnum{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestTimerProtoText(t *testing2.T) {
@@ -7434,55 +4236,6 @@ func TestTimerProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkTimerProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTimer(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTimerProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTimer(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkTimerProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTimer(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &Timer{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestMyExtendableProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, true)
@@ -7515,55 +4268,6 @@ func TestMyExtendableProtoCompactText(t *testing2.T) {
 	}
 }
 
-func BenchmarkMyExtendableProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedMyExtendable(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkMyExtendableProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedMyExtendable(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkMyExtendableProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedMyExtendable(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &MyExtendable{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOtherExtenableProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, true)
@@ -7594,55 +4298,6 @@ func TestOtherExtenableProtoCompactText(t *testing2.T) {
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Proto %#v", msg, p)
 	}
-}
-
-func BenchmarkOtherExtenableProtoTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOtherExtenable(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOtherExtenableProtoCompactTextMarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOtherExtenable(popr, true)
-		b.StartTimer()
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
-func BenchmarkOtherExtenableProtoTextUnmarshal(b *testing2.B) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOtherExtenable(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-		msg := &OtherExtenable{}
-		total += len(data)
-		msg.Reset()
-		b.StartTimer()
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-			panic(fmt.Sprintf("%v given %v", err, data))
-		}
-	}
-	b.SetBytes(int64(total / b.N))
 }
 
 func TestNinOptNativeUnionUnion(t *testing3.T) {
@@ -7721,914 +4376,344 @@ func TestNidOptNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidOptNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidRepNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinRepNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepPackedNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidRepPackedNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepPackedNativeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinRepPackedNativeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidOptStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidRepStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinRepStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidEmbeddedStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidEmbeddedStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinEmbeddedStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidNestedStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidNestedStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidNestedStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinNestedStructStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStruct(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptCustomStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidOptCustomStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptCustom(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptCustomStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptCustomStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptCustom(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepCustomStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidRepCustomStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepCustom(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepCustomStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinRepCustomStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepCustom(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeUnionStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptNativeUnionStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructUnionStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptStructUnionStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructUnionStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinEmbeddedStructUnionStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructUnionStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinNestedStructUnionStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTreeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedTree(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkTreeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTree(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOrBranchStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkOrBranchStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOrBranch(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndBranchStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkAndBranchStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndBranch(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestLeafStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkLeafStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedLeaf(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepTreeStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkDeepTreeStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepTree(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestADeepBranchStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkADeepBranchStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedADeepBranch(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndDeepBranchStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkAndDeepBranchStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndDeepBranch(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepLeafStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkDeepLeafStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepLeaf(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNilStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNil(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNilStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNil(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptEnumStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidOptEnumStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptEnum(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptEnumStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinOptEnumStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptEnum(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepEnumStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNidRepEnumStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepEnum(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepEnumStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkNinRepEnumStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepEnum(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTimerStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkTimerStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTimer(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestMyExtendableStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkMyExtendableStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedMyExtendable(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOtherExtenableStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, false)
 	s1 := p.String()
-	s2 := fmt1.Sprintf("%v", p)
+	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func BenchmarkOtherExtenableStringer(b *testing4.B) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOtherExtenable(popr, true)
-		b.StartTimer()
-		data := p.String()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -10077,7 +6162,7 @@ func TestNidOptNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10086,26 +6171,11 @@ func TestNidOptNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidOptNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10114,26 +6184,11 @@ func TestNinOptNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10142,26 +6197,11 @@ func TestNidRepNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidRepNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10170,26 +6210,11 @@ func TestNinRepNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinRepNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepPackedNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10198,26 +6223,11 @@ func TestNidRepPackedNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidRepPackedNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepPackedNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepPackedNativeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10226,26 +6236,11 @@ func TestNinRepPackedNativeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinRepPackedNativeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepPackedNative(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10254,26 +6249,11 @@ func TestNidOptStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidOptStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10282,26 +6262,11 @@ func TestNinOptStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10310,26 +6275,11 @@ func TestNidRepStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidRepStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10338,26 +6288,11 @@ func TestNinRepStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinRepStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidEmbeddedStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10366,26 +6301,11 @@ func TestNidEmbeddedStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidEmbeddedStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidEmbeddedStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10394,26 +6314,11 @@ func TestNinEmbeddedStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinEmbeddedStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidNestedStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10422,26 +6327,11 @@ func TestNidNestedStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidNestedStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidNestedStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10450,26 +6340,11 @@ func TestNinNestedStructGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinNestedStructGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStruct(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptCustomGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10478,26 +6353,11 @@ func TestNidOptCustomGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidOptCustomGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptCustom(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptCustomGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10506,26 +6366,11 @@ func TestNinOptCustomGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptCustomGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptCustom(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepCustomGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10534,26 +6379,11 @@ func TestNidRepCustomGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidRepCustomGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepCustom(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepCustomGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10562,26 +6392,11 @@ func TestNinRepCustomGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinRepCustomGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepCustom(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptNativeUnionGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10590,26 +6405,11 @@ func TestNinOptNativeUnionGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptNativeUnionGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptNativeUnion(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptStructUnionGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10618,26 +6418,11 @@ func TestNinOptStructUnionGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptStructUnionGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptStructUnion(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinEmbeddedStructUnionGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10646,26 +6431,11 @@ func TestNinEmbeddedStructUnionGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinEmbeddedStructUnionGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinEmbeddedStructUnion(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinNestedStructUnionGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10674,26 +6444,11 @@ func TestNinNestedStructUnionGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinNestedStructUnionGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinNestedStructUnion(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTreeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedTree(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10702,26 +6457,11 @@ func TestTreeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkTreeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTree(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOrBranchGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10730,26 +6470,11 @@ func TestOrBranchGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkOrBranchGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOrBranch(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndBranchGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10758,26 +6483,11 @@ func TestAndBranchGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkAndBranchGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndBranch(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestLeafGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10786,26 +6496,11 @@ func TestLeafGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkLeafGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedLeaf(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepTreeGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10814,26 +6509,11 @@ func TestDeepTreeGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkDeepTreeGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepTree(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestADeepBranchGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10842,26 +6522,11 @@ func TestADeepBranchGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkADeepBranchGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedADeepBranch(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestAndDeepBranchGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10870,26 +6535,11 @@ func TestAndDeepBranchGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkAndDeepBranchGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedAndDeepBranch(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestDeepLeafGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10898,26 +6548,11 @@ func TestDeepLeafGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkDeepLeafGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedDeepLeaf(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNilGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNil(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10926,26 +6561,11 @@ func TestNilGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNilGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNil(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptEnumGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10954,26 +6574,11 @@ func TestNidOptEnumGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidOptEnumGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidOptEnum(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinOptEnumGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -10982,26 +6587,11 @@ func TestNinOptEnumGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinOptEnumGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinOptEnum(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidRepEnumGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -11010,26 +6600,11 @@ func TestNidRepEnumGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNidRepEnumGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNidRepEnum(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNinRepEnumGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -11038,26 +6613,11 @@ func TestNinRepEnumGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkNinRepEnumGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedNinRepEnum(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestTimerGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -11066,26 +6626,11 @@ func TestTimerGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkTimerGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedTimer(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestMyExtendableGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -11094,26 +6639,11 @@ func TestMyExtendableGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkMyExtendableGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedMyExtendable(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestOtherExtenableGoString(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, false)
 	s1 := p.GoString()
-	s2 := fmt2.Sprintf("%#v", p)
+	s2 := fmt1.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -11122,21 +6652,6 @@ func TestOtherExtenableGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func BenchmarkOtherExtenableGoString(b *testing7.B) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
-	total := 0
-	b.ResetTimer()
-	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		p := NewPopulatedOtherExtenable(popr, false)
-		b.StartTimer()
-		data := p.GoString()
-		b.StopTimer()
-		total += len(data)
-	}
-	b.SetBytes(int64(total / b.N))
-}
-
 func TestNidOptNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -11145,17 +6660,6 @@ func TestNidOptNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, true)
@@ -11164,17 +6668,6 @@ func TestNinOptNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidRepNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, true)
@@ -11183,17 +6676,6 @@ func TestNidRepNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinRepNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, true)
@@ -11202,17 +6684,6 @@ func TestNinRepNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidRepPackedNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, true)
@@ -11221,17 +6692,6 @@ func TestNidRepPackedNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepPackedNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepPackedNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinRepPackedNativeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, true)
@@ -11240,17 +6700,6 @@ func TestNinRepPackedNativeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepPackedNativeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepPackedNative(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidOptStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, true)
@@ -11259,17 +6708,6 @@ func TestNidOptStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, true)
@@ -11278,17 +6716,6 @@ func TestNinOptStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidRepStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, true)
@@ -11297,17 +6724,6 @@ func TestNidRepStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinRepStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, true)
@@ -11316,17 +6732,6 @@ func TestNinRepStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidEmbeddedStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
@@ -11335,17 +6740,6 @@ func TestNidEmbeddedStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidEmbeddedStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidEmbeddedStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinEmbeddedStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, true)
@@ -11354,17 +6748,6 @@ func TestNinEmbeddedStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinEmbeddedStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidNestedStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, true)
@@ -11373,17 +6756,6 @@ func TestNidNestedStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidNestedStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidNestedStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinNestedStructFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, true)
@@ -11392,17 +6764,6 @@ func TestNinNestedStructFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinNestedStructFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStruct(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidOptCustomFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, true)
@@ -11411,17 +6772,6 @@ func TestNidOptCustomFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptCustomFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptCustom(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptCustomFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, true)
@@ -11430,17 +6780,6 @@ func TestNinOptCustomFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptCustomFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptCustom(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidRepCustomFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, true)
@@ -11449,17 +6788,6 @@ func TestNidRepCustomFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepCustomFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepCustom(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinRepCustomFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, true)
@@ -11468,17 +6796,6 @@ func TestNinRepCustomFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepCustomFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepCustom(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptNativeUnionFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
@@ -11487,17 +6804,6 @@ func TestNinOptNativeUnionFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptNativeUnionFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNativeUnion(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptStructUnionFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, true)
@@ -11506,17 +6812,6 @@ func TestNinOptStructUnionFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptStructUnionFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStructUnion(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinEmbeddedStructUnionFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
@@ -11525,17 +6820,6 @@ func TestNinEmbeddedStructUnionFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinEmbeddedStructUnionFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStructUnion(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinNestedStructUnionFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, true)
@@ -11544,17 +6828,6 @@ func TestNinNestedStructUnionFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinNestedStructUnionFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStructUnion(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestTreeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedTree(popr, true)
@@ -11563,17 +6836,6 @@ func TestTreeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkTreeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTree(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestOrBranchFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, true)
@@ -11582,17 +6844,6 @@ func TestOrBranchFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkOrBranchFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOrBranch(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestAndBranchFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, true)
@@ -11601,17 +6852,6 @@ func TestAndBranchFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkAndBranchFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndBranch(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestLeafFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, true)
@@ -11620,17 +6860,6 @@ func TestLeafFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkLeafFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedLeaf(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestDeepTreeFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, true)
@@ -11639,17 +6868,6 @@ func TestDeepTreeFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkDeepTreeFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepTree(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestADeepBranchFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, true)
@@ -11658,17 +6876,6 @@ func TestADeepBranchFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkADeepBranchFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedADeepBranch(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestAndDeepBranchFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, true)
@@ -11677,17 +6884,6 @@ func TestAndDeepBranchFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkAndDeepBranchFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndDeepBranch(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestDeepLeafFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, true)
@@ -11696,17 +6892,6 @@ func TestDeepLeafFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkDeepLeafFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepLeaf(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNilFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNil(popr, true)
@@ -11715,17 +6900,6 @@ func TestNilFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNilFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNil(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidOptEnumFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
@@ -11734,17 +6908,6 @@ func TestNidOptEnumFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidOptEnumFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptEnum(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinOptEnumFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
@@ -11753,17 +6916,6 @@ func TestNinOptEnumFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinOptEnumFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptEnum(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidRepEnumFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
@@ -11772,17 +6924,6 @@ func TestNidRepEnumFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNidRepEnumFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepEnum(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNinRepEnumFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
@@ -11791,17 +6932,6 @@ func TestNinRepEnumFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkNinRepEnumFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepEnum(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestTimerFace(t *testing8.T) {
 	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, true)
@@ -11810,17 +6940,6 @@ func TestTimerFace(t *testing8.T) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func BenchmarkTimerFace(b *testing8.B) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTimer(popr, true)
-		b.StartTimer()
-		p.TestProto()
-	}
-}
-
 func TestNidOptNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
@@ -11836,17 +6955,6 @@ func TestNidOptNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidOptNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, false)
@@ -11862,17 +6970,6 @@ func TestNinOptNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidRepNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, false)
@@ -11888,17 +6985,6 @@ func TestNidRepNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidRepNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinRepNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, false)
@@ -11914,17 +7000,6 @@ func TestNinRepNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinRepNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidRepPackedNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, false)
@@ -11940,17 +7015,6 @@ func TestNidRepPackedNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidRepPackedNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepPackedNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinRepPackedNativeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, false)
@@ -11966,17 +7030,6 @@ func TestNinRepPackedNativeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinRepPackedNativeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepPackedNative(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidOptStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, false)
@@ -11992,17 +7045,6 @@ func TestNidOptStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidOptStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, false)
@@ -12018,17 +7060,6 @@ func TestNinOptStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidRepStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, false)
@@ -12044,17 +7075,6 @@ func TestNidRepStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidRepStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinRepStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, false)
@@ -12070,17 +7090,6 @@ func TestNinRepStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinRepStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidEmbeddedStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
@@ -12096,17 +7105,6 @@ func TestNidEmbeddedStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidEmbeddedStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidEmbeddedStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinEmbeddedStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
@@ -12122,17 +7120,6 @@ func TestNinEmbeddedStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinEmbeddedStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidNestedStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, false)
@@ -12148,17 +7135,6 @@ func TestNidNestedStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidNestedStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidNestedStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinNestedStructVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, false)
@@ -12174,17 +7150,6 @@ func TestNinNestedStructVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinNestedStructEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStruct(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidOptCustomVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, false)
@@ -12200,17 +7165,6 @@ func TestNidOptCustomVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidOptCustomEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptCustom(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptCustomVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, false)
@@ -12226,17 +7180,6 @@ func TestNinOptCustomVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptCustomEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptCustom(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidRepCustomVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, false)
@@ -12252,17 +7195,6 @@ func TestNidRepCustomVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidRepCustomEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepCustom(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinRepCustomVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, false)
@@ -12278,17 +7210,6 @@ func TestNinRepCustomVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinRepCustomEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepCustom(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptNativeUnionVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
@@ -12304,17 +7225,6 @@ func TestNinOptNativeUnionVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptNativeUnionEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptNativeUnion(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptStructUnionVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, false)
@@ -12330,17 +7240,6 @@ func TestNinOptStructUnionVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptStructUnionEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptStructUnion(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinEmbeddedStructUnionVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
@@ -12356,17 +7255,6 @@ func TestNinEmbeddedStructUnionVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinEmbeddedStructUnionEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinEmbeddedStructUnion(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinNestedStructUnionVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
@@ -12382,17 +7270,6 @@ func TestNinNestedStructUnionVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinNestedStructUnionEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinNestedStructUnion(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestTreeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedTree(popr, false)
@@ -12408,17 +7285,6 @@ func TestTreeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkTreeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTree(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestOrBranchVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, false)
@@ -12434,17 +7300,6 @@ func TestOrBranchVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkOrBranchEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOrBranch(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestAndBranchVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, false)
@@ -12460,17 +7315,6 @@ func TestAndBranchVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkAndBranchEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndBranch(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestLeafVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, false)
@@ -12486,17 +7330,6 @@ func TestLeafVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkLeafEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedLeaf(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestDeepTreeVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, false)
@@ -12512,17 +7345,6 @@ func TestDeepTreeVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkDeepTreeEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepTree(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestADeepBranchVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, false)
@@ -12538,17 +7360,6 @@ func TestADeepBranchVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkADeepBranchEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedADeepBranch(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestAndDeepBranchVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, false)
@@ -12564,17 +7375,6 @@ func TestAndDeepBranchVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkAndDeepBranchEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedAndDeepBranch(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestDeepLeafVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, false)
@@ -12590,17 +7390,6 @@ func TestDeepLeafVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkDeepLeafEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedDeepLeaf(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNilVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNil(popr, false)
@@ -12616,17 +7405,6 @@ func TestNilVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNilEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNil(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidOptEnumVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
@@ -12642,17 +7420,6 @@ func TestNidOptEnumVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidOptEnumEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidOptEnum(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinOptEnumVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
@@ -12668,17 +7435,6 @@ func TestNinOptEnumVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinOptEnumEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinOptEnum(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNidRepEnumVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
@@ -12694,17 +7450,6 @@ func TestNidRepEnumVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNidRepEnumEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNidRepEnum(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestNinRepEnumVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
@@ -12720,17 +7465,6 @@ func TestNinRepEnumVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkNinRepEnumEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedNinRepEnum(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestTimerVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, false)
@@ -12746,17 +7480,6 @@ func TestTimerVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkTimerEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedTimer(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestMyExtendableVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, false)
@@ -12772,17 +7495,6 @@ func TestMyExtendableVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkMyExtendableEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedMyExtendable(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestOtherExtenableVerboseEqual(t *testing9.T) {
 	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, false)
@@ -12798,17 +7510,6 @@ func TestOtherExtenableVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func BenchmarkOtherExtenableEqual(b *testing9.B) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		p := NewPopulatedOtherExtenable(popr, false)
-		b.StartTimer()
-		p.Equal(p)
-	}
-}
-
 func TestThetestDescription(t *testing10.T) {
 	ThetestDescription()
 }

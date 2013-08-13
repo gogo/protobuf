@@ -46,11 +46,6 @@ The equal plugin also generates a test given it is enabled using one of the foll
   - testgen
   - testgen_all
 
-And a benchmark given it is enabled using one of the following extensions:
-
-  - benchgen
-  - benchgen_all
-
 Let us look at:
 
   code.google.com/p/gogoprotobuf/test/example/example.proto
@@ -160,18 +155,6 @@ and the following test code:
 		}
 		if err := p.VerboseEqual(msg); err != nil {
 			t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
-	}
-
-	}
-	func BenchmarkBEqual(b *testing8.B) {
-		popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
-			b.StopTimer()
-			p := NewPopulatedB(popr, false)
-			b.StartTimer()
-			p.Equal(p)
-		}
 	}
 
 */

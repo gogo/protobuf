@@ -44,11 +44,6 @@ The gostring plugin also generates a test given it is enabled using one of the f
   - testgen
   - testgen_all
 
-And a benchmark given it is enabled using one of the following extensions:
-
-  - benchgen
-  - benchgen_all
-
 Let us look at:
 
   code.google.com/p/gogoprotobuf/test/example/example.proto
@@ -91,20 +86,6 @@ and the following test code:
 		if err != nil {
 			panic(err)
 		}
-	}
-	func BenchmarkAGoString(b *testing6.B) {
-		popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		b.StopTimer()
-		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, false)
-			b.StartTimer()
-			data := p.GoString()
-			b.StopTimer()
-			total += len(data)
-		}
-		b.SetBytes(int64(total / b.N))
 	}
 
 Typically fmt.Printf("%#v") will stop to print when it reaches a pointer and

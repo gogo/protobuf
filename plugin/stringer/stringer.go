@@ -37,11 +37,6 @@ The stringer plugin also generates a test given it is enabled using one of the f
   - testgen
   - testgen_all
 
-And a benchmark given it is enabled using one of the following extensions:
-
-  - benchgen
-  - benchgen_all
-
 Let us look at:
 
   code.google.com/p/gogoprotobuf/test/example/example.proto
@@ -87,20 +82,6 @@ and the following test code:
 		if s1 != s2 {
 			t.Fatalf("String want %v got %v", s1, s2)
 		}
-	}
-	func BenchmarkAStringer(b *testing4.B) {
-		popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		b.StopTimer()
-		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			data := p.String()
-			b.StopTimer()
-			total += len(data)
-		}
-		b.SetBytes(int64(total / b.N))
 	}
 
 Typically fmt.Printf("%v") will stop to print when it reaches a pointer and

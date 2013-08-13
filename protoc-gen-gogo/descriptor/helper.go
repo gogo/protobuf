@@ -113,6 +113,20 @@ func (desc *FileDescriptorSet) GetMessage(packageName string, typeName string) *
 	return nil
 }
 
+func (desc *FileDescriptorSet) GetEnum(packageName string, typeName string) *EnumDescriptorProto {
+	for _, file := range desc.GetFile() {
+		if file.GetPackage() != packageName {
+			continue
+		}
+		for _, enum := range file.GetEnumType() {
+			if enum.GetName() == typeName {
+				return enum
+			}
+		}
+	}
+	return nil
+}
+
 func (f *FieldDescriptorProto) IsEnum() bool {
 	return *f.Type == FieldDescriptorProto_TYPE_ENUM
 }

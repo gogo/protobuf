@@ -33,11 +33,6 @@ It is enabled by the following extensions:
   - populate
   - populate_all
 
-The populate plugin also generates a benchmark given it is enabled using one of the following extensions:
-
-  - benchgen
-  - benchgen_all
-
 Let us look at:
 
   code.google.com/p/gogoprotobuf/test/example/example.proto
@@ -73,18 +68,6 @@ given to the populate plugin, will generate code the following code:
 		this.XXX_unrecognized = randUnrecognizedExample(r, 3)
 	}
 	return this
-  }
-
-and the following test code:
-
-  func BenchmarkBPopulate(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		NewPopulatedB(popr, false)
-	}
   }
 
 The idea that is useful for testing.

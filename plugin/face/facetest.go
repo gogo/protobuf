@@ -68,25 +68,6 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 			p.P(`}`)
 		}
 
-		if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
-			used = true
-			p.P(`func Benchmark`, ccTypeName, `Face(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`b.ResetTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`b.StopTimer()`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`b.StartTimer()`)
-			p.P(`p.TestProto()`)
-			p.Out()
-			p.P(`}`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-		}
-
 	}
 	return used
 }

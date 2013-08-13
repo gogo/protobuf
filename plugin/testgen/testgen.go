@@ -139,44 +139,6 @@ given to the testgen plugin, will generate the following test code:
 			t.Fatalf("%#v !Json Equal %#v", msg, p)
 		}
 	}
-	func BenchmarkAJSONMarshal(b *testing1.B) {
-		popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		b.StopTimer()
-		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			data, err := encoding_json.Marshal(p)
-			if err != nil {
-				panic(err)
-			}
-			b.StopTimer()
-			total += len(data)
-		}
-		b.SetBytes(int64(total / b.N))
-	}
-
-	func BenchmarkAJSONUnmarshal(b *testing1.B) {
-		popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
-			b.StopTimer()
-			p := NewPopulatedA(popr, true)
-			data, err := encoding_json.Marshal(p)
-			if err != nil {
-				panic(err)
-			}
-			msg := &A{}
-			total += len(data)
-			b.StartTimer()
-			if err := encoding_json.Unmarshal(data, msg); err != nil {
-				panic(err)
-			}
-		}
-		b.SetBytes(int64(total / b.N))
-	}
 
 	func TestAProtoText(t *testing2.T) {
 		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
@@ -208,55 +170,6 @@ given to the testgen plugin, will generate the following test code:
 		if !p.Equal(msg) {
 			t.Fatalf("%#v !Proto %#v", msg, p)
 		}
-	}
-
-	func BenchmarkAProtoTextMarshal(b *testing2.B) {
-		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		b.StopTimer()
-		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-			b.StopTimer()
-			total += len(data)
-		}
-		b.SetBytes(int64(total / b.N))
-	}
-
-	func BenchmarkAProtoCompactTextMarshal(b *testing2.B) {
-		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		b.StopTimer()
-		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
-			b.StopTimer()
-			total += len(data)
-		}
-		b.SetBytes(int64(total / b.N))
-	}
-
-	func BenchmarkAProtoTextUnmarshal(b *testing2.B) {
-		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
-		total := 0
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
-			b.StopTimer()
-			p := NewPopulatedA(popr, true)
-			data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
-			msg := &A{}
-			total += len(data)
-			msg.Reset()
-			b.StartTimer()
-			if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
-				panic(fmt.Sprintf("%v given %v", err, data))
-			}
-		}
-		b.SetBytes(int64(total / b.N))
 	}
 
 Other registered tests are also generated.
@@ -560,7 +473,7 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 
 		}
 
-		if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
+		/*if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 			p.P(`func Benchmark`, ccTypeName, `JSONMarshal(b *`, testingPkg.Use(), `.B) {`)
 			p.In()
@@ -616,7 +529,7 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 			p.Out()
 			p.P(`}`)
 			p.P()
-		}
+		}*/
 	}
 	return used
 }
@@ -635,7 +548,7 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 	randPkg := imports.NewImport("math/rand")
 	timePkg := imports.NewImport("time")
 	protoPkg := imports.NewImport("code.google.com/p/gogoprotobuf/proto")
-	fmtPkg := imports.NewImport("fmt")
+	//fmtPkg := imports.NewImport("fmt")
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
@@ -697,7 +610,7 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 
 		}
 
-		if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
+		/*if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 
 			p.P(`func Benchmark`, ccTypeName, `ProtoTextMarshal(b *`, testingPkg.Use(), `.B) {`)
@@ -765,7 +678,7 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 			p.Out()
 			p.P(`}`)
 			p.P()
-		}
+		}*/
 	}
 	return used
 }
