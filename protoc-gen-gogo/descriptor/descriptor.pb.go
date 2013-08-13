@@ -940,7 +940,8 @@ type FieldOptions struct {
 	// TODO: Fully-implement this, then remove the "experimental_" prefix.
 	ExperimentalMapKey *string `protobuf:"bytes,9,opt,name=experimental_map_key" json:"experimental_map_key,omitempty"`
 	// For Google-internal migration only. Do not use.
-	Weak *bool `protobuf:"varint,10,opt,name=weak,def=0" json:"weak,omitempty"`
+	Weak                  *bool   `protobuf:"varint,10,opt,name=weak,def=0" json:"weak,omitempty"`
+	InterpretedCustomtype *string `protobuf:"bytes,616,opt,name=interpreted_customtype" json:"interpreted_customtype,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
 	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
@@ -1010,6 +1011,13 @@ func (m *FieldOptions) GetWeak() bool {
 		return *m.Weak
 	}
 	return Default_FieldOptions_Weak
+}
+
+func (m *FieldOptions) GetInterpretedCustomtype() string {
+	if m != nil && m.InterpretedCustomtype != nil {
+		return *m.InterpretedCustomtype
+	}
+	return ""
 }
 
 func (m *FieldOptions) GetUninterpretedOption() []*UninterpretedOption {
