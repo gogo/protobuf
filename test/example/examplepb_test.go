@@ -30,19 +30,16 @@ import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/pro
 import math_rand6 "math/rand"
 import time6 "time"
 import testing6 "testing"
+import fmt1 "fmt"
+import go_parser "go/parser"
 import math_rand7 "math/rand"
 import time7 "time"
 import testing7 "testing"
-import fmt1 "fmt"
-import go_parser "go/parser"
 import math_rand8 "math/rand"
 import time8 "time"
 import testing8 "testing"
-import math_rand9 "math/rand"
-import time9 "time"
-import testing9 "testing"
 import code_google_com_p_gogoprotobuf_proto3 "code.google.com/p/gogoprotobuf/proto"
-import testing10 "testing"
+import testing9 "testing"
 
 func TestAProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -584,38 +581,8 @@ func BenchmarkUSize(b *testing5.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func BenchmarkAPopulate(b *testing6.B) {
+func TestAGoString(t *testing6.T) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		NewPopulatedA(popr, false)
-	}
-}
-
-func BenchmarkBPopulate(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		NewPopulatedB(popr, false)
-	}
-}
-
-func BenchmarkUPopulate(b *testing6.B) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
-	b.StopTimer()
-	b.ResetTimer()
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		NewPopulatedU(popr, false)
-	}
-}
-
-func TestAGoString(t *testing7.T) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -627,8 +594,8 @@ func TestAGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func TestBGoString(t *testing7.T) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+func TestBGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedB(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -640,8 +607,8 @@ func TestBGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func TestUGoString(t *testing7.T) {
-	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+func TestUGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
 	s1 := p.GoString()
 	s2 := fmt1.Sprintf("%#v", p)
@@ -653,16 +620,16 @@ func TestUGoString(t *testing7.T) {
 		panic(err)
 	}
 }
-func TestAFace(t *testing8.T) {
-	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+func TestAFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
 	}
 }
-func TestAVerboseEqual(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+func TestAVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
@@ -676,8 +643,8 @@ func TestAVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestBVerboseEqual(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+func TestBVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedB(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
@@ -691,8 +658,8 @@ func TestBVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestUVerboseEqual(t *testing9.T) {
-	popr := math_rand9.New(math_rand9.NewSource(time9.Now().UnixNano()))
+func TestUVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
 	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
 	if err != nil {
@@ -706,7 +673,7 @@ func TestUVerboseEqual(t *testing9.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestExampleDescription(t *testing10.T) {
+func TestExampleDescription(t *testing9.T) {
 	ExampleDescription()
 }
 
