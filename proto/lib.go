@@ -332,17 +332,13 @@ func (p *Buffer) buffree(s []byte) {
 // Bool is a helper routine that allocates a new bool value
 // to store v and returns a pointer to it.
 func Bool(v bool) *bool {
-	p := new(bool)
-	*p = v
-	return p
+	return &v
 }
 
 // Int32 is a helper routine that allocates a new int32 value
 // to store v and returns a pointer to it.
 func Int32(v int32) *int32 {
-	p := new(int32)
-	*p = v
-	return p
+	return &v
 }
 
 // Int is a helper routine that allocates a new int32 value
@@ -357,25 +353,19 @@ func Int(v int) *int32 {
 // Int64 is a helper routine that allocates a new int64 value
 // to store v and returns a pointer to it.
 func Int64(v int64) *int64 {
-	p := new(int64)
-	*p = v
-	return p
+	return &v
 }
 
 // Float32 is a helper routine that allocates a new float32 value
 // to store v and returns a pointer to it.
 func Float32(v float32) *float32 {
-	p := new(float32)
-	*p = v
-	return p
+	return &v
 }
 
 // Float64 is a helper routine that allocates a new float64 value
 // to store v and returns a pointer to it.
 func Float64(v float64) *float64 {
-	p := new(float64)
-	*p = v
-	return p
+	return &v
 }
 
 // Uint32 is a helper routine that allocates a new uint32 value
@@ -389,17 +379,13 @@ func Uint32(v uint32) *uint32 {
 // Uint64 is a helper routine that allocates a new uint64 value
 // to store v and returns a pointer to it.
 func Uint64(v uint64) *uint64 {
-	p := new(uint64)
-	*p = v
-	return p
+	return &v
 }
 
 // String is a helper routine that allocates a new string value
 // to store v and returns a pointer to it.
 func String(v string) *string {
-	p := new(string)
-	*p = v
-	return p
+	return &v
 }
 
 // EnumName is a helper function to simplify printing protocol buffer enums
@@ -668,7 +654,18 @@ func setDefaults(v reflect.Value, recur, zeros bool) {
 		if f.IsNil() {
 			continue
 		}
-		setDefaults(f, recur, zeros)
+		// f is *T or []*T
+		if f.Kind() == reflect.Ptr {
+			setDefaults(f, recur, zeros)
+		} else {
+			for i := 0; i < f.Len(); i++ {
+				e := f.Index(i)
+				if e.IsNil() {
+					continue
+				}
+				setDefaults(e, recur, zeros)
+			}
+		}
 	}
 }
 
@@ -693,6 +690,10 @@ type scalarField struct {
 	value interface{}  // the proto-declared default value, or nil
 }
 
+func ptrToStruct(t reflect.Type) bool {
+	return t.Kind() == reflect.Ptr && t.Elem().Kind() == reflect.Struct
+}
+
 // t is a struct type.
 func buildDefaultMessage(t reflect.Type) (dm defaultMessage) {
 	sprop := GetProperties(t)
@@ -705,7 +706,7 @@ func buildDefaultMessage(t reflect.Type) (dm defaultMessage) {
 		ft := t.Field(fi).Type
 
 		// nested messages
-		if ft.Kind() == reflect.Ptr && ft.Elem().Kind() == reflect.Struct {
+		if ptrToStruct(ft) || (ft.Kind() == reflect.Slice && ptrToStruct(ft.Elem())) {
 			dm.nested = append(dm.nested, fi)
 			continue
 		}

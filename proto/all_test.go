@@ -1341,6 +1341,21 @@ func TestSetDefaultsWithSubMessage(t *testing.T) {
 	}
 }
 
+func TestSetDefaultsWithRepeatedSubMessage(t *testing.T) {
+	m := &MyMessage{
+		RepInner: []*InnerMessage{{}},
+	}
+	expected := &MyMessage{
+		RepInner: []*InnerMessage{{
+			Port: Int32(4000),
+		}},
+	}
+	SetDefaults(m)
+	if !Equal(m, expected) {
+		t.Errorf("\n got %v\nwant %v", m, expected)
+	}
+}
+
 func TestMaximumTagNumber(t *testing.T) {
 	m := &MaxTag{
 		LastField: String("natural goat essence"),
@@ -1411,6 +1426,20 @@ func TestBytesWithInvalidLength(t *testing.T) {
 	// If a byte sequence has an invalid (negative) length, Unmarshal should not panic.
 	b := []byte{2<<3 | WireBytes, 0xff, 0xff, 0xff, 0xff, 0xff, 0}
 	Unmarshal(b, new(MyMessage))
+}
+
+func TestLengthOverflow(t *testing.T) {
+	// Overflowing a length should not panic.
+	b := []byte{2<<3 | WireBytes, 1, 1, 3<<3 | WireBytes, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f, 0x01}
+	Unmarshal(b, new(MyMessage))
+}
+
+func TestVarintOverflow(t *testing.T) {
+	// Overflowing a 64-bit length should not be allowed.
+	b := []byte{1<<3 | WireVarint, 0x01, 3<<3 | WireBytes, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x01}
+	if err := Unmarshal(b, new(MyMessage)); err == nil {
+		t.Fatalf("Overflowed uint64 length without error")
+	}
 }
 
 func TestUnmarshalFuzz(t *testing.T) {
