@@ -99,6 +99,15 @@ func (desc *FileDescriptorSet) GetField(packageName, messageName, fieldName stri
 	return nil
 }
 
+func (file *FileDescriptorProto) GetMessage(typeName string) *DescriptorProto {
+	for _, msg := range file.GetMessageType() {
+		if msg.GetName() == typeName {
+			return msg
+		}
+	}
+	return nil
+}
+
 func (desc *FileDescriptorSet) GetMessage(packageName string, typeName string) *DescriptorProto {
 	for _, file := range desc.GetFile() {
 		if file.GetPackage() != packageName {

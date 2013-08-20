@@ -58,7 +58,7 @@ The following message:
 
   message A {
 	option (gogoproto.face) = true;
-	option (gogoproto.getters) = false;
+	option (gogoproto.goproto_getters) = false;
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
 	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];

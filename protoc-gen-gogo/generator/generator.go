@@ -1451,7 +1451,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	if gogoproto.IsCustomType(field) {
 		var packageName string
 		var err error
-		typ, packageName, err = getCustomType(field)
+		packageName, typ, err = getCustomType(field)
 		if err != nil {
 			g.Fail(err.Error())
 		}

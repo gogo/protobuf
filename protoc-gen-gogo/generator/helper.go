@@ -38,7 +38,6 @@ import (
 	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	plugin "code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin"
-	"errors"
 	"path"
 )
 
@@ -211,15 +210,13 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 			ctype := *(v.(*string))
 			ss := strings.Split(ctype, ".")
 			if len(ss) == 1 {
-				return "", typ, nil
-			} else if len(ss) >= 2 {
+				return "", ctype, nil
+			} else {
 				packageName := strings.Join(ss[0:len(ss)-1], ".")
 				typeName := ss[len(ss)-1]
 				importStr := strings.Replace(strings.Replace(packageName, "/", "_", -1), ".", "_", -1)
 				typ = importStr + "." + typeName
-				return typ, packageName, nil
-			} else {
-				err = errors.New("custom type requires a dot-separated import and type")
+				return packageName, typ, nil
 			}
 		}
 	}

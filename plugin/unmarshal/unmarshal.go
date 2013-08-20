@@ -485,15 +485,15 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex]...)`)
 					}
 				} else {
-					packageName, _, err := generator.GetCustomType(field)
+					_, ctyp, err := generator.GetCustomType(field)
 					if err != nil {
 						panic(err)
 					}
 					if repeated {
-						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, packageName, `{})`)
+						p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, ctyp, `{})`)
 						p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
 					} else if nullable {
-						p.P(`m.`, fieldname, ` = &`, packageName, `{}`)
+						p.P(`m.`, fieldname, ` = &`, ctyp, `{}`)
 						p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
 						p.In()
 						p.P(`return err`)
