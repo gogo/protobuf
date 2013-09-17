@@ -55,6 +55,10 @@ for a quicker overview.
 
 The following message:
 
+  package test;
+
+  import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
+
 	message A {
 		optional string Description = 1 [(gogoproto.nullable) = false];
 		optional int64 Number = 2 [(gogoproto.nullable) = false];
