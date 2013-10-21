@@ -76,7 +76,7 @@ func (m *NinOptEnum) GetField1() TheTestEnum {
 	if m != nil && m.Field1 != nil {
 		return *m.Field1
 	}
-	return 0
+	return TheTestEnum_A
 }
 
 type NidRepEnum struct {

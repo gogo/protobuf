@@ -55,16 +55,7 @@ func (this *Extension) Equal(that *Extension) bool {
 }
 
 func SizeOfExtensionMap(m map[int32]Extension) (n int) {
-	for _, ext := range m {
-		ms := len(ext.enc)
-		if ext.enc == nil {
-			props := new(Properties)
-			props.Init(reflect.TypeOf(ext.desc.ExtensionType), "x", ext.desc.Tag, nil)
-			ms = len(props.tagcode) + sizeField(reflect.ValueOf(ext.value), props)
-		}
-		n += ms
-	}
-	return n
+	return sizeExtensionMap(m)
 }
 
 func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {

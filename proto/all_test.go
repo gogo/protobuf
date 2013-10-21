@@ -431,7 +431,7 @@ func TestRequiredBit(t *testing.T) {
 	err := o.Marshal(pb)
 	if err == nil {
 		t.Error("did not catch missing required fields")
-	} else if strings.Index(err.Error(), "GoTest") < 0 {
+	} else if strings.Index(err.Error(), "Kind") < 0 {
 		t.Error("wrong error type:", err)
 	}
 }
@@ -1205,7 +1205,7 @@ func TestRequiredFieldEnforcement(t *testing.T) {
 	_, err := Marshal(pb)
 	if err == nil {
 		t.Error("marshal: expected error, got nil")
-	} else if strings.Index(err.Error(), "GoTestField") < 0 {
+	} else if strings.Index(err.Error(), "Label") < 0 {
 		t.Errorf("marshal: bad error type: %v", err)
 	}
 
@@ -1216,7 +1216,7 @@ func TestRequiredFieldEnforcement(t *testing.T) {
 	err = Unmarshal(buf, pb)
 	if err == nil {
 		t.Error("unmarshal: expected error, got nil")
-	} else if strings.Index(err.Error(), "GoTestField") < 0 {
+	} else if strings.Index(err.Error(), "{Unknown}") < 0 {
 		t.Errorf("unmarshal: bad error type: %v", err)
 	}
 }
@@ -1382,7 +1382,7 @@ func TestJSON(t *testing.T) {
 		},
 		Bikeshed: MyMessage_GREEN.Enum(),
 	}
-	const expected = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":"GREEN"}`
+	const expected = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":1}`
 
 	b, err := json.Marshal(m)
 	if err != nil {
@@ -1401,8 +1401,8 @@ func TestJSON(t *testing.T) {
 		t.Fatalf("got %s, want %s", received, m)
 	}
 
-	// Test unmarshalling of older json wire format.
-	const old = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":1}`
+	// Test unmarshalling of JSON with symbolic enum name.
+	const old = `{"count":4,"pet":["bunny","kitty"],"inner":{"host":"cauchy"},"bikeshed":"GREEN"}`
 	received.Reset()
 	if err := json.Unmarshal([]byte(old), received); err != nil {
 		t.Fatalf("json.Unmarshal failed: %v", err)
@@ -1670,6 +1670,70 @@ func TestEncodingSizes(t *testing.T) {
 	}
 }
 
+func TestRequiredNotSetError(t *testing.T) {
+	pb := initGoTest(false)
+	pb.RequiredField.Label = nil
+	pb.F_Int32Required = nil
+	pb.F_Int64Required = nil
+
+	expected := "0807" + // field 1, encoding 0, value 7
+		"2206" + "120474797065" + // field 4, encoding 2 (GoTestField)
+		"5001" + // field 10, encoding 0, value 1
+		"6d20000000" + // field 13, encoding 5, value 0x20
+		"714000000000000000" + // field 14, encoding 1, value 0x40
+		"78a019" + // field 15, encoding 0, value 0xca0 = 3232
+		"8001c032" + // field 16, encoding 0, value 0x1940 = 6464
+		"8d0100004a45" + // field 17, encoding 5, value 3232.0
+		"9101000000000040b940" + // field 18, encoding 1, value 6464.0
+		"9a0106" + "737472696e67" + // field 19, encoding 2, string "string"
+		"b304" + // field 70, encoding 3, start group
+		"ba0408" + "7265717569726564" + // field 71, encoding 2, string "required"
+		"b404" + // field 70, encoding 4, end group
+		"aa0605" + "6279746573" + // field 101, encoding 2, string "bytes"
+		"b0063f" + // field 102, encoding 0, 0x3f zigzag32
+		"b8067f" // field 103, encoding 0, 0x7f zigzag64
+
+	o := old()
+	bytes, err := Marshal(pb)
+	if _, ok := err.(*RequiredNotSetError); !ok {
+		fmt.Printf("marshal-1 err = %v, want *RequiredNotSetError", err)
+		o.DebugPrint("", bytes)
+		t.Fatalf("expected = %s", expected)
+	}
+	if strings.Index(err.Error(), "RequiredField.Label") < 0 {
+		t.Errorf("marshal-1 wrong err msg: %v", err)
+	}
+	if !equal(bytes, expected, t) {
+		o.DebugPrint("neq 1", bytes)
+		t.Fatalf("expected = %s", expected)
+	}
+
+	// Now test Unmarshal by recreating the original buffer.
+	pbd := new(GoTest)
+	err = Unmarshal(bytes, pbd)
+	if _, ok := err.(*RequiredNotSetError); !ok {
+		t.Fatalf("unmarshal err = %v, want *RequiredNotSetError", err)
+		o.DebugPrint("", bytes)
+		t.Fatalf("string = %s", expected)
+	}
+	if strings.Index(err.Error(), "RequiredField.{Unknown}") < 0 {
+		t.Errorf("unmarshal wrong err msg: %v", err)
+	}
+	bytes, err = Marshal(pbd)
+	if _, ok := err.(*RequiredNotSetError); !ok {
+		t.Errorf("marshal-2 err = %v, want *RequiredNotSetError", err)
+		o.DebugPrint("", bytes)
+		t.Fatalf("string = %s", expected)
+	}
+	if strings.Index(err.Error(), "RequiredField.Label") < 0 {
+		t.Errorf("marshal-2 wrong err msg: %v", err)
+	}
+	if !equal(bytes, expected, t) {
+		o.DebugPrint("neq 2", bytes)
+		t.Fatalf("string = %s", expected)
+	}
+}
+
 func fuzzUnmarshal(t *testing.T, data []byte) {
 	defer func() {
 		if e := recover(); e != nil {
@@ -1683,78 +1747,122 @@ func fuzzUnmarshal(t *testing.T, data []byte) {
 	Unmarshal(data, pb)
 }
 
-func benchmarkMsg(bytes bool) *GoTest {
+// Benchmarks
+
+func testMsg() *GoTest {
 	pb := initGoTest(true)
-	if bytes {
-		buf := make([]byte, 4000)
-		for i := range buf {
-			buf[i] = byte(i)
-		}
-		pb.F_BytesDefaulted = buf
-	} else {
-		const N = 1000 // Internally the library starts much smaller.
-		pb.F_Int32Repeated = make([]int32, N)
-		pb.F_DoubleRepeated = make([]float64, N)
-		for i := 0; i < N; i++ {
-			pb.F_Int32Repeated[i] = int32(i)
-			pb.F_DoubleRepeated[i] = float64(i)
-		}
+	const N = 1000 // Internally the library starts much smaller.
+	pb.F_Int32Repeated = make([]int32, N)
+	pb.F_DoubleRepeated = make([]float64, N)
+	for i := 0; i < N; i++ {
+		pb.F_Int32Repeated[i] = int32(i)
+		pb.F_DoubleRepeated[i] = float64(i)
 	}
 	return pb
 }
 
-func BenchmarkMarshal(b *testing.B) {
-	pb := benchmarkMsg(false)
+func bytesMsg() *GoTest {
+	pb := initGoTest(true)
+	buf := make([]byte, 4000)
+	for i := range buf {
+		buf[i] = byte(i)
+	}
+	pb.F_BytesDefaulted = buf
+	return pb
+}
+
+func benchmarkMarshal(b *testing.B, pb Message, marshal func(Message) ([]byte, error)) {
+	d, _ := marshal(pb)
+	b.SetBytes(int64(len(d)))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		marshal(pb)
+	}
+}
+
+func benchmarkBufferMarshal(b *testing.B, pb Message) {
 	p := NewBuffer(nil)
+	benchmarkMarshal(b, pb, func(pb0 Message) ([]byte, error) {
+		p.Reset()
+		err := p.Marshal(pb0)
+		return p.Bytes(), err
+	})
+}
+
+func benchmarkSize(b *testing.B, pb Message) {
+	benchmarkMarshal(b, pb, func(pb0 Message) ([]byte, error) {
+		Size(pb)
+		return nil, nil
+	})
+}
+
+func newOf(pb Message) Message {
+	in := reflect.ValueOf(pb)
+	if in.IsNil() {
+		return pb
+	}
+	return reflect.New(in.Type().Elem()).Interface().(Message)
+}
+
+func benchmarkUnmarshal(b *testing.B, pb Message, unmarshal func([]byte, Message) error) {
+	d, _ := Marshal(pb)
+	b.SetBytes(int64(len(d)))
+	pbd := newOf(pb)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		p.Reset()
-		p.Marshal(pb)
+		unmarshal(d, pbd)
 	}
-	b.SetBytes(int64(len(p.Bytes())))
+}
+
+func benchmarkBufferUnmarshal(b *testing.B, pb Message) {
+	p := NewBuffer(nil)
+	benchmarkUnmarshal(b, pb, func(d []byte, pb0 Message) error {
+		p.SetBuf(d)
+		return p.Unmarshal(pb0)
+	})
+}
+
+// Benchmark{Marshal,BufferMarshal,Size,Unmarshal,BufferUnmarshal}{,Bytes}
+
+func BenchmarkMarshal(b *testing.B) {
+	benchmarkMarshal(b, testMsg(), Marshal)
+}
+
+func BenchmarkBufferMarshal(b *testing.B) {
+	benchmarkBufferMarshal(b, testMsg())
+}
+
+func BenchmarkSize(b *testing.B) {
+	benchmarkSize(b, testMsg())
 }
 
 func BenchmarkUnmarshal(b *testing.B) {
-	pb := benchmarkMsg(false)
-	p := NewBuffer(nil)
-	p.Marshal(pb)
-	b.SetBytes(int64(len(p.Bytes())))
-	p2 := NewBuffer(nil)
-	pbd := new(GoTest)
+	benchmarkUnmarshal(b, testMsg(), Unmarshal)
+}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		p2.SetBuf(p.Bytes())
-		p2.Unmarshal(pbd)
-	}
+func BenchmarkBufferUnmarshal(b *testing.B) {
+	benchmarkBufferUnmarshal(b, testMsg())
 }
 
 func BenchmarkMarshalBytes(b *testing.B) {
-	pb := benchmarkMsg(true)
-	p := NewBuffer(nil)
+	benchmarkMarshal(b, bytesMsg(), Marshal)
+}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		p.Reset()
-		p.Marshal(pb)
-	}
-	b.SetBytes(int64(len(p.Bytes())))
+func BenchmarkBufferMarshalBytes(b *testing.B) {
+	benchmarkBufferMarshal(b, bytesMsg())
+}
+
+func BenchmarkSizeBytes(b *testing.B) {
+	benchmarkSize(b, bytesMsg())
 }
 
 func BenchmarkUnmarshalBytes(b *testing.B) {
-	pb := benchmarkMsg(true)
-	p := NewBuffer(nil)
-	p.Marshal(pb)
-	b.SetBytes(int64(len(p.Bytes())))
-	p2 := NewBuffer(nil)
-	pbd := new(GoTest)
+	benchmarkUnmarshal(b, bytesMsg(), Unmarshal)
+}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		p2.SetBuf(p.Bytes())
-		p2.Unmarshal(pbd)
-	}
+func BenchmarkBufferUnmarshalBytes(b *testing.B) {
+	benchmarkBufferUnmarshal(b, bytesMsg())
 }
 
 func BenchmarkUnmarshalUnrecognizedFields(b *testing.B) {

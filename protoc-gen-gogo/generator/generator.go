@@ -1231,15 +1231,13 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("}")
 	}
 
-	g.P("func (x ", ccTypeName, ") MarshalJSON() ([]byte, error) {")
-	g.In()
-	if gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
-		g.P("return json.Marshal(x.String())")
-	} else {
+	if !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+		g.P("func (x ", ccTypeName, ") MarshalJSON() ([]byte, error) {")
+		g.In()
 		g.P("return ", g.Pkg["proto"], ".MarshalJSONEnum(", ccTypeName, "_name, int32(x))")
+		g.Out()
+		g.P("}")
 	}
-	g.Out()
-	g.P("}")
 
 	g.P("func (x *", ccTypeName, ") UnmarshalJSON(data []byte) error {")
 	g.In()
@@ -1751,6 +1749,31 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.P("return false")
 			case descriptor.FieldDescriptorProto_TYPE_STRING:
 				g.P(`return ""`)
+			case descriptor.FieldDescriptorProto_TYPE_ENUM:
+				// The default default for an enum is the first value in the enum,
+				// not zero.
+				obj := g.ObjectNamed(field.GetTypeName())
+				var enum *EnumDescriptor
+				if id, ok := obj.(*ImportedDescriptor); ok {
+					// The enum type has been publicly imported.
+					enum, _ = id.o.(*EnumDescriptor)
+				} else {
+					enum, _ = obj.(*EnumDescriptor)
+				}
+				if enum == nil {
+					log.Printf("don't know how to generate getter for %s", field.GetName())
+					continue
+				}
+				if len(enum.Value) == 0 {
+					g.P("return 0 // empty enum")
+				} else {
+					first := enum.Value[0].GetName()
+					if gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+						g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
+					} else {
+						g.P("return ", g.DefaultPackageName(obj)+first)
+					}
+				}
 			default:
 				g.P("return 0")
 			}
@@ -1868,7 +1891,7 @@ func isASCIIDigit(c byte) bool {
 // but it's so remote we're prepared to pretend it's nonexistent - since the
 // C++ generator lowercases names, it's extremely unlikely to have two fields
 // with different capitalizations.
-// In short, _my_field_name_2 becomes XMyFieldName2.
+// In short, _my_field_name_2 becomes XMyFieldName_2.
 func CamelCase(s string) string {
 	if s == "" {
 		return ""

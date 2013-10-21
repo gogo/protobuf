@@ -198,8 +198,8 @@ func (p *textParser) advance() {
 }
 
 var (
-	errBadUTF8 = errors.New("bad UTF-8")
-	errBadHex  = errors.New("bad hexadecimal")
+	errBadUTF8 = errors.New("proto: bad UTF-8")
+	errBadHex  = errors.New("proto: bad hexadecimal")
 )
 
 func unquoteC(s string, quote rune) (string, error) {
