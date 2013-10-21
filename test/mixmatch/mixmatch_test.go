@@ -53,6 +53,13 @@ func (this MixMatch) Regenerate() {
 	if err := ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
 		panic(err)
 	}
+	data2, err := ioutil.ReadFile("../uuid.go")
+	if err != nil {
+		panic(err)
+	}
+	if err := ioutil.WriteFile("./testdata/uuid.go", data2, 0666); err != nil {
+		panic(err)
+	}
 	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../../../../:.", "./testdata/thetest.proto")
 	fmt.Printf("regenerating\n")
 	out, err := regenerate.CombinedOutput()

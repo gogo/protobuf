@@ -26,46 +26,45 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"fmt"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
+type errType struct {
+	Want descriptor.FieldDescriptorProto_Type
+	Got  descriptor.FieldDescriptorProto_Type
 }
 
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
+func (this *errType) Error() string {
+	return fmt.Sprintf("Type Error: wanted %v got %v", this.Want, this.Got)
 }
 
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
+type errChild struct {
+	fieldName string
+	pkg       string
+	msg       string
 }
 
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
-	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
-	if err != nil {
-		return nil, &errCmd{data, err}
-	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
-	}
-	return fileDesc, nil
+func (this *errChild) Error() string {
+	return fmt.Sprintf("%v is not a child of %v.%v", this.fieldName, this.pkg, this.msg)
+}
+
+type errMessage struct {
+	name string
+}
+
+func (this *errMessage) Error() string {
+	return fmt.Sprintf("%v is not a message", this.name)
+}
+
+type errRepeated struct {
+	path      string
+	fieldName string
+}
+
+func (this *errRepeated) Error() string {
+	return fmt.Sprintf("%v in %v is repeated", this.fieldName, this.path)
 }

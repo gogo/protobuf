@@ -26,46 +26,74 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath_test
 
 import (
+	"code.google.com/p/gogoprotobuf/fieldpath"
 	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"code.google.com/p/gogoprotobuf/test"
+	"fmt"
+	math_rand "math/rand"
+	"testing"
+	"time"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
-}
-
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
-}
-
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
-}
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
-	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
+func TestExtend(t *testing.T) {
+	fp, err := fieldpath.NewFloat64Path("test", "MyExtendable", test.ThetestDescription(), "FieldA")
 	if err != nil {
-		return nil, &errCmd{data, err}
+		panic(err)
 	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
+	m := &test.MyExtendable{}
+	err = proto.SetExtension(m, test.E_FieldA, proto.Float64(10.0))
+	if err != nil {
+		panic(err)
 	}
-	return fileDesc, nil
+	buf, err := proto.Marshal(m)
+	if err != nil {
+		panic(err)
+	}
+	var unmarshalled float64
+	f := FuncHandler{
+		Float64Func: func(v float64) {
+			unmarshalled = v
+		},
+	}
+	unmarshaler := fieldpath.NewFloat64Unmarshaler(fp, f)
+	err = unmarshaler.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if unmarshalled != float64(10.0) {
+		panic(fmt.Errorf("wtf %v", unmarshalled))
+	}
+}
+
+func BenchmarkUnmarshalNidOptNativeWhole(b *testing.B) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := test.NewPopulatedNidOptNative(r, false)
+		data, err := proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StartTimer()
+		pp := &test.NidOptNative{}
+		proto.Unmarshal(data, pp)
+	}
+}
+
+func BenchmarkUnmarshalNinOptStructWhole(b *testing.B) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		p := test.NewPopulatedNinOptStruct(r, false)
+		data, err := proto.Marshal(p)
+		if err != nil {
+			panic(err)
+		}
+		b.StartTimer()
+		pp := &test.NinOptStruct{}
+		proto.Unmarshal(data, pp)
+	}
 }

@@ -970,7 +970,7 @@ func (m *C) Size() (n int) {
 		n += 9
 	}
 	if m.Field3 != nil {
-		l = len([]byte(*m.Field3))
+		l = len(*m.Field3)
 		n += 1 + l + sovUnrecognized(uint64(l))
 	}
 	if m.Field4 != nil {
@@ -1036,7 +1036,7 @@ func (m *OldC) Size() (n int) {
 		n += 9
 	}
 	if m.Field3 != nil {
-		l = len([]byte(*m.Field3))
+		l = len(*m.Field3)
 		n += 1 + l + sovUnrecognized(uint64(l))
 	}
 	if m.Field6 != nil {

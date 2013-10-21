@@ -226,27 +226,27 @@ message NidNestedStruct {
 }
 
 message NinNestedStruct {
-	optional NidOptStruct Field1 = 1;
-	repeated NidRepStruct Field2 = 2;
+	optional NinOptStruct Field1 = 1;
+	repeated NinRepStruct Field2 = 2;
 }
 
 message NidOptCustom {
-	optional bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	optional bytes Id = 1 [(gogoproto.customtype) = "Uuid", (gogoproto.nullable) = false];
 	optional bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
 }
 
 message NinOptCustom {
-	optional bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid"];
+	optional bytes Id = 1 [(gogoproto.customtype) = "Uuid"];
 	optional bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
 }
 
 message NidRepCustom {
-	repeated bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	repeated bytes Id = 1 [(gogoproto.customtype) = "Uuid", (gogoproto.nullable) = false];
 	repeated bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
 }
 
 message NinRepCustom {
-	repeated bytes Id = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid"];
+	repeated bytes Id = 1 [(gogoproto.customtype) = "Uuid"];
 	repeated bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
 }
 
@@ -371,7 +371,9 @@ message MyExtendable {
 }
 
 extend MyExtendable {
-	optional double Field2 = 100;
+	optional double FieldA = 100;
+	optional NinOptNative FieldB = 101;
+	optional NinEmbeddedStruct FieldC = 102;
 }
 
 message OtherExtenable {
@@ -381,4 +383,27 @@ message OtherExtenable {
 	optional int64 Field13 = 13;
 	extensions 10 to 12;
 	optional MyExtendable M = 1;
+}
+
+message NestedDefinition {
+	optional int64 Field1 = 1;
+	message NestedMessage {
+		optional fixed64 NestedField1 = 1;
+		optional NestedNestedMsg NNM = 2;
+		message NestedNestedMsg {
+			optional string NestedNestedField1 = 10;
+		}
+	}
+	enum NestedEnum {
+		TYPE_NESTED = 1;
+	}
+	optional NestedEnum EnumField = 2;
+	optional NestedMessage.NestedNestedMsg NNM = 3;
+	optional NestedMessage NM = 4;
+}
+
+message NestedScope {
+	optional NestedDefinition.NestedMessage.NestedNestedMsg A = 1;
+	optional NestedDefinition.NestedEnum B = 2;
+	optional NestedDefinition.NestedMessage C = 3;
 }

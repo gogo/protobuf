@@ -26,46 +26,32 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath_test
 
 import (
+	"code.google.com/p/gogoprotobuf/fieldpath"
 	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"code.google.com/p/gogoprotobuf/test"
+	"fmt"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
-}
-
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
-}
-
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
-}
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
+func ExampleInt64SinglePath() {
+	a := &test.NinOptNative{
+		Field4: proto.Int64(1234),
 	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
+	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field4")
 	if err != nil {
-		return nil, &errCmd{data, err}
+		panic(err)
 	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
+	buf, err := proto.Marshal(a)
+	if err != nil {
+		panic(err)
 	}
-	return fileDesc, nil
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%v\n", *unmarshalled)
+	// Output:
+	// 1234
 }

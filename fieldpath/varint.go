@@ -26,46 +26,58 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"io"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
+func sizeOfVarint(buf []byte, offset int) (int, error) {
+	var n int
+	l := len(buf)
+	for {
+		if offset+n >= l {
+			return 0, io.ErrUnexpectedEOF
+		}
+		if buf[offset+n] < 0x80 {
+			break
+		}
+		n++
+	}
+	return n + 1, nil
 }
 
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
+func decodeVarint(buf []byte, offset int) (x uint64, n int, err error) {
+	l := len(buf)
+	for shift := uint(0); ; shift += 7 {
+		if offset+n >= l {
+			err = io.ErrUnexpectedEOF
+			return
+		}
+		b := buf[offset+n]
+		x |= (uint64(b) & 0x7F) << shift
+		if b < 0x80 {
+			break
+		}
+		n++
+	}
+	n += 1
+	return
 }
 
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
-}
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
+func skip(buf []byte, offset int, wireType int) (int, error) {
+	switch wireType {
+	case 0: //WireVarint:
+		nn, err := sizeOfVarint(buf, offset)
+		return offset + nn, err
+	case 1: //WireFixed64:
+		return offset + 8, nil
+	case 2: //WireLengthDelimited:
+		l, nn, err := decodeVarint(buf, offset)
+		offset += nn + int(l)
+		return offset, err
+	case 5: //WireFixed32:
+		return offset + 4, nil
 	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
-	if err != nil {
-		return nil, &errCmd{data, err}
-	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
-	}
-	return fileDesc, nil
+	panic("unreachable")
 }

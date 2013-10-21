@@ -26,46 +26,53 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+//Generates fieldpath-generated.go and fieldpath-generated_test.go in code.google.com/p/gogoprotobuf/fieldpath
+//, since writing code for each native go type and native proto type can be quite tedious.
+package main
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"bytes"
+	"go/format"
+	"os"
+	"text/template"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
-}
-
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
-}
-
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
-}
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
-	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
+func out(t *template.Template, model interface{}) {
+	buf := bytes.NewBuffer(nil)
+	err := t.Execute(buf, model)
 	if err != nil {
-		return nil, &errCmd{data, err}
+		panic(err)
 	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
+	bytes := buf.Bytes()
+	expr, err := format.Source(bytes)
+	if err != nil {
+		panic(err)
 	}
-	return fileDesc, nil
+	os.Stdout.Write(expr)
+}
+
+func main() {
+	if len(os.Args) > 1 {
+		if os.Args[1] == "test" {
+			top := template.Must(template.New("top").Parse(NewTestTopTemplate()))
+			out(top, nil)
+			types := NewTypes()
+			t := template.Must(template.New("types").Parse(NewTestTypeTemplate()))
+			for _, typ := range types {
+				out(t, typ)
+			}
+			return
+		}
+	}
+	top := template.Must(template.New("top").Parse(NewTopTemplate()))
+	out(top, nil)
+	types := NewTypes()
+	t := template.Must(template.New("types").Parse(NewTypeTemplate()))
+	for _, typ := range types {
+		if typ.packed {
+			out(t, typ)
+		}
+		typ.packed = false
+		out(t, typ)
+	}
 }

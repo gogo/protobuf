@@ -26,46 +26,44 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath
 
-import (
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
-)
-
-type errCmd struct {
-	output []byte
-	err    error
+type handler interface {
+	Float64(float64)
+	Float32(float32)
+	Int64(int64)
+	Int32(int32)
+	Uint64(uint64)
+	Uint32(uint32)
+	Bool(bool)
+	Bytes([]byte)
+	String(string)
 }
 
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
+type Float64Handler interface {
+	Float64(float64)
 }
-
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
+type Float32Handler interface {
+	Float32(float32)
 }
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
-	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
-	if err != nil {
-		return nil, &errCmd{data, err}
-	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
-	}
-	return fileDesc, nil
+type Int64Handler interface {
+	Int64(int64)
+}
+type Int32Handler interface {
+	Int32(int32)
+}
+type Uint64Handler interface {
+	Uint64(uint64)
+}
+type Uint32Handler interface {
+	Uint32(uint32)
+}
+type BoolHandler interface {
+	Bool(bool)
+}
+type BytesHandler interface {
+	Bytes([]byte)
+}
+type StringHandler interface {
+	String(string)
 }

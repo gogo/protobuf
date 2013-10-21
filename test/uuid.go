@@ -26,46 +26,85 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package test
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"bytes"
+	"encoding/json"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
+func PutLittleEndianUint64(b []byte, offset int, v uint64) {
+	b[offset] = byte(v)
+	b[offset+1] = byte(v >> 8)
+	b[offset+2] = byte(v >> 16)
+	b[offset+3] = byte(v >> 24)
+	b[offset+4] = byte(v >> 32)
+	b[offset+5] = byte(v >> 40)
+	b[offset+6] = byte(v >> 48)
+	b[offset+7] = byte(v >> 56)
 }
 
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
+type Uuid []byte
+
+func (uuid Uuid) Marshal() ([]byte, error) {
+	return []byte(uuid), nil
 }
 
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
+func (uuid Uuid) MarshalTo(data []byte) (n int, err error) {
+	copy(data, uuid)
+	return 16, nil
 }
 
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
+func (uuid *Uuid) Unmarshal(data []byte) error {
+	if data == nil {
+		uuid = nil
+		return nil
 	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
+	id := Uuid(make([]byte, 16))
+	copy(id, data)
+	*uuid = id
+	return nil
+}
+
+func (uuid Uuid) MarshalJSON() ([]byte, error) {
+	return json.Marshal([]byte(uuid))
+}
+
+func (uuid *Uuid) UnmarshalJSON(data []byte) error {
+	v := new([]byte)
+	err := json.Unmarshal(data, v)
 	if err != nil {
-		return nil, &errCmd{data, err}
+		return err
 	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
-	}
-	return fileDesc, nil
+	return uuid.Unmarshal(*v)
+}
+
+func (uuid Uuid) Equal(other Uuid) bool {
+	return bytes.Equal(uuid[0:], other[0:])
+}
+
+type int63 interface {
+	Int63() int64
+}
+
+func NewPopulatedUuid(r int63) *Uuid {
+	u := RandV4(r)
+	return &u
+}
+
+func RandV4(r int63) Uuid {
+	uuid := make(Uuid, 16)
+	uuid.RandV4(r)
+	return uuid
+}
+
+func (uuid Uuid) RandV4(r int63) {
+	PutLittleEndianUint64(uuid, 0, uint64(r.Int63()))
+	PutLittleEndianUint64(uuid, 8, uint64(r.Int63()))
+	uuid[6] = (uuid[6] & 0xf) | 0x40
+	uuid[8] = (uuid[8] & 0x3f) | 0x80
+}
+
+func (uuid *Uuid) Size() int {
+	return 16
 }

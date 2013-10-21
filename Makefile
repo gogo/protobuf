@@ -33,6 +33,9 @@ install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
+	go install ./fieldpath/fieldpath-gen
+	go install ./fieldpath
+	go install ./pbpath
 
 all:	reinstall regenerate install tests
 
@@ -41,6 +44,9 @@ reinstall:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
+	go install ./fieldpath/fieldpath-gen
+	go install ./fieldpath
+	go install ./pbpath
 
 clean:
 	go clean ./...
@@ -55,6 +61,7 @@ regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C gogoproto regenerate
+	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
 	make -C test regenerate
 	make -C test/example regenerate
@@ -67,6 +74,7 @@ regenerate:
 tests:
 	go test -v ./test
 	go test -v ./proto
+	go test -v ./fieldpath
 	go test -v ./test/embedconflict
 	go test -v ./test/unrecognized
 	go test -v ./test/group
@@ -78,6 +86,7 @@ testall:
 	go test -v ./test/example
 	go test -v ./test
 	go test -v ./proto
+	go test -v ./fieldpath
 	go test -v ./test/embedconflict
 	go test -v ./test/unrecognized
 	go test -v ./test/group

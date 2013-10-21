@@ -82,6 +82,16 @@ func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {
 	return n, nil
 }
 
+func GetRawExtension(m map[int32]Extension, id int32) ([]byte, error) {
+	if m[id].value == nil || m[id].desc == nil {
+		return m[id].enc, nil
+	}
+	if err := encodeExtensionMap(m); err != nil {
+		return nil, err
+	}
+	return m[id].enc, nil
+}
+
 func NewExtension(e []byte) Extension {
 	ee := Extension{enc: make([]byte, len(e))}
 	copy(ee.enc, e)

@@ -26,6 +26,17 @@
 
 package google_protobuf
 
+import (
+	"strings"
+)
+
+func dotToUnderscore(r rune) rune {
+	if r == '.' {
+		return '_'
+	}
+	return r
+}
+
 func (field *FieldDescriptorProto) WireType() (wire int) {
 	switch *field.Type {
 	case FieldDescriptorProto_TYPE_DOUBLE:
@@ -68,14 +79,19 @@ func (field *FieldDescriptorProto) WireType() (wire int) {
 	panic("unreachable")
 }
 
-func (field *FieldDescriptorProto) GetKey() []byte {
+func (field *FieldDescriptorProto) GetKeyUint64() (x uint64) {
 	packed := field.IsPacked()
 	wireType := field.WireType()
 	fieldNumber := field.GetNumber()
 	if packed {
 		wireType = 2
 	}
-	x := uint32(fieldNumber)<<3 | uint32(wireType)
+	x = uint64(uint32(fieldNumber)<<3 | uint32(wireType))
+	return x
+}
+
+func (field *FieldDescriptorProto) GetKey() []byte {
+	x := field.GetKeyUint64()
 	i := 0
 	keybuf := make([]byte, 0)
 	for i = 0; x > 127; i++ {
@@ -110,7 +126,7 @@ func (file *FileDescriptorProto) GetMessage(typeName string) *DescriptorProto {
 
 func (desc *FileDescriptorSet) GetMessage(packageName string, typeName string) *DescriptorProto {
 	for _, file := range desc.GetFile() {
-		if file.GetPackage() != packageName {
+		if strings.Map(dotToUnderscore, file.GetPackage()) != strings.Map(dotToUnderscore, packageName) {
 			continue
 		}
 		for _, msg := range file.GetMessageType() {
@@ -118,13 +134,102 @@ func (desc *FileDescriptorSet) GetMessage(packageName string, typeName string) *
 				return msg
 			}
 		}
+		for _, msg := range file.GetMessageType() {
+			for _, nes := range msg.GetNestedType() {
+				if nes.GetName() == typeName {
+					return nes
+				}
+				if msg.GetName()+"."+nes.GetName() == typeName {
+					return nes
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (msg *DescriptorProto) IsExtendable() bool {
+	return len(msg.GetExtensionRange()) > 0
+}
+
+func (desc *FileDescriptorSet) FindExtension(packageName string, typeName string, fieldName string) (extPackageName string, field *FieldDescriptorProto) {
+	parent := desc.GetMessage(packageName, typeName)
+	if parent == nil {
+		return "", nil
+	}
+	if !parent.IsExtendable() {
+		return "", nil
+	}
+	extendee := "." + packageName + "." + typeName
+	for _, file := range desc.GetFile() {
+		for _, ext := range file.GetExtension() {
+			if strings.Map(dotToUnderscore, file.GetPackage()) == strings.Map(dotToUnderscore, packageName) {
+				if !(ext.GetExtendee() == typeName || ext.GetExtendee() == extendee) {
+					continue
+				}
+			} else {
+				if ext.GetExtendee() != extendee {
+					continue
+				}
+			}
+			if ext.GetName() == fieldName {
+				return file.GetPackage(), ext
+			}
+		}
+	}
+	return "", nil
+}
+
+func (desc *FileDescriptorSet) FindMessage(packageName string, typeName string, fieldName string) (msgPackageName string, msgName string) {
+	parent := desc.GetMessage(packageName, typeName)
+	if parent == nil {
+		return "", ""
+	}
+	field := parent.GetFieldDescriptor(fieldName)
+	if field == nil {
+		extPackageName, field := desc.FindExtension(packageName, typeName, fieldName)
+		if field == nil {
+			return "", ""
+		}
+		packageName = extPackageName
+	}
+	typeNames := strings.Split(field.GetTypeName(), ".")
+	if len(typeNames) == 1 {
+		msg := desc.GetMessage(packageName, typeName)
+		if msg == nil {
+			return "", ""
+		}
+		return packageName, msg.GetName()
+	}
+	if len(typeNames) > 2 {
+		for i := 1; i < len(typeNames)-1; i++ {
+			packageName = strings.Join(typeNames[1:len(typeNames)-i], ".")
+			typeName = strings.Join(typeNames[len(typeNames)-i:], ".")
+			msg := desc.GetMessage(packageName, typeName)
+			if msg != nil {
+				typeNames := strings.Split(msg.GetName(), ".")
+				if len(typeNames) == 1 {
+					return packageName, msg.GetName()
+				}
+				return strings.Join(typeNames[1:len(typeNames)-1], "."), typeNames[len(typeNames)-1]
+			}
+		}
+	}
+	return "", ""
+}
+
+func (msg *DescriptorProto) GetFieldDescriptor(fieldName string) *FieldDescriptorProto {
+	for _, field := range msg.GetField() {
+		if field.GetName() == fieldName {
+			return field
+		}
 	}
 	return nil
 }
 
 func (desc *FileDescriptorSet) GetEnum(packageName string, typeName string) *EnumDescriptorProto {
 	for _, file := range desc.GetFile() {
-		if file.GetPackage() != packageName {
+		if strings.Map(dotToUnderscore, file.GetPackage()) != strings.Map(dotToUnderscore, packageName) {
 			continue
 		}
 		for _, enum := range file.GetEnumType() {

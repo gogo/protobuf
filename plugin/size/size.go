@@ -303,15 +303,15 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 				if repeated {
 					p.P(`for _, s := range m.`, fieldname, ` { `)
 					p.In()
-					p.P(`l = len([]byte(s))`)
+					p.P(`l = len(s)`)
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 					p.Out()
 					p.P(`}`)
 				} else if nullable {
-					p.P(`l=len([]byte(*m.`, fieldname, `))`)
+					p.P(`l=len(*m.`, fieldname, `)`)
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 				} else {
-					p.P(`l=len([]byte(m.`, fieldname, `))`)
+					p.P(`l=len(m.`, fieldname, `)`)
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:

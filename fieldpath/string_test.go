@@ -26,46 +26,31 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package parser
+package fieldpath_test
 
 import (
+	"bytes"
+	"code.google.com/p/gogoprotobuf/fieldpath"
 	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"os/exec"
-	"strings"
+	"code.google.com/p/gogoprotobuf/test"
+	"math/rand"
+	"os"
+	"testing"
+	"time"
 )
 
-type errCmd struct {
-	output []byte
-	err    error
-}
-
-func (this *errCmd) Error() string {
-	return this.err.Error() + ":" + string(this.output)
-}
-
-func ParseFile(filename string, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	return parseFile(filename, false, true, paths...)
-}
-
-func parseFile(filename string, includeSourceInfo bool, includeImports bool, paths ...string) (*descriptor.FileDescriptorSet, error) {
-	args := []string{"--proto_path=" + strings.Join(paths, ":")}
-	if includeSourceInfo {
-		args = append(args, "--include_source_info")
-	}
-	if includeImports {
-		args = append(args, "--include_imports")
-	}
-	args = append(args, "--descriptor_set_out=/dev/stdout")
-	args = append(args, filename)
-	cmd := exec.Command("protoc", args...)
-	data, err := cmd.CombinedOutput()
+func TestString(t *testing.T) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	s := test.NewPopulatedNinOptStruct(r, false)
+	data, err := proto.Marshal(s)
 	if err != nil {
-		return nil, &errCmd{data, err}
+		panic(err)
 	}
-	fileDesc := &descriptor.FileDescriptorSet{}
-	if err := proto.Unmarshal(data, fileDesc); err != nil {
-		return nil, err
+	buf := bytes.NewBuffer(nil)
+	err = fieldpath.ToString("test", "NinOptStruct", test.ThetestDescription(), "", data, 0, os.Stdout)
+	if err != nil {
+		panic(err)
 	}
-	return fileDesc, nil
+	_ = buf
+	t.Logf("%v", string(buf.Bytes()))
 }

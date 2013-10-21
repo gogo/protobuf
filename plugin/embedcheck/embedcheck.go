@@ -107,6 +107,12 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		}
 		p.checkNameSpace(msg)
 	}
+	for _, e := range file.GetExtension() {
+		if gogoproto.IsEmbed(e) {
+			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be embedded", generator.CamelCase(*e.Name))
+			os.Exit(1)
+		}
+	}
 }
 
 func (p *plugin) checkNameSpace(message *generator.Descriptor) map[string]bool {

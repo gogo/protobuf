@@ -31,7 +31,6 @@
 package custom
 
 import (
-	"bytes"
 	"encoding/json"
 	"unsafe"
 )
@@ -126,69 +125,4 @@ func NewPopulatedUint128(r randy) *Uint128 {
 	}
 	u := Uint128(GetLittleEndianUint128(data, 0))
 	return &u
-}
-
-type Uuid []byte
-
-func (uuid Uuid) Marshal() ([]byte, error) {
-	return []byte(uuid), nil
-}
-
-func (uuid Uuid) MarshalTo(data []byte) (n int, err error) {
-	copy(data, uuid)
-	return 16, nil
-}
-
-func (uuid *Uuid) Unmarshal(data []byte) error {
-	if data == nil {
-		uuid = nil
-		return nil
-	}
-	id := Uuid(make([]byte, 16))
-	copy(id, data)
-	*uuid = id
-	return nil
-}
-
-func (uuid Uuid) MarshalJSON() ([]byte, error) {
-	return json.Marshal([]byte(uuid))
-}
-
-func (uuid *Uuid) UnmarshalJSON(data []byte) error {
-	v := new([]byte)
-	err := json.Unmarshal(data, v)
-	if err != nil {
-		return err
-	}
-	return uuid.Unmarshal(*v)
-}
-
-func (uuid Uuid) Equal(other Uuid) bool {
-	return bytes.Equal(uuid[0:], other[0:])
-}
-
-type int63 interface {
-	Int63() int64
-}
-
-func NewPopulatedUuid(r int63) *Uuid {
-	u := RandV4(r)
-	return &u
-}
-
-func RandV4(r int63) Uuid {
-	uuid := make(Uuid, 16)
-	uuid.RandV4(r)
-	return uuid
-}
-
-func (uuid Uuid) RandV4(r int63) {
-	PutLittleEndianUint64(uuid, 0, uint64(r.Int63()))
-	PutLittleEndianUint64(uuid, 8, uint64(r.Int63()))
-	uuid[6] = (uuid[6] & 0xf) | 0x40
-	uuid[8] = (uuid[8] & 0x3f) | 0x80
-}
-
-func (uuid *Uuid) Size() int {
-	return 16
 }
