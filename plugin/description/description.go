@@ -75,6 +75,7 @@ package description
 
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
+	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 	"fmt"
 )
@@ -117,10 +118,16 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`func `, localName, `Description() (desc *google_protobuf.FileDescriptorSet) {`)
 		p.In()
 		//Don't generate SourceCodeInfo, since it will create too much code.
+
+		ss := make([]*descriptor.SourceCodeInfo, 0)
 		for _, f := range p.Generator.AllFiles().GetFile() {
+			ss = append(ss, f.SourceCodeInfo)
 			f.SourceCodeInfo = nil
 		}
 		s := fmt.Sprintf("%#v", p.Generator.AllFiles())
+		for i, f := range p.Generator.AllFiles().GetFile() {
+			f.SourceCodeInfo = ss[i]
+		}
 		p.P(`return `, s)
 		p.Out()
 		p.P(`}`)
