@@ -1278,7 +1278,10 @@ func NewTestTypeTemplate() string {
 		{{if .Repeated}}
 			{{if $this.Bytes}}panic("not implemented")
 			{{else}}if !reflect.DeepEqual(unmarshalled, p.{{.Path}}) {
-				panic(fmt.Errorf("unmarshalled %v != p.{{.Path}} %v", unmarshalled, p.{{.Path}}))
+				if len(unmarshalled) == 0 && len(p.{{.Path}}) == 0 {
+					return
+				}
+				panic(fmt.Errorf("unmarshalled %#v != p.{{.Path}} %#v", unmarshalled, p.{{.Path}}))
 			}
 			{{end}}
 		{{else}}

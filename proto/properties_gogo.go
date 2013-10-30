@@ -37,12 +37,15 @@ func (p *Properties) setCustomEncAndDec(typ reflect.Type) {
 	if p.Repeated {
 		p.enc = (*Buffer).enc_custom_slice_bytes
 		p.dec = (*Buffer).dec_custom_slice_bytes
+		p.size = size_custom_slice_bytes
 	} else if typ.Kind() == reflect.Ptr {
 		p.enc = (*Buffer).enc_custom_bytes
 		p.dec = (*Buffer).dec_custom_bytes
+		p.size = size_custom_bytes
 	} else {
 		p.enc = (*Buffer).enc_custom_ref_bytes
 		p.dec = (*Buffer).dec_custom_ref_bytes
+		p.size = size_custom_ref_bytes
 	}
 }
 
@@ -51,21 +54,27 @@ func (p *Properties) setNonNullableEncAndDec(typ reflect.Type) bool {
 	case reflect.Bool:
 		p.enc = (*Buffer).enc_ref_bool
 		p.dec = (*Buffer).dec_ref_bool
+		p.size = size_ref_bool
 	case reflect.Int32, reflect.Uint32:
 		p.enc = (*Buffer).enc_ref_int32
 		p.dec = (*Buffer).dec_ref_int32
+		p.size = size_ref_int32
 	case reflect.Int64, reflect.Uint64:
 		p.enc = (*Buffer).enc_ref_int64
 		p.dec = (*Buffer).dec_ref_int64
+		p.size = size_ref_int64
 	case reflect.Float32:
 		p.enc = (*Buffer).enc_ref_int32 // can just treat them as bits
 		p.dec = (*Buffer).dec_ref_int32
+		p.size = size_ref_int32
 	case reflect.Float64:
 		p.enc = (*Buffer).enc_ref_int64 // can just treat them as bits
 		p.dec = (*Buffer).dec_ref_int64
+		p.size = size_ref_int64
 	case reflect.String:
 		p.dec = (*Buffer).dec_ref_string
 		p.enc = (*Buffer).enc_ref_string
+		p.size = size_ref_string
 	case reflect.Struct:
 		p.stype = typ
 		p.isMarshaler = isMarshaler(typ)
@@ -73,6 +82,7 @@ func (p *Properties) setNonNullableEncAndDec(typ reflect.Type) bool {
 		if p.Wire == "bytes" {
 			p.enc = (*Buffer).enc_ref_struct_message
 			p.dec = (*Buffer).dec_ref_struct_message
+			p.size = size_ref_struct_message
 		} else {
 			fmt.Fprintf(os.Stderr, "proto: no coders for struct %T\n", typ)
 		}
@@ -90,6 +100,7 @@ func (p *Properties) setSliceOfNonPointerStructs(typ reflect.Type) {
 	p.isUnmarshaler = isUnmarshaler(t2)
 	p.enc = (*Buffer).enc_slice_ref_struct_message
 	p.dec = (*Buffer).dec_slice_ref_struct_message
+	p.size = size_slice_ref_struct_message
 	if p.Wire != "bytes" {
 		fmt.Fprintf(os.Stderr, "proto: no ptr oenc for %T -> %T \n", typ, t2)
 	}

@@ -389,7 +389,10 @@ func TestCompiledNinRepPackedNativeFloat64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field1) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled, p.Field1))
+		if len(unmarshalled) == 0 && len(p.Field1) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field1 %#v", unmarshalled, p.Field1))
 	}
 
 }
@@ -419,7 +422,10 @@ func TestCompiledNinRepNativeFloat64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field1) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled, p.Field1))
+		if len(unmarshalled) == 0 && len(p.Field1) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field1 %#v", unmarshalled, p.Field1))
 	}
 
 }
@@ -781,7 +787,10 @@ func TestCompiledNinRepPackedNativeFloat32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field2) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field2 %v", unmarshalled, p.Field2))
+		if len(unmarshalled) == 0 && len(p.Field2) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field2 %#v", unmarshalled, p.Field2))
 	}
 
 }
@@ -811,7 +820,10 @@ func TestCompiledNinRepNativeFloat32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field2) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field2 %v", unmarshalled, p.Field2))
+		if len(unmarshalled) == 0 && len(p.Field2) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field2 %#v", unmarshalled, p.Field2))
 	}
 
 }
@@ -1173,7 +1185,10 @@ func TestCompiledNinRepPackedNativeInt32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field3) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field3 %v", unmarshalled, p.Field3))
+		if len(unmarshalled) == 0 && len(p.Field3) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field3 %#v", unmarshalled, p.Field3))
 	}
 
 }
@@ -1203,7 +1218,10 @@ func TestCompiledNinRepNativeInt32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field3) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field3 %v", unmarshalled, p.Field3))
+		if len(unmarshalled) == 0 && len(p.Field3) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field3 %#v", unmarshalled, p.Field3))
 	}
 
 }
@@ -1565,7 +1583,10 @@ func TestCompiledNinRepPackedNativeInt64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field4) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field4 %v", unmarshalled, p.Field4))
+		if len(unmarshalled) == 0 && len(p.Field4) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field4 %#v", unmarshalled, p.Field4))
 	}
 
 }
@@ -1595,7 +1616,10 @@ func TestCompiledNinRepNativeInt64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field4) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field4 %v", unmarshalled, p.Field4))
+		if len(unmarshalled) == 0 && len(p.Field4) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field4 %#v", unmarshalled, p.Field4))
 	}
 
 }
@@ -1957,7 +1981,10 @@ func TestCompiledNinRepPackedNativeUint64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field6) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field6 %v", unmarshalled, p.Field6))
+		if len(unmarshalled) == 0 && len(p.Field6) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field6 %#v", unmarshalled, p.Field6))
 	}
 
 }
@@ -1987,7 +2014,10 @@ func TestCompiledNinRepNativeUint64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field6) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field6 %v", unmarshalled, p.Field6))
+		if len(unmarshalled) == 0 && len(p.Field6) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field6 %#v", unmarshalled, p.Field6))
 	}
 
 }
@@ -2349,7 +2379,10 @@ func TestCompiledNinRepPackedNativeUint32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field5) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field5 %v", unmarshalled, p.Field5))
+		if len(unmarshalled) == 0 && len(p.Field5) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field5 %#v", unmarshalled, p.Field5))
 	}
 
 }
@@ -2379,7 +2412,10 @@ func TestCompiledNinRepNativeUint32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field5) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field5 %v", unmarshalled, p.Field5))
+		if len(unmarshalled) == 0 && len(p.Field5) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field5 %#v", unmarshalled, p.Field5))
 	}
 
 }
@@ -2741,7 +2777,10 @@ func TestCompiledNinRepPackedNativeSint32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field7) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field7 %v", unmarshalled, p.Field7))
+		if len(unmarshalled) == 0 && len(p.Field7) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field7 %#v", unmarshalled, p.Field7))
 	}
 
 }
@@ -2771,7 +2810,10 @@ func TestCompiledNinRepNativeSint32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field7) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field7 %v", unmarshalled, p.Field7))
+		if len(unmarshalled) == 0 && len(p.Field7) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field7 %#v", unmarshalled, p.Field7))
 	}
 
 }
@@ -3133,7 +3175,10 @@ func TestCompiledNinRepPackedNativeSint64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field8) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field8 %v", unmarshalled, p.Field8))
+		if len(unmarshalled) == 0 && len(p.Field8) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field8 %#v", unmarshalled, p.Field8))
 	}
 
 }
@@ -3163,7 +3208,10 @@ func TestCompiledNinRepNativeSint64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field8) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field8 %v", unmarshalled, p.Field8))
+		if len(unmarshalled) == 0 && len(p.Field8) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field8 %#v", unmarshalled, p.Field8))
 	}
 
 }
@@ -3525,7 +3573,10 @@ func TestCompiledNinRepPackedNativeFixed32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field9) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field9 %v", unmarshalled, p.Field9))
+		if len(unmarshalled) == 0 && len(p.Field9) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field9 %#v", unmarshalled, p.Field9))
 	}
 
 }
@@ -3555,7 +3606,10 @@ func TestCompiledNinRepNativeFixed32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field9) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field9 %v", unmarshalled, p.Field9))
+		if len(unmarshalled) == 0 && len(p.Field9) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field9 %#v", unmarshalled, p.Field9))
 	}
 
 }
@@ -3917,7 +3971,10 @@ func TestCompiledNinRepPackedNativeFixed64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field11) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field11 %v", unmarshalled, p.Field11))
+		if len(unmarshalled) == 0 && len(p.Field11) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field11 %#v", unmarshalled, p.Field11))
 	}
 
 }
@@ -3947,7 +4004,10 @@ func TestCompiledNinRepNativeFixed64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field11) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field11 %v", unmarshalled, p.Field11))
+		if len(unmarshalled) == 0 && len(p.Field11) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field11 %#v", unmarshalled, p.Field11))
 	}
 
 }
@@ -4309,7 +4369,10 @@ func TestCompiledNinRepPackedNativeSfixed32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field10) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field10 %v", unmarshalled, p.Field10))
+		if len(unmarshalled) == 0 && len(p.Field10) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field10 %#v", unmarshalled, p.Field10))
 	}
 
 }
@@ -4339,7 +4402,10 @@ func TestCompiledNinRepNativeSfixed32(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field10) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field10 %v", unmarshalled, p.Field10))
+		if len(unmarshalled) == 0 && len(p.Field10) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field10 %#v", unmarshalled, p.Field10))
 	}
 
 }
@@ -4701,7 +4767,10 @@ func TestCompiledNinRepPackedNativeSfixed64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field12) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field12 %v", unmarshalled, p.Field12))
+		if len(unmarshalled) == 0 && len(p.Field12) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field12 %#v", unmarshalled, p.Field12))
 	}
 
 }
@@ -4731,7 +4800,10 @@ func TestCompiledNinRepNativeSfixed64(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field12) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field12 %v", unmarshalled, p.Field12))
+		if len(unmarshalled) == 0 && len(p.Field12) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field12 %#v", unmarshalled, p.Field12))
 	}
 
 }
@@ -4869,7 +4941,10 @@ func TestCompiledNinRepPackedNativeBool(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field13) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field13 %v", unmarshalled, p.Field13))
+		if len(unmarshalled) == 0 && len(p.Field13) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field13 %#v", unmarshalled, p.Field13))
 	}
 
 }
@@ -4899,7 +4974,10 @@ func TestCompiledNinRepNativeBool(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field13) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field13 %v", unmarshalled, p.Field13))
+		if len(unmarshalled) == 0 && len(p.Field13) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field13 %#v", unmarshalled, p.Field13))
 	}
 
 }
@@ -5261,7 +5339,10 @@ func TestCompiledNinRepNativeString(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(unmarshalled, p.Field14) {
-		panic(fmt.Errorf("unmarshalled %v != p.Field14 %v", unmarshalled, p.Field14))
+		if len(unmarshalled) == 0 && len(p.Field14) == 0 {
+			return
+		}
+		panic(fmt.Errorf("unmarshalled %#v != p.Field14 %#v", unmarshalled, p.Field14))
 	}
 
 }

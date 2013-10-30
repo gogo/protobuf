@@ -116,6 +116,10 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 
 		p.P(`func `, localName, `Description() (desc *google_protobuf.FileDescriptorSet) {`)
 		p.In()
+		//Don't generate SourceCodeInfo, since it will create too much code.
+		for _, f := range p.Generator.AllFiles().GetFile() {
+			f.SourceCodeInfo = nil
+		}
 		s := fmt.Sprintf("%#v", p.Generator.AllFiles())
 		p.P(`return `, s)
 		p.Out()
