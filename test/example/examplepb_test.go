@@ -500,6 +500,7 @@ func TestUStringer(t *testing4.T) {
 func TestASize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -507,6 +508,13 @@ func TestASize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -528,6 +536,7 @@ func BenchmarkASize(b *testing5.B) {
 func TestBSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedB(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -535,6 +544,13 @@ func TestBSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -556,6 +572,7 @@ func BenchmarkBSize(b *testing5.B) {
 func TestUSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedU(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -563,6 +580,13 @@ func TestUSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 

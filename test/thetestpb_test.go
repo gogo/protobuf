@@ -5198,6 +5198,7 @@ func TestNestedScopeStringer(t *testing4.T) {
 func TestNidOptNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5205,6 +5206,13 @@ func TestNidOptNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5226,6 +5234,7 @@ func BenchmarkNidOptNativeSize(b *testing5.B) {
 func TestNinOptNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5233,6 +5242,13 @@ func TestNinOptNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5254,6 +5270,7 @@ func BenchmarkNinOptNativeSize(b *testing5.B) {
 func TestNidRepNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5261,6 +5278,13 @@ func TestNidRepNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5282,6 +5306,7 @@ func BenchmarkNidRepNativeSize(b *testing5.B) {
 func TestNinRepNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5289,6 +5314,13 @@ func TestNinRepNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5310,6 +5342,7 @@ func BenchmarkNinRepNativeSize(b *testing5.B) {
 func TestNidRepPackedNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5317,6 +5350,13 @@ func TestNidRepPackedNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5338,6 +5378,7 @@ func BenchmarkNidRepPackedNativeSize(b *testing5.B) {
 func TestNinRepPackedNativeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5345,6 +5386,13 @@ func TestNinRepPackedNativeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5366,6 +5414,7 @@ func BenchmarkNinRepPackedNativeSize(b *testing5.B) {
 func TestNidOptStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5373,6 +5422,13 @@ func TestNidOptStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5394,6 +5450,7 @@ func BenchmarkNidOptStructSize(b *testing5.B) {
 func TestNinOptStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5401,6 +5458,13 @@ func TestNinOptStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5422,6 +5486,7 @@ func BenchmarkNinOptStructSize(b *testing5.B) {
 func TestNidRepStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5429,6 +5494,13 @@ func TestNidRepStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5450,6 +5522,7 @@ func BenchmarkNidRepStructSize(b *testing5.B) {
 func TestNinRepStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5457,6 +5530,13 @@ func TestNinRepStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5478,6 +5558,7 @@ func BenchmarkNinRepStructSize(b *testing5.B) {
 func TestNidEmbeddedStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5485,6 +5566,13 @@ func TestNidEmbeddedStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5506,6 +5594,7 @@ func BenchmarkNidEmbeddedStructSize(b *testing5.B) {
 func TestNinEmbeddedStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5513,6 +5602,13 @@ func TestNinEmbeddedStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5534,6 +5630,7 @@ func BenchmarkNinEmbeddedStructSize(b *testing5.B) {
 func TestNidNestedStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5541,6 +5638,13 @@ func TestNidNestedStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5562,6 +5666,7 @@ func BenchmarkNidNestedStructSize(b *testing5.B) {
 func TestNinNestedStructSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5569,6 +5674,13 @@ func TestNinNestedStructSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5590,6 +5702,7 @@ func BenchmarkNinNestedStructSize(b *testing5.B) {
 func TestNidOptCustomSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5597,6 +5710,13 @@ func TestNidOptCustomSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5618,6 +5738,7 @@ func BenchmarkNidOptCustomSize(b *testing5.B) {
 func TestNinOptCustomSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5625,6 +5746,13 @@ func TestNinOptCustomSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5646,6 +5774,7 @@ func BenchmarkNinOptCustomSize(b *testing5.B) {
 func TestNidRepCustomSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5653,6 +5782,13 @@ func TestNidRepCustomSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5674,6 +5810,7 @@ func BenchmarkNidRepCustomSize(b *testing5.B) {
 func TestNinRepCustomSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5681,6 +5818,13 @@ func TestNinRepCustomSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5702,6 +5846,7 @@ func BenchmarkNinRepCustomSize(b *testing5.B) {
 func TestNinOptNativeUnionSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5709,6 +5854,13 @@ func TestNinOptNativeUnionSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5730,6 +5882,7 @@ func BenchmarkNinOptNativeUnionSize(b *testing5.B) {
 func TestNinOptStructUnionSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5737,6 +5890,13 @@ func TestNinOptStructUnionSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5758,6 +5918,7 @@ func BenchmarkNinOptStructUnionSize(b *testing5.B) {
 func TestNinEmbeddedStructUnionSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5765,6 +5926,13 @@ func TestNinEmbeddedStructUnionSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5786,6 +5954,7 @@ func BenchmarkNinEmbeddedStructUnionSize(b *testing5.B) {
 func TestNinNestedStructUnionSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5793,6 +5962,13 @@ func TestNinNestedStructUnionSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5814,6 +5990,7 @@ func BenchmarkNinNestedStructUnionSize(b *testing5.B) {
 func TestTreeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedTree(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5821,6 +5998,13 @@ func TestTreeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5842,6 +6026,7 @@ func BenchmarkTreeSize(b *testing5.B) {
 func TestOrBranchSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5849,6 +6034,13 @@ func TestOrBranchSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5870,6 +6062,7 @@ func BenchmarkOrBranchSize(b *testing5.B) {
 func TestAndBranchSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5877,6 +6070,13 @@ func TestAndBranchSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5898,6 +6098,7 @@ func BenchmarkAndBranchSize(b *testing5.B) {
 func TestLeafSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5905,6 +6106,13 @@ func TestLeafSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5926,6 +6134,7 @@ func BenchmarkLeafSize(b *testing5.B) {
 func TestDeepTreeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5933,6 +6142,13 @@ func TestDeepTreeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5954,6 +6170,7 @@ func BenchmarkDeepTreeSize(b *testing5.B) {
 func TestADeepBranchSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5961,6 +6178,13 @@ func TestADeepBranchSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -5982,6 +6206,7 @@ func BenchmarkADeepBranchSize(b *testing5.B) {
 func TestAndDeepBranchSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -5989,6 +6214,13 @@ func TestAndDeepBranchSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6010,6 +6242,7 @@ func BenchmarkAndDeepBranchSize(b *testing5.B) {
 func TestDeepLeafSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6017,6 +6250,13 @@ func TestDeepLeafSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6038,6 +6278,7 @@ func BenchmarkDeepLeafSize(b *testing5.B) {
 func TestNilSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNil(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6045,6 +6286,13 @@ func TestNilSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6066,6 +6314,7 @@ func BenchmarkNilSize(b *testing5.B) {
 func TestNidOptEnumSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6073,6 +6322,13 @@ func TestNidOptEnumSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6094,6 +6350,7 @@ func BenchmarkNidOptEnumSize(b *testing5.B) {
 func TestNinOptEnumSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6101,6 +6358,13 @@ func TestNinOptEnumSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6122,6 +6386,7 @@ func BenchmarkNinOptEnumSize(b *testing5.B) {
 func TestNidRepEnumSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6129,6 +6394,13 @@ func TestNidRepEnumSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6150,6 +6422,7 @@ func BenchmarkNidRepEnumSize(b *testing5.B) {
 func TestNinRepEnumSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6157,6 +6430,13 @@ func TestNinRepEnumSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6178,6 +6458,7 @@ func BenchmarkNinRepEnumSize(b *testing5.B) {
 func TestTimerSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6185,6 +6466,13 @@ func TestTimerSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6206,6 +6494,7 @@ func BenchmarkTimerSize(b *testing5.B) {
 func TestMyExtendableSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6213,6 +6502,13 @@ func TestMyExtendableSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6234,6 +6530,7 @@ func BenchmarkMyExtendableSize(b *testing5.B) {
 func TestOtherExtenableSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6241,6 +6538,13 @@ func TestOtherExtenableSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6262,6 +6566,7 @@ func BenchmarkOtherExtenableSize(b *testing5.B) {
 func TestNestedDefinitionSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6269,6 +6574,13 @@ func TestNestedDefinitionSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6290,6 +6602,7 @@ func BenchmarkNestedDefinitionSize(b *testing5.B) {
 func TestNestedDefinition_NestedMessageSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6297,6 +6610,13 @@ func TestNestedDefinition_NestedMessageSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6318,6 +6638,7 @@ func BenchmarkNestedDefinition_NestedMessageSize(b *testing5.B) {
 func TestNestedDefinition_NestedMessage_NestedNestedMsgSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6325,6 +6646,13 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -6346,6 +6674,7 @@ func BenchmarkNestedDefinition_NestedMessage_NestedNestedMsgSize(b *testing5.B) 
 func TestNestedScopeSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedNestedScope(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -6353,6 +6682,13 @@ func TestNestedScopeSize(t *testing5.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 

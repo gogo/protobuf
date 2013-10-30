@@ -502,6 +502,7 @@ func TestOldWithGroup_Group2Stringer(t *testing3.T) {
 func TestNewNoGroupSize(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -509,12 +510,20 @@ func TestNewNoGroupSize(t *testing4.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
 func TestASize(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
 	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
@@ -522,6 +531,13 @@ func TestASize(t *testing4.T) {
 	size := p.Size()
 	if len(data) != size {
 		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
