@@ -356,6 +356,13 @@ func (o *Buffer) unmarshalType(st reflect.Type, prop *StructProperties, is_group
 	var state errorState
 	required, reqFields := prop.reqCount, uint64(0)
 
+	for _, p := range prop.Prop {
+		if p.setDef == nil {
+			break
+		}
+		p.setDef(base, p)
+	}
+
 	var err error
 	for err == nil && o.index < len(o.buf) {
 		oi := o.index

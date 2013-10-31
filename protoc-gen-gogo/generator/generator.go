@@ -1308,6 +1308,24 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 			defaultValue = enum.integerValueAsString(defaultValue)
 		}
 		defaultValue = ",def=" + defaultValue
+	} else if *field.Type == descriptor.FieldDescriptorProto_TYPE_ENUM && !gogoproto.IsNullable(field) {
+		obj := g.ObjectNamed(field.GetTypeName())
+		if id, ok := obj.(*ImportedDescriptor); ok {
+			// It is an enum that was publicly imported.
+			// We need the underlying type.
+			obj = id.o
+		}
+		enum, ok := obj.(*EnumDescriptor)
+		if !ok {
+			log.Printf("obj is a %T", obj)
+			if id, ok := obj.(*ImportedDescriptor); ok {
+				log.Printf("id.o is a %T", id.o)
+			}
+			g.Fail("unknown enum type", CamelCaseSlice(obj.TypeName()))
+		}
+		if enum.Value[0].GetNumber() != 0 {
+			defaultValue = fmt.Sprintf(",def=%d", enum.Value[0].GetNumber())
+		}
 	}
 	enum := ""
 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_ENUM {

@@ -184,6 +184,8 @@ type Properties struct {
 
 	// If this is a packable field, this will be the decoder for the packed version of the field.
 	packedDec decoder
+
+	setDef setDefaultFunc
 }
 
 // String formats the properties in the protobuf struct field tag style.

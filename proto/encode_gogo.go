@@ -138,6 +138,7 @@ func size_ref_string(p *Properties, base structPointer) (n int) {
 
 // Encode a reference to a message struct.
 func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error {
+	var state errorState
 	structp := structPointer_GetRefStructPointer(base, p.field)
 	if structPointer_IsNil(structp) {
 		return ErrNil
@@ -147,7 +148,7 @@ func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error
 	if p.isMarshaler {
 		m := structPointer_Interface(structp, p.stype).(Marshaler)
 		data, err := m.Marshal()
-		if err != nil {
+		if err != nil && !state.shouldContinue(err, nil) {
 			return err
 		}
 		o.buf = append(o.buf, p.tagcode...)
@@ -164,7 +165,7 @@ func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error
 
 	nbuf := o.buf
 	o.buf = obuf
-	if err != nil {
+	if err != nil && !state.shouldContinue(err, nil) {
 		o.buffree(nbuf)
 		return err
 	}
@@ -198,6 +199,7 @@ func size_ref_struct_message(p *Properties, base structPointer) int {
 
 // Encode a slice of references to message struct pointers ([]struct).
 func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer) error {
+	var state errorState
 	ss := structPointer_GetStructPointer(base, p.field)
 	ss1 := structPointer_GetRefStructPointer(ss, field(0))
 	size := p.stype.Size()
@@ -212,7 +214,7 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 		if p.isMarshaler {
 			m := structPointer_Interface(structp, p.stype).(Marshaler)
 			data, err := m.Marshal()
-			if err != nil {
+			if err != nil && !state.shouldContinue(err, nil) {
 				return err
 			}
 			o.buf = append(o.buf, p.tagcode...)
@@ -227,7 +229,7 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 
 		nbuf := o.buf
 		o.buf = obuf
-		if err != nil {
+		if err != nil && !state.shouldContinue(err, nil) {
 			o.buffree(nbuf)
 			if err == ErrNil {
 				return ErrRepeatedHasNil
