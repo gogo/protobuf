@@ -143,6 +143,9 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.In()
 		for _, field := range message.Field {
 			fieldname := generator.CamelCase(*field.Name)
+			if fieldname == "Value" {
+				panic("cannot have a union message " + ccTypeName + " with a field named Value")
+			}
 			if field.IsMessage() && gogoproto.IsEmbed(field) {
 				goTyp, _ := p.GoType(message, field)
 				fieldname = generator.GoTypeToName(goTyp)

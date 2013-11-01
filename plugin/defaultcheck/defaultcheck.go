@@ -25,12 +25,16 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The nullablecheck plugin is used to check whether nullable is not used incorrectly.
+The defaultcheck plugin is used to check whether nullable is not used incorrectly.
 For instance:
 An error is caused if a nullable field:
   - has a default value.
   - is an enum which does not start at zero.
   - is used for an extension.
+
+An error is also caused if a field with a default value is used in a message:
+  - which is a face.
+  - without getters.
 
 It is enabled by the following extensions:
 
@@ -41,7 +45,7 @@ For incorrect usage of nullable with tests see:
   code.google.com/p/gogoprotobuf/test/nullableconflict
 
 */
-package nullablecheck
+package defaultcheck
 
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
@@ -59,7 +63,7 @@ func NewPlugin() *plugin {
 }
 
 func (p *plugin) Name() string {
-	return "nullablecheck"
+	return "defaultcheck"
 }
 
 func (p *plugin) Init(g *generator.Generator) {
@@ -68,7 +72,19 @@ func (p *plugin) Init(g *generator.Generator) {
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
 	for _, msg := range file.Messages() {
+		getters := gogoproto.HasGoGetters(file.FileDescriptorProto, msg.DescriptorProto)
+		face := gogoproto.IsFace(file.FileDescriptorProto, msg.DescriptorProto)
 		for _, field := range msg.GetField() {
+			if len(field.GetDefaultValue()) > 0 {
+				if !getters {
+					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot have a default value and not have a getter method", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+					os.Exit(1)
+				}
+				if face {
+					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot have a default value be in a face", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+					os.Exit(1)
+				}
+			}
 			if gogoproto.IsNullable(field) {
 				continue
 			}

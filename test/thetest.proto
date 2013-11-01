@@ -358,6 +358,28 @@ message NinRepEnum {
 	repeated TheTestEnum Field1 = 1;
 }
 
+message NinOptEnumDefault {
+	option (gogoproto.goproto_getters) = true;
+	option (gogoproto.face) = false;
+	optional TheTestEnum Field1 = 1  [default=C];
+}
+
+enum AnotherTestEnum {
+	option (gogoproto.goproto_enum_prefix) = false;
+    D = 10;
+    E = 11;
+}
+
+message AnotherNinOptEnum {
+	optional AnotherTestEnum Field1 = 1;
+}
+
+message AnotherNinOptEnumDefault {
+	option (gogoproto.goproto_getters) = true;
+	option (gogoproto.face) = false;
+	optional AnotherTestEnum Field1 = 1 [default=E];
+}
+
 message Timer {
 	optional sfixed64 Time1 = 1 [(gogoproto.nullable) = false];
 	optional sfixed64 Time2 = 2 [(gogoproto.nullable) = false];
@@ -407,3 +429,24 @@ message NestedScope {
 	optional NestedDefinition.NestedEnum B = 2;
 	optional NestedDefinition.NestedMessage C = 3;
 }
+
+message NinOptNativeDefault {
+	option (gogoproto.goproto_getters) = true;
+	option (gogoproto.face) = false;
+	optional double Field1 = 1 [default = 1234.1234];
+	optional float Field2 = 2 [default = 1234.1234];
+	optional int32 Field3 = 3 [default = 1234];
+	optional int64 Field4 = 4 [default = 1234];
+	optional uint32 Field5 = 5 [default = 1234];
+	optional uint64 Field6 = 6 [default = 1234];
+	optional sint32 Field7 = 7 [default = 1234];
+	optional sint64 Field8 = 8 [default = 1234];
+	optional fixed32 Field9 = 9 [default = 1234];
+	optional sfixed32 Field10 = 10 [default = 1234];
+	optional fixed64 Field11 = 11 [default = 1234];
+	optional sfixed64 Field12 = 12 [default = 1234];
+	optional bool Field13 = 13 [default = true];
+	optional string Field14 = 14 [default = "1234"];
+	optional bytes Field15 = 15;
+}
+

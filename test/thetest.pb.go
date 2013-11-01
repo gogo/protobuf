@@ -77,6 +77,39 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type AnotherTestEnum int32
+
+const (
+	D AnotherTestEnum = 10
+	E AnotherTestEnum = 11
+)
+
+var AnotherTestEnum_name = map[int32]string{
+	10: "D",
+	11: "E",
+}
+var AnotherTestEnum_value = map[string]int32{
+	"D": 10,
+	"E": 11,
+}
+
+func (x AnotherTestEnum) Enum() *AnotherTestEnum {
+	p := new(AnotherTestEnum)
+	*p = x
+	return p
+}
+func (x AnotherTestEnum) MarshalJSON() ([]byte, error) {
+	return proto.MarshalJSONEnum(AnotherTestEnum_name, int32(x))
+}
+func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, data, "AnotherTestEnum")
+	if err != nil {
+		return err
+	}
+	*x = AnotherTestEnum(value)
+	return nil
+}
+
 type NestedDefinition_NestedEnum int32
 
 const (
@@ -540,6 +573,48 @@ type NinRepEnum struct {
 func (m *NinRepEnum) Reset()      { *m = NinRepEnum{} }
 func (*NinRepEnum) ProtoMessage() {}
 
+type NinOptEnumDefault struct {
+	Field1           *TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
+	XXX_unrecognized []byte       `json:"-"`
+}
+
+func (m *NinOptEnumDefault) Reset()      { *m = NinOptEnumDefault{} }
+func (*NinOptEnumDefault) ProtoMessage() {}
+
+const Default_NinOptEnumDefault_Field1 TheTestEnum = C
+
+func (m *NinOptEnumDefault) GetField1() TheTestEnum {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
+	}
+	return Default_NinOptEnumDefault_Field1
+}
+
+type AnotherNinOptEnum struct {
+	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
+	XXX_unrecognized []byte           `json:"-"`
+}
+
+func (m *AnotherNinOptEnum) Reset()      { *m = AnotherNinOptEnum{} }
+func (*AnotherNinOptEnum) ProtoMessage() {}
+
+type AnotherNinOptEnumDefault struct {
+	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
+	XXX_unrecognized []byte           `json:"-"`
+}
+
+func (m *AnotherNinOptEnumDefault) Reset()      { *m = AnotherNinOptEnumDefault{} }
+func (*AnotherNinOptEnumDefault) ProtoMessage() {}
+
+const Default_AnotherNinOptEnumDefault_Field1 AnotherTestEnum = E
+
+func (m *AnotherNinOptEnumDefault) GetField1() AnotherTestEnum {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
+	}
+	return Default_AnotherNinOptEnumDefault_Field1
+}
+
 type Timer struct {
 	Time1            int64  `protobuf:"fixed64,1,opt" json:"Time1"`
 	Time2            int64  `protobuf:"fixed64,2,opt" json:"Time2"`
@@ -639,6 +714,148 @@ type NestedScope struct {
 func (m *NestedScope) Reset()      { *m = NestedScope{} }
 func (*NestedScope) ProtoMessage() {}
 
+type NinOptNativeDefault struct {
+	Field1           *float64 `protobuf:"fixed64,1,opt,def=1234.1234" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,def=1234.1234" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,def=1234" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,def=1234" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,def=1234" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,def=1234" json:"Field6,omitempty"`
+	Field7           *int32   `protobuf:"zigzag32,7,opt,def=1234" json:"Field7,omitempty"`
+	Field8           *int64   `protobuf:"zigzag64,8,opt,def=1234" json:"Field8,omitempty"`
+	Field9           *uint32  `protobuf:"fixed32,9,opt,def=1234" json:"Field9,omitempty"`
+	Field10          *int32   `protobuf:"fixed32,10,opt,def=1234" json:"Field10,omitempty"`
+	Field11          *uint64  `protobuf:"fixed64,11,opt,def=1234" json:"Field11,omitempty"`
+	Field12          *int64   `protobuf:"fixed64,12,opt,def=1234" json:"Field12,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,def=1" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,def=1234" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *NinOptNativeDefault) Reset()      { *m = NinOptNativeDefault{} }
+func (*NinOptNativeDefault) ProtoMessage() {}
+
+const Default_NinOptNativeDefault_Field1 float64 = 1234.1234
+const Default_NinOptNativeDefault_Field2 float32 = 1234.1234
+const Default_NinOptNativeDefault_Field3 int32 = 1234
+const Default_NinOptNativeDefault_Field4 int64 = 1234
+const Default_NinOptNativeDefault_Field5 uint32 = 1234
+const Default_NinOptNativeDefault_Field6 uint64 = 1234
+const Default_NinOptNativeDefault_Field7 int32 = 1234
+const Default_NinOptNativeDefault_Field8 int64 = 1234
+const Default_NinOptNativeDefault_Field9 uint32 = 1234
+const Default_NinOptNativeDefault_Field10 int32 = 1234
+const Default_NinOptNativeDefault_Field11 uint64 = 1234
+const Default_NinOptNativeDefault_Field12 int64 = 1234
+const Default_NinOptNativeDefault_Field13 bool = true
+const Default_NinOptNativeDefault_Field14 string = "1234"
+
+func (m *NinOptNativeDefault) GetField1() float64 {
+	if m != nil && m.Field1 != nil {
+		return *m.Field1
+	}
+	return Default_NinOptNativeDefault_Field1
+}
+
+func (m *NinOptNativeDefault) GetField2() float32 {
+	if m != nil && m.Field2 != nil {
+		return *m.Field2
+	}
+	return Default_NinOptNativeDefault_Field2
+}
+
+func (m *NinOptNativeDefault) GetField3() int32 {
+	if m != nil && m.Field3 != nil {
+		return *m.Field3
+	}
+	return Default_NinOptNativeDefault_Field3
+}
+
+func (m *NinOptNativeDefault) GetField4() int64 {
+	if m != nil && m.Field4 != nil {
+		return *m.Field4
+	}
+	return Default_NinOptNativeDefault_Field4
+}
+
+func (m *NinOptNativeDefault) GetField5() uint32 {
+	if m != nil && m.Field5 != nil {
+		return *m.Field5
+	}
+	return Default_NinOptNativeDefault_Field5
+}
+
+func (m *NinOptNativeDefault) GetField6() uint64 {
+	if m != nil && m.Field6 != nil {
+		return *m.Field6
+	}
+	return Default_NinOptNativeDefault_Field6
+}
+
+func (m *NinOptNativeDefault) GetField7() int32 {
+	if m != nil && m.Field7 != nil {
+		return *m.Field7
+	}
+	return Default_NinOptNativeDefault_Field7
+}
+
+func (m *NinOptNativeDefault) GetField8() int64 {
+	if m != nil && m.Field8 != nil {
+		return *m.Field8
+	}
+	return Default_NinOptNativeDefault_Field8
+}
+
+func (m *NinOptNativeDefault) GetField9() uint32 {
+	if m != nil && m.Field9 != nil {
+		return *m.Field9
+	}
+	return Default_NinOptNativeDefault_Field9
+}
+
+func (m *NinOptNativeDefault) GetField10() int32 {
+	if m != nil && m.Field10 != nil {
+		return *m.Field10
+	}
+	return Default_NinOptNativeDefault_Field10
+}
+
+func (m *NinOptNativeDefault) GetField11() uint64 {
+	if m != nil && m.Field11 != nil {
+		return *m.Field11
+	}
+	return Default_NinOptNativeDefault_Field11
+}
+
+func (m *NinOptNativeDefault) GetField12() int64 {
+	if m != nil && m.Field12 != nil {
+		return *m.Field12
+	}
+	return Default_NinOptNativeDefault_Field12
+}
+
+func (m *NinOptNativeDefault) GetField13() bool {
+	if m != nil && m.Field13 != nil {
+		return *m.Field13
+	}
+	return Default_NinOptNativeDefault_Field13
+}
+
+func (m *NinOptNativeDefault) GetField14() string {
+	if m != nil && m.Field14 != nil {
+		return *m.Field14
+	}
+	return Default_NinOptNativeDefault_Field14
+}
+
+func (m *NinOptNativeDefault) GetField15() []byte {
+	if m != nil {
+		return m.Field15
+	}
+	return nil
+}
+
 var E_FieldA = &proto.ExtensionDesc{
 	ExtendedType:  (*MyExtendable)(nil),
 	ExtensionType: (*float64)(nil),
@@ -665,6 +882,7 @@ var E_FieldC = &proto.ExtensionDesc{
 
 func init() {
 	proto.RegisterEnum("test.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
+	proto.RegisterEnum("test.AnotherTestEnum", AnotherTestEnum_name, AnotherTestEnum_value)
 	proto.RegisterEnum("test.NestedDefinition_NestedEnum", NestedDefinition_NestedEnum_name, NestedDefinition_NestedEnum_value)
 	proto.RegisterExtension(E_FieldA)
 	proto.RegisterExtension(E_FieldB)
@@ -1439,6 +1657,39 @@ func (this *NinRepEnum) String() string {
 	}, "")
 	return s
 }
+func (this *NinOptEnumDefault) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NinOptEnumDefault{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AnotherNinOptEnum) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AnotherNinOptEnum{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AnotherNinOptEnumDefault) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AnotherNinOptEnumDefault{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *Timer) String() string {
 	if this == nil {
 		return "nil"
@@ -1523,6 +1774,31 @@ func (this *NestedScope) String() string {
 		`A:` + strings.Replace(fmt.Sprintf("%v", this.A), "NestedDefinition_NestedMessage_NestedNestedMsg", "NestedDefinition_NestedMessage_NestedNestedMsg", 1) + `,`,
 		`B:` + valueToStringThetest(this.B) + `,`,
 		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "NestedDefinition_NestedMessage", "NestedDefinition_NestedMessage", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *NinOptNativeDefault) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&NinOptNativeDefault{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
+		`Field3:` + valueToStringThetest(this.Field3) + `,`,
+		`Field4:` + valueToStringThetest(this.Field4) + `,`,
+		`Field5:` + valueToStringThetest(this.Field5) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field7:` + valueToStringThetest(this.Field7) + `,`,
+		`Field8:` + valueToStringThetest(this.Field8) + `,`,
+		`Field9:` + valueToStringThetest(this.Field9) + `,`,
+		`Field10:` + valueToStringThetest(this.Field10) + `,`,
+		`Field11:` + valueToStringThetest(this.Field11) + `,`,
+		`Field12:` + valueToStringThetest(this.Field12) + `,`,
+		`Field13:` + valueToStringThetest(this.Field13) + `,`,
+		`Field14:` + valueToStringThetest(this.Field14) + `,`,
+		`Field15:` + valueToStringThetest(this.Field15) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -2492,6 +2768,39 @@ func (m *NinRepEnum) Size() (n int) {
 	}
 	return n
 }
+func (m *NinOptEnumDefault) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *AnotherNinOptEnum) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *AnotherNinOptEnumDefault) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
 func (m *Timer) Size() (n int) {
 	var l int
 	_ = l
@@ -2600,6 +2909,61 @@ func (m *NestedScope) Size() (n int) {
 	}
 	if m.C != nil {
 		l = m.C.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *NinOptNativeDefault) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		n += 1 + sovThetest(uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		n += 1 + sovThetest(uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		n += 1 + sovThetest(uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovThetest(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 1 + sozThetest(uint64(*m.Field7))
+	}
+	if m.Field8 != nil {
+		n += 1 + sozThetest(uint64(*m.Field8))
+	}
+	if m.Field9 != nil {
+		n += 5
+	}
+	if m.Field10 != nil {
+		n += 5
+	}
+	if m.Field11 != nil {
+		n += 9
+	}
+	if m.Field12 != nil {
+		n += 9
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len(*m.Field14)
+		n += 1 + l + sovThetest(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
 		n += 1 + l + sovThetest(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
@@ -3790,13 +4154,49 @@ func NewPopulatedNinRepEnum(r randyThetest, easy bool) *NinRepEnum {
 	return this
 }
 
+func NewPopulatedNinOptEnumDefault(r randyThetest, easy bool) *NinOptEnumDefault {
+	this := &NinOptEnumDefault{}
+	if r.Intn(10) != 0 {
+		v155 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		this.Field1 = &v155
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedAnotherNinOptEnum(r randyThetest, easy bool) *AnotherNinOptEnum {
+	this := &AnotherNinOptEnum{}
+	if r.Intn(10) != 0 {
+		v156 := AnotherTestEnum([]int32{10, 11}[r.Intn(2)])
+		this.Field1 = &v156
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedAnotherNinOptEnumDefault(r randyThetest, easy bool) *AnotherNinOptEnumDefault {
+	this := &AnotherNinOptEnumDefault{}
+	if r.Intn(10) != 0 {
+		v157 := AnotherTestEnum([]int32{10, 11}[r.Intn(2)])
+		this.Field1 = &v157
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
+	return this
+}
+
 func NewPopulatedTimer(r randyThetest, easy bool) *Timer {
 	this := &Timer{}
 	this.Time1 = r.Int63()
 	this.Time2 = r.Int63()
-	v155 := r.Intn(100)
-	this.Data = make([]byte, v155)
-	for i := 0; i < v155; i++ {
+	v158 := r.Intn(100)
+	this.Data = make([]byte, v158)
+	for i := 0; i < v158; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -3808,8 +4208,8 @@ func NewPopulatedTimer(r randyThetest, easy bool) *Timer {
 func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 	this := &MyExtendable{}
 	if r.Intn(10) != 0 {
-		v156 := r.Int63()
-		this.Field1 = &v156
+		v159 := r.Int63()
+		this.Field1 = &v159
 	}
 	if !easy && r.Intn(10) != 0 {
 		l := r.Intn(5)
@@ -3832,12 +4232,12 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 	this := &OtherExtenable{}
 	if r.Intn(10) != 0 {
-		v157 := r.Int63()
-		this.Field2 = &v157
+		v160 := r.Int63()
+		this.Field2 = &v160
 	}
 	if r.Intn(10) != 0 {
-		v158 := r.Int63()
-		this.Field13 = &v158
+		v161 := r.Int63()
+		this.Field13 = &v161
 	}
 	if r.Intn(10) != 0 {
 		this.M = NewPopulatedMyExtendable(r, easy)
@@ -3870,12 +4270,12 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 func NewPopulatedNestedDefinition(r randyThetest, easy bool) *NestedDefinition {
 	this := &NestedDefinition{}
 	if r.Intn(10) != 0 {
-		v159 := r.Int63()
-		this.Field1 = &v159
+		v162 := r.Int63()
+		this.Field1 = &v162
 	}
 	if r.Intn(10) != 0 {
-		v160 := NestedDefinition_NestedEnum([]int32{1}[r.Intn(1)])
-		this.EnumField = &v160
+		v163 := NestedDefinition_NestedEnum([]int32{1}[r.Intn(1)])
+		this.EnumField = &v163
 	}
 	if r.Intn(10) != 0 {
 		this.NNM = NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(r, easy)
@@ -3892,8 +4292,8 @@ func NewPopulatedNestedDefinition(r randyThetest, easy bool) *NestedDefinition {
 func NewPopulatedNestedDefinition_NestedMessage(r randyThetest, easy bool) *NestedDefinition_NestedMessage {
 	this := &NestedDefinition_NestedMessage{}
 	if r.Intn(10) != 0 {
-		v161 := uint64(r.Uint32())
-		this.NestedField1 = &v161
+		v164 := uint64(r.Uint32())
+		this.NestedField1 = &v164
 	}
 	if r.Intn(10) != 0 {
 		this.NNM = NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(r, easy)
@@ -3907,8 +4307,8 @@ func NewPopulatedNestedDefinition_NestedMessage(r randyThetest, easy bool) *Nest
 func NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(r randyThetest, easy bool) *NestedDefinition_NestedMessage_NestedNestedMsg {
 	this := &NestedDefinition_NestedMessage_NestedNestedMsg{}
 	if r.Intn(10) != 0 {
-		v162 := randStringThetest(r)
-		this.NestedNestedField1 = &v162
+		v165 := randStringThetest(r)
+		this.NestedNestedField1 = &v165
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 11)
@@ -3922,14 +4322,85 @@ func NewPopulatedNestedScope(r randyThetest, easy bool) *NestedScope {
 		this.A = NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		v163 := NestedDefinition_NestedEnum([]int32{1}[r.Intn(1)])
-		this.B = &v163
+		v166 := NestedDefinition_NestedEnum([]int32{1}[r.Intn(1)])
+		this.B = &v166
 	}
 	if r.Intn(10) != 0 {
 		this.C = NewPopulatedNestedDefinition_NestedMessage(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 4)
+	}
+	return this
+}
+
+func NewPopulatedNinOptNativeDefault(r randyThetest, easy bool) *NinOptNativeDefault {
+	this := &NinOptNativeDefault{}
+	if r.Intn(10) != 0 {
+		v167 := r.Float64()
+		this.Field1 = &v167
+	}
+	if r.Intn(10) != 0 {
+		v168 := r.Float32()
+		this.Field2 = &v168
+	}
+	if r.Intn(10) != 0 {
+		v169 := r.Int31()
+		this.Field3 = &v169
+	}
+	if r.Intn(10) != 0 {
+		v170 := r.Int63()
+		this.Field4 = &v170
+	}
+	if r.Intn(10) != 0 {
+		v171 := r.Uint32()
+		this.Field5 = &v171
+	}
+	if r.Intn(10) != 0 {
+		v172 := uint64(r.Uint32())
+		this.Field6 = &v172
+	}
+	if r.Intn(10) != 0 {
+		v173 := r.Int31()
+		this.Field7 = &v173
+	}
+	if r.Intn(10) != 0 {
+		v174 := r.Int63()
+		this.Field8 = &v174
+	}
+	if r.Intn(10) != 0 {
+		v175 := r.Uint32()
+		this.Field9 = &v175
+	}
+	if r.Intn(10) != 0 {
+		v176 := r.Int31()
+		this.Field10 = &v176
+	}
+	if r.Intn(10) != 0 {
+		v177 := uint64(r.Uint32())
+		this.Field11 = &v177
+	}
+	if r.Intn(10) != 0 {
+		v178 := r.Int63()
+		this.Field12 = &v178
+	}
+	if r.Intn(10) != 0 {
+		v179 := bool(r.Intn(2) == 0)
+		this.Field13 = &v179
+	}
+	if r.Intn(10) != 0 {
+		v180 := randStringThetest(r)
+		this.Field14 = &v180
+	}
+	if r.Intn(10) != 0 {
+		v181 := r.Intn(100)
+		this.Field15 = make([]byte, v181)
+		for i := 0; i < v181; i++ {
+			this.Field15[i] = byte(r.Intn(256))
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 16)
 	}
 	return this
 }
@@ -3951,9 +4422,9 @@ func randUTF8RuneThetest(r randyThetest) rune {
 	return res
 }
 func randStringThetest(r randyThetest) string {
-	v164 := r.Intn(100)
-	tmps := make([]rune, v164)
-	for i := 0; i < v164; i++ {
+	v182 := r.Intn(100)
+	tmps := make([]rune, v182)
+	for i := 0; i < v182; i++ {
 		tmps[i] = randUTF8RuneThetest(r)
 	}
 	return string(tmps)
@@ -4245,6 +4716,27 @@ func (this *NinRepEnum) GoString() string {
 	s := strings1.Join([]string{`&test.NinRepEnum{` + `Field1:` + fmt1.Sprintf("%#v", this.Field1), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
+func (this *NinOptEnumDefault) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NinOptEnumDefault{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.TheTestEnum"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *AnotherNinOptEnum) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.AnotherNinOptEnum{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.AnotherTestEnum"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *AnotherNinOptEnumDefault) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.AnotherNinOptEnumDefault{` + `Field1:` + valueToGoStringThetest(this.Field1, "test.AnotherTestEnum"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
 func (this *Timer) GoString() string {
 	if this == nil {
 		return "nil"
@@ -4292,6 +4784,13 @@ func (this *NestedScope) GoString() string {
 		return "nil"
 	}
 	s := strings1.Join([]string{`&test.NestedScope{` + `A:` + fmt1.Sprintf("%#v", this.A), `B:` + valueToGoStringThetest(this.B, "test.NestedDefinition_NestedEnum"), `C:` + fmt1.Sprintf("%#v", this.C), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *NinOptNativeDefault) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.NinOptNativeDefault{` + `Field1:` + valueToGoStringThetest(this.Field1, "float64"), `Field2:` + valueToGoStringThetest(this.Field2, "float32"), `Field3:` + valueToGoStringThetest(this.Field3, "int32"), `Field4:` + valueToGoStringThetest(this.Field4, "int64"), `Field5:` + valueToGoStringThetest(this.Field5, "uint32"), `Field6:` + valueToGoStringThetest(this.Field6, "uint64"), `Field7:` + valueToGoStringThetest(this.Field7, "int32"), `Field8:` + valueToGoStringThetest(this.Field8, "int64"), `Field9:` + valueToGoStringThetest(this.Field9, "uint32"), `Field10:` + valueToGoStringThetest(this.Field10, "int32"), `Field11:` + valueToGoStringThetest(this.Field11, "uint64"), `Field12:` + valueToGoStringThetest(this.Field12, "int64"), `Field13:` + valueToGoStringThetest(this.Field13, "bool"), `Field14:` + valueToGoStringThetest(this.Field14, "string"), `Field15:` + valueToGoStringThetest(this.Field15, "byte"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringThetest(v interface{}, typ string) string {
@@ -6039,6 +6538,29 @@ func (this *NinRepEnum) GetField1() []TheTestEnum {
 
 func NewNinRepEnumFromFace(that NinRepEnumFace) *NinRepEnum {
 	this := &NinRepEnum{}
+	this.Field1 = that.GetField1()
+	return this
+}
+
+type AnotherNinOptEnumFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	GetField1() *AnotherTestEnum
+}
+
+func (this *AnotherNinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+	return this
+}
+
+func (this *AnotherNinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+	return NewAnotherNinOptEnumFromFace(this)
+}
+
+func (this *AnotherNinOptEnum) GetField1() *AnotherTestEnum {
+	return this.Field1
+}
+
+func NewAnotherNinOptEnumFromFace(that AnotherNinOptEnumFace) *AnotherNinOptEnum {
+	this := &AnotherNinOptEnum{}
 	this.Field1 = that.GetField1()
 	return this
 }
@@ -10384,6 +10906,210 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *NinOptEnumDefault) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NinOptEnumDefault)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NinOptEnumDefault")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NinOptEnumDefault but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NinOptEnumDefaultbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *NinOptEnumDefault) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NinOptEnumDefault)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *AnotherNinOptEnum) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*AnotherNinOptEnum)
+	if !ok {
+		return fmt2.Errorf("that is not of type *AnotherNinOptEnum")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *AnotherNinOptEnum but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *AnotherNinOptEnumbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *AnotherNinOptEnum) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*AnotherNinOptEnum)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *AnotherNinOptEnumDefault) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*AnotherNinOptEnumDefault)
+	if !ok {
+		return fmt2.Errorf("that is not of type *AnotherNinOptEnumDefault")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *AnotherNinOptEnumDefault but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *AnotherNinOptEnumDefaultbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *AnotherNinOptEnumDefault) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*AnotherNinOptEnumDefault)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func (this *Timer) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -10988,8 +11714,323 @@ func (this *NestedScope) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *NinOptNativeDefault) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*NinOptNativeDefault)
+	if !ok {
+		return fmt2.Errorf("that is not of type *NinOptNativeDefault")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *NinOptNativeDefault but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *NinOptNativeDefaultbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+		}
+	} else if this.Field2 != nil {
+		return fmt2.Errorf("this.Field2 == nil && that.Field2 != nil")
+	} else if that1.Field2 != nil {
+		return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+		}
+	} else if this.Field3 != nil {
+		return fmt2.Errorf("this.Field3 == nil && that.Field3 != nil")
+	} else if that1.Field3 != nil {
+		return fmt2.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return fmt2.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
+		}
+	} else if this.Field4 != nil {
+		return fmt2.Errorf("this.Field4 == nil && that.Field4 != nil")
+	} else if that1.Field4 != nil {
+		return fmt2.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
+	}
+	if this.Field5 != nil && that1.Field5 != nil {
+		if *this.Field5 != *that1.Field5 {
+			return fmt2.Errorf("Field5 this(%v) Not Equal that(%v)", *this.Field5, *that1.Field5)
+		}
+	} else if this.Field5 != nil {
+		return fmt2.Errorf("this.Field5 == nil && that.Field5 != nil")
+	} else if that1.Field5 != nil {
+		return fmt2.Errorf("Field5 this(%v) Not Equal that(%v)", this.Field5, that1.Field5)
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+		}
+	} else if this.Field6 != nil {
+		return fmt2.Errorf("this.Field6 == nil && that.Field6 != nil")
+	} else if that1.Field6 != nil {
+		return fmt2.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", *this.Field7, *that1.Field7)
+		}
+	} else if this.Field7 != nil {
+		return fmt2.Errorf("this.Field7 == nil && that.Field7 != nil")
+	} else if that1.Field7 != nil {
+		return fmt2.Errorf("Field7 this(%v) Not Equal that(%v)", this.Field7, that1.Field7)
+	}
+	if this.Field8 != nil && that1.Field8 != nil {
+		if *this.Field8 != *that1.Field8 {
+			return fmt2.Errorf("Field8 this(%v) Not Equal that(%v)", *this.Field8, *that1.Field8)
+		}
+	} else if this.Field8 != nil {
+		return fmt2.Errorf("this.Field8 == nil && that.Field8 != nil")
+	} else if that1.Field8 != nil {
+		return fmt2.Errorf("Field8 this(%v) Not Equal that(%v)", this.Field8, that1.Field8)
+	}
+	if this.Field9 != nil && that1.Field9 != nil {
+		if *this.Field9 != *that1.Field9 {
+			return fmt2.Errorf("Field9 this(%v) Not Equal that(%v)", *this.Field9, *that1.Field9)
+		}
+	} else if this.Field9 != nil {
+		return fmt2.Errorf("this.Field9 == nil && that.Field9 != nil")
+	} else if that1.Field9 != nil {
+		return fmt2.Errorf("Field9 this(%v) Not Equal that(%v)", this.Field9, that1.Field9)
+	}
+	if this.Field10 != nil && that1.Field10 != nil {
+		if *this.Field10 != *that1.Field10 {
+			return fmt2.Errorf("Field10 this(%v) Not Equal that(%v)", *this.Field10, *that1.Field10)
+		}
+	} else if this.Field10 != nil {
+		return fmt2.Errorf("this.Field10 == nil && that.Field10 != nil")
+	} else if that1.Field10 != nil {
+		return fmt2.Errorf("Field10 this(%v) Not Equal that(%v)", this.Field10, that1.Field10)
+	}
+	if this.Field11 != nil && that1.Field11 != nil {
+		if *this.Field11 != *that1.Field11 {
+			return fmt2.Errorf("Field11 this(%v) Not Equal that(%v)", *this.Field11, *that1.Field11)
+		}
+	} else if this.Field11 != nil {
+		return fmt2.Errorf("this.Field11 == nil && that.Field11 != nil")
+	} else if that1.Field11 != nil {
+		return fmt2.Errorf("Field11 this(%v) Not Equal that(%v)", this.Field11, that1.Field11)
+	}
+	if this.Field12 != nil && that1.Field12 != nil {
+		if *this.Field12 != *that1.Field12 {
+			return fmt2.Errorf("Field12 this(%v) Not Equal that(%v)", *this.Field12, *that1.Field12)
+		}
+	} else if this.Field12 != nil {
+		return fmt2.Errorf("this.Field12 == nil && that.Field12 != nil")
+	} else if that1.Field12 != nil {
+		return fmt2.Errorf("Field12 this(%v) Not Equal that(%v)", this.Field12, that1.Field12)
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			return fmt2.Errorf("Field13 this(%v) Not Equal that(%v)", *this.Field13, *that1.Field13)
+		}
+	} else if this.Field13 != nil {
+		return fmt2.Errorf("this.Field13 == nil && that.Field13 != nil")
+	} else if that1.Field13 != nil {
+		return fmt2.Errorf("Field13 this(%v) Not Equal that(%v)", this.Field13, that1.Field13)
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			return fmt2.Errorf("Field14 this(%v) Not Equal that(%v)", *this.Field14, *that1.Field14)
+		}
+	} else if this.Field14 != nil {
+		return fmt2.Errorf("this.Field14 == nil && that.Field14 != nil")
+	} else if that1.Field14 != nil {
+		return fmt2.Errorf("Field14 this(%v) Not Equal that(%v)", this.Field14, that1.Field14)
+	}
+	if !bytes.Equal(this.Field15, that1.Field15) {
+		return fmt2.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *NinOptNativeDefault) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*NinOptNativeDefault)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return false
+		}
+	} else if this.Field2 != nil {
+		return false
+	} else if that1.Field2 != nil {
+		return false
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return false
+		}
+	} else if this.Field3 != nil {
+		return false
+	} else if that1.Field3 != nil {
+		return false
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return false
+		}
+	} else if this.Field4 != nil {
+		return false
+	} else if that1.Field4 != nil {
+		return false
+	}
+	if this.Field5 != nil && that1.Field5 != nil {
+		if *this.Field5 != *that1.Field5 {
+			return false
+		}
+	} else if this.Field5 != nil {
+		return false
+	} else if that1.Field5 != nil {
+		return false
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return false
+		}
+	} else if this.Field6 != nil {
+		return false
+	} else if that1.Field6 != nil {
+		return false
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			return false
+		}
+	} else if this.Field7 != nil {
+		return false
+	} else if that1.Field7 != nil {
+		return false
+	}
+	if this.Field8 != nil && that1.Field8 != nil {
+		if *this.Field8 != *that1.Field8 {
+			return false
+		}
+	} else if this.Field8 != nil {
+		return false
+	} else if that1.Field8 != nil {
+		return false
+	}
+	if this.Field9 != nil && that1.Field9 != nil {
+		if *this.Field9 != *that1.Field9 {
+			return false
+		}
+	} else if this.Field9 != nil {
+		return false
+	} else if that1.Field9 != nil {
+		return false
+	}
+	if this.Field10 != nil && that1.Field10 != nil {
+		if *this.Field10 != *that1.Field10 {
+			return false
+		}
+	} else if this.Field10 != nil {
+		return false
+	} else if that1.Field10 != nil {
+		return false
+	}
+	if this.Field11 != nil && that1.Field11 != nil {
+		if *this.Field11 != *that1.Field11 {
+			return false
+		}
+	} else if this.Field11 != nil {
+		return false
+	} else if that1.Field11 != nil {
+		return false
+	}
+	if this.Field12 != nil && that1.Field12 != nil {
+		if *this.Field12 != *that1.Field12 {
+			return false
+		}
+	} else if this.Field12 != nil {
+		return false
+	} else if that1.Field12 != nil {
+		return false
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			return false
+		}
+	} else if this.Field13 != nil {
+		return false
+	} else if that1.Field13 != nil {
+		return false
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			return false
+		}
+	} else if this.Field14 != nil {
+		return false
+	} else if that1.Field14 != nil {
+		return false
+	}
+	if !bytes.Equal(this.Field15, that1.Field15) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func (x TheTestEnum) String() string {
 	s, ok := TheTestEnum_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv1.Itoa(int(x))
+}
+func (x AnotherTestEnum) String() string {
+	s, ok := AnotherTestEnum_name[int32(x)]
 	if ok {
 		return s
 	}
@@ -11107,6 +12148,15 @@ func (this *NidRepEnum) Description() (desc *google_protobuf.FileDescriptorSet) 
 func (this *NinRepEnum) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
+func (this *NinOptEnumDefault) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
+func (this *AnotherNinOptEnum) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
+func (this *AnotherNinOptEnumDefault) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
 func (this *Timer) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
@@ -11126,6 +12176,9 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Description() (desc 
 	return ThetestDescription()
 }
 func (this *NestedScope) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
+func (this *NinOptNativeDefault) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
 func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
@@ -12389,7 +13442,19 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Timer"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Time1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("NinOptEnumDefault"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: func(v string) *string { return &v }("C"), Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64001: proto.NewExtension([]byte{0x88, 0xa0, 0x1f, 0x1}), 64005: proto.NewExtension([]byte{0xa8, 0xa0, 0x1f, 0x0})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("AnotherNinOptEnum"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.AnotherTestEnum"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("AnotherNinOptEnumDefault"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(14), TypeName: func(v string) *string { return &v }(".test.AnotherTestEnum"), Extendee: nil, DefaultValue: func(v string) *string { return &v }("E"), Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64001: proto.NewExtension([]byte{0x88, 0xa0, 0x1f, 0x1}), 64005: proto.NewExtension([]byte{0xa8, 0xa0, 0x1f, 0x0})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Timer"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Time1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -12457,7 +13522,67 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.NestedDefinition.NestedMessage"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}}, EnumType: []*google_protobuf.EnumDescriptorProto{{Name: func(v string) *string { return &v }("TheTestEnum"), Value: []*google_protobuf.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(2), Options: nil, XXX_unrecognized: []byte{}}}, Options: nil, XXX_unrecognized: []byte{}}}, Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("FieldA"), Number: func(v int32) *int32 { return &v }(100), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".test.NestedDefinition.NestedMessage"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("NinOptNativeDefault"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234.1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234.1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field11"), Number: func(v int32) *int32 { return &v }(11), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field12"), Number: func(v int32) *int32 { return &v }(12), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field13"), Number: func(v int32) *int32 { return &v }(13), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("true"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field14"), Number: func(v int32) *int32 { return &v }(14), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: func(v string) *string { return &v }("1234"), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("Field15"), Number: func(v int32) *int32 { return &v }(15), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64001: proto.NewExtension([]byte{0x88, 0xa0, 0x1f, 0x1}), 64005: proto.NewExtension([]byte{0xa8, 0xa0, 0x1f, 0x0})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}}, EnumType: []*google_protobuf.EnumDescriptorProto{{Name: func(v string) *string { return &v }("TheTestEnum"), Value: []*google_protobuf.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(2), Options: nil, XXX_unrecognized: []byte{}}}, Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("AnotherTestEnum"), Value: []*google_protobuf.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("D"), Number: func(v int32) *int32 { return &v }(10), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("E"), Number: func(v int32) *int32 { return &v }(11), Options: nil, XXX_unrecognized: []byte{}}}, Options: &google_protobuf.EnumOptions{AllowAlias: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{62001: proto.NewExtension([]byte{0x88, 0xa3, 0x1e, 0x0})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}}, Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("FieldA"), Number: func(v int32) *int32 { return &v }(100), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

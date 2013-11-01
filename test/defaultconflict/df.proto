@@ -24,15 +24,14 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package nullableconflict;
+package defaultcheck;
 
 import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
 
-message A {
-	extensions 1 to max;
-}
+option (gogoproto.face_all) = true;
+option (gogoproto.goproto_getters_all) = false;
 
-extend A {
-	optional int64 Field1 = 1 [(gogoproto.nullable) = false];
+message A {
+	optional int64 Field1 = 1 [default=1234];
 }
 

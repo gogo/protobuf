@@ -24,34 +24,16 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package nullableconflict
+package defaultcheck;
 
-import (
-	"os"
-	"os/exec"
-	"testing"
-)
+import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
 
-func testNullableConflict(t *testing.T, name string) {
-	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", name+".proto")
-	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
-		if err := os.Remove(name + ".pb.go"); err != nil {
-			panic(err)
-		}
-	}
-	t.Logf("received expected error = %v and output = %v", err, string(data))
+enum E {
+	P = 10;
+	Q = 11;
 }
 
-func TestNullableDefault(t *testing.T) {
-	testNullableConflict(t, "nc")
+message A {
+	optional E Field1 = 1 [(gogoproto.nullable) = false];
 }
 
-func TestNullableExtension(t *testing.T) {
-	testNullableConflict(t, "nx")
-}
-
-func TestNullableEnum(t *testing.T) {
-	testNullableConflict(t, "ne")
-}

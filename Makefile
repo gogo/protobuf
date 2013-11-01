@@ -76,7 +76,7 @@ tests:
 	go test -v ./proto
 	go test -v ./fieldpath
 	go test -v ./test/embedconflict
-	go test -v ./test/nullableconflict
+	go test -v ./test/defaultconflict
 	go test -v ./test/unrecognized
 	go test -v ./test/group
 	go test -v ./test/unrecognizedgroup
@@ -89,7 +89,7 @@ testall:
 	go test -v ./proto
 	go test -v ./fieldpath
 	go test -v ./test/embedconflict
-	go test -v ./test/nullableconflict
+	go test -v ./test/defaultconflict
 	go test -v ./test/unrecognized
 	go test -v ./test/group
 	go test -v ./test/unrecognizedgroup

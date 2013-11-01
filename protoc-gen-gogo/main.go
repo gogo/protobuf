@@ -46,6 +46,7 @@ import (
 	"code.google.com/p/gogoprotobuf/proto"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 
+	_ "code.google.com/p/gogoprotobuf/plugin/defaultcheck"
 	_ "code.google.com/p/gogoprotobuf/plugin/description"
 	_ "code.google.com/p/gogoprotobuf/plugin/embedcheck"
 	_ "code.google.com/p/gogoprotobuf/plugin/enumstringer"
@@ -53,7 +54,6 @@ import (
 	_ "code.google.com/p/gogoprotobuf/plugin/face"
 	_ "code.google.com/p/gogoprotobuf/plugin/gostring"
 	_ "code.google.com/p/gogoprotobuf/plugin/marshalto"
-	_ "code.google.com/p/gogoprotobuf/plugin/nullablecheck"
 	_ "code.google.com/p/gogoprotobuf/plugin/populate"
 	_ "code.google.com/p/gogoprotobuf/plugin/size"
 	_ "code.google.com/p/gogoprotobuf/plugin/stringer"
