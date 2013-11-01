@@ -28,10 +28,8 @@ package proto
 
 import (
 	"fmt"
-	"math"
 	"os"
 	"reflect"
-	"strconv"
 )
 
 func (p *Properties) setCustomEncAndDec(typ reflect.Type) {
@@ -57,77 +55,26 @@ func (p *Properties) setNonNullableEncAndDec(typ reflect.Type) bool {
 		p.enc = (*Buffer).enc_ref_bool
 		p.dec = (*Buffer).dec_ref_bool
 		p.size = size_ref_bool
-		if len(p.Default) > 0 {
-			if p.Default == "1" {
-				p.setDef = func(base structPointer, p *Properties) {
-					setDefaultBool(base, p, true)
-				}
-			}
-		}
 	case reflect.Int32, reflect.Uint32:
 		p.enc = (*Buffer).enc_ref_int32
 		p.dec = (*Buffer).dec_ref_int32
 		p.size = size_ref_int32
-		if len(p.Default) > 0 {
-			var v uint32
-			if typ.Kind() == reflect.Int32 {
-				v2, _ := strconv.ParseInt(p.Default, 0, 32)
-				v = uint32(v2)
-			} else {
-				v2, _ := strconv.ParseUint(p.Default, 0, 32)
-				v = uint32(v2)
-			}
-			if v != 0 {
-				p.setDef = func(base structPointer, p *Properties) {
-					setDefaultInt32(base, p, v)
-				}
-			}
-		}
 	case reflect.Int64, reflect.Uint64:
 		p.enc = (*Buffer).enc_ref_int64
 		p.dec = (*Buffer).dec_ref_int64
 		p.size = size_ref_int64
-		if len(p.Default) > 0 {
-			var v uint64
-			if typ.Kind() == reflect.Int64 {
-				v2, _ := strconv.ParseInt(p.Default, 0, 64)
-				v = uint64(v2)
-			} else {
-				v, _ = strconv.ParseUint(p.Default, 0, 64)
-			}
-			p.setDef = func(base structPointer, p *Properties) {
-				setDefaultInt64(base, p, v)
-			}
-		}
 	case reflect.Float32:
 		p.enc = (*Buffer).enc_ref_int32 // can just treat them as bits
 		p.dec = (*Buffer).dec_ref_int32
 		p.size = size_ref_int32
-		if len(p.Default) > 0 {
-			f, _ := strconv.ParseFloat(p.Default, 32)
-			p.setDef = func(base structPointer, p *Properties) {
-				setDefaultInt32(base, p, math.Float32bits(float32(f)))
-			}
-		}
 	case reflect.Float64:
 		p.enc = (*Buffer).enc_ref_int64 // can just treat them as bits
 		p.dec = (*Buffer).dec_ref_int64
 		p.size = size_ref_int64
-		if len(p.Default) > 0 {
-			f, _ := strconv.ParseFloat(p.Default, 64)
-			p.setDef = func(base structPointer, p *Properties) {
-				setDefaultInt64(base, p, math.Float64bits(f))
-			}
-		}
 	case reflect.String:
 		p.dec = (*Buffer).dec_ref_string
 		p.enc = (*Buffer).enc_ref_string
 		p.size = size_ref_string
-		if len(p.Default) > 0 {
-			p.setDef = func(base structPointer, p *Properties) {
-				setDefaultString(base, p, p.Default)
-			}
-		}
 	case reflect.Struct:
 		p.stype = typ
 		p.isMarshaler = isMarshaler(typ)

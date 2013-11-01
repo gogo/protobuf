@@ -30,12 +30,6 @@ import (
 	"reflect"
 )
 
-type setDefaultFunc func(base structPointer, p *Properties)
-
-func setDefaultBool(base structPointer, p *Properties, v bool) {
-	*structPointer_RefBool(base, p.field) = v
-}
-
 // Decode a reference to a bool pointer.
 func (o *Buffer) dec_ref_bool(p *Properties, base structPointer) error {
 	u, err := p.valDec(o)
@@ -51,10 +45,6 @@ func (o *Buffer) dec_ref_bool(p *Properties, base structPointer) error {
 	return nil
 }
 
-func setDefaultInt32(base structPointer, p *Properties, v uint32) {
-	*structPointer_RefWord32(base, p.field) = v
-}
-
 // Decode a reference to an int32 pointer.
 func (o *Buffer) dec_ref_int32(p *Properties, base structPointer) error {
 	u, err := p.valDec(o)
@@ -65,10 +55,6 @@ func (o *Buffer) dec_ref_int32(p *Properties, base structPointer) error {
 	return nil
 }
 
-func setDefaultInt64(base structPointer, p *Properties, v uint64) {
-	*structPointer_RefWord64(base, p.field) = v
-}
-
 // Decode a reference to an int64 pointer.
 func (o *Buffer) dec_ref_int64(p *Properties, base structPointer) error {
 	u, err := p.valDec(o)
@@ -77,10 +63,6 @@ func (o *Buffer) dec_ref_int64(p *Properties, base structPointer) error {
 	}
 	refWord64_Set(structPointer_RefWord64(base, p.field), o, u)
 	return nil
-}
-
-func setDefaultString(base structPointer, p *Properties, v string) {
-	*structPointer_RefString(base, p.field) = v
 }
 
 // Decode a reference to a string pointer.
