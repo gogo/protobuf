@@ -29,27 +29,28 @@
 package fieldpath
 
 type unmarshaler interface {
+	reset()
 	unmarshal(buf []byte, offset int) (int, error)
+	unmarshalDefault()
 }
 
 //Used to Unmarshal a selected part of an input buffer.
 type Unmarshaler struct {
 	unmarshaler
-	path     []uint64
-	position int
-	final    int
+	path []uint64
 }
 
 //Unmarshals the selected part of this input buffer.
 func (this *Unmarshaler) Unmarshal(buf []byte) error {
-	this.Reset()
 	return Compile(this).Unmarshal(buf)
 }
 
-//Resets the position of the Unmarshaler in the compiled path.
-func (this *Unmarshaler) Reset() {
-	this.position = 0
-	this.final = len(this.path) - 1
+func (this *Unmarshaler) reset() {
+	this.unmarshaler.reset()
+}
+
+func (this *Unmarshaler) unmarshalDefault() {
+	this.unmarshaler.unmarshalDefault()
 }
 
 //One or more Unmarshalers compiled for single traversal of an input buffer.
@@ -87,6 +88,7 @@ func (this *Compiled) add(path []uint64, u unmarshaler) {
 
 //Unmarshals all the slected parts with a single traversal of the input buffer.
 func (this *Compiled) Unmarshal(buf []byte) error {
+	this.reset()
 	i := 0
 	for i < len(buf) {
 		key, n, err := decodeVarint(buf, i)
@@ -109,7 +111,26 @@ func (this *Compiled) Unmarshal(buf []byte) error {
 			i += n
 		}
 	}
+	this.unmarshalDefault()
 	return nil
+}
+
+func (this *Compiled) reset() {
+	for _, c := range this.children {
+		c.reset()
+	}
+	for _, u := range this.unmarshalers {
+		u.reset()
+	}
+}
+
+func (this *Compiled) unmarshalDefault() {
+	for _, c := range this.children {
+		c.unmarshalDefault()
+	}
+	for _, u := range this.unmarshalers {
+		u.unmarshalDefault()
+	}
 }
 
 func (this *Compiled) unmarshal(buf []byte, offset int) (int, error) {

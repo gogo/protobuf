@@ -38,6 +38,7 @@ type TestType struct {
 	Repeated bool
 	packed   bool
 	Single   bool
+	Enum     bool
 }
 
 func (this *TestType) NotNil(root string) string {
@@ -112,6 +113,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field1",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field1",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -148,6 +154,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field2",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field2",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -198,6 +209,23 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field3",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field3",
+					Single: true,
+				},
+				{
+					Struct: "NinOptEnumDefault",
+					Path:   "Field1",
+					Single: true,
+					Enum:   true,
+				},
+				{
+					Struct: "AnotherNinOptEnum",
+					Path:   "Field1",
+					Single: true,
+					Enum:   true,
+				},
 			},
 			Sort: true,
 		},
@@ -246,6 +274,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field4",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field4",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -296,6 +329,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field6",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field6",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -344,6 +382,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field5",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field5",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -395,6 +438,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field7",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field7",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -445,6 +493,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field8",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field8",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -481,6 +534,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field9",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field9",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -519,6 +577,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field11",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field11",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -556,6 +619,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field10",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field10",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -592,6 +660,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field12",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field12",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -642,6 +715,10 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field13",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field13",
+				},
 			},
 			Sort: false,
 		},
@@ -689,6 +766,11 @@ func NewTypes() []*Type {
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field14",
 				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field14",
+					Single: true,
+				},
 			},
 			Sort: true,
 		},
@@ -731,6 +813,11 @@ func NewTypes() []*Type {
 				{
 					Struct: "NinNestedStruct",
 					Path:   "Field1.Field4.Field15",
+				},
+				{
+					Struct: "NinOptNativeDefault",
+					Path:   "Field15",
+					Single: true,
 				},
 			},
 			Sort: true,
@@ -843,11 +930,17 @@ func Dec{{.CName}}(buf []byte, offset int, handler {{.CGoTyp}}Handler) (int, err
 //Contains the ordered list of keys, compiled path.
 type {{.CPacked}}{{.CName}}Path struct {
 	path []uint64
+	def  {{.ReturnType}}
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *{{.CPacked}}{{.CName}}Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *{{.CPacked}}{{.CName}}Path) GetDefault() {{.ReturnType}} {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -860,7 +953,15 @@ func New{{.CPacked}}{{.CName}}Path(rootPackage string, rootMessage string, descS
 	{{$this := .}}
 	{{range .ProtoTyp}}
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_{{.}} {
-		return &{{$this.CPacked}}{{$this.CName}}Path{fd.path}, nil
+		{{if $this.Packed}}
+		return &{{$this.CPacked}}{{$this.CName}}Path{fd.path, nil}, nil
+		{{else}}
+		{{if $this.Bytes}}
+		return &{{$this.CPacked}}{{$this.CName}}Path{fd.path, nil}, nil
+		{{else}}
+		return &{{$this.CPacked}}{{$this.CName}}Path{fd.path, fd.GetDefault{{$this.CGoTyp}}()}, nil
+		{{end}}
+		{{end}}
 	}
 	{{end}}
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_{{index .ProtoTyp 0}}, fd.field.GetType()}
@@ -888,36 +989,56 @@ func (this *{{.Packed}}{{.CName}}Unmarshaler) unmarshal(buf []byte, offset int) 
 	}
 	return nn, nil
 }
+
+func (this *{{.Packed}}{{.CName}}Unmarshaler) reset() {}
+
+func (this *{{.Packed}}{{.CName}}Unmarshaler) unmarshalDefault() {}
+
 {{else}}
 type {{.Name}}Unmarshaler struct {
 	handler {{.CGoTyp}}Handler
+	def {{.ReturnType}}
+	set bool
 }
 
 func (this *{{.Name}}Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	{{.DecCode}}
 	this.handler.{{.CGoTyp}}({{.Return}})
 	return {{.N}}, nil
 }
+
+func (this *{{.Name}}Unmarshaler) reset() {
+	this.set = false
+}
+
+func (this *{{.Name}}Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+		{{if .Bytes}}
+		this.handler.{{.CGoTyp}}(this.def)	
+		{{else}}
+		this.handler.{{.CGoTyp}}(*this.def)	
+		{{end}}
+	}
+}
 {{end}}
 
 
-func new{{.CPacked}}{{.CName}}Unmarshaler(path []uint64, h {{.CGoTyp}}Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func new{{.CPacked}}{{.CName}}Unmarshaler(path []uint64, def {{.ReturnType}}, h {{.CGoTyp}}Handler) *Unmarshaler {
+	return &Unmarshaler{
 		{{if .Packed}}
 		unmarshaler: &{{.Packed}}{{.CName}}Unmarshaler{h},
 		{{else}}
-		unmarshaler: &{{.Name}}Unmarshaler{h},
+		unmarshaler: &{{.Name}}Unmarshaler{h, def, false},
 		{{end}}
 		path:    path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a {{.CPacked}}{{.CName}}Path and a {{.CGoTyp}}Handler into an Unmarshaler
 func New{{.CPacked}}{{.CName}}Unmarshaler(f *{{.CPacked}}{{.CName}}Path, h {{.CGoTyp}}Handler) *Unmarshaler {
-	return new{{.CPacked}}{{.CName}}Unmarshaler(f.GetPath(), h)
+	return new{{.CPacked}}{{.CName}}Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 {{if .Packed}}
@@ -927,11 +1048,17 @@ func New{{.CPacked}}{{.CName}}Unmarshaler(f *{{.CPacked}}{{.CName}}Path, h {{.CG
 //Contains an ordered key list, compiled path, for a single value.
 type {{.CName}}SinglePath struct {
 	path []uint64
+	def  {{.ReturnType}}
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *{{.CName}}SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *{{.CName}}SinglePath) GetDefault() {{.ReturnType}} {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -951,7 +1078,11 @@ func New{{.CName}}SinglePath(rootPackage string, rootMessage string, descSet *de
 	{{$this := .}}
 	{{range .ProtoTyp}}
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_{{.}} {
-		return &{{$this.CName}}SinglePath{fd.path}, nil
+		{{if $this.Bytes}}
+		return &{{$this.CName}}SinglePath{fd.path, nil}, nil
+		{{else}}
+		return &{{$this.CName}}SinglePath{fd.path, fd.GetDefault{{$this.CGoTyp}}()}, nil
+		{{end}}
 	}
 	{{end}}
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_{{index .ProtoTyp 0}}, fd.field.GetType()}
@@ -1000,12 +1131,12 @@ func (this *{{.CName}}SinglePath) UnmarshalFirst(buf []byte) ({{.ReturnType}}, e
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *{{.CName}}SinglePath) Unmarshal(buf []byte) ({{.ReturnType}}, error) {
-	var ret {{.ReturnType}}
+	var ret {{.ReturnType}} = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -1086,11 +1217,11 @@ func (this *{{.CName}}Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 	//nil is the least
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 	{{if .Bytes}}
 	return bytes.Compare(this.mem[i], this.mem[j]) == -1
@@ -1204,6 +1335,12 @@ func NewTestTypeTemplate() string {
 			}
 			if !({{.NotNil "p"}}) {
 				if unmarshalled != nil {
+					{{if $this.Bytes}}
+					{{else}}
+					if *unmarshalled == *fieldpath.TestDefault("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}").GetDefault{{$this.CGoTyp}}() {
+						return
+					}
+					{{end}}
 					t.Fatalf("unmarshalled != nil")
 				}
 				return
@@ -1214,9 +1351,13 @@ func NewTestTypeTemplate() string {
 			{{if $this.Bytes}}if !bytes.Equal(unmarshalled, p.{{.Path}}) {
 				t.Fatalf("%v != %v", unmarshalled, p.{{.Path}})
 			}
-			{{else}}if *unmarshalled != *p.{{.Path}} {
+			{{else}}
+			{{if .Enum}}if int32(*unmarshalled) != int32(*p.{{.Path}}) {
+				t.Fatalf("%v != %v", *unmarshalled, *p.{{.Path}})
+			}{{else}}if *unmarshalled != *p.{{.Path}} {
 				t.Fatalf("%v != %v", *unmarshalled, *p.{{.Path}})
 			}{{end}}
+			{{end}}
 		}
 
 		func TestUnmarshal{{.Struct}}{{$this.CName}}(t *testing.T) {
@@ -1236,6 +1377,12 @@ func NewTestTypeTemplate() string {
 			}
 			if !({{.NotNil "p"}}) {
 				if unmarshalled != nil {
+					{{if $this.Bytes}}
+					{{else}}
+					if *unmarshalled == *fieldpath.TestDefault("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}").GetDefault{{$this.CGoTyp}}() {
+						return
+					}
+					{{end}}
 					t.Fatalf("unmarshalled != nil")
 				}
 				return
@@ -1246,9 +1393,13 @@ func NewTestTypeTemplate() string {
 			{{if $this.Bytes}}if !bytes.Equal(unmarshalled, p.{{.Path}}) {
 				t.Fatalf("%v != %v", unmarshalled, p.{{.Path}})
 			}
-			{{else}}if *unmarshalled != *p.{{.Path}} {
+			{{else}}
+			{{if .Enum}}if int32(*unmarshalled) != int32(*p.{{.Path}}) {
+				t.Fatalf("%v != %v", *unmarshalled, *p.{{.Path}})
+			}{{else}}if *unmarshalled != *p.{{.Path}} {
 				t.Fatalf("%v != %v", *unmarshalled, *p.{{.Path}})
 			}{{end}}
+			{{end}}
 		}
 	{{end}}
 
@@ -1285,14 +1436,24 @@ func NewTestTypeTemplate() string {
 			}
 			{{end}}
 		{{else}}
-			if len(unmarshalled) > 0 {
+			if {{.NotNil "p"}} {
+				{{if .Enum}}
+				if !reflect.DeepEqual(int32(unmarshalled[0]), int32({{if $this.Bytes}}{{else}}*{{end}}p.{{.Path}})) {
+				{{else}}
 				if !reflect.DeepEqual(unmarshalled[0], {{if $this.Bytes}}{{else}}*{{end}}p.{{.Path}}) {
+				{{end}}
 					panic(fmt.Errorf("unmarshalled %v != p.{{.Path}} %v", unmarshalled[0], {{if $this.Bytes}}{{else}}*{{end}}p.{{.Path}}))
 				}
-			} else {
-				if {{.NotNil "p"}} {
-					t.Fatalf("Expected nil")
+				return
+			}
+			if len(unmarshalled) > 0 {
+			{{if $this.Bytes}}
+				t.Fatalf("Expected nil")
+			{{else}}
+				if unmarshalled[0] != *fieldpath.TestDefault("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}").GetDefault{{$this.CGoTyp}}() {
+					t.Fatalf("wrong default")
 				}
+			{{end}}
 			}
 		{{end}}
 	}
@@ -1301,15 +1462,45 @@ func NewTestTypeTemplate() string {
 
 	type sorter{{.Struct}}{{$this.CName}} []*test.{{.Struct}}
 
-	func (this sorter{{.Struct}}{{$this.CName}}) Less(i, j int) bool {
-		if !({{.NotNil "this[i]"}}) {
-			return true
+	func (s sorter{{.Struct}}{{$this.CName}}) Less(i, j int) bool {
+		{{if $this.Bytes}}
+			if !({{.NotNil "s[j]"}}) {
+				return false
+			}
+			if !({{.NotNil "s[i]"}}) {
+				return true
+			}
+			return bytes.Compare(s[i].{{.Path}}, s[j].{{.Path}}) == -1
+		{{else}}
+		var vi {{$this.ReturnType}}
+		var vj {{$this.ReturnType}}
+		if ({{.NotNil "s[i]"}}) {
+			{{if .Enum}}
+			v1 := int32(*s[i].{{.Path}})
+			vi = &v1
+			{{else}}
+			vi = s[i].{{.Path}}
+			{{end}}
+		} else {
+			vi = fieldpath.TestDefault("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}").GetDefault{{$this.CGoTyp}}()
 		}
-		if !({{.NotNil "this[j]"}}) {
+		if ({{.NotNil "s[j]"}}) {
+			{{if .Enum}}
+			v2 := int32(*s[j].{{.Path}})
+			vj = &v2
+			{{else}}
+			vj = s[j].{{.Path}}
+			{{end}}
+		} else {
+			vj = fieldpath.TestDefault("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}").GetDefault{{$this.CGoTyp}}()
+		}
+		if vj == nil {
 			return false
 		}
-		{{if $this.Bytes}}return (bytes.Compare(this[i].{{.Path}}, this[j].{{.Path}}) == -1){{else}}
-		return *this[i].{{.Path}} < *this[j].{{.Path}}
+		if vi == nil {
+			return true
+		}
+		return *vi < *vj
 		{{end}}
 	}
 
@@ -1377,30 +1568,6 @@ func NewTestTypeTemplate() string {
 			fpsorter := fieldpath.New{{$this.CName}}Sorter(&sortable{bytes}, fp)
 			sort.Sort(fpsorter)
 		}
-	}
-
-	type sort{{.Struct}}{{$this.CName}} []*test.{{.Struct}}
-
-	func (s sort{{.Struct}}{{$this.CName}}) Len() int {
-		return len(s)
-	}
-
-	func (s sort{{.Struct}}{{$this.CName}}) Less(i, j int) bool {
-		if !({{.NotNil "s[i]"}}) {
-			return true
-		}
-		if !({{.NotNil "s[j]"}}) {
-			return false
-		}
-		{{if $this.Bytes}}
-			return bytes.Compare(s[i].{{.Path}}, s[j].{{.Path}}) == -1
-		{{else}}
-			return *s[i].{{.Path}} < *s[j].{{.Path}}
-		{{end}}
-	}
-
-	func (s sort{{.Struct}}{{$this.CName}}) Swap(i, j int) {
-		s[i], s[j] = s[j], s[i]
 	}
 
 	func BenchmarkUnmarshalAndSort{{.Struct}}{{$this.CName}}(b *testing.B) {

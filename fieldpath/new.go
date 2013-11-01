@@ -34,11 +34,12 @@ import (
 )
 
 type fdesc struct {
-	rootPkg string
-	rootMsg string
-	fields  []*descriptor.FieldDescriptorProto
-	field   *descriptor.FieldDescriptorProto
-	path    []uint64
+	rootPkg        string
+	rootMsg        string
+	fields         []*descriptor.FieldDescriptorProto
+	field          *descriptor.FieldDescriptorProto
+	path           []uint64
+	firstEnumValue int32
 }
 
 func new(rootPackage string, rootMessage string, descSet *descriptor.FileDescriptorSet, path string) (*fdesc, error) {
@@ -78,7 +79,26 @@ func new(rootPackage string, rootMessage string, descSet *descriptor.FileDescrip
 			fields[i] = fieldDesc
 		}
 	}
-	return &fdesc{curPackage, curMessage, fields, fieldDesc, keys}, nil
+	fd := &fdesc{curPackage, curMessage, fields, fieldDesc, keys, 0}
+	if fieldDesc.GetType() == descriptor.FieldDescriptorProto_TYPE_ENUM {
+		typeNames := strings.Split(fieldDesc.GetTypeName(), ".")
+		enumMessage := fieldDesc.GetTypeName()
+		enumPackage := curPackage
+		if len(typeNames) > 1 {
+			enumPackage = typeNames[1]
+			enumMessage = typeNames[2]
+		}
+		enum := descSet.GetEnum(enumPackage, enumMessage)
+		if enum == nil {
+			return nil, &errChild{fieldName: fieldDesc.GetName(), pkg: enumPackage, msg: enumMessage}
+		}
+		for _, v := range enum.GetValue() {
+			if v.GetNumber() < fd.firstEnumValue {
+				fd.firstEnumValue = v.GetNumber()
+			}
+		}
+	}
+	return fd, nil
 }
 
 //only for testing

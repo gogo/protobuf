@@ -55,6 +55,7 @@ func TestExtend(t *testing.T) {
 	var unmarshalled float64
 	f := FuncHandler{
 		Float64Func: func(v float64) {
+			t.Logf("unmarshalled %v", v)
 			unmarshalled = v
 		},
 	}

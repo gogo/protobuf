@@ -85,6 +85,11 @@ func TestUnmarshalFirstNinOptNativeFloat64(t *testing.T) {
 	}
 	if !(p.Field1 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -92,9 +97,11 @@ func TestUnmarshalFirstNinOptNativeFloat64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field1 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeFloat64(t *testing.T) {
@@ -114,6 +121,11 @@ func TestUnmarshalNinOptNativeFloat64(t *testing.T) {
 	}
 	if !(p.Field1 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -121,9 +133,11 @@ func TestUnmarshalNinOptNativeFloat64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field1 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
 	}
+
 }
 
 func TestCompiledNinOptNativeFloat64(t *testing.T) {
@@ -150,29 +164,51 @@ func TestCompiledNinOptNativeFloat64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled[0], *p.Field1))
 		}
-	} else {
-		if p.Field1 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeFloat64 []*test.NinOptNative
 
-func (this sorterNinOptNativeFloat64) Less(i, j int) bool {
-	if !(this[i].Field1 != nil) {
-		return true
+func (s sorterNinOptNativeFloat64) Less(i, j int) bool {
+
+	var vi *float64
+	var vj *float64
+	if s[i].Field1 != nil {
+
+		vi = s[i].Field1
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field1").GetDefaultFloat64()
 	}
-	if !(this[j].Field1 != nil) {
+	if s[j].Field1 != nil {
+
+		vj = s[j].Field1
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field1").GetDefaultFloat64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field1 < *this[j].Field1
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -233,6 +269,11 @@ func TestUnmarshalFirstNinOptStructFloat64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field1 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1").GetDefaultFloat64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -240,9 +281,11 @@ func TestUnmarshalFirstNinOptStructFloat64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field1 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field1)
 	}
+
 }
 
 func TestUnmarshalNinOptStructFloat64(t *testing.T) {
@@ -262,6 +305,11 @@ func TestUnmarshalNinOptStructFloat64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field1 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1").GetDefaultFloat64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -269,9 +317,11 @@ func TestUnmarshalNinOptStructFloat64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field1 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field1)
 	}
+
 }
 
 func TestCompiledNinOptStructFloat64(t *testing.T) {
@@ -298,29 +348,51 @@ func TestCompiledNinOptStructFloat64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field1 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field1) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field1 %v", unmarshalled[0], *p.Field4.Field1))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field1 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1").GetDefaultFloat64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructFloat64 []*test.NinOptStruct
 
-func (this sorterNinOptStructFloat64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field1 != nil) {
-		return true
+func (s sorterNinOptStructFloat64) Less(i, j int) bool {
+
+	var vi *float64
+	var vj *float64
+	if s[i].Field4 != nil && s[i].Field4.Field1 != nil {
+
+		vi = s[i].Field4.Field1
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1").GetDefaultFloat64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field1 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field1 != nil {
+
+		vj = s[j].Field4.Field1
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1").GetDefaultFloat64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field1 < *this[j].Field4.Field1
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -454,16 +526,206 @@ func TestCompiledNinNestedStructFloat64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field1 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field1) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field1 %v", unmarshalled[0], *p.Field1.Field4.Field1))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field1 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field1").GetDefaultFloat64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultFloat64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field1 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultFloat64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field1 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultFloat64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []float64
+	f := FuncHandler{
+		Float64Func: func(v float64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewFloat64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field1 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field1) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled[0], *p.Field1))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1").GetDefaultFloat64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultFloat64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultFloat64) Less(i, j int) bool {
+
+	var vi *float64
+	var vj *float64
+	if s[i].Field1 != nil {
+
+		vi = s[i].Field1
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1").GetDefaultFloat64()
+	}
+	if s[j].Field1 != nil {
+
+		vj = s[j].Field1
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1").GetDefaultFloat64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultFloat64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultFloat64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultFloat64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultFloat64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewFloat64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeFloat32(t *testing.T) {
@@ -483,6 +745,11 @@ func TestUnmarshalFirstNinOptNativeFloat32(t *testing.T) {
 	}
 	if !(p.Field2 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -490,9 +757,11 @@ func TestUnmarshalFirstNinOptNativeFloat32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field2 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field2)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeFloat32(t *testing.T) {
@@ -512,6 +781,11 @@ func TestUnmarshalNinOptNativeFloat32(t *testing.T) {
 	}
 	if !(p.Field2 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -519,9 +793,11 @@ func TestUnmarshalNinOptNativeFloat32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field2 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field2)
 	}
+
 }
 
 func TestCompiledNinOptNativeFloat32(t *testing.T) {
@@ -548,29 +824,51 @@ func TestCompiledNinOptNativeFloat32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field2 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field2) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field2 %v", unmarshalled[0], *p.Field2))
 		}
-	} else {
-		if p.Field2 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeFloat32 []*test.NinOptNative
 
-func (this sorterNinOptNativeFloat32) Less(i, j int) bool {
-	if !(this[i].Field2 != nil) {
-		return true
+func (s sorterNinOptNativeFloat32) Less(i, j int) bool {
+
+	var vi *float32
+	var vj *float32
+	if s[i].Field2 != nil {
+
+		vi = s[i].Field2
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field2").GetDefaultFloat32()
 	}
-	if !(this[j].Field2 != nil) {
+	if s[j].Field2 != nil {
+
+		vj = s[j].Field2
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field2").GetDefaultFloat32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field2 < *this[j].Field2
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -631,6 +929,11 @@ func TestUnmarshalFirstNinOptStructFloat32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field2 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2").GetDefaultFloat32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -638,9 +941,11 @@ func TestUnmarshalFirstNinOptStructFloat32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field2 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field2)
 	}
+
 }
 
 func TestUnmarshalNinOptStructFloat32(t *testing.T) {
@@ -660,6 +965,11 @@ func TestUnmarshalNinOptStructFloat32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field2 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2").GetDefaultFloat32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -667,9 +977,11 @@ func TestUnmarshalNinOptStructFloat32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field2 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field2)
 	}
+
 }
 
 func TestCompiledNinOptStructFloat32(t *testing.T) {
@@ -696,29 +1008,51 @@ func TestCompiledNinOptStructFloat32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field2 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field2) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field2 %v", unmarshalled[0], *p.Field4.Field2))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field2 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2").GetDefaultFloat32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructFloat32 []*test.NinOptStruct
 
-func (this sorterNinOptStructFloat32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field2 != nil) {
-		return true
+func (s sorterNinOptStructFloat32) Less(i, j int) bool {
+
+	var vi *float32
+	var vj *float32
+	if s[i].Field4 != nil && s[i].Field4.Field2 != nil {
+
+		vi = s[i].Field4.Field2
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2").GetDefaultFloat32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field2 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field2 != nil {
+
+		vj = s[j].Field4.Field2
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2").GetDefaultFloat32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field2 < *this[j].Field4.Field2
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -852,16 +1186,206 @@ func TestCompiledNinNestedStructFloat32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field2 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field2) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field2 %v", unmarshalled[0], *p.Field1.Field4.Field2))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field2 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field2").GetDefaultFloat32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultFloat32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field2 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field2 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field2)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultFloat32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field2 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field2 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field2)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultFloat32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFloat32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []float32
+	f := FuncHandler{
+		Float32Func: func(v float32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewFloat32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field2 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field2) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field2 %v", unmarshalled[0], *p.Field2))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2").GetDefaultFloat32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultFloat32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultFloat32) Less(i, j int) bool {
+
+	var vi *float32
+	var vj *float32
+	if s[i].Field2 != nil {
+
+		vi = s[i].Field2
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2").GetDefaultFloat32()
+	}
+	if s[j].Field2 != nil {
+
+		vj = s[j].Field2
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2").GetDefaultFloat32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultFloat32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultFloat32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultFloat32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultFloat32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewFloat32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeInt32(t *testing.T) {
@@ -881,6 +1405,11 @@ func TestUnmarshalFirstNinOptNativeInt32(t *testing.T) {
 	}
 	if !(p.Field3 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -888,9 +1417,11 @@ func TestUnmarshalFirstNinOptNativeInt32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field3 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field3)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeInt32(t *testing.T) {
@@ -910,6 +1441,11 @@ func TestUnmarshalNinOptNativeInt32(t *testing.T) {
 	}
 	if !(p.Field3 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -917,9 +1453,11 @@ func TestUnmarshalNinOptNativeInt32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field3 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field3)
 	}
+
 }
 
 func TestCompiledNinOptNativeInt32(t *testing.T) {
@@ -946,29 +1484,51 @@ func TestCompiledNinOptNativeInt32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field3 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field3) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field3 %v", unmarshalled[0], *p.Field3))
 		}
-	} else {
-		if p.Field3 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeInt32 []*test.NinOptNative
 
-func (this sorterNinOptNativeInt32) Less(i, j int) bool {
-	if !(this[i].Field3 != nil) {
-		return true
+func (s sorterNinOptNativeInt32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field3 != nil {
+
+		vi = s[i].Field3
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field3").GetDefaultInt32()
 	}
-	if !(this[j].Field3 != nil) {
+	if s[j].Field3 != nil {
+
+		vj = s[j].Field3
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field3").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field3 < *this[j].Field3
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -1029,6 +1589,11 @@ func TestUnmarshalFirstNinOptStructInt32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field3 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1036,9 +1601,11 @@ func TestUnmarshalFirstNinOptStructInt32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field3 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field3)
 	}
+
 }
 
 func TestUnmarshalNinOptStructInt32(t *testing.T) {
@@ -1058,6 +1625,11 @@ func TestUnmarshalNinOptStructInt32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field3 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1065,9 +1637,11 @@ func TestUnmarshalNinOptStructInt32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field3 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field3)
 	}
+
 }
 
 func TestCompiledNinOptStructInt32(t *testing.T) {
@@ -1094,29 +1668,51 @@ func TestCompiledNinOptStructInt32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field3 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field3) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field3 %v", unmarshalled[0], *p.Field4.Field3))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field3 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructInt32 []*test.NinOptStruct
 
-func (this sorterNinOptStructInt32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field3 != nil) {
-		return true
+func (s sorterNinOptStructInt32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field4 != nil && s[i].Field4.Field3 != nil {
+
+		vi = s[i].Field4.Field3
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3").GetDefaultInt32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field3 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field3 != nil {
+
+		vj = s[j].Field4.Field3
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field3 < *this[j].Field4.Field3
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -1250,16 +1846,578 @@ func TestCompiledNinNestedStructInt32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field3 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field3) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field3 %v", unmarshalled[0], *p.Field1.Field4.Field3))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field3 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field3").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field3 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field3 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field3)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field3 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field3 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field3)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int32
+	f := FuncHandler{
+		Int32Func: func(v int32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewInt32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field3 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field3) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field3 %v", unmarshalled[0], *p.Field3))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3").GetDefaultInt32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultInt32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultInt32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field3 != nil {
+
+		vi = s[i].Field3
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3").GetDefaultInt32()
+	}
+	if s[j].Field3 != nil {
+
+		vj = s[j].Field3
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3").GetDefaultInt32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultInt32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultInt32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultInt32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewInt32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func TestUnmarshalFirstNinOptEnumDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptEnumDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if int32(*unmarshalled) != int32(*p.Field1) {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestUnmarshalNinOptEnumDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptEnumDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if int32(*unmarshalled) != int32(*p.Field1) {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestCompiledNinOptEnumDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32Path("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptEnumDefault(r, false)
+	var unmarshalled []int32
+	f := FuncHandler{
+		Int32Func: func(v int32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewInt32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field1 != nil {
+
+		if !reflect.DeepEqual(int32(unmarshalled[0]), int32(*p.Field1)) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled[0], *p.Field1))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptEnumDefaultInt32 []*test.NinOptEnumDefault
+
+func (s sorterNinOptEnumDefaultInt32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field1 != nil {
+
+		v1 := int32(*s[i].Field1)
+		vi = &v1
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1").GetDefaultInt32()
+	}
+	if s[j].Field1 != nil {
+
+		v2 := int32(*s[j].Field1)
+		vj = &v2
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1").GetDefaultInt32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptEnumDefaultInt32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptEnumDefaultInt32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptEnumDefaultInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptEnumDefaultInt32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptEnumDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewInt32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptEnumDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func TestUnmarshalFirstAnotherNinOptEnumInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedAnotherNinOptEnum(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if int32(*unmarshalled) != int32(*p.Field1) {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestUnmarshalAnotherNinOptEnumInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32SinglePath("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedAnotherNinOptEnum(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field1 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if int32(*unmarshalled) != int32(*p.Field1) {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field1)
+	}
+
+}
+
+func TestCompiledAnotherNinOptEnumInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt32Path("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedAnotherNinOptEnum(r, false)
+	var unmarshalled []int32
+	f := FuncHandler{
+		Int32Func: func(v int32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewInt32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field1 != nil {
+
+		if !reflect.DeepEqual(int32(unmarshalled[0]), int32(*p.Field1)) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field1 %v", unmarshalled[0], *p.Field1))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1").GetDefaultInt32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterAnotherNinOptEnumInt32 []*test.AnotherNinOptEnum
+
+func (s sorterAnotherNinOptEnumInt32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field1 != nil {
+
+		v1 := int32(*s[i].Field1)
+		vi = &v1
+
+	} else {
+		vi = fieldpath.TestDefault("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1").GetDefaultInt32()
+	}
+	if s[j].Field1 != nil {
+
+		v2 := int32(*s[j].Field1)
+		vj = &v2
+
+	} else {
+		vj = fieldpath.TestDefault("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1").GetDefaultInt32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterAnotherNinOptEnumInt32) Len() int {
+	return len(this)
+}
+
+func (this sorterAnotherNinOptEnumInt32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortAnotherNinOptEnumInt32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterAnotherNinOptEnumInt32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedAnotherNinOptEnum(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewInt32SinglePath("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewInt32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.AnotherNinOptEnum{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeInt64(t *testing.T) {
@@ -1279,6 +2437,11 @@ func TestUnmarshalFirstNinOptNativeInt64(t *testing.T) {
 	}
 	if !(p.Field4 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1286,9 +2449,11 @@ func TestUnmarshalFirstNinOptNativeInt64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeInt64(t *testing.T) {
@@ -1308,6 +2473,11 @@ func TestUnmarshalNinOptNativeInt64(t *testing.T) {
 	}
 	if !(p.Field4 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1315,9 +2485,11 @@ func TestUnmarshalNinOptNativeInt64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4)
 	}
+
 }
 
 func TestCompiledNinOptNativeInt64(t *testing.T) {
@@ -1344,29 +2516,51 @@ func TestCompiledNinOptNativeInt64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4 %v", unmarshalled[0], *p.Field4))
 		}
-	} else {
-		if p.Field4 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeInt64 []*test.NinOptNative
 
-func (this sorterNinOptNativeInt64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil) {
-		return true
+func (s sorterNinOptNativeInt64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field4 != nil {
+
+		vi = s[i].Field4
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field4").GetDefaultInt64()
 	}
-	if !(this[j].Field4 != nil) {
+	if s[j].Field4 != nil {
+
+		vj = s[j].Field4
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field4").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4 < *this[j].Field4
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -1427,6 +2621,11 @@ func TestUnmarshalFirstNinOptStructInt64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field4 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1434,9 +2633,11 @@ func TestUnmarshalFirstNinOptStructInt64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field4 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field4)
 	}
+
 }
 
 func TestUnmarshalNinOptStructInt64(t *testing.T) {
@@ -1456,6 +2657,11 @@ func TestUnmarshalNinOptStructInt64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field4 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1463,9 +2669,11 @@ func TestUnmarshalNinOptStructInt64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field4 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field4)
 	}
+
 }
 
 func TestCompiledNinOptStructInt64(t *testing.T) {
@@ -1492,29 +2700,51 @@ func TestCompiledNinOptStructInt64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field4 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field4) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field4 %v", unmarshalled[0], *p.Field4.Field4))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field4 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructInt64 []*test.NinOptStruct
 
-func (this sorterNinOptStructInt64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field4 != nil) {
-		return true
+func (s sorterNinOptStructInt64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field4 != nil && s[i].Field4.Field4 != nil {
+
+		vi = s[i].Field4.Field4
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4").GetDefaultInt64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field4 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field4 != nil {
+
+		vj = s[j].Field4.Field4
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field4 < *this[j].Field4.Field4
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -1648,16 +2878,206 @@ func TestCompiledNinNestedStructInt64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field4 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field4) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field4 %v", unmarshalled[0], *p.Field1.Field4.Field4))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field4 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field4").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultInt64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field4 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field4 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field4)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultInt64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field4 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field4 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field4)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultInt64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewInt64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int64
+	f := FuncHandler{
+		Int64Func: func(v int64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewInt64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field4 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field4) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field4 %v", unmarshalled[0], *p.Field4))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4").GetDefaultInt64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultInt64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultInt64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field4 != nil {
+
+		vi = s[i].Field4
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4").GetDefaultInt64()
+	}
+	if s[j].Field4 != nil {
+
+		vj = s[j].Field4
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4").GetDefaultInt64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultInt64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultInt64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultInt64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultInt64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewInt64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeUint64(t *testing.T) {
@@ -1677,6 +3097,11 @@ func TestUnmarshalFirstNinOptNativeUint64(t *testing.T) {
 	}
 	if !(p.Field6 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1684,9 +3109,11 @@ func TestUnmarshalFirstNinOptNativeUint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field6 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field6)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeUint64(t *testing.T) {
@@ -1706,6 +3133,11 @@ func TestUnmarshalNinOptNativeUint64(t *testing.T) {
 	}
 	if !(p.Field6 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1713,9 +3145,11 @@ func TestUnmarshalNinOptNativeUint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field6 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field6)
 	}
+
 }
 
 func TestCompiledNinOptNativeUint64(t *testing.T) {
@@ -1742,29 +3176,51 @@ func TestCompiledNinOptNativeUint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field6 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field6) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field6 %v", unmarshalled[0], *p.Field6))
 		}
-	} else {
-		if p.Field6 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeUint64 []*test.NinOptNative
 
-func (this sorterNinOptNativeUint64) Less(i, j int) bool {
-	if !(this[i].Field6 != nil) {
-		return true
+func (s sorterNinOptNativeUint64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field6 != nil {
+
+		vi = s[i].Field6
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field6").GetDefaultUint64()
 	}
-	if !(this[j].Field6 != nil) {
+	if s[j].Field6 != nil {
+
+		vj = s[j].Field6
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field6").GetDefaultUint64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field6 < *this[j].Field6
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -1825,6 +3281,11 @@ func TestUnmarshalFirstNinOptStructUint64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field6 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1832,9 +3293,11 @@ func TestUnmarshalFirstNinOptStructUint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field6 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field6)
 	}
+
 }
 
 func TestUnmarshalNinOptStructUint64(t *testing.T) {
@@ -1854,6 +3317,11 @@ func TestUnmarshalNinOptStructUint64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field6 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -1861,9 +3329,11 @@ func TestUnmarshalNinOptStructUint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field6 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field6)
 	}
+
 }
 
 func TestCompiledNinOptStructUint64(t *testing.T) {
@@ -1890,29 +3360,51 @@ func TestCompiledNinOptStructUint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field6 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field6) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field6 %v", unmarshalled[0], *p.Field4.Field6))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field6 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructUint64 []*test.NinOptStruct
 
-func (this sorterNinOptStructUint64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field6 != nil) {
-		return true
+func (s sorterNinOptStructUint64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field4 != nil && s[i].Field4.Field6 != nil {
+
+		vi = s[i].Field4.Field6
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6").GetDefaultUint64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field6 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field6 != nil {
+
+		vj = s[j].Field4.Field6
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6").GetDefaultUint64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field6 < *this[j].Field4.Field6
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -2046,16 +3538,206 @@ func TestCompiledNinNestedStructUint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field6 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field6) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field6 %v", unmarshalled[0], *p.Field1.Field4.Field6))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field6 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field6").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultUint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field6 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field6 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field6)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultUint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field6 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field6 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field6)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultUint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []uint64
+	f := FuncHandler{
+		Uint64Func: func(v uint64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewUint64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field6 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field6) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field6 %v", unmarshalled[0], *p.Field6))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6").GetDefaultUint64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultUint64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultUint64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field6 != nil {
+
+		vi = s[i].Field6
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6").GetDefaultUint64()
+	}
+	if s[j].Field6 != nil {
+
+		vj = s[j].Field6
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6").GetDefaultUint64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultUint64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultUint64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultUint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultUint64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewUint64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeUint32(t *testing.T) {
@@ -2075,6 +3757,11 @@ func TestUnmarshalFirstNinOptNativeUint32(t *testing.T) {
 	}
 	if !(p.Field5 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2082,9 +3769,11 @@ func TestUnmarshalFirstNinOptNativeUint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field5 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field5)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeUint32(t *testing.T) {
@@ -2104,6 +3793,11 @@ func TestUnmarshalNinOptNativeUint32(t *testing.T) {
 	}
 	if !(p.Field5 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2111,9 +3805,11 @@ func TestUnmarshalNinOptNativeUint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field5 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field5)
 	}
+
 }
 
 func TestCompiledNinOptNativeUint32(t *testing.T) {
@@ -2140,29 +3836,51 @@ func TestCompiledNinOptNativeUint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field5 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field5) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field5 %v", unmarshalled[0], *p.Field5))
 		}
-	} else {
-		if p.Field5 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeUint32 []*test.NinOptNative
 
-func (this sorterNinOptNativeUint32) Less(i, j int) bool {
-	if !(this[i].Field5 != nil) {
-		return true
+func (s sorterNinOptNativeUint32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field5 != nil {
+
+		vi = s[i].Field5
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field5").GetDefaultUint32()
 	}
-	if !(this[j].Field5 != nil) {
+	if s[j].Field5 != nil {
+
+		vj = s[j].Field5
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field5").GetDefaultUint32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field5 < *this[j].Field5
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -2223,6 +3941,11 @@ func TestUnmarshalFirstNinOptStructUint32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field5 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2230,9 +3953,11 @@ func TestUnmarshalFirstNinOptStructUint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field5 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field5)
 	}
+
 }
 
 func TestUnmarshalNinOptStructUint32(t *testing.T) {
@@ -2252,6 +3977,11 @@ func TestUnmarshalNinOptStructUint32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field5 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2259,9 +3989,11 @@ func TestUnmarshalNinOptStructUint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field5 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field5)
 	}
+
 }
 
 func TestCompiledNinOptStructUint32(t *testing.T) {
@@ -2288,29 +4020,51 @@ func TestCompiledNinOptStructUint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field5 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field5) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field5 %v", unmarshalled[0], *p.Field4.Field5))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field5 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructUint32 []*test.NinOptStruct
 
-func (this sorterNinOptStructUint32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field5 != nil) {
-		return true
+func (s sorterNinOptStructUint32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field4 != nil && s[i].Field4.Field5 != nil {
+
+		vi = s[i].Field4.Field5
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5").GetDefaultUint32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field5 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field5 != nil {
+
+		vj = s[j].Field4.Field5
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5").GetDefaultUint32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field5 < *this[j].Field4.Field5
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -2444,16 +4198,206 @@ func TestCompiledNinNestedStructUint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field5 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field5) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field5 %v", unmarshalled[0], *p.Field1.Field4.Field5))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field5 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field5").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultUint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field5 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field5 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field5)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultUint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field5 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field5 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field5)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultUint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewUint32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []uint32
+	f := FuncHandler{
+		Uint32Func: func(v uint32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewUint32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field5 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field5) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field5 %v", unmarshalled[0], *p.Field5))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5").GetDefaultUint32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultUint32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultUint32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field5 != nil {
+
+		vi = s[i].Field5
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5").GetDefaultUint32()
+	}
+	if s[j].Field5 != nil {
+
+		vj = s[j].Field5
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5").GetDefaultUint32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultUint32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultUint32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultUint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultUint32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewUint32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeSint32(t *testing.T) {
@@ -2473,6 +4417,11 @@ func TestUnmarshalFirstNinOptNativeSint32(t *testing.T) {
 	}
 	if !(p.Field7 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2480,9 +4429,11 @@ func TestUnmarshalFirstNinOptNativeSint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field7 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field7)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeSint32(t *testing.T) {
@@ -2502,6 +4453,11 @@ func TestUnmarshalNinOptNativeSint32(t *testing.T) {
 	}
 	if !(p.Field7 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2509,9 +4465,11 @@ func TestUnmarshalNinOptNativeSint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field7 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field7)
 	}
+
 }
 
 func TestCompiledNinOptNativeSint32(t *testing.T) {
@@ -2538,29 +4496,51 @@ func TestCompiledNinOptNativeSint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field7 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field7) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field7 %v", unmarshalled[0], *p.Field7))
 		}
-	} else {
-		if p.Field7 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeSint32 []*test.NinOptNative
 
-func (this sorterNinOptNativeSint32) Less(i, j int) bool {
-	if !(this[i].Field7 != nil) {
-		return true
+func (s sorterNinOptNativeSint32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field7 != nil {
+
+		vi = s[i].Field7
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field7").GetDefaultInt32()
 	}
-	if !(this[j].Field7 != nil) {
+	if s[j].Field7 != nil {
+
+		vj = s[j].Field7
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field7").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field7 < *this[j].Field7
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -2621,6 +4601,11 @@ func TestUnmarshalFirstNinOptStructSint32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field7 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2628,9 +4613,11 @@ func TestUnmarshalFirstNinOptStructSint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field7 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field7)
 	}
+
 }
 
 func TestUnmarshalNinOptStructSint32(t *testing.T) {
@@ -2650,6 +4637,11 @@ func TestUnmarshalNinOptStructSint32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field7 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2657,9 +4649,11 @@ func TestUnmarshalNinOptStructSint32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field7 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field7)
 	}
+
 }
 
 func TestCompiledNinOptStructSint32(t *testing.T) {
@@ -2686,29 +4680,51 @@ func TestCompiledNinOptStructSint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field7 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field7) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field7 %v", unmarshalled[0], *p.Field4.Field7))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field7 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructSint32 []*test.NinOptStruct
 
-func (this sorterNinOptStructSint32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field7 != nil) {
-		return true
+func (s sorterNinOptStructSint32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field4 != nil && s[i].Field4.Field7 != nil {
+
+		vi = s[i].Field4.Field7
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7").GetDefaultInt32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field7 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field7 != nil {
+
+		vj = s[j].Field4.Field7
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field7 < *this[j].Field4.Field7
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -2842,16 +4858,206 @@ func TestCompiledNinNestedStructSint32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field7 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field7) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field7 %v", unmarshalled[0], *p.Field1.Field4.Field7))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field7 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field7").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultSint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field7 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field7 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field7)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultSint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field7 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field7 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field7)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultSint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int32
+	f := FuncHandler{
+		Int32Func: func(v int32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewSint32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field7 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field7) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field7 %v", unmarshalled[0], *p.Field7))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7").GetDefaultInt32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultSint32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultSint32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field7 != nil {
+
+		vi = s[i].Field7
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7").GetDefaultInt32()
+	}
+	if s[j].Field7 != nil {
+
+		vj = s[j].Field7
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7").GetDefaultInt32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultSint32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultSint32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultSint32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultSint32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewSint32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeSint64(t *testing.T) {
@@ -2871,6 +5077,11 @@ func TestUnmarshalFirstNinOptNativeSint64(t *testing.T) {
 	}
 	if !(p.Field8 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2878,9 +5089,11 @@ func TestUnmarshalFirstNinOptNativeSint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field8 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field8)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeSint64(t *testing.T) {
@@ -2900,6 +5113,11 @@ func TestUnmarshalNinOptNativeSint64(t *testing.T) {
 	}
 	if !(p.Field8 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -2907,9 +5125,11 @@ func TestUnmarshalNinOptNativeSint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field8 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field8)
 	}
+
 }
 
 func TestCompiledNinOptNativeSint64(t *testing.T) {
@@ -2936,29 +5156,51 @@ func TestCompiledNinOptNativeSint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field8 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field8) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field8 %v", unmarshalled[0], *p.Field8))
 		}
-	} else {
-		if p.Field8 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeSint64 []*test.NinOptNative
 
-func (this sorterNinOptNativeSint64) Less(i, j int) bool {
-	if !(this[i].Field8 != nil) {
-		return true
+func (s sorterNinOptNativeSint64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field8 != nil {
+
+		vi = s[i].Field8
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field8").GetDefaultInt64()
 	}
-	if !(this[j].Field8 != nil) {
+	if s[j].Field8 != nil {
+
+		vj = s[j].Field8
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field8").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field8 < *this[j].Field8
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -3019,6 +5261,11 @@ func TestUnmarshalFirstNinOptStructSint64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field8 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3026,9 +5273,11 @@ func TestUnmarshalFirstNinOptStructSint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field8 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field8)
 	}
+
 }
 
 func TestUnmarshalNinOptStructSint64(t *testing.T) {
@@ -3048,6 +5297,11 @@ func TestUnmarshalNinOptStructSint64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field8 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3055,9 +5309,11 @@ func TestUnmarshalNinOptStructSint64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field8 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field8)
 	}
+
 }
 
 func TestCompiledNinOptStructSint64(t *testing.T) {
@@ -3084,29 +5340,51 @@ func TestCompiledNinOptStructSint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field8 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field8) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field8 %v", unmarshalled[0], *p.Field4.Field8))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field8 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructSint64 []*test.NinOptStruct
 
-func (this sorterNinOptStructSint64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field8 != nil) {
-		return true
+func (s sorterNinOptStructSint64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field4 != nil && s[i].Field4.Field8 != nil {
+
+		vi = s[i].Field4.Field8
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8").GetDefaultInt64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field8 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field8 != nil {
+
+		vj = s[j].Field4.Field8
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field8 < *this[j].Field4.Field8
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -3240,16 +5518,206 @@ func TestCompiledNinNestedStructSint64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field8 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field8) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field8 %v", unmarshalled[0], *p.Field1.Field4.Field8))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field8 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field8").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultSint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field8 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field8 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field8)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultSint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field8 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field8 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field8)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultSint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSint64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int64
+	f := FuncHandler{
+		Int64Func: func(v int64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewSint64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field8 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field8) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field8 %v", unmarshalled[0], *p.Field8))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8").GetDefaultInt64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultSint64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultSint64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field8 != nil {
+
+		vi = s[i].Field8
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8").GetDefaultInt64()
+	}
+	if s[j].Field8 != nil {
+
+		vj = s[j].Field8
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8").GetDefaultInt64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultSint64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultSint64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultSint64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultSint64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewSint64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeFixed32(t *testing.T) {
@@ -3269,6 +5737,11 @@ func TestUnmarshalFirstNinOptNativeFixed32(t *testing.T) {
 	}
 	if !(p.Field9 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3276,9 +5749,11 @@ func TestUnmarshalFirstNinOptNativeFixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field9 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field9)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeFixed32(t *testing.T) {
@@ -3298,6 +5773,11 @@ func TestUnmarshalNinOptNativeFixed32(t *testing.T) {
 	}
 	if !(p.Field9 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3305,9 +5785,11 @@ func TestUnmarshalNinOptNativeFixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field9 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field9)
 	}
+
 }
 
 func TestCompiledNinOptNativeFixed32(t *testing.T) {
@@ -3334,29 +5816,51 @@ func TestCompiledNinOptNativeFixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field9 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field9) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field9 %v", unmarshalled[0], *p.Field9))
 		}
-	} else {
-		if p.Field9 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeFixed32 []*test.NinOptNative
 
-func (this sorterNinOptNativeFixed32) Less(i, j int) bool {
-	if !(this[i].Field9 != nil) {
-		return true
+func (s sorterNinOptNativeFixed32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field9 != nil {
+
+		vi = s[i].Field9
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field9").GetDefaultUint32()
 	}
-	if !(this[j].Field9 != nil) {
+	if s[j].Field9 != nil {
+
+		vj = s[j].Field9
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field9").GetDefaultUint32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field9 < *this[j].Field9
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -3417,6 +5921,11 @@ func TestUnmarshalFirstNinOptStructFixed32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field9 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3424,9 +5933,11 @@ func TestUnmarshalFirstNinOptStructFixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field9 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field9)
 	}
+
 }
 
 func TestUnmarshalNinOptStructFixed32(t *testing.T) {
@@ -3446,6 +5957,11 @@ func TestUnmarshalNinOptStructFixed32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field9 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9").GetDefaultUint32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3453,9 +5969,11 @@ func TestUnmarshalNinOptStructFixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field9 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field9)
 	}
+
 }
 
 func TestCompiledNinOptStructFixed32(t *testing.T) {
@@ -3482,29 +6000,51 @@ func TestCompiledNinOptStructFixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field9 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field9) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field9 %v", unmarshalled[0], *p.Field4.Field9))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field9 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructFixed32 []*test.NinOptStruct
 
-func (this sorterNinOptStructFixed32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field9 != nil) {
-		return true
+func (s sorterNinOptStructFixed32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field4 != nil && s[i].Field4.Field9 != nil {
+
+		vi = s[i].Field4.Field9
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9").GetDefaultUint32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field9 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field9 != nil {
+
+		vj = s[j].Field4.Field9
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9").GetDefaultUint32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field9 < *this[j].Field4.Field9
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -3638,16 +6178,206 @@ func TestCompiledNinNestedStructFixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field9 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field9) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field9 %v", unmarshalled[0], *p.Field1.Field4.Field9))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field9 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field9").GetDefaultUint32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultFixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field9 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field9 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field9)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultFixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field9 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field9 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field9)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultFixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []uint32
+	f := FuncHandler{
+		Uint32Func: func(v uint32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewFixed32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field9 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field9) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field9 %v", unmarshalled[0], *p.Field9))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9").GetDefaultUint32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultFixed32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultFixed32) Less(i, j int) bool {
+
+	var vi *uint32
+	var vj *uint32
+	if s[i].Field9 != nil {
+
+		vi = s[i].Field9
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9").GetDefaultUint32()
+	}
+	if s[j].Field9 != nil {
+
+		vj = s[j].Field9
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9").GetDefaultUint32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultFixed32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultFixed32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultFixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultFixed32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewFixed32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeFixed64(t *testing.T) {
@@ -3667,6 +6397,11 @@ func TestUnmarshalFirstNinOptNativeFixed64(t *testing.T) {
 	}
 	if !(p.Field11 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3674,9 +6409,11 @@ func TestUnmarshalFirstNinOptNativeFixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field11 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field11)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeFixed64(t *testing.T) {
@@ -3696,6 +6433,11 @@ func TestUnmarshalNinOptNativeFixed64(t *testing.T) {
 	}
 	if !(p.Field11 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3703,9 +6445,11 @@ func TestUnmarshalNinOptNativeFixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field11 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field11)
 	}
+
 }
 
 func TestCompiledNinOptNativeFixed64(t *testing.T) {
@@ -3732,29 +6476,51 @@ func TestCompiledNinOptNativeFixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field11 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field11) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field11 %v", unmarshalled[0], *p.Field11))
 		}
-	} else {
-		if p.Field11 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeFixed64 []*test.NinOptNative
 
-func (this sorterNinOptNativeFixed64) Less(i, j int) bool {
-	if !(this[i].Field11 != nil) {
-		return true
+func (s sorterNinOptNativeFixed64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field11 != nil {
+
+		vi = s[i].Field11
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field11").GetDefaultUint64()
 	}
-	if !(this[j].Field11 != nil) {
+	if s[j].Field11 != nil {
+
+		vj = s[j].Field11
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field11").GetDefaultUint64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field11 < *this[j].Field11
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -3815,6 +6581,11 @@ func TestUnmarshalFirstNinOptStructFixed64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field11 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3822,9 +6593,11 @@ func TestUnmarshalFirstNinOptStructFixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field11 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field11)
 	}
+
 }
 
 func TestUnmarshalNinOptStructFixed64(t *testing.T) {
@@ -3844,6 +6617,11 @@ func TestUnmarshalNinOptStructFixed64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field11 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11").GetDefaultUint64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -3851,9 +6629,11 @@ func TestUnmarshalNinOptStructFixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field11 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field11)
 	}
+
 }
 
 func TestCompiledNinOptStructFixed64(t *testing.T) {
@@ -3880,29 +6660,51 @@ func TestCompiledNinOptStructFixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field11 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field11) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field11 %v", unmarshalled[0], *p.Field4.Field11))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field11 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructFixed64 []*test.NinOptStruct
 
-func (this sorterNinOptStructFixed64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field11 != nil) {
-		return true
+func (s sorterNinOptStructFixed64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field4 != nil && s[i].Field4.Field11 != nil {
+
+		vi = s[i].Field4.Field11
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11").GetDefaultUint64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field11 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field11 != nil {
+
+		vj = s[j].Field4.Field11
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11").GetDefaultUint64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field11 < *this[j].Field4.Field11
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -4036,16 +6838,206 @@ func TestCompiledNinNestedStructFixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field11 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field11) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field11 %v", unmarshalled[0], *p.Field1.Field4.Field11))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field11 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field11").GetDefaultUint64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultFixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field11 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field11 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field11)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultFixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field11 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field11 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field11)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultFixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewFixed64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []uint64
+	f := FuncHandler{
+		Uint64Func: func(v uint64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewFixed64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field11 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field11) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field11 %v", unmarshalled[0], *p.Field11))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11").GetDefaultUint64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultFixed64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultFixed64) Less(i, j int) bool {
+
+	var vi *uint64
+	var vj *uint64
+	if s[i].Field11 != nil {
+
+		vi = s[i].Field11
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11").GetDefaultUint64()
+	}
+	if s[j].Field11 != nil {
+
+		vj = s[j].Field11
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11").GetDefaultUint64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultFixed64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultFixed64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultFixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultFixed64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewFixed64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeSfixed32(t *testing.T) {
@@ -4065,6 +7057,11 @@ func TestUnmarshalFirstNinOptNativeSfixed32(t *testing.T) {
 	}
 	if !(p.Field10 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4072,9 +7069,11 @@ func TestUnmarshalFirstNinOptNativeSfixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field10 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field10)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeSfixed32(t *testing.T) {
@@ -4094,6 +7093,11 @@ func TestUnmarshalNinOptNativeSfixed32(t *testing.T) {
 	}
 	if !(p.Field10 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4101,9 +7105,11 @@ func TestUnmarshalNinOptNativeSfixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field10 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field10)
 	}
+
 }
 
 func TestCompiledNinOptNativeSfixed32(t *testing.T) {
@@ -4130,29 +7136,51 @@ func TestCompiledNinOptNativeSfixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field10 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field10) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field10 %v", unmarshalled[0], *p.Field10))
 		}
-	} else {
-		if p.Field10 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeSfixed32 []*test.NinOptNative
 
-func (this sorterNinOptNativeSfixed32) Less(i, j int) bool {
-	if !(this[i].Field10 != nil) {
-		return true
+func (s sorterNinOptNativeSfixed32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field10 != nil {
+
+		vi = s[i].Field10
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field10").GetDefaultInt32()
 	}
-	if !(this[j].Field10 != nil) {
+	if s[j].Field10 != nil {
+
+		vj = s[j].Field10
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field10").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field10 < *this[j].Field10
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -4213,6 +7241,11 @@ func TestUnmarshalFirstNinOptStructSfixed32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field10 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4220,9 +7253,11 @@ func TestUnmarshalFirstNinOptStructSfixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field10 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field10)
 	}
+
 }
 
 func TestUnmarshalNinOptStructSfixed32(t *testing.T) {
@@ -4242,6 +7277,11 @@ func TestUnmarshalNinOptStructSfixed32(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field10 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10").GetDefaultInt32() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4249,9 +7289,11 @@ func TestUnmarshalNinOptStructSfixed32(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field10 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field10)
 	}
+
 }
 
 func TestCompiledNinOptStructSfixed32(t *testing.T) {
@@ -4278,29 +7320,51 @@ func TestCompiledNinOptStructSfixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field10 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field10) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field10 %v", unmarshalled[0], *p.Field4.Field10))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field10 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructSfixed32 []*test.NinOptStruct
 
-func (this sorterNinOptStructSfixed32) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field10 != nil) {
-		return true
+func (s sorterNinOptStructSfixed32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field4 != nil && s[i].Field4.Field10 != nil {
+
+		vi = s[i].Field4.Field10
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10").GetDefaultInt32()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field10 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field10 != nil {
+
+		vj = s[j].Field4.Field10
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10").GetDefaultInt32()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field10 < *this[j].Field4.Field10
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -4434,16 +7498,206 @@ func TestCompiledNinNestedStructSfixed32(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field10 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field10) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field10 %v", unmarshalled[0], *p.Field1.Field4.Field10))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field10 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field10").GetDefaultInt32() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultSfixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field10 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field10 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field10)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultSfixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field10 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field10 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field10)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultSfixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int32
+	f := FuncHandler{
+		Int32Func: func(v int32) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewSfixed32Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field10 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field10) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field10 %v", unmarshalled[0], *p.Field10))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10").GetDefaultInt32() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultSfixed32 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultSfixed32) Less(i, j int) bool {
+
+	var vi *int32
+	var vj *int32
+	if s[i].Field10 != nil {
+
+		vi = s[i].Field10
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10").GetDefaultInt32()
+	}
+	if s[j].Field10 != nil {
+
+		vj = s[j].Field10
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10").GetDefaultInt32()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultSfixed32) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultSfixed32) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultSfixed32(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultSfixed32, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewSfixed32Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeSfixed64(t *testing.T) {
@@ -4463,6 +7717,11 @@ func TestUnmarshalFirstNinOptNativeSfixed64(t *testing.T) {
 	}
 	if !(p.Field12 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4470,9 +7729,11 @@ func TestUnmarshalFirstNinOptNativeSfixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field12 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field12)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeSfixed64(t *testing.T) {
@@ -4492,6 +7753,11 @@ func TestUnmarshalNinOptNativeSfixed64(t *testing.T) {
 	}
 	if !(p.Field12 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4499,9 +7765,11 @@ func TestUnmarshalNinOptNativeSfixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field12 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field12)
 	}
+
 }
 
 func TestCompiledNinOptNativeSfixed64(t *testing.T) {
@@ -4528,29 +7796,51 @@ func TestCompiledNinOptNativeSfixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field12 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field12) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field12 %v", unmarshalled[0], *p.Field12))
 		}
-	} else {
-		if p.Field12 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeSfixed64 []*test.NinOptNative
 
-func (this sorterNinOptNativeSfixed64) Less(i, j int) bool {
-	if !(this[i].Field12 != nil) {
-		return true
+func (s sorterNinOptNativeSfixed64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field12 != nil {
+
+		vi = s[i].Field12
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field12").GetDefaultInt64()
 	}
-	if !(this[j].Field12 != nil) {
+	if s[j].Field12 != nil {
+
+		vj = s[j].Field12
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field12").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field12 < *this[j].Field12
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -4611,6 +7901,11 @@ func TestUnmarshalFirstNinOptStructSfixed64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field12 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4618,9 +7913,11 @@ func TestUnmarshalFirstNinOptStructSfixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field12 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field12)
 	}
+
 }
 
 func TestUnmarshalNinOptStructSfixed64(t *testing.T) {
@@ -4640,6 +7937,11 @@ func TestUnmarshalNinOptStructSfixed64(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field12 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12").GetDefaultInt64() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -4647,9 +7949,11 @@ func TestUnmarshalNinOptStructSfixed64(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field12 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field12)
 	}
+
 }
 
 func TestCompiledNinOptStructSfixed64(t *testing.T) {
@@ -4676,29 +7980,51 @@ func TestCompiledNinOptStructSfixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field12 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field12) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field12 %v", unmarshalled[0], *p.Field4.Field12))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field12 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructSfixed64 []*test.NinOptStruct
 
-func (this sorterNinOptStructSfixed64) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field12 != nil) {
-		return true
+func (s sorterNinOptStructSfixed64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field4 != nil && s[i].Field4.Field12 != nil {
+
+		vi = s[i].Field4.Field12
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12").GetDefaultInt64()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field12 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field12 != nil {
+
+		vj = s[j].Field4.Field12
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12").GetDefaultInt64()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field12 < *this[j].Field4.Field12
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -4832,16 +8158,206 @@ func TestCompiledNinNestedStructSfixed64(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field12 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field12) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field12 %v", unmarshalled[0], *p.Field1.Field4.Field12))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field12 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field12").GetDefaultInt64() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultSfixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field12 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field12 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field12)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultSfixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field12 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field12 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field12)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultSfixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewSfixed64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []int64
+	f := FuncHandler{
+		Int64Func: func(v int64) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewSfixed64Unmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field12 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field12) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field12 %v", unmarshalled[0], *p.Field12))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12").GetDefaultInt64() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultSfixed64 []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultSfixed64) Less(i, j int) bool {
+
+	var vi *int64
+	var vj *int64
+	if s[i].Field12 != nil {
+
+		vi = s[i].Field12
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12").GetDefaultInt64()
+	}
+	if s[j].Field12 != nil {
+
+		vj = s[j].Field12
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12").GetDefaultInt64()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultSfixed64) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultSfixed64) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultSfixed64(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultSfixed64, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewSfixed64Sorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestCompiledNinOptNativeBool(t *testing.T) {
@@ -4868,14 +8384,20 @@ func TestCompiledNinOptNativeBool(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field13 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field13) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field13 %v", unmarshalled[0], *p.Field13))
 		}
-	} else {
-		if p.Field13 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field13").GetDefaultBool() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
@@ -4904,14 +8426,20 @@ func TestCompiledNinOptStructBool(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field13 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field13) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field13 %v", unmarshalled[0], *p.Field4.Field13))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field13 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field13").GetDefaultBool() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
@@ -5006,14 +8534,62 @@ func TestCompiledNinNestedStructBool(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field13 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field13) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field13 %v", unmarshalled[0], *p.Field1.Field4.Field13))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field13 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field13").GetDefaultBool() {
+			t.Fatalf("wrong default")
 		}
+
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultBool(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewBoolPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field13")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []bool
+	f := FuncHandler{
+		BoolFunc: func(v bool) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewBoolUnmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field13 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field13) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field13 %v", unmarshalled[0], *p.Field13))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field13").GetDefaultBool() {
+			t.Fatalf("wrong default")
+		}
+
 	}
 
 }
@@ -5035,6 +8611,11 @@ func TestUnmarshalFirstNinOptNativeString(t *testing.T) {
 	}
 	if !(p.Field14 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field14").GetDefaultString() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5042,9 +8623,11 @@ func TestUnmarshalFirstNinOptNativeString(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field14 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field14)
 	}
+
 }
 
 func TestUnmarshalNinOptNativeString(t *testing.T) {
@@ -5064,6 +8647,11 @@ func TestUnmarshalNinOptNativeString(t *testing.T) {
 	}
 	if !(p.Field14 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field14").GetDefaultString() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5071,9 +8659,11 @@ func TestUnmarshalNinOptNativeString(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field14 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field14)
 	}
+
 }
 
 func TestCompiledNinOptNativeString(t *testing.T) {
@@ -5100,29 +8690,51 @@ func TestCompiledNinOptNativeString(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field14 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field14) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field14 %v", unmarshalled[0], *p.Field14))
 		}
-	} else {
-		if p.Field14 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field14").GetDefaultString() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptNativeString []*test.NinOptNative
 
-func (this sorterNinOptNativeString) Less(i, j int) bool {
-	if !(this[i].Field14 != nil) {
-		return true
+func (s sorterNinOptNativeString) Less(i, j int) bool {
+
+	var vi *string
+	var vj *string
+	if s[i].Field14 != nil {
+
+		vi = s[i].Field14
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field14").GetDefaultString()
 	}
-	if !(this[j].Field14 != nil) {
+	if s[j].Field14 != nil {
+
+		vj = s[j].Field14
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNative", test.ThetestDescription(), "Field14").GetDefaultString()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field14 < *this[j].Field14
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -5183,6 +8795,11 @@ func TestUnmarshalFirstNinOptStructString(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field14 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14").GetDefaultString() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5190,9 +8807,11 @@ func TestUnmarshalFirstNinOptStructString(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field14 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field14)
 	}
+
 }
 
 func TestUnmarshalNinOptStructString(t *testing.T) {
@@ -5212,6 +8831,11 @@ func TestUnmarshalNinOptStructString(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field14 != nil) {
 		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14").GetDefaultString() {
+				return
+			}
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5219,9 +8843,11 @@ func TestUnmarshalNinOptStructString(t *testing.T) {
 	if unmarshalled == nil {
 		t.Fatalf("ummarshalled == nil")
 	}
+
 	if *unmarshalled != *p.Field4.Field14 {
 		t.Fatalf("%v != %v", *unmarshalled, *p.Field4.Field14)
 	}
+
 }
 
 func TestCompiledNinOptStructString(t *testing.T) {
@@ -5248,29 +8874,51 @@ func TestCompiledNinOptStructString(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field14 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field4.Field14) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field14 %v", unmarshalled[0], *p.Field4.Field14))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field14 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14").GetDefaultString() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
 }
 
 type sorterNinOptStructString []*test.NinOptStruct
 
-func (this sorterNinOptStructString) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field14 != nil) {
-		return true
+func (s sorterNinOptStructString) Less(i, j int) bool {
+
+	var vi *string
+	var vj *string
+	if s[i].Field4 != nil && s[i].Field4.Field14 != nil {
+
+		vi = s[i].Field4.Field14
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14").GetDefaultString()
 	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field14 != nil) {
+	if s[j].Field4 != nil && s[j].Field4.Field14 != nil {
+
+		vj = s[j].Field4.Field14
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14").GetDefaultString()
+	}
+	if vj == nil {
 		return false
 	}
-
-	return *this[i].Field4.Field14 < *this[j].Field4.Field14
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
 
 }
 
@@ -5371,16 +9019,206 @@ func TestCompiledNinNestedStructString(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field14 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], *p.Field1.Field4.Field14) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field14 %v", unmarshalled[0], *p.Field1.Field4.Field14))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field14 != nil {
-			t.Fatalf("Expected nil")
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field14").GetDefaultString() {
+			t.Fatalf("wrong default")
 		}
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultString(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field14 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14").GetDefaultString() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field14 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field14)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultString(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field14 != nil) {
+		if unmarshalled != nil {
+
+			if *unmarshalled == *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14").GetDefaultString() {
+				return
+			}
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+
+	if *unmarshalled != *p.Field14 {
+		t.Fatalf("%v != %v", *unmarshalled, *p.Field14)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultString(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewStringPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled []string
+	f := FuncHandler{
+		StringFunc: func(v string) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewStringUnmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field14 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], *p.Field14) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field14 %v", unmarshalled[0], *p.Field14))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		if unmarshalled[0] != *fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14").GetDefaultString() {
+			t.Fatalf("wrong default")
+		}
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultString []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultString) Less(i, j int) bool {
+
+	var vi *string
+	var vj *string
+	if s[i].Field14 != nil {
+
+		vi = s[i].Field14
+
+	} else {
+		vi = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14").GetDefaultString()
+	}
+	if s[j].Field14 != nil {
+
+		vj = s[j].Field14
+
+	} else {
+		vj = fieldpath.TestDefault("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14").GetDefaultString()
+	}
+	if vj == nil {
+		return false
+	}
+	if vi == nil {
+		return true
+	}
+	return *vi < *vj
+
+}
+
+func (this sorterNinOptNativeDefaultString) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultString) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultString(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultString, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewStringSorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func TestUnmarshalFirstNinOptNativeBytes(t *testing.T) {
@@ -5400,6 +9238,7 @@ func TestUnmarshalFirstNinOptNativeBytes(t *testing.T) {
 	}
 	if !(p.Field15 != nil) {
 		if unmarshalled != nil {
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5430,6 +9269,7 @@ func TestUnmarshalNinOptNativeBytes(t *testing.T) {
 	}
 	if !(p.Field15 != nil) {
 		if unmarshalled != nil {
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5467,28 +9307,34 @@ func TestCompiledNinOptNativeBytes(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field15 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], p.Field15) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field15 %v", unmarshalled[0], p.Field15))
 		}
-	} else {
-		if p.Field15 != nil {
-			t.Fatalf("Expected nil")
-		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		t.Fatalf("Expected nil")
+
 	}
 
 }
 
 type sorterNinOptNativeBytes []*test.NinOptNative
 
-func (this sorterNinOptNativeBytes) Less(i, j int) bool {
-	if !(this[i].Field15 != nil) {
-		return true
-	}
-	if !(this[j].Field15 != nil) {
+func (s sorterNinOptNativeBytes) Less(i, j int) bool {
+
+	if !(s[j].Field15 != nil) {
 		return false
 	}
-	return (bytes.Compare(this[i].Field15, this[j].Field15) == -1)
+	if !(s[i].Field15 != nil) {
+		return true
+	}
+	return bytes.Compare(s[i].Field15, s[j].Field15) == -1
+
 }
 
 func (this sorterNinOptNativeBytes) Len() int {
@@ -5548,6 +9394,7 @@ func TestUnmarshalFirstNinOptStructBytes(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field15 != nil) {
 		if unmarshalled != nil {
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5578,6 +9425,7 @@ func TestUnmarshalNinOptStructBytes(t *testing.T) {
 	}
 	if !(p.Field4 != nil && p.Field4.Field15 != nil) {
 		if unmarshalled != nil {
+
 			t.Fatalf("unmarshalled != nil")
 		}
 		return
@@ -5615,28 +9463,34 @@ func TestCompiledNinOptStructBytes(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field4 != nil && p.Field4.Field15 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], p.Field4.Field15) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field4.Field15 %v", unmarshalled[0], p.Field4.Field15))
 		}
-	} else {
-		if p.Field4 != nil && p.Field4.Field15 != nil {
-			t.Fatalf("Expected nil")
-		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		t.Fatalf("Expected nil")
+
 	}
 
 }
 
 type sorterNinOptStructBytes []*test.NinOptStruct
 
-func (this sorterNinOptStructBytes) Less(i, j int) bool {
-	if !(this[i].Field4 != nil && this[i].Field4.Field15 != nil) {
-		return true
-	}
-	if !(this[j].Field4 != nil && this[j].Field4.Field15 != nil) {
+func (s sorterNinOptStructBytes) Less(i, j int) bool {
+
+	if !(s[j].Field4 != nil && s[j].Field4.Field15 != nil) {
 		return false
 	}
-	return (bytes.Compare(this[i].Field4.Field15, this[j].Field4.Field15) == -1)
+	if !(s[i].Field4 != nil && s[i].Field4.Field15 != nil) {
+		return true
+	}
+	return bytes.Compare(s[i].Field4.Field15, s[j].Field4.Field15) == -1
+
 }
 
 func (this sorterNinOptStructBytes) Len() int {
@@ -5703,14 +9557,174 @@ func TestCompiledNinNestedStructBytes(t *testing.T) {
 		panic(err)
 	}
 
-	if len(unmarshalled) > 0 {
+	if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field15 != nil {
+
 		if !reflect.DeepEqual(unmarshalled[0], p.Field1.Field4.Field15) {
+
 			panic(fmt.Errorf("unmarshalled %v != p.Field1.Field4.Field15 %v", unmarshalled[0], p.Field1.Field4.Field15))
 		}
-	} else {
-		if p.Field1 != nil && p.Field1.Field4 != nil && p.Field1.Field4.Field15 != nil {
-			t.Fatalf("Expected nil")
-		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		t.Fatalf("Expected nil")
+
 	}
 
+}
+
+func TestUnmarshalFirstNinOptNativeDefaultBytes(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.UnmarshalFirst(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field15 != nil) {
+		if unmarshalled != nil {
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+	if !bytes.Equal(unmarshalled, p.Field15) {
+		t.Fatalf("%v != %v", unmarshalled, p.Field15)
+	}
+
+}
+
+func TestUnmarshalNinOptNativeDefaultBytes(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	unmarshalled, err := fp.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+	if !(p.Field15 != nil) {
+		if unmarshalled != nil {
+
+			t.Fatalf("unmarshalled != nil")
+		}
+		return
+	}
+	if unmarshalled == nil {
+		t.Fatalf("ummarshalled == nil")
+	}
+	if !bytes.Equal(unmarshalled, p.Field15) {
+		t.Fatalf("%v != %v", unmarshalled, p.Field15)
+	}
+
+}
+
+func TestCompiledNinOptNativeDefaultBytes(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	fp, err := fieldpath.NewBytesPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
+	if err != nil {
+		panic(err)
+	}
+	p := test.NewPopulatedNinOptNativeDefault(r, false)
+	var unmarshalled [][]byte
+	f := FuncHandler{
+		BytesFunc: func(v []byte) {
+			unmarshalled = append(unmarshalled, v)
+		},
+	}
+	unmarshaler := fieldpath.NewBytesUnmarshaler(fp, f)
+	buf, err := proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	compiled := fieldpath.Compile(unmarshaler)
+	err = compiled.Unmarshal(buf)
+	if err != nil {
+		panic(err)
+	}
+
+	if p.Field15 != nil {
+
+		if !reflect.DeepEqual(unmarshalled[0], p.Field15) {
+
+			panic(fmt.Errorf("unmarshalled %v != p.Field15 %v", unmarshalled[0], p.Field15))
+		}
+		return
+	}
+	if len(unmarshalled) > 0 {
+
+		t.Fatalf("Expected nil")
+
+	}
+
+}
+
+type sorterNinOptNativeDefaultBytes []*test.NinOptNativeDefault
+
+func (s sorterNinOptNativeDefaultBytes) Less(i, j int) bool {
+
+	if !(s[j].Field15 != nil) {
+		return false
+	}
+	if !(s[i].Field15 != nil) {
+		return true
+	}
+	return bytes.Compare(s[i].Field15, s[j].Field15) == -1
+
+}
+
+func (this sorterNinOptNativeDefaultBytes) Len() int {
+	return len(this)
+}
+
+func (this sorterNinOptNativeDefaultBytes) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func TestSortNinOptNativeDefaultBytes(t *testing.T) {
+	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	l := r.Intn(1000)
+	unmarshalled := make(sorterNinOptNativeDefaultBytes, l)
+	marshalled := make([][]byte, l)
+	var err error
+	for i := 0; i < l; i++ {
+		unmarshalled[i] = test.NewPopulatedNinOptNativeDefault(r, false)
+		marshalled[i], err = proto.Marshal(unmarshalled[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	sort.Sort(unmarshalled)
+	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
+	if err != nil {
+		panic(err)
+	}
+	fpsorter := fieldpath.NewBytesSorter(&sortable{marshalled}, fp)
+	sort.Sort(fpsorter)
+	struct2 := &test.NinOptNativeDefault{}
+	for i := 0; i < l; i++ {
+		err = proto.Unmarshal(marshalled[i], struct2)
+		if err != nil {
+			panic(err)
+		}
+		if err := unmarshalled[i].VerboseEqual(struct2); err != nil {
+			panic(err)
+		}
+	}
 }

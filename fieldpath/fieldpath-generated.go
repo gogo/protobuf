@@ -35,11 +35,17 @@ func DecPackedFloat64(buf []byte, offset int, handler Float64Handler) (int, erro
 //Contains the ordered list of keys, compiled path.
 type PackedFloat64Path struct {
 	path []uint64
+	def  *float64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedFloat64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedFloat64Path) GetDefault() *float64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -51,7 +57,9 @@ func NewPackedFloat64Path(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_DOUBLE {
-		return &PackedFloat64Path{fd.path}, nil
+
+		return &PackedFloat64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_DOUBLE, fd.field.GetType()}
@@ -79,20 +87,22 @@ func (this *packedFloat64Unmarshaler) unmarshal(buf []byte, offset int) (int, er
 	return nn, nil
 }
 
-func newPackedFloat64Unmarshaler(path []uint64, h Float64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedFloat64Unmarshaler) reset() {}
+
+func (this *packedFloat64Unmarshaler) unmarshalDefault() {}
+
+func newPackedFloat64Unmarshaler(path []uint64, def *float64, h Float64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedFloat64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedFloat64Path and a Float64Handler into an Unmarshaler
 func NewPackedFloat64Unmarshaler(f *PackedFloat64Path, h Float64Handler) *Unmarshaler {
-	return newPackedFloat64Unmarshaler(f.GetPath(), h)
+	return newPackedFloat64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -109,11 +119,17 @@ func DecFloat64(buf []byte, offset int, handler Float64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Float64Path struct {
 	path []uint64
+	def  *float64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Float64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Float64Path) GetDefault() *float64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -125,7 +141,9 @@ func NewFloat64Path(rootPackage string, rootMessage string, descSet *descriptor.
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_DOUBLE {
-		return &Float64Path{fd.path}, nil
+
+		return &Float64Path{fd.path, fd.GetDefaultFloat64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_DOUBLE, fd.field.GetType()}
@@ -133,9 +151,12 @@ func NewFloat64Path(rootPackage string, rootMessage string, descSet *descriptor.
 
 type float64Unmarshaler struct {
 	handler Float64Handler
+	def     *float64
+	set     bool
 }
 
 func (this *float64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+8 {
 		return 0, io.ErrUnexpectedEOF
@@ -144,30 +165,46 @@ func (this *float64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return 8, nil
 }
 
-func newFloat64Unmarshaler(path []uint64, h Float64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *float64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &float64Unmarshaler{h},
+func (this *float64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Float64(*this.def)
+
+	}
+}
+
+func newFloat64Unmarshaler(path []uint64, def *float64, h Float64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &float64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Float64Path and a Float64Handler into an Unmarshaler
 func NewFloat64Unmarshaler(f *Float64Path, h Float64Handler) *Unmarshaler {
-	return newFloat64Unmarshaler(f.GetPath(), h)
+	return newFloat64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Float64SinglePath struct {
 	path []uint64
+	def  *float64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Float64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Float64SinglePath) GetDefault() *float64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -186,7 +223,9 @@ func NewFloat64SinglePath(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_DOUBLE {
-		return &Float64SinglePath{fd.path}, nil
+
+		return &Float64SinglePath{fd.path, fd.GetDefaultFloat64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_DOUBLE, fd.field.GetType()}
@@ -237,12 +276,12 @@ func (this *Float64SinglePath) UnmarshalFirst(buf []byte) (*float64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Float64SinglePath) Unmarshal(buf []byte) (*float64, error) {
-	var ret *float64
+	var ret *float64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -325,11 +364,11 @@ func (this *Float64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -366,11 +405,17 @@ func DecPackedFloat32(buf []byte, offset int, handler Float32Handler) (int, erro
 //Contains the ordered list of keys, compiled path.
 type PackedFloat32Path struct {
 	path []uint64
+	def  *float32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedFloat32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedFloat32Path) GetDefault() *float32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -382,7 +427,9 @@ func NewPackedFloat32Path(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FLOAT {
-		return &PackedFloat32Path{fd.path}, nil
+
+		return &PackedFloat32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FLOAT, fd.field.GetType()}
@@ -410,20 +457,22 @@ func (this *packedFloat32Unmarshaler) unmarshal(buf []byte, offset int) (int, er
 	return nn, nil
 }
 
-func newPackedFloat32Unmarshaler(path []uint64, h Float32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedFloat32Unmarshaler) reset() {}
+
+func (this *packedFloat32Unmarshaler) unmarshalDefault() {}
+
+func newPackedFloat32Unmarshaler(path []uint64, def *float32, h Float32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedFloat32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedFloat32Path and a Float32Handler into an Unmarshaler
 func NewPackedFloat32Unmarshaler(f *PackedFloat32Path, h Float32Handler) *Unmarshaler {
-	return newPackedFloat32Unmarshaler(f.GetPath(), h)
+	return newPackedFloat32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -440,11 +489,17 @@ func DecFloat32(buf []byte, offset int, handler Float32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Float32Path struct {
 	path []uint64
+	def  *float32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Float32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Float32Path) GetDefault() *float32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -456,7 +511,9 @@ func NewFloat32Path(rootPackage string, rootMessage string, descSet *descriptor.
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FLOAT {
-		return &Float32Path{fd.path}, nil
+
+		return &Float32Path{fd.path, fd.GetDefaultFloat32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FLOAT, fd.field.GetType()}
@@ -464,9 +521,12 @@ func NewFloat32Path(rootPackage string, rootMessage string, descSet *descriptor.
 
 type float32Unmarshaler struct {
 	handler Float32Handler
+	def     *float32
+	set     bool
 }
 
 func (this *float32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+4 {
 		return 0, io.ErrUnexpectedEOF
@@ -475,30 +535,46 @@ func (this *float32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return 4, nil
 }
 
-func newFloat32Unmarshaler(path []uint64, h Float32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *float32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &float32Unmarshaler{h},
+func (this *float32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Float32(*this.def)
+
+	}
+}
+
+func newFloat32Unmarshaler(path []uint64, def *float32, h Float32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &float32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Float32Path and a Float32Handler into an Unmarshaler
 func NewFloat32Unmarshaler(f *Float32Path, h Float32Handler) *Unmarshaler {
-	return newFloat32Unmarshaler(f.GetPath(), h)
+	return newFloat32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Float32SinglePath struct {
 	path []uint64
+	def  *float32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Float32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Float32SinglePath) GetDefault() *float32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -517,7 +593,9 @@ func NewFloat32SinglePath(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FLOAT {
-		return &Float32SinglePath{fd.path}, nil
+
+		return &Float32SinglePath{fd.path, fd.GetDefaultFloat32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FLOAT, fd.field.GetType()}
@@ -568,12 +646,12 @@ func (this *Float32SinglePath) UnmarshalFirst(buf []byte) (*float32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Float32SinglePath) Unmarshal(buf []byte) (*float32, error) {
-	var ret *float32
+	var ret *float32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -656,11 +734,11 @@ func (this *Float32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -697,11 +775,17 @@ func DecPackedInt32(buf []byte, offset int, handler Int32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type PackedInt32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedInt32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedInt32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -713,11 +797,15 @@ func NewPackedInt32Path(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT32 {
-		return &PackedInt32Path{fd.path}, nil
+
+		return &PackedInt32Path{fd.path, nil}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_ENUM {
-		return &PackedInt32Path{fd.path}, nil
+
+		return &PackedInt32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT32, fd.field.GetType()}
@@ -745,20 +833,22 @@ func (this *packedInt32Unmarshaler) unmarshal(buf []byte, offset int) (int, erro
 	return nn, nil
 }
 
-func newPackedInt32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedInt32Unmarshaler) reset() {}
+
+func (this *packedInt32Unmarshaler) unmarshalDefault() {}
+
+func newPackedInt32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedInt32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedInt32Path and a Int32Handler into an Unmarshaler
 func NewPackedInt32Unmarshaler(f *PackedInt32Path, h Int32Handler) *Unmarshaler {
-	return newPackedInt32Unmarshaler(f.GetPath(), h)
+	return newPackedInt32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -785,11 +875,17 @@ func DecInt32(buf []byte, offset int, handler Int32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Int32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Int32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Int32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -801,11 +897,15 @@ func NewInt32Path(rootPackage string, rootMessage string, descSet *descriptor.Fi
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT32 {
-		return &Int32Path{fd.path}, nil
+
+		return &Int32Path{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_ENUM {
-		return &Int32Path{fd.path}, nil
+
+		return &Int32Path{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT32, fd.field.GetType()}
@@ -813,9 +913,12 @@ func NewInt32Path(rootPackage string, rootMessage string, descSet *descriptor.Fi
 
 type int32Unmarshaler struct {
 	handler Int32Handler
+	def     *int32
+	set     bool
 }
 
 func (this *int32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v int32
 	n := 0
@@ -834,30 +937,46 @@ func (this *int32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newInt32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *int32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &int32Unmarshaler{h},
+func (this *int32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int32(*this.def)
+
+	}
+}
+
+func newInt32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &int32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Int32Path and a Int32Handler into an Unmarshaler
 func NewInt32Unmarshaler(f *Int32Path, h Int32Handler) *Unmarshaler {
-	return newInt32Unmarshaler(f.GetPath(), h)
+	return newInt32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Int32SinglePath struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Int32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Int32SinglePath) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -876,11 +995,15 @@ func NewInt32SinglePath(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT32 {
-		return &Int32SinglePath{fd.path}, nil
+
+		return &Int32SinglePath{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_ENUM {
-		return &Int32SinglePath{fd.path}, nil
+
+		return &Int32SinglePath{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT32, fd.field.GetType()}
@@ -941,12 +1064,12 @@ func (this *Int32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Int32SinglePath) Unmarshal(buf []byte) (*int32, error) {
-	var ret *int32
+	var ret *int32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -1039,11 +1162,11 @@ func (this *Int32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -1080,11 +1203,17 @@ func DecPackedInt64(buf []byte, offset int, handler Int64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type PackedInt64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedInt64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedInt64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1096,7 +1225,9 @@ func NewPackedInt64Path(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT64 {
-		return &PackedInt64Path{fd.path}, nil
+
+		return &PackedInt64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT64, fd.field.GetType()}
@@ -1124,20 +1255,22 @@ func (this *packedInt64Unmarshaler) unmarshal(buf []byte, offset int) (int, erro
 	return nn, nil
 }
 
-func newPackedInt64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedInt64Unmarshaler) reset() {}
+
+func (this *packedInt64Unmarshaler) unmarshalDefault() {}
+
+func newPackedInt64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedInt64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedInt64Path and a Int64Handler into an Unmarshaler
 func NewPackedInt64Unmarshaler(f *PackedInt64Path, h Int64Handler) *Unmarshaler {
-	return newPackedInt64Unmarshaler(f.GetPath(), h)
+	return newPackedInt64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -1164,11 +1297,17 @@ func DecInt64(buf []byte, offset int, handler Int64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Int64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Int64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Int64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1180,7 +1319,9 @@ func NewInt64Path(rootPackage string, rootMessage string, descSet *descriptor.Fi
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT64 {
-		return &Int64Path{fd.path}, nil
+
+		return &Int64Path{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT64, fd.field.GetType()}
@@ -1188,9 +1329,12 @@ func NewInt64Path(rootPackage string, rootMessage string, descSet *descriptor.Fi
 
 type int64Unmarshaler struct {
 	handler Int64Handler
+	def     *int64
+	set     bool
 }
 
 func (this *int64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v int64
 	n := 0
@@ -1209,30 +1353,46 @@ func (this *int64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newInt64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *int64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &int64Unmarshaler{h},
+func (this *int64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int64(*this.def)
+
+	}
+}
+
+func newInt64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &int64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Int64Path and a Int64Handler into an Unmarshaler
 func NewInt64Unmarshaler(f *Int64Path, h Int64Handler) *Unmarshaler {
-	return newInt64Unmarshaler(f.GetPath(), h)
+	return newInt64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Int64SinglePath struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Int64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Int64SinglePath) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1251,7 +1411,9 @@ func NewInt64SinglePath(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_INT64 {
-		return &Int64SinglePath{fd.path}, nil
+
+		return &Int64SinglePath{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_INT64, fd.field.GetType()}
@@ -1312,12 +1474,12 @@ func (this *Int64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Int64SinglePath) Unmarshal(buf []byte) (*int64, error) {
-	var ret *int64
+	var ret *int64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -1410,11 +1572,11 @@ func (this *Int64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -1451,11 +1613,17 @@ func DecPackedUint64(buf []byte, offset int, handler Uint64Handler) (int, error)
 //Contains the ordered list of keys, compiled path.
 type PackedUint64Path struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedUint64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedUint64Path) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1467,7 +1635,9 @@ func NewPackedUint64Path(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT64 {
-		return &PackedUint64Path{fd.path}, nil
+
+		return &PackedUint64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT64, fd.field.GetType()}
@@ -1495,20 +1665,22 @@ func (this *packedUint64Unmarshaler) unmarshal(buf []byte, offset int) (int, err
 	return nn, nil
 }
 
-func newPackedUint64Unmarshaler(path []uint64, h Uint64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedUint64Unmarshaler) reset() {}
+
+func (this *packedUint64Unmarshaler) unmarshalDefault() {}
+
+func newPackedUint64Unmarshaler(path []uint64, def *uint64, h Uint64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedUint64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedUint64Path and a Uint64Handler into an Unmarshaler
 func NewPackedUint64Unmarshaler(f *PackedUint64Path, h Uint64Handler) *Unmarshaler {
-	return newPackedUint64Unmarshaler(f.GetPath(), h)
+	return newPackedUint64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -1535,11 +1707,17 @@ func DecUint64(buf []byte, offset int, handler Uint64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Uint64Path struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Uint64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Uint64Path) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1551,7 +1729,9 @@ func NewUint64Path(rootPackage string, rootMessage string, descSet *descriptor.F
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT64 {
-		return &Uint64Path{fd.path}, nil
+
+		return &Uint64Path{fd.path, fd.GetDefaultUint64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT64, fd.field.GetType()}
@@ -1559,9 +1739,12 @@ func NewUint64Path(rootPackage string, rootMessage string, descSet *descriptor.F
 
 type uint64Unmarshaler struct {
 	handler Uint64Handler
+	def     *uint64
+	set     bool
 }
 
 func (this *uint64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v uint64
 	n := 0
@@ -1580,30 +1763,46 @@ func (this *uint64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newUint64Unmarshaler(path []uint64, h Uint64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *uint64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &uint64Unmarshaler{h},
+func (this *uint64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Uint64(*this.def)
+
+	}
+}
+
+func newUint64Unmarshaler(path []uint64, def *uint64, h Uint64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &uint64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Uint64Path and a Uint64Handler into an Unmarshaler
 func NewUint64Unmarshaler(f *Uint64Path, h Uint64Handler) *Unmarshaler {
-	return newUint64Unmarshaler(f.GetPath(), h)
+	return newUint64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Uint64SinglePath struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Uint64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Uint64SinglePath) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1622,7 +1821,9 @@ func NewUint64SinglePath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT64 {
-		return &Uint64SinglePath{fd.path}, nil
+
+		return &Uint64SinglePath{fd.path, fd.GetDefaultUint64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT64, fd.field.GetType()}
@@ -1683,12 +1884,12 @@ func (this *Uint64SinglePath) UnmarshalFirst(buf []byte) (*uint64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Uint64SinglePath) Unmarshal(buf []byte) (*uint64, error) {
-	var ret *uint64
+	var ret *uint64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -1781,11 +1982,11 @@ func (this *Uint64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -1822,11 +2023,17 @@ func DecPackedUint32(buf []byte, offset int, handler Uint32Handler) (int, error)
 //Contains the ordered list of keys, compiled path.
 type PackedUint32Path struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedUint32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedUint32Path) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1838,7 +2045,9 @@ func NewPackedUint32Path(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT32 {
-		return &PackedUint32Path{fd.path}, nil
+
+		return &PackedUint32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT32, fd.field.GetType()}
@@ -1866,20 +2075,22 @@ func (this *packedUint32Unmarshaler) unmarshal(buf []byte, offset int) (int, err
 	return nn, nil
 }
 
-func newPackedUint32Unmarshaler(path []uint64, h Uint32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedUint32Unmarshaler) reset() {}
+
+func (this *packedUint32Unmarshaler) unmarshalDefault() {}
+
+func newPackedUint32Unmarshaler(path []uint64, def *uint32, h Uint32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedUint32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedUint32Path and a Uint32Handler into an Unmarshaler
 func NewPackedUint32Unmarshaler(f *PackedUint32Path, h Uint32Handler) *Unmarshaler {
-	return newPackedUint32Unmarshaler(f.GetPath(), h)
+	return newPackedUint32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -1906,11 +2117,17 @@ func DecUint32(buf []byte, offset int, handler Uint32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Uint32Path struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Uint32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Uint32Path) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1922,7 +2139,9 @@ func NewUint32Path(rootPackage string, rootMessage string, descSet *descriptor.F
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT32 {
-		return &Uint32Path{fd.path}, nil
+
+		return &Uint32Path{fd.path, fd.GetDefaultUint32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT32, fd.field.GetType()}
@@ -1930,9 +2149,12 @@ func NewUint32Path(rootPackage string, rootMessage string, descSet *descriptor.F
 
 type uint32Unmarshaler struct {
 	handler Uint32Handler
+	def     *uint32
+	set     bool
 }
 
 func (this *uint32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v uint32
 	n := 0
@@ -1951,30 +2173,46 @@ func (this *uint32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newUint32Unmarshaler(path []uint64, h Uint32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *uint32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &uint32Unmarshaler{h},
+func (this *uint32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Uint32(*this.def)
+
+	}
+}
+
+func newUint32Unmarshaler(path []uint64, def *uint32, h Uint32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &uint32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Uint32Path and a Uint32Handler into an Unmarshaler
 func NewUint32Unmarshaler(f *Uint32Path, h Uint32Handler) *Unmarshaler {
-	return newUint32Unmarshaler(f.GetPath(), h)
+	return newUint32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Uint32SinglePath struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Uint32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Uint32SinglePath) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -1993,7 +2231,9 @@ func NewUint32SinglePath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_UINT32 {
-		return &Uint32SinglePath{fd.path}, nil
+
+		return &Uint32SinglePath{fd.path, fd.GetDefaultUint32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_UINT32, fd.field.GetType()}
@@ -2054,12 +2294,12 @@ func (this *Uint32SinglePath) UnmarshalFirst(buf []byte) (*uint32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Uint32SinglePath) Unmarshal(buf []byte) (*uint32, error) {
-	var ret *uint32
+	var ret *uint32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -2152,11 +2392,11 @@ func (this *Uint32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -2193,11 +2433,17 @@ func DecPackedSint32(buf []byte, offset int, handler Int32Handler) (int, error) 
 //Contains the ordered list of keys, compiled path.
 type PackedSint32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedSint32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedSint32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2209,7 +2455,9 @@ func NewPackedSint32Path(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT32 {
-		return &PackedSint32Path{fd.path}, nil
+
+		return &PackedSint32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT32, fd.field.GetType()}
@@ -2237,20 +2485,22 @@ func (this *packedSint32Unmarshaler) unmarshal(buf []byte, offset int) (int, err
 	return nn, nil
 }
 
-func newPackedSint32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedSint32Unmarshaler) reset() {}
+
+func (this *packedSint32Unmarshaler) unmarshalDefault() {}
+
+func newPackedSint32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedSint32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedSint32Path and a Int32Handler into an Unmarshaler
 func NewPackedSint32Unmarshaler(f *PackedSint32Path, h Int32Handler) *Unmarshaler {
-	return newPackedSint32Unmarshaler(f.GetPath(), h)
+	return newPackedSint32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -2278,11 +2528,17 @@ func DecSint32(buf []byte, offset int, handler Int32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Sint32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Sint32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sint32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2294,7 +2550,9 @@ func NewSint32Path(rootPackage string, rootMessage string, descSet *descriptor.F
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT32 {
-		return &Sint32Path{fd.path}, nil
+
+		return &Sint32Path{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT32, fd.field.GetType()}
@@ -2302,9 +2560,12 @@ func NewSint32Path(rootPackage string, rootMessage string, descSet *descriptor.F
 
 type sint32Unmarshaler struct {
 	handler Int32Handler
+	def     *int32
+	set     bool
 }
 
 func (this *sint32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v int32
 	n := 0
@@ -2324,30 +2585,46 @@ func (this *sint32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newSint32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *sint32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &sint32Unmarshaler{h},
+func (this *sint32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int32(*this.def)
+
+	}
+}
+
+func newSint32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &sint32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Sint32Path and a Int32Handler into an Unmarshaler
 func NewSint32Unmarshaler(f *Sint32Path, h Int32Handler) *Unmarshaler {
-	return newSint32Unmarshaler(f.GetPath(), h)
+	return newSint32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Sint32SinglePath struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Sint32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sint32SinglePath) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2366,7 +2643,9 @@ func NewSint32SinglePath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT32 {
-		return &Sint32SinglePath{fd.path}, nil
+
+		return &Sint32SinglePath{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT32, fd.field.GetType()}
@@ -2428,12 +2707,12 @@ func (this *Sint32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Sint32SinglePath) Unmarshal(buf []byte) (*int32, error) {
-	var ret *int32
+	var ret *int32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -2527,11 +2806,11 @@ func (this *Sint32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -2568,11 +2847,17 @@ func DecPackedSint64(buf []byte, offset int, handler Int64Handler) (int, error) 
 //Contains the ordered list of keys, compiled path.
 type PackedSint64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedSint64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedSint64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2584,7 +2869,9 @@ func NewPackedSint64Path(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT64 {
-		return &PackedSint64Path{fd.path}, nil
+
+		return &PackedSint64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT64, fd.field.GetType()}
@@ -2612,20 +2899,22 @@ func (this *packedSint64Unmarshaler) unmarshal(buf []byte, offset int) (int, err
 	return nn, nil
 }
 
-func newPackedSint64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedSint64Unmarshaler) reset() {}
+
+func (this *packedSint64Unmarshaler) unmarshalDefault() {}
+
+func newPackedSint64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedSint64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedSint64Path and a Int64Handler into an Unmarshaler
 func NewPackedSint64Unmarshaler(f *PackedSint64Path, h Int64Handler) *Unmarshaler {
-	return newPackedSint64Unmarshaler(f.GetPath(), h)
+	return newPackedSint64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -2653,11 +2942,17 @@ func DecSint64(buf []byte, offset int, handler Int64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Sint64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Sint64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sint64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2669,7 +2964,9 @@ func NewSint64Path(rootPackage string, rootMessage string, descSet *descriptor.F
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT64 {
-		return &Sint64Path{fd.path}, nil
+
+		return &Sint64Path{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT64, fd.field.GetType()}
@@ -2677,9 +2974,12 @@ func NewSint64Path(rootPackage string, rootMessage string, descSet *descriptor.F
 
 type sint64Unmarshaler struct {
 	handler Int64Handler
+	def     *int64
+	set     bool
 }
 
 func (this *sint64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v uint64
 	n := 0
@@ -2699,30 +2999,46 @@ func (this *sint64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newSint64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *sint64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &sint64Unmarshaler{h},
+func (this *sint64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int64(*this.def)
+
+	}
+}
+
+func newSint64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &sint64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Sint64Path and a Int64Handler into an Unmarshaler
 func NewSint64Unmarshaler(f *Sint64Path, h Int64Handler) *Unmarshaler {
-	return newSint64Unmarshaler(f.GetPath(), h)
+	return newSint64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Sint64SinglePath struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Sint64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sint64SinglePath) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2741,7 +3057,9 @@ func NewSint64SinglePath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SINT64 {
-		return &Sint64SinglePath{fd.path}, nil
+
+		return &Sint64SinglePath{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SINT64, fd.field.GetType()}
@@ -2803,12 +3121,12 @@ func (this *Sint64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Sint64SinglePath) Unmarshal(buf []byte) (*int64, error) {
-	var ret *int64
+	var ret *int64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -2902,11 +3220,11 @@ func (this *Sint64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -2943,11 +3261,17 @@ func DecPackedFixed32(buf []byte, offset int, handler Uint32Handler) (int, error
 //Contains the ordered list of keys, compiled path.
 type PackedFixed32Path struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedFixed32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedFixed32Path) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -2959,7 +3283,9 @@ func NewPackedFixed32Path(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED32 {
-		return &PackedFixed32Path{fd.path}, nil
+
+		return &PackedFixed32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED32, fd.field.GetType()}
@@ -2987,20 +3313,22 @@ func (this *packedFixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, er
 	return nn, nil
 }
 
-func newPackedFixed32Unmarshaler(path []uint64, h Uint32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedFixed32Unmarshaler) reset() {}
+
+func (this *packedFixed32Unmarshaler) unmarshalDefault() {}
+
+func newPackedFixed32Unmarshaler(path []uint64, def *uint32, h Uint32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedFixed32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedFixed32Path and a Uint32Handler into an Unmarshaler
 func NewPackedFixed32Unmarshaler(f *PackedFixed32Path, h Uint32Handler) *Unmarshaler {
-	return newPackedFixed32Unmarshaler(f.GetPath(), h)
+	return newPackedFixed32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -3017,11 +3345,17 @@ func DecFixed32(buf []byte, offset int, handler Uint32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Fixed32Path struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Fixed32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Fixed32Path) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3033,7 +3367,9 @@ func NewFixed32Path(rootPackage string, rootMessage string, descSet *descriptor.
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED32 {
-		return &Fixed32Path{fd.path}, nil
+
+		return &Fixed32Path{fd.path, fd.GetDefaultUint32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED32, fd.field.GetType()}
@@ -3041,9 +3377,12 @@ func NewFixed32Path(rootPackage string, rootMessage string, descSet *descriptor.
 
 type fixed32Unmarshaler struct {
 	handler Uint32Handler
+	def     *uint32
+	set     bool
 }
 
 func (this *fixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+4 {
 		return 0, io.ErrUnexpectedEOF
@@ -3052,30 +3391,46 @@ func (this *fixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return 4, nil
 }
 
-func newFixed32Unmarshaler(path []uint64, h Uint32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *fixed32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &fixed32Unmarshaler{h},
+func (this *fixed32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Uint32(*this.def)
+
+	}
+}
+
+func newFixed32Unmarshaler(path []uint64, def *uint32, h Uint32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &fixed32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Fixed32Path and a Uint32Handler into an Unmarshaler
 func NewFixed32Unmarshaler(f *Fixed32Path, h Uint32Handler) *Unmarshaler {
-	return newFixed32Unmarshaler(f.GetPath(), h)
+	return newFixed32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Fixed32SinglePath struct {
 	path []uint64
+	def  *uint32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Fixed32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Fixed32SinglePath) GetDefault() *uint32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3094,7 +3449,9 @@ func NewFixed32SinglePath(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED32 {
-		return &Fixed32SinglePath{fd.path}, nil
+
+		return &Fixed32SinglePath{fd.path, fd.GetDefaultUint32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED32, fd.field.GetType()}
@@ -3145,12 +3502,12 @@ func (this *Fixed32SinglePath) UnmarshalFirst(buf []byte) (*uint32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Fixed32SinglePath) Unmarshal(buf []byte) (*uint32, error) {
-	var ret *uint32
+	var ret *uint32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -3233,11 +3590,11 @@ func (this *Fixed32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -3274,11 +3631,17 @@ func DecPackedFixed64(buf []byte, offset int, handler Uint64Handler) (int, error
 //Contains the ordered list of keys, compiled path.
 type PackedFixed64Path struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedFixed64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedFixed64Path) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3290,7 +3653,9 @@ func NewPackedFixed64Path(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED64 {
-		return &PackedFixed64Path{fd.path}, nil
+
+		return &PackedFixed64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED64, fd.field.GetType()}
@@ -3318,20 +3683,22 @@ func (this *packedFixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, er
 	return nn, nil
 }
 
-func newPackedFixed64Unmarshaler(path []uint64, h Uint64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedFixed64Unmarshaler) reset() {}
+
+func (this *packedFixed64Unmarshaler) unmarshalDefault() {}
+
+func newPackedFixed64Unmarshaler(path []uint64, def *uint64, h Uint64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedFixed64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedFixed64Path and a Uint64Handler into an Unmarshaler
 func NewPackedFixed64Unmarshaler(f *PackedFixed64Path, h Uint64Handler) *Unmarshaler {
-	return newPackedFixed64Unmarshaler(f.GetPath(), h)
+	return newPackedFixed64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -3348,11 +3715,17 @@ func DecFixed64(buf []byte, offset int, handler Uint64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Fixed64Path struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Fixed64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Fixed64Path) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3364,7 +3737,9 @@ func NewFixed64Path(rootPackage string, rootMessage string, descSet *descriptor.
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED64 {
-		return &Fixed64Path{fd.path}, nil
+
+		return &Fixed64Path{fd.path, fd.GetDefaultUint64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED64, fd.field.GetType()}
@@ -3372,9 +3747,12 @@ func NewFixed64Path(rootPackage string, rootMessage string, descSet *descriptor.
 
 type fixed64Unmarshaler struct {
 	handler Uint64Handler
+	def     *uint64
+	set     bool
 }
 
 func (this *fixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+8 {
 		return 0, io.ErrUnexpectedEOF
@@ -3383,30 +3761,46 @@ func (this *fixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return 8, nil
 }
 
-func newFixed64Unmarshaler(path []uint64, h Uint64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *fixed64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &fixed64Unmarshaler{h},
+func (this *fixed64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Uint64(*this.def)
+
+	}
+}
+
+func newFixed64Unmarshaler(path []uint64, def *uint64, h Uint64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &fixed64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Fixed64Path and a Uint64Handler into an Unmarshaler
 func NewFixed64Unmarshaler(f *Fixed64Path, h Uint64Handler) *Unmarshaler {
-	return newFixed64Unmarshaler(f.GetPath(), h)
+	return newFixed64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Fixed64SinglePath struct {
 	path []uint64
+	def  *uint64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Fixed64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Fixed64SinglePath) GetDefault() *uint64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3425,7 +3819,9 @@ func NewFixed64SinglePath(rootPackage string, rootMessage string, descSet *descr
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_FIXED64 {
-		return &Fixed64SinglePath{fd.path}, nil
+
+		return &Fixed64SinglePath{fd.path, fd.GetDefaultUint64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_FIXED64, fd.field.GetType()}
@@ -3476,12 +3872,12 @@ func (this *Fixed64SinglePath) UnmarshalFirst(buf []byte) (*uint64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Fixed64SinglePath) Unmarshal(buf []byte) (*uint64, error) {
-	var ret *uint64
+	var ret *uint64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -3564,11 +3960,11 @@ func (this *Fixed64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -3605,11 +4001,17 @@ func DecPackedSfixed32(buf []byte, offset int, handler Int32Handler) (int, error
 //Contains the ordered list of keys, compiled path.
 type PackedSfixed32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedSfixed32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedSfixed32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3621,7 +4023,9 @@ func NewPackedSfixed32Path(rootPackage string, rootMessage string, descSet *desc
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED32 {
-		return &PackedSfixed32Path{fd.path}, nil
+
+		return &PackedSfixed32Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED32, fd.field.GetType()}
@@ -3649,20 +4053,22 @@ func (this *packedSfixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, e
 	return nn, nil
 }
 
-func newPackedSfixed32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedSfixed32Unmarshaler) reset() {}
+
+func (this *packedSfixed32Unmarshaler) unmarshalDefault() {}
+
+func newPackedSfixed32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedSfixed32Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedSfixed32Path and a Int32Handler into an Unmarshaler
 func NewPackedSfixed32Unmarshaler(f *PackedSfixed32Path, h Int32Handler) *Unmarshaler {
-	return newPackedSfixed32Unmarshaler(f.GetPath(), h)
+	return newPackedSfixed32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -3679,11 +4085,17 @@ func DecSfixed32(buf []byte, offset int, handler Int32Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Sfixed32Path struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Sfixed32Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sfixed32Path) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3695,7 +4107,9 @@ func NewSfixed32Path(rootPackage string, rootMessage string, descSet *descriptor
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED32 {
-		return &Sfixed32Path{fd.path}, nil
+
+		return &Sfixed32Path{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED32, fd.field.GetType()}
@@ -3703,9 +4117,12 @@ func NewSfixed32Path(rootPackage string, rootMessage string, descSet *descriptor
 
 type sfixed32Unmarshaler struct {
 	handler Int32Handler
+	def     *int32
+	set     bool
 }
 
 func (this *sfixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+4 {
 		return 0, io.ErrUnexpectedEOF
@@ -3714,30 +4131,46 @@ func (this *sfixed32Unmarshaler) unmarshal(buf []byte, offset int) (int, error) 
 	return 4, nil
 }
 
-func newSfixed32Unmarshaler(path []uint64, h Int32Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *sfixed32Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &sfixed32Unmarshaler{h},
+func (this *sfixed32Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int32(*this.def)
+
+	}
+}
+
+func newSfixed32Unmarshaler(path []uint64, def *int32, h Int32Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &sfixed32Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Sfixed32Path and a Int32Handler into an Unmarshaler
 func NewSfixed32Unmarshaler(f *Sfixed32Path, h Int32Handler) *Unmarshaler {
-	return newSfixed32Unmarshaler(f.GetPath(), h)
+	return newSfixed32Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Sfixed32SinglePath struct {
 	path []uint64
+	def  *int32
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Sfixed32SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sfixed32SinglePath) GetDefault() *int32 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3756,7 +4189,9 @@ func NewSfixed32SinglePath(rootPackage string, rootMessage string, descSet *desc
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED32 {
-		return &Sfixed32SinglePath{fd.path}, nil
+
+		return &Sfixed32SinglePath{fd.path, fd.GetDefaultInt32()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED32, fd.field.GetType()}
@@ -3807,12 +4242,12 @@ func (this *Sfixed32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Sfixed32SinglePath) Unmarshal(buf []byte) (*int32, error) {
-	var ret *int32
+	var ret *int32 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -3895,11 +4330,11 @@ func (this *Sfixed32Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -3936,11 +4371,17 @@ func DecPackedSfixed64(buf []byte, offset int, handler Int64Handler) (int, error
 //Contains the ordered list of keys, compiled path.
 type PackedSfixed64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedSfixed64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedSfixed64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -3952,7 +4393,9 @@ func NewPackedSfixed64Path(rootPackage string, rootMessage string, descSet *desc
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED64 {
-		return &PackedSfixed64Path{fd.path}, nil
+
+		return &PackedSfixed64Path{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED64, fd.field.GetType()}
@@ -3980,20 +4423,22 @@ func (this *packedSfixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, e
 	return nn, nil
 }
 
-func newPackedSfixed64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedSfixed64Unmarshaler) reset() {}
+
+func (this *packedSfixed64Unmarshaler) unmarshalDefault() {}
+
+func newPackedSfixed64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedSfixed64Unmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedSfixed64Path and a Int64Handler into an Unmarshaler
 func NewPackedSfixed64Unmarshaler(f *PackedSfixed64Path, h Int64Handler) *Unmarshaler {
-	return newPackedSfixed64Unmarshaler(f.GetPath(), h)
+	return newPackedSfixed64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -4010,11 +4455,17 @@ func DecSfixed64(buf []byte, offset int, handler Int64Handler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type Sfixed64Path struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *Sfixed64Path) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sfixed64Path) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4026,7 +4477,9 @@ func NewSfixed64Path(rootPackage string, rootMessage string, descSet *descriptor
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED64 {
-		return &Sfixed64Path{fd.path}, nil
+
+		return &Sfixed64Path{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED64, fd.field.GetType()}
@@ -4034,9 +4487,12 @@ func NewSfixed64Path(rootPackage string, rootMessage string, descSet *descriptor
 
 type sfixed64Unmarshaler struct {
 	handler Int64Handler
+	def     *int64
+	set     bool
 }
 
 func (this *sfixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	if endOf < offset+8 {
 		return 0, io.ErrUnexpectedEOF
@@ -4045,30 +4501,46 @@ func (this *sfixed64Unmarshaler) unmarshal(buf []byte, offset int) (int, error) 
 	return 8, nil
 }
 
-func newSfixed64Unmarshaler(path []uint64, h Int64Handler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *sfixed64Unmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &sfixed64Unmarshaler{h},
+func (this *sfixed64Unmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Int64(*this.def)
+
+	}
+}
+
+func newSfixed64Unmarshaler(path []uint64, def *int64, h Int64Handler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &sfixed64Unmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a Sfixed64Path and a Int64Handler into an Unmarshaler
 func NewSfixed64Unmarshaler(f *Sfixed64Path, h Int64Handler) *Unmarshaler {
-	return newSfixed64Unmarshaler(f.GetPath(), h)
+	return newSfixed64Unmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type Sfixed64SinglePath struct {
 	path []uint64
+	def  *int64
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *Sfixed64SinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *Sfixed64SinglePath) GetDefault() *int64 {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4087,7 +4559,9 @@ func NewSfixed64SinglePath(rootPackage string, rootMessage string, descSet *desc
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_SFIXED64 {
-		return &Sfixed64SinglePath{fd.path}, nil
+
+		return &Sfixed64SinglePath{fd.path, fd.GetDefaultInt64()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_SFIXED64, fd.field.GetType()}
@@ -4138,12 +4612,12 @@ func (this *Sfixed64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *Sfixed64SinglePath) Unmarshal(buf []byte) (*int64, error) {
-	var ret *int64
+	var ret *int64 = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -4226,11 +4700,11 @@ func (this *Sfixed64Sorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -4267,11 +4741,17 @@ func DecPackedBool(buf []byte, offset int, handler BoolHandler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type PackedBoolPath struct {
 	path []uint64
+	def  *bool
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedBoolPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedBoolPath) GetDefault() *bool {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4283,7 +4763,9 @@ func NewPackedBoolPath(rootPackage string, rootMessage string, descSet *descript
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_BOOL {
-		return &PackedBoolPath{fd.path}, nil
+
+		return &PackedBoolPath{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_BOOL, fd.field.GetType()}
@@ -4311,20 +4793,22 @@ func (this *packedBoolUnmarshaler) unmarshal(buf []byte, offset int) (int, error
 	return nn, nil
 }
 
-func newPackedBoolUnmarshaler(path []uint64, h BoolHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedBoolUnmarshaler) reset() {}
+
+func (this *packedBoolUnmarshaler) unmarshalDefault() {}
+
+func newPackedBoolUnmarshaler(path []uint64, def *bool, h BoolHandler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedBoolUnmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedBoolPath and a BoolHandler into an Unmarshaler
 func NewPackedBoolUnmarshaler(f *PackedBoolPath, h BoolHandler) *Unmarshaler {
-	return newPackedBoolUnmarshaler(f.GetPath(), h)
+	return newPackedBoolUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -4352,11 +4836,17 @@ func DecBool(buf []byte, offset int, handler BoolHandler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type BoolPath struct {
 	path []uint64
+	def  *bool
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *BoolPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *BoolPath) GetDefault() *bool {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4368,7 +4858,9 @@ func NewBoolPath(rootPackage string, rootMessage string, descSet *descriptor.Fil
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_BOOL {
-		return &BoolPath{fd.path}, nil
+
+		return &BoolPath{fd.path, fd.GetDefaultBool()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_BOOL, fd.field.GetType()}
@@ -4376,9 +4868,12 @@ func NewBoolPath(rootPackage string, rootMessage string, descSet *descriptor.Fil
 
 type boolUnmarshaler struct {
 	handler BoolHandler
+	def     *bool
+	set     bool
 }
 
 func (this *boolUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var v int32
 	n := 0
@@ -4398,20 +4893,30 @@ func (this *boolUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n, nil
 }
 
-func newBoolUnmarshaler(path []uint64, h BoolHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *boolUnmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &boolUnmarshaler{h},
+func (this *boolUnmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Bool(*this.def)
+
+	}
+}
+
+func newBoolUnmarshaler(path []uint64, def *bool, h BoolHandler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &boolUnmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a BoolPath and a BoolHandler into an Unmarshaler
 func NewBoolUnmarshaler(f *BoolPath, h BoolHandler) *Unmarshaler {
-	return newBoolUnmarshaler(f.GetPath(), h)
+	return newBoolUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a repeated packed field and sends the elements one by one to the handler.
@@ -4438,11 +4943,17 @@ func DecPackedString(buf []byte, offset int, handler StringHandler) (int, error)
 //Contains the ordered list of keys, compiled path.
 type PackedStringPath struct {
 	path []uint64
+	def  *string
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedStringPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedStringPath) GetDefault() *string {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4454,7 +4965,9 @@ func NewPackedStringPath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_STRING {
-		return &PackedStringPath{fd.path}, nil
+
+		return &PackedStringPath{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_STRING, fd.field.GetType()}
@@ -4482,20 +4995,22 @@ func (this *packedStringUnmarshaler) unmarshal(buf []byte, offset int) (int, err
 	return nn, nil
 }
 
-func newPackedStringUnmarshaler(path []uint64, h StringHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedStringUnmarshaler) reset() {}
+
+func (this *packedStringUnmarshaler) unmarshalDefault() {}
+
+func newPackedStringUnmarshaler(path []uint64, def *string, h StringHandler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedStringUnmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedStringPath and a StringHandler into an Unmarshaler
 func NewPackedStringUnmarshaler(f *PackedStringPath, h StringHandler) *Unmarshaler {
-	return newPackedStringUnmarshaler(f.GetPath(), h)
+	return newPackedStringUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -4527,11 +5042,17 @@ func DecString(buf []byte, offset int, handler StringHandler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type StringPath struct {
 	path []uint64
+	def  *string
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *StringPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *StringPath) GetDefault() *string {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4543,7 +5064,9 @@ func NewStringPath(rootPackage string, rootMessage string, descSet *descriptor.F
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_STRING {
-		return &StringPath{fd.path}, nil
+
+		return &StringPath{fd.path, fd.GetDefaultString()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_STRING, fd.field.GetType()}
@@ -4551,9 +5074,12 @@ func NewStringPath(rootPackage string, rootMessage string, descSet *descriptor.F
 
 type stringUnmarshaler struct {
 	handler StringHandler
+	def     *string
+	set     bool
 }
 
 func (this *stringUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var stringLen uint64
 	n := 0
@@ -4577,30 +5103,46 @@ func (this *stringUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n + int(stringLen), nil
 }
 
-func newStringUnmarshaler(path []uint64, h StringHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *stringUnmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &stringUnmarshaler{h},
+func (this *stringUnmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.String(*this.def)
+
+	}
+}
+
+func newStringUnmarshaler(path []uint64, def *string, h StringHandler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &stringUnmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a StringPath and a StringHandler into an Unmarshaler
 func NewStringUnmarshaler(f *StringPath, h StringHandler) *Unmarshaler {
-	return newStringUnmarshaler(f.GetPath(), h)
+	return newStringUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type StringSinglePath struct {
 	path []uint64
+	def  *string
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *StringSinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *StringSinglePath) GetDefault() *string {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4619,7 +5161,9 @@ func NewStringSinglePath(rootPackage string, rootMessage string, descSet *descri
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_STRING {
-		return &StringSinglePath{fd.path}, nil
+
+		return &StringSinglePath{fd.path, fd.GetDefaultString()}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_STRING, fd.field.GetType()}
@@ -4685,12 +5229,12 @@ func (this *StringSinglePath) UnmarshalFirst(buf []byte) (*string, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *StringSinglePath) Unmarshal(buf []byte) (*string, error) {
-	var ret *string
+	var ret *string = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -4788,11 +5332,11 @@ func (this *StringSorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return *this.mem[i] < *this.mem[j]
@@ -4829,11 +5373,17 @@ func DecPackedBytes(buf []byte, offset int, handler BytesHandler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type PackedBytesPath struct {
 	path []uint64
+	def  []byte
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *PackedBytesPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *PackedBytesPath) GetDefault() []byte {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4845,11 +5395,15 @@ func NewPackedBytesPath(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_BYTES {
-		return &PackedBytesPath{fd.path}, nil
+
+		return &PackedBytesPath{fd.path, nil}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-		return &PackedBytesPath{fd.path}, nil
+
+		return &PackedBytesPath{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_BYTES, fd.field.GetType()}
@@ -4877,20 +5431,22 @@ func (this *packedBytesUnmarshaler) unmarshal(buf []byte, offset int) (int, erro
 	return nn, nil
 }
 
-func newPackedBytesUnmarshaler(path []uint64, h BytesHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *packedBytesUnmarshaler) reset() {}
+
+func (this *packedBytesUnmarshaler) unmarshalDefault() {}
+
+func newPackedBytesUnmarshaler(path []uint64, def []byte, h BytesHandler) *Unmarshaler {
+	return &Unmarshaler{
 
 		unmarshaler: &packedBytesUnmarshaler{h},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a PackedBytesPath and a BytesHandler into an Unmarshaler
 func NewPackedBytesUnmarshaler(f *PackedBytesPath, h BytesHandler) *Unmarshaler {
-	return newPackedBytesUnmarshaler(f.GetPath(), h)
+	return newPackedBytesUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Decodes a protocol buffer encoded value and sends the value to the handler.
@@ -4922,11 +5478,17 @@ func DecBytes(buf []byte, offset int, handler BytesHandler) (int, error) {
 //Contains the ordered list of keys, compiled path.
 type BytesPath struct {
 	path []uint64
+	def  []byte
 }
 
 //Returns the ordered list of keys, compiled path.
 func (this *BytesPath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *BytesPath) GetDefault() []byte {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -4938,11 +5500,15 @@ func NewBytesPath(rootPackage string, rootMessage string, descSet *descriptor.Fi
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_BYTES {
-		return &BytesPath{fd.path}, nil
+
+		return &BytesPath{fd.path, nil}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-		return &BytesPath{fd.path}, nil
+
+		return &BytesPath{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_BYTES, fd.field.GetType()}
@@ -4950,9 +5516,12 @@ func NewBytesPath(rootPackage string, rootMessage string, descSet *descriptor.Fi
 
 type bytesUnmarshaler struct {
 	handler BytesHandler
+	def     []byte
+	set     bool
 }
 
 func (this *bytesUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
+	this.set = true
 	endOf := len(buf)
 	var bytesLen uint64
 	n := 0
@@ -4976,30 +5545,46 @@ func (this *bytesUnmarshaler) unmarshal(buf []byte, offset int) (int, error) {
 	return n + int(bytesLen), nil
 }
 
-func newBytesUnmarshaler(path []uint64, h BytesHandler) *Unmarshaler {
-	fd := &Unmarshaler{
+func (this *bytesUnmarshaler) reset() {
+	this.set = false
+}
 
-		unmarshaler: &bytesUnmarshaler{h},
+func (this *bytesUnmarshaler) unmarshalDefault() {
+	if this.def != nil && !this.set {
+
+		this.handler.Bytes(this.def)
+
+	}
+}
+
+func newBytesUnmarshaler(path []uint64, def []byte, h BytesHandler) *Unmarshaler {
+	return &Unmarshaler{
+
+		unmarshaler: &bytesUnmarshaler{h, def, false},
 
 		path: path,
 	}
-	fd.Reset()
-	return fd
 }
 
 //Combines a BytesPath and a BytesHandler into an Unmarshaler
 func NewBytesUnmarshaler(f *BytesPath, h BytesHandler) *Unmarshaler {
-	return newBytesUnmarshaler(f.GetPath(), h)
+	return newBytesUnmarshaler(f.GetPath(), f.GetDefault(), h)
 }
 
 //Contains an ordered key list, compiled path, for a single value.
 type BytesSinglePath struct {
 	path []uint64
+	def  []byte
 }
 
 //Returns an ordered key list, previously compiled path, for a single value.
 func (this *BytesSinglePath) GetPath() []uint64 {
 	return this.path
+}
+
+//Returns this default value of the field
+func (this *BytesSinglePath) GetDefault() []byte {
+	return this.def
 }
 
 //This constructor also checks if the path is valid and the type in the descriptor is matches the called function.
@@ -5018,11 +5603,15 @@ func NewBytesSinglePath(rootPackage string, rootMessage string, descSet *descrip
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_BYTES {
-		return &BytesSinglePath{fd.path}, nil
+
+		return &BytesSinglePath{fd.path, nil}, nil
+
 	}
 
 	if fd.field.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-		return &BytesSinglePath{fd.path}, nil
+
+		return &BytesSinglePath{fd.path, nil}, nil
+
 	}
 
 	return nil, &errType{descriptor.FieldDescriptorProto_TYPE_BYTES, fd.field.GetType()}
@@ -5088,12 +5677,12 @@ func (this *BytesSinglePath) UnmarshalFirst(buf []byte) ([]byte, error) {
 			endOf = endOfs[position]
 		}
 	}
-	return nil, nil
+	return this.def, nil
 }
 
 //Technically UnmarshalLast which is the correct protocol buffer compliant way to unmarshal only one field.
 func (this *BytesSinglePath) Unmarshal(buf []byte) ([]byte, error) {
-	var ret []byte
+	var ret []byte = this.def
 	position := 0
 	final := len(this.path) - 1
 	offset := 0
@@ -5191,11 +5780,11 @@ func (this *BytesSorter) Less(i, j int) bool {
 		this.saved[j] = true
 	}
 
-	if this.mem[i] == nil {
-		return true
-	}
 	if this.mem[j] == nil {
 		return false
+	}
+	if this.mem[i] == nil {
+		return true
 	}
 
 	return bytes.Compare(this.mem[i], this.mem[j]) == -1
