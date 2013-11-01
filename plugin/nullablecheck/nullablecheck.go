@@ -73,7 +73,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				continue
 			}
 			if len(field.GetDefaultValue()) > 0 {
-				fmt.Fprintf(os.Stderr, "ERROR: field %v cannot be nullable and have a default value", generator.CamelCase(*field.Name))
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be nullable and have a default value", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}
 			if !field.IsEnum() {
@@ -81,14 +81,14 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			}
 			enum := p.ObjectNamed(field.GetTypeName()).(*generator.EnumDescriptor)
 			if len(enum.Value) == 0 || enum.Value[0].GetNumber() != 0 {
-				fmt.Fprintf(os.Stderr, "ERROR: field %v cannot be nullable and be an enum type %v which does not start with zero", generator.CamelCase(*field.Name), enum.GetName())
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be nullable and be an enum type %v which does not start with zero", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name), enum.GetName())
 				os.Exit(1)
 			}
 		}
 	}
 	for _, e := range file.GetExtension() {
 		if !gogoproto.IsNullable(e) {
-			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be nullable", generator.CamelCase(*e.Name))
+			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be nullable", generator.CamelCase(e.GetName()), generator.CamelCase(*e.Name))
 			os.Exit(1)
 		}
 	}
