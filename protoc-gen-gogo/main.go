@@ -53,6 +53,7 @@ import (
 	_ "code.google.com/p/gogoprotobuf/plugin/face"
 	_ "code.google.com/p/gogoprotobuf/plugin/gostring"
 	_ "code.google.com/p/gogoprotobuf/plugin/marshalto"
+	_ "code.google.com/p/gogoprotobuf/plugin/nullablecheck"
 	_ "code.google.com/p/gogoprotobuf/plugin/populate"
 	_ "code.google.com/p/gogoprotobuf/plugin/size"
 	_ "code.google.com/p/gogoprotobuf/plugin/stringer"
