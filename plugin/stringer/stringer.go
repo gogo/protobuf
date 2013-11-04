@@ -129,7 +129,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		if gogoproto.EnabledGoStringer(file.FileDescriptorProto, message.DescriptorProto) {
-			panic("old string method needs to be disabled, please use gogoproto.msgstringmethod or gogoproto.msgstringmethod_all and set it to false")
+			panic("old string method needs to be disabled, please use gogoproto.goproto_stringer or gogoproto.goproto_stringer_all and set it to false")
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())

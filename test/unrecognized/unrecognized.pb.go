@@ -227,7 +227,9 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.C = &C{}
+			if m.C == nil {
+				m.C = &C{}
+			}
 			if err := m.C.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -252,7 +254,9 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.D = &D{}
+			if m.D == nil {
+				m.D = &D{}
+			}
 			if err := m.D.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -277,7 +281,9 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.F = &OldC{}
+			if m.F == nil {
+				m.F = &OldC{}
+			}
 			if err := m.F.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -634,7 +640,9 @@ func (m *OldB) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.C = &OldC{}
+			if m.C == nil {
+				m.C = &OldC{}
+			}
 			if err := m.C.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -659,7 +667,9 @@ func (m *OldB) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.F = &OldC{}
+			if m.F == nil {
+				m.F = &OldC{}
+			}
 			if err := m.F.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}

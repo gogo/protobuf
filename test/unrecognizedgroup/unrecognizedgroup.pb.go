@@ -163,7 +163,9 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.A = &A{}
+			if m.A == nil {
+				m.A = &A{}
+			}
 			if err := m.A.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}

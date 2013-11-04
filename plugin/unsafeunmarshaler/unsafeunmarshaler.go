@@ -363,7 +363,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					}
 					p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
 				} else if nullable {
+					p.P(`if m.`, fieldname, ` == nil {`)
+					p.In()
 					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+					p.Out()
+					p.P(`}`)
 					p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
 					p.In()
 					p.P(`return err`)

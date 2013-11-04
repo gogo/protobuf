@@ -308,7 +308,9 @@ func (m *U) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.A = &A{}
+			if m.A == nil {
+				m.A = &A{}
+			}
 			if err := m.A.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -333,7 +335,9 @@ func (m *U) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.B = &B{}
+			if m.B == nil {
+				m.B = &B{}
+			}
 			if err := m.B.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
