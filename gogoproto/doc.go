@@ -75,6 +75,8 @@ Will generate a go struct which looks a lot like this:
 
 You will see there are no pointers, since all fields are non-nullable.
 You will also see a custom type which marshals to a string.
+Be warned it is your responsibility to test your custom types thoroughly.
+You should think of every possible empty and nil case for your marshaling, unmarshaling and size methods.
 
 Next we will embed the message A in message B.
 

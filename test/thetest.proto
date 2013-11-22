@@ -450,3 +450,6 @@ message NinOptNativeDefault {
 	optional bytes Field15 = 15;
 }
 
+message CustomContainer {
+	optional NidOptCustom CustomStruct = 1 [(gogoproto.nullable) = false];
+}

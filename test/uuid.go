@@ -47,16 +47,22 @@ func PutLittleEndianUint64(b []byte, offset int, v uint64) {
 type Uuid []byte
 
 func (uuid Uuid) Marshal() ([]byte, error) {
+	if len(uuid) == 0 {
+		return nil, nil
+	}
 	return []byte(uuid), nil
 }
 
 func (uuid Uuid) MarshalTo(data []byte) (n int, err error) {
+	if len(uuid) == 0 {
+		return 0, nil
+	}
 	copy(data, uuid)
 	return 16, nil
 }
 
 func (uuid *Uuid) Unmarshal(data []byte) error {
-	if data == nil {
+	if len(data) == 0 {
 		uuid = nil
 		return nil
 	}
@@ -64,6 +70,16 @@ func (uuid *Uuid) Unmarshal(data []byte) error {
 	copy(id, data)
 	*uuid = id
 	return nil
+}
+
+func (uuid *Uuid) Size() int {
+	if uuid == nil {
+		return 0
+	}
+	if len(*uuid) == 0 {
+		return 0
+	}
+	return 16
 }
 
 func (uuid Uuid) MarshalJSON() ([]byte, error) {
@@ -103,8 +119,4 @@ func (uuid Uuid) RandV4(r int63) {
 	PutLittleEndianUint64(uuid, 8, uint64(r.Int63()))
 	uuid[6] = (uuid[6] & 0xf) | 0x40
 	uuid[8] = (uuid[8] & 0x3f) | 0x80
-}
-
-func (uuid *Uuid) Size() int {
-	return 16
 }
