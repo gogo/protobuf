@@ -70,6 +70,7 @@ regenerate:
 	make -C test/unrecognizedgroup regenerate
 	make -C test/enumstringer regenerate
 	make -C test/unmarshalmerge regenerate
+	make -C test/moredefaults regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -83,6 +84,7 @@ tests:
 	go test -v ./test/unrecognizedgroup
 	go test -v ./test/enumstringer
 	go test -v ./test/unmarshalmerge
+	go test -v ./test/moredefaults
 	make -C protoc-gen-gogo/testdata test
 
 testall:
@@ -97,6 +99,7 @@ testall:
 	go test -v ./test/unrecognizedgroup
 	go test -v ./test/enumstringer
 	go test -v ./test/unmarshalmerge
+	go test -v ./test/moredefaults
 	make -C protoc-gen-gogo/testdata test
 	go test -v ./test/mixmatch
 

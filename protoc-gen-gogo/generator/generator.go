@@ -1598,6 +1598,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if def == "" {
 			continue
 		}
+		if !gogoproto.IsNullable(field) {
+			g.Fail("illegal default value: ", field.GetName(), " in ", message.GetName(), " is not nullable and is thus not allowed to have a default value")
+		}
 		fieldname := "Default_" + ccTypeName + "_" + CamelCase(*field.Name)
 		defNames[field] = fieldname
 		typename, _ := g.GoType(message, field)
@@ -1657,8 +1660,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
 			break
 		}
-		if !gogoproto.IsNullable(field) ||
-			gogoproto.IsEmbed(field) ||
+		if gogoproto.IsEmbed(field) ||
 			gogoproto.IsCustomType(field) {
 			continue
 		}
@@ -1711,7 +1713,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		case descriptor.FieldDescriptorProto_TYPE_BYTES:
 			typeDefaultIsNil = !hasDef
 		case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-			typeDefaultIsNil = true
+			typeDefaultIsNil = gogoproto.IsNullable(field)
 		}
 		if isRepeated(field) {
 			typeDefaultIsNil = true
@@ -1730,11 +1732,19 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P()
 			continue
 		}
-		g.P("if m != nil && m." + fname + " != nil {")
-		g.In()
-		g.P("return " + star + "m." + fname)
-		g.Out()
-		g.P("}")
+		if !gogoproto.IsNullable(field) {
+			g.P("if m != nil {")
+			g.In()
+			g.P("return m." + fname)
+			g.Out()
+			g.P("}")
+		} else {
+			g.P("if m != nil && m." + fname + " != nil {")
+			g.In()
+			g.P("return " + star + "m." + fname)
+			g.Out()
+			g.P("}")
+		}
 		if hasDef {
 			if *field.Type != descriptor.FieldDescriptorProto_TYPE_BYTES {
 				g.P("return " + def)
@@ -1745,6 +1755,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 		} else {
 			switch *field.Type {
+			case descriptor.FieldDescriptorProto_TYPE_GROUP,
+				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				goTyp, _ := g.GoType(message, field)
+				goTypName := GoTypeToName(goTyp)
+				g.P("return ", goTypName, "{}")
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				g.P("return false")
 			case descriptor.FieldDescriptorProto_TYPE_STRING:
