@@ -145,6 +145,9 @@ given to the unmarshal plugin, will generate the following code:
 			if err != nil {
 				return err
 			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
 			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
 			index += skippy
 		}
@@ -626,6 +629,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`m.XXX_extensions = make(map[int32]`, protoPkg.Use(), `.Extension)`)
 			p.Out()
 			p.P(`}`)
+			p.P(`if (index + skippy) > l {`)
+			p.In()
+			p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+			p.Out()
+			p.P(`}`)
 			p.P(`m.XXX_extensions[int32(fieldNum)] = `, protoPkg.Use(), `.NewExtension(data[index:index+skippy])`)
 			p.P(`index += skippy`)
 			p.Out()
@@ -649,6 +657,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`if err != nil {`)
 		p.In()
 		p.P(`return err`)
+		p.Out()
+		p.P(`}`)
+		p.P(`if (index + skippy) > l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
 		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)`)
