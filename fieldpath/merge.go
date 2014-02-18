@@ -154,7 +154,9 @@ func getFieldNumber(descriptorSet *descriptor.FileDescriptorSet, rootPkg string,
 					continue
 				}
 			}
-			return ext
+			if ext.GetNumber() == fieldNum {
+				return ext
+			}
 		}
 	}
 	return nil

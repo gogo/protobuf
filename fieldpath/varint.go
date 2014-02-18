@@ -30,6 +30,7 @@ package fieldpath
 
 import (
 	"io"
+	"strconv"
 )
 
 func sizeOfVarint(buf []byte, offset int) (int, error) {
@@ -79,5 +80,5 @@ func skip(buf []byte, offset int, wireType int) (int, error) {
 	case 5: //WireFixed32:
 		return offset + 4, nil
 	}
-	panic("unreachable")
+	panic("unreachable wireType = " + strconv.Itoa(wireType))
 }

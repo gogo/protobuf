@@ -187,7 +187,8 @@ func (desc *FileDescriptorSet) FindMessage(packageName string, typeName string, 
 	}
 	field := parent.GetFieldDescriptor(fieldName)
 	if field == nil {
-		extPackageName, field := desc.FindExtension(packageName, typeName, fieldName)
+		var extPackageName string
+		extPackageName, field = desc.FindExtension(packageName, typeName, fieldName)
 		if field == nil {
 			return "", ""
 		}
