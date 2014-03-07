@@ -97,16 +97,15 @@ and the following test code:
 	}
 
 	func BenchmarkBSize(b *testing5.B) {
-		popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+		popr := math_rand5.New(math_rand5.NewSource(616))
 		total := 0
+		pops := make([]*B, 1000)
+		for i := 0; i < 1000; i++ {
+			pops[i] = NewPopulatedB(popr, false)
+		}
 		b.ResetTimer()
-		b.StopTimer()
 		for i := 0; i < b.N; i++ {
-			p := NewPopulatedB(popr, false)
-			b.StartTimer()
-			size := p.Size()
-			b.StopTimer()
-			total += size
+			total += pops[i%1000].Size()
 		}
 		b.SetBytes(int64(total / b.N))
 	}

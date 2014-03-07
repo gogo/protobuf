@@ -81,38 +81,39 @@ given to the testgen plugin, will generate the following test code:
 	}
 
 	func BenchmarkAProtoMarshal(b *testing.B) {
-		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+		popr := math_rand.New(math_rand.NewSource(616))
 		total := 0
+		pops := make([]*A, 10000)
+		for i := 0; i < 10000; i++ {
+			pops[i] = NewPopulatedA(popr, false)
+		}
 		b.ResetTimer()
-		b.StopTimer()
 		for i := 0; i < b.N; i++ {
-			p := NewPopulatedA(popr, true)
-			b.StartTimer()
-			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
 			if err != nil {
 				panic(err)
 			}
-			b.StopTimer()
 			total += len(data)
 		}
 		b.SetBytes(int64(total / b.N))
 	}
 
 	func BenchmarkAProtoUnmarshal(b *testing.B) {
-		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+		popr := math_rand.New(math_rand.NewSource(616))
 		total := 0
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
-			b.StopTimer()
-			p := NewPopulatedA(popr, true)
-			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		datas := make([][]byte, 10000)
+		for i := 0; i < 10000; i++ {
+			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedA(popr, false))
 			if err != nil {
 				panic(err)
 			}
-			msg := &A{}
-			total += len(data)
-			b.StartTimer()
-			if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+			datas[i] = data
+		}
+		msg := &A{}
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			total += len(datas[i%10000])
+			if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 				panic(err)
 			}
 		}
@@ -363,21 +364,23 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 			used = true
 			p.P(`func Benchmark`, ccTypeName, `ProtoMarshal(b *`, testingPkg.Use(), `.B) {`)
 			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
+			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(616))`)
 			p.P(`total := 0`)
+			p.P(`pops := make([]*`, ccTypeName, `, 10000)`)
+			p.P(`for i := 0; i < 10000; i++ {`)
+			p.In()
+			p.P(`pops[i] = NewPopulated`, ccTypeName, `(popr, false)`)
+			p.Out()
+			p.P(`}`)
 			p.P(`b.ResetTimer()`)
-			p.P(`b.StopTimer()`)
 			p.P(`for i := 0; i < b.N; i++ {`)
 			p.In()
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`b.StartTimer()`)
-			p.P(`data, err := `, protoPkg.Use(), `.Marshal(p)`)
+			p.P(`data, err := `, protoPkg.Use(), `.Marshal(pops[i%10000])`)
 			p.P(`if err != nil {`)
 			p.In()
 			p.P(`panic(err)`)
 			p.Out()
 			p.P(`}`)
-			p.P(`b.StopTimer()`)
 			p.P(`total += len(data)`)
 			p.Out()
 			p.P(`}`)
@@ -388,23 +391,26 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 
 			p.P(`func Benchmark`, ccTypeName, `ProtoUnmarshal(b *`, testingPkg.Use(), `.B) {`)
 			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
+			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(616))`)
 			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
+			p.P(`datas := make([][]byte, 10000)`)
+			p.P(`for i := 0; i < 10000; i++ {`)
 			p.In()
-			p.P(`b.StopTimer()`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`data, err := `, protoPkg.Use(), `.Marshal(p)`)
+			p.P(`data, err := `, protoPkg.Use(), `.Marshal(NewPopulated`, ccTypeName, `(popr, false))`)
 			p.P(`if err != nil {`)
 			p.In()
 			p.P(`panic(err)`)
 			p.Out()
 			p.P(`}`)
+			p.P(`datas[i] = data`)
+			p.Out()
+			p.P(`}`)
 			p.P(`msg := &`, ccTypeName, `{}`)
-			p.P(`total += len(data)`)
-			p.P(`b.StartTimer()`)
-			p.P(`if err := `, protoPkg.Use(), `.Unmarshal(data, msg); err != nil {`)
+			p.P(`b.ResetTimer()`)
+			p.P(`for i := 0; i < b.N; i++ {`)
+			p.In()
+			p.P(`total += len(datas[i%10000])`)
+			p.P(`if err := `, protoPkg.Use(), `.Unmarshal(datas[i%10000], msg); err != nil {`)
 			p.In()
 			p.P(`panic(err)`)
 			p.Out()
@@ -470,66 +476,7 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 			p.P(`}`)
 			p.Out()
 			p.P(`}`)
-
 		}
-
-		/*if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
-			used = true
-			p.P(`func Benchmark`, ccTypeName, `JSONMarshal(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`b.StopTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`b.StartTimer()`)
-			p.P(`data, err := `, jsonPkg.Use(), `.Marshal(p)`)
-			p.P(`if err != nil {`)
-			p.In()
-			p.P(`panic(err)`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.StopTimer()`)
-			p.P(`total += len(data)`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.SetBytes(int64(total / b.N))`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-
-			p.P(`func Benchmark`, ccTypeName, `JSONUnmarshal(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`b.StopTimer()`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`data, err := `, jsonPkg.Use(), `.Marshal(p)`)
-			p.P(`if err != nil {`)
-			p.In()
-			p.P(`panic(err)`)
-			p.Out()
-			p.P(`}`)
-			p.P(`msg := &`, ccTypeName, `{}`)
-			p.P(`total += len(data)`)
-			p.P(`b.StartTimer()`)
-			p.P(`if err := `, jsonPkg.Use(), `.Unmarshal(data, msg); err != nil {`)
-			p.In()
-			p.P(`panic(err)`)
-			p.Out()
-			p.P(`}`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.SetBytes(int64(total / b.N))`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-		}*/
 	}
 	return used
 }
@@ -609,76 +556,6 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 			p.P()
 
 		}
-
-		/*if gogoproto.HasBenchGen(file.FileDescriptorProto, message.DescriptorProto) {
-			used = true
-
-			p.P(`func Benchmark`, ccTypeName, `ProtoTextMarshal(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`b.StopTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`b.StartTimer()`)
-			p.P(`data := `, protoPkg.Use(), `.MarshalTextString(p)`)
-			p.P(`b.StopTimer()`)
-			p.P(`total += len(data)`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.SetBytes(int64(total / b.N))`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-
-			p.P(`func Benchmark`, ccTypeName, `ProtoCompactTextMarshal(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`b.StopTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`b.StartTimer()`)
-			p.P(`data := `, protoPkg.Use(), `.CompactTextString(p)`)
-			p.P(`b.StopTimer()`)
-			p.P(`total += len(data)`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.SetBytes(int64(total / b.N))`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-
-			p.P(`func Benchmark`, ccTypeName, `ProtoTextUnmarshal(b *`, testingPkg.Use(), `.B) {`)
-			p.In()
-			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
-			p.P(`total := 0`)
-			p.P(`b.ResetTimer()`)
-			p.P(`for i := 0; i < b.N; i++ {`)
-			p.In()
-			p.P(`b.StopTimer()`)
-			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`data := `, protoPkg.Use(), `.MarshalTextString(p)`)
-			p.P(`msg := &`, ccTypeName, `{}`)
-			p.P(`total += len(data)`)
-			p.P(`msg.Reset()`)
-			p.P(`b.StartTimer()`)
-			p.P(`if err := `, protoPkg.Use(), `.UnmarshalText(data, msg); err != nil {`)
-			p.In()
-			p.P(`panic(`, fmtPkg.Use(), `.Sprintf("%v given %v", err, data))`)
-			p.Out()
-			p.P(`}`)
-			p.Out()
-			p.P(`}`)
-			p.P(`b.SetBytes(int64(total / b.N))`)
-			p.Out()
-			p.P(`}`)
-			p.P()
-		}*/
 	}
 	return used
 }

@@ -41,6 +41,13 @@ type MixMatch struct {
 
 func (this *MixMatch) Regenerate() {
 	fmt.Printf("mixbench\n")
+	uuidData, err := ioutil.ReadFile("../uuid.go")
+	if err != nil {
+		panic(err)
+	}
+	if err := ioutil.WriteFile("./testdata/uuid.go", uuidData, 0666); err != nil {
+		panic(err)
+	}
 	data, err := ioutil.ReadFile("../thetest.proto")
 	if err != nil {
 		panic(err)
@@ -120,7 +127,7 @@ func main() {
 	NewMixMatch(false, false, true, true).Bench("ProtoMarshal", "unsafe_marshaler.txt")
 	NewMixMatch(true, true, false, false).Bench("ProtoUnmarshal", "unmarshaler.txt")
 	NewMixMatch(false, false, false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
-	NewMixMatch(true, true, true, true).Bench("ProtoUnmarshal", "unsafe_unmarshaler.txt")
+	NewMixMatch(false, false, true, true).Bench("ProtoUnmarshal", "unsafe_unmarshaler.txt")
 	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
 	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
 	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")
