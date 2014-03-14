@@ -1838,7 +1838,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	if !message.group {
-		g.file.addExport(message, &messageSymbol{ccTypeName, hasExtensions, isMessageSet, getters})
+		ms := &messageSymbol{sym: ccTypeName, hasExtensions: hasExtensions, isMessageSet: isMessageSet, getters: getters}
+		g.file.addExport(message, ms)
 	}
 
 	for _, ext := range message.ext {
