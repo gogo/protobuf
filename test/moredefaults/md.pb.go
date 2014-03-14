@@ -2,6 +2,16 @@
 // source: md.proto
 // DO NOT EDIT!
 
+/*
+	Package moredefaults is a generated protocol buffer package.
+
+	It is generated from these files:
+		md.proto
+
+	It has these top-level messages:
+		MoreDefaultsB
+		MoreDefaultsA
+*/
 package moredefaults
 
 import proto "code.google.com/p/gogoprotobuf/proto"

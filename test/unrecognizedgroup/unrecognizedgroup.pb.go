@@ -2,6 +2,17 @@
 // source: unrecognizedgroup.proto
 // DO NOT EDIT!
 
+/*
+	Package unrecognizedgroup is a generated protocol buffer package.
+
+	It is generated from these files:
+		unrecognizedgroup.proto
+
+	It has these top-level messages:
+		NewNoGroup
+		A
+		OldWithGroup
+*/
 package unrecognizedgroup
 
 import proto "code.google.com/p/gogoprotobuf/proto"

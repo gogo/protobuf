@@ -2,6 +2,21 @@
 // source: unrecognized.proto
 // DO NOT EDIT!
 
+/*
+	Package unrecognized is a generated protocol buffer package.
+
+	It is generated from these files:
+		unrecognized.proto
+
+	It has these top-level messages:
+		A
+		B
+		D
+		C
+		OldA
+		OldB
+		OldC
+*/
 package unrecognized
 
 import proto "code.google.com/p/gogoprotobuf/proto"

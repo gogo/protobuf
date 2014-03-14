@@ -2,6 +2,16 @@
 // source: group.proto
 // DO NOT EDIT!
 
+/*
+Package group is a generated protocol buffer package.
+
+It is generated from these files:
+	group.proto
+
+It has these top-level messages:
+	Groups1
+	Groups2
+*/
 package group
 
 import testing "testing"

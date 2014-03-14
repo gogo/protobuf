@@ -2,6 +2,17 @@
 // source: example.proto
 // DO NOT EDIT!
 
+/*
+Package test is a generated protocol buffer package.
+
+It is generated from these files:
+	example.proto
+
+It has these top-level messages:
+	A
+	B
+	U
+*/
 package test
 
 import testing "testing"

@@ -2,6 +2,18 @@
 // source: enumstringer.proto
 // DO NOT EDIT!
 
+/*
+Package enumstringer is a generated protocol buffer package.
+
+It is generated from these files:
+	enumstringer.proto
+
+It has these top-level messages:
+	NidOptEnum
+	NinOptEnum
+	NidRepEnum
+	NinRepEnum
+*/
 package enumstringer
 
 import proto "code.google.com/p/gogoprotobuf/proto"

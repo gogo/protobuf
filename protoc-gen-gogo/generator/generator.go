@@ -245,6 +245,8 @@ type FileDescriptor struct {
 	// as a map from the exported object to its symbols.
 	// This is used for supporting public imports.
 	exported map[Object][]symbol
+
+	index int // The index of this file in the list of files to generate code for
 }
 
 // PackageName is the package name we'll use in the generated code to refer to this file.
@@ -315,6 +317,7 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 		}
 	}
 	for _, get := range ms.getters {
+
 		if get.typeName != "" {
 			g.RecordTypeUse(get.typeName)
 		}
@@ -370,6 +373,7 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 
 		g.P("func (m *", ms.sym, ") ", get.name, "() ", typ, " { return ", val, " }")
 	}
+
 }
 
 type enumSymbol string
@@ -682,6 +686,7 @@ FindFiles:
 		for _, file := range g.allFiles {
 			if fileName == file.GetName() {
 				g.genFiles[i] = file
+				file.index = i
 				continue FindFiles
 			}
 		}
@@ -1041,7 +1046,41 @@ func (g *Generator) generateHeader() {
 	g.P("// source: ", *g.file.Name)
 	g.P("// DO NOT EDIT!")
 	g.P()
-	g.P("package ", g.file.PackageName())
+
+	name := g.file.PackageName()
+
+	if g.file.index == 0 {
+		// Generate package docs for the first file in the package.
+		g.P("/*")
+		g.P("Package ", name, " is a generated protocol buffer package.")
+		g.P()
+		if loc, ok := g.file.comments[strconv.Itoa(packagePath)]; ok {
+			// not using g.PrintComments because this is a /* */ comment block.
+			text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
+			for _, line := range strings.Split(text, "\n") {
+				line = strings.TrimPrefix(line, " ")
+				// ensure we don't escape from the block comment
+				line = strings.Replace(line, "*/", "* /", -1)
+				g.P(line)
+			}
+			g.P()
+		}
+		g.P("It is generated from these files:")
+		for _, f := range g.genFiles {
+			g.P("\t", f.Name)
+		}
+		g.P()
+		g.P("It has these top-level messages:")
+		for _, msg := range g.file.desc {
+			if msg.parent != nil {
+				continue
+			}
+			g.P("\t", CamelCaseSlice(msg.TypeName()))
+		}
+		g.P("*/")
+	}
+
+	g.P("package ", name)
 	g.P()
 }
 
@@ -2010,6 +2049,7 @@ func baseName(name string) string {
 // See descriptor.proto for more information about this.
 const (
 	// tag numbers in FileDescriptorProto
+	packagePath = 2 // package
 	messagePath = 4 // message_type
 	enumPath    = 5 // enum_type
 	// tag numbers in DescriptorProto

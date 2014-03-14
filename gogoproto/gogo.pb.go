@@ -2,6 +2,14 @@
 // source: gogo.proto
 // DO NOT EDIT!
 
+/*
+Package gogoproto is a generated protocol buffer package.
+
+It is generated from these files:
+	gogo.proto
+
+It has these top-level messages:
+*/
 package gogoproto
 
 import proto "code.google.com/p/gogoprotobuf/proto"

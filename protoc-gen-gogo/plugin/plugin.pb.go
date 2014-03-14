@@ -2,6 +2,16 @@
 // source: code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin/plugin.proto
 // DO NOT EDIT!
 
+/*
+Package com_google_com_p_gogoprotobuf_protoc_gen_gogo_plugin is a generated protocol buffer package.
+
+It is generated from these files:
+	code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin/plugin.proto
+
+It has these top-level messages:
+	CodeGeneratorRequest
+	CodeGeneratorResponse
+*/
 package com_google_com_p_gogoprotobuf_protoc_gen_gogo_plugin
 
 import proto "code.google.com/p/gogoprotobuf/proto"

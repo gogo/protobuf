@@ -39,7 +39,7 @@ func (this *errMerge) Error() string {
 	return this.fieldName + " requires merging"
 }
 
-// The NoMerge function checks that the marshaled protocol buffer does not require any merging when unmarshaling
+// The NoMerge function checks that the marshaled protocol buffer does not require any merging when unmarshaling.
 // When this property holds, streaming processing is possible.
 //
 // See below quotes from the protocol buffer documentation that describes how merging should work.

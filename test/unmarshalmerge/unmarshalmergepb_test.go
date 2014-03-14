@@ -2,6 +2,17 @@
 // source: unmarshalmerge.proto
 // DO NOT EDIT!
 
+/*
+Package unmarshalmerge is a generated protocol buffer package.
+
+It is generated from these files:
+	unmarshalmerge.proto
+
+It has these top-level messages:
+	Big
+	BigUnsafe
+	Sub
+*/
 package unmarshalmerge
 
 import testing "testing"

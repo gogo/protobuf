@@ -2,6 +2,59 @@
 // source: thetest.proto
 // DO NOT EDIT!
 
+/*
+	Package test is a generated protocol buffer package.
+
+	It is generated from these files:
+		thetest.proto
+
+	It has these top-level messages:
+		NidOptNative
+		NinOptNative
+		NidRepNative
+		NinRepNative
+		NidRepPackedNative
+		NinRepPackedNative
+		NidOptStruct
+		NinOptStruct
+		NidRepStruct
+		NinRepStruct
+		NidEmbeddedStruct
+		NinEmbeddedStruct
+		NidNestedStruct
+		NinNestedStruct
+		NidOptCustom
+		NinOptCustom
+		NidRepCustom
+		NinRepCustom
+		NinOptNativeUnion
+		NinOptStructUnion
+		NinEmbeddedStructUnion
+		NinNestedStructUnion
+		Tree
+		OrBranch
+		AndBranch
+		Leaf
+		DeepTree
+		ADeepBranch
+		AndDeepBranch
+		DeepLeaf
+		Nil
+		NidOptEnum
+		NinOptEnum
+		NidRepEnum
+		NinRepEnum
+		NinOptEnumDefault
+		AnotherNinOptEnum
+		AnotherNinOptEnumDefault
+		Timer
+		MyExtendable
+		OtherExtenable
+		NestedDefinition
+		NestedScope
+		NinOptNativeDefault
+		CustomContainer
+*/
 package test
 
 import proto "code.google.com/p/gogoprotobuf/proto"

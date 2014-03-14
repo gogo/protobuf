@@ -156,23 +156,8 @@ func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error
 		return nil
 	}
 
-	// need the length before we can write out the message itself,
-	// so marshal into a separate byte buffer first.
-	obuf := o.buf
-	o.buf = o.bufalloc()
-
-	err := o.enc_struct(p.stype, p.sprop, structp)
-
-	nbuf := o.buf
-	o.buf = obuf
-	if err != nil && !state.shouldContinue(err, nil) {
-		o.buffree(nbuf)
-		return err
-	}
 	o.buf = append(o.buf, p.tagcode...)
-	o.EncodeRawBytes(nbuf)
-	o.buffree(nbuf)
-	return nil
+	return o.enc_len_struct(p.stype, p.sprop, structp, &state)
 }
 
 //TODO this is only copied, please fix this
@@ -222,26 +207,17 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 			continue
 		}
 
-		obuf := o.buf
-		o.buf = o.bufalloc()
-
-		err := o.enc_struct(p.stype, p.sprop, structp)
-
-		nbuf := o.buf
-		o.buf = obuf
+		o.buf = append(o.buf, p.tagcode...)
+		err := o.enc_len_struct(p.stype, p.sprop, structp, &state)
 		if err != nil && !state.shouldContinue(err, nil) {
-			o.buffree(nbuf)
 			if err == ErrNil {
 				return ErrRepeatedHasNil
 			}
 			return err
 		}
-		o.buf = append(o.buf, p.tagcode...)
-		o.EncodeRawBytes(nbuf)
 
-		o.buffree(nbuf)
 	}
-	return nil
+	return state.err
 }
 
 //TODO this is only copied, please fix this
