@@ -283,7 +283,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			if packed {
 				p.P(`if wireType != `, strconv.Itoa(proto.WireBytes), `{`)
 				p.In()
-				p.P(`return proto.ErrWrongType`)
+				p.P(`return ` + protoPkg.Use() + `.ErrWrongType`)
 				p.Out()
 				p.P(`}`)
 				p.P(`var packedLen int`)
@@ -299,7 +299,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			} else {
 				p.P(`if wireType != `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.P(`return proto.ErrWrongType`)
+				p.P(`return ` + protoPkg.Use() + `.ErrWrongType`)
 				p.Out()
 				p.P(`}`)
 			}

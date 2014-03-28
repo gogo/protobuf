@@ -119,7 +119,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -136,7 +136,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		case 3:
 			if wireType != 1 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint64
 			i := index + 8
@@ -156,7 +156,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v2)
 		case 5:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -225,7 +225,7 @@ func (m *A) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {

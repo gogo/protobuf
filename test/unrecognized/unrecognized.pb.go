@@ -145,7 +145,7 @@ func (m *A) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 2:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -162,7 +162,7 @@ func (m *A) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		case 1:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -227,7 +227,7 @@ func (m *B) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -254,7 +254,7 @@ func (m *B) Unmarshal(data []byte) error {
 			index = postIndex
 		case 2:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -281,7 +281,7 @@ func (m *B) Unmarshal(data []byte) error {
 			index = postIndex
 		case 5:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -350,7 +350,7 @@ func (m *D) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -409,7 +409,7 @@ func (m *C) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 2:
 			if wireType != 1 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint64
 			i := index + 8
@@ -429,7 +429,7 @@ func (m *C) Unmarshal(data []byte) error {
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -452,7 +452,7 @@ func (m *C) Unmarshal(data []byte) error {
 			index = postIndex
 		case 4:
 			if wireType != 1 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint64
 			i := index + 8
@@ -472,7 +472,7 @@ func (m *C) Unmarshal(data []byte) error {
 			m.Field4 = &v2
 		case 5:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
@@ -495,7 +495,7 @@ func (m *C) Unmarshal(data []byte) error {
 			index = postIndex
 		case 6:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -512,7 +512,7 @@ func (m *C) Unmarshal(data []byte) error {
 			m.Field6 = &v
 		case 7:
 			if wireType != 5 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint32
 			i := index + 4
@@ -570,7 +570,7 @@ func (m *OldA) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 2:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -587,7 +587,7 @@ func (m *OldA) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		case 1:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -652,7 +652,7 @@ func (m *OldB) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -679,7 +679,7 @@ func (m *OldB) Unmarshal(data []byte) error {
 			index = postIndex
 		case 5:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -748,7 +748,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -765,7 +765,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		case 2:
 			if wireType != 1 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint64
 			i := index + 8
@@ -785,7 +785,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -808,7 +808,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			index = postIndex
 		case 6:
 			if wireType != 0 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -825,7 +825,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			m.Field6 = &v
 		case 7:
 			if wireType != 5 {
-				return proto.ErrWrongType
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
 			}
 			var v uint32
 			i := index + 4
