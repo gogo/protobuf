@@ -82,7 +82,6 @@ tests:
 	go test -v ./test/moredefaults
 	go test -v ./test/issue8
 	go test -v ./test/example
-	make -C protoc-gen-gogo/testdata test
 
 drone:
 	sudo apt-get install protobuf-compiler
@@ -90,6 +89,7 @@ drone:
 	make all
 
 testall: tests
+	make -C protoc-gen-gogo/testdata test
 	go test -v ./test/mixmatch
 
 bench:
