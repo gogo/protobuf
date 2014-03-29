@@ -382,6 +382,14 @@ var E_Customtype = &proto.ExtensionDesc{
 	Tag:           "bytes,65003,opt,name=customtype",
 }
 
+var E_Customname = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65004,
+	Name:          "gogoproto.customname",
+	Tag:           "bytes,65004,opt,name=customname",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -428,4 +436,5 @@ func init() {
 	proto.RegisterExtension(E_Nullable)
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)
+	proto.RegisterExtension(E_Customname)
 }

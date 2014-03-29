@@ -39,11 +39,12 @@ More Canonical Go Structures
 
 A lot of time working with a goprotobuf struct will lead you to a place where you create another struct that is easier to work with and then have a function to copy the values between the two structs.
 You might also find that basic structs that started their life as part of an API need to be sent over the wire. With gob, you could just send it. With goprotobuf, you need to make a parallel struct.
-Gogoprotobuf tries to fix these problems with the nullable, embed and customtype field extensions.
+Gogoprotobuf tries to fix these problems with the nullable, embed, customtype and customname field extensions.
 
   - nullable, if false, a field is generated without a pointer (see warning below).
   - embed, if true, the field is generated as an embedded field.
   - customtype, It works with the Marshal and Unmarshal methods, to allow you to have your own types in your struct, but marshal to bytes. For example, custom.Uuid or custom.Fixed128
+  - customname (experimental), Is useful when generated methods conflict with fieldnames.
 
 Warning about nullable: According to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set. It can be seen as a layer on top of Protocol Buffers, where before and after marshalling all non-nullable fields are set and they cannot be unset.
 
@@ -95,6 +96,23 @@ See below that A is embedded in B.
 Also see the repeated custom type.
 
 	type Uint128 [2]uint64
+
+Next we will create a custom name for one of our fields.
+
+	message C {
+		optional int64 size = 1 [(gogoproto.customname) = "MySize"];
+	}
+
+See below that the field's name is MySize and not Size.
+
+	type C struct {
+		MySize		*int64
+	}
+
+The is useful when having a protocol buffer message with a field name which conflicts with a generated method.
+As an example, having a field name size and using the sizer plugin to generate a Size method will cause a go compiler error.
+Using customname you can fix this error without changing the field name.
+This is typically useful when working with a protocol buffer that was designed before these methods and/or the go language were avialable.
 
 Gogoprotobuf also has some more subtle changes, these could be changed back:
 

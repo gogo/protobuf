@@ -142,13 +142,9 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`func (this *`, ccTypeName, `) GetValue() interface{} {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			if fieldname == "Value" {
 				panic("cannot have a union message " + ccTypeName + " with a field named Value")
-			}
-			if field.IsMessage() && gogoproto.IsEmbed(field) {
-				goTyp, _ := p.GoType(message, field)
-				fieldname = generator.GoTypeToName(goTyp)
 			}
 			p.P(`if this.`, fieldname, ` != nil {`)
 			p.In()
@@ -165,11 +161,8 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`switch vt := value.(type) {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
-			if field.IsMessage() && gogoproto.IsEmbed(field) {
-				fieldname = generator.GoTypeToName(goTyp)
-			}
 			p.P(`case `, goTyp, `:`)
 			p.In()
 			p.P(`this.`, fieldname, ` = vt`)
@@ -178,12 +171,9 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`default:`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			if field.IsMessage() {
 				goTyp, _ := p.GoType(message, field)
-				if gogoproto.IsEmbed(field) {
-					fieldname = generator.GoTypeToName(goTyp)
-				}
 				obj := p.ObjectNamed(field.GetTypeName()).(*generator.Descriptor)
 
 				if gogoproto.IsUnion(obj.File(), obj.DescriptorProto) {

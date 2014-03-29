@@ -11,6 +11,7 @@
 	It has these top-level messages:
 		A
 		B
+		C
 		U
 */
 package test
@@ -68,6 +69,21 @@ type B struct {
 
 func (m *B) Reset()      { *m = B{} }
 func (*B) ProtoMessage() {}
+
+type C struct {
+	MySize           *int64 `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *C) Reset()      { *m = C{} }
+func (*C) ProtoMessage() {}
+
+func (m *C) GetMySize() int64 {
+	if m != nil && m.MySize != nil {
+		return *m.MySize
+	}
+	return 0
+}
 
 type U struct {
 	A                *A     `protobuf:"bytes,1,opt" json:"A,omitempty"`
@@ -286,6 +302,65 @@ func (m *B) Unmarshal(data []byte) error {
 	}
 	return nil
 }
+func (m *C) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.MySize = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
+		}
+	}
+	return nil
+}
 func (m *U) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -428,6 +503,17 @@ func (this *B) String() string {
 	}, "")
 	return s
 }
+func (this *C) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&C{`,
+		`MySize:` + valueToStringExample(this.MySize) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *U) String() string {
 	if this == nil {
 		return "nil"
@@ -471,6 +557,17 @@ func (m *B) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovExample(uint64(l))
 		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *C) Size() (n int) {
+	var l int
+	_ = l
+	if m.MySize != nil {
+		n += 1 + sovExample(uint64(*m.MySize))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -538,6 +635,18 @@ func NewPopulatedB(r randyExample, easy bool) *B {
 	return this
 }
 
+func NewPopulatedC(r randyExample, easy bool) *C {
+	this := &C{}
+	if r.Intn(10) != 0 {
+		v5 := r.Int63()
+		this.MySize = &v5
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedExample(r, 2)
+	}
+	return this
+}
+
 func NewPopulatedU(r randyExample, easy bool) *U {
 	this := &U{}
 	fieldNum := r.Intn(2)
@@ -567,9 +676,9 @@ func randUTF8RuneExample(r randyExample) rune {
 	return res
 }
 func randStringExample(r randyExample) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	v6 := r.Intn(100)
+	tmps := make([]rune, v6)
+	for i := 0; i < v6; i++ {
 		tmps[i] = randUTF8RuneExample(r)
 	}
 	return string(tmps)
@@ -691,6 +800,31 @@ func (m *B) MarshalTo(data []byte) (n int, err error) {
 	}
 	return i, nil
 }
+func (m *C) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *C) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.MySize != nil {
+		data[i] = 0x8
+		i++
+		i = encodeVarintExample(data, i, uint64(*m.MySize))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
 func (m *U) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
@@ -770,6 +904,13 @@ func (this *B) GoString() string {
 		return "nil"
 	}
 	s := strings1.Join([]string{`&test.B{` + `A:` + strings1.Replace(this.A.GoString(), `&`, ``, 1), `G:` + fmt1.Sprintf("%#v", this.G), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *C) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.C{` + `MySize:` + valueToGoStringExample(this.MySize, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *U) GoString() string {
@@ -974,6 +1115,74 @@ func (this *B) Equal(that interface{}) bool {
 		if !this.G[i].Equal(that1.G[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *C) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*C)
+	if !ok {
+		return fmt2.Errorf("that is not of type *C")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *C but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Cbut is not nil && this == nil")
+	}
+	if this.MySize != nil && that1.MySize != nil {
+		if *this.MySize != *that1.MySize {
+			return fmt2.Errorf("MySize this(%v) Not Equal that(%v)", *this.MySize, *that1.MySize)
+		}
+	} else if this.MySize != nil {
+		return fmt2.Errorf("this.MySize == nil && that.MySize != nil")
+	} else if that1.MySize != nil {
+		return fmt2.Errorf("MySize this(%v) Not Equal that(%v)", this.MySize, that1.MySize)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *C) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*C)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.MySize != nil && that1.MySize != nil {
+		if *this.MySize != *that1.MySize {
+			return false
+		}
+	} else if this.MySize != nil {
+		return false
+	} else if that1.MySize != nil {
+		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
@@ -1554,6 +1763,10 @@ func ExampleDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("customname"), Number: func(v int32) *int32 { return &v }(65004), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
 	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte{}}}, Options: nil, SourceCodeInfo: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("example.proto"), Package: func(v string) *string { return &v }("test"), Dependency: []string{"code.google.com/p/gogoprotobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("A"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Description"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
@@ -1574,7 +1787,11 @@ func ExampleDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64014: proto.NewExtension([]byte{0xf0, 0xa0, 0x1f, 0x1})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("U"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64014: proto.NewExtension([]byte{0xf0, 0xa0, 0x1f, 0x1})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("C"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("size"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x4d, 0x79, 0x53, 0x69, 0x7a, 0x65})}, XXX_unrecognized: []byte{}}, XXX_unrecognized: []byte{}}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte{}}, {Name: func(v string) *string { return &v }("U"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("A"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

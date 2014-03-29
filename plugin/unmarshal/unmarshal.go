@@ -273,7 +273,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`switch fieldNum {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			repeated := field.IsRepeated()
 			nullable := gogoproto.IsNullable(field)
 			packed := field.IsPacked()
@@ -434,11 +434,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
-				msgnames := strings.Split(msgname, ".")
-				typeName := msgnames[len(msgnames)-1]
-				if gogoproto.IsEmbed(field) {
-					fieldname = typeName
-				}
 				p.P(`var msglen int`)
 				p.decodeVarint("msglen", "int")
 				p.P(`postIndex := index + msglen`)

@@ -132,6 +132,18 @@ func (this *importedPackage) Generate() string {
 	return strings.Join([]string{`import `, this.name, ` `, strconv.Quote(this.importPrefix + this.pkg)}, "")
 }
 
+func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+	goTyp, _ := g.GoType(message, field)
+	fieldname := CamelCase(*field.Name)
+	if gogoproto.IsCustomName(field) {
+		fieldname = gogoproto.GetCustomName(field)
+	}
+	if gogoproto.IsEmbed(field) {
+		fieldname = EmbedFieldName(goTyp)
+	}
+	return fieldname
+}
+
 func GoTypeToName(goTyp string) string {
 	return strings.Replace(strings.Replace(goTyp, "*", "", -1), "[]", "", -1)
 }

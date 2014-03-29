@@ -163,7 +163,6 @@ package equal
 import (
 	"code.google.com/p/gogoprotobuf/gogoproto"
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
-	"strings"
 )
 
 type plugin struct {
@@ -289,16 +288,10 @@ func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool) {
 	p.P(`}`)
 
 	for _, field := range message.Field {
-		fieldname := generator.CamelCase(*field.Name)
+		fieldname := p.GetFieldName(message, field)
 		repeated := field.IsRepeated()
 		ctype := gogoproto.IsCustomType(field)
 		nullable := gogoproto.IsNullable(field)
-		if gogoproto.IsEmbed(field) {
-			desc := p.ObjectNamed(field.GetTypeName())
-			fieldname = p.TypeName(desc)
-			fieldnames := strings.Split(fieldname, ".")
-			fieldname = fieldnames[len(fieldnames)-1]
-		}
 		if !repeated {
 			if ctype {
 				if nullable {

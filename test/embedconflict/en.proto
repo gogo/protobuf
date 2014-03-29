@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://code.google.com/p/gogoprotobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -24,43 +24,14 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package test;
+package embedconflict;
 
 import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
 
-option (gogoproto.gostring_all) = true;
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.goproto_stringer_all) = false;
-option (gogoproto.stringer_all) =  true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.testgen_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.marshaler_all) = true;
-option (gogoproto.sizer_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-
-message A {
-	option (gogoproto.face) = true;
-	option (gogoproto.goproto_getters) = false;
-	optional string Description = 1 [(gogoproto.nullable) = false];
-	optional int64 Number = 2 [(gogoproto.nullable) = false];
-	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test.Uuid", (gogoproto.nullable) = false];
+message F {
+	optional G G = 2 [(gogoproto.embed) = true, (gogoproto.customname) = "G"];
 }
 
-message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+message G {
+	optional int64 Field1 = 1;
 }
-
-message C {
-	optional int64 size = 1 [(gogoproto.customname) = "MySize"];
-}
-
-message U {
-	option (gogoproto.union) = true;
-	optional A A = 1;
-	optional B B = 2;
-}
-

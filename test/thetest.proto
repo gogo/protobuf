@@ -453,3 +453,89 @@ message NinOptNativeDefault {
 message CustomContainer {
 	optional NidOptCustom CustomStruct = 1 [(gogoproto.nullable) = false];
 }
+
+message CustomNameNidOptNative {
+	optional double Field1 = 1 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldA"];
+	optional float Field2 = 2 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldB"];
+	optional int32 Field3 = 3 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldC"];
+	optional int64 Field4 = 4 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldD"];
+	optional uint32 Field5 = 5 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldE"];
+	optional uint64 Field6 = 6 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldF"];
+	optional sint32 Field7 = 7 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldG"];
+	optional sint64 Field8 = 8 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldH"];
+	optional fixed32 Field9 = 9 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldI"];
+	optional sfixed32 Field10 = 10 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldJ"];
+	optional fixed64 Field11 = 11 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldK"];
+	optional sfixed64 Field12 = 12 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldL"];
+	optional bool Field13 = 13 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldM"];
+	optional string Field14 = 14 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldN"];
+	optional bytes Field15 = 15 [(gogoproto.nullable) = false, (gogoproto.customname) = "FieldO"];
+}
+
+message CustomNameNinOptNative {
+	optional double Field1 = 1 [(gogoproto.customname) = "FieldA"];
+	optional float Field2 = 2 [(gogoproto.customname) = "FieldB"];
+	optional int32 Field3 = 3 [(gogoproto.customname) = "FieldC"];
+	optional int64 Field4 = 4 [(gogoproto.customname) = "FieldD"];
+	optional uint32 Field5 = 5 [(gogoproto.customname) = "FieldE"];
+	optional uint64 Field6 = 6 [(gogoproto.customname) = "FieldF"];
+	optional sint32 Field7 = 7 [(gogoproto.customname) = "FieldG"];
+	optional sint64 Field8 = 8 [(gogoproto.customname) = "FieldH"];
+	optional fixed32 Field9 = 9 [(gogoproto.customname) = "FieldI"];
+	optional sfixed32 Field10 = 10 [(gogoproto.customname) = "FieldJ"];
+	optional fixed64 Field11 = 11 [(gogoproto.customname) = "FieldK"];
+	optional sfixed64 Field12 = 12 [(gogoproto.customname) = "FielL"];
+	optional bool Field13 = 13 [(gogoproto.customname) = "FieldM"];
+	optional string Field14 = 14 [(gogoproto.customname) = "FieldN"];
+	optional bytes Field15 = 15 [(gogoproto.customname) = "FieldO"];
+}
+
+message CustomNameNinRepNative {
+	repeated double Field1 = 1 [(gogoproto.customname) = "FieldA"];
+	repeated float Field2 = 2 [(gogoproto.customname) = "FieldB"];
+	repeated int32 Field3 = 3 [(gogoproto.customname) = "FieldC"];
+	repeated int64 Field4 = 4 [(gogoproto.customname) = "FieldD"];
+	repeated uint32 Field5 = 5 [(gogoproto.customname) = "FieldE"];
+	repeated uint64 Field6 = 6 [(gogoproto.customname) = "FieldF"];
+	repeated sint32 Field7 = 7 [(gogoproto.customname) = "FieldG"];
+	repeated sint64 Field8 = 8 [(gogoproto.customname) = "FieldH"];
+	repeated fixed32 Field9 = 9 [(gogoproto.customname) = "FieldI"];
+	repeated sfixed32 Field10 = 10 [(gogoproto.customname) = "FieldJ"];
+	repeated fixed64 Field11 = 11 [(gogoproto.customname) = "FieldK"];
+	repeated sfixed64 Field12 = 12 [(gogoproto.customname) = "FieldL"];
+	repeated bool Field13 = 13 [(gogoproto.customname) = "FieldM"];
+	repeated string Field14 = 14 [(gogoproto.customname) = "FieldN"];
+	repeated bytes Field15 = 15 [(gogoproto.customname) = "FieldO"];
+}
+
+message CustomNameNinStruct {
+	optional double Field1 = 1 [(gogoproto.customname) = "FieldA"];
+	optional float Field2 = 2 [(gogoproto.customname) = "FieldB"];
+	optional NidOptNative Field3 = 3 [(gogoproto.customname) = "FieldC"];
+	repeated NinOptNative Field4 = 4 [(gogoproto.customname) = "FieldD"];
+	optional uint64 Field6 = 6 [(gogoproto.customname) = "FieldE"];
+	optional sint32 Field7 = 7 [(gogoproto.customname) = "FieldF"];
+	optional NidOptNative Field8 = 8 [(gogoproto.customname) = "FieldG"];
+	optional bool Field13 = 13 [(gogoproto.customname) = "FieldH"];
+	optional string Field14 = 14 [(gogoproto.customname) = "FieldI"];
+	optional bytes Field15 = 15 [(gogoproto.customname) = "FieldJ"];
+}
+
+message CustomNameCustomType {
+	optional bytes Id = 1 [(gogoproto.customname) = "FieldA", (gogoproto.customtype) = "Uuid"];
+	optional bytes Value = 2 [(gogoproto.customname) = "FieldB", (gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
+	repeated bytes Ids = 3 [(gogoproto.customname) = "FieldC", (gogoproto.customtype) = "Uuid"];
+	repeated bytes Values = 4 [(gogoproto.customname) = "FieldD", (gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];
+}
+
+message CustomNameNinEmbeddedStructUnion {
+	option (gogoproto.union) = true;
+	optional NidOptNative Field1 = 1 [(gogoproto.embed) = true];
+	optional NinOptNative Field200 = 200 [(gogoproto.customname) = "FieldA"];
+	optional bool Field210 = 210 [(gogoproto.customname) = "FieldB"];
+}
+
+message CustomNameEnum {
+	optional TheTestEnum Field1 = 1 [(gogoproto.customname) = "FieldA"];
+	repeated TheTestEnum Field2 = 2 [(gogoproto.customname) = "FieldB"];
+}

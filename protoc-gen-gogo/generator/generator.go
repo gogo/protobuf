@@ -1548,6 +1548,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i))
 
 		fieldName := CamelCase(*field.Name)
+		if gogoproto.IsCustomName(field) {
+			fieldName = gogoproto.GetCustomName(field)
+		}
 		for usedNames[fieldName] {
 			fieldName += "_"
 		}

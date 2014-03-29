@@ -88,5 +88,6 @@ extend google.protobuf.FieldOptions {
   optional bool nullable = 65001;
   optional bool embed = 65002;
   optional string customtype = 65003;
+  optional string customname = 65004;
 }
 

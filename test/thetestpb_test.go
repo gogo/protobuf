@@ -54,6 +54,13 @@ It has these top-level messages:
 	NestedScope
 	NinOptNativeDefault
 	CustomContainer
+	CustomNameNidOptNative
+	CustomNameNinOptNative
+	CustomNameNinRepNative
+	CustomNameNinStruct
+	CustomNameCustomType
+	CustomNameNinEmbeddedStructUnion
+	CustomNameEnum
 */
 package test
 
@@ -3008,6 +3015,440 @@ func BenchmarkCustomContainerProtoUnmarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestCustomNameNidOptNativeProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNidOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameNidOptNativeProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNidOptNative, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameNidOptNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameNidOptNativeProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameNidOptNative(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameNidOptNative{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinOptNativeProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameNinOptNativeProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinOptNative, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameNinOptNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameNinOptNativeProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameNinOptNative(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameNinOptNative{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinRepNativeProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinRepNative{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameNinRepNativeProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinRepNative, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameNinRepNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameNinRepNativeProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameNinRepNative(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameNinRepNative{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinStructProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinStruct{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameNinStructProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinStruct, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameNinStruct(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameNinStructProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameNinStruct(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameNinStruct{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameCustomTypeProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameCustomType{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameCustomTypeProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameCustomType, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameCustomType(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameCustomTypeProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameCustomType(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameCustomType{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinEmbeddedStructUnionProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameNinEmbeddedStructUnionProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinEmbeddedStructUnion, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameEnumProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCustomNameEnumProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameEnum, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedCustomNameEnum(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCustomNameEnumProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedCustomNameEnum(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &CustomNameEnum{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestNidOptNativeJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -3890,6 +4331,139 @@ func TestCustomContainerJSON(t *testing1.T) {
 		panic(err)
 	}
 	msg := &CustomContainer{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNidOptNativeJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNidOptNative{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinOptNativeJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinOptNative{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinRepNativeJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinRepNative{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinStructJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinStruct{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameCustomTypeJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameCustomType{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
+func TestCustomNameEnumJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameEnum{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
 		panic(err)
@@ -5405,6 +5979,230 @@ func TestCustomContainerProtoCompactText(t *testing2.T) {
 	}
 }
 
+func TestCustomNameNidOptNativeProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameNidOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNidOptNativeProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameNidOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinOptNativeProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameNinOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinOptNativeProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameNinOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinRepNativeProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameNinRepNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinRepNativeProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameNinRepNative{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinStructProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameNinStruct{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinStructProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameNinStruct{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameCustomTypeProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameCustomType{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameCustomTypeProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameCustomType{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinEmbeddedStructUnionProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameNinEmbeddedStructUnionProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameEnumProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &CustomNameEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCustomNameEnumProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &CustomNameEnum{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
 func TestNinOptNativeUnionUnion(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
@@ -5470,6 +6268,18 @@ func TestDeepTreeUnion(t *testing3.T) {
 	p := NewPopulatedDeepTree(popr, true)
 	v := p.GetValue()
 	msg := &DeepTree{}
+	if !msg.SetValue(v) {
+		t.Fatalf("Union: Could not set Value")
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Union Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionUnion(t *testing3.T) {
+	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	v := p.GetValue()
+	msg := &CustomNameNinEmbeddedStructUnion{}
 	if !msg.SetValue(v) {
 		t.Fatalf("Union: Could not set Value")
 	}
@@ -5894,6 +6704,69 @@ func TestNinOptNativeDefaultStringer(t *testing4.T) {
 func TestCustomContainerStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedCustomContainer(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameNidOptNativeStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameNinOptNativeStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameNinRepNativeStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameNinStructStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameCustomTypeStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCustomNameEnumStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
@@ -7545,6 +8418,251 @@ func BenchmarkCustomContainerSize(b *testing5.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestCustomNameNidOptNativeSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameNidOptNativeSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNidOptNative, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameNidOptNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinOptNativeSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameNinOptNativeSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinOptNative, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameNinOptNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinRepNativeSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameNinRepNativeSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinRepNative, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameNinRepNative(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinStructSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameNinStructSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinStruct, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameNinStruct(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameCustomTypeSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameCustomTypeSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameCustomType, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameCustomType(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameNinEmbeddedStructUnionSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameNinEmbeddedStructUnionSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameNinEmbeddedStructUnion, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func TestCustomNameEnumSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCustomNameEnumSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*CustomNameEnum, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedCustomNameEnum(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestNidOptNativeGoString(t *testing6.T) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
@@ -8156,6 +9274,97 @@ func TestCustomContainerGoString(t *testing6.T) {
 		panic(err)
 	}
 }
+func TestCustomNameNidOptNativeGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameNinOptNativeGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameNinRepNativeGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameNinStructGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameCustomTypeGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
+func TestCustomNameEnumGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
 func TestNidOptNativeFace(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, true)
@@ -8487,6 +9696,62 @@ func TestNestedScopeFace(t *testing7.T) {
 func TestCustomContainerFace(t *testing7.T) {
 	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
 	p := NewPopulatedCustomContainer(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNidOptNativeFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinOptNativeFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinRepNativeFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinStructFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameCustomTypeFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
+	msg := p.TestProto()
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Face Equal %#v", msg, p)
+	}
+}
+func TestCustomNameEnumFace(t *testing7.T) {
+	popr := math_rand7.New(math_rand7.NewSource(time7.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Face Equal %#v", msg, p)
@@ -9190,6 +10455,111 @@ func TestCustomContainerVerboseEqual(t *testing8.T) {
 		panic(err)
 	}
 	msg := &CustomContainer{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameNidOptNativeVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameNidOptNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNidOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameNinOptNativeVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinOptNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinOptNative{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameNinRepNativeVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinRepNative(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinRepNative{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameNinStructVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinStruct(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinStruct{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameCustomTypeVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameCustomType(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameCustomType{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameNinEmbeddedStructUnionVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameNinEmbeddedStructUnion{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCustomNameEnumVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedCustomNameEnum(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &CustomNameEnum{}
 	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}

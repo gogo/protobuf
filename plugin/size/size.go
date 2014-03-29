@@ -122,7 +122,6 @@ import (
 	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 type size struct {
@@ -212,16 +211,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		p.P(`var l int`)
 		p.P(`_ = l`)
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
-			if field.IsMessage() {
-				desc := p.ObjectNamed(field.GetTypeName())
-				msgname := p.TypeName(desc)
-				msgnames := strings.Split(msgname, ".")
-				typeName := msgnames[len(msgnames)-1]
-				if gogoproto.IsEmbed(field) {
-					fieldname = typeName
-				}
-			}
+			fieldname := p.GetFieldName(message, field)
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			if repeated {

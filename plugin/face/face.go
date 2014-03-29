@@ -168,11 +168,8 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.In()
 		p.P(`Proto() `, protoPkg.Use(), `.Message`)
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
-			if field.IsMessage() && gogoproto.IsEmbed(field) {
-				fieldname = generator.GoTypeToName(goTyp)
-			}
 			p.P(`Get`, fieldname, `() `, goTyp)
 		}
 		p.Out()
@@ -191,11 +188,8 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(``)
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
-			if field.IsMessage() && gogoproto.IsEmbed(field) {
-				fieldname = generator.GoTypeToName(goTyp)
-			}
 			p.P(`func (this *`, ccTypeName, `) Get`, fieldname, `() `, goTyp, `{`)
 			p.In()
 			p.P(` return this.`, fieldname)
@@ -208,11 +202,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
 		for _, field := range message.Field {
-			fieldname := generator.CamelCase(*field.Name)
-			if field.IsMessage() && gogoproto.IsEmbed(field) {
-				goTyp, _ := p.GoType(message, field)
-				fieldname = generator.GoTypeToName(goTyp)
-			}
+			fieldname := p.GetFieldName(message, field)
 			p.P(`this.`, fieldname, ` = that.Get`, fieldname, `()`)
 		}
 		p.P(`return this`)

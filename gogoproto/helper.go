@@ -55,6 +55,24 @@ func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {
 	return ""
 }
 
+func IsCustomName(field *google_protobuf.FieldDescriptorProto) bool {
+	name := GetCustomName(field)
+	if len(name) > 0 {
+		return true
+	}
+	return false
+}
+
+func GetCustomName(field *google_protobuf.FieldDescriptorProto) string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Customname)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {

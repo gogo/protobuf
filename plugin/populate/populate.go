@@ -160,10 +160,7 @@ func value(typName string) string {
 
 func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
 	goTyp, _ := p.GoType(message, field)
-	fieldname := generator.CamelCase(*field.Name)
-	if field.IsMessage() && gogoproto.IsEmbed(field) {
-		fieldname = generator.EmbedFieldName(goTyp)
-	}
+	fieldname := p.GetFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
 	if field.IsMessage() || p.IsGroup(field) {
 		funcName := "NewPopulated" + goTypName

@@ -68,3 +68,15 @@ func TestEmbedExtend(t *testing.T) {
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
 }
+
+func TestCustomName(t *testing.T) {
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", "en.proto")
+	data, err := cmd.CombinedOutput()
+	if err == nil {
+		t.Errorf("Expected error")
+		if err := os.Remove("en.pb.go"); err != nil {
+			panic(err)
+		}
+	}
+	t.Logf("received expected error = %v and output = %v", err, string(data))
+}

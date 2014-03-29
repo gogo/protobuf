@@ -106,6 +106,12 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			}
 		}
 		p.checkNameSpace(msg)
+		for _, field := range msg.GetField() {
+			if gogoproto.IsEmbed(field) && gogoproto.IsCustomName(field) {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v with custom name %v cannot be embedded", *field.Name, gogoproto.GetCustomName(field))
+				os.Exit(1)
+			}
+		}
 	}
 	for _, e := range file.GetExtension() {
 		if gogoproto.IsEmbed(e) {

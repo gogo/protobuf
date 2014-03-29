@@ -11,6 +11,7 @@ It is generated from these files:
 It has these top-level messages:
 	A
 	B
+	C
 	U
 */
 package test
@@ -230,6 +231,95 @@ func BenchmarkBProtoUnmarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestCProto(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedC(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &C{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCMarshalTo(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedC(popr, false)
+	size := p.Size()
+	data := make([]byte, size)
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	_, err := p.MarshalTo(data)
+	if err != nil {
+		panic(err)
+	}
+	msg := &C{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	for i := range data {
+		data[i] = byte(popr.Intn(256))
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func BenchmarkCProtoMarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	pops := make([]*C, 10000)
+	for i := 0; i < 10000; i++ {
+		pops[i] = NewPopulatedC(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+		if err != nil {
+			panic(err)
+		}
+		total += len(data)
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
+func BenchmarkCProtoUnmarshal(b *testing.B) {
+	popr := math_rand.New(math_rand.NewSource(616))
+	total := 0
+	datas := make([][]byte, 10000)
+	for i := 0; i < 10000; i++ {
+		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedC(popr, false))
+		if err != nil {
+			panic(err)
+		}
+		datas[i] = data
+	}
+	msg := &C{}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += len(datas[i%10000])
+		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			panic(err)
+		}
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestUProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
@@ -357,6 +447,25 @@ func TestBJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
+func TestCJSON(t *testing1.T) {
+	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+	p := NewPopulatedC(popr, true)
+	jsondata, err := encoding_json.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &C{}
+	err = encoding_json.Unmarshal(jsondata, msg)
+	if err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Json Equal %#v", msg, p)
+	}
+}
 func TestUJSON(t *testing1.T) {
 	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
 	p := NewPopulatedU(popr, true)
@@ -440,6 +549,38 @@ func TestBProtoCompactText(t *testing2.T) {
 	}
 }
 
+func TestCProtoText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedC(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	msg := &C{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
+func TestCProtoCompactText(t *testing2.T) {
+	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+	p := NewPopulatedC(popr, true)
+	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	msg := &C{}
+	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
+	}
+	if !p.Equal(msg) {
+		t.Fatalf("%#v !Proto %#v", msg, p)
+	}
+}
+
 func TestUProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedU(popr, true)
@@ -496,6 +637,15 @@ func TestAStringer(t *testing4.T) {
 func TestBStringer(t *testing4.T) {
 	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
 	p := NewPopulatedB(popr, false)
+	s1 := p.String()
+	s2 := fmt.Sprintf("%v", p)
+	if s1 != s2 {
+		t.Fatalf("String want %v got %v", s1, s2)
+	}
+}
+func TestCStringer(t *testing4.T) {
+	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+	p := NewPopulatedC(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
@@ -581,6 +731,41 @@ func BenchmarkBSize(b *testing5.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
+func TestCSize(t *testing5.T) {
+	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+	p := NewPopulatedC(popr, true)
+	size2 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	size := p.Size()
+	if len(data) != size {
+		t.Fatalf("size %v != marshalled size %v", size, len(data))
+	}
+	if size2 != size {
+		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+	}
+	size3 := code_google_com_p_gogoprotobuf_proto2.Size(p)
+	if size3 != size {
+		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+	}
+}
+
+func BenchmarkCSize(b *testing5.B) {
+	popr := math_rand5.New(math_rand5.NewSource(616))
+	total := 0
+	pops := make([]*C, 1000)
+	for i := 0; i < 1000; i++ {
+		pops[i] = NewPopulatedC(popr, false)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		total += pops[i%1000].Size()
+	}
+	b.SetBytes(int64(total / b.N))
+}
+
 func TestUSize(t *testing5.T) {
 	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 	p := NewPopulatedU(popr, true)
@@ -642,6 +827,19 @@ func TestBGoString(t *testing6.T) {
 		panic(err)
 	}
 }
+func TestCGoString(t *testing6.T) {
+	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+	p := NewPopulatedC(popr, false)
+	s1 := p.GoString()
+	s2 := fmt1.Sprintf("%#v", p)
+	if s1 != s2 {
+		t.Fatalf("GoString want %v got %v", s1, s2)
+	}
+	_, err := go_parser.ParseExpr(s1)
+	if err != nil {
+		panic(err)
+	}
+}
 func TestUGoString(t *testing6.T) {
 	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
 	p := NewPopulatedU(popr, false)
@@ -686,6 +884,21 @@ func TestBVerboseEqual(t *testing8.T) {
 		panic(err)
 	}
 	msg := &B{}
+	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
+		panic(err)
+	}
+	if err := p.VerboseEqual(msg); err != nil {
+		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
+	}
+}
+func TestCVerboseEqual(t *testing8.T) {
+	popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
+	p := NewPopulatedC(popr, false)
+	data, err := code_google_com_p_gogoprotobuf_proto3.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &C{}
 	if err := code_google_com_p_gogoprotobuf_proto3.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}

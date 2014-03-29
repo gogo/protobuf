@@ -152,15 +152,8 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
-			fieldname := generator.CamelCase(*field.Name)
+			fieldname := p.GetFieldName(message, field)
 			if field.IsMessage() || p.IsGroup(field) {
-				desc := p.ObjectNamed(field.GetTypeName())
-				msgname := p.TypeName(desc)
-				msgnames := strings.Split(msgname, ".")
-				typeName := msgnames[len(msgnames)-1]
-				if gogoproto.IsEmbed(field) {
-					fieldname = typeName
-				}
 				out += strings.Join([]string{"`", fieldname, ":` + "}, "")
 				if nullable {
 					out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
