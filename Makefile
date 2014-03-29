@@ -29,6 +29,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+.PHONY: nuke regenerate tests clean install gofmt
+
 install:
 	go install ./proto
 	go install ./gogoproto
@@ -37,16 +39,7 @@ install:
 	go install ./fieldpath
 	go install ./pbpath
 
-all:	reinstall regenerate install tests
-
-reinstall:
-	go clean -i ./...
-	go install ./proto
-	go install ./gogoproto
-	go install ./protoc-gen-gogo
-	go install ./fieldpath/fieldpath-gen
-	go install ./fieldpath
-	go install ./pbpath
+all: clean install regenerate gofmt install tests
 
 clean:
 	go clean ./...
@@ -88,24 +81,15 @@ tests:
 	go test -v ./test/unmarshalmerge
 	go test -v ./test/moredefaults
 	go test -v ./test/issue8
+	go test -v ./test/example
 	make -C protoc-gen-gogo/testdata test
 
-testall:
-	go test -v ./test/example
-	go test -v ./test
-	go test -v ./proto
-	go test -v ./fieldpath
-	go test -v ./io
-	go test -v ./test/embedconflict
-	go test -v ./test/defaultconflict
-	go test -v ./test/unrecognized
-	go test -v ./test/group
-	go test -v ./test/unrecognizedgroup
-	go test -v ./test/enumstringer
-	go test -v ./test/unmarshalmerge
-	go test -v ./test/moredefaults
-	go test -v ./test/issue8
-	make -C protoc-gen-gogo/testdata test
+drone:
+	sudo apt-get install protobuf-compiler
+	git clone https://code.google.com/p/gogoprotobuf
+	make all
+
+testall: tests
 	go test -v ./test/mixmatch
 
 bench:
