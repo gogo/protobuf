@@ -1109,7 +1109,6 @@ func sovUnrecognized(x uint64) (n int) {
 }
 func sozUnrecognized(x uint64) (n int) {
 	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}

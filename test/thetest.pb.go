@@ -3605,7 +3605,6 @@ func sovThetest(x uint64) (n int) {
 }
 func sozThetest(x uint64) (n int) {
 	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-	return sovThetest(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func NewPopulatedNidOptNative(r randyThetest, easy bool) *NidOptNative {
 	this := &NidOptNative{}
