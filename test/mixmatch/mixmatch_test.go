@@ -24,7 +24,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package mixbench
+package mixmatch
 
 import (
 	"fmt"
@@ -93,6 +93,9 @@ func (this MixMatch) Test(t *testing.T) {
 }
 
 func TestNeither(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
@@ -110,6 +113,9 @@ func TestNeither(t *testing.T) {
 }
 
 func TestMarshaler(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.marshaler_all) = false;",
@@ -127,6 +133,9 @@ func TestMarshaler(t *testing.T) {
 }
 
 func TestUnmarshaler(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
@@ -144,6 +153,9 @@ func TestUnmarshaler(t *testing.T) {
 }
 
 func TestBoth(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
@@ -161,6 +173,9 @@ func TestBoth(t *testing.T) {
 }
 
 func TestUnsafeMarshaler(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.marshaler_all) = true;",
@@ -178,6 +193,9 @@ func TestUnsafeMarshaler(t *testing.T) {
 }
 
 func TestUnsafeUnMarshaler(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.marshaler_all) = true;",
@@ -195,6 +213,9 @@ func TestUnsafeUnMarshaler(t *testing.T) {
 }
 
 func TestBothUnsafe(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = true;",

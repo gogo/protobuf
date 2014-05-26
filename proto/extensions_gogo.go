@@ -31,6 +31,7 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
+	"strings"
 )
 
 func GetBoolExtension(pb extendableProto, extension *ExtensionDesc, ifnotset bool) bool {
@@ -56,6 +57,40 @@ func (this *Extension) Equal(that *Extension) bool {
 
 func SizeOfExtensionMap(m map[int32]Extension) (n int) {
 	return sizeExtensionMap(m)
+}
+
+type sortableMapElem struct {
+	field int32
+	ext   Extension
+}
+
+func newSortableExtensionsFromMap(m map[int32]Extension) sortableExtensions {
+	s := make(sortableExtensions, 0, len(m))
+	for k, v := range m {
+		s = append(s, &sortableMapElem{field: k, ext: v})
+	}
+	return s
+}
+
+type sortableExtensions []*sortableMapElem
+
+func (this sortableExtensions) Len() int { return len(this) }
+
+func (this sortableExtensions) Swap(i, j int) { this[i], this[j] = this[j], this[i] }
+
+func (this sortableExtensions) Less(i, j int) bool { return this[i].field < this[j].field }
+
+func (this sortableExtensions) String() string {
+	sort.Sort(this)
+	ss := make([]string, len(this))
+	for i := range this {
+		ss[i] = fmt.Sprintf("%d: %v", this[i].field, this[i].ext)
+	}
+	return "map[" + strings.Join(ss, ",") + "]"
+}
+
+func StringFromExtensionsMap(m map[int32]Extension) string {
+	return newSortableExtensionsFromMap(m).String()
 }
 
 func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {

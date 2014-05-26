@@ -1319,6 +1319,9 @@ func NewTestTypeTemplate() string {
 
 	{{if .Single}}
 		func TestUnmarshalFirst{{.Struct}}{{$this.CName}}(t *testing.T) {
+			if testing.Short() {
+				t.Skip("skipping test in short mode.")
+			}
 			r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 			fp, err := fieldpath.New{{$this.CName}}SinglePath("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}")
 			if err != nil {
@@ -1361,6 +1364,9 @@ func NewTestTypeTemplate() string {
 		}
 
 		func TestUnmarshal{{.Struct}}{{$this.CName}}(t *testing.T) {
+			if testing.Short() {
+				t.Skip("skipping test in short mode.")
+			}
 			r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))	
 			fp, err := fieldpath.New{{$this.CName}}SinglePath("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}")
 			if err != nil {
@@ -1404,6 +1410,9 @@ func NewTestTypeTemplate() string {
 	{{end}}
 
 	func TestCompiled{{.Struct}}{{$this.CName}}(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping test in short mode.")
+		}
 		r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 		fp, err := fieldpath.New{{.CPacked}}{{$this.CName}}Path("test", "{{.Struct}}", test.ThetestDescription(), "{{.Path}}")
 		if err != nil {
@@ -1513,6 +1522,9 @@ func NewTestTypeTemplate() string {
 	}
 
 	func TestSort{{.Struct}}{{$this.CName}}(t *testing.T) {
+		if testing.Short() {
+			t.Skip("skipping test in short mode.")
+		}
 		r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 		l := r.Intn(1000)
 		unmarshalled := make(sorter{{.Struct}}{{$this.CName}}, l)

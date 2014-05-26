@@ -166,7 +166,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			}
 		}
 		if message.DescriptorProto.HasExtension() {
-			p.P("`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_extensions) + `, "`,`,")
+			p.P("`XXX_extensions:` + proto.StringFromExtensionsMap(this.XXX_extensions) + `,`,")
 		}
 		p.P("`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_unrecognized) + `, "`,`,")
 		p.P("`}`,")

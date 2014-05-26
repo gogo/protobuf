@@ -1916,7 +1916,7 @@ func (this *MyExtendable) String() string {
 	}
 	s := strings.Join([]string{`&MyExtendable{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
-		`XXX_extensions:` + fmt.Sprintf("%v", this.XXX_extensions) + `,`,
+		`XXX_extensions:` + proto.StringFromExtensionsMap(this.XXX_extensions) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -1930,7 +1930,7 @@ func (this *OtherExtenable) String() string {
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
-		`XXX_extensions:` + fmt.Sprintf("%v", this.XXX_extensions) + `,`,
+		`XXX_extensions:` + proto.StringFromExtensionsMap(this.XXX_extensions) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
