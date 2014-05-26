@@ -1571,7 +1571,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.RecordTypeUse(field.GetTypeName())
 	}
 	if len(message.ExtensionRange) > 0 {
-		g.P("XXX_extensions\t\tmap[int32]", g.Pkg["proto"], ".Extension `json:\"-\"`")
+		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P("XXX_extensions\t\tmap[int32]", g.Pkg["proto"], ".Extension `json:\"-\"`")
+		} else {
+			g.P("XXX_extensions\t\t[]byte `json:\"-\"`")
+		}
 	}
 	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 	g.Out()
@@ -1621,16 +1625,29 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("return extRange_", ccTypeName)
 		g.Out()
 		g.P("}")
-		g.P("func (m *", ccTypeName, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension {")
-		g.In()
-		g.P("if m.XXX_extensions == nil {")
-		g.In()
-		g.P("m.XXX_extensions = make(map[int32]", g.Pkg["proto"], ".Extension)")
-		g.Out()
-		g.P("}")
-		g.P("return m.XXX_extensions")
-		g.Out()
-		g.P("}")
+		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P("func (m *", ccTypeName, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension {")
+			g.In()
+			g.P("if m.XXX_extensions == nil {")
+			g.In()
+			g.P("m.XXX_extensions = make(map[int32]", g.Pkg["proto"], ".Extension)")
+			g.Out()
+			g.P("}")
+			g.P("return m.XXX_extensions")
+			g.Out()
+			g.P("}")
+		} else {
+			g.P("func (m *", ccTypeName, ") GetExtensions() *[]byte {")
+			g.In()
+			g.P("if m.XXX_extensions == nil {")
+			g.In()
+			g.P("m.XXX_extensions = make([]byte, 0)")
+			g.Out()
+			g.P("}")
+			g.P("return &m.XXX_extensions")
+			g.Out()
+			g.P("}")
+		}
 	}
 
 	// Default constants

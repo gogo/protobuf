@@ -539,3 +539,16 @@ message CustomNameEnum {
 	optional TheTestEnum Field1 = 1 [(gogoproto.customname) = "FieldA"];
 	repeated TheTestEnum Field2 = 2 [(gogoproto.customname) = "FieldB"];
 }
+
+message NoExtensionsMap {
+	option (gogoproto.face) = false;
+	option (gogoproto.goproto_extensions_map) = false;
+	optional int64 Field1 = 1;
+	extensions 100 to 199;
+}
+
+extend NoExtensionsMap {
+	optional double FieldA1 = 100;
+	optional NinOptNative FieldB1 = 101;
+	optional NinEmbeddedStruct FieldC1 = 102;
+}

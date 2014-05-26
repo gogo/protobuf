@@ -375,7 +375,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		if message.DescriptorProto.HasExtension() {
 			p.P(`if m.XXX_extensions != nil {`)
 			p.In()
-			p.P(`n += `, protoPkg.Use(), `.SizeOfExtensionMap(m.XXX_extensions)`)
+			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
+				p.P(`n += `, protoPkg.Use(), `.SizeOfExtensionMap(m.XXX_extensions)`)
+			} else {
+				p.P(`n+=len(m.XXX_extensions)`)
+			}
 			p.Out()
 			p.P(`}`)
 		}

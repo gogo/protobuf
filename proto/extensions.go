@@ -55,7 +55,16 @@ type ExtensionRange struct {
 type extendableProto interface {
 	Message
 	ExtensionRangeArray() []ExtensionRange
+}
+
+type extensionsMap interface {
+	extendableProto
 	ExtensionMap() map[int32]Extension
+}
+
+type extensionsBytes interface {
+	extendableProto
+	GetExtensions() *[]byte
 }
 
 var extendableProtoType = reflect.TypeOf((*extendableProto)(nil)).Elem()
@@ -92,7 +101,14 @@ type Extension struct {
 
 // SetRawExtension is for testing only.
 func SetRawExtension(base extendableProto, id int32, b []byte) {
-	base.ExtensionMap()[id] = Extension{enc: b}
+	if ebase, ok := base.(extensionsMap); ok {
+		ebase.ExtensionMap()[id] = Extension{enc: b}
+	} else if ebase, ok := base.(extensionsBytes); ok {
+		ext := ebase.GetExtensions()
+		*ext = append(*ext, b...)
+	} else {
+		panic("unreachable")
+	}
 }
 
 // isExtensionField returns true iff the given field number is in an extension range.
@@ -210,14 +226,58 @@ func sizeExtensionMap(m map[int32]Extension) (n int) {
 // HasExtension returns whether the given extension is present in pb.
 func HasExtension(pb extendableProto, extension *ExtensionDesc) bool {
 	// TODO: Check types, field numbers, etc.?
-	_, ok := pb.ExtensionMap()[extension.Field]
-	return ok
+	if epb, doki := pb.(extensionsMap); doki {
+		_, ok := epb.ExtensionMap()[extension.Field]
+		return ok
+	} else if epb, doki := pb.(extensionsBytes); doki {
+		ext := epb.GetExtensions()
+		buf := *ext
+		o := 0
+		for o < len(buf) {
+			v, n := DecodeVarint(buf[o:])
+			if int32(v) == extension.Field {
+				return true
+			}
+			o += n
+			l, n := DecodeVarint(buf[o:])
+			o += n
+			o += int(l)
+		}
+		return false
+	}
+	panic("unreachable")
+}
+
+func deleteExtension(pb extensionsBytes, extension *ExtensionDesc, offset int) int {
+	ext := pb.GetExtensions()
+	buf := *ext
+	for offset < len(buf) {
+		v, n1 := DecodeVarint(buf[offset:])
+		l, n2 := DecodeVarint(buf[offset+n1:])
+		newOffset := offset + n1 + n2 + int(l)
+		if int32(v) == extension.Field {
+			buf = append(buf[:offset], buf[newOffset:]...)
+			ext = &buf
+			return offset
+		}
+		offset = newOffset
+	}
+	return -1
 }
 
 // ClearExtension removes the given extension from pb.
 func ClearExtension(pb extendableProto, extension *ExtensionDesc) {
 	// TODO: Check types, field numbers, etc.?
-	delete(pb.ExtensionMap(), extension.Field)
+	if epb, doki := pb.(extensionsMap); doki {
+		delete(epb.ExtensionMap(), extension.Field)
+	} else if epb, doki := pb.(extensionsBytes); doki {
+		offset := 0
+		for offset != -1 {
+			offset = deleteExtension(epb, extension, offset)
+		}
+	} else {
+		panic("unreachable")
+	}
 }
 
 // GetExtension parses and returns the given extension of pb.
@@ -227,32 +287,53 @@ func GetExtension(pb extendableProto, extension *ExtensionDesc) (interface{}, er
 		return nil, err
 	}
 
-	e, ok := pb.ExtensionMap()[extension.Field]
-	if !ok {
-		return nil, ErrMissingExtension
-	}
-	if e.value != nil {
-		// Already decoded. Check the descriptor, though.
-		if e.desc != extension {
-			// This shouldn't happen. If it does, it means that
-			// GetExtension was called twice with two different
-			// descriptors with the same field number.
-			return nil, errors.New("proto: descriptor conflict")
+	if epb, doki := pb.(extensionsMap); doki {
+		e, ok := epb.ExtensionMap()[extension.Field]
+		if !ok {
+			return nil, ErrMissingExtension
 		}
+		if e.value != nil {
+			// Already decoded. Check the descriptor, though.
+			if e.desc != extension {
+				// This shouldn't happen. If it does, it means that
+				// GetExtension was called twice with two different
+				// descriptors with the same field number.
+				return nil, errors.New("proto: descriptor conflict")
+			}
+			return e.value, nil
+		}
+
+		v, err := decodeExtension(e.enc, extension)
+		if err != nil {
+			return nil, err
+		}
+
+		// Remember the decoded version and drop the encoded version.
+		// That way it is safe to mutate what we return.
+		e.value = v
+		e.desc = extension
+		e.enc = nil
 		return e.value, nil
+	} else if epb, doki := pb.(extensionsBytes); doki {
+		ext := epb.GetExtensions()
+		buf := *ext
+		o := 0
+		for o < len(buf) {
+			v, n := DecodeVarint(buf[o:])
+			if int32(v) == extension.Field {
+				v, err := decodeExtension(buf[o:], extension)
+				if err != nil {
+					return nil, err
+				}
+				return v, nil
+			}
+			o += n
+			l, n := DecodeVarint(buf[o:])
+			o += n
+			o += int(l)
+		}
 	}
-
-	v, err := decodeExtension(e.enc, extension)
-	if err != nil {
-		return nil, err
-	}
-
-	// Remember the decoded version and drop the encoded version.
-	// That way it is safe to mutate what we return.
-	e.value = v
-	e.desc = extension
-	e.enc = nil
-	return e.value, nil
+	panic("unreachable")
 }
 
 // decodeExtension decodes an extension encoded in b.
@@ -317,7 +398,12 @@ func SetExtension(pb extendableProto, extension *ExtensionDesc, value interface{
 		return errors.New("proto: bad extension value type")
 	}
 
-	pb.ExtensionMap()[extension.Field] = Extension{desc: extension, value: value}
+	if epb, doki := pb.(extensionsMap); doki {
+		epb.ExtensionMap()[extension.Field] = Extension{desc: extension, value: value}
+	} else if epb, doki := pb.(extensionsBytes); doki {
+		ext := epb.GetExtensions()
+		asdfas
+	}
 	return nil
 }
 

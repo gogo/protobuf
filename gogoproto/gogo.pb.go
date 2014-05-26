@@ -214,6 +214,14 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all",
 }
 
+var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63025,
+	Name:          "gogoproto.goproto_extensions_map_all",
+	Tag:           "varint,63025,opt,name=goproto_extensions_map_all",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -358,6 +366,14 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 	Tag:           "varint,64024,opt,name=unsafe_unmarshaler",
 }
 
+var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64025,
+	Name:          "gogoproto.goproto_extensions_map",
+	Tag:           "varint,64025,opt,name=goproto_extensions_map",
+}
+
 var E_Nullable = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -415,6 +431,7 @@ func init() {
 	proto.RegisterExtension(E_EnumStringerAll)
 	proto.RegisterExtension(E_UnsafeMarshalerAll)
 	proto.RegisterExtension(E_UnsafeUnmarshalerAll)
+	proto.RegisterExtension(E_GoprotoExtensionsMapAll)
 	proto.RegisterExtension(E_GoprotoGetters)
 	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)
@@ -433,6 +450,7 @@ func init() {
 	proto.RegisterExtension(E_Sizer)
 	proto.RegisterExtension(E_UnsafeMarshaler)
 	proto.RegisterExtension(E_UnsafeUnmarshaler)
+	proto.RegisterExtension(E_GoprotoExtensionsMap)
 	proto.RegisterExtension(E_Nullable)
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)

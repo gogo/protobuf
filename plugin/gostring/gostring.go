@@ -183,7 +183,11 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			out += ", "
 		}
 		if message.DescriptorProto.HasExtension() {
-			out += strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions),`}, "")
+			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
+				out += strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions),`}, "")
+			} else {
+				out += strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions),`}, "")
+			}
 		}
 		out += strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, "")
 		out += "+ `}`"
