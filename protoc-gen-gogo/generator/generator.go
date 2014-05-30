@@ -1574,7 +1574,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P("XXX_extensions\t\tmap[int32]", g.Pkg["proto"], ".Extension `json:\"-\"`")
 		} else {
-			g.P("XXX_extensions\t\t[]byte `json:\"-\"`")
+			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
 		}
 	}
 	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")

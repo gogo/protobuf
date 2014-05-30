@@ -1040,7 +1040,7 @@ func (*CustomNameEnum) ProtoMessage() {}
 
 type NoExtensionsMap struct {
 	Field1           *int64 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	XXX_extensions   []byte `json:"-"`
+	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1054,8 +1054,11 @@ var extRange_NoExtensionsMap = []proto.ExtensionRange{
 func (*NoExtensionsMap) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_NoExtensionsMap
 }
-func (m *NoExtensionsMap) ExtensionMap() map[int32]proto.Extension {
-	panic("not implemented")
+func (m *NoExtensionsMap) GetExtensions() *[]byte {
+	if m.XXX_extensions == nil {
+		m.XXX_extensions = make([]byte, 0)
+	}
+	return &m.XXX_extensions
 }
 
 var E_FieldA = &proto.ExtensionDesc{

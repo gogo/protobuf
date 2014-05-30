@@ -570,7 +570,18 @@ func writeExtensions(w *textWriter, pv reflect.Value) error {
 	// Order the extensions by ID.
 	// This isn't strictly necessary, but it will give us
 	// canonical output, which will also make testing easier.
-	m := ep.ExtensionMap()
+	var m map[int32]Extension
+	if em, ok := ep.(extensionsMap); ok {
+		m = em.ExtensionMap()
+	} else if em, ok := ep.(extensionsBytes); ok {
+		eb := em.GetExtensions()
+		var err error
+		m, err = BytesToExtensionsMap(*eb)
+		if err != nil {
+			return err
+		}
+	}
+
 	ids := make([]int32, 0, len(m))
 	for id := range m {
 		ids = append(ids, id)

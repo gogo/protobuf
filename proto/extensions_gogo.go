@@ -83,6 +83,25 @@ func GetRawExtension(m map[int32]Extension, id int32) ([]byte, error) {
 	return m[id].enc, nil
 }
 
+func BytesToExtensionsMap(buf []byte) (map[int32]Extension, error) {
+	m := make(map[int32]Extension)
+	i := 0
+	for i < len(buf) {
+		v, n := DecodeVarint(buf[i:])
+		if n <= 0 {
+			return nil, fmt.Errorf("unable to decode varint")
+		}
+		i += n
+		l, n := DecodeVarint(buf[i:])
+		if n <= 0 {
+			return nil, fmt.Errorf("unable to decode varint")
+		}
+		i += n
+		m[int32(v)] = Extension{enc: buf[i : i+int(l)]}
+	}
+	return m, nil
+}
+
 func NewExtension(e []byte) Extension {
 	ee := Extension{enc: make([]byte, len(e))}
 	copy(ee.enc, e)

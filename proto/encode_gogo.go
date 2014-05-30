@@ -44,6 +44,24 @@ type Sizer interface {
 	Size() int
 }
 
+func (o *Buffer) enc_ext_slice_byte(p *Properties, base structPointer) error {
+	s := *structPointer_Bytes(base, p.field)
+	if s == nil {
+		return ErrNil
+	}
+	o.buf = append(o.buf, s...)
+	return nil
+}
+
+func size_ext_slice_byte(p *Properties, base structPointer) (n int) {
+	s := *structPointer_Bytes(base, p.field)
+	if s == nil {
+		return 0
+	}
+	n += len(s)
+	return
+}
+
 // Encode a reference to bool pointer.
 func (o *Buffer) enc_ref_bool(p *Properties, base structPointer) error {
 	v := structPointer_RefBool(base, p.field)

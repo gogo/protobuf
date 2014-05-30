@@ -402,7 +402,15 @@ func SetExtension(pb extendableProto, extension *ExtensionDesc, value interface{
 		epb.ExtensionMap()[extension.Field] = Extension{desc: extension, value: value}
 	} else if epb, doki := pb.(extensionsBytes); doki {
 		ext := epb.GetExtensions()
-		asdfas
+		et := reflect.TypeOf(extension.ExtensionType)
+		props := extensionProperties(extension)
+		p := NewBuffer(nil)
+		x := reflect.New(et)
+		x.Elem().Set(reflect.ValueOf(value))
+		if err := props.enc(p, props, toStructPointer(x)); err != nil {
+			return err
+		}
+		*ext = append(*ext, p.buf...)
 	}
 	return nil
 }
