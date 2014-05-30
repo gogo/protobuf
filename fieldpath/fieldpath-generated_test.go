@@ -69,6 +69,9 @@ func (this *sortable) Get(index int) []byte {
 }
 
 func TestUnmarshalFirstNinOptNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -105,6 +108,9 @@ func TestUnmarshalFirstNinOptNativeFloat64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -141,6 +147,9 @@ func TestUnmarshalNinOptNativeFloat64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64Path("test", "NinOptNative", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -221,6 +230,9 @@ func (this sorterNinOptNativeFloat64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeFloat64, l)
@@ -253,6 +265,9 @@ func TestSortNinOptNativeFloat64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1")
 	if err != nil {
@@ -289,6 +304,9 @@ func TestUnmarshalFirstNinOptStructFloat64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1")
 	if err != nil {
@@ -325,6 +343,9 @@ func TestUnmarshalNinOptStructFloat64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field1")
 	if err != nil {
@@ -405,6 +426,9 @@ func (this sorterNinOptStructFloat64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructFloat64, l)
@@ -437,6 +461,9 @@ func TestSortNinOptStructFloat64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedFloat64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -470,6 +497,9 @@ func TestCompiledNinRepPackedNativeFloat64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64Path("test", "NinRepNative", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -503,6 +533,9 @@ func TestCompiledNinRepNativeFloat64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field1")
 	if err != nil {
@@ -545,6 +578,9 @@ func TestCompiledNinNestedStructFloat64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -581,6 +617,9 @@ func TestUnmarshalFirstNinOptNativeDefaultFloat64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -617,6 +656,9 @@ func TestUnmarshalNinOptNativeDefaultFloat64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -697,6 +739,9 @@ func (this sorterNinOptNativeDefaultFloat64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultFloat64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultFloat64, l)
@@ -729,6 +774,9 @@ func TestSortNinOptNativeDefaultFloat64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -765,6 +813,9 @@ func TestUnmarshalFirstNinOptNativeFloat32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -801,6 +852,9 @@ func TestUnmarshalNinOptNativeFloat32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32Path("test", "NinOptNative", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -881,6 +935,9 @@ func (this sorterNinOptNativeFloat32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeFloat32, l)
@@ -913,6 +970,9 @@ func TestSortNinOptNativeFloat32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2")
 	if err != nil {
@@ -949,6 +1009,9 @@ func TestUnmarshalFirstNinOptStructFloat32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2")
 	if err != nil {
@@ -985,6 +1048,9 @@ func TestUnmarshalNinOptStructFloat32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field2")
 	if err != nil {
@@ -1065,6 +1131,9 @@ func (this sorterNinOptStructFloat32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructFloat32, l)
@@ -1097,6 +1166,9 @@ func TestSortNinOptStructFloat32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedFloat32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -1130,6 +1202,9 @@ func TestCompiledNinRepPackedNativeFloat32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32Path("test", "NinRepNative", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -1163,6 +1238,9 @@ func TestCompiledNinRepNativeFloat32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field2")
 	if err != nil {
@@ -1205,6 +1283,9 @@ func TestCompiledNinNestedStructFloat32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -1241,6 +1322,9 @@ func TestUnmarshalFirstNinOptNativeDefaultFloat32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -1277,6 +1361,9 @@ func TestUnmarshalNinOptNativeDefaultFloat32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFloat32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field2")
 	if err != nil {
@@ -1357,6 +1444,9 @@ func (this sorterNinOptNativeDefaultFloat32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultFloat32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultFloat32, l)
@@ -1389,6 +1479,9 @@ func TestSortNinOptNativeDefaultFloat32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1425,6 +1518,9 @@ func TestUnmarshalFirstNinOptNativeInt32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1461,6 +1557,9 @@ func TestUnmarshalNinOptNativeInt32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinOptNative", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1541,6 +1640,9 @@ func (this sorterNinOptNativeInt32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeInt32, l)
@@ -1573,6 +1675,9 @@ func TestSortNinOptNativeInt32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3")
 	if err != nil {
@@ -1609,6 +1714,9 @@ func TestUnmarshalFirstNinOptStructInt32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3")
 	if err != nil {
@@ -1645,6 +1753,9 @@ func TestUnmarshalNinOptStructInt32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field3")
 	if err != nil {
@@ -1725,6 +1836,9 @@ func (this sorterNinOptStructInt32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructInt32, l)
@@ -1757,6 +1871,9 @@ func TestSortNinOptStructInt32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedInt32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1790,6 +1907,9 @@ func TestCompiledNinRepPackedNativeInt32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinRepNative", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1823,6 +1943,9 @@ func TestCompiledNinRepNativeInt32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field3")
 	if err != nil {
@@ -1865,6 +1988,9 @@ func TestCompiledNinNestedStructInt32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1901,6 +2027,9 @@ func TestUnmarshalFirstNinOptNativeDefaultInt32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -1937,6 +2066,9 @@ func TestUnmarshalNinOptNativeDefaultInt32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field3")
 	if err != nil {
@@ -2017,6 +2149,9 @@ func (this sorterNinOptNativeDefaultInt32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultInt32, l)
@@ -2049,6 +2184,9 @@ func TestSortNinOptNativeDefaultInt32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptEnumDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2085,6 +2223,9 @@ func TestUnmarshalFirstNinOptEnumDefaultInt32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptEnumDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2121,6 +2262,9 @@ func TestUnmarshalNinOptEnumDefaultInt32(t *testing.T) {
 }
 
 func TestCompiledNinOptEnumDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "NinOptEnumDefault", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2203,6 +2347,9 @@ func (this sorterNinOptEnumDefaultInt32) Swap(i, j int) {
 }
 
 func TestSortNinOptEnumDefaultInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptEnumDefaultInt32, l)
@@ -2235,6 +2382,9 @@ func TestSortNinOptEnumDefaultInt32(t *testing.T) {
 }
 
 func TestUnmarshalFirstAnotherNinOptEnumInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2271,6 +2421,9 @@ func TestUnmarshalFirstAnotherNinOptEnumInt32(t *testing.T) {
 }
 
 func TestUnmarshalAnotherNinOptEnumInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32SinglePath("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2307,6 +2460,9 @@ func TestUnmarshalAnotherNinOptEnumInt32(t *testing.T) {
 }
 
 func TestCompiledAnotherNinOptEnumInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt32Path("test", "AnotherNinOptEnum", test.ThetestDescription(), "Field1")
 	if err != nil {
@@ -2389,6 +2545,9 @@ func (this sorterAnotherNinOptEnumInt32) Swap(i, j int) {
 }
 
 func TestSortAnotherNinOptEnumInt32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterAnotherNinOptEnumInt32, l)
@@ -2421,6 +2580,9 @@ func TestSortAnotherNinOptEnumInt32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2457,6 +2619,9 @@ func TestUnmarshalFirstNinOptNativeInt64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2493,6 +2658,9 @@ func TestUnmarshalNinOptNativeInt64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64Path("test", "NinOptNative", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2573,6 +2741,9 @@ func (this sorterNinOptNativeInt64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeInt64, l)
@@ -2605,6 +2776,9 @@ func TestSortNinOptNativeInt64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4")
 	if err != nil {
@@ -2641,6 +2815,9 @@ func TestUnmarshalFirstNinOptStructInt64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4")
 	if err != nil {
@@ -2677,6 +2854,9 @@ func TestUnmarshalNinOptStructInt64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field4")
 	if err != nil {
@@ -2757,6 +2937,9 @@ func (this sorterNinOptStructInt64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructInt64, l)
@@ -2789,6 +2972,9 @@ func TestSortNinOptStructInt64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedInt64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2822,6 +3008,9 @@ func TestCompiledNinRepPackedNativeInt64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64Path("test", "NinRepNative", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2855,6 +3044,9 @@ func TestCompiledNinRepNativeInt64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field4")
 	if err != nil {
@@ -2897,6 +3089,9 @@ func TestCompiledNinNestedStructInt64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2933,6 +3128,9 @@ func TestUnmarshalFirstNinOptNativeDefaultInt64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -2969,6 +3167,9 @@ func TestUnmarshalNinOptNativeDefaultInt64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewInt64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field4")
 	if err != nil {
@@ -3049,6 +3250,9 @@ func (this sorterNinOptNativeDefaultInt64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultInt64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultInt64, l)
@@ -3081,6 +3285,9 @@ func TestSortNinOptNativeDefaultInt64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3117,6 +3324,9 @@ func TestUnmarshalFirstNinOptNativeUint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3153,6 +3363,9 @@ func TestUnmarshalNinOptNativeUint64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64Path("test", "NinOptNative", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3233,6 +3446,9 @@ func (this sorterNinOptNativeUint64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeUint64, l)
@@ -3265,6 +3481,9 @@ func TestSortNinOptNativeUint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6")
 	if err != nil {
@@ -3301,6 +3520,9 @@ func TestUnmarshalFirstNinOptStructUint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6")
 	if err != nil {
@@ -3337,6 +3559,9 @@ func TestUnmarshalNinOptStructUint64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field6")
 	if err != nil {
@@ -3417,6 +3642,9 @@ func (this sorterNinOptStructUint64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructUint64, l)
@@ -3449,6 +3677,9 @@ func TestSortNinOptStructUint64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedUint64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3482,6 +3713,9 @@ func TestCompiledNinRepPackedNativeUint64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64Path("test", "NinRepNative", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3515,6 +3749,9 @@ func TestCompiledNinRepNativeUint64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field6")
 	if err != nil {
@@ -3557,6 +3794,9 @@ func TestCompiledNinNestedStructUint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3593,6 +3833,9 @@ func TestUnmarshalFirstNinOptNativeDefaultUint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3629,6 +3872,9 @@ func TestUnmarshalNinOptNativeDefaultUint64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field6")
 	if err != nil {
@@ -3709,6 +3955,9 @@ func (this sorterNinOptNativeDefaultUint64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultUint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultUint64, l)
@@ -3741,6 +3990,9 @@ func TestSortNinOptNativeDefaultUint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -3777,6 +4029,9 @@ func TestUnmarshalFirstNinOptNativeUint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -3813,6 +4068,9 @@ func TestUnmarshalNinOptNativeUint32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32Path("test", "NinOptNative", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -3893,6 +4151,9 @@ func (this sorterNinOptNativeUint32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeUint32, l)
@@ -3925,6 +4186,9 @@ func TestSortNinOptNativeUint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5")
 	if err != nil {
@@ -3961,6 +4225,9 @@ func TestUnmarshalFirstNinOptStructUint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5")
 	if err != nil {
@@ -3997,6 +4264,9 @@ func TestUnmarshalNinOptStructUint32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field5")
 	if err != nil {
@@ -4077,6 +4347,9 @@ func (this sorterNinOptStructUint32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructUint32, l)
@@ -4109,6 +4382,9 @@ func TestSortNinOptStructUint32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedUint32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -4142,6 +4418,9 @@ func TestCompiledNinRepPackedNativeUint32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32Path("test", "NinRepNative", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -4175,6 +4454,9 @@ func TestCompiledNinRepNativeUint32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field5")
 	if err != nil {
@@ -4217,6 +4499,9 @@ func TestCompiledNinNestedStructUint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -4253,6 +4538,9 @@ func TestUnmarshalFirstNinOptNativeDefaultUint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -4289,6 +4577,9 @@ func TestUnmarshalNinOptNativeDefaultUint32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewUint32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field5")
 	if err != nil {
@@ -4369,6 +4660,9 @@ func (this sorterNinOptNativeDefaultUint32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultUint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultUint32, l)
@@ -4401,6 +4695,9 @@ func TestSortNinOptNativeDefaultUint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4437,6 +4734,9 @@ func TestUnmarshalFirstNinOptNativeSint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4473,6 +4773,9 @@ func TestUnmarshalNinOptNativeSint32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32Path("test", "NinOptNative", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4553,6 +4856,9 @@ func (this sorterNinOptNativeSint32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeSint32, l)
@@ -4585,6 +4891,9 @@ func TestSortNinOptNativeSint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7")
 	if err != nil {
@@ -4621,6 +4930,9 @@ func TestUnmarshalFirstNinOptStructSint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7")
 	if err != nil {
@@ -4657,6 +4969,9 @@ func TestUnmarshalNinOptStructSint32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field7")
 	if err != nil {
@@ -4737,6 +5052,9 @@ func (this sorterNinOptStructSint32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructSint32, l)
@@ -4769,6 +5087,9 @@ func TestSortNinOptStructSint32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedSint32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4802,6 +5123,9 @@ func TestCompiledNinRepPackedNativeSint32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32Path("test", "NinRepNative", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4835,6 +5159,9 @@ func TestCompiledNinRepNativeSint32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field7")
 	if err != nil {
@@ -4877,6 +5204,9 @@ func TestCompiledNinNestedStructSint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4913,6 +5243,9 @@ func TestUnmarshalFirstNinOptNativeDefaultSint32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -4949,6 +5282,9 @@ func TestUnmarshalNinOptNativeDefaultSint32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field7")
 	if err != nil {
@@ -5029,6 +5365,9 @@ func (this sorterNinOptNativeDefaultSint32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultSint32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultSint32, l)
@@ -5061,6 +5400,9 @@ func TestSortNinOptNativeDefaultSint32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5097,6 +5439,9 @@ func TestUnmarshalFirstNinOptNativeSint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5133,6 +5478,9 @@ func TestUnmarshalNinOptNativeSint64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64Path("test", "NinOptNative", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5213,6 +5561,9 @@ func (this sorterNinOptNativeSint64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeSint64, l)
@@ -5245,6 +5596,9 @@ func TestSortNinOptNativeSint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8")
 	if err != nil {
@@ -5281,6 +5635,9 @@ func TestUnmarshalFirstNinOptStructSint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8")
 	if err != nil {
@@ -5317,6 +5674,9 @@ func TestUnmarshalNinOptStructSint64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field8")
 	if err != nil {
@@ -5397,6 +5757,9 @@ func (this sorterNinOptStructSint64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructSint64, l)
@@ -5429,6 +5792,9 @@ func TestSortNinOptStructSint64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedSint64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5462,6 +5828,9 @@ func TestCompiledNinRepPackedNativeSint64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64Path("test", "NinRepNative", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5495,6 +5864,9 @@ func TestCompiledNinRepNativeSint64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field8")
 	if err != nil {
@@ -5537,6 +5909,9 @@ func TestCompiledNinNestedStructSint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5573,6 +5948,9 @@ func TestUnmarshalFirstNinOptNativeDefaultSint64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5609,6 +5987,9 @@ func TestUnmarshalNinOptNativeDefaultSint64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSint64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field8")
 	if err != nil {
@@ -5689,6 +6070,9 @@ func (this sorterNinOptNativeDefaultSint64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultSint64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultSint64, l)
@@ -5721,6 +6105,9 @@ func TestSortNinOptNativeDefaultSint64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -5757,6 +6144,9 @@ func TestUnmarshalFirstNinOptNativeFixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -5793,6 +6183,9 @@ func TestUnmarshalNinOptNativeFixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32Path("test", "NinOptNative", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -5873,6 +6266,9 @@ func (this sorterNinOptNativeFixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeFixed32, l)
@@ -5905,6 +6301,9 @@ func TestSortNinOptNativeFixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9")
 	if err != nil {
@@ -5941,6 +6340,9 @@ func TestUnmarshalFirstNinOptStructFixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9")
 	if err != nil {
@@ -5977,6 +6379,9 @@ func TestUnmarshalNinOptStructFixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field9")
 	if err != nil {
@@ -6057,6 +6462,9 @@ func (this sorterNinOptStructFixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructFixed32, l)
@@ -6089,6 +6497,9 @@ func TestSortNinOptStructFixed32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedFixed32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -6122,6 +6533,9 @@ func TestCompiledNinRepPackedNativeFixed32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32Path("test", "NinRepNative", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -6155,6 +6569,9 @@ func TestCompiledNinRepNativeFixed32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field9")
 	if err != nil {
@@ -6197,6 +6614,9 @@ func TestCompiledNinNestedStructFixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -6233,6 +6653,9 @@ func TestUnmarshalFirstNinOptNativeDefaultFixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -6269,6 +6692,9 @@ func TestUnmarshalNinOptNativeDefaultFixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field9")
 	if err != nil {
@@ -6349,6 +6775,9 @@ func (this sorterNinOptNativeDefaultFixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultFixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultFixed32, l)
@@ -6381,6 +6810,9 @@ func TestSortNinOptNativeDefaultFixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6417,6 +6849,9 @@ func TestUnmarshalFirstNinOptNativeFixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6453,6 +6888,9 @@ func TestUnmarshalNinOptNativeFixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64Path("test", "NinOptNative", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6533,6 +6971,9 @@ func (this sorterNinOptNativeFixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeFixed64, l)
@@ -6565,6 +7006,9 @@ func TestSortNinOptNativeFixed64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11")
 	if err != nil {
@@ -6601,6 +7045,9 @@ func TestUnmarshalFirstNinOptStructFixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11")
 	if err != nil {
@@ -6637,6 +7084,9 @@ func TestUnmarshalNinOptStructFixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field11")
 	if err != nil {
@@ -6717,6 +7167,9 @@ func (this sorterNinOptStructFixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructFixed64, l)
@@ -6749,6 +7202,9 @@ func TestSortNinOptStructFixed64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedFixed64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6782,6 +7238,9 @@ func TestCompiledNinRepPackedNativeFixed64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64Path("test", "NinRepNative", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6815,6 +7274,9 @@ func TestCompiledNinRepNativeFixed64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field11")
 	if err != nil {
@@ -6857,6 +7319,9 @@ func TestCompiledNinNestedStructFixed64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6893,6 +7358,9 @@ func TestUnmarshalFirstNinOptNativeDefaultFixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -6929,6 +7397,9 @@ func TestUnmarshalNinOptNativeDefaultFixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewFixed64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field11")
 	if err != nil {
@@ -7009,6 +7480,9 @@ func (this sorterNinOptNativeDefaultFixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultFixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultFixed64, l)
@@ -7041,6 +7515,9 @@ func TestSortNinOptNativeDefaultFixed64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7077,6 +7554,9 @@ func TestUnmarshalFirstNinOptNativeSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7113,6 +7593,9 @@ func TestUnmarshalNinOptNativeSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32Path("test", "NinOptNative", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7193,6 +7676,9 @@ func (this sorterNinOptNativeSfixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeSfixed32, l)
@@ -7225,6 +7711,9 @@ func TestSortNinOptNativeSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10")
 	if err != nil {
@@ -7261,6 +7750,9 @@ func TestUnmarshalFirstNinOptStructSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10")
 	if err != nil {
@@ -7297,6 +7789,9 @@ func TestUnmarshalNinOptStructSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptStructSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field10")
 	if err != nil {
@@ -7377,6 +7872,9 @@ func (this sorterNinOptStructSfixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptStructSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructSfixed32, l)
@@ -7409,6 +7907,9 @@ func TestSortNinOptStructSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedSfixed32Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7442,6 +7943,9 @@ func TestCompiledNinRepPackedNativeSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32Path("test", "NinRepNative", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7475,6 +7979,9 @@ func TestCompiledNinRepNativeSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field10")
 	if err != nil {
@@ -7517,6 +8024,9 @@ func TestCompiledNinNestedStructSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7553,6 +8063,9 @@ func TestUnmarshalFirstNinOptNativeDefaultSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7589,6 +8102,9 @@ func TestUnmarshalNinOptNativeDefaultSfixed32(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed32Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field10")
 	if err != nil {
@@ -7669,6 +8185,9 @@ func (this sorterNinOptNativeDefaultSfixed32) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultSfixed32(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultSfixed32, l)
@@ -7701,6 +8220,9 @@ func TestSortNinOptNativeDefaultSfixed32(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -7737,6 +8259,9 @@ func TestUnmarshalFirstNinOptNativeSfixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNative", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -7773,6 +8298,9 @@ func TestUnmarshalNinOptNativeSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64Path("test", "NinOptNative", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -7853,6 +8381,9 @@ func (this sorterNinOptNativeSfixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeSfixed64, l)
@@ -7885,6 +8416,9 @@ func TestSortNinOptNativeSfixed64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12")
 	if err != nil {
@@ -7921,6 +8455,9 @@ func TestUnmarshalFirstNinOptStructSfixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12")
 	if err != nil {
@@ -7957,6 +8494,9 @@ func TestUnmarshalNinOptStructSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptStructSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64Path("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field12")
 	if err != nil {
@@ -8037,6 +8577,9 @@ func (this sorterNinOptStructSfixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptStructSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructSfixed64, l)
@@ -8069,6 +8612,9 @@ func TestSortNinOptStructSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedSfixed64Path("test", "NinRepPackedNative", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -8102,6 +8648,9 @@ func TestCompiledNinRepPackedNativeSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64Path("test", "NinRepNative", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -8135,6 +8684,9 @@ func TestCompiledNinRepNativeSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64Path("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field12")
 	if err != nil {
@@ -8177,6 +8729,9 @@ func TestCompiledNinNestedStructSfixed64(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -8213,6 +8768,9 @@ func TestUnmarshalFirstNinOptNativeDefaultSfixed64(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64SinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -8249,6 +8807,9 @@ func TestUnmarshalNinOptNativeDefaultSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewSfixed64Path("test", "NinOptNativeDefault", test.ThetestDescription(), "Field12")
 	if err != nil {
@@ -8329,6 +8890,9 @@ func (this sorterNinOptNativeDefaultSfixed64) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultSfixed64(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultSfixed64, l)
@@ -8361,6 +8925,9 @@ func TestSortNinOptNativeDefaultSfixed64(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBoolPath("test", "NinOptNative", test.ThetestDescription(), "Field13")
 	if err != nil {
@@ -8403,6 +8970,9 @@ func TestCompiledNinOptNativeBool(t *testing.T) {
 }
 
 func TestCompiledNinOptStructBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBoolPath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field13")
 	if err != nil {
@@ -8445,6 +9015,9 @@ func TestCompiledNinOptStructBool(t *testing.T) {
 }
 
 func TestCompiledNinRepPackedNativeBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewPackedBoolPath("test", "NinRepPackedNative", test.ThetestDescription(), "Field13")
 	if err != nil {
@@ -8478,6 +9051,9 @@ func TestCompiledNinRepPackedNativeBool(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBoolPath("test", "NinRepNative", test.ThetestDescription(), "Field13")
 	if err != nil {
@@ -8511,6 +9087,9 @@ func TestCompiledNinRepNativeBool(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBoolPath("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field13")
 	if err != nil {
@@ -8553,6 +9132,9 @@ func TestCompiledNinNestedStructBool(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultBool(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBoolPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field13")
 	if err != nil {
@@ -8595,6 +9177,9 @@ func TestCompiledNinOptNativeDefaultBool(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNative", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -8631,6 +9216,9 @@ func TestUnmarshalFirstNinOptNativeString(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNative", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -8667,6 +9255,9 @@ func TestUnmarshalNinOptNativeString(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringPath("test", "NinOptNative", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -8747,6 +9338,9 @@ func (this sorterNinOptNativeString) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeString, l)
@@ -8779,6 +9373,9 @@ func TestSortNinOptNativeString(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14")
 	if err != nil {
@@ -8815,6 +9412,9 @@ func TestUnmarshalFirstNinOptStructString(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14")
 	if err != nil {
@@ -8851,6 +9451,9 @@ func TestUnmarshalNinOptStructString(t *testing.T) {
 }
 
 func TestCompiledNinOptStructString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringPath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field14")
 	if err != nil {
@@ -8931,6 +9534,9 @@ func (this sorterNinOptStructString) Swap(i, j int) {
 }
 
 func TestSortNinOptStructString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructString, l)
@@ -8963,6 +9569,9 @@ func TestSortNinOptStructString(t *testing.T) {
 }
 
 func TestCompiledNinRepNativeString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringPath("test", "NinRepNative", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -8996,6 +9605,9 @@ func TestCompiledNinRepNativeString(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringPath("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field14")
 	if err != nil {
@@ -9038,6 +9650,9 @@ func TestCompiledNinNestedStructString(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -9074,6 +9689,9 @@ func TestUnmarshalFirstNinOptNativeDefaultString(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -9110,6 +9728,9 @@ func TestUnmarshalNinOptNativeDefaultString(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewStringPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field14")
 	if err != nil {
@@ -9190,6 +9811,9 @@ func (this sorterNinOptNativeDefaultString) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultString(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultString, l)
@@ -9222,6 +9846,9 @@ func TestSortNinOptNativeDefaultString(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNative", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9253,6 +9880,9 @@ func TestUnmarshalFirstNinOptNativeBytes(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNative", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9284,6 +9914,9 @@ func TestUnmarshalNinOptNativeBytes(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesPath("test", "NinOptNative", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9346,6 +9979,9 @@ func (this sorterNinOptNativeBytes) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeBytes, l)
@@ -9378,6 +10014,9 @@ func TestSortNinOptNativeBytes(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptStructBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field15")
 	if err != nil {
@@ -9409,6 +10048,9 @@ func TestUnmarshalFirstNinOptStructBytes(t *testing.T) {
 }
 
 func TestUnmarshalNinOptStructBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field15")
 	if err != nil {
@@ -9440,6 +10082,9 @@ func TestUnmarshalNinOptStructBytes(t *testing.T) {
 }
 
 func TestCompiledNinOptStructBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesPath("test", "NinOptStruct", test.ThetestDescription(), "Field4.Field15")
 	if err != nil {
@@ -9502,6 +10147,9 @@ func (this sorterNinOptStructBytes) Swap(i, j int) {
 }
 
 func TestSortNinOptStructBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptStructBytes, l)
@@ -9534,6 +10182,9 @@ func TestSortNinOptStructBytes(t *testing.T) {
 }
 
 func TestCompiledNinNestedStructBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesPath("test", "NinNestedStruct", test.ThetestDescription(), "Field1.Field4.Field15")
 	if err != nil {
@@ -9574,6 +10225,9 @@ func TestCompiledNinNestedStructBytes(t *testing.T) {
 }
 
 func TestUnmarshalFirstNinOptNativeDefaultBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9605,6 +10259,9 @@ func TestUnmarshalFirstNinOptNativeDefaultBytes(t *testing.T) {
 }
 
 func TestUnmarshalNinOptNativeDefaultBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesSinglePath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9636,6 +10293,9 @@ func TestUnmarshalNinOptNativeDefaultBytes(t *testing.T) {
 }
 
 func TestCompiledNinOptNativeDefaultBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	fp, err := fieldpath.NewBytesPath("test", "NinOptNativeDefault", test.ThetestDescription(), "Field15")
 	if err != nil {
@@ -9698,6 +10358,9 @@ func (this sorterNinOptNativeDefaultBytes) Swap(i, j int) {
 }
 
 func TestSortNinOptNativeDefaultBytes(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
 	r := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	l := r.Intn(1000)
 	unmarshalled := make(sorterNinOptNativeDefaultBytes, l)

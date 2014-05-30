@@ -603,7 +603,6 @@ func sovExample(x uint64) (n int) {
 }
 func sozExample(x uint64) (n int) {
 	return sovExample(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-	return sovExample(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func NewPopulatedA(r randyExample, easy bool) *A {
 	this := &A{}

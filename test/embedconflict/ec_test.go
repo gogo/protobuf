@@ -48,9 +48,10 @@ func TestEmbedConflict(t *testing.T) {
 func TestEmbedMarshaler(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", "em.proto")
 	data, err := cmd.CombinedOutput()
-	t.Logf("received error = %v and output = %v", err, string(data))
-	if !strings.Contains(string(data), "WARNING: found non-[marshaler unsafe_marshaler]") {
-		t.Errorf("Expected WARNING: found non-marshaler C with embedded marshaler D")
+	dataStr := string(data)
+	t.Logf("received error = %v and output = %v", err, dataStr)
+	if !strings.Contains(dataStr, "WARNING: found non-") || !strings.Contains(dataStr, "unsafe_marshaler") {
+		t.Errorf("Expected WARNING: found non-[marshaler unsafe_marshaler] C with embedded marshaler D")
 	}
 	if err := os.Remove("em.pb.go"); err != nil {
 		panic(err)

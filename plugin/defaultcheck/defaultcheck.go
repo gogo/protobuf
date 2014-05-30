@@ -104,7 +104,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	}
 	for _, e := range file.GetExtension() {
 		if !gogoproto.IsNullable(e) {
-			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be nullable", generator.CamelCase(e.GetName()), generator.CamelCase(*e.Name))
+			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be nullable %v", generator.CamelCase(e.GetName()), generator.CamelCase(*e.Name))
 			os.Exit(1)
 		}
 	}

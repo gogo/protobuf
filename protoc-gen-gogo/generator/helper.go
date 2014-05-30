@@ -236,7 +236,10 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 }
 
 func FileName(file *FileDescriptor) string {
-	return CamelCase(strings.Replace(path.Base(file.FileDescriptorProto.GetName()), ".proto", "", -1))
+	fname := path.Base(file.FileDescriptorProto.GetName())
+	fname = strings.Replace(fname, ".proto", "", -1)
+	fname = strings.Replace(fname, "-", "_", -1)
+	return CamelCase(fname)
 }
 
 func (g *Generator) AllFiles() *descriptor.FileDescriptorSet {

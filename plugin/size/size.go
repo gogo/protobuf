@@ -190,7 +190,6 @@ func (p *size) sizeVarint() {
 func (p *size) sizeZigZag() {
 	p.P(`func soz`, p.localName, `(x uint64) (n int) {
  		return sov`, p.localName, `(uint64((x << 1) ^ uint64((int64(x) >> 63)))) 	
- 		return sov`, p.localName, `(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	}`)
 }
 

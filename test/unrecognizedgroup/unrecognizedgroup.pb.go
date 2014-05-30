@@ -376,7 +376,6 @@ func sovUnrecognizedgroup(x uint64) (n int) {
 }
 func sozUnrecognizedgroup(x uint64) (n int) {
 	return sovUnrecognizedgroup(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-	return sovUnrecognizedgroup(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 	this := &NewNoGroup{}
