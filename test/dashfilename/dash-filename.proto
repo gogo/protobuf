@@ -1,0 +1,9 @@
+package dashfilename;
+
+import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
+
+option (gogoproto.marshaler_all) = true;
+
+message test {
+
+}
