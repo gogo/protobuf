@@ -93,6 +93,14 @@ func StringFromExtensionsMap(m map[int32]Extension) string {
 	return newSortableExtensionsFromMap(m).String()
 }
 
+func StringFromExtensionsBytes(ext []byte) string {
+	m, err := BytesToExtensionsMap(ext)
+	if err != nil {
+		panic(err)
+	}
+	return StringFromExtensionsMap(m)
+}
+
 func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {
 	if err := encodeExtensionMap(m); err != nil {
 		return 0, err
@@ -133,6 +141,7 @@ func BytesToExtensionsMap(buf []byte) (map[int32]Extension, error) {
 		}
 		i += n
 		m[int32(v)] = Extension{enc: buf[i : i+int(l)]}
+		i += int(l)
 	}
 	return m, nil
 }
