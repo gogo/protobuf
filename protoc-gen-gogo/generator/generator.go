@@ -1148,8 +1148,15 @@ func (g *Generator) generateImports() {
 		if _, ok := g.usedPackages[fd.PackageName()]; ok {
 			if strings.Contains(filename, "/") {
 				dir, _ := path.Split(filename)
-				g.P("import ", fd.PackageName(), " ", strconv.Quote(path.Clean(dir)))
-				c[path.Clean(dir)] = true
+				dir = path.Clean(dir)
+				if dir == "google/protobuf" && strings.HasSuffix(filename, "descriptor.pb") {
+					// This allows protos to import a single google/protobuf/descriptor.proto so as not to cause conflicts with C++ or other code generators.
+					// Also this allows the go generated descriptor to live inside the gogoprotobuf package
+					dir = "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
+					g.P("// renamed import google/protobuf/descriptor to code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor")
+				}
+				g.P("import ", fd.PackageName(), " ", strconv.Quote(dir))
+				c[dir] = true
 			} else {
 				g.P("import ", fd.PackageName(), " ", strconv.Quote(filename))
 			}
