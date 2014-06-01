@@ -126,22 +126,57 @@ func GetRawExtension(m map[int32]Extension, id int32) ([]byte, error) {
 	return m[id].enc, nil
 }
 
+func size(buf []byte, wire int) (int, error) {
+	switch wire {
+	case WireVarint:
+		_, n := DecodeVarint(buf)
+		return n, nil
+	case WireFixed64:
+		return 8, nil
+	case WireBytes:
+		v, n := DecodeVarint(buf)
+		return int(v) + n, nil
+	case WireFixed32:
+		return 4, nil
+	case WireStartGroup:
+		offset := 0
+		for {
+			u, n := DecodeVarint(buf[offset:])
+			fwire := int(u & 0x7)
+			offset += n
+			if fwire == WireEndGroup {
+				return offset, nil
+			}
+			s, err := size(buf[offset:], wire)
+			if err != nil {
+				return 0, err
+			}
+			offset += s
+		}
+	}
+	return 0, fmt.Errorf("proto: can't get size for unknown wire type %d", wire)
+}
+
 func BytesToExtensionsMap(buf []byte) (map[int32]Extension, error) {
 	m := make(map[int32]Extension)
 	i := 0
 	for i < len(buf) {
-		v, n := DecodeVarint(buf[i:])
+		tag, n := DecodeVarint(buf[i:])
 		if n <= 0 {
 			return nil, fmt.Errorf("unable to decode varint")
 		}
-		i += n
-		l, n := DecodeVarint(buf[i:])
-		if n <= 0 {
-			return nil, fmt.Errorf("unable to decode varint")
+		fieldNum := int32(tag >> 3)
+		wireType := int(tag & 0x7)
+		l, err := size(buf[i+n:], wireType)
+		if err != nil {
+			return nil, err
 		}
-		i += n
-		m[int32(v)] = Extension{enc: buf[i : i+int(l)]}
-		i += int(l)
+		end := i + int(l) + n
+		if end > len(buf) {
+			panic(fmt.Sprintf("v = %d, l = %d, i = %d buf = %#v", fieldNum, l, i, buf))
+		}
+		m[int32(fieldNum)] = Extension{enc: buf[i:end]}
+		i = end
 	}
 	return m, nil
 }
