@@ -172,9 +172,6 @@ func BytesToExtensionsMap(buf []byte) (map[int32]Extension, error) {
 			return nil, err
 		}
 		end := i + int(l) + n
-		if end > len(buf) {
-			panic(fmt.Sprintf("v = %d, l = %d, i = %d buf = %#v", fieldNum, l, i, buf))
-		}
 		m[int32(fieldNum)] = Extension{enc: buf[i:end]}
 		i = end
 	}

@@ -234,14 +234,18 @@ func HasExtension(pb extendableProto, extension *ExtensionDesc) bool {
 		buf := *ext
 		o := 0
 		for o < len(buf) {
-			v, n := DecodeVarint(buf[o:])
-			if int32(v) == extension.Field {
+			tag, n := DecodeVarint(buf[o:])
+			fieldNum := int32(tag >> 3)
+			if int32(fieldNum) == extension.Field {
 				return true
 			}
+			wireType := int(tag & 0x7)
 			o += n
-			l, n := DecodeVarint(buf[o:])
-			o += n
-			o += int(l)
+			l, err := size(buf[o:], wireType)
+			if err != nil {
+				return false
+			}
+			o += l
 		}
 		return false
 	}
@@ -319,18 +323,22 @@ func GetExtension(pb extendableProto, extension *ExtensionDesc) (interface{}, er
 		buf := *ext
 		o := 0
 		for o < len(buf) {
-			v, n := DecodeVarint(buf[o:])
-			if int32(v) == extension.Field {
+			tag, n := DecodeVarint(buf[o:])
+			fieldNum := int32(tag >> 3)
+			if int32(fieldNum) == extension.Field {
 				v, err := decodeExtension(buf[o:], extension)
 				if err != nil {
 					return nil, err
 				}
 				return v, nil
 			}
+			wireType := int(tag & 0x7)
 			o += n
-			l, n := DecodeVarint(buf[o:])
-			o += n
-			o += int(l)
+			l, err := size(buf[o:], wireType)
+			if err != nil {
+				return nil, err
+			}
+			o += l
 		}
 	}
 	panic("unreachable")
