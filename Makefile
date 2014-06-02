@@ -41,8 +41,6 @@ install:
 
 all: clean install regenerate gofmt install tests
 
-everything: clean install regenerate-google-protobuf regenerate tests clean install gofmt
-
 clean:
 	go clean ./...
 
@@ -52,14 +50,10 @@ nuke:
 gofmt:
 	gofmt -l -s -w .
 
-#this job requires the descriptor.proto in src/google/protobuf
-regenerate-google-protobuf:
+regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C gogoproto regenerate
-	gofmt -l -s -w .
-
-regenerate:
 	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
 	make -C test regenerate

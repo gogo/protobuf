@@ -33,7 +33,7 @@
 # at protobuf-2.3.0/src/google/protobuf/compiler/plugin.proto
 # Also we need to fix an import.
 regenerate:
-	(cd ../../../../../ && protoc --gogo_out=. ./code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin/plugin.proto)
+	protoc --gogo_out=. -I=../../protobuf/google/protobuf/compiler/:../../protobuf/ ../../protobuf/google/protobuf/compiler/plugin.proto
 
 restore:
 	cp plugin.pb.golden plugin.pb.go

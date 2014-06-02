@@ -27,7 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	protoc --gogo_out=. --proto_path=../../../../:. *.proto
+	protoc --gogo_out=. --proto_path=../../../../:../protobuf/:. *.proto
 
 restore:
 	cp gogo.pb.golden gogo.pb.go

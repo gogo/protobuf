@@ -33,7 +33,7 @@ import (
 )
 
 func testDefaultConflict(t *testing.T, name string) {
-	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:.", name+".proto")
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", name+".proto")
 	data, err := cmd.CombinedOutput()
 	if err == nil {
 		t.Errorf("Expected error")
