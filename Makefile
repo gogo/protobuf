@@ -90,7 +90,7 @@ drone:
 	git clone https://code.google.com/p/gogoprotobuf
 	cd $(GOPATH)
 	svn checkout http://protobuf.googlecode.com/svn/tags/2.4.1/ protobuf-readonly
-	mv $(GOPATH)/protobuf-readonly/src/google $GOPATH/src/google
+	mv $(GOPATH)/protobuf-readonly/src/google $(GOPATH)/src/google
 	cd $(GOPATH)/src/code.google.com/p/gogoprotobuf
 	make all
 	cd $(GOPATH)/src
