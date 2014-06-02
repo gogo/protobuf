@@ -29,7 +29,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-.PHONY: nuke regenerate tests clean install gofmt
+.PHONY: nuke regenerate regenerate-google-protobuf tests clean install gofmt
 
 install:
 	go install ./proto
@@ -41,6 +41,8 @@ install:
 
 all: clean install regenerate gofmt install tests
 
+everything: clean install regenerate-google-protobuf regenerate tests clean install gofmt
+
 clean:
 	go clean ./...
 
@@ -50,10 +52,14 @@ nuke:
 gofmt:
 	gofmt -l -s -w .
 
-regenerate:
+#this job requires the descriptor.proto in src/google/protobuf
+regenerate-google-protobuf:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C gogoproto regenerate
+	gofmt -l -s -w .
+
+regenerate:
 	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
 	make -C test regenerate
