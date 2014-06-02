@@ -59,7 +59,7 @@ message C {
 }
 
 message U {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional A A = 1;
 	optional B B = 2;
 }

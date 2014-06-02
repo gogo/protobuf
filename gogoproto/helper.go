@@ -88,7 +88,7 @@ func HasGoGetters(file *google_protobuf.FileDescriptorProto, message *google_pro
 }
 
 func IsUnion(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
-	return proto.GetBoolExtension(message.Options, E_Union, proto.GetBoolExtension(file.Options, E_UnionAll, false))
+	return proto.GetBoolExtension(message.Options, E_Onlyone, proto.GetBoolExtension(file.Options, E_OnlyoneAll, false))
 }
 
 func HasGoString(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {

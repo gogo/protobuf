@@ -112,12 +112,12 @@ var E_StringerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63008,opt,name=stringer_all",
 }
 
-var E_UnionAll = &proto.ExtensionDesc{
+var E_OnlyoneAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63009,
-	Name:          "gogoproto.union_all",
-	Tag:           "varint,63009,opt,name=union_all",
+	Name:          "gogoproto.onlyone_all",
+	Tag:           "varint,63009,opt,name=onlyone_all",
 }
 
 var E_EqualAll = &proto.ExtensionDesc{
@@ -272,12 +272,12 @@ var E_Stringer = &proto.ExtensionDesc{
 	Tag:           "varint,67008,opt,name=stringer",
 }
 
-var E_Union = &proto.ExtensionDesc{
+var E_Onlyone = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64009,
-	Name:          "gogoproto.union",
-	Tag:           "varint,64009,opt,name=union",
+	Name:          "gogoproto.onlyone",
+	Tag:           "varint,64009,opt,name=onlyone",
 }
 
 var E_Equal = &proto.ExtensionDesc{
@@ -404,7 +404,7 @@ func init() {
 	proto.RegisterExtension(E_GostringAll)
 	proto.RegisterExtension(E_PopulateAll)
 	proto.RegisterExtension(E_StringerAll)
-	proto.RegisterExtension(E_UnionAll)
+	proto.RegisterExtension(E_OnlyoneAll)
 	proto.RegisterExtension(E_EqualAll)
 	proto.RegisterExtension(E_DescriptionAll)
 	proto.RegisterExtension(E_TestgenAll)
@@ -424,7 +424,7 @@ func init() {
 	proto.RegisterExtension(E_Gostring)
 	proto.RegisterExtension(E_Populate)
 	proto.RegisterExtension(E_Stringer)
-	proto.RegisterExtension(E_Union)
+	proto.RegisterExtension(E_Onlyone)
 	proto.RegisterExtension(E_Equal)
 	proto.RegisterExtension(E_Description)
 	proto.RegisterExtension(E_Testgen)

@@ -988,7 +988,7 @@ func GroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("union_all"), Number: func(v int32) *int32 { return &v }(63009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("onlyone_all"), Number: func(v int32) *int32 { return &v }(63009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -1068,7 +1068,7 @@ func GroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("union"), Number: func(v int32) *int32 { return &v }(64009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("onlyone"), Number: func(v int32) *int32 { return &v }(64009), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

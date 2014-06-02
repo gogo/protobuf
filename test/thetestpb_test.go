@@ -6203,88 +6203,88 @@ func TestCustomNameEnumProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestNinOptNativeUnionUnion(t *testing3.T) {
+func TestNinOptNativeUnionOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
 	v := p.GetValue()
 	msg := &NinOptNativeUnion{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestNinOptStructUnionUnion(t *testing3.T) {
+func TestNinOptStructUnionOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, true)
 	v := p.GetValue()
 	msg := &NinOptStructUnion{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestNinEmbeddedStructUnionUnion(t *testing3.T) {
+func TestNinEmbeddedStructUnionOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
 	v := p.GetValue()
 	msg := &NinEmbeddedStructUnion{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestNinNestedStructUnionUnion(t *testing3.T) {
+func TestNinNestedStructUnionOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, true)
 	v := p.GetValue()
 	msg := &NinNestedStructUnion{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestTreeUnion(t *testing3.T) {
+func TestTreeOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedTree(popr, true)
 	v := p.GetValue()
 	msg := &Tree{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestDeepTreeUnion(t *testing3.T) {
+func TestDeepTreeOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, true)
 	v := p.GetValue()
 	msg := &DeepTree{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
-func TestCustomNameNinEmbeddedStructUnionUnion(t *testing3.T) {
+func TestCustomNameNinEmbeddedStructUnionOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
 	v := p.GetValue()
 	msg := &CustomNameNinEmbeddedStructUnion{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
 func TestNidOptNativeStringer(t *testing4.T) {
