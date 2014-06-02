@@ -88,14 +88,11 @@ tests:
 drone:
 	sudo apt-get install protobuf-compiler
 	git clone https://code.google.com/p/gogoprotobuf
-	cd $(GOPATH)
-	svn checkout http://protobuf.googlecode.com/svn/tags/2.4.1/ protobuf-readonly
+	(cd $(GOPATH) && svn checkout http://protobuf.googlecode.com/svn/tags/2.4.1/ protobuf-readonly)
 	mv $(GOPATH)/protobuf-readonly/src/google $(GOPATH)/src/google
-	cd $(GOPATH)/src/code.google.com/p/gogoprotobuf
-	make all
-	cd $(GOPATH)/src
-	protoc -I=. --cpp_out=. ./code.google.com/p/gogoprotobuf/gogoproto/gogo.proto
-	g++ -I$(GOPATH)/src -c -o $(GOPATH)/src/code.google.com/p/gogoprotobuf/gogoproto/gogo.pb.o $(GOPATH)/src/code.google.com/p/gogoprotobuf/gogoproto/gogo.pb.cc
+	(cd $(GOPATH)/src/code.google.com/p/gogoprotobuf && make all)
+	(cd $(GOPATH)/src && protoc -I=. --cpp_out=. ./code.google.com/p/gogoprotobuf/gogoproto/gogo.proto)
+	(cd $(GOPATH)/src && g++ -I$(GOPATH)/src -c -o $(GOPATH)/src/code.google.com/p/gogoprotobuf/gogoproto/gogo.pb.o $(GOPATH)/src/code.google.com/p/gogoprotobuf/gogoproto/gogo.pb.cc)
 
 testall: tests
 	make -C protoc-gen-gogo/testdata test
