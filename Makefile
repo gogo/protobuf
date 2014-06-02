@@ -83,6 +83,7 @@ tests:
 	go test -v ./test/issue8
 	go test -v ./test/example
 	go test -v ./test/dashfilename
+	go test -v ./parser
 
 drone:
 	sudo apt-get install protobuf-compiler

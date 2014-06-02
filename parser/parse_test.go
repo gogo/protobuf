@@ -33,7 +33,7 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	_, err := ParseFile("../protoc-gen-gogo/descriptor/descriptor.proto", "../protoc-gen-gogo/descriptor/")
+	_, err := ParseFile("../protobuf/google/protobuf/descriptor.proto", "../protobuf/")
 	if err != nil {
 		panic(err)
 	}
