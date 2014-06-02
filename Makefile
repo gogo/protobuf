@@ -29,7 +29,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-.PHONY: nuke regenerate regenerate-google-protobuf tests clean install gofmt
+.PHONY: nuke regenerate tests clean install gofmt
 
 install:
 	go install ./proto
