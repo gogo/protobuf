@@ -26,7 +26,7 @@
 
 package gogoproto;
 
-import "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto";
+import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumOptions {
 	optional bool goproto_enum_prefix = 62001;
@@ -43,7 +43,7 @@ extend google.protobuf.FileOptions {
 	optional bool gostring_all = 63006;
 	optional bool populate_all = 63007;
 	optional bool stringer_all = 63008;
-	optional bool union_all = 63009;
+	optional bool onlyone_all = 63009;
 
 	optional bool equal_all = 63013;
 	optional bool description_all = 63014;
@@ -71,7 +71,7 @@ extend google.protobuf.MessageOptions {
 	optional bool gostring = 64006;
 	optional bool populate = 64007;
   	optional bool stringer = 67008;
-	optional bool union = 64009;
+	optional bool onlyone = 64009;
 
 	optional bool equal = 64013;
 	optional bool description = 64014;

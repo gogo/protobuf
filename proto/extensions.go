@@ -254,14 +254,17 @@ func HasExtension(pb extendableProto, extension *ExtensionDesc) bool {
 
 func deleteExtension(pb extensionsBytes, extension *ExtensionDesc, offset int) int {
 	ext := pb.GetExtensions()
-	buf := *ext
-	for offset < len(buf) {
-		v, n1 := DecodeVarint(buf[offset:])
-		l, n2 := DecodeVarint(buf[offset+n1:])
-		newOffset := offset + n1 + n2 + int(l)
-		if int32(v) == extension.Field {
-			buf = append(buf[:offset], buf[newOffset:]...)
-			ext = &buf
+	for offset < len(*ext) {
+		tag, n1 := DecodeVarint((*ext)[offset:])
+		fieldNum := int32(tag >> 3)
+		wireType := int(tag & 0x7)
+		n2, err := size((*ext)[offset+n1:], wireType)
+		if err != nil {
+			panic(err)
+		}
+		newOffset := offset + n1 + n2
+		if fieldNum == extension.Field {
+			*ext = append((*ext)[:offset], (*ext)[newOffset:]...)
 			return offset
 		}
 		offset = newOffset

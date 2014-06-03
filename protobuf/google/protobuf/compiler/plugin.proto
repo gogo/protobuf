@@ -48,8 +48,7 @@ package google.protobuf.compiler;
 option java_package = "com.google.protobuf.compiler";
 option java_outer_classname = "PluginProtos";
 
-import "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor/descriptor.proto";
-option go_package = "com.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin";
+import "google/protobuf/descriptor.proto";
 
 // An encoded CodeGeneratorRequest is written to the plugin's stdin.
 message CodeGeneratorRequest {

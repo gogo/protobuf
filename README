@@ -61,6 +61,16 @@ The package comment for the proto library contains text describing
 the interface provided in Go for protocol buffers. Here is an edited
 version.
 
+If you are using any gogo.proto extensions you will need to specify the
+proto_path to include the descriptor.proto and gogo.proto.
+gogo.proto is located in code.google.com/p/gogoprotobuf/gogoproto
+This should be fine, since your import is the same.
+descriptor.proto is located in either code.google.com/p/gogoprotobuf/protobuf
+or code.google.com/p/protobuf/trunk/src/
+Its import is google/protobuf/descriptor.proto so it might need some help.
+
+	protoc --gogo_out=. -I=.:code.google.com/p/gogoprotobuf/protobuf *.proto
+
 ==========
 
 The proto package converts data structures to and from the

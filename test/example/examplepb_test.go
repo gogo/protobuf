@@ -613,16 +613,16 @@ func TestUProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestUUnion(t *testing3.T) {
+func TestUOnlyOne(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedU(popr, true)
 	v := p.GetValue()
 	msg := &U{}
 	if !msg.SetValue(v) {
-		t.Fatalf("Union: Could not set Value")
+		t.Fatalf("OnlyOne: Could not set Value")
 	}
 	if !p.Equal(msg) {
-		t.Fatalf("%#v !Union Equal %#v", msg, p)
+		t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)
 	}
 }
 func TestAStringer(t *testing4.T) {

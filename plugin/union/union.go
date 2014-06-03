@@ -25,7 +25,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*
-The union union generates code for the union extension.
+The onlyone plugin generates code for the onlyone extension.
 All fields must be nullable and only one of the fields may be set, like a union.
 Two methods are generated
 
@@ -35,14 +35,17 @@ and
 
   SetValue(v interface{}) (set bool)
 
-These provide easier interaction with a union.
+These provide easier interaction with a onlyone.
+
+The onlyone extension is not called union as this causes compile errors in the C++ generated code.
+There can only be one ;)
 
 It is enabled by the following extensions:
 
-  - union
-  - union_all
+  - onlyone
+  - onlyone_all
 
-The union plugin also generates a test given it is enabled using one of the following extensions:
+The onlyone plugin also generates a test given it is enabled using one of the following extensions:
 
   - testgen
   - testgen_all
@@ -58,12 +61,12 @@ Btw all the output can be seen at:
 The following message:
 
   message U {
-	  option (gogoproto.union) = true;
+	  option (gogoproto.onlyone) = true;
 	  optional A A = 1;
 	  optional B B = 2;
   }
 
-given to the union union, will generate code which looks a lot like this:
+given to the onlyone plugin, will generate code which looks a lot like this:
 
 	func (this *U) GetValue() interface{} {
 		if this.A != nil {
@@ -135,7 +138,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		if message.DescriptorProto.HasExtension() {
-			panic("union does not currently support extensions")
+			panic("onlyone does not currently support extensions")
 		}
 
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
@@ -144,7 +147,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
 			if fieldname == "Value" {
-				panic("cannot have a union message " + ccTypeName + " with a field named Value")
+				panic("cannot have a onlyone message " + ccTypeName + " with a field named Value")
 			}
 			p.P(`if this.`, fieldname, ` != nil {`)
 			p.In()

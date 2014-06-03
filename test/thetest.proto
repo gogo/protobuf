@@ -251,7 +251,7 @@ message NinRepCustom {
 }
 
 message NinOptNativeUnion {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional double Field1 = 1;
 	optional float Field2 = 2;
 	optional int32 Field3 = 3;
@@ -264,7 +264,7 @@ message NinOptNativeUnion {
 }
 
 message NinOptStructUnion {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional double Field1 = 1;
 	optional float Field2 = 2;
 	optional NidOptNative Field3 = 3;
@@ -277,21 +277,21 @@ message NinOptStructUnion {
 }
 
 message NinEmbeddedStructUnion {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional NidOptNative Field1 = 1 [(gogoproto.embed) = true];
 	optional NinOptNative Field200 = 200;
 	optional bool Field210 = 210;
 }
 
 message NinNestedStructUnion {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional NinOptNativeUnion Field1 = 1;
 	optional NinOptStructUnion Field2 = 2;
 	optional NinEmbeddedStructUnion Field3 = 3;
 }
 
 message Tree {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional OrBranch Or = 1;
 	optional AndBranch And = 2;
 	optional Leaf Leaf = 3;
@@ -313,7 +313,7 @@ message Leaf {
 }
 
 message DeepTree {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional ADeepBranch Down = 1;
 	optional AndDeepBranch And = 2;
 	optional DeepLeaf Leaf = 3;
@@ -529,7 +529,7 @@ message CustomNameCustomType {
 }
 
 message CustomNameNinEmbeddedStructUnion {
-	option (gogoproto.union) = true;
+	option (gogoproto.onlyone) = true;
 	optional NidOptNative Field1 = 1 [(gogoproto.embed) = true];
 	optional NinOptNative Field200 = 200 [(gogoproto.customname) = "FieldA"];
 	optional bool Field210 = 210 [(gogoproto.customname) = "FieldB"];

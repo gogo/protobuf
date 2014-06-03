@@ -53,7 +53,7 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 		used = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 
-		p.P(`func Test`, ccTypeName, `Union(t *`, testingPkg.Use(), `.T) {`)
+		p.P(`func Test`, ccTypeName, `OnlyOne(t *`, testingPkg.Use(), `.T) {`)
 		p.In()
 		p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
 		p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
@@ -61,12 +61,12 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 		p.P(`msg := &`, ccTypeName, `{}`)
 		p.P(`if !msg.SetValue(v) {`)
 		p.In()
-		p.P(`t.Fatalf("Union: Could not set Value")`)
+		p.P(`t.Fatalf("OnlyOne: Could not set Value")`)
 		p.Out()
 		p.P(`}`)
 		p.P(`if !p.Equal(msg) {`)
 		p.In()
-		p.P(`t.Fatalf("%#v !Union Equal %#v", msg, p)`)
+		p.P(`t.Fatalf("%#v !OnlyOne Equal %#v", msg, p)`)
 		p.Out()
 		p.P(`}`)
 		p.Out()
