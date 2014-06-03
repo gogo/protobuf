@@ -2,7 +2,6 @@ package test
 
 import (
 	"code.google.com/p/gogoprotobuf/proto"
-	"fmt"
 	"math"
 	math_rand "math/rand"
 	"testing"
