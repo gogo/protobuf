@@ -64,3 +64,7 @@ message U {
 	optional B B = 2;
 }
 
+message E {
+	option (gogoproto.goproto_extensions_map) = false;
+	extensions 1 to max;
+}

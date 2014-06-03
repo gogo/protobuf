@@ -44,7 +44,7 @@ Gogoprotobuf tries to fix these problems with the nullable, embed, customtype an
   - nullable, if false, a field is generated without a pointer (see warning below).
   - embed, if true, the field is generated as an embedded field.
   - customtype, It works with the Marshal and Unmarshal methods, to allow you to have your own types in your struct, but marshal to bytes. For example, custom.Uuid or custom.Fixed128
-  - customname (experimental), Changes the generated fieldname. This is especially useful when generated methods conflict with fieldnames.
+  - customname (beta), Changes the generated fieldname. This is especially useful when generated methods conflict with fieldnames.
 
 Warning about nullable: According to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set. It can be seen as a layer on top of Protocol Buffers, where before and after marshalling all non-nullable fields are set and they cannot be unset.
 
@@ -142,6 +142,7 @@ The enumprefix, getters and stringer extensions can be used to remove some of th
   - goproto_enum_stringer (experimental), if false, the enum is generated without the default string method, this is useful for rather using enum_stringer, or allowing you to write your own string method.
   - goproto_getters, if false, the message is generated without get methods, this is useful when you would rather want to use face
   - goproto_stringer, if false, the message is generated without the default string method, this is useful for rather using stringer, or allowing you to write your own string method.
+  - goproto_extensions_map (beta), if false, the extensions field is generated as type []byte instead of type map[int32]proto.Extension
 
 Less Typing and Peace of Mind is explained in their specific plugin folders godoc:
 

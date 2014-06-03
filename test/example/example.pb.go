@@ -13,6 +13,7 @@
 		B
 		C
 		U
+		E
 */
 package test
 
@@ -32,14 +33,16 @@ import fmt "fmt"
 import strings "strings"
 import reflect "reflect"
 
+import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+
 import fmt1 "fmt"
 import strings1 "strings"
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect1 "reflect"
 
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto3 "code.google.com/p/gogoprotobuf/proto"
 
 import fmt2 "fmt"
 import bytes "bytes"
@@ -106,6 +109,28 @@ func (m *U) GetB() *B {
 		return m.B
 	}
 	return nil
+}
+
+type E struct {
+	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *E) Reset()      { *m = E{} }
+func (*E) ProtoMessage() {}
+
+var extRange_E = []proto.ExtensionRange{
+	{1, 536870911},
+}
+
+func (*E) ExtensionRangeArray() []proto.ExtensionRange {
+	return extRange_E
+}
+func (m *E) GetExtensions() *[]byte {
+	if m.XXX_extensions == nil {
+		m.XXX_extensions = make([]byte, 0)
+	}
+	return &m.XXX_extensions
 }
 
 func init() {
@@ -457,6 +482,68 @@ func (m *U) Unmarshal(data []byte) error {
 	}
 	return nil
 }
+func (m *E) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		switch fieldNum {
+		default:
+			if (fieldNum >= 1) && (fieldNum < 536870912) {
+				var sizeOfWire int
+				for {
+					sizeOfWire++
+					wire >>= 7
+					if wire == 0 {
+						break
+					}
+				}
+				index -= sizeOfWire
+				skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+				if err != nil {
+					return err
+				}
+				if (index + skippy) > l {
+					return io.ErrUnexpectedEOF
+				}
+				m.XXX_extensions = append(m.XXX_extensions, data[index:index+skippy]...)
+				index += skippy
+			} else {
+				var sizeOfWire int
+				for {
+					sizeOfWire++
+					wire >>= 7
+					if wire == 0 {
+						break
+					}
+				}
+				index -= sizeOfWire
+				skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+				if err != nil {
+					return err
+				}
+				if (index + skippy) > l {
+					return io.ErrUnexpectedEOF
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+				index += skippy
+			}
+		}
+	}
+	return nil
+}
 func (this *U) GetValue() interface{} {
 	if this.A != nil {
 		return this.A
@@ -526,6 +613,17 @@ func (this *U) String() string {
 	}, "")
 	return s
 }
+func (this *E) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&E{`,
+		`XXX_extensions:` + proto.StringFromExtensionsBytes(this.XXX_extensions) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func valueToStringExample(v interface{}) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -584,6 +682,17 @@ func (m *U) Size() (n int) {
 	if m.B != nil {
 		l = m.B.Size()
 		n += 1 + l + sovExample(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *E) Size() (n int) {
+	var l int
+	_ = l
+	if m.XXX_extensions != nil {
+		n += len(m.XXX_extensions)
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -654,6 +763,23 @@ func NewPopulatedU(r randyExample, easy bool) *U {
 		this.A = NewPopulatedA(r, easy)
 	case 1:
 		this.B = NewPopulatedB(r, easy)
+	}
+	return this
+}
+
+func NewPopulatedE(r randyExample, easy bool) *E {
+	this := &E{}
+	if !easy && r.Intn(10) != 0 {
+		l := r.Intn(5)
+		for i := 0; i < l; i++ {
+			fieldNumber := r.Intn(536870911) + 1
+			wire := r.Intn(4)
+			if wire == 3 {
+				wire = 5
+			}
+			data := randFieldExample(nil, r, fieldNumber, wire)
+			code_google_com_p_gogoprotobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
+		}
 	}
 	return this
 }
@@ -864,6 +990,29 @@ func (m *U) MarshalTo(data []byte) (n int, err error) {
 	}
 	return i, nil
 }
+func (m *E) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *E) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_extensions != nil {
+		i += copy(data[i:], m.XXX_extensions)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
 func encodeFixed64Example(data []byte, offset int, v uint64) int {
 	data[offset] = uint8(v)
 	data[offset+1] = uint8(v >> 8)
@@ -919,6 +1068,13 @@ func (this *U) GoString() string {
 	s := strings1.Join([]string{`&test.U{` + `A:` + fmt1.Sprintf("%#v", this.A), `B:` + fmt1.Sprintf("%#v", this.B), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
+func (this *E) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.E{` + `XXX_extensions:` + fmt1.Sprintf("%#v", this.XXX_extensions), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
 func valueToGoStringExample(v interface{}, typ string) string {
 	rv := reflect1.ValueOf(v)
 	if rv.IsNil() {
@@ -927,7 +1083,7 @@ func valueToGoStringExample(v interface{}, typ string) string {
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringExample(e map[int32]code_google_com_p_gogoprotobuf_proto1.Extension) string {
+func extensionToGoStringExample(e map[int32]code_google_com_p_gogoprotobuf_proto2.Extension) string {
 	if e == nil {
 		return "nil"
 	}
@@ -946,17 +1102,17 @@ func extensionToGoStringExample(e map[int32]code_google_com_p_gogoprotobuf_proto
 }
 
 type AFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto2.Message
+	Proto() code_google_com_p_gogoprotobuf_proto3.Message
 	GetDescription() string
 	GetNumber() int64
 	GetId() code_google_com_p_gogoprotobuf_test.Uuid
 }
 
-func (this *A) Proto() code_google_com_p_gogoprotobuf_proto2.Message {
+func (this *A) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
 	return this
 }
 
-func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto2.Message {
+func (this *A) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
 	return NewAFromFace(this)
 }
 
@@ -1243,6 +1399,62 @@ func (this *U) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.B.Equal(that1.B) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *E) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*E)
+	if !ok {
+		return fmt2.Errorf("that is not of type *E")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *E but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *Ebut is not nil && this == nil")
+	}
+	if !bytes.Equal(this.XXX_extensions, that1.XXX_extensions) {
+		return fmt2.Errorf("XXX_extensions this(%v) Not Equal that(%v)", this.XXX_extensions, that1.XXX_extensions)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *E) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*E)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_extensions, that1.XXX_extensions) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1806,5 +2018,5 @@ func ExampleDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".test.B"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64009: proto.NewExtension([]byte{0xc8, 0xa0, 0x1f, 0x1})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x1}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(11), TypeName: func(v string) *string { return &v }(".test.B"), Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64009: proto.NewExtension([]byte{0xc8, 0xa0, 0x1f, 0x1})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("E"), Field: []*google_protobuf.FieldDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange{{Start: func(v int32) *int32 { return &v }(1), End: func(v int32) *int32 { return &v }(536870912), XXX_unrecognized: []byte(nil)}}, Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64025: proto.NewExtension([]byte{0xc8, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x1}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
