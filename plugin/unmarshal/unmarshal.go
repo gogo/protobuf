@@ -155,6 +155,10 @@ given to the unmarshal plugin, will generate the following code:
 	return nil
   }
 
+Remember when using this code to call proto.Unmarshal.
+This will call m.Reset and invoke the generated Unmarshal method for you.
+If you call m.Unmarshal without m.Reset you could be merging protocol buffers.
+
 */
 package unmarshal
 
