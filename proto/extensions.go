@@ -104,6 +104,7 @@ func SetRawExtension(base extendableProto, id int32, b []byte) {
 	if ebase, ok := base.(extensionsMap); ok {
 		ebase.ExtensionMap()[id] = Extension{enc: b}
 	} else if ebase, ok := base.(extensionsBytes); ok {
+		clearExtension(base, id)
 		ext := ebase.GetExtensions()
 		*ext = append(*ext, b...)
 	} else {
@@ -252,7 +253,7 @@ func HasExtension(pb extendableProto, extension *ExtensionDesc) bool {
 	panic("unreachable")
 }
 
-func deleteExtension(pb extensionsBytes, extension *ExtensionDesc, offset int) int {
+func deleteExtension(pb extensionsBytes, theFieldNum int32, offset int) int {
 	ext := pb.GetExtensions()
 	for offset < len(*ext) {
 		tag, n1 := DecodeVarint((*ext)[offset:])
@@ -263,7 +264,7 @@ func deleteExtension(pb extensionsBytes, extension *ExtensionDesc, offset int) i
 			panic(err)
 		}
 		newOffset := offset + n1 + n2
-		if fieldNum == extension.Field {
+		if fieldNum == theFieldNum {
 			*ext = append((*ext)[:offset], (*ext)[newOffset:]...)
 			return offset
 		}
@@ -272,19 +273,23 @@ func deleteExtension(pb extensionsBytes, extension *ExtensionDesc, offset int) i
 	return -1
 }
 
-// ClearExtension removes the given extension from pb.
-func ClearExtension(pb extendableProto, extension *ExtensionDesc) {
-	// TODO: Check types, field numbers, etc.?
+func clearExtension(pb extendableProto, fieldNum int32) {
 	if epb, doki := pb.(extensionsMap); doki {
-		delete(epb.ExtensionMap(), extension.Field)
+		delete(epb.ExtensionMap(), fieldNum)
 	} else if epb, doki := pb.(extensionsBytes); doki {
 		offset := 0
 		for offset != -1 {
-			offset = deleteExtension(epb, extension, offset)
+			offset = deleteExtension(epb, fieldNum, offset)
 		}
 	} else {
 		panic("unreachable")
 	}
+}
+
+// ClearExtension removes the given extension from pb.
+func ClearExtension(pb extendableProto, extension *ExtensionDesc) {
+	// TODO: Check types, field numbers, etc.?
+	clearExtension(pb, extension.Field)
 }
 
 // GetExtension parses and returns the given extension of pb.
@@ -323,25 +328,23 @@ func GetExtension(pb extendableProto, extension *ExtensionDesc) (interface{}, er
 		return e.value, nil
 	} else if epb, doki := pb.(extensionsBytes); doki {
 		ext := epb.GetExtensions()
-		buf := *ext
 		o := 0
-		for o < len(buf) {
-			tag, n := DecodeVarint(buf[o:])
+		for o < len(*ext) {
+			tag, n := DecodeVarint((*ext)[o:])
 			fieldNum := int32(tag >> 3)
+			wireType := int(tag & 0x7)
+			l, err := size((*ext)[o+n:], wireType)
+			if err != nil {
+				return nil, err
+			}
 			if int32(fieldNum) == extension.Field {
-				v, err := decodeExtension(buf[o:], extension)
+				v, err := decodeExtension((*ext)[o:o+n+l], extension)
 				if err != nil {
 					return nil, err
 				}
 				return v, nil
 			}
-			wireType := int(tag & 0x7)
-			o += n
-			l, err := size(buf[o:], wireType)
-			if err != nil {
-				return nil, err
-			}
-			o += l
+			o += n + l
 		}
 	}
 	panic("unreachable")
@@ -412,6 +415,7 @@ func SetExtension(pb extendableProto, extension *ExtensionDesc, value interface{
 	if epb, doki := pb.(extensionsMap); doki {
 		epb.ExtensionMap()[extension.Field] = Extension{desc: extension, value: value}
 	} else if epb, doki := pb.(extensionsBytes); doki {
+		ClearExtension(pb, extension)
 		ext := epb.GetExtensions()
 		et := reflect.TypeOf(extension.ExtensionType)
 		props := extensionProperties(extension)
