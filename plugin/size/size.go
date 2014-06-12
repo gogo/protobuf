@@ -255,7 +255,6 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 				}
 			case descriptor.FieldDescriptorProto_TYPE_INT64,
 				descriptor.FieldDescriptorProto_TYPE_UINT64,
-				descriptor.FieldDescriptorProto_TYPE_INT32,
 				descriptor.FieldDescriptorProto_TYPE_UINT32,
 				descriptor.FieldDescriptorProto_TYPE_ENUM:
 				if packed {
@@ -276,6 +275,26 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(*m.`, fieldname, `))`)
 				} else {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
+				}
+			case descriptor.FieldDescriptorProto_TYPE_INT32:
+				if packed {
+					p.P(`l = 0`)
+					p.P(`for _, e := range m.`, fieldname, ` {`)
+					p.In()
+					p.P(`l+=sov`, p.localName, `(uint64(uint32(e)))`)
+					p.Out()
+					p.P(`}`)
+					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(l))+l`)
+				} else if repeated {
+					p.P(`for _, e := range m.`, fieldname, ` {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(uint32(e)))`)
+					p.Out()
+					p.P(`}`)
+				} else if nullable {
+					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(uint32(*m.`, fieldname, `)))`)
+				} else {
+					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(uint32(m.`, fieldname, `)))`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				if packed {

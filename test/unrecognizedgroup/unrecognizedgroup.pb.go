@@ -381,6 +381,9 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 	this := &NewNoGroup{}
 	if r.Intn(10) != 0 {
 		v1 := r.Int63()
+		if r.Intn(2) == 0 {
+			v1 *= -1
+		}
 		this.Field1 = &v1
 	}
 	if r.Intn(10) != 0 {
@@ -388,6 +391,9 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 		this.Field3 = make([]float64, v2)
 		for i := 0; i < v2; i++ {
 			this.Field3[i] = r.Float64()
+			if r.Intn(2) == 0 {
+				this.Field3[i] *= -1
+			}
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -403,6 +409,9 @@ func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
 		v3 := r.Int63()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
 		this.AField = &v3
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -415,6 +424,9 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup
 	this := &OldWithGroup{}
 	if r.Intn(10) != 0 {
 		v4 := r.Int63()
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
 		this.Field1 = &v4
 	}
 	if r.Intn(10) != 0 {
@@ -425,6 +437,9 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup
 		this.Field3 = make([]float64, v5)
 		for i := 0; i < v5; i++ {
 			this.Field3[i] = r.Float64()
+			if r.Intn(2) == 0 {
+				this.Field3[i] *= -1
+			}
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -440,10 +455,16 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWi
 	this := &OldWithGroup_Group1{}
 	if r.Intn(10) != 0 {
 		v6 := r.Int63()
+		if r.Intn(2) == 0 {
+			v6 *= -1
+		}
 		this.Field1 = &v6
 	}
 	if r.Intn(10) != 0 {
 		v7 := r.Int31()
+		if r.Intn(2) == 0 {
+			v7 *= -1
+		}
 		this.Field2 = &v7
 	}
 	if r.Intn(10) != 0 {
@@ -451,6 +472,9 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWi
 		this.Field3 = make([]float64, v8)
 		for i := 0; i < v8; i++ {
 			this.Field3[i] = r.Float64()
+			if r.Intn(2) == 0 {
+				this.Field3[i] *= -1
+			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -463,6 +487,9 @@ func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWi
 	this := &OldWithGroup_Group2{}
 	if r.Intn(10) != 0 {
 		v9 := r.Int63()
+		if r.Intn(2) == 0 {
+			v9 *= -1
+		}
 		this.Field1 = &v9
 	}
 	if r.Intn(10) != 0 {
@@ -470,6 +497,9 @@ func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWi
 		this.Field2 = make([]float64, v10)
 		for i := 0; i < v10; i++ {
 			this.Field2[i] = r.Float64()
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -519,7 +549,11 @@ func randFieldUnrecognizedgroup(data []byte, r randyUnrecognizedgroup, fieldNumb
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(r.Int63()))
+		v12 := r.Int63()
+		if r.Intn(2) == 0 {
+			v12 *= -1
+		}
+		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(v12))
 	case 1:
 		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

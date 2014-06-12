@@ -157,7 +157,11 @@ func randFieldProto(data []byte, r randyProto, fieldNumber int, wire int) []byte
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateProto(data, uint64(key))
-		data = encodeVarintPopulateProto(data, uint64(r.Int63()))
+		v3 := r.Int63()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
+		data = encodeVarintPopulateProto(data, uint64(v3))
 	case 1:
 		data = encodeVarintPopulateProto(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

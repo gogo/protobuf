@@ -717,6 +717,9 @@ func NewPopulatedA(r randyExample, easy bool) *A {
 	this := &A{}
 	this.Description = randStringExample(r)
 	this.Number = r.Int63()
+	if r.Intn(2) == 0 {
+		this.Number *= -1
+	}
 	v1 := code_google_com_p_gogoprotobuf_test.NewPopulatedUuid(r)
 	this.Id = *v1
 	if !easy && r.Intn(10) != 0 {
@@ -747,6 +750,9 @@ func NewPopulatedC(r randyExample, easy bool) *C {
 	this := &C{}
 	if r.Intn(10) != 0 {
 		v5 := r.Int63()
+		if r.Intn(2) == 0 {
+			v5 *= -1
+		}
 		this.MySize = &v5
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -825,7 +831,11 @@ func randFieldExample(data []byte, r randyExample, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateExample(data, uint64(key))
-		data = encodeVarintPopulateExample(data, uint64(r.Int63()))
+		v7 := r.Int63()
+		if r.Intn(2) == 0 {
+			v7 *= -1
+		}
+		data = encodeVarintPopulateExample(data, uint64(v7))
 	case 1:
 		data = encodeVarintPopulateExample(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

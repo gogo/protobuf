@@ -225,7 +225,11 @@ func randFieldEnumstringer(data []byte, r randyEnumstringer, fieldNumber int, wi
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateEnumstringer(data, uint64(key))
-		data = encodeVarintPopulateEnumstringer(data, uint64(r.Int63()))
+		v5 := r.Int63()
+		if r.Intn(2) == 0 {
+			v5 *= -1
+		}
+		data = encodeVarintPopulateEnumstringer(data, uint64(v5))
 	case 1:
 		data = encodeVarintPopulateEnumstringer(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

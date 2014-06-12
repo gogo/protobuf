@@ -1114,6 +1114,9 @@ func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
 		v1 := r.Int63()
+		if r.Intn(2) == 0 {
+			v1 *= -1
+		}
 		this.Field1 = &v1
 	}
 	if r.Intn(10) != 0 {
@@ -1150,6 +1153,9 @@ func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 	this := &D{}
 	if r.Intn(10) != 0 {
 		v3 := r.Int63()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
 		this.Field1 = &v3
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1162,6 +1168,9 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	this := &C{}
 	if r.Intn(10) != 0 {
 		v4 := r.Float64()
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
 		this.Field2 = &v4
 	}
 	if r.Intn(10) != 0 {
@@ -1170,6 +1179,9 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	}
 	if r.Intn(10) != 0 {
 		v6 := r.Float64()
+		if r.Intn(2) == 0 {
+			v6 *= -1
+		}
 		this.Field4 = &v6
 	}
 	if r.Intn(10) != 0 {
@@ -1185,6 +1197,9 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	}
 	if r.Intn(10) != 0 {
 		v9 := r.Int63()
+		if r.Intn(2) == 0 {
+			v9 *= -1
+		}
 		this.Field6 = &v9
 	}
 	if r.Intn(10) != 0 {
@@ -1192,6 +1207,9 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		this.Field7 = make([]float32, v10)
 		for i := 0; i < v10; i++ {
 			this.Field7[i] = r.Float32()
+			if r.Intn(2) == 0 {
+				this.Field7[i] *= -1
+			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1204,6 +1222,9 @@ func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
 	this := &OldA{}
 	if r.Intn(10) != 0 {
 		v11 := r.Int63()
+		if r.Intn(2) == 0 {
+			v11 *= -1
+		}
 		this.Field1 = &v11
 	}
 	if r.Intn(10) != 0 {
@@ -1237,10 +1258,16 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 	this := &OldC{}
 	if r.Intn(10) != 0 {
 		v13 := r.Int63()
+		if r.Intn(2) == 0 {
+			v13 *= -1
+		}
 		this.Field1 = &v13
 	}
 	if r.Intn(10) != 0 {
 		v14 := r.Float64()
+		if r.Intn(2) == 0 {
+			v14 *= -1
+		}
 		this.Field2 = &v14
 	}
 	if r.Intn(10) != 0 {
@@ -1249,6 +1276,9 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 	}
 	if r.Intn(10) != 0 {
 		v16 := r.Int63()
+		if r.Intn(2) == 0 {
+			v16 *= -1
+		}
 		this.Field6 = &v16
 	}
 	if r.Intn(10) != 0 {
@@ -1256,6 +1286,9 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 		this.Field7 = make([]float32, v17)
 		for i := 0; i < v17; i++ {
 			this.Field7[i] = r.Float32()
+			if r.Intn(2) == 0 {
+				this.Field7[i] *= -1
+			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1305,7 +1338,11 @@ func randFieldUnrecognized(data []byte, r randyUnrecognized, fieldNumber int, wi
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateUnrecognized(data, uint64(key))
-		data = encodeVarintPopulateUnrecognized(data, uint64(r.Int63()))
+		v19 := r.Int63()
+		if r.Intn(2) == 0 {
+			v19 *= -1
+		}
+		data = encodeVarintPopulateUnrecognized(data, uint64(v19))
 	case 1:
 		data = encodeVarintPopulateUnrecognized(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

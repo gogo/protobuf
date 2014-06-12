@@ -150,10 +150,16 @@ func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
 	this := &Groups1_G{}
 	if r.Intn(10) != 0 {
 		v2 := r.Int63()
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
 		this.Field1 = &v2
 	}
 	if r.Intn(10) != 0 {
 		v3 := r.Float64()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
 		this.Field2 = &v3
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -177,6 +183,9 @@ func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
 	this := &Groups2_G{}
 	if r.Intn(10) != 0 {
 		v4 := r.Int63()
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
 		this.Field1 = &v4
 	}
 	if r.Intn(10) != 0 {
@@ -184,6 +193,9 @@ func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
 		this.Field2 = make([]float64, v5)
 		for i := 0; i < v5; i++ {
 			this.Field2[i] = r.Float64()
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -233,7 +245,11 @@ func randFieldGroup(data []byte, r randyGroup, fieldNumber int, wire int) []byte
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateGroup(data, uint64(key))
-		data = encodeVarintPopulateGroup(data, uint64(r.Int63()))
+		v7 := r.Int63()
+		if r.Intn(2) == 0 {
+			v7 *= -1
+		}
+		data = encodeVarintPopulateGroup(data, uint64(v7))
 	case 1:
 		data = encodeVarintPopulateGroup(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

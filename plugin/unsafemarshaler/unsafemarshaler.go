@@ -117,6 +117,10 @@ func (p *marshalto) callVarint(varName ...string) {
 	p.P(`i = encodeVarint`, p.localName, `(data, i, uint64(`, strings.Join(varName, ""), `))`)
 }
 
+func (p *marshalto) callInt32Varint(varName ...string) {
+	p.P(`i = encodeVarint`, p.localName, `(data, i, uint64(uint32(`, strings.Join(varName, ""), `)))`)
+}
+
 func (p *marshalto) encodeVarint(varName string) {
 	p.P(`for `, varName, ` >= 1<<7 {`)
 	p.In()
@@ -296,8 +300,18 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					jvar := "j" + numGen.Next()
 					p.P(`data`, numGen.Next(), ` := make([]byte, len(m.`, fieldname, `)*10)`)
 					p.P(`var `, jvar, ` int`)
-					p.P(`for _, num := range m.`, fieldname, ` {`)
-					p.In()
+					if *field.Type == descriptor.FieldDescriptorProto_TYPE_INT32 {
+						p.P(`for _, num1 := range m.`, fieldname, ` {`)
+						p.In()
+						p.P(`num := uint32(num1)`)
+					} else if *field.Type == descriptor.FieldDescriptorProto_TYPE_INT64 {
+						p.P(`for _, num1 := range m.`, fieldname, ` {`)
+						p.In()
+						p.P(`num := uint64(num1)`)
+					} else {
+						p.P(`for _, num := range m.`, fieldname, ` {`)
+						p.In()
+					}
 					p.P(`for num >= 1<<7 {`)
 					p.In()
 					p.P(`data`, numGen.Current(), `[`, jvar, `] = uint8(uint64(num)&0x7f|0x80)`)
@@ -316,15 +330,27 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`for _, num := range m.`, fieldname, ` {`)
 					p.In()
 					p.encodeKey(fieldNumber, wireType)
-					p.encodeVarint("num")
+					if *field.Type == descriptor.FieldDescriptorProto_TYPE_INT32 {
+						p.callInt32Varint("num")
+					} else {
+						p.callVarint("num")
+					}
 					p.Out()
 					p.P(`}`)
 				} else if nullable {
 					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`*m.`, fieldname)
+					if *field.Type == descriptor.FieldDescriptorProto_TYPE_INT32 {
+						p.callInt32Varint(`*m.`, fieldname)
+					} else {
+						p.callVarint(`*m.`, fieldname)
+					}
 				} else {
 					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`m.`, fieldname)
+					if *field.Type == descriptor.FieldDescriptorProto_TYPE_INT32 {
+						p.callInt32Varint(`m.`, fieldname)
+					} else {
+						p.callVarint(`m.`, fieldname)
+					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:

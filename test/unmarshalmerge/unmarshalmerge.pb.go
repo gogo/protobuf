@@ -390,6 +390,9 @@ func NewPopulatedBig(r randyUnmarshalmerge, easy bool) *Big {
 	}
 	if r.Intn(10) != 0 {
 		v1 := r.Int63()
+		if r.Intn(2) == 0 {
+			v1 *= -1
+		}
 		this.Number = &v1
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -405,6 +408,9 @@ func NewPopulatedBigUnsafe(r randyUnmarshalmerge, easy bool) *BigUnsafe {
 	}
 	if r.Intn(10) != 0 {
 		v2 := r.Int63()
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
 		this.Number = &v2
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -417,6 +423,9 @@ func NewPopulatedSub(r randyUnmarshalmerge, easy bool) *Sub {
 	this := &Sub{}
 	if r.Intn(10) != 0 {
 		v3 := r.Int63()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
 		this.SubNumber = &v3
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -466,7 +475,11 @@ func randFieldUnmarshalmerge(data []byte, r randyUnmarshalmerge, fieldNumber int
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(r.Int63()))
+		v5 := r.Int63()
+		if r.Intn(2) == 0 {
+			v5 *= -1
+		}
+		data = encodeVarintPopulateUnmarshalmerge(data, uint64(v5))
 	case 1:
 		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

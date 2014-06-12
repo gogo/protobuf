@@ -140,22 +140,31 @@ func (p *plugin) Init(g *generator.Generator) {
 }
 
 func value(typName string) string {
-	if typName == "float64" {
+	switch typName {
+	case "float64":
 		return "r.Float64()"
-	} else if typName == "float32" {
+	case "float32":
 		return "r.Float32()"
-	} else if typName == "int64" {
+	case "int64":
 		return "r.Int63()"
-	} else if typName == "int32" {
+	case "int32":
 		return "r.Int31()"
-	} else if typName == "uint32" {
+	case "uint32":
 		return "r.Uint32()"
-	} else if typName == "uint64" {
+	case "uint64":
 		return "uint64(r.Uint32())"
-	} else if typName == "bool" {
+	case "bool":
 		return `bool(r.Intn(2) == 0)`
 	}
 	panic(fmt.Errorf("unexpected type %v", typName))
+}
+
+func negative(typeName string) bool {
+	switch typeName {
+	case "uint32", "uint64", "bool":
+		return false
+	}
+	return true
 }
 
 func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
@@ -288,13 +297,34 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 				p.In()
 				p.P(`this.`, fieldname, `[i] = `, value(typName))
+				if negative(typName) {
+					p.P(`if r.Intn(2) == 0 {`)
+					p.In()
+					p.P(`this.`, fieldname, `[i] *= -1`)
+					p.Out()
+					p.P(`}`)
+				}
 				p.Out()
 				p.P(`}`)
 			} else if gogoproto.IsNullable(field) {
 				p.P(p.varGen.Next(), ` := `, value(typName))
+				if negative(typName) {
+					p.P(`if r.Intn(2) == 0 {`)
+					p.In()
+					p.P(p.varGen.Current(), ` *= -1`)
+					p.Out()
+					p.P(`}`)
+				}
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
 			} else {
 				p.P(`this.`, fieldname, ` = `, value(typName))
+				if negative(typName) {
+					p.P(`if r.Intn(2) == 0 {`)
+					p.In()
+					p.P(`this.`, fieldname, ` *= -1`)
+					p.Out()
+					p.P(`}`)
+				}
 			}
 		}
 	}
@@ -521,7 +551,13 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.P(`case 0:`)
 	p.In()
 	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(key))`)
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(r.Int63()))`)
+	p.P(p.varGen.Next(), ` := r.Int63()`)
+	p.P(`if r.Intn(2) == 0 {`)
+	p.In()
+	p.P(p.varGen.Current(), ` *= -1`)
+	p.Out()
+	p.P(`}`)
+	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(`, p.varGen.Current(), `))`)
 	p.Out()
 	p.P(`case 1:`)
 	p.In()

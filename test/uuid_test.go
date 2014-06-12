@@ -19,6 +19,6 @@ func TestBugUuid(t *testing.T) {
 	}
 	fmt.Printf("%+v", u2)
 	if u2.CustomStruct.Id != nil {
-		panic("should be nil")
+		t.Fatalf("should be nil")
 	}
 }
