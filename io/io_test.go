@@ -96,6 +96,17 @@ func TestVarint(t *testing.T) {
 	iotest(writer, reader)
 }
 
+func TestVarintError(t *testing.T) {
+	buf := bytes.NewBuffer(nil)
+	buf.Write([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f})
+	reader := io.NewDelimitedReader(buf, 1024*1024)
+	msg := &test.NinOptNative{}
+	err := reader.ReadMsg(msg)
+	if err == nil {
+		t.Fatalf("Expected error")
+	}
+}
+
 func TestFull(t *testing.T) {
 	buf := bytes.NewBuffer(nil)
 	writer := io.NewFullWriter(buf)

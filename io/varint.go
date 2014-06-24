@@ -31,7 +31,13 @@ package io
 import (
 	"code.google.com/p/gogoprotobuf/proto"
 	"encoding/binary"
+	"errors"
 	"io"
+)
+
+var (
+	errSmallBuffer = errors.New("Buffer Too Small")
+	errLargeValue  = errors.New("Value is Larger than 64 bits")
 )
 
 func NewDelimitedWriter(w io.Writer) WriteCloser {
@@ -96,6 +102,12 @@ func (this *varintReader) ReadMsg(msg proto.Message) error {
 		return err
 	}
 	length64, lenLen := binary.Uvarint(this.lenBuf)
+	if lenLen <= 0 {
+		if lenLen == 0 {
+			return errSmallBuffer
+		}
+		return errLargeValue
+	}
 	msgLen := int(length64)
 	if len(this.buf) < msgLen {
 		this.buf = make([]byte, msgLen)
