@@ -112,6 +112,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				os.Exit(1)
 			}
 		}
+		p.checkRepeated(msg)
 	}
 	for _, e := range file.GetExtension() {
 		if gogoproto.IsEmbed(e) {
@@ -165,6 +166,21 @@ func (p *plugin) checkOverwrite(message *generator.Descriptor, enablers map[stri
 			}
 			p.checkOverwrite(msg, enablers)
 		}
+	}
+}
+
+func (p *plugin) checkRepeated(message *generator.Descriptor) {
+	ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	for _, field := range message.Field {
+		if !gogoproto.IsEmbed(field) {
+			continue
+		}
+		if !field.IsRepeated() {
+			continue
+		}
+		fieldname := generator.CamelCase(*field.Name)
+		fmt.Fprintf(os.Stderr, "ERROR: found repeated embedded field %s in message %s\n", fieldname, ccTypeName)
+		os.Exit(1)
 	}
 }
 

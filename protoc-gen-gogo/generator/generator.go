@@ -1224,7 +1224,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	ccPrefix := enum.prefix()
 
 	g.PrintComments(enum.path)
-	if !gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+	if !gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 		ccPrefix = ""
 	}
 	g.P("type ", ccTypeName, " int32")
@@ -1709,7 +1709,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				log.Printf("don't know how to generate constant for %s", fieldname)
 				continue
 			}
-			if gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+			if gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 				def = g.DefaultPackageName(obj) + enum.prefix() + def
 			} else {
 				def = g.DefaultPackageName(obj) + def
@@ -1849,7 +1849,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					g.P("return 0 // empty enum")
 				} else {
 					first := enum.Value[0].GetName()
-					if gogoproto.EnabledGoEnumPrefix(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+					if gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 						g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
 					} else {
 						g.P("return ", g.DefaultPackageName(obj)+first)

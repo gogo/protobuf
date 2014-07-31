@@ -81,3 +81,20 @@ func TestCustomName(t *testing.T) {
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
 }
+
+func TestRepeatedEmbed(t *testing.T) {
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "er.proto")
+	data, err := cmd.CombinedOutput()
+	if err == nil {
+		t.Errorf("Expected error")
+		if err := os.Remove("er.pb.go"); err != nil {
+			panic(err)
+		}
+	}
+	dataStr := string(data)
+	t.Logf("received error = %v and output = %v", err, dataStr)
+	warning := "ERROR: found repeated embedded field B in message A"
+	if !strings.Contains(dataStr, warning) {
+		t.Errorf("Expected " + warning)
+	}
+}
