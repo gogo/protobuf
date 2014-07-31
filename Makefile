@@ -65,6 +65,7 @@ regenerate:
 	make -C test/unmarshalmerge regenerate
 	make -C test/moredefaults regenerate
 	make -C test/issue8 regenerate
+	make -C test/enumprefix regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -83,7 +84,7 @@ tests:
 	go test -v ./test/issue8
 	go test -v ./test/example
 	go test -v ./test/dashfilename
-	go test -v ./test/enumprefix
+	go build ./test/enumprefix
 	go test -v ./parser
 
 drone:
