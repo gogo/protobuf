@@ -35,6 +35,14 @@ If is enabled by the following extensions:
   - unmarshaler
   - unmarshaler_all
 
+Or the following extensions:
+
+  - unsafe_unmarshaler
+  - unsafe_unmarshaler_all
+
+That is if you want to use the unsafe package in your generated code.
+The speed up using the unsafe package is not very significant.
+
 The generation of unmarshalling tests are enabled using one of the following extensions:
 
   - testgen
@@ -174,10 +182,12 @@ import (
 
 type unmarshal struct {
 	*generator.Generator
+	unsafe bool
 	generator.PluginImports
 	atleastOne bool
 	ioPkg      generator.Single
 	mathPkg    generator.Single
+	unsafePkg  generator.Single
 	localName  string
 }
 
@@ -185,7 +195,14 @@ func NewUnmarshal() *unmarshal {
 	return &unmarshal{}
 }
 
+func NewUnsafeUnmarshal() *unmarshal {
+	return &unmarshal{unsafe: true}
+}
+
 func (p *unmarshal) Name() string {
+	if p.unsafe {
+		return "unsafeunmarshaler"
+	}
 	return "unmarshal"
 }
 
@@ -227,6 +244,16 @@ func (p *unmarshal) decodeFixed32(varName string, typeName string) {
 	p.P(varName, ` |= `, typeName, `(data[i-1]) << 24`)
 }
 
+func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
+	p.P(`if index + 4 > l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[index]))`)
+	p.P(`index += 4`)
+}
+
 func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(`i := index + 8`)
 	p.P(`if i > l {`)
@@ -245,41 +272,79 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(varName, ` |= `, typeName, `(data[i-1]) << 56`)
 }
 
+func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
+	p.P(`if index + 8 > l {`)
+	p.In()
+	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+	p.Out()
+	p.P(`}`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[index]))`)
+	p.P(`index += 8`)
+}
+
 func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname string) {
 	repeated := field.IsRepeated()
 	nullable := gogoproto.IsNullable(field)
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		if repeated {
-			p.P(`var v uint64`)
-			p.decodeFixed64("v", "uint64")
-			p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
-		} else if nullable {
-			p.P(`var v uint64`)
-			p.decodeFixed64("v", "uint64")
-			p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
-			p.P(`m.`, fieldname, ` = &v2`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v uint64`)
+				p.decodeFixed64("v", "uint64")
+				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
+			} else if nullable {
+				p.P(`var v uint64`)
+				p.decodeFixed64("v", "uint64")
+				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
+				p.P(`m.`, fieldname, ` = &v2`)
+			} else {
+				p.P(`var v uint64`)
+				p.decodeFixed64("v", "uint64")
+				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float64frombits(v)`)
+			}
 		} else {
-			p.P(`var v uint64`)
-			p.decodeFixed64("v", "uint64")
-			p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float64frombits(v)`)
+			if repeated {
+				p.P(`var v float64`)
+				p.unsafeFixed64("v", "float64")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v float64`)
+				p.unsafeFixed64("v", "float64")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed64(`m.`+fieldname, "float64")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		if repeated {
-			p.P(`var v uint32`)
-			p.decodeFixed32("v", "uint32")
-			p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
-		} else if nullable {
-			p.P(`var v uint32`)
-			p.decodeFixed32("v", "uint32")
-			p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
-			p.P(`m.`, fieldname, ` = &v2`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v uint32`)
+				p.decodeFixed32("v", "uint32")
+				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
+			} else if nullable {
+				p.P(`var v uint32`)
+				p.decodeFixed32("v", "uint32")
+				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
+				p.P(`m.`, fieldname, ` = &v2`)
+			} else {
+				p.P(`var v uint32`)
+				p.decodeFixed32("v", "uint32")
+				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float32frombits(v)`)
+			}
 		} else {
-			p.P(`var v uint32`)
-			p.decodeFixed32("v", "uint32")
-			p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float32frombits(v)`)
+			if repeated {
+				p.P(`var v float32`)
+				p.unsafeFixed32("v", "float32")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v float32`)
+				p.unsafeFixed32("v", "float32")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed32("m."+fieldname, "float32")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_INT64:
 		if repeated {
@@ -318,28 +383,56 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 			p.decodeVarint("m."+fieldname, "int32")
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
-		if repeated {
-			p.P(`var v uint64`)
-			p.decodeFixed64("v", "uint64")
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if nullable {
-			p.P(`var v uint64`)
-			p.decodeFixed64("v", "uint64")
-			p.P(`m.`, fieldname, ` = &v`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v uint64`)
+				p.decodeFixed64("v", "uint64")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v uint64`)
+				p.decodeFixed64("v", "uint64")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.decodeFixed64("m."+fieldname, "uint64")
+			}
 		} else {
-			p.decodeFixed64("m."+fieldname, "uint64")
+			if repeated {
+				p.P(`var v uint64`)
+				p.unsafeFixed64("v", "uint64")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v uint64`)
+				p.unsafeFixed64("v", "uint64")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed64("m."+fieldname, "uint64")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
-		if repeated {
-			p.P(`var v uint32`)
-			p.decodeFixed32("v", "uint32")
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if nullable {
-			p.P(`var v uint32`)
-			p.decodeFixed32("v", "uint32")
-			p.P(`m.`, fieldname, ` = &v`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v uint32`)
+				p.decodeFixed32("v", "uint32")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v uint32`)
+				p.decodeFixed32("v", "uint32")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.decodeFixed32("m."+fieldname, "uint32")
+			}
 		} else {
-			p.decodeFixed32("m."+fieldname, "uint32")
+			if repeated {
+				p.P(`var v uint32`)
+				p.unsafeFixed32("v", "uint32")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v uint32`)
+				p.unsafeFixed32("v", "uint32")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed32("m."+fieldname, "uint32")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		if repeated {
@@ -481,28 +574,56 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 			p.decodeVarint("m."+fieldname, typName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-		if repeated {
-			p.P(`var v int32`)
-			p.decodeFixed32("v", "int32")
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if nullable {
-			p.P(`var v int32`)
-			p.decodeFixed32("v", "int32")
-			p.P(`m.`, fieldname, ` = &v`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v int32`)
+				p.decodeFixed32("v", "int32")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v int32`)
+				p.decodeFixed32("v", "int32")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.decodeFixed32("m."+fieldname, "int32")
+			}
 		} else {
-			p.decodeFixed32("m."+fieldname, "int32")
+			if repeated {
+				p.P(`var v int32`)
+				p.unsafeFixed32("v", "int32")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v int32`)
+				p.unsafeFixed32("v", "int32")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed32("m."+fieldname, "int32")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-		if repeated {
-			p.P(`var v int64`)
-			p.decodeFixed64("v", "int64")
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if nullable {
-			p.P(`var v int64`)
-			p.decodeFixed64("v", "int64")
-			p.P(`m.`, fieldname, ` = &v`)
+		if !p.unsafe {
+			if repeated {
+				p.P(`var v int64`)
+				p.decodeFixed64("v", "int64")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v int64`)
+				p.decodeFixed64("v", "int64")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.decodeFixed64("m."+fieldname, "int64")
+			}
 		} else {
-			p.decodeFixed64("m."+fieldname, "int64")
+			if repeated {
+				p.P(`var v int64`)
+				p.unsafeFixed64("v", "int64")
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+			} else if nullable {
+				p.P(`var v int64`)
+				p.unsafeFixed64("v", "int64")
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.unsafeFixed64("m."+fieldname, "int64")
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
 		p.P(`var v int32`)
@@ -538,15 +659,26 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 	p.ioPkg = p.NewImport("io")
 	p.mathPkg = p.NewImport("math")
+	p.unsafePkg = p.NewImport("unsafe")
 	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 
 	for _, message := range file.Messages() {
-		if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
-			continue
-		}
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		if gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
-			panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+		if p.unsafe {
+			if !gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				continue
+			}
+			if gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+			}
+		}
+		if !p.unsafe {
+			if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				continue
+			}
+			if gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+			}
 		}
 		p.atleastOne = true
 
@@ -757,4 +889,5 @@ func (p *unmarshal) skipVarint() {
 
 func init() {
 	generator.RegisterPlugin(NewUnmarshal())
+	generator.RegisterPlugin(NewUnsafeUnmarshal())
 }
