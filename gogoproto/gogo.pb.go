@@ -408,6 +408,22 @@ var E_Customname = &proto.ExtensionDesc{
 	Tag:           "bytes,65004,opt,name=customname",
 }
 
+var E_Jsontag = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65005,
+	Name:          "gogoproto.jsontag",
+	Tag:           "bytes,65005,opt,name=jsontag",
+}
+
+var E_Moretags = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65006,
+	Name:          "gogoproto.moretags",
+	Tag:           "bytes,65006,opt,name=moretags",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -457,4 +473,6 @@ func init() {
 	proto.RegisterExtension(E_Embed)
 	proto.RegisterExtension(E_Customtype)
 	proto.RegisterExtension(E_Customname)
+	proto.RegisterExtension(E_Jsontag)
+	proto.RegisterExtension(E_Moretags)
 }

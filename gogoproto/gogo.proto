@@ -93,5 +93,7 @@ extend google.protobuf.FieldOptions {
   optional bool embed = 65002;
   optional string customtype = 65003;
   optional string customname = 65004;
+  optional string jsontag = 65005;
+  optional string moretags = 65006;
 }
 

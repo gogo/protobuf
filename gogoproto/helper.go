@@ -73,6 +73,26 @@ func GetCustomName(field *google_protobuf.FieldDescriptorProto) string {
 	return ""
 }
 
+func GetJsonTag(field *google_protobuf.FieldDescriptorProto) *string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Jsontag)
+		if err == nil && v.(*string) != nil {
+			return (v.(*string))
+		}
+	}
+	return nil
+}
+
+func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Moretags)
+		if err == nil && v.(*string) != nil {
+			return (v.(*string))
+		}
+	}
+	return nil
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {

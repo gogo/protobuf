@@ -1565,10 +1565,20 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		usedNames[fieldName] = true
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
-		tag := fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName+",omitempty")
+		jsonTag := jsonName + ",omitempty"
 		if !gogoproto.IsNullable(field) {
-			tag = fmt.Sprintf("`protobuf:%s json:%q`", g.goTag(field, wiretype), jsonName)
+			jsonTag = jsonName
 		}
+		gogoJsonTag := gogoproto.GetJsonTag(field)
+		if gogoJsonTag != nil {
+			jsonTag = *gogoJsonTag
+		}
+		gogoMoreTags := gogoproto.GetMoreTags(field)
+		moreTags := ""
+		if gogoMoreTags != nil {
+			moreTags = " " + *gogoMoreTags
+		}
+		tag := fmt.Sprintf("`protobuf:%s json:%q%s`", g.goTag(field, wiretype), jsonTag, moreTags)
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 			fieldName = ""
 		}

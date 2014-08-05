@@ -67,6 +67,7 @@ regenerate:
 	make -C test/issue8 regenerate
 	make -C test/enumprefix regenerate
 	make -C test/packed regenerate
+	make -C test/tags regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -87,6 +88,7 @@ tests:
 	go test -v ./test/dashfilename
 	go build ./test/enumprefix
 	go test -v ./test/packed
+	go test -v ./test/tags
 	go test -v ./parser
 
 drone:
