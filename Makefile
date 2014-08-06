@@ -68,7 +68,6 @@ regenerate:
 	make -C test/enumprefix regenerate
 	make -C test/packed regenerate
 	make -C test/tags regenerate
-	make -C test/customnil regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -91,7 +90,6 @@ tests:
 	go build ./test/enumprefix
 	go test -v ./test/packed
 	go test -v ./test/tags
-	go test -v ./test/customnil
 	go test -v ./parser
 
 drone:
