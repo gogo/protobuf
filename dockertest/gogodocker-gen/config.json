@@ -1,0 +1,54 @@
+{
+	"_comment": {
+		"Go" : [
+			{
+				"Version": "1.0.3",
+				"Download": "https://go.googlecode.com/files/"
+			},
+			{
+				"Version": "1.1.2",
+				"Download": "https://go.googlecode.com/files/"
+			},
+			{
+				"Version": "1.2.2",
+				"Download": "http://golang.org/dl/"
+			},
+			{
+				"Version": "1.3",
+				"Download": "http://golang.org/dl/"
+			}
+		],
+		"Proto": [
+			{
+				"Version": "2.3.0"
+			},
+			{
+				"Version": "2.4.1"
+			},
+			{
+				"Version": "2.5.0"
+			}
+		]
+	},
+	"Go": [
+		{
+			"Version": "1.2.2",
+			"Download": "http://golang.org/dl/"
+		},
+		{
+			"Version": "1.3",
+			"Download": "http://golang.org/dl/"
+		}
+	],
+	"Proto": [
+		{
+			"Version": "2.3.0"
+		},
+		{
+			"Version": "2.4.1"
+		},
+		{
+			"Version": "2.5.0"
+		}
+	]
+}
