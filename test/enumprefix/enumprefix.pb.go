@@ -14,15 +14,13 @@
 package enumprefix
 
 import proto "code.google.com/p/gogoprotobuf/proto"
-import json "encoding/json"
 import math "math"
 import test "code.google.com/p/gogoprotobuf/test"
 
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
 
-// Reference proto, json, and math imports to suppress error if they are not otherwise used.
+// Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
-var _ = &json.SyntaxError{}
 var _ = math.Inf
 
 type MyMessage struct {

@@ -14,7 +14,6 @@ It has these top-level messages:
 package proto
 
 import proto1 "code.google.com/p/gogoprotobuf/proto"
-import json "encoding/json"
 import math "math"
 
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
@@ -24,9 +23,8 @@ import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/prot
 
 import bytes "bytes"
 
-// Reference proto, json, and math imports to suppress error if they are not otherwise used.
+// Reference imports to suppress errors if they are not otherwise used.
 var _ = proto1.Marshal
-var _ = &json.SyntaxError{}
 var _ = math.Inf
 
 type Foo struct {

@@ -17,7 +17,6 @@
 package packed
 
 import proto "code.google.com/p/gogoprotobuf/proto"
-import json "encoding/json"
 import math "math"
 
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
@@ -30,9 +29,8 @@ import io1 "io"
 import unsafe "unsafe"
 import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
 
-// Reference proto, json, and math imports to suppress error if they are not otherwise used.
+// Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
-var _ = &json.SyntaxError{}
 var _ = math.Inf
 
 type NinRepNative struct {
