@@ -21,23 +21,25 @@ import math "math"
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
 
 import io "io"
+import fmt "fmt"
 import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
 
 import io1 "io"
+import fmt1 "fmt"
 import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
 
-import fmt "fmt"
+import fmt2 "fmt"
 import strings "strings"
 import reflect "reflect"
 
-import fmt1 "fmt"
+import fmt3 "fmt"
 import strings1 "strings"
 import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect1 "reflect"
 
-import fmt2 "fmt"
+import fmt4 "fmt"
 import bytes "bytes"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -128,7 +130,7 @@ func (m *Big) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Sub", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -155,7 +157,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			index = postIndex
 		case 2:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Number", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -214,7 +216,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field SubNumber", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -273,7 +275,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Sub", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -300,7 +302,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			index = postIndex
 		case 2:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Number", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -343,9 +345,9 @@ func (this *Big) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Big{`,
-		`Sub:` + strings.Replace(fmt.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
+		`Sub:` + strings.Replace(fmt2.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
 		`Number:` + valueToStringUnmarshalmerge(this.Number) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`XXX_unrecognized:` + fmt2.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -355,9 +357,9 @@ func (this *BigUnsafe) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&BigUnsafe{`,
-		`Sub:` + strings.Replace(fmt.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
+		`Sub:` + strings.Replace(fmt2.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
 		`Number:` + valueToStringUnmarshalmerge(this.Number) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`XXX_unrecognized:` + fmt2.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -368,7 +370,7 @@ func (this *Sub) String() string {
 	}
 	s := strings.Join([]string{`&Sub{`,
 		`SubNumber:` + valueToStringUnmarshalmerge(this.SubNumber) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`XXX_unrecognized:` + fmt2.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -379,7 +381,7 @@ func valueToStringUnmarshalmerge(v interface{}) string {
 		return "nil"
 	}
 	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
+	return fmt2.Sprintf("*%v", pv)
 }
 func NewPopulatedBig(r randyUnmarshalmerge, easy bool) *Big {
 	this := &Big{}
@@ -506,21 +508,21 @@ func (this *Big) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.Big{` + `Sub:` + fmt1.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.Big{` + `Sub:` + fmt3.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *BigUnsafe) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.BigUnsafe{` + `Sub:` + fmt1.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.BigUnsafe{` + `Sub:` + fmt3.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Sub) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.Sub{` + `SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.Sub{` + `SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
@@ -529,7 +531,7 @@ func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
 		return "nil"
 	}
 	pv := reflect1.Indirect(rv).Interface()
-	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	return fmt3.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
 func extensionToGoStringUnmarshalmerge(e map[int32]code_google_com_p_gogoprotobuf_proto2.Extension) string {
 	if e == nil {
@@ -553,35 +555,35 @@ func (this *Big) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt4.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Big)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Big")
+		return fmt4.Errorf("that is not of type *Big")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Big but is nil && this != nil")
+		return fmt4.Errorf("that is type *Big but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Bigbut is not nil && this == nil")
+		return fmt4.Errorf("that is type *Bigbut is not nil && this == nil")
 	}
 	if !this.Sub.Equal(that1.Sub) {
-		return fmt2.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
+		return fmt4.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
 	}
 	if this.Number != nil && that1.Number != nil {
 		if *this.Number != *that1.Number {
-			return fmt2.Errorf("Number this(%v) Not Equal that(%v)", *this.Number, *that1.Number)
+			return fmt4.Errorf("Number this(%v) Not Equal that(%v)", *this.Number, *that1.Number)
 		}
 	} else if this.Number != nil {
-		return fmt2.Errorf("this.Number == nil && that.Number != nil")
+		return fmt4.Errorf("this.Number == nil && that.Number != nil")
 	} else if that1.Number != nil {
-		return fmt2.Errorf("Number this(%v) Not Equal that(%v)", this.Number, that1.Number)
+		return fmt4.Errorf("Number this(%v) Not Equal that(%v)", this.Number, that1.Number)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt4.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -627,35 +629,35 @@ func (this *BigUnsafe) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt4.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*BigUnsafe)
 	if !ok {
-		return fmt2.Errorf("that is not of type *BigUnsafe")
+		return fmt4.Errorf("that is not of type *BigUnsafe")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *BigUnsafe but is nil && this != nil")
+		return fmt4.Errorf("that is type *BigUnsafe but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *BigUnsafebut is not nil && this == nil")
+		return fmt4.Errorf("that is type *BigUnsafebut is not nil && this == nil")
 	}
 	if !this.Sub.Equal(that1.Sub) {
-		return fmt2.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
+		return fmt4.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
 	}
 	if this.Number != nil && that1.Number != nil {
 		if *this.Number != *that1.Number {
-			return fmt2.Errorf("Number this(%v) Not Equal that(%v)", *this.Number, *that1.Number)
+			return fmt4.Errorf("Number this(%v) Not Equal that(%v)", *this.Number, *that1.Number)
 		}
 	} else if this.Number != nil {
-		return fmt2.Errorf("this.Number == nil && that.Number != nil")
+		return fmt4.Errorf("this.Number == nil && that.Number != nil")
 	} else if that1.Number != nil {
-		return fmt2.Errorf("Number this(%v) Not Equal that(%v)", this.Number, that1.Number)
+		return fmt4.Errorf("Number this(%v) Not Equal that(%v)", this.Number, that1.Number)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt4.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -701,32 +703,32 @@ func (this *Sub) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt4.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Sub)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Sub")
+		return fmt4.Errorf("that is not of type *Sub")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Sub but is nil && this != nil")
+		return fmt4.Errorf("that is type *Sub but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Subbut is not nil && this == nil")
+		return fmt4.Errorf("that is type *Subbut is not nil && this == nil")
 	}
 	if this.SubNumber != nil && that1.SubNumber != nil {
 		if *this.SubNumber != *that1.SubNumber {
-			return fmt2.Errorf("SubNumber this(%v) Not Equal that(%v)", *this.SubNumber, *that1.SubNumber)
+			return fmt4.Errorf("SubNumber this(%v) Not Equal that(%v)", *this.SubNumber, *that1.SubNumber)
 		}
 	} else if this.SubNumber != nil {
-		return fmt2.Errorf("this.SubNumber == nil && that.SubNumber != nil")
+		return fmt4.Errorf("this.SubNumber == nil && that.SubNumber != nil")
 	} else if that1.SubNumber != nil {
-		return fmt2.Errorf("SubNumber this(%v) Not Equal that(%v)", this.SubNumber, that1.SubNumber)
+		return fmt4.Errorf("SubNumber this(%v) Not Equal that(%v)", this.SubNumber, that1.SubNumber)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt4.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }

@@ -27,6 +27,7 @@
 package proto
 
 import (
+	"fmt"
 	"io"
 )
 
@@ -109,7 +110,7 @@ func Skip(data []byte) (n int, err error) {
 			index += 4
 			return index, nil
 		default:
-			return 0, ErrWrongType
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}
 	}
 	panic("unreachable")

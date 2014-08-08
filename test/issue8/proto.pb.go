@@ -19,6 +19,7 @@ import math "math"
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
 
 import io "io"
+import fmt "fmt"
 import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
 
 import bytes "bytes"
@@ -66,7 +67,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Bar", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {

@@ -23,10 +23,12 @@ import math "math"
 
 import io "io"
 import math1 "math"
+import fmt "fmt"
 import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
 
 import io1 "io"
 import unsafe "unsafe"
+import fmt1 "fmt"
 import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -504,7 +506,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 			var v uint64
 			i := index + 8
@@ -524,7 +526,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field1 = append(m.Field1, v2)
 		case 2:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 			var v uint32
 			i := index + 4
@@ -540,7 +542,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field2 = append(m.Field2, v2)
 		case 3:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -557,7 +559,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v)
 		case 4:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -574,7 +576,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field4 = append(m.Field4, v)
 		case 5:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
@@ -591,7 +593,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field5 = append(m.Field5, v)
 		case 6:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -608,7 +610,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -626,7 +628,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field7 = append(m.Field7, v)
 		case 8:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -644,7 +646,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field8 = append(m.Field8, int64(v))
 		case 9:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
 			i := index + 4
@@ -659,7 +661,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field9 = append(m.Field9, v)
 		case 10:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
 			i := index + 4
@@ -674,7 +676,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field10 = append(m.Field10, v)
 		case 11:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
 			i := index + 8
@@ -693,7 +695,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field11 = append(m.Field11, v)
 		case 12:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
 			i := index + 8
@@ -712,7 +714,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			m.Field12 = append(m.Field12, v)
 		case 13:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
@@ -823,7 +825,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v2 := math1.Float64frombits(v)
 				m.Field1 = append(m.Field1, v2)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 2 {
@@ -871,7 +873,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v2 := math1.Float32frombits(v)
 				m.Field2 = append(m.Field2, v2)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 		case 3:
 			if wireType == 2 {
@@ -921,7 +923,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				m.Field3 = append(m.Field3, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 		case 4:
 			if wireType == 2 {
@@ -971,7 +973,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				m.Field4 = append(m.Field4, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 		case 5:
 			if wireType == 2 {
@@ -1021,7 +1023,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				m.Field5 = append(m.Field5, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 		case 6:
 			if wireType == 2 {
@@ -1071,7 +1073,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				m.Field6 = append(m.Field6, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 		case 7:
 			if wireType == 2 {
@@ -1123,7 +1125,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 				m.Field7 = append(m.Field7, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 		case 8:
 			if wireType == 2 {
@@ -1175,7 +1177,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 				m.Field8 = append(m.Field8, int64(v))
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 		case 9:
 			if wireType == 2 {
@@ -1221,7 +1223,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint32(data[i-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 		case 10:
 			if wireType == 2 {
@@ -1267,7 +1269,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= int32(data[i-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 		case 11:
 			if wireType == 2 {
@@ -1321,7 +1323,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint64(data[i-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 		case 12:
 			if wireType == 2 {
@@ -1375,7 +1377,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= int64(data[i-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 		case 13:
 			if wireType == 2 {
@@ -1425,7 +1427,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				m.Field13 = append(m.Field13, bool(v != 0))
 			} else {
-				return code_google_com_p_gogoprotobuf_proto.ErrWrongType
+				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 		default:
 			var sizeOfWire int
@@ -1471,7 +1473,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 			var v float64
 			if index+8 > l {
@@ -1482,7 +1484,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field1 = append(m.Field1, v)
 		case 2:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 			var v float32
 			if index+4 > l {
@@ -1493,7 +1495,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field2 = append(m.Field2, v)
 		case 3:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -1510,7 +1512,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v)
 		case 4:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -1527,7 +1529,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field4 = append(m.Field4, v)
 		case 5:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
@@ -1544,7 +1546,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field5 = append(m.Field5, v)
 		case 6:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1561,7 +1563,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -1579,7 +1581,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field7 = append(m.Field7, v)
 		case 8:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1597,7 +1599,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field8 = append(m.Field8, int64(v))
 		case 9:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
 			if index+4 > l {
@@ -1608,7 +1610,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field9 = append(m.Field9, v)
 		case 10:
 			if wireType != 5 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
 			if index+4 > l {
@@ -1619,7 +1621,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field10 = append(m.Field10, v)
 		case 11:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
 			if index+8 > l {
@@ -1630,7 +1632,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field11 = append(m.Field11, v)
 		case 12:
 			if wireType != 1 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
 			if index+8 > l {
@@ -1641,7 +1643,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field12 = append(m.Field12, v)
 		case 13:
 			if wireType != 0 {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
@@ -1734,7 +1736,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 8
 				m.Field1 = append(m.Field1, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 2 {
@@ -1772,7 +1774,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 4
 				m.Field2 = append(m.Field2, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 		case 3:
 			if wireType == 2 {
@@ -1822,7 +1824,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field3 = append(m.Field3, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 		case 4:
 			if wireType == 2 {
@@ -1872,7 +1874,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field4 = append(m.Field4, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 		case 5:
 			if wireType == 2 {
@@ -1922,7 +1924,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field5 = append(m.Field5, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 		case 6:
 			if wireType == 2 {
@@ -1972,7 +1974,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field6 = append(m.Field6, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 		case 7:
 			if wireType == 2 {
@@ -2024,7 +2026,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 				m.Field7 = append(m.Field7, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 		case 8:
 			if wireType == 2 {
@@ -2076,7 +2078,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 				m.Field8 = append(m.Field8, int64(v))
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 		case 9:
 			if wireType == 2 {
@@ -2114,7 +2116,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 4
 				m.Field9 = append(m.Field9, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 		case 10:
 			if wireType == 2 {
@@ -2152,7 +2154,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 4
 				m.Field10 = append(m.Field10, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 		case 11:
 			if wireType == 2 {
@@ -2190,7 +2192,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 8
 				m.Field11 = append(m.Field11, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 		case 12:
 			if wireType == 2 {
@@ -2228,7 +2230,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				index += 8
 				m.Field12 = append(m.Field12, v)
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 		case 13:
 			if wireType == 2 {
@@ -2278,7 +2280,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field13 = append(m.Field13, bool(v != 0))
 			} else {
-				return code_google_com_p_gogoprotobuf_proto1.ErrWrongType
+				return fmt1.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 		default:
 			var sizeOfWire int

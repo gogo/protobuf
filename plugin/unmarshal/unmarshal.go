@@ -660,6 +660,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.ioPkg = p.NewImport("io")
 	p.mathPkg = p.NewImport("math")
 	p.unsafePkg = p.NewImport("unsafe")
+	fmtPkg := p.NewImport("fmt")
 	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
 
 	for _, message := range file.Messages() {
@@ -726,13 +727,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`} else {`)
 				p.In()
-				p.P(`return ` + protoPkg.Use() + `.ErrWrongType`)
+				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
 			} else {
 				p.P(`if wireType != `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.P(`return ` + protoPkg.Use() + `.ErrWrongType`)
+				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
 				p.field(field, fieldname)
