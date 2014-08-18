@@ -226,7 +226,7 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 			} else {
 				packageName := strings.Join(ss[0:len(ss)-1], ".")
 				typeName := ss[len(ss)-1]
-				importStr := strings.Replace(strings.Replace(packageName, "/", "_", -1), ".", "_", -1)
+				importStr := strings.Map(badToUnderscore, packageName)
 				typ = importStr + "." + typeName
 				return packageName, typ, nil
 			}

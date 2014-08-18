@@ -235,6 +235,10 @@ message NidOptCustom {
 	optional bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
 }
 
+message CustomDash {
+	optional bytes Value = 1 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom-dash-type.Bytes"];
+}
+
 message NinOptCustom {
 	optional bytes Id = 1 [(gogoproto.customtype) = "Uuid"];
 	optional bytes Value = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128"];

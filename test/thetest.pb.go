@@ -24,6 +24,7 @@
 		NidNestedStruct
 		NinNestedStruct
 		NidOptCustom
+		CustomDash
 		NinOptCustom
 		NidRepCustom
 		NinRepCustom
@@ -71,6 +72,7 @@ import math "math"
 // discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
 
 import code_google_com_p_gogoprotobuf_test_custom "code.google.com/p/gogoprotobuf/test/custom"
+import code_google_com_p_gogoprotobuf_test_custom_dash_type "code.google.com/p/gogoprotobuf/test/custom-dash-type"
 
 import fmt "fmt"
 import strings "strings"
@@ -441,6 +443,14 @@ type NidOptCustom struct {
 
 func (m *NidOptCustom) Reset()      { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage() {}
+
+type CustomDash struct {
+	Value            *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,customtype=code.google.com/p/gogoprotobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	XXX_unrecognized []byte                                                      `json:"-"`
+}
+
+func (m *CustomDash) Reset()      { *m = CustomDash{} }
+func (*CustomDash) ProtoMessage() {}
 
 type NinOptCustom struct {
 	Id               *Uuid                                               `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
@@ -1663,6 +1673,17 @@ func (this *NidOptCustom) String() string {
 	}, "")
 	return s
 }
+func (this *CustomDash) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomDash{`,
+		`Value:` + valueToStringThetest(this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *NinOptCustom) String() string {
 	if this == nil {
 		return "nil"
@@ -2844,6 +2865,18 @@ func (m *NidOptCustom) Size() (n int) {
 	n += 1 + l + sovThetest(uint64(l))
 	l = m.Value.Size()
 	n += 1 + l + sovThetest(uint64(l))
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+func (m *CustomDash) Size() (n int) {
+	var l int
+	_ = l
+	if m.Value != nil {
+		l = m.Value.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -4711,6 +4744,17 @@ func NewPopulatedNidOptCustom(r randyThetest, easy bool) *NidOptCustom {
 	return this
 }
 
+func NewPopulatedCustomDash(r randyThetest, easy bool) *CustomDash {
+	this := &CustomDash{}
+	if r.Intn(10) != 0 {
+		this.Value = code_google_com_p_gogoprotobuf_test_custom_dash_type.NewPopulatedBytes(r)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
+	}
+	return this
+}
+
 func NewPopulatedNinOptCustom(r randyThetest, easy bool) *NinOptCustom {
 	this := &NinOptCustom{}
 	if r.Intn(10) != 0 {
@@ -5968,6 +6012,13 @@ func (this *NidOptCustom) GoString() string {
 		return "nil"
 	}
 	s := strings1.Join([]string{`&test.NidOptCustom{` + `Id:` + fmt1.Sprintf("%#v", this.Id), `Value:` + fmt1.Sprintf("%#v", this.Value), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *CustomDash) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings1.Join([]string{`&test.CustomDash{` + `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptCustom) GoString() string {
@@ -7355,6 +7406,29 @@ func (this *NidOptCustom) GetValue() code_google_com_p_gogoprotobuf_test_custom.
 func NewNidOptCustomFromFace(that NidOptCustomFace) *NidOptCustom {
 	this := &NidOptCustom{}
 	this.Id = that.GetId()
+	this.Value = that.GetValue()
+	return this
+}
+
+type CustomDashFace interface {
+	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	GetValue() *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes
+}
+
+func (this *CustomDash) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+	return this
+}
+
+func (this *CustomDash) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+	return NewCustomDashFromFace(this)
+}
+
+func (this *CustomDash) GetValue() *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes {
+	return this.Value
+}
+
+func NewCustomDashFromFace(that CustomDashFace) *CustomDash {
+	this := &CustomDash{}
 	this.Value = that.GetValue()
 	return this
 }
@@ -11314,6 +11388,70 @@ func (this *NidOptCustom) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Value.Equal(that1.Value) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *CustomDash) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomDash)
+	if !ok {
+		return fmt2.Errorf("that is not of type *CustomDash")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt2.Errorf("that is type *CustomDash but is nil && this != nil")
+	} else if this == nil {
+		return fmt2.Errorf("that is type *CustomDashbut is not nil && this == nil")
+	}
+	if that1.Value == nil {
+		if this.Value != nil {
+			return fmt2.Errorf("this.Value != nil && that1.Value == nil")
+		}
+	} else if !this.Value.Equal(*that1.Value) {
+		return fmt2.Errorf("Value this(%v) Not Equal that(%v)", this.Value, that1.Value)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *CustomDash) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomDash)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.Value == nil {
+		if this.Value != nil {
+			return false
+		}
+	} else if !this.Value.Equal(*that1.Value) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -15405,6 +15543,9 @@ func (this *NinNestedStruct) Description() (desc *google_protobuf.FileDescriptor
 func (this *NidOptCustom) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
+func (this *CustomDash) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
 func (this *NinOptCustom) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
@@ -16606,7 +16747,11 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomDash"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x3a, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2d, 0x64, 0x61, 0x73, 0x68, 0x2d, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x42, 0x79, 0x74, 0x65, 0x73})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
