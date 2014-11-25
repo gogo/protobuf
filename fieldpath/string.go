@@ -33,6 +33,7 @@ import (
 	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
 	"fmt"
 	"io"
+	"strings"
 )
 
 type stringWriter struct {
@@ -71,7 +72,7 @@ func (this *stringWriter) Uint32(v uint32) {
 }
 
 func (this *stringWriter) Bool(v bool) {
-	io.WriteString(this.w, fmt.Sprintf(`%t`, v))
+	io.WriteString(this.w, fmt.Sprintf(`%v`, v))
 }
 
 func (this *stringWriter) Bytes(v []byte) {
@@ -128,6 +129,9 @@ func ToString(rootPkg string, rootMsg string, desc *descriptor.FileDescriptorSet
 				w.tab()
 				w.String(f.GetName() + `:{` + "\n")
 				err = ToString(messagePkg, messageName, desc, f.GetName(), buf[offset:offset+int(length)], tabs+1, writer)
+				if err != nil {
+					return err
+				}
 				offset += int(length)
 				w.tab()
 				w.String(`}` + "\n")
@@ -191,15 +195,37 @@ func ToString(rootPkg string, rootMsg string, desc *descriptor.FileDescriptorSet
 				}
 			}
 			w.tab()
-			if !found {
-				w.String("XXX_unrecognized:")
-			} else {
-				w.String("XXX_extensions:")
-			}
 			offset -= n
 			nn, err := proto.Skip(buf[offset:])
 			if err != nil {
 				panic(err)
+			}
+			if !found {
+				w.String("XXX_unrecognized:")
+			} else {
+				w.String("XXX_extensions:")
+				extPkg, ext := desc.FindExtensionByFieldNumber(messagePkg, messageName, fieldNum)
+				if ext != nil && ext.IsMessage() {
+					names := strings.Split(ext.GetTypeName(), ".")
+					if len(names) == 3 {
+						_, nnn, err := decodeVarint(buf, offset+n)
+						if err != nil {
+							panic(err)
+						}
+						w.tab()
+						w.String(extPkg + "." + names[2] + `:{` + "\n")
+						err = ToString(extPkg, names[2], desc, "", buf[offset+n+nnn:offset+nn], tabs+1, writer)
+						if err != nil {
+							return err
+						}
+						offset += nn
+						w.tab()
+						w.String(`}` + "\n")
+						break
+					} else {
+						panic(ext.GetTypeName())
+					}
+				}
 			}
 			w.Bytes(buf[offset : offset+nn])
 			w.String("\n")

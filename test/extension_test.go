@@ -58,6 +58,14 @@ func check(t *testing.T, m extendable, fieldA float64, ext *proto.ExtensionDesc)
 	if fieldA != *fieldA2 {
 		t.Fatalf("Expected %f got %f", fieldA, *fieldA2)
 	}
+	fieldA3Interface, err := proto.GetUnsafeExtension(m, ext.Field)
+	if err != nil {
+		panic(err)
+	}
+	fieldA3 := fieldA3Interface.(*float64)
+	if fieldA != *fieldA3 {
+		t.Fatalf("Expected %f got %f", fieldA, *fieldA3)
+	}
 	proto.ClearExtension(m, ext)
 	if proto.HasExtension(m, ext) {
 		t.Fatalf("expected extension to be cleared")
@@ -107,4 +115,13 @@ func TestExtensionsNoExtensionsMapSetRawExtension(t *testing.T) {
 	m := NewPopulatedNoExtensionsMap(extr, false)
 	proto.SetRawExtension(m, 100, fieldABytes)
 	check(t, m, fieldA, E_FieldA1)
+}
+
+func TestUnsafeExtension(t *testing.T) {
+	m := NewPopulatedMyExtendable(extr, false)
+	err := proto.SetUnsafeExtension(m, E_FieldA.Field, &fieldA)
+	if err != nil {
+		panic(err)
+	}
+	check(t, m, fieldA, E_FieldA)
 }

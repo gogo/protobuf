@@ -39,19 +39,27 @@ import (
 	"time"
 )
 
-func iotest(writer io.WriteCloser, reader io.ReadCloser) {
+func iotest(writer io.WriteCloser, reader io.ReadCloser) error {
 	size := 1000
 	msgs := make([]*test.NinOptNative, size)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := range msgs {
 		msgs[i] = test.NewPopulatedNinOptNative(r, true)
+		//issue 31
+		if i == 5 {
+			msgs[i] = &test.NinOptNative{}
+		}
+		//issue 31
+		if i == 999 {
+			msgs[i] = &test.NinOptNative{}
+		}
 		err := writer.WriteMsg(msgs[i])
 		if err != nil {
-			panic(err)
+			return err
 		}
 	}
 	if err := writer.Close(); err != nil {
-		panic(err)
+		return err
 	}
 	i := 0
 	for {
@@ -60,10 +68,10 @@ func iotest(writer io.WriteCloser, reader io.ReadCloser) {
 			if err == goio.EOF {
 				break
 			}
-			panic(err)
+			return err
 		}
 		if err := msg.VerboseEqual(msgs[i]); err != nil {
-			panic(err)
+			return err
 		}
 		i++
 	}
@@ -71,33 +79,106 @@ func iotest(writer io.WriteCloser, reader io.ReadCloser) {
 		panic("not enough messages read")
 	}
 	if err := reader.Close(); err != nil {
-		panic(err)
+		return err
+	}
+	return nil
+}
+
+type buffer struct {
+	*bytes.Buffer
+	closed bool
+}
+
+func (this *buffer) Close() error {
+	this.closed = true
+	return nil
+}
+
+func newBuffer() *buffer {
+	return &buffer{bytes.NewBuffer(nil), false}
+}
+
+func TestBigUint32Normal(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewUint32DelimitedWriter(buf, binary.BigEndian)
+	reader := io.NewUint32DelimitedReader(buf, binary.BigEndian, 1024*1024)
+	if err := iotest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
 	}
 }
 
-func TestBigUint32(t *testing.T) {
-	buf := bytes.NewBuffer(nil)
+func TestBigUint32MaxSize(t *testing.T) {
+	buf := newBuffer()
 	writer := io.NewUint32DelimitedWriter(buf, binary.BigEndian)
-	reader := io.NewUint32DelimitedReader(buf, binary.BigEndian, 1024*1024)
-	iotest(writer, reader)
+	reader := io.NewUint32DelimitedReader(buf, binary.BigEndian, 20)
+	if err := iotest(writer, reader); err != goio.ErrShortBuffer {
+		t.Error(err)
+	} else {
+		t.Logf("%s", err)
+	}
 }
 
-func TestLittleUint32(t *testing.T) {
-	buf := bytes.NewBuffer(nil)
+func TestLittleUint32Normal(t *testing.T) {
+	buf := newBuffer()
 	writer := io.NewUint32DelimitedWriter(buf, binary.LittleEndian)
 	reader := io.NewUint32DelimitedReader(buf, binary.LittleEndian, 1024*1024)
-	iotest(writer, reader)
+	if err := iotest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
+	}
 }
 
-func TestVarint(t *testing.T) {
+func TestLittleUint32MaxSize(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewUint32DelimitedWriter(buf, binary.LittleEndian)
+	reader := io.NewUint32DelimitedReader(buf, binary.LittleEndian, 20)
+	if err := iotest(writer, reader); err != goio.ErrShortBuffer {
+		t.Error(err)
+	} else {
+		t.Logf("%s", err)
+	}
+}
+
+func TestVarintNormal(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewDelimitedWriter(buf)
+	reader := io.NewDelimitedReader(buf, 1024*1024)
+	if err := iotest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
+	}
+}
+
+func TestVarintNoClose(t *testing.T) {
 	buf := bytes.NewBuffer(nil)
 	writer := io.NewDelimitedWriter(buf)
 	reader := io.NewDelimitedReader(buf, 1024*1024)
-	iotest(writer, reader)
+	if err := iotest(writer, reader); err != nil {
+		t.Error(err)
+	}
+}
+
+//issue 32
+func TestVarintMaxSize(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewDelimitedWriter(buf)
+	reader := io.NewDelimitedReader(buf, 20)
+	if err := iotest(writer, reader); err != goio.ErrShortBuffer {
+		t.Error(err)
+	} else {
+		t.Logf("%s", err)
+	}
 }
 
 func TestVarintError(t *testing.T) {
-	buf := bytes.NewBuffer(nil)
+	buf := newBuffer()
 	buf.Write([]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f})
 	reader := io.NewDelimitedReader(buf, 1024*1024)
 	msg := &test.NinOptNative{}
@@ -108,7 +189,7 @@ func TestVarintError(t *testing.T) {
 }
 
 func TestFull(t *testing.T) {
-	buf := bytes.NewBuffer(nil)
+	buf := newBuffer()
 	writer := io.NewFullWriter(buf)
 	reader := io.NewFullReader(buf, 1024*1024)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -133,5 +214,8 @@ func TestFull(t *testing.T) {
 	}
 	if err := reader.Close(); err != nil {
 		panic(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
 	}
 }

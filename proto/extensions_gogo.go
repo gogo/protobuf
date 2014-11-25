@@ -28,6 +28,7 @@ package proto
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"reflect"
 	"sort"
@@ -186,4 +187,30 @@ func NewExtension(e []byte) Extension {
 
 func (this Extension) GoString() string {
 	return fmt.Sprintf("proto.NewExtension(%#v)", this.enc)
+}
+
+func SetUnsafeExtension(pb extendableProto, fieldNum int32, value interface{}) error {
+	typ := reflect.TypeOf(pb).Elem()
+	ext, ok := extensionMaps[typ]
+	if !ok {
+		return fmt.Errorf("proto: bad extended type; %s is not extendable", typ.String())
+	}
+	desc, ok := ext[fieldNum]
+	if !ok {
+		return errors.New("proto: bad extension number; not in declared ranges")
+	}
+	return setExtension(pb, desc, value)
+}
+
+func GetUnsafeExtension(pb extendableProto, fieldNum int32) (interface{}, error) {
+	typ := reflect.TypeOf(pb).Elem()
+	ext, ok := extensionMaps[typ]
+	if !ok {
+		return nil, fmt.Errorf("proto: bad extended type; %s is not extendable", typ.String())
+	}
+	desc, ok := ext[fieldNum]
+	if !ok {
+		return nil, fmt.Errorf("unregistered field number %d", fieldNum)
+	}
+	return GetExtension(pb, desc)
 }

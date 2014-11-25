@@ -180,6 +180,34 @@ func (desc *FileDescriptorSet) FindExtension(packageName string, typeName string
 	return "", nil
 }
 
+func (desc *FileDescriptorSet) FindExtensionByFieldNumber(packageName string, typeName string, fieldNum int32) (extPackageName string, field *FieldDescriptorProto) {
+	parent := desc.GetMessage(packageName, typeName)
+	if parent == nil {
+		return "", nil
+	}
+	if !parent.IsExtendable() {
+		return "", nil
+	}
+	extendee := "." + packageName + "." + typeName
+	for _, file := range desc.GetFile() {
+		for _, ext := range file.GetExtension() {
+			if strings.Map(dotToUnderscore, file.GetPackage()) == strings.Map(dotToUnderscore, packageName) {
+				if !(ext.GetExtendee() == typeName || ext.GetExtendee() == extendee) {
+					continue
+				}
+			} else {
+				if ext.GetExtendee() != extendee {
+					continue
+				}
+			}
+			if ext.GetNumber() == fieldNum {
+				return file.GetPackage(), ext
+			}
+		}
+	}
+	return "", nil
+}
+
 func (desc *FileDescriptorSet) FindMessage(packageName string, typeName string, fieldName string) (msgPackageName string, msgName string) {
 	parent := desc.GetMessage(packageName, typeName)
 	if parent == nil {

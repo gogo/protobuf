@@ -414,7 +414,10 @@ func SetExtension(pb extendableProto, extension *ExtensionDesc, value interface{
 	if typ != reflect.TypeOf(value) {
 		return errors.New("proto: bad extension value type")
 	}
+	return setExtension(pb, extension, value)
+}
 
+func setExtension(pb extendableProto, extension *ExtensionDesc, value interface{}) error {
 	if epb, doki := pb.(extensionsMap); doki {
 		epb.ExtensionMap()[extension.Field] = Extension{desc: extension, value: value}
 	} else if epb, doki := pb.(extensionsBytes); doki {
