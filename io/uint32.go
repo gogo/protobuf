@@ -38,6 +38,10 @@ func NewUint32DelimitedWriter(w io.Writer, byteOrder binary.ByteOrder) WriteClos
 	return &uint32Writer{w, byteOrder, nil}
 }
 
+func NewSizeUint32DelimitedWriter(w io.Writer, byteOrder binary.ByteOrder, size int) WriteCloser {
+	return &uint32Writer{w, byteOrder, make([]byte, size)}
+}
+
 type uint32Writer struct {
 	w         io.Writer
 	byteOrder binary.ByteOrder

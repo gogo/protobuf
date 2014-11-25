@@ -29,6 +29,7 @@
 package io
 
 import (
+	"bufio"
 	"code.google.com/p/gogoprotobuf/proto"
 	"encoding/binary"
 	"errors"
@@ -86,42 +87,42 @@ func (this *varintWriter) Close() error {
 }
 
 func NewDelimitedReader(r io.Reader, maxSize int) ReadCloser {
-	return &varintReader{r, make([]byte, 10), nil, maxSize}
+	var closer io.Closer
+	if c, ok := r.(io.Closer); ok {
+		closer = c
+	}
+	return &varintReader{bufio.NewReader(r), nil, maxSize, closer}
 }
 
 type varintReader struct {
-	r       io.Reader
-	lenBuf  []byte
+	r       *bufio.Reader
 	buf     []byte
 	maxSize int
+	closer  io.Closer
 }
 
 func (this *varintReader) ReadMsg(msg proto.Message) error {
-	firstLen, err := this.r.Read(this.lenBuf)
+	length64, err := binary.ReadUvarint(this.r)
 	if err != nil {
 		return err
 	}
-	length64, lenLen := binary.Uvarint(this.lenBuf)
-	if lenLen <= 0 {
-		if lenLen == 0 {
-			return errSmallBuffer
-		}
-		return errLargeValue
+	length := int(length64)
+	if length < 0 || length > this.maxSize {
+		return io.ErrShortBuffer
 	}
-	msgLen := int(length64)
-	if len(this.buf) < msgLen {
-		this.buf = make([]byte, msgLen)
+	if len(this.buf) < length {
+		this.buf = make([]byte, length)
 	}
-	prefixN := copy(this.buf, this.lenBuf[lenLen:firstLen])
-	if _, err := io.ReadFull(this.r, this.buf[prefixN:msgLen]); err != nil {
+	buf := this.buf[:length]
+	if _, err := io.ReadFull(this.r, buf); err != nil {
 		return err
 	}
-	return proto.Unmarshal(this.buf[:msgLen], msg)
+	return proto.Unmarshal(buf, msg)
 }
 
 func (this *varintReader) Close() error {
-	if closer, ok := this.r.(io.Closer); ok {
-		return closer.Close()
+	if this.closer != nil {
+		return this.closer.Close()
 	}
 	return nil
 }
