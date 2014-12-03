@@ -15,18 +15,18 @@
 */
 package unmarshalmerge
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
 
 import io "io"
 import fmt "fmt"
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import io1 "io"
 import fmt1 "fmt"
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 
 import fmt2 "fmt"
 import strings "strings"
@@ -34,7 +34,7 @@ import reflect "reflect"
 
 import fmt3 "fmt"
 import strings1 "strings"
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto2 "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect1 "reflect"
@@ -182,7 +182,7 @@ func (m *Big) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -241,7 +241,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -327,7 +327,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto1.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto1.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -533,7 +533,7 @@ func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt3.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringUnmarshalmerge(e map[int32]code_google_com_p_gogoprotobuf_proto2.Extension) string {
+func extensionToGoStringUnmarshalmerge(e map[int32]github_com_gogo_protobuf_proto2.Extension) string {
 	if e == nil {
 		return "nil"
 	}

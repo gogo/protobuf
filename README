@@ -1,4 +1,4 @@
-GoGoProtobuf http://code.google.com/p/gogoprotobuf extends 
+GoGoProtobuf http://github.com/gogo/protobuf extends 
 GoProtobuf http://code.google.com/p/goprotobuf
 
 Go support for Protocol Buffers - Google's data interchange format
@@ -32,14 +32,14 @@ once a standard RPC protocol develops for protobufs.
 There are no insertion points in the plugin.
 
 GoGoProtobuf provides extensions for protocol buffers and GoProtobuf
-see http://code.google.com/p/gogoprotobuf/gogoproto/doc.go
+see http://github.com/gogo/protobuf/gogoproto/doc.go
 
 To install this code:
 
 The simplest way is to run go get.
 
 	# Grab the code from the repository and install the proto package.
-	go get -u code.google.com/p/gogoprotobuf/{proto,protoc-gen-gogo,gogoproto}
+	go get -u github.com/gogo/protobuf/{proto,protoc-gen-gogo,gogoproto}
 
 The compiler plugin, protoc-gen-gogo, will be installed in $GOBIN,
 defaulting to $GOPATH/bin.  It must be in your $PATH for the protocol
@@ -63,13 +63,13 @@ version.
 
 If you are using any gogo.proto extensions you will need to specify the
 proto_path to include the descriptor.proto and gogo.proto.
-gogo.proto is located in code.google.com/p/gogoprotobuf/gogoproto
+gogo.proto is located in github.com/gogo/protobuf/gogoproto
 This should be fine, since your import is the same.
-descriptor.proto is located in either code.google.com/p/gogoprotobuf/protobuf
+descriptor.proto is located in either github.com/gogo/protobuf/protobuf
 or code.google.com/p/protobuf/trunk/src/
 Its import is google/protobuf/descriptor.proto so it might need some help.
 
-	protoc --gogo_out=. -I=.:code.google.com/p/gogoprotobuf/protobuf *.proto
+	protoc --gogo_out=. -I=.:github.com/gogo/protobuf/protobuf *.proto
 
 ==========
 
@@ -134,7 +134,7 @@ To create and play with a Test object from the example package,
 	import (
 		"log"
 
-		"code.google.com/p/gogoprotobuf/proto"
+		"github.com/gogo/protobuf/proto"
 		"path/to/example"
 	)
 

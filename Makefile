@@ -94,8 +94,8 @@ tests:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	git clone https://code.google.com/p/gogoprotobuf
-	(cd $(GOPATH)/src/code.google.com/p/gogoprotobuf && make all)
+	git clone https://github.com/gogo/protobuf
+	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
 
 testall: tests
 	make -C protoc-gen-gogo/testdata test

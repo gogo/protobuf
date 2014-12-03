@@ -1,7 +1,7 @@
 // Extensions for Protocol Buffers to create more go like structures.
 //
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -50,7 +50,7 @@ Warning about nullable: According to the Protocol Buffer specification, you shou
 
 Let us look at:
 
-	code.google.com/p/gogoprotobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 for a quicker overview.
 
@@ -58,12 +58,12 @@ The following message:
 
   package test;
 
-  import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
+  import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 	message A {
 		optional string Description = 1 [(gogoproto.nullable) = false];
 		optional int64 Number = 2 [(gogoproto.nullable) = false];
-		optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+		optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
 	}
 
 Will generate a go struct which looks a lot like this:
@@ -83,7 +83,7 @@ Next we will embed the message A in message B.
 
 	message B {
 		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-		repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
 	}
 
 See below that A is embedded in B.
@@ -146,14 +146,14 @@ The enumprefix, getters and stringer extensions can be used to remove some of th
 
 Less Typing and Peace of Mind is explained in their specific plugin folders godoc:
 
-	- code.google.com/p/gogoprotobuf/plugin/<extension_name>
+	- github.com/gogo/protobuf/plugin/<extension_name>
 
 If you do not use any of these extension the code that is generated
 will be the same as if goprotobuf has generated it.
 
 The most complete way to see examples is to look at
 
-	code.google.com/p/gogoprotobuf/test/thetest.proto
+	github.com/gogo/protobuf/test/thetest.proto
 
 Gogoprototest is a seperate project,
 because we want to keep gogoprotobuf independant of goprotobuf,

@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -27,7 +27,7 @@
 package unrecognizedgroup
 
 import (
-	code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+	code_google_com_p_gogoprotobuf_proto "github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	"testing"
 	time "time"

@@ -89,7 +89,7 @@
 
 		package example
 
-		import "code.google.com/p/gogoprotobuf/proto"
+		import "github.com/gogo/protobuf/proto"
 
 		type FOO int32
 		const (
@@ -168,7 +168,7 @@
 		import (
 			"log"
 
-			"code.google.com/p/gogoprotobuf/proto"
+			"github.com/gogo/protobuf/proto"
 			"./example.pb"
 		)
 

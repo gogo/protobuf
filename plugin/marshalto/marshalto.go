@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -55,11 +55,11 @@ And benchmarks given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  code.google.com/p/gogoprotobuf/test/example/example.proto
+  github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  code.google.com/p/gogoprotobuf/test/example/*
+  github.com/gogo/protobuf/test/example/*
 
 The following message:
 
@@ -68,7 +68,7 @@ option (gogoproto.marshaler_all) = true;
 message B {
 	option (gogoproto.description) = true;
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
 }
 
 given to the marshalto plugin, will generate the following code:
@@ -128,11 +128,11 @@ The generated tests and benchmarks will keep you safe and show that this is real
 package marshalto
 
 import (
-	"code.google.com/p/gogoprotobuf/gogoproto"
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 	"fmt"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto"
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"strconv"
 	"strings"
 )
@@ -277,7 +277,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	p.localName = generator.FileName(file)
 
 	mathPkg := p.NewImport("math")
-	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
+	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	p.unsafePkg = p.NewImport("unsafe")
 
 	for _, message := range file.Messages() {

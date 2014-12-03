@@ -1,7 +1,7 @@
 // Extensions for Protocol Buffers to create more go like structures.
 //
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -26,7 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-//Generates fieldpath-generated.go and fieldpath-generated_test.go in code.google.com/p/gogoprotobuf/fieldpath
+//Generates fieldpath-generated.go and fieldpath-generated_test.go in github.com/gogo/protobuf/fieldpath
 //, since writing code for each native go type and native proto type can be quite tedious.
 package main
 

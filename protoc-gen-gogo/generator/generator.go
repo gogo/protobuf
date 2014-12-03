@@ -1,7 +1,7 @@
 // Extensions for Protocol Buffers to create more go like structures.
 //
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Go support for Protocol Buffers - Google's data interchange format
 //
@@ -55,10 +55,10 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"code.google.com/p/gogoprotobuf/gogoproto"
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	plugin "code.google.com/p/gogoprotobuf/protoc-gen-gogo/plugin"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto"
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
 
 // A Plugin provides functionality to add to the output during Go code generation,
@@ -1123,7 +1123,7 @@ func (g *Generator) generateImports() {
 	// reference it later. The same argument applies to the math package,
 	// for handling bit patterns for floating-point numbers.
 	c := make(map[string]bool)
-	g.P("import " + g.Pkg["proto"] + " " + strconv.Quote(g.ImportPrefix+"code.google.com/p/gogoprotobuf/proto"))
+	g.P("import " + g.Pkg["proto"] + " " + strconv.Quote(g.ImportPrefix+"github.com/gogo/protobuf/proto"))
 	g.P("import " + g.Pkg["math"] + ` "math"`)
 	for i, s := range g.file.Dependency {
 		fd := g.fileByName(s)
@@ -1151,8 +1151,8 @@ func (g *Generator) generateImports() {
 				if dir == "google/protobuf" && strings.HasSuffix(filename, "descriptor.pb") {
 					// This allows protos to import a single google/protobuf/descriptor.proto so as not to cause conflicts with C++ or other code generators.
 					// Also this allows the go generated descriptor to live inside the gogoprotobuf package
-					dir = "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-					g.P("// renamed import google/protobuf/descriptor to code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor")
+					dir = "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+					g.P("// renamed import google/protobuf/descriptor to github.com/gogo/protobuf/protoc-gen-gogo/descriptor")
 				}
 				g.P("import ", fd.PackageName(), " ", strconv.Quote(dir))
 				c[dir] = true

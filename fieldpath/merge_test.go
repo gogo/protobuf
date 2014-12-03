@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -27,10 +27,10 @@
 package fieldpath_test
 
 import (
-	"code.google.com/p/gogoprotobuf/fieldpath"
-	"code.google.com/p/gogoprotobuf/proto"
-	"code.google.com/p/gogoprotobuf/test"
 	"encoding/binary"
+	"github.com/gogo/protobuf/fieldpath"
+	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/test"
 	"math/rand"
 	"strings"
 	"testing"

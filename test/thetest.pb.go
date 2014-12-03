@@ -66,37 +66,37 @@
 */
 package test
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
 
-import code_google_com_p_gogoprotobuf_test_custom "code.google.com/p/gogoprotobuf/test/custom"
-import code_google_com_p_gogoprotobuf_test_custom_dash_type "code.google.com/p/gogoprotobuf/test/custom-dash-type"
+import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
 import fmt "fmt"
 import strings "strings"
 import reflect "reflect"
 
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 
 import fmt1 "fmt"
 import strings1 "strings"
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto2 "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect1 "reflect"
 
-import code_google_com_p_gogoprotobuf_proto3 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto3 "github.com/gogo/protobuf/proto"
 
 import fmt2 "fmt"
 import bytes "bytes"
 
 import strconv1 "strconv"
 
-import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -436,44 +436,44 @@ func (m *NinNestedStruct) Reset()      { *m = NinNestedStruct{} }
 func (*NinNestedStruct) ProtoMessage() {}
 
 type NidOptCustom struct {
-	Id               Uuid                                               `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id"`
-	Value            code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Value"`
-	XXX_unrecognized []byte                                             `json:"-"`
+	Id               Uuid                                         `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id"`
+	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	XXX_unrecognized []byte                                       `json:"-"`
 }
 
 func (m *NidOptCustom) Reset()      { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage() {}
 
 type CustomDash struct {
-	Value            *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,customtype=code.google.com/p/gogoprotobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                                      `json:"-"`
+	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	XXX_unrecognized []byte                                                `json:"-"`
 }
 
 func (m *CustomDash) Reset()      { *m = CustomDash{} }
 func (*CustomDash) ProtoMessage() {}
 
 type NinOptCustom struct {
-	Id               *Uuid                                               `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
-	Value            *code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                              `json:"-"`
+	Id               *Uuid                                         `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
+	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	XXX_unrecognized []byte                                        `json:"-"`
 }
 
 func (m *NinOptCustom) Reset()      { *m = NinOptCustom{} }
 func (*NinOptCustom) ProtoMessage() {}
 
 type NidRepCustom struct {
-	Id               []Uuid                                               `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id"`
-	Value            []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Value"`
-	XXX_unrecognized []byte                                               `json:"-"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	XXX_unrecognized []byte                                         `json:"-"`
 }
 
 func (m *NidRepCustom) Reset()      { *m = NidRepCustom{} }
 func (*NidRepCustom) ProtoMessage() {}
 
 type NinRepCustom struct {
-	Id               []Uuid                                               `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id,omitempty"`
-	Value            []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                               `json:"-"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id,omitempty"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	XXX_unrecognized []byte                                         `json:"-"`
 }
 
 func (m *NinRepCustom) Reset()      { *m = NinRepCustom{} }
@@ -1017,11 +1017,11 @@ func (m *CustomNameNinStruct) Reset()      { *m = CustomNameNinStruct{} }
 func (*CustomNameNinStruct) ProtoMessage() {}
 
 type CustomNameCustomType struct {
-	FieldA           *Uuid                                                `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
-	FieldB           *code_google_com_p_gogoprotobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Value,omitempty"`
-	FieldC           []Uuid                                               `protobuf:"bytes,3,rep,customtype=Uuid" json:"Ids,omitempty"`
-	FieldD           []code_google_com_p_gogoprotobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,customtype=code.google.com/p/gogoprotobuf/test/custom.Uint128" json:"Values,omitempty"`
-	XXX_unrecognized []byte                                               `json:"-"`
+	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
+	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,customtype=Uuid" json:"Ids,omitempty"`
+	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
+	XXX_unrecognized []byte                                         `json:"-"`
 }
 
 func (m *CustomNameCustomType) Reset()      { *m = CustomNameCustomType{} }
@@ -3266,7 +3266,7 @@ func (m *MyExtendable) Size() (n int) {
 		n += 1 + sovThetest(uint64(*m.Field1))
 	}
 	if m.XXX_extensions != nil {
-		n += code_google_com_p_gogoprotobuf_proto.SizeOfExtensionMap(m.XXX_extensions)
+		n += github_com_gogo_protobuf_proto.SizeOfExtensionMap(m.XXX_extensions)
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -3287,7 +3287,7 @@ func (m *OtherExtenable) Size() (n int) {
 		n += 1 + l + sovThetest(uint64(l))
 	}
 	if m.XXX_extensions != nil {
-		n += code_google_com_p_gogoprotobuf_proto.SizeOfExtensionMap(m.XXX_extensions)
+		n += github_com_gogo_protobuf_proto.SizeOfExtensionMap(m.XXX_extensions)
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -4736,7 +4736,7 @@ func NewPopulatedNidOptCustom(r randyThetest, easy bool) *NidOptCustom {
 	this := &NidOptCustom{}
 	v117 := NewPopulatedUuid(r)
 	this.Id = *v117
-	v118 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+	v118 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	this.Value = *v118
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
@@ -4747,7 +4747,7 @@ func NewPopulatedNidOptCustom(r randyThetest, easy bool) *NidOptCustom {
 func NewPopulatedCustomDash(r randyThetest, easy bool) *CustomDash {
 	this := &CustomDash{}
 	if r.Intn(10) != 0 {
-		this.Value = code_google_com_p_gogoprotobuf_test_custom_dash_type.NewPopulatedBytes(r)
+		this.Value = github_com_gogo_protobuf_test_custom_dash_type.NewPopulatedBytes(r)
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
@@ -4761,7 +4761,7 @@ func NewPopulatedNinOptCustom(r randyThetest, easy bool) *NinOptCustom {
 		this.Id = NewPopulatedUuid(r)
 	}
 	if r.Intn(10) != 0 {
-		this.Value = code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+		this.Value = github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 3)
@@ -4781,9 +4781,9 @@ func NewPopulatedNidRepCustom(r randyThetest, easy bool) *NidRepCustom {
 	}
 	if r.Intn(10) != 0 {
 		v121 := r.Intn(10)
-		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v121)
+		this.Value = make([]github_com_gogo_protobuf_test_custom.Uint128, v121)
 		for i := 0; i < v121; i++ {
-			v122 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			v122 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 			this.Value[i] = *v122
 		}
 	}
@@ -4805,9 +4805,9 @@ func NewPopulatedNinRepCustom(r randyThetest, easy bool) *NinRepCustom {
 	}
 	if r.Intn(10) != 0 {
 		v125 := r.Intn(10)
-		this.Value = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v125)
+		this.Value = make([]github_com_gogo_protobuf_test_custom.Uint128, v125)
 		for i := 0; i < v125; i++ {
-			v126 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			v126 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 			this.Value[i] = *v126
 		}
 	}
@@ -5172,7 +5172,7 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 				wire = 5
 			}
 			data := randFieldThetest(nil, r, fieldNumber, wire)
-			code_google_com_p_gogoprotobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
+			github_com_gogo_protobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -5216,7 +5216,7 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 				wire = 5
 			}
 			data := randFieldThetest(nil, r, fieldNumber, wire)
-			code_google_com_p_gogoprotobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
+			github_com_gogo_protobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -5754,7 +5754,7 @@ func NewPopulatedCustomNameCustomType(r randyThetest, easy bool) *CustomNameCust
 		this.FieldA = NewPopulatedUuid(r)
 	}
 	if r.Intn(10) != 0 {
-		this.FieldB = code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+		this.FieldB = github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	}
 	if r.Intn(10) != 0 {
 		v223 := r.Intn(10)
@@ -5766,9 +5766,9 @@ func NewPopulatedCustomNameCustomType(r randyThetest, easy bool) *CustomNameCust
 	}
 	if r.Intn(10) != 0 {
 		v225 := r.Intn(10)
-		this.FieldD = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v225)
+		this.FieldD = make([]github_com_gogo_protobuf_test_custom.Uint128, v225)
 		for i := 0; i < v225; i++ {
-			v226 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			v226 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 			this.FieldD[i] = *v226
 		}
 	}
@@ -5830,7 +5830,7 @@ func NewPopulatedNoExtensionsMap(r randyThetest, easy bool) *NoExtensionsMap {
 				wire = 5
 			}
 			data := randFieldThetest(nil, r, fieldNumber, wire)
-			code_google_com_p_gogoprotobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
+			github_com_gogo_protobuf_proto1.SetRawExtension(this, int32(fieldNumber), data)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -6018,14 +6018,14 @@ func (this *CustomDash) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.CustomDash{` + `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.CustomDash{` + `Value:` + valueToGoStringThetest(this.Value, "github_com_gogo_protobuf_test_custom_dash_type.Bytes"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NinOptCustom) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoStringThetest(this.Id, "Uuid"), `Value:` + valueToGoStringThetest(this.Value, "code_google_com_p_gogoprotobuf_test_custom.Uint128"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.NinOptCustom{` + `Id:` + valueToGoStringThetest(this.Id, "Uuid"), `Value:` + valueToGoStringThetest(this.Value, "github_com_gogo_protobuf_test_custom.Uint128"), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *NidRepCustom) GoString() string {
@@ -6277,7 +6277,7 @@ func (this *CustomNameCustomType) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&test.CustomNameCustomType{` + `FieldA:` + valueToGoStringThetest(this.FieldA, "Uuid"), `FieldB:` + valueToGoStringThetest(this.FieldB, "code_google_com_p_gogoprotobuf_test_custom.Uint128"), `FieldC:` + fmt1.Sprintf("%#v", this.FieldC), `FieldD:` + fmt1.Sprintf("%#v", this.FieldD), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&test.CustomNameCustomType{` + `FieldA:` + valueToGoStringThetest(this.FieldA, "Uuid"), `FieldB:` + valueToGoStringThetest(this.FieldB, "github_com_gogo_protobuf_test_custom.Uint128"), `FieldC:` + fmt1.Sprintf("%#v", this.FieldC), `FieldD:` + fmt1.Sprintf("%#v", this.FieldD), `XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *CustomNameNinEmbeddedStructUnion) GoString() string {
@@ -6309,7 +6309,7 @@ func valueToGoStringThetest(v interface{}, typ string) string {
 	pv := reflect1.Indirect(rv).Interface()
 	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringThetest(e map[int32]code_google_com_p_gogoprotobuf_proto2.Extension) string {
+func extensionToGoStringThetest(e map[int32]github_com_gogo_protobuf_proto2.Extension) string {
 	if e == nil {
 		return "nil"
 	}
@@ -6328,7 +6328,7 @@ func extensionToGoStringThetest(e map[int32]code_google_com_p_gogoprotobuf_proto
 }
 
 type NidOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() int32
@@ -6346,11 +6346,11 @@ type NidOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidOptNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidOptNativeFromFace(this)
 }
 
@@ -6435,7 +6435,7 @@ func NewNidOptNativeFromFace(that NidOptNativeFace) *NidOptNative {
 }
 
 type NinOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -6453,11 +6453,11 @@ type NinOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptNativeFromFace(this)
 }
 
@@ -6542,7 +6542,7 @@ func NewNinOptNativeFromFace(that NinOptNativeFace) *NinOptNative {
 }
 
 type NidRepNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -6560,11 +6560,11 @@ type NidRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidRepNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidRepNativeFromFace(this)
 }
 
@@ -6649,7 +6649,7 @@ func NewNidRepNativeFromFace(that NidRepNativeFace) *NidRepNative {
 }
 
 type NinRepNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -6667,11 +6667,11 @@ type NinRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinRepNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinRepNativeFromFace(this)
 }
 
@@ -6756,7 +6756,7 @@ func NewNinRepNativeFromFace(that NinRepNativeFace) *NinRepNative {
 }
 
 type NidRepPackedNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -6772,11 +6772,11 @@ type NidRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NidRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepPackedNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepPackedNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidRepPackedNativeFromFace(this)
 }
 
@@ -6851,7 +6851,7 @@ func NewNidRepPackedNativeFromFace(that NidRepPackedNativeFace) *NidRepPackedNat
 }
 
 type NinRepPackedNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -6867,11 +6867,11 @@ type NinRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NinRepPackedNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepPackedNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinRepPackedNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepPackedNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinRepPackedNativeFromFace(this)
 }
 
@@ -6946,7 +6946,7 @@ func NewNinRepPackedNativeFromFace(that NinRepPackedNativeFace) *NinRepPackedNat
 }
 
 type NidOptStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() NidOptNative
@@ -6959,11 +6959,11 @@ type NidOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidOptStructFromFace(this)
 }
 
@@ -7023,7 +7023,7 @@ func NewNidOptStructFromFace(that NidOptStructFace) *NidOptStruct {
 }
 
 type NinOptStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -7036,11 +7036,11 @@ type NinOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptStructFromFace(this)
 }
 
@@ -7100,7 +7100,7 @@ func NewNinOptStructFromFace(that NinOptStructFace) *NinOptStruct {
 }
 
 type NidRepStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []NidOptNative
@@ -7113,11 +7113,11 @@ type NidRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidRepStructFromFace(this)
 }
 
@@ -7177,7 +7177,7 @@ func NewNidRepStructFromFace(that NidRepStructFace) *NidRepStruct {
 }
 
 type NinRepStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []*NidOptNative
@@ -7190,11 +7190,11 @@ type NinRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinRepStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinRepStructFromFace(this)
 }
 
@@ -7254,17 +7254,17 @@ func NewNinRepStructFromFace(that NinRepStructFace) *NinRepStruct {
 }
 
 type NidEmbeddedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() NidOptNative
 	GetField210() bool
 }
 
-func (this *NidEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidEmbeddedStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidEmbeddedStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidEmbeddedStructFromFace(this)
 }
 
@@ -7289,17 +7289,17 @@ func NewNidEmbeddedStructFromFace(that NidEmbeddedStructFace) *NidEmbeddedStruct
 }
 
 type NinEmbeddedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NidOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinEmbeddedStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinEmbeddedStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinEmbeddedStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinEmbeddedStructFromFace(this)
 }
 
@@ -7324,16 +7324,16 @@ func NewNinEmbeddedStructFromFace(that NinEmbeddedStructFace) *NinEmbeddedStruct
 }
 
 type NidNestedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() NidOptStruct
 	GetField2() []NidRepStruct
 }
 
-func (this *NidNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidNestedStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidNestedStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidNestedStructFromFace(this)
 }
 
@@ -7353,16 +7353,16 @@ func NewNidNestedStructFromFace(that NidNestedStructFace) *NidNestedStruct {
 }
 
 type NinNestedStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *NinOptStruct
 	GetField2() []*NinRepStruct
 }
 
-func (this *NinNestedStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinNestedStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinNestedStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinNestedStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinNestedStructFromFace(this)
 }
 
@@ -7382,16 +7382,16 @@ func NewNinNestedStructFromFace(that NinNestedStructFace) *NinNestedStruct {
 }
 
 type NidOptCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetId() Uuid
-	GetValue() code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetValue() github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NidOptCustom) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptCustom) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptCustom) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidOptCustomFromFace(this)
 }
 
@@ -7399,7 +7399,7 @@ func (this *NidOptCustom) GetId() Uuid {
 	return this.Id
 }
 
-func (this *NidOptCustom) GetValue() code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *NidOptCustom) GetValue() github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.Value
 }
 
@@ -7411,19 +7411,19 @@ func NewNidOptCustomFromFace(that NidOptCustomFace) *NidOptCustom {
 }
 
 type CustomDashFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
-	GetValue() *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes
+	Proto() github_com_gogo_protobuf_proto3.Message
+	GetValue() *github_com_gogo_protobuf_test_custom_dash_type.Bytes
 }
 
-func (this *CustomDash) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomDash) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomDash) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomDash) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomDashFromFace(this)
 }
 
-func (this *CustomDash) GetValue() *code_google_com_p_gogoprotobuf_test_custom_dash_type.Bytes {
+func (this *CustomDash) GetValue() *github_com_gogo_protobuf_test_custom_dash_type.Bytes {
 	return this.Value
 }
 
@@ -7434,16 +7434,16 @@ func NewCustomDashFromFace(that CustomDashFace) *CustomDash {
 }
 
 type NinOptCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetId() *Uuid
-	GetValue() *code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetValue() *github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NinOptCustom) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptCustom) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptCustom) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptCustom) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptCustomFromFace(this)
 }
 
@@ -7451,7 +7451,7 @@ func (this *NinOptCustom) GetId() *Uuid {
 	return this.Id
 }
 
-func (this *NinOptCustom) GetValue() *code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *NinOptCustom) GetValue() *github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.Value
 }
 
@@ -7463,16 +7463,16 @@ func NewNinOptCustomFromFace(that NinOptCustomFace) *NinOptCustom {
 }
 
 type NidRepCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetId() []Uuid
-	GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetValue() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NidRepCustom) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepCustom) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepCustom) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidRepCustomFromFace(this)
 }
 
@@ -7480,7 +7480,7 @@ func (this *NidRepCustom) GetId() []Uuid {
 	return this.Id
 }
 
-func (this *NidRepCustom) GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *NidRepCustom) GetValue() []github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.Value
 }
 
@@ -7492,16 +7492,16 @@ func NewNidRepCustomFromFace(that NidRepCustomFace) *NidRepCustom {
 }
 
 type NinRepCustomFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetId() []Uuid
-	GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetValue() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NinRepCustom) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepCustom) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinRepCustom) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepCustom) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinRepCustomFromFace(this)
 }
 
@@ -7509,7 +7509,7 @@ func (this *NinRepCustom) GetId() []Uuid {
 	return this.Id
 }
 
-func (this *NinRepCustom) GetValue() []code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *NinRepCustom) GetValue() []github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.Value
 }
 
@@ -7521,7 +7521,7 @@ func NewNinRepCustomFromFace(that NinRepCustomFace) *NinRepCustom {
 }
 
 type NinOptNativeUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -7533,11 +7533,11 @@ type NinOptNativeUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNativeUnion) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptNativeUnion) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptNativeUnion) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptNativeUnion) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptNativeUnionFromFace(this)
 }
 
@@ -7592,7 +7592,7 @@ func NewNinOptNativeUnionFromFace(that NinOptNativeUnionFace) *NinOptNativeUnion
 }
 
 type NinOptStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -7604,11 +7604,11 @@ type NinOptStructUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStructUnion) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptStructUnion) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptStructUnion) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptStructUnionFromFace(this)
 }
 
@@ -7663,17 +7663,17 @@ func NewNinOptStructUnionFromFace(that NinOptStructUnionFace) *NinOptStructUnion
 }
 
 type NinEmbeddedStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NinOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinEmbeddedStructUnion) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinEmbeddedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinEmbeddedStructUnion) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinEmbeddedStructUnionFromFace(this)
 }
 
@@ -7698,17 +7698,17 @@ func NewNinEmbeddedStructUnionFromFace(that NinEmbeddedStructUnionFace) *NinEmbe
 }
 
 type NinNestedStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *NinOptNativeUnion
 	GetField2() *NinOptStructUnion
 	GetField3() *NinEmbeddedStructUnion
 }
 
-func (this *NinNestedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinNestedStructUnion) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinNestedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinNestedStructUnion) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinNestedStructUnionFromFace(this)
 }
 
@@ -7733,17 +7733,17 @@ func NewNinNestedStructUnionFromFace(that NinNestedStructUnionFace) *NinNestedSt
 }
 
 type TreeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetOr() *OrBranch
 	GetAnd() *AndBranch
 	GetLeaf() *Leaf
 }
 
-func (this *Tree) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Tree) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *Tree) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Tree) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewTreeFromFace(this)
 }
 
@@ -7768,16 +7768,16 @@ func NewTreeFromFace(that TreeFace) *Tree {
 }
 
 type OrBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *OrBranch) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *OrBranch) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *OrBranch) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *OrBranch) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewOrBranchFromFace(this)
 }
 
@@ -7797,16 +7797,16 @@ func NewOrBranchFromFace(that OrBranchFace) *OrBranch {
 }
 
 type AndBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *AndBranch) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AndBranch) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *AndBranch) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AndBranch) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewAndBranchFromFace(this)
 }
 
@@ -7826,16 +7826,16 @@ func NewAndBranchFromFace(that AndBranchFace) *AndBranch {
 }
 
 type LeafFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetValue() int64
 	GetStrValue() string
 }
 
-func (this *Leaf) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Leaf) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *Leaf) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Leaf) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewLeafFromFace(this)
 }
 
@@ -7855,17 +7855,17 @@ func NewLeafFromFace(that LeafFace) *Leaf {
 }
 
 type DeepTreeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetDown() *ADeepBranch
 	GetAnd() *AndDeepBranch
 	GetLeaf() *DeepLeaf
 }
 
-func (this *DeepTree) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *DeepTree) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *DeepTree) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *DeepTree) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewDeepTreeFromFace(this)
 }
 
@@ -7890,15 +7890,15 @@ func NewDeepTreeFromFace(that DeepTreeFace) *DeepTree {
 }
 
 type ADeepBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetDown() DeepTree
 }
 
-func (this *ADeepBranch) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *ADeepBranch) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *ADeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *ADeepBranch) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewADeepBranchFromFace(this)
 }
 
@@ -7913,16 +7913,16 @@ func NewADeepBranchFromFace(that ADeepBranchFace) *ADeepBranch {
 }
 
 type AndDeepBranchFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetLeft() DeepTree
 	GetRight() DeepTree
 }
 
-func (this *AndDeepBranch) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AndDeepBranch) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *AndDeepBranch) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AndDeepBranch) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewAndDeepBranchFromFace(this)
 }
 
@@ -7942,15 +7942,15 @@ func NewAndDeepBranchFromFace(that AndDeepBranchFace) *AndDeepBranch {
 }
 
 type DeepLeafFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetTree() Tree
 }
 
-func (this *DeepLeaf) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *DeepLeaf) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *DeepLeaf) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *DeepLeaf) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewDeepLeafFromFace(this)
 }
 
@@ -7965,14 +7965,14 @@ func NewDeepLeafFromFace(that DeepLeafFace) *DeepLeaf {
 }
 
 type NilFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 }
 
-func (this *Nil) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Nil) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *Nil) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Nil) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNilFromFace(this)
 }
 
@@ -7982,15 +7982,15 @@ func NewNilFromFace(that NilFace) *Nil {
 }
 
 type NidOptEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() TheTestEnum
 }
 
-func (this *NidOptEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidOptEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidOptEnumFromFace(this)
 }
 
@@ -8005,15 +8005,15 @@ func NewNidOptEnumFromFace(that NidOptEnumFace) *NidOptEnum {
 }
 
 type NinOptEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *TheTestEnum
 }
 
-func (this *NinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinOptEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinOptEnumFromFace(this)
 }
 
@@ -8028,15 +8028,15 @@ func NewNinOptEnumFromFace(that NinOptEnumFace) *NinOptEnum {
 }
 
 type NidRepEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []TheTestEnum
 }
 
-func (this *NidRepEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NidRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NidRepEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNidRepEnumFromFace(this)
 }
 
@@ -8051,15 +8051,15 @@ func NewNidRepEnumFromFace(that NidRepEnumFace) *NidRepEnum {
 }
 
 type NinRepEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() []TheTestEnum
 }
 
-func (this *NinRepEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NinRepEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NinRepEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNinRepEnumFromFace(this)
 }
 
@@ -8074,15 +8074,15 @@ func NewNinRepEnumFromFace(that NinRepEnumFace) *NinRepEnum {
 }
 
 type AnotherNinOptEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *AnotherTestEnum
 }
 
-func (this *AnotherNinOptEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AnotherNinOptEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *AnotherNinOptEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *AnotherNinOptEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewAnotherNinOptEnumFromFace(this)
 }
 
@@ -8097,17 +8097,17 @@ func NewAnotherNinOptEnumFromFace(that AnotherNinOptEnumFace) *AnotherNinOptEnum
 }
 
 type TimerFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetTime1() int64
 	GetTime2() int64
 	GetData() []byte
 }
 
-func (this *Timer) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Timer) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *Timer) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *Timer) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewTimerFromFace(this)
 }
 
@@ -8132,18 +8132,18 @@ func NewTimerFromFace(that TimerFace) *Timer {
 }
 
 type NestedDefinitionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetField1() *int64
 	GetEnumField() *NestedDefinition_NestedEnum
 	GetNNM() *NestedDefinition_NestedMessage_NestedNestedMsg
 	GetNM() *NestedDefinition_NestedMessage
 }
 
-func (this *NestedDefinition) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NestedDefinition) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNestedDefinitionFromFace(this)
 }
 
@@ -8173,16 +8173,16 @@ func NewNestedDefinitionFromFace(that NestedDefinitionFace) *NestedDefinition {
 }
 
 type NestedDefinition_NestedMessageFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNestedField1() *uint64
 	GetNNM() *NestedDefinition_NestedMessage_NestedNestedMsg
 }
 
-func (this *NestedDefinition_NestedMessage) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition_NestedMessage) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NestedDefinition_NestedMessage) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition_NestedMessage) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNestedDefinition_NestedMessageFromFace(this)
 }
 
@@ -8202,15 +8202,15 @@ func NewNestedDefinition_NestedMessageFromFace(that NestedDefinition_NestedMessa
 }
 
 type NestedDefinition_NestedMessage_NestedNestedMsgFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNestedNestedField1() *string
 }
 
-func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NestedDefinition_NestedMessage_NestedNestedMsg) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNestedDefinition_NestedMessage_NestedNestedMsgFromFace(this)
 }
 
@@ -8225,17 +8225,17 @@ func NewNestedDefinition_NestedMessage_NestedNestedMsgFromFace(that NestedDefini
 }
 
 type NestedScopeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetA() *NestedDefinition_NestedMessage_NestedNestedMsg
 	GetB() *NestedDefinition_NestedEnum
 	GetC() *NestedDefinition_NestedMessage
 }
 
-func (this *NestedScope) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedScope) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *NestedScope) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *NestedScope) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewNestedScopeFromFace(this)
 }
 
@@ -8260,15 +8260,15 @@ func NewNestedScopeFromFace(that NestedScopeFace) *NestedScope {
 }
 
 type CustomContainerFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetCustomStruct() NidOptCustom
 }
 
-func (this *CustomContainer) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomContainer) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomContainer) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomContainer) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomContainerFromFace(this)
 }
 
@@ -8283,7 +8283,7 @@ func NewCustomContainerFromFace(that CustomContainerFace) *CustomContainer {
 }
 
 type CustomNameNidOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() float64
 	GetFieldB() float32
 	GetFieldC() int32
@@ -8301,11 +8301,11 @@ type CustomNameNidOptNativeFace interface {
 	GetFieldO() []byte
 }
 
-func (this *CustomNameNidOptNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNidOptNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameNidOptNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNidOptNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameNidOptNativeFromFace(this)
 }
 
@@ -8390,7 +8390,7 @@ func NewCustomNameNidOptNativeFromFace(that CustomNameNidOptNativeFace) *CustomN
 }
 
 type CustomNameNinOptNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() *float64
 	GetFieldB() *float32
 	GetFieldC() *int32
@@ -8408,11 +8408,11 @@ type CustomNameNinOptNativeFace interface {
 	GetFieldO() []byte
 }
 
-func (this *CustomNameNinOptNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinOptNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameNinOptNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinOptNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameNinOptNativeFromFace(this)
 }
 
@@ -8497,7 +8497,7 @@ func NewCustomNameNinOptNativeFromFace(that CustomNameNinOptNativeFace) *CustomN
 }
 
 type CustomNameNinRepNativeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() []float64
 	GetFieldB() []float32
 	GetFieldC() []int32
@@ -8515,11 +8515,11 @@ type CustomNameNinRepNativeFace interface {
 	GetFieldO() [][]byte
 }
 
-func (this *CustomNameNinRepNative) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinRepNative) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameNinRepNative) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinRepNative) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameNinRepNativeFromFace(this)
 }
 
@@ -8604,7 +8604,7 @@ func NewCustomNameNinRepNativeFromFace(that CustomNameNinRepNativeFace) *CustomN
 }
 
 type CustomNameNinStructFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() *float64
 	GetFieldB() *float32
 	GetFieldC() *NidOptNative
@@ -8617,11 +8617,11 @@ type CustomNameNinStructFace interface {
 	GetFieldJ() []byte
 }
 
-func (this *CustomNameNinStruct) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinStruct) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameNinStruct) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinStruct) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameNinStructFromFace(this)
 }
 
@@ -8681,18 +8681,18 @@ func NewCustomNameNinStructFromFace(that CustomNameNinStructFace) *CustomNameNin
 }
 
 type CustomNameCustomTypeFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() *Uuid
-	GetFieldB() *code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetFieldB() *github_com_gogo_protobuf_test_custom.Uint128
 	GetFieldC() []Uuid
-	GetFieldD() []code_google_com_p_gogoprotobuf_test_custom.Uint128
+	GetFieldD() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *CustomNameCustomType) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameCustomType) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameCustomType) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameCustomType) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameCustomTypeFromFace(this)
 }
 
@@ -8700,7 +8700,7 @@ func (this *CustomNameCustomType) GetFieldA() *Uuid {
 	return this.FieldA
 }
 
-func (this *CustomNameCustomType) GetFieldB() *code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *CustomNameCustomType) GetFieldB() *github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.FieldB
 }
 
@@ -8708,7 +8708,7 @@ func (this *CustomNameCustomType) GetFieldC() []Uuid {
 	return this.FieldC
 }
 
-func (this *CustomNameCustomType) GetFieldD() []code_google_com_p_gogoprotobuf_test_custom.Uint128 {
+func (this *CustomNameCustomType) GetFieldD() []github_com_gogo_protobuf_test_custom.Uint128 {
 	return this.FieldD
 }
 
@@ -8722,17 +8722,17 @@ func NewCustomNameCustomTypeFromFace(that CustomNameCustomTypeFace) *CustomNameC
 }
 
 type CustomNameNinEmbeddedStructUnionFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetNidOptNative() *NidOptNative
 	GetFieldA() *NinOptNative
 	GetFieldB() *bool
 }
 
-func (this *CustomNameNinEmbeddedStructUnion) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinEmbeddedStructUnion) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameNinEmbeddedStructUnion) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameNinEmbeddedStructUnion) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameNinEmbeddedStructUnionFromFace(this)
 }
 
@@ -8757,16 +8757,16 @@ func NewCustomNameNinEmbeddedStructUnionFromFace(that CustomNameNinEmbeddedStruc
 }
 
 type CustomNameEnumFace interface {
-	Proto() code_google_com_p_gogoprotobuf_proto3.Message
+	Proto() github_com_gogo_protobuf_proto3.Message
 	GetFieldA() *TheTestEnum
 	GetFieldB() []TheTestEnum
 }
 
-func (this *CustomNameEnum) Proto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameEnum) Proto() github_com_gogo_protobuf_proto3.Message {
 	return this
 }
 
-func (this *CustomNameEnum) TestProto() code_google_com_p_gogoprotobuf_proto3.Message {
+func (this *CustomNameEnum) TestProto() github_com_gogo_protobuf_proto3.Message {
 	return NewCustomNameEnumFromFace(this)
 }
 
@@ -15995,7 +15995,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"), JavaOuterClassname: func(v string) *string { return &v }("DescriptorProtos"), JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: func(v google_protobuf.FileOptions_OptimizeMode) *google_protobuf.FileOptions_OptimizeMode { return &v }(1), GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("code.google.com/p/gogoprotobuf/gogoproto/gogo.proto"), Package: func(v string) *string { return &v }("gogoproto"), Dependency: []string{"google/protobuf/descriptor.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("goproto_enum_prefix"), Number: func(v int32) *int32 { return &v }(62001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"), JavaOuterClassname: func(v string) *string { return &v }("DescriptorProtos"), JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, OptimizeFor: func(v google_protobuf.FileOptions_OptimizeMode) *google_protobuf.FileOptions_OptimizeMode { return &v }(1), GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("github.com/gogo/protobuf/gogoproto/gogo.proto"), Package: func(v string) *string { return &v }("gogoproto"), Dependency: []string{"google/protobuf/descriptor.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("goproto_enum_prefix"), Number: func(v int32) *int32 { return &v }(62001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -16195,7 +16195,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Options: nil, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("thetest.proto"), Package: func(v string) *string { return &v }("test"), Dependency: []string{"code.google.com/p/gogoprotobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("NidOptNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Options: nil, SourceCodeInfo: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("thetest.proto"), Package: func(v string) *string { return &v }("test"), Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("NidOptNative"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -16747,11 +16747,11 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomDash"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomDash"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Value"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x3a, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2d, 0x64, 0x61, 0x73, 0x68, 0x2d, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x42, 0x79, 0x74, 0x65, 0x73})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x34, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2d, 0x64, 0x61, 0x73, 0x68, 0x2d, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x42, 0x79, 0x74, 0x65, 0x73})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -16759,7 +16759,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NidRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NidRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -16767,7 +16767,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinRepCustom"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Id"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -16775,7 +16775,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptNativeUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NinOptNativeUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -17323,7 +17323,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38}), 65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Ids"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38}), 65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Ids"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -17331,7 +17331,7 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x32, 0x63, 0x6f, 0x64, 0x65, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38}), 65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x44})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomNameNinEmbeddedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38}), 65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x44})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomNameNinEmbeddedStructUnion"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

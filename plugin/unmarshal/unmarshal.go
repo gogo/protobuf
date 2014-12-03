@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -55,11 +55,11 @@ And benchmarks given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  code.google.com/p/gogoprotobuf/test/example/example.proto
+  github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  code.google.com/p/gogoprotobuf/test/example/*
+  github.com/gogo/protobuf/test/example/*
 
 The following message:
 
@@ -68,7 +68,7 @@ The following message:
   message B {
 	option (gogoproto.description) = true;
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
   }
 
 given to the unmarshal plugin, will generate the following code:
@@ -171,11 +171,11 @@ If you call m.Unmarshal without m.Reset you could be merging protocol buffers.
 package unmarshal
 
 import (
-	"code.google.com/p/gogoprotobuf/gogoproto"
-	"code.google.com/p/gogoprotobuf/proto"
-	descriptor "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
 	"fmt"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto"
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"strconv"
 	"strings"
 )
@@ -661,7 +661,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.mathPkg = p.NewImport("math")
 	p.unsafePkg = p.NewImport("unsafe")
 	fmtPkg := p.NewImport("fmt")
-	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
+	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())

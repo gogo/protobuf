@@ -1,8 +1,8 @@
 package test
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
 	"fmt"
+	"github.com/gogo/protobuf/proto"
 	"testing"
 )
 

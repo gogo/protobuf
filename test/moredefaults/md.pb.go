@@ -14,11 +14,11 @@
 */
 package moredefaults
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
-import test "code.google.com/p/gogoprotobuf/test/example"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
+import test "github.com/gogo/protobuf/test/example"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

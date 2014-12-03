@@ -12,11 +12,11 @@ It has these top-level messages:
 */
 package gogoproto
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// renamed import google/protobuf/descriptor to code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor
-import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
+// renamed import google/protobuf/descriptor to github.com/gogo/protobuf/protoc-gen-gogo/descriptor
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

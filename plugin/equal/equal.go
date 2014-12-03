@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -48,11 +48,11 @@ The equal plugin also generates a test given it is enabled using one of the foll
 
 Let us look at:
 
-  code.google.com/p/gogoprotobuf/test/example/example.proto
+  github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  code.google.com/p/gogoprotobuf/test/example/*
+  github.com/gogo/protobuf/test/example/*
 
 The following message:
 
@@ -61,7 +61,7 @@ The following message:
 
   message B {
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
   }
 
 given to the equal plugin, will generate the following code:
@@ -161,8 +161,8 @@ and the following test code:
 package equal
 
 import (
-	"code.google.com/p/gogoprotobuf/gogoproto"
-	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
 
 type plugin struct {

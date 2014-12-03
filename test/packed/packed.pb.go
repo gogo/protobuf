@@ -16,20 +16,20 @@
 */
 package packed
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import gogoproto "code.google.com/p/gogoprotobuf/gogoproto/gogo.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
 
 import io "io"
 import math1 "math"
 import fmt "fmt"
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import io1 "io"
 import unsafe "unsafe"
 import fmt1 "fmt"
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -739,7 +739,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -1439,7 +1439,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -1668,7 +1668,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto1.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto1.Skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -2292,7 +2292,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto1.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto1.Skip(data[index:])
 			if err != nil {
 				return err
 			}

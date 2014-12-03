@@ -19,7 +19,7 @@ package enumstringer
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import testing1 "testing"
 import math_rand1 "math/rand"
 import time1 "time"
@@ -27,21 +27,21 @@ import encoding_json "encoding/json"
 import testing2 "testing"
 import math_rand2 "math/rand"
 import time2 "time"
-import code_google_com_p_gogoprotobuf_proto1 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 import math_rand3 "math/rand"
 import time3 "time"
 import testing3 "testing"
-import code_google_com_p_gogoprotobuf_proto2 "code.google.com/p/gogoprotobuf/proto"
+import github_com_gogo_protobuf_proto2 "github.com/gogo/protobuf/proto"
 
 func TestNidOptEnumProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NidOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	for i := range data {
@@ -58,12 +58,12 @@ func TestNidOptEnumProto(t *testing.T) {
 func TestNinOptEnumProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NinOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	for i := range data {
@@ -80,12 +80,12 @@ func TestNinOptEnumProto(t *testing.T) {
 func TestNidRepEnumProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NidRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	for i := range data {
@@ -102,12 +102,12 @@ func TestNidRepEnumProto(t *testing.T) {
 func TestNinRepEnumProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NinRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	for i := range data {
@@ -200,9 +200,9 @@ func TestNinRepEnumJSON(t *testing1.T) {
 func TestNidOptEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
 	msg := &NidOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -216,9 +216,9 @@ func TestNidOptEnumProtoText(t *testing2.T) {
 func TestNidOptEnumProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
 	msg := &NidOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -232,9 +232,9 @@ func TestNidOptEnumProtoCompactText(t *testing2.T) {
 func TestNinOptEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
 	msg := &NinOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -248,9 +248,9 @@ func TestNinOptEnumProtoText(t *testing2.T) {
 func TestNinOptEnumProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
 	msg := &NinOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -264,9 +264,9 @@ func TestNinOptEnumProtoCompactText(t *testing2.T) {
 func TestNidRepEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
 	msg := &NidRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -280,9 +280,9 @@ func TestNidRepEnumProtoText(t *testing2.T) {
 func TestNidRepEnumProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
 	msg := &NidRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -296,9 +296,9 @@ func TestNidRepEnumProtoCompactText(t *testing2.T) {
 func TestNinRepEnumProtoText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
 	msg := &NinRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -312,9 +312,9 @@ func TestNinRepEnumProtoText(t *testing2.T) {
 func TestNinRepEnumProtoCompactText(t *testing2.T) {
 	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
-	data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
 	msg := &NinRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -328,12 +328,12 @@ func TestNinRepEnumProtoCompactText(t *testing2.T) {
 func TestNidOptEnumVerboseEqual(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NidOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -343,12 +343,12 @@ func TestNidOptEnumVerboseEqual(t *testing3.T) {
 func TestNinOptEnumVerboseEqual(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NinOptEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -358,12 +358,12 @@ func TestNinOptEnumVerboseEqual(t *testing3.T) {
 func TestNidRepEnumVerboseEqual(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NidRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -373,12 +373,12 @@ func TestNidRepEnumVerboseEqual(t *testing3.T) {
 func TestNinRepEnumVerboseEqual(t *testing3.T) {
 	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
-	data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NinRepEnum{}
-	if err := code_google_com_p_gogoprotobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -386,4 +386,4 @@ func TestNinRepEnumVerboseEqual(t *testing3.T) {
 	}
 }
 
-//These tests are generated by code.google.com/p/gogoprotobuf/plugin/testgen
+//These tests are generated by github.com/gogo/protobuf/plugin/testgen

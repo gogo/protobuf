@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -26,8 +26,8 @@
 
 package gogoproto
 
-import google_protobuf "code.google.com/p/gogoprotobuf/protoc-gen-gogo/descriptor"
-import proto "code.google.com/p/gogoprotobuf/proto"
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import proto "github.com/gogo/protobuf/proto"
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)

@@ -16,7 +16,7 @@ It has these top-level messages:
 */
 package my_test
 
-import proto "code.google.com/p/gogoprotobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
 // discarding unused import multi2 "multi/multi1.pb"

@@ -1,7 +1,7 @@
 // Extensions for Protocol Buffers to create more go like structures.
 //
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,7 +30,7 @@ package google_protobuf
 
 import fmt "fmt"
 import strings "strings"
-import code_google_com_p_gogoprotobuf_proto "code.google.com/p/gogoprotobuf/proto"
+import code_google_com_p_gogoprotobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"

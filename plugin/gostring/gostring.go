@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -46,11 +46,11 @@ The gostring plugin also generates a test given it is enabled using one of the f
 
 Let us look at:
 
-  code.google.com/p/gogoprotobuf/test/example/example.proto
+  github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  code.google.com/p/gogoprotobuf/test/example/*
+  github.com/gogo/protobuf/test/example/*
 
 The following message:
 
@@ -59,7 +59,7 @@ The following message:
   message A {
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
-	optional bytes Id = 3 [(gogoproto.customtype) = "code.google.com/p/gogoprotobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
   }
 
 given to the gostring plugin, will generate the following code:
@@ -95,8 +95,8 @@ not print their values, while the generated GoString method will always print al
 package gostring
 
 import (
-	"code.google.com/p/gogoprotobuf/gogoproto"
-	"code.google.com/p/gogoprotobuf/protoc-gen-gogo/generator"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"strings"
 )
 
@@ -127,7 +127,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
-	protoPkg := p.NewImport("code.google.com/p/gogoprotobuf/proto")
+	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	sortPkg := p.NewImport("sort")
 	strconvPkg := p.NewImport("strconv")
 	reflectPkg := p.NewImport("reflect")

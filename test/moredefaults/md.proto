@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -26,8 +26,8 @@
 
 package moredefaults;
 
-import "code.google.com/p/gogoprotobuf/gogoproto/gogo.proto";
-import "code.google.com/p/gogoprotobuf/test/example/example.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/gogo/protobuf/test/example/example.proto";
 
 option (gogoproto.goproto_getters_all) = true;
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -28,15 +28,15 @@ package packed
 
 import (
 	"bytes"
-	"code.google.com/p/gogoprotobuf/proto"
 	"fmt"
+	"github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	"testing"
 	"time"
 )
 
 /*
-https://code.google.com/p/gogoprotobuf/issues/detail?id=21
+https://github.com/gogo/protobuf/issues/detail?id=21
 https://developers.google.com/protocol-buffers/docs/proto#options
 In 2.3.0 and later, this change is safe, as parsers for packable fields will always accept both formats,
 */

@@ -45,7 +45,7 @@ import (
 	"time"
 
 	. "./testdata"
-	. "code.google.com/p/gogoprotobuf/proto"
+	. "github.com/gogo/protobuf/proto"
 )
 
 var globalO *Buffer

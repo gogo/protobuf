@@ -1,7 +1,7 @@
 package unmarshalmerge
 
 import (
-	"code.google.com/p/gogoprotobuf/proto"
+	"github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	"testing"
 	"time"

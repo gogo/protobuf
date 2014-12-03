@@ -1,7 +1,7 @@
 // Extensions for Protocol Buffers to create more go like structures.
 //
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://code.google.com/p/gogoprotobuf/gogoproto
+// http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -29,10 +29,10 @@
 package fieldpath_test
 
 import (
-	"code.google.com/p/gogoprotobuf/fieldpath"
-	"code.google.com/p/gogoprotobuf/proto"
-	"code.google.com/p/gogoprotobuf/test"
 	"fmt"
+	"github.com/gogo/protobuf/fieldpath"
+	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/test"
 )
 
 type handler64 struct {
