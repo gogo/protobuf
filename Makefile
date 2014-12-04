@@ -94,7 +94,6 @@ tests:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	git clone https://github.com/gogo/protobuf
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
 
 testall: tests
