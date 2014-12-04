@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM phusion/baseimage
 
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
 RUN apt-get update
@@ -41,10 +41,11 @@ ENV GOPATH /gopath
 ENV PATH $PATH:$GOPATH/bin:$GOROOT/bin
 
 #setup paths for my repositories
-RUN mkdir -p $GOPATH/src/code.google.com/p
+RUN mkdir -p $GOPATH/src/github.com/gogo
+RUN mkdir -p $GOPATH/src/github.com/golang
 ENV GOGOPROTOPATH $GOPATH/src/github.com/gogo/protobuf
-ENV GOGOTESTPATH $GOPATH/src/code.google.com/p/gogoprototest
-ENV GOPROTOPATH $GOPATH/src/code.google.com/p/goprotobuf
+ENV GOGOTESTPATH $GOPATH/src/github.com/gogo/harmonytests
+ENV GOPROTOPATH $GOPATH/src/github.com/golang/protobuf
 
 #setup the script to run everytime the docker runs
 RUN echo '#!/bin/bash' >> /test.sh
