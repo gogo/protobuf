@@ -61,6 +61,7 @@ extend google.protobuf.FileOptions {
 	optional bool unsafe_unmarshaler_all = 63024;
 
 	optional bool goproto_extensions_map_all = 63025;
+	optional bool goproto_unrecognized_all = 63026;
 }
 
 extend google.protobuf.MessageOptions {
@@ -86,6 +87,7 @@ extend google.protobuf.MessageOptions {
 	optional bool unsafe_unmarshaler = 64024;
 
 	optional bool goproto_extensions_map = 64025;
+	optional bool goproto_unrecognized = 64026;
 }
 
 extend google.protobuf.FieldOptions {

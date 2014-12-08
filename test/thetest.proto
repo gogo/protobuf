@@ -303,12 +303,12 @@ message Tree {
 
 message OrBranch {
 	optional Tree Left = 1 [(gogoproto.nullable) = false];
-	optional Tree Right = 2 [(gogoproto.nullable) = false];	
+	optional Tree Right = 2 [(gogoproto.nullable) = false];
 }
 
 message AndBranch {
 	optional Tree Left = 1 [(gogoproto.nullable) = false];
-	optional Tree Right = 2 [(gogoproto.nullable) = false];	
+	optional Tree Right = 2 [(gogoproto.nullable) = false];
 }
 
 message Leaf {
@@ -324,12 +324,12 @@ message DeepTree {
 }
 
 message ADeepBranch {
-	optional DeepTree Down = 2 [(gogoproto.nullable) = false];	
+	optional DeepTree Down = 2 [(gogoproto.nullable) = false];
 }
 
 message AndDeepBranch {
 	optional DeepTree Left = 1 [(gogoproto.nullable) = false];
-	optional DeepTree Right = 2 [(gogoproto.nullable) = false];	
+	optional DeepTree Right = 2 [(gogoproto.nullable) = false];
 }
 
 message DeepLeaf {
@@ -337,7 +337,7 @@ message DeepLeaf {
 }
 
 message Nil {
-	
+
 }
 
 enum TheTestEnum {
@@ -555,4 +555,29 @@ extend NoExtensionsMap {
 	optional double FieldA1 = 100;
 	optional NinOptNative FieldB1 = 101;
 	optional NinEmbeddedStruct FieldC1 = 102;
+}
+
+message Unrecognized {
+	option (gogoproto.goproto_unrecognized) = false;
+	optional string Field1 = 1;
+}
+
+message UnrecognizedWithInner {
+	message Inner {
+		option (gogoproto.goproto_unrecognized) = false;
+		optional uint32 Field1 = 1;
+	}
+
+	repeated Inner embedded = 1;
+	optional string Field2 = 2;
+}
+
+message UnrecognizedWithEmbed {
+	message Embedded {
+		option (gogoproto.goproto_unrecognized) = false;
+		optional uint32 Field1 = 1;
+	}
+
+	optional Embedded embedded = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+	optional string Field2 = 2;
 }

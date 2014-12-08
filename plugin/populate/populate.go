@@ -475,7 +475,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			if maxFieldNumber < (1 << 10) {
 				p.P(`if !easy && r.Intn(10) != 0 {`)
 				p.In()
-				p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
+				if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+					p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
+				}
 				p.Out()
 				p.P(`}`)
 			}

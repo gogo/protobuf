@@ -191,10 +191,10 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 
 	for _, msg := range file.Messages() {
 		if gogoproto.HasVerboseEqual(file.FileDescriptorProto, msg.DescriptorProto) {
-			p.generateMessage(msg, true, gogoproto.HasExtensionsMap(file.FileDescriptorProto, msg.DescriptorProto))
+			p.generateMessage(file, msg, true)
 		}
 		if gogoproto.HasEqual(file.FileDescriptorProto, msg.DescriptorProto) {
-			p.generateMessage(msg, false, gogoproto.HasExtensionsMap(file.FileDescriptorProto, msg.DescriptorProto))
+			p.generateMessage(file, msg, false)
 		}
 	}
 }
@@ -223,7 +223,7 @@ func (p *plugin) generateNullableField(fieldname string, verbose bool) {
 	p.P(`} else if that1.`, fieldname, ` != nil {`)
 }
 
-func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool, hasExtensionsMap bool) {
+func (p *plugin) generateMessage(file *generator.FileDescriptor, message *generator.Descriptor, verbose bool) {
 	ccTypeName := generator.CamelCaseSlice(message.TypeName())
 	if verbose {
 		p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
@@ -385,7 +385,7 @@ func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool, ha
 	}
 	if message.DescriptorProto.HasExtension() {
 		fieldname := "XXX_extensions"
-		if hasExtensionsMap {
+		if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
 			p.P(`for k, v := range this.`, fieldname, ` {`)
 			p.In()
 			p.P(`if v2, ok := that1.`, fieldname, `[k]; ok {`)
@@ -437,16 +437,18 @@ func (p *plugin) generateMessage(message *generator.Descriptor, verbose bool, ha
 			p.P(`}`)
 		}
 	}
-	fieldname := "XXX_unrecognized"
-	p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
-	p.In()
-	if verbose {
-		p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
-	} else {
-		p.P(`return false`)
+	if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+		fieldname := "XXX_unrecognized"
+		p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
+		p.In()
+		if verbose {
+			p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+		} else {
+			p.P(`return false`)
+		}
+		p.Out()
+		p.P(`}`)
 	}
-	p.Out()
-	p.P(`}`)
 	if verbose {
 		p.P(`return nil`)
 	} else {

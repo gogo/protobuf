@@ -147,52 +147,57 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.P(`return "nil"`)
 		p.Out()
 		p.P(`}`)
-		plus := "+"
-		out := strings.Join([]string{"s := ", stringsPkg.Use(), ".Join([]string{`&", packageName, ".", ccTypeName, "{` ", plus, " "}, "")
+
+		outFlds := []string{}
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := p.GetFieldName(message, field)
 			if field.IsMessage() || p.IsGroup(field) {
-				out += strings.Join([]string{"`", fieldname, ":` + "}, "")
+				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
 				if nullable {
-					out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
+					tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
 				} else if repeated {
-					out += strings.Join([]string{stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`, ",`&`,``,1)"}, "")
+					tmp += strings.Join([]string{stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`, ",`&`,``,1)"}, "")
 				} else {
-					out += strings.Join([]string{stringsPkg.Use(), `.Replace(this.`, fieldname, `.GoString()`, ",`&`,``,1)"}, "")
+					tmp += strings.Join([]string{stringsPkg.Use(), `.Replace(this.`, fieldname, `.GoString()`, ",`&`,``,1)"}, "")
 				}
+				outFlds = append(outFlds, tmp)
 			} else {
-				out += strings.Join([]string{"`", fieldname, ":` + "}, "")
+				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
 				if field.IsEnum() {
 					if nullable && !repeated {
 						goTyp, _ := p.GoType(message, field)
-						out += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {
-						out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
+						tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
 					}
 				} else {
 					if nullable && !repeated {
 						goTyp, _ := p.GoType(message, field)
-						out += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {
-						out += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
+						tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
 					}
 				}
+				outFlds = append(outFlds, tmp)
 			}
-			out += ", "
 		}
 		if message.DescriptorProto.HasExtension() {
 			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
-				out += strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions),`}, "")
+				outFlds = append(outFlds, strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions)`}, ""))
 			} else {
-				out += strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions),`}, "")
+				outFlds = append(outFlds, strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions)`}, ""))
 			}
 		}
-		out += strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, "")
-		out += "+ `}`"
-		out = strings.Join([]string{out, `}`, `,", "`, ")"}, "")
-		p.P(out)
+		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+			outFlds = append(outFlds, strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, ""))
+		}
+
+		outStr := strings.Join([]string{"s := ", stringsPkg.Use(), ".Join([]string{`&", packageName, ".", ccTypeName, "{` + \n"}, "")
+		outStr += strings.Join(outFlds, ",\n")
+		outStr += strings.Join([]string{" + `}`", `}`, `,", "`, ")"}, "")
+		p.P(outStr)
 		p.P(`return s`)
 		p.Out()
 		p.P(`}`)

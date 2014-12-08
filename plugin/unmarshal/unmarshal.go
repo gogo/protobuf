@@ -812,7 +812,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)`)
+		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+			p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)`)
+		}
 		p.P(`index += skippy`)
 		p.Out()
 		if message.DescriptorProto.HasExtension() {
@@ -832,60 +834,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-}
-
-func (p *unmarshal) skipFixed32() {
-	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+4]...)`)
-	p.P(`index+=4`)
-}
-
-func (p *unmarshal) skipLengthDelimited() {
-	p.P(`var length int`)
-	p.P(`for shift := uint(0); ; shift += 7 {`)
-	p.In()
-	p.P(`if index >= l {`)
-	p.In()
-	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-	p.Out()
-	p.P(`}`)
-	p.P(`b := data[index]`)
-	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, b)`)
-	p.P(`index++`)
-	p.P(`length |= (int(b) & 0x7F) << shift`)
-	p.P(`if b < 0x80 {`)
-	p.In()
-	p.P(`break`)
-	p.Out()
-	p.P(`}`)
-	p.Out()
-	p.P(`}`)
-
-	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+length]...)`)
-	p.P(`index+=length`)
-}
-
-func (p *unmarshal) skipFixed64() {
-	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+8]...)`)
-	p.P(`index+=8`)
-}
-
-func (p *unmarshal) skipVarint() {
-	p.P(`for {`)
-	p.In()
-	p.P(`if index >= l {`)
-	p.In()
-	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
-	p.Out()
-	p.P(`}`)
-	p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[index])`)
-	p.P(`index++`)
-	p.P(`if data[index-1] < 0x80 {`)
-	p.In()
-	p.P(`break`)
-	p.Out()
-	p.P(`}`)
-	p.Out()
-	p.P(`}`)
 }
 
 func init() {

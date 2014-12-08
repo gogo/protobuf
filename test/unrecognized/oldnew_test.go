@@ -124,3 +124,31 @@ func TestOldNewOldNew(t *testing.T) {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", older, magenta, err)
 	}
 }
+
+func TestOldUToU(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	older := NewPopulatedOldU(popr, true)
+	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	if err != nil {
+		panic(err)
+	}
+
+	newer := &U{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
+		panic(err)
+	}
+	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	if err != nil {
+		panic(err)
+	}
+
+	older2 := &OldU{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, newer); err != nil {
+		panic(err)
+	}
+
+	// check that 2 messages are NOT equal (since U has no XXX_unrecognized)
+	if err := older.VerboseEqual(older2); err == nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", older, older2, err)
+	}
+}

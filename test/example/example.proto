@@ -43,6 +43,7 @@ option (gogoproto.unmarshaler_all) = true;
 message A {
 	option (gogoproto.face) = true;
 	option (gogoproto.goproto_getters) = false;
+	option (gogoproto.goproto_unrecognized) = false;
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
 	optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test.Uuid", (gogoproto.nullable) = false];
@@ -67,4 +68,9 @@ message U {
 message E {
 	option (gogoproto.goproto_extensions_map) = false;
 	extensions 1 to max;
+}
+
+message R {
+	option (gogoproto.goproto_unrecognized) = false;
+	optional uint32 recognized = 1;
 }

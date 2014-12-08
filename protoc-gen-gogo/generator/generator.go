@@ -1592,7 +1592,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
 		}
 	}
-	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
+	if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
+	}
 	g.Out()
 	g.P("}")
 
