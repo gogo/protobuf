@@ -12,8 +12,8 @@ Next, install the standard protocol buffer implementation from [http://code.goog
 
 Finally run:
 
-  go get github.com/gogo/protobuf/proto
-  go get github.com/gogo/protobuf/protoc-gen-gogo
-  go get github.com/gogo/protobuf/gogoproto
+    go get github.com/gogo/protobuf/proto
+    go get github.com/gogo/protobuf/protoc-gen-gogo
+    go get github.com/gogo/protobuf/gogoproto
 
 
