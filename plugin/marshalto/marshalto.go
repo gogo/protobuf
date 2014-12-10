@@ -860,14 +860,18 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 			}
 		}
-		p.P(`if m.XXX_unrecognized != nil {`)
-		p.In()
-		p.P(`i+=copy(data[i:], m.XXX_unrecognized)`)
-		p.Out()
-		p.P(`}`)
+		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+			p.P(`if m.XXX_unrecognized != nil {`)
+			p.In()
+			p.P(`i+=copy(data[i:], m.XXX_unrecognized)`)
+			p.Out()
+			p.P(`}`)
+		}
+
 		p.P(`return i, nil`)
 		p.Out()
 		p.P(`}`)
+		p.P()
 	}
 
 	if p.atleastOne {

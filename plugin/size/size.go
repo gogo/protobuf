@@ -189,7 +189,7 @@ func (p *size) sizeVarint() {
 
 func (p *size) sizeZigZag() {
 	p.P(`func soz`, p.localName, `(x uint64) (n int) {
- 		return sov`, p.localName, `(uint64((x << 1) ^ uint64((int64(x) >> 63)))) 	
+		return sov`, p.localName, `(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	}`)
 }
 
@@ -401,14 +401,17 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 		}
-		p.P(`if m.XXX_unrecognized != nil {`)
-		p.In()
-		p.P(`n+=len(m.XXX_unrecognized)`)
-		p.Out()
-		p.P(`}`)
+		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+			p.P(`if m.XXX_unrecognized != nil {`)
+			p.In()
+			p.P(`n+=len(m.XXX_unrecognized)`)
+			p.Out()
+			p.P(`}`)
+		}
 		p.P(`return n`)
 		p.Out()
 		p.P(`}`)
+		p.P()
 	}
 
 	if !p.atleastOne {

@@ -124,3 +124,75 @@ func TestOldNewOldNew(t *testing.T) {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", older, magenta, err)
 	}
 }
+
+func TestOldUToU(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	older := NewPopulatedOldU(popr, true)
+	// need optional field to be always initialized, to check it's lost in this test
+	older.Field1 = code_google_com_p_gogoprotobuf_proto.String(randStringUnrecognized(popr))
+	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	if err != nil {
+		panic(err)
+	}
+
+	newer := &U{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
+		panic(err)
+	}
+	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	if err != nil {
+		panic(err)
+	}
+
+	older2 := &OldU{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, older2); err != nil {
+		panic(err)
+	}
+
+	// check that Field1 is lost
+	if older2.Field1 != nil {
+		t.Fatalf("field must be lost, but it's not, older: %#v, older2: %#v", older, older2)
+	}
+
+	// now restore Field1 and messages should be equal now
+	older2.Field1 = older.Field1
+	if err := older.VerboseEqual(older2); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", older, older2, err)
+	}
+}
+
+func TestOldUnoM(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	older := NewPopulatedOldUnoM(popr, true)
+	// need optional field to be always initialized, to check it's lost in this test
+	older.Field1 = code_google_com_p_gogoprotobuf_proto.String(randStringUnrecognized(popr))
+	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	if err != nil {
+		panic(err)
+	}
+
+	newer := &UnoM{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
+		panic(err)
+	}
+	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	if err != nil {
+		panic(err)
+	}
+
+	older2 := &OldUnoM{}
+	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, older2); err != nil {
+		panic(err)
+	}
+
+	// check that Field1 is lost
+	if older2.Field1 != nil {
+		t.Fatalf("field must be lost, but it's not, older: %#v, older2: %#v", older, older2)
+	}
+
+	// now restore Field1 and messages should be equal now
+	older2.Field1 = older.Field1
+	if err := older.VerboseEqual(older2); err != nil {
+		t.Fatalf("%#v !VerboseProto %#v, since %v", older, older2, err)
+	}
+}

@@ -351,6 +351,7 @@ func (m *NewNoGroup) Size() (n int) {
 	}
 	return n
 }
+
 func (m *A) Size() (n int) {
 	var l int
 	_ = l
@@ -635,6 +636,7 @@ func (m *NewNoGroup) MarshalTo(data []byte) (n int, err error) {
 	}
 	return i, nil
 }
+
 func (m *A) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
@@ -660,6 +662,7 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 	}
 	return i, nil
 }
+
 func encodeFixed64Unrecognizedgroup(data []byte, offset int, v uint64) int {
 	data[offset] = uint8(v)
 	data[offset+1] = uint8(v >> 8)
@@ -691,35 +694,53 @@ func (this *NewNoGroup) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.NewNoGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field3:` + fmt2.Sprintf("%#v", this.Field3), `A:` + fmt2.Sprintf("%#v", this.A), `XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.NewNoGroup{` +
+		`Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"),
+		`Field3:` + fmt2.Sprintf("%#v", this.Field3),
+		`A:` + fmt2.Sprintf("%#v", this.A),
+		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *A) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.A{` + `AField:` + valueToGoStringUnrecognizedgroup(this.AField, "int64"), `XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.A{` +
+		`AField:` + valueToGoStringUnrecognizedgroup(this.AField, "int64"),
+		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Group1:` + fmt2.Sprintf("%#v", this.Group1), `Field3:` + fmt2.Sprintf("%#v", this.Field3), `Group2:` + fmt2.Sprintf("%#v", this.Group2), `XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup{` +
+		`Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"),
+		`Group1:` + fmt2.Sprintf("%#v", this.Group1),
+		`Field3:` + fmt2.Sprintf("%#v", this.Field3),
+		`Group2:` + fmt2.Sprintf("%#v", this.Group2),
+		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup_Group1) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group1{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + valueToGoStringUnrecognizedgroup(this.Field2, "int32"), `Field3:` + fmt2.Sprintf("%#v", this.Field3), `XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group1{` +
+		`Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"),
+		`Field2:` + valueToGoStringUnrecognizedgroup(this.Field2, "int32"),
+		`Field3:` + fmt2.Sprintf("%#v", this.Field3),
+		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldWithGroup_Group2) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group2{` + `Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"), `Field2:` + fmt2.Sprintf("%#v", this.Field2), `XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unrecognizedgroup.OldWithGroup_Group2{` +
+		`Field1:` + valueToGoStringUnrecognizedgroup(this.Field1, "int64"),
+		`Field2:` + fmt2.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnrecognizedgroup(v interface{}, typ string) string {
@@ -1631,6 +1652,10 @@ func UnrecognizedgroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("goproto_unrecognized_all"), Number: func(v int32) *int32 { return &v }(63026), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
 	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("goproto_getters"), Number: func(v int32) *int32 { return &v }(64001), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
@@ -1704,6 +1729,10 @@ func UnrecognizedgroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("goproto_extensions_map"), Number: func(v int32) *int32 { return &v }(64025), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("goproto_unrecognized"), Number: func(v int32) *int32 { return &v }(64026), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

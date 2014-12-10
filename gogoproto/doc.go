@@ -143,6 +143,7 @@ The enumprefix, getters and stringer extensions can be used to remove some of th
   - goproto_getters, if false, the message is generated without get methods, this is useful when you would rather want to use face
   - goproto_stringer, if false, the message is generated without the default string method, this is useful for rather using stringer, or allowing you to write your own string method.
   - goproto_extensions_map (beta), if false, the extensions field is generated as type []byte instead of type map[int32]proto.Extension
+  - goproto_unrecognized (beta), if false, XXX_unrecognized field is not generated. This is useful in conjunction with gogoproto.nullable=false, to generate structures completely devoid of pointers and reduce GC pressure at the cost of losing information about unrecognized fields.
 
 Less Typing and Peace of Mind is explained in their specific plugin folders godoc:
 

@@ -172,7 +172,9 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 				p.P("`XXX_extensions:` + proto.StringFromExtensionsBytes(this.XXX_extensions) + `,`,")
 			}
 		}
-		p.P("`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_unrecognized) + `, "`,`,")
+		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+			p.P("`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%v", this.XXX_unrecognized) + `, "`,`,")
+		}
 		p.P("`}`,")
 		p.P(`}`, `,""`, ")")
 		p.P(`return s`)

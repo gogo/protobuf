@@ -68,3 +68,8 @@ message E {
 	option (gogoproto.goproto_extensions_map) = false;
 	extensions 1 to max;
 }
+
+message R {
+	option (gogoproto.goproto_unrecognized) = false;
+	optional uint32 recognized = 1;
+}
