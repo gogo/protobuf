@@ -508,21 +508,29 @@ func (this *Big) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.Big{` + `Sub:` + fmt3.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.Big{` +
+		`Sub:` + fmt3.Sprintf("%#v", this.Sub),
+		`Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"),
+		`XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *BigUnsafe) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.BigUnsafe{` + `Sub:` + fmt3.Sprintf("%#v", this.Sub), `Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.BigUnsafe{` +
+		`Sub:` + fmt3.Sprintf("%#v", this.Sub),
+		`Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"),
+		`XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Sub) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unmarshalmerge.Sub{` + `SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"), `XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings1.Join([]string{`&unmarshalmerge.Sub{` +
+		`SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"),
+		`XXX_unrecognized:` + fmt3.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
