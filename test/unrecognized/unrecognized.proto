@@ -77,6 +77,19 @@ message U {
 	optional uint32 Field3 = 3;
 }
 
+message UnoM {
+	// disable marshal/unmarshal generation here
+	// to check that reflection based code handles missing XXX_unrecognized field coorectly
+	option (gogoproto.sizer) = false;
+	option (gogoproto.marshaler) = false;
+	option (gogoproto.unmarshaler) = false;
+	// unserializing U as OldU must leave Field1 unset
+	option (gogoproto.goproto_unrecognized) = false;
+
+	repeated double Field2 = 2;
+	optional uint32 Field3 = 3;
+}
+
 message OldA {
 	// OldA == A, so removing unrecognized should not affect anything, tests must pass
 	option (gogoproto.goproto_unrecognized) = false;
@@ -98,6 +111,17 @@ message OldC {
 }
 
 message OldU {
+	optional string Field1 = 1;
+	repeated double Field2 = 2;
+}
+
+message OldUnoM {
+	// disable marshal/unmarshal generation here
+	// to check that reflection based code handles missing XXX_unrecognized field coorectly
+	option (gogoproto.sizer) = false;
+	option (gogoproto.marshaler) = false;
+	option (gogoproto.unmarshaler) = false;
+
 	optional string Field1 = 1;
 	repeated double Field2 = 2;
 }
