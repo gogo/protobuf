@@ -520,9 +520,9 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-index))`)
 				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[index:postIndex])`)
 			} else if nullable {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex]...)`)
+				p.P(`m.`, fieldname, ` = append([]byte{}`, `, data[index:postIndex]...)`)
 			} else {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, data[index:postIndex]...)`)
+				p.P(`m.`, fieldname, ` = append([]byte{}`, `, data[index:postIndex]...)`)
 			}
 		} else {
 			_, ctyp, err := generator.GetCustomType(field)
