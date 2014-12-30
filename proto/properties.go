@@ -211,7 +211,7 @@ func (p *Properties) String() string {
 	if len(p.Enum) > 0 {
 		s += ",enum=" + p.Enum
 	}
-	if len(p.Default) > 0 {
+	if p.HasDefault {
 		s += ",def=" + p.Default
 	}
 	return s
