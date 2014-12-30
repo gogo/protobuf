@@ -366,8 +366,8 @@ func (p *textParser) next() *token {
 	return &p.cur
 }
 
-// Return an error indicating which required field was not set.
-func (p *textParser) missingRequiredFieldError(sv reflect.Value) *ParseError {
+// Return a RequiredNotSetError indicating which required field was not set.
+func (p *textParser) missingRequiredFieldError(sv reflect.Value) *RequiredNotSetError {
 	st := sv.Type()
 	sprops := GetProperties(st)
 	for i := 0; i < st.NumField(); i++ {
@@ -377,10 +377,10 @@ func (p *textParser) missingRequiredFieldError(sv reflect.Value) *ParseError {
 
 		props := sprops.Prop[i]
 		if props.Required {
-			return p.errorf("message %v missing required field %q", st, props.OrigName)
+			return &RequiredNotSetError{fmt.Sprintf("%v.%v", st, props.OrigName)}
 		}
 	}
-	return p.errorf("message %v missing required field", st) // should not happen
+	return &RequiredNotSetError{fmt.Sprintf("%v.<unknown field name>", st)} // should not happen
 }
 
 // Returns the index in the struct for the named field, as well as the parsed tag properties.
@@ -431,9 +431,10 @@ func (p *textParser) checkForColon(props *Properties, typ reflect.Type) *ParseEr
 	return nil
 }
 
-func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError {
+func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 	st := sv.Type()
 	reqCount := GetProperties(st).reqCount
+	var reqFieldErr error
 	// A struct is a sequence of "name: value", terminated by one of
 	// '>' or '}', or the end of the input.  A name may also be
 	// "[extension]".
@@ -494,7 +495,10 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError
 				ext = reflect.New(typ.Elem()).Elem()
 			}
 			if err := p.readAny(ext, props); err != nil {
-				return err
+				if _, ok := err.(*RequiredNotSetError); !ok {
+					return err
+				}
+				reqFieldErr = err
 			}
 			ep := sv.Addr().Interface().(extendableProto)
 			if !rep {
@@ -531,10 +535,11 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError
 
 			// Parse into the field.
 			if err := p.readAny(dst, props); err != nil {
-				return err
-			}
-
-			if props.Required {
+				if _, ok := err.(*RequiredNotSetError); !ok {
+					return err
+				}
+				reqFieldErr = err
+			} else if props.Required {
 				reqCount--
 			}
 		}
@@ -552,10 +557,10 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) *ParseError
 	if reqCount > 0 {
 		return p.missingRequiredFieldError(sv)
 	}
-	return nil
+	return reqFieldErr
 }
 
-func (p *textParser) readAny(v reflect.Value, props *Properties) *ParseError {
+func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 	tok := p.next()
 	if tok.err != nil {
 		return tok.err
@@ -713,6 +718,8 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) *ParseError {
 
 // UnmarshalText reads a protocol buffer in Text format. UnmarshalText resets pb
 // before starting to unmarshal, so any existing data in pb is always removed.
+// If a required field is not set and no other error occurs,
+// UnmarshalText returns *RequiredNotSetError.
 func UnmarshalText(s string, pb Message) error {
 	if um, ok := pb.(textUnmarshaler); ok {
 		err := um.UnmarshalText([]byte(s))
