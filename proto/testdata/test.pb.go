@@ -1070,6 +1070,7 @@ func (m *MaxTag) GetLastField() string {
 
 type OldMessage struct {
 	Nested           *OldMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
+	Num              *int32             `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
 	XXX_unrecognized []byte             `json:"-"`
 }
 
@@ -1082,6 +1083,13 @@ func (m *OldMessage) GetNested() *OldMessage_Nested {
 		return m.Nested
 	}
 	return nil
+}
+
+func (m *OldMessage) GetNum() int32 {
+	if m != nil && m.Num != nil {
+		return *m.Num
+	}
+	return 0
 }
 
 type OldMessage_Nested struct {
@@ -1103,8 +1111,10 @@ func (m *OldMessage_Nested) GetName() string {
 // NewMessage is wire compatible with OldMessage;
 // imagine it as a future version.
 type NewMessage struct {
-	Nested           *NewMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Nested *NewMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
+	// This is an int32 in OldMessage.
+	Num              *int64 `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
 }
 
 func (m *NewMessage) Reset()         { *m = NewMessage{} }
@@ -1116,6 +1126,13 @@ func (m *NewMessage) GetNested() *NewMessage_Nested {
 		return m.Nested
 	}
 	return nil
+}
+
+func (m *NewMessage) GetNum() int64 {
+	if m != nil && m.Num != nil {
+		return *m.Num
+	}
+	return 0
 }
 
 type NewMessage_Nested struct {
@@ -1512,8 +1529,10 @@ type Defaults struct {
 	F_Ninf *float32 `protobuf:"fixed32,16,opt,def=-inf" json:"F_Ninf,omitempty"`
 	F_Nan  *float32 `protobuf:"fixed32,17,opt,def=nan" json:"F_Nan,omitempty"`
 	// Sub-message.
-	Sub              *SubDefaults `protobuf:"bytes,18,opt,name=sub" json:"sub,omitempty"`
-	XXX_unrecognized []byte       `json:"-"`
+	Sub *SubDefaults `protobuf:"bytes,18,opt,name=sub" json:"sub,omitempty"`
+	// Redundant but explicit defaults.
+	StrZero          *string `protobuf:"bytes,19,opt,name=str_zero,def=" json:"str_zero,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Defaults) Reset()         { *m = Defaults{} }
@@ -1665,6 +1684,13 @@ func (m *Defaults) GetSub() *SubDefaults {
 		return m.Sub
 	}
 	return nil
+}
+
+func (m *Defaults) GetStrZero() string {
+	if m != nil && m.StrZero != nil {
+		return *m.StrZero
+	}
+	return ""
 }
 
 type SubDefaults struct {

@@ -40,6 +40,16 @@ type MixMatch struct {
 	New []string
 }
 
+func move(src string, dst string) {
+	data, err := ioutil.ReadFile(src)
+	if err != nil {
+		panic(err)
+	}
+	if err := ioutil.WriteFile(dst, data, 0666); err != nil {
+		panic(err)
+	}
+}
+
 func (this MixMatch) Regenerate() {
 	fmt.Printf("mixmatch\n")
 	data, err := ioutil.ReadFile("../thetest.proto")
@@ -48,18 +58,19 @@ func (this MixMatch) Regenerate() {
 	}
 	content := string(data)
 	for i, old := range this.Old {
-		content = strings.Replace(content, old, this.New[i], -1)
+		if !strings.Contains(content, old) {
+			panic(fmt.Errorf("could not find string {%s} to replace with {%s}", old, this.New[i]))
+		}
+		content = strings.Replace(content, old, this.New[i], 1)
+		if strings.Contains(content, old) && old != this.New[i] {
+			panic(fmt.Errorf("found another string {%s} after it was replaced with {%s}", old, this.New[i]))
+		}
 	}
 	if err := ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
 		panic(err)
 	}
-	data2, err := ioutil.ReadFile("../uuid.go")
-	if err != nil {
-		panic(err)
-	}
-	if err := ioutil.WriteFile("./testdata/uuid.go", data2, 0666); err != nil {
-		panic(err)
-	}
+	move("../uuid.go", "./testdata/uuid.go")
+	move("../bug_test.go", "./testdata/bug_test.go")
 	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../protobuf/:../../../../../:.", "./testdata/thetest.proto")
 	fmt.Printf("regenerating\n")
 	out, err := regenerate.CombinedOutput()
@@ -92,17 +103,19 @@ func (this MixMatch) Test(t *testing.T) {
 	}
 }
 
+var oldies = []string{
+	"option (gogoproto.unmarshaler_all) = false;",
+	"option (gogoproto.marshaler_all) = false;",
+	"option (gogoproto.unsafe_unmarshaler_all) = false;",
+	"option (gogoproto.unsafe_marshaler_all) = false;",
+}
+
 func TestNeither(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.unmarshaler_all) = true;",
-			"option (gogoproto.marshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_marshaler_all) = true;",
-		},
+		Old: oldies,
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",
@@ -117,15 +130,10 @@ func TestMarshaler(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.marshaler_all) = false;",
-			"option (gogoproto.unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_marshaler_all) = true;",
-		},
+		Old: oldies,
 		New: []string{
-			"option (gogoproto.marshaler_all) = true;",
 			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.marshaler_all) = true;",
 			"option (gogoproto.unsafe_unmarshaler_all) = false;",
 			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
@@ -137,12 +145,7 @@ func TestUnmarshaler(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.unmarshaler_all) = false;",
-			"option (gogoproto.marshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_marshaler_all) = true;",
-		},
+		Old: oldies,
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
 			"option (gogoproto.marshaler_all) = false;",
@@ -157,12 +160,7 @@ func TestBoth(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.unmarshaler_all) = false;",
-			"option (gogoproto.marshaler_all) = false;",
-			"option (gogoproto.unsafe_unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_marshaler_all) = true;",
-		},
+		Old: oldies,
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = true;",
 			"option (gogoproto.marshaler_all) = true;",
@@ -177,15 +175,10 @@ func TestUnsafeMarshaler(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.marshaler_all) = true;",
-			"option (gogoproto.unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_marshaler_all) = false;",
-		},
+		Old: oldies,
 		New: []string{
-			"option (gogoproto.marshaler_all) = false;",
 			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.marshaler_all) = false;",
 			"option (gogoproto.unsafe_unmarshaler_all) = false;",
 			"option (gogoproto.unsafe_marshaler_all) = true;",
 		},
@@ -197,15 +190,10 @@ func TestUnsafeUnMarshaler(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.marshaler_all) = true;",
-			"option (gogoproto.unmarshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = false;",
-			"option (gogoproto.unsafe_marshaler_all) = true;",
-		},
+		Old: oldies,
 		New: []string{
-			"option (gogoproto.marshaler_all) = false;",
 			"option (gogoproto.unmarshaler_all) = false;",
+			"option (gogoproto.marshaler_all) = false;",
 			"option (gogoproto.unsafe_unmarshaler_all) = true;",
 			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
@@ -217,12 +205,7 @@ func TestBothUnsafe(t *testing.T) {
 		t.Skip("skipping test in short mode.")
 	}
 	MixMatch{
-		Old: []string{
-			"option (gogoproto.unmarshaler_all) = true;",
-			"option (gogoproto.marshaler_all) = true;",
-			"option (gogoproto.unsafe_unmarshaler_all) = false;",
-			"option (gogoproto.unsafe_marshaler_all) = false;",
-		},
+		Old: oldies,
 		New: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",

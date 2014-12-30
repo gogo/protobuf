@@ -27,6 +27,7 @@
 package test
 
 import (
+	"fmt"
 	"github.com/gogo/protobuf/proto"
 	"math"
 	"testing"
@@ -77,4 +78,111 @@ func TestBugPackedProtoSize(t *testing.T) {
 	if len(data) != size {
 		t.Fatalf("expected %v, but got %v diff is %v", len(data), size, len(data)-size)
 	}
+}
+
+func testSize(m interface {
+	proto.Message
+	Size() int
+}, desc string, expected int) ([]byte, error) {
+	data, err := proto.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+	protoSize := proto.Size(m)
+	mSize := m.Size()
+	lenData := len(data)
+	if protoSize != mSize || protoSize != lenData || mSize != lenData {
+		return nil, fmt.Errorf("%s proto.Size(m){%d} != m.Size(){%d} != len(data){%d}", desc, protoSize, mSize, lenData)
+	}
+	if got := protoSize; got != expected {
+		return nil, fmt.Errorf("%s proto.Size(m) got %d expected %d", desc, got, expected)
+	}
+	if got := mSize; got != expected {
+		return nil, fmt.Errorf("%s m.Size() got %d expected %d", desc, got, expected)
+	}
+	if got := lenData; got != expected {
+		return nil, fmt.Errorf("%s len(data) got %d expected %d", desc, got, expected)
+	}
+	return data, nil
+}
+
+func TestInt32Int64Compatibility(t *testing.T) {
+
+	//test nullable int32 and int64
+
+	data1, err := testSize(&NinOptNative{
+		Field3: proto.Int32(-1),
+	}, "nullable", 11)
+	if err != nil {
+		t.Error(err)
+	}
+	//change marshaled data1 to unmarshal into 4th field which is an int64
+	data1[0] = uint8(uint32(4 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
+	u1 := &NinOptNative{}
+	err = proto.Unmarshal(data1, u1)
+	if err != nil {
+		t.Error(err)
+	}
+	if !u1.Equal(&NinOptNative{
+		Field4: proto.Int64(-1),
+	}) {
+		t.Error("nullable unmarshaled int32 is not the same int64")
+	}
+
+	//test non-nullable int32 and int64
+
+	data2, err := testSize(&NidOptNative{
+		Field3: -1,
+	}, "non nullable", 67)
+	if err != nil {
+		t.Error(err)
+	}
+	//change marshaled data2 to unmarshal into 4th field which is an int64
+	field3 := uint8(uint32(3 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
+	field4 := uint8(uint32(4 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
+	for i, c := range data2 {
+		if c == field4 {
+			data2[i] = field3
+		} else if c == field3 {
+			data2[i] = field4
+		}
+	}
+	u2 := &NidOptNative{}
+	err = proto.Unmarshal(data2, u2)
+	if err != nil {
+		t.Error(err)
+	}
+	if !u2.Equal(&NidOptNative{
+		Field4: -1,
+	}) {
+		t.Error("non nullable unmarshaled int32 is not the same int64")
+	}
+
+	//test repeated int32 and int64
+
+	if _, err := testSize(&NinRepNative{
+		Field3: []int32{-1},
+	}, "repeated", 11); err != nil {
+		t.Error(err)
+	}
+
+	//test packed repeated int32 and int64
+
+	m4 := &NinRepPackedNative{
+		Field3: []int32{-1},
+	}
+	data4, err := testSize(m4, "packed", 12)
+	if err != nil {
+		t.Error(err)
+	}
+	u4 := &NinRepPackedNative{}
+	err = proto.Unmarshal(data4, u4)
+	if err != nil {
+		t.Error(err)
+	}
+	if err := u4.VerboseEqual(m4); err != nil {
+		t.Fatalf("%#v", u4)
+	}
+
+	t.Logf("tested all")
 }

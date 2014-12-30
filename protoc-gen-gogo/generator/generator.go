@@ -140,6 +140,7 @@ type EnumDescriptor struct {
 	*descriptor.EnumDescriptorProto
 	parent   *Descriptor // The containing message, if any.
 	typename []string    // Cached typename vector.
+	index    int         // The index into the container, whether the file or a message.
 	path     string      // The SourceCodeInfo path as comma-separated integers.
 }
 
@@ -778,6 +779,7 @@ func newEnumDescriptor(desc *descriptor.EnumDescriptorProto, parent *Descriptor,
 		common:              common{file},
 		EnumDescriptorProto: desc,
 		parent:              parent,
+		index:               index,
 	}
 	if parent == nil {
 		ed.path = fmt.Sprintf("%d,%d", enumPath, index)
@@ -1321,8 +1323,10 @@ func (g *Generator) goTag(field *descriptor.FieldDescriptorProto, wiretype strin
 	case isRepeated(field):
 		optrepreq = "rep"
 	}
-	defaultValue := field.GetDefaultValue()
-	if defaultValue != "" {
+	var defaultValue string
+	if dv := field.DefaultValue; dv != nil { // set means an explicit default
+		defaultValue = *dv
+		// Some types need tweaking.
 		switch *field.Type {
 		case descriptor.FieldDescriptorProto_TYPE_BOOL:
 			if defaultValue == "true" {

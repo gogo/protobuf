@@ -2347,7 +2347,7 @@ func (m *NidOptNative) Size() (n int) {
 	_ = l
 	n += 9
 	n += 5
-	n += 1 + sovThetest(uint64(uint32(m.Field3)))
+	n += 1 + sovThetest(uint64(m.Field3))
 	n += 1 + sovThetest(uint64(m.Field4))
 	n += 1 + sovThetest(uint64(m.Field5))
 	n += 1 + sovThetest(uint64(m.Field6))
@@ -2360,8 +2360,10 @@ func (m *NidOptNative) Size() (n int) {
 	n += 2
 	l = len(m.Field14)
 	n += 1 + l + sovThetest(uint64(l))
-	l = len(m.Field15)
-	n += 1 + l + sovThetest(uint64(l))
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -2378,7 +2380,7 @@ func (m *NinOptNative) Size() (n int) {
 		n += 5
 	}
 	if m.Field3 != nil {
-		n += 1 + sovThetest(uint64(uint32(*m.Field3)))
+		n += 1 + sovThetest(uint64(*m.Field3))
 	}
 	if m.Field4 != nil {
 		n += 1 + sovThetest(uint64(*m.Field4))
@@ -2435,7 +2437,7 @@ func (m *NidRepNative) Size() (n int) {
 	}
 	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
-			n += 1 + sovThetest(uint64(uint32(e)))
+			n += 1 + sovThetest(uint64(e))
 		}
 	}
 	if len(m.Field4) > 0 {
@@ -2507,7 +2509,7 @@ func (m *NinRepNative) Size() (n int) {
 	}
 	if len(m.Field3) > 0 {
 		for _, e := range m.Field3 {
-			n += 1 + sovThetest(uint64(uint32(e)))
+			n += 1 + sovThetest(uint64(e))
 		}
 	}
 	if len(m.Field4) > 0 {
@@ -2580,7 +2582,7 @@ func (m *NidRepPackedNative) Size() (n int) {
 	if len(m.Field3) > 0 {
 		l = 0
 		for _, e := range m.Field3 {
-			l += sovThetest(uint64(uint32(e)))
+			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
@@ -2652,7 +2654,7 @@ func (m *NinRepPackedNative) Size() (n int) {
 	if len(m.Field3) > 0 {
 		l = 0
 		for _, e := range m.Field3 {
-			l += sovThetest(uint64(uint32(e)))
+			l += sovThetest(uint64(e))
 		}
 		n += 1 + sovThetest(uint64(l)) + l
 	}
@@ -2728,8 +2730,10 @@ func (m *NidOptStruct) Size() (n int) {
 	n += 2
 	l = len(m.Field14)
 	n += 1 + l + sovThetest(uint64(l))
-	l = len(m.Field15)
-	n += 1 + l + sovThetest(uint64(l))
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -3063,7 +3067,7 @@ func (m *NinOptNativeUnion) Size() (n int) {
 		n += 5
 	}
 	if m.Field3 != nil {
-		n += 1 + sovThetest(uint64(uint32(*m.Field3)))
+		n += 1 + sovThetest(uint64(*m.Field3))
 	}
 	if m.Field4 != nil {
 		n += 1 + sovThetest(uint64(*m.Field4))
@@ -3387,8 +3391,10 @@ func (m *Timer) Size() (n int) {
 	_ = l
 	n += 9
 	n += 9
-	l = len(m.Data)
-	n += 1 + l + sovThetest(uint64(l))
+	if m.Data != nil {
+		l = len(m.Data)
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -3514,7 +3520,7 @@ func (m *NinOptNativeDefault) Size() (n int) {
 		n += 5
 	}
 	if m.Field3 != nil {
-		n += 1 + sovThetest(uint64(uint32(*m.Field3)))
+		n += 1 + sovThetest(uint64(*m.Field3))
 	}
 	if m.Field4 != nil {
 		n += 1 + sovThetest(uint64(*m.Field4))
@@ -3576,7 +3582,7 @@ func (m *CustomNameNidOptNative) Size() (n int) {
 	_ = l
 	n += 9
 	n += 5
-	n += 1 + sovThetest(uint64(uint32(m.FieldC)))
+	n += 1 + sovThetest(uint64(m.FieldC))
 	n += 1 + sovThetest(uint64(m.FieldD))
 	n += 1 + sovThetest(uint64(m.FieldE))
 	n += 1 + sovThetest(uint64(m.FieldF))
@@ -3589,8 +3595,10 @@ func (m *CustomNameNidOptNative) Size() (n int) {
 	n += 2
 	l = len(m.FieldN)
 	n += 1 + l + sovThetest(uint64(l))
-	l = len(m.FieldO)
-	n += 1 + l + sovThetest(uint64(l))
+	if m.FieldO != nil {
+		l = len(m.FieldO)
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -3607,7 +3615,7 @@ func (m *CustomNameNinOptNative) Size() (n int) {
 		n += 5
 	}
 	if m.FieldC != nil {
-		n += 1 + sovThetest(uint64(uint32(*m.FieldC)))
+		n += 1 + sovThetest(uint64(*m.FieldC))
 	}
 	if m.FieldD != nil {
 		n += 1 + sovThetest(uint64(*m.FieldD))
@@ -3664,7 +3672,7 @@ func (m *CustomNameNinRepNative) Size() (n int) {
 	}
 	if len(m.FieldC) > 0 {
 		for _, e := range m.FieldC {
-			n += 1 + sovThetest(uint64(uint32(e)))
+			n += 1 + sovThetest(uint64(e))
 		}
 	}
 	if len(m.FieldD) > 0 {

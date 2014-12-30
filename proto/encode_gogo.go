@@ -91,13 +91,35 @@ func (o *Buffer) enc_ref_int32(p *Properties, base structPointer) error {
 	if refWord32_IsNil(v) {
 		return ErrNil
 	}
-	x := refWord32_Get(v)
+	x := int32(refWord32_Get(v))
 	o.buf = append(o.buf, p.tagcode...)
 	p.valEnc(o, uint64(x))
 	return nil
 }
 
 func size_ref_int32(p *Properties, base structPointer) (n int) {
+	v := structPointer_RefWord32(base, p.field)
+	if refWord32_IsNil(v) {
+		return 0
+	}
+	x := int32(refWord32_Get(v))
+	n += len(p.tagcode)
+	n += p.valSize(uint64(x))
+	return
+}
+
+func (o *Buffer) enc_ref_uint32(p *Properties, base structPointer) error {
+	v := structPointer_RefWord32(base, p.field)
+	if refWord32_IsNil(v) {
+		return ErrNil
+	}
+	x := refWord32_Get(v)
+	o.buf = append(o.buf, p.tagcode...)
+	p.valEnc(o, uint64(x))
+	return nil
+}
+
+func size_ref_uint32(p *Properties, base structPointer) (n int) {
 	v := structPointer_RefWord32(base, p.field)
 	if refWord32_IsNil(v) {
 		return 0

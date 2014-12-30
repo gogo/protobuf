@@ -65,8 +65,10 @@ var SizeTests = []struct {
 	// Basic types.
 	{"bool", &pb.Defaults{F_Bool: Bool(true)}},
 	{"int32", &pb.Defaults{F_Int32: Int32(12)}},
+	{"negative int32", &pb.Defaults{F_Int32: Int32(-1)}},
 	{"small int64", &pb.Defaults{F_Int64: Int64(1)}},
 	{"big int64", &pb.Defaults{F_Int64: Int64(1 << 20)}},
+	{"negative int64", &pb.Defaults{F_Int64: Int64(-1)}},
 	{"fixed32", &pb.Defaults{F_Fixed32: Uint32(71)}},
 	{"fixed64", &pb.Defaults{F_Fixed64: Uint64(72)}},
 	{"uint32", &pb.Defaults{F_Uint32: Uint32(123)}},
@@ -83,7 +85,7 @@ var SizeTests = []struct {
 	{"empty repeated bool", &pb.MoreRepeated{Bools: []bool{}}},
 	{"repeated bool", &pb.MoreRepeated{Bools: []bool{false, true, true, false}}},
 	{"packed repeated bool", &pb.MoreRepeated{BoolsPacked: []bool{false, true, true, false, true, true, true}}},
-	{"repeated int32", &pb.MoreRepeated{Ints: []int32{1, 12203, 1729}}},
+	{"repeated int32", &pb.MoreRepeated{Ints: []int32{1, 12203, 1729, -1}}},
 	{"repeated int32 packed", &pb.MoreRepeated{IntsPacked: []int32{1, 12203, 1729}}},
 	{"repeated int64 packed", &pb.MoreRepeated{Int64SPacked: []int64{
 		// Need enough large numbers to verify that the header is counting the number of bytes
