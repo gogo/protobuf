@@ -317,7 +317,7 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 	switch t1 := typ; t1.Kind() {
 	default:
 		if !p.setNonNullableEncAndDec(t1) {
-			fmt.Fprintf(os.Stderr, "proto: no coders for %T\n", t1)
+			fmt.Fprintf(os.Stderr, "proto: no coders for %v\n", t1)
 		}
 	case reflect.Ptr:
 		switch t2 := t1.Elem(); t2.Kind() {
