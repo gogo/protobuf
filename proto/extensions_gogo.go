@@ -186,6 +186,11 @@ func NewExtension(e []byte) Extension {
 }
 
 func (this Extension) GoString() string {
+	if this.enc == nil {
+		if err := encodeExtension(&this); err != nil {
+			panic(err)
+		}
+	}
 	return fmt.Sprintf("proto.NewExtension(%#v)", this.enc)
 }
 

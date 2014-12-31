@@ -174,29 +174,36 @@ func extensionProperties(ed *ExtensionDesc) *Properties {
 // encodeExtensionMap encodes any unmarshaled (unencoded) extensions in m.
 func encodeExtensionMap(m map[int32]Extension) error {
 	for k, e := range m {
-		if e.value == nil || e.desc == nil {
-			// Extension is only in its encoded form.
-			continue
-		}
-
-		// We don't skip extensions that have an encoded form set,
-		// because the extension value may have been mutated after
-		// the last time this function was called.
-
-		et := reflect.TypeOf(e.desc.ExtensionType)
-		props := extensionProperties(e.desc)
-
-		p := NewBuffer(nil)
-		// If e.value has type T, the encoder expects a *struct{ X T }.
-		// Pass a *T with a zero field and hope it all works out.
-		x := reflect.New(et)
-		x.Elem().Set(reflect.ValueOf(e.value))
-		if err := props.enc(p, props, toStructPointer(x)); err != nil {
+		err := encodeExtension(&e)
+		if err != nil {
 			return err
 		}
-		e.enc = p.buf
 		m[k] = e
 	}
+	return nil
+}
+
+func encodeExtension(e *Extension) error {
+	if e.value == nil || e.desc == nil {
+		// Extension is only in its encoded form.
+		return nil
+	}
+	// We don't skip extensions that have an encoded form set,
+	// because the extension value may have been mutated after
+	// the last time this function was called.
+
+	et := reflect.TypeOf(e.desc.ExtensionType)
+	props := extensionProperties(e.desc)
+
+	p := NewBuffer(nil)
+	// If e.value has type T, the encoder expects a *struct{ X T }.
+	// Pass a *T with a zero field and hope it all works out.
+	x := reflect.New(et)
+	x.Elem().Set(reflect.ValueOf(e.value))
+	if err := props.enc(p, props, toStructPointer(x)); err != nil {
+		return err
+	}
+	e.enc = p.buf
 	return nil
 }
 
@@ -300,7 +307,8 @@ func GetExtension(pb extendableProto, extension *ExtensionDesc) (interface{}, er
 	}
 
 	if epb, doki := pb.(extensionsMap); doki {
-		e, ok := epb.ExtensionMap()[extension.Field]
+		emap := epb.ExtensionMap()
+		e, ok := emap[extension.Field]
 		if !ok {
 			return nil, ErrMissingExtension
 		}
@@ -325,6 +333,7 @@ func GetExtension(pb extendableProto, extension *ExtensionDesc) (interface{}, er
 		e.value = v
 		e.desc = extension
 		e.enc = nil
+		emap[extension.Field] = e
 		return e.value, nil
 	} else if epb, doki := pb.(extensionsBytes); doki {
 		ext := epb.GetExtensions()
