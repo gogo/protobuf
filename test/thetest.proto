@@ -581,3 +581,10 @@ message UnrecognizedWithEmbed {
 	optional Embedded embedded = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 	optional string Field2 = 2;
 }
+
+message SampleOneOf {
+  oneof test_oneof {
+    string name = 4;
+    NinOptNative sub_message = 9;
+  }
+}
