@@ -40,6 +40,7 @@ package proto
 // TODO: message sets.
 
 import (
+	"encoding"
 	"errors"
 	"fmt"
 	"reflect"
@@ -47,13 +48,6 @@ import (
 	"strings"
 	"unicode/utf8"
 )
-
-// textUnmarshaler is implemented by Messages that can unmarshal themsleves.
-// It is identical to encoding.TextUnmarshaler, introduced in go 1.2,
-// which will eventually replace it.
-type textUnmarshaler interface {
-	UnmarshalText(text []byte) error
-}
 
 type ParseError struct {
 	Message string
@@ -702,7 +696,7 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 		default:
 			return p.errorf("expected '{' or '<', found %q", tok.value)
 		}
-		// TODO: Handle nested messages which implement textUnmarshaler.
+		// TODO: Handle nested messages which implement encoding.TextUnmarshaler.
 		return p.readStruct(fv, terminator)
 	case reflect.Uint32:
 		if x, err := strconv.ParseUint(tok.value, 0, 32); err == nil {
@@ -723,7 +717,7 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 // If a required field is not set and no other error occurs,
 // UnmarshalText returns *RequiredNotSetError.
 func UnmarshalText(s string, pb Message) error {
-	if um, ok := pb.(textUnmarshaler); ok {
+	if um, ok := pb.(encoding.TextUnmarshaler); ok {
 		err := um.UnmarshalText([]byte(s))
 		return err
 	}
