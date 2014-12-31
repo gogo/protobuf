@@ -7,8 +7,8 @@ RUN apt-get install -y wget
 RUN apt-get install -y mercurial
 RUN apt-get install -y build-essential
 
-ENV PROTOVERSION 2.3.0
-ENV PROTODOWNLOAD http://protobuf.googlecode.com/files/protobuf-2.3.0.tar.gz
+ENV PROTOVERSION 2.6.0
+ENV PROTODOWNLOAD https://github.com/google/protobuf/releases/download/v2.6.0/protobuf-2.6.0.tar.gz
 
 #install protoc
 RUN wget $PROTODOWNLOAD

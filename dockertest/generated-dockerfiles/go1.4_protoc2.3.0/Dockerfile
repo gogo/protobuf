@@ -21,7 +21,7 @@ RUN (cd protobuf && make install)
 RUN (cd protobuf && ldconfig)
 RUN protoc --version || true
 
-ENV GOVERSION 1.2.2
+ENV GOVERSION 1.4
 ENV GODOWNLOAD http://golang.org/dl/
 
 #install go from mecurial repository

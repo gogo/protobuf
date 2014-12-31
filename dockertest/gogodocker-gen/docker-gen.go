@@ -29,20 +29,24 @@ type Go struct {
 }
 
 type Proto struct {
-	Version string
+	Version  string
+	Download string
 }
 
-func newDocker(content string, goversion string, godownload string, protoversion string) string {
+func newDocker(content string, goversion string, godownload string, protoversion string, protodownload string) string {
 	lines := strings.Split(content, "\n")
 	for i, line := range lines {
-		if strings.HasPrefix(line, "ENV PROTOVERSION") {
-			lines[i] = "ENV PROTOVERSION " + protoversion
-		}
 		if strings.HasPrefix(line, "ENV GOVERSION") {
 			lines[i] = "ENV GOVERSION " + goversion
 		}
 		if strings.HasPrefix(line, "ENV GODOWNLOAD") {
 			lines[i] = "ENV GODOWNLOAD " + godownload
+		}
+		if strings.HasPrefix(line, "ENV PROTOVERSION") {
+			lines[i] = "ENV PROTOVERSION " + protoversion
+		}
+		if strings.HasPrefix(line, "ENV PROTODOWNLOAD") {
+			lines[i] = "ENV PROTODOWNLOAD " + protodownload
 		}
 	}
 	return strings.Join(lines, "\n")
@@ -93,7 +97,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			newDockerStr := newDocker(dockerstr, goversion.Version, goversion.Download, protoversion.Version)
+			newDockerStr := newDocker(dockerstr, goversion.Version, goversion.Download, protoversion.Version, protoversion.Download)
 			filename := filepath.Join(path, "Dockerfile")
 			err = ioutil.WriteFile(filename, []byte(newDockerStr), 0644)
 			if err != nil {

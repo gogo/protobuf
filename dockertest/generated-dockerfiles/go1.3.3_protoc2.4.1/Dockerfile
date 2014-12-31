@@ -7,8 +7,8 @@ RUN apt-get install -y wget
 RUN apt-get install -y mercurial
 RUN apt-get install -y build-essential
 
-ENV PROTOVERSION 2.3.0
-ENV PROTODOWNLOAD http://protobuf.googlecode.com/files/protobuf-2.3.0.tar.gz
+ENV PROTOVERSION 2.4.1
+ENV PROTODOWNLOAD http://protobuf.googlecode.com/files/protobuf-2.4.1.tar.gz
 
 #install protoc
 RUN wget $PROTODOWNLOAD
@@ -21,7 +21,7 @@ RUN (cd protobuf && make install)
 RUN (cd protobuf && ldconfig)
 RUN protoc --version || true
 
-ENV GOVERSION 1.2.2
+ENV GOVERSION 1.3.3
 ENV GODOWNLOAD http://golang.org/dl/
 
 #install go from mecurial repository
