@@ -582,9 +582,11 @@ message UnrecognizedWithEmbed {
 	optional string Field2 = 2;
 }
 
+//begin versioned: only for protoc 2.6.0 and up
 message SampleOneOf {
   oneof test_oneof {
     string name = 4;
     NinOptNative sub_message = 9;
   }
 }
+//end versioned

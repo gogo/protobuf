@@ -27,4 +27,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
+	go run ./versionedtests/versionedtests.go
 	(protoc --proto_path=../:../../../../:../protobuf/:. --gogo_out=. thetest.proto)

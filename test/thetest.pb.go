@@ -1112,6 +1112,7 @@ type UnrecognizedWithEmbed_Embedded struct {
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
 func (*UnrecognizedWithEmbed_Embedded) ProtoMessage() {}
 
+// begin versioned: only for protoc 2.6.0 and up
 type SampleOneOf struct {
 	Name             *string       `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"`
 	SubMessage       *NinOptNative `protobuf:"bytes,9,opt,name=sub_message" json:"sub_message,omitempty"`
