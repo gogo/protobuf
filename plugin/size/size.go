@@ -86,7 +86,7 @@ and the following test code:
 	func TestBSize(t *testing5.T) {
 		popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 		p := NewPopulatedB(popr, true)
-		data, err := code_google_com_p_gogoprotobuf_proto2.Marshal(p)
+		data, err := github_com_gogo_protobuf_proto2.Marshal(p)
 		if err != nil {
 			panic(err)
 		}

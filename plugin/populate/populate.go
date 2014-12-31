@@ -58,9 +58,9 @@ given to the populate plugin, will generate code the following code:
 	this.A = *v2
 	if r.Intn(10) != 0 {
 		v3 := r.Intn(10)
-		this.G = make([]code_google_com_p_gogoprotobuf_test_custom.Uint128, v3)
+		this.G = make([]github_com_gogo_protobuf_test_custom.Uint128, v3)
 		for i := 0; i < v3; i++ {
-			v4 := code_google_com_p_gogoprotobuf_test_custom.NewPopulatedUint128(r)
+			v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 			this.G[i] = *v4
 		}
 	}

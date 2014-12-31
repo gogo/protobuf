@@ -30,7 +30,7 @@ package google_protobuf
 
 import fmt "fmt"
 import strings "strings"
-import code_google_com_p_gogoprotobuf_proto "github.com/gogo/protobuf/proto"
+import "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"
@@ -183,7 +183,7 @@ func valueToGoStringDescriptor(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringDescriptor(e map[int32]code_google_com_p_gogoprotobuf_proto.Extension) string {
+func extensionToGoStringDescriptor(e map[int32]proto.Extension) string {
 	if e == nil {
 		return "nil"
 	}

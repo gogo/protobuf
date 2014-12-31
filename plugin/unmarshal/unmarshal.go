@@ -136,7 +136,7 @@ given to the unmarshal plugin, will generate the following code:
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.G = append(m.G, code_google_com_p_gogoprotobuf_test_custom.Uint128{})
+			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
 			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
@@ -149,7 +149,7 @@ given to the unmarshal plugin, will generate the following code:
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := code_google_com_p_gogoprotobuf_proto.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}

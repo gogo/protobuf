@@ -1,5 +1,5 @@
 GoGoProtobuf http://github.com/gogo/protobuf extends 
-GoProtobuf http://code.google.com/p/goprotobuf
+GoProtobuf http://github.com/golang/protobuf
 
 Go support for Protocol Buffers - Google's data interchange format
 Copyright 2010 The Go Authors.

@@ -71,7 +71,7 @@ Will generate a go struct which looks a lot like this:
 	type A struct {
 		Description string
 		Number      int64
-		Id          code_google_com_p_gogoprotobuf_test_custom.Uuid
+		Id          github_com_gogo_protobuf_test_custom.Uuid
 	}
 
 You will see there are no pointers, since all fields are non-nullable.
@@ -90,7 +90,7 @@ See below that A is embedded in B.
 
 	type B struct {
 		A
-		G []code_google_com_p_gogoprotobuf_test_custom.Uint128
+		G []github_com_gogo_protobuf_test_custom.Uint128
 	}
 
 Also see the repeated custom type.

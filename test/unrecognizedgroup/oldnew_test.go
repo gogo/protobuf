@@ -27,7 +27,7 @@
 package unrecognizedgroup
 
 import (
-	code_google_com_p_gogoprotobuf_proto "github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	"testing"
 	time "time"
@@ -36,20 +36,20 @@ import (
 func TestNewOld(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	newer := NewPopulatedNewNoGroup(popr, true)
-	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	data1, err := proto.Marshal(newer)
 	if err != nil {
 		panic(err)
 	}
 	older := &OldWithGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, older); err != nil {
+	if err := proto.Unmarshal(data1, older); err != nil {
 		panic(err)
 	}
-	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	data2, err := proto.Marshal(older)
 	if err != nil {
 		panic(err)
 	}
 	bluer := &NewNoGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
+	if err := proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
 	if err := newer.VerboseEqual(bluer); err != nil {
@@ -60,20 +60,20 @@ func TestNewOld(t *testing.T) {
 func TestOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	older := NewPopulatedOldWithGroup(popr, true)
-	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	data1, err := proto.Marshal(older)
 	if err != nil {
 		panic(err)
 	}
 	newer := &NewNoGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
+	if err := proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
-	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	data2, err := proto.Marshal(newer)
 	if err != nil {
 		panic(err)
 	}
 	bluer := &OldWithGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
+	if err := proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
 	if err := older.VerboseEqual(bluer); err != nil {
@@ -84,40 +84,40 @@ func TestOldNew(t *testing.T) {
 func TestOldNewOldNew(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	older := NewPopulatedOldWithGroup(popr, true)
-	data1, err := code_google_com_p_gogoprotobuf_proto.Marshal(older)
+	data1, err := proto.Marshal(older)
 	if err != nil {
 		panic(err)
 	}
 	newer := &NewNoGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data1, newer); err != nil {
+	if err := proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
-	data2, err := code_google_com_p_gogoprotobuf_proto.Marshal(newer)
+	data2, err := proto.Marshal(newer)
 	if err != nil {
 		panic(err)
 	}
 	bluer := &OldWithGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data2, bluer); err != nil {
+	if err := proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
 	if err := older.VerboseEqual(bluer); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", older, bluer, err)
 	}
 
-	data3, err := code_google_com_p_gogoprotobuf_proto.Marshal(bluer)
+	data3, err := proto.Marshal(bluer)
 	if err != nil {
 		panic(err)
 	}
 	purple := &NewNoGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data3, purple); err != nil {
+	if err := proto.Unmarshal(data3, purple); err != nil {
 		panic(err)
 	}
-	data4, err := code_google_com_p_gogoprotobuf_proto.Marshal(purple)
+	data4, err := proto.Marshal(purple)
 	if err != nil {
 		panic(err)
 	}
 	magenta := &OldWithGroup{}
-	if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data4, magenta); err != nil {
+	if err := proto.Unmarshal(data4, magenta); err != nil {
 		panic(err)
 	}
 	if err := older.VerboseEqual(magenta); err != nil {

@@ -61,12 +61,12 @@ given to the testgen plugin, will generate the following test code:
 	func TestAProto(t *testing.T) {
 		popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 		p := NewPopulatedA(popr, false)
-		data, err := code_google_com_p_gogoprotobuf_proto.Marshal(p)
+		data, err := github_com_gogo_protobuf_proto.Marshal(p)
 		if err != nil {
 			panic(err)
 		}
 		msg := &A{}
-		if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(data, msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 		for i := range data {
@@ -89,7 +89,7 @@ given to the testgen plugin, will generate the following test code:
 		}
 		b.ResetTimer()
 		for i := 0; i < b.N; i++ {
-			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(pops[i%10000])
+			data, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 			if err != nil {
 				panic(err)
 			}
@@ -103,7 +103,7 @@ given to the testgen plugin, will generate the following test code:
 		total := 0
 		datas := make([][]byte, 10000)
 		for i := 0; i < 10000; i++ {
-			data, err := code_google_com_p_gogoprotobuf_proto.Marshal(NewPopulatedA(popr, false))
+			data, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedA(popr, false))
 			if err != nil {
 				panic(err)
 			}
@@ -113,7 +113,7 @@ given to the testgen plugin, will generate the following test code:
 		b.ResetTimer()
 		for i := 0; i < b.N; i++ {
 			total += len(datas[i%10000])
-			if err := code_google_com_p_gogoprotobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+			if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 				panic(err)
 			}
 		}
@@ -144,9 +144,9 @@ given to the testgen plugin, will generate the following test code:
 	func TestAProtoText(t *testing2.T) {
 		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 		p := NewPopulatedA(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.MarshalTextString(p)
+		data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
 		msg := &A{}
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(err)
 		}
 		if err := p.VerboseEqual(msg); err != nil {
@@ -160,9 +160,9 @@ given to the testgen plugin, will generate the following test code:
 	func TestAProtoCompactText(t *testing2.T) {
 		popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
 		p := NewPopulatedA(popr, true)
-		data := code_google_com_p_gogoprotobuf_proto1.CompactTextString(p)
+		data := github_com_gogo_protobuf_proto1.CompactTextString(p)
 		msg := &A{}
-		if err := code_google_com_p_gogoprotobuf_proto1.UnmarshalText(data, msg); err != nil {
+		if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
 			panic(err)
 		}
 		if err := p.VerboseEqual(msg); err != nil {
