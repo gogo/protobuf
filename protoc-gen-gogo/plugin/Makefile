@@ -29,8 +29,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Not stored here, but plugin.proto is in http://code.google.com/p/protobuf
-# at protobuf-2.3.0/src/google/protobuf/compiler/plugin.proto
+# Not stored here, but plugin.proto is in https://github.com/google/protobuf/
+# at src/google/protobuf/compiler/plugin.proto
 # Also we need to fix an import.
 regenerate:
 	protoc --gogo_out=. -I=../../protobuf/google/protobuf/compiler/:../../protobuf/ ../../protobuf/google/protobuf/compiler/plugin.proto
