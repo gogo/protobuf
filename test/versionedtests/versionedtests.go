@@ -37,10 +37,7 @@ func less(this, that string) bool {
 }
 
 func getVersion() string {
-	versionBytes, err := exec.Command("protoc", "--version").CombinedOutput()
-	if err != nil {
-		panic(err)
-	}
+	versionBytes, _ := exec.Command("protoc", "--version").CombinedOutput()
 	version := strings.TrimSpace(string(versionBytes))
 	versions := strings.Split(version, " ")
 	if len(versions) != 2 {
