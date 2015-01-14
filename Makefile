@@ -91,6 +91,10 @@ tests:
 	go test -v ./test/packed
 	go test -v ./test/tags
 	go test -v ./parser
+	make vet
+
+vet:
+	go vet ./...
 
 drone:
 	sudo apt-get install protobuf-compiler
