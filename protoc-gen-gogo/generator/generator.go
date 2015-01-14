@@ -452,6 +452,7 @@ func New() *Generator {
 	g.Buffer = new(bytes.Buffer)
 	g.Request = new(plugin.CodeGeneratorRequest)
 	g.Response = new(plugin.CodeGeneratorResponse)
+	g.writtenImports = make(map[string]bool)
 	uniquePackageName = make(map[*descriptor.FileDescriptorProto]string)
 	pkgNamesInUse = make(map[string][]*FileDescriptor)
 	return g
@@ -1025,6 +1026,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.customImports = make([]string, 0)
 	g.file = g.FileOf(file.FileDescriptorProto)
 	g.usedPackages = make(map[string]bool)
+	// Reset on each file
 	g.writtenImports = make(map[string]bool)
 
 	for _, td := range g.file.imp {

@@ -19,27 +19,9 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import testing1 "testing"
-import math_rand1 "math/rand"
-import time1 "time"
 import encoding_json "encoding/json"
-import testing2 "testing"
-import math_rand2 "math/rand"
-import time2 "time"
-import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
-import math_rand3 "math/rand"
-import time3 "time"
-import testing3 "testing"
 import fmt "fmt"
-import math_rand4 "math/rand"
-import time4 "time"
-import testing4 "testing"
-import fmt1 "fmt"
 import go_parser "go/parser"
-import math_rand5 "math/rand"
-import time5 "time"
-import testing5 "testing"
-import github_com_gogo_protobuf_proto2 "github.com/gogo/protobuf/proto"
 
 func TestBigProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -227,8 +209,8 @@ func BenchmarkSubProtoUnmarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func TestBigJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestBigJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -246,8 +228,8 @@ func TestBigJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestBigUnsafeJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestBigUnsafeJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -265,8 +247,8 @@ func TestBigUnsafeJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestSubJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestSubJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -284,12 +266,12 @@ func TestSubJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestBigProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestBigProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Big{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -300,12 +282,12 @@ func TestBigProtoText(t *testing2.T) {
 	}
 }
 
-func TestBigProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestBigProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Big{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -316,12 +298,12 @@ func TestBigProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestBigUnsafeProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestBigUnsafeProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &BigUnsafe{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -332,12 +314,12 @@ func TestBigUnsafeProtoText(t *testing2.T) {
 	}
 }
 
-func TestBigUnsafeProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestBigUnsafeProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &BigUnsafe{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -348,12 +330,12 @@ func TestBigUnsafeProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestSubProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestSubProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Sub{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -364,12 +346,12 @@ func TestSubProtoText(t *testing2.T) {
 	}
 }
 
-func TestSubProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestSubProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Sub{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -380,8 +362,8 @@ func TestSubProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestBigStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestBigStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -389,8 +371,8 @@ func TestBigStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestBigUnsafeStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestBigUnsafeStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -398,8 +380,8 @@ func TestBigUnsafeStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestSubStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestSubStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -407,11 +389,11 @@ func TestSubStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestBigGoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestBigGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -420,11 +402,11 @@ func TestBigGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestBigUnsafeGoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestBigUnsafeGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -433,11 +415,11 @@ func TestBigUnsafeGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestSubGoString(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestSubGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -446,45 +428,45 @@ func TestSubGoString(t *testing4.T) {
 		panic(err)
 	}
 }
-func TestBigVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestBigVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBig(popr, false)
-	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &Big{}
-	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestBigUnsafeVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestBigUnsafeVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, false)
-	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &BigUnsafe{}
-	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestSubVerboseEqual(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestSubVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSub(popr, false)
-	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &Sub{}
-	if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {

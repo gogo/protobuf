@@ -19,32 +19,9 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import testing1 "testing"
-import math_rand1 "math/rand"
-import time1 "time"
 import encoding_json "encoding/json"
-import testing2 "testing"
-import math_rand2 "math/rand"
-import time2 "time"
-import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
-import math_rand3 "math/rand"
-import time3 "time"
-import testing3 "testing"
 import fmt "fmt"
-import math_rand4 "math/rand"
-import time4 "time"
-import testing4 "testing"
-import github_com_gogo_protobuf_proto2 "github.com/gogo/protobuf/proto"
-import math_rand5 "math/rand"
-import time5 "time"
-import testing5 "testing"
-import fmt1 "fmt"
 import go_parser "go/parser"
-import math_rand6 "math/rand"
-import time6 "time"
-import testing6 "testing"
-import github_com_gogo_protobuf_proto3 "github.com/gogo/protobuf/proto"
-import testing7 "testing"
 
 func TestNewNoGroupProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -210,8 +187,8 @@ func TestOldWithGroup_Group2Proto(t *testing.T) {
 	}
 }
 
-func TestNewNoGroupJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestNewNoGroupJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -229,8 +206,8 @@ func TestNewNoGroupJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestAJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestAJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -248,8 +225,8 @@ func TestAJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestOldWithGroupJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestOldWithGroupJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -267,8 +244,8 @@ func TestOldWithGroupJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestOldWithGroup_Group1JSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestOldWithGroup_Group1JSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -286,8 +263,8 @@ func TestOldWithGroup_Group1JSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestOldWithGroup_Group2JSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestOldWithGroup_Group2JSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -305,12 +282,12 @@ func TestOldWithGroup_Group2JSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestNewNoGroupProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestNewNoGroupProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &NewNoGroup{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -321,12 +298,12 @@ func TestNewNoGroupProtoText(t *testing2.T) {
 	}
 }
 
-func TestNewNoGroupProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestNewNoGroupProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &NewNoGroup{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -337,12 +314,12 @@ func TestNewNoGroupProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestAProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestAProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &A{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -353,12 +330,12 @@ func TestAProtoText(t *testing2.T) {
 	}
 }
 
-func TestAProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestAProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &A{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -369,12 +346,12 @@ func TestAProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroupProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroupProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &OldWithGroup{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -385,12 +362,12 @@ func TestOldWithGroupProtoText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroupProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroupProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &OldWithGroup{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -401,12 +378,12 @@ func TestOldWithGroupProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroup_Group1ProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroup_Group1ProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &OldWithGroup_Group1{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -417,12 +394,12 @@ func TestOldWithGroup_Group1ProtoText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroup_Group1ProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroup_Group1ProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &OldWithGroup_Group1{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -433,12 +410,12 @@ func TestOldWithGroup_Group1ProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroup_Group2ProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroup_Group2ProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &OldWithGroup_Group2{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -449,12 +426,12 @@ func TestOldWithGroup_Group2ProtoText(t *testing2.T) {
 	}
 }
 
-func TestOldWithGroup_Group2ProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestOldWithGroup_Group2ProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &OldWithGroup_Group2{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -465,8 +442,8 @@ func TestOldWithGroup_Group2ProtoCompactText(t *testing2.T) {
 	}
 }
 
-func TestNewNoGroupStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestNewNoGroupStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -474,8 +451,8 @@ func TestNewNoGroupStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestAStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestAStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -483,8 +460,8 @@ func TestAStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldWithGroupStringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestOldWithGroupStringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -492,8 +469,8 @@ func TestOldWithGroupStringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldWithGroup_Group1Stringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestOldWithGroup_Group1Stringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -501,8 +478,8 @@ func TestOldWithGroup_Group1Stringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestOldWithGroup_Group2Stringer(t *testing3.T) {
-	popr := math_rand3.New(math_rand3.NewSource(time3.Now().UnixNano()))
+func TestOldWithGroup_Group2Stringer(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -510,11 +487,11 @@ func TestOldWithGroup_Group2Stringer(t *testing3.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestNewNoGroupSize(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestNewNoGroupSize(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
-	size2 := github_com_gogo_protobuf_proto2.Size(p)
-	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
@@ -525,17 +502,17 @@ func TestNewNoGroupSize(t *testing4.T) {
 	if size2 != size {
 		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
 	}
-	size3 := github_com_gogo_protobuf_proto2.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
-func TestASize(t *testing4.T) {
-	popr := math_rand4.New(math_rand4.NewSource(time4.Now().UnixNano()))
+func TestASize(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
-	size2 := github_com_gogo_protobuf_proto2.Size(p)
-	data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
@@ -546,17 +523,17 @@ func TestASize(t *testing4.T) {
 	if size2 != size {
 		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
 	}
-	size3 := github_com_gogo_protobuf_proto2.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
-func TestNewNoGroupGoString(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestNewNoGroupGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -565,11 +542,11 @@ func TestNewNoGroupGoString(t *testing5.T) {
 		panic(err)
 	}
 }
-func TestAGoString(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestAGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -578,11 +555,11 @@ func TestAGoString(t *testing5.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroupGoString(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroupGoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -591,11 +568,11 @@ func TestOldWithGroupGoString(t *testing5.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroup_Group1GoString(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroup_Group1GoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -604,11 +581,11 @@ func TestOldWithGroup_Group1GoString(t *testing5.T) {
 		panic(err)
 	}
 }
-func TestOldWithGroup_Group2GoString(t *testing5.T) {
-	popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
+func TestOldWithGroup_Group2GoString(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, false)
 	s1 := p.GoString()
-	s2 := fmt1.Sprintf("%#v", p)
+	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
@@ -617,82 +594,82 @@ func TestOldWithGroup_Group2GoString(t *testing5.T) {
 		panic(err)
 	}
 }
-func TestNewNoGroupVerboseEqual(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestNewNoGroupVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, false)
-	data, err := github_com_gogo_protobuf_proto3.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NewNoGroup{}
-	if err := github_com_gogo_protobuf_proto3.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestAVerboseEqual(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestAVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, false)
-	data, err := github_com_gogo_protobuf_proto3.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &A{}
-	if err := github_com_gogo_protobuf_proto3.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroupVerboseEqual(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestOldWithGroupVerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, false)
-	data, err := github_com_gogo_protobuf_proto3.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup{}
-	if err := github_com_gogo_protobuf_proto3.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroup_Group1VerboseEqual(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestOldWithGroup_Group1VerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, false)
-	data, err := github_com_gogo_protobuf_proto3.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup_Group1{}
-	if err := github_com_gogo_protobuf_proto3.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestOldWithGroup_Group2VerboseEqual(t *testing6.T) {
-	popr := math_rand6.New(math_rand6.NewSource(time6.Now().UnixNano()))
+func TestOldWithGroup_Group2VerboseEqual(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, false)
-	data, err := github_com_gogo_protobuf_proto3.Marshal(p)
+	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &OldWithGroup_Group2{}
-	if err := github_com_gogo_protobuf_proto3.Unmarshal(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestUnrecognizedgroupDescription(t *testing7.T) {
+func TestUnrecognizedgroupDescription(t *testing.T) {
 	UnrecognizedgroupDescription()
 }
 

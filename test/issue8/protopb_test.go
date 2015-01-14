@@ -17,14 +17,7 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import testing1 "testing"
-import math_rand1 "math/rand"
-import time1 "time"
 import encoding_json "encoding/json"
-import testing2 "testing"
-import math_rand2 "math/rand"
-import time2 "time"
-import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 
 func TestFooProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
@@ -45,8 +38,8 @@ func TestFooProto(t *testing.T) {
 	}
 }
 
-func TestFooJSON(t *testing1.T) {
-	popr := math_rand1.New(math_rand1.NewSource(time1.Now().UnixNano()))
+func TestFooJSON(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFoo(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
@@ -61,12 +54,12 @@ func TestFooJSON(t *testing1.T) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
 	}
 }
-func TestFooProtoText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestFooProtoText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFoo(popr, true)
-	data := github_com_gogo_protobuf_proto1.MarshalTextString(p)
+	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Foo{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if !p.Equal(msg) {
@@ -74,12 +67,12 @@ func TestFooProtoText(t *testing2.T) {
 	}
 }
 
-func TestFooProtoCompactText(t *testing2.T) {
-	popr := math_rand2.New(math_rand2.NewSource(time2.Now().UnixNano()))
+func TestFooProtoCompactText(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFoo(popr, true)
-	data := github_com_gogo_protobuf_proto1.CompactTextString(p)
+	data := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Foo{}
-	if err := github_com_gogo_protobuf_proto1.UnmarshalText(data, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		panic(err)
 	}
 	if !p.Equal(msg) {
