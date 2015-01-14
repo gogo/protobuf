@@ -91,7 +91,7 @@ func (this *pluginImports) NewImport(pkg string) Single {
 func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 	for _, s := range this.singles {
 		if s.IsUsed() {
-            this.generator.PrintImport(s.Name(), s.Location())
+			this.generator.PrintImport(s.Name(), s.Location())
 		}
 	}
 }
@@ -99,10 +99,10 @@ func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 type Single interface {
 	Use() string
 	IsUsed() bool
-Name() string
-  Location() string
+	Name() string
+	Location() string
 
-	Generate() string  // DEPRECATED
+	Generate() string // DEPRECATED
 }
 
 type importedPackage struct {
@@ -132,11 +132,11 @@ func (this *importedPackage) IsUsed() bool {
 }
 
 func (this *importedPackage) Name() string {
-  return this.name
+	return this.name
 }
 
 func (this *importedPackage) Location() string {
-  return this.importPrefix + this.pkg
+	return this.importPrefix + this.pkg
 }
 
 func (this *importedPackage) Generate() string {
