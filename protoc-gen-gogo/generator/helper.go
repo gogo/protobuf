@@ -31,7 +31,6 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
-	"strconv"
 	"strings"
 
 	"github.com/gogo/protobuf/gogoproto"
