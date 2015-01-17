@@ -101,8 +101,6 @@ type Single interface {
 	IsUsed() bool
 	Name() string
 	Location() string
-
-	Generate() string // DEPRECATED
 }
 
 type importedPackage struct {
@@ -137,10 +135,6 @@ func (this *importedPackage) Name() string {
 
 func (this *importedPackage) Location() string {
 	return this.importPrefix + this.pkg
-}
-
-func (this *importedPackage) Generate() string {
-	return strings.Join([]string{`import `, this.name, ` `, strconv.Quote(this.Location())}, "")
 }
 
 func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
