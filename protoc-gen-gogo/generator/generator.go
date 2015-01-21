@@ -443,6 +443,7 @@ type Generator struct {
 	typeNameToObject map[string]Object // Key is a fully-qualified name in input syntax.
 	customImports    []string
 	indent           string
+	writtenImports   map[string]bool // For de-duplicating written imports
 }
 
 // New creates a new generator and allocates the request and response protobufs.
@@ -451,8 +452,9 @@ func New() *Generator {
 	g.Buffer = new(bytes.Buffer)
 	g.Request = new(plugin.CodeGeneratorRequest)
 	g.Response = new(plugin.CodeGeneratorResponse)
+	g.writtenImports = make(map[string]bool)
 	uniquePackageName = make(map[*descriptor.FileDescriptorProto]string)
-	pkgNamesInUse = make(map[string]bool)
+	pkgNamesInUse = make(map[string][]*FileDescriptor)
 	return g
 }
 
@@ -514,7 +516,7 @@ var uniquePackageName = make(map[*descriptor.FileDescriptorProto]string)
 
 // Package names already registered.  Key is the name from the .proto file;
 // value is the name that appears in the generated code.
-var pkgNamesInUse = make(map[string]bool)
+var pkgNamesInUse = make(map[string][]*FileDescriptor)
 
 // Create and remember a guaranteed unique package name for this file descriptor.
 // Pkg is the candidate name.  If f is nil, it's a builtin package like "proto" and
@@ -523,12 +525,24 @@ func RegisterUniquePackageName(pkg string, f *FileDescriptor) string {
 	// Convert dots to underscores before finding a unique alias.
 	pkg = strings.Map(badToUnderscore, pkg)
 
-	for i, orig := 1, pkg; pkgNamesInUse[pkg]; i++ {
-		// It's a duplicate; must rename.
-		pkg = orig + strconv.Itoa(i)
+	var i = -1
+	var ptr *FileDescriptor = nil
+	for i, ptr = range pkgNamesInUse[pkg] {
+		if ptr == f {
+			if i == 0 {
+				return pkg
+			}
+			return pkg + strconv.Itoa(i)
+		}
 	}
-	// Install it.
-	pkgNamesInUse[pkg] = true
+
+	pkgNamesInUse[pkg] = append(pkgNamesInUse[pkg], f)
+	i += 1
+
+	if i > 0 {
+		pkg = pkg + strconv.Itoa(i)
+	}
+
 	if f != nil {
 		uniquePackageName[f.FileDescriptorProto] = pkg
 	}
@@ -942,6 +956,15 @@ func (g *Generator) P(str ...interface{}) {
 	g.WriteByte('\n')
 }
 
+func (g *Generator) PrintImport(alias, pkg string) {
+	statement := "import " + alias + " " + strconv.Quote(pkg)
+	if g.writtenImports[statement] {
+		return
+	}
+	g.P(statement)
+	g.writtenImports[statement] = true
+}
+
 // In Indents the output one tab stop.
 func (g *Generator) In() { g.indent += "\t" }
 
@@ -1003,6 +1026,8 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.customImports = make([]string, 0)
 	g.file = g.FileOf(file.FileDescriptorProto)
 	g.usedPackages = make(map[string]bool)
+	// Reset on each file
+	g.writtenImports = make(map[string]bool)
 
 	for _, td := range g.file.imp {
 		g.generateImported(td)
@@ -1124,8 +1149,8 @@ func (g *Generator) generateImports() {
 	// reference it later. The same argument applies to the math package,
 	// for handling bit patterns for floating-point numbers.
 	c := make(map[string]bool)
-	g.P("import " + g.Pkg["proto"] + " " + strconv.Quote(g.ImportPrefix+"github.com/gogo/protobuf/proto"))
-	g.P("import " + g.Pkg["math"] + ` "math"`)
+	g.PrintImport(g.Pkg["proto"], g.ImportPrefix+"github.com/gogo/protobuf/proto")
+	g.PrintImport(g.Pkg["math"], "math")
 	for i, s := range g.file.Dependency {
 		fd := g.fileByName(s)
 		// Do not import our own package.
@@ -1155,10 +1180,10 @@ func (g *Generator) generateImports() {
 					dir = "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 					g.P("// renamed import google/protobuf/descriptor to github.com/gogo/protobuf/protoc-gen-gogo/descriptor")
 				}
-				g.P("import ", fd.PackageName(), " ", strconv.Quote(dir))
+				g.PrintImport(fd.PackageName(), dir)
 				c[dir] = true
 			} else {
-				g.P("import ", fd.PackageName(), " ", strconv.Quote(filename))
+				g.PrintImport(fd.PackageName(), filename)
 			}
 		} else {
 			// TODO: Re-enable this when we are more feature-complete.
@@ -1172,7 +1197,7 @@ func (g *Generator) generateImports() {
 	for _, s := range g.customImports {
 		if _, ok := c[s]; !ok {
 			s1 := strings.Map(badToUnderscore, s)
-			g.P(`import `, s1, " ", strconv.Quote(s))
+			g.PrintImport(s1, s)
 			c[s] = true
 		}
 	}

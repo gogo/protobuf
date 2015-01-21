@@ -31,7 +31,6 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
-	"strconv"
 	"strings"
 
 	"github.com/gogo/protobuf/gogoproto"
@@ -91,7 +90,7 @@ func (this *pluginImports) NewImport(pkg string) Single {
 func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 	for _, s := range this.singles {
 		if s.IsUsed() {
-			this.generator.P(s.Generate())
+			this.generator.PrintImport(s.Name(), s.Location())
 		}
 	}
 }
@@ -99,7 +98,8 @@ func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 type Single interface {
 	Use() string
 	IsUsed() bool
-	Generate() string
+	Name() string
+	Location() string
 }
 
 type importedPackage struct {
@@ -128,8 +128,12 @@ func (this *importedPackage) IsUsed() bool {
 	return this.used
 }
 
-func (this *importedPackage) Generate() string {
-	return strings.Join([]string{`import `, this.name, ` `, strconv.Quote(this.importPrefix + this.pkg)}, "")
+func (this *importedPackage) Name() string {
+	return this.name
+}
+
+func (this *importedPackage) Location() string {
+	return this.importPrefix + this.pkg
 }
 
 func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {

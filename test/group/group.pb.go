@@ -23,14 +23,10 @@ import fmt "fmt"
 import strings "strings"
 import reflect "reflect"
 
-import fmt1 "fmt"
-import strings1 "strings"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
-import reflect1 "reflect"
 
-import fmt2 "fmt"
 import bytes "bytes"
 
 import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -276,47 +272,47 @@ func (this *Groups1) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&group.Groups1{` +
-		`G:` + fmt1.Sprintf("%#v", this.G),
-		`XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings.Join([]string{`&group.Groups1{` +
+		`G:` + fmt.Sprintf("%#v", this.G),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Groups1_G) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&group.Groups1_G{` +
+	s := strings.Join([]string{`&group.Groups1_G{` +
 		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
 		`Field2:` + valueToGoStringGroup(this.Field2, "float64"),
-		`XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Groups2) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&group.Groups2{` +
-		`G:` + fmt1.Sprintf("%#v", this.G),
-		`XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings.Join([]string{`&group.Groups2{` +
+		`G:` + fmt.Sprintf("%#v", this.G),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *Groups2_G) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&group.Groups2_G{` +
+	s := strings.Join([]string{`&group.Groups2_G{` +
 		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
-		`Field2:` + fmt1.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt1.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringGroup(v interface{}, typ string) string {
-	rv := reflect1.ValueOf(v)
+	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
 		return "nil"
 	}
-	pv := reflect1.Indirect(rv).Interface()
-	return fmt1.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
 func extensionToGoStringGroup(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
 	if e == nil {
@@ -332,7 +328,7 @@ func extensionToGoStringGroup(e map[int32]github_com_gogo_protobuf_proto.Extensi
 	for _, k := range keys {
 		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
 	}
-	s += strings1.Join(ss, ",") + "}"
+	s += strings.Join(ss, ",") + "}"
 	return s
 }
 func (this *Groups1) VerboseEqual(that interface{}) error {
@@ -340,31 +336,31 @@ func (this *Groups1) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Groups1)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Groups1")
+		return fmt.Errorf("that is not of type *Groups1")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Groups1 but is nil && this != nil")
+		return fmt.Errorf("that is type *Groups1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Groups1but is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups1but is not nil && this == nil")
 	}
 	if len(this.G) != len(that1.G) {
-		return fmt2.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
+		return fmt.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
 	}
 	for i := range this.G {
 		if !this.G[i].Equal(that1.G[i]) {
-			return fmt2.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
+			return fmt.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -406,41 +402,41 @@ func (this *Groups1_G) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Groups1_G)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Groups1_G")
+		return fmt.Errorf("that is not of type *Groups1_G")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Groups1_G but is nil && this != nil")
+		return fmt.Errorf("that is type *Groups1_G but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Groups1_Gbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups1_Gbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if this.Field2 != nil && that1.Field2 != nil {
 		if *this.Field2 != *that1.Field2 {
-			return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
 		}
 	} else if this.Field2 != nil {
-		return fmt2.Errorf("this.Field2 == nil && that.Field2 != nil")
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
 	} else if that1.Field2 != nil {
-		return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -492,26 +488,26 @@ func (this *Groups2) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Groups2)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Groups2")
+		return fmt.Errorf("that is not of type *Groups2")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Groups2 but is nil && this != nil")
+		return fmt.Errorf("that is type *Groups2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Groups2but is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups2but is not nil && this == nil")
 	}
 	if !this.G.Equal(that1.G) {
-		return fmt2.Errorf("G this(%v) Not Equal that(%v)", this.G, that1.G)
+		return fmt.Errorf("G this(%v) Not Equal that(%v)", this.G, that1.G)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -548,40 +544,40 @@ func (this *Groups2_G) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*Groups2_G)
 	if !ok {
-		return fmt2.Errorf("that is not of type *Groups2_G")
+		return fmt.Errorf("that is not of type *Groups2_G")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt2.Errorf("that is type *Groups2_G but is nil && this != nil")
+		return fmt.Errorf("that is type *Groups2_G but is nil && this != nil")
 	} else if this == nil {
-		return fmt2.Errorf("that is type *Groups2_Gbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups2_Gbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt2.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt2.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if len(this.Field2) != len(that1.Field2) {
-		return fmt2.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
 	}
 	for i := range this.Field2 {
 		if this.Field2[i] != that1.Field2[i] {
-			return fmt2.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt2.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }

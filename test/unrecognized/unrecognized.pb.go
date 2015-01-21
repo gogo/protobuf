@@ -29,24 +29,15 @@ import math "math"
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
 
 import io "io"
-import math1 "math"
 import fmt "fmt"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
-import fmt1 "fmt"
 import strings "strings"
 import reflect "reflect"
 
-import math2 "math"
-
-import fmt2 "fmt"
-import strings1 "strings"
-import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
-import reflect1 "reflect"
 
-import fmt3 "fmt"
 import bytes "bytes"
 
 import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -459,7 +450,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
@@ -502,7 +493,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field4 = &v2
 		case 5:
 			if wireType != 2 {
@@ -558,7 +549,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint32(data[i-3]) << 8
 			v |= uint32(data[i-2]) << 16
 			v |= uint32(data[i-1]) << 24
-			v2 := math1.Float32frombits(v)
+			v2 := math.Float32frombits(v)
 			m.Field7 = append(m.Field7, v2)
 		default:
 			var sizeOfWire int
@@ -620,7 +611,7 @@ func (m *U) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field2 = append(m.Field2, v2)
 		case 3:
 			if wireType != 0 {
@@ -892,7 +883,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
@@ -948,7 +939,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			v |= uint32(data[i-3]) << 8
 			v |= uint32(data[i-2]) << 16
 			v |= uint32(data[i-1]) << 24
-			v2 := math1.Float32frombits(v)
+			v2 := math.Float32frombits(v)
 			m.Field7 = append(m.Field7, v2)
 		default:
 			var sizeOfWire int
@@ -1033,7 +1024,7 @@ func (m *OldU) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field2 = append(m.Field2, v2)
 		default:
 			var sizeOfWire int
@@ -1064,7 +1055,7 @@ func (this *A) String() string {
 	}
 	s := strings.Join([]string{`&A{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`B:` + strings.Replace(fmt1.Sprintf("%v", this.B), "B", "B", 1) + `,`,
+		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1074,10 +1065,10 @@ func (this *B) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&B{`,
-		`C:` + strings.Replace(fmt1.Sprintf("%v", this.C), "C", "C", 1) + `,`,
-		`D:` + strings.Replace(fmt1.Sprintf("%v", this.D), "D", "D", 1) + `,`,
-		`F:` + strings.Replace(fmt1.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "C", "C", 1) + `,`,
+		`D:` + strings.Replace(fmt.Sprintf("%v", this.D), "D", "D", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1088,7 +1079,7 @@ func (this *D) String() string {
 	}
 	s := strings.Join([]string{`&D{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1101,10 +1092,10 @@ func (this *C) String() string {
 		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
 		`Field4:` + valueToStringUnrecognized(this.Field4) + `,`,
-		`Field5:` + fmt1.Sprintf("%v", this.Field5) + `,`,
+		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
 		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
-		`Field7:` + fmt1.Sprintf("%v", this.Field7) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1114,7 +1105,7 @@ func (this *U) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&U{`,
-		`Field2:` + fmt1.Sprintf("%v", this.Field2) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
 		`}`,
 	}, "")
@@ -1125,7 +1116,7 @@ func (this *UnoM) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&UnoM{`,
-		`Field2:` + fmt1.Sprintf("%v", this.Field2) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
 		`}`,
 	}, "")
@@ -1137,7 +1128,7 @@ func (this *OldA) String() string {
 	}
 	s := strings.Join([]string{`&OldA{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`B:` + strings.Replace(fmt1.Sprintf("%v", this.B), "OldB", "OldB", 1) + `,`,
+		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "OldB", "OldB", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1147,9 +1138,9 @@ func (this *OldB) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&OldB{`,
-		`C:` + strings.Replace(fmt1.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
-		`F:` + strings.Replace(fmt1.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1163,8 +1154,8 @@ func (this *OldC) String() string {
 		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
 		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
 		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
-		`Field7:` + fmt1.Sprintf("%v", this.Field7) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1175,8 +1166,8 @@ func (this *OldU) String() string {
 	}
 	s := strings.Join([]string{`&OldU{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`Field2:` + fmt1.Sprintf("%v", this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1187,8 +1178,8 @@ func (this *OldUnoM) String() string {
 	}
 	s := strings.Join([]string{`&OldUnoM{`,
 		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`Field2:` + fmt1.Sprintf("%v", this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt1.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1199,7 +1190,7 @@ func valueToStringUnrecognized(v interface{}) string {
 		return "nil"
 	}
 	pv := reflect.Indirect(rv).Interface()
-	return fmt1.Sprintf("*%v", pv)
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *A) Size() (n int) {
 	var l int
@@ -1849,7 +1840,7 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 	if m.Field2 != nil {
 		data[i] = 0x11
 		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math2.Float64bits(*m.Field2)))
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
 	}
 	if m.Field3 != nil {
 		data[i] = 0x1a
@@ -1860,7 +1851,7 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 	if m.Field4 != nil {
 		data[i] = 0x21
 		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math2.Float64bits(*m.Field4)))
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field4)))
 	}
 	if len(m.Field5) > 0 {
 		for _, b := range m.Field5 {
@@ -1879,7 +1870,7 @@ func (m *C) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++
-			f4 := math2.Float32bits(num)
+			f4 := math.Float32bits(num)
 			data[i] = uint8(f4)
 			i++
 			data[i] = uint8(f4 >> 8)
@@ -1915,7 +1906,7 @@ func (m *U) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field2 {
 			data[i] = 0x11
 			i++
-			f5 := math2.Float64bits(num)
+			f5 := math.Float64bits(num)
 			data[i] = uint8(f5)
 			i++
 			data[i] = uint8(f5 >> 8)
@@ -2041,7 +2032,7 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 	if m.Field2 != nil {
 		data[i] = 0x11
 		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math2.Float64bits(*m.Field2)))
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
 	}
 	if m.Field3 != nil {
 		data[i] = 0x1a
@@ -2058,7 +2049,7 @@ func (m *OldC) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field7 {
 			data[i] = 0x3d
 			i++
-			f8 := math2.Float32bits(num)
+			f8 := math.Float32bits(num)
 			data[i] = uint8(f8)
 			i++
 			data[i] = uint8(f8 >> 8)
@@ -2100,7 +2091,7 @@ func (m *OldU) MarshalTo(data []byte) (n int, err error) {
 		for _, num := range m.Field2 {
 			data[i] = 0x11
 			i++
-			f9 := math2.Float64bits(num)
+			f9 := math.Float64bits(num)
 			data[i] = uint8(f9)
 			i++
 			data[i] = uint8(f9 >> 8)
@@ -2156,51 +2147,51 @@ func (this *A) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.A{` +
+	s := strings.Join([]string{`&unrecognized.A{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
-		`B:` + fmt2.Sprintf("%#v", this.B) + `}`}, ", ")
+		`B:` + fmt.Sprintf("%#v", this.B) + `}`}, ", ")
 	return s
 }
 func (this *B) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.B{` +
-		`C:` + fmt2.Sprintf("%#v", this.C),
-		`D:` + fmt2.Sprintf("%#v", this.D),
-		`F:` + fmt2.Sprintf("%#v", this.F),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings.Join([]string{`&unrecognized.B{` +
+		`C:` + fmt.Sprintf("%#v", this.C),
+		`D:` + fmt.Sprintf("%#v", this.D),
+		`F:` + fmt.Sprintf("%#v", this.F),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *D) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.D{` +
+	s := strings.Join([]string{`&unrecognized.D{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *C) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.C{` +
+	s := strings.Join([]string{`&unrecognized.C{` +
 		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
 		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
 		`Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"),
-		`Field5:` + fmt2.Sprintf("%#v", this.Field5),
+		`Field5:` + fmt.Sprintf("%#v", this.Field5),
 		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
-		`Field7:` + fmt2.Sprintf("%#v", this.Field7),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Field7:` + fmt.Sprintf("%#v", this.Field7),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *U) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.U{` +
-		`Field2:` + fmt2.Sprintf("%#v", this.Field2),
+	s := strings.Join([]string{`&unrecognized.U{` +
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
 		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
 	return s
 }
@@ -2208,8 +2199,8 @@ func (this *UnoM) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.UnoM{` +
-		`Field2:` + fmt2.Sprintf("%#v", this.Field2),
+	s := strings.Join([]string{`&unrecognized.UnoM{` +
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
 		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
 	return s
 }
@@ -2217,63 +2208,63 @@ func (this *OldA) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldA{` +
+	s := strings.Join([]string{`&unrecognized.OldA{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
-		`B:` + fmt2.Sprintf("%#v", this.B) + `}`}, ", ")
+		`B:` + fmt.Sprintf("%#v", this.B) + `}`}, ", ")
 	return s
 }
 func (this *OldB) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldB{` +
-		`C:` + fmt2.Sprintf("%#v", this.C),
-		`F:` + fmt2.Sprintf("%#v", this.F),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	s := strings.Join([]string{`&unrecognized.OldB{` +
+		`C:` + fmt.Sprintf("%#v", this.C),
+		`F:` + fmt.Sprintf("%#v", this.F),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldC) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldC{` +
+	s := strings.Join([]string{`&unrecognized.OldC{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
 		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
 		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
 		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
-		`Field7:` + fmt2.Sprintf("%#v", this.Field7),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Field7:` + fmt.Sprintf("%#v", this.Field7),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldU) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldU{` +
+	s := strings.Join([]string{`&unrecognized.OldU{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
-		`Field2:` + fmt2.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func (this *OldUnoM) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings1.Join([]string{`&unrecognized.OldUnoM{` +
+	s := strings.Join([]string{`&unrecognized.OldUnoM{` +
 		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
-		`Field2:` + fmt2.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt2.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
 func valueToGoStringUnrecognized(v interface{}, typ string) string {
-	rv := reflect1.ValueOf(v)
+	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
 		return "nil"
 	}
-	pv := reflect1.Indirect(rv).Interface()
-	return fmt2.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringUnrecognized(e map[int32]github_com_gogo_protobuf_proto1.Extension) string {
+func extensionToGoStringUnrecognized(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
 	if e == nil {
 		return "nil"
 	}
@@ -2287,7 +2278,7 @@ func extensionToGoStringUnrecognized(e map[int32]github_com_gogo_protobuf_proto1
 	for _, k := range keys {
 		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
 	}
-	s += strings1.Join(ss, ",") + "}"
+	s += strings.Join(ss, ",") + "}"
 	return s
 }
 func (this *A) VerboseEqual(that interface{}) error {
@@ -2295,36 +2286,36 @@ func (this *A) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*A)
 	if !ok {
-		return fmt3.Errorf("that is not of type *A")
+		return fmt.Errorf("that is not of type *A")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *A but is nil && this != nil")
+		return fmt.Errorf("that is type *A but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *Abut is not nil && this == nil")
+		return fmt.Errorf("that is type *Abut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if len(this.B) != len(that1.B) {
-		return fmt3.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
+		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
 	}
 	for i := range this.B {
 		if !this.B[i].Equal(that1.B[i]) {
-			return fmt3.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
+			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
 		}
 	}
 	return nil
@@ -2373,32 +2364,32 @@ func (this *B) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*B)
 	if !ok {
-		return fmt3.Errorf("that is not of type *B")
+		return fmt.Errorf("that is not of type *B")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *B but is nil && this != nil")
+		return fmt.Errorf("that is type *B but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *Bbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Bbut is not nil && this == nil")
 	}
 	if !this.C.Equal(that1.C) {
-		return fmt3.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
+		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
 	}
 	if !this.D.Equal(that1.D) {
-		return fmt3.Errorf("D this(%v) Not Equal that(%v)", this.D, that1.D)
+		return fmt.Errorf("D this(%v) Not Equal that(%v)", this.D, that1.D)
 	}
 	if !this.F.Equal(that1.F) {
-		return fmt3.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -2441,32 +2432,32 @@ func (this *D) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*D)
 	if !ok {
-		return fmt3.Errorf("that is not of type *D")
+		return fmt.Errorf("that is not of type *D")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *D but is nil && this != nil")
+		return fmt.Errorf("that is type *D but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *Dbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Dbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -2509,75 +2500,75 @@ func (this *C) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*C)
 	if !ok {
-		return fmt3.Errorf("that is not of type *C")
+		return fmt.Errorf("that is not of type *C")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *C but is nil && this != nil")
+		return fmt.Errorf("that is type *C but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *Cbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Cbut is not nil && this == nil")
 	}
 	if this.Field2 != nil && that1.Field2 != nil {
 		if *this.Field2 != *that1.Field2 {
-			return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
 		}
 	} else if this.Field2 != nil {
-		return fmt3.Errorf("this.Field2 == nil && that.Field2 != nil")
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
 	} else if that1.Field2 != nil {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
 	}
 	if this.Field3 != nil && that1.Field3 != nil {
 		if *this.Field3 != *that1.Field3 {
-			return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
 		}
 	} else if this.Field3 != nil {
-		return fmt3.Errorf("this.Field3 == nil && that.Field3 != nil")
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
 	} else if that1.Field3 != nil {
-		return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
 	if this.Field4 != nil && that1.Field4 != nil {
 		if *this.Field4 != *that1.Field4 {
-			return fmt3.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
+			return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
 		}
 	} else if this.Field4 != nil {
-		return fmt3.Errorf("this.Field4 == nil && that.Field4 != nil")
+		return fmt.Errorf("this.Field4 == nil && that.Field4 != nil")
 	} else if that1.Field4 != nil {
-		return fmt3.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
+		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
 	}
 	if len(this.Field5) != len(that1.Field5) {
-		return fmt3.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
+		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
 	}
 	for i := range this.Field5 {
 		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
-			return fmt3.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
+			return fmt.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
 		}
 	}
 	if this.Field6 != nil && that1.Field6 != nil {
 		if *this.Field6 != *that1.Field6 {
-			return fmt3.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
 		}
 	} else if this.Field6 != nil {
-		return fmt3.Errorf("this.Field6 == nil && that.Field6 != nil")
+		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
 	} else if that1.Field6 != nil {
-		return fmt3.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
 	}
 	if len(this.Field7) != len(that1.Field7) {
-		return fmt3.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
 	}
 	for i := range this.Field7 {
 		if this.Field7[i] != that1.Field7[i] {
-			return fmt3.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -2663,37 +2654,37 @@ func (this *U) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*U)
 	if !ok {
-		return fmt3.Errorf("that is not of type *U")
+		return fmt.Errorf("that is not of type *U")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *U but is nil && this != nil")
+		return fmt.Errorf("that is type *U but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *Ubut is not nil && this == nil")
+		return fmt.Errorf("that is type *Ubut is not nil && this == nil")
 	}
 	if len(this.Field2) != len(that1.Field2) {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
 	}
 	for i := range this.Field2 {
 		if this.Field2[i] != that1.Field2[i] {
-			return fmt3.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
 	if this.Field3 != nil && that1.Field3 != nil {
 		if *this.Field3 != *that1.Field3 {
-			return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
 		}
 	} else if this.Field3 != nil {
-		return fmt3.Errorf("this.Field3 == nil && that.Field3 != nil")
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
 	} else if that1.Field3 != nil {
-		return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
 	return nil
 }
@@ -2741,37 +2732,37 @@ func (this *UnoM) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*UnoM)
 	if !ok {
-		return fmt3.Errorf("that is not of type *UnoM")
+		return fmt.Errorf("that is not of type *UnoM")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *UnoM but is nil && this != nil")
+		return fmt.Errorf("that is type *UnoM but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *UnoMbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnoMbut is not nil && this == nil")
 	}
 	if len(this.Field2) != len(that1.Field2) {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
 	}
 	for i := range this.Field2 {
 		if this.Field2[i] != that1.Field2[i] {
-			return fmt3.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
 	if this.Field3 != nil && that1.Field3 != nil {
 		if *this.Field3 != *that1.Field3 {
-			return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
 		}
 	} else if this.Field3 != nil {
-		return fmt3.Errorf("this.Field3 == nil && that.Field3 != nil")
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
 	} else if that1.Field3 != nil {
-		return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
 	return nil
 }
@@ -2819,36 +2810,36 @@ func (this *OldA) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*OldA)
 	if !ok {
-		return fmt3.Errorf("that is not of type *OldA")
+		return fmt.Errorf("that is not of type *OldA")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *OldA but is nil && this != nil")
+		return fmt.Errorf("that is type *OldA but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *OldAbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldAbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if len(this.B) != len(that1.B) {
-		return fmt3.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
+		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
 	}
 	for i := range this.B {
 		if !this.B[i].Equal(that1.B[i]) {
-			return fmt3.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
+			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
 		}
 	}
 	return nil
@@ -2897,29 +2888,29 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*OldB)
 	if !ok {
-		return fmt3.Errorf("that is not of type *OldB")
+		return fmt.Errorf("that is not of type *OldB")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *OldB but is nil && this != nil")
+		return fmt.Errorf("that is type *OldB but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *OldBbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldBbut is not nil && this == nil")
 	}
 	if !this.C.Equal(that1.C) {
-		return fmt3.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
+		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
 	}
 	if !this.F.Equal(that1.F) {
-		return fmt3.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -2959,67 +2950,67 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*OldC)
 	if !ok {
-		return fmt3.Errorf("that is not of type *OldC")
+		return fmt.Errorf("that is not of type *OldC")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *OldC but is nil && this != nil")
+		return fmt.Errorf("that is type *OldC but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *OldCbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldCbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if this.Field2 != nil && that1.Field2 != nil {
 		if *this.Field2 != *that1.Field2 {
-			return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
 		}
 	} else if this.Field2 != nil {
-		return fmt3.Errorf("this.Field2 == nil && that.Field2 != nil")
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
 	} else if that1.Field2 != nil {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
 	}
 	if this.Field3 != nil && that1.Field3 != nil {
 		if *this.Field3 != *that1.Field3 {
-			return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
 		}
 	} else if this.Field3 != nil {
-		return fmt3.Errorf("this.Field3 == nil && that.Field3 != nil")
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
 	} else if that1.Field3 != nil {
-		return fmt3.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
 	if this.Field6 != nil && that1.Field6 != nil {
 		if *this.Field6 != *that1.Field6 {
-			return fmt3.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
 		}
 	} else if this.Field6 != nil {
-		return fmt3.Errorf("this.Field6 == nil && that.Field6 != nil")
+		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
 	} else if that1.Field6 != nil {
-		return fmt3.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
 	}
 	if len(this.Field7) != len(that1.Field7) {
-		return fmt3.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
 	}
 	for i := range this.Field7 {
 		if this.Field7[i] != that1.Field7[i] {
-			return fmt3.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -3097,40 +3088,40 @@ func (this *OldU) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*OldU)
 	if !ok {
-		return fmt3.Errorf("that is not of type *OldU")
+		return fmt.Errorf("that is not of type *OldU")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *OldU but is nil && this != nil")
+		return fmt.Errorf("that is type *OldU but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *OldUbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldUbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if len(this.Field2) != len(that1.Field2) {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
 	}
 	for i := range this.Field2 {
 		if this.Field2[i] != that1.Field2[i] {
-			return fmt3.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -3181,40 +3172,40 @@ func (this *OldUnoM) VerboseEqual(that interface{}) error {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that == nil && this != nil")
+		return fmt.Errorf("that == nil && this != nil")
 	}
 
 	that1, ok := that.(*OldUnoM)
 	if !ok {
-		return fmt3.Errorf("that is not of type *OldUnoM")
+		return fmt.Errorf("that is not of type *OldUnoM")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt3.Errorf("that is type *OldUnoM but is nil && this != nil")
+		return fmt.Errorf("that is type *OldUnoM but is nil && this != nil")
 	} else if this == nil {
-		return fmt3.Errorf("that is type *OldUnoMbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldUnoMbut is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
-			return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
 		}
 	} else if this.Field1 != nil {
-		return fmt3.Errorf("this.Field1 == nil && that.Field1 != nil")
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
 	} else if that1.Field1 != nil {
-		return fmt3.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	if len(this.Field2) != len(that1.Field2) {
-		return fmt3.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
 	}
 	for i := range this.Field2 {
 		if this.Field2[i] != that1.Field2[i] {
-			return fmt3.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt3.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }

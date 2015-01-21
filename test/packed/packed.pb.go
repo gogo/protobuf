@@ -22,14 +22,10 @@ import math "math"
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
 
 import io "io"
-import math1 "math"
 import fmt "fmt"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
-import io1 "io"
 import unsafe "unsafe"
-import fmt1 "fmt"
-import github_com_gogo_protobuf_proto1 "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -522,7 +518,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			v |= uint64(data[i-3]) << 40
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
-			v2 := math1.Float64frombits(v)
+			v2 := math.Float64frombits(v)
 			m.Field1 = append(m.Field1, v2)
 		case 2:
 			if wireType != 5 {
@@ -538,7 +534,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			v |= uint32(data[i-3]) << 8
 			v |= uint32(data[i-2]) << 16
 			v |= uint32(data[i-1]) << 24
-			v2 := math1.Float32frombits(v)
+			v2 := math.Float32frombits(v)
 			m.Field2 = append(m.Field2, v2)
 		case 3:
 			if wireType != 0 {
@@ -804,7 +800,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					v |= uint64(data[i-3]) << 40
 					v |= uint64(data[i-2]) << 48
 					v |= uint64(data[i-1]) << 56
-					v2 := math1.Float64frombits(v)
+					v2 := math.Float64frombits(v)
 					m.Field1 = append(m.Field1, v2)
 				}
 			} else if wireType == 1 {
@@ -822,7 +818,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint64(data[i-3]) << 40
 				v |= uint64(data[i-2]) << 48
 				v |= uint64(data[i-1]) << 56
-				v2 := math1.Float64frombits(v)
+				v2 := math.Float64frombits(v)
 				m.Field1 = append(m.Field1, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
@@ -856,7 +852,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					v |= uint32(data[i-3]) << 8
 					v |= uint32(data[i-2]) << 16
 					v |= uint32(data[i-1]) << 24
-					v2 := math1.Float32frombits(v)
+					v2 := math.Float32frombits(v)
 					m.Field2 = append(m.Field2, v2)
 				}
 			} else if wireType == 5 {
@@ -870,7 +866,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint32(data[i-3]) << 8
 				v |= uint32(data[i-2]) << 16
 				v |= uint32(data[i-1]) << 24
-				v2 := math1.Float32frombits(v)
+				v2 := math.Float32frombits(v)
 				m.Field2 = append(m.Field2, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -1459,7 +1455,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if index >= l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			b := data[index]
 			index++
@@ -1473,34 +1469,34 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 			var v float64
 			if index+8 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*float64)(unsafe.Pointer(&data[index]))
 			index += 8
 			m.Field1 = append(m.Field1, v)
 		case 2:
 			if wireType != 5 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 			var v float32
 			if index+4 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*float32)(unsafe.Pointer(&data[index]))
 			index += 4
 			m.Field2 = append(m.Field2, v)
 		case 3:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1512,12 +1508,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v)
 		case 4:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field4", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1529,12 +1525,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field4 = append(m.Field4, v)
 		case 5:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field5", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1546,12 +1542,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field5 = append(m.Field5, v)
 		case 6:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field6", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1563,12 +1559,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field7", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1581,12 +1577,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field7 = append(m.Field7, v)
 		case 8:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field8", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1599,56 +1595,56 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			m.Field8 = append(m.Field8, int64(v))
 		case 9:
 			if wireType != 5 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field9", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
 			if index+4 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*uint32)(unsafe.Pointer(&data[index]))
 			index += 4
 			m.Field9 = append(m.Field9, v)
 		case 10:
 			if wireType != 5 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field10", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
 			if index+4 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*int32)(unsafe.Pointer(&data[index]))
 			index += 4
 			m.Field10 = append(m.Field10, v)
 		case 11:
 			if wireType != 1 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field11", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
 			if index+8 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*uint64)(unsafe.Pointer(&data[index]))
 			index += 8
 			m.Field11 = append(m.Field11, v)
 		case 12:
 			if wireType != 1 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field12", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
 			if index+8 > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			v = *(*int64)(unsafe.Pointer(&data[index]))
 			index += 8
 			m.Field12 = append(m.Field12, v)
 		case 13:
 			if wireType != 0 {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field13", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1668,12 +1664,12 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto1.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
 			if (index + skippy) > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
 			index += skippy
@@ -1688,7 +1684,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if index >= l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			b := data[index]
 			index++
@@ -1705,7 +1701,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1716,12 +1712,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v float64
 					if index+8 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*float64)(unsafe.Pointer(&data[index]))
 					index += 8
@@ -1730,20 +1726,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 1 {
 				var v float64
 				if index+8 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*float64)(unsafe.Pointer(&data[index]))
 				index += 8
 				m.Field1 = append(m.Field1, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1754,12 +1750,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v float32
 					if index+4 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*float32)(unsafe.Pointer(&data[index]))
 					index += 4
@@ -1768,20 +1764,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 5 {
 				var v float32
 				if index+4 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*float32)(unsafe.Pointer(&data[index]))
 				index += 4
 				m.Field2 = append(m.Field2, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 		case 3:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1792,13 +1788,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -1813,7 +1809,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1824,14 +1820,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field3 = append(m.Field3, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 		case 4:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1842,13 +1838,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -1863,7 +1859,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1874,14 +1870,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field4 = append(m.Field4, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field4", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 		case 5:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1892,13 +1888,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -1913,7 +1909,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1924,14 +1920,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field5 = append(m.Field5, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field5", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 		case 6:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1942,13 +1938,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -1963,7 +1959,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1974,14 +1970,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field6 = append(m.Field6, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field6", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 		case 7:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1992,13 +1988,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -2014,7 +2010,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2026,14 +2022,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 				m.Field7 = append(m.Field7, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field7", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 		case 8:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2044,13 +2040,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -2066,7 +2062,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2078,14 +2074,14 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 				m.Field8 = append(m.Field8, int64(v))
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field8", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 		case 9:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2096,12 +2092,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v uint32
 					if index+4 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*uint32)(unsafe.Pointer(&data[index]))
 					index += 4
@@ -2110,20 +2106,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 5 {
 				var v uint32
 				if index+4 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*uint32)(unsafe.Pointer(&data[index]))
 				index += 4
 				m.Field9 = append(m.Field9, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field9", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 		case 10:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2134,12 +2130,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int32
 					if index+4 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*int32)(unsafe.Pointer(&data[index]))
 					index += 4
@@ -2148,20 +2144,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 5 {
 				var v int32
 				if index+4 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*int32)(unsafe.Pointer(&data[index]))
 				index += 4
 				m.Field10 = append(m.Field10, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field10", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 		case 11:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2172,12 +2168,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v uint64
 					if index+8 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*uint64)(unsafe.Pointer(&data[index]))
 					index += 8
@@ -2186,20 +2182,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 1 {
 				var v uint64
 				if index+8 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*uint64)(unsafe.Pointer(&data[index]))
 				index += 8
 				m.Field11 = append(m.Field11, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field11", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 		case 12:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2210,12 +2206,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int64
 					if index+8 > l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					v = *(*int64)(unsafe.Pointer(&data[index]))
 					index += 8
@@ -2224,20 +2220,20 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 1 {
 				var v int64
 				if index+8 > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				v = *(*int64)(unsafe.Pointer(&data[index]))
 				index += 8
 				m.Field12 = append(m.Field12, v)
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field12", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 		case 13:
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2248,13 +2244,13 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				postIndex := index + packedLen
 				if postIndex > l {
-					return io1.ErrUnexpectedEOF
+					return io.ErrUnexpectedEOF
 				}
 				for index < postIndex {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return io1.ErrUnexpectedEOF
+							return io.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -2269,7 +2265,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return io1.ErrUnexpectedEOF
+						return io.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -2280,7 +2276,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 				m.Field13 = append(m.Field13, bool(v != 0))
 			} else {
-				return fmt1.Errorf("proto: wrong wireType = %d for field Field13", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 		default:
 			var sizeOfWire int
@@ -2292,12 +2288,12 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto1.Skip(data[index:])
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
 			if err != nil {
 				return err
 			}
 			if (index + skippy) > l {
-				return io1.ErrUnexpectedEOF
+				return io.ErrUnexpectedEOF
 			}
 			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
 			index += skippy
