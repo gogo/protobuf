@@ -188,6 +188,7 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 }
 
 func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
+	g.writtenImports = make(map[string]bool)
 	g.file = g.FileOf(file.FileDescriptorProto)
 	g.usedPackages = make(map[string]bool)
 

@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"github.com/gogo/protobuf/proto"
 	"testing"
 )
@@ -17,7 +16,7 @@ func TestBugUuid(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v", u2)
+	t.Logf("%+v", u2)
 	if u2.CustomStruct.Id != nil {
 		t.Fatalf("should be nil")
 	}

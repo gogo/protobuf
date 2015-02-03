@@ -91,12 +91,6 @@ import (
 	"strings"
 )
 
-const (
-	maxRune      = '\U0010FFFF'
-	surrogateMin = 0xD800
-	surrogateMax = 0xDFFF
-)
-
 type VarGen interface {
 	Next() string
 	Current() string
@@ -503,18 +497,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.Out()
 	p.P(`}`)
 
-	surrogateRange := surrogateMax - surrogateMin
-	maxRand := maxRune - surrogateRange
-
 	p.P(`func randUTF8Rune`, p.localName, `(r randy`, p.localName, `) rune {`)
 	p.In()
-	p.P(`res := rune(r.Uint32() % `, fmt.Sprintf("%d", maxRand), `)`)
-	p.P(`if `, fmt.Sprintf("%d", surrogateMin), ` <= res {`)
-	p.In()
-	p.P(`res += `, fmt.Sprintf("%d", surrogateRange))
-	p.Out()
-	p.P(`}`)
-	p.P(`return res`)
+	p.P(`return rune(r.Intn(126-43)+43)`)
 	p.Out()
 	p.P(`}`)
 

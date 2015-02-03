@@ -434,11 +434,7 @@ type randyUnmarshalmerge interface {
 }
 
 func randUTF8RuneUnmarshalmerge(r randyUnmarshalmerge) rune {
-	res := rune(r.Uint32() % 1112064)
-	if 55296 <= res {
-		res += 2047
-	}
-	return res
+	return rune(r.Intn(126-43) + 43)
 }
 func randStringUnmarshalmerge(r randyUnmarshalmerge) string {
 	v4 := r.Intn(100)

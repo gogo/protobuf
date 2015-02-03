@@ -1216,7 +1216,6 @@ func (this *{{.CName}}Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-	//nil is the least
 	if this.mem[j] == nil {
 		return false
 	}

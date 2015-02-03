@@ -1,7 +1,7 @@
-# Go support for Protocol Buffers - Google's data interchange format
+# Extensions for Protocol Buffers to create more go like structures.
 #
-# Copyright 2010 The Go Authors.  All rights reserved.
-# https://github.com/golang/protobuf
+# Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+# http://github.com/gogo/protobuf/gogoproto
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -13,9 +13,6 @@
 # copyright notice, this list of conditions and the following disclaimer
 # in the documentation and/or other materials provided with the
 # distribution.
-#     * Neither the name of Google Inc. nor the names of its
-# contributors may be used to endorse or promote products derived from
-# this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -68,6 +65,7 @@ regenerate:
 	make -C test/enumprefix regenerate
 	make -C test/packed regenerate
 	make -C test/tags regenerate
+	make -C test/oneof regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -91,6 +89,7 @@ tests:
 	go test -v ./test/packed
 	go test -v ./test/tags
 	go test -v ./parser
+	go test -v ./test/oneof
 	make vet
 
 vet:

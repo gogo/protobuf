@@ -363,7 +363,6 @@ func (this *Float64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -733,7 +732,6 @@ func (this *Float32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -1161,7 +1159,6 @@ func (this *Int32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -1571,7 +1568,6 @@ func (this *Int64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -1981,7 +1977,6 @@ func (this *Uint64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -2391,7 +2386,6 @@ func (this *Uint32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -2805,7 +2799,6 @@ func (this *Sint32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -3219,7 +3212,6 @@ func (this *Sint64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -3589,7 +3581,6 @@ func (this *Fixed32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -3959,7 +3950,6 @@ func (this *Fixed64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -4329,7 +4319,6 @@ func (this *Sfixed32Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -4699,7 +4688,6 @@ func (this *Sfixed64Sorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -5331,7 +5319,6 @@ func (this *StringSorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}
@@ -5779,7 +5766,6 @@ func (this *BytesSorter) Less(i, j int) bool {
 		}
 		this.saved[j] = true
 	}
-
 	if this.mem[j] == nil {
 		return false
 	}

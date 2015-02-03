@@ -27,4 +27,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	(protoc --proto_path=../:../../../../:../protobuf/:. --gogo_out=. thetest.proto)
+	go install ./regenerate-oneof
+	regenerate-oneof

@@ -95,11 +95,7 @@ type randyTags interface {
 }
 
 func randUTF8RuneTags(r randyTags) rune {
-	res := rune(r.Uint32() % 1112064)
-	if 55296 <= res {
-		res += 2047
-	}
-	return res
+	return rune(r.Intn(126-43) + 43)
 }
 func randStringTags(r randyTags) string {
 	v3 := r.Intn(100)

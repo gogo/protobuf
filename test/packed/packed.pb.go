@@ -2803,11 +2803,7 @@ type randyPacked interface {
 }
 
 func randUTF8RunePacked(r randyPacked) rune {
-	res := rune(r.Uint32() % 1112064)
-	if 55296 <= res {
-		res += 2047
-	}
-	return res
+	return rune(r.Intn(126-43) + 43)
 }
 func randStringPacked(r randyPacked) string {
 	v53 := r.Intn(100)
