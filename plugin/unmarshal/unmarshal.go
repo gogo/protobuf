@@ -685,26 +685,21 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 
-		// calculate the minimal range we need to store all required fields
-		rfMin, rfMax := func() (min int, max int) {
-			for _, field := range message.Field {
-				if fn := int(field.GetNumber()); field.IsRequired() {
-					if fn < min || min == 0 {
-						min = fn
-					}
-					if fn > max {
-						max = fn
-					}
-				}
+		// build a map required field_id -> bitmask offset
+		rfMap := make(map[int32]uint)
+		rfNextId := uint(0)
+		for _, field := range message.Field {
+			if field.IsRequired() {
+				rfMap[field.GetNumber()] = rfNextId
+				rfNextId++
 			}
-			return
-		}()
+		}
+		rfCount := len(rfMap)
 
-		p.P()
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
-		if rfMin > 0 {
-			p.P(`var hasFields [`, strconv.Itoa(1+(rfMax-rfMin)/64), `]uint64`)
+		if rfCount > 0 {
+			p.P(`var hasFields [`, strconv.Itoa(1+(rfCount-1)/64), `]uint64`)
 		}
 		p.P(`l := len(data)`)
 		p.P(`index := 0`)
@@ -715,14 +710,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`fieldNum := int32(wire >> 3)`)
 		if len(message.Field) > 0 {
 			p.P(`wireType := int(wire & 0x7)`)
-		}
-		p.P()
-		if rfMin > 0 {
-			p.P(`if fn := int(fieldNum-`, strconv.Itoa(rfMin), `); fn <= `, strconv.Itoa(rfMax-rfMin), ` { `)
-			p.In()
-			p.P(`hasFields[fn/64] |= (uint64(1) << (uint(fn) % 64))`)
-			p.Out()
-			p.P(`}`)
 		}
 		p.P()
 		p.P(`switch fieldNum {`)
@@ -767,6 +754,15 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 				p.field(field, fieldname)
+			}
+
+			if field.IsRequired() {
+				fieldBit, ok := rfMap[field.GetNumber()]
+				if !ok {
+					panic("field is required, but no bit registered")
+				}
+
+				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, strconv.Itoa(1<<fieldBit%64), `)`)
 			}
 		}
 		p.Out()
@@ -863,9 +859,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				continue
 			}
 
-			fn := int(field.GetNumber()) - rfMin
+			fieldBit, ok := rfMap[field.GetNumber()]
+			if !ok {
+				panic("field is required, but no bit registered")
+			}
 
-			p.P(`if (hasFields[`, strconv.Itoa(fn/64), `] & (uint64(1) << `, strconv.Itoa(fn%64), `)) == 0 {`)
+			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, strconv.Itoa(1<<fieldBit%64), `) == 0 {`)
+
 			p.In()
 			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
 			p.Out()
