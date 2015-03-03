@@ -35,8 +35,3 @@
 regenerate:
 	protoc --gogo_out=. -I=../../protobuf/google/protobuf/compiler/:../../protobuf/ ../../protobuf/google/protobuf/compiler/plugin.proto
 
-restore:
-	cp plugin.pb.golden plugin.pb.go
-
-preserve:
-	cp plugin.pb.go plugin.pb.golden

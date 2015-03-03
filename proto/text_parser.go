@@ -414,6 +414,10 @@ func (p *textParser) checkForColon(props *Properties, typ reflect.Type) *ParseEr
 				if typ.Elem().Kind() != reflect.Ptr {
 					break
 				}
+			} else if typ.Kind() == reflect.String {
+				// The proto3 exception is for a string field,
+				// which requires a colon.
+				break
 			}
 			needColon = false
 		}

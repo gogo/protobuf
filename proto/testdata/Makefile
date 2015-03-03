@@ -38,7 +38,7 @@ regenerate:
 # The following rules are just aids to development. Not needed for typical testing.
 
 diff:	regenerate
-	hg diff test.pb.go
+	git diff test.pb.go
 
 restore:
 	cp test.pb.go.golden test.pb.go
