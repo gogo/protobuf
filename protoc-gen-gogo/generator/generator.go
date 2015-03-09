@@ -1063,10 +1063,11 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.Write(rem.Bytes())
 
 	// Reformat generated code.
+	contents := string(g.Buffer.Bytes())
 	fset := token.NewFileSet()
 	ast, err := parser.ParseFile(fset, "", g, parser.ParseComments)
 	if err != nil {
-		g.Fail("bad Go source code was generated:", err.Error())
+		g.Fail("%s\n bad Go source code was generated:", contents, err.Error())
 		return
 	}
 	g.Reset()
@@ -1316,7 +1317,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("}")
 	}
 
-	if !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+	if !enum.proto3() && !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		g.P("func (x ", ccTypeName, ") MarshalJSON() ([]byte, error) {")
 		g.In()
 		g.P("return ", g.Pkg["proto"], ".MarshalJSONEnum(", ccTypeName, "_name, int32(x))")
@@ -1450,7 +1451,8 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		// We only need the extra tag for []byte fields;
 		// no need to add noise for the others.
 		if *field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE &&
-			*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP {
+			*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP &&
+			!field.IsRepeated() {
 			name += ",proto3"
 		}
 	}

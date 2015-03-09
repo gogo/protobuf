@@ -161,7 +161,7 @@ func negative(typeName string) bool {
 	return true
 }
 
-func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
+func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3 bool) {
 	goTyp, _ := p.GoType(message, field)
 	fieldname := p.GetFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
@@ -213,11 +213,11 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				p.P(`this.`, fieldname, `[i] = `, val)
 				p.Out()
 				p.P(`}`)
-			} else if gogoproto.IsNullable(field) {
+			} else if !gogoproto.IsNullable(field) || proto3 {
+				p.P(`this.`, fieldname, ` = `, val)
+			} else {
 				p.P(p.varGen.Next(), ` := `, val)
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
-			} else {
-				p.P(`this.`, fieldname, ` = `, val)
 			}
 		} else if gogoproto.IsCustomType(field) {
 			funcName := "NewPopulated" + goTypName
@@ -277,11 +277,11 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				p.P(`this.`, fieldname, `[i] = `, val)
 				p.Out()
 				p.P(`}`)
-			} else if gogoproto.IsNullable(field) {
+			} else if !gogoproto.IsNullable(field) || proto3 {
+				p.P(`this.`, fieldname, ` = `, val)
+			} else {
 				p.P(p.varGen.Next(), `:= `, val)
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
-			} else {
-				p.P(`this.`, fieldname, ` = `, val)
 			}
 		} else {
 			typName := generator.GoTypeToName(goTyp)
@@ -300,7 +300,16 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				}
 				p.Out()
 				p.P(`}`)
-			} else if gogoproto.IsNullable(field) {
+			} else if !gogoproto.IsNullable(field) || proto3 {
+				p.P(`this.`, fieldname, ` = `, value(typName))
+				if negative(typName) {
+					p.P(`if r.Intn(2) == 0 {`)
+					p.In()
+					p.P(`this.`, fieldname, ` *= -1`)
+					p.Out()
+					p.P(`}`)
+				}
+			} else {
 				p.P(p.varGen.Next(), ` := `, value(typName))
 				if negative(typName) {
 					p.P(`if r.Intn(2) == 0 {`)
@@ -310,15 +319,6 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 					p.P(`}`)
 				}
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
-			} else {
-				p.P(`this.`, fieldname, ` = `, value(typName))
-				if negative(typName) {
-					p.P(`if r.Intn(2) == 0 {`)
-					p.In()
-					p.P(`this.`, fieldname, ` *= -1`)
-					p.Out()
-					p.P(`}`)
-				}
 			}
 		}
 	}
@@ -368,6 +368,7 @@ func (p *plugin) loops(field *descriptor.FieldDescriptorProto, message *generato
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.atleastOne = false
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.varGen = NewVarGen()
@@ -409,19 +410,19 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				k += ran
 				p.P(`case `, strings.Join(is, ","), `:`)
 				p.In()
-				p.GenerateField(message, field)
+				p.GenerateField(message, field, proto3)
 				p.Out()
 			}
 			p.P(`}`)
 		} else {
 			var maxFieldNumber int32
 			for _, field := range message.Field {
-				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) {
-					p.GenerateField(message, field)
+				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || proto3 {
+					p.GenerateField(message, field, proto3)
 				} else {
 					p.P(`if r.Intn(10) != 0 {`)
 					p.In()
-					p.GenerateField(message, field)
+					p.GenerateField(message, field, proto3)
 					p.Out()
 					p.P(`}`)
 				}

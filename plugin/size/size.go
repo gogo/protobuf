@@ -203,6 +203,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		p.atleastOne = true
+		proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) Size() (n int) {`)
@@ -216,7 +217,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			if repeated {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
-			} else if nullable || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+			} else if (!proto3 && nullable) || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
 			}
@@ -236,6 +237,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*8))`, `+len(m.`, fieldname, `)*8`)
 				} else if repeated {
 					p.P(`n+=`, strconv.Itoa(key+8), `*len(m.`, fieldname, `)`)
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key+8))
+					p.Out()
+					p.P(`}`)
 				} else if nullable {
 					p.P(`n+=`, strconv.Itoa(key+8))
 				} else {
@@ -248,6 +255,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*4))`, `+len(m.`, fieldname, `)*4`)
 				} else if repeated {
 					p.P(`n+=`, strconv.Itoa(key+4), `*len(m.`, fieldname, `)`)
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key+4))
+					p.Out()
+					p.P(`}`)
 				} else if nullable {
 					p.P(`n+=`, strconv.Itoa(key+4))
 				} else {
@@ -272,6 +285,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(e))`)
 					p.Out()
 					p.P(`}`)
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
+					p.Out()
+					p.P(`}`)
 				} else if nullable {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(*m.`, fieldname, `))`)
 				} else {
@@ -282,6 +301,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)))`, `+len(m.`, fieldname, `)*1`)
 				} else if repeated {
 					p.P(`n+=`, strconv.Itoa(key+1), `*len(m.`, fieldname, `)`)
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key+1))
+					p.Out()
+					p.P(`}`)
 				} else if nullable {
 					p.P(`n+=`, strconv.Itoa(key+1))
 				} else {
@@ -292,6 +317,13 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`for _, s := range m.`, fieldname, ` { `)
 					p.In()
 					p.P(`l = len(s)`)
+					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+					p.Out()
+					p.P(`}`)
+				} else if proto3 {
+					p.P(`l=len(m.`, fieldname, `)`)
+					p.P(`if l > 0 {`)
+					p.In()
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 					p.Out()
 					p.P(`}`)
@@ -322,6 +354,13 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 						p.P(`for _, b := range m.`, fieldname, ` { `)
 						p.In()
 						p.P(`l = len(b)`)
+						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+						p.Out()
+						p.P(`}`)
+					} else if proto3 {
+						p.P(`l=len(m.`, fieldname, `)`)
+						p.P(`if l > 0 {`)
+						p.In()
 						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 						p.Out()
 						p.P(`}`)
@@ -358,6 +397,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(e))`)
 					p.Out()
 					p.P(`}`)
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
+					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
+					p.Out()
+					p.P(`}`)
 				} else if nullable {
 					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(*m.`, fieldname, `))`)
 				} else {
@@ -366,7 +411,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			default:
 				panic("not implemented")
 			}
-			if nullable || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+			if (!proto3 && nullable) || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
 				p.Out()
 				p.P(`}`)
 			}

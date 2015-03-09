@@ -26,53 +26,26 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package version
+package main
 
 import (
 	"fmt"
+	"github.com/gogo/protobuf/protoc-gen-gogo/version"
+	"os"
 	"os/exec"
-	"strconv"
-	"strings"
 )
 
-func Get() string {
-	versionBytes, _ := exec.Command("protoc", "--version").CombinedOutput()
-	version := strings.TrimSpace(string(versionBytes))
-	versions := strings.Split(version, " ")
-	if len(versions) != 2 {
-		panic("version string returned from protoc is seperated with a space: " + version)
+func main() {
+	if !version.AtLeast("3.0.0") {
+		fmt.Printf("protoc version not high enough to test this feature\n")
+		os.Remove("proto3.pb.go")
+		os.Remove("proto3pb_test.go")
+		return
 	}
-	return versions[1]
-}
-
-func parseVersion(version string) (int, error) {
-	versions := strings.Split(version, ".")
-	if len(versions) != 3 {
-		return 0, fmt.Errorf("version does not have 3 numbers seperated by dots: %s", version)
-	}
-	n := 0
-	for _, v := range versions {
-		i, err := strconv.Atoi(v)
-		if err != nil {
-			return 0, err
-		}
-		n = n*10 + i
-	}
-	return n, nil
-}
-
-func less(this, that string) bool {
-	thisNum, err := parseVersion(this)
+	gen := exec.Command("protoc", "--gogo_out=.", "proto3.proto")
+	out, err := gen.CombinedOutput()
 	if err != nil {
+		fmt.Printf("%s\n", string(out))
 		panic(err)
 	}
-	thatNum, err := parseVersion(that)
-	if err != nil {
-		panic(err)
-	}
-	return thisNum <= thatNum
-}
-
-func AtLeast(v string) bool {
-	return less(v, Get())
 }

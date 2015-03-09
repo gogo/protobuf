@@ -116,6 +116,7 @@ func (p *stringer) Init(g *generator.Generator) {
 }
 
 func (p *stringer) Generate(file *generator.FileDescriptor) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
@@ -158,7 +159,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 					p.P("`", fieldname, ":`", ` + `, stringsPkg.Use(), `.Replace(`, stringsPkg.Use(), `.Replace(this.`, fieldname, `.String(), "`, typeName, `","`, msgname, `"`, ", 1),`&`,``,1) + `,", "`,")
 				}
 			} else {
-				if nullable && !repeated {
+				if nullable && !repeated && !proto3 {
 					p.P("`", fieldname, ":`", ` + valueToString`, p.localName, `(this.`, fieldname, ") + `,", "`,")
 				} else {
 					p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")

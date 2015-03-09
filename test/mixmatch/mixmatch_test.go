@@ -40,7 +40,7 @@ type MixMatch struct {
 	New []string
 }
 
-func move(src string, dst string) {
+func copyFile(src string, dst string) {
 	data, err := ioutil.ReadFile(src)
 	if err != nil {
 		panic(err)
@@ -69,8 +69,8 @@ func (this MixMatch) Regenerate() {
 	if err := ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
 		panic(err)
 	}
-	move("../uuid.go", "./testdata/uuid.go")
-	move("../bug_test.go", "./testdata/bug_test.go")
+	copyFile("../uuid.go", "./testdata/uuid.go")
+	copyFile("../bug_test.go", "./testdata/bug_test.go")
 	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../protobuf/:../../../../../:.", "./testdata/thetest.proto")
 	fmt.Printf("regenerating\n")
 	out, err := regenerate.CombinedOutput()

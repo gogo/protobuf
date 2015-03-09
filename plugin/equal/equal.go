@@ -224,6 +224,7 @@ func (p *plugin) generateNullableField(fieldname string, verbose bool) {
 }
 
 func (p *plugin) generateMessage(file *generator.FileDescriptor, message *generator.Descriptor, verbose bool) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	ccTypeName := generator.CamelCaseSlice(message.TypeName())
 	if verbose {
 		p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
@@ -321,13 +322,13 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 				} else if field.IsBytes() {
 					p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
 				} else if field.IsString() {
-					if nullable {
+					if nullable && !proto3 {
 						p.generateNullableField(fieldname, verbose)
 					} else {
 						p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 					}
 				} else {
-					if nullable {
+					if nullable && !proto3 {
 						p.generateNullableField(fieldname, verbose)
 					} else {
 						p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)

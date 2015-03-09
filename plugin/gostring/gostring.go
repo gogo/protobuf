@@ -120,6 +120,7 @@ func (p *gostring) Init(g *generator.Generator) {
 }
 
 func (p *gostring) Generate(file *generator.FileDescriptor) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
@@ -166,14 +167,14 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			} else {
 				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
 				if field.IsEnum() {
-					if nullable && !repeated {
+					if nullable && !repeated && !proto3 {
 						goTyp, _ := p.GoType(message, field)
 						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {
 						tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
 					}
 				} else {
-					if nullable && !repeated {
+					if nullable && !repeated && !proto3 {
 						goTyp, _ := p.GoType(message, field)
 						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
 					} else {

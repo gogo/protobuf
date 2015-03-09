@@ -53,7 +53,7 @@ type Message struct {
 	ResultCount  int64          `protobuf:"varint,7,opt,name=result_count,proto3" json:"result_count,omitempty"`
 	TrueScotsman bool           `protobuf:"varint,8,opt,name=true_scotsman,proto3" json:"true_scotsman,omitempty"`
 	Score        float32        `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
-	Key          []uint64       `protobuf:"varint,5,rep,name=key,proto3" json:"key,omitempty"`
+	Key          []uint64       `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
 	Nested       *Nested        `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
 }
 
