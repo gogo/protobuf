@@ -62,6 +62,87 @@ func size_ext_slice_byte(p *Properties, base structPointer) (n int) {
 	return
 }
 
+// Encode a reference to bool pointer.
+func (o *Buffer) enc_ref_bool(p *Properties, base structPointer) error {
+	v := *structPointer_BoolVal(base, p.field)
+	x := 0
+	if v {
+		x = 1
+	}
+	o.buf = append(o.buf, p.tagcode...)
+	p.valEnc(o, uint64(x))
+	return nil
+}
+
+func size_ref_bool(p *Properties, base structPointer) int {
+	return len(p.tagcode) + 1 // each bool takes exactly one byte
+}
+
+// Encode a reference to int32 pointer.
+func (o *Buffer) enc_ref_int32(p *Properties, base structPointer) error {
+	v := structPointer_Word32Val(base, p.field)
+	x := int32(word32Val_Get(v))
+	o.buf = append(o.buf, p.tagcode...)
+	p.valEnc(o, uint64(x))
+	return nil
+}
+
+func size_ref_int32(p *Properties, base structPointer) (n int) {
+	v := structPointer_Word32Val(base, p.field)
+	x := int32(word32Val_Get(v))
+	n += len(p.tagcode)
+	n += p.valSize(uint64(x))
+	return
+}
+
+func (o *Buffer) enc_ref_uint32(p *Properties, base structPointer) error {
+	v := structPointer_Word32Val(base, p.field)
+	x := word32Val_Get(v)
+	o.buf = append(o.buf, p.tagcode...)
+	p.valEnc(o, uint64(x))
+	return nil
+}
+
+func size_ref_uint32(p *Properties, base structPointer) (n int) {
+	v := structPointer_Word32Val(base, p.field)
+	x := word32Val_Get(v)
+	n += len(p.tagcode)
+	n += p.valSize(uint64(x))
+	return
+}
+
+// Encode a reference to an int64 pointer.
+func (o *Buffer) enc_ref_int64(p *Properties, base structPointer) error {
+	v := structPointer_Word64Val(base, p.field)
+	x := word64Val_Get(v)
+	o.buf = append(o.buf, p.tagcode...)
+	p.valEnc(o, x)
+	return nil
+}
+
+func size_ref_int64(p *Properties, base structPointer) (n int) {
+	v := structPointer_Word64Val(base, p.field)
+	x := word64Val_Get(v)
+	n += len(p.tagcode)
+	n += p.valSize(x)
+	return
+}
+
+// Encode a reference to a string pointer.
+func (o *Buffer) enc_ref_string(p *Properties, base structPointer) error {
+	v := *structPointer_StringVal(base, p.field)
+	o.buf = append(o.buf, p.tagcode...)
+	o.EncodeStringBytes(v)
+	return nil
+}
+
+func size_ref_string(p *Properties, base structPointer) (n int) {
+	v := *structPointer_StringVal(base, p.field)
+	n += len(p.tagcode)
+	n += sizeStringBytes(v)
+	return
+}
+
 // Encode a reference to a message struct.
 func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error {
 	var state errorState

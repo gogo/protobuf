@@ -46,15 +46,15 @@ func (x Message_Humour) String() string {
 }
 
 type Message struct {
-	Name         *string         `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Hilarity     *Message_Humour `protobuf:"varint,2,opt,name=hilarity,enum=proto3_proto.Message_Humour" json:"hilarity,omitempty"`
-	HeightInCm   *uint32         `protobuf:"varint,3,opt,name=height_in_cm" json:"height_in_cm,omitempty"`
-	Data         []byte          `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	ResultCount  *int64          `protobuf:"varint,7,opt,name=result_count" json:"result_count,omitempty"`
-	TrueScotsman *bool           `protobuf:"varint,8,opt,name=true_scotsman" json:"true_scotsman,omitempty"`
-	Score        *float32        `protobuf:"fixed32,9,opt,name=score" json:"score,omitempty"`
-	Key          []uint64        `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
-	Nested       *Nested         `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
+	Name         string         `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Hilarity     Message_Humour `protobuf:"varint,2,opt,name=hilarity,proto3,enum=proto3_proto.Message_Humour" json:"hilarity,omitempty"`
+	HeightInCm   uint32         `protobuf:"varint,3,opt,name=height_in_cm,proto3" json:"height_in_cm,omitempty"`
+	Data         []byte         `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	ResultCount  int64          `protobuf:"varint,7,opt,name=result_count,proto3" json:"result_count,omitempty"`
+	TrueScotsman bool           `protobuf:"varint,8,opt,name=true_scotsman,proto3" json:"true_scotsman,omitempty"`
+	Score        float32        `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
+	Key          []uint64       `protobuf:"varint,5,rep,name=key,proto3" json:"key,omitempty"`
+	Nested       *Nested        `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
 }
 
 func (m *Message) Reset()         { *m = Message{} }
@@ -69,7 +69,7 @@ func (m *Message) GetNested() *Nested {
 }
 
 type Nested struct {
-	Bunny *string `protobuf:"bytes,1,opt,name=bunny" json:"bunny,omitempty"`
+	Bunny string `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
 }
 
 func (m *Nested) Reset()         { *m = Nested{} }

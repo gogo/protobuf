@@ -1449,7 +1449,8 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if message.proto3() {
 		// We only need the extra tag for []byte fields;
 		// no need to add noise for the others.
-		if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES {
+		if *field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE &&
+			*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP {
 			name += ",proto3"
 		}
 	}
@@ -1466,7 +1467,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		ctype))
 }
 
-func needsStar(field *descriptor.FieldDescriptorProto) bool {
+func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool) bool {
 	if isRepeated(field) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
@@ -1476,6 +1477,11 @@ func needsStar(field *descriptor.FieldDescriptorProto) bool {
 		return false
 	}
 	if !gogoproto.IsNullable(field) {
+		return false
+	}
+	if proto3 &&
+		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
+		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
 	}
 	return true
@@ -1553,7 +1559,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.customImports = append(g.customImports, packageName)
 		}
 	}
-	if needsStar(field) {
+	if needsStar(field, g.file.proto3) {
 		typ = "*" + typ
 	}
 	if isRepeated(field) {
@@ -1810,7 +1816,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		star := ""
 		if (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 			(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-			needsStar(field) && typename[0] == '*' {
+			needsStar(field, g.file.proto3) && typename[0] == '*' {
 			typename = typename[1:]
 			star = "*"
 		}

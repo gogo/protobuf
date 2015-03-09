@@ -327,33 +327,75 @@ func (p *Properties) setEncAndDec(typ reflect.Type, lockGetProp bool) {
 	// proto3 scalar types
 
 	case reflect.Bool:
-		p.enc = (*Buffer).enc_proto3_bool
-		p.dec = (*Buffer).dec_proto3_bool
-		p.size = size_proto3_bool
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_bool
+			p.dec = (*Buffer).dec_proto3_bool
+			p.size = size_proto3_bool
+		} else {
+			p.enc = (*Buffer).enc_ref_bool
+			p.dec = (*Buffer).dec_proto3_bool
+			p.size = size_ref_bool
+		}
 	case reflect.Int32:
-		p.enc = (*Buffer).enc_proto3_int32
-		p.dec = (*Buffer).dec_proto3_int32
-		p.size = size_proto3_int32
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_int32
+			p.dec = (*Buffer).dec_proto3_int32
+			p.size = size_proto3_int32
+		} else {
+			p.enc = (*Buffer).enc_ref_int32
+			p.dec = (*Buffer).dec_proto3_int32
+			p.size = size_ref_int32
+		}
 	case reflect.Uint32:
-		p.enc = (*Buffer).enc_proto3_uint32
-		p.dec = (*Buffer).dec_proto3_int32 // can reuse
-		p.size = size_proto3_uint32
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_uint32
+			p.dec = (*Buffer).dec_proto3_int32 // can reuse
+			p.size = size_proto3_uint32
+		} else {
+			p.enc = (*Buffer).enc_ref_uint32
+			p.dec = (*Buffer).dec_proto3_int32 // can reuse
+			p.size = size_ref_uint32
+		}
 	case reflect.Int64, reflect.Uint64:
-		p.enc = (*Buffer).enc_proto3_int64
-		p.dec = (*Buffer).dec_proto3_int64
-		p.size = size_proto3_int64
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_int64
+			p.dec = (*Buffer).dec_proto3_int64
+			p.size = size_proto3_int64
+		} else {
+			p.enc = (*Buffer).enc_ref_int64
+			p.dec = (*Buffer).dec_proto3_int64
+			p.size = size_ref_int64
+		}
 	case reflect.Float32:
-		p.enc = (*Buffer).enc_proto3_uint32 // can just treat them as bits
-		p.dec = (*Buffer).dec_proto3_int32
-		p.size = size_proto3_uint32
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_uint32 // can just treat them as bits
+			p.dec = (*Buffer).dec_proto3_int32
+			p.size = size_proto3_uint32
+		} else {
+			p.enc = (*Buffer).enc_ref_uint32 // can just treat them as bits
+			p.dec = (*Buffer).dec_proto3_int32
+			p.size = size_ref_uint32
+		}
 	case reflect.Float64:
-		p.enc = (*Buffer).enc_proto3_int64 // can just treat them as bits
-		p.dec = (*Buffer).dec_proto3_int64
-		p.size = size_proto3_int64
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_int64 // can just treat them as bits
+			p.dec = (*Buffer).dec_proto3_int64
+			p.size = size_proto3_int64
+		} else {
+			p.enc = (*Buffer).enc_ref_int64 // can just treat them as bits
+			p.dec = (*Buffer).dec_proto3_int64
+			p.size = size_ref_int64
+		}
 	case reflect.String:
-		p.enc = (*Buffer).enc_proto3_string
-		p.dec = (*Buffer).dec_proto3_string
-		p.size = size_proto3_string
+		if p.proto3 {
+			p.enc = (*Buffer).enc_proto3_string
+			p.dec = (*Buffer).dec_proto3_string
+			p.size = size_proto3_string
+		} else {
+			p.enc = (*Buffer).enc_ref_string
+			p.dec = (*Buffer).dec_proto3_string
+			p.size = size_ref_string
+		}
 	case reflect.Struct:
 		p.stype = typ
 		p.isMarshaler = isMarshaler(typ)
