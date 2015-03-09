@@ -28,9 +28,11 @@
 The defaultcheck plugin is used to check whether nullable is not used incorrectly.
 For instance:
 An error is caused if a nullable field:
-  - has a default value.
-  - is an enum which does not start at zero.
-  - is used for an extension.
+  - has a default value,
+  - is an enum which does not start at zero,
+  - is used for an extension,
+  - is used for a native proto3 type,
+  - is used for a repeated native type.
 
 An error is also caused if a field with a default value is used in a message:
   - which is a face.
@@ -71,6 +73,7 @@ func (p *plugin) Init(g *generator.Generator) {
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	for _, msg := range file.Messages() {
 		getters := gogoproto.HasGoGetters(file.FileDescriptorProto, msg.DescriptorProto)
 		face := gogoproto.IsFace(file.FileDescriptorProto, msg.DescriptorProto)
@@ -91,6 +94,14 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			if len(field.GetDefaultValue()) > 0 {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be non-nullable and have a default value", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
+			}
+			if !field.IsMessage() && !gogoproto.IsCustomType(field) {
+				if field.IsRepeated() {
+					fmt.Fprintf(os.Stderr, "WARNING: field %v.%v is a repeated non-nullable native type, nullable=false has no effect\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				} else if proto3 {
+					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v is a native type and in proto3 syntax with nullable=false there exists conflicting interpretations for zero values", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+					os.Exit(1)
+				}
 			}
 			if !field.IsEnum() {
 				continue
