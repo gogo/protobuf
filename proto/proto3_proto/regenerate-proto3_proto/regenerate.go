@@ -31,15 +31,12 @@ package main
 import (
 	"fmt"
 	"github.com/gogo/protobuf/protoc-gen-gogo/version"
-	"os"
 	"os/exec"
 )
 
 func main() {
 	if !version.AtLeast("3.0.0") {
 		fmt.Printf("protoc version not high enough to test this feature\n")
-		os.Remove("proto3.pb.go")
-		os.Remove("proto3pb_test.go")
 		return
 	}
 	gen := exec.Command("protoc", "--gogo_out=.", "proto3.proto")
