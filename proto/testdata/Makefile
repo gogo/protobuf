@@ -32,7 +32,6 @@
 all:	regenerate
 
 regenerate:
-	rm -f test.pb.go
 	go install github.com/gogo/protobuf/protoc-gen-gogo/version/protoc-min-version
 	protoc-min-version --version="3.0.0" --gogo_out=. test.proto
 	
