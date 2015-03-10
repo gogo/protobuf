@@ -29,17 +29,25 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/gogo/protobuf/protoc-gen-gogo/version"
 	"os/exec"
 )
 
+var min = flag.String("version", "2.3.0", "minimum protoc version")
+var gogo_out = flag.String("gogo_out", ".", "")
+var proto_path = flag.String("proto_path", ".", "")
+
 func main() {
-	if !version.AtLeast("3.0.0") {
-		fmt.Printf("protoc version not high enough to test this feature\n")
+	flag.Parse()
+	if !version.AtLeast(*min) {
+		fmt.Printf("protoc version not high enough to parse this proto file\n")
 		return
 	}
-	gen := exec.Command("protoc", "--gogo_out=.", "proto3.proto")
+	args := flag.Args()
+	args = append([]string{"--gogo_out=" + *gogo_out, "--proto_path=" + *proto_path}, args...)
+	gen := exec.Command("protoc", args...)
 	out, err := gen.CombinedOutput()
 	if err != nil {
 		fmt.Printf("%s\n", string(out))

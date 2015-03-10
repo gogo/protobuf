@@ -27,5 +27,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install ./regenerate-oneof
-	regenerate-oneof
+	go install github.com/gogo/protobuf/protoc-gen-gogo/version/protoc-min-version
+	protoc-min-version --version="2.6.0" --gogo_out=. --proto_path=../../../../../:../../protobuf/:. one.proto

@@ -32,8 +32,8 @@
 all:	regenerate
 
 regenerate:
-	go install ./regenerate-proto3_proto
-	regenerate-proto3_proto
+	go install github.com/gogo/protobuf/protoc-gen-gogo/version/protoc-min-version
+	protoc-min-version --version="3.0.0" --gogo_out=. proto3.proto
 
 # The following rules are just aids to development. Not needed for typical testing.
 
