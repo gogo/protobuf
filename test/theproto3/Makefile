@@ -27,5 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-gen-gogo/version/protoc-min-version
-	protoc-min-version --version="3.0.0" --gogo_out=. --proto_path=../../../../../:../../protobuf/:. theproto3.proto
+	cp header.txt theproto3.proto
+	tail -n +35 ../../proto/proto3_proto/proto3.proto >> theproto3.proto
+	go install github.com/gogo/protobuf/protoc-gen-gogo/protoc-gen-combo
+	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. theproto3.proto

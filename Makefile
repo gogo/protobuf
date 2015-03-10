@@ -36,7 +36,7 @@ install:
 	go install ./fieldpath
 	go install ./pbpath
 
-all: clean install regenerate gofmt install tests
+all: clean install regenerate install tests
 
 clean:
 	go clean ./...
@@ -92,7 +92,8 @@ tests:
 	go test -v ./test/tags
 	go test -v ./parser
 	go test -v ./test/oneof
-	go test -v ./test/theproto3
+	go test -v ./test/theproto3/...
+	go test -v ./test/combos/...
 	make vet
 
 vet:
@@ -104,7 +105,6 @@ drone:
 
 testall: tests
 	make -C protoc-gen-gogo/testdata test
-	go test -v ./test/mixmatch
 
 bench:
 	(cd test/mixbench && go build .)

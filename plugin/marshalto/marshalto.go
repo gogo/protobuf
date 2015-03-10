@@ -267,6 +267,7 @@ func (p *marshalto) encodeKey(fieldNumber int32, wireType int) {
 }
 
 func (p *marshalto) Generate(file *generator.FileDescriptor) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	numGen := NewNumGen()
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
@@ -323,7 +324,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			if repeated {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
-			} else if nullable || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
+			} else if (!proto3 && nullable) || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
 			}
@@ -353,12 +354,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.encodeFixed64("f" + numGen.Current())
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.callFixed64(mathPkg.Use(), `.Float64bits(*m.`+fieldname, `)`)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.callFixed64(mathPkg.Use(), `.Float64bits(m.`+fieldname, `)`)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed64(mathPkg.Use(), `.Float64bits(m.`+fieldname, `)`)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed64(mathPkg.Use(), `.Float64bits(*m.`+fieldname, `)`)
 					}
 				} else {
 					if packed {
@@ -376,12 +384,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.unsafeFixed64("num", "float64")
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.unsafeFixed64(`*m.`+fieldname, `float64`)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.unsafeFixed64(`m.`+fieldname, "float64")
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed64(`m.`+fieldname, "float64")
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed64(`*m.`+fieldname, `float64`)
 					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FLOAT:
@@ -403,12 +418,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.encodeFixed32("f" + numGen.Current())
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.callFixed32(mathPkg.Use(), `.Float32bits(*m.`+fieldname, `)`)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.callFixed32(mathPkg.Use(), `.Float32bits(m.`+fieldname, `)`)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed32(mathPkg.Use(), `.Float32bits(m.`+fieldname, `)`)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed32(mathPkg.Use(), `.Float32bits(*m.`+fieldname, `)`)
 					}
 				} else {
 					if packed {
@@ -426,12 +448,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.unsafeFixed32("num", "float32")
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.unsafeFixed32(`*m.`+fieldname, "float32")
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.unsafeFixed32(`m.`+fieldname, `float32`)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed32(`m.`+fieldname, `float32`)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed32(`*m.`+fieldname, "float32")
 					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_INT64,
@@ -473,12 +502,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.callVarint("num")
 					p.Out()
 					p.P(`}`)
-				} else if nullable {
-					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`*m.`, fieldname)
-				} else {
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
 					p.encodeKey(fieldNumber, wireType)
 					p.callVarint(`m.`, fieldname)
+					p.Out()
+					p.P(`}`)
+				} else if !nullable {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`m.`, fieldname)
+				} else {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`*m.`, fieldname)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -498,12 +534,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.encodeFixed64("num")
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.callFixed64("*m." + fieldname)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.callFixed64("m." + fieldname)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed64("m." + fieldname)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed64("*m." + fieldname)
 					}
 				} else {
 					typeName := "int64"
@@ -525,12 +568,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.unsafeFixed64("num", typeName)
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.unsafeFixed64("*m."+fieldname, typeName)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.unsafeFixed64("m."+fieldname, typeName)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed64("m."+fieldname, typeName)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed64("*m."+fieldname, typeName)
 					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_FIXED32,
@@ -551,12 +601,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.encodeFixed32("num")
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.callFixed32("*m." + fieldname)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.callFixed32("m." + fieldname)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed32("m." + fieldname)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.callFixed32("*m." + fieldname)
 					}
 				} else {
 					typeName := "int32"
@@ -578,12 +635,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.unsafeFixed32("num", typeName)
 						p.Out()
 						p.P(`}`)
-					} else if nullable {
-						p.encodeKey(fieldNumber, wireType)
-						p.unsafeFixed32("*m."+fieldname, typeName)
-					} else {
+					} else if proto3 {
+						p.P(`if m.`, fieldname, ` != 0 {`)
+						p.In()
 						p.encodeKey(fieldNumber, wireType)
 						p.unsafeFixed32("m."+fieldname, typeName)
+						p.Out()
+						p.P(`}`)
+					} else if !nullable {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed32("m."+fieldname, typeName)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.unsafeFixed32("*m."+fieldname, typeName)
 					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
@@ -620,9 +684,25 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`i++`)
 					p.Out()
 					p.P(`}`)
-				} else if nullable {
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` {`)
+					p.In()
 					p.encodeKey(fieldNumber, wireType)
-					p.P(`if *m.`, fieldname, ` {`)
+					p.P(`if m.`, fieldname, ` {`)
+					p.In()
+					p.P(`data[i] = 1`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`data[i] = 0`)
+					p.Out()
+					p.P(`}`)
+					p.P(`i++`)
+					p.Out()
+					p.P(`}`)
+				} else if !nullable {
+					p.encodeKey(fieldNumber, wireType)
+					p.P(`if m.`, fieldname, ` {`)
 					p.In()
 					p.P(`data[i] = 1`)
 					p.Out()
@@ -634,7 +714,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`i++`)
 				} else {
 					p.encodeKey(fieldNumber, wireType)
-					p.P(`if m.`, fieldname, ` {`)
+					p.P(`if *m.`, fieldname, ` {`)
 					p.In()
 					p.P(`data[i] = 1`)
 					p.Out()
@@ -655,14 +735,22 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`i+=copy(data[i:], s)`)
 					p.Out()
 					p.P(`}`)
-				} else if nullable {
-					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`len(*m.`, fieldname, `)`)
-					p.P(`i+=copy(data[i:], *m.`, fieldname, `)`)
-				} else {
+				} else if proto3 {
+					p.P(`if len(m.`, fieldname, `) > 0 {`)
+					p.In()
 					p.encodeKey(fieldNumber, wireType)
 					p.callVarint(`len(m.`, fieldname, `)`)
 					p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
+					p.Out()
+					p.P(`}`)
+				} else if !nullable {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`len(m.`, fieldname, `)`)
+					p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
+				} else {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`len(*m.`, fieldname, `)`)
+					p.P(`i+=copy(data[i:], *m.`, fieldname, `)`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
 				panic(fmt.Errorf("marshaler does not support group %v", fieldname))
@@ -700,6 +788,14 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.encodeKey(fieldNumber, wireType)
 						p.callVarint("len(b)")
 						p.P(`i+=copy(data[i:], b)`)
+						p.Out()
+						p.P(`}`)
+					} else if proto3 {
+						p.P(`if len(m.`, fieldname, `) > 0 {`)
+						p.In()
+						p.encodeKey(fieldNumber, wireType)
+						p.callVarint(`len(m.`, fieldname, `)`)
+						p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
 						p.Out()
 						p.P(`}`)
 					} else {
@@ -766,12 +862,19 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.encodeVarint("x" + numGen.Current())
 					p.Out()
 					p.P(`}`)
-				} else if nullable {
-					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`(uint32(*m.`, fieldname, `) << 1) ^ uint32((*m.`, fieldname, ` >> 31))`)
-				} else {
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
 					p.encodeKey(fieldNumber, wireType)
 					p.callVarint(`(uint32(m.`, fieldname, `) << 1) ^ uint32((m.`, fieldname, ` >> 31))`)
+					p.Out()
+					p.P(`}`)
+				} else if !nullable {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`(uint32(m.`, fieldname, `) << 1) ^ uint32((m.`, fieldname, ` >> 31))`)
+				} else {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`(uint32(*m.`, fieldname, `) << 1) ^ uint32((*m.`, fieldname, ` >> 31))`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_SINT64:
 				if packed {
@@ -805,17 +908,24 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.encodeVarint("x" + numGen.Current())
 					p.Out()
 					p.P(`}`)
-				} else if nullable {
-					p.encodeKey(fieldNumber, wireType)
-					p.callVarint(`(uint64(*m.`, fieldname, `) << 1) ^ uint64((*m.`, fieldname, ` >> 63))`)
-				} else {
+				} else if proto3 {
+					p.P(`if m.`, fieldname, ` != 0 {`)
+					p.In()
 					p.encodeKey(fieldNumber, wireType)
 					p.callVarint(`(uint64(m.`, fieldname, `) << 1) ^ uint64((m.`, fieldname, ` >> 63))`)
+					p.Out()
+					p.P(`}`)
+				} else if !nullable {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`(uint64(m.`, fieldname, `) << 1) ^ uint64((m.`, fieldname, ` >> 63))`)
+				} else {
+					p.encodeKey(fieldNumber, wireType)
+					p.callVarint(`(uint64(*m.`, fieldname, `) << 1) ^ uint64((*m.`, fieldname, ` >> 63))`)
 				}
 			default:
 				panic("not implemented")
 			}
-			if nullable || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
+			if (!proto3 && nullable) || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
 				p.Out()
 				p.P(`}`)
 			}
