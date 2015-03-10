@@ -107,6 +107,12 @@ func fileIsProto3(file *descriptor.FileDescriptorProto) bool {
 
 func (c *common) proto3() bool { return fileIsProto3(c.file) }
 
+func fileUsesMaps(file *descriptor.FileDescriptorProto) bool {
+	return true
+}
+
+func (c *common) usesMaps() bool { return fileUsesMaps(c.file) }
+
 // Descriptor represents a protocol buffer message.
 type Descriptor struct {
 	common
@@ -1045,6 +1051,10 @@ func (g *Generator) generate(file *FileDescriptor) {
 		g.generateEnum(enum)
 	}
 	for _, desc := range g.file.desc {
+		// Don't generate virtual messages for maps.
+		if desc.GetOptions().GetMapEntry() && desc.usesMaps() {
+			continue
+		}
 		g.generateMessage(desc)
 	}
 	for _, ext := range g.file.ext {
@@ -1606,6 +1616,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 	fieldNames := make(map[*descriptor.FieldDescriptorProto]string)
 	fieldGetterNames := make(map[*descriptor.FieldDescriptorProto]string)
+	mapFieldTypes := make(map[*descriptor.FieldDescriptorProto]string)
 
 	g.PrintComments(message.path)
 	g.P("type ", ccTypeName, " struct {")
@@ -1638,13 +1649,39 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if gogoMoreTags != nil {
 			moreTags = " " + *gogoMoreTags
 		}
-		tag := fmt.Sprintf("`protobuf:%s json:%q%s`", g.goTag(message, field, wiretype), jsonTag, moreTags)
+		tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 			fieldName = ""
 		}
+
+		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+			desc := g.ObjectNamed(field.GetTypeName())
+			if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() && d.usesMaps() {
+				// Figure out the Go types and tags for the key and value types.
+				keyField, valField := d.Field[0], d.Field[1]
+				keyType, keyWire := g.GoType(d, keyField)
+				valType, valWire := g.GoType(d, valField)
+				keyTag, valTag := g.goTag(d, keyField, keyWire), g.goTag(d, valField, valWire)
+
+				// We don't use stars, except for message-typed values.
+				keyType = strings.TrimPrefix(keyType, "*")
+				switch *valField.Type {
+				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+					g.RecordTypeUse(valField.GetTypeName())
+				default:
+					valType = strings.TrimPrefix(valType, "*")
+				}
+
+				typename = fmt.Sprintf("map[%s]%s", keyType, valType)
+				mapFieldTypes[field] = typename // record for the getter generation
+
+				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", keyTag, valTag)
+			}
+		}
+
 		fieldNames[field] = fieldName
 		fieldGetterNames[field] = fieldGetterName
-		g.P(fieldName, "\t", typename, "\t", tag)
+		g.P(fieldName, "\t", typename, "\t`", tag, "`")
 		g.RecordTypeUse(field.GetTypeName())
 	}
 	if len(message.ExtensionRange) > 0 {
@@ -1814,6 +1851,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		fname := fieldNames[field]
 		typename, _ := g.GoType(message, field)
+		if t, ok := mapFieldTypes[field]; ok {
+			typename = t
+		}
 		mname := "Get" + fieldGetterNames[field]
 		star := ""
 		if (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
