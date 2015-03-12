@@ -115,12 +115,12 @@ func TestNidOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNidOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &NidOptEnum{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -134,12 +134,12 @@ func TestNinOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNinOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &NinOptEnum{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -153,12 +153,12 @@ func TestNidRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNidRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &NidRepEnum{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -172,12 +172,12 @@ func TestNinRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNinRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &NinRepEnum{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

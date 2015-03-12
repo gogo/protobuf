@@ -14867,7 +14867,13 @@ type randyThetest interface {
 }
 
 func randUTF8RuneThetest(r randyThetest) rune {
-	return rune(r.Intn(126-43) + 43)
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
 }
 func randStringThetest(r randyThetest) string {
 	v238 := r.Intn(100)

@@ -43,12 +43,12 @@ func TestFooJSON(t *testing.T) {
 	p := NewPopulatedFoo(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &Foo{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)

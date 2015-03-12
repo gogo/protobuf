@@ -161,19 +161,94 @@ func negative(typeName string) bool {
 	return true
 }
 
-func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3 bool) {
+func getFuncName(goTypName string) string {
+	funcName := "NewPopulated" + goTypName
+	goTypNames := strings.Split(goTypName, ".")
+	if len(goTypNames) == 2 {
+		funcName = goTypNames[0] + ".NewPopulated" + goTypNames[1]
+	} else if len(goTypNames) != 1 {
+		panic(fmt.Errorf("unreachable: too many dots in %v", goTypName))
+	}
+	return funcName
+}
+
+func getFuncCall(goTypName string) string {
+	funcName := getFuncName(goTypName)
+	funcCall := funcName + "(r, easy)"
+	return funcCall
+}
+
+func getCustomFuncCall(goTypName string) string {
+	funcName := getFuncName(goTypName)
+	funcCall := funcName + "(r)"
+	return funcCall
+}
+
+func (p *plugin) getEnumVal(field *descriptor.FieldDescriptorProto, goTyp string) string {
+	enum := p.ObjectNamed(field.GetTypeName()).(*generator.EnumDescriptor)
+	l := len(enum.Value)
+	values := make([]string, l)
+	for i := range enum.Value {
+		values[i] = strconv.Itoa(int(*enum.Value[i].Number))
+	}
+	arr := "[]int32{" + strings.Join(values, ",") + "}"
+	val := strings.Join([]string{generator.GoTypeToName(goTyp), `(`, arr, `[r.Intn(`, fmt.Sprintf("%d", l), `)])`}, "")
+	return val
+}
+
+func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	goTyp, _ := p.GoType(message, field)
 	fieldname := p.GetFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
-	if field.IsMessage() || p.IsGroup(field) {
-		funcName := "NewPopulated" + goTypName
-		goTypNames := strings.Split(goTypName, ".")
-		if len(goTypNames) == 2 {
-			funcName = goTypNames[0] + ".NewPopulated" + goTypNames[1]
-		} else if len(goTypNames) != 1 {
-			panic(fmt.Errorf("unreachable: too many dots in %v", goTypName))
+	if generator.IsMap(file.FileDescriptorProto, field) {
+		mapmsg := generator.GetMap(file.FileDescriptorProto, field)
+		mapkey, mapvalue := mapmsg.GetMapFields()
+		keygoTyp, _ := p.GoType(nil, mapkey)
+		valuegoTyp, _ := p.GoType(nil, mapvalue)
+		keytypName := generator.GoTypeToName(keygoTyp)
+		valuetypName := generator.GoTypeToName(valuegoTyp)
+		p.P(p.varGen.Next(), ` := r.Intn(10)`)
+		p.P(`this.`, fieldname, ` = make(map[`, keygoTyp, `]`, valuegoTyp, `)`)
+		p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
+		p.In()
+		if mapvalue.IsMessage() || p.IsGroup(field) {
+			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = `
+			goTypName := generator.GoTypeToName(valuegoTyp)
+			funcCall := getFuncCall(goTypName)
+			s += funcCall
+			p.P(s)
+		} else if mapvalue.IsEnum() {
+			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = ` + p.getEnumVal(mapvalue, valuegoTyp)
+			p.P(s)
+		} else if mapvalue.IsBytes() {
+			count := p.varGen.Next()
+			p.P(count, ` := r.Intn(100)`)
+			p.P(p.varGen.Next(), ` := `, value(keytypName))
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = make(`, valuegoTyp, `, `, count, `)`)
+			p.P(`for i := 0; i < `, count, `; i++ {`)
+			p.In()
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `][i] = byte(r.Intn(256))`)
+			p.Out()
+			p.P(`}`)
+		} else if mapvalue.IsString() {
+			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = ` + fmt.Sprintf("randString%v(r)", p.localName)
+			p.P(s)
+		} else {
+			p.P(p.varGen.Next(), ` := `, value(keytypName))
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypName))
+			if negative(valuetypName) {
+				p.P(`if r.Intn(2) == 0 {`)
+				p.In()
+				p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] *= -1`)
+				p.Out()
+				p.P(`}`)
+			}
 		}
-		funcCall := funcName + "(r, easy)"
+		p.Out()
+		p.P(`}`)
+	} else if field.IsMessage() || p.IsGroup(field) {
+		funcCall := getFuncCall(goTypName)
 		if field.IsRepeated() {
 			p.P(p.varGen.Next(), ` := r.Intn(10)`)
 			p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -197,14 +272,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 		}
 	} else {
 		if field.IsEnum() {
-			enum := p.ObjectNamed(field.GetTypeName()).(*generator.EnumDescriptor)
-			l := len(enum.Value)
-			values := make([]string, l)
-			for i := range enum.Value {
-				values[i] = strconv.Itoa(int(*enum.Value[i].Number))
-			}
-			arr := "[]int32{" + strings.Join(values, ",") + "}"
-			val := strings.Join([]string{generator.GoTypeToName(goTyp), `(`, arr, `[r.Intn(`, fmt.Sprintf("%d", l), `)])`}, "")
+			val := p.getEnumVal(field, goTyp)
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -220,14 +288,7 @@ func (p *plugin) GenerateField(message *generator.Descriptor, field *descriptor.
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
 			}
 		} else if gogoproto.IsCustomType(field) {
-			funcName := "NewPopulated" + goTypName
-			goTypNames := strings.Split(goTypName, ".")
-			if len(goTypNames) == 2 {
-				funcName = goTypNames[0] + ".NewPopulated" + goTypNames[1]
-			} else if len(goTypNames) != 1 {
-				panic(fmt.Errorf("unreachable: too many dots in %v", goTypName))
-			}
-			funcCall := funcName + "(r)"
+			funcCall := getCustomFuncCall(goTypName)
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -368,16 +429,19 @@ func (p *plugin) loops(field *descriptor.FieldDescriptorProto, message *generato
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.atleastOne = false
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.varGen = NewVarGen()
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 
 	p.localName = generator.FileName(file)
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.HasPopulate(file.FileDescriptorProto, message.DescriptorProto) {
+			continue
+		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
 			continue
 		}
 		p.atleastOne = true
@@ -410,7 +474,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				k += ran
 				p.P(`case `, strings.Join(is, ","), `:`)
 				p.In()
-				p.GenerateField(message, field, proto3)
+				p.GenerateField(file, message, field)
 				p.Out()
 			}
 			p.P(`}`)
@@ -418,11 +482,11 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			var maxFieldNumber int32
 			for _, field := range message.Field {
 				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || proto3 {
-					p.GenerateField(message, field, proto3)
+					p.GenerateField(file, message, field)
 				} else {
 					p.P(`if r.Intn(10) != 0 {`)
 					p.In()
-					p.GenerateField(message, field, proto3)
+					p.GenerateField(file, message, field)
 					p.Out()
 					p.P(`}`)
 				}
@@ -500,7 +564,17 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 
 	p.P(`func randUTF8Rune`, p.localName, `(r randy`, p.localName, `) rune {`)
 	p.In()
-	p.P(`return rune(r.Intn(126-43)+43)`)
+	p.P(`ru := r.Intn(62)`)
+	p.P(`if ru < 10 {`)
+	p.In()
+	p.P(`return rune(ru+48)`)
+	p.Out()
+	p.P(`} else if ru < 36 {`)
+	p.In()
+	p.P(`return rune(ru+55)`)
+	p.Out()
+	p.P(`}`)
+	p.P(`return rune(ru+61)`)
 	p.Out()
 	p.P(`}`)
 

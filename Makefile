@@ -68,7 +68,7 @@ regenerate:
 	make -C test/tags regenerate
 	make -C test/oneof regenerate
 	make -C test/theproto3 regenerate
-	gofmt -l -s -w .
+	make gofmt
 
 tests:
 	go test -v ./test

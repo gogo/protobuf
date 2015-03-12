@@ -282,7 +282,133 @@ func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
 	p.P(`index += 8`)
 }
 
-func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname string, proto3 bool) {
+func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorProto) {
+	switch field.GetType() {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		if !p.unsafe {
+			p.P(`var `, varName, `temp uint64`)
+			p.decodeFixed64(varName+"temp", "uint64")
+			p.P(`mapkey := `, p.mathPkg.Use(), `.Float64frombits(`, varName, `temp)`)
+		} else {
+			p.P(`var `, varName, ` float64`)
+			p.unsafeFixed64(varName, "float64")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		if !p.unsafe {
+			p.P(`var `, varName, `temp uint32`)
+			p.decodeFixed32(varName+"temp", "uint32")
+			p.P(`mapkey := `, p.mathPkg.Use(), `.Float32frombits(`, varName, `temp)`)
+		} else {
+			p.P(`var `, varName, ` float32`)
+			p.unsafeFixed32(varName, "float32")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_INT64:
+		p.P(`var `, varName, ` int64`)
+		p.decodeVarint(varName, "int64")
+	case descriptor.FieldDescriptorProto_TYPE_UINT64:
+		p.P(`var `, varName, ` uint64`)
+		p.decodeVarint(varName, "uint64")
+	case descriptor.FieldDescriptorProto_TYPE_INT32:
+		p.P(`var `, varName, ` int32`)
+		p.decodeVarint(varName, "int32")
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
+		if !p.unsafe {
+			p.P(`var `, varName, ` uint64`)
+			p.decodeFixed64(varName, "uint64")
+		} else {
+			p.P(`var `, varName, ` uint64`)
+			p.unsafeFixed64(varName, "uint64")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
+		if !p.unsafe {
+			p.P(`var `, varName, ` uint32`)
+			p.decodeFixed32(varName, "uint32")
+		} else {
+			p.P(`var `, varName, ` uint32`)
+			p.unsafeFixed32(varName, "uint32")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		p.P(`var `, varName, `temp int`)
+		p.decodeVarint(varName+"temp", "int")
+		p.P(varName, ` := bool(`, varName, `temp != 0)`)
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		p.P(`var stringLen uint64`)
+		p.decodeVarint("stringLen", "uint64")
+		p.P(`postStringIndex := index + int(stringLen)`)
+		p.P(`if postStringIndex > l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		p.P(varName, ` := string(data[index:postStringIndex])`)
+		p.P(`index = postStringIndex`)
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		p.P(`var mapmsglen int`)
+		p.decodeVarint("mapmsglen", "int")
+		p.P(`postmsgIndex := index + mapmsglen`)
+		p.P(`if postmsgIndex > l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		desc := p.ObjectNamed(field.GetTypeName())
+		msgname := p.TypeName(desc)
+		p.P(varName, ` := &`, msgname, `{}`)
+		p.P(`if err := `, varName, `.Unmarshal(data[index:postmsgIndex]); err != nil {`)
+		p.In()
+		p.P(`return err`)
+		p.Out()
+		p.P(`}`)
+		p.P(`index = postmsgIndex`)
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		p.P(`var mapbyteLen uint64`)
+		p.decodeVarint("mapbyteLen", "uint64")
+		p.P(`postbytesIndex := index + int(mapbyteLen)`)
+		p.P(`if postbytesIndex > l {`)
+		p.In()
+		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
+		p.P(varName, ` := make([]byte, mapbyteLen)`)
+		p.P(`copy(`, varName, `, data[index:postbytesIndex])`)
+		p.P(`index = postbytesIndex`)
+	case descriptor.FieldDescriptorProto_TYPE_UINT32:
+		p.P(`var `, varName, ` uint32`)
+		p.decodeVarint(varName, "uint32")
+	case descriptor.FieldDescriptorProto_TYPE_ENUM:
+		typName := p.TypeName(p.ObjectNamed(field.GetTypeName()))
+		p.P(`var `, varName, ` `, typName)
+		p.decodeVarint(varName, typName)
+	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		if !p.unsafe {
+			p.P(`var `, varName, ` int32`)
+			p.decodeFixed32(varName, "int32")
+		} else {
+			p.P(`var `, varName, ` int32`)
+			p.unsafeFixed32(varName, "int32")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		if !p.unsafe {
+			p.P(`var `, varName, ` int64`)
+			p.decodeFixed64(varName, "int64")
+		} else {
+			p.P(`var `, varName, ` int64`)
+			p.unsafeFixed64(varName, "int64")
+		}
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		p.P(`var `, varName, `temp int32`)
+		p.decodeVarint(varName+"temp", "int32")
+		p.P(varName, `temp = int32((uint32(`, varName, `temp) >> 1) ^ uint32(((`, varName, `temp&1)<<31)>>31))`)
+		p.P(varName, ` := int32(`, varName, `temp)`)
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		p.P(`var `, varName, `temp uint64`)
+		p.decodeVarint(varName+"temp", "uint64")
+		p.P(varName, `temp = (`, varName, `temp >> 1) ^ uint64((int64(`, varName, `temp&1)<<63)>>63)`)
+		p.P(varName, ` := int64(`, varName, `temp)`)
+	}
+}
+
+func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto, fieldname string, proto3 bool) {
 	repeated := field.IsRepeated()
 	nullable := gogoproto.IsNullable(field)
 	switch *field.Type {
@@ -480,7 +606,24 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		if repeated {
+		if generator.IsMap(file, field) {
+			mapMsg := generator.GetMap(file, field)
+			keyField, valueField := mapMsg.GetMapFields()
+			keygoTyp, _ := p.GoType(nil, keyField)
+			valuegoTyp, _ := p.GoType(nil, valueField)
+			p.P(`var keykey uint64`)
+			p.decodeVarint("keykey", "uint64")
+			p.mapField("mapkey", keyField)
+			p.P(`var valuekey uint64`)
+			p.decodeVarint("valuekey", "uint64")
+			p.mapField("mapvalue", valueField)
+			p.P(`if m.`, fieldname, ` == nil {`)
+			p.In()
+			p.P(`m.`, fieldname, ` = make(map[`, keygoTyp, `]`, valuegoTyp, `)`)
+			p.Out()
+			p.P(`}`)
+			p.P(`m.`, fieldname, `[mapkey] = mapvalue`)
+		} else if repeated {
 			if nullable {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
 			} else {
@@ -680,6 +823,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
 			}
 		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		p.atleastOne = true
 
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
@@ -716,13 +862,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 				p.P(`for index < postIndex {`)
 				p.In()
-				p.field(field, fieldname, false)
+				p.field(file.FileDescriptorProto, field, fieldname, false)
 				p.Out()
 				p.P(`}`)
 				p.Out()
 				p.P(`} else if wireType == `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.field(field, fieldname, false)
+				p.field(file.FileDescriptorProto, field, fieldname, false)
 				p.Out()
 				p.P(`} else {`)
 				p.In()
@@ -735,7 +881,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
-				p.field(field, fieldname, proto3)
+				p.field(file.FileDescriptorProto, field, fieldname, proto3)
 			}
 		}
 		p.Out()

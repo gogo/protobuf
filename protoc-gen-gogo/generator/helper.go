@@ -148,6 +148,29 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 	return fieldname
 }
 
+func GetMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto) *descriptor.DescriptorProto {
+	if !field.IsMessage() {
+		return nil
+	}
+	typeName := field.GetTypeName()
+	if strings.Contains(typeName, "Map") {
+		typeName += "." + CamelCase(field.GetName()) + "Entry"
+	}
+	ts := strings.Split(typeName, ".")
+	if len(ts) == 1 {
+		return file.GetMessage(typeName)
+	}
+	return file.GetMessage(strings.Join(ts[2:(len(ts)-1)], "."))
+}
+
+func IsMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto) bool {
+	msg := GetMap(file, field)
+	if msg == nil {
+		return false
+	}
+	return msg.GetOptions().GetMapEntry()
+}
+
 func GoTypeToName(goTyp string) string {
 	return strings.Replace(strings.Replace(goTyp, "*", "", -1), "[]", "", -1)
 }

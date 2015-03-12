@@ -63,12 +63,12 @@ func TestMoreDefaultsBJSON(t *testing.T) {
 	p := NewPopulatedMoreDefaultsB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &MoreDefaultsB{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)
@@ -79,12 +79,12 @@ func TestMoreDefaultsAJSON(t *testing.T) {
 	p := NewPopulatedMoreDefaultsA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &MoreDefaultsA{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if !p.Equal(msg) {
 		t.Fatalf("%#v !Json Equal %#v", msg, p)

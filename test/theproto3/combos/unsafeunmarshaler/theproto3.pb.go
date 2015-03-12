@@ -11,6 +11,8 @@
 	It has these top-level messages:
 		Message
 		Nested
+		MessageWithMap
+		FloatingPoint
 */
 package theproto3
 
@@ -25,6 +27,7 @@ import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import strings "strings"
 import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import sort "sort"
 import strconv "strconv"
@@ -79,6 +82,22 @@ type Nested struct {
 
 func (m *Nested) Reset()      { *m = Nested{} }
 func (*Nested) ProtoMessage() {}
+
+type MessageWithMap struct {
+	NameMapping map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	MsgMapping  map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	ByteMapping map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (m *MessageWithMap) Reset()      { *m = MessageWithMap{} }
+func (*MessageWithMap) ProtoMessage() {}
+
+type FloatingPoint struct {
+	F float64 `protobuf:"fixed64,1,opt,name=f,proto3" json:"f,omitempty"`
+}
+
+func (m *FloatingPoint) Reset()      { *m = FloatingPoint{} }
+func (*FloatingPoint) ProtoMessage() {}
 
 func init() {
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
@@ -346,6 +365,341 @@ func (m *Nested) Unmarshal(data []byte) error {
 	}
 	return nil
 }
+func (m *MessageWithMap) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NameMapping", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapkey int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				mapkey |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postStringIndex := index + int(stringLen)
+			if postStringIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapvalue := string(data[index:postStringIndex])
+			index = postStringIndex
+			if m.NameMapping == nil {
+				m.NameMapping = make(map[int32]string)
+			}
+			m.NameMapping[mapkey] = mapvalue
+			index = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MsgMapping", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapkeytemp uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				mapkeytemp |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
+			mapkey := int64(mapkeytemp)
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapmsglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				mapmsglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postmsgIndex := index + mapmsglen
+			if postmsgIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapvalue := &FloatingPoint{}
+			if err := mapvalue.Unmarshal(data[index:postmsgIndex]); err != nil {
+				return err
+			}
+			index = postmsgIndex
+			if m.MsgMapping == nil {
+				m.MsgMapping = make(map[int64]*FloatingPoint)
+			}
+			m.MsgMapping[mapkey] = mapvalue
+			index = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ByteMapping", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapkeytemp int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				mapkeytemp |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			mapkey := bool(mapkeytemp != 0)
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapbyteLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				mapbyteLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postbytesIndex := index + int(mapbyteLen)
+			if postbytesIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapvalue := make([]byte, mapbyteLen)
+			copy(mapvalue, data[index:postbytesIndex])
+			index = postbytesIndex
+			if m.ByteMapping == nil {
+				m.ByteMapping = make(map[bool][]byte)
+			}
+			m.ByteMapping[mapkey] = mapvalue
+			index = postIndex
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			index += skippy
+		}
+	}
+	return nil
+}
+func (m *FloatingPoint) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
+			}
+			if index+8 > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.F = *(*float64)(unsafe.Pointer(&data[index]))
+			index += 8
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			index += skippy
+		}
+	}
+	return nil
+}
 func (this *Message) String() string {
 	if this == nil {
 		return "nil"
@@ -370,6 +724,58 @@ func (this *Nested) String() string {
 	}
 	s := strings.Join([]string{`&Nested{`,
 		`Bunny:` + fmt.Sprintf("%v", this.Bunny) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *MessageWithMap) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
+	for k := range this.NameMapping {
+		keysForNameMapping = append(keysForNameMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
+	mapStringForNameMapping := "map[int32]string{"
+	for _, k := range keysForNameMapping {
+		mapStringForNameMapping += fmt.Sprintf("%v: %v,", k, this.NameMapping[k])
+	}
+	mapStringForNameMapping += "}"
+	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
+	for k := range this.MsgMapping {
+		keysForMsgMapping = append(keysForMsgMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
+	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
+	for _, k := range keysForMsgMapping {
+		mapStringForMsgMapping += fmt.Sprintf("%v: %v,", k, this.MsgMapping[k])
+	}
+	mapStringForMsgMapping += "}"
+	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
+	for k := range this.ByteMapping {
+		keysForByteMapping = append(keysForByteMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
+	mapStringForByteMapping := "map[bool][]byte{"
+	for _, k := range keysForByteMapping {
+		mapStringForByteMapping += fmt.Sprintf("%v: %v,", k, this.ByteMapping[k])
+	}
+	mapStringForByteMapping += "}"
+	s := strings.Join([]string{`&MessageWithMap{`,
+		`NameMapping:` + mapStringForNameMapping + `,`,
+		`MsgMapping:` + mapStringForMsgMapping + `,`,
+		`ByteMapping:` + mapStringForByteMapping + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *FloatingPoint) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&FloatingPoint{`,
+		`F:` + fmt.Sprintf("%v", this.F) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -430,6 +836,46 @@ func (m *Nested) Size() (n int) {
 	return n
 }
 
+func (m *MessageWithMap) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NameMapping) > 0 {
+		for k, v := range m.NameMapping {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.MsgMapping) > 0 {
+		for k, v := range m.MsgMapping {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.ByteMapping) > 0 {
+		for k, v := range m.ByteMapping {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 1 + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *FloatingPoint) Size() (n int) {
+	var l int
+	_ = l
+	if m.F != 0 {
+		n += 9
+	}
+	return n
+}
+
 func sovTheproto3(x uint64) (n int) {
 	for {
 		n++
@@ -481,6 +927,44 @@ func NewPopulatedNested(r randyTheproto3, easy bool) *Nested {
 	return this
 }
 
+func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
+	this := &MessageWithMap{}
+	v3 := r.Intn(10)
+	this.NameMapping = make(map[int32]string)
+	for i := 0; i < v3; i++ {
+		this.NameMapping[r.Int31()] = randStringTheproto3(r)
+	}
+	v4 := r.Intn(10)
+	this.MsgMapping = make(map[int64]*FloatingPoint)
+	for i := 0; i < v4; i++ {
+		this.MsgMapping[r.Int63()] = NewPopulatedFloatingPoint(r, easy)
+	}
+	v5 := r.Intn(10)
+	this.ByteMapping = make(map[bool][]byte)
+	for i := 0; i < v5; i++ {
+		v6 := r.Intn(100)
+		v7 := bool(r.Intn(2) == 0)
+		this.ByteMapping[v7] = make([]byte, v6)
+		for i := 0; i < v6; i++ {
+			this.ByteMapping[v7][i] = byte(r.Intn(256))
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
+	this := &FloatingPoint{}
+	this.F = r.Float64()
+	if r.Intn(2) == 0 {
+		this.F *= -1
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 type randyTheproto3 interface {
 	Float32() float32
 	Float64() float64
@@ -491,12 +975,18 @@ type randyTheproto3 interface {
 }
 
 func randUTF8RuneTheproto3(r randyTheproto3) rune {
-	return rune(r.Intn(126-43) + 43)
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
 }
 func randStringTheproto3(r randyTheproto3) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	v8 := r.Intn(100)
+	tmps := make([]rune, v8)
+	for i := 0; i < v8; i++ {
 		tmps[i] = randUTF8RuneTheproto3(r)
 	}
 	return string(tmps)
@@ -518,11 +1008,11 @@ func randFieldTheproto3(data []byte, r randyTheproto3, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		v4 := r.Int63()
+		v9 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			v9 *= -1
 		}
-		data = encodeVarintPopulateTheproto3(data, uint64(v4))
+		data = encodeVarintPopulateTheproto3(data, uint64(v9))
 	case 1:
 		data = encodeVarintPopulateTheproto3(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -569,6 +1059,54 @@ func (this *Nested) GoString() string {
 	}
 	s := strings.Join([]string{`&theproto3.Nested{` +
 		`Bunny:` + fmt.Sprintf("%#v", this.Bunny) + `}`}, ", ")
+	return s
+}
+func (this *MessageWithMap) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
+	for k := range this.NameMapping {
+		keysForNameMapping = append(keysForNameMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
+	mapStringForNameMapping := "map[int32]string{"
+	for _, k := range keysForNameMapping {
+		mapStringForNameMapping += fmt.Sprintf("%#v: %#v,", k, this.NameMapping[k])
+	}
+	mapStringForNameMapping += "}"
+	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
+	for k := range this.MsgMapping {
+		keysForMsgMapping = append(keysForMsgMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
+	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
+	for _, k := range keysForMsgMapping {
+		mapStringForMsgMapping += fmt.Sprintf("%#v: %#v,", k, this.MsgMapping[k])
+	}
+	mapStringForMsgMapping += "}"
+	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
+	for k := range this.ByteMapping {
+		keysForByteMapping = append(keysForByteMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
+	mapStringForByteMapping := "map[bool][]byte{"
+	for _, k := range keysForByteMapping {
+		mapStringForByteMapping += fmt.Sprintf("%#v: %#v,", k, this.ByteMapping[k])
+	}
+	mapStringForByteMapping += "}"
+	s := strings.Join([]string{`&theproto3.MessageWithMap{` +
+		`NameMapping:` + mapStringForNameMapping,
+		`MsgMapping:` + mapStringForMsgMapping,
+		`ByteMapping:` + mapStringForByteMapping + `}`}, ", ")
+	return s
+}
+func (this *FloatingPoint) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&theproto3.FloatingPoint{` +
+		`F:` + fmt.Sprintf("%#v", this.F) + `}`}, ", ")
 	return s
 }
 func valueToGoStringTheproto3(v interface{}, typ string) string {
@@ -688,6 +1226,64 @@ func (this *Nested) GetBunny() string {
 func NewNestedFromFace(that NestedFace) *Nested {
 	this := &Nested{}
 	this.Bunny = that.GetBunny()
+	return this
+}
+
+type MessageWithMapFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetNameMapping() map[int32]string
+	GetMsgMapping() map[int64]*FloatingPoint
+	GetByteMapping() map[bool][]byte
+}
+
+func (this *MessageWithMap) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *MessageWithMap) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewMessageWithMapFromFace(this)
+}
+
+func (this *MessageWithMap) GetNameMapping() map[int32]string {
+	return this.NameMapping
+}
+
+func (this *MessageWithMap) GetMsgMapping() map[int64]*FloatingPoint {
+	return this.MsgMapping
+}
+
+func (this *MessageWithMap) GetByteMapping() map[bool][]byte {
+	return this.ByteMapping
+}
+
+func NewMessageWithMapFromFace(that MessageWithMapFace) *MessageWithMap {
+	this := &MessageWithMap{}
+	this.NameMapping = that.GetNameMapping()
+	this.MsgMapping = that.GetMsgMapping()
+	this.ByteMapping = that.GetByteMapping()
+	return this
+}
+
+type FloatingPointFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetF() float64
+}
+
+func (this *FloatingPoint) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *FloatingPoint) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewFloatingPointFromFace(this)
+}
+
+func (this *FloatingPoint) GetF() float64 {
+	return this.F
+}
+
+func NewFloatingPointFromFace(that FloatingPointFace) *FloatingPoint {
+	this := &FloatingPoint{}
+	this.F = that.GetF()
 	return this
 }
 
@@ -849,6 +1445,148 @@ func (this *Nested) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *MessageWithMap) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*MessageWithMap)
+	if !ok {
+		return fmt.Errorf("that is not of type *MessageWithMap")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *MessageWithMap but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *MessageWithMapbut is not nil && this == nil")
+	}
+	if len(this.NameMapping) != len(that1.NameMapping) {
+		return fmt.Errorf("NameMapping this(%v) Not Equal that(%v)", len(this.NameMapping), len(that1.NameMapping))
+	}
+	for i := range this.NameMapping {
+		if this.NameMapping[i] != that1.NameMapping[i] {
+			return fmt.Errorf("NameMapping this[%v](%v) Not Equal that[%v](%v)", i, this.NameMapping[i], i, that1.NameMapping[i])
+		}
+	}
+	if len(this.MsgMapping) != len(that1.MsgMapping) {
+		return fmt.Errorf("MsgMapping this(%v) Not Equal that(%v)", len(this.MsgMapping), len(that1.MsgMapping))
+	}
+	for i := range this.MsgMapping {
+		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
+			return fmt.Errorf("MsgMapping this[%v](%v) Not Equal that[%v](%v)", i, this.MsgMapping[i], i, that1.MsgMapping[i])
+		}
+	}
+	if len(this.ByteMapping) != len(that1.ByteMapping) {
+		return fmt.Errorf("ByteMapping this(%v) Not Equal that(%v)", len(this.ByteMapping), len(that1.ByteMapping))
+	}
+	for i := range this.ByteMapping {
+		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
+			return fmt.Errorf("ByteMapping this[%v](%v) Not Equal that[%v](%v)", i, this.ByteMapping[i], i, that1.ByteMapping[i])
+		}
+	}
+	return nil
+}
+func (this *MessageWithMap) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MessageWithMap)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.NameMapping) != len(that1.NameMapping) {
+		return false
+	}
+	for i := range this.NameMapping {
+		if this.NameMapping[i] != that1.NameMapping[i] {
+			return false
+		}
+	}
+	if len(this.MsgMapping) != len(that1.MsgMapping) {
+		return false
+	}
+	for i := range this.MsgMapping {
+		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
+			return false
+		}
+	}
+	if len(this.ByteMapping) != len(that1.ByteMapping) {
+		return false
+	}
+	for i := range this.ByteMapping {
+		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *FloatingPoint) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*FloatingPoint)
+	if !ok {
+		return fmt.Errorf("that is not of type *FloatingPoint")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *FloatingPoint but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *FloatingPointbut is not nil && this == nil")
+	}
+	if this.F != that1.F {
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
+	return nil
+}
+func (this *FloatingPoint) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*FloatingPoint)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.F != that1.F {
+		return false
+	}
+	return true
+}
 func (x Message_Humour) String() string {
 	s, ok := Message_Humour_name[int32(x)]
 	if ok {
@@ -860,6 +1598,12 @@ func (this *Message) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return Theproto3Description()
 }
 func (this *Nested) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return Theproto3Description()
+}
+func (this *MessageWithMap) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return Theproto3Description()
+}
+func (this *FloatingPoint) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return Theproto3Description()
 }
 func Theproto3Description() (desc *google_protobuf.FileDescriptorSet) {
@@ -1491,5 +2235,45 @@ func Theproto3Description() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: func(v string) *string { return &v }("proto3"), XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("MessageWithMap"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("name_mapping"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".theproto3.MessageWithMap.NameMappingEntry"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("msg_mapping"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".theproto3.MessageWithMap.MsgMappingEntry"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("byte_mapping"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".theproto3.MessageWithMap.ByteMappingEntry"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("NameMappingEntry"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: func(v bool) *bool { return &v }(true), UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("MsgMappingEntry"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".theproto3.FloatingPoint"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: func(v bool) *bool { return &v }(true), UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("ByteMappingEntry"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(8), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("value"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: func(v bool) *bool { return &v }(true), UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("FloatingPoint"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("f"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: func(v string) *string { return &v }("proto3"), XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }

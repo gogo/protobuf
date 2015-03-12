@@ -271,6 +271,9 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 	protoPkg := imports.NewImport("github.com/gogo/protobuf/proto")
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 
@@ -442,9 +445,11 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 	jsonPkg := imports.NewImport("encoding/json")
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
-
 			p.P(`func Test`, ccTypeName, `JSON(t *`, testingPkg.Use(), `.T) {`)
 			p.In()
 			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
@@ -452,14 +457,14 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 			p.P(`jsondata, err := `, jsonPkg.Use(), `.Marshal(p)`)
 			p.P(`if err != nil {`)
 			p.In()
-			p.P(`panic(err)`)
+			p.P(`t.Fatal(err)`)
 			p.Out()
 			p.P(`}`)
 			p.P(`msg := &`, ccTypeName, `{}`)
 			p.P(`err = `, jsonPkg.Use(), `.Unmarshal(jsondata, msg)`)
 			p.P(`if err != nil {`)
 			p.In()
-			p.P(`panic(err)`)
+			p.P(`t.Fatal(err)`)
 			p.Out()
 			p.P(`}`)
 			if gogoproto.HasVerboseEqual(file.FileDescriptorProto, message.DescriptorProto) {
@@ -498,6 +503,9 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 	//fmtPkg := imports.NewImport("fmt")
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 

@@ -521,12 +521,12 @@ func TestAJSON(t *testing.T) {
 	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &A{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -540,12 +540,12 @@ func TestBJSON(t *testing.T) {
 	p := NewPopulatedB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &B{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -559,12 +559,12 @@ func TestDJSON(t *testing.T) {
 	p := NewPopulatedD(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &D{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -578,12 +578,12 @@ func TestCJSON(t *testing.T) {
 	p := NewPopulatedC(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &C{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -597,12 +597,12 @@ func TestUJSON(t *testing.T) {
 	p := NewPopulatedU(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &U{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -616,12 +616,12 @@ func TestUnoMJSON(t *testing.T) {
 	p := NewPopulatedUnoM(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &UnoM{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -635,12 +635,12 @@ func TestOldAJSON(t *testing.T) {
 	p := NewPopulatedOldA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldA{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -654,12 +654,12 @@ func TestOldBJSON(t *testing.T) {
 	p := NewPopulatedOldB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldB{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -673,12 +673,12 @@ func TestOldCJSON(t *testing.T) {
 	p := NewPopulatedOldC(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldC{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -692,12 +692,12 @@ func TestOldUJSON(t *testing.T) {
 	p := NewPopulatedOldU(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldU{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -711,12 +711,12 @@ func TestOldUnoMJSON(t *testing.T) {
 	p := NewPopulatedOldUnoM(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldUnoM{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

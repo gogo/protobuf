@@ -85,3 +85,13 @@ message Message {
 message Nested {
   string bunny = 1;
 }
+
+message MessageWithMap {
+  map<int32, string> name_mapping = 1;
+  map<sint64, FloatingPoint> msg_mapping = 2;
+  map<bool, bytes> byte_mapping = 3;
+}
+
+message FloatingPoint {
+  double f = 1;
+}

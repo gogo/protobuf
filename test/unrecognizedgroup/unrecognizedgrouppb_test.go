@@ -192,12 +192,12 @@ func TestNewNoGroupJSON(t *testing.T) {
 	p := NewPopulatedNewNoGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &NewNoGroup{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -211,12 +211,12 @@ func TestAJSON(t *testing.T) {
 	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &A{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -230,12 +230,12 @@ func TestOldWithGroupJSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldWithGroup{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -249,12 +249,12 @@ func TestOldWithGroup_Group1JSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group1{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)
@@ -268,12 +268,12 @@ func TestOldWithGroup_Group2JSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group2{}
 	err = encoding_json.Unmarshal(jsondata, msg)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", msg, p, err)

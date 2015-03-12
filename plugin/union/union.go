@@ -140,6 +140,9 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		if message.DescriptorProto.HasExtension() {
 			panic("onlyone does not currently support extensions")
 		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (this *`, ccTypeName, `) GetValue() interface{} {`)

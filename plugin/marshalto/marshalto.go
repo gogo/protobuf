@@ -266,6 +266,109 @@ func (p *marshalto) encodeKey(fieldNumber int32, wireType int) {
 	}
 }
 
+func keySize(fieldNumber int32, wireType int) int {
+	x := uint32(fieldNumber)<<3 | uint32(wireType)
+	size := 0
+	for size = 0; x > 127; size++ {
+		x >>= 7
+	}
+	size++
+	return size
+}
+
+func wireToType(wire string) int {
+	switch wire {
+	case "fixed64":
+		return proto.WireFixed64
+	case "fixed32":
+		return proto.WireFixed32
+	case "varint":
+		return proto.WireVarint
+	case "bytes":
+		return proto.WireBytes
+	case "group":
+		return proto.WireBytes
+	case "zigzag32":
+		return proto.WireVarint
+	case "zigzag64":
+		return proto.WireVarint
+	}
+	panic("unreachable")
+}
+
+func (p *marshalto) mapField(numGen NumGen, mathPkg generator.Single, fieldTyp descriptor.FieldDescriptorProto_Type, varName string) {
+	switch fieldTyp {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		if !p.unsafe {
+			p.callFixed64(mathPkg.Use(), `.Float64bits(`, varName, `)`)
+		} else {
+			p.unsafeFixed64(varName, `float64`)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		if !p.unsafe {
+			p.callFixed32(mathPkg.Use(), `.Float32bits(`, varName, `)`)
+		} else {
+			p.unsafeFixed32(varName, `float32`)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM:
+		p.callVarint(varName)
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		if !p.unsafe {
+			p.callFixed64(varName)
+		} else {
+			typeName := "int64"
+			if fieldTyp == descriptor.FieldDescriptorProto_TYPE_FIXED64 {
+				typeName = "uint64"
+			}
+			p.unsafeFixed64(varName, typeName)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		if !p.unsafe {
+			p.callFixed32(varName)
+		} else {
+			typeName := "int32"
+			if fieldTyp == descriptor.FieldDescriptorProto_TYPE_FIXED32 {
+				typeName = "uint32"
+			}
+			p.unsafeFixed32(varName, typeName)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		p.P(`if `, varName, ` {`)
+		p.In()
+		p.P(`data[i] = 1`)
+		p.Out()
+		p.P(`} else {`)
+		p.In()
+		p.P(`data[i] = 0`)
+		p.Out()
+		p.P(`}`)
+		p.P(`i++`)
+	case descriptor.FieldDescriptorProto_TYPE_STRING,
+		descriptor.FieldDescriptorProto_TYPE_BYTES:
+		p.callVarint(`len(`, varName, `)`)
+		p.P(`i+=copy(data[i:], `, varName, `)`)
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		p.callVarint(`(uint32(`, varName, `) << 1) ^ uint32((`, varName, ` >> 31))`)
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		p.callVarint(`(uint64(`, varName, `) << 1) ^ uint64((`, varName, ` >> 63))`)
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		p.callVarint(varName, `.Size()`)
+		p.P(`n`, numGen.Next(), `, err := `, varName, `.MarshalTo(data[i:])`)
+		p.P(`if err != nil {`)
+		p.In()
+		p.P(`return 0, err`)
+		p.Out()
+		p.P(`}`)
+		p.P(`i+=n`, numGen.Current())
+	}
+}
+
 func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	numGen := NewNumGen()
@@ -275,9 +378,13 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 
 	mathPkg := p.NewImport("math")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
 	p.unsafePkg = p.NewImport("unsafe")
 
 	for _, message := range file.Messages() {
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		if p.unsafe {
 			if !gogoproto.IsUnsafeMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
@@ -755,7 +862,88 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
 				panic(fmt.Errorf("marshaler does not support group %v", fieldname))
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if repeated {
+				if generator.IsMap(file.FileDescriptorProto, field) {
+					mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+					keyField, valueField := mapMsg.GetMapFields()
+					keysName := `keysFor` + fieldname
+					keygoTyp, keywire := p.GoType(nil, keyField)
+					_, valuewire := p.GoType(nil, valueField)
+					keyCapTyp := generator.CamelCase(keygoTyp)
+					keyKeySize := keySize(1, wireToType(keywire))
+					valueKeySize := keySize(2, wireToType(valuewire))
+					p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(m.`, fieldname, `))`)
+					p.P(`for k, _ := range m.`, fieldname, ` {`)
+					p.In()
+					p.P(keysName, ` = append(`, keysName, `, k)`)
+					p.Out()
+					p.P(`}`)
+					p.P(sortKeysPkg.Use(), `.`, keyCapTyp, `s(`, keysName, `)`)
+					p.P(`for _, k := range `, keysName, ` {`)
+					p.In()
+					p.encodeKey(fieldNumber, wireType)
+					sum := []string{strconv.Itoa(keyKeySize)}
+					switch keyField.GetType() {
+					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+						descriptor.FieldDescriptorProto_TYPE_FIXED64,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+						sum = append(sum, `8`)
+					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+						descriptor.FieldDescriptorProto_TYPE_FIXED32,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+						sum = append(sum, `4`)
+					case descriptor.FieldDescriptorProto_TYPE_INT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT32,
+						descriptor.FieldDescriptorProto_TYPE_ENUM,
+						descriptor.FieldDescriptorProto_TYPE_INT32:
+						sum = append(sum, `sov`+p.localName+`(uint64(k))`)
+					case descriptor.FieldDescriptorProto_TYPE_BOOL:
+						sum = append(sum, `1`)
+					case descriptor.FieldDescriptorProto_TYPE_STRING,
+						descriptor.FieldDescriptorProto_TYPE_BYTES:
+						sum = append(sum, `len(k)+sov`+p.localName+`(uint64(len(k)))`)
+					case descriptor.FieldDescriptorProto_TYPE_SINT32,
+						descriptor.FieldDescriptorProto_TYPE_SINT64:
+						sum = append(sum, `soz`+p.localName+`(uint64(k))`)
+					}
+					p.P(`v := m.`, fieldname, `[k]`)
+					sum = append(sum, strconv.Itoa(valueKeySize))
+					switch valueField.GetType() {
+					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+						descriptor.FieldDescriptorProto_TYPE_FIXED64,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+						sum = append(sum, strconv.Itoa(8))
+					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+						descriptor.FieldDescriptorProto_TYPE_FIXED32,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+						sum = append(sum, strconv.Itoa(4))
+					case descriptor.FieldDescriptorProto_TYPE_INT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT32,
+						descriptor.FieldDescriptorProto_TYPE_ENUM,
+						descriptor.FieldDescriptorProto_TYPE_INT32:
+						sum = append(sum, `sov`+p.localName+`(uint64(v))`)
+					case descriptor.FieldDescriptorProto_TYPE_BOOL:
+						sum = append(sum, `1`)
+					case descriptor.FieldDescriptorProto_TYPE_STRING,
+						descriptor.FieldDescriptorProto_TYPE_BYTES:
+						sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
+					case descriptor.FieldDescriptorProto_TYPE_SINT32,
+						descriptor.FieldDescriptorProto_TYPE_SINT64:
+						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
+					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+						p.P(`msgSize := v.Size()`)
+						sum = append(sum, `l+sov`+p.localName+`(uint64(msgSize))`)
+					}
+					p.P(`mapSize := `, strings.Join(sum, " + "))
+					p.callVarint("mapSize")
+					p.encodeKey(1, wireToType(keywire))
+					p.mapField(numGen, mathPkg, keyField.GetType(), "k")
+					p.encodeKey(2, wireToType(valuewire))
+					p.mapField(numGen, mathPkg, valueField.GetType(), "v")
+					p.Out()
+					p.P(`}`)
+				} else if repeated {
 					p.P(`for _, msg := range m.`, fieldname, ` {`)
 					p.In()
 					p.encodeKey(fieldNumber, wireType)

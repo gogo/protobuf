@@ -99,7 +99,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				if field.IsRepeated() {
 					fmt.Fprintf(os.Stderr, "WARNING: field %v.%v is a repeated non-nullable native type, nullable=false has no effect\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				} else if proto3 {
-					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v is a native type and in proto3 syntax with nullable=false there exists conflicting interpretations for zero values", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v is a native type and in proto3 syntax with nullable=false there exists conflicting implementations when encoding zero values", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 					os.Exit(1)
 				}
 			}

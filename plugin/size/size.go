@@ -122,6 +122,7 @@ import (
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"strconv"
+	"strings"
 )
 
 type size struct {
@@ -200,6 +201,9 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	for _, message := range file.Messages() {
 		if !gogoproto.IsSizer(file.FileDescriptorProto, message.DescriptorProto) {
+			continue
+		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
 			continue
 		}
 		p.atleastOne = true
@@ -337,7 +341,77 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
 				panic(fmt.Errorf("size does not support group %v", fieldname))
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if repeated {
+				if generator.IsMap(file.FileDescriptorProto, field) {
+					mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+					keyField, valueField := mapMsg.GetMapFields()
+					_, keywire := p.GoType(nil, keyField)
+					_, valuewire := p.GoType(nil, valueField)
+					_, fieldwire := p.GoType(nil, field)
+					fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
+					keyKeySize := keySize(1, wireToType(keywire))
+					valueKeySize := keySize(2, wireToType(valuewire))
+					p.P(`for k, v := range m.`, fieldname, ` { `)
+					p.In()
+					p.P(`_ = k`)
+					p.P(`_ = v`)
+					sum := []string{strconv.Itoa(keyKeySize)}
+					switch keyField.GetType() {
+					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+						descriptor.FieldDescriptorProto_TYPE_FIXED64,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+						sum = append(sum, `8`)
+					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+						descriptor.FieldDescriptorProto_TYPE_FIXED32,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+						sum = append(sum, `4`)
+					case descriptor.FieldDescriptorProto_TYPE_INT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT32,
+						descriptor.FieldDescriptorProto_TYPE_ENUM,
+						descriptor.FieldDescriptorProto_TYPE_INT32:
+						sum = append(sum, `sov`+p.localName+`(uint64(k))`)
+					case descriptor.FieldDescriptorProto_TYPE_BOOL:
+						sum = append(sum, `1`)
+					case descriptor.FieldDescriptorProto_TYPE_STRING,
+						descriptor.FieldDescriptorProto_TYPE_BYTES:
+						sum = append(sum, `len(k)+sov`+p.localName+`(uint64(len(k)))`)
+					case descriptor.FieldDescriptorProto_TYPE_SINT32,
+						descriptor.FieldDescriptorProto_TYPE_SINT64:
+						sum = append(sum, `soz`+p.localName+`(uint64(k))`)
+					}
+					sum = append(sum, strconv.Itoa(valueKeySize))
+					switch valueField.GetType() {
+					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+						descriptor.FieldDescriptorProto_TYPE_FIXED64,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+						sum = append(sum, strconv.Itoa(8))
+					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+						descriptor.FieldDescriptorProto_TYPE_FIXED32,
+						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+						sum = append(sum, strconv.Itoa(4))
+					case descriptor.FieldDescriptorProto_TYPE_INT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT64,
+						descriptor.FieldDescriptorProto_TYPE_UINT32,
+						descriptor.FieldDescriptorProto_TYPE_ENUM,
+						descriptor.FieldDescriptorProto_TYPE_INT32:
+						sum = append(sum, `sov`+p.localName+`(uint64(v))`)
+					case descriptor.FieldDescriptorProto_TYPE_BOOL:
+						sum = append(sum, `1`)
+					case descriptor.FieldDescriptorProto_TYPE_STRING,
+						descriptor.FieldDescriptorProto_TYPE_BYTES:
+						sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
+					case descriptor.FieldDescriptorProto_TYPE_SINT32,
+						descriptor.FieldDescriptorProto_TYPE_SINT64:
+						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
+					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+						p.P(`l=v.Size()`)
+						sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
+					}
+					p.P(`mapEntrySize := `, strings.Join(sum, "+"))
+					p.P(`n+=mapEntrySize+`, fieldKeySize, `+sov`, p.localName, `(uint64(mapEntrySize))`)
+					p.Out()
+					p.P(`}`)
+				} else if repeated {
 					p.P(`for _, e := range m.`, fieldname, ` { `)
 					p.In()
 					p.P(`l=e.Size()`)

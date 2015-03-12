@@ -51,6 +51,9 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 		if !gogoproto.HasVerboseEqual(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true

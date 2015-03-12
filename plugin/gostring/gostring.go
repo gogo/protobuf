@@ -132,9 +132,13 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 	sortPkg := p.NewImport("sort")
 	strconvPkg := p.NewImport("strconv")
 	reflectPkg := p.NewImport("reflect")
+	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
 
 	for _, message := range file.Messages() {
 		if !gogoproto.HasGoString(file.FileDescriptorProto, message.DescriptorProto) {
+			continue
+		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
 			continue
 		}
 		p.atleastOne = true
@@ -154,7 +158,31 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := p.GetFieldName(message, field)
-			if field.IsMessage() || p.IsGroup(field) {
+			if generator.IsMap(file.FileDescriptorProto, field) {
+				mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+				keyField, valueField := mapMsg.GetMapFields()
+				keysName := `keysFor` + fieldname
+				keygoTyp, _ := p.GoType(nil, keyField)
+				keyCapTyp := generator.CamelCase(keygoTyp)
+				valuegoTyp, _ := p.GoType(nil, valueField)
+				p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)
+				p.P(`for k, _ := range this.`, fieldname, ` {`)
+				p.In()
+				p.P(keysName, ` = append(`, keysName, `, k)`)
+				p.Out()
+				p.P(`}`)
+				p.P(sortKeysPkg.Use(), `.`, keyCapTyp, `s(`, keysName, `)`)
+				mapName := `mapStringFor` + fieldname
+				p.P(mapName, ` := "map[`, keygoTyp, `]`, valuegoTyp, `{"`)
+				p.P(`for _, k := range `, keysName, ` {`)
+				p.In()
+				p.P(mapName, ` += fmt.Sprintf("%#v: %#v,", k, this.`, fieldname, `[k])`)
+				p.Out()
+				p.P(`}`)
+				p.P(mapName, ` += "}"`)
+				tmp := strings.Join([]string{"`", fieldname, ":` + ", mapName}, "")
+				outFlds = append(outFlds, tmp)
+			} else if field.IsMessage() || p.IsGroup(field) {
 				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
 				if nullable {
 					tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")

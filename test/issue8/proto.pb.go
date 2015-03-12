@@ -125,7 +125,13 @@ type randyProto interface {
 }
 
 func randUTF8RuneProto(r randyProto) rune {
-	return rune(r.Intn(126-43) + 43)
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
 }
 func randStringProto(r randyProto) string {
 	v2 := r.Intn(100)

@@ -192,7 +192,13 @@ type randyEnumstringer interface {
 }
 
 func randUTF8RuneEnumstringer(r randyEnumstringer) rune {
-	return rune(r.Intn(126-43) + 43)
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
 }
 func randStringEnumstringer(r randyEnumstringer) string {
 	v4 := r.Intn(100)

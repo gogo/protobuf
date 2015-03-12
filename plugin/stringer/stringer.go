@@ -125,12 +125,16 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
 	reflectPkg := p.NewImport("reflect")
+	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
 	for _, message := range file.Messages() {
 		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
 		if gogoproto.EnabledGoStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			panic("old string method needs to be disabled, please use gogoproto.goproto_stringer or gogoproto.goproto_stringer_all and set it to false")
+		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
@@ -141,12 +145,42 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		p.P(`return "nil"`)
 		p.Out()
 		p.P(`}`)
+		for _, field := range message.Field {
+			if !generator.IsMap(file.FileDescriptorProto, field) {
+				continue
+			}
+			fieldname := p.GetFieldName(message, field)
+			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+			keyField, valueField := mapMsg.GetMapFields()
+			keysName := `keysFor` + fieldname
+			keygoTyp, _ := p.GoType(nil, keyField)
+			keyCapTyp := generator.CamelCase(keygoTyp)
+			valuegoTyp, _ := p.GoType(nil, valueField)
+			p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)
+			p.P(`for k, _ := range this.`, fieldname, ` {`)
+			p.In()
+			p.P(keysName, ` = append(`, keysName, `, k)`)
+			p.Out()
+			p.P(`}`)
+			p.P(sortKeysPkg.Use(), `.`, keyCapTyp, `s(`, keysName, `)`)
+			mapName := `mapStringFor` + fieldname
+			p.P(mapName, ` := "map[`, keygoTyp, `]`, valuegoTyp, `{"`)
+			p.P(`for _, k := range `, keysName, ` {`)
+			p.In()
+			p.P(mapName, ` += fmt.Sprintf("%v: %v,", k, this.`, fieldname, `[k])`)
+			p.Out()
+			p.P(`}`)
+			p.P(mapName, ` += "}"`)
+		}
 		p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := p.GetFieldName(message, field)
-			if field.IsMessage() || p.IsGroup(field) {
+			if generator.IsMap(file.FileDescriptorProto, field) {
+				mapName := `mapStringFor` + fieldname
+				p.P("`", fieldname, ":`", ` + `, mapName, " + `,", "`,")
+			} else if field.IsMessage() || p.IsGroup(field) {
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
 				msgnames := strings.Split(msgname, ".")

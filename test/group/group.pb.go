@@ -208,7 +208,13 @@ type randyGroup interface {
 }
 
 func randUTF8RuneGroup(r randyGroup) rune {
-	return rune(r.Intn(126-43) + 43)
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
 }
 func randStringGroup(r randyGroup) string {
 	v6 := r.Intn(100)

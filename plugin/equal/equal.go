@@ -190,6 +190,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.bytesPkg = p.NewImport("bytes")
 
 	for _, msg := range file.Messages() {
+		if msg.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		if gogoproto.HasVerboseEqual(file.FileDescriptorProto, msg.DescriptorProto) {
 			p.generateMessage(file, msg, true)
 		}
@@ -358,7 +361,19 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			if ctype {
 				p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 			} else {
-				if field.IsMessage() || p.IsGroup(field) {
+				if generator.IsMap(file.FileDescriptorProto, field) {
+					mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+					_, mapValue := mapMsg.GetMapFields()
+					if mapValue.IsMessage() || p.IsGroup(mapValue) {
+						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					} else if mapValue.IsBytes() {
+						p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
+					} else if mapValue.IsString() {
+						p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					} else {
+						p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					}
+				} else if field.IsMessage() || p.IsGroup(field) {
 					if nullable {
 						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 					} else {

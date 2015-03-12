@@ -104,6 +104,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		if !gogoproto.HasDescription(file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
+		if message.DescriptorProto.GetOptions().GetMapEntry() {
+			continue
+		}
 		p.used = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (this *`, ccTypeName, `) Description() (desc *google_protobuf.FileDescriptorSet) {`)

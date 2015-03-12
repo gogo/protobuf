@@ -62,6 +62,7 @@ import (
 
 	"github.com/gogo/protobuf/plugin/testgen"
 
+	"go/format"
 	"strings"
 )
 
@@ -121,6 +122,15 @@ func main() {
 			gtest.Response.File[i].Name = proto.String(strings.Replace(*gtest.Response.File[i].Name, ".pb.go", "pb_test.go", -1))
 			g.Response.File = append(g.Response.File, gtest.Response.File[i])
 		}
+	}
+
+	for i := 0; i < len(g.Response.File); i++ {
+		formatted, err := format.Source([]byte(g.Response.File[i].GetContent()))
+		if err != nil {
+			g.Error(err, "go format error")
+		}
+		fmts := string(formatted)
+		g.Response.File[i].Content = &fmts
 	}
 
 	// Send back the results.

@@ -30,6 +30,13 @@ import (
 	"strings"
 )
 
+func (msg *DescriptorProto) GetMapFields() (*FieldDescriptorProto, *FieldDescriptorProto) {
+	if !msg.GetOptions().GetMapEntry() {
+		return nil, nil
+	}
+	return msg.GetField()[0], msg.GetField()[1]
+}
+
 func dotToUnderscore(r rune) rune {
 	if r == '.' {
 		return '_'
@@ -119,6 +126,14 @@ func (file *FileDescriptorProto) GetMessage(typeName string) *DescriptorProto {
 	for _, msg := range file.GetMessageType() {
 		if msg.GetName() == typeName {
 			return msg
+		}
+		for _, nes := range msg.GetNestedType() {
+			if nes.GetName() == typeName {
+				return nes
+			}
+			if msg.GetName()+"."+nes.GetName() == typeName {
+				return nes
+			}
 		}
 	}
 	return nil
