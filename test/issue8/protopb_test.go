@@ -43,6 +43,9 @@ func TestFooJSON(t *testing.T) {
 	p := NewPopulatedFoo(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Foo{}

@@ -299,17 +299,9 @@ func wireToType(wire string) int {
 func (p *marshalto) mapField(numGen NumGen, mathPkg generator.Single, fieldTyp descriptor.FieldDescriptorProto_Type, varName string) {
 	switch fieldTyp {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		if !p.unsafe {
-			p.callFixed64(mathPkg.Use(), `.Float64bits(`, varName, `)`)
-		} else {
-			p.unsafeFixed64(varName, `float64`)
-		}
+		p.callFixed64(mathPkg.Use(), `.Float64bits(`, varName, `)`)
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		if !p.unsafe {
-			p.callFixed32(mathPkg.Use(), `.Float32bits(`, varName, `)`)
-		} else {
-			p.unsafeFixed32(varName, `float32`)
-		}
+		p.callFixed32(mathPkg.Use(), `.Float32bits(`, varName, `)`)
 	case descriptor.FieldDescriptorProto_TYPE_INT64,
 		descriptor.FieldDescriptorProto_TYPE_UINT64,
 		descriptor.FieldDescriptorProto_TYPE_INT32,
@@ -318,26 +310,10 @@ func (p *marshalto) mapField(numGen NumGen, mathPkg generator.Single, fieldTyp d
 		p.callVarint(varName)
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-		if !p.unsafe {
-			p.callFixed64(varName)
-		} else {
-			typeName := "int64"
-			if fieldTyp == descriptor.FieldDescriptorProto_TYPE_FIXED64 {
-				typeName = "uint64"
-			}
-			p.unsafeFixed64(varName, typeName)
-		}
+		p.callFixed64(varName)
 	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
 		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-		if !p.unsafe {
-			p.callFixed32(varName)
-		} else {
-			typeName := "int32"
-			if fieldTyp == descriptor.FieldDescriptorProto_TYPE_FIXED32 {
-				typeName = "uint32"
-			}
-			p.unsafeFixed32(varName, typeName)
-		}
+		p.callFixed32(varName)
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		p.P(`if `, varName, ` {`)
 		p.In()
@@ -933,7 +909,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 						p.P(`msgSize := v.Size()`)
-						sum = append(sum, `l+sov`+p.localName+`(uint64(msgSize))`)
+						sum = append(sum, `msgSize + sov`+p.localName+`(uint64(msgSize))`)
 					}
 					p.P(`mapSize := `, strings.Join(sum, " + "))
 					p.callVarint("mapSize")

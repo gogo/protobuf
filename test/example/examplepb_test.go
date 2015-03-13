@@ -565,6 +565,9 @@ func TestAJSON(t *testing.T) {
 	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &A{}
@@ -584,6 +587,9 @@ func TestBJSON(t *testing.T) {
 	p := NewPopulatedB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &B{}
@@ -603,6 +609,9 @@ func TestCJSON(t *testing.T) {
 	p := NewPopulatedC(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &C{}
@@ -622,6 +631,9 @@ func TestUJSON(t *testing.T) {
 	p := NewPopulatedU(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &U{}
@@ -641,6 +653,9 @@ func TestEJSON(t *testing.T) {
 	p := NewPopulatedE(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &E{}
@@ -660,6 +675,9 @@ func TestRJSON(t *testing.T) {
 	p := NewPopulatedR(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &R{}

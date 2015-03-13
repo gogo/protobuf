@@ -3864,6 +3864,9 @@ func TestNidOptNativeJSON(t *testing.T) {
 	p := NewPopulatedNidOptNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidOptNative{}
@@ -3883,6 +3886,9 @@ func TestNinOptNativeJSON(t *testing.T) {
 	p := NewPopulatedNinOptNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptNative{}
@@ -3902,6 +3908,9 @@ func TestNidRepNativeJSON(t *testing.T) {
 	p := NewPopulatedNidRepNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepNative{}
@@ -3921,6 +3930,9 @@ func TestNinRepNativeJSON(t *testing.T) {
 	p := NewPopulatedNinRepNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepNative{}
@@ -3940,6 +3952,9 @@ func TestNidRepPackedNativeJSON(t *testing.T) {
 	p := NewPopulatedNidRepPackedNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepPackedNative{}
@@ -3959,6 +3974,9 @@ func TestNinRepPackedNativeJSON(t *testing.T) {
 	p := NewPopulatedNinRepPackedNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepPackedNative{}
@@ -3978,6 +3996,9 @@ func TestNidOptStructJSON(t *testing.T) {
 	p := NewPopulatedNidOptStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidOptStruct{}
@@ -3997,6 +4018,9 @@ func TestNinOptStructJSON(t *testing.T) {
 	p := NewPopulatedNinOptStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptStruct{}
@@ -4016,6 +4040,9 @@ func TestNidRepStructJSON(t *testing.T) {
 	p := NewPopulatedNidRepStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepStruct{}
@@ -4035,6 +4062,9 @@ func TestNinRepStructJSON(t *testing.T) {
 	p := NewPopulatedNinRepStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepStruct{}
@@ -4054,6 +4084,9 @@ func TestNidEmbeddedStructJSON(t *testing.T) {
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidEmbeddedStruct{}
@@ -4073,6 +4106,9 @@ func TestNinEmbeddedStructJSON(t *testing.T) {
 	p := NewPopulatedNinEmbeddedStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinEmbeddedStruct{}
@@ -4092,6 +4128,9 @@ func TestNidNestedStructJSON(t *testing.T) {
 	p := NewPopulatedNidNestedStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidNestedStruct{}
@@ -4111,6 +4150,9 @@ func TestNinNestedStructJSON(t *testing.T) {
 	p := NewPopulatedNinNestedStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinNestedStruct{}
@@ -4130,6 +4172,9 @@ func TestNidOptCustomJSON(t *testing.T) {
 	p := NewPopulatedNidOptCustom(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidOptCustom{}
@@ -4149,6 +4194,9 @@ func TestCustomDashJSON(t *testing.T) {
 	p := NewPopulatedCustomDash(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomDash{}
@@ -4168,6 +4216,9 @@ func TestNinOptCustomJSON(t *testing.T) {
 	p := NewPopulatedNinOptCustom(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptCustom{}
@@ -4187,6 +4238,9 @@ func TestNidRepCustomJSON(t *testing.T) {
 	p := NewPopulatedNidRepCustom(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepCustom{}
@@ -4206,6 +4260,9 @@ func TestNinRepCustomJSON(t *testing.T) {
 	p := NewPopulatedNinRepCustom(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepCustom{}
@@ -4225,6 +4282,9 @@ func TestNinOptNativeUnionJSON(t *testing.T) {
 	p := NewPopulatedNinOptNativeUnion(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptNativeUnion{}
@@ -4244,6 +4304,9 @@ func TestNinOptStructUnionJSON(t *testing.T) {
 	p := NewPopulatedNinOptStructUnion(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptStructUnion{}
@@ -4263,6 +4326,9 @@ func TestNinEmbeddedStructUnionJSON(t *testing.T) {
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinEmbeddedStructUnion{}
@@ -4282,6 +4348,9 @@ func TestNinNestedStructUnionJSON(t *testing.T) {
 	p := NewPopulatedNinNestedStructUnion(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinNestedStructUnion{}
@@ -4301,6 +4370,9 @@ func TestTreeJSON(t *testing.T) {
 	p := NewPopulatedTree(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Tree{}
@@ -4320,6 +4392,9 @@ func TestOrBranchJSON(t *testing.T) {
 	p := NewPopulatedOrBranch(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &OrBranch{}
@@ -4339,6 +4414,9 @@ func TestAndBranchJSON(t *testing.T) {
 	p := NewPopulatedAndBranch(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &AndBranch{}
@@ -4358,6 +4436,9 @@ func TestLeafJSON(t *testing.T) {
 	p := NewPopulatedLeaf(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Leaf{}
@@ -4377,6 +4458,9 @@ func TestDeepTreeJSON(t *testing.T) {
 	p := NewPopulatedDeepTree(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &DeepTree{}
@@ -4396,6 +4480,9 @@ func TestADeepBranchJSON(t *testing.T) {
 	p := NewPopulatedADeepBranch(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &ADeepBranch{}
@@ -4415,6 +4502,9 @@ func TestAndDeepBranchJSON(t *testing.T) {
 	p := NewPopulatedAndDeepBranch(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &AndDeepBranch{}
@@ -4434,6 +4524,9 @@ func TestDeepLeafJSON(t *testing.T) {
 	p := NewPopulatedDeepLeaf(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &DeepLeaf{}
@@ -4453,6 +4546,9 @@ func TestNilJSON(t *testing.T) {
 	p := NewPopulatedNil(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Nil{}
@@ -4472,6 +4568,9 @@ func TestNidOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNidOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidOptEnum{}
@@ -4491,6 +4590,9 @@ func TestNinOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNinOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptEnum{}
@@ -4510,6 +4612,9 @@ func TestNidRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNidRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepEnum{}
@@ -4529,6 +4634,9 @@ func TestNinRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNinRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepEnum{}
@@ -4548,6 +4656,9 @@ func TestNinOptEnumDefaultJSON(t *testing.T) {
 	p := NewPopulatedNinOptEnumDefault(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptEnumDefault{}
@@ -4567,6 +4678,9 @@ func TestAnotherNinOptEnumJSON(t *testing.T) {
 	p := NewPopulatedAnotherNinOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &AnotherNinOptEnum{}
@@ -4586,6 +4700,9 @@ func TestAnotherNinOptEnumDefaultJSON(t *testing.T) {
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &AnotherNinOptEnumDefault{}
@@ -4605,6 +4722,9 @@ func TestTimerJSON(t *testing.T) {
 	p := NewPopulatedTimer(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Timer{}
@@ -4624,6 +4744,9 @@ func TestMyExtendableJSON(t *testing.T) {
 	p := NewPopulatedMyExtendable(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &MyExtendable{}
@@ -4643,6 +4766,9 @@ func TestOtherExtenableJSON(t *testing.T) {
 	p := NewPopulatedOtherExtenable(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &OtherExtenable{}
@@ -4662,6 +4788,9 @@ func TestNestedDefinitionJSON(t *testing.T) {
 	p := NewPopulatedNestedDefinition(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NestedDefinition{}
@@ -4681,6 +4810,9 @@ func TestNestedDefinition_NestedMessageJSON(t *testing.T) {
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NestedDefinition_NestedMessage{}
@@ -4700,6 +4832,9 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgJSON(t *testing.T) {
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NestedDefinition_NestedMessage_NestedNestedMsg{}
@@ -4719,6 +4854,9 @@ func TestNestedScopeJSON(t *testing.T) {
 	p := NewPopulatedNestedScope(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NestedScope{}
@@ -4738,6 +4876,9 @@ func TestNinOptNativeDefaultJSON(t *testing.T) {
 	p := NewPopulatedNinOptNativeDefault(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptNativeDefault{}
@@ -4757,6 +4898,9 @@ func TestCustomContainerJSON(t *testing.T) {
 	p := NewPopulatedCustomContainer(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomContainer{}
@@ -4776,6 +4920,9 @@ func TestCustomNameNidOptNativeJSON(t *testing.T) {
 	p := NewPopulatedCustomNameNidOptNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameNidOptNative{}
@@ -4795,6 +4942,9 @@ func TestCustomNameNinOptNativeJSON(t *testing.T) {
 	p := NewPopulatedCustomNameNinOptNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameNinOptNative{}
@@ -4814,6 +4964,9 @@ func TestCustomNameNinRepNativeJSON(t *testing.T) {
 	p := NewPopulatedCustomNameNinRepNative(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameNinRepNative{}
@@ -4833,6 +4986,9 @@ func TestCustomNameNinStructJSON(t *testing.T) {
 	p := NewPopulatedCustomNameNinStruct(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameNinStruct{}
@@ -4852,6 +5008,9 @@ func TestCustomNameCustomTypeJSON(t *testing.T) {
 	p := NewPopulatedCustomNameCustomType(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameCustomType{}
@@ -4871,6 +5030,9 @@ func TestCustomNameNinEmbeddedStructUnionJSON(t *testing.T) {
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameNinEmbeddedStructUnion{}
@@ -4890,6 +5052,9 @@ func TestCustomNameEnumJSON(t *testing.T) {
 	p := NewPopulatedCustomNameEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &CustomNameEnum{}
@@ -4909,6 +5074,9 @@ func TestNoExtensionsMapJSON(t *testing.T) {
 	p := NewPopulatedNoExtensionsMap(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NoExtensionsMap{}
@@ -4928,6 +5096,9 @@ func TestUnrecognizedJSON(t *testing.T) {
 	p := NewPopulatedUnrecognized(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Unrecognized{}
@@ -4947,6 +5118,9 @@ func TestUnrecognizedWithInnerJSON(t *testing.T) {
 	p := NewPopulatedUnrecognizedWithInner(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &UnrecognizedWithInner{}
@@ -4966,6 +5140,9 @@ func TestUnrecognizedWithInner_InnerJSON(t *testing.T) {
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &UnrecognizedWithInner_Inner{}
@@ -4985,6 +5162,9 @@ func TestUnrecognizedWithEmbedJSON(t *testing.T) {
 	p := NewPopulatedUnrecognizedWithEmbed(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &UnrecognizedWithEmbed{}
@@ -5004,6 +5184,9 @@ func TestUnrecognizedWithEmbed_EmbeddedJSON(t *testing.T) {
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &UnrecognizedWithEmbed_Embedded{}

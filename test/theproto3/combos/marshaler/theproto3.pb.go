@@ -586,7 +586,7 @@ func (m *MessageWithMap) MarshalTo(data []byte) (n int, err error) {
 			i++
 			v := m.MsgMapping[k]
 			msgSize := v.Size()
-			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(msgSize))
+			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + msgSize + sovTheproto3(uint64(msgSize))
 			i = encodeVarintTheproto3(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++

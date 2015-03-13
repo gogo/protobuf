@@ -285,23 +285,13 @@ func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
 func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		if !p.unsafe {
-			p.P(`var `, varName, `temp uint64`)
-			p.decodeFixed64(varName+"temp", "uint64")
-			p.P(`mapkey := `, p.mathPkg.Use(), `.Float64frombits(`, varName, `temp)`)
-		} else {
-			p.P(`var `, varName, ` float64`)
-			p.unsafeFixed64(varName, "float64")
-		}
+		p.P(`var `, varName, `temp uint64`)
+		p.decodeFixed64(varName+"temp", "uint64")
+		p.P(`mapkey := `, p.mathPkg.Use(), `.Float64frombits(`, varName, `temp)`)
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		if !p.unsafe {
-			p.P(`var `, varName, `temp uint32`)
-			p.decodeFixed32(varName+"temp", "uint32")
-			p.P(`mapkey := `, p.mathPkg.Use(), `.Float32frombits(`, varName, `temp)`)
-		} else {
-			p.P(`var `, varName, ` float32`)
-			p.unsafeFixed32(varName, "float32")
-		}
+		p.P(`var `, varName, `temp uint32`)
+		p.decodeFixed32(varName+"temp", "uint32")
+		p.P(`mapkey := `, p.mathPkg.Use(), `.Float32frombits(`, varName, `temp)`)
 	case descriptor.FieldDescriptorProto_TYPE_INT64:
 		p.P(`var `, varName, ` int64`)
 		p.decodeVarint(varName, "int64")
@@ -312,21 +302,11 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.P(`var `, varName, ` int32`)
 		p.decodeVarint(varName, "int32")
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
-		if !p.unsafe {
-			p.P(`var `, varName, ` uint64`)
-			p.decodeFixed64(varName, "uint64")
-		} else {
-			p.P(`var `, varName, ` uint64`)
-			p.unsafeFixed64(varName, "uint64")
-		}
+		p.P(`var `, varName, ` uint64`)
+		p.decodeFixed64(varName, "uint64")
 	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
-		if !p.unsafe {
-			p.P(`var `, varName, ` uint32`)
-			p.decodeFixed32(varName, "uint32")
-		} else {
-			p.P(`var `, varName, ` uint32`)
-			p.unsafeFixed32(varName, "uint32")
-		}
+		p.P(`var `, varName, ` uint32`)
+		p.decodeFixed32(varName, "uint32")
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		p.P(`var `, varName, `temp int`)
 		p.decodeVarint(varName+"temp", "int")
@@ -380,21 +360,11 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.P(`var `, varName, ` `, typName)
 		p.decodeVarint(varName, typName)
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-		if !p.unsafe {
-			p.P(`var `, varName, ` int32`)
-			p.decodeFixed32(varName, "int32")
-		} else {
-			p.P(`var `, varName, ` int32`)
-			p.unsafeFixed32(varName, "int32")
-		}
+		p.P(`var `, varName, ` int32`)
+		p.decodeFixed32(varName, "int32")
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-		if !p.unsafe {
-			p.P(`var `, varName, ` int64`)
-			p.decodeFixed64(varName, "int64")
-		} else {
-			p.P(`var `, varName, ` int64`)
-			p.unsafeFixed64(varName, "int64")
-		}
+		p.P(`var `, varName, ` int64`)
+		p.decodeFixed64(varName, "int64")
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
 		p.P(`var `, varName, `temp int32`)
 		p.decodeVarint(varName+"temp", "int32")

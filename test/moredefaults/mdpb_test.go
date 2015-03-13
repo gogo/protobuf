@@ -63,6 +63,9 @@ func TestMoreDefaultsBJSON(t *testing.T) {
 	p := NewPopulatedMoreDefaultsB(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &MoreDefaultsB{}
@@ -79,6 +82,9 @@ func TestMoreDefaultsAJSON(t *testing.T) {
 	p := NewPopulatedMoreDefaultsA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &MoreDefaultsA{}

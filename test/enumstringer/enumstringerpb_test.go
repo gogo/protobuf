@@ -115,6 +115,9 @@ func TestNidOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNidOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidOptEnum{}
@@ -134,6 +137,9 @@ func TestNinOptEnumJSON(t *testing.T) {
 	p := NewPopulatedNinOptEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinOptEnum{}
@@ -153,6 +159,9 @@ func TestNidRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNidRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NidRepEnum{}
@@ -172,6 +181,9 @@ func TestNinRepEnumJSON(t *testing.T) {
 	p := NewPopulatedNinRepEnum(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NinRepEnum{}

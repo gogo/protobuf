@@ -277,6 +277,9 @@ func TestMessageJSON(t *testing.T) {
 	p := NewPopulatedMessage(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Message{}
@@ -296,6 +299,9 @@ func TestNestedJSON(t *testing.T) {
 	p := NewPopulatedNested(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Nested{}
@@ -315,6 +321,9 @@ func TestMessageWithMapJSON(t *testing.T) {
 	p := NewPopulatedMessageWithMap(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &MessageWithMap{}
@@ -334,6 +343,9 @@ func TestFloatingPointJSON(t *testing.T) {
 	p := NewPopulatedFloatingPoint(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &FloatingPoint{}

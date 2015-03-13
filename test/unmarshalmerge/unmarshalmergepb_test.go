@@ -214,6 +214,9 @@ func TestBigJSON(t *testing.T) {
 	p := NewPopulatedBig(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Big{}
@@ -233,6 +236,9 @@ func TestBigUnsafeJSON(t *testing.T) {
 	p := NewPopulatedBigUnsafe(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &BigUnsafe{}
@@ -252,6 +258,9 @@ func TestSubJSON(t *testing.T) {
 	p := NewPopulatedSub(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &Sub{}

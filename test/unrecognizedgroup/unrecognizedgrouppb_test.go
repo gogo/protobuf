@@ -192,6 +192,9 @@ func TestNewNoGroupJSON(t *testing.T) {
 	p := NewPopulatedNewNoGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &NewNoGroup{}
@@ -211,6 +214,9 @@ func TestAJSON(t *testing.T) {
 	p := NewPopulatedA(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &A{}
@@ -230,6 +236,9 @@ func TestOldWithGroupJSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup{}
@@ -249,6 +258,9 @@ func TestOldWithGroup_Group1JSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group1{}
@@ -268,6 +280,9 @@ func TestOldWithGroup_Group2JSON(t *testing.T) {
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
 	jsondata, err := encoding_json.Marshal(p)
 	if err != nil {
+		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
+			t.Skip(err)
+		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group2{}
