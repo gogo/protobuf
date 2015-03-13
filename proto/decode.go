@@ -523,9 +523,7 @@ func (o *Buffer) dec_string(p *Properties, base structPointer) error {
 	if err != nil {
 		return err
 	}
-	sp := new(string)
-	*sp = s
-	*structPointer_String(base, p.field) = sp
+	*structPointer_String(base, p.field) = &s
 	return nil
 }
 
