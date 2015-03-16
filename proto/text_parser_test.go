@@ -296,7 +296,7 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	// Missing required field
 	{
 		in:  `name: "Pawel"`,
-		err: `proto: required field "testdata.MyMessage.count" not set`,
+		err: `proto: required field "test_proto.MyMessage.count" not set`,
 		out: &MyMessage{
 			Name: String("Pawel"),
 		},
@@ -337,10 +337,10 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	},
 
 	// Extension
-	buildExtStructTest(`count: 42 [testdata.Ext.more]:<data:"Hello, world!" >`),
-	buildExtStructTest(`count: 42 [testdata.Ext.more] {data:"Hello, world!"}`),
-	buildExtDataTest(`count: 42 [testdata.Ext.text]:"Hello, world!" [testdata.Ext.number]:1729`),
-	buildExtRepStringTest(`count: 42 [testdata.greeting]:"bula" [testdata.greeting]:"hola"`),
+	buildExtStructTest(`count: 42 [test_proto.Ext.more]:<data:"Hello, world!" >`),
+	buildExtStructTest(`count: 42 [test_proto.Ext.more] {data:"Hello, world!"}`),
+	buildExtDataTest(`count: 42 [test_proto.Ext.text]:"Hello, world!" [test_proto.Ext.number]:1729`),
+	buildExtRepStringTest(`count: 42 [test_proto.greeting]:"bula" [test_proto.greeting]:"hola"`),
 
 	// Big all-in-one
 	{

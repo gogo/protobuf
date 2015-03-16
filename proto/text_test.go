@@ -151,12 +151,12 @@ SomeGroup {
 }
 /* 2 unknown bytes */
 13: 4
-[testdata.Ext.more]: <
+[test_proto.Ext.more]: <
   data: "Big gobs for big rats"
 >
-[testdata.greeting]: "adg"
-[testdata.greeting]: "easy"
-[testdata.greeting]: "cow"
+[test_proto.greeting]: "adg"
+[test_proto.greeting]: "easy"
+[test_proto.greeting]: "cow"
 /* 13 unknown bytes */
 201: "\t3G skiing"
 /* 3 unknown bytes */
