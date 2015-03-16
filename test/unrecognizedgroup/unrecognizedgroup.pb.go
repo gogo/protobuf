@@ -129,19 +129,18 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 			var v uint64
-			i := index + 8
-			if i > l {
+			if (index + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = uint64(data[i-8])
-			v |= uint64(data[i-7]) << 8
-			v |= uint64(data[i-6]) << 16
-			v |= uint64(data[i-5]) << 24
-			v |= uint64(data[i-4]) << 32
-			v |= uint64(data[i-3]) << 40
-			v |= uint64(data[i-2]) << 48
-			v |= uint64(data[i-1]) << 56
+			index += 8
+			v = uint64(data[index-8])
+			v |= uint64(data[index-7]) << 8
+			v |= uint64(data[index-6]) << 16
+			v |= uint64(data[index-5]) << 24
+			v |= uint64(data[index-4]) << 32
+			v |= uint64(data[index-3]) << 40
+			v |= uint64(data[index-2]) << 48
+			v |= uint64(data[index-1]) << 56
 			v2 := math.Float64frombits(v)
 			m.Field3 = append(m.Field3, v2)
 		case 5:

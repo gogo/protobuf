@@ -505,19 +505,18 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 			var v uint64
-			i := index + 8
-			if i > l {
+			if (index + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = uint64(data[i-8])
-			v |= uint64(data[i-7]) << 8
-			v |= uint64(data[i-6]) << 16
-			v |= uint64(data[i-5]) << 24
-			v |= uint64(data[i-4]) << 32
-			v |= uint64(data[i-3]) << 40
-			v |= uint64(data[i-2]) << 48
-			v |= uint64(data[i-1]) << 56
+			index += 8
+			v = uint64(data[index-8])
+			v |= uint64(data[index-7]) << 8
+			v |= uint64(data[index-6]) << 16
+			v |= uint64(data[index-5]) << 24
+			v |= uint64(data[index-4]) << 32
+			v |= uint64(data[index-3]) << 40
+			v |= uint64(data[index-2]) << 48
+			v |= uint64(data[index-1]) << 56
 			v2 := math.Float64frombits(v)
 			m.Field1 = append(m.Field1, v2)
 		case 2:
@@ -525,15 +524,14 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 			var v uint32
-			i := index + 4
-			if i > l {
+			if (index + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = uint32(data[i-4])
-			v |= uint32(data[i-3]) << 8
-			v |= uint32(data[i-2]) << 16
-			v |= uint32(data[i-1]) << 24
+			index += 4
+			v = uint32(data[index-4])
+			v |= uint32(data[index-3]) << 8
+			v |= uint32(data[index-2]) << 16
+			v |= uint32(data[index-1]) << 24
 			v2 := math.Float32frombits(v)
 			m.Field2 = append(m.Field2, v2)
 		case 3:
@@ -645,68 +643,64 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
-			i := index + 4
-			if i > l {
+			if (index + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = uint32(data[i-4])
-			v |= uint32(data[i-3]) << 8
-			v |= uint32(data[i-2]) << 16
-			v |= uint32(data[i-1]) << 24
+			index += 4
+			v = uint32(data[index-4])
+			v |= uint32(data[index-3]) << 8
+			v |= uint32(data[index-2]) << 16
+			v |= uint32(data[index-1]) << 24
 			m.Field9 = append(m.Field9, v)
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
-			i := index + 4
-			if i > l {
+			if (index + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = int32(data[i-4])
-			v |= int32(data[i-3]) << 8
-			v |= int32(data[i-2]) << 16
-			v |= int32(data[i-1]) << 24
+			index += 4
+			v = int32(data[index-4])
+			v |= int32(data[index-3]) << 8
+			v |= int32(data[index-2]) << 16
+			v |= int32(data[index-1]) << 24
 			m.Field10 = append(m.Field10, v)
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
-			i := index + 8
-			if i > l {
+			if (index + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = uint64(data[i-8])
-			v |= uint64(data[i-7]) << 8
-			v |= uint64(data[i-6]) << 16
-			v |= uint64(data[i-5]) << 24
-			v |= uint64(data[i-4]) << 32
-			v |= uint64(data[i-3]) << 40
-			v |= uint64(data[i-2]) << 48
-			v |= uint64(data[i-1]) << 56
+			index += 8
+			v = uint64(data[index-8])
+			v |= uint64(data[index-7]) << 8
+			v |= uint64(data[index-6]) << 16
+			v |= uint64(data[index-5]) << 24
+			v |= uint64(data[index-4]) << 32
+			v |= uint64(data[index-3]) << 40
+			v |= uint64(data[index-2]) << 48
+			v |= uint64(data[index-1]) << 56
 			m.Field11 = append(m.Field11, v)
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
-			i := index + 8
-			if i > l {
+			if (index + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index = i
-			v = int64(data[i-8])
-			v |= int64(data[i-7]) << 8
-			v |= int64(data[i-6]) << 16
-			v |= int64(data[i-5]) << 24
-			v |= int64(data[i-4]) << 32
-			v |= int64(data[i-3]) << 40
-			v |= int64(data[i-2]) << 48
-			v |= int64(data[i-1]) << 56
+			index += 8
+			v = int64(data[index-8])
+			v |= int64(data[index-7]) << 8
+			v |= int64(data[index-6]) << 16
+			v |= int64(data[index-5]) << 24
+			v |= int64(data[index-4]) << 32
+			v |= int64(data[index-3]) << 40
+			v |= int64(data[index-2]) << 48
+			v |= int64(data[index-1]) << 56
 			m.Field12 = append(m.Field12, v)
 		case 13:
 			if wireType != 0 {
@@ -787,37 +781,35 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v uint64
-					i := index + 8
-					if i > l {
+					if (index + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = uint64(data[i-8])
-					v |= uint64(data[i-7]) << 8
-					v |= uint64(data[i-6]) << 16
-					v |= uint64(data[i-5]) << 24
-					v |= uint64(data[i-4]) << 32
-					v |= uint64(data[i-3]) << 40
-					v |= uint64(data[i-2]) << 48
-					v |= uint64(data[i-1]) << 56
+					index += 8
+					v = uint64(data[index-8])
+					v |= uint64(data[index-7]) << 8
+					v |= uint64(data[index-6]) << 16
+					v |= uint64(data[index-5]) << 24
+					v |= uint64(data[index-4]) << 32
+					v |= uint64(data[index-3]) << 40
+					v |= uint64(data[index-2]) << 48
+					v |= uint64(data[index-1]) << 56
 					v2 := math.Float64frombits(v)
 					m.Field1 = append(m.Field1, v2)
 				}
 			} else if wireType == 1 {
 				var v uint64
-				i := index + 8
-				if i > l {
+				if (index + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = uint64(data[i-8])
-				v |= uint64(data[i-7]) << 8
-				v |= uint64(data[i-6]) << 16
-				v |= uint64(data[i-5]) << 24
-				v |= uint64(data[i-4]) << 32
-				v |= uint64(data[i-3]) << 40
-				v |= uint64(data[i-2]) << 48
-				v |= uint64(data[i-1]) << 56
+				index += 8
+				v = uint64(data[index-8])
+				v |= uint64(data[index-7]) << 8
+				v |= uint64(data[index-6]) << 16
+				v |= uint64(data[index-5]) << 24
+				v |= uint64(data[index-4]) << 32
+				v |= uint64(data[index-3]) << 40
+				v |= uint64(data[index-2]) << 48
+				v |= uint64(data[index-1]) << 56
 				v2 := math.Float64frombits(v)
 				m.Field1 = append(m.Field1, v2)
 			} else {
@@ -843,29 +835,27 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v uint32
-					i := index + 4
-					if i > l {
+					if (index + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = uint32(data[i-4])
-					v |= uint32(data[i-3]) << 8
-					v |= uint32(data[i-2]) << 16
-					v |= uint32(data[i-1]) << 24
+					index += 4
+					v = uint32(data[index-4])
+					v |= uint32(data[index-3]) << 8
+					v |= uint32(data[index-2]) << 16
+					v |= uint32(data[index-1]) << 24
 					v2 := math.Float32frombits(v)
 					m.Field2 = append(m.Field2, v2)
 				}
 			} else if wireType == 5 {
 				var v uint32
-				i := index + 4
-				if i > l {
+				if (index + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = uint32(data[i-4])
-				v |= uint32(data[i-3]) << 8
-				v |= uint32(data[i-2]) << 16
-				v |= uint32(data[i-1]) << 24
+				index += 4
+				v = uint32(data[index-4])
+				v |= uint32(data[index-3]) << 8
+				v |= uint32(data[index-2]) << 16
+				v |= uint32(data[index-1]) << 24
 				v2 := math.Float32frombits(v)
 				m.Field2 = append(m.Field2, v2)
 			} else {
@@ -1195,28 +1185,26 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v uint32
-					i := index + 4
-					if i > l {
+					if (index + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = uint32(data[i-4])
-					v |= uint32(data[i-3]) << 8
-					v |= uint32(data[i-2]) << 16
-					v |= uint32(data[i-1]) << 24
+					index += 4
+					v = uint32(data[index-4])
+					v |= uint32(data[index-3]) << 8
+					v |= uint32(data[index-2]) << 16
+					v |= uint32(data[index-1]) << 24
 					m.Field9 = append(m.Field9, v)
 				}
 			} else if wireType == 5 {
 				var v uint32
-				i := index + 4
-				if i > l {
+				if (index + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = uint32(data[i-4])
-				v |= uint32(data[i-3]) << 8
-				v |= uint32(data[i-2]) << 16
-				v |= uint32(data[i-1]) << 24
+				index += 4
+				v = uint32(data[index-4])
+				v |= uint32(data[index-3]) << 8
+				v |= uint32(data[index-2]) << 16
+				v |= uint32(data[index-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
@@ -1241,28 +1229,26 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v int32
-					i := index + 4
-					if i > l {
+					if (index + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = int32(data[i-4])
-					v |= int32(data[i-3]) << 8
-					v |= int32(data[i-2]) << 16
-					v |= int32(data[i-1]) << 24
+					index += 4
+					v = int32(data[index-4])
+					v |= int32(data[index-3]) << 8
+					v |= int32(data[index-2]) << 16
+					v |= int32(data[index-1]) << 24
 					m.Field10 = append(m.Field10, v)
 				}
 			} else if wireType == 5 {
 				var v int32
-				i := index + 4
-				if i > l {
+				if (index + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = int32(data[i-4])
-				v |= int32(data[i-3]) << 8
-				v |= int32(data[i-2]) << 16
-				v |= int32(data[i-1]) << 24
+				index += 4
+				v = int32(data[index-4])
+				v |= int32(data[index-3]) << 8
+				v |= int32(data[index-2]) << 16
+				v |= int32(data[index-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
@@ -1287,36 +1273,34 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v uint64
-					i := index + 8
-					if i > l {
+					if (index + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = uint64(data[i-8])
-					v |= uint64(data[i-7]) << 8
-					v |= uint64(data[i-6]) << 16
-					v |= uint64(data[i-5]) << 24
-					v |= uint64(data[i-4]) << 32
-					v |= uint64(data[i-3]) << 40
-					v |= uint64(data[i-2]) << 48
-					v |= uint64(data[i-1]) << 56
+					index += 8
+					v = uint64(data[index-8])
+					v |= uint64(data[index-7]) << 8
+					v |= uint64(data[index-6]) << 16
+					v |= uint64(data[index-5]) << 24
+					v |= uint64(data[index-4]) << 32
+					v |= uint64(data[index-3]) << 40
+					v |= uint64(data[index-2]) << 48
+					v |= uint64(data[index-1]) << 56
 					m.Field11 = append(m.Field11, v)
 				}
 			} else if wireType == 1 {
 				var v uint64
-				i := index + 8
-				if i > l {
+				if (index + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = uint64(data[i-8])
-				v |= uint64(data[i-7]) << 8
-				v |= uint64(data[i-6]) << 16
-				v |= uint64(data[i-5]) << 24
-				v |= uint64(data[i-4]) << 32
-				v |= uint64(data[i-3]) << 40
-				v |= uint64(data[i-2]) << 48
-				v |= uint64(data[i-1]) << 56
+				index += 8
+				v = uint64(data[index-8])
+				v |= uint64(data[index-7]) << 8
+				v |= uint64(data[index-6]) << 16
+				v |= uint64(data[index-5]) << 24
+				v |= uint64(data[index-4]) << 32
+				v |= uint64(data[index-3]) << 40
+				v |= uint64(data[index-2]) << 48
+				v |= uint64(data[index-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
@@ -1341,36 +1325,34 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 				for index < postIndex {
 					var v int64
-					i := index + 8
-					if i > l {
+					if (index + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					index = i
-					v = int64(data[i-8])
-					v |= int64(data[i-7]) << 8
-					v |= int64(data[i-6]) << 16
-					v |= int64(data[i-5]) << 24
-					v |= int64(data[i-4]) << 32
-					v |= int64(data[i-3]) << 40
-					v |= int64(data[i-2]) << 48
-					v |= int64(data[i-1]) << 56
+					index += 8
+					v = int64(data[index-8])
+					v |= int64(data[index-7]) << 8
+					v |= int64(data[index-6]) << 16
+					v |= int64(data[index-5]) << 24
+					v |= int64(data[index-4]) << 32
+					v |= int64(data[index-3]) << 40
+					v |= int64(data[index-2]) << 48
+					v |= int64(data[index-1]) << 56
 					m.Field12 = append(m.Field12, v)
 				}
 			} else if wireType == 1 {
 				var v int64
-				i := index + 8
-				if i > l {
+				if (index + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				index = i
-				v = int64(data[i-8])
-				v |= int64(data[i-7]) << 8
-				v |= int64(data[i-6]) << 16
-				v |= int64(data[i-5]) << 24
-				v |= int64(data[i-4]) << 32
-				v |= int64(data[i-3]) << 40
-				v |= int64(data[i-2]) << 48
-				v |= int64(data[i-1]) << 56
+				index += 8
+				v = int64(data[index-8])
+				v |= int64(data[index-7]) << 8
+				v |= int64(data[index-6]) << 16
+				v |= int64(data[index-5]) << 24
+				v |= int64(data[index-4]) << 32
+				v |= int64(data[index-3]) << 40
+				v |= int64(data[index-2]) << 48
+				v |= int64(data[index-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)

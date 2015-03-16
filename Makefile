@@ -68,6 +68,7 @@ regenerate:
 	make -C test/tags regenerate
 	make -C test/oneof regenerate
 	make -C test/theproto3 regenerate
+	make -C test/mapsproto2 regenerate
 	make gofmt
 
 tests:
@@ -94,6 +95,7 @@ tests:
 	go test -v ./test/oneof
 	go test -v ./test/theproto3/...
 	go test -v ./test/combos/...
+	go test -v ./test/mapsproto2/...
 	make vet
 
 vet:

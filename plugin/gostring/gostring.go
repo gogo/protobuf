@@ -163,6 +163,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				keyField, valueField := mapMsg.GetMapFields()
 				keysName := `keysFor` + fieldname
 				keygoTyp, _ := p.GoType(nil, keyField)
+				keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 				keyCapTyp := generator.CamelCase(keygoTyp)
 				valuegoTyp, _ := p.GoType(nil, valueField)
 				p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)

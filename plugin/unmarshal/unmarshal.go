@@ -231,17 +231,16 @@ func (p *unmarshal) decodeVarint(varName string, typName string) {
 }
 
 func (p *unmarshal) decodeFixed32(varName string, typeName string) {
-	p.P(`i := index + 4`)
-	p.P(`if i > l {`)
+	p.P(`if (index+4) > l {`)
 	p.In()
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 	p.Out()
 	p.P(`}`)
-	p.P(`index = i`)
-	p.P(varName, ` = `, typeName, `(data[i-4])`)
-	p.P(varName, ` |= `, typeName, `(data[i-3]) << 8`)
-	p.P(varName, ` |= `, typeName, `(data[i-2]) << 16`)
-	p.P(varName, ` |= `, typeName, `(data[i-1]) << 24`)
+	p.P(`index += 4`)
+	p.P(varName, ` = `, typeName, `(data[index-4])`)
+	p.P(varName, ` |= `, typeName, `(data[index-3]) << 8`)
+	p.P(varName, ` |= `, typeName, `(data[index-2]) << 16`)
+	p.P(varName, ` |= `, typeName, `(data[index-1]) << 24`)
 }
 
 func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
@@ -255,21 +254,20 @@ func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
 }
 
 func (p *unmarshal) decodeFixed64(varName string, typeName string) {
-	p.P(`i := index + 8`)
-	p.P(`if i > l {`)
+	p.P(`if (index+8) > l {`)
 	p.In()
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 	p.Out()
 	p.P(`}`)
-	p.P(`index = i`)
-	p.P(varName, ` = `, typeName, `(data[i-8])`)
-	p.P(varName, ` |= `, typeName, `(data[i-7]) << 8`)
-	p.P(varName, ` |= `, typeName, `(data[i-6]) << 16`)
-	p.P(varName, ` |= `, typeName, `(data[i-5]) << 24`)
-	p.P(varName, ` |= `, typeName, `(data[i-4]) << 32`)
-	p.P(varName, ` |= `, typeName, `(data[i-3]) << 40`)
-	p.P(varName, ` |= `, typeName, `(data[i-2]) << 48`)
-	p.P(varName, ` |= `, typeName, `(data[i-1]) << 56`)
+	p.P(`index += 8`)
+	p.P(varName, ` = `, typeName, `(data[index-8])`)
+	p.P(varName, ` |= `, typeName, `(data[index-7]) << 8`)
+	p.P(varName, ` |= `, typeName, `(data[index-6]) << 16`)
+	p.P(varName, ` |= `, typeName, `(data[index-5]) << 24`)
+	p.P(varName, ` |= `, typeName, `(data[index-4]) << 32`)
+	p.P(varName, ` |= `, typeName, `(data[index-3]) << 40`)
+	p.P(varName, ` |= `, typeName, `(data[index-2]) << 48`)
+	p.P(varName, ` |= `, typeName, `(data[index-1]) << 56`)
 }
 
 func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
@@ -287,11 +285,11 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, `temp uint64`)
 		p.decodeFixed64(varName+"temp", "uint64")
-		p.P(`mapkey := `, p.mathPkg.Use(), `.Float64frombits(`, varName, `temp)`)
+		p.P(varName, ` := `, p.mathPkg.Use(), `.Float64frombits(`, varName, `temp)`)
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 		p.P(`var `, varName, `temp uint32`)
 		p.decodeFixed32(varName+"temp", "uint32")
-		p.P(`mapkey := `, p.mathPkg.Use(), `.Float32frombits(`, varName, `temp)`)
+		p.P(varName, ` := `, p.mathPkg.Use(), `.Float32frombits(`, varName, `temp)`)
 	case descriptor.FieldDescriptorProto_TYPE_INT64:
 		p.P(`var `, varName, ` int64`)
 		p.decodeVarint(varName, "int64")
@@ -312,16 +310,16 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.decodeVarint(varName+"temp", "int")
 		p.P(varName, ` := bool(`, varName, `temp != 0)`)
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		p.P(`var stringLen uint64`)
-		p.decodeVarint("stringLen", "uint64")
-		p.P(`postStringIndex := index + int(stringLen)`)
-		p.P(`if postStringIndex > l {`)
+		p.P(`var stringLen`, varName, ` uint64`)
+		p.decodeVarint("stringLen"+varName, "uint64")
+		p.P(`postStringIndex`, varName, ` := index + int(stringLen`, varName, `)`)
+		p.P(`if postStringIndex`, varName, ` > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		p.P(varName, ` := string(data[index:postStringIndex])`)
-		p.P(`index = postStringIndex`)
+		p.P(varName, ` := string(data[index:postStringIndex`, varName, `])`)
+		p.P(`index = postStringIndex`, varName)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		p.P(`var mapmsglen int`)
 		p.decodeVarint("mapmsglen", "int")
@@ -580,7 +578,11 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			mapMsg := generator.GetMap(file, field)
 			keyField, valueField := mapMsg.GetMapFields()
 			keygoTyp, _ := p.GoType(nil, keyField)
+			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			valuegoTyp, _ := p.GoType(nil, valueField)
+			if !valueField.IsMessage() {
+				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
+			}
 			p.P(`var keykey uint64`)
 			p.decodeVarint("keykey", "uint64")
 			p.mapField("mapkey", keyField)

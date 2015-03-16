@@ -843,6 +843,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					keyField, valueField := mapMsg.GetMapFields()
 					keysName := `keysFor` + fieldname
 					keygoTyp, keywire := p.GoType(nil, keyField)
+					keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 					_, valuewire := p.GoType(nil, valueField)
 					keyCapTyp := generator.CamelCase(keygoTyp)
 					keyKeySize := keySize(1, wireToType(keywire))

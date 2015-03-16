@@ -208,23 +208,33 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		valuegoTyp, _ := p.GoType(nil, mapvalue)
 		keytypName := generator.GoTypeToName(keygoTyp)
 		valuetypName := generator.GoTypeToName(valuegoTyp)
+		mapvaluegoType := valuegoTyp
+		if !mapvalue.IsMessage() {
+			mapvaluegoType = strings.Replace(mapvaluegoType, "*", "", 1)
+		}
 		p.P(p.varGen.Next(), ` := r.Intn(10)`)
-		p.P(`this.`, fieldname, ` = make(map[`, keygoTyp, `]`, valuegoTyp, `)`)
+		p.P(`this.`, fieldname, ` = make(map[`, strings.Replace(keygoTyp, "*", "", 1), `]`, mapvaluegoType, `)`)
 		p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 		p.In()
+		keyval := ""
+		if mapkey.IsString() {
+			keyval = fmt.Sprintf("randString%v(r)", p.localName)
+		} else {
+			keyval = value(keytypName)
+		}
 		if mapvalue.IsMessage() || p.IsGroup(field) {
-			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = `
+			s := `this.` + fieldname + `[` + keyval + `]` + ` = `
 			goTypName := generator.GoTypeToName(valuegoTyp)
 			funcCall := getFuncCall(goTypName)
 			s += funcCall
 			p.P(s)
 		} else if mapvalue.IsEnum() {
-			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = ` + p.getEnumVal(mapvalue, valuegoTyp)
+			s := `this.` + fieldname + `[` + keyval + `]` + ` = ` + p.getEnumVal(mapvalue, valuegoTyp)
 			p.P(s)
 		} else if mapvalue.IsBytes() {
 			count := p.varGen.Next()
 			p.P(count, ` := r.Intn(100)`)
-			p.P(p.varGen.Next(), ` := `, value(keytypName))
+			p.P(p.varGen.Next(), ` := `, keyval)
 			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = make(`, valuegoTyp, `, `, count, `)`)
 			p.P(`for i := 0; i < `, count, `; i++ {`)
 			p.In()
@@ -232,10 +242,10 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.Out()
 			p.P(`}`)
 		} else if mapvalue.IsString() {
-			s := `this.` + fieldname + `[` + value(keytypName) + `]` + ` = ` + fmt.Sprintf("randString%v(r)", p.localName)
+			s := `this.` + fieldname + `[` + keyval + `]` + ` = ` + fmt.Sprintf("randString%v(r)", p.localName)
 			p.P(s)
 		} else {
-			p.P(p.varGen.Next(), ` := `, value(keytypName))
+			p.P(p.varGen.Next(), ` := `, keyval)
 			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypName))
 			if negative(valuetypName) {
 				p.P(`if r.Intn(2) == 0 {`)

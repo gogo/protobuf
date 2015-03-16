@@ -132,6 +132,7 @@ import (
 	"github.com/gogo/protobuf/gogoproto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"strings"
 )
 
 type plugin struct {
@@ -155,7 +156,11 @@ func (p *plugin) GetMapGoType(file *descriptor.FileDescriptorProto, field *descr
 	mapMsg := generator.GetMap(file, field)
 	keyField, valueField := mapMsg.GetMapFields()
 	keygoTyp, _ := p.GoType(nil, keyField)
+	keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 	valuegoTyp, _ := p.GoType(nil, valueField)
+	if !valueField.IsMessage() {
+		valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
+	}
 	goTyp := "map[" + keygoTyp + "]" + valuegoTyp
 	return goTyp
 }
