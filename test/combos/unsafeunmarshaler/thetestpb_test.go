@@ -7796,14 +7796,14 @@ func TestNidOptNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -7831,14 +7831,14 @@ func TestNinOptNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -7866,14 +7866,14 @@ func TestNidRepNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -7901,14 +7901,14 @@ func TestNinRepNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -7936,14 +7936,14 @@ func TestNidRepPackedNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -7971,14 +7971,14 @@ func TestNinRepPackedNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8006,14 +8006,14 @@ func TestNidOptStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8041,14 +8041,14 @@ func TestNinOptStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8076,14 +8076,14 @@ func TestNidRepStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8111,14 +8111,14 @@ func TestNinRepStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8146,14 +8146,14 @@ func TestNidEmbeddedStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8181,14 +8181,14 @@ func TestNinEmbeddedStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8216,14 +8216,14 @@ func TestNidNestedStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8251,14 +8251,14 @@ func TestNinNestedStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8286,14 +8286,14 @@ func TestNidOptCustomSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8321,14 +8321,14 @@ func TestCustomDashSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8356,14 +8356,14 @@ func TestNinOptCustomSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8391,14 +8391,14 @@ func TestNidRepCustomSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8426,14 +8426,14 @@ func TestNinRepCustomSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8461,14 +8461,14 @@ func TestNinOptNativeUnionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8496,14 +8496,14 @@ func TestNinOptStructUnionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8531,14 +8531,14 @@ func TestNinEmbeddedStructUnionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8566,14 +8566,14 @@ func TestNinNestedStructUnionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8601,14 +8601,14 @@ func TestTreeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8636,14 +8636,14 @@ func TestOrBranchSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8671,14 +8671,14 @@ func TestAndBranchSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8706,14 +8706,14 @@ func TestLeafSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8741,14 +8741,14 @@ func TestDeepTreeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8776,14 +8776,14 @@ func TestADeepBranchSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8811,14 +8811,14 @@ func TestAndDeepBranchSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8846,14 +8846,14 @@ func TestDeepLeafSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8881,14 +8881,14 @@ func TestNilSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8916,14 +8916,14 @@ func TestNidOptEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8951,14 +8951,14 @@ func TestNinOptEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -8986,14 +8986,14 @@ func TestNidRepEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9021,14 +9021,14 @@ func TestNinRepEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9056,14 +9056,14 @@ func TestNinOptEnumDefaultSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9091,14 +9091,14 @@ func TestAnotherNinOptEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9126,14 +9126,14 @@ func TestAnotherNinOptEnumDefaultSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9161,14 +9161,14 @@ func TestTimerSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9196,14 +9196,14 @@ func TestMyExtendableSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9231,14 +9231,14 @@ func TestOtherExtenableSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9266,14 +9266,14 @@ func TestNestedDefinitionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9301,14 +9301,14 @@ func TestNestedDefinition_NestedMessageSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9336,14 +9336,14 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9371,14 +9371,14 @@ func TestNestedScopeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9406,14 +9406,14 @@ func TestNinOptNativeDefaultSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9441,14 +9441,14 @@ func TestCustomContainerSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9476,14 +9476,14 @@ func TestCustomNameNidOptNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9511,14 +9511,14 @@ func TestCustomNameNinOptNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9546,14 +9546,14 @@ func TestCustomNameNinRepNativeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9581,14 +9581,14 @@ func TestCustomNameNinStructSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9616,14 +9616,14 @@ func TestCustomNameCustomTypeSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9651,14 +9651,14 @@ func TestCustomNameNinEmbeddedStructUnionSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9686,14 +9686,14 @@ func TestCustomNameEnumSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9721,14 +9721,14 @@ func TestNoExtensionsMapSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9756,14 +9756,14 @@ func TestUnrecognizedSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9791,14 +9791,14 @@ func TestUnrecognizedWithInnerSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9826,14 +9826,14 @@ func TestUnrecognizedWithInner_InnerSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9861,14 +9861,14 @@ func TestUnrecognizedWithEmbedSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
@@ -9896,14 +9896,14 @@ func TestUnrecognizedWithEmbed_EmbeddedSize(t *testing.T) {
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Fatalf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("size %v != marshalled size %v", size, len(data))
 	}
 	if size2 != size {
-		t.Fatalf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Fatalf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
 	}
 }
 
