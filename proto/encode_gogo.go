@@ -199,7 +199,7 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 	for i := 0; i < l; i++ {
 		structp := structPointer_Add(ss1, field(uintptr(i)*size))
 		if structPointer_IsNil(structp) {
-			return ErrRepeatedHasNil
+			return errRepeatedHasNil
 		}
 
 		// Can the object marshal itself?
@@ -218,7 +218,7 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 		err := o.enc_len_struct(p.sprop, structp, &state)
 		if err != nil && !state.shouldContinue(err, nil) {
 			if err == ErrNil {
-				return ErrRepeatedHasNil
+				return errRepeatedHasNil
 			}
 			return err
 		}
