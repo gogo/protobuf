@@ -166,6 +166,9 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 				keyCapTyp := generator.CamelCase(keygoTyp)
 				valuegoTyp, _ := p.GoType(nil, valueField)
+				if !valueField.IsMessage() {
+					valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
+				}
 				p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)
 				p.P(`for k, _ := range this.`, fieldname, ` {`)
 				p.In()
