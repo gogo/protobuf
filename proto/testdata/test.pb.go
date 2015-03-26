@@ -3,7 +3,7 @@
 // DO NOT EDIT!
 
 /*
-Package test_proto is a generated protocol buffer package.
+Package testdata is a generated protocol buffer package.
 
 It is generated from these files:
 	test.proto
@@ -35,7 +35,7 @@ It has these top-level messages:
 	FloatingPoint
 	MessageWithMap
 */
-package test_proto
+package testdata
 
 import proto "github.com/gogo/protobuf/proto"
 import math "math"
@@ -248,7 +248,7 @@ func (x *RepeatedEnum_Color) UnmarshalJSON(data []byte) error {
 }
 
 type GoEnum struct {
-	Foo              *FOO   `protobuf:"varint,1,req,name=foo,enum=test_proto.FOO" json:"foo,omitempty"`
+	Foo              *FOO   `protobuf:"varint,1,req,name=foo,enum=testdata.FOO" json:"foo,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -289,7 +289,7 @@ func (m *GoTestField) GetType() string {
 
 type GoTest struct {
 	// Some typical parameters
-	Kind  *GoTest_KIND `protobuf:"varint,1,req,enum=test_proto.GoTest_KIND" json:"Kind,omitempty"`
+	Kind  *GoTest_KIND `protobuf:"varint,1,req,enum=testdata.GoTest_KIND" json:"Kind,omitempty"`
 	Table *string      `protobuf:"bytes,2,opt" json:"Table,omitempty"`
 	Param *int32       `protobuf:"varint,3,opt" json:"Param,omitempty"`
 	// Required, repeated and optional foreign fields.
@@ -1242,7 +1242,7 @@ type MyMessage struct {
 	Inner     *InnerMessage        `protobuf:"bytes,5,opt,name=inner" json:"inner,omitempty"`
 	Others    []*OtherMessage      `protobuf:"bytes,6,rep,name=others" json:"others,omitempty"`
 	RepInner  []*InnerMessage      `protobuf:"bytes,12,rep,name=rep_inner" json:"rep_inner,omitempty"`
-	Bikeshed  *MyMessage_Color     `protobuf:"varint,7,opt,name=bikeshed,enum=test_proto.MyMessage_Color" json:"bikeshed,omitempty"`
+	Bikeshed  *MyMessage_Color     `protobuf:"varint,7,opt,name=bikeshed,enum=testdata.MyMessage_Color" json:"bikeshed,omitempty"`
 	Somegroup *MyMessage_SomeGroup `protobuf:"group,8,opt,name=SomeGroup" json:"somegroup,omitempty"`
 	// This field becomes [][]byte in the generated code.
 	RepBytes         [][]byte                  `protobuf:"bytes,10,rep,name=rep_bytes" json:"rep_bytes,omitempty"`
@@ -1382,7 +1382,7 @@ var E_Ext_More = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
 	ExtensionType: (*Ext)(nil),
 	Field:         103,
-	Name:          "test_proto.Ext.more",
+	Name:          "testdata.Ext.more",
 	Tag:           "bytes,103,opt,name=more",
 }
 
@@ -1390,7 +1390,7 @@ var E_Ext_Text = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         104,
-	Name:          "test_proto.Ext.text",
+	Name:          "testdata.Ext.text",
 	Tag:           "bytes,104,opt,name=text",
 }
 
@@ -1398,7 +1398,7 @@ var E_Ext_Number = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
 	ExtensionType: (*int32)(nil),
 	Field:         105,
-	Name:          "test_proto.Ext.number",
+	Name:          "testdata.Ext.number",
 	Tag:           "varint,105,opt,name=number",
 }
 
@@ -1530,7 +1530,7 @@ type Defaults struct {
 	F_Bytes   []byte          `protobuf:"bytes,11,opt,def=Bignose" json:"F_Bytes,omitempty"`
 	F_Sint32  *int32          `protobuf:"zigzag32,12,opt,def=-32" json:"F_Sint32,omitempty"`
 	F_Sint64  *int64          `protobuf:"zigzag64,13,opt,def=-64" json:"F_Sint64,omitempty"`
-	F_Enum    *Defaults_Color `protobuf:"varint,14,opt,enum=test_proto.Defaults_Color,def=1" json:"F_Enum,omitempty"`
+	F_Enum    *Defaults_Color `protobuf:"varint,14,opt,enum=testdata.Defaults_Color,def=1" json:"F_Enum,omitempty"`
 	// More fields with crazy defaults.
 	F_Pinf *float32 `protobuf:"fixed32,15,opt,def=inf" json:"F_Pinf,omitempty"`
 	F_Ninf *float32 `protobuf:"fixed32,16,opt,def=-inf" json:"F_Ninf,omitempty"`
@@ -1719,7 +1719,7 @@ func (m *SubDefaults) GetN() int64 {
 }
 
 type RepeatedEnum struct {
-	Color            []RepeatedEnum_Color `protobuf:"varint,1,rep,name=color,enum=test_proto.RepeatedEnum_Color" json:"color,omitempty"`
+	Color            []RepeatedEnum_Color `protobuf:"varint,1,rep,name=color,enum=testdata.RepeatedEnum_Color" json:"color,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
@@ -1922,7 +1922,7 @@ var E_Greeting = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessage)(nil),
 	ExtensionType: ([]string)(nil),
 	Field:         106,
-	Name:          "test_proto.greeting",
+	Name:          "testdata.greeting",
 	Tag:           "bytes,106,rep,name=greeting",
 }
 
@@ -1930,7 +1930,7 @@ var E_X201 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         201,
-	Name:          "test_proto.x201",
+	Name:          "testdata.x201",
 	Tag:           "bytes,201,opt,name=x201",
 }
 
@@ -1938,7 +1938,7 @@ var E_X202 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         202,
-	Name:          "test_proto.x202",
+	Name:          "testdata.x202",
 	Tag:           "bytes,202,opt,name=x202",
 }
 
@@ -1946,7 +1946,7 @@ var E_X203 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         203,
-	Name:          "test_proto.x203",
+	Name:          "testdata.x203",
 	Tag:           "bytes,203,opt,name=x203",
 }
 
@@ -1954,7 +1954,7 @@ var E_X204 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         204,
-	Name:          "test_proto.x204",
+	Name:          "testdata.x204",
 	Tag:           "bytes,204,opt,name=x204",
 }
 
@@ -1962,7 +1962,7 @@ var E_X205 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         205,
-	Name:          "test_proto.x205",
+	Name:          "testdata.x205",
 	Tag:           "bytes,205,opt,name=x205",
 }
 
@@ -1970,7 +1970,7 @@ var E_X206 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         206,
-	Name:          "test_proto.x206",
+	Name:          "testdata.x206",
 	Tag:           "bytes,206,opt,name=x206",
 }
 
@@ -1978,7 +1978,7 @@ var E_X207 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         207,
-	Name:          "test_proto.x207",
+	Name:          "testdata.x207",
 	Tag:           "bytes,207,opt,name=x207",
 }
 
@@ -1986,7 +1986,7 @@ var E_X208 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         208,
-	Name:          "test_proto.x208",
+	Name:          "testdata.x208",
 	Tag:           "bytes,208,opt,name=x208",
 }
 
@@ -1994,7 +1994,7 @@ var E_X209 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         209,
-	Name:          "test_proto.x209",
+	Name:          "testdata.x209",
 	Tag:           "bytes,209,opt,name=x209",
 }
 
@@ -2002,7 +2002,7 @@ var E_X210 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         210,
-	Name:          "test_proto.x210",
+	Name:          "testdata.x210",
 	Tag:           "bytes,210,opt,name=x210",
 }
 
@@ -2010,7 +2010,7 @@ var E_X211 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         211,
-	Name:          "test_proto.x211",
+	Name:          "testdata.x211",
 	Tag:           "bytes,211,opt,name=x211",
 }
 
@@ -2018,7 +2018,7 @@ var E_X212 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         212,
-	Name:          "test_proto.x212",
+	Name:          "testdata.x212",
 	Tag:           "bytes,212,opt,name=x212",
 }
 
@@ -2026,7 +2026,7 @@ var E_X213 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         213,
-	Name:          "test_proto.x213",
+	Name:          "testdata.x213",
 	Tag:           "bytes,213,opt,name=x213",
 }
 
@@ -2034,7 +2034,7 @@ var E_X214 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         214,
-	Name:          "test_proto.x214",
+	Name:          "testdata.x214",
 	Tag:           "bytes,214,opt,name=x214",
 }
 
@@ -2042,7 +2042,7 @@ var E_X215 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         215,
-	Name:          "test_proto.x215",
+	Name:          "testdata.x215",
 	Tag:           "bytes,215,opt,name=x215",
 }
 
@@ -2050,7 +2050,7 @@ var E_X216 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         216,
-	Name:          "test_proto.x216",
+	Name:          "testdata.x216",
 	Tag:           "bytes,216,opt,name=x216",
 }
 
@@ -2058,7 +2058,7 @@ var E_X217 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         217,
-	Name:          "test_proto.x217",
+	Name:          "testdata.x217",
 	Tag:           "bytes,217,opt,name=x217",
 }
 
@@ -2066,7 +2066,7 @@ var E_X218 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         218,
-	Name:          "test_proto.x218",
+	Name:          "testdata.x218",
 	Tag:           "bytes,218,opt,name=x218",
 }
 
@@ -2074,7 +2074,7 @@ var E_X219 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         219,
-	Name:          "test_proto.x219",
+	Name:          "testdata.x219",
 	Tag:           "bytes,219,opt,name=x219",
 }
 
@@ -2082,7 +2082,7 @@ var E_X220 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         220,
-	Name:          "test_proto.x220",
+	Name:          "testdata.x220",
 	Tag:           "bytes,220,opt,name=x220",
 }
 
@@ -2090,7 +2090,7 @@ var E_X221 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         221,
-	Name:          "test_proto.x221",
+	Name:          "testdata.x221",
 	Tag:           "bytes,221,opt,name=x221",
 }
 
@@ -2098,7 +2098,7 @@ var E_X222 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         222,
-	Name:          "test_proto.x222",
+	Name:          "testdata.x222",
 	Tag:           "bytes,222,opt,name=x222",
 }
 
@@ -2106,7 +2106,7 @@ var E_X223 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         223,
-	Name:          "test_proto.x223",
+	Name:          "testdata.x223",
 	Tag:           "bytes,223,opt,name=x223",
 }
 
@@ -2114,7 +2114,7 @@ var E_X224 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         224,
-	Name:          "test_proto.x224",
+	Name:          "testdata.x224",
 	Tag:           "bytes,224,opt,name=x224",
 }
 
@@ -2122,7 +2122,7 @@ var E_X225 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         225,
-	Name:          "test_proto.x225",
+	Name:          "testdata.x225",
 	Tag:           "bytes,225,opt,name=x225",
 }
 
@@ -2130,7 +2130,7 @@ var E_X226 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         226,
-	Name:          "test_proto.x226",
+	Name:          "testdata.x226",
 	Tag:           "bytes,226,opt,name=x226",
 }
 
@@ -2138,7 +2138,7 @@ var E_X227 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         227,
-	Name:          "test_proto.x227",
+	Name:          "testdata.x227",
 	Tag:           "bytes,227,opt,name=x227",
 }
 
@@ -2146,7 +2146,7 @@ var E_X228 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         228,
-	Name:          "test_proto.x228",
+	Name:          "testdata.x228",
 	Tag:           "bytes,228,opt,name=x228",
 }
 
@@ -2154,7 +2154,7 @@ var E_X229 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         229,
-	Name:          "test_proto.x229",
+	Name:          "testdata.x229",
 	Tag:           "bytes,229,opt,name=x229",
 }
 
@@ -2162,7 +2162,7 @@ var E_X230 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         230,
-	Name:          "test_proto.x230",
+	Name:          "testdata.x230",
 	Tag:           "bytes,230,opt,name=x230",
 }
 
@@ -2170,7 +2170,7 @@ var E_X231 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         231,
-	Name:          "test_proto.x231",
+	Name:          "testdata.x231",
 	Tag:           "bytes,231,opt,name=x231",
 }
 
@@ -2178,7 +2178,7 @@ var E_X232 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         232,
-	Name:          "test_proto.x232",
+	Name:          "testdata.x232",
 	Tag:           "bytes,232,opt,name=x232",
 }
 
@@ -2186,7 +2186,7 @@ var E_X233 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         233,
-	Name:          "test_proto.x233",
+	Name:          "testdata.x233",
 	Tag:           "bytes,233,opt,name=x233",
 }
 
@@ -2194,7 +2194,7 @@ var E_X234 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         234,
-	Name:          "test_proto.x234",
+	Name:          "testdata.x234",
 	Tag:           "bytes,234,opt,name=x234",
 }
 
@@ -2202,7 +2202,7 @@ var E_X235 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         235,
-	Name:          "test_proto.x235",
+	Name:          "testdata.x235",
 	Tag:           "bytes,235,opt,name=x235",
 }
 
@@ -2210,7 +2210,7 @@ var E_X236 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         236,
-	Name:          "test_proto.x236",
+	Name:          "testdata.x236",
 	Tag:           "bytes,236,opt,name=x236",
 }
 
@@ -2218,7 +2218,7 @@ var E_X237 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         237,
-	Name:          "test_proto.x237",
+	Name:          "testdata.x237",
 	Tag:           "bytes,237,opt,name=x237",
 }
 
@@ -2226,7 +2226,7 @@ var E_X238 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         238,
-	Name:          "test_proto.x238",
+	Name:          "testdata.x238",
 	Tag:           "bytes,238,opt,name=x238",
 }
 
@@ -2234,7 +2234,7 @@ var E_X239 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         239,
-	Name:          "test_proto.x239",
+	Name:          "testdata.x239",
 	Tag:           "bytes,239,opt,name=x239",
 }
 
@@ -2242,7 +2242,7 @@ var E_X240 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         240,
-	Name:          "test_proto.x240",
+	Name:          "testdata.x240",
 	Tag:           "bytes,240,opt,name=x240",
 }
 
@@ -2250,7 +2250,7 @@ var E_X241 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         241,
-	Name:          "test_proto.x241",
+	Name:          "testdata.x241",
 	Tag:           "bytes,241,opt,name=x241",
 }
 
@@ -2258,7 +2258,7 @@ var E_X242 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         242,
-	Name:          "test_proto.x242",
+	Name:          "testdata.x242",
 	Tag:           "bytes,242,opt,name=x242",
 }
 
@@ -2266,7 +2266,7 @@ var E_X243 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         243,
-	Name:          "test_proto.x243",
+	Name:          "testdata.x243",
 	Tag:           "bytes,243,opt,name=x243",
 }
 
@@ -2274,7 +2274,7 @@ var E_X244 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         244,
-	Name:          "test_proto.x244",
+	Name:          "testdata.x244",
 	Tag:           "bytes,244,opt,name=x244",
 }
 
@@ -2282,7 +2282,7 @@ var E_X245 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         245,
-	Name:          "test_proto.x245",
+	Name:          "testdata.x245",
 	Tag:           "bytes,245,opt,name=x245",
 }
 
@@ -2290,7 +2290,7 @@ var E_X246 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         246,
-	Name:          "test_proto.x246",
+	Name:          "testdata.x246",
 	Tag:           "bytes,246,opt,name=x246",
 }
 
@@ -2298,7 +2298,7 @@ var E_X247 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         247,
-	Name:          "test_proto.x247",
+	Name:          "testdata.x247",
 	Tag:           "bytes,247,opt,name=x247",
 }
 
@@ -2306,7 +2306,7 @@ var E_X248 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         248,
-	Name:          "test_proto.x248",
+	Name:          "testdata.x248",
 	Tag:           "bytes,248,opt,name=x248",
 }
 
@@ -2314,7 +2314,7 @@ var E_X249 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         249,
-	Name:          "test_proto.x249",
+	Name:          "testdata.x249",
 	Tag:           "bytes,249,opt,name=x249",
 }
 
@@ -2322,16 +2322,16 @@ var E_X250 = &proto.ExtensionDesc{
 	ExtendedType:  (*MyMessageSet)(nil),
 	ExtensionType: (*Empty)(nil),
 	Field:         250,
-	Name:          "test_proto.x250",
+	Name:          "testdata.x250",
 	Tag:           "bytes,250,opt,name=x250",
 }
 
 func init() {
-	proto.RegisterEnum("test_proto.FOO", FOO_name, FOO_value)
-	proto.RegisterEnum("test_proto.GoTest_KIND", GoTest_KIND_name, GoTest_KIND_value)
-	proto.RegisterEnum("test_proto.MyMessage_Color", MyMessage_Color_name, MyMessage_Color_value)
-	proto.RegisterEnum("test_proto.Defaults_Color", Defaults_Color_name, Defaults_Color_value)
-	proto.RegisterEnum("test_proto.RepeatedEnum_Color", RepeatedEnum_Color_name, RepeatedEnum_Color_value)
+	proto.RegisterEnum("testdata.FOO", FOO_name, FOO_value)
+	proto.RegisterEnum("testdata.GoTest_KIND", GoTest_KIND_name, GoTest_KIND_value)
+	proto.RegisterEnum("testdata.MyMessage_Color", MyMessage_Color_name, MyMessage_Color_value)
+	proto.RegisterEnum("testdata.Defaults_Color", Defaults_Color_name, Defaults_Color_value)
+	proto.RegisterEnum("testdata.RepeatedEnum_Color", RepeatedEnum_Color_name, RepeatedEnum_Color_value)
 	proto.RegisterExtension(E_Ext_More)
 	proto.RegisterExtension(E_Ext_Text)
 	proto.RegisterExtension(E_Ext_Number)

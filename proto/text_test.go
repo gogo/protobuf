@@ -41,8 +41,8 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 
-	proto3pb "./proto3_proto"
-	pb "./testdata"
+	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
+	pb "github.com/gogo/protobuf/proto/testdata"
 )
 
 // textMessage implements the methods that allow it to marshal and unmarshal
@@ -151,12 +151,12 @@ SomeGroup {
 }
 /* 2 unknown bytes */
 13: 4
-[test_proto.Ext.more]: <
+[testdata.Ext.more]: <
   data: "Big gobs for big rats"
 >
-[test_proto.greeting]: "adg"
-[test_proto.greeting]: "easy"
-[test_proto.greeting]: "cow"
+[testdata.greeting]: "adg"
+[testdata.greeting]: "easy"
+[testdata.greeting]: "cow"
 /* 13 unknown bytes */
 201: "\t3G skiing"
 /* 3 unknown bytes */

@@ -53,7 +53,6 @@ regenerate:
 	make -C gogoproto regenerate
 	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
-	make -C proto/proto3_proto regenerate
 	make -C test regenerate
 	make -C test/example regenerate
 	make -C test/unrecognized regenerate

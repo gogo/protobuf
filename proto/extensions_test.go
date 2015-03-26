@@ -34,8 +34,8 @@ package proto_test
 import (
 	"testing"
 
-	pb "./testdata"
 	"github.com/gogo/protobuf/proto"
+	pb "github.com/gogo/protobuf/proto/testdata"
 )
 
 func TestGetExtensionsWithMissingExtensions(t *testing.T) {
@@ -117,7 +117,7 @@ func TestExtensionsRoundTrip(t *testing.T) {
 	}
 	x, ok := e.(*pb.Ext)
 	if !ok {
-		t.Errorf("e has type %T, expected test_proto.Ext", e)
+		t.Errorf("e has type %T, expected testdata.Ext", e)
 	} else if *x.Data != "there" {
 		t.Errorf("SetExtension failed to overwrite, got %+v, not 'there'", x)
 	}
@@ -145,7 +145,7 @@ func TestNilExtension(t *testing.T) {
 	}
 	if err := proto.SetExtension(msg, pb.E_Ext_More, (*pb.Ext)(nil)); err == nil {
 		t.Error("expected SetExtension to fail due to a nil extension")
-	} else if want := "proto: SetExtension called with nil value of type *test_proto.Ext"; err.Error() != want {
+	} else if want := "proto: SetExtension called with nil value of type *testdata.Ext"; err.Error() != want {
 		t.Errorf("expected error %v, got %v", want, err)
 	}
 	// Note: if the behavior of Marshal is ever changed to ignore nil extensions, update
