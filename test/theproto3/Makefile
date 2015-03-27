@@ -28,7 +28,6 @@
 
 regenerate:
 	cp header.proto theproto3.proto
-	tail -n +35 ../../proto/proto3_proto/proto3.proto >> theproto3.proto
 	cat maps.proto >> theproto3.proto
 	cat footer.proto >> theproto3.proto
 	go install github.com/gogo/protobuf/protoc-gen-gogo/protoc-gen-combo

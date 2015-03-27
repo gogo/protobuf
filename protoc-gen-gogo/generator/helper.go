@@ -153,14 +153,15 @@ func GetMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescrip
 		return nil
 	}
 	typeName := field.GetTypeName()
-	if strings.Contains(typeName, "Map") {
+	if strings.Contains(typeName, "Map") && !strings.HasSuffix(typeName, "Entry") {
 		typeName += "." + CamelCase(field.GetName()) + "Entry"
 	}
 	ts := strings.Split(typeName, ".")
 	if len(ts) == 1 {
 		return file.GetMessage(typeName)
 	}
-	return file.GetMessage(strings.Join(ts[2:(len(ts)-1)], "."))
+	newTypeName := strings.Join(ts[2:], ".")
+	return file.GetMessage(newTypeName)
 }
 
 func IsMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto) bool {

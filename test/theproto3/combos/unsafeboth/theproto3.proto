@@ -38,6 +38,8 @@ package theproto3;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
+import "github.com/gogo/protobuf/test/combos/both/thetest.proto";
+
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.goproto_enum_prefix_all) = false;
 option (gogoproto.goproto_getters_all) = false;
@@ -80,6 +82,10 @@ message Message {
 
   repeated uint64 key = 5;
   Nested nested = 6;
+
+  map<int64, Nested> terrain = 10;
+  test.NinOptNative proto2_field = 11;
+  map<int64, test.NinOptEnum> proto2_value = 13;
 }
 
 message Nested {

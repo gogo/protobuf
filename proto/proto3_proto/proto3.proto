@@ -33,6 +33,8 @@ syntax = "proto3";
 
 package proto3_proto;
 
+import "github.com/gogo/protobuf/proto/testdata/test.proto";
+
 message Message {
   enum Humour {
     UNKNOWN = 0;
@@ -51,6 +53,10 @@ message Message {
 
   repeated uint64 key = 5;
   Nested nested = 6;
+
+  map<string, Nested> terrain = 10;
+  testdata.SubDefaults proto2_field = 11;
+  map<string, testdata.SubDefaults> proto2_value = 13;
 }
 
 message Nested {

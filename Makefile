@@ -68,6 +68,7 @@ regenerate:
 	make -C test/oneof regenerate
 	make -C test/theproto3 regenerate
 	make -C test/mapsproto2 regenerate
+	make -C proto generate-test-pbs
 	make gofmt
 
 tests:
@@ -104,8 +105,9 @@ drone:
 	sudo apt-get install protobuf-compiler
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
 
-testall: tests
+testall:
 	make -C protoc-gen-gogo/testdata test
+	make tests
 
 bench:
 	(cd test/mixbench && go build .)
