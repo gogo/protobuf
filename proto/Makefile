@@ -39,5 +39,5 @@ test: install generate-test-pbs
 generate-test-pbs:
 	make install
 	make -C testdata
-	protoc --gogo_out=. -I=.:../../../../ proto3_proto/proto3.proto
+	protoc-min-version --version="3.0.0" --proto_path=.:../../../../ proto3_proto/proto3.proto
 	make
