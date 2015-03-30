@@ -29,6 +29,7 @@ package grpc
 import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"net"
 	"testing"
@@ -39,14 +40,41 @@ type aServer struct{}
 func (this *aServer) UnaryCall(c context.Context, s *MyRequest) (*MyResponse, error) {
 	return &MyResponse{s.Value}, nil
 }
-func (this *aServer) Downstream(*MyResponse, MyTest_DownstreamServer) error {
+func (this *aServer) Downstream(m *MyRequest, s MyTest_DownstreamServer) error {
+	for i := 0; i < int(m.Value); i++ {
+		err := s.Send(&MyMsg{int64(i)})
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
-func (this *aServer) Upstream(MyTest_UpstreamServer) error {
-	return nil
+func (this *aServer) Upstream(s MyTest_UpstreamServer) error {
+	rec, err := s.Recv()
+	sum := int64(0)
+	for err == nil {
+		sum += rec.Value
+		rec, err = s.Recv()
+	}
+	return s.SendAndClose(&MyResponse{sum})
 }
-func (this *aServer) Bidi(MyTest_BidiServer) error {
-	return nil
+func (this *aServer) Bidi(b MyTest_BidiServer) error {
+	var err error
+	var msg *MyMsg
+	for {
+		msg, err = b.Recv()
+		if err != nil {
+			break
+		}
+		err = b.Send(&MyMsg2{msg.Value})
+		if err != nil {
+			break
+		}
+	}
+	if err != io.EOF {
+		return nil
+	}
+	return err
 }
 
 func setup(t *testing.T) (*grpc.Server, MyTestClient) {
@@ -77,5 +105,89 @@ func TestUnary(t *testing.T) {
 	reply, err := client.UnaryCall(context.Background(), &MyRequest{want})
 	if err != nil || reply.Value != want {
 		t.Fatalf("UnaryCall(_, _) = %d, %v, want %d, <nil>", reply.Value, err, want)
+	}
+}
+
+func TestDownstream(t *testing.T) {
+	server, client := setup(t)
+	defer server.Stop()
+	num := int64(10)
+	down, err := client.Downstream(context.Background(), &MyRequest{num})
+	if err != nil {
+		t.Fatal(err)
+	}
+	var m *MyMsg
+	last := -1
+	for err == nil {
+		m, err = down.Recv()
+		if err == nil {
+			if int(m.Value) == (last + 1) {
+				last++
+			} else {
+				t.Errorf("out of order last = %d this = %d", last, m.Value)
+			}
+		}
+	}
+	if last != int(num)-1 {
+		t.Fatalf("wrong last %d expected %d", last, num-1)
+	}
+}
+
+func total(n int) int {
+	t := 0
+	for i := 0; i < n; i++ {
+		t += i
+	}
+	return t
+}
+
+func TestUpstream(t *testing.T) {
+	server, client := setup(t)
+	defer server.Stop()
+	num := 10
+	up, err := client.Upstream(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i := 0; i < num; i++ {
+		err := up.Send(&MyMsg{int64(i)})
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	res, err := up.CloseAndRecv()
+	if err != nil {
+		t.Fatal(err)
+	}
+	sum := total(num)
+	if res.Value != int64(sum) {
+		t.Fatal("expected %d got %d", sum, res.Value)
+	}
+}
+
+func TestBidi(t *testing.T) {
+	server, client := setup(t)
+	defer server.Stop()
+	num := 10
+	bidi, err := client.Bidi(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	go func() {
+		for i := 0; i < num; i++ {
+			err := bidi.Send(&MyMsg{int64(i)})
+			if err != nil {
+				t.Fatal(err)
+			}
+		}
+	}()
+	for i := 0; i < num; i++ {
+		msg, err := bidi.Recv()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if msg.Value != int64(i) {
+			t.Fatal("expected %d got %d", i, msg.Value)
+		}
 	}
 }

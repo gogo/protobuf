@@ -70,7 +70,7 @@ func init() {
 type MyTestClient interface {
 	UnaryCall(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (*MyResponse, error)
 	// This RPC streams from the server only.
-	Downstream(ctx context.Context, in *MyResponse, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error)
+	Downstream(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error)
 	// This RPC streams from the client.
 	Upstream(ctx context.Context, opts ...grpc1.CallOption) (MyTest_UpstreamClient, error)
 	// This one streams in both directions.
@@ -94,7 +94,7 @@ func (c *myTestClient) UnaryCall(ctx context.Context, in *MyRequest, opts ...grp
 	return out, nil
 }
 
-func (c *myTestClient) Downstream(ctx context.Context, in *MyResponse, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error) {
+func (c *myTestClient) Downstream(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error) {
 	stream, err := grpc1.NewClientStream(ctx, &_MyTest_serviceDesc.Streams[0], c.cc, "/grpc.MyTest/Downstream", opts...)
 	if err != nil {
 		return nil, err
@@ -196,7 +196,7 @@ func (x *myTestBidiClient) Recv() (*MyMsg2, error) {
 type MyTestServer interface {
 	UnaryCall(context.Context, *MyRequest) (*MyResponse, error)
 	// This RPC streams from the server only.
-	Downstream(*MyResponse, MyTest_DownstreamServer) error
+	Downstream(*MyRequest, MyTest_DownstreamServer) error
 	// This RPC streams from the client.
 	Upstream(MyTest_UpstreamServer) error
 	// This one streams in both directions.
@@ -220,7 +220,7 @@ func _MyTest_UnaryCall_Handler(srv interface{}, ctx context.Context, buf []byte)
 }
 
 func _MyTest_Downstream_Handler(srv interface{}, stream grpc1.ServerStream) error {
-	m := new(MyResponse)
+	m := new(MyRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
