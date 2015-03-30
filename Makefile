@@ -105,6 +105,8 @@ vet:
 
 drone:
 	sudo apt-get install protobuf-compiler
+	go get golang.org/x/net
+	go get google.golang.org/grpc
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
 
 testall:
