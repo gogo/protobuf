@@ -68,6 +68,7 @@ regenerate:
 	make -C test/oneof regenerate
 	make -C test/theproto3 regenerate
 	make -C test/mapsproto2 regenerate
+	make -C test/grpc regenerate
 	make -C proto generate-test-pbs
 	make gofmt
 
@@ -96,6 +97,7 @@ tests:
 	go test -v ./test/theproto3/...
 	go test -v ./test/combos/...
 	go test -v ./test/mapsproto2/...
+	go test -v ./test/grpc
 	make vet
 
 vet:

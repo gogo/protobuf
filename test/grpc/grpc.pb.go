@@ -9,10 +9,10 @@ It is generated from these files:
 	grpc.proto
 
 It has these top-level messages:
-	SimpleRequest
-	SimpleResponse
-	StreamMsg
-	StreamMsg2
+	MyRequest
+	MyResponse
+	MyMsg
+	MyMsg2
 */
 package grpc
 
@@ -30,76 +30,76 @@ var _ grpc1.ClientConn
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 
-type SimpleRequest struct {
+type MyRequest struct {
 	Value int64 `protobuf:"varint,1,opt,proto3" json:"Value,omitempty"`
 }
 
-func (m *SimpleRequest) Reset()         { *m = SimpleRequest{} }
-func (m *SimpleRequest) String() string { return proto.CompactTextString(m) }
-func (*SimpleRequest) ProtoMessage()    {}
+func (m *MyRequest) Reset()         { *m = MyRequest{} }
+func (m *MyRequest) String() string { return proto.CompactTextString(m) }
+func (*MyRequest) ProtoMessage()    {}
 
-type SimpleResponse struct {
+type MyResponse struct {
 	Value int64 `protobuf:"varint,1,opt,proto3" json:"Value,omitempty"`
 }
 
-func (m *SimpleResponse) Reset()         { *m = SimpleResponse{} }
-func (m *SimpleResponse) String() string { return proto.CompactTextString(m) }
-func (*SimpleResponse) ProtoMessage()    {}
+func (m *MyResponse) Reset()         { *m = MyResponse{} }
+func (m *MyResponse) String() string { return proto.CompactTextString(m) }
+func (*MyResponse) ProtoMessage()    {}
 
-type StreamMsg struct {
+type MyMsg struct {
 	Value int64 `protobuf:"varint,1,opt,proto3" json:"Value,omitempty"`
 }
 
-func (m *StreamMsg) Reset()         { *m = StreamMsg{} }
-func (m *StreamMsg) String() string { return proto.CompactTextString(m) }
-func (*StreamMsg) ProtoMessage()    {}
+func (m *MyMsg) Reset()         { *m = MyMsg{} }
+func (m *MyMsg) String() string { return proto.CompactTextString(m) }
+func (*MyMsg) ProtoMessage()    {}
 
-type StreamMsg2 struct {
+type MyMsg2 struct {
 	Value int64 `protobuf:"varint,1,opt,proto3" json:"Value,omitempty"`
 }
 
-func (m *StreamMsg2) Reset()         { *m = StreamMsg2{} }
-func (m *StreamMsg2) String() string { return proto.CompactTextString(m) }
-func (*StreamMsg2) ProtoMessage()    {}
+func (m *MyMsg2) Reset()         { *m = MyMsg2{} }
+func (m *MyMsg2) String() string { return proto.CompactTextString(m) }
+func (*MyMsg2) ProtoMessage()    {}
 
 func init() {
 }
 
-// Client API for Test service
+// Client API for MyTest service
 
-type TestClient interface {
-	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc1.CallOption) (*SimpleResponse, error)
+type MyTestClient interface {
+	UnaryCall(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (*MyResponse, error)
 	// This RPC streams from the server only.
-	Downstream(ctx context.Context, in *SimpleRequest, opts ...grpc1.CallOption) (Test_DownstreamClient, error)
+	Downstream(ctx context.Context, in *MyResponse, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error)
 	// This RPC streams from the client.
-	Upstream(ctx context.Context, opts ...grpc1.CallOption) (Test_UpstreamClient, error)
+	Upstream(ctx context.Context, opts ...grpc1.CallOption) (MyTest_UpstreamClient, error)
 	// This one streams in both directions.
-	Bidi(ctx context.Context, opts ...grpc1.CallOption) (Test_BidiClient, error)
+	Bidi(ctx context.Context, opts ...grpc1.CallOption) (MyTest_BidiClient, error)
 }
 
-type testClient struct {
+type myTestClient struct {
 	cc *grpc1.ClientConn
 }
 
-func NewTestClient(cc *grpc1.ClientConn) TestClient {
-	return &testClient{cc}
+func NewMyTestClient(cc *grpc1.ClientConn) MyTestClient {
+	return &myTestClient{cc}
 }
 
-func (c *testClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc1.CallOption) (*SimpleResponse, error) {
-	out := new(SimpleResponse)
-	err := grpc1.Invoke(ctx, "/grpc.Test/UnaryCall", in, out, c.cc, opts...)
+func (c *myTestClient) UnaryCall(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (*MyResponse, error) {
+	out := new(MyResponse)
+	err := grpc1.Invoke(ctx, "/grpc.MyTest/UnaryCall", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *testClient) Downstream(ctx context.Context, in *SimpleRequest, opts ...grpc1.CallOption) (Test_DownstreamClient, error) {
-	stream, err := grpc1.NewClientStream(ctx, &_Test_serviceDesc.Streams[0], c.cc, "/grpc.Test/Downstream", opts...)
+func (c *myTestClient) Downstream(ctx context.Context, in *MyResponse, opts ...grpc1.CallOption) (MyTest_DownstreamClient, error) {
+	stream, err := grpc1.NewClientStream(ctx, &_MyTest_serviceDesc.Streams[0], c.cc, "/grpc.MyTest/Downstream", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &testDownstreamClient{stream}
+	x := &myTestDownstreamClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -109,212 +109,212 @@ func (c *testClient) Downstream(ctx context.Context, in *SimpleRequest, opts ...
 	return x, nil
 }
 
-type Test_DownstreamClient interface {
-	Recv() (*StreamMsg, error)
+type MyTest_DownstreamClient interface {
+	Recv() (*MyMsg, error)
 	grpc1.ClientStream
 }
 
-type testDownstreamClient struct {
+type myTestDownstreamClient struct {
 	grpc1.ClientStream
 }
 
-func (x *testDownstreamClient) Recv() (*StreamMsg, error) {
-	m := new(StreamMsg)
+func (x *myTestDownstreamClient) Recv() (*MyMsg, error) {
+	m := new(MyMsg)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *testClient) Upstream(ctx context.Context, opts ...grpc1.CallOption) (Test_UpstreamClient, error) {
-	stream, err := grpc1.NewClientStream(ctx, &_Test_serviceDesc.Streams[1], c.cc, "/grpc.Test/Upstream", opts...)
+func (c *myTestClient) Upstream(ctx context.Context, opts ...grpc1.CallOption) (MyTest_UpstreamClient, error) {
+	stream, err := grpc1.NewClientStream(ctx, &_MyTest_serviceDesc.Streams[1], c.cc, "/grpc.MyTest/Upstream", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &testUpstreamClient{stream}
+	x := &myTestUpstreamClient{stream}
 	return x, nil
 }
 
-type Test_UpstreamClient interface {
-	Send(*StreamMsg) error
-	CloseAndRecv() (*SimpleResponse, error)
+type MyTest_UpstreamClient interface {
+	Send(*MyMsg) error
+	CloseAndRecv() (*MyResponse, error)
 	grpc1.ClientStream
 }
 
-type testUpstreamClient struct {
+type myTestUpstreamClient struct {
 	grpc1.ClientStream
 }
 
-func (x *testUpstreamClient) Send(m *StreamMsg) error {
+func (x *myTestUpstreamClient) Send(m *MyMsg) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *testUpstreamClient) CloseAndRecv() (*SimpleResponse, error) {
+func (x *myTestUpstreamClient) CloseAndRecv() (*MyResponse, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
-	m := new(SimpleResponse)
+	m := new(MyResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *testClient) Bidi(ctx context.Context, opts ...grpc1.CallOption) (Test_BidiClient, error) {
-	stream, err := grpc1.NewClientStream(ctx, &_Test_serviceDesc.Streams[2], c.cc, "/grpc.Test/Bidi", opts...)
+func (c *myTestClient) Bidi(ctx context.Context, opts ...grpc1.CallOption) (MyTest_BidiClient, error) {
+	stream, err := grpc1.NewClientStream(ctx, &_MyTest_serviceDesc.Streams[2], c.cc, "/grpc.MyTest/Bidi", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &testBidiClient{stream}
+	x := &myTestBidiClient{stream}
 	return x, nil
 }
 
-type Test_BidiClient interface {
-	Send(*StreamMsg) error
-	Recv() (*StreamMsg2, error)
+type MyTest_BidiClient interface {
+	Send(*MyMsg) error
+	Recv() (*MyMsg2, error)
 	grpc1.ClientStream
 }
 
-type testBidiClient struct {
+type myTestBidiClient struct {
 	grpc1.ClientStream
 }
 
-func (x *testBidiClient) Send(m *StreamMsg) error {
+func (x *myTestBidiClient) Send(m *MyMsg) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *testBidiClient) Recv() (*StreamMsg2, error) {
-	m := new(StreamMsg2)
+func (x *myTestBidiClient) Recv() (*MyMsg2, error) {
+	m := new(MyMsg2)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-// Server API for Test service
+// Server API for MyTest service
 
-type TestServer interface {
-	UnaryCall(context.Context, *SimpleRequest) (*SimpleResponse, error)
+type MyTestServer interface {
+	UnaryCall(context.Context, *MyRequest) (*MyResponse, error)
 	// This RPC streams from the server only.
-	Downstream(*SimpleRequest, Test_DownstreamServer) error
+	Downstream(*MyResponse, MyTest_DownstreamServer) error
 	// This RPC streams from the client.
-	Upstream(Test_UpstreamServer) error
+	Upstream(MyTest_UpstreamServer) error
 	// This one streams in both directions.
-	Bidi(Test_BidiServer) error
+	Bidi(MyTest_BidiServer) error
 }
 
-func RegisterTestServer(s *grpc1.Server, srv TestServer) {
-	s.RegisterService(&_Test_serviceDesc, srv)
+func RegisterMyTestServer(s *grpc1.Server, srv MyTestServer) {
+	s.RegisterService(&_MyTest_serviceDesc, srv)
 }
 
-func _Test_UnaryCall_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
-	in := new(SimpleRequest)
+func _MyTest_UnaryCall_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
+	in := new(MyRequest)
 	if err := proto.Unmarshal(buf, in); err != nil {
 		return nil, err
 	}
-	out, err := srv.(TestServer).UnaryCall(ctx, in)
+	out, err := srv.(MyTestServer).UnaryCall(ctx, in)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func _Test_Downstream_Handler(srv interface{}, stream grpc1.ServerStream) error {
-	m := new(SimpleRequest)
+func _MyTest_Downstream_Handler(srv interface{}, stream grpc1.ServerStream) error {
+	m := new(MyResponse)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(TestServer).Downstream(m, &testDownstreamServer{stream})
+	return srv.(MyTestServer).Downstream(m, &myTestDownstreamServer{stream})
 }
 
-type Test_DownstreamServer interface {
-	Send(*StreamMsg) error
+type MyTest_DownstreamServer interface {
+	Send(*MyMsg) error
 	grpc1.ServerStream
 }
 
-type testDownstreamServer struct {
+type myTestDownstreamServer struct {
 	grpc1.ServerStream
 }
 
-func (x *testDownstreamServer) Send(m *StreamMsg) error {
+func (x *myTestDownstreamServer) Send(m *MyMsg) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Test_Upstream_Handler(srv interface{}, stream grpc1.ServerStream) error {
-	return srv.(TestServer).Upstream(&testUpstreamServer{stream})
+func _MyTest_Upstream_Handler(srv interface{}, stream grpc1.ServerStream) error {
+	return srv.(MyTestServer).Upstream(&myTestUpstreamServer{stream})
 }
 
-type Test_UpstreamServer interface {
-	SendAndClose(*SimpleResponse) error
-	Recv() (*StreamMsg, error)
+type MyTest_UpstreamServer interface {
+	SendAndClose(*MyResponse) error
+	Recv() (*MyMsg, error)
 	grpc1.ServerStream
 }
 
-type testUpstreamServer struct {
+type myTestUpstreamServer struct {
 	grpc1.ServerStream
 }
 
-func (x *testUpstreamServer) SendAndClose(m *SimpleResponse) error {
+func (x *myTestUpstreamServer) SendAndClose(m *MyResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *testUpstreamServer) Recv() (*StreamMsg, error) {
-	m := new(StreamMsg)
+func (x *myTestUpstreamServer) Recv() (*MyMsg, error) {
+	m := new(MyMsg)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func _Test_Bidi_Handler(srv interface{}, stream grpc1.ServerStream) error {
-	return srv.(TestServer).Bidi(&testBidiServer{stream})
+func _MyTest_Bidi_Handler(srv interface{}, stream grpc1.ServerStream) error {
+	return srv.(MyTestServer).Bidi(&myTestBidiServer{stream})
 }
 
-type Test_BidiServer interface {
-	Send(*StreamMsg2) error
-	Recv() (*StreamMsg, error)
+type MyTest_BidiServer interface {
+	Send(*MyMsg2) error
+	Recv() (*MyMsg, error)
 	grpc1.ServerStream
 }
 
-type testBidiServer struct {
+type myTestBidiServer struct {
 	grpc1.ServerStream
 }
 
-func (x *testBidiServer) Send(m *StreamMsg2) error {
+func (x *myTestBidiServer) Send(m *MyMsg2) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *testBidiServer) Recv() (*StreamMsg, error) {
-	m := new(StreamMsg)
+func (x *myTestBidiServer) Recv() (*MyMsg, error) {
+	m := new(MyMsg)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-var _Test_serviceDesc = grpc1.ServiceDesc{
-	ServiceName: "grpc.Test",
-	HandlerType: (*TestServer)(nil),
+var _MyTest_serviceDesc = grpc1.ServiceDesc{
+	ServiceName: "grpc.MyTest",
+	HandlerType: (*MyTestServer)(nil),
 	Methods: []grpc1.MethodDesc{
 		{
 			MethodName: "UnaryCall",
-			Handler:    _Test_UnaryCall_Handler,
+			Handler:    _MyTest_UnaryCall_Handler,
 		},
 	},
 	Streams: []grpc1.StreamDesc{
 		{
 			StreamName:    "Downstream",
-			Handler:       _Test_Downstream_Handler,
+			Handler:       _MyTest_Downstream_Handler,
 			ServerStreams: true,
 		},
 		{
 			StreamName:    "Upstream",
-			Handler:       _Test_Upstream_Handler,
+			Handler:       _MyTest_Upstream_Handler,
 			ClientStreams: true,
 		},
 		{
 			StreamName:    "Bidi",
-			Handler:       _Test_Bidi_Handler,
+			Handler:       _MyTest_Bidi_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

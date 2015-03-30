@@ -34,22 +34,22 @@ import (
 	"testing"
 )
 
-type testServer struct{}
+type aServer struct{}
 
-func (this *testServer) UnaryCall(c context.Context, s *SimpleRequest) (*SimpleResponse, error) {
-	return &SimpleResponse{s.Value}, nil
+func (this *aServer) UnaryCall(c context.Context, s *MyRequest) (*MyResponse, error) {
+	return &MyResponse{s.Value}, nil
 }
-func (this *testServer) Downstream(*SimpleRequest, Test_DownstreamServer) error {
+func (this *aServer) Downstream(*MyResponse, MyTest_DownstreamServer) error {
 	return nil
 }
-func (this *testServer) Upstream(Test_UpstreamServer) error {
+func (this *aServer) Upstream(MyTest_UpstreamServer) error {
 	return nil
 }
-func (this *testServer) Bidi(Test_BidiServer) error {
+func (this *aServer) Bidi(MyTest_BidiServer) error {
 	return nil
 }
 
-func setup(t *testing.T) (*grpc.Server, TestClient) {
+func setup(t *testing.T) (*grpc.Server, MyTestClient) {
 	lis, err := net.Listen("tcp", ":0")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
@@ -59,14 +59,14 @@ func setup(t *testing.T) (*grpc.Server, TestClient) {
 		log.Fatalf("Failed to parse listener address: %v", err)
 	}
 	s := grpc.NewServer(grpc.MaxConcurrentStreams(10))
-	RegisterTestServer(s, &testServer{})
+	RegisterMyTestServer(s, &aServer{})
 	go s.Serve(lis)
 	addr := "localhost:" + port
 	conn, err := grpc.Dial(addr)
 	if err != nil {
 		log.Fatalf("Dial(%q) = %v", addr, err)
 	}
-	tc := NewTestClient(conn)
+	tc := NewMyTestClient(conn)
 	return s, tc
 }
 
@@ -74,7 +74,7 @@ func TestUnary(t *testing.T) {
 	server, client := setup(t)
 	defer server.Stop()
 	want := int64(5)
-	reply, err := client.UnaryCall(context.Background(), &SimpleRequest{want})
+	reply, err := client.UnaryCall(context.Background(), &MyRequest{want})
 	if err != nil || reply.Value != want {
 		t.Fatalf("UnaryCall(_, _) = %d, %v, want %d, <nil>", reply.Value, err, want)
 	}

@@ -44,7 +44,7 @@ message MyMsg2 {
 	int64 Value = 1;
 }
 
-service Test {
+service MyTest {
   rpc UnaryCall(MyRequest) returns (MyResponse);
 
   // This RPC streams from the server only.
