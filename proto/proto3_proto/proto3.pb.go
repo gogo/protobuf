@@ -11,6 +11,7 @@ It is generated from these files:
 It has these top-level messages:
 	Message
 	Nested
+	MessageWithMap
 */
 package proto3_proto
 
@@ -100,6 +101,21 @@ type Nested struct {
 func (m *Nested) Reset()         { *m = Nested{} }
 func (m *Nested) String() string { return proto.CompactTextString(m) }
 func (*Nested) ProtoMessage()    {}
+
+type MessageWithMap struct {
+	ByteMapping map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (m *MessageWithMap) Reset()         { *m = MessageWithMap{} }
+func (m *MessageWithMap) String() string { return proto.CompactTextString(m) }
+func (*MessageWithMap) ProtoMessage()    {}
+
+func (m *MessageWithMap) GetByteMapping() map[bool][]byte {
+	if m != nil {
+		return m.ByteMapping
+	}
+	return nil
+}
 
 func init() {
 	proto.RegisterEnum("proto3_proto.Message_Humour", Message_Humour_name, Message_Humour_value)
