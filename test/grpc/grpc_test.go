@@ -77,7 +77,27 @@ func (this *aServer) Bidi(b MyTest_BidiServer) error {
 	return err
 }
 
-func setup(t *testing.T) (*grpc.Server, MyTestClient) {
+type bServer struct{}
+
+func (this *bServer) UnaryCall(c context.Context, s *MyRequest) (*MyResponse, error) {
+	return nil, nil
+}
+func (this *bServer) Downstream(m *MyRequest, s MyTest_DownstreamServer) error {
+	mymsg := &MyMsg{1}
+	for {
+		if err := s.Send(mymsg); err != nil {
+			return err
+		}
+	}
+}
+func (this *bServer) Upstream(s MyTest_UpstreamServer) error {
+	return nil
+}
+func (this *bServer) Bidi(b MyTest_BidiServer) error {
+	return nil
+}
+
+func setup(t testing.TB, mytest MyTestServer) (*grpc.Server, MyTestClient) {
 	lis, err := net.Listen("tcp", ":0")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
@@ -87,7 +107,7 @@ func setup(t *testing.T) (*grpc.Server, MyTestClient) {
 		log.Fatalf("Failed to parse listener address: %v", err)
 	}
 	s := grpc.NewServer(grpc.MaxConcurrentStreams(10))
-	RegisterMyTestServer(s, &aServer{})
+	RegisterMyTestServer(s, mytest)
 	go s.Serve(lis)
 	addr := "localhost:" + port
 	conn, err := grpc.Dial(addr)
@@ -99,7 +119,7 @@ func setup(t *testing.T) (*grpc.Server, MyTestClient) {
 }
 
 func TestUnary(t *testing.T) {
-	server, client := setup(t)
+	server, client := setup(t, &aServer{})
 	defer server.Stop()
 	want := int64(5)
 	reply, err := client.UnaryCall(context.Background(), &MyRequest{want})
@@ -109,7 +129,7 @@ func TestUnary(t *testing.T) {
 }
 
 func TestDownstream(t *testing.T) {
-	server, client := setup(t)
+	server, client := setup(t, &aServer{})
 	defer server.Stop()
 	num := int64(10)
 	down, err := client.Downstream(context.Background(), &MyRequest{num})
@@ -142,7 +162,7 @@ func total(n int) int {
 }
 
 func TestUpstream(t *testing.T) {
-	server, client := setup(t)
+	server, client := setup(t, &aServer{})
 	defer server.Stop()
 	num := 10
 	up, err := client.Upstream(context.Background())
@@ -161,12 +181,12 @@ func TestUpstream(t *testing.T) {
 	}
 	sum := total(num)
 	if res.Value != int64(sum) {
-		t.Fatal("expected %d got %d", sum, res.Value)
+		t.Fatalf("expected %d got %d", sum, res.Value)
 	}
 }
 
 func TestBidi(t *testing.T) {
-	server, client := setup(t)
+	server, client := setup(t, &aServer{})
 	defer server.Stop()
 	num := 10
 	bidi, err := client.Bidi(context.Background())
@@ -187,7 +207,20 @@ func TestBidi(t *testing.T) {
 			t.Fatal(err)
 		}
 		if msg.Value != int64(i) {
-			t.Fatal("expected %d got %d", i, msg.Value)
+			t.Fatalf("expected %d got %d", i, msg.Value)
 		}
+	}
+}
+
+func BenchmarkDownstream(b *testing.B) {
+	server, client := setup(b, &bServer{})
+	defer server.Stop()
+	down, err := client.Downstream(context.Background(), &MyRequest{1})
+	if err != nil {
+		b.Fatal(err)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, err = down.Recv()
 	}
 }
