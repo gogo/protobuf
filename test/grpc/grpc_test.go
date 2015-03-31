@@ -27,6 +27,7 @@
 package grpc
 
 import (
+	protoio "github.com/gogo/protobuf/io"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"io"
@@ -60,7 +61,7 @@ func (this *aServer) Upstream(s MyTest_UpstreamServer) error {
 }
 func (this *aServer) Bidi(b MyTest_BidiServer) error {
 	var err error
-	var msg *MyMsg
+	msg := &MyMsg{}
 	for {
 		msg, err = b.Recv()
 		if err != nil {
@@ -136,13 +137,16 @@ func TestDownstream(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	var m *MyMsg
+	m := &MyMsg{}
 	last := -1
 	for err == nil {
 		m, err = down.Recv()
 		if err == nil {
 			if int(m.Value) == (last + 1) {
 				last++
+				if last == int(num)-1 {
+					break
+				}
 			} else {
 				t.Errorf("out of order last = %d this = %d", last, m.Value)
 			}
@@ -212,8 +216,158 @@ func TestBidi(t *testing.T) {
 	}
 }
 
+func setupTCP(t testing.TB, s MyTestServer) (*server, *client) {
+	serverConn, err := net.Listen("tcp", ":0")
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+	}
+	_, port, err := net.SplitHostPort(serverConn.Addr().String())
+	if err != nil {
+		log.Fatalf("Failed to parse listener address: %v", err)
+	}
+	addr := "localhost:" + port
+	server := newServer(serverConn, s)
+	go server.Serve()
+	clientConn, err := net.Dial("tcp", addr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	client := NewClient(clientConn)
+	return server, client
+}
+
+type server struct {
+	lis  net.Listener
+	s    MyTestServer
+	conn net.Conn
+}
+
+func newServer(lis net.Listener, s MyTestServer) *server {
+	return &server{
+		lis: lis,
+		s:   s,
+	}
+}
+
+func (this *server) Serve() {
+	conn, err := this.lis.Accept()
+	if err != nil {
+		panic(err)
+	}
+	this.conn = conn
+	reader := protoio.NewDelimitedReader(conn, 1024*1024)
+	msg := &MyRequest{}
+	err = reader.ReadMsg(msg)
+	if err != nil {
+		panic(err)
+	}
+	this.s.Downstream(msg, newDownServer(conn))
+	this.conn.Close()
+}
+
+func (this *server) Stop() {
+	this.conn.Close()
+}
+
+type downServer struct {
+	grpc.ServerStream
+	conn protoio.WriteCloser
+}
+
+func newDownServer(conn io.Writer) *downServer {
+	return &downServer{nil, protoio.NewDelimitedWriter(conn)}
+}
+
+func (this *downServer) Send(m *MyMsg) error {
+	if err := this.conn.WriteMsg(m); err != nil {
+		return err
+	}
+	return nil
+}
+
+type client struct {
+	writer protoio.WriteCloser
+	reader protoio.ReadCloser
+	conn   net.Conn
+}
+
+func NewClient(conn net.Conn) *client {
+	return &client{
+		writer: protoio.NewDelimitedWriter(conn),
+		reader: protoio.NewDelimitedReader(conn, 1024*1024),
+		conn:   conn,
+	}
+}
+
+func (this *client) UnaryCall(ctx context.Context, in *MyRequest, opts ...grpc.CallOption) (*MyResponse, error) {
+	panic("not implemented")
+}
+
+func (this *client) Downstream(ctx context.Context, in *MyRequest, opts ...grpc.CallOption) (MyTest_DownstreamClient, error) {
+	if err := this.writer.WriteMsg(in); err != nil {
+		return nil, err
+	}
+	return &downClient{nil, this.reader}, nil
+}
+
+func (this *client) Upstream(ctx context.Context, opts ...grpc.CallOption) (MyTest_UpstreamClient, error) {
+	panic("not implemented")
+}
+func (this *client) Bidi(ctx context.Context, opts ...grpc.CallOption) (MyTest_BidiClient, error) {
+	panic("not implemented")
+}
+
+type downClient struct {
+	grpc.ClientStream
+	reader protoio.ReadCloser
+}
+
+func (this *downClient) Recv() (*MyMsg, error) {
+	m := &MyMsg{}
+	err := this.reader.ReadMsg(m)
+	return m, err
+}
+
+func TestDownstreamTCP(t *testing.T) {
+	server, client := setupTCP(t, &aServer{})
+	defer server.Stop()
+	num := int64(10)
+	down, err := client.Downstream(context.Background(), &MyRequest{num})
+	if err != nil {
+		t.Fatal(err)
+	}
+	m := &MyMsg{}
+	last := -1
+	for err == nil {
+		m, err = down.Recv()
+		if err == nil {
+			if int(m.Value) == (last + 1) {
+				last++
+			} else {
+				t.Errorf("out of order last = %d this = %d", last, m.Value)
+			}
+		}
+	}
+	if last != int(num)-1 {
+		t.Fatalf("wrong last %d expected %d", last, num-1)
+	}
+}
+
 func BenchmarkDownstream(b *testing.B) {
 	server, client := setup(b, &bServer{})
+	defer server.Stop()
+	down, err := client.Downstream(context.Background(), &MyRequest{1})
+	if err != nil {
+		b.Fatal(err)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, err = down.Recv()
+	}
+}
+
+func BenchmarkDownstreamTCP(b *testing.B) {
+	server, client := setupTCP(b, &bServer{})
 	defer server.Stop()
 	down, err := client.Downstream(context.Background(), &MyRequest{1})
 	if err != nil {
