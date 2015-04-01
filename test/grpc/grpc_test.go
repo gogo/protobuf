@@ -353,8 +353,8 @@ func TestDownstreamTCP(t *testing.T) {
 	}
 }
 
-func BenchmarkDownstream(b *testing.B) {
-	server, client := setup(b, &bServer{})
+func BenchmarkDownstreamTCP(b *testing.B) {
+	server, client := setupTCP(b, &bServer{})
 	defer server.Stop()
 	down, err := client.Downstream(context.Background(), &MyRequest{1})
 	if err != nil {
@@ -366,8 +366,8 @@ func BenchmarkDownstream(b *testing.B) {
 	}
 }
 
-func BenchmarkDownstreamTCP(b *testing.B) {
-	server, client := setupTCP(b, &bServer{})
+func BenchmarkDownstreamGRPC(b *testing.B) {
+	server, client := setup(b, &bServer{})
 	defer server.Stop()
 	down, err := client.Downstream(context.Background(), &MyRequest{1})
 	if err != nil {

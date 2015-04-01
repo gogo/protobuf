@@ -3,20 +3,21 @@
 // DO NOT EDIT!
 
 /*
-Package grpc is a generated protocol buffer package.
+	Package grpc is a generated protocol buffer package.
 
-It is generated from these files:
-	grpc.proto
+	It is generated from these files:
+		grpc.proto
 
-It has these top-level messages:
-	MyRequest
-	MyResponse
-	MyMsg
-	MyMsg2
+	It has these top-level messages:
+		MyRequest
+		MyResponse
+		MyMsg
+		MyMsg2
 */
 package grpc
 
 import proto "github.com/gogo/protobuf/proto"
+import test "github.com/gogo/protobuf/test"
 
 import (
 	context "golang.org/x/net/context"
@@ -317,6 +318,96 @@ var _MyTest_serviceDesc = grpc1.ServiceDesc{
 			Handler:       _MyTest_Bidi_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
+		},
+	},
+}
+
+// Client API for MyBench service
+
+type MyBenchClient interface {
+	Down(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (MyBench_DownClient, error)
+}
+
+type myBenchClient struct {
+	cc *grpc1.ClientConn
+}
+
+func NewMyBenchClient(cc *grpc1.ClientConn) MyBenchClient {
+	return &myBenchClient{cc}
+}
+
+func (c *myBenchClient) Down(ctx context.Context, in *MyRequest, opts ...grpc1.CallOption) (MyBench_DownClient, error) {
+	stream, err := grpc1.NewClientStream(ctx, &_MyBench_serviceDesc.Streams[0], c.cc, "/grpc.MyBench/Down", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &myBenchDownClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MyBench_DownClient interface {
+	Recv() (*test.NinOptStruct, error)
+	grpc1.ClientStream
+}
+
+type myBenchDownClient struct {
+	grpc1.ClientStream
+}
+
+func (x *myBenchDownClient) Recv() (*test.NinOptStruct, error) {
+	m := new(test.NinOptStruct)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// Server API for MyBench service
+
+type MyBenchServer interface {
+	Down(*MyRequest, MyBench_DownServer) error
+}
+
+func RegisterMyBenchServer(s *grpc1.Server, srv MyBenchServer) {
+	s.RegisterService(&_MyBench_serviceDesc, srv)
+}
+
+func _MyBench_Down_Handler(srv interface{}, stream grpc1.ServerStream) error {
+	m := new(MyRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MyBenchServer).Down(m, &myBenchDownServer{stream})
+}
+
+type MyBench_DownServer interface {
+	Send(*test.NinOptStruct) error
+	grpc1.ServerStream
+}
+
+type myBenchDownServer struct {
+	grpc1.ServerStream
+}
+
+func (x *myBenchDownServer) Send(m *test.NinOptStruct) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+var _MyBench_serviceDesc = grpc1.ServiceDesc{
+	ServiceName: "grpc.MyBench",
+	HandlerType: (*MyBenchServer)(nil),
+	Methods:     []grpc1.MethodDesc{},
+	Streams: []grpc1.StreamDesc{
+		{
+			StreamName:    "Down",
+			Handler:       _MyBench_Down_Handler,
+			ServerStreams: true,
 		},
 	},
 }

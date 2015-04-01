@@ -28,6 +28,8 @@ syntax = "proto3";
 
 package grpc;
 
+import "github.com/gogo/protobuf/test/thetest.proto";
+
 message MyRequest {
 	int64 Value = 1;
 }
@@ -55,4 +57,8 @@ service MyTest {
 
   // This one streams in both directions.
   rpc Bidi(stream MyMsg) returns (stream MyMsg2);
+}
+
+service MyBench {
+  rpc Down(MyRequest) returns (stream test.NinOptStruct);
 }
