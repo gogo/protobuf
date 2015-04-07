@@ -35,6 +35,8 @@ install:
 	go install ./fieldpath/fieldpath-gen
 	go install ./fieldpath
 	go install ./pbpath
+	go install ./protoc-gen-gogo/version/protoc-min-version
+	go install ./protoc-gen-gogo/protoc-gen-combo
 
 all: clean install regenerate install tests
 
@@ -68,7 +70,6 @@ regenerate:
 	make -C test/oneof regenerate
 	make -C test/theproto3 regenerate
 	make -C test/mapsproto2 regenerate
-	make -C test/grpc regenerate
 	make -C proto generate-test-pbs
 	make gofmt
 
@@ -97,7 +98,6 @@ tests:
 	go test -v ./test/theproto3/...
 	go test -v ./test/combos/...
 	go test -v ./test/mapsproto2/...
-	go test -v ./test/grpc
 	make vet
 
 vet:
@@ -105,8 +105,6 @@ vet:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	go get golang.org/x/net/context
-	go get google.golang.org/grpc
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
 
 testall:
