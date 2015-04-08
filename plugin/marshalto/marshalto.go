@@ -133,6 +133,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -345,6 +346,20 @@ func (p *marshalto) mapField(numGen NumGen, mathPkg generator.Single, fieldTyp d
 	}
 }
 
+type orderFields []*descriptor.FieldDescriptorProto
+
+func (this orderFields) Len() int {
+	return len(this)
+}
+
+func (this orderFields) Less(i, j int) bool {
+	return this[i].GetNumber() < this[j].GetNumber()
+}
+
+func (this orderFields) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
 func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	numGen := NewNumGen()
@@ -400,6 +415,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		p.P(`_ = i`)
 		p.P(`var l int`)
 		p.P(`_ = l`)
+		fields := orderFields(message.GetField())
+		sort.Sort(fields)
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
 			nullable := gogoproto.IsNullable(field)

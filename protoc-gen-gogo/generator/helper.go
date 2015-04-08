@@ -227,10 +227,11 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.Write(rem.Bytes())
 
 	// Reformat generated code.
+	contents := string(g.Buffer.Bytes())
 	fset := token.NewFileSet()
 	ast, err := parser.ParseFile(fset, "", g, parser.ParseComments)
 	if err != nil {
-		g.Fail("bad Go source code was generated:", err.Error())
+		g.Fail("bad Go source code was generated:", contents, err.Error())
 		return
 	}
 	g.Reset()

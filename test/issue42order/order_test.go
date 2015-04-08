@@ -24,57 +24,31 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package issue34
+package issue42
 
 import (
 	"bytes"
 	"github.com/gogo/protobuf/proto"
+	math_rand "math/rand"
 	"testing"
+	time "time"
 )
 
-func TestZeroLengthOptionalBytes(t *testing.T) {
-	roundtrip := func(f *Foo) *Foo {
-		data, err := proto.Marshal(f)
-		if err != nil {
-			panic(err)
-		}
-		newF := &Foo{}
-		err = proto.Unmarshal(data, newF)
-		if err != nil {
-			panic(err)
-		}
-		return newF
-	}
-
-	f := &Foo{}
-	roundtrippedF := roundtrip(f)
-	if roundtrippedF.Bar != nil {
-		t.Fatalf("should be nil")
-	}
-
-	f.Bar = []byte{}
-	roundtrippedF = roundtrip(f)
-	if roundtrippedF.Bar == nil {
-		t.Fatalf("should not be nil")
-	}
-	if len(roundtrippedF.Bar) != 0 {
-		t.Fatalf("should be empty")
-	}
-}
-
-func TestRepeatedOptional(t *testing.T) {
-	repeated := &FooWithRepeated{Bar: [][]byte{[]byte("a"), []byte("b")}}
-	data, err := proto.Marshal(repeated)
+func TestIssue42Order(t *testing.T) {
+	unordered := NewPopulatedUnorderedFields(math_rand.New(math_rand.NewSource(time.Now().UnixNano())), false)
+	udata, err := proto.Marshal(unordered)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
-	optional := &Foo{}
-	err = proto.Unmarshal(data, optional)
+	ordered := &OrderedFields{}
+	if err := proto.Unmarshal(udata, ordered); err != nil {
+		t.Fatal(err)
+	}
+	data, err := proto.Marshal(ordered)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
-
-	if !bytes.Equal(optional.Bar, []byte("b")) {
-		t.Fatalf("should return the last entry")
+	if !bytes.Equal(udata, data) {
+		t.Fatalf("expected data to be marshaled in the same order, please sort fields before marshaling")
 	}
 }
