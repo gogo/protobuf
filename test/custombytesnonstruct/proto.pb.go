@@ -77,7 +77,8 @@ func (m *Object) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.CustomField1 = &CustomType{}
+			var v CustomType
+			m.CustomField1 = &v
 			if err := m.CustomField1.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -102,7 +103,8 @@ func (m *Object) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.CustomField2 = append(m.CustomField2, CustomType{})
+			var v CustomType
+			m.CustomField2 = append(m.CustomField2, v)
 			m.CustomField2[len(m.CustomField2)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
