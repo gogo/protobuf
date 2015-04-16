@@ -1,0 +1,7 @@
+package subpkg;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message SubObject {
+
+}
