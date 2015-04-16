@@ -67,6 +67,7 @@ regenerate:
 	make -C test/tags regenerate
 	make -C test/oneof regenerate
 	make -C test/importdedup regenerate
+	make -C test/custombytesnonstruct regenerate
 	gofmt -l -s -w .
 
 tests:
@@ -92,6 +93,7 @@ tests:
 	go test -v ./parser
 	go test -v ./test/oneof
 	go test -v ./test/importdedup
+	go test -v ./test/custombytesnonstruct
 	make vet
 
 vet:
