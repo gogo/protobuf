@@ -1185,7 +1185,6 @@ func (g *Generator) generateImports() {
 	// do, which is tricky when there's a plugin, just import it and
 	// reference it later. The same argument applies to the math package,
 	// for handling bit patterns for floating-point numbers.
-	c := make(map[string]bool)
 	g.PrintImport(g.Pkg["proto"], g.ImportPrefix+"github.com/gogo/protobuf/proto")
 	if !g.file.proto3 {
 		g.PrintImport(g.Pkg["math"], "math")
@@ -1220,7 +1219,6 @@ func (g *Generator) generateImports() {
 					g.P("// renamed import google/protobuf/descriptor to github.com/gogo/protobuf/protoc-gen-gogo/descriptor")
 				}
 				g.PrintImport(fd.PackageName(), dir)
-				c[dir] = true
 			} else {
 				g.PrintImport(fd.PackageName(), filename)
 			}
@@ -1234,11 +1232,8 @@ func (g *Generator) generateImports() {
 	}
 	g.P()
 	for _, s := range g.customImports {
-		if _, ok := c[s]; !ok {
-			s1 := strings.Map(badToUnderscore, s)
-			g.PrintImport(s1, s)
-			c[s] = true
-		}
+		s1 := strings.Map(badToUnderscore, s)
+		g.PrintImport(s1, s)
 	}
 	g.P()
 	// TODO: may need to worry about uniqueness across plugins
