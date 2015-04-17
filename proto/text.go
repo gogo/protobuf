@@ -322,7 +322,7 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 			// empty bytes field
 			continue
 		}
-		if fv.Kind() != reflect.Ptr && fv.Kind() != reflect.Slice {
+		if props.proto3 && fv.Kind() != reflect.Ptr && fv.Kind() != reflect.Slice {
 			// proto3 non-repeated scalar field; skip if zero value
 			switch fv.Kind() {
 			case reflect.Bool:
