@@ -73,6 +73,7 @@ regenerate:
 	make -C test/issue42order regenerate
 	make -C proto generate-test-pbs
 	make -C test/importdedup regenerate
+	make -C test/custombytesnonstruct regenerate
 	make gofmt
 
 tests:
@@ -102,6 +103,7 @@ tests:
 	go test -v ./test/mapsproto2/...
 	go test -v ./test/issue42order
 	go test -v ./test/importdedup
+	go test -v ./test/custombytesnonstruct
 	make vet
 
 vet:

@@ -643,10 +643,12 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 				panic(err)
 			}
 			if repeated {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, ctyp, `{})`)
+				p.P(`var v `, ctyp)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 				p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
 			} else if nullable {
-				p.P(`m.`, fieldname, ` = &`, ctyp, `{}`)
+				p.P(`var v `, ctyp)
+				p.P(`m.`, fieldname, ` = &v`)
 				p.P(`if err := m.`, fieldname, `.Unmarshal(data[index:postIndex]); err != nil {`)
 				p.In()
 				p.P(`return err`)

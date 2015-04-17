@@ -5256,7 +5256,8 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Value = &github_com_gogo_protobuf_test_custom_dash_type.Bytes{}
+			var v github_com_gogo_protobuf_test_custom_dash_type.Bytes
+			m.Value = &v
 			if err := m.Value.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -5323,7 +5324,8 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Id = &Uuid{}
+			var v Uuid
+			m.Id = &v
 			if err := m.Id.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -5348,7 +5350,8 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Value = &github_com_gogo_protobuf_test_custom.Uint128{}
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.Value = &v
 			if err := m.Value.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -5415,7 +5418,8 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Id = append(m.Id, Uuid{})
+			var v Uuid
+			m.Id = append(m.Id, v)
 			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		case 2:
@@ -5438,7 +5442,8 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Value = append(m.Value, github_com_gogo_protobuf_test_custom.Uint128{})
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.Value = append(m.Value, v)
 			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
@@ -5503,7 +5508,8 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Id = append(m.Id, Uuid{})
+			var v Uuid
+			m.Id = append(m.Id, v)
 			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		case 2:
@@ -5526,7 +5532,8 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Value = append(m.Value, github_com_gogo_protobuf_test_custom.Uint128{})
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.Value = append(m.Value, v)
 			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
@@ -9669,7 +9676,8 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldA = &Uuid{}
+			var v Uuid
+			m.FieldA = &v
 			if err := m.FieldA.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -9694,7 +9702,8 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldB = &github_com_gogo_protobuf_test_custom.Uint128{}
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.FieldB = &v
 			if err := m.FieldB.Unmarshal(data[index:postIndex]); err != nil {
 				return err
 			}
@@ -9719,7 +9728,8 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldC = append(m.FieldC, Uuid{})
+			var v Uuid
+			m.FieldC = append(m.FieldC, v)
 			m.FieldC[len(m.FieldC)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		case 4:
@@ -9742,7 +9752,8 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldD = append(m.FieldD, github_com_gogo_protobuf_test_custom.Uint128{})
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.FieldD = append(m.FieldD, v)
 			m.FieldD[len(m.FieldD)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:

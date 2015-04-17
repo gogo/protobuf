@@ -305,7 +305,8 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.G = append(m.G, v)
 			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
