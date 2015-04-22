@@ -224,6 +224,7 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.Buffer = new(bytes.Buffer)
 	g.generateHeader()
 	p.GenerateImports(g.file)
+	g.generateImports()
 	g.Write(rem.Bytes())
 
 	// Reformat generated code.
