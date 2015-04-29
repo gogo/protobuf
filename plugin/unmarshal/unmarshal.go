@@ -867,7 +867,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 			p.P(`if (hasFields[`, strconv.Itoa(fn/64), `] & (uint64(1) << `, strconv.Itoa(fn%64), `)) == 0 {`)
 			p.In()
-			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			p.P(`return `, protoPkg.Use(), `.RequiredNotSetError{"`, field.GetName(), `"}`)
 			p.Out()
 			p.P(`}`)
 		}

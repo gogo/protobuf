@@ -324,7 +324,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			if required {
 				p.P(`if m.`, fieldname, `== nil {`)
 				p.In()
-				p.P(`return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("`, field.GetName(), `")`)
+				p.P(`return 0, `, protoPkg.Use(), `.RequiredNotSetError{"`, field.GetName(), `"}`)
 				p.Out()
 				p.P(`} else {`)
 			} else if repeated {
