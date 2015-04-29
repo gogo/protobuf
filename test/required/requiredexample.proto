@@ -1,0 +1,14 @@
+package required;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message RequiredExample {
+    required string theRequiredString = 1;
+    optional string theOptionalString = 2;
+    repeated string theRepeatedStrings = 3;
+}
+

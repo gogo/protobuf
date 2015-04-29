@@ -685,8 +685,27 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 
+		// calculate the minimal range we need to store all required fields
+		rfMin, rfMax := func() (min int, max int) {
+			for _, field := range message.Field {
+				if fn := int(field.GetNumber()); field.IsRequired() {
+					if fn < min || min == 0 {
+						min = fn
+					}
+					if fn > max {
+						max = fn
+					}
+				}
+			}
+			return
+		}()
+
+		p.P()
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
+		if rfMin > 0 {
+			p.P(`var hasFields [`, strconv.Itoa(1+(rfMax-rfMin)/64), `]uint64`)
+		}
 		p.P(`l := len(data)`)
 		p.P(`index := 0`)
 		p.P(`for index < l {`)
@@ -697,6 +716,15 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		if len(message.Field) > 0 {
 			p.P(`wireType := int(wire & 0x7)`)
 		}
+		p.P()
+		if rfMin > 0 {
+			p.P(`if fn := int(fieldNum-`, strconv.Itoa(rfMin), `); fn <= `, strconv.Itoa(rfMax-rfMin), ` { `)
+			p.In()
+			p.P(`hasFields[fn/64] |= (uint64(1) << (uint(fn) % 64))`)
+			p.Out()
+			p.P(`}`)
+		}
+		p.P()
 		p.P(`switch fieldNum {`)
 		p.In()
 		for _, field := range message.Field {
@@ -827,6 +855,24 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.Out()
 		p.P(`}`)
+
+		p.P()
+
+		for _, field := range message.Field {
+			if !field.IsRequired() {
+				continue
+			}
+
+			fn := int(field.GetNumber()) - rfMin
+
+			p.P(`if (hasFields[`, strconv.Itoa(fn/64), `] & (uint64(1) << `, strconv.Itoa(fn%64), `)) == 0 {`)
+			p.In()
+			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			p.Out()
+			p.P(`}`)
+		}
+
+		p.P()
 		p.P(`return nil`)
 		p.Out()
 		p.P(`}`)

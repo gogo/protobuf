@@ -88,6 +88,7 @@ func (*OldWithGroup_Group2) ProtoMessage() {}
 
 func init() {
 }
+
 func (m *NewNoGroup) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -106,6 +107,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -192,8 +194,10 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
+
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -212,6 +216,7 @@ func (m *A) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -251,6 +256,7 @@ func (m *A) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *NewNoGroup) String() string {

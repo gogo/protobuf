@@ -139,6 +139,7 @@ func (m *R) GetRecognized() uint32 {
 
 func init() {
 }
+
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -157,6 +158,7 @@ func (m *A) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -240,8 +242,10 @@ func (m *A) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
+
 func (m *B) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -260,6 +264,7 @@ func (m *B) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -305,7 +310,8 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.G = append(m.G, v)
 			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
 			index = postIndex
 		default:
@@ -329,8 +335,10 @@ func (m *B) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
+
 func (m *C) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -349,6 +357,7 @@ func (m *C) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -388,8 +397,10 @@ func (m *C) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
+
 func (m *U) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -408,6 +419,7 @@ func (m *U) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -484,8 +496,10 @@ func (m *U) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
+
 func (m *E) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -503,6 +517,7 @@ func (m *E) Unmarshal(data []byte) error {
 			}
 		}
 		fieldNum := int32(wire >> 3)
+
 		switch fieldNum {
 		default:
 			if (fieldNum >= 1) && (fieldNum < 536870912) {
@@ -546,8 +561,10 @@ func (m *E) Unmarshal(data []byte) error {
 			}
 		}
 	}
+
 	return nil
 }
+
 func (m *R) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -566,6 +583,7 @@ func (m *R) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
+
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -604,6 +622,7 @@ func (m *R) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *U) GetValue() interface{} {

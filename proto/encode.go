@@ -59,6 +59,10 @@ func (e *RequiredNotSetError) Error() string {
 	return fmt.Sprintf("proto: required field %q not set", e.field)
 }
 
+func NewRequiredNotSetError(field string) *RequiredNotSetError {
+	return &RequiredNotSetError{field}
+}
+
 var (
 	// ErrRepeatedHasNil is the error returned if Marshal is called with
 	// a struct with a repeated field containing a nil element.
