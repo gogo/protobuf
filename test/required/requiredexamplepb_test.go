@@ -1,8 +1,8 @@
 package required
 
 import (
-	"github.com/gogo/protobuf/proto"
 	"testing"
+	"github.com/gogo/protobuf/proto"
 )
 
 func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
