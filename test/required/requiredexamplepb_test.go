@@ -8,7 +8,7 @@ import (
 func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
 	data := RequiredExample{}
 
-	buf, err := data.Marshal()
+	buf, err := proto.Marshal(&data)
 
 	if err == nil {
 		t.Fatalf("err == nil; was %v instead", err)
@@ -28,7 +28,7 @@ func TestMarshalToSucceedsWhenRequiredFieldIsPresent(t *testing.T) {
 		TheRequiredString: proto.String("present"),
 	}
 
-	buf, err := data.Marshal()
+	buf, err := proto.Marshal(&data)
 
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
@@ -43,7 +43,7 @@ func TestUnmarshalErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
 	missingRequiredField := []byte{0x12, 0x8, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c}
 
 	data := RequiredExample{}
-	err := data.Unmarshal(missingRequiredField)
+	err := proto.Unmarshal(missingRequiredField, &data)
 
 	if err == nil {
 		t.Fatalf("err == nil; was %v instead", err)
@@ -61,7 +61,7 @@ func TestUnmarshalSucceedsWhenRequiredIsNotPresent(t *testing.T) {
 	encodedMessage, _ := dataOut.Marshal()
 
 	dataIn := RequiredExample{}
-	err := dataIn.Unmarshal(encodedMessage)
+	err := proto.Unmarshal(encodedMessage, &dataIn)
 
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
