@@ -46,7 +46,6 @@ func (m *Foo) GetBar() uint64 {
 
 func init() {
 }
-
 func (m *Foo) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)
@@ -67,10 +66,6 @@ func (m *Foo) Unmarshal(data []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 
-		if fn := int(fieldNum - 1); fn <= 0 {
-			hasFields[fn/64] |= (uint64(1) << (uint(fn) % 64))
-		}
-
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -89,6 +84,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 				}
 			}
 			m.Bar = &v
+			hasFields[0] |= uint64(1)
 		default:
 			var sizeOfWire int
 			for {
@@ -111,7 +107,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 		}
 	}
 
-	if (hasFields[0] & (uint64(1) << 0)) == 0 {
+	if hasFields[0]&uint64(1) == 0 {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("bar")
 	}
 

@@ -139,7 +139,6 @@ func (m *R) GetRecognized() uint32 {
 
 func init() {
 }
-
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -245,7 +244,6 @@ func (m *A) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *B) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -338,7 +336,6 @@ func (m *B) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *C) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -400,7 +397,6 @@ func (m *C) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *U) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -499,7 +495,6 @@ func (m *U) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *E) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -564,7 +559,6 @@ func (m *E) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *R) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0

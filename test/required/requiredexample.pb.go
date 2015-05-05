@@ -60,7 +60,6 @@ func (m *RequiredExample) GetTheRepeatedStrings() []string {
 
 func init() {
 }
-
 func (m *RequiredExample) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)
@@ -80,10 +79,6 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
-		if fn := int(fieldNum - 1); fn <= 0 {
-			hasFields[fn/64] |= (uint64(1) << (uint(fn) % 64))
-		}
 
 		switch fieldNum {
 		case 1:
@@ -109,6 +104,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			s := string(data[index:postIndex])
 			m.TheRequiredString = &s
 			index = postIndex
+			hasFields[0] |= uint64(1)
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field TheOptionalString", wireType)
@@ -176,7 +172,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 		}
 	}
 
-	if (hasFields[0] & (uint64(1) << 0)) == 0 {
+	if hasFields[0]&uint64(1) == 0 {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("theRequiredString")
 	}
 

@@ -88,7 +88,6 @@ func (*OldWithGroup_Group2) ProtoMessage() {}
 
 func init() {
 }
-
 func (m *NewNoGroup) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -197,7 +196,6 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0

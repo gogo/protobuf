@@ -150,7 +150,6 @@ func (*OldUnoM) ProtoMessage() {}
 
 func init() {
 }
-
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -234,7 +233,6 @@ func (m *A) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *B) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -360,7 +358,6 @@ func (m *B) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *D) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -422,7 +419,6 @@ func (m *D) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *C) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -586,7 +582,6 @@ func (m *C) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *U) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -667,7 +662,6 @@ func (m *U) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *OldA) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -751,7 +745,6 @@ func (m *OldA) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *OldB) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -850,7 +843,6 @@ func (m *OldB) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *OldC) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -988,7 +980,6 @@ func (m *OldC) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *OldU) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0

@@ -481,7 +481,6 @@ func (m *NinRepPackedNativeUnsafe) GetField13() []bool {
 
 func init() {
 }
-
 func (m *NinRepNative) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -751,7 +750,6 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -1454,7 +1452,6 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -1686,7 +1683,6 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0

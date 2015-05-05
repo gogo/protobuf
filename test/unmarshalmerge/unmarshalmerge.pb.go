@@ -99,7 +99,6 @@ func (m *Sub) GetSubNumber() int64 {
 
 func init() {
 }
-
 func (m *Big) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -188,7 +187,6 @@ func (m *Big) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *Sub) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
@@ -250,7 +248,6 @@ func (m *Sub) Unmarshal(data []byte) error {
 
 	return nil
 }
-
 func (m *BigUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0

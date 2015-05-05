@@ -38,7 +38,6 @@ func (*Object) ProtoMessage()    {}
 
 func init() {
 }
-
 func (m *Object) Unmarshal(data []byte) error {
 	l := len(data)
 	index := 0
