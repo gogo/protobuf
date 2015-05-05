@@ -48,9 +48,12 @@ func TestUnmarshalSucceedsWhenRequiredIsNotPresent(t *testing.T) {
 	dataOut := RequiredExample{
 		TheRequiredString: proto.String("present"),
 	}
-	encodedMessage, _ := dataOut.Marshal()
+	encodedMessage, err := proto.Marshal(&dataOut)
+	if err != nil {
+		t.Fatalf("Unexpected error when marshalling dataOut: %v", err)
+	}
 	dataIn := RequiredExample{}
-	err := proto.Unmarshal(encodedMessage, &dataIn)
+	err = proto.Unmarshal(encodedMessage, &dataIn)
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
 	}
