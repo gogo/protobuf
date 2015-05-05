@@ -1,15 +1,14 @@
 package required
 
 import (
-	"testing"
 	"github.com/gogo/protobuf/proto"
+	"testing"
 )
 
 func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
 	data := RequiredExample{}
 
-	buf := make([]byte, 1024)
-	n, err := data.MarshalTo(buf)
+	buf, err := data.Marshal()
 
 	if err == nil {
 		t.Fatalf("err == nil; was %v instead", err)
@@ -19,8 +18,8 @@ func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
 		t.Fatalf(`err.Error() != "proto: required field "theRequiredString" not set"; was "%s" instead`, err.Error())
 	}
 
-	if n != 0 {
-		t.Fatalf(`n != 0; was %d instead`, n)
+	if len(buf) != 0 {
+		t.Fatalf(`len(buf) != 0; was %d instead`, len(buf))
 	}
 }
 
@@ -29,15 +28,14 @@ func TestMarshalToSucceedsWhenRequiredFieldIsPresent(t *testing.T) {
 		TheRequiredString: proto.String("present"),
 	}
 
-	buf := make([]byte, 1024)
-	n, err := data.MarshalTo(buf)
+	buf, err := data.Marshal()
 
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
 	}
 
-	if n == 0 {
-		t.Fatalf(`n == 0; expected nonzero`)
+	if len(buf) == 0 {
+		t.Fatalf(`len(buf) == 0; expected nonzero`)
 	}
 }
 
