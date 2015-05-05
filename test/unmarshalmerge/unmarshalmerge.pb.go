@@ -117,7 +117,6 @@ func (m *Big) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -205,7 +204,6 @@ func (m *Sub) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -266,7 +264,6 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {

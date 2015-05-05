@@ -499,7 +499,6 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
@@ -768,7 +767,6 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType == 2 {
@@ -1470,7 +1468,6 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
@@ -1701,7 +1698,6 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType == 2 {

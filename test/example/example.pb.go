@@ -157,7 +157,6 @@ func (m *A) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -262,7 +261,6 @@ func (m *B) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -354,7 +352,6 @@ func (m *C) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -415,7 +412,6 @@ func (m *U) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
@@ -512,7 +508,6 @@ func (m *E) Unmarshal(data []byte) error {
 			}
 		}
 		fieldNum := int32(wire >> 3)
-
 		switch fieldNum {
 		default:
 			if (fieldNum >= 1) && (fieldNum < 536870912) {
@@ -577,7 +572,6 @@ func (m *R) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {

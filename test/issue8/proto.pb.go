@@ -65,7 +65,6 @@ func (m *Foo) Unmarshal(data []byte) error {
 		}
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
-
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
@@ -106,7 +105,6 @@ func (m *Foo) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
-
 	if hasFields[0]&uint64(1) == 0 {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("bar")
 	}

@@ -711,7 +711,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		if len(message.Field) > 0 {
 			p.P(`wireType := int(wire & 0x7)`)
 		}
-		p.P()
 		p.P(`switch fieldNum {`)
 		p.In()
 		for _, field := range message.Field {
@@ -761,7 +760,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				if !ok {
 					panic("field is required, but no bit registered")
 				}
-
 				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, strconv.Itoa(1<<fieldBit%64), `)`)
 			}
 		}
@@ -851,37 +849,28 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.Out()
 		p.P(`}`)
-
-		p.P()
-
 		for _, field := range message.Field {
 			if !field.IsRequired() {
 				continue
 			}
-
 			fieldBit, ok := rfMap[field.GetNumber()]
 			if !ok {
 				panic("field is required, but no bit registered")
 			}
-
 			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, strconv.Itoa(1<<fieldBit%64), `) == 0 {`)
-
 			p.In()
 			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
 			p.Out()
 			p.P(`}`)
 		}
-
 		p.P()
 		p.P(`return nil`)
 		p.Out()
 		p.P(`}`)
 	}
-
 	if !p.atleastOne {
 		return
 	}
-
 }
 
 func init() {
