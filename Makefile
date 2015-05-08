@@ -99,6 +99,10 @@ tests:
 vet:
 	go vet ./...
 
+errcheck:
+	go get -u github.com/kisielk/errcheck
+	errcheck ./test/...
+
 drone:
 	sudo apt-get install protobuf-compiler
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)

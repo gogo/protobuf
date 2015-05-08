@@ -30,16 +30,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/protoc-gen-gogo/version"
 	"os"
 	"os/exec"
+
+	"github.com/gogo/protobuf/protoc-gen-gogo/version"
 )
 
 func main() {
 	if !version.AtLeast("2.6.0") {
 		fmt.Printf("protoc version not high enough to test this feature\n")
-		os.Remove("one.pb.go")
-		os.Remove("onepb_test.go")
+		if err := os.Remove("one.pb.go"); err != nil {
+			panic(err)
+		}
+		if err := os.Remove("onepb_test.go"); err != nil {
+			panic(err)
+		}
 		return
 	}
 	gen := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "one.proto")

@@ -39,8 +39,8 @@ type Uint128 [2]uint64
 
 func (u Uint128) Marshal() ([]byte, error) {
 	buffer := make([]byte, 16)
-	u.MarshalTo(buffer)
-	return buffer, nil
+	_, err := u.MarshalTo(buffer)
+	return buffer, err
 }
 
 func (u Uint128) MarshalTo(data []byte) (n int, err error) {

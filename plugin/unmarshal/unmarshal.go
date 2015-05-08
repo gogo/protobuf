@@ -137,7 +137,9 @@ given to the unmarshal plugin, will generate the following code:
 				return io.ErrUnexpectedEOF
 			}
 			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
-			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
+			if err := m.G[len(m.G)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -172,12 +174,13 @@ package unmarshal
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"strconv"
-	"strings"
 )
 
 type unmarshal struct {
@@ -486,7 +489,11 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 			} else {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, msgname, `{})`)
 			}
-			p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
+			p.P(`if err := m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex]); err != nil {`)
+			p.In()
+			p.P(`return err`)
+			p.Out()
+			p.P(`}`)
 		} else if nullable {
 			p.P(`if m.`, fieldname, ` == nil {`)
 			p.In()
@@ -532,7 +539,11 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 			if repeated {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-				p.P(`m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex])`)
+				p.P(`if err := m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[index:postIndex]); err != nil {`)
+				p.In()
+				p.P(`return err`)
+				p.Out()
+				p.P(`}`)
 			} else if nullable {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = &v`)

@@ -39,8 +39,8 @@ type Bytes []byte
 
 func (b Bytes) Marshal() ([]byte, error) {
 	buffer := make([]byte, len(b))
-	b.MarshalTo(buffer)
-	return buffer, nil
+	_, err := b.MarshalTo(buffer)
+	return buffer, err
 }
 
 func (b Bytes) MarshalTo(data []byte) (n int, err error) {

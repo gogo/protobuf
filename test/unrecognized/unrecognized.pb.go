@@ -207,7 +207,9 @@ func (m *A) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.B = append(m.B, &B{})
-			m.B[len(m.B)-1].Unmarshal(data[index:postIndex])
+			if err := m.B[len(m.B)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -709,7 +711,9 @@ func (m *OldA) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.B = append(m.B, &OldB{})
-			m.B[len(m.B)-1].Unmarshal(data[index:postIndex])
+			if err := m.B[len(m.B)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
