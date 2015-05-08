@@ -4017,7 +4017,9 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field3 = append(m.Field3, NidOptNative{})
-			m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 4:
 			if wireType != 2 {
@@ -4040,7 +4042,9 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field4 = append(m.Field4, NinOptNative{})
-			m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 6:
 			if wireType != 0 {
@@ -4098,7 +4102,9 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field8 = append(m.Field8, NidOptNative{})
-			m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 13:
 			if wireType != 0 {
@@ -4247,7 +4253,9 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field3 = append(m.Field3, &NidOptNative{})
-			m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field3[len(m.Field3)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 4:
 			if wireType != 2 {
@@ -4270,7 +4278,9 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field4 = append(m.Field4, &NinOptNative{})
-			m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field4[len(m.Field4)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 6:
 			if wireType != 0 {
@@ -4328,7 +4338,9 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field8 = append(m.Field8, &NidOptNative{})
-			m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field8[len(m.Field8)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 13:
 			if wireType != 0 {
@@ -4703,7 +4715,9 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field2 = append(m.Field2, NidRepStruct{})
-			m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -4795,7 +4809,9 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field2 = append(m.Field2, &NinRepStruct{})
-			m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex])
+			if err := m.Field2[len(m.Field2)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -5113,7 +5129,9 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.Id = append(m.Id, v)
-			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
+			if err := m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 2:
 			if wireType != 2 {
@@ -5137,7 +5155,9 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.Value = append(m.Value, v)
-			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
+			if err := m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -5203,7 +5223,9 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.Id = append(m.Id, v)
-			m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex])
+			if err := m.Id[len(m.Id)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 2:
 			if wireType != 2 {
@@ -5227,7 +5249,9 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.Value = append(m.Value, v)
-			m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex])
+			if err := m.Value[len(m.Value)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -8993,7 +9017,9 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.FieldD = append(m.FieldD, &NinOptNative{})
-			m.FieldD[len(m.FieldD)-1].Unmarshal(data[index:postIndex])
+			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 6:
 			if wireType != 0 {
@@ -9236,7 +9262,9 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.FieldC = append(m.FieldC, v)
-			m.FieldC[len(m.FieldC)-1].Unmarshal(data[index:postIndex])
+			if err := m.FieldC[len(m.FieldC)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 4:
 			if wireType != 2 {
@@ -9260,7 +9288,9 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.FieldD = append(m.FieldD, v)
-			m.FieldD[len(m.FieldD)-1].Unmarshal(data[index:postIndex])
+			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
@@ -9659,7 +9689,9 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Embedded = append(m.Embedded, &UnrecognizedWithInner_Inner{})
-			m.Embedded[len(m.Embedded)-1].Unmarshal(data[index:postIndex])
+			if err := m.Embedded[len(m.Embedded)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		case 2:
 			if wireType != 2 {
