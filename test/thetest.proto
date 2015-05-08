@@ -544,6 +544,23 @@ message CustomNameEnum {
 	repeated TheTestEnum Field2 = 2 [(gogoproto.customname) = "FieldB"];
 }
 
+message CustomTypeUnmarshaler {
+	option (gogoproto.sizer) = true;
+	option (gogoproto.marshaler) = true;
+	option (gogoproto.unmarshaler) = true;
+  
+	optional int32 Field1 = 1 [(gogoproto.customtype) = "Value32"];
+	optional int64 Field2 = 2 [(gogoproto.customtype) = "Value64"];
+	optional uint32 Field3 = 3 [(gogoproto.customtype) = "Value32"];
+	optional uint64 Field4 = 4 [(gogoproto.customtype) = "Value64"];
+	optional sint32 Field5 = 5 [(gogoproto.customtype) = "Value32"];
+	optional sint64 Field6 = 6 [(gogoproto.customtype) = "Value64"];
+	optional fixed32 Field7 = 7 [(gogoproto.customtype) = "Value32"];
+	optional sfixed32 Field8 = 8 [(gogoproto.customtype) = "Value32"];
+	optional fixed64 Field9 = 9 [(gogoproto.customtype) = "Value64"];
+	optional sfixed64 Field10 = 10 [(gogoproto.customtype) = "Value64"];
+}
+
 message NoExtensionsMap {
 	option (gogoproto.face) = false;
 	option (gogoproto.goproto_extensions_map) = false;

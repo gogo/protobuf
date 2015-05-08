@@ -620,8 +620,8 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-			m.Field7 = append(m.Field7, v)
+			v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v2)
 		case 8:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
@@ -638,8 +638,8 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-			m.Field8 = append(m.Field8, int64(v))
+			v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+			m.Field8 = append(m.Field8, v2)
 		case 9:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
@@ -1102,8 +1102,8 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
-					v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-					m.Field7 = append(m.Field7, v)
+					v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+					m.Field7 = append(m.Field7, v2)
 				}
 			} else if wireType == 0 {
 				var v int32
@@ -1118,8 +1118,8 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
-				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-				m.Field7 = append(m.Field7, v)
+				v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+				m.Field7 = append(m.Field7, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
@@ -1154,8 +1154,8 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
-					v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-					m.Field8 = append(m.Field8, int64(v))
+					v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+					m.Field8 = append(m.Field8, v2)
 				}
 			} else if wireType == 0 {
 				var v uint64
@@ -1170,8 +1170,8 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
-				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-				m.Field8 = append(m.Field8, int64(v))
+				v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+				m.Field8 = append(m.Field8, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
@@ -1573,8 +1573,8 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-			m.Field7 = append(m.Field7, v)
+			v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field7 = append(m.Field7, v2)
 		case 8:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
@@ -1591,8 +1591,8 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-			m.Field8 = append(m.Field8, int64(v))
+			v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+			m.Field8 = append(m.Field8, v2)
 		case 9:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
@@ -2003,8 +2003,8 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 							break
 						}
 					}
-					v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-					m.Field7 = append(m.Field7, v)
+					v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+					m.Field7 = append(m.Field7, v2)
 				}
 			} else if wireType == 0 {
 				var v int32
@@ -2019,8 +2019,8 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
-				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
-				m.Field7 = append(m.Field7, v)
+				v2 := int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+				m.Field7 = append(m.Field7, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
@@ -2055,8 +2055,8 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 							break
 						}
 					}
-					v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-					m.Field8 = append(m.Field8, int64(v))
+					v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+					m.Field8 = append(m.Field8, v2)
 				}
 			} else if wireType == 0 {
 				var v uint64
@@ -2071,8 +2071,8 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
-				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
-				m.Field8 = append(m.Field8, int64(v))
+				v2 := int64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+				m.Field8 = append(m.Field8, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}

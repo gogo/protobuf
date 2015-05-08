@@ -62,6 +62,7 @@
 		CustomNameCustomType
 		CustomNameNinEmbeddedStructUnion
 		CustomNameEnum
+		CustomTypeUnmarshaler
 		NoExtensionsMap
 		Unrecognized
 		UnrecognizedWithInner
@@ -77,11 +78,12 @@ import math "math"
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
+import io "io"
 import fmt "fmt"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
 import strings "strings"
 import reflect "reflect"
-
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import sort "sort"
 import strconv "strconv"
@@ -1038,6 +1040,23 @@ type CustomNameEnum struct {
 func (m *CustomNameEnum) Reset()      { *m = CustomNameEnum{} }
 func (*CustomNameEnum) ProtoMessage() {}
 
+type CustomTypeUnmarshaler struct {
+	Field1           *Value32 `protobuf:"varint,1,opt,customtype=Value32" json:"Field1,omitempty"`
+	Field2           *Value64 `protobuf:"varint,2,opt,customtype=Value64" json:"Field2,omitempty"`
+	Field3           *Value32 `protobuf:"varint,3,opt,customtype=Value32" json:"Field3,omitempty"`
+	Field4           *Value64 `protobuf:"varint,4,opt,customtype=Value64" json:"Field4,omitempty"`
+	Field5           *Value32 `protobuf:"zigzag32,5,opt,customtype=Value32" json:"Field5,omitempty"`
+	Field6           *Value64 `protobuf:"zigzag64,6,opt,customtype=Value64" json:"Field6,omitempty"`
+	Field7           *Value32 `protobuf:"fixed32,7,opt,customtype=Value32" json:"Field7,omitempty"`
+	Field8           *Value32 `protobuf:"fixed32,8,opt,customtype=Value32" json:"Field8,omitempty"`
+	Field9           *Value64 `protobuf:"fixed64,9,opt,customtype=Value64" json:"Field9,omitempty"`
+	Field10          *Value64 `protobuf:"fixed64,10,opt,customtype=Value64" json:"Field10,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *CustomTypeUnmarshaler) Reset()      { *m = CustomTypeUnmarshaler{} }
+func (*CustomTypeUnmarshaler) ProtoMessage() {}
+
 type NoExtensionsMap struct {
 	Field1           *int64 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
 	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
@@ -1158,6 +1177,220 @@ func init() {
 	proto.RegisterExtension(E_FieldA1)
 	proto.RegisterExtension(E_FieldB1)
 	proto.RegisterExtension(E_FieldC1)
+}
+func (m *CustomTypeUnmarshaler) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var v Value32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (Value32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+			}
+			var v Value64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (Value64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field2 = &v
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+			}
+			var v Value32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (Value32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = &v
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
+			}
+			var v Value64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (Value64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field4 = &v
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v2 := Value32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Field5 = &v2
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v2 := Value64((v >> 1) ^ uint64((int64(v&1)<<63)>>63))
+			m.Field6 = &v2
+		case 7:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
+			}
+			var v Value32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = Value32(data[i-4])
+			v |= Value32(data[i-3]) << 8
+			v |= Value32(data[i-2]) << 16
+			v |= Value32(data[i-1]) << 24
+			m.Field7 = &v
+		case 8:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
+			}
+			var v Value32
+			i := index + 4
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = Value32(data[i-4])
+			v |= Value32(data[i-3]) << 8
+			v |= Value32(data[i-2]) << 16
+			v |= Value32(data[i-1]) << 24
+			m.Field8 = &v
+		case 9:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
+			}
+			var v Value64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = Value64(data[i-8])
+			v |= Value64(data[i-7]) << 8
+			v |= Value64(data[i-6]) << 16
+			v |= Value64(data[i-5]) << 24
+			v |= Value64(data[i-4]) << 32
+			v |= Value64(data[i-3]) << 40
+			v |= Value64(data[i-2]) << 48
+			v |= Value64(data[i-1]) << 56
+			m.Field9 = &v
+		case 10:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
+			}
+			var v Value64
+			i := index + 8
+			if i > l {
+				return io.ErrUnexpectedEOF
+			}
+			index = i
+			v = Value64(data[i-8])
+			v |= Value64(data[i-7]) << 8
+			v |= Value64(data[i-6]) << 16
+			v |= Value64(data[i-5]) << 24
+			v |= Value64(data[i-4]) << 32
+			v |= Value64(data[i-3]) << 40
+			v |= Value64(data[i-2]) << 48
+			v |= Value64(data[i-1]) << 56
+			m.Field10 = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
+		}
+	}
+	return nil
 }
 func (this *NinOptNativeUnion) GetValue() interface{} {
 	if this.Field1 != nil {
@@ -2252,6 +2485,26 @@ func (this *CustomNameEnum) String() string {
 	s := strings.Join([]string{`&CustomNameEnum{`,
 		`FieldA:` + valueToStringThetest(this.FieldA) + `,`,
 		`FieldB:` + fmt.Sprintf("%v", this.FieldB) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomTypeUnmarshaler) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomTypeUnmarshaler{`,
+		`Field1:` + valueToStringThetest(this.Field1) + `,`,
+		`Field2:` + valueToStringThetest(this.Field2) + `,`,
+		`Field3:` + valueToStringThetest(this.Field3) + `,`,
+		`Field4:` + valueToStringThetest(this.Field4) + `,`,
+		`Field5:` + valueToStringThetest(this.Field5) + `,`,
+		`Field6:` + valueToStringThetest(this.Field6) + `,`,
+		`Field7:` + valueToStringThetest(this.Field7) + `,`,
+		`Field8:` + valueToStringThetest(this.Field8) + `,`,
+		`Field9:` + valueToStringThetest(this.Field9) + `,`,
+		`Field10:` + valueToStringThetest(this.Field10) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -3827,6 +4080,45 @@ func (m *CustomNameEnum) Size() (n int) {
 		for _, e := range m.FieldB {
 			n += 1 + sovThetest(uint64(e))
 		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CustomTypeUnmarshaler) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovThetest(uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		n += 1 + sovThetest(uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		n += 1 + sovThetest(uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		n += 1 + sovThetest(uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		n += 1 + sozThetest(uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		n += 1 + sozThetest(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 5
+	}
+	if m.Field8 != nil {
+		n += 5
+	}
+	if m.Field9 != nil {
+		n += 9
+	}
+	if m.Field10 != nil {
+		n += 9
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -6022,6 +6314,44 @@ func NewPopulatedCustomNameEnum(r randyThetest, easy bool) *CustomNameEnum {
 	return this
 }
 
+func NewPopulatedCustomTypeUnmarshaler(r randyThetest, easy bool) *CustomTypeUnmarshaler {
+	this := &CustomTypeUnmarshaler{}
+	if r.Intn(10) != 0 {
+		this.Field1 = NewPopulatedValue32(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field2 = NewPopulatedValue64(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field3 = NewPopulatedValue32(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field4 = NewPopulatedValue64(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field5 = NewPopulatedValue32(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field6 = NewPopulatedValue64(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field7 = NewPopulatedValue32(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field8 = NewPopulatedValue32(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field9 = NewPopulatedValue64(r)
+	}
+	if r.Intn(10) != 0 {
+		this.Field10 = NewPopulatedValue64(r)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedThetest(r, 11)
+	}
+	return this
+}
+
 func NewPopulatedNoExtensionsMap(r randyThetest, easy bool) *NoExtensionsMap {
 	this := &NoExtensionsMap{}
 	if r.Intn(10) != 0 {
@@ -6180,6 +6510,104 @@ func encodeVarintPopulateThetest(data []byte, v uint64) []byte {
 	}
 	data = append(data, uint8(v))
 	return data
+}
+func (m *CustomTypeUnmarshaler) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *CustomTypeUnmarshaler) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x8
+		i++
+		i = encodeVarintThetest(data, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		data[i] = 0x10
+		i++
+		i = encodeVarintThetest(data, i, uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		data[i] = 0x18
+		i++
+		i = encodeVarintThetest(data, i, uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		data[i] = 0x20
+		i++
+		i = encodeVarintThetest(data, i, uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		data[i] = 0x28
+		i++
+		i = encodeVarintThetest(data, i, uint64((uint32(*m.Field5)<<1)^uint32((*m.Field5>>31))))
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		i = encodeVarintThetest(data, i, uint64((uint64(*m.Field6)<<1)^uint64((*m.Field6>>63))))
+	}
+	if m.Field7 != nil {
+		data[i] = 0x3d
+		i++
+		i = encodeFixed32Thetest(data, i, uint32(*m.Field7))
+	}
+	if m.Field8 != nil {
+		data[i] = 0x45
+		i++
+		i = encodeFixed32Thetest(data, i, uint32(*m.Field8))
+	}
+	if m.Field9 != nil {
+		data[i] = 0x49
+		i++
+		i = encodeFixed64Thetest(data, i, uint64(*m.Field9))
+	}
+	if m.Field10 != nil {
+		data[i] = 0x51
+		i++
+		i = encodeFixed64Thetest(data, i, uint64(*m.Field10))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Thetest(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Thetest(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintThetest(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
 }
 func (this *NidOptNative) GoString() string {
 	if this == nil {
@@ -6909,6 +7337,24 @@ func (this *CustomNameEnum) GoString() string {
 	s := strings.Join([]string{`&test.CustomNameEnum{` +
 		`FieldA:` + valueToGoStringThetest(this.FieldA, "test.TheTestEnum"),
 		`FieldB:` + fmt.Sprintf("%#v", this.FieldB),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *CustomTypeUnmarshaler) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&test.CustomTypeUnmarshaler{` +
+		`Field1:` + valueToGoStringThetest(this.Field1, "Value32"),
+		`Field2:` + valueToGoStringThetest(this.Field2, "Value64"),
+		`Field3:` + valueToGoStringThetest(this.Field3, "Value32"),
+		`Field4:` + valueToGoStringThetest(this.Field4, "Value64"),
+		`Field5:` + valueToGoStringThetest(this.Field5, "Value32"),
+		`Field6:` + valueToGoStringThetest(this.Field6, "Value64"),
+		`Field7:` + valueToGoStringThetest(this.Field7, "Value32"),
+		`Field8:` + valueToGoStringThetest(this.Field8, "Value32"),
+		`Field9:` + valueToGoStringThetest(this.Field9, "Value64"),
+		`Field10:` + valueToGoStringThetest(this.Field10, "Value64"),
 		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
@@ -9447,6 +9893,83 @@ func NewCustomNameEnumFromFace(that CustomNameEnumFace) *CustomNameEnum {
 	this := &CustomNameEnum{}
 	this.FieldA = that.GetFieldA()
 	this.FieldB = that.GetFieldB()
+	return this
+}
+
+type CustomTypeUnmarshalerFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetField1() *Value32
+	GetField2() *Value64
+	GetField3() *Value32
+	GetField4() *Value64
+	GetField5() *Value32
+	GetField6() *Value64
+	GetField7() *Value32
+	GetField8() *Value32
+	GetField9() *Value64
+	GetField10() *Value64
+}
+
+func (this *CustomTypeUnmarshaler) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *CustomTypeUnmarshaler) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewCustomTypeUnmarshalerFromFace(this)
+}
+
+func (this *CustomTypeUnmarshaler) GetField1() *Value32 {
+	return this.Field1
+}
+
+func (this *CustomTypeUnmarshaler) GetField2() *Value64 {
+	return this.Field2
+}
+
+func (this *CustomTypeUnmarshaler) GetField3() *Value32 {
+	return this.Field3
+}
+
+func (this *CustomTypeUnmarshaler) GetField4() *Value64 {
+	return this.Field4
+}
+
+func (this *CustomTypeUnmarshaler) GetField5() *Value32 {
+	return this.Field5
+}
+
+func (this *CustomTypeUnmarshaler) GetField6() *Value64 {
+	return this.Field6
+}
+
+func (this *CustomTypeUnmarshaler) GetField7() *Value32 {
+	return this.Field7
+}
+
+func (this *CustomTypeUnmarshaler) GetField8() *Value32 {
+	return this.Field8
+}
+
+func (this *CustomTypeUnmarshaler) GetField9() *Value64 {
+	return this.Field9
+}
+
+func (this *CustomTypeUnmarshaler) GetField10() *Value64 {
+	return this.Field10
+}
+
+func NewCustomTypeUnmarshalerFromFace(that CustomTypeUnmarshalerFace) *CustomTypeUnmarshaler {
+	this := &CustomTypeUnmarshaler{}
+	this.Field1 = that.GetField1()
+	this.Field2 = that.GetField2()
+	this.Field3 = that.GetField3()
+	this.Field4 = that.GetField4()
+	this.Field5 = that.GetField5()
+	this.Field6 = that.GetField6()
+	this.Field7 = that.GetField7()
+	this.Field8 = that.GetField8()
+	this.Field9 = that.GetField9()
+	this.Field10 = that.GetField10()
 	return this
 }
 
@@ -16195,6 +16718,196 @@ func (this *CustomNameEnum) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *CustomTypeUnmarshaler) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomTypeUnmarshaler)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomTypeUnmarshaler")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomTypeUnmarshaler but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomTypeUnmarshalerbut is not nil && this == nil")
+	}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
+			return fmt.Errorf("this.Field1 != nil && that1.Field1 == nil")
+		}
+	} else if !this.Field1.Equal(*that1.Field1) {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
+			return fmt.Errorf("this.Field2 != nil && that1.Field2 == nil")
+		}
+	} else if !this.Field2.Equal(*that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
+			return fmt.Errorf("this.Field3 != nil && that1.Field3 == nil")
+		}
+	} else if !this.Field3.Equal(*that1.Field3) {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	if that1.Field4 == nil {
+		if this.Field4 != nil {
+			return fmt.Errorf("this.Field4 != nil && that1.Field4 == nil")
+		}
+	} else if !this.Field4.Equal(*that1.Field4) {
+		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
+	}
+	if that1.Field5 == nil {
+		if this.Field5 != nil {
+			return fmt.Errorf("this.Field5 != nil && that1.Field5 == nil")
+		}
+	} else if !this.Field5.Equal(*that1.Field5) {
+		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", this.Field5, that1.Field5)
+	}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
+			return fmt.Errorf("this.Field6 != nil && that1.Field6 == nil")
+		}
+	} else if !this.Field6.Equal(*that1.Field6) {
+		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
+			return fmt.Errorf("this.Field7 != nil && that1.Field7 == nil")
+		}
+	} else if !this.Field7.Equal(*that1.Field7) {
+		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", this.Field7, that1.Field7)
+	}
+	if that1.Field8 == nil {
+		if this.Field8 != nil {
+			return fmt.Errorf("this.Field8 != nil && that1.Field8 == nil")
+		}
+	} else if !this.Field8.Equal(*that1.Field8) {
+		return fmt.Errorf("Field8 this(%v) Not Equal that(%v)", this.Field8, that1.Field8)
+	}
+	if that1.Field9 == nil {
+		if this.Field9 != nil {
+			return fmt.Errorf("this.Field9 != nil && that1.Field9 == nil")
+		}
+	} else if !this.Field9.Equal(*that1.Field9) {
+		return fmt.Errorf("Field9 this(%v) Not Equal that(%v)", this.Field9, that1.Field9)
+	}
+	if that1.Field10 == nil {
+		if this.Field10 != nil {
+			return fmt.Errorf("this.Field10 != nil && that1.Field10 == nil")
+		}
+	} else if !this.Field10.Equal(*that1.Field10) {
+		return fmt.Errorf("Field10 this(%v) Not Equal that(%v)", this.Field10, that1.Field10)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *CustomTypeUnmarshaler) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomTypeUnmarshaler)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
+			return false
+		}
+	} else if !this.Field1.Equal(*that1.Field1) {
+		return false
+	}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
+			return false
+		}
+	} else if !this.Field2.Equal(*that1.Field2) {
+		return false
+	}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
+			return false
+		}
+	} else if !this.Field3.Equal(*that1.Field3) {
+		return false
+	}
+	if that1.Field4 == nil {
+		if this.Field4 != nil {
+			return false
+		}
+	} else if !this.Field4.Equal(*that1.Field4) {
+		return false
+	}
+	if that1.Field5 == nil {
+		if this.Field5 != nil {
+			return false
+		}
+	} else if !this.Field5.Equal(*that1.Field5) {
+		return false
+	}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
+			return false
+		}
+	} else if !this.Field6.Equal(*that1.Field6) {
+		return false
+	}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
+			return false
+		}
+	} else if !this.Field7.Equal(*that1.Field7) {
+		return false
+	}
+	if that1.Field8 == nil {
+		if this.Field8 != nil {
+			return false
+		}
+	} else if !this.Field8.Equal(*that1.Field8) {
+		return false
+	}
+	if that1.Field9 == nil {
+		if this.Field9 != nil {
+			return false
+		}
+	} else if !this.Field9.Equal(*that1.Field9) {
+		return false
+	}
+	if that1.Field10 == nil {
+		if this.Field10 != nil {
+			return false
+		}
+	} else if !this.Field10.Equal(*that1.Field10) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func (this *NoExtensionsMap) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -16797,6 +17510,9 @@ func (this *CustomNameNinEmbeddedStructUnion) Description() (desc *google_protob
 	return ThetestDescription()
 }
 func (this *CustomNameEnum) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return ThetestDescription()
+}
+func (this *CustomTypeUnmarshaler) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return ThetestDescription()
 }
 func (this *NoExtensionsMap) Description() (desc *google_protobuf.FileDescriptorSet) {
@@ -18510,7 +19226,47 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NoExtensionsMap"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(14), TypeName: func(v string) *string { return &v }(".test.TheTestEnum"), Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0x6, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x42})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomTypeUnmarshaler"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x33, 0x32})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x36, 0x34})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x33, 0x32})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field4"), Number: func(v int32) *int32 { return &v }(4), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x36, 0x34})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field5"), Number: func(v int32) *int32 { return &v }(5), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(17), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x33, 0x32})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field6"), Number: func(v int32) *int32 { return &v }(6), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(18), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x36, 0x34})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field7"), Number: func(v int32) *int32 { return &v }(7), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(7), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x33, 0x32})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field8"), Number: func(v int32) *int32 { return &v }(8), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(15), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x33, 0x32})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field9"), Number: func(v int32) *int32 { return &v }(9), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(6), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x36, 0x34})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field10"), Number: func(v int32) *int32 { return &v }(10), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(16), TypeName: nil, Extendee: nil, DefaultValue: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, ExperimentalMapKey: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x7, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x36, 0x34})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64017: proto.NewExtension([]byte{0x88, 0xa1, 0x1f, 0x1}), 64018: proto.NewExtension([]byte{0x90, 0xa1, 0x1f, 0x1}), 64020: proto.NewExtension([]byte{0xa0, 0xa1, 0x1f, 0x1})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("NoExtensionsMap"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
