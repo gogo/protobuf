@@ -105,7 +105,9 @@ func (m *Object) Unmarshal(data []byte) error {
 			}
 			var v CustomType
 			m.CustomField2 = append(m.CustomField2, v)
-			m.CustomField2[len(m.CustomField2)-1].Unmarshal(data[index:postIndex])
+			if err := m.CustomField2[len(m.CustomField2)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int

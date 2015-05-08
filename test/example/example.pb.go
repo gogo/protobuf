@@ -307,7 +307,9 @@ func (m *B) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.G = append(m.G, v)
-			m.G[len(m.G)-1].Unmarshal(data[index:postIndex])
+			if err := m.G[len(m.G)-1].Unmarshal(data[index:postIndex]); err != nil {
+				return err
+			}
 			index = postIndex
 		default:
 			var sizeOfWire int
