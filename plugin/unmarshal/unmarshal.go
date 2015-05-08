@@ -213,7 +213,7 @@ func (p *unmarshal) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-func (p *unmarshal) decodeVarint(varName string, typName string) {
+func (p *unmarshal) decodeVarint(varName string, typName string, castName string) {
 	p.P(`for shift := uint(0); ; shift += 7 {`)
 	p.In()
 	p.P(`if index >= l {`)
@@ -223,7 +223,7 @@ func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`}`)
 	p.P(`b := data[index]`)
 	p.P(`index++`)
-	p.P(varName, ` |= (`, typName, `(b) & 0x7F) << shift`)
+	p.P(varName, ` |= `, castName, `((`, typName, `(b) & 0x7F) << shift)`)
 	p.P(`if b < 0x80 {`)
 	p.In()
 	p.P(`break`)
@@ -286,6 +286,12 @@ func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
 }
 
 func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname string) {
+
+	var castName string
+	if _, typ, err := generator.GetCustomType(field); err == nil {
+		castName = typ
+	}
+
 	repeated := field.IsRepeated()
 	nullable := gogoproto.IsNullable(field)
 	switch *field.Type {
@@ -352,38 +358,38 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 	case descriptor.FieldDescriptorProto_TYPE_INT64:
 		if repeated {
 			p.P(`var v int64`)
-			p.decodeVarint("v", "int64")
+			p.decodeVarint("v", "int64", castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if nullable {
 			p.P(`var v int64`)
-			p.decodeVarint("v", "int64")
+			p.decodeVarint("v", "int64", castName)
 			p.P(`m.`, fieldname, ` = &v`)
 		} else {
-			p.decodeVarint("m."+fieldname, "int64")
+			p.decodeVarint("m."+fieldname, "int64", castName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_UINT64:
 		if repeated {
 			p.P(`var v uint64`)
-			p.decodeVarint("v", "uint64")
+			p.decodeVarint("v", "uint64", castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if nullable {
 			p.P(`var v uint64`)
-			p.decodeVarint("v", "uint64")
+			p.decodeVarint("v", "uint64", castName)
 			p.P(`m.`, fieldname, ` = &v`)
 		} else {
-			p.decodeVarint("m."+fieldname, "uint64")
+			p.decodeVarint("m."+fieldname, "uint64", castName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_INT32:
 		if repeated {
 			p.P(`var v int32`)
-			p.decodeVarint("v", "int32")
+			p.decodeVarint("v", "int32", castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if nullable {
 			p.P(`var v int32`)
-			p.decodeVarint("v", "int32")
+			p.decodeVarint("v", "int32", castName)
 			p.P(`m.`, fieldname, ` = &v`)
 		} else {
-			p.decodeVarint("m."+fieldname, "int32")
+			p.decodeVarint("m."+fieldname, "int32", castName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
 		if !p.unsafe {
@@ -440,21 +446,21 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		if repeated {
 			p.P(`var v int`)
-			p.decodeVarint("v", "int")
+			p.decodeVarint("v", "int", castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, bool(v != 0))`)
 		} else if nullable {
 			p.P(`var v int`)
-			p.decodeVarint("v", "int")
+			p.decodeVarint("v", "int", castName)
 			p.P(`b := bool(v != 0)`)
 			p.P(`m.`, fieldname, ` = &b`)
 		} else {
 			p.P(`var v int`)
-			p.decodeVarint("v", "int")
+			p.decodeVarint("v", "int", castName)
 			p.P(`m.`, fieldname, ` = bool(v != 0)`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
 		p.P(`var stringLen uint64`)
-		p.decodeVarint("stringLen", "uint64")
+		p.decodeVarint("stringLen", "uint64", castName)
 		p.P(`postIndex := index + int(stringLen)`)
 		p.P(`if postIndex > l {`)
 		p.In()
@@ -476,7 +482,7 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 		desc := p.ObjectNamed(field.GetTypeName())
 		msgname := p.TypeName(desc)
 		p.P(`var msglen int`)
-		p.decodeVarint("msglen", "int")
+		p.decodeVarint("msglen", "int", castName)
 		p.P(`postIndex := index + msglen`)
 		p.P(`if postIndex > l {`)
 		p.In()
@@ -515,7 +521,9 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 		p.P(`index = postIndex`)
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		p.P(`var byteLen int`)
-		p.decodeVarint("byteLen", "int")
+		// As a special case, where field.Type is byte slice, castName is not used,
+		// because Unmarshal is always used instead.
+		p.decodeVarint("byteLen", "int", "")
 		p.P(`postIndex := index + byteLen`)
 		p.P(`if postIndex > l {`)
 		p.In()
@@ -564,27 +572,27 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 	case descriptor.FieldDescriptorProto_TYPE_UINT32:
 		if repeated {
 			p.P(`var v uint32`)
-			p.decodeVarint("v", "uint32")
+			p.decodeVarint("v", "uint32", castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if nullable {
 			p.P(`var v uint32`)
-			p.decodeVarint("v", "uint32")
+			p.decodeVarint("v", "uint32", castName)
 			p.P(`m.`, fieldname, ` = &v`)
 		} else {
-			p.decodeVarint("m."+fieldname, "uint32")
+			p.decodeVarint("m."+fieldname, "uint32", castName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_ENUM:
 		typName := p.TypeName(p.ObjectNamed(field.GetTypeName()))
 		if repeated {
 			p.P(`var v `, typName)
-			p.decodeVarint("v", typName)
+			p.decodeVarint("v", typName, castName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if nullable {
 			p.P(`var v `, typName)
-			p.decodeVarint("v", typName)
+			p.decodeVarint("v", typName, castName)
 			p.P(`m.`, fieldname, ` = &v`)
 		} else {
-			p.decodeVarint("m."+fieldname, typName)
+			p.decodeVarint("m."+fieldname, typName, castName)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
 		if !p.unsafe {
@@ -640,7 +648,7 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
 		p.P(`var v int32`)
-		p.decodeVarint("v", "int32")
+		p.decodeVarint("v", "int32", castName)
 		p.P(`v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))`)
 		if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
@@ -651,7 +659,7 @@ func (p *unmarshal) field(field *descriptor.FieldDescriptorProto, fieldname stri
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SINT64:
 		p.P(`var v uint64`)
-		p.decodeVarint("v", "uint64")
+		p.decodeVarint("v", "uint64", castName)
 		p.P(`v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)`)
 		if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, int64(v))`)
@@ -703,7 +711,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`for index < l {`)
 		p.In()
 		p.P(`var wire uint64`)
-		p.decodeVarint("wire", "uint64")
+		p.decodeVarint("wire", "uint64", "")
 		p.P(`fieldNum := int32(wire >> 3)`)
 		if len(message.Field) > 0 {
 			p.P(`wireType := int(wire & 0x7)`)
@@ -721,7 +729,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`if wireType == `, strconv.Itoa(proto.WireBytes), `{`)
 				p.In()
 				p.P(`var packedLen int`)
-				p.decodeVarint("packedLen", "int")
+				p.decodeVarint("packedLen", "int", "")
 				p.P(`postIndex := index + packedLen`)
 				p.P(`if postIndex > l {`)
 				p.In()
