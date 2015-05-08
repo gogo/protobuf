@@ -4,6 +4,8 @@ import (
 	"github.com/gogo/protobuf/proto"
 	"github.com/gogo/protobuf/test"
 	"math/rand"
+	"reflect"
+	"strconv"
 	"testing"
 	"time"
 )
@@ -73,5 +75,56 @@ func TestUnmarshalPopulatedOptionalFieldsAsRequiredSucceeds(t *testing.T) {
 	err = proto.Unmarshal(encodedMessage, &dataIn)
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
+	}
+}
+
+func TestUnmarshalPartiallyPopulatedOptionalFieldsFails(t *testing.T) {
+	// Fill in all fields, then randomly remove one.
+	dataOut := &test.NinOptNative{
+		Field1:  proto.Float64(0),
+		Field2:  proto.Float32(0),
+		Field3:  proto.Int32(0),
+		Field4:  proto.Int64(0),
+		Field5:  proto.Uint32(0),
+		Field6:  proto.Uint64(0),
+		Field7:  proto.Int32(0),
+		Field8:  proto.Int64(0),
+		Field9:  proto.Uint32(0),
+		Field10: proto.Int32(0),
+		Field11: proto.Uint64(0),
+		Field12: proto.Int64(0),
+		Field13: proto.Bool(false),
+		Field14: proto.String("0"),
+		Field15: []byte("0"),
+	}
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	fieldName := "Field" + strconv.Itoa(r.Intn(15)+1)
+	field := reflect.ValueOf(dataOut).Elem().FieldByName(fieldName)
+	fieldType := field.Type()
+	field.Set(reflect.Zero(fieldType))
+	encodedMessage, err := proto.Marshal(dataOut)
+	if err != nil {
+		t.Fatalf("Unexpected error when marshalling dataOut: %v", err)
+	}
+	dataIn := NidOptNative{}
+	err = proto.Unmarshal(encodedMessage, &dataIn)
+	if err.Error() != `proto: required field "`+fieldName+`" not set` {
+		t.Fatalf(`err.Error() != "proto: required field "`+fieldName+`" not set"; was "%s" instead`, err.Error())
+	}
+}
+
+func TestMarshalFailsWithoutAllFieldsSet(t *testing.T) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	dataOut := NewPopulatedNinOptNative(r, true)
+	fieldName := "Field" + strconv.Itoa(r.Intn(15)+1)
+	field := reflect.ValueOf(dataOut).Elem().FieldByName(fieldName)
+	fieldType := field.Type()
+	field.Set(reflect.Zero(fieldType))
+	encodedMessage, err := proto.Marshal(dataOut)
+	if err.Error() != `proto: required field "`+fieldName+`" not set` {
+		t.Fatalf(`err.Error() != "proto: required field "`+fieldName+`" not set"; was "%s" instead`, err.Error())
+	}
+	if len(encodedMessage) > 0 {
+		t.Fatalf("Got some bytes from marhsal, expected none.")
 	}
 }
