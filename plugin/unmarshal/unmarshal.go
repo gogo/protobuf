@@ -685,21 +685,24 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 
-		// build a map required field_id -> bitmask offset
-		rfMap := make(map[int32]uint)
-		rfNextId := uint(0)
+		// Count the required fields
+		var rfList []string
 		for _, field := range message.Field {
 			if field.IsRequired() {
-				rfMap[field.GetNumber()] = rfNextId
-				rfNextId++
+				rfList = append(rfList, field.GetName())
 			}
 		}
-		rfCount := len(rfMap)
 
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
-		if rfCount > 0 {
-			p.P(`var hasFields [`, strconv.Itoa(1+(rfCount-1)/64), `]uint64`)
+		if len(rfList) > 0 {
+			p.P(`requiredFieldsPresent := map[string]bool{`)
+			p.In()
+			for _, fieldName := range rfList {
+				p.P(`"`, fieldName, `": false,`)
+			}
+			p.Out()
+			p.P(`}`)
 		}
 		p.P(`l := len(data)`)
 		p.P(`index := 0`)
@@ -756,11 +759,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			}
 
 			if field.IsRequired() {
-				fieldBit, ok := rfMap[field.GetNumber()]
-				if !ok {
-					panic("field is required, but no bit registered")
-				}
-				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, strconv.Itoa(1<<fieldBit%64), `)`)
+				p.P(`requiredFieldsPresent["`, field.GetName(), `"] = true`)
 			}
 		}
 		p.Out()
@@ -849,17 +848,14 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.Out()
 		p.P(`}`)
-		for _, field := range message.Field {
-			if !field.IsRequired() {
-				continue
-			}
-			fieldBit, ok := rfMap[field.GetNumber()]
-			if !ok {
-				panic("field is required, but no bit registered")
-			}
-			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, strconv.Itoa(1<<fieldBit%64), `) == 0 {`)
+		if len(rfList) > 0 {
+			p.P(`for fieldName, present := range requiredFieldsPresent {`)
 			p.In()
-			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			p.P(`if !present {`)
+			p.In()
+			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError(fieldName)`)
+			p.Out()
+			p.P(`}`)
 			p.Out()
 			p.P(`}`)
 		}

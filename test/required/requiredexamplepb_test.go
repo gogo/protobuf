@@ -2,7 +2,10 @@ package required
 
 import (
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/test"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {
@@ -53,6 +56,20 @@ func TestUnmarshalSucceedsWhenRequiredIsNotPresent(t *testing.T) {
 		t.Fatalf("Unexpected error when marshalling dataOut: %v", err)
 	}
 	dataIn := RequiredExample{}
+	err = proto.Unmarshal(encodedMessage, &dataIn)
+	if err != nil {
+		t.Fatalf("err != nil; was %v instead", err)
+	}
+}
+
+func TestUnmarshalPopulatedOptionalFieldsAsRequiredSucceeds(t *testing.T) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	dataOut := test.NewPopulatedNidOptNative(r, true)
+	encodedMessage, err := proto.Marshal(dataOut)
+	if err != nil {
+		t.Fatalf("Unexpected error when marshalling dataOut: %v", err)
+	}
+	dataIn := NidOptNative{}
 	err = proto.Unmarshal(encodedMessage, &dataIn)
 	if err != nil {
 		t.Fatalf("err != nil; was %v instead", err)
