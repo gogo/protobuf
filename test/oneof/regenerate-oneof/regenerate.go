@@ -30,6 +30,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 
@@ -40,10 +41,10 @@ func main() {
 	if !version.AtLeast("2.6.0") {
 		fmt.Printf("protoc version not high enough to test this feature\n")
 		if err := os.Remove("one.pb.go"); err != nil {
-			panic(err)
+			log.Print(err)
 		}
 		if err := os.Remove("onepb_test.go"); err != nil {
-			panic(err)
+			log.Print(err)
 		}
 		return
 	}
