@@ -103,6 +103,11 @@ errcheck:
 	go get -u github.com/kisielk/errcheck
 	errcheck ./test/...
 
+# This can be ratcheted over time
+golint:
+	go get -u github.com/golang/lint
+	! golint ./test/... | grep -vE '(should have comment|underscores|generic names|should not have leading space|should be|ALL_CAPS|stutters)'
+
 drone:
 	sudo apt-get install protobuf-compiler
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
