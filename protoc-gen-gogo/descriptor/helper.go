@@ -163,6 +163,30 @@ func (desc *FileDescriptorSet) GetMessage(packageName string, typeName string) *
 	return nil
 }
 
+func (desc *FileDescriptorSet) IsProto3(packageName string, typeName string) bool {
+	for _, file := range desc.GetFile() {
+		if strings.Map(dotToUnderscore, file.GetPackage()) != strings.Map(dotToUnderscore, packageName) {
+			continue
+		}
+		for _, msg := range file.GetMessageType() {
+			if msg.GetName() == typeName {
+				return file.GetSyntax() == "proto3"
+			}
+		}
+		for _, msg := range file.GetMessageType() {
+			for _, nes := range msg.GetNestedType() {
+				if nes.GetName() == typeName {
+					return file.GetSyntax() == "proto3"
+				}
+				if msg.GetName()+"."+nes.GetName() == typeName {
+					return file.GetSyntax() == "proto3"
+				}
+			}
+		}
+	}
+	return false
+}
+
 func (msg *DescriptorProto) IsExtendable() bool {
 	return len(msg.GetExtensionRange()) > 0
 }
