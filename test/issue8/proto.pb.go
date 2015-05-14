@@ -47,9 +47,7 @@ func (m *Foo) GetBar() uint64 {
 func init() {
 }
 func (m *Foo) Unmarshal(data []byte) error {
-	requiredFieldsPresent := map[string]bool{
-		"bar": false,
-	}
+	var hasFields [1]uint64
 	l := len(data)
 	index := 0
 	for index < l {
@@ -85,7 +83,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 				}
 			}
 			m.Bar = &v
-			requiredFieldsPresent["bar"] = true
+			hasFields[0] |= uint64(0x00000001)
 		default:
 			var sizeOfWire int
 			for {
@@ -107,10 +105,8 @@ func (m *Foo) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
-	for fieldName, present := range requiredFieldsPresent {
-		if !present {
-			return github_com_gogo_protobuf_proto.NewRequiredNotSetError(fieldName)
-		}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("bar")
 	}
 
 	return nil

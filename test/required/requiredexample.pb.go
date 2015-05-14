@@ -319,9 +319,7 @@ func (m *NinOptNative) GetField15() []byte {
 func init() {
 }
 func (m *RequiredExample) Unmarshal(data []byte) error {
-	requiredFieldsPresent := map[string]bool{
-		"theRequiredString": false,
-	}
+	var hasFields [1]uint64
 	l := len(data)
 	index := 0
 	for index < l {
@@ -363,7 +361,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			s := string(data[index:postIndex])
 			m.TheRequiredString = &s
 			index = postIndex
-			requiredFieldsPresent["theRequiredString"] = true
+			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field TheOptionalString", wireType)
@@ -430,32 +428,14 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
-	for fieldName, present := range requiredFieldsPresent {
-		if !present {
-			return github_com_gogo_protobuf_proto.NewRequiredNotSetError(fieldName)
-		}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("theRequiredString")
 	}
 
 	return nil
 }
 func (m *NidOptNative) Unmarshal(data []byte) error {
-	requiredFieldsPresent := map[string]bool{
-		"Field1":  false,
-		"Field2":  false,
-		"Field3":  false,
-		"Field4":  false,
-		"Field5":  false,
-		"Field6":  false,
-		"Field7":  false,
-		"Field8":  false,
-		"Field9":  false,
-		"Field10": false,
-		"Field11": false,
-		"Field12": false,
-		"Field13": false,
-		"Field14": false,
-		"Field15": false,
-	}
+	var hasFields [1]uint64
 	l := len(data)
 	index := 0
 	for index < l {
@@ -493,7 +473,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
 			m.Field1 = math.Float64frombits(v)
-			requiredFieldsPresent["Field1"] = true
+			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -509,7 +489,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			v |= uint32(data[i-2]) << 16
 			v |= uint32(data[i-1]) << 24
 			m.Field2 = math.Float32frombits(v)
-			requiredFieldsPresent["Field2"] = true
+			hasFields[0] |= uint64(0x00000002)
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -525,7 +505,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			requiredFieldsPresent["Field3"] = true
+			hasFields[0] |= uint64(0x00000004)
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
@@ -541,7 +521,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			requiredFieldsPresent["Field4"] = true
+			hasFields[0] |= uint64(0x00000008)
 		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
@@ -557,7 +537,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			requiredFieldsPresent["Field5"] = true
+			hasFields[0] |= uint64(0x00000010)
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
@@ -573,7 +553,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			requiredFieldsPresent["Field6"] = true
+			hasFields[0] |= uint64(0x00000020)
 		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
@@ -592,7 +572,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			}
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = v
-			requiredFieldsPresent["Field7"] = true
+			hasFields[0] |= uint64(0x00000040)
 		case 8:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
@@ -611,7 +591,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			}
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Field8 = int64(v)
-			requiredFieldsPresent["Field8"] = true
+			hasFields[0] |= uint64(0x00000080)
 		case 9:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
@@ -625,7 +605,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			m.Field9 |= uint32(data[i-3]) << 8
 			m.Field9 |= uint32(data[i-2]) << 16
 			m.Field9 |= uint32(data[i-1]) << 24
-			requiredFieldsPresent["Field9"] = true
+			hasFields[0] |= uint64(0x00000100)
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
@@ -639,7 +619,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			m.Field10 |= int32(data[i-3]) << 8
 			m.Field10 |= int32(data[i-2]) << 16
 			m.Field10 |= int32(data[i-1]) << 24
-			requiredFieldsPresent["Field10"] = true
+			hasFields[0] |= uint64(0x00000200)
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
@@ -657,7 +637,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			m.Field11 |= uint64(data[i-3]) << 40
 			m.Field11 |= uint64(data[i-2]) << 48
 			m.Field11 |= uint64(data[i-1]) << 56
-			requiredFieldsPresent["Field11"] = true
+			hasFields[0] |= uint64(0x00000400)
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
@@ -675,7 +655,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			m.Field12 |= int64(data[i-3]) << 40
 			m.Field12 |= int64(data[i-2]) << 48
 			m.Field12 |= int64(data[i-1]) << 56
-			requiredFieldsPresent["Field12"] = true
+			hasFields[0] |= uint64(0x00000800)
 		case 13:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
@@ -693,7 +673,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			m.Field13 = bool(v != 0)
-			requiredFieldsPresent["Field13"] = true
+			hasFields[0] |= uint64(0x00001000)
 		case 14:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field14", wireType)
@@ -716,7 +696,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			}
 			m.Field14 = string(data[index:postIndex])
 			index = postIndex
-			requiredFieldsPresent["Field14"] = true
+			hasFields[0] |= uint64(0x00002000)
 		case 15:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field15", wireType)
@@ -739,7 +719,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			}
 			m.Field15 = append([]byte{}, data[index:postIndex]...)
 			index = postIndex
-			requiredFieldsPresent["Field15"] = true
+			hasFields[0] |= uint64(0x00004000)
 		default:
 			var sizeOfWire int
 			for {
@@ -761,32 +741,56 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
-	for fieldName, present := range requiredFieldsPresent {
-		if !present {
-			return github_com_gogo_protobuf_proto.NewRequiredNotSetError(fieldName)
-		}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field1")
+	}
+	if hasFields[0]&uint64(0x00000002) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
+	}
+	if hasFields[0]&uint64(0x00000004) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")
+	}
+	if hasFields[0]&uint64(0x00000008) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field4")
+	}
+	if hasFields[0]&uint64(0x00000010) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field5")
+	}
+	if hasFields[0]&uint64(0x00000020) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field6")
+	}
+	if hasFields[0]&uint64(0x00000040) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field7")
+	}
+	if hasFields[0]&uint64(0x00000080) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field8")
+	}
+	if hasFields[0]&uint64(0x00000100) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field9")
+	}
+	if hasFields[0]&uint64(0x00000200) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field10")
+	}
+	if hasFields[0]&uint64(0x00000400) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field11")
+	}
+	if hasFields[0]&uint64(0x00000800) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field12")
+	}
+	if hasFields[0]&uint64(0x00001000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field13")
+	}
+	if hasFields[0]&uint64(0x00002000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field14")
+	}
+	if hasFields[0]&uint64(0x00004000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field15")
 	}
 
 	return nil
 }
 func (m *NinOptNative) Unmarshal(data []byte) error {
-	requiredFieldsPresent := map[string]bool{
-		"Field1":  false,
-		"Field2":  false,
-		"Field3":  false,
-		"Field4":  false,
-		"Field5":  false,
-		"Field6":  false,
-		"Field7":  false,
-		"Field8":  false,
-		"Field9":  false,
-		"Field10": false,
-		"Field11": false,
-		"Field12": false,
-		"Field13": false,
-		"Field14": false,
-		"Field15": false,
-	}
+	var hasFields [1]uint64
 	l := len(data)
 	index := 0
 	for index < l {
@@ -825,7 +829,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint64(data[i-1]) << 56
 			v2 := math.Float64frombits(v)
 			m.Field1 = &v2
-			requiredFieldsPresent["Field1"] = true
+			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -842,7 +846,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint32(data[i-1]) << 24
 			v2 := math.Float32frombits(v)
 			m.Field2 = &v2
-			requiredFieldsPresent["Field2"] = true
+			hasFields[0] |= uint64(0x00000002)
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -860,7 +864,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			m.Field3 = &v
-			requiredFieldsPresent["Field3"] = true
+			hasFields[0] |= uint64(0x00000004)
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
@@ -878,7 +882,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			m.Field4 = &v
-			requiredFieldsPresent["Field4"] = true
+			hasFields[0] |= uint64(0x00000008)
 		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
@@ -896,7 +900,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			m.Field5 = &v
-			requiredFieldsPresent["Field5"] = true
+			hasFields[0] |= uint64(0x00000010)
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
@@ -914,7 +918,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			m.Field6 = &v
-			requiredFieldsPresent["Field6"] = true
+			hasFields[0] |= uint64(0x00000020)
 		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
@@ -933,7 +937,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			}
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
-			requiredFieldsPresent["Field7"] = true
+			hasFields[0] |= uint64(0x00000040)
 		case 8:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
@@ -953,7 +957,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			v2 := int64(v)
 			m.Field8 = &v2
-			requiredFieldsPresent["Field8"] = true
+			hasFields[0] |= uint64(0x00000080)
 		case 9:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
@@ -969,7 +973,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint32(data[i-2]) << 16
 			v |= uint32(data[i-1]) << 24
 			m.Field9 = &v
-			requiredFieldsPresent["Field9"] = true
+			hasFields[0] |= uint64(0x00000100)
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
@@ -985,7 +989,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= int32(data[i-2]) << 16
 			v |= int32(data[i-1]) << 24
 			m.Field10 = &v
-			requiredFieldsPresent["Field10"] = true
+			hasFields[0] |= uint64(0x00000200)
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
@@ -1005,7 +1009,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint64(data[i-2]) << 48
 			v |= uint64(data[i-1]) << 56
 			m.Field11 = &v
-			requiredFieldsPresent["Field11"] = true
+			hasFields[0] |= uint64(0x00000400)
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
@@ -1025,7 +1029,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= int64(data[i-2]) << 48
 			v |= int64(data[i-1]) << 56
 			m.Field12 = &v
-			requiredFieldsPresent["Field12"] = true
+			hasFields[0] |= uint64(0x00000800)
 		case 13:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
@@ -1044,7 +1048,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			}
 			b := bool(v != 0)
 			m.Field13 = &b
-			requiredFieldsPresent["Field13"] = true
+			hasFields[0] |= uint64(0x00001000)
 		case 14:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field14", wireType)
@@ -1068,7 +1072,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			s := string(data[index:postIndex])
 			m.Field14 = &s
 			index = postIndex
-			requiredFieldsPresent["Field14"] = true
+			hasFields[0] |= uint64(0x00002000)
 		case 15:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field15", wireType)
@@ -1091,7 +1095,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			}
 			m.Field15 = append([]byte{}, data[index:postIndex]...)
 			index = postIndex
-			requiredFieldsPresent["Field15"] = true
+			hasFields[0] |= uint64(0x00004000)
 		default:
 			var sizeOfWire int
 			for {
@@ -1113,10 +1117,50 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
-	for fieldName, present := range requiredFieldsPresent {
-		if !present {
-			return github_com_gogo_protobuf_proto.NewRequiredNotSetError(fieldName)
-		}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field1")
+	}
+	if hasFields[0]&uint64(0x00000002) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
+	}
+	if hasFields[0]&uint64(0x00000004) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")
+	}
+	if hasFields[0]&uint64(0x00000008) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field4")
+	}
+	if hasFields[0]&uint64(0x00000010) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field5")
+	}
+	if hasFields[0]&uint64(0x00000020) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field6")
+	}
+	if hasFields[0]&uint64(0x00000040) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field7")
+	}
+	if hasFields[0]&uint64(0x00000080) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field8")
+	}
+	if hasFields[0]&uint64(0x00000100) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field9")
+	}
+	if hasFields[0]&uint64(0x00000200) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field10")
+	}
+	if hasFields[0]&uint64(0x00000400) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field11")
+	}
+	if hasFields[0]&uint64(0x00000800) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field12")
+	}
+	if hasFields[0]&uint64(0x00001000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field13")
+	}
+	if hasFields[0]&uint64(0x00002000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field14")
+	}
+	if hasFields[0]&uint64(0x00004000) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field15")
 	}
 
 	return nil
