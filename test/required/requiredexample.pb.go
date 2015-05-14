@@ -12,6 +12,7 @@
 		RequiredExample
 		NidOptNative
 		NinOptNative
+		NestedNinOptNative
 */
 package required
 
@@ -312,6 +313,22 @@ func (m *NinOptNative) GetField14() string {
 func (m *NinOptNative) GetField15() []byte {
 	if m != nil {
 		return m.Field15
+	}
+	return nil
+}
+
+type NestedNinOptNative struct {
+	NestedNinOpts    []*NinOptNative `protobuf:"bytes,1,rep" json:"NestedNinOpts,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *NestedNinOptNative) Reset()         { *m = NestedNinOptNative{} }
+func (m *NestedNinOptNative) String() string { return proto.CompactTextString(m) }
+func (*NestedNinOptNative) ProtoMessage()    {}
+
+func (m *NestedNinOptNative) GetNestedNinOpts() []*NinOptNative {
+	if m != nil {
+		return m.NestedNinOpts
 	}
 	return nil
 }
@@ -1165,6 +1182,72 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 
 	return nil
 }
+func (m *NestedNinOptNative) Unmarshal(data []byte) error {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NestedNinOpts", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := index + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NestedNinOpts = append(m.NestedNinOpts, &NinOptNative{})
+			m.NestedNinOpts[len(m.NestedNinOpts)-1].Unmarshal(data[index:postIndex])
+			index = postIndex
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			index -= sizeOfWire
+			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			if err != nil {
+				return err
+			}
+			if (index + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
+			index += skippy
+		}
+	}
+
+	return nil
+}
 func (m *RequiredExample) Size() (n int) {
 	var l int
 	_ = l
@@ -1265,6 +1348,21 @@ func (m *NinOptNative) Size() (n int) {
 	if m.Field15 != nil {
 		l = len(m.Field15)
 		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *NestedNinOptNative) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NestedNinOpts) > 0 {
+		for _, e := range m.NestedNinOpts {
+			l = e.Size()
+			n += 1 + l + sovRequiredexample(uint64(l))
+		}
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -1422,6 +1520,21 @@ func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
 	return this
 }
 
+func NewPopulatedNestedNinOptNative(r randyRequiredexample, easy bool) *NestedNinOptNative {
+	this := &NestedNinOptNative{}
+	if r.Intn(10) != 0 {
+		v20 := r.Intn(10)
+		this.NestedNinOpts = make([]*NinOptNative, v20)
+		for i := 0; i < v20; i++ {
+			this.NestedNinOpts[i] = NewPopulatedNinOptNative(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 2)
+	}
+	return this
+}
+
 type randyRequiredexample interface {
 	Float32() float32
 	Float64() float64
@@ -1435,9 +1548,9 @@ func randUTF8RuneRequiredexample(r randyRequiredexample) rune {
 	return rune(r.Intn(126-43) + 43)
 }
 func randStringRequiredexample(r randyRequiredexample) string {
-	v20 := r.Intn(100)
-	tmps := make([]rune, v20)
-	for i := 0; i < v20; i++ {
+	v21 := r.Intn(100)
+	tmps := make([]rune, v21)
+	for i := 0; i < v21; i++ {
 		tmps[i] = randUTF8RuneRequiredexample(r)
 	}
 	return string(tmps)
@@ -1459,11 +1572,11 @@ func randFieldRequiredexample(data []byte, r randyRequiredexample, fieldNumber i
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		v21 := r.Int63()
+		v22 := r.Int63()
 		if r.Intn(2) == 0 {
-			v21 *= -1
+			v22 *= -1
 		}
-		data = encodeVarintPopulateRequiredexample(data, uint64(v21))
+		data = encodeVarintPopulateRequiredexample(data, uint64(v22))
 	case 1:
 		data = encodeVarintPopulateRequiredexample(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -1739,6 +1852,39 @@ func (m *NinOptNative) MarshalTo(data []byte) (n int, err error) {
 		i++
 		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
 		i += copy(data[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedNinOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NestedNinOptNative) MarshalTo(data []byte) (n int, err error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.NestedNinOpts) > 0 {
+		for _, msg := range m.NestedNinOpts {
+			data[i] = 0xa
+			i++
+			i = encodeVarintRequiredexample(data, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(data[i:], m.XXX_unrecognized)

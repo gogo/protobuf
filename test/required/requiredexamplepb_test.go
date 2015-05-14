@@ -125,6 +125,29 @@ func TestMarshalFailsWithoutAllFieldsSet(t *testing.T) {
 		t.Fatalf(`err.Error() != "proto: required field "`+fieldName+`" not set"; was "%s" instead`, err.Error())
 	}
 	if len(encodedMessage) > 0 {
-		t.Fatalf("Got some bytes from marhsal, expected none.")
+		t.Fatalf("Got some bytes from marshal, expected none.")
+	}
+}
+
+func TestMissingFieldsOnRepeatedNestedTypes(t *testing.T) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	dataOut := &NestedNinOptNative{
+		NestedNinOpts: []*NinOptNative{
+			NewPopulatedNinOptNative(r, true),
+			NewPopulatedNinOptNative(r, true),
+			NewPopulatedNinOptNative(r, true),
+		},
+	}
+	middle := dataOut.GetNestedNinOpts()[1]
+	fieldName := "Field" + strconv.Itoa(r.Intn(15)+1)
+	field := reflect.ValueOf(middle).Elem().FieldByName(fieldName)
+	fieldType := field.Type()
+	field.Set(reflect.Zero(fieldType))
+	encodedMessage, err := proto.Marshal(dataOut)
+	if err.Error() != `proto: required field "`+fieldName+`" not set` {
+		t.Fatalf(`err.Error() != "proto: required field "`+fieldName+`" not set"; was "%s" instead`, err.Error())
+	}
+	if len(encodedMessage) > 0 {
+		t.Fatalf("Got some bytes from marshal, expected none.")
 	}
 }

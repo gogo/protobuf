@@ -48,3 +48,7 @@ message NinOptNative {
     required string Field14 = 14;
     required bytes Field15 = 15;
 }
+
+message NestedNinOptNative {
+    repeated NinOptNative NestedNinOpts = 1;
+}
