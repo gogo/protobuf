@@ -192,6 +192,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *A) Unmarshal(data []byte) error {
@@ -251,6 +252,7 @@ func (m *A) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *NewNoGroup) String() string {

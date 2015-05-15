@@ -130,5 +130,6 @@ func (m *Object) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }

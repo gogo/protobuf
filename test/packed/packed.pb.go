@@ -746,6 +746,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepPackedNative) Unmarshal(data []byte) error {
@@ -1446,6 +1447,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
@@ -1675,6 +1677,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
@@ -2299,6 +2302,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {

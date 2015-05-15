@@ -320,7 +320,14 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			fieldname := p.GetFieldName(message, field)
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
-			if repeated {
+			required := field.IsRequired()
+			if required && nullable {
+				p.P(`if m.`, fieldname, `== nil {`)
+				p.In()
+				p.P(`return 0, `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+				p.Out()
+				p.P(`} else {`)
+			} else if repeated {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
 			} else if nullable || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
@@ -815,7 +822,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			default:
 				panic("not implemented")
 			}
-			if nullable || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
+			if (required && nullable) || nullable || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
 				p.Out()
 				p.P(`}`)
 			}
