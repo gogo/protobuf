@@ -1412,6 +1412,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptNative) Unmarshal(data []byte) error {
@@ -1688,6 +1689,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidRepNative) Unmarshal(data []byte) error {
@@ -1962,6 +1964,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepNative) Unmarshal(data []byte) error {
@@ -2236,6 +2239,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidRepPackedNative) Unmarshal(data []byte) error {
@@ -2860,6 +2864,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepPackedNative) Unmarshal(data []byte) error {
@@ -3484,6 +3489,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidOptStruct) Unmarshal(data []byte) error {
@@ -3710,6 +3716,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptStruct) Unmarshal(data []byte) error {
@@ -3953,6 +3960,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidRepStruct) Unmarshal(data []byte) error {
@@ -4189,6 +4197,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepStruct) Unmarshal(data []byte) error {
@@ -4425,6 +4434,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
@@ -4535,6 +4545,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
@@ -4649,6 +4660,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidNestedStruct) Unmarshal(data []byte) error {
@@ -4740,6 +4752,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinNestedStruct) Unmarshal(data []byte) error {
@@ -4834,6 +4847,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidOptCustom) Unmarshal(data []byte) error {
@@ -4924,6 +4938,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomDash) Unmarshal(data []byte) error {
@@ -4992,6 +5007,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptCustom) Unmarshal(data []byte) error {
@@ -5086,6 +5102,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidRepCustom) Unmarshal(data []byte) error {
@@ -5180,6 +5197,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepCustom) Unmarshal(data []byte) error {
@@ -5274,6 +5292,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
@@ -5469,6 +5488,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptStructUnion) Unmarshal(data []byte) error {
@@ -5685,6 +5705,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
@@ -5799,6 +5820,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
@@ -5922,6 +5944,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Tree) Unmarshal(data []byte) error {
@@ -6045,6 +6068,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *OrBranch) Unmarshal(data []byte) error {
@@ -6135,6 +6159,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AndBranch) Unmarshal(data []byte) error {
@@ -6225,6 +6250,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Leaf) Unmarshal(data []byte) error {
@@ -6304,6 +6330,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *DeepTree) Unmarshal(data []byte) error {
@@ -6427,6 +6454,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *ADeepBranch) Unmarshal(data []byte) error {
@@ -6493,6 +6521,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AndDeepBranch) Unmarshal(data []byte) error {
@@ -6583,6 +6612,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *DeepLeaf) Unmarshal(data []byte) error {
@@ -6649,6 +6679,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Nil) Unmarshal(data []byte) error {
@@ -6690,6 +6721,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidOptEnum) Unmarshal(data []byte) error {
@@ -6747,6 +6779,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptEnum) Unmarshal(data []byte) error {
@@ -6806,6 +6839,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NidRepEnum) Unmarshal(data []byte) error {
@@ -6865,6 +6899,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinRepEnum) Unmarshal(data []byte) error {
@@ -6924,6 +6959,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
@@ -6983,6 +7019,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
@@ -7042,6 +7079,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
@@ -7101,6 +7139,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Timer) Unmarshal(data []byte) error {
@@ -7183,6 +7222,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *MyExtendable) Unmarshal(data []byte) error {
@@ -7266,6 +7306,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 			}
 		}
 	}
+
 	return nil
 }
 func (m *OtherExtenable) Unmarshal(data []byte) error {
@@ -7393,6 +7434,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 			}
 		}
 	}
+
 	return nil
 }
 func (m *NestedDefinition) Unmarshal(data []byte) error {
@@ -7523,6 +7565,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
@@ -7603,6 +7646,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) error {
@@ -7668,6 +7712,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NestedScope) Unmarshal(data []byte) error {
@@ -7781,6 +7826,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
@@ -8057,6 +8103,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomContainer) Unmarshal(data []byte) error {
@@ -8123,6 +8170,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
@@ -8376,6 +8424,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
@@ -8652,6 +8701,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
@@ -8926,6 +8976,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
@@ -9167,6 +9218,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameCustomType) Unmarshal(data []byte) error {
@@ -9313,6 +9365,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
@@ -9427,6 +9480,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *CustomNameEnum) Unmarshal(data []byte) error {
@@ -9503,6 +9557,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *NoExtensionsMap) Unmarshal(data []byte) error {
@@ -9583,6 +9638,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 			}
 		}
 	}
+
 	return nil
 }
 func (m *Unrecognized) Unmarshal(data []byte) error {
@@ -9647,6 +9703,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
@@ -9737,6 +9794,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
@@ -9795,6 +9853,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
@@ -9884,6 +9943,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
@@ -9942,6 +10002,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *NinOptNativeUnion) GetValue() interface{} {

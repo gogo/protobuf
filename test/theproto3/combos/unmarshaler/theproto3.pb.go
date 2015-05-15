@@ -544,6 +544,7 @@ func (m *Message) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Nested) Unmarshal(data []byte) error {
@@ -607,6 +608,7 @@ func (m *Nested) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AllMaps) Unmarshal(data []byte) error {
@@ -1949,6 +1951,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *MessageWithMap) Unmarshal(data []byte) error {
@@ -2234,6 +2237,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *FloatingPoint) Unmarshal(data []byte) error {
@@ -2293,6 +2297,7 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *Message) String() string {

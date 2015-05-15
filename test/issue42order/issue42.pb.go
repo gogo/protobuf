@@ -152,6 +152,7 @@ func (m *UnorderedFields) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *OrderedFields) Unmarshal(data []byte) error {
@@ -229,6 +230,7 @@ func (m *OrderedFields) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *UnorderedFields) Size() (n int) {

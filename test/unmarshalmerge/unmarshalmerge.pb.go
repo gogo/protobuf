@@ -183,6 +183,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *Sub) Unmarshal(data []byte) error {
@@ -242,6 +243,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *BigUnsafe) Unmarshal(data []byte) error {
@@ -328,6 +330,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *Big) String() string {

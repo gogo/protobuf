@@ -813,8 +813,22 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 
+		// build a map required field_id -> bitmask offset
+		rfMap := make(map[int32]uint)
+		rfNextId := uint(0)
+		for _, field := range message.Field {
+			if field.IsRequired() {
+				rfMap[field.GetNumber()] = rfNextId
+				rfNextId++
+			}
+		}
+		rfCount := len(rfMap)
+
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
 		p.In()
+		if rfCount > 0 {
+			p.P(`var hasFields [`, strconv.Itoa(1+(rfCount-1)/64), `]uint64`)
+		}
 		p.P(`l := len(data)`)
 		p.P(`index := 0`)
 		p.P(`for index < l {`)
@@ -867,6 +881,14 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 				p.field(file.FileDescriptorProto, field, fieldname, proto3)
+			}
+
+			if field.IsRequired() {
+				fieldBit, ok := rfMap[field.GetNumber()]
+				if !ok {
+					panic("field is required, but no bit registered")
+				}
+				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, fmt.Sprintf("0x%08x", 1<<(fieldBit%64)), `)`)
 			}
 		}
 		p.Out()
@@ -955,15 +977,31 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.Out()
 		p.P(`}`)
+
+		for _, field := range message.Field {
+			if !field.IsRequired() {
+				continue
+			}
+
+			fieldBit, ok := rfMap[field.GetNumber()]
+			if !ok {
+				panic("field is required, but no bit registered")
+			}
+
+			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, fmt.Sprintf("0x%08x", 1<<(fieldBit%64)), `) == 0 {`)
+			p.In()
+			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			p.Out()
+			p.P(`}`)
+		}
+		p.P()
 		p.P(`return nil`)
 		p.Out()
 		p.P(`}`)
 	}
-
 	if !p.atleastOne {
 		return
 	}
-
 }
 
 func init() {

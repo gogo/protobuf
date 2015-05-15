@@ -168,6 +168,7 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *AllMaps) Unmarshal(data []byte) error {
@@ -1511,6 +1512,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (this *FloatingPoint) String() string {
