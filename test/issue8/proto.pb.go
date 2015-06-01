@@ -113,7 +113,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 }
 func NewPopulatedFoo(r randyProto, easy bool) *Foo {
 	this := &Foo{}
-	v1 := uint64(r.Uint32())
+	v1 := uint64(uint64(r.Uint32()))
 	this.Bar = &v1
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedProto(r, 2)

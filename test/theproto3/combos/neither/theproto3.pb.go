@@ -722,37 +722,37 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 	this := &Message{}
 	this.Name = randStringTheproto3(r)
 	this.Hilarity = Message_Humour([]int32{0, 1, 2, 3}[r.Intn(4)])
-	this.HeightInCm = r.Uint32()
+	this.HeightInCm = uint32(r.Uint32())
 	v1 := r.Intn(100)
 	this.Data = make([]byte, v1)
 	for i := 0; i < v1; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
-	this.ResultCount = r.Int63()
+	this.ResultCount = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.ResultCount *= -1
 	}
-	this.TrueScotsman = bool(r.Intn(2) == 0)
-	this.Score = r.Float32()
+	this.TrueScotsman = bool(bool(r.Intn(2) == 0))
+	this.Score = float32(r.Float32())
 	if r.Intn(2) == 0 {
 		this.Score *= -1
 	}
 	v2 := r.Intn(100)
 	this.Key = make([]uint64, v2)
 	for i := 0; i < v2; i++ {
-		this.Key[i] = uint64(r.Uint32())
+		this.Key[i] = uint64(uint64(r.Uint32()))
 	}
 	this.Nested = NewPopulatedNested(r, easy)
 	v3 := r.Intn(10)
 	this.Terrain = make(map[int64]*Nested)
 	for i := 0; i < v3; i++ {
-		this.Terrain[r.Int63()] = NewPopulatedNested(r, easy)
+		this.Terrain[int64(r.Int63())] = NewPopulatedNested(r, easy)
 	}
 	this.Proto2Field = test.NewPopulatedNinOptNative(r, easy)
 	v4 := r.Intn(10)
 	this.Proto2Value = make(map[int64]*test.NinOptEnum)
 	for i := 0; i < v4; i++ {
-		this.Proto2Value[r.Int63()] = test.NewPopulatedNinOptEnum(r, easy)
+		this.Proto2Value[int64(r.Int63())] = test.NewPopulatedNinOptEnum(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -773,7 +773,7 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	this.StringToDoubleMap = make(map[string]float64)
 	for i := 0; i < v5; i++ {
 		v6 := randStringTheproto3(r)
-		this.StringToDoubleMap[v6] = r.Float64()
+		this.StringToDoubleMap[v6] = float64(r.Float64())
 		if r.Intn(2) == 0 {
 			this.StringToDoubleMap[v6] *= -1
 		}
@@ -782,7 +782,7 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	this.StringToFloatMap = make(map[string]float32)
 	for i := 0; i < v7; i++ {
 		v8 := randStringTheproto3(r)
-		this.StringToFloatMap[v8] = r.Float32()
+		this.StringToFloatMap[v8] = float32(r.Float32())
 		if r.Intn(2) == 0 {
 			this.StringToFloatMap[v8] *= -1
 		}
@@ -790,8 +790,8 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v9 := r.Intn(10)
 	this.Int32Map = make(map[int32]int32)
 	for i := 0; i < v9; i++ {
-		v10 := r.Int31()
-		this.Int32Map[v10] = r.Int31()
+		v10 := int32(r.Int31())
+		this.Int32Map[v10] = int32(r.Int31())
 		if r.Intn(2) == 0 {
 			this.Int32Map[v10] *= -1
 		}
@@ -799,8 +799,8 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v11 := r.Intn(10)
 	this.Int64Map = make(map[int64]int64)
 	for i := 0; i < v11; i++ {
-		v12 := r.Int63()
-		this.Int64Map[v12] = r.Int63()
+		v12 := int64(r.Int63())
+		this.Int64Map[v12] = int64(r.Int63())
 		if r.Intn(2) == 0 {
 			this.Int64Map[v12] *= -1
 		}
@@ -808,20 +808,20 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v13 := r.Intn(10)
 	this.Uint32Map = make(map[uint32]uint32)
 	for i := 0; i < v13; i++ {
-		v14 := r.Uint32()
-		this.Uint32Map[v14] = r.Uint32()
+		v14 := uint32(r.Uint32())
+		this.Uint32Map[v14] = uint32(r.Uint32())
 	}
 	v15 := r.Intn(10)
 	this.Uint64Map = make(map[uint64]uint64)
 	for i := 0; i < v15; i++ {
-		v16 := uint64(r.Uint32())
-		this.Uint64Map[v16] = uint64(r.Uint32())
+		v16 := uint64(uint64(r.Uint32()))
+		this.Uint64Map[v16] = uint64(uint64(r.Uint32()))
 	}
 	v17 := r.Intn(10)
 	this.Sint32Map = make(map[int32]int32)
 	for i := 0; i < v17; i++ {
-		v18 := r.Int31()
-		this.Sint32Map[v18] = r.Int31()
+		v18 := int32(r.Int31())
+		this.Sint32Map[v18] = int32(r.Int31())
 		if r.Intn(2) == 0 {
 			this.Sint32Map[v18] *= -1
 		}
@@ -829,8 +829,8 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v19 := r.Intn(10)
 	this.Sint64Map = make(map[int64]int64)
 	for i := 0; i < v19; i++ {
-		v20 := r.Int63()
-		this.Sint64Map[v20] = r.Int63()
+		v20 := int64(r.Int63())
+		this.Sint64Map[v20] = int64(r.Int63())
 		if r.Intn(2) == 0 {
 			this.Sint64Map[v20] *= -1
 		}
@@ -838,14 +838,14 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v21 := r.Intn(10)
 	this.Fixed32Map = make(map[uint32]uint32)
 	for i := 0; i < v21; i++ {
-		v22 := r.Uint32()
-		this.Fixed32Map[v22] = r.Uint32()
+		v22 := uint32(r.Uint32())
+		this.Fixed32Map[v22] = uint32(r.Uint32())
 	}
 	v23 := r.Intn(10)
 	this.Sfixed32Map = make(map[int32]int32)
 	for i := 0; i < v23; i++ {
-		v24 := r.Int31()
-		this.Sfixed32Map[v24] = r.Int31()
+		v24 := int32(r.Int31())
+		this.Sfixed32Map[v24] = int32(r.Int31())
 		if r.Intn(2) == 0 {
 			this.Sfixed32Map[v24] *= -1
 		}
@@ -853,14 +853,14 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v25 := r.Intn(10)
 	this.Fixed64Map = make(map[uint64]uint64)
 	for i := 0; i < v25; i++ {
-		v26 := uint64(r.Uint32())
-		this.Fixed64Map[v26] = uint64(r.Uint32())
+		v26 := uint64(uint64(r.Uint32()))
+		this.Fixed64Map[v26] = uint64(uint64(r.Uint32()))
 	}
 	v27 := r.Intn(10)
 	this.Sfixed64Map = make(map[int64]int64)
 	for i := 0; i < v27; i++ {
-		v28 := r.Int63()
-		this.Sfixed64Map[v28] = r.Int63()
+		v28 := int64(r.Int63())
+		this.Sfixed64Map[v28] = int64(r.Int63())
 		if r.Intn(2) == 0 {
 			this.Sfixed64Map[v28] *= -1
 		}
@@ -868,8 +868,8 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 	v29 := r.Intn(10)
 	this.BoolMap = make(map[bool]bool)
 	for i := 0; i < v29; i++ {
-		v30 := bool(r.Intn(2) == 0)
-		this.BoolMap[v30] = bool(r.Intn(2) == 0)
+		v30 := bool(bool(r.Intn(2) == 0))
+		this.BoolMap[v30] = bool(bool(r.Intn(2) == 0))
 	}
 	v31 := r.Intn(10)
 	this.StringMap = make(map[string]string)
@@ -906,18 +906,18 @@ func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
 	v37 := r.Intn(10)
 	this.NameMapping = make(map[int32]string)
 	for i := 0; i < v37; i++ {
-		this.NameMapping[r.Int31()] = randStringTheproto3(r)
+		this.NameMapping[int32(r.Int31())] = randStringTheproto3(r)
 	}
 	v38 := r.Intn(10)
 	this.MsgMapping = make(map[int64]*FloatingPoint)
 	for i := 0; i < v38; i++ {
-		this.MsgMapping[r.Int63()] = NewPopulatedFloatingPoint(r, easy)
+		this.MsgMapping[int64(r.Int63())] = NewPopulatedFloatingPoint(r, easy)
 	}
 	v39 := r.Intn(10)
 	this.ByteMapping = make(map[bool][]byte)
 	for i := 0; i < v39; i++ {
 		v40 := r.Intn(100)
-		v41 := bool(r.Intn(2) == 0)
+		v41 := bool(bool(r.Intn(2) == 0))
 		this.ByteMapping[v41] = make([]byte, v40)
 		for i := 0; i < v40; i++ {
 			this.ByteMapping[v41][i] = byte(r.Intn(256))
@@ -930,7 +930,7 @@ func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
 
 func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
 	this := &FloatingPoint{}
-	this.F = r.Float64()
+	this.F = float64(r.Float64())
 	if r.Intn(2) == 0 {
 		this.F *= -1
 	}
@@ -2884,6 +2884,10 @@ func Theproto3Description() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("moretags"), Number: func(v int32) *int32 { return &v }(65006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("casttype"), Number: func(v int32) *int32 { return &v }(65007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

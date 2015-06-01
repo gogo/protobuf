@@ -279,14 +279,14 @@ func sozIssue42(x uint64) (n int) {
 func NewPopulatedUnorderedFields(r randyIssue42, easy bool) *UnorderedFields {
 	this := &UnorderedFields{}
 	if r.Intn(10) != 0 {
-		v1 := r.Int63()
+		v1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v1 *= -1
 		}
 		this.A = &v1
 	}
 	if r.Intn(10) != 0 {
-		v2 := uint64(r.Uint32())
+		v2 := uint64(uint64(r.Uint32()))
 		this.B = &v2
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -298,11 +298,11 @@ func NewPopulatedUnorderedFields(r randyIssue42, easy bool) *UnorderedFields {
 func NewPopulatedOrderedFields(r randyIssue42, easy bool) *OrderedFields {
 	this := &OrderedFields{}
 	if r.Intn(10) != 0 {
-		v3 := uint64(r.Uint32())
+		v3 := uint64(uint64(r.Uint32()))
 		this.B = &v3
 	}
 	if r.Intn(10) != 0 {
-		v4 := r.Int63()
+		v4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v4 *= -1
 		}

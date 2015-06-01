@@ -379,25 +379,37 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 	}
 }
 
-func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto, fieldname string, proto3 bool) {
+func (p *unmarshal) noStarOrSliceType(msg *generator.Descriptor, field *descriptor.FieldDescriptorProto) string {
+	typ, _ := p.GoType(msg, field)
+	if typ[0] == '*' {
+		return typ[1:]
+	}
+	if typ[0] == '[' && typ[1] == ']' {
+		return typ[2:]
+	}
+	return typ
+}
+
+func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.Descriptor, field *descriptor.FieldDescriptorProto, fieldname string, proto3 bool) {
 	repeated := field.IsRepeated()
 	nullable := gogoproto.IsNullable(field)
+	typ := p.noStarOrSliceType(msg, field)
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
 				p.P(`var v uint64`)
 				p.decodeFixed64("v", "uint64")
-				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
+				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
 			} else if proto3 || !nullable {
 				p.P(`var v uint64`)
 				p.decodeFixed64("v", "uint64")
-				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float64frombits(v)`)
+				p.P(`m.`, fieldname, ` = `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 			} else {
-				p.P(`var v uint64`)
+				p.P(`var v `, "uint64")
 				p.decodeFixed64("v", "uint64")
-				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
+				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 				p.P(`m.`, fieldname, ` = &v2`)
 			}
 		} else {
@@ -414,20 +426,20 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
 				p.P(`var v uint32`)
 				p.decodeFixed32("v", "uint32")
-				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
+				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
 			} else if proto3 || !nullable {
 				p.P(`var v uint32`)
 				p.decodeFixed32("v", "uint32")
-				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float32frombits(v)`)
+				p.P(`m.`, fieldname, ` = `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 			} else {
 				p.P(`var v uint32`)
 				p.decodeFixed32("v", "uint32")
-				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
+				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 				p.P(`m.`, fieldname, ` = &v2`)
 			}
 		} else {
@@ -445,51 +457,51 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		}
 	case descriptor.FieldDescriptorProto_TYPE_INT64:
 		if repeated {
-			p.P(`var v int64`)
-			p.decodeVarint("v", "int64")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
-			p.decodeVarint("m."+fieldname, "int64")
+			p.decodeVarint("m."+fieldname, typ)
 		} else {
-			p.P(`var v int64`)
-			p.decodeVarint("v", "int64")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = &v`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_UINT64:
 		if repeated {
-			p.P(`var v uint64`)
-			p.decodeVarint("v", "uint64")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
-			p.decodeVarint("m."+fieldname, "uint64")
+			p.decodeVarint("m."+fieldname, typ)
 		} else {
-			p.P(`var v uint64`)
-			p.decodeVarint("v", "uint64")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = &v`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_INT32:
 		if repeated {
-			p.P(`var v int32`)
-			p.decodeVarint("v", "int32")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
-			p.decodeVarint("m."+fieldname, "int32")
+			p.decodeVarint("m."+fieldname, typ)
 		} else {
-			p.P(`var v int32`)
-			p.decodeVarint("v", "int32")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = &v`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
-				p.P(`var v uint64`)
-				p.decodeFixed64("v", "uint64")
+				p.P(`var v `, typ)
+				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
-				p.decodeFixed64("m."+fieldname, "uint64")
+				p.decodeFixed64("m."+fieldname, typ)
 			} else {
-				p.P(`var v uint64`)
-				p.decodeFixed64("v", "uint64")
+				p.P(`var v `, typ)
+				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = &v`)
 			}
 		} else {
@@ -506,16 +518,16 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
-				p.P(`var v uint32`)
-				p.decodeFixed32("v", "uint32")
+				p.P(`var v `, typ)
+				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
-				p.decodeFixed32("m."+fieldname, "uint32")
+				p.decodeFixed32("m."+fieldname, typ)
 			} else {
-				p.P(`var v uint32`)
-				p.decodeFixed32("v", "uint32")
+				p.P(`var v `, typ)
+				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = &v`)
 			}
 		} else {
@@ -535,15 +547,15 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		if repeated {
 			p.P(`var v int`)
 			p.decodeVarint("v", "int")
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, bool(v != 0))`)
+			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v != 0))`)
 		} else if proto3 || !nullable {
 			p.P(`var v int`)
 			p.decodeVarint("v", "int")
-			p.P(`m.`, fieldname, ` = bool(v != 0)`)
+			p.P(`m.`, fieldname, ` = `, typ, `(v != 0)`)
 		} else {
 			p.P(`var v int`)
 			p.decodeVarint("v", "int")
-			p.P(`b := bool(v != 0)`)
+			p.P(`b := `, typ, `(v != 0)`)
 			p.P(`m.`, fieldname, ` = &b`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
@@ -556,11 +568,11 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		p.Out()
 		p.P(`}`)
 		if repeated {
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, string(data[index:postIndex]))`)
+			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(data[index:postIndex]))`)
 		} else if proto3 || !nullable {
-			p.P(`m.`, fieldname, ` = string(data[index:postIndex])`)
+			p.P(`m.`, fieldname, ` = `, typ, `(data[index:postIndex])`)
 		} else {
-			p.P(`s := string(data[index:postIndex])`)
+			p.P(`s := `, typ, `(data[index:postIndex])`)
 			p.P(`m.`, fieldname, ` = &s`)
 		}
 		p.P(`index = postIndex`)
@@ -676,14 +688,14 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		p.P(`index = postIndex`)
 	case descriptor.FieldDescriptorProto_TYPE_UINT32:
 		if repeated {
-			p.P(`var v uint32`)
-			p.decodeVarint("v", "uint32")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
-			p.decodeVarint("m."+fieldname, "uint32")
+			p.decodeVarint("m."+fieldname, typ)
 		} else {
-			p.P(`var v uint32`)
-			p.decodeVarint("v", "uint32")
+			p.P(`var v `, typ)
+			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = &v`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_ENUM:
@@ -700,16 +712,16 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			p.P(`m.`, fieldname, ` = &v`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
-				p.P(`var v int32`)
-				p.decodeFixed32("v", "int32")
+				p.P(`var v `, typ)
+				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
-				p.decodeFixed32("m."+fieldname, "int32")
+				p.decodeFixed32("m."+fieldname, typ)
 			} else {
-				p.P(`var v int32`)
-				p.decodeFixed32("v", "int32")
+				p.P(`var v `, typ)
+				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = &v`)
 			}
 		} else {
@@ -726,16 +738,16 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if repeated {
-				p.P(`var v int64`)
-				p.decodeFixed64("v", "int64")
+				p.P(`var v `, typ)
+				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
-				p.decodeFixed64("m."+fieldname, "int64")
+				p.decodeFixed64("m."+fieldname, typ)
 			} else {
-				p.P(`var v int64`)
-				p.decodeFixed64("v", "int64")
+				p.P(`var v `, typ)
+				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = &v`)
 			}
 		} else {
@@ -752,9 +764,9 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
-		p.P(`var v int32`)
-		p.decodeVarint("v", "int32")
-		p.P(`v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))`)
+		p.P(`var v `, typ)
+		p.decodeVarint("v", typ)
+		p.P(`v = `, typ, `((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))`)
 		if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
@@ -767,11 +779,11 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		p.decodeVarint("v", "uint64")
 		p.P(`v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)`)
 		if repeated {
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, int64(v))`)
+			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v))`)
 		} else if proto3 || !nullable {
-			p.P(`m.`, fieldname, ` = int64(v)`)
+			p.P(`m.`, fieldname, ` = `, typ, `(v)`)
 		} else {
-			p.P(`v2 := int64(v)`)
+			p.P(`v2 := `, typ, `(v)`)
 			p.P(`m.`, fieldname, ` = &v2`)
 		}
 	default:
@@ -861,13 +873,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`}`)
 				p.P(`for index < postIndex {`)
 				p.In()
-				p.field(file.FileDescriptorProto, field, fieldname, false)
+				p.field(file.FileDescriptorProto, message, field, fieldname, false)
 				p.Out()
 				p.P(`}`)
 				p.Out()
 				p.P(`} else if wireType == `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.field(file.FileDescriptorProto, field, fieldname, false)
+				p.field(file.FileDescriptorProto, message, field, fieldname, false)
 				p.Out()
 				p.P(`} else {`)
 				p.In()
@@ -880,7 +892,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
-				p.field(file.FileDescriptorProto, field, fieldname, proto3)
+				p.field(file.FileDescriptorProto, message, field, fieldname, proto3)
 			}
 
 			if field.IsRequired() {

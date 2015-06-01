@@ -1462,11 +1462,13 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	}
 
 	ctype := ""
-	if field.Options != nil {
-		v, err := proto.GetExtension(field.Options, gogoproto.E_Customtype)
-		if err == nil && (v.(*string)) != nil {
-			ctype = ",customtype=" + *(v.(*string))
-		}
+	if gogoproto.IsCustomType(field) {
+		ctype = ",customtype=" + gogoproto.GetCustomType(field)
+	}
+
+	casttype := ""
+	if gogoproto.IsCastType(field) {
+		casttype = ",casttype=" + gogoproto.GetCastType(field)
 	}
 
 	if message.proto3() {
@@ -1479,7 +1481,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		}
 	}
 
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1488,7 +1490,8 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		enum,
 		defaultValue,
 		embed,
-		ctype))
+		ctype,
+		casttype))
 }
 
 func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool) bool {
@@ -1572,10 +1575,24 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	default:
 		g.Fail("unknown type for", field.GetName())
 	}
+	if gogoproto.IsCustomType(field) && gogoproto.IsCastType(field) {
+		g.Fail(field.GetName() + " cannot be custom type and cast type")
+	}
 	if gogoproto.IsCustomType(field) {
 		var packageName string
 		var err error
 		packageName, typ, err = getCustomType(field)
+		if err != nil {
+			g.Fail(err.Error())
+		}
+		if len(packageName) > 0 {
+			g.customImports = append(g.customImports, packageName)
+		}
+	}
+	if gogoproto.IsCastType(field) {
+		var packageName string
+		var err error
+		packageName, typ, err = getCastType(field)
 		if err != nil {
 			g.Fail(err.Error())
 		}
@@ -1858,7 +1875,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			break
 		}
 		if gogoproto.IsEmbed(field) ||
-			gogoproto.IsCustomType(field) {
+			gogoproto.IsCustomType(field) ||
+			gogoproto.IsCastType(field) {
 			continue
 		}
 		fname := fieldNames[field]

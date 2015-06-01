@@ -75,6 +75,7 @@ regenerate:
 	make -C test/importdedup regenerate
 	make -C test/custombytesnonstruct regenerate
 	make -C test/required regenerate
+	make -C test/casttype regenerate
 	make gofmt
 
 tests:
@@ -106,6 +107,7 @@ tests:
 	go test -v ./test/importdedup
 	go test -v ./test/custombytesnonstruct
 	go test -v ./test/required
+	go test -v ./test/casttype/...
 	make vet
 
 vet:

@@ -251,16 +251,32 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 		v, err := proto.GetExtension(field.Options, gogoproto.E_Customtype)
 		if err == nil && v.(*string) != nil {
 			ctype := *(v.(*string))
-			ss := strings.Split(ctype, ".")
-			if len(ss) == 1 {
-				return "", ctype, nil
-			} else {
-				packageName := strings.Join(ss[0:len(ss)-1], ".")
-				typeName := ss[len(ss)-1]
-				importStr := strings.Map(badToUnderscore, packageName)
-				typ = importStr + "." + typeName
-				return packageName, typ, nil
-			}
+			packageName, typ = splitCPackageType(ctype)
+			return packageName, typ, nil
+		}
+	}
+	return "", "", err
+}
+
+func splitCPackageType(ctype string) (packageName string, typ string) {
+	ss := strings.Split(ctype, ".")
+	if len(ss) == 1 {
+		return "", ctype
+	}
+	packageName = strings.Join(ss[0:len(ss)-1], ".")
+	typeName := ss[len(ss)-1]
+	importStr := strings.Map(badToUnderscore, packageName)
+	typ = importStr + "." + typeName
+	return packageName, typ
+}
+
+func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, gogoproto.E_Casttype)
+		if err == nil && v.(*string) != nil {
+			ctype := *(v.(*string))
+			packageName, typ = splitCPackageType(ctype)
+			return packageName, typ, nil
 		}
 	}
 	return "", "", err

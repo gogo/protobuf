@@ -454,7 +454,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
@@ -496,7 +496,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field4 = &v2
 		case 5:
 			if wireType != 2 {
@@ -551,7 +551,7 @@ func (m *C) Unmarshal(data []byte) error {
 			v |= uint32(data[index-3]) << 8
 			v |= uint32(data[index-2]) << 16
 			v |= uint32(data[index-1]) << 24
-			v2 := math.Float32frombits(v)
+			v2 := float32(math.Float32frombits(v))
 			m.Field7 = append(m.Field7, v2)
 		default:
 			var sizeOfWire int
@@ -613,7 +613,7 @@ func (m *U) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field2 = append(m.Field2, v2)
 		case 3:
 			if wireType != 0 {
@@ -889,7 +889,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
@@ -944,7 +944,7 @@ func (m *OldC) Unmarshal(data []byte) error {
 			v |= uint32(data[index-3]) << 8
 			v |= uint32(data[index-2]) << 16
 			v |= uint32(data[index-1]) << 24
-			v2 := math.Float32frombits(v)
+			v2 := float32(math.Float32frombits(v))
 			m.Field7 = append(m.Field7, v2)
 		default:
 			var sizeOfWire int
@@ -1029,7 +1029,7 @@ func (m *OldU) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field2 = append(m.Field2, v2)
 		default:
 			var sizeOfWire int
@@ -1378,7 +1378,7 @@ func sozUnrecognized(x uint64) (n int) {
 func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
-		v1 := r.Int63()
+		v1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v1 *= -1
 		}
@@ -1416,7 +1416,7 @@ func NewPopulatedB(r randyUnrecognized, easy bool) *B {
 func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 	this := &D{}
 	if r.Intn(10) != 0 {
-		v3 := r.Int63()
+		v3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v3 *= -1
 		}
@@ -1431,7 +1431,7 @@ func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	this := &C{}
 	if r.Intn(10) != 0 {
-		v4 := r.Float64()
+		v4 := float64(r.Float64())
 		if r.Intn(2) == 0 {
 			v4 *= -1
 		}
@@ -1442,7 +1442,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		this.Field3 = &v5
 	}
 	if r.Intn(10) != 0 {
-		v6 := r.Float64()
+		v6 := float64(r.Float64())
 		if r.Intn(2) == 0 {
 			v6 *= -1
 		}
@@ -1460,7 +1460,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		}
 	}
 	if r.Intn(10) != 0 {
-		v9 := r.Int63()
+		v9 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v9 *= -1
 		}
@@ -1470,7 +1470,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		v10 := r.Intn(100)
 		this.Field7 = make([]float32, v10)
 		for i := 0; i < v10; i++ {
-			this.Field7[i] = r.Float32()
+			this.Field7[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -1488,14 +1488,14 @@ func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 		v11 := r.Intn(100)
 		this.Field2 = make([]float64, v11)
 		for i := 0; i < v11; i++ {
-			this.Field2[i] = r.Float64()
+			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
 		}
 	}
 	if r.Intn(10) != 0 {
-		v12 := r.Uint32()
+		v12 := uint32(r.Uint32())
 		this.Field3 = &v12
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1509,14 +1509,14 @@ func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 		v13 := r.Intn(100)
 		this.Field2 = make([]float64, v13)
 		for i := 0; i < v13; i++ {
-			this.Field2[i] = r.Float64()
+			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
 		}
 	}
 	if r.Intn(10) != 0 {
-		v14 := r.Uint32()
+		v14 := uint32(r.Uint32())
 		this.Field3 = &v14
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1527,7 +1527,7 @@ func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
 	this := &OldA{}
 	if r.Intn(10) != 0 {
-		v15 := r.Int63()
+		v15 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v15 *= -1
 		}
@@ -1562,14 +1562,14 @@ func NewPopulatedOldB(r randyUnrecognized, easy bool) *OldB {
 func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 	this := &OldC{}
 	if r.Intn(10) != 0 {
-		v17 := r.Int63()
+		v17 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v17 *= -1
 		}
 		this.Field1 = &v17
 	}
 	if r.Intn(10) != 0 {
-		v18 := r.Float64()
+		v18 := float64(r.Float64())
 		if r.Intn(2) == 0 {
 			v18 *= -1
 		}
@@ -1580,7 +1580,7 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 		this.Field3 = &v19
 	}
 	if r.Intn(10) != 0 {
-		v20 := r.Int63()
+		v20 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v20 *= -1
 		}
@@ -1590,7 +1590,7 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 		v21 := r.Intn(100)
 		this.Field7 = make([]float32, v21)
 		for i := 0; i < v21; i++ {
-			this.Field7[i] = r.Float32()
+			this.Field7[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -1612,7 +1612,7 @@ func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
 		v23 := r.Intn(100)
 		this.Field2 = make([]float64, v23)
 		for i := 0; i < v23; i++ {
-			this.Field2[i] = r.Float64()
+			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -1634,7 +1634,7 @@ func NewPopulatedOldUnoM(r randyUnrecognized, easy bool) *OldUnoM {
 		v25 := r.Intn(100)
 		this.Field2 = make([]float64, v25)
 		for i := 0; i < v25; i++ {
-			this.Field2[i] = r.Float64()
+			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -3878,6 +3878,10 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("moretags"), Number: func(v int32) *int32 { return &v }(65006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("casttype"), Number: func(v int32) *int32 { return &v }(65007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

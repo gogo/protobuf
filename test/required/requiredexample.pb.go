@@ -488,7 +488,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			m.Field1 = math.Float64frombits(v)
+			m.Field1 = float64(math.Float64frombits(v))
 			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 5 {
@@ -503,7 +503,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			v |= uint32(data[index-3]) << 8
 			v |= uint32(data[index-2]) << 16
 			v |= uint32(data[index-1]) << 24
-			m.Field2 = math.Float32frombits(v)
+			m.Field2 = float32(math.Float32frombits(v))
 			hasFields[0] |= uint64(0x00000002)
 		case 3:
 			if wireType != 0 {
@@ -837,7 +837,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 			hasFields[0] |= uint64(0x00000001)
 		case 2:
@@ -853,7 +853,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			v |= uint32(data[index-3]) << 8
 			v |= uint32(data[index-2]) << 16
 			v |= uint32(data[index-1]) << 24
-			v2 := math.Float32frombits(v)
+			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 			hasFields[0] |= uint64(0x00000002)
 		case 3:
@@ -1396,43 +1396,43 @@ func NewPopulatedRequiredExample(r randyRequiredexample, easy bool) *RequiredExa
 
 func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
 	this := &NidOptNative{}
-	this.Field1 = r.Float64()
+	this.Field1 = float64(r.Float64())
 	if r.Intn(2) == 0 {
 		this.Field1 *= -1
 	}
-	this.Field2 = r.Float32()
+	this.Field2 = float32(r.Float32())
 	if r.Intn(2) == 0 {
 		this.Field2 *= -1
 	}
-	this.Field3 = r.Int31()
+	this.Field3 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field3 *= -1
 	}
-	this.Field4 = r.Int63()
+	this.Field4 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field4 *= -1
 	}
-	this.Field5 = r.Uint32()
-	this.Field6 = uint64(r.Uint32())
-	this.Field7 = r.Int31()
+	this.Field5 = uint32(r.Uint32())
+	this.Field6 = uint64(uint64(r.Uint32()))
+	this.Field7 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field7 *= -1
 	}
-	this.Field8 = r.Int63()
+	this.Field8 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field8 *= -1
 	}
-	this.Field9 = r.Uint32()
-	this.Field10 = r.Int31()
+	this.Field9 = uint32(r.Uint32())
+	this.Field10 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field10 *= -1
 	}
-	this.Field11 = uint64(r.Uint32())
-	this.Field12 = r.Int63()
+	this.Field11 = uint64(uint64(r.Uint32()))
+	this.Field12 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field12 *= -1
 	}
-	this.Field13 = bool(r.Intn(2) == 0)
+	this.Field13 = bool(bool(r.Intn(2) == 0))
 	this.Field14 = randStringRequiredexample(r)
 	v4 := r.Intn(100)
 	this.Field15 = make([]byte, v4)
@@ -1447,55 +1447,55 @@ func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
 
 func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
 	this := &NinOptNative{}
-	v5 := r.Float64()
+	v5 := float64(r.Float64())
 	if r.Intn(2) == 0 {
 		v5 *= -1
 	}
 	this.Field1 = &v5
-	v6 := r.Float32()
+	v6 := float32(r.Float32())
 	if r.Intn(2) == 0 {
 		v6 *= -1
 	}
 	this.Field2 = &v6
-	v7 := r.Int31()
+	v7 := int32(r.Int31())
 	if r.Intn(2) == 0 {
 		v7 *= -1
 	}
 	this.Field3 = &v7
-	v8 := r.Int63()
+	v8 := int64(r.Int63())
 	if r.Intn(2) == 0 {
 		v8 *= -1
 	}
 	this.Field4 = &v8
-	v9 := r.Uint32()
+	v9 := uint32(r.Uint32())
 	this.Field5 = &v9
-	v10 := uint64(r.Uint32())
+	v10 := uint64(uint64(r.Uint32()))
 	this.Field6 = &v10
-	v11 := r.Int31()
+	v11 := int32(r.Int31())
 	if r.Intn(2) == 0 {
 		v11 *= -1
 	}
 	this.Field7 = &v11
-	v12 := r.Int63()
+	v12 := int64(r.Int63())
 	if r.Intn(2) == 0 {
 		v12 *= -1
 	}
 	this.Field8 = &v12
-	v13 := r.Uint32()
+	v13 := uint32(r.Uint32())
 	this.Field9 = &v13
-	v14 := r.Int31()
+	v14 := int32(r.Int31())
 	if r.Intn(2) == 0 {
 		v14 *= -1
 	}
 	this.Field10 = &v14
-	v15 := uint64(r.Uint32())
+	v15 := uint64(uint64(r.Uint32()))
 	this.Field11 = &v15
-	v16 := r.Int63()
+	v16 := int64(r.Int63())
 	if r.Intn(2) == 0 {
 		v16 *= -1
 	}
 	this.Field12 = &v16
-	v17 := bool(r.Intn(2) == 0)
+	v17 := bool(bool(r.Intn(2) == 0))
 	this.Field13 = &v17
 	v18 := randStringRequiredexample(r)
 	this.Field14 = &v18

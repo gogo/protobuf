@@ -517,7 +517,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field1 = append(m.Field1, v2)
 		case 2:
 			if wireType != 5 {
@@ -532,7 +532,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			v |= uint32(data[index-3]) << 8
 			v |= uint32(data[index-2]) << 16
 			v |= uint32(data[index-1]) << 24
-			v2 := math.Float32frombits(v)
+			v2 := float32(math.Float32frombits(v))
 			m.Field2 = append(m.Field2, v2)
 		case 3:
 			if wireType != 0 {
@@ -794,7 +794,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					v |= uint64(data[index-3]) << 40
 					v |= uint64(data[index-2]) << 48
 					v |= uint64(data[index-1]) << 56
-					v2 := math.Float64frombits(v)
+					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
 			} else if wireType == 1 {
@@ -811,7 +811,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint64(data[index-3]) << 40
 				v |= uint64(data[index-2]) << 48
 				v |= uint64(data[index-1]) << 56
-				v2 := math.Float64frombits(v)
+				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
@@ -844,7 +844,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					v |= uint32(data[index-3]) << 8
 					v |= uint32(data[index-2]) << 16
 					v |= uint32(data[index-1]) << 24
-					v2 := math.Float32frombits(v)
+					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
 			} else if wireType == 5 {
@@ -857,7 +857,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				v |= uint32(data[index-3]) << 8
 				v |= uint32(data[index-2]) << 16
 				v |= uint32(data[index-1]) << 24
-				v2 := math.Float32frombits(v)
+				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -2293,7 +2293,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v1 := r.Intn(100)
 		this.Field1 = make([]float64, v1)
 		for i := 0; i < v1; i++ {
-			this.Field1[i] = r.Float64()
+			this.Field1[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field1[i] *= -1
 			}
@@ -2303,7 +2303,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v2 := r.Intn(100)
 		this.Field2 = make([]float32, v2)
 		for i := 0; i < v2; i++ {
-			this.Field2[i] = r.Float32()
+			this.Field2[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -2313,7 +2313,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v3 := r.Intn(100)
 		this.Field3 = make([]int32, v3)
 		for i := 0; i < v3; i++ {
-			this.Field3[i] = r.Int31()
+			this.Field3[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -2323,7 +2323,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v4 := r.Intn(100)
 		this.Field4 = make([]int64, v4)
 		for i := 0; i < v4; i++ {
-			this.Field4[i] = r.Int63()
+			this.Field4[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field4[i] *= -1
 			}
@@ -2333,21 +2333,21 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v5 := r.Intn(100)
 		this.Field5 = make([]uint32, v5)
 		for i := 0; i < v5; i++ {
-			this.Field5[i] = r.Uint32()
+			this.Field5[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v6 := r.Intn(100)
 		this.Field6 = make([]uint64, v6)
 		for i := 0; i < v6; i++ {
-			this.Field6[i] = uint64(r.Uint32())
+			this.Field6[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v7 := r.Intn(100)
 		this.Field7 = make([]int32, v7)
 		for i := 0; i < v7; i++ {
-			this.Field7[i] = r.Int31()
+			this.Field7[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -2357,7 +2357,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v8 := r.Intn(100)
 		this.Field8 = make([]int64, v8)
 		for i := 0; i < v8; i++ {
-			this.Field8[i] = r.Int63()
+			this.Field8[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field8[i] *= -1
 			}
@@ -2367,14 +2367,14 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v9 := r.Intn(100)
 		this.Field9 = make([]uint32, v9)
 		for i := 0; i < v9; i++ {
-			this.Field9[i] = r.Uint32()
+			this.Field9[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v10 := r.Intn(100)
 		this.Field10 = make([]int32, v10)
 		for i := 0; i < v10; i++ {
-			this.Field10[i] = r.Int31()
+			this.Field10[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field10[i] *= -1
 			}
@@ -2384,14 +2384,14 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v11 := r.Intn(100)
 		this.Field11 = make([]uint64, v11)
 		for i := 0; i < v11; i++ {
-			this.Field11[i] = uint64(r.Uint32())
+			this.Field11[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v12 := r.Intn(100)
 		this.Field12 = make([]int64, v12)
 		for i := 0; i < v12; i++ {
-			this.Field12[i] = r.Int63()
+			this.Field12[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field12[i] *= -1
 			}
@@ -2401,7 +2401,7 @@ func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 		v13 := r.Intn(100)
 		this.Field13 = make([]bool, v13)
 		for i := 0; i < v13; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
+			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2416,7 +2416,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v14 := r.Intn(100)
 		this.Field1 = make([]float64, v14)
 		for i := 0; i < v14; i++ {
-			this.Field1[i] = r.Float64()
+			this.Field1[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field1[i] *= -1
 			}
@@ -2426,7 +2426,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v15 := r.Intn(100)
 		this.Field2 = make([]float32, v15)
 		for i := 0; i < v15; i++ {
-			this.Field2[i] = r.Float32()
+			this.Field2[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -2436,7 +2436,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v16 := r.Intn(100)
 		this.Field3 = make([]int32, v16)
 		for i := 0; i < v16; i++ {
-			this.Field3[i] = r.Int31()
+			this.Field3[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -2446,7 +2446,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v17 := r.Intn(100)
 		this.Field4 = make([]int64, v17)
 		for i := 0; i < v17; i++ {
-			this.Field4[i] = r.Int63()
+			this.Field4[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field4[i] *= -1
 			}
@@ -2456,21 +2456,21 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v18 := r.Intn(100)
 		this.Field5 = make([]uint32, v18)
 		for i := 0; i < v18; i++ {
-			this.Field5[i] = r.Uint32()
+			this.Field5[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v19 := r.Intn(100)
 		this.Field6 = make([]uint64, v19)
 		for i := 0; i < v19; i++ {
-			this.Field6[i] = uint64(r.Uint32())
+			this.Field6[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v20 := r.Intn(100)
 		this.Field7 = make([]int32, v20)
 		for i := 0; i < v20; i++ {
-			this.Field7[i] = r.Int31()
+			this.Field7[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -2480,7 +2480,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v21 := r.Intn(100)
 		this.Field8 = make([]int64, v21)
 		for i := 0; i < v21; i++ {
-			this.Field8[i] = r.Int63()
+			this.Field8[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field8[i] *= -1
 			}
@@ -2490,14 +2490,14 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v22 := r.Intn(100)
 		this.Field9 = make([]uint32, v22)
 		for i := 0; i < v22; i++ {
-			this.Field9[i] = r.Uint32()
+			this.Field9[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v23 := r.Intn(100)
 		this.Field10 = make([]int32, v23)
 		for i := 0; i < v23; i++ {
-			this.Field10[i] = r.Int31()
+			this.Field10[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field10[i] *= -1
 			}
@@ -2507,14 +2507,14 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v24 := r.Intn(100)
 		this.Field11 = make([]uint64, v24)
 		for i := 0; i < v24; i++ {
-			this.Field11[i] = uint64(r.Uint32())
+			this.Field11[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v25 := r.Intn(100)
 		this.Field12 = make([]int64, v25)
 		for i := 0; i < v25; i++ {
-			this.Field12[i] = r.Int63()
+			this.Field12[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field12[i] *= -1
 			}
@@ -2524,7 +2524,7 @@ func NewPopulatedNinRepPackedNative(r randyPacked, easy bool) *NinRepPackedNativ
 		v26 := r.Intn(100)
 		this.Field13 = make([]bool, v26)
 		for i := 0; i < v26; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
+			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2539,7 +2539,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v27 := r.Intn(100)
 		this.Field1 = make([]float64, v27)
 		for i := 0; i < v27; i++ {
-			this.Field1[i] = r.Float64()
+			this.Field1[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field1[i] *= -1
 			}
@@ -2549,7 +2549,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v28 := r.Intn(100)
 		this.Field2 = make([]float32, v28)
 		for i := 0; i < v28; i++ {
-			this.Field2[i] = r.Float32()
+			this.Field2[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -2559,7 +2559,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v29 := r.Intn(100)
 		this.Field3 = make([]int32, v29)
 		for i := 0; i < v29; i++ {
-			this.Field3[i] = r.Int31()
+			this.Field3[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -2569,7 +2569,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v30 := r.Intn(100)
 		this.Field4 = make([]int64, v30)
 		for i := 0; i < v30; i++ {
-			this.Field4[i] = r.Int63()
+			this.Field4[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field4[i] *= -1
 			}
@@ -2579,21 +2579,21 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v31 := r.Intn(100)
 		this.Field5 = make([]uint32, v31)
 		for i := 0; i < v31; i++ {
-			this.Field5[i] = r.Uint32()
+			this.Field5[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v32 := r.Intn(100)
 		this.Field6 = make([]uint64, v32)
 		for i := 0; i < v32; i++ {
-			this.Field6[i] = uint64(r.Uint32())
+			this.Field6[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v33 := r.Intn(100)
 		this.Field7 = make([]int32, v33)
 		for i := 0; i < v33; i++ {
-			this.Field7[i] = r.Int31()
+			this.Field7[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -2603,7 +2603,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v34 := r.Intn(100)
 		this.Field8 = make([]int64, v34)
 		for i := 0; i < v34; i++ {
-			this.Field8[i] = r.Int63()
+			this.Field8[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field8[i] *= -1
 			}
@@ -2613,14 +2613,14 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v35 := r.Intn(100)
 		this.Field9 = make([]uint32, v35)
 		for i := 0; i < v35; i++ {
-			this.Field9[i] = r.Uint32()
+			this.Field9[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v36 := r.Intn(100)
 		this.Field10 = make([]int32, v36)
 		for i := 0; i < v36; i++ {
-			this.Field10[i] = r.Int31()
+			this.Field10[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field10[i] *= -1
 			}
@@ -2630,14 +2630,14 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v37 := r.Intn(100)
 		this.Field11 = make([]uint64, v37)
 		for i := 0; i < v37; i++ {
-			this.Field11[i] = uint64(r.Uint32())
+			this.Field11[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v38 := r.Intn(100)
 		this.Field12 = make([]int64, v38)
 		for i := 0; i < v38; i++ {
-			this.Field12[i] = r.Int63()
+			this.Field12[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field12[i] *= -1
 			}
@@ -2647,7 +2647,7 @@ func NewPopulatedNinRepNativeUnsafe(r randyPacked, easy bool) *NinRepNativeUnsaf
 		v39 := r.Intn(100)
 		this.Field13 = make([]bool, v39)
 		for i := 0; i < v39; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
+			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2662,7 +2662,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v40 := r.Intn(100)
 		this.Field1 = make([]float64, v40)
 		for i := 0; i < v40; i++ {
-			this.Field1[i] = r.Float64()
+			this.Field1[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field1[i] *= -1
 			}
@@ -2672,7 +2672,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v41 := r.Intn(100)
 		this.Field2 = make([]float32, v41)
 		for i := 0; i < v41; i++ {
-			this.Field2[i] = r.Float32()
+			this.Field2[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -2682,7 +2682,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v42 := r.Intn(100)
 		this.Field3 = make([]int32, v42)
 		for i := 0; i < v42; i++ {
-			this.Field3[i] = r.Int31()
+			this.Field3[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -2692,7 +2692,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v43 := r.Intn(100)
 		this.Field4 = make([]int64, v43)
 		for i := 0; i < v43; i++ {
-			this.Field4[i] = r.Int63()
+			this.Field4[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field4[i] *= -1
 			}
@@ -2702,21 +2702,21 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v44 := r.Intn(100)
 		this.Field5 = make([]uint32, v44)
 		for i := 0; i < v44; i++ {
-			this.Field5[i] = r.Uint32()
+			this.Field5[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v45 := r.Intn(100)
 		this.Field6 = make([]uint64, v45)
 		for i := 0; i < v45; i++ {
-			this.Field6[i] = uint64(r.Uint32())
+			this.Field6[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v46 := r.Intn(100)
 		this.Field7 = make([]int32, v46)
 		for i := 0; i < v46; i++ {
-			this.Field7[i] = r.Int31()
+			this.Field7[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
 			}
@@ -2726,7 +2726,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v47 := r.Intn(100)
 		this.Field8 = make([]int64, v47)
 		for i := 0; i < v47; i++ {
-			this.Field8[i] = r.Int63()
+			this.Field8[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field8[i] *= -1
 			}
@@ -2736,14 +2736,14 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v48 := r.Intn(100)
 		this.Field9 = make([]uint32, v48)
 		for i := 0; i < v48; i++ {
-			this.Field9[i] = r.Uint32()
+			this.Field9[i] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v49 := r.Intn(100)
 		this.Field10 = make([]int32, v49)
 		for i := 0; i < v49; i++ {
-			this.Field10[i] = r.Int31()
+			this.Field10[i] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Field10[i] *= -1
 			}
@@ -2753,14 +2753,14 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v50 := r.Intn(100)
 		this.Field11 = make([]uint64, v50)
 		for i := 0; i < v50; i++ {
-			this.Field11[i] = uint64(r.Uint32())
+			this.Field11[i] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v51 := r.Intn(100)
 		this.Field12 = make([]int64, v51)
 		for i := 0; i < v51; i++ {
-			this.Field12[i] = r.Int63()
+			this.Field12[i] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Field12[i] *= -1
 			}
@@ -2770,7 +2770,7 @@ func NewPopulatedNinRepPackedNativeUnsafe(r randyPacked, easy bool) *NinRepPacke
 		v52 := r.Intn(100)
 		this.Field13 = make([]bool, v52)
 		for i := 0; i < v52; i++ {
-			this.Field13[i] = bool(r.Intn(2) == 0)
+			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {

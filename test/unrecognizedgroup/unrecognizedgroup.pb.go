@@ -141,7 +141,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			v |= uint64(data[index-3]) << 40
 			v |= uint64(data[index-2]) << 48
 			v |= uint64(data[index-1]) << 56
-			v2 := math.Float64frombits(v)
+			v2 := float64(math.Float64frombits(v))
 			m.Field3 = append(m.Field3, v2)
 		case 5:
 			if wireType != 2 {
@@ -372,7 +372,7 @@ func sozUnrecognizedgroup(x uint64) (n int) {
 func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 	this := &NewNoGroup{}
 	if r.Intn(10) != 0 {
-		v1 := r.Int63()
+		v1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v1 *= -1
 		}
@@ -382,7 +382,7 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 		v2 := r.Intn(100)
 		this.Field3 = make([]float64, v2)
 		for i := 0; i < v2; i++ {
-			this.Field3[i] = r.Float64()
+			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -400,7 +400,7 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
-		v3 := r.Int63()
+		v3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v3 *= -1
 		}
@@ -415,7 +415,7 @@ func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup {
 	this := &OldWithGroup{}
 	if r.Intn(10) != 0 {
-		v4 := r.Int63()
+		v4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v4 *= -1
 		}
@@ -428,7 +428,7 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup
 		v5 := r.Intn(100)
 		this.Field3 = make([]float64, v5)
 		for i := 0; i < v5; i++ {
-			this.Field3[i] = r.Float64()
+			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -446,14 +446,14 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup
 func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group1 {
 	this := &OldWithGroup_Group1{}
 	if r.Intn(10) != 0 {
-		v6 := r.Int63()
+		v6 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v6 *= -1
 		}
 		this.Field1 = &v6
 	}
 	if r.Intn(10) != 0 {
-		v7 := r.Int31()
+		v7 := int32(r.Int31())
 		if r.Intn(2) == 0 {
 			v7 *= -1
 		}
@@ -463,7 +463,7 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWi
 		v8 := r.Intn(100)
 		this.Field3 = make([]float64, v8)
 		for i := 0; i < v8; i++ {
-			this.Field3[i] = r.Float64()
+			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
 			}
@@ -478,7 +478,7 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWi
 func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group2 {
 	this := &OldWithGroup_Group2{}
 	if r.Intn(10) != 0 {
-		v9 := r.Int63()
+		v9 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v9 *= -1
 		}
@@ -488,7 +488,7 @@ func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWi
 		v10 := r.Intn(100)
 		this.Field2 = make([]float64, v10)
 		for i := 0; i < v10; i++ {
-			this.Field2[i] = r.Float64()
+			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
 			}
@@ -1803,6 +1803,10 @@ func UnrecognizedgroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("moretags"), Number: func(v int32) *int32 { return &v }(65006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("casttype"), Number: func(v int32) *int32 { return &v }(65007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

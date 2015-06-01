@@ -1898,7 +1898,7 @@ func sozMapsproto2(x uint64) (n int) {
 func NewPopulatedFloatingPoint(r randyMapsproto2, easy bool) *FloatingPoint {
 	this := &FloatingPoint{}
 	if r.Intn(10) != 0 {
-		v1 := r.Float64()
+		v1 := float64(r.Float64())
 		if r.Intn(2) == 0 {
 			v1 *= -1
 		}
@@ -1917,7 +1917,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		this.StringToDoubleMap = make(map[string]float64)
 		for i := 0; i < v2; i++ {
 			v3 := randStringMapsproto2(r)
-			this.StringToDoubleMap[v3] = r.Float64()
+			this.StringToDoubleMap[v3] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.StringToDoubleMap[v3] *= -1
 			}
@@ -1928,7 +1928,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		this.StringToFloatMap = make(map[string]float32)
 		for i := 0; i < v4; i++ {
 			v5 := randStringMapsproto2(r)
-			this.StringToFloatMap[v5] = r.Float32()
+			this.StringToFloatMap[v5] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.StringToFloatMap[v5] *= -1
 			}
@@ -1938,8 +1938,8 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v6 := r.Intn(10)
 		this.Int32Map = make(map[int32]int32)
 		for i := 0; i < v6; i++ {
-			v7 := r.Int31()
-			this.Int32Map[v7] = r.Int31()
+			v7 := int32(r.Int31())
+			this.Int32Map[v7] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Int32Map[v7] *= -1
 			}
@@ -1949,8 +1949,8 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v8 := r.Intn(10)
 		this.Int64Map = make(map[int64]int64)
 		for i := 0; i < v8; i++ {
-			v9 := r.Int63()
-			this.Int64Map[v9] = r.Int63()
+			v9 := int64(r.Int63())
+			this.Int64Map[v9] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Int64Map[v9] *= -1
 			}
@@ -1960,24 +1960,24 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v10 := r.Intn(10)
 		this.Uint32Map = make(map[uint32]uint32)
 		for i := 0; i < v10; i++ {
-			v11 := r.Uint32()
-			this.Uint32Map[v11] = r.Uint32()
+			v11 := uint32(r.Uint32())
+			this.Uint32Map[v11] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v12 := r.Intn(10)
 		this.Uint64Map = make(map[uint64]uint64)
 		for i := 0; i < v12; i++ {
-			v13 := uint64(r.Uint32())
-			this.Uint64Map[v13] = uint64(r.Uint32())
+			v13 := uint64(uint64(r.Uint32()))
+			this.Uint64Map[v13] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v14 := r.Intn(10)
 		this.Sint32Map = make(map[int32]int32)
 		for i := 0; i < v14; i++ {
-			v15 := r.Int31()
-			this.Sint32Map[v15] = r.Int31()
+			v15 := int32(r.Int31())
+			this.Sint32Map[v15] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Sint32Map[v15] *= -1
 			}
@@ -1987,8 +1987,8 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v16 := r.Intn(10)
 		this.Sint64Map = make(map[int64]int64)
 		for i := 0; i < v16; i++ {
-			v17 := r.Int63()
-			this.Sint64Map[v17] = r.Int63()
+			v17 := int64(r.Int63())
+			this.Sint64Map[v17] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Sint64Map[v17] *= -1
 			}
@@ -1998,16 +1998,16 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v18 := r.Intn(10)
 		this.Fixed32Map = make(map[uint32]uint32)
 		for i := 0; i < v18; i++ {
-			v19 := r.Uint32()
-			this.Fixed32Map[v19] = r.Uint32()
+			v19 := uint32(r.Uint32())
+			this.Fixed32Map[v19] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(10) != 0 {
 		v20 := r.Intn(10)
 		this.Sfixed32Map = make(map[int32]int32)
 		for i := 0; i < v20; i++ {
-			v21 := r.Int31()
-			this.Sfixed32Map[v21] = r.Int31()
+			v21 := int32(r.Int31())
+			this.Sfixed32Map[v21] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Sfixed32Map[v21] *= -1
 			}
@@ -2017,16 +2017,16 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v22 := r.Intn(10)
 		this.Fixed64Map = make(map[uint64]uint64)
 		for i := 0; i < v22; i++ {
-			v23 := uint64(r.Uint32())
-			this.Fixed64Map[v23] = uint64(r.Uint32())
+			v23 := uint64(uint64(r.Uint32()))
+			this.Fixed64Map[v23] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v24 := r.Intn(10)
 		this.Sfixed64Map = make(map[int64]int64)
 		for i := 0; i < v24; i++ {
-			v25 := r.Int63()
-			this.Sfixed64Map[v25] = r.Int63()
+			v25 := int64(r.Int63())
+			this.Sfixed64Map[v25] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Sfixed64Map[v25] *= -1
 			}
@@ -2036,8 +2036,8 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v26 := r.Intn(10)
 		this.BoolMap = make(map[bool]bool)
 		for i := 0; i < v26; i++ {
-			v27 := bool(r.Intn(2) == 0)
-			this.BoolMap[v27] = bool(r.Intn(2) == 0)
+			v27 := bool(bool(r.Intn(2) == 0))
+			this.BoolMap[v27] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -3512,6 +3512,10 @@ func Mapsproto2Description() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("moretags"), Number: func(v int32) *int32 { return &v }(65006), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("casttype"), Number: func(v int32) *int32 { return &v }(65007), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

@@ -133,29 +133,44 @@ func (p *plugin) Init(g *generator.Generator) {
 	p.Generator = g
 }
 
-func value(typName string) string {
-	switch typName {
-	case "float64":
-		return "r.Float64()"
-	case "float32":
-		return "r.Float32()"
-	case "int64":
-		return "r.Int63()"
-	case "int32":
-		return "r.Int31()"
-	case "uint32":
-		return "r.Uint32()"
-	case "uint64":
-		return "uint64(r.Uint32())"
-	case "bool":
-		return `bool(r.Intn(2) == 0)`
+func value(typeName string, fieldType descriptor.FieldDescriptorProto_Type) string {
+	switch fieldType {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		return typeName + "(r.Float64())"
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		return typeName + "(r.Float32())"
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SINT64:
+		return typeName + "(r.Int63())"
+	case descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_FIXED64:
+		return typeName + "(uint64(r.Uint32()))"
+	case descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_SINT32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM:
+		return typeName + "(r.Int31())"
+	case descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_FIXED32:
+		return typeName + "(r.Uint32())"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		return typeName + `(bool(r.Intn(2) == 0))`
+	case descriptor.FieldDescriptorProto_TYPE_STRING,
+		descriptor.FieldDescriptorProto_TYPE_GROUP,
+		descriptor.FieldDescriptorProto_TYPE_MESSAGE,
+		descriptor.FieldDescriptorProto_TYPE_BYTES:
 	}
-	panic(fmt.Errorf("unexpected type %v", typName))
+	panic(fmt.Errorf("unexpected type %v", typeName))
 }
 
-func negative(typeName string) bool {
-	switch typeName {
-	case "uint32", "uint64", "bool":
+func negative(fieldType descriptor.FieldDescriptorProto_Type) bool {
+	switch fieldType {
+	case descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_BOOL:
 		return false
 	}
 	return true
@@ -220,7 +235,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		if mapkey.IsString() {
 			keyval = fmt.Sprintf("randString%v(r)", p.localName)
 		} else {
-			keyval = value(keytypName)
+			keyval = value(keytypName, mapkey.GetType())
 		}
 		if mapvalue.IsMessage() || p.IsGroup(field) {
 			s := `this.` + fieldname + `[` + keyval + `]` + ` = `
@@ -246,8 +261,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(s)
 		} else {
 			p.P(p.varGen.Next(), ` := `, keyval)
-			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypName))
-			if negative(valuetypName) {
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypName, mapvalue.GetType()))
+			if negative(mapvalue.GetType()) {
 				p.P(`if r.Intn(2) == 0 {`)
 				p.In()
 				p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] *= -1`)
@@ -361,8 +376,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
 				p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 				p.In()
-				p.P(`this.`, fieldname, `[i] = `, value(typName))
-				if negative(typName) {
+				p.P(`this.`, fieldname, `[i] = `, value(typName, field.GetType()))
+				if negative(field.GetType()) {
 					p.P(`if r.Intn(2) == 0 {`)
 					p.In()
 					p.P(`this.`, fieldname, `[i] *= -1`)
@@ -372,8 +387,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.Out()
 				p.P(`}`)
 			} else if !gogoproto.IsNullable(field) || proto3 {
-				p.P(`this.`, fieldname, ` = `, value(typName))
-				if negative(typName) {
+				p.P(`this.`, fieldname, ` = `, value(typName, field.GetType()))
+				if negative(field.GetType()) {
 					p.P(`if r.Intn(2) == 0 {`)
 					p.In()
 					p.P(`this.`, fieldname, ` *= -1`)
@@ -381,8 +396,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 					p.P(`}`)
 				}
 			} else {
-				p.P(p.varGen.Next(), ` := `, value(typName))
-				if negative(typName) {
+				p.P(p.varGen.Next(), ` := `, value(typName, field.GetType()))
+				if negative(field.GetType()) {
 					p.P(`if r.Intn(2) == 0 {`)
 					p.In()
 					p.P(p.varGen.Current(), ` *= -1`)

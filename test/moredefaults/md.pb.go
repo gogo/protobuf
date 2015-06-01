@@ -117,13 +117,13 @@ func NewPopulatedMoreDefaultsB(r randyMd, easy bool) *MoreDefaultsB {
 func NewPopulatedMoreDefaultsA(r randyMd, easy bool) *MoreDefaultsA {
 	this := &MoreDefaultsA{}
 	if r.Intn(10) != 0 {
-		v2 := r.Int63()
+		v2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v2 *= -1
 		}
 		this.Field1 = &v2
 	}
-	this.Field2 = r.Int63()
+	this.Field2 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field2 *= -1
 	}

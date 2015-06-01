@@ -45,9 +45,27 @@ func IsCustomType(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsCastType(field *google_protobuf.FieldDescriptorProto) bool {
+	typ := GetCastType(field)
+	if len(typ) > 0 {
+		return true
+	}
+	return false
+}
+
 func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, E_Customtype)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetCastType(field *google_protobuf.FieldDescriptorProto) string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Casttype)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}

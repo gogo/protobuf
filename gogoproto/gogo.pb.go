@@ -438,6 +438,14 @@ var E_Moretags = &proto.ExtensionDesc{
 	Tag:           "bytes,65006,opt,name=moretags",
 }
 
+var E_Casttype = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65007,
+	Name:          "gogoproto.casttype",
+	Tag:           "bytes,65007,opt,name=casttype",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -491,4 +499,5 @@ func init() {
 	proto.RegisterExtension(E_Customname)
 	proto.RegisterExtension(E_Jsontag)
 	proto.RegisterExtension(E_Moretags)
+	proto.RegisterExtension(E_Casttype)
 }

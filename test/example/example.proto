@@ -75,3 +75,7 @@ message R {
 	option (gogoproto.goproto_unrecognized) = false;
 	optional uint32 recognized = 1;
 }
+
+message CastType {
+	optional int64 Int32 = 1 [(gogoproto.casttype)="int32"];
+}
