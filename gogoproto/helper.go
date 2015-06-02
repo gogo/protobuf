@@ -193,3 +193,7 @@ func HasUnrecognized(file *google_protobuf.FileDescriptorProto, message *google_
 func IsProto3(file *google_protobuf.FileDescriptorProto) bool {
 	return file.GetSyntax() == "proto3"
 }
+
+func ImportsGoGoProto(file *google_protobuf.FileDescriptorProto) bool {
+	return proto.GetBoolExtension(file.Options, E_GogoprotoImport, true)
+}

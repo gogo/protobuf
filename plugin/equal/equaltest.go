@@ -46,6 +46,9 @@ func (p *test) Generate(imports generator.PluginImports, file *generator.FileDes
 	timePkg := imports.NewImport("time")
 	testingPkg := imports.NewImport("testing")
 	protoPkg := imports.NewImport("github.com/gogo/protobuf/proto")
+	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+		protoPkg = imports.NewImport("github.com/golang/protobuf/proto")
+	}
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		if !gogoproto.HasVerboseEqual(file.FileDescriptorProto, message.DescriptorProto) {

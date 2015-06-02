@@ -66,6 +66,7 @@ extend google.protobuf.FileOptions {
 
 	optional bool goproto_extensions_map_all = 63025;
 	optional bool goproto_unrecognized_all = 63026;
+	optional bool gogoproto_import = 63027;
 }
 
 extend google.protobuf.MessageOptions {
