@@ -1613,6 +1613,11 @@ var methodNames = [...]string{
 	"ExtensionRangeArray",
 	"ExtensionMap",
 	"Descriptor",
+	"Size",
+	"MarshalTo",
+	"Equal",
+	"VerboseEqual",
+	"GoString",
 }
 
 // Generate the type and default constant definitions for this Descriptor.

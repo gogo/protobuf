@@ -145,6 +145,11 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 	if gogoproto.IsEmbed(field) {
 		fieldname = EmbedFieldName(goTyp)
 	}
+	for _, f := range methodNames {
+		if f == fieldname {
+			return fieldname + "_"
+		}
+	}
 	return fieldname
 }
 
