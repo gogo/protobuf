@@ -55,7 +55,7 @@ extend google.protobuf.FileOptions {
 	optional bool benchgen_all = 63016;
 	optional bool marshaler_all = 63017;
 	optional bool unmarshaler_all = 63018;
-	optional bool bufferto_all = 63019;
+
 	optional bool sizer_all = 63020;
 
 	optional bool goproto_enum_stringer_all = 63021;
@@ -84,7 +84,7 @@ extend google.protobuf.MessageOptions {
 	optional bool benchgen = 64016;
 	optional bool marshaler = 64017;
 	optional bool unmarshaler = 64018;
-	optional bool bufferto = 64019;
+
 	optional bool sizer = 64020;
 
 	optional bool unsafe_marshaler = 64023;

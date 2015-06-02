@@ -29824,10 +29824,6 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("bufferto_all"), Number: func(v int32) *int32 { return &v }(63019), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
 	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("sizer_all"), Number: func(v int32) *int32 { return &v }(63020), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
@@ -29909,10 +29905,6 @@ func ThetestDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("unmarshaler"), Number: func(v int32) *int32 { return &v }(64018), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(8), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("bufferto"), Number: func(v int32) *int32 { return &v }(64019), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v

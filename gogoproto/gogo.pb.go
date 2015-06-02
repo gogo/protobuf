@@ -166,14 +166,6 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 	Tag:           "varint,63018,opt,name=unmarshaler_all",
 }
 
-var E_BuffertoAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
-	ExtensionType: (*bool)(nil),
-	Field:         63019,
-	Name:          "gogoproto.bufferto_all",
-	Tag:           "varint,63019,opt,name=bufferto_all",
-}
-
 var E_SizerAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -342,14 +334,6 @@ var E_Unmarshaler = &proto.ExtensionDesc{
 	Tag:           "varint,64018,opt,name=unmarshaler",
 }
 
-var E_Bufferto = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
-	ExtensionType: (*bool)(nil),
-	Field:         64019,
-	Name:          "gogoproto.bufferto",
-	Tag:           "varint,64019,opt,name=bufferto",
-}
-
 var E_Sizer = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -457,7 +441,6 @@ func init() {
 	proto.RegisterExtension(E_BenchgenAll)
 	proto.RegisterExtension(E_MarshalerAll)
 	proto.RegisterExtension(E_UnmarshalerAll)
-	proto.RegisterExtension(E_BuffertoAll)
 	proto.RegisterExtension(E_SizerAll)
 	proto.RegisterExtension(E_GoprotoEnumStringerAll)
 	proto.RegisterExtension(E_EnumStringerAll)
@@ -479,7 +462,6 @@ func init() {
 	proto.RegisterExtension(E_Benchgen)
 	proto.RegisterExtension(E_Marshaler)
 	proto.RegisterExtension(E_Unmarshaler)
-	proto.RegisterExtension(E_Bufferto)
 	proto.RegisterExtension(E_Sizer)
 	proto.RegisterExtension(E_UnsafeMarshaler)
 	proto.RegisterExtension(E_UnsafeUnmarshaler)
