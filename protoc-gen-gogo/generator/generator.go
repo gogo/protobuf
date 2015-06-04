@@ -1185,7 +1185,11 @@ func (g *Generator) generateImports() {
 	// do, which is tricky when there's a plugin, just import it and
 	// reference it later. The same argument applies to the math package,
 	// for handling bit patterns for floating-point numbers.
-	g.PrintImport(g.Pkg["proto"], g.ImportPrefix+"github.com/gogo/protobuf/proto")
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+		g.PrintImport(g.Pkg["proto"], g.ImportPrefix+"github.com/gogo/protobuf/proto")
+	} else {
+		g.PrintImport(g.Pkg["proto"], g.ImportPrefix+"github.com/golang/protobuf/proto")
+	}
 	if !g.file.proto3 {
 		g.PrintImport(g.Pkg["math"], "math")
 	}

@@ -129,6 +129,9 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
+	}
 	sortPkg := p.NewImport("sort")
 	strconvPkg := p.NewImport("strconv")
 	reflectPkg := p.NewImport("reflect")

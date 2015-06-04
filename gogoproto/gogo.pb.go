@@ -222,6 +222,14 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 	Tag:           "varint,63026,opt,name=goproto_unrecognized_all",
 }
 
+var E_GogoprotoImport = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63027,
+	Name:          "gogoproto.gogoproto_import",
+	Tag:           "varint,63027,opt,name=gogoproto_import",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -448,6 +456,7 @@ func init() {
 	proto.RegisterExtension(E_UnsafeUnmarshalerAll)
 	proto.RegisterExtension(E_GoprotoExtensionsMapAll)
 	proto.RegisterExtension(E_GoprotoUnrecognizedAll)
+	proto.RegisterExtension(E_GogoprotoImport)
 	proto.RegisterExtension(E_GoprotoGetters)
 	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)

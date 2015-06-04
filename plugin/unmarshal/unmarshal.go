@@ -789,6 +789,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.unsafePkg = p.NewImport("unsafe")
 	fmtPkg := p.NewImport("fmt")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
+	}
 
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
