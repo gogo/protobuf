@@ -80,6 +80,7 @@ regenerate:
 	make -C test/custombytesnonstruct regenerate
 	make -C test/required regenerate
 	make -C vanity/test regenerate
+	make -C test/sizeunderscore regenerate
 	make gofmt
 
 tests:
@@ -112,6 +113,7 @@ tests:
 	go test -v ./test/custombytesnonstruct
 	go test -v ./test/required
 	go test -v ./vanity/test
+	go test -v ./test/sizeunderscore
 	make vet
 
 vet:
