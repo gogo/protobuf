@@ -32,6 +32,10 @@ install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
+	go install ./protoc-gen-gofast
+	go install ./protoc-gen-gogofast
+	go install ./protoc-gen-gogofaster
+	go install ./protoc-gen-gogoslick
 	go install ./fieldpath/fieldpath-gen
 	go install ./fieldpath
 	go install ./pbpath

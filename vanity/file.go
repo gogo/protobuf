@@ -148,3 +148,7 @@ func TurnOffGoExtensionsMapAll(file *descriptor.FileDescriptorProto) {
 func TurnOffGoUnrecognizedAll(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_GoprotoUnrecognizedAll, false)(file)
 }
+
+func TurnOffGogoImport(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_GogoprotoImport, false)(file)
+}
