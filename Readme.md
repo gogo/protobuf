@@ -1,8 +1,28 @@
 Protocol Buffers for Go with Gadgets
 
-Please visit the [homepage](http://gogo.github.io) for documentation
-
 [![Build Status](https://drone.io/github.com/gogo/protobuf/status.png)](https://drone.io/github.com/gogo/protobuf/latest)
+
+# Getting Started (Give me the speed I don't care about the rest)
+
+Install the protoc-gen-gofast binary
+
+    go get github.com/gogo/protobuf/protoc-gen-gofast
+
+Use it to generate faster marshaling and unmarshaling go code for you protocol buffers.
+
+    protoc -gofast_out=. myproto.proto
+
+# Getting started (I have heard about fields without pointers and more code generation)
+
+Other binaries are also included:
+    
+    protoc-gen-gogofast (same as gofast, but imports gogoprotobuf)
+    protoc-gen-gogofaster (same as gogofast, without XXX_unrecognized, less pointer fields)
+    protoc-gen-gogoslick (same as gogofaster, but with generated string, gostring and equal methods)
+
+# Getting started (I want more customization power over fields, speed, other serialization formats and tests, etc.) 
+
+Please visit the [homepage](http://gogo.github.io) for more documentation.
 
 # Installation
 
