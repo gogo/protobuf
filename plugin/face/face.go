@@ -168,6 +168,9 @@ func (p *plugin) GetMapGoType(file *descriptor.FileDescriptorProto, field *descr
 func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
+	}
 	for _, message := range file.Messages() {
 		if !gogoproto.IsFace(file.FileDescriptorProto, message.DescriptorProto) {
 			continue

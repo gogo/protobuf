@@ -32,6 +32,10 @@ install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./protoc-gen-gogo
+	go install ./protoc-gen-gofast
+	go install ./protoc-gen-gogofast
+	go install ./protoc-gen-gogofaster
+	go install ./protoc-gen-gogoslick
 	go install ./fieldpath/fieldpath-gen
 	go install ./fieldpath
 	go install ./pbpath
@@ -76,6 +80,8 @@ regenerate:
 	make -C test/custombytesnonstruct regenerate
 	make -C test/required regenerate
 	make -C test/casttype regenerate
+	make -C vanity/test regenerate
+	make -C test/sizeunderscore regenerate
 	make gofmt
 
 tests:
@@ -108,6 +114,8 @@ tests:
 	go test -v ./test/custombytesnonstruct
 	go test -v ./test/required
 	go test -v ./test/casttype/...
+	go test -v ./vanity/test
+	go test -v ./test/sizeunderscore
 	make vet
 
 vet:
