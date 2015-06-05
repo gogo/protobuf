@@ -385,18 +385,14 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		if !p.unsafe {
+			p.P(`var v uint64`)
+			p.decodeFixed64("v", "uint64")
 			if repeated {
-				p.P(`var v uint64`)
-				p.decodeFixed64("v", "uint64")
 				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
 			} else if proto3 || !nullable {
-				p.P(`var v uint64`)
-				p.decodeFixed64("v", "uint64")
 				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float64frombits(v)`)
 			} else {
-				p.P(`var v uint64`)
-				p.decodeFixed64("v", "uint64")
 				p.P(`v2 := `, p.mathPkg.Use(), `.Float64frombits(v)`)
 				p.P(`m.`, fieldname, ` = &v2`)
 			}
@@ -415,18 +411,14 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 		if !p.unsafe {
+			p.P(`var v uint32`)
+			p.decodeFixed32("v", "uint32")
 			if repeated {
-				p.P(`var v uint32`)
-				p.decodeFixed32("v", "uint32")
 				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
 			} else if proto3 || !nullable {
-				p.P(`var v uint32`)
-				p.decodeFixed32("v", "uint32")
 				p.P(`m.`, fieldname, ` = `, p.mathPkg.Use(), `.Float32frombits(v)`)
 			} else {
-				p.P(`var v uint32`)
-				p.decodeFixed32("v", "uint32")
 				p.P(`v2 := `, p.mathPkg.Use(), `.Float32frombits(v)`)
 				p.P(`m.`, fieldname, ` = &v2`)
 			}
@@ -532,17 +524,13 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, field *descripto
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		p.P(`var v int`)
+		p.decodeVarint("v", "int")
 		if repeated {
-			p.P(`var v int`)
-			p.decodeVarint("v", "int")
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, bool(v != 0))`)
 		} else if proto3 || !nullable {
-			p.P(`var v int`)
-			p.decodeVarint("v", "int")
 			p.P(`m.`, fieldname, ` = bool(v != 0)`)
 		} else {
-			p.P(`var v int`)
-			p.decodeVarint("v", "int")
 			p.P(`b := bool(v != 0)`)
 			p.P(`m.`, fieldname, ` = &b`)
 		}
