@@ -1,8 +1,8 @@
-Protocol Buffers for Go with Gadgets
+# Protocol Buffers for Go with Gadgets
 
 [![Build Status](https://drone.io/github.com/gogo/protobuf/status.png)](https://drone.io/github.com/gogo/protobuf/latest)
 
-# Getting Started (Give me the speed I don't care about the rest)
+### Getting Started (Give me the speed I don't care about the rest)
 
 Install the protoc-gen-gofast binary
 
@@ -12,7 +12,7 @@ Use it to generate faster marshaling and unmarshaling go code for you protocol b
 
     protoc -gofast_out=. myproto.proto
 
-# Getting started (I have heard about fields without pointers and more code generation)
+### Getting started (I have heard about fields without pointers and more code generation)
 
 Other binaries are also included:
     
@@ -20,11 +20,11 @@ Other binaries are also included:
     protoc-gen-gogofaster (same as gogofast, without XXX_unrecognized, less pointer fields)
     protoc-gen-gogoslick (same as gogofaster, but with generated string, gostring and equal methods)
 
-# Getting started (I want more customization power over fields, speed, other serialization formats and tests, etc.) 
+### Getting started (I want more customization power over fields, speed, other serialization formats and tests, etc.) 
 
 Please visit the [homepage](http://gogo.github.io) for more documentation.
 
-# Installation
+### Installation
 
 To install it, you must first have Go (at least version 1.2.2) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).
 
@@ -36,10 +36,8 @@ Finally run:
     go get github.com/gogo/protobuf/protoc-gen-gogo
     go get github.com/gogo/protobuf/gogoproto
 
-# Proto3
+### Proto3
 
-Protocol Buffers 3 is currently only supported on the proto3 branch.
-When documentation for Protocol Buffers 3 is released and confidence is achieved this will be merged into the master branch.
-Currently the proto3 branch is quite stable.
+Proto3 is supported, but since a specification has not been released yet, this support is limited.
 
 
