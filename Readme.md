@@ -38,8 +38,6 @@ Finally run:
 
 ### Proto3
 
-Protocol Buffers 3 is currently only supported on the proto3 branch.
-When documentation for Protocol Buffers 3 is released and confidence is achieved this will be merged into the master branch.
-Currently the proto3 branch is quite stable.
+Proto3 is supported, but since a specification has not been released yet, this support is limited.
 
 
