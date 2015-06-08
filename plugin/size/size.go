@@ -117,12 +117,13 @@ package size
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"strconv"
-	"strings"
 )
 
 type size struct {
@@ -426,7 +427,19 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				if !gogoproto.IsCustomType(field) {
+				if gogoproto.IsCustomType(field) {
+					if repeated {
+						p.P(`for _, e := range m.`, fieldname, ` { `)
+						p.In()
+						p.P(`l=e.Size()`)
+						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+						p.Out()
+						p.P(`}`)
+					} else {
+						p.P(`l=m.`, fieldname, `.Size()`)
+						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+					}
+				} else {
 					if repeated {
 						p.P(`for _, b := range m.`, fieldname, ` { `)
 						p.In()
@@ -441,20 +454,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 						p.Out()
 						p.P(`}`)
+					} else if gogoproto.IsCastType(field) && nullable {
+						p.P(`l=len(*m.`, fieldname, `)`)
+						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 					} else {
 						p.P(`l=len(m.`, fieldname, `)`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					}
-				} else {
-					if repeated {
-						p.P(`for _, e := range m.`, fieldname, ` { `)
-						p.In()
-						p.P(`l=e.Size()`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-						p.Out()
-						p.P(`}`)
-					} else {
-						p.P(`l=m.`, fieldname, `.Size()`)
 						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 					}
 				}
