@@ -61,5 +61,6 @@ message Castaway {
 	optional uint64 MyUint64 = 4 [(gogoproto.nullable) = false, (gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.MyUint64Type"];
 	optional bytes MyBytes = 5 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.Bytes"];
 	optional bytes NormalBytes = 6;
+	repeated uint64 MyUint64s = 7 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.MyUint64Type"];
 }
 
