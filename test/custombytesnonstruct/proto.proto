@@ -1,3 +1,4 @@
+syntax = "proto2";
 package custombytesnonstruct;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
