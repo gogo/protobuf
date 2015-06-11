@@ -649,14 +649,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		if !gogoproto.IsCustomType(field) {
-			if repeated {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-index))`)
-				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[index:postIndex])`)
-			} else {
-				p.P(`m.`, fieldname, ` = append([]byte{}`, `, data[index:postIndex]...)`)
-			}
-		} else {
+		if gogoproto.IsCustomType(field) {
 			_, ctyp, err := generator.GetCustomType(field)
 			if err != nil {
 				panic(err)
@@ -683,6 +676,20 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.P(`return err`)
 				p.Out()
 				p.P(`}`)
+			}
+		} else {
+			if repeated {
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-index))`)
+				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[index:postIndex])`)
+			} else if gogoproto.IsCastType(field) && nullable {
+				_, ctyp, err := generator.GetCastType(field)
+				if err != nil {
+					panic(err)
+				}
+				p.P(`v := `, ctyp, `(data[index:postIndex])`)
+				p.P(`m.`, fieldname, ` = &v`)
+			} else {
+				p.P(`m.`, fieldname, ` = append([]byte{}`, `, data[index:postIndex]...)`)
 			}
 		}
 		p.P(`index = postIndex`)

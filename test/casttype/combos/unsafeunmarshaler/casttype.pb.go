@@ -43,7 +43,7 @@ type Castaway struct {
 	Int32            int32                                                 `protobuf:"varint,2,opt,casttype=int32" json:"Int32"`
 	MyUint64Ptr      *github_com_gogo_protobuf_test_casttype.MyUint64Type  `protobuf:"varint,3,opt,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64Ptr,omitempty"`
 	MyUint64         github_com_gogo_protobuf_test_casttype.MyUint64Type   `protobuf:"varint,4,opt,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64"`
-	MyBytes          github_com_gogo_protobuf_test_casttype.Bytes          `protobuf:"bytes,5,opt,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
+	MyBytes          *github_com_gogo_protobuf_test_casttype.Bytes         `protobuf:"bytes,5,opt,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
 	NormalBytes      []byte                                                `protobuf:"bytes,6,opt" json:"NormalBytes,omitempty"`
 	MyUint64S        []github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,7,rep,name=MyUint64s,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64s,omitempty"`
 	XXX_unrecognized []byte                                                `json:"-"`
@@ -157,7 +157,8 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MyBytes = append([]byte{}, data[index:postIndex]...)
+			v := github_com_gogo_protobuf_test_casttype.Bytes(data[index:postIndex])
+			m.MyBytes = &v
 			index = postIndex
 		case 6:
 			if wireType != 2 {
@@ -259,7 +260,7 @@ func (m *Castaway) Size() (n int) {
 	}
 	n += 1 + sovCasttype(uint64(m.MyUint64))
 	if m.MyBytes != nil {
-		l = len(m.MyBytes)
+		l = len(*m.MyBytes)
 		n += 1 + l + sovCasttype(uint64(l))
 	}
 	if m.NormalBytes != nil {
@@ -310,7 +311,7 @@ func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 	this.MyUint64 = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 	if r.Intn(10) != 0 {
 		v3 := r.Intn(100)
-		this.MyBytes = make(github_com_gogo_protobuf_test_casttype.Bytes, v3)
+		this.MyBytes = make(*github_com_gogo_protobuf_test_casttype.Bytes, v3)
 		for i := 0; i < v3; i++ {
 			this.MyBytes[i] = byte(r.Intn(256))
 		}
@@ -454,7 +455,7 @@ type CastawayFace interface {
 	GetInt32() int32
 	GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type
 	GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUint64Type
-	GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes
+	GetMyBytes() *github_com_gogo_protobuf_test_casttype.Bytes
 	GetNormalBytes() []byte
 	GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type
 }
@@ -483,7 +484,7 @@ func (this *Castaway) GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUin
 	return this.MyUint64
 }
 
-func (this *Castaway) GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes {
+func (this *Castaway) GetMyBytes() *github_com_gogo_protobuf_test_casttype.Bytes {
 	return this.MyBytes
 }
 

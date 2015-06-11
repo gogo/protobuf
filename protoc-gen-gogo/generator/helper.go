@@ -33,11 +33,12 @@ import (
 	"go/token"
 	"strings"
 
+	"path"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
-	"path"
 )
 
 func (d *FileDescriptor) Messages() []*Descriptor {
@@ -273,6 +274,10 @@ func splitCPackageType(ctype string) (packageName string, typ string) {
 	importStr := strings.Map(badToUnderscore, packageName)
 	typ = importStr + "." + typeName
 	return packageName, typ
+}
+
+func GetCastType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	return getCastType(field)
 }
 
 func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {

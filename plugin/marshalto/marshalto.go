@@ -129,13 +129,14 @@ package marshalto
 
 import (
 	"fmt"
+	"sort"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"sort"
-	"strconv"
-	"strings"
 )
 
 type NumGen interface {
@@ -973,29 +974,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 					p.P(`i+=n`, numGen.Current())
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				if !gogoproto.IsCustomType(field) {
-					if repeated {
-						p.P(`for _, b := range m.`, fieldname, ` {`)
-						p.In()
-						p.encodeKey(fieldNumber, wireType)
-						p.callVarint("len(b)")
-						p.P(`i+=copy(data[i:], b)`)
-						p.Out()
-						p.P(`}`)
-					} else if proto3 {
-						p.P(`if len(m.`, fieldname, `) > 0 {`)
-						p.In()
-						p.encodeKey(fieldNumber, wireType)
-						p.callVarint(`len(m.`, fieldname, `)`)
-						p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
-						p.Out()
-						p.P(`}`)
-					} else {
-						p.encodeKey(fieldNumber, wireType)
-						p.callVarint(`len(m.`, fieldname, `)`)
-						p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
-					}
-				} else {
+				if gogoproto.IsCustomType(field) {
 					if repeated {
 						p.P(`for _, msg := range m.`, fieldname, ` {`)
 						p.In()
@@ -1020,6 +999,36 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						p.Out()
 						p.P(`}`)
 						p.P(`i+=n`, numGen.Current())
+					}
+				} else {
+					if repeated {
+						p.P(`for _, b := range m.`, fieldname, ` {`)
+						p.In()
+						p.encodeKey(fieldNumber, wireType)
+						p.callVarint("len(b)")
+						p.P(`i+=copy(data[i:], b)`)
+						p.Out()
+						p.P(`}`)
+					} else if proto3 {
+						p.P(`if len(m.`, fieldname, `) > 0 {`)
+						p.In()
+						p.encodeKey(fieldNumber, wireType)
+						p.callVarint(`len(m.`, fieldname, `)`)
+						p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
+						p.Out()
+						p.P(`}`)
+					} else if gogoproto.IsCastType(field) && nullable {
+						_, ctyp, err := generator.GetCastType(field)
+						if err != nil {
+							panic(err)
+						}
+						p.encodeKey(fieldNumber, wireType)
+						p.callVarint(`len(*m.`, fieldname, `)`)
+						p.P(`i+=copy(`, ctyp, `(data[i:]), *m.`, fieldname, `)`)
+					} else {
+						p.encodeKey(fieldNumber, wireType)
+						p.callVarint(`len(m.`, fieldname, `)`)
+						p.P(`i+=copy(data[i:], m.`, fieldname, `)`)
 					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_SINT32:

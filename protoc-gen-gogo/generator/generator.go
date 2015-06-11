@@ -1504,7 +1504,7 @@ func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool) bool {
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
 	}
-	if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field) {
+	if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
 		return false
 	}
 	if !gogoproto.IsNullable(field) {
