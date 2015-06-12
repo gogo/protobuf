@@ -31,6 +31,7 @@ package vanity
 import (
 	fast "github.com/gogo/protobuf/vanity/test/fast"
 	faster "github.com/gogo/protobuf/vanity/test/faster"
+	gofast "github.com/gogo/protobuf/vanity/test/gofast"
 	slick "github.com/gogo/protobuf/vanity/test/slick"
 	"testing"
 )
@@ -61,4 +62,11 @@ func TestSlick(t *testing.T) {
 
 	_ = (&slick.A{}).GoString
 	_ = (&slick.A{}).String
+}
+
+func TestGoFast(t *testing.T) {
+	_ = (&gofast.A{}).Marshal
+	_ = (&gofast.A{}).MarshalTo
+	_ = (&gofast.A{}).Unmarshal
+	_ = (&gofast.A{}).Size
 }

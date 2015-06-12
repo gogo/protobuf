@@ -151,7 +151,7 @@ given to the unmarshal plugin, will generate the following code:
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skip(data[index:])
 			if err != nil {
 				return err
 			}
@@ -771,6 +771,10 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
+	p.localName = generator.FileName(file)
+	if p.unsafe {
+		p.localName += "Unsafe"
+	}
 
 	p.ioPkg = p.NewImport("io")
 	p.mathPkg = p.NewImport("math")
@@ -905,7 +909,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 			p.P(`index-=sizeOfWire`)
-			p.P(`skippy, err := `, protoPkg.Use(), `.Skip(data[index:])`)
+			p.P(`skippy, err := skip`, p.localName+`(data[index:])`)
 			p.P(`if err != nil {`)
 			p.In()
 			p.P(`return err`)
@@ -944,7 +948,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P(`index-=sizeOfWire`)
-		p.P(`skippy, err := `, protoPkg.Use(), `.Skip(data[index:])`)
+		p.P(`skippy, err := skip`, p.localName, `(data[index:])`)
 		p.P(`if err != nil {`)
 		p.In()
 		p.P(`return err`)
@@ -993,6 +997,91 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	if !p.atleastOne {
 		return
 	}
+
+	p.P(`func skip` + p.localName + `(data []byte) (n int, err error) {
+		l := len(data)
+		index := 0
+		for index < l {
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				wire |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			wireType := int(wire & 0x7)
+			switch wireType {
+			case 0:
+				for {
+					if index >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					index++
+					if data[index-1] < 0x80 {
+						break
+					}
+				}
+				return index, nil
+			case 1:
+				index += 8
+				return index, nil
+			case 2:
+				var length int
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					length |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				index += length
+				return index, nil
+			case 3:
+				for {
+					var wire uint64
+					var start int = index
+					for shift := uint(0); ; shift += 7 {
+						if index >= l {
+							return 0, io.ErrUnexpectedEOF
+						}
+						b := data[index]
+						index++
+						wire |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					wireType := int(wire & 0x7)
+					if wireType == 4 {
+						break
+					}
+					next, err := skip` + p.localName + `(data[start:])
+					if err != nil {
+						return 0, err
+					}
+					index = start + next
+				}
+				return index, nil
+			case 4:
+				return index, nil
+			case 5:
+				index += 4
+				return index, nil
+			default:
+				return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+			}
+		}
+		panic("unreachable")
+	}`)
 }
 
 func init() {

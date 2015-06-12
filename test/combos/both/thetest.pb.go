@@ -1434,7 +1434,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -1743,7 +1743,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -2050,7 +2050,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -2357,7 +2357,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -3046,7 +3046,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -3735,7 +3735,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -3976,7 +3976,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -4232,7 +4232,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -4481,7 +4481,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -4730,7 +4730,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -4841,7 +4841,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -4956,7 +4956,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5048,7 +5048,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5143,7 +5143,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5234,7 +5234,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5303,7 +5303,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5398,7 +5398,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5493,7 +5493,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5588,7 +5588,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -5796,7 +5796,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6025,7 +6025,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6140,7 +6140,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6264,7 +6264,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6388,7 +6388,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6479,7 +6479,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6570,7 +6570,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6650,7 +6650,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6774,7 +6774,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6841,7 +6841,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6932,7 +6932,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -6999,7 +6999,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7041,7 +7041,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7099,7 +7099,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7159,7 +7159,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7219,7 +7219,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7279,7 +7279,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7339,7 +7339,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7399,7 +7399,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7459,7 +7459,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7556,7 +7556,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7617,7 +7617,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -7639,7 +7639,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -7745,7 +7745,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -7767,7 +7767,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -7899,7 +7899,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -7987,7 +7987,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -8053,7 +8053,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -8167,7 +8167,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -8476,7 +8476,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -8543,7 +8543,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -8831,7 +8831,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -9140,7 +9140,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -9447,7 +9447,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -9701,7 +9701,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -9848,7 +9848,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -9963,7 +9963,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10040,7 +10040,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10101,7 +10101,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -10120,7 +10120,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 					}
 				}
 				index -= sizeOfWire
-				skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+				skippy, err := skipThetest(data[index:])
 				if err != nil {
 					return err
 				}
@@ -10187,7 +10187,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10277,7 +10277,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10337,7 +10337,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10426,7 +10426,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10486,7 +10486,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 				}
 			}
 			index -= sizeOfWire
-			skippy, err := github_com_gogo_protobuf_proto.Skip(data[index:])
+			skippy, err := skipThetest(data[index:])
 			if err != nil {
 				return err
 			}
@@ -10498,6 +10498,90 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 	}
 
 	return nil
+}
+func skipThetest(data []byte) (n int, err error) {
+	l := len(data)
+	index := 0
+	for index < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if index >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := data[index]
+			index++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for {
+				if index >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				index++
+				if data[index-1] < 0x80 {
+					break
+				}
+			}
+			return index, nil
+		case 1:
+			index += 8
+			return index, nil
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if index >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := data[index]
+				index++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			index += length
+			return index, nil
+		case 3:
+			for {
+				var wire uint64
+				var start int = index
+				for shift := uint(0); ; shift += 7 {
+					if index >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := data[index]
+					index++
+					wire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				wireType := int(wire & 0x7)
+				if wireType == 4 {
+					break
+				}
+				next, err := skipThetest(data[start:])
+				if err != nil {
+					return 0, err
+				}
+				index = start + next
+			}
+			return index, nil
+		case 4:
+			return index, nil
+		case 5:
+			index += 4
+			return index, nil
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+	}
+	panic("unreachable")
 }
 func (this *NinOptNativeUnion) GetValue() interface{} {
 	if this.Field1 != nil {
