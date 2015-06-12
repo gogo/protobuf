@@ -499,7 +499,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	}
 
 	g.ImportMap = make(map[string]string)
-	pluginList := "" // Default list of plugin names to enable (empty means all).
+	pluginList := "none" // Default list of plugin names to enable (empty means all).
 	for k, v := range g.Param {
 		switch k {
 		case "import_prefix":
@@ -515,6 +515,14 @@ func (g *Generator) CommandLineParameters(parameter string) {
 		}
 	}
 
+	if pluginList == "" {
+		return
+	}
+	if pluginList == "none" {
+		pluginList = ""
+	}
+	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck"}
+	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
 		enabled := make(map[string]bool)
