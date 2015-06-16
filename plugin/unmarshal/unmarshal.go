@@ -1005,7 +1005,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			var wire uint64
 			for shift := uint(0); ; shift += 7 {
 				if index >= l {
-					return 0, io.ErrUnexpectedEOF
+					return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 				}
 				b := data[index]
 				index++
@@ -1019,7 +1019,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			case 0:
 				for {
 					if index >= l {
-						return 0, io.ErrUnexpectedEOF
+						return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 					}
 					index++
 					if data[index-1] < 0x80 {
@@ -1034,7 +1034,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				var length int
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
-						return 0, io.ErrUnexpectedEOF
+						return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 					}
 					b := data[index]
 					index++
@@ -1051,7 +1051,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					var start int = index
 					for shift := uint(0); ; shift += 7 {
 						if index >= l {
-							return 0, io.ErrUnexpectedEOF
+							return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 						}
 						b := data[index]
 						index++
@@ -1077,7 +1077,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				index += 4
 				return index, nil
 			default:
-				return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+				return 0, ` + fmtPkg.Use() + `.Errorf("proto: illegal wireType %d", wireType)
 			}
 		}
 		panic("unreachable")

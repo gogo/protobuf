@@ -82,6 +82,7 @@ regenerate:
 	make -C vanity/test regenerate
 	make -C test/sizeunderscore regenerate
 	make -C test/issue34 regenerate
+	make -C test/empty-issue70 regenerate
 	make gofmt
 
 tests:
@@ -116,6 +117,7 @@ tests:
 	go test -v ./vanity/test
 	go test -v ./test/sizeunderscore
 	go test -v ./test/issue34
+	go test -v ./test/empty-issue70
 	make vet
 
 vet:
