@@ -111,15 +111,15 @@ func init() {
 }
 func (m *FloatingPoint) Unmarshal(data []byte) error {
 	l := len(data)
-	index := 0
-	for index < l {
+	iNdEx := 0
+	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
-			if index >= l {
+			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[index]
-			index++
+			b := data[iNdEx]
+			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
@@ -133,18 +133,18 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
 			}
 			var v uint64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			v = uint64(data[index-8])
-			v |= uint64(data[index-7]) << 8
-			v |= uint64(data[index-6]) << 16
-			v |= uint64(data[index-5]) << 24
-			v |= uint64(data[index-4]) << 32
-			v |= uint64(data[index-3]) << 40
-			v |= uint64(data[index-2]) << 48
-			v |= uint64(data[index-1]) << 56
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
 			v2 := math.Float64frombits(v)
 			m.F = &v2
 		default:
@@ -156,16 +156,16 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			index -= sizeOfWire
-			skippy, err := skipMapsproto2(data[index:])
+			iNdEx -= sizeOfWire
+			skippy, err := skipMapsproto2(data[iNdEx:])
 			if err != nil {
 				return err
 			}
-			if (index + skippy) > l {
+			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
-			index += skippy
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
 		}
 	}
 
@@ -173,15 +173,15 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 }
 func (m *AllMaps) Unmarshal(data []byte) error {
 	l := len(data)
-	index := 0
-	for index < l {
+	iNdEx := 0
+	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
-			if index >= l {
+			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[index]
-			index++
+			b := data[iNdEx]
+			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
@@ -196,27 +196,27 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -224,80 +224,80 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvaluetemp uint64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			mapvaluetemp = uint64(data[index-8])
-			mapvaluetemp |= uint64(data[index-7]) << 8
-			mapvaluetemp |= uint64(data[index-6]) << 16
-			mapvaluetemp |= uint64(data[index-5]) << 24
-			mapvaluetemp |= uint64(data[index-4]) << 32
-			mapvaluetemp |= uint64(data[index-3]) << 40
-			mapvaluetemp |= uint64(data[index-2]) << 48
-			mapvaluetemp |= uint64(data[index-1]) << 56
+			iNdEx += 8
+			mapvaluetemp = uint64(data[iNdEx-8])
+			mapvaluetemp |= uint64(data[iNdEx-7]) << 8
+			mapvaluetemp |= uint64(data[iNdEx-6]) << 16
+			mapvaluetemp |= uint64(data[iNdEx-5]) << 24
+			mapvaluetemp |= uint64(data[iNdEx-4]) << 32
+			mapvaluetemp |= uint64(data[iNdEx-3]) << 40
+			mapvaluetemp |= uint64(data[iNdEx-2]) << 48
+			mapvaluetemp |= uint64(data[iNdEx-1]) << 56
 			mapvalue := math.Float64frombits(mapvaluetemp)
 			if m.StringToDoubleMap == nil {
 				m.StringToDoubleMap = make(map[string]float64)
 			}
 			m.StringToDoubleMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StringToFloatMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -305,76 +305,76 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvaluetemp uint32
-			if (index + 4) > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 4
-			mapvaluetemp = uint32(data[index-4])
-			mapvaluetemp |= uint32(data[index-3]) << 8
-			mapvaluetemp |= uint32(data[index-2]) << 16
-			mapvaluetemp |= uint32(data[index-1]) << 24
+			iNdEx += 4
+			mapvaluetemp = uint32(data[iNdEx-4])
+			mapvaluetemp |= uint32(data[iNdEx-3]) << 8
+			mapvaluetemp |= uint32(data[iNdEx-2]) << 16
+			mapvaluetemp |= uint32(data[iNdEx-1]) << 24
 			mapvalue := math.Float32frombits(mapvaluetemp)
 			if m.StringToFloatMap == nil {
 				m.StringToFloatMap = make(map[string]float32)
 			}
 			m.StringToFloatMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Int32Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -382,11 +382,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkey |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -394,11 +394,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -406,11 +406,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue int32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvalue |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -420,34 +420,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Int32Map = make(map[int32]int32)
 			}
 			m.Int32Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Int64Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -455,11 +455,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey int64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkey |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -467,11 +467,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -479,11 +479,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue int64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvalue |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -493,34 +493,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Int64Map = make(map[int64]int64)
 			}
 			m.Int64Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Uint32Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -528,11 +528,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey uint32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkey |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -540,11 +540,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -552,11 +552,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue uint32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvalue |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -566,34 +566,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Uint32Map = make(map[uint32]uint32)
 			}
 			m.Uint32Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Uint64Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -601,11 +601,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -613,11 +613,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -625,11 +625,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvalue |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -639,34 +639,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Uint64Map = make(map[uint64]uint64)
 			}
 			m.Uint64Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 7:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sint32Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -674,11 +674,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp int32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkeytemp |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -688,11 +688,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := int32(mapkeytemp)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -700,11 +700,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp int32
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvaluetemp |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -716,34 +716,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Sint32Map = make(map[int32]int32)
 			}
 			m.Sint32Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 8:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sint64Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -751,11 +751,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkeytemp |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -765,11 +765,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := int64(mapkeytemp)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -777,11 +777,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvaluetemp |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -793,318 +793,318 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.Sint64Map = make(map[int64]int64)
 			}
 			m.Sint64Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 9:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Fixed32Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapkey uint32
-			if (index + 4) > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 4
-			mapkey = uint32(data[index-4])
-			mapkey |= uint32(data[index-3]) << 8
-			mapkey |= uint32(data[index-2]) << 16
-			mapkey |= uint32(data[index-1]) << 24
+			iNdEx += 4
+			mapkey = uint32(data[iNdEx-4])
+			mapkey |= uint32(data[iNdEx-3]) << 8
+			mapkey |= uint32(data[iNdEx-2]) << 16
+			mapkey |= uint32(data[iNdEx-1]) << 24
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvalue uint32
-			if (index + 4) > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 4
-			mapvalue = uint32(data[index-4])
-			mapvalue |= uint32(data[index-3]) << 8
-			mapvalue |= uint32(data[index-2]) << 16
-			mapvalue |= uint32(data[index-1]) << 24
+			iNdEx += 4
+			mapvalue = uint32(data[iNdEx-4])
+			mapvalue |= uint32(data[iNdEx-3]) << 8
+			mapvalue |= uint32(data[iNdEx-2]) << 16
+			mapvalue |= uint32(data[iNdEx-1]) << 24
 			if m.Fixed32Map == nil {
 				m.Fixed32Map = make(map[uint32]uint32)
 			}
 			m.Fixed32Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 10:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sfixed32Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapkey int32
-			if (index + 4) > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 4
-			mapkey = int32(data[index-4])
-			mapkey |= int32(data[index-3]) << 8
-			mapkey |= int32(data[index-2]) << 16
-			mapkey |= int32(data[index-1]) << 24
+			iNdEx += 4
+			mapkey = int32(data[iNdEx-4])
+			mapkey |= int32(data[iNdEx-3]) << 8
+			mapkey |= int32(data[iNdEx-2]) << 16
+			mapkey |= int32(data[iNdEx-1]) << 24
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvalue int32
-			if (index + 4) > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 4
-			mapvalue = int32(data[index-4])
-			mapvalue |= int32(data[index-3]) << 8
-			mapvalue |= int32(data[index-2]) << 16
-			mapvalue |= int32(data[index-1]) << 24
+			iNdEx += 4
+			mapvalue = int32(data[iNdEx-4])
+			mapvalue |= int32(data[iNdEx-3]) << 8
+			mapvalue |= int32(data[iNdEx-2]) << 16
+			mapvalue |= int32(data[iNdEx-1]) << 24
 			if m.Sfixed32Map == nil {
 				m.Sfixed32Map = make(map[int32]int32)
 			}
 			m.Sfixed32Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 11:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Fixed64Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapkey uint64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			mapkey = uint64(data[index-8])
-			mapkey |= uint64(data[index-7]) << 8
-			mapkey |= uint64(data[index-6]) << 16
-			mapkey |= uint64(data[index-5]) << 24
-			mapkey |= uint64(data[index-4]) << 32
-			mapkey |= uint64(data[index-3]) << 40
-			mapkey |= uint64(data[index-2]) << 48
-			mapkey |= uint64(data[index-1]) << 56
+			iNdEx += 8
+			mapkey = uint64(data[iNdEx-8])
+			mapkey |= uint64(data[iNdEx-7]) << 8
+			mapkey |= uint64(data[iNdEx-6]) << 16
+			mapkey |= uint64(data[iNdEx-5]) << 24
+			mapkey |= uint64(data[iNdEx-4]) << 32
+			mapkey |= uint64(data[iNdEx-3]) << 40
+			mapkey |= uint64(data[iNdEx-2]) << 48
+			mapkey |= uint64(data[iNdEx-1]) << 56
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvalue uint64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			mapvalue = uint64(data[index-8])
-			mapvalue |= uint64(data[index-7]) << 8
-			mapvalue |= uint64(data[index-6]) << 16
-			mapvalue |= uint64(data[index-5]) << 24
-			mapvalue |= uint64(data[index-4]) << 32
-			mapvalue |= uint64(data[index-3]) << 40
-			mapvalue |= uint64(data[index-2]) << 48
-			mapvalue |= uint64(data[index-1]) << 56
+			iNdEx += 8
+			mapvalue = uint64(data[iNdEx-8])
+			mapvalue |= uint64(data[iNdEx-7]) << 8
+			mapvalue |= uint64(data[iNdEx-6]) << 16
+			mapvalue |= uint64(data[iNdEx-5]) << 24
+			mapvalue |= uint64(data[iNdEx-4]) << 32
+			mapvalue |= uint64(data[iNdEx-3]) << 40
+			mapvalue |= uint64(data[iNdEx-2]) << 48
+			mapvalue |= uint64(data[iNdEx-1]) << 56
 			if m.Fixed64Map == nil {
 				m.Fixed64Map = make(map[uint64]uint64)
 			}
 			m.Fixed64Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 12:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sfixed64Map", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapkey int64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			mapkey = int64(data[index-8])
-			mapkey |= int64(data[index-7]) << 8
-			mapkey |= int64(data[index-6]) << 16
-			mapkey |= int64(data[index-5]) << 24
-			mapkey |= int64(data[index-4]) << 32
-			mapkey |= int64(data[index-3]) << 40
-			mapkey |= int64(data[index-2]) << 48
-			mapkey |= int64(data[index-1]) << 56
+			iNdEx += 8
+			mapkey = int64(data[iNdEx-8])
+			mapkey |= int64(data[iNdEx-7]) << 8
+			mapkey |= int64(data[iNdEx-6]) << 16
+			mapkey |= int64(data[iNdEx-5]) << 24
+			mapkey |= int64(data[iNdEx-4]) << 32
+			mapkey |= int64(data[iNdEx-3]) << 40
+			mapkey |= int64(data[iNdEx-2]) << 48
+			mapkey |= int64(data[iNdEx-1]) << 56
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			var mapvalue int64
-			if (index + 8) > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += 8
-			mapvalue = int64(data[index-8])
-			mapvalue |= int64(data[index-7]) << 8
-			mapvalue |= int64(data[index-6]) << 16
-			mapvalue |= int64(data[index-5]) << 24
-			mapvalue |= int64(data[index-4]) << 32
-			mapvalue |= int64(data[index-3]) << 40
-			mapvalue |= int64(data[index-2]) << 48
-			mapvalue |= int64(data[index-1]) << 56
+			iNdEx += 8
+			mapvalue = int64(data[iNdEx-8])
+			mapvalue |= int64(data[iNdEx-7]) << 8
+			mapvalue |= int64(data[iNdEx-6]) << 16
+			mapvalue |= int64(data[iNdEx-5]) << 24
+			mapvalue |= int64(data[iNdEx-4]) << 32
+			mapvalue |= int64(data[iNdEx-3]) << 40
+			mapvalue |= int64(data[iNdEx-2]) << 48
+			mapvalue |= int64(data[iNdEx-1]) << 56
 			if m.Sfixed64Map == nil {
 				m.Sfixed64Map = make(map[int64]int64)
 			}
 			m.Sfixed64Map[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 13:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field BoolMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1112,11 +1112,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapkeytemp |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1125,11 +1125,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := bool(mapkeytemp != 0)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1137,11 +1137,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvaluetemp |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1152,34 +1152,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.BoolMap = make(map[bool]bool)
 			}
 			m.BoolMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 14:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StringMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1187,29 +1187,29 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1217,54 +1217,54 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapvalue uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapvalue |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapvalue := index + int(stringLenmapvalue)
+			postStringIndexmapvalue := iNdEx + int(stringLenmapvalue)
 			if postStringIndexmapvalue > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapvalue := string(data[index:postStringIndexmapvalue])
-			index = postStringIndexmapvalue
+			mapvalue := string(data[iNdEx:postStringIndexmapvalue])
+			iNdEx = postStringIndexmapvalue
 			if m.StringMap == nil {
 				m.StringMap = make(map[string]string)
 			}
 			m.StringMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StringToBytesMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1272,29 +1272,29 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1302,55 +1302,55 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapbyteLen uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapbyteLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postbytesIndex := index + int(mapbyteLen)
+			postbytesIndex := iNdEx + int(mapbyteLen)
 			if postbytesIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			mapvalue := make([]byte, mapbyteLen)
-			copy(mapvalue, data[index:postbytesIndex])
-			index = postbytesIndex
+			copy(mapvalue, data[iNdEx:postbytesIndex])
+			iNdEx = postbytesIndex
 			if m.StringToBytesMap == nil {
 				m.StringToBytesMap = make(map[string][]byte)
 			}
 			m.StringToBytesMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 16:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StringToEnumMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1358,29 +1358,29 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1388,11 +1388,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue MapEnum
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapvalue |= (MapEnum(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1402,34 +1402,34 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				m.StringToEnumMap = make(map[string]MapEnum)
 			}
 			m.StringToEnumMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		case 17:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StringToMsgMap", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + msglen
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				keykey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1437,29 +1437,29 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLenmapkey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postStringIndexmapkey := index + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
-			mapkey := string(data[index:postStringIndexmapkey])
-			index = postStringIndexmapkey
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				valuekey |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
@@ -1467,30 +1467,30 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				mapmsglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postmsgIndex := index + mapmsglen
+			postmsgIndex := iNdEx + mapmsglen
 			if postmsgIndex > l {
 				return io.ErrUnexpectedEOF
 			}
 			mapvalue := &FloatingPoint{}
-			if err := mapvalue.Unmarshal(data[index:postmsgIndex]); err != nil {
+			if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
 				return err
 			}
-			index = postmsgIndex
+			iNdEx = postmsgIndex
 			if m.StringToMsgMap == nil {
 				m.StringToMsgMap = make(map[string]*FloatingPoint)
 			}
 			m.StringToMsgMap[mapkey] = mapvalue
-			index = postIndex
+			iNdEx = postIndex
 		default:
 			var sizeOfWire int
 			for {
@@ -1500,16 +1500,16 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			index -= sizeOfWire
-			skippy, err := skipMapsproto2(data[index:])
+			iNdEx -= sizeOfWire
+			skippy, err := skipMapsproto2(data[iNdEx:])
 			if err != nil {
 				return err
 			}
-			if (index + skippy) > l {
+			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[index:index+skippy]...)
-			index += skippy
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
 		}
 	}
 
@@ -1517,15 +1517,15 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 }
 func skipMapsproto2(data []byte) (n int, err error) {
 	l := len(data)
-	index := 0
-	for index < l {
+	iNdEx := 0
+	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
-			if index >= l {
+			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[index]
-			index++
+			b := data[iNdEx]
+			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
@@ -1535,43 +1535,43 @@ func skipMapsproto2(data []byte) (n int, err error) {
 		switch wireType {
 		case 0:
 			for {
-				if index >= l {
+				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				index++
-				if data[index-1] < 0x80 {
+				iNdEx++
+				if data[iNdEx-1] < 0x80 {
 					break
 				}
 			}
-			return index, nil
+			return iNdEx, nil
 		case 1:
-			index += 8
-			return index, nil
+			iNdEx += 8
+			return iNdEx, nil
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			index += length
-			return index, nil
+			iNdEx += length
+			return iNdEx, nil
 		case 3:
 			for {
 				var wire uint64
-				var start int = index
+				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
-					if index >= l {
+					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[index]
-					index++
+					b := data[iNdEx]
+					iNdEx++
 					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
@@ -1585,14 +1585,14 @@ func skipMapsproto2(data []byte) (n int, err error) {
 				if err != nil {
 					return 0, err
 				}
-				index = start + next
+				iNdEx = start + next
 			}
-			return index, nil
+			return iNdEx, nil
 		case 4:
-			return index, nil
+			return iNdEx, nil
 		case 5:
-			index += 4
-			return index, nil
+			iNdEx += 4
+			return iNdEx, nil
 		default:
 			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}

@@ -35,15 +35,15 @@ func init() {
 }
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
-	index := 0
-	for index < l {
+	iNdEx := 0
+	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
-			if index >= l {
+			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[index]
-			index++
+			b := data[iNdEx]
+			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
@@ -58,22 +58,22 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := index + int(stringLen)
+			postIndex := iNdEx + int(stringLen)
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Strings = string(data[index:postIndex])
-			index = postIndex
+			m.Strings = string(data[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			var sizeOfWire int
 			for {
@@ -83,15 +83,15 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			index -= sizeOfWire
-			skippy, err := skipVanity(data[index:])
+			iNdEx -= sizeOfWire
+			skippy, err := skipVanity(data[iNdEx:])
 			if err != nil {
 				return err
 			}
-			if (index + skippy) > l {
+			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			index += skippy
+			iNdEx += skippy
 		}
 	}
 
@@ -99,15 +99,15 @@ func (m *A) Unmarshal(data []byte) error {
 }
 func skipVanity(data []byte) (n int, err error) {
 	l := len(data)
-	index := 0
-	for index < l {
+	iNdEx := 0
+	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
-			if index >= l {
+			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[index]
-			index++
+			b := data[iNdEx]
+			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
@@ -117,43 +117,43 @@ func skipVanity(data []byte) (n int, err error) {
 		switch wireType {
 		case 0:
 			for {
-				if index >= l {
+				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				index++
-				if data[index-1] < 0x80 {
+				iNdEx++
+				if data[iNdEx-1] < 0x80 {
 					break
 				}
 			}
-			return index, nil
+			return iNdEx, nil
 		case 1:
-			index += 8
-			return index, nil
+			iNdEx += 8
+			return iNdEx, nil
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
-				if index >= l {
+				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[index]
-				index++
+				b := data[iNdEx]
+				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			index += length
-			return index, nil
+			iNdEx += length
+			return iNdEx, nil
 		case 3:
 			for {
 				var wire uint64
-				var start int = index
+				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
-					if index >= l {
+					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[index]
-					index++
+					b := data[iNdEx]
+					iNdEx++
 					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
@@ -167,14 +167,14 @@ func skipVanity(data []byte) (n int, err error) {
 				if err != nil {
 					return 0, err
 				}
-				index = start + next
+				iNdEx = start + next
 			}
-			return index, nil
+			return iNdEx, nil
 		case 4:
-			return index, nil
+			return iNdEx, nil
 		case 5:
-			index += 4
-			return index, nil
+			iNdEx += 4
+			return iNdEx, nil
 		default:
 			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}
