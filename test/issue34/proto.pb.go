@@ -123,6 +123,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
 func (m *FooWithRepeated) Unmarshal(data []byte) error {
@@ -188,5 +189,6 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 			index += skippy
 		}
 	}
+
 	return nil
 }
