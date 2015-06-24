@@ -36,10 +36,10 @@ import (
 func TestEmbedConflict(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "ec.proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove("ec.pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
@@ -54,17 +54,17 @@ func TestEmbedMarshaler(t *testing.T) {
 		t.Errorf("Expected WARNING: found non-[marshaler unsafe_marshaler] C with embedded marshaler D")
 	}
 	if err := os.Remove("em.pb.go"); err != nil {
-		panic(err)
+		t.Error(err)
 	}
 }
 
 func TestEmbedExtend(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "ee.proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove("ee.pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
@@ -73,10 +73,10 @@ func TestEmbedExtend(t *testing.T) {
 func TestCustomName(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "en.proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove("en.pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
@@ -85,10 +85,10 @@ func TestCustomName(t *testing.T) {
 func TestRepeatedEmbed(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "er.proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove("er.pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	dataStr := string(data)
@@ -102,10 +102,10 @@ func TestRepeatedEmbed(t *testing.T) {
 func TestTakesTooLongToDebug(t *testing.T) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "eb.proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove("eb.pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	dataStr := string(data)
