@@ -67,7 +67,9 @@ regenerate:
 	make -C test/enumstringer regenerate
 	make -C test/unmarshalmerge regenerate
 	make -C test/moredefaults regenerate
+	make -C test/multipkg regenerate
 	make -C test/issue8 regenerate
+	make -C test/issue34 regenerate
 	make -C test/enumprefix regenerate
 	make -C test/packed regenerate
 	make -C test/tags regenerate
