@@ -41,6 +41,7 @@ type MixMatch struct {
 	Old      []string
 	Filename string
 	Args     []string
+	Plugins  string
 }
 
 func (this MixMatch) Gen(folder string, news []string) {
@@ -64,7 +65,7 @@ func (this MixMatch) Gen(folder string, news []string) {
 	if err := ioutil.WriteFile(filepath.Join(folder, this.Filename), []byte(content), 0666); err != nil {
 		panic(err)
 	}
-	args := append([]string{"--gogo_out=."}, this.Args...)
+	args := append([]string{"--gogo_out=" + this.Plugins + "."}, this.Args...)
 	args = append(args, filepath.Join(folder, this.Filename))
 	var regenerate = exec.Command("protoc", args...)
 	out, err := regenerate.CombinedOutput()
@@ -77,6 +78,7 @@ func (this MixMatch) Gen(folder string, news []string) {
 var min = flag.String("version", "2.3.0", "minimum protoc version")
 var proto_path = flag.String("proto_path", ".", "")
 var def = flag.Bool("default", true, "generate the case where everything is false")
+var plugins = flag.String("plugins", "", "--gogo_out=plugins=<plugins>:.")
 
 func main() {
 	flag.Parse()
@@ -90,6 +92,10 @@ func main() {
 	if _, err := exec.LookPath("protoc"); err != nil {
 		panic("cannot find protoc in PATH")
 	}
+	pluginStr := ""
+	if len(*plugins) > 0 {
+		pluginStr = "plugins=" + *plugins + ":"
+	}
 	m := MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
@@ -99,6 +105,7 @@ func main() {
 		},
 		Filename: filename,
 		Args:     args,
+		Plugins:  pluginStr,
 	}
 	if *def {
 		m.Gen("./combos/neither/", []string{

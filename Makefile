@@ -82,12 +82,15 @@ regenerate:
 	make -C test/casttype regenerate
 	make -C vanity/test regenerate
 	make -C test/sizeunderscore regenerate
+	make -C test/issue34 regenerate
+	make -C test/empty-issue70 regenerate
+	make -C test/indeximport-issue72 regenerate
 	make gofmt
 
 tests:
 	go test -v ./test
 	go test -v ./proto
-	go test -v ./fieldpath
+	go test -v ./fieldpath/...
 	go test -v ./io
 	go test -v ./test/custom
 	go test -v ./test/embedconflict
@@ -116,6 +119,9 @@ tests:
 	go test -v ./test/casttype/...
 	go test -v ./vanity/test
 	go test -v ./test/sizeunderscore
+	go test -v ./test/issue34
+	go test -v ./test/empty-issue70
+	go test -v ./test/indeximport-issue72
 	make vet
 
 vet:

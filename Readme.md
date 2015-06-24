@@ -10,7 +10,7 @@ Install the protoc-gen-gofast binary
 
 Use it to generate faster marshaling and unmarshaling go code for you protocol buffers.
 
-    protoc -gofast_out=. myproto.proto
+    protoc --gofast_out=. myproto.proto
 
 ### Getting started (I have heard about fields without pointers and more code generation)
 
@@ -40,4 +40,10 @@ Finally run:
 
 Proto3 is supported, but since a specification has not been released yet, this support is limited.
 
+### GRPC
+
+It works the same as golang/protobuf, simply specify the plugin.
+Here is an example using gofast:
+
+    protoc --gofast_out=plugins=grpc:. my.proto
 

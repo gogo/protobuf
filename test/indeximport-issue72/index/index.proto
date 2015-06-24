@@ -1,5 +1,3 @@
-// Extensions for Protocol Buffers to create more go like structures.
-//
 // Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf/gogoproto
 //
@@ -26,39 +24,20 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package test
+syntax = "proto2";
 
-import (
-	fast "github.com/gogo/protobuf/vanity/test/fast"
-	faster "github.com/gogo/protobuf/vanity/test/faster"
-	slick "github.com/gogo/protobuf/vanity/test/slick"
-	"testing"
-)
+package index;
 
-func TestFast(t *testing.T) {
-	_ = (&fast.A{}).Marshal
-	_ = (&fast.A{}).MarshalTo
-	_ = (&fast.A{}).Unmarshal
-	_ = (&fast.A{}).Size
-}
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-func TestFaster(t *testing.T) {
-	_ = (&faster.A{}).Marshal
-	_ = (&faster.A{}).MarshalTo
-	_ = (&faster.A{}).Unmarshal
-	_ = (&faster.A{}).Size
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.testgen_all) = true;
 
-	_ = (&faster.A{}).Strings == ""
-}
-
-func TestSlick(t *testing.T) {
-	_ = (&slick.A{}).Marshal
-	_ = (&slick.A{}).MarshalTo
-	_ = (&slick.A{}).Unmarshal
-	_ = (&slick.A{}).Size
-
-	_ = (&slick.A{}).Strings == ""
-
-	_ = (&slick.A{}).GoString
-	_ = (&slick.A{}).String
+message IndexQuery {
+	optional string Key = 1;
+	optional string Value = 2;
 }
