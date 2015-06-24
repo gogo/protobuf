@@ -98,3 +98,20 @@ func TestRepeatedEmbed(t *testing.T) {
 		t.Errorf("Expected " + warning)
 	}
 }
+
+func TestTakesTooLongToDebug(t *testing.T) {
+	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", "eb.proto")
+	data, err := cmd.CombinedOutput()
+	if err == nil {
+		t.Errorf("Expected error")
+		if err := os.Remove("eb.pb.go"); err != nil {
+			panic(err)
+		}
+	}
+	dataStr := string(data)
+	t.Logf("received error = %v and output = %v", err, dataStr)
+	warning := "ERROR: found embedded bytes field"
+	if !strings.Contains(dataStr, warning) {
+		t.Errorf("Expected " + warning)
+	}
+}
