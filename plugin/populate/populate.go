@@ -509,7 +509,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		} else {
 			var maxFieldNumber int32
 			for _, field := range message.Field {
-				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || proto3 {
+				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
 					p.GenerateField(file, message, field)
 				} else {
 					p.P(`if r.Intn(10) != 0 {`)
