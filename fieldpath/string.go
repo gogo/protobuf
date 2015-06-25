@@ -30,9 +30,10 @@ package fieldpath
 
 import (
 	"fmt"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"io"
 	"strings"
+
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 )
 
 type stringWriter struct {
@@ -283,7 +284,7 @@ func protoSkip(data []byte) (n int, err error) {
 			return index, nil
 		case 3:
 			for {
-				var wire uint64
+				var innerWire uint64
 				var start int = index
 				for shift := uint(0); ; shift += 7 {
 					if index >= l {
@@ -291,13 +292,13 @@ func protoSkip(data []byte) (n int, err error) {
 					}
 					b := data[index]
 					index++
-					wire |= (uint64(b) & 0x7F) << shift
+					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				wireType := int(wire & 0x7)
-				if wireType == 4 {
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
 					break
 				}
 				next, err := protoSkip(data[start:])
