@@ -156,7 +156,7 @@ func skipVanity(data []byte) (n int, err error) {
 			return iNdEx, nil
 		case 3:
 			for {
-				var wire uint64
+				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if iNdEx >= l {
@@ -164,13 +164,13 @@ func skipVanity(data []byte) (n int, err error) {
 					}
 					b := data[iNdEx]
 					iNdEx++
-					wire |= (uint64(b) & 0x7F) << shift
+					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				wireType := int(wire & 0x7)
-				if wireType == 4 {
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
 					break
 				}
 				next, err := skipVanity(data[start:])

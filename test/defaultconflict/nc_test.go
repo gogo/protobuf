@@ -29,16 +29,17 @@ package defaultcheck
 import (
 	"os"
 	"os/exec"
+	"strings"
 	"testing"
 )
 
 func testDefaultConflict(t *testing.T, name string) {
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", name+".proto")
 	data, err := cmd.CombinedOutput()
-	if err == nil {
-		t.Errorf("Expected error")
+	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
+		t.Errorf("Expected error, got: %s", data)
 		if err := os.Remove(name + ".pb.go"); err != nil {
-			panic(err)
+			t.Error(err)
 		}
 	}
 	t.Logf("received expected error = %v and output = %v", err, string(data))
