@@ -434,7 +434,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			} else if repeated {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
-			} else if (!proto3 && nullable) || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
+			} else if ((!proto3 || field.IsMessage()) && nullable) || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
 			}
@@ -1117,7 +1117,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			default:
 				panic("not implemented")
 			}
-			if (required && nullable) || (!proto3 && nullable) || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
+			if (required && nullable) || ((!proto3 || field.IsMessage()) && nullable) || repeated || (*field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && !gogoproto.IsCustomType(field)) {
 				p.Out()
 				p.P(`}`)
 			}

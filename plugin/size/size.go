@@ -224,7 +224,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			if repeated {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
-			} else if (!proto3 && nullable) || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+			} else if ((!proto3 || field.IsMessage()) && nullable) || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
 			}
@@ -488,7 +488,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			default:
 				panic("not implemented")
 			}
-			if (!proto3 && nullable) || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+			if ((!proto3 || field.IsMessage()) && nullable) || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
 				p.Out()
 				p.P(`}`)
 			}
