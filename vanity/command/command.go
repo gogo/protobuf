@@ -36,7 +36,7 @@ import (
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 
-	_ "github.com/gogo/protobuf/protoc-gen-gogo/internal/grpc"
+	_ "github.com/gogo/protobuf/plugin/grpc"
 
 	_ "github.com/gogo/protobuf/plugin/defaultcheck"
 	_ "github.com/gogo/protobuf/plugin/description"

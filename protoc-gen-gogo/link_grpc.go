@@ -31,4 +31,4 @@
 
 package main
 
-import _ "github.com/gogo/protobuf/protoc-gen-gogo/internal/grpc"
+import _ "github.com/gogo/protobuf/plugin/grpc"
