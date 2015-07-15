@@ -26,8 +26,8 @@ import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
 
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
-// discarding unused import test "github.com/gogo/protobuf/test/combos/both/thetest.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
+// discarding unused import test "github.com/gogo/protobuf/test/combos/both"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

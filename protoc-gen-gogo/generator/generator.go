@@ -1208,38 +1208,25 @@ func (g *Generator) generateImports() {
 			continue
 		}
 		filename := goFileName(s)
+		// By default, import path is the dirname of the Go filename.
+		importPath := path.Dir(filename)
 		if substitution, ok := g.ImportMap[s]; ok {
-			filename = substitution
+			importPath = substitution
 		}
-		filename = g.ImportPrefix + filename
-		if strings.HasSuffix(filename, ".go") {
-			filename = filename[0 : len(filename)-3]
-		}
+		importPath = g.ImportPrefix + importPath
 		// Skip weak imports.
 		if g.weak(int32(i)) {
-			g.P("// skipping weak import ", fd.PackageName(), " ", strconv.Quote(filename))
+			g.P("// skipping weak import ", fd.PackageName(), " ", strconv.Quote(importPath))
 			continue
 		}
 		if _, ok := g.usedPackages[fd.PackageName()]; ok {
-			if strings.Contains(filename, "/") {
-				dir, _ := path.Split(filename)
-				dir = path.Clean(dir)
-				if dir == "google/protobuf" && strings.HasSuffix(filename, "descriptor.pb") {
-					// This allows protos to import a single google/protobuf/descriptor.proto so as not to cause conflicts with C++ or other code generators.
-					// Also this allows the go generated descriptor to live inside the gogoprotobuf package
-					dir = "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-					g.P("// renamed import google/protobuf/descriptor to github.com/gogo/protobuf/protoc-gen-gogo/descriptor")
-				}
-				g.PrintImport(fd.PackageName(), dir)
-			} else {
-				g.PrintImport(fd.PackageName(), filename)
-			}
+			g.PrintImport(fd.PackageName(), importPath)
 		} else {
 			// TODO: Re-enable this when we are more feature-complete.
 			// For instance, some protos use foreign field extensions, which we don't support.
 			// Until then, this is just annoying spam.
 			//log.Printf("protoc-gen-go: discarding unused import from %v: %v", *g.file.Name, s)
-			g.P("// discarding unused import ", fd.PackageName(), " ", strconv.Quote(filename))
+			g.P("// discarding unused import ", fd.PackageName(), " ", strconv.Quote(importPath))
 		}
 	}
 	g.P()

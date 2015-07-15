@@ -21,8 +21,8 @@ import encoding_json "encoding/json"
 import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import index "github.com/gogo/protobuf/test/indeximport-issue72/index/index.pb"
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
+// discarding unused import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

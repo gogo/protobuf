@@ -22,7 +22,7 @@ package test
 import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
 import github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"

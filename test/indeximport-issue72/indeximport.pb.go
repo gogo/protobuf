@@ -17,7 +17,7 @@ import proto "github.com/gogo/protobuf/proto"
 import math "math"
 import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
 
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto/gogo.pb"
+// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
 import io "io"
 import fmt "fmt"
