@@ -5,5 +5,8 @@ regenerate:
 	protoc --gogofaster_out=./faster/ vanity.proto
 	go install github.com/gogo/protobuf/protoc-gen-gogoslick
 	protoc --gogoslick_out=./slick/ vanity.proto
+
+test:
 	go install github.com/gogo/protobuf/protoc-gen-gofast
 	protoc --gofast_out=./gofast/ vanity.proto
+	go test -v ./...

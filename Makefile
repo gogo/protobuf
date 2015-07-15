@@ -137,6 +137,7 @@ drone:
 
 testall:
 	make -C protoc-gen-gogo/testdata test
+	make -C vanity/test test
 	make tests
 
 bench:
