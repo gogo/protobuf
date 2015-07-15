@@ -2719,7 +2719,10 @@ func (m *Message) Size() (n int) {
 		for k, v := range m.Terrain {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
@@ -2732,7 +2735,10 @@ func (m *Message) Size() (n int) {
 		for k, v := range m.Proto2Value {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
@@ -2885,7 +2891,10 @@ func (m *AllMaps) Size() (n int) {
 		for k, v := range m.StringToMsgMap {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + l + sovTheproto3(uint64(l))
 			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
 		}
@@ -2908,7 +2917,10 @@ func (m *MessageWithMap) Size() (n int) {
 		for k, v := range m.MsgMapping {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}

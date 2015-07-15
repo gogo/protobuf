@@ -25,6 +25,7 @@ import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import unsafe "unsafe"
+import errors "errors"
 
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
@@ -472,7 +473,10 @@ func (m *AllMaps) Size() (n int) {
 		for k, v := range m.StringToMsgMap {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + l + sovMapsproto2(uint64(l))
 			n += mapEntrySize + 2 + sovMapsproto2(uint64(mapEntrySize))
 		}
@@ -1145,6 +1149,9 @@ func (m *AllMaps) MarshalTo(data []byte) (n int, err error) {
 			data[i] = 0x1
 			i++
 			v := m.StringToMsgMap[k]
+			if v == nil {
+				return 0, errors.New("proto: map has nil element")
+			}
 			msgSize := v.Size()
 			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + msgSize + sovMapsproto2(uint64(msgSize))
 			i = encodeVarintMapsproto2(data, i, uint64(mapSize))

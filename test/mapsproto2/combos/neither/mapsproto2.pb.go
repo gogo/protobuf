@@ -470,7 +470,10 @@ func (m *AllMaps) Size() (n int) {
 		for k, v := range m.StringToMsgMap {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
 			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + l + sovMapsproto2(uint64(l))
 			n += mapEntrySize + 2 + sovMapsproto2(uint64(mapEntrySize))
 		}

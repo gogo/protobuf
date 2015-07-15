@@ -165,6 +165,7 @@ type marshalto struct {
 	generator.PluginImports
 	atleastOne bool
 	unsafePkg  generator.Single
+	errorsPkg  generator.Single
 	localName  string
 	unsafe     bool
 }
@@ -374,6 +375,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	}
 	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
 	p.unsafePkg = p.NewImport("unsafe")
+	p.errorsPkg = p.NewImport("errors")
 
 	for _, message := range file.Messages() {
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
@@ -936,6 +938,11 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 						descriptor.FieldDescriptorProto_TYPE_SINT64:
 						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+						p.P(`if v == nil {`)
+						p.In()
+						p.P(`return 0, `, p.errorsPkg.Use(), `.New("proto: map has nil element")`)
+						p.Out()
+						p.P(`}`)
 						p.P(`msgSize := v.Size()`)
 						sum = append(sum, `msgSize + sov`+p.localName+`(uint64(msgSize))`)
 					}

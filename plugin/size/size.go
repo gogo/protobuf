@@ -407,7 +407,12 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 						descriptor.FieldDescriptorProto_TYPE_SINT64:
 						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-						p.P(`l=v.Size()`)
+						p.P(`l = 0`)
+						p.P(`if v != nil {`)
+						p.In()
+						p.P(`l= v.Size()`)
+						p.Out()
+						p.P(`}`)
 						sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
 					}
 					p.P(`mapEntrySize := `, strings.Join(sum, "+"))
