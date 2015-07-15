@@ -28,13 +28,11 @@ package theproto3
 
 import (
 	"github.com/gogo/protobuf/proto"
-	goproto "github.com/golang/protobuf/proto"
 	"testing"
 )
 
 func TestNilMaps(t *testing.T) {
 	m := &AllMaps{StringToMsgMap: map[string]*FloatingPoint{"a": nil}}
-	goproto.Size(m)
 	if _, err := proto.Marshal(m); err == nil {
 		t.Fatalf("expected error")
 	}
