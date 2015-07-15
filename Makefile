@@ -31,6 +31,7 @@
 install:
 	go install ./proto
 	go install ./gogoproto
+	go install ./jsonpb
 	go install ./protoc-gen-gogo
 	go install ./protoc-gen-gofast
 	go install ./protoc-gen-gogofast
@@ -59,6 +60,7 @@ regenerate:
 	make -C gogoproto regenerate
 	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
+	make -C jsonpb/jsonpb_test_proto regenerate
 	make -C test regenerate
 	make -C test/example regenerate
 	make -C test/unrecognized regenerate
@@ -90,6 +92,7 @@ regenerate:
 tests:
 	go test -v ./test
 	go test -v ./proto
+	go test -v ./jsonpb
 	go test -v ./fieldpath/...
 	go test -v ./io
 	go test -v ./test/custom

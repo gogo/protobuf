@@ -17,7 +17,7 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import encoding_json "encoding/json"
+import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import proto1 "github.com/gogo/protobuf/proto"
 import math "math"
 
@@ -49,15 +49,13 @@ func TestFooProto(t *testing.T) {
 func TestFooJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFoo(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &Foo{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}

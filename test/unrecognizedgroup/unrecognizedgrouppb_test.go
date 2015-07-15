@@ -19,7 +19,7 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import encoding_json "encoding/json"
+import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
@@ -198,15 +198,13 @@ func TestOldWithGroup_Group2Proto(t *testing.T) {
 func TestNewNoGroupJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNewNoGroup(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &NewNoGroup{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,15 +218,13 @@ func TestNewNoGroupJSON(t *testing.T) {
 func TestAJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedA(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &A{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,15 +238,13 @@ func TestAJSON(t *testing.T) {
 func TestOldWithGroupJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,15 +258,13 @@ func TestOldWithGroupJSON(t *testing.T) {
 func TestOldWithGroup_Group1JSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group1(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group1{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,15 +278,13 @@ func TestOldWithGroup_Group1JSON(t *testing.T) {
 func TestOldWithGroup_Group2JSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOldWithGroup_Group2(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &OldWithGroup_Group2{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}

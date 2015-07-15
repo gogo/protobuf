@@ -20,7 +20,7 @@ import testing "testing"
 import math_rand "math/rand"
 import time "time"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import encoding_json "encoding/json"
+import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import proto "github.com/gogo/protobuf/proto"
 import math "math"
 
@@ -121,15 +121,13 @@ func TestNinRepEnumProto(t *testing.T) {
 func TestNidOptEnumJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &NidOptEnum{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,15 +141,13 @@ func TestNidOptEnumJSON(t *testing.T) {
 func TestNinOptEnumJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &NinOptEnum{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,15 +161,13 @@ func TestNinOptEnumJSON(t *testing.T) {
 func TestNidRepEnumJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &NidRepEnum{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,15 +181,13 @@ func TestNidRepEnumJSON(t *testing.T) {
 func TestNinRepEnumJSON(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, true)
-	jsondata, err := encoding_json.Marshal(p)
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaller{}
+	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
-		if _, ok := err.(*encoding_json.UnsupportedTypeError); ok {
-			t.Skip(err)
-		}
 		t.Fatal(err)
 	}
 	msg := &NinRepEnum{}
-	err = encoding_json.Unmarshal(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatal(err)
 	}
