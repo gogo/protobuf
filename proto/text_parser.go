@@ -572,6 +572,9 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 				if err := p.readAny(key, props.mkeyprop); err != nil {
 					return err
 				}
+				if err := p.consumeOptionalSeparator(); err != nil {
+					return err
+				}
 				if err := p.consumeToken("value"); err != nil {
 					return err
 				}
@@ -579,6 +582,9 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 					return err
 				}
 				if err := p.readAny(val, props.mvalprop); err != nil {
+					return err
+				}
+				if err := p.consumeOptionalSeparator(); err != nil {
 					return err
 				}
 				if err := p.consumeToken(terminator); err != nil {
@@ -610,20 +616,29 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 			}
 		}
 
-		// For backward compatibility, permit a semicolon or comma after a field.
-		tok = p.next()
-		if tok.err != nil {
-			return tok.err
+		if err := p.consumeOptionalSeparator(); err != nil {
+			return err
 		}
-		if tok.value != ";" && tok.value != "," {
-			p.back()
-		}
+
 	}
 
 	if reqCount > 0 {
 		return p.missingRequiredFieldError(sv)
 	}
 	return reqFieldErr
+}
+
+// consumeOptionalSeparator consumes an optional semicolon or comma.
+// It is used in readStruct to provide backward compatibility.
+func (p *textParser) consumeOptionalSeparator() error {
+	tok := p.next()
+	if tok.err != nil {
+		return tok.err
+	}
+	if tok.value != ";" && tok.value != "," {
+		p.back()
+	}
+	return nil
 }
 
 func (p *textParser) readAny(v reflect.Value, props *Properties) error {
