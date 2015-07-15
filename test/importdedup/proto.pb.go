@@ -41,6 +41,3 @@ func (m *Object) GetSubObject() *subpkg.SubObject {
 	}
 	return nil
 }
-
-func init() {
-}

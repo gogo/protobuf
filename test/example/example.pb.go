@@ -147,8 +147,6 @@ type CastType struct {
 func (m *CastType) Reset()      { *m = CastType{} }
 func (*CastType) ProtoMessage() {}
 
-func init() {
-}
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

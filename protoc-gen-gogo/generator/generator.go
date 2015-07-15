@@ -454,6 +454,7 @@ type Generator struct {
 	file             *FileDescriptor   // The file we are compiling now.
 	usedPackages     map[string]bool   // Names of packages used in current file.
 	typeNameToObject map[string]Object // Key is a fully-qualified name in input syntax.
+	init             []string          // Lines to emit in the init function.
 	customImports    []string
 	indent           string
 	writtenImports   map[string]bool // For de-duplicating written imports
@@ -994,6 +995,12 @@ func (g *Generator) P(str ...interface{}) {
 		}
 	}
 	g.WriteByte('\n')
+}
+
+// addInitf stores the given statement to be printed inside the file's init function.
+// The statement is given as a format specifier and arguments.
+func (g *Generator) addInitf(stmt string, a ...interface{}) {
+	g.init = append(g.init, fmt.Sprintf(stmt, a...))
 }
 
 func (g *Generator) PrintImport(alias, pkg string) {
@@ -2095,19 +2102,13 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 
 	if mset {
 		// Generate a bit more code to register with message_set.go.
-		g.P("func init() { ")
-		g.In()
-		g.P(g.Pkg["proto"], ".RegisterMessageSetType((", fieldType, ")(nil), ", field.Number, ", \"", extName, "\")")
-		g.Out()
-		g.P("}")
+		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
 	}
 
 	g.file.addExport(ext, constOrVarSymbol{ccTypeName, "var", ""})
 }
 
 func (g *Generator) generateInitFunction() {
-	g.P("func init() {")
-	g.In()
 	for _, enum := range g.file.enum {
 		g.generateEnumRegistration(enum)
 	}
@@ -2119,8 +2120,17 @@ func (g *Generator) generateInitFunction() {
 	for _, ext := range g.file.ext {
 		g.generateExtensionRegistration(ext)
 	}
+	if len(g.init) == 0 {
+		return
+	}
+	g.P("func init() {")
+	g.In()
+	for _, l := range g.init {
+		g.P(l)
+	}
 	g.Out()
 	g.P("}")
+	g.init = nil
 }
 
 func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
@@ -2133,11 +2143,11 @@ func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
 	typeName := enum.TypeName()
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
-	g.P(g.Pkg["proto"]+".RegisterEnum(", strconv.Quote(pkg+ccTypeName), ", ", ccTypeName+"_name, ", ccTypeName+"_value)")
+	g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["proto"], pkg+ccTypeName, ccTypeName)
 }
 
 func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
-	g.P(g.Pkg["proto"]+".RegisterExtension(", ext.DescName(), ")")
+	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
 }
 
 // And now lots of helper functions.

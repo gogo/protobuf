@@ -59,8 +59,6 @@ func (m *SizeMessage) GetString_() string {
 	return ""
 }
 
-func init() {
-}
 func (m *SizeMessage) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

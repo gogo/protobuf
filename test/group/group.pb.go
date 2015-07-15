@@ -69,8 +69,6 @@ type Groups2_G struct {
 func (m *Groups2_G) Reset()      { *m = Groups2_G{} }
 func (*Groups2_G) ProtoMessage() {}
 
-func init() {
-}
 func (this *Groups1) String() string {
 	if this == nil {
 		return "nil"

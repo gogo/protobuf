@@ -31,8 +31,6 @@ func (m *A) Reset()         { *m = A{} }
 func (m *A) String() string { return proto.CompactTextString(m) }
 func (*A) ProtoMessage()    {}
 
-func init() {
-}
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

@@ -56,8 +56,6 @@ func (m *Inside) GetField1() string {
 	return ""
 }
 
-func init() {
-}
 func NewPopulatedOutside(r randyTags, easy bool) *Outside {
 	this := &Outside{}
 	if r.Intn(10) != 0 {

@@ -74,6 +74,3 @@ func (m *Mappy) GetBooly() map[bool]bool {
 	}
 	return nil
 }
-
-func init() {
-}

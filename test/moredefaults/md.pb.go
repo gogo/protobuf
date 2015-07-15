@@ -100,8 +100,6 @@ func (m *MoreDefaultsA) GetA2() test.A {
 	return test.A{}
 }
 
-func init() {
-}
 func NewPopulatedMoreDefaultsB(r randyMd, easy bool) *MoreDefaultsB {
 	this := &MoreDefaultsB{}
 	if r.Intn(10) != 0 {

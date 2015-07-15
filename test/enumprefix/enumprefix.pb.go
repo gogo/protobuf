@@ -38,6 +38,3 @@ func (m *MyMessage) GetTheField() test.TheTestEnum {
 	}
 	return test.A
 }
-
-func init() {
-}

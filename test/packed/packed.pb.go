@@ -478,8 +478,6 @@ func (m *NinRepPackedNativeUnsafe) GetField13() []bool {
 	return nil
 }
 
-func init() {
-}
 func (m *NinRepNative) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

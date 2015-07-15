@@ -58,8 +58,6 @@ func (m *FooWithRepeated) GetBar() [][]byte {
 	return nil
 }
 
-func init() {
-}
 func (m *Foo) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

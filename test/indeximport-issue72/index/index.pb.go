@@ -51,8 +51,6 @@ func (m *IndexQuery) GetValue() string {
 	return ""
 }
 
-func init() {
-}
 func (m *IndexQuery) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

@@ -52,8 +52,6 @@ type Castaway struct {
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 
-func init() {
-}
 func (m *Castaway) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

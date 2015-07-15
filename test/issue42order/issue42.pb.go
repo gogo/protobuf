@@ -74,8 +74,6 @@ func (m *OrderedFields) GetA() int64 {
 	return 0
 }
 
-func init() {
-}
 func (m *UnorderedFields) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

@@ -97,8 +97,6 @@ func (m *Sub) GetSubNumber() int64 {
 	return 0
 }
 
-func init() {
-}
 func (m *Big) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

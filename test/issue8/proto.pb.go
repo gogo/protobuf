@@ -44,8 +44,6 @@ func (m *Foo) GetBar() uint64 {
 	return 0
 }
 
-func init() {
-}
 func (m *Foo) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)

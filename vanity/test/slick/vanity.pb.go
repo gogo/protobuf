@@ -37,8 +37,6 @@ type A struct {
 func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 
-func init() {
-}
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

@@ -39,8 +39,6 @@ func (m *A) GetStrings() string {
 	return ""
 }
 
-func init() {
-}
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

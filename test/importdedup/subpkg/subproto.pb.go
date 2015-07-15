@@ -29,6 +29,3 @@ type SubObject struct {
 func (m *SubObject) Reset()         { *m = SubObject{} }
 func (m *SubObject) String() string { return proto.CompactTextString(m) }
 func (*SubObject) ProtoMessage()    {}
-
-func init() {
-}

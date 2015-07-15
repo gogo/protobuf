@@ -184,6 +184,3 @@ func (m *CodeGeneratorResponse_File) GetContent() string {
 	}
 	return ""
 }
-
-func init() {
-}

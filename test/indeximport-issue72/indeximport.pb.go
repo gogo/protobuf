@@ -44,8 +44,6 @@ func (m *IndexQueries) GetQueries() []*index.IndexQuery {
 	return nil
 }
 
-func init() {
-}
 func (m *IndexQueries) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

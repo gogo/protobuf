@@ -333,8 +333,6 @@ func (m *NestedNinOptNative) GetNestedNinOpts() []*NinOptNative {
 	return nil
 }
 
-func init() {
-}
 func (m *RequiredExample) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)

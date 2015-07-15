@@ -86,8 +86,6 @@ type OldWithGroup_Group2 struct {
 func (m *OldWithGroup_Group2) Reset()      { *m = OldWithGroup_Group2{} }
 func (*OldWithGroup_Group2) ProtoMessage() {}
 
-func init() {
-}
 func (m *NewNoGroup) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

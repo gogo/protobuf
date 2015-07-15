@@ -148,8 +148,6 @@ type OldUnoM struct {
 func (m *OldUnoM) Reset()      { *m = OldUnoM{} }
 func (*OldUnoM) ProtoMessage() {}
 
-func init() {
-}
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

@@ -50,8 +50,6 @@ type Castaway struct {
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 
-func init() {
-}
 func (this *Castaway) String() string {
 	if this == nil {
 		return "nil"
