@@ -1215,6 +1215,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
+			m.Field3 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1230,6 +1231,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
+			m.Field4 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1245,6 +1247,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
+			m.Field5 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1260,6 +1263,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
+			m.Field6 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1311,6 +1315,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
+			m.Field9 = 0
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1323,6 +1328,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
+			m.Field10 = 0
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1335,6 +1341,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
+			m.Field11 = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1351,6 +1358,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
+			m.Field12 = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3852,6 +3860,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
+			m.Field6 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6607,6 +6616,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
+			m.Value = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7078,6 +7088,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
+			m.Field1 = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7496,6 +7507,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Time1", wireType)
 			}
+			m.Time1 = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7512,6 +7524,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Time2", wireType)
 			}
+			m.Time2 = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -8612,6 +8625,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldC", wireType)
 			}
+			m.FieldC = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8627,6 +8641,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldD", wireType)
 			}
+			m.FieldD = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8642,6 +8657,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldE", wireType)
 			}
+			m.FieldE = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8657,6 +8673,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldF", wireType)
 			}
+			m.FieldF = 0
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8708,6 +8725,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldI", wireType)
 			}
+			m.FieldI = 0
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -8720,6 +8738,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldJ", wireType)
 			}
+			m.FieldJ = 0
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -8732,6 +8751,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldK", wireType)
 			}
+			m.FieldK = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -8748,6 +8768,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldL", wireType)
 			}
+			m.FieldL = 0
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}

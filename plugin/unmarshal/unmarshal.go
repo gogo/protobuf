@@ -453,6 +453,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
 			p.P(`var v `, typ)
@@ -465,6 +466,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
 			p.P(`var v `, typ)
@@ -477,6 +479,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
 			p.P(`var v `, typ)
@@ -490,6 +493,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
+				p.P(`m.`, fieldname, ` = 0`)
 				p.decodeFixed64("m."+fieldname, typ)
 			} else {
 				p.P(`var v `, typ)
@@ -516,6 +520,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
+				p.P(`m.`, fieldname, ` = 0`)
 				p.decodeFixed32("m."+fieldname, typ)
 			} else {
 				p.P(`var v `, typ)
@@ -680,6 +685,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
 			p.P(`var v `, typ)
@@ -693,6 +699,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.decodeVarint("v", typName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typName)
 		} else {
 			p.P(`var v `, typName)
@@ -706,6 +713,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.decodeFixed32("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
+				p.P(`m.`, fieldname, ` = 0`)
 				p.decodeFixed32("m."+fieldname, typ)
 			} else {
 				p.P(`var v `, typ)
@@ -732,6 +740,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.decodeFixed64("v", typ)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 			} else if proto3 || !nullable {
+				p.P(`m.`, fieldname, ` = 0`)
 				p.decodeFixed64("m."+fieldname, typ)
 			} else {
 				p.P(`var v `, typ)

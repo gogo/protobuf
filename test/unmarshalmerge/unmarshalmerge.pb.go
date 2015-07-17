@@ -12,6 +12,7 @@
 		Big
 		BigUnsafe
 		Sub
+		IntMerge
 */
 package unmarshalmerge
 
@@ -22,11 +23,11 @@ import math "math"
 
 import io "io"
 import fmt "fmt"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import strings "strings"
 import reflect "reflect"
 
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 
@@ -95,6 +96,101 @@ func (m *Sub) GetSubNumber() int64 {
 		return *m.SubNumber
 	}
 	return 0
+}
+
+type IntMerge struct {
+	Int64            int64  `protobuf:"varint,1,req" json:"Int64"`
+	Int32            int32  `protobuf:"varint,2,opt" json:"Int32"`
+	Sint32           int32  `protobuf:"zigzag32,3,req" json:"Sint32"`
+	Sint64           int64  `protobuf:"zigzag64,4,opt" json:"Sint64"`
+	Uint64           uint64 `protobuf:"varint,5,opt" json:"Uint64"`
+	Uint32           uint32 `protobuf:"varint,6,req" json:"Uint32"`
+	Fixed64          uint64 `protobuf:"fixed64,7,opt" json:"Fixed64"`
+	Fixed32          uint32 `protobuf:"fixed32,8,opt" json:"Fixed32"`
+	Sfixed32         int32  `protobuf:"fixed32,9,req" json:"Sfixed32"`
+	Sfixed64         int64  `protobuf:"fixed64,10,opt" json:"Sfixed64"`
+	Bool             bool   `protobuf:"varint,11,opt" json:"Bool"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *IntMerge) Reset()      { *m = IntMerge{} }
+func (*IntMerge) ProtoMessage() {}
+
+func (m *IntMerge) GetInt64() int64 {
+	if m != nil {
+		return m.Int64
+	}
+	return 0
+}
+
+func (m *IntMerge) GetInt32() int32 {
+	if m != nil {
+		return m.Int32
+	}
+	return 0
+}
+
+func (m *IntMerge) GetSint32() int32 {
+	if m != nil {
+		return m.Sint32
+	}
+	return 0
+}
+
+func (m *IntMerge) GetSint64() int64 {
+	if m != nil {
+		return m.Sint64
+	}
+	return 0
+}
+
+func (m *IntMerge) GetUint64() uint64 {
+	if m != nil {
+		return m.Uint64
+	}
+	return 0
+}
+
+func (m *IntMerge) GetUint32() uint32 {
+	if m != nil {
+		return m.Uint32
+	}
+	return 0
+}
+
+func (m *IntMerge) GetFixed64() uint64 {
+	if m != nil {
+		return m.Fixed64
+	}
+	return 0
+}
+
+func (m *IntMerge) GetFixed32() uint32 {
+	if m != nil {
+		return m.Fixed32
+	}
+	return 0
+}
+
+func (m *IntMerge) GetSfixed32() int32 {
+	if m != nil {
+		return m.Sfixed32
+	}
+	return 0
+}
+
+func (m *IntMerge) GetSfixed64() int64 {
+	if m != nil {
+		return m.Sfixed64
+	}
+	return 0
+}
+
+func (m *IntMerge) GetBool() bool {
+	if m != nil {
+		return m.Bool
+	}
+	return false
 }
 
 func (m *Big) Unmarshal(data []byte) error {
@@ -240,6 +336,243 @@ func (m *Sub) Unmarshal(data []byte) error {
 			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
+	}
+
+	return nil
+}
+func (m *IntMerge) Unmarshal(data []byte) error {
+	var hasFields [1]uint64
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int64", wireType)
+			}
+			m.Int64 = 0
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				m.Int64 |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			hasFields[0] |= uint64(0x00000001)
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int32", wireType)
+			}
+			m.Int32 = 0
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				m.Int32 |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Sint32", wireType)
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
+			m.Sint32 = v
+			hasFields[0] |= uint64(0x00000002)
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Sint64", wireType)
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
+			m.Sint64 = int64(v)
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uint64", wireType)
+			}
+			m.Uint64 = 0
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				m.Uint64 |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uint32", wireType)
+			}
+			m.Uint32 = 0
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				m.Uint32 |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			hasFields[0] |= uint64(0x00000004)
+		case 7:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Fixed64", wireType)
+			}
+			m.Fixed64 = 0
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			m.Fixed64 = uint64(data[iNdEx-8])
+			m.Fixed64 |= uint64(data[iNdEx-7]) << 8
+			m.Fixed64 |= uint64(data[iNdEx-6]) << 16
+			m.Fixed64 |= uint64(data[iNdEx-5]) << 24
+			m.Fixed64 |= uint64(data[iNdEx-4]) << 32
+			m.Fixed64 |= uint64(data[iNdEx-3]) << 40
+			m.Fixed64 |= uint64(data[iNdEx-2]) << 48
+			m.Fixed64 |= uint64(data[iNdEx-1]) << 56
+		case 8:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Fixed32", wireType)
+			}
+			m.Fixed32 = 0
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 4
+			m.Fixed32 = uint32(data[iNdEx-4])
+			m.Fixed32 |= uint32(data[iNdEx-3]) << 8
+			m.Fixed32 |= uint32(data[iNdEx-2]) << 16
+			m.Fixed32 |= uint32(data[iNdEx-1]) << 24
+		case 9:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Sfixed32", wireType)
+			}
+			m.Sfixed32 = 0
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 4
+			m.Sfixed32 = int32(data[iNdEx-4])
+			m.Sfixed32 |= int32(data[iNdEx-3]) << 8
+			m.Sfixed32 |= int32(data[iNdEx-2]) << 16
+			m.Sfixed32 |= int32(data[iNdEx-1]) << 24
+			hasFields[0] |= uint64(0x00000008)
+		case 10:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Sfixed64", wireType)
+			}
+			m.Sfixed64 = 0
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			m.Sfixed64 = int64(data[iNdEx-8])
+			m.Sfixed64 |= int64(data[iNdEx-7]) << 8
+			m.Sfixed64 |= int64(data[iNdEx-6]) << 16
+			m.Sfixed64 |= int64(data[iNdEx-5]) << 24
+			m.Sfixed64 |= int64(data[iNdEx-4]) << 32
+			m.Sfixed64 |= int64(data[iNdEx-3]) << 40
+			m.Sfixed64 |= int64(data[iNdEx-2]) << 48
+			m.Sfixed64 |= int64(data[iNdEx-1]) << 56
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Bool", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Bool = bool(v != 0)
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnmarshalmerge(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Int64")
+	}
+	if hasFields[0]&uint64(0x00000002) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Sint32")
+	}
+	if hasFields[0]&uint64(0x00000004) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Uint32")
+	}
+	if hasFields[0]&uint64(0x00000008) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Sfixed32")
 	}
 
 	return nil
@@ -534,6 +867,27 @@ func (this *Sub) String() string {
 	}, "")
 	return s
 }
+func (this *IntMerge) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&IntMerge{`,
+		`Int64:` + fmt.Sprintf("%v", this.Int64) + `,`,
+		`Int32:` + fmt.Sprintf("%v", this.Int32) + `,`,
+		`Sint32:` + fmt.Sprintf("%v", this.Sint32) + `,`,
+		`Sint64:` + fmt.Sprintf("%v", this.Sint64) + `,`,
+		`Uint64:` + fmt.Sprintf("%v", this.Uint64) + `,`,
+		`Uint32:` + fmt.Sprintf("%v", this.Uint32) + `,`,
+		`Fixed64:` + fmt.Sprintf("%v", this.Fixed64) + `,`,
+		`Fixed32:` + fmt.Sprintf("%v", this.Fixed32) + `,`,
+		`Sfixed32:` + fmt.Sprintf("%v", this.Sfixed32) + `,`,
+		`Sfixed64:` + fmt.Sprintf("%v", this.Sfixed64) + `,`,
+		`Bool:` + fmt.Sprintf("%v", this.Bool) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func valueToStringUnmarshalmerge(v interface{}) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -589,6 +943,43 @@ func NewPopulatedSub(r randyUnmarshalmerge, easy bool) *Sub {
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnmarshalmerge(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedIntMerge(r randyUnmarshalmerge, easy bool) *IntMerge {
+	this := &IntMerge{}
+	this.Int64 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Int64 *= -1
+	}
+	this.Int32 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Int32 *= -1
+	}
+	this.Sint32 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Sint32 *= -1
+	}
+	this.Sint64 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Sint64 *= -1
+	}
+	this.Uint64 = uint64(uint64(r.Uint32()))
+	this.Uint32 = uint32(r.Uint32())
+	this.Fixed64 = uint64(uint64(r.Uint32()))
+	this.Fixed32 = uint32(r.Uint32())
+	this.Sfixed32 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Sfixed32 *= -1
+	}
+	this.Sfixed64 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Sfixed64 *= -1
+	}
+	this.Bool = bool(bool(r.Intn(2) == 0))
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnmarshalmerge(r, 12)
 	}
 	return this
 }
@@ -691,6 +1082,25 @@ func (this *Sub) GoString() string {
 	}
 	s := strings.Join([]string{`&unmarshalmerge.Sub{` +
 		`SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *IntMerge) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unmarshalmerge.IntMerge{` +
+		`Int64:` + fmt.Sprintf("%#v", this.Int64),
+		`Int32:` + fmt.Sprintf("%#v", this.Int32),
+		`Sint32:` + fmt.Sprintf("%#v", this.Sint32),
+		`Sint64:` + fmt.Sprintf("%#v", this.Sint64),
+		`Uint64:` + fmt.Sprintf("%#v", this.Uint64),
+		`Uint32:` + fmt.Sprintf("%#v", this.Uint32),
+		`Fixed64:` + fmt.Sprintf("%#v", this.Fixed64),
+		`Fixed32:` + fmt.Sprintf("%#v", this.Fixed32),
+		`Sfixed32:` + fmt.Sprintf("%#v", this.Sfixed32),
+		`Sfixed64:` + fmt.Sprintf("%#v", this.Sfixed64),
+		`Bool:` + fmt.Sprintf("%#v", this.Bool),
 		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
@@ -928,6 +1338,122 @@ func (this *Sub) Equal(that interface{}) bool {
 	} else if this.SubNumber != nil {
 		return false
 	} else if that1.SubNumber != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *IntMerge) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*IntMerge)
+	if !ok {
+		return fmt.Errorf("that is not of type *IntMerge")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *IntMerge but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *IntMergebut is not nil && this == nil")
+	}
+	if this.Int64 != that1.Int64 {
+		return fmt.Errorf("Int64 this(%v) Not Equal that(%v)", this.Int64, that1.Int64)
+	}
+	if this.Int32 != that1.Int32 {
+		return fmt.Errorf("Int32 this(%v) Not Equal that(%v)", this.Int32, that1.Int32)
+	}
+	if this.Sint32 != that1.Sint32 {
+		return fmt.Errorf("Sint32 this(%v) Not Equal that(%v)", this.Sint32, that1.Sint32)
+	}
+	if this.Sint64 != that1.Sint64 {
+		return fmt.Errorf("Sint64 this(%v) Not Equal that(%v)", this.Sint64, that1.Sint64)
+	}
+	if this.Uint64 != that1.Uint64 {
+		return fmt.Errorf("Uint64 this(%v) Not Equal that(%v)", this.Uint64, that1.Uint64)
+	}
+	if this.Uint32 != that1.Uint32 {
+		return fmt.Errorf("Uint32 this(%v) Not Equal that(%v)", this.Uint32, that1.Uint32)
+	}
+	if this.Fixed64 != that1.Fixed64 {
+		return fmt.Errorf("Fixed64 this(%v) Not Equal that(%v)", this.Fixed64, that1.Fixed64)
+	}
+	if this.Fixed32 != that1.Fixed32 {
+		return fmt.Errorf("Fixed32 this(%v) Not Equal that(%v)", this.Fixed32, that1.Fixed32)
+	}
+	if this.Sfixed32 != that1.Sfixed32 {
+		return fmt.Errorf("Sfixed32 this(%v) Not Equal that(%v)", this.Sfixed32, that1.Sfixed32)
+	}
+	if this.Sfixed64 != that1.Sfixed64 {
+		return fmt.Errorf("Sfixed64 this(%v) Not Equal that(%v)", this.Sfixed64, that1.Sfixed64)
+	}
+	if this.Bool != that1.Bool {
+		return fmt.Errorf("Bool this(%v) Not Equal that(%v)", this.Bool, that1.Bool)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *IntMerge) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*IntMerge)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Int64 != that1.Int64 {
+		return false
+	}
+	if this.Int32 != that1.Int32 {
+		return false
+	}
+	if this.Sint32 != that1.Sint32 {
+		return false
+	}
+	if this.Sint64 != that1.Sint64 {
+		return false
+	}
+	if this.Uint64 != that1.Uint64 {
+		return false
+	}
+	if this.Uint32 != that1.Uint32 {
+		return false
+	}
+	if this.Fixed64 != that1.Fixed64 {
+		return false
+	}
+	if this.Fixed32 != that1.Fixed32 {
+		return false
+	}
+	if this.Sfixed32 != that1.Sfixed32 {
+		return false
+	}
+	if this.Sfixed64 != that1.Sfixed64 {
+		return false
+	}
+	if this.Bool != that1.Bool {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
