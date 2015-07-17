@@ -113,10 +113,6 @@ func (g *grpc) GenerateImports(file *generator.FileDescriptor) {
 	g.P(grpcPkg, " ", strconv.Quote(path.Join(g.gen.ImportPrefix, grpcPkgPath)))
 	g.P(")")
 	g.P()
-	g.P("// Reference imports to suppress errors if they are not otherwise used.")
-	g.P("var _ ", contextPkg, ".Context")
-	g.P("var _ ", grpcPkg, ".ClientConn")
-	g.P()
 }
 
 // reservedClientName records whether a client name is reserved on the client side.
