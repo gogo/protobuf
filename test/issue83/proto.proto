@@ -1,0 +1,4 @@
+syntax = "proto3";
+package issue83;
+service Bar {rpc Bar(Foo) returns (Foo);}
+message Foo {}
