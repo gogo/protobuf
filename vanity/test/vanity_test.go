@@ -40,6 +40,11 @@ func TestFast(t *testing.T) {
 	_ = (&fast.A{}).MarshalTo
 	_ = (&fast.A{}).Unmarshal
 	_ = (&fast.A{}).Size
+
+	_ = (&fast.B{}).Marshal
+	_ = (&fast.B{}).MarshalTo
+	_ = (&fast.B{}).Unmarshal
+	_ = (&fast.B{}).Size
 }
 
 func TestFaster(t *testing.T) {
@@ -49,6 +54,18 @@ func TestFaster(t *testing.T) {
 	_ = (&faster.A{}).Size
 
 	_ = (&faster.A{}).Strings == ""
+
+	_ = (&faster.B{}).Marshal
+	_ = (&faster.B{}).MarshalTo
+	_ = (&faster.B{}).Unmarshal
+	_ = (&faster.B{}).Size
+
+	_ = (&faster.B{}).String_ == nil
+	_ = (&faster.B{}).Int64 == 0
+	_ = (&faster.B{}).Int32 == nil
+	if (&faster.B{}).GetInt32() != 1234 {
+		t.Fatalf("expected default")
+	}
 }
 
 func TestSlick(t *testing.T) {
@@ -61,4 +78,16 @@ func TestSlick(t *testing.T) {
 
 	_ = (&slick.A{}).GoString
 	_ = (&slick.A{}).String
+
+	_ = (&slick.B{}).Marshal
+	_ = (&slick.B{}).MarshalTo
+	_ = (&slick.B{}).Unmarshal
+	_ = (&slick.B{}).Size
+
+	_ = (&slick.B{}).String_ == nil
+	_ = (&slick.B{}).Int64 == 0
+	_ = (&slick.B{}).Int32 == nil
+	if (&slick.B{}).GetInt32() != 1234 {
+		t.Fatalf("expected default")
+	}
 }

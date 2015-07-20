@@ -32,7 +32,23 @@ import (
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"strings"
 )
+
+func NotInPackageGoogleProtobuf(file *descriptor.FileDescriptorProto) bool {
+	return !strings.HasPrefix(file.GetPackage(), "google.protobuf")
+}
+
+func FilterFiles(files []*descriptor.FileDescriptorProto, f func(file *descriptor.FileDescriptorProto) bool) []*descriptor.FileDescriptorProto {
+	filtered := make([]*descriptor.FileDescriptorProto, 0, len(files))
+	for i := range files {
+		if !f(files[i]) {
+			continue
+		}
+		filtered = append(filtered, files[i])
+	}
+	return filtered
+}
 
 func FileHasBoolExtension(file *descriptor.FileDescriptorProto, extension *proto.ExtensionDesc) bool {
 	if file.Options == nil {

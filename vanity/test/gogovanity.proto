@@ -1,5 +1,3 @@
-// Extensions for Protocol Buffers to create more go like structures.
-//
 // Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf/gogoproto
 //
@@ -26,34 +24,14 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package main
+syntax = "proto2";
 
-import (
-	"github.com/gogo/protobuf/vanity"
-	"github.com/gogo/protobuf/vanity/command"
-)
+package vanity;
 
-func main() {
-	req := command.Read()
-	files := req.GetProtoFile()
-	files = vanity.FilterFiles(files, vanity.NotInPackageGoogleProtobuf)
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-	vanity.ForEachFile(files, vanity.TurnOnMarshalerAll)
-	vanity.ForEachFile(files, vanity.TurnOnSizerAll)
-	vanity.ForEachFile(files, vanity.TurnOnUnmarshalerAll)
-
-	vanity.ForEachFieldInFilesExcludingExtensions(files, vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly)
-	vanity.ForEachFile(files, vanity.TurnOffGoUnrecognizedAll)
-
-	vanity.ForEachFile(files, vanity.TurnOffGoEnumPrefixAll)
-	vanity.ForEachFile(files, vanity.TurnOffGoEnumStringerAll)
-	vanity.ForEachFile(files, vanity.TurnOnEnumStringerAll)
-
-	vanity.ForEachFile(files, vanity.TurnOnEqualAll)
-	vanity.ForEachFile(files, vanity.TurnOnGoStringAll)
-	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
-	vanity.ForEachFile(files, vanity.TurnOnStringerAll)
-
-	resp := command.Generate(req)
-	command.Write(resp)
+message B {
+	optional string String = 1 [(gogoproto.nullable) = true];
+	optional int64 Int64 = 2;
+	optional int32 Int32 = 3 [default = 1234];
 }

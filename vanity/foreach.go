@@ -49,12 +49,27 @@ func ForEachMessage(msgs []*descriptor.DescriptorProto, f func(msg *descriptor.D
 	}
 }
 
+func ForEachFieldInFilesExcludingExtensions(files []*descriptor.FileDescriptorProto, f func(field *descriptor.FieldDescriptorProto)) {
+	for _, file := range files {
+		ForEachFieldExcludingExtensions(file.MessageType, f)
+	}
+}
+
 func ForEachFieldInFiles(files []*descriptor.FileDescriptorProto, f func(field *descriptor.FieldDescriptorProto)) {
 	for _, file := range files {
 		for _, ext := range file.Extension {
 			f(ext)
 		}
 		ForEachField(file.MessageType, f)
+	}
+}
+
+func ForEachFieldExcludingExtensions(msgs []*descriptor.DescriptorProto, f func(field *descriptor.FieldDescriptorProto)) {
+	for _, msg := range msgs {
+		for _, field := range msg.Field {
+			f(field)
+		}
+		ForEachField(msg.NestedType, f)
 	}
 }
 
