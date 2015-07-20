@@ -97,7 +97,7 @@ func (m *NinOptEnum) GetField1() TheTestEnum {
 }
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=enumstringer.TheTestEnum" json:"Field1"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
