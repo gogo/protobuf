@@ -36,6 +36,28 @@ func ForEachFile(files []*descriptor.FileDescriptorProto, f func(file *descripto
 	}
 }
 
+func OnlyProto2(files []*descriptor.FileDescriptorProto) []*descriptor.FileDescriptorProto {
+	outs := make([]*descriptor.FileDescriptorProto, 0, len(files))
+	for i, file := range files {
+		if file.GetSyntax() == "proto3" {
+			continue
+		}
+		outs = append(outs, files[i])
+	}
+	return outs
+}
+
+func OnlyProto3(files []*descriptor.FileDescriptorProto) []*descriptor.FileDescriptorProto {
+	outs := make([]*descriptor.FileDescriptorProto, 0, len(files))
+	for i, file := range files {
+		if file.GetSyntax() != "proto3" {
+			continue
+		}
+		outs = append(outs, files[i])
+	}
+	return outs
+}
+
 func ForEachMessageInFiles(files []*descriptor.FileDescriptorProto, f func(msg *descriptor.DescriptorProto)) {
 	for _, file := range files {
 		ForEachMessage(file.MessageType, f)
