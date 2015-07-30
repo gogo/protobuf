@@ -327,6 +327,11 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.P(`var mapmsglen int`)
 		p.decodeVarint("mapmsglen", "int")
 		p.P(`postmsgIndex := iNdEx + mapmsglen`)
+		p.P(`if mapmsglen < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postmsgIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -577,6 +582,11 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 		p.P(`var msglen int`)
 		p.decodeVarint("msglen", "int")
 		p.P(`postIndex := iNdEx + msglen`)
+		p.P(`if msglen < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -636,6 +646,11 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		p.P(`var byteLen int`)
 		p.decodeVarint("byteLen", "int")
+		p.P(`if byteLen < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`postIndex := iNdEx + byteLen`)
 		p.P(`if postIndex > l {`)
 		p.In()
@@ -936,6 +951,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`return err`)
 			p.Out()
 			p.P(`}`)
+			p.P(`if skippy < 0 {`)
+			p.In()
+			p.P(`return ErrInvalidLength`, p.localName)
+			p.Out()
+			p.P(`}`)
 			p.P(`if (iNdEx + skippy) > l {`)
 			p.In()
 			p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -973,6 +993,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`if err != nil {`)
 		p.In()
 		p.P(`return err`)
+		p.Out()
+		p.P(`}`)
+		p.P(`if skippy < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength`, p.localName)
 		p.Out()
 		p.P(`}`)
 		p.P(`if (iNdEx + skippy) > l {`)
@@ -1065,6 +1090,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					}
 				}
 				iNdEx += length
+				if length < 0 {
+					return 0, ErrInvalidLength` + p.localName + `
+				}
 				return iNdEx, nil
 			case 3:
 				for {
@@ -1102,7 +1130,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			}
 		}
 		panic("unreachable")
-	}`)
+	}
+
+	var (
+		ErrInvalidLength` + p.localName + ` = ` + fmtPkg.Use() + `.Errorf("proto: negative length found during unmarshaling")
+	)
+	`)
 }
 
 func init() {

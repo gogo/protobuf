@@ -158,6 +158,9 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognizedgroup
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -181,6 +184,9 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			skippy, err := skipUnrecognizedgroup(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognizedgroup
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -242,6 +248,9 @@ func (m *A) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognizedgroup
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -298,6 +307,9 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthUnrecognizedgroup
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -336,6 +348,11 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthUnrecognizedgroup = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *NewNoGroup) String() string {
 	if this == nil {
 		return "nil"

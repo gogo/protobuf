@@ -242,6 +242,9 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
@@ -324,6 +327,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -351,6 +357,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -403,6 +412,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postmsgIndex := iNdEx + mapmsglen
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postmsgIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -433,6 +445,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -460,6 +475,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -512,6 +530,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postmsgIndex := iNdEx + mapmsglen
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postmsgIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -538,6 +559,9 @@ func (m *Message) Unmarshal(data []byte) error {
 			skippy, err := skipTheproto3Unsafe(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -603,6 +627,9 @@ func (m *Nested) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -648,6 +675,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -729,6 +759,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -806,6 +839,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -879,6 +915,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -952,6 +991,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1025,6 +1067,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1098,6 +1143,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1175,6 +1223,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1252,6 +1303,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1319,6 +1373,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1386,6 +1443,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1461,6 +1521,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1536,6 +1599,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1611,6 +1677,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1696,6 +1765,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1782,6 +1854,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1861,6 +1936,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1919,6 +1997,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				}
 			}
 			postmsgIndex := iNdEx + mapmsglen
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postmsgIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1945,6 +2026,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			skippy, err := skipTheproto3Unsafe(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1991,6 +2075,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2070,6 +2157,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2124,6 +2214,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				}
 			}
 			postmsgIndex := iNdEx + mapmsglen
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postmsgIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2154,6 +2247,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2232,6 +2328,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2282,6 +2381,9 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 			skippy, err := skipTheproto3Unsafe(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -2338,6 +2440,9 @@ func skipTheproto3Unsafe(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthTheproto3Unsafe
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -2376,6 +2481,11 @@ func skipTheproto3Unsafe(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthTheproto3Unsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *Message) String() string {
 	if this == nil {
 		return "nil"

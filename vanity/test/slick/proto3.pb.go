@@ -90,6 +90,9 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthProto3
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -145,6 +148,9 @@ func skipProto3(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthProto3
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -183,6 +189,11 @@ func skipProto3(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthProto3 = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *Aproto3) String() string {
 	if this == nil {
 		return "nil"

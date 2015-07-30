@@ -436,6 +436,9 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -730,6 +733,9 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if byteLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
@@ -750,6 +756,9 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			skippy, err := skipRequiredexample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1100,6 +1109,9 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if byteLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
@@ -1120,6 +1132,9 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			skippy, err := skipRequiredexample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1212,6 +1227,9 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1233,6 +1251,9 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 			skippy, err := skipRequiredexample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1290,6 +1311,9 @@ func skipRequiredexample(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthRequiredexample
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -1328,6 +1352,11 @@ func skipRequiredexample(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthRequiredexample = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (m *RequiredExample) Size() (n int) {
 	var l int
 	_ = l

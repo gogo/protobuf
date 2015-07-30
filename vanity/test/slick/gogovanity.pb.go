@@ -153,6 +153,9 @@ func (m *B) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthGogovanity
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -208,6 +211,9 @@ func skipGogovanity(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthGogovanity
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -246,6 +252,11 @@ func skipGogovanity(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthGogovanity = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *B) String() string {
 	if this == nil {
 		return "nil"

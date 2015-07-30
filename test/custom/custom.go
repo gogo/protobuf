@@ -32,6 +32,7 @@ package custom
 
 import (
 	"encoding/json"
+	"errors"
 	"unsafe"
 )
 
@@ -83,6 +84,9 @@ func (u *Uint128) Unmarshal(data []byte) error {
 		pu := Uint128{}
 		*u = pu
 		return nil
+	}
+	if len(data) != 16 {
+		return errors.New("Uint128: invalid length")
 	}
 	pu := Uint128(GetLittleEndianUint128(data, 0))
 	*u = pu

@@ -80,6 +80,9 @@ func (m *IndexQueries) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthIndeximport
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -101,6 +104,9 @@ func (m *IndexQueries) Unmarshal(data []byte) error {
 			skippy, err := skipIndeximport(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthIndeximport
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -158,6 +164,9 @@ func skipIndeximport(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthIndeximport
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -196,6 +205,11 @@ func skipIndeximport(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthIndeximport = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (m *IndexQueries) Size() (n int) {
 	var l int
 	_ = l

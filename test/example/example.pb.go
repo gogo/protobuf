@@ -220,6 +220,9 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if byteLen < 0 {
+				return ErrInvalidLengthExample
+			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
@@ -241,6 +244,9 @@ func (m *A) Unmarshal(data []byte) error {
 			skippy, err := skipExample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -288,6 +294,9 @@ func (m *B) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthExample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -310,6 +319,9 @@ func (m *B) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthExample
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -334,6 +346,9 @@ func (m *B) Unmarshal(data []byte) error {
 			skippy, err := skipExample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -395,6 +410,9 @@ func (m *C) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -441,6 +459,9 @@ func (m *U) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthExample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -468,6 +489,9 @@ func (m *U) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthExample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -491,6 +515,9 @@ func (m *U) Unmarshal(data []byte) error {
 			skippy, err := skipExample(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -535,6 +562,9 @@ func (m *E) Unmarshal(data []byte) error {
 				if err != nil {
 					return err
 				}
+				if skippy < 0 {
+					return ErrInvalidLengthExample
+				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -553,6 +583,9 @@ func (m *E) Unmarshal(data []byte) error {
 				skippy, err := skipExample(data[iNdEx:])
 				if err != nil {
 					return err
+				}
+				if skippy < 0 {
+					return ErrInvalidLengthExample
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -615,6 +648,9 @@ func (m *R) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -674,6 +710,9 @@ func (m *CastType) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthExample
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -730,6 +769,9 @@ func skipExample(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthExample
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -768,6 +810,11 @@ func skipExample(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthExample = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *U) GetValue() interface{} {
 	if this.A != nil {
 		return this.A

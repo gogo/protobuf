@@ -229,6 +229,9 @@ func (m *Big) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -269,6 +272,9 @@ func (m *Big) Unmarshal(data []byte) error {
 			skippy, err := skipUnmarshalmerge(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -329,6 +335,9 @@ func (m *Sub) Unmarshal(data []byte) error {
 			skippy, err := skipUnmarshalmerge(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -555,6 +564,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -623,6 +635,9 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthUnmarshalmerge
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -661,6 +676,11 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthUnmarshalmerge = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (m *BigUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -697,6 +717,9 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnmarshalmergeUnsafe
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -737,6 +760,9 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			skippy, err := skipUnmarshalmergeUnsafe(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmergeUnsafe
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -794,6 +820,9 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthUnmarshalmergeUnsafe
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -832,6 +861,11 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthUnmarshalmergeUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *Big) String() string {
 	if this == nil {
 		return "nil"

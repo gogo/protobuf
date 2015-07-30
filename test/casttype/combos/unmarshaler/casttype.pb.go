@@ -153,6 +153,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if byteLen < 0 {
+				return ErrInvalidLengthCasttype
+			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
@@ -174,6 +177,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -211,6 +217,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			skippy, err := skipCasttype(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCasttype
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -268,6 +277,9 @@ func skipCasttype(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthCasttype
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -306,6 +318,11 @@ func skipCasttype(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthCasttype = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *Castaway) String() string {
 	if this == nil {
 		return "nil"

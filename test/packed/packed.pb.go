@@ -730,6 +730,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthPacked
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1419,6 +1422,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthPacked
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1475,6 +1481,9 @@ func skipPacked(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthPacked
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -1513,6 +1522,11 @@ func skipPacked(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthPacked = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -1732,6 +1746,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			skippy, err := skipPackedUnsafe(data[iNdEx:])
 			if err != nil {
 				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPackedUnsafe
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -2358,6 +2375,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthPackedUnsafe
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2414,6 +2434,9 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthPackedUnsafe
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -2452,6 +2475,11 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthPackedUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 	this := &NinRepNative{}
 	if r.Intn(10) != 0 {

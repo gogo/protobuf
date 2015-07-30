@@ -150,6 +150,9 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthSizeunderscore
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -206,6 +209,9 @@ func skipSizeunderscore(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthSizeunderscore
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -244,6 +250,11 @@ func skipSizeunderscore(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthSizeunderscore = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (m *SizeMessage) Size() (n int) {
 	var l int
 	_ = l

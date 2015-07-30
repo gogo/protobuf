@@ -99,6 +99,9 @@ func (m *A) Unmarshal(data []byte) error {
 			if err != nil {
 				return err
 			}
+			if skippy < 0 {
+				return ErrInvalidLengthVanity
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -154,6 +157,9 @@ func skipVanity(data []byte) (n int, err error) {
 				}
 			}
 			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthVanity
+			}
 			return iNdEx, nil
 		case 3:
 			for {
@@ -192,6 +198,11 @@ func skipVanity(data []byte) (n int, err error) {
 	}
 	panic("unreachable")
 }
+
+var (
+	ErrInvalidLengthVanity = fmt.Errorf("proto: negative length found during unmarshaling")
+)
+
 func (this *A) String() string {
 	if this == nil {
 		return "nil"
