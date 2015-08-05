@@ -1891,9 +1891,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
 			break
 		}
-		if gogoproto.IsEmbed(field) ||
-			gogoproto.IsCustomType(field) ||
-			gogoproto.IsCastType(field) {
+		if gogoproto.IsEmbed(field) || gogoproto.IsCustomType(field) {
 			continue
 		}
 		fname := fieldNames[field]
