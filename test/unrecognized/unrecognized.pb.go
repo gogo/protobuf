@@ -1869,7 +1869,7 @@ func (m *A) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *A) MarshalTo(data []byte) (n int, err error) {
+func (m *A) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1904,7 +1904,7 @@ func (m *B) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *B) MarshalTo(data []byte) (n int, err error) {
+func (m *B) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1955,7 +1955,7 @@ func (m *D) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *D) MarshalTo(data []byte) (n int, err error) {
+func (m *D) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1981,7 +1981,7 @@ func (m *C) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *C) MarshalTo(data []byte) (n int, err error) {
+func (m *C) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2046,7 +2046,7 @@ func (m *U) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *U) MarshalTo(data []byte) (n int, err error) {
+func (m *U) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2092,7 +2092,7 @@ func (m *OldA) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OldA) MarshalTo(data []byte) (n int, err error) {
+func (m *OldA) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2127,7 +2127,7 @@ func (m *OldB) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OldB) MarshalTo(data []byte) (n int, err error) {
+func (m *OldB) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2168,7 +2168,7 @@ func (m *OldC) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OldC) MarshalTo(data []byte) (n int, err error) {
+func (m *OldC) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2225,7 +2225,7 @@ func (m *OldU) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OldU) MarshalTo(data []byte) (n int, err error) {
+func (m *OldU) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int

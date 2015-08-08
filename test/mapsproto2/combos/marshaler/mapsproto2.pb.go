@@ -765,7 +765,7 @@ func (m *FloatingPoint) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *FloatingPoint) MarshalTo(data []byte) (n int, err error) {
+func (m *FloatingPoint) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -791,7 +791,7 @@ func (m *AllMaps) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AllMaps) MarshalTo(data []byte) (n int, err error) {
+func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int

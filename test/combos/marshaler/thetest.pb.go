@@ -6197,7 +6197,7 @@ func (m *NidOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -6272,7 +6272,7 @@ func (m *NinOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -6375,7 +6375,7 @@ func (m *NidRepNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidRepNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NidRepNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -6597,7 +6597,7 @@ func (m *NinRepNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinRepNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NinRepNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -6819,7 +6819,7 @@ func (m *NidRepPackedNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidRepPackedNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NidRepPackedNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7075,7 +7075,7 @@ func (m *NinRepPackedNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinRepPackedNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NinRepPackedNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7331,7 +7331,7 @@ func (m *NidOptStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidOptStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NidOptStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7406,7 +7406,7 @@ func (m *NinOptStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7499,7 +7499,7 @@ func (m *NidRepStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidRepStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NidRepStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7650,7 +7650,7 @@ func (m *NinRepStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinRepStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NinRepStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7801,7 +7801,7 @@ func (m *NidEmbeddedStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidEmbeddedStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NidEmbeddedStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7852,7 +7852,7 @@ func (m *NinEmbeddedStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinEmbeddedStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NinEmbeddedStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7907,7 +7907,7 @@ func (m *NidNestedStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidNestedStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NidNestedStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7948,7 +7948,7 @@ func (m *NinNestedStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinNestedStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *NinNestedStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -7991,7 +7991,7 @@ func (m *NidOptCustom) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidOptCustom) MarshalTo(data []byte) (n int, err error) {
+func (m *NidOptCustom) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8028,7 +8028,7 @@ func (m *CustomDash) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomDash) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomDash) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8059,7 +8059,7 @@ func (m *NinOptCustom) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptCustom) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptCustom) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8100,7 +8100,7 @@ func (m *NidRepCustom) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidRepCustom) MarshalTo(data []byte) (n int, err error) {
+func (m *NidRepCustom) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8145,7 +8145,7 @@ func (m *NinRepCustom) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinRepCustom) MarshalTo(data []byte) (n int, err error) {
+func (m *NinRepCustom) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8190,7 +8190,7 @@ func (m *NinOptNativeUnion) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptNativeUnion) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptNativeUnion) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8263,7 +8263,7 @@ func (m *NinOptStructUnion) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptStructUnion) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptStructUnion) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8346,7 +8346,7 @@ func (m *NinEmbeddedStructUnion) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinEmbeddedStructUnion) MarshalTo(data []byte) (n int, err error) {
+func (m *NinEmbeddedStructUnion) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8401,7 +8401,7 @@ func (m *NinNestedStructUnion) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinNestedStructUnion) MarshalTo(data []byte) (n int, err error) {
+func (m *NinNestedStructUnion) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8452,7 +8452,7 @@ func (m *Tree) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Tree) MarshalTo(data []byte) (n int, err error) {
+func (m *Tree) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8503,7 +8503,7 @@ func (m *OrBranch) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OrBranch) MarshalTo(data []byte) (n int, err error) {
+func (m *OrBranch) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8540,7 +8540,7 @@ func (m *AndBranch) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AndBranch) MarshalTo(data []byte) (n int, err error) {
+func (m *AndBranch) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8577,7 +8577,7 @@ func (m *Leaf) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Leaf) MarshalTo(data []byte) (n int, err error) {
+func (m *Leaf) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8605,7 +8605,7 @@ func (m *DeepTree) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *DeepTree) MarshalTo(data []byte) (n int, err error) {
+func (m *DeepTree) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8656,7 +8656,7 @@ func (m *ADeepBranch) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *ADeepBranch) MarshalTo(data []byte) (n int, err error) {
+func (m *ADeepBranch) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8685,7 +8685,7 @@ func (m *AndDeepBranch) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AndDeepBranch) MarshalTo(data []byte) (n int, err error) {
+func (m *AndDeepBranch) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8722,7 +8722,7 @@ func (m *DeepLeaf) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *DeepLeaf) MarshalTo(data []byte) (n int, err error) {
+func (m *DeepLeaf) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8751,7 +8751,7 @@ func (m *Nil) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Nil) MarshalTo(data []byte) (n int, err error) {
+func (m *Nil) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8772,7 +8772,7 @@ func (m *NidOptEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidOptEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *NidOptEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8796,7 +8796,7 @@ func (m *NinOptEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8822,7 +8822,7 @@ func (m *NidRepEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidRepEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *NidRepEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8850,7 +8850,7 @@ func (m *NinRepEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinRepEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *NinRepEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8878,7 +8878,7 @@ func (m *NinOptEnumDefault) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptEnumDefault) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptEnumDefault) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8904,7 +8904,7 @@ func (m *AnotherNinOptEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AnotherNinOptEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *AnotherNinOptEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8930,7 +8930,7 @@ func (m *AnotherNinOptEnumDefault) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AnotherNinOptEnumDefault) MarshalTo(data []byte) (n int, err error) {
+func (m *AnotherNinOptEnumDefault) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8956,7 +8956,7 @@ func (m *Timer) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Timer) MarshalTo(data []byte) (n int, err error) {
+func (m *Timer) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -8989,7 +8989,7 @@ func (m *MyExtendable) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *MyExtendable) MarshalTo(data []byte) (n int, err error) {
+func (m *MyExtendable) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9022,7 +9022,7 @@ func (m *OtherExtenable) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *OtherExtenable) MarshalTo(data []byte) (n int, err error) {
+func (m *OtherExtenable) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9070,7 +9070,7 @@ func (m *NestedDefinition) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NestedDefinition) MarshalTo(data []byte) (n int, err error) {
+func (m *NestedDefinition) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9121,7 +9121,7 @@ func (m *NestedDefinition_NestedMessage) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NestedDefinition_NestedMessage) MarshalTo(data []byte) (n int, err error) {
+func (m *NestedDefinition_NestedMessage) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9157,7 +9157,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Marshal() (data []byte,
 	return data[:n], nil
 }
 
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) MarshalTo(data []byte) (n int, err error) {
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9184,7 +9184,7 @@ func (m *NestedScope) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NestedScope) MarshalTo(data []byte) (n int, err error) {
+func (m *NestedScope) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9230,7 +9230,7 @@ func (m *NinOptNativeDefault) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptNativeDefault) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptNativeDefault) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9333,7 +9333,7 @@ func (m *CustomContainer) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomContainer) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomContainer) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9362,7 +9362,7 @@ func (m *CustomNameNidOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameNidOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameNidOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9437,7 +9437,7 @@ func (m *CustomNameNinOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameNinOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameNinOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9540,7 +9540,7 @@ func (m *CustomNameNinRepNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameNinRepNative) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameNinRepNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9762,7 +9762,7 @@ func (m *CustomNameNinStruct) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameNinStruct) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameNinStruct) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9857,7 +9857,7 @@ func (m *CustomNameCustomType) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameCustomType) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameCustomType) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9922,7 +9922,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -9977,7 +9977,7 @@ func (m *CustomNameEnum) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *CustomNameEnum) MarshalTo(data []byte) (n int, err error) {
+func (m *CustomNameEnum) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10010,7 +10010,7 @@ func (m *NoExtensionsMap) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NoExtensionsMap) MarshalTo(data []byte) (n int, err error) {
+func (m *NoExtensionsMap) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10039,7 +10039,7 @@ func (m *Unrecognized) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Unrecognized) MarshalTo(data []byte) (n int, err error) {
+func (m *Unrecognized) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10063,7 +10063,7 @@ func (m *UnrecognizedWithInner) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *UnrecognizedWithInner) MarshalTo(data []byte) (n int, err error) {
+func (m *UnrecognizedWithInner) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10102,7 +10102,7 @@ func (m *UnrecognizedWithInner_Inner) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *UnrecognizedWithInner_Inner) MarshalTo(data []byte) (n int, err error) {
+func (m *UnrecognizedWithInner_Inner) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10125,7 +10125,7 @@ func (m *UnrecognizedWithEmbed) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *UnrecognizedWithEmbed) MarshalTo(data []byte) (n int, err error) {
+func (m *UnrecognizedWithEmbed) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -10160,7 +10160,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *UnrecognizedWithEmbed_Embedded) MarshalTo(data []byte) (n int, err error) {
+func (m *UnrecognizedWithEmbed_Embedded) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int

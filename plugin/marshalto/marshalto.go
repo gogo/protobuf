@@ -83,7 +83,7 @@ given to the marshalto plugin, will generate the following code:
 	return data[:n], nil
   }
 
-  func (m *B) MarshalTo(data []byte) (n int, err error) {
+  func (m *B) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -129,13 +129,14 @@ package marshalto
 
 import (
 	"fmt"
+	"sort"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"sort"
-	"strconv"
-	"strings"
 )
 
 type NumGen interface {
@@ -414,7 +415,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P(``)
-		p.P(`func (m *`, ccTypeName, `) MarshalTo(data []byte) (n int, err error) {`)
+		p.P(`func (m *`, ccTypeName, `) MarshalTo(data []byte) (int, error) {`)
 		p.In()
 		p.P(`var i int`)
 		p.P(`_ = i`)

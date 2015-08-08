@@ -81,12 +81,12 @@ func main() {
 	// report failure.
 	g := generator.New()
 
-	data, err := ioutil.ReadAll(os.Stdin)
+	dataIn, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		g.Error(err, "reading input")
 	}
 
-	if err := proto.Unmarshal(data, g.Request); err != nil {
+	if err := proto.Unmarshal(dataIn, g.Request); err != nil {
 		g.Error(err, "parsing input proto")
 	}
 
@@ -107,7 +107,7 @@ func main() {
 
 	gtest := generator.New()
 
-	if err := proto.Unmarshal(data, gtest.Request); err != nil {
+	if err := proto.Unmarshal(dataIn, gtest.Request); err != nil {
 		gtest.Error(err, "parsing input proto")
 	}
 
@@ -143,12 +143,12 @@ func main() {
 	}
 
 	// Send back the results.
-	data, err = proto.Marshal(g.Response)
+	dataOut, err := proto.Marshal(g.Response)
 	if err != nil {
 		g.Error(err, "failed to marshal output proto")
 	}
-	_, err = os.Stdout.Write(data)
-	if err != nil {
+
+	if _, err := os.Stdout.Write(dataOut); err != nil {
 		g.Error(err, "failed to write output proto")
 	}
 }

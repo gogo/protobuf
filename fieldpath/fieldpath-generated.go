@@ -266,6 +266,7 @@ func (this *Float64SinglePath) UnmarshalFirst(buf []byte) (*float64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -316,6 +317,7 @@ func (this *Float64SinglePath) Unmarshal(buf []byte) (*float64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -635,6 +637,7 @@ func (this *Float32SinglePath) UnmarshalFirst(buf []byte) (*float32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -685,6 +688,7 @@ func (this *Float32SinglePath) Unmarshal(buf []byte) (*float32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1052,6 +1056,7 @@ func (this *Int32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1112,6 +1117,7 @@ func (this *Int32SinglePath) Unmarshal(buf []byte) (*int32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1461,6 +1467,7 @@ func (this *Int64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1521,6 +1528,7 @@ func (this *Int64SinglePath) Unmarshal(buf []byte) (*int64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1870,6 +1878,7 @@ func (this *Uint64SinglePath) UnmarshalFirst(buf []byte) (*uint64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -1930,6 +1939,7 @@ func (this *Uint64SinglePath) Unmarshal(buf []byte) (*uint64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -2279,6 +2289,7 @@ func (this *Uint32SinglePath) UnmarshalFirst(buf []byte) (*uint32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -2339,6 +2350,7 @@ func (this *Uint32SinglePath) Unmarshal(buf []byte) (*uint32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -2691,6 +2703,7 @@ func (this *Sint32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -2752,6 +2765,7 @@ func (this *Sint32SinglePath) Unmarshal(buf []byte) (*int32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3104,6 +3118,7 @@ func (this *Sint64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3165,6 +3180,7 @@ func (this *Sint64SinglePath) Unmarshal(buf []byte) (*int64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3484,6 +3500,7 @@ func (this *Fixed32SinglePath) UnmarshalFirst(buf []byte) (*uint32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3534,6 +3551,7 @@ func (this *Fixed32SinglePath) Unmarshal(buf []byte) (*uint32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3853,6 +3871,7 @@ func (this *Fixed64SinglePath) UnmarshalFirst(buf []byte) (*uint64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -3903,6 +3922,7 @@ func (this *Fixed64SinglePath) Unmarshal(buf []byte) (*uint64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -4222,6 +4242,7 @@ func (this *Sfixed32SinglePath) UnmarshalFirst(buf []byte) (*int32, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -4272,6 +4293,7 @@ func (this *Sfixed32SinglePath) Unmarshal(buf []byte) (*int32, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -4591,6 +4613,7 @@ func (this *Sfixed64SinglePath) UnmarshalFirst(buf []byte) (*int64, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -4641,6 +4664,7 @@ func (this *Sfixed64SinglePath) Unmarshal(buf []byte) (*int64, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -5207,6 +5231,7 @@ func (this *StringSinglePath) UnmarshalFirst(buf []byte) (*string, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -5272,6 +5297,7 @@ func (this *StringSinglePath) Unmarshal(buf []byte) (*string, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -5654,6 +5680,7 @@ func (this *BytesSinglePath) UnmarshalFirst(buf []byte) ([]byte, error) {
 				endOfs[position] = offset + int(length)
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
@@ -5719,6 +5746,7 @@ func (this *BytesSinglePath) Unmarshal(buf []byte) ([]byte, error) {
 				}
 			}
 		} else {
+			var err error
 			offset, err = skip(buf, offset, wireType)
 			if err != nil {
 				return nil, err
