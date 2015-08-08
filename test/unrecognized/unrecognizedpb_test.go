@@ -67,8 +67,8 @@ func TestAProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -127,8 +127,8 @@ func TestBProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -187,8 +187,8 @@ func TestDProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -247,8 +247,8 @@ func TestCProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -307,8 +307,8 @@ func TestUProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -367,8 +367,8 @@ func TestUnoMProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -400,8 +400,8 @@ func TestOldAProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -460,8 +460,8 @@ func TestOldBProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -520,8 +520,8 @@ func TestOldCProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -580,8 +580,8 @@ func TestOldUProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -640,8 +640,8 @@ func TestOldUnoMProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 

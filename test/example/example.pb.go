@@ -147,6 +147,13 @@ type CastType struct {
 func (m *CastType) Reset()      { *m = CastType{} }
 func (*CastType) ProtoMessage() {}
 
+func (m *CastType) GetInt32() int32 {
+	if m != nil && m.Int32 != nil {
+		return *m.Int32
+	}
+	return 0
+}
+
 func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

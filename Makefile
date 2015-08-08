@@ -26,7 +26,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-.PHONY: nuke regenerate tests clean install gofmt
+.PHONY: nuke regenerate tests clean install gofmt vet
+
+all: clean install regenerate install tests errcheck vet
 
 install:
 	go install ./proto
@@ -42,8 +44,6 @@ install:
 	go install ./pbpath
 	go install ./protoc-gen-gogo/version/protoc-min-version
 	go install ./protoc-gen-gogo/protoc-gen-combo
-
-all: clean install regenerate install tests
 
 clean:
 	go clean ./...
@@ -90,42 +90,8 @@ regenerate:
 	make gofmt
 
 tests:
-	go test -v ./test
-	go test -v ./proto
-	go test -v ./jsonpb
-	go test -v ./fieldpath/...
-	go test -v ./io
-	go test -v ./test/custom
-	go test -v ./test/embedconflict
-	go test -v ./test/defaultconflict
-	go test -v ./test/unrecognized
-	go test -v ./test/group
-	go test -v ./test/unrecognizedgroup
-	go test -v ./test/enumstringer
-	go test -v ./test/unmarshalmerge
-	go test -v ./test/moredefaults
-	go test -v ./test/issue8
-	go test -v ./test/example
-	go test -v ./test/dashfilename
 	go build ./test/enumprefix
-	go test -v ./test/packed
-	go test -v ./test/tags
-	go test -v ./parser
-	go test -v ./test/oneof
-	go test -v ./test/theproto3/...
-	go test -v ./test/combos/...
-	go test -v ./test/mapsproto2/...
-	go test -v ./test/issue42order
-	go test -v ./test/importdedup
-	go test -v ./test/custombytesnonstruct
-	go test -v ./test/required
-	go test -v ./test/casttype/...
-	go test -v ./vanity/test
-	go test -v ./test/sizeunderscore
-	go test -v ./test/issue34
-	go test -v ./test/empty-issue70
-	go test -v ./test/indeximport-issue72
-	make vet
+	go test ./...
 
 vet:
 	go vet ./...

@@ -60,8 +60,8 @@ func TestBigProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -133,8 +133,8 @@ func TestBigUnsafeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -206,8 +206,8 @@ func TestSubProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -279,8 +279,8 @@ func TestIntMergeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 

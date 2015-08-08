@@ -113,8 +113,8 @@ func TestNidOptNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -213,8 +213,8 @@ func TestNinOptNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -313,8 +313,8 @@ func TestNidRepNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -413,8 +413,8 @@ func TestNinRepNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -513,8 +513,8 @@ func TestNidRepPackedNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -613,8 +613,8 @@ func TestNinRepPackedNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -713,8 +713,8 @@ func TestNidOptStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -813,8 +813,8 @@ func TestNinOptStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -913,8 +913,8 @@ func TestNidRepStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1013,8 +1013,8 @@ func TestNinRepStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1113,8 +1113,8 @@ func TestNidEmbeddedStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1213,8 +1213,8 @@ func TestNinEmbeddedStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1313,8 +1313,8 @@ func TestNidNestedStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1413,8 +1413,8 @@ func TestNinNestedStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1513,8 +1513,8 @@ func TestNidOptCustomProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1613,8 +1613,8 @@ func TestCustomDashProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1713,8 +1713,8 @@ func TestNinOptCustomProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1813,8 +1813,8 @@ func TestNidRepCustomProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -1913,8 +1913,8 @@ func TestNinRepCustomProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2013,8 +2013,8 @@ func TestNinOptNativeUnionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2113,8 +2113,8 @@ func TestNinOptStructUnionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2213,8 +2213,8 @@ func TestNinEmbeddedStructUnionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2313,8 +2313,8 @@ func TestNinNestedStructUnionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2413,8 +2413,8 @@ func TestTreeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2513,8 +2513,8 @@ func TestOrBranchProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2613,8 +2613,8 @@ func TestAndBranchProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2713,8 +2713,8 @@ func TestLeafProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2813,8 +2813,8 @@ func TestDeepTreeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -2913,8 +2913,8 @@ func TestADeepBranchProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3013,8 +3013,8 @@ func TestAndDeepBranchProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3113,8 +3113,8 @@ func TestDeepLeafProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3213,8 +3213,8 @@ func TestNilProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3313,8 +3313,8 @@ func TestNidOptEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3413,8 +3413,8 @@ func TestNinOptEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3513,8 +3513,8 @@ func TestNidRepEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3613,8 +3613,8 @@ func TestNinRepEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3713,8 +3713,8 @@ func TestNinOptEnumDefaultProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3813,8 +3813,8 @@ func TestAnotherNinOptEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -3913,8 +3913,8 @@ func TestAnotherNinOptEnumDefaultProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4013,8 +4013,8 @@ func TestTimerProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4113,8 +4113,8 @@ func TestMyExtendableProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4213,8 +4213,8 @@ func TestOtherExtenableProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4313,8 +4313,8 @@ func TestNestedDefinitionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4413,8 +4413,8 @@ func TestNestedDefinition_NestedMessageProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4513,8 +4513,8 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4613,8 +4613,8 @@ func TestNestedScopeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4713,8 +4713,8 @@ func TestNinOptNativeDefaultProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4813,8 +4813,8 @@ func TestCustomContainerProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -4913,8 +4913,8 @@ func TestCustomNameNidOptNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5013,8 +5013,8 @@ func TestCustomNameNinOptNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5113,8 +5113,8 @@ func TestCustomNameNinRepNativeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5213,8 +5213,8 @@ func TestCustomNameNinStructProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5313,8 +5313,8 @@ func TestCustomNameCustomTypeProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5413,8 +5413,8 @@ func TestCustomNameNinEmbeddedStructUnionProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5513,8 +5513,8 @@ func TestCustomNameEnumProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5613,8 +5613,8 @@ func TestNoExtensionsMapProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5713,8 +5713,8 @@ func TestUnrecognizedProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5813,8 +5813,8 @@ func TestUnrecognizedWithInnerProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -5913,8 +5913,8 @@ func TestUnrecognizedWithInner_InnerProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -6013,8 +6013,8 @@ func TestUnrecognizedWithEmbedProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
@@ -6113,8 +6113,8 @@ func TestUnrecognizedWithEmbed_EmbeddedProto(t *testing.T) {
 			littlefuzz[popr.Intn(len(littlefuzz))] = byte(popr.Intn(256))
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
-		//shouldn't panic
-		github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
+		// shouldn't panic
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
