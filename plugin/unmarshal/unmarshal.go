@@ -1031,7 +1031,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, fmt.Sprintf("0x%08x", 1<<(fieldBit%64)), `) == 0 {`)
 			p.In()
-			p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+				p.P(`return new(`, protoPkg.Use(), `.RequiredNotSetError)`)
+			} else {
+				p.P(`return `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+			}
 			p.Out()
 			p.P(`}`)
 		}

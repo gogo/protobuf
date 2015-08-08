@@ -18,6 +18,7 @@ import math "math"
 
 import io "io"
 import fmt "fmt"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -25,6 +26,7 @@ var _ = math.Inf
 
 type A struct {
 	Strings          *string `protobuf:"bytes,1,opt" json:"Strings,omitempty"`
+	Int              *int64  `protobuf:"varint,2,req" json:"Int,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -39,7 +41,15 @@ func (m *A) GetStrings() string {
 	return ""
 }
 
+func (m *A) GetInt() int64 {
+	if m != nil && m.Int != nil {
+		return *m.Int
+	}
+	return 0
+}
+
 func (m *A) Unmarshal(data []byte) error {
+	var hasFields [1]uint64
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
@@ -81,6 +91,24 @@ func (m *A) Unmarshal(data []byte) error {
 			s := string(data[iNdEx:postIndex])
 			m.Strings = &s
 			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Int = &v
+			hasFields[0] |= uint64(0x00000001)
 		default:
 			var sizeOfWire int
 			for {
@@ -104,6 +132,9 @@ func (m *A) Unmarshal(data []byte) error {
 			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
+	}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Int")
 	}
 
 	return nil
@@ -207,6 +238,9 @@ func (m *A) Size() (n int) {
 		l = len(*m.Strings)
 		n += 1 + l + sovVanity(uint64(l))
 	}
+	if m.Int != nil {
+		n += 1 + sovVanity(uint64(*m.Int))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -246,6 +280,13 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 		i++
 		i = encodeVarintVanity(data, i, uint64(len(*m.Strings)))
 		i += copy(data[i:], *m.Strings)
+	}
+	if m.Int == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Int")
+	} else {
+		data[i] = 0x10
+		i++
+		i = encodeVarintVanity(data, i, uint64(*m.Int))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(data[i:], m.XXX_unrecognized)

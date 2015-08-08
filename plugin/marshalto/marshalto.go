@@ -430,7 +430,11 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			if required && nullable {
 				p.P(`if m.`, fieldname, `== nil {`)
 				p.In()
-				p.P(`return 0, `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+				if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+					p.P(`return 0, new(`, protoPkg.Use(), `.RequiredNotSetError)`)
+				} else {
+					p.P(`return 0, `, protoPkg.Use(), `.NewRequiredNotSetError("`, field.GetName(), `")`)
+				}
 				p.Out()
 				p.P(`} else {`)
 			} else if repeated {

@@ -30,4 +30,5 @@ package vanity;
 
 message A {
 	optional string Strings = 1;
+	required int64 Int = 2;
 }

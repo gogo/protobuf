@@ -3,13 +3,13 @@
 // DO NOT EDIT!
 
 /*
-Package vanity is a generated protocol buffer package.
+	Package vanity is a generated protocol buffer package.
 
-It is generated from these files:
-	vanity.proto
+	It is generated from these files:
+		vanity.proto
 
-It has these top-level messages:
-	A
+	It has these top-level messages:
+		A
 */
 package vanity
 
@@ -18,6 +18,7 @@ import math "math"
 
 import io "io"
 import fmt "fmt"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -25,6 +26,7 @@ var _ = math.Inf
 
 type A struct {
 	Strings string `protobuf:"bytes,1,opt" json:"Strings"`
+	Int     int64  `protobuf:"varint,2,req" json:"Int"`
 }
 
 func (m *A) Reset()         { *m = A{} }
@@ -38,7 +40,15 @@ func (m *A) GetStrings() string {
 	return ""
 }
 
+func (m *A) GetInt() int64 {
+	if m != nil {
+		return m.Int
+	}
+	return 0
+}
+
 func (m *A) Unmarshal(data []byte) error {
+	var hasFields [1]uint64
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
@@ -79,6 +89,23 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			m.Strings = string(data[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int", wireType)
+			}
+			m.Int = 0
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				m.Int |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			hasFields[0] |= uint64(0x00000001)
 		default:
 			var sizeOfWire int
 			for {
@@ -101,6 +128,9 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			iNdEx += skippy
 		}
+	}
+	if hasFields[0]&uint64(0x00000001) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Int")
 	}
 
 	return nil
@@ -202,6 +232,7 @@ func (m *A) Size() (n int) {
 	_ = l
 	l = len(m.Strings)
 	n += 1 + l + sovVanity(uint64(l))
+	n += 1 + sovVanity(uint64(m.Int))
 	return n
 }
 
@@ -237,6 +268,9 @@ func (m *A) MarshalTo(data []byte) (n int, err error) {
 	i++
 	i = encodeVarintVanity(data, i, uint64(len(m.Strings)))
 	i += copy(data[i:], m.Strings)
+	data[i] = 0x10
+	i++
+	i = encodeVarintVanity(data, i, uint64(m.Int))
 	return i, nil
 }
 
