@@ -1726,7 +1726,7 @@ func (m *RequiredExample) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *RequiredExample) MarshalTo(data []byte) (n int, err error) {
+func (m *RequiredExample) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1776,7 +1776,7 @@ func (m *NidOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NidOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1851,7 +1851,7 @@ func (m *NinOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NinOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1984,7 +1984,7 @@ func (m *NestedNinOptNative) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *NestedNinOptNative) MarshalTo(data []byte) (n int, err error) {
+func (m *NestedNinOptNative) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int

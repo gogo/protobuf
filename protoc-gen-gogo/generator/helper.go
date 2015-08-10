@@ -33,11 +33,12 @@ import (
 	"go/token"
 	"strings"
 
+	"path"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
-	"path"
 )
 
 func (d *FileDescriptor) Messages() []*Descriptor {
@@ -253,7 +254,8 @@ func GetCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 
 func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
 	if field.Options != nil {
-		v, err := proto.GetExtension(field.Options, gogoproto.E_Customtype)
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Customtype)
 		if err == nil && v.(*string) != nil {
 			ctype := *(v.(*string))
 			packageName, typ = splitCPackageType(ctype)
@@ -277,7 +279,8 @@ func splitCPackageType(ctype string) (packageName string, typ string) {
 
 func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
 	if field.Options != nil {
-		v, err := proto.GetExtension(field.Options, gogoproto.E_Casttype)
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Casttype)
 		if err == nil && v.(*string) != nil {
 			ctype := *(v.(*string))
 			packageName, typ = splitCPackageType(ctype)

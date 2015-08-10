@@ -28,9 +28,10 @@ package test
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/proto"
 	"math"
 	"testing"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 //http://code.google.com/p/goprotobuf/issues/detail?id=39
@@ -119,8 +120,7 @@ func TestInt32Int64Compatibility(t *testing.T) {
 	//change marshaled data1 to unmarshal into 4th field which is an int64
 	data1[0] = uint8(uint32(4 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
 	u1 := &NinOptNative{}
-	err = proto.Unmarshal(data1, u1)
-	if err != nil {
+	if err := proto.Unmarshal(data1, u1); err != nil {
 		t.Error(err)
 	}
 	if !u1.Equal(&NinOptNative{
@@ -148,22 +148,13 @@ func TestInt32Int64Compatibility(t *testing.T) {
 		}
 	}
 	u2 := &NidOptNative{}
-	err = proto.Unmarshal(data2, u2)
-	if err != nil {
+	if err := proto.Unmarshal(data2, u2); err != nil {
 		t.Error(err)
 	}
 	if !u2.Equal(&NidOptNative{
 		Field4: -1,
 	}) {
 		t.Error("non nullable unmarshaled int32 is not the same int64")
-	}
-
-	//test repeated int32 and int64
-
-	if _, err := testSize(&NinRepNative{
-		Field3: []int32{-1},
-	}, "repeated", 11); err != nil {
-		t.Error(err)
 	}
 
 	//test packed repeated int32 and int64
@@ -176,12 +167,19 @@ func TestInt32Int64Compatibility(t *testing.T) {
 		t.Error(err)
 	}
 	u4 := &NinRepPackedNative{}
-	err = proto.Unmarshal(data4, u4)
-	if err != nil {
+	if err := proto.Unmarshal(data4, u4); err != nil {
 		t.Error(err)
 	}
 	if err := u4.VerboseEqual(m4); err != nil {
 		t.Fatalf("%#v", u4)
+	}
+
+	//test repeated int32 and int64
+
+	if _, err := testSize(&NinRepNative{
+		Field3: []int32{-1},
+	}, "repeated", 11); err != nil {
+		t.Error(err)
 	}
 
 	t.Logf("tested all")

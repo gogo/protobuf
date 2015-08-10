@@ -139,47 +139,47 @@ func ToString(rootPkg string, rootMsg string, desc *descriptor.FileDescriptorSet
 			} else {
 				w.tab()
 				w.String(f.GetName() + `:`)
-				var n int
+				var m int
 				var err error
 				switch f.GetType() {
 				case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-					n, err = DecFloat64(buf, offset, w)
+					m, err = DecFloat64(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-					n, err = DecFloat32(buf, offset, w)
+					m, err = DecFloat32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_INT64:
-					n, err = DecInt64(buf, offset, w)
+					m, err = DecInt64(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_UINT64:
-					n, err = DecUint64(buf, offset, w)
+					m, err = DecUint64(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_INT32:
-					n, err = DecInt32(buf, offset, w)
+					m, err = DecInt32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_FIXED64:
-					n, err = DecFixed64(buf, offset, w)
+					m, err = DecFixed64(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_FIXED32:
-					n, err = DecFixed32(buf, offset, w)
+					m, err = DecFixed32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_BOOL:
-					n, err = DecBool(buf, offset, w)
+					m, err = DecBool(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_STRING:
-					n, err = DecString(buf, offset, w)
+					m, err = DecString(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_GROUP:
 					panic("not implemented")
 				case descriptor.FieldDescriptorProto_TYPE_BYTES:
-					n, err = DecBytes(buf, offset, w)
+					m, err = DecBytes(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_UINT32:
-					n, err = DecUint32(buf, offset, w)
+					m, err = DecUint32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_ENUM:
-					n, err = DecInt32(buf, offset, w)
+					m, err = DecInt32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-					n, err = DecSfixed32(buf, offset, w)
+					m, err = DecSfixed32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-					n, err = DecSfixed64(buf, offset, w)
+					m, err = DecSfixed64(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_SINT32:
-					n, err = DecSint32(buf, offset, w)
+					m, err = DecSint32(buf, offset, w)
 				case descriptor.FieldDescriptorProto_TYPE_SINT64:
-					n, err = DecSint64(buf, offset, w)
+					m, err = DecSint64(buf, offset, w)
 				default:
 					panic("unreachable")
 				}
-				offset += n
+				offset += m
 				if err != nil {
 					panic(err)
 				}

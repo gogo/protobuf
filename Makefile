@@ -49,7 +49,7 @@ clean:
 	go clean ./...
 
 nuke:
-	go clean -i ...
+	go clean -i ./...
 
 gofmt:
 	gofmt -l -s -w .
@@ -95,6 +95,10 @@ tests:
 
 vet:
 	go vet ./...
+
+# See https://github.com/golang/go/issues/11843
+vetshadow:
+	! go tool vet --shadow . 2>&1 | grep -vE 'declaration of err shadows declaration at (proto/text.go:535|proto/text.go:570|protoc-gen-gogo/main.go:84)'
 
 errcheck:
 	go get -u github.com/kisielk/errcheck

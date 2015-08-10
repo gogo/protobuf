@@ -149,7 +149,6 @@ func (m *Marshaller) marshalObject(out *errWriter, v proto.Message, indent strin
 func (m *Marshaller) marshalValue(out *errWriter, v reflect.Value,
 	structField reflect.StructField, indent string) error {
 
-	var err error
 	v = reflect.Indirect(v)
 
 	// Handle repeated elements.

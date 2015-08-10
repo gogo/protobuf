@@ -1088,7 +1088,7 @@ func (m *Message) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Message) MarshalTo(data []byte) (n int, err error) {
+func (m *Message) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1235,7 +1235,7 @@ func (m *Nested) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *Nested) MarshalTo(data []byte) (n int, err error) {
+func (m *Nested) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1259,7 +1259,7 @@ func (m *AllMaps) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *AllMaps) MarshalTo(data []byte) (n int, err error) {
+func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1648,7 +1648,7 @@ func (m *MessageWithMap) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *MessageWithMap) MarshalTo(data []byte) (n int, err error) {
+func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1742,7 +1742,7 @@ func (m *FloatingPoint) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *FloatingPoint) MarshalTo(data []byte) (n int, err error) {
+func (m *FloatingPoint) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int

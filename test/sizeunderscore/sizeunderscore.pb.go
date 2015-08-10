@@ -392,7 +392,7 @@ func (m *SizeMessage) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *SizeMessage) MarshalTo(data []byte) (n int, err error) {
+func (m *SizeMessage) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
