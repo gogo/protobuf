@@ -39,7 +39,8 @@ Finally run:
 
 ### Proto3
 
-Proto3 is supported, but since a specification has not been released yet, this support is limited.
+Proto3 is supported, but most of the new native types are not supported yet.
+[See Proto3 Issue](https://github.com/gogo/protobuf/issues/57) for more details.
 
 ### GRPC
 
