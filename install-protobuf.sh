@@ -19,7 +19,8 @@ case "$PROTOBUF_VERSION" in
     ;;
 esac
 
-curl -sL https://github.com/google/protobuf/releases/download/v$PROTOBUF_VERSION/$basename.tar.gz | tar zx
+wget -q https://github.com/google/protobuf/releases/download/v$PROTOBUF_VERSION/$basename.tar.gz
+tar xzf $basename.tar.gz
 
 cd protobuf-$PROTOBUF_VERSION
 
