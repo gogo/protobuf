@@ -26,10 +26,10 @@ Please visit the [homepage](http://gogo.github.io) for more documentation.
 
 ### Installation
 
-To install it, you must first have Go (at least version 1.2.2) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).
+To install it, you must first have Go (at least version 1.2.2) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.3 and 1.4 are continiuosly tested.
 
 Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
-Most versions should not give any problems, 2.5.0, 2.6.1 and 3 alpha are officially supported.
+Most versions from 2.3.1 should not give any problems, but 2.5.0, 2.6.1 and 3 alpha continiously tested.
 
 Finally run:
 
