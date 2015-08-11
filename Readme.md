@@ -1,6 +1,8 @@
 # Protocol Buffers for Go with Gadgets
 
-[![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
+Stable Drone.io Tests: [![Build Status](https://drone.io/github.com/gogo/protobuf/status.png)](https://drone.io/github.com/gogo/protobuf/latest)
+
+Experimental Travis CI Matrix Builds: [![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
 
 ### Getting Started (Give me the speed I don't care about the rest)
 
