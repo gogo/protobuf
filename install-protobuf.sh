@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -ex
 
 die() {
     echo "$@" >&2
@@ -19,7 +19,7 @@ case "$PROTOBUF_VERSION" in
     ;;
 esac
 
-wget -q https://github.com/google/protobuf/releases/download/v$PROTOBUF_VERSION/$basename.tar.gz
+wget https://github.com/google/protobuf/releases/download/v$PROTOBUF_VERSION/$basename.tar.gz
 tar xzf $basename.tar.gz
 
 cd protobuf-$PROTOBUF_VERSION
