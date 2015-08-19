@@ -59,6 +59,102 @@ func (m *B) GetInt32() int32 {
 	return Default_B_Int32
 }
 
+func (m *B) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *B) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.String_ != nil {
+		data[i] = 0xa
+		i++
+		i = encodeVarintGogovanity(data, i, uint64(len(*m.String_)))
+		i += copy(data[i:], *m.String_)
+	}
+	if m.Int64 != nil {
+		data[i] = 0x10
+		i++
+		i = encodeVarintGogovanity(data, i, uint64(*m.Int64))
+	}
+	if m.Int32 != nil {
+		data[i] = 0x18
+		i++
+		i = encodeVarintGogovanity(data, i, uint64(*m.Int32))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Gogovanity(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Gogovanity(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintGogovanity(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func (m *B) Size() (n int) {
+	var l int
+	_ = l
+	if m.String_ != nil {
+		l = len(*m.String_)
+		n += 1 + l + sovGogovanity(uint64(l))
+	}
+	if m.Int64 != nil {
+		n += 1 + sovGogovanity(uint64(*m.Int64))
+	}
+	if m.Int32 != nil {
+		n += 1 + sovGogovanity(uint64(*m.Int32))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovGogovanity(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozGogovanity(x uint64) (n int) {
+	return sovGogovanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *B) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -253,100 +349,3 @@ func skipGogovanity(data []byte) (n int, err error) {
 var (
 	ErrInvalidLengthGogovanity = fmt.Errorf("proto: negative length found during unmarshaling")
 )
-
-func (m *B) Size() (n int) {
-	var l int
-	_ = l
-	if m.String_ != nil {
-		l = len(*m.String_)
-		n += 1 + l + sovGogovanity(uint64(l))
-	}
-	if m.Int64 != nil {
-		n += 1 + sovGogovanity(uint64(*m.Int64))
-	}
-	if m.Int32 != nil {
-		n += 1 + sovGogovanity(uint64(*m.Int32))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func sovGogovanity(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozGogovanity(x uint64) (n int) {
-	return sovGogovanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *B) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *B) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.String_ != nil {
-		data[i] = 0xa
-		i++
-		i = encodeVarintGogovanity(data, i, uint64(len(*m.String_)))
-		i += copy(data[i:], *m.String_)
-	}
-	if m.Int64 != nil {
-		data[i] = 0x10
-		i++
-		i = encodeVarintGogovanity(data, i, uint64(*m.Int64))
-	}
-	if m.Int32 != nil {
-		data[i] = 0x18
-		i++
-		i = encodeVarintGogovanity(data, i, uint64(*m.Int32))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func encodeFixed64Gogovanity(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Gogovanity(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintGogovanity(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}

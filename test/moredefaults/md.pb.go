@@ -100,6 +100,89 @@ func (m *MoreDefaultsA) GetA2() test.A {
 	return test.A{}
 }
 
+func (this *MoreDefaultsB) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MoreDefaultsB)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *MoreDefaultsA) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MoreDefaultsA)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if this.Field2 != that1.Field2 {
+		return false
+	}
+	if !this.B1.Equal(that1.B1) {
+		return false
+	}
+	if !this.B2.Equal(&that1.B2) {
+		return false
+	}
+	if !this.A1.Equal(that1.A1) {
+		return false
+	}
+	if !this.A2.Equal(&that1.A2) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func NewPopulatedMoreDefaultsB(r randyMd, easy bool) *MoreDefaultsB {
 	this := &MoreDefaultsB{}
 	if r.Intn(10) != 0 {
@@ -212,87 +295,4 @@ func encodeVarintPopulateMd(data []byte, v uint64) []byte {
 	}
 	data = append(data, uint8(v))
 	return data
-}
-func (this *MoreDefaultsB) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*MoreDefaultsB)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *MoreDefaultsA) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*MoreDefaultsA)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if this.Field2 != that1.Field2 {
-		return false
-	}
-	if !this.B1.Equal(that1.B1) {
-		return false
-	}
-	if !this.B2.Equal(&that1.B2) {
-		return false
-	}
-	if !this.A1.Equal(that1.A1) {
-		return false
-	}
-	if !this.A2.Equal(&that1.A2) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
 }

@@ -131,129 +131,6 @@ func (m *NinRepEnum) GetField1() []TheTestEnum {
 func init() {
 	proto.RegisterEnum("enumstringer.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
 }
-func NewPopulatedNidOptEnum(r randyEnumstringer, easy bool) *NidOptEnum {
-	this := &NidOptEnum{}
-	this.Field1 = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedNinOptEnum(r randyEnumstringer, easy bool) *NinOptEnum {
-	this := &NinOptEnum{}
-	if r.Intn(10) != 0 {
-		v1 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
-		this.Field1 = &v1
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedNidRepEnum(r randyEnumstringer, easy bool) *NidRepEnum {
-	this := &NidRepEnum{}
-	if r.Intn(10) != 0 {
-		v2 := r.Intn(10)
-		this.Field1 = make([]TheTestEnum, v2)
-		for i := 0; i < v2; i++ {
-			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedNinRepEnum(r randyEnumstringer, easy bool) *NinRepEnum {
-	this := &NinRepEnum{}
-	if r.Intn(10) != 0 {
-		v3 := r.Intn(10)
-		this.Field1 = make([]TheTestEnum, v3)
-		for i := 0; i < v3; i++ {
-			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
-	}
-	return this
-}
-
-type randyEnumstringer interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneEnumstringer(r randyEnumstringer) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringEnumstringer(r randyEnumstringer) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
-		tmps[i] = randUTF8RuneEnumstringer(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedEnumstringer(r randyEnumstringer, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldEnumstringer(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldEnumstringer(data []byte, r randyEnumstringer, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateEnumstringer(data, uint64(key))
-		v5 := r.Int63()
-		if r.Intn(2) == 0 {
-			v5 *= -1
-		}
-		data = encodeVarintPopulateEnumstringer(data, uint64(v5))
-	case 1:
-		data = encodeVarintPopulateEnumstringer(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateEnumstringer(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateEnumstringer(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateEnumstringer(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateEnumstringer(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
 func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -509,4 +386,127 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 		return false
 	}
 	return true
+}
+func NewPopulatedNidOptEnum(r randyEnumstringer, easy bool) *NidOptEnum {
+	this := &NidOptEnum{}
+	this.Field1 = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedNinOptEnum(r randyEnumstringer, easy bool) *NinOptEnum {
+	this := &NinOptEnum{}
+	if r.Intn(10) != 0 {
+		v1 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		this.Field1 = &v1
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedNidRepEnum(r randyEnumstringer, easy bool) *NidRepEnum {
+	this := &NidRepEnum{}
+	if r.Intn(10) != 0 {
+		v2 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, v2)
+		for i := 0; i < v2; i++ {
+			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedNinRepEnum(r randyEnumstringer, easy bool) *NinRepEnum {
+	this := &NinRepEnum{}
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, v3)
+		for i := 0; i < v3; i++ {
+			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
+	}
+	return this
+}
+
+type randyEnumstringer interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneEnumstringer(r randyEnumstringer) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringEnumstringer(r randyEnumstringer) string {
+	v4 := r.Intn(100)
+	tmps := make([]rune, v4)
+	for i := 0; i < v4; i++ {
+		tmps[i] = randUTF8RuneEnumstringer(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedEnumstringer(r randyEnumstringer, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldEnumstringer(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldEnumstringer(data []byte, r randyEnumstringer, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
+		v5 := r.Int63()
+		if r.Intn(2) == 0 {
+			v5 *= -1
+		}
+		data = encodeVarintPopulateEnumstringer(data, uint64(v5))
+	case 1:
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateEnumstringer(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateEnumstringer(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateEnumstringer(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
 }
