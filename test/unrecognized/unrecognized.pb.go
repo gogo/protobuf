@@ -28,19 +28,18 @@ import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
-import io "io"
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+
 import fmt "fmt"
+import bytes "bytes"
 
 import strings "strings"
-import reflect "reflect"
-
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
+import reflect "reflect"
 
-import bytes "bytes"
-
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -148,3258 +147,6 @@ type OldUnoM struct {
 func (m *OldUnoM) Reset()      { *m = OldUnoM{} }
 func (*OldUnoM) ProtoMessage() {}
 
-func (m *A) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field1 = &v
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field B", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.B = append(m.B, &B{})
-			if err := m.B[len(m.B)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *B) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field C", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.C == nil {
-				m.C = &C{}
-			}
-			if err := m.C.Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field D", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.D == nil {
-				m.D = &D{}
-			}
-			if err := m.D.Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.F == nil {
-				m.F = &OldC{}
-			}
-			if err := m.F.Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *D) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field1 = &v
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *C) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 2:
-			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
-			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
-			v2 := float64(math.Float64frombits(v))
-			m.Field2 = &v2
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + int(stringLen)
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			s := string(data[iNdEx:postIndex])
-			m.Field3 = &s
-			iNdEx = postIndex
-		case 4:
-			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
-			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
-			v2 := float64(math.Float64frombits(v))
-			m.Field4 = &v2
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				byteLen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Field5 = append(m.Field5, make([]byte, postIndex-iNdEx))
-			copy(m.Field5[len(m.Field5)-1], data[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field6 = &v
-		case 7:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 4
-			v = uint32(data[iNdEx-4])
-			v |= uint32(data[iNdEx-3]) << 8
-			v |= uint32(data[iNdEx-2]) << 16
-			v |= uint32(data[iNdEx-1]) << 24
-			v2 := float32(math.Float32frombits(v))
-			m.Field7 = append(m.Field7, v2)
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *U) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 2:
-			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
-			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
-			v2 := float64(math.Float64frombits(v))
-			m.Field2 = append(m.Field2, v2)
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
-			}
-			var v uint32
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (uint32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field3 = &v
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *OldA) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field1 = &v
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field B", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.B = append(m.B, &OldB{})
-			if err := m.B[len(m.B)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *OldB) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field C", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.C == nil {
-				m.C = &OldC{}
-			}
-			if err := m.C.Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + msglen
-			if msglen < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.F == nil {
-				m.F = &OldC{}
-			}
-			if err := m.F.Unmarshal(data[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *OldC) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field1 = &v
-		case 2:
-			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
-			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
-			v2 := float64(math.Float64frombits(v))
-			m.Field2 = &v2
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + int(stringLen)
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			s := string(data[iNdEx:postIndex])
-			m.Field3 = &s
-			iNdEx = postIndex
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
-			}
-			var v int64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Field6 = &v
-		case 7:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 4
-			v = uint32(data[iNdEx-4])
-			v |= uint32(data[iNdEx-3]) << 8
-			v |= uint32(data[iNdEx-2]) << 16
-			v |= uint32(data[iNdEx-1]) << 24
-			v2 := float32(math.Float32frombits(v))
-			m.Field7 = append(m.Field7, v2)
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func (m *OldU) Unmarshal(data []byte) error {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			postIndex := iNdEx + int(stringLen)
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			s := string(data[iNdEx:postIndex])
-			m.Field1 = &s
-			iNdEx = postIndex
-		case 2:
-			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
-			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
-			v2 := float64(math.Float64frombits(v))
-			m.Field2 = append(m.Field2, v2)
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
-			skippy, err := skipUnrecognized(data[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthUnrecognized
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	return nil
-}
-func skipUnrecognized(data []byte) (n int, err error) {
-	l := len(data)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return 0, io.ErrUnexpectedEOF
-			}
-			b := data[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		wireType := int(wire & 0x7)
-		switch wireType {
-		case 0:
-			for {
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				iNdEx++
-				if data[iNdEx-1] < 0x80 {
-					break
-				}
-			}
-			return iNdEx, nil
-		case 1:
-			iNdEx += 8
-			return iNdEx, nil
-		case 2:
-			var length int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				length |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			iNdEx += length
-			if length < 0 {
-				return 0, ErrInvalidLengthUnrecognized
-			}
-			return iNdEx, nil
-		case 3:
-			for {
-				var innerWire uint64
-				var start int = iNdEx
-				for shift := uint(0); ; shift += 7 {
-					if iNdEx >= l {
-						return 0, io.ErrUnexpectedEOF
-					}
-					b := data[iNdEx]
-					iNdEx++
-					innerWire |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				innerWireType := int(innerWire & 0x7)
-				if innerWireType == 4 {
-					break
-				}
-				next, err := skipUnrecognized(data[start:])
-				if err != nil {
-					return 0, err
-				}
-				iNdEx = start + next
-			}
-			return iNdEx, nil
-		case 4:
-			return iNdEx, nil
-		case 5:
-			iNdEx += 4
-			return iNdEx, nil
-		default:
-			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
-		}
-	}
-	panic("unreachable")
-}
-
-var (
-	ErrInvalidLengthUnrecognized = fmt.Errorf("proto: negative length found during unmarshaling")
-)
-
-func (this *A) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&A{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *B) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&B{`,
-		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "C", "C", 1) + `,`,
-		`D:` + strings.Replace(fmt.Sprintf("%v", this.D), "D", "D", 1) + `,`,
-		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *D) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&D{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *C) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&C{`,
-		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
-		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
-		`Field4:` + valueToStringUnrecognized(this.Field4) + `,`,
-		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
-		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
-		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *U) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&U{`,
-		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *UnoM) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&UnoM{`,
-		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *OldA) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&OldA{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "OldB", "OldB", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *OldB) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&OldB{`,
-		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
-		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *OldC) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&OldC{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
-		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
-		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
-		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *OldU) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&OldU{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *OldUnoM) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&OldUnoM{`,
-		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
-		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringUnrecognized(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
-}
-func (m *A) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field1))
-	}
-	if len(m.B) > 0 {
-		for _, e := range m.B {
-			l = e.Size()
-			n += 1 + l + sovUnrecognized(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *B) Size() (n int) {
-	var l int
-	_ = l
-	if m.C != nil {
-		l = m.C.Size()
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.D != nil {
-		l = m.D.Size()
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.F != nil {
-		l = m.F.Size()
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *D) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field1))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *C) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field2 != nil {
-		n += 9
-	}
-	if m.Field3 != nil {
-		l = len(*m.Field3)
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.Field4 != nil {
-		n += 9
-	}
-	if len(m.Field5) > 0 {
-		for _, b := range m.Field5 {
-			l = len(b)
-			n += 1 + l + sovUnrecognized(uint64(l))
-		}
-	}
-	if m.Field6 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field6))
-	}
-	if len(m.Field7) > 0 {
-		n += 5 * len(m.Field7)
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *U) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.Field2) > 0 {
-		n += 9 * len(m.Field2)
-	}
-	if m.Field3 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field3))
-	}
-	return n
-}
-
-func (m *OldA) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field1))
-	}
-	if len(m.B) > 0 {
-		for _, e := range m.B {
-			l = e.Size()
-			n += 1 + l + sovUnrecognized(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *OldB) Size() (n int) {
-	var l int
-	_ = l
-	if m.C != nil {
-		l = m.C.Size()
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.F != nil {
-		l = m.F.Size()
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *OldC) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		n += 9
-	}
-	if m.Field3 != nil {
-		l = len(*m.Field3)
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if m.Field6 != nil {
-		n += 1 + sovUnrecognized(uint64(*m.Field6))
-	}
-	if len(m.Field7) > 0 {
-		n += 5 * len(m.Field7)
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *OldU) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		l = len(*m.Field1)
-		n += 1 + l + sovUnrecognized(uint64(l))
-	}
-	if len(m.Field2) > 0 {
-		n += 9 * len(m.Field2)
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func sovUnrecognized(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozUnrecognized(x uint64) (n int) {
-	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func NewPopulatedA(r randyUnrecognized, easy bool) *A {
-	this := &A{}
-	if r.Intn(10) != 0 {
-		v1 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v1 *= -1
-		}
-		this.Field1 = &v1
-	}
-	if r.Intn(10) != 0 {
-		v2 := r.Intn(10)
-		this.B = make([]*B, v2)
-		for i := 0; i < v2; i++ {
-			this.B[i] = NewPopulatedB(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedB(r randyUnrecognized, easy bool) *B {
-	this := &B{}
-	if r.Intn(10) != 0 {
-		this.C = NewPopulatedC(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.D = NewPopulatedD(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.F = NewPopulatedOldC(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
-	}
-	return this
-}
-
-func NewPopulatedD(r randyUnrecognized, easy bool) *D {
-	this := &D{}
-	if r.Intn(10) != 0 {
-		v3 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v3 *= -1
-		}
-		this.Field1 = &v3
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedC(r randyUnrecognized, easy bool) *C {
-	this := &C{}
-	if r.Intn(10) != 0 {
-		v4 := float64(r.Float64())
-		if r.Intn(2) == 0 {
-			v4 *= -1
-		}
-		this.Field2 = &v4
-	}
-	if r.Intn(10) != 0 {
-		v5 := randStringUnrecognized(r)
-		this.Field3 = &v5
-	}
-	if r.Intn(10) != 0 {
-		v6 := float64(r.Float64())
-		if r.Intn(2) == 0 {
-			v6 *= -1
-		}
-		this.Field4 = &v6
-	}
-	if r.Intn(10) != 0 {
-		v7 := r.Intn(100)
-		this.Field5 = make([][]byte, v7)
-		for i := 0; i < v7; i++ {
-			v8 := r.Intn(100)
-			this.Field5[i] = make([]byte, v8)
-			for j := 0; j < v8; j++ {
-				this.Field5[i][j] = byte(r.Intn(256))
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v9 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v9 *= -1
-		}
-		this.Field6 = &v9
-	}
-	if r.Intn(10) != 0 {
-		v10 := r.Intn(100)
-		this.Field7 = make([]float32, v10)
-		for i := 0; i < v10; i++ {
-			this.Field7[i] = float32(r.Float32())
-			if r.Intn(2) == 0 {
-				this.Field7[i] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
-	}
-	return this
-}
-
-func NewPopulatedU(r randyUnrecognized, easy bool) *U {
-	this := &U{}
-	if r.Intn(10) != 0 {
-		v11 := r.Intn(100)
-		this.Field2 = make([]float64, v11)
-		for i := 0; i < v11; i++ {
-			this.Field2[i] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.Field2[i] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v12 := uint32(r.Uint32())
-		this.Field3 = &v12
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
-	this := &UnoM{}
-	if r.Intn(10) != 0 {
-		v13 := r.Intn(100)
-		this.Field2 = make([]float64, v13)
-		for i := 0; i < v13; i++ {
-			this.Field2[i] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.Field2[i] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v14 := uint32(r.Uint32())
-		this.Field3 = &v14
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
-	this := &OldA{}
-	if r.Intn(10) != 0 {
-		v15 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v15 *= -1
-		}
-		this.Field1 = &v15
-	}
-	if r.Intn(10) != 0 {
-		v16 := r.Intn(10)
-		this.B = make([]*OldB, v16)
-		for i := 0; i < v16; i++ {
-			this.B[i] = NewPopulatedOldB(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedOldB(r randyUnrecognized, easy bool) *OldB {
-	this := &OldB{}
-	if r.Intn(10) != 0 {
-		this.C = NewPopulatedOldC(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.F = NewPopulatedOldC(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
-	}
-	return this
-}
-
-func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
-	this := &OldC{}
-	if r.Intn(10) != 0 {
-		v17 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v17 *= -1
-		}
-		this.Field1 = &v17
-	}
-	if r.Intn(10) != 0 {
-		v18 := float64(r.Float64())
-		if r.Intn(2) == 0 {
-			v18 *= -1
-		}
-		this.Field2 = &v18
-	}
-	if r.Intn(10) != 0 {
-		v19 := randStringUnrecognized(r)
-		this.Field3 = &v19
-	}
-	if r.Intn(10) != 0 {
-		v20 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v20 *= -1
-		}
-		this.Field6 = &v20
-	}
-	if r.Intn(10) != 0 {
-		v21 := r.Intn(100)
-		this.Field7 = make([]float32, v21)
-		for i := 0; i < v21; i++ {
-			this.Field7[i] = float32(r.Float32())
-			if r.Intn(2) == 0 {
-				this.Field7[i] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
-	}
-	return this
-}
-
-func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
-	this := &OldU{}
-	if r.Intn(10) != 0 {
-		v22 := randStringUnrecognized(r)
-		this.Field1 = &v22
-	}
-	if r.Intn(10) != 0 {
-		v23 := r.Intn(100)
-		this.Field2 = make([]float64, v23)
-		for i := 0; i < v23; i++ {
-			this.Field2[i] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.Field2[i] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
-	}
-	return this
-}
-
-func NewPopulatedOldUnoM(r randyUnrecognized, easy bool) *OldUnoM {
-	this := &OldUnoM{}
-	if r.Intn(10) != 0 {
-		v24 := randStringUnrecognized(r)
-		this.Field1 = &v24
-	}
-	if r.Intn(10) != 0 {
-		v25 := r.Intn(100)
-		this.Field2 = make([]float64, v25)
-		for i := 0; i < v25; i++ {
-			this.Field2[i] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.Field2[i] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
-	}
-	return this
-}
-
-type randyUnrecognized interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneUnrecognized(r randyUnrecognized) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringUnrecognized(r randyUnrecognized) string {
-	v26 := r.Intn(100)
-	tmps := make([]rune, v26)
-	for i := 0; i < v26; i++ {
-		tmps[i] = randUTF8RuneUnrecognized(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedUnrecognized(r randyUnrecognized, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldUnrecognized(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldUnrecognized(data []byte, r randyUnrecognized, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateUnrecognized(data, uint64(key))
-		v27 := r.Int63()
-		if r.Intn(2) == 0 {
-			v27 *= -1
-		}
-		data = encodeVarintPopulateUnrecognized(data, uint64(v27))
-	case 1:
-		data = encodeVarintPopulateUnrecognized(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateUnrecognized(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateUnrecognized(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateUnrecognized(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateUnrecognized(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
-func (m *A) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *A) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.B) > 0 {
-		for _, msg := range m.B {
-			data[i] = 0xa
-			i++
-			i = encodeVarintUnrecognized(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.Field1 != nil {
-		data[i] = 0x10
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
-	}
-	return i, nil
-}
-
-func (m *B) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *B) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.C != nil {
-		data[i] = 0xa
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(m.C.Size()))
-		n1, err := m.C.MarshalTo(data[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n1
-	}
-	if m.D != nil {
-		data[i] = 0x12
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(m.D.Size()))
-		n2, err := m.D.MarshalTo(data[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n2
-	}
-	if m.F != nil {
-		data[i] = 0x2a
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(m.F.Size()))
-		n3, err := m.F.MarshalTo(data[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n3
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *D) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *D) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		data[i] = 0x8
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *C) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *C) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field2 != nil {
-		data[i] = 0x11
-		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
-	}
-	if m.Field3 != nil {
-		data[i] = 0x1a
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
-		i += copy(data[i:], *m.Field3)
-	}
-	if m.Field4 != nil {
-		data[i] = 0x21
-		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field4)))
-	}
-	if len(m.Field5) > 0 {
-		for _, b := range m.Field5 {
-			data[i] = 0x2a
-			i++
-			i = encodeVarintUnrecognized(data, i, uint64(len(b)))
-			i += copy(data[i:], b)
-		}
-	}
-	if m.Field6 != nil {
-		data[i] = 0x30
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field6))
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			data[i] = 0x3d
-			i++
-			f4 := math.Float32bits(num)
-			data[i] = uint8(f4)
-			i++
-			data[i] = uint8(f4 >> 8)
-			i++
-			data[i] = uint8(f4 >> 16)
-			i++
-			data[i] = uint8(f4 >> 24)
-			i++
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *U) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *U) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			data[i] = 0x11
-			i++
-			f5 := math.Float64bits(num)
-			data[i] = uint8(f5)
-			i++
-			data[i] = uint8(f5 >> 8)
-			i++
-			data[i] = uint8(f5 >> 16)
-			i++
-			data[i] = uint8(f5 >> 24)
-			i++
-			data[i] = uint8(f5 >> 32)
-			i++
-			data[i] = uint8(f5 >> 40)
-			i++
-			data[i] = uint8(f5 >> 48)
-			i++
-			data[i] = uint8(f5 >> 56)
-			i++
-		}
-	}
-	if m.Field3 != nil {
-		data[i] = 0x18
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field3))
-	}
-	return i, nil
-}
-
-func (m *OldA) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *OldA) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.B) > 0 {
-		for _, msg := range m.B {
-			data[i] = 0xa
-			i++
-			i = encodeVarintUnrecognized(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.Field1 != nil {
-		data[i] = 0x10
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
-	}
-	return i, nil
-}
-
-func (m *OldB) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *OldB) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.C != nil {
-		data[i] = 0xa
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(m.C.Size()))
-		n6, err := m.C.MarshalTo(data[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n6
-	}
-	if m.F != nil {
-		data[i] = 0x2a
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(m.F.Size()))
-		n7, err := m.F.MarshalTo(data[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n7
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *OldC) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *OldC) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		data[i] = 0x8
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		data[i] = 0x11
-		i++
-		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
-	}
-	if m.Field3 != nil {
-		data[i] = 0x1a
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
-		i += copy(data[i:], *m.Field3)
-	}
-	if m.Field6 != nil {
-		data[i] = 0x30
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(*m.Field6))
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			data[i] = 0x3d
-			i++
-			f8 := math.Float32bits(num)
-			data[i] = uint8(f8)
-			i++
-			data[i] = uint8(f8 >> 8)
-			i++
-			data[i] = uint8(f8 >> 16)
-			i++
-			data[i] = uint8(f8 >> 24)
-			i++
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *OldU) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *OldU) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		data[i] = 0xa
-		i++
-		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field1)))
-		i += copy(data[i:], *m.Field1)
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			data[i] = 0x11
-			i++
-			f9 := math.Float64bits(num)
-			data[i] = uint8(f9)
-			i++
-			data[i] = uint8(f9 >> 8)
-			i++
-			data[i] = uint8(f9 >> 16)
-			i++
-			data[i] = uint8(f9 >> 24)
-			i++
-			data[i] = uint8(f9 >> 32)
-			i++
-			data[i] = uint8(f9 >> 40)
-			i++
-			data[i] = uint8(f9 >> 48)
-			i++
-			data[i] = uint8(f9 >> 56)
-			i++
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func encodeFixed64Unrecognized(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Unrecognized(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintUnrecognized(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}
-func (this *A) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.A{` +
-		`B:` + fmt.Sprintf("%#v", this.B),
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64") + `}`}, ", ")
-	return s
-}
-func (this *B) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.B{` +
-		`C:` + fmt.Sprintf("%#v", this.C),
-		`D:` + fmt.Sprintf("%#v", this.D),
-		`F:` + fmt.Sprintf("%#v", this.F),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *D) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.D{` +
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *C) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.C{` +
-		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
-		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
-		`Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"),
-		`Field5:` + fmt.Sprintf("%#v", this.Field5),
-		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
-		`Field7:` + fmt.Sprintf("%#v", this.Field7),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *U) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.U{` +
-		`Field2:` + fmt.Sprintf("%#v", this.Field2),
-		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
-	return s
-}
-func (this *UnoM) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.UnoM{` +
-		`Field2:` + fmt.Sprintf("%#v", this.Field2),
-		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
-	return s
-}
-func (this *OldA) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.OldA{` +
-		`B:` + fmt.Sprintf("%#v", this.B),
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64") + `}`}, ", ")
-	return s
-}
-func (this *OldB) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.OldB{` +
-		`C:` + fmt.Sprintf("%#v", this.C),
-		`F:` + fmt.Sprintf("%#v", this.F),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *OldC) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.OldC{` +
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
-		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
-		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
-		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
-		`Field7:` + fmt.Sprintf("%#v", this.Field7),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *OldU) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.OldU{` +
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
-		`Field2:` + fmt.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *OldUnoM) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&unrecognized.OldUnoM{` +
-		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
-		`Field2:` + fmt.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func valueToGoStringUnrecognized(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
-}
-func extensionToGoStringUnrecognized(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
-	if e == nil {
-		return "nil"
-	}
-	s := "map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "}"
-	return s
-}
-func (this *A) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*A)
-	if !ok {
-		return fmt.Errorf("that is not of type *A")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *A but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Abut is not nil && this == nil")
-	}
-	if len(this.B) != len(that1.B) {
-		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
-	}
-	for i := range this.B {
-		if !this.B[i].Equal(that1.B[i]) {
-			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
-		}
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	return nil
-}
-func (this *A) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*A)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.B) != len(that1.B) {
-		return false
-	}
-	for i := range this.B {
-		if !this.B[i].Equal(that1.B[i]) {
-			return false
-		}
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	return true
-}
-func (this *B) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*B)
-	if !ok {
-		return fmt.Errorf("that is not of type *B")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *B but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Bbut is not nil && this == nil")
-	}
-	if !this.C.Equal(that1.C) {
-		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
-	}
-	if !this.D.Equal(that1.D) {
-		return fmt.Errorf("D this(%v) Not Equal that(%v)", this.D, that1.D)
-	}
-	if !this.F.Equal(that1.F) {
-		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *B) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*B)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if !this.C.Equal(that1.C) {
-		return false
-	}
-	if !this.D.Equal(that1.D) {
-		return false
-	}
-	if !this.F.Equal(that1.F) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *D) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*D)
-	if !ok {
-		return fmt.Errorf("that is not of type *D")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *D but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Dbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *D) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*D)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *C) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*C)
-	if !ok {
-		return fmt.Errorf("that is not of type *C")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *C but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Cbut is not nil && this == nil")
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
-		}
-	} else if this.Field2 != nil {
-		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
-	} else if that1.Field2 != nil {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
-		}
-	} else if this.Field3 != nil {
-		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
-	} else if that1.Field3 != nil {
-		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
-	}
-	if this.Field4 != nil && that1.Field4 != nil {
-		if *this.Field4 != *that1.Field4 {
-			return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
-		}
-	} else if this.Field4 != nil {
-		return fmt.Errorf("this.Field4 == nil && that.Field4 != nil")
-	} else if that1.Field4 != nil {
-		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
-	}
-	if len(this.Field5) != len(that1.Field5) {
-		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
-	}
-	for i := range this.Field5 {
-		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
-			return fmt.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
-		}
-	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
-		}
-	} else if this.Field6 != nil {
-		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
-	} else if that1.Field6 != nil {
-		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
-	}
-	if len(this.Field7) != len(that1.Field7) {
-		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
-	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *C) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*C)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return false
-		}
-	} else if this.Field2 != nil {
-		return false
-	} else if that1.Field2 != nil {
-		return false
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return false
-		}
-	} else if this.Field3 != nil {
-		return false
-	} else if that1.Field3 != nil {
-		return false
-	}
-	if this.Field4 != nil && that1.Field4 != nil {
-		if *this.Field4 != *that1.Field4 {
-			return false
-		}
-	} else if this.Field4 != nil {
-		return false
-	} else if that1.Field4 != nil {
-		return false
-	}
-	if len(this.Field5) != len(that1.Field5) {
-		return false
-	}
-	for i := range this.Field5 {
-		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
-			return false
-		}
-	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			return false
-		}
-	} else if this.Field6 != nil {
-		return false
-	} else if that1.Field6 != nil {
-		return false
-	}
-	if len(this.Field7) != len(that1.Field7) {
-		return false
-	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *U) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*U)
-	if !ok {
-		return fmt.Errorf("that is not of type *U")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *U but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Ubut is not nil && this == nil")
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
-		}
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
-		}
-	} else if this.Field3 != nil {
-		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
-	} else if that1.Field3 != nil {
-		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
-	}
-	return nil
-}
-func (this *U) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*U)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return false
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return false
-		}
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return false
-		}
-	} else if this.Field3 != nil {
-		return false
-	} else if that1.Field3 != nil {
-		return false
-	}
-	return true
-}
-func (this *UnoM) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*UnoM)
-	if !ok {
-		return fmt.Errorf("that is not of type *UnoM")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *UnoM but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *UnoMbut is not nil && this == nil")
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
-		}
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
-		}
-	} else if this.Field3 != nil {
-		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
-	} else if that1.Field3 != nil {
-		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
-	}
-	return nil
-}
-func (this *UnoM) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*UnoM)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return false
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return false
-		}
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return false
-		}
-	} else if this.Field3 != nil {
-		return false
-	} else if that1.Field3 != nil {
-		return false
-	}
-	return true
-}
-func (this *OldA) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*OldA)
-	if !ok {
-		return fmt.Errorf("that is not of type *OldA")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *OldA but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *OldAbut is not nil && this == nil")
-	}
-	if len(this.B) != len(that1.B) {
-		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
-	}
-	for i := range this.B {
-		if !this.B[i].Equal(that1.B[i]) {
-			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
-		}
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	return nil
-}
-func (this *OldA) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*OldA)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.B) != len(that1.B) {
-		return false
-	}
-	for i := range this.B {
-		if !this.B[i].Equal(that1.B[i]) {
-			return false
-		}
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	return true
-}
-func (this *OldB) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*OldB)
-	if !ok {
-		return fmt.Errorf("that is not of type *OldB")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *OldB but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *OldBbut is not nil && this == nil")
-	}
-	if !this.C.Equal(that1.C) {
-		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
-	}
-	if !this.F.Equal(that1.F) {
-		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *OldB) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*OldB)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if !this.C.Equal(that1.C) {
-		return false
-	}
-	if !this.F.Equal(that1.F) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *OldC) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*OldC)
-	if !ok {
-		return fmt.Errorf("that is not of type *OldC")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *OldC but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *OldCbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
-		}
-	} else if this.Field2 != nil {
-		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
-	} else if that1.Field2 != nil {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
-		}
-	} else if this.Field3 != nil {
-		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
-	} else if that1.Field3 != nil {
-		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
-	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
-		}
-	} else if this.Field6 != nil {
-		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
-	} else if that1.Field6 != nil {
-		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
-	}
-	if len(this.Field7) != len(that1.Field7) {
-		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
-	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *OldC) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*OldC)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return false
-		}
-	} else if this.Field2 != nil {
-		return false
-	} else if that1.Field2 != nil {
-		return false
-	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			return false
-		}
-	} else if this.Field3 != nil {
-		return false
-	} else if that1.Field3 != nil {
-		return false
-	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			return false
-		}
-	} else if this.Field6 != nil {
-		return false
-	} else if that1.Field6 != nil {
-		return false
-	}
-	if len(this.Field7) != len(that1.Field7) {
-		return false
-	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *OldU) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*OldU)
-	if !ok {
-		return fmt.Errorf("that is not of type *OldU")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *OldU but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *OldUbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *OldU) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*OldU)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return false
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *OldUnoM) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*OldUnoM)
-	if !ok {
-		return fmt.Errorf("that is not of type *OldUnoM")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *OldUnoM but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *OldUnoMbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *OldUnoM) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*OldUnoM)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return false
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
 func (this *A) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return UnrecognizedDescription()
 }
@@ -4022,15 +769,15 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Options: &google_protobuf.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"), JavaOuterClassname: func(v string) *string { return &v }("GoGoProtos"), JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("unrecognized.proto"), Package: func(v string) *string { return &v }("unrecognized"), Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("A"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.B"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"), DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Options: &google_protobuf.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"), JavaOuterClassname: func(v string) *string { return &v }("GoGoProtos"), JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("unrecognized.proto"), Package: func(v string) *string { return &v }("unrecognized"), Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"}, PublicDependency: []int32(nil), WeakDependency: []int32(nil), MessageType: []*google_protobuf.DescriptorProto{{Name: func(v string) *string { return &v }("A"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("B"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.B"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("B"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -4086,15 +833,15 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64017: proto.NewExtension([]byte{0x88, 0xa1, 0x1f, 0x0}), 64018: proto.NewExtension([]byte{0x90, 0xa1, 0x1f, 0x0}), 64020: proto.NewExtension([]byte{0xa0, 0xa1, 0x1f, 0x0}), 64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("OldA"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
-		return &v
-	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
-		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.OldB"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(13), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64017: proto.NewExtension([]byte{0x88, 0xa1, 0x1f, 0x0}), 64018: proto.NewExtension([]byte{0x90, 0xa1, 0x1f, 0x0}), 64020: proto.NewExtension([]byte{0xa0, 0xa1, 0x1f, 0x0}), 64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("OldA"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("OldB"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("B"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".unrecognized.OldB"), Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("OldB"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("C"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -4140,3 +887,3254 @@ func UnrecognizedDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: &google_protobuf.MessageOptions{MessageSetWireFormat: nil, NoStandardDescriptorAccessor: nil, Deprecated: nil, MapEntry: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{64017: proto.NewExtension([]byte{0x88, 0xa1, 0x1f, 0x0}), 64018: proto.NewExtension([]byte{0x90, 0xa1, 0x1f, 0x0}), 64020: proto.NewExtension([]byte{0xa0, 0xa1, 0x1f, 0x0})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x1}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
+func (this *A) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*A)
+	if !ok {
+		return fmt.Errorf("that is not of type *A")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *A but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Abut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if len(this.B) != len(that1.B) {
+		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
+	}
+	for i := range this.B {
+		if !this.B[i].Equal(that1.B[i]) {
+			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
+		}
+	}
+	return nil
+}
+func (this *A) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*A)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if len(this.B) != len(that1.B) {
+		return false
+	}
+	for i := range this.B {
+		if !this.B[i].Equal(that1.B[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *B) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*B)
+	if !ok {
+		return fmt.Errorf("that is not of type *B")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *B but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Bbut is not nil && this == nil")
+	}
+	if !this.C.Equal(that1.C) {
+		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
+	}
+	if !this.D.Equal(that1.D) {
+		return fmt.Errorf("D this(%v) Not Equal that(%v)", this.D, that1.D)
+	}
+	if !this.F.Equal(that1.F) {
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *B) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*B)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.C.Equal(that1.C) {
+		return false
+	}
+	if !this.D.Equal(that1.D) {
+		return false
+	}
+	if !this.F.Equal(that1.F) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *D) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*D)
+	if !ok {
+		return fmt.Errorf("that is not of type *D")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *D but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Dbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *D) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*D)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *C) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*C)
+	if !ok {
+		return fmt.Errorf("that is not of type *C")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *C but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Cbut is not nil && this == nil")
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+		}
+	} else if this.Field2 != nil {
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
+	} else if that1.Field2 != nil {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+		}
+	} else if this.Field3 != nil {
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
+	} else if that1.Field3 != nil {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", *this.Field4, *that1.Field4)
+		}
+	} else if this.Field4 != nil {
+		return fmt.Errorf("this.Field4 == nil && that.Field4 != nil")
+	} else if that1.Field4 != nil {
+		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", len(this.Field5), len(that1.Field5))
+	}
+	for i := range this.Field5 {
+		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
+			return fmt.Errorf("Field5 this[%v](%v) Not Equal that[%v](%v)", i, this.Field5[i], i, that1.Field5[i])
+		}
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+		}
+	} else if this.Field6 != nil {
+		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
+	} else if that1.Field6 != nil {
+		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *C) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*C)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return false
+		}
+	} else if this.Field2 != nil {
+		return false
+	} else if that1.Field2 != nil {
+		return false
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return false
+		}
+	} else if this.Field3 != nil {
+		return false
+	} else if that1.Field3 != nil {
+		return false
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			return false
+		}
+	} else if this.Field4 != nil {
+		return false
+	} else if that1.Field4 != nil {
+		return false
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		return false
+	}
+	for i := range this.Field5 {
+		if !bytes.Equal(this.Field5[i], that1.Field5[i]) {
+			return false
+		}
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return false
+		}
+	} else if this.Field6 != nil {
+		return false
+	} else if that1.Field6 != nil {
+		return false
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *U) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*U)
+	if !ok {
+		return fmt.Errorf("that is not of type *U")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *U but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Ubut is not nil && this == nil")
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+		}
+	} else if this.Field3 != nil {
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
+	} else if that1.Field3 != nil {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	return nil
+}
+func (this *U) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*U)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return false
+		}
+	} else if this.Field3 != nil {
+		return false
+	} else if that1.Field3 != nil {
+		return false
+	}
+	return true
+}
+func (this *UnoM) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*UnoM)
+	if !ok {
+		return fmt.Errorf("that is not of type *UnoM")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *UnoM but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *UnoMbut is not nil && this == nil")
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+		}
+	} else if this.Field3 != nil {
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
+	} else if that1.Field3 != nil {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	return nil
+}
+func (this *UnoM) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*UnoM)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return false
+		}
+	} else if this.Field3 != nil {
+		return false
+	} else if that1.Field3 != nil {
+		return false
+	}
+	return true
+}
+func (this *OldA) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OldA)
+	if !ok {
+		return fmt.Errorf("that is not of type *OldA")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OldA but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OldAbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if len(this.B) != len(that1.B) {
+		return fmt.Errorf("B this(%v) Not Equal that(%v)", len(this.B), len(that1.B))
+	}
+	for i := range this.B {
+		if !this.B[i].Equal(that1.B[i]) {
+			return fmt.Errorf("B this[%v](%v) Not Equal that[%v](%v)", i, this.B[i], i, that1.B[i])
+		}
+	}
+	return nil
+}
+func (this *OldA) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OldA)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if len(this.B) != len(that1.B) {
+		return false
+	}
+	for i := range this.B {
+		if !this.B[i].Equal(that1.B[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *OldB) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OldB)
+	if !ok {
+		return fmt.Errorf("that is not of type *OldB")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OldB but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OldBbut is not nil && this == nil")
+	}
+	if !this.C.Equal(that1.C) {
+		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
+	}
+	if !this.F.Equal(that1.F) {
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *OldB) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OldB)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.C.Equal(that1.C) {
+		return false
+	}
+	if !this.F.Equal(that1.F) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *OldC) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OldC)
+	if !ok {
+		return fmt.Errorf("that is not of type *OldC")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OldC but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OldCbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+		}
+	} else if this.Field2 != nil {
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
+	} else if that1.Field2 != nil {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", *this.Field3, *that1.Field3)
+		}
+	} else if this.Field3 != nil {
+		return fmt.Errorf("this.Field3 == nil && that.Field3 != nil")
+	} else if that1.Field3 != nil {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", *this.Field6, *that1.Field6)
+		}
+	} else if this.Field6 != nil {
+		return fmt.Errorf("this.Field6 == nil && that.Field6 != nil")
+	} else if that1.Field6 != nil {
+		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", len(this.Field7), len(that1.Field7))
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return fmt.Errorf("Field7 this[%v](%v) Not Equal that[%v](%v)", i, this.Field7[i], i, that1.Field7[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *OldC) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OldC)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return false
+		}
+	} else if this.Field2 != nil {
+		return false
+	} else if that1.Field2 != nil {
+		return false
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			return false
+		}
+	} else if this.Field3 != nil {
+		return false
+	} else if that1.Field3 != nil {
+		return false
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			return false
+		}
+	} else if this.Field6 != nil {
+		return false
+	} else if that1.Field6 != nil {
+		return false
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		return false
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *OldU) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OldU)
+	if !ok {
+		return fmt.Errorf("that is not of type *OldU")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OldU but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OldUbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *OldU) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OldU)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *OldUnoM) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OldUnoM)
+	if !ok {
+		return fmt.Errorf("that is not of type *OldUnoM")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OldUnoM but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OldUnoMbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *OldUnoM) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OldUnoM)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *A) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.A{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
+		`B:` + fmt.Sprintf("%#v", this.B) + `}`}, ", ")
+	return s
+}
+func (this *B) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.B{` +
+		`C:` + fmt.Sprintf("%#v", this.C),
+		`D:` + fmt.Sprintf("%#v", this.D),
+		`F:` + fmt.Sprintf("%#v", this.F),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *D) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.D{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *C) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.C{` +
+		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
+		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
+		`Field4:` + valueToGoStringUnrecognized(this.Field4, "float64"),
+		`Field5:` + fmt.Sprintf("%#v", this.Field5),
+		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
+		`Field7:` + fmt.Sprintf("%#v", this.Field7),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *U) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.U{` +
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
+	return s
+}
+func (this *UnoM) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.UnoM{` +
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`Field3:` + valueToGoStringUnrecognized(this.Field3, "uint32") + `}`}, ", ")
+	return s
+}
+func (this *OldA) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.OldA{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
+		`B:` + fmt.Sprintf("%#v", this.B) + `}`}, ", ")
+	return s
+}
+func (this *OldB) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.OldB{` +
+		`C:` + fmt.Sprintf("%#v", this.C),
+		`F:` + fmt.Sprintf("%#v", this.F),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *OldC) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.OldC{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "int64"),
+		`Field2:` + valueToGoStringUnrecognized(this.Field2, "float64"),
+		`Field3:` + valueToGoStringUnrecognized(this.Field3, "string"),
+		`Field6:` + valueToGoStringUnrecognized(this.Field6, "int64"),
+		`Field7:` + fmt.Sprintf("%#v", this.Field7),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *OldU) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.OldU{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *OldUnoM) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&unrecognized.OldUnoM{` +
+		`Field1:` + valueToGoStringUnrecognized(this.Field1, "string"),
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func valueToGoStringUnrecognized(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringUnrecognized(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "}"
+	return s
+}
+func (m *A) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *A) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.B) > 0 {
+		for _, msg := range m.B {
+			data[i] = 0xa
+			i++
+			i = encodeVarintUnrecognized(data, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field1 != nil {
+		data[i] = 0x10
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
+	}
+	return i, nil
+}
+
+func (m *B) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *B) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.C != nil {
+		data[i] = 0xa
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(m.C.Size()))
+		n1, err := m.C.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n1
+	}
+	if m.D != nil {
+		data[i] = 0x12
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(m.D.Size()))
+		n2, err := m.D.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n2
+	}
+	if m.F != nil {
+		data[i] = 0x2a
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(m.F.Size()))
+		n3, err := m.F.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *D) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *D) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x8
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *C) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *C) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field2 != nil {
+		data[i] = 0x11
+		i++
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
+	}
+	if m.Field3 != nil {
+		data[i] = 0x1a
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
+		i += copy(data[i:], *m.Field3)
+	}
+	if m.Field4 != nil {
+		data[i] = 0x21
+		i++
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field4)))
+	}
+	if len(m.Field5) > 0 {
+		for _, b := range m.Field5 {
+			data[i] = 0x2a
+			i++
+			i = encodeVarintUnrecognized(data, i, uint64(len(b)))
+			i += copy(data[i:], b)
+		}
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field6))
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			data[i] = 0x3d
+			i++
+			f4 := math.Float32bits(num)
+			data[i] = uint8(f4)
+			i++
+			data[i] = uint8(f4 >> 8)
+			i++
+			data[i] = uint8(f4 >> 16)
+			i++
+			data[i] = uint8(f4 >> 24)
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *U) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *U) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			data[i] = 0x11
+			i++
+			f5 := math.Float64bits(num)
+			data[i] = uint8(f5)
+			i++
+			data[i] = uint8(f5 >> 8)
+			i++
+			data[i] = uint8(f5 >> 16)
+			i++
+			data[i] = uint8(f5 >> 24)
+			i++
+			data[i] = uint8(f5 >> 32)
+			i++
+			data[i] = uint8(f5 >> 40)
+			i++
+			data[i] = uint8(f5 >> 48)
+			i++
+			data[i] = uint8(f5 >> 56)
+			i++
+		}
+	}
+	if m.Field3 != nil {
+		data[i] = 0x18
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field3))
+	}
+	return i, nil
+}
+
+func (m *OldA) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *OldA) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.B) > 0 {
+		for _, msg := range m.B {
+			data[i] = 0xa
+			i++
+			i = encodeVarintUnrecognized(data, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field1 != nil {
+		data[i] = 0x10
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
+	}
+	return i, nil
+}
+
+func (m *OldB) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *OldB) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.C != nil {
+		data[i] = 0xa
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(m.C.Size()))
+		n6, err := m.C.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n6
+	}
+	if m.F != nil {
+		data[i] = 0x2a
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(m.F.Size()))
+		n7, err := m.F.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n7
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *OldC) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *OldC) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0x8
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		data[i] = 0x11
+		i++
+		i = encodeFixed64Unrecognized(data, i, uint64(math.Float64bits(*m.Field2)))
+	}
+	if m.Field3 != nil {
+		data[i] = 0x1a
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field3)))
+		i += copy(data[i:], *m.Field3)
+	}
+	if m.Field6 != nil {
+		data[i] = 0x30
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(*m.Field6))
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			data[i] = 0x3d
+			i++
+			f8 := math.Float32bits(num)
+			data[i] = uint8(f8)
+			i++
+			data[i] = uint8(f8 >> 8)
+			i++
+			data[i] = uint8(f8 >> 16)
+			i++
+			data[i] = uint8(f8 >> 24)
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *OldU) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *OldU) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		data[i] = 0xa
+		i++
+		i = encodeVarintUnrecognized(data, i, uint64(len(*m.Field1)))
+		i += copy(data[i:], *m.Field1)
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			data[i] = 0x11
+			i++
+			f9 := math.Float64bits(num)
+			data[i] = uint8(f9)
+			i++
+			data[i] = uint8(f9 >> 8)
+			i++
+			data[i] = uint8(f9 >> 16)
+			i++
+			data[i] = uint8(f9 >> 24)
+			i++
+			data[i] = uint8(f9 >> 32)
+			i++
+			data[i] = uint8(f9 >> 40)
+			i++
+			data[i] = uint8(f9 >> 48)
+			i++
+			data[i] = uint8(f9 >> 56)
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Unrecognized(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Unrecognized(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintUnrecognized(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func NewPopulatedA(r randyUnrecognized, easy bool) *A {
+	this := &A{}
+	if r.Intn(10) != 0 {
+		v1 := r.Intn(10)
+		this.B = make([]*B, v1)
+		for i := 0; i < v1; i++ {
+			this.B[i] = NewPopulatedB(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v2 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
+		this.Field1 = &v2
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedB(r randyUnrecognized, easy bool) *B {
+	this := &B{}
+	if r.Intn(10) != 0 {
+		this.C = NewPopulatedC(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.D = NewPopulatedD(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.F = NewPopulatedOldC(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
+	}
+	return this
+}
+
+func NewPopulatedD(r randyUnrecognized, easy bool) *D {
+	this := &D{}
+	if r.Intn(10) != 0 {
+		v3 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
+		this.Field1 = &v3
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedC(r randyUnrecognized, easy bool) *C {
+	this := &C{}
+	if r.Intn(10) != 0 {
+		v4 := float64(r.Float64())
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
+		this.Field2 = &v4
+	}
+	if r.Intn(10) != 0 {
+		v5 := randStringUnrecognized(r)
+		this.Field3 = &v5
+	}
+	if r.Intn(10) != 0 {
+		v6 := float64(r.Float64())
+		if r.Intn(2) == 0 {
+			v6 *= -1
+		}
+		this.Field4 = &v6
+	}
+	if r.Intn(10) != 0 {
+		v7 := r.Intn(100)
+		this.Field5 = make([][]byte, v7)
+		for i := 0; i < v7; i++ {
+			v8 := r.Intn(100)
+			this.Field5[i] = make([]byte, v8)
+			for j := 0; j < v8; j++ {
+				this.Field5[i][j] = byte(r.Intn(256))
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v9 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v9 *= -1
+		}
+		this.Field6 = &v9
+	}
+	if r.Intn(10) != 0 {
+		v10 := r.Intn(100)
+		this.Field7 = make([]float32, v10)
+		for i := 0; i < v10; i++ {
+			this.Field7[i] = float32(r.Float32())
+			if r.Intn(2) == 0 {
+				this.Field7[i] *= -1
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
+	}
+	return this
+}
+
+func NewPopulatedU(r randyUnrecognized, easy bool) *U {
+	this := &U{}
+	if r.Intn(10) != 0 {
+		v11 := r.Intn(100)
+		this.Field2 = make([]float64, v11)
+		for i := 0; i < v11; i++ {
+			this.Field2[i] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v12 := uint32(r.Uint32())
+		this.Field3 = &v12
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
+	this := &UnoM{}
+	if r.Intn(10) != 0 {
+		v13 := r.Intn(100)
+		this.Field2 = make([]float64, v13)
+		for i := 0; i < v13; i++ {
+			this.Field2[i] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v14 := uint32(r.Uint32())
+		this.Field3 = &v14
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
+	this := &OldA{}
+	if r.Intn(10) != 0 {
+		v15 := r.Intn(10)
+		this.B = make([]*OldB, v15)
+		for i := 0; i < v15; i++ {
+			this.B[i] = NewPopulatedOldB(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v16 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v16 *= -1
+		}
+		this.Field1 = &v16
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOldB(r randyUnrecognized, easy bool) *OldB {
+	this := &OldB{}
+	if r.Intn(10) != 0 {
+		this.C = NewPopulatedOldC(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.F = NewPopulatedOldC(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 6)
+	}
+	return this
+}
+
+func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
+	this := &OldC{}
+	if r.Intn(10) != 0 {
+		v17 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v17 *= -1
+		}
+		this.Field1 = &v17
+	}
+	if r.Intn(10) != 0 {
+		v18 := float64(r.Float64())
+		if r.Intn(2) == 0 {
+			v18 *= -1
+		}
+		this.Field2 = &v18
+	}
+	if r.Intn(10) != 0 {
+		v19 := randStringUnrecognized(r)
+		this.Field3 = &v19
+	}
+	if r.Intn(10) != 0 {
+		v20 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v20 *= -1
+		}
+		this.Field6 = &v20
+	}
+	if r.Intn(10) != 0 {
+		v21 := r.Intn(100)
+		this.Field7 = make([]float32, v21)
+		for i := 0; i < v21; i++ {
+			this.Field7[i] = float32(r.Float32())
+			if r.Intn(2) == 0 {
+				this.Field7[i] *= -1
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 8)
+	}
+	return this
+}
+
+func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
+	this := &OldU{}
+	if r.Intn(10) != 0 {
+		v22 := randStringUnrecognized(r)
+		this.Field1 = &v22
+	}
+	if r.Intn(10) != 0 {
+		v23 := r.Intn(100)
+		this.Field2 = make([]float64, v23)
+		for i := 0; i < v23; i++ {
+			this.Field2[i] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
+	}
+	return this
+}
+
+func NewPopulatedOldUnoM(r randyUnrecognized, easy bool) *OldUnoM {
+	this := &OldUnoM{}
+	if r.Intn(10) != 0 {
+		v24 := randStringUnrecognized(r)
+		this.Field1 = &v24
+	}
+	if r.Intn(10) != 0 {
+		v25 := r.Intn(100)
+		this.Field2 = make([]float64, v25)
+		for i := 0; i < v25; i++ {
+			this.Field2[i] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 3)
+	}
+	return this
+}
+
+type randyUnrecognized interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneUnrecognized(r randyUnrecognized) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringUnrecognized(r randyUnrecognized) string {
+	v26 := r.Intn(100)
+	tmps := make([]rune, v26)
+	for i := 0; i < v26; i++ {
+		tmps[i] = randUTF8RuneUnrecognized(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedUnrecognized(r randyUnrecognized, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldUnrecognized(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldUnrecognized(data []byte, r randyUnrecognized, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateUnrecognized(data, uint64(key))
+		v27 := r.Int63()
+		if r.Intn(2) == 0 {
+			v27 *= -1
+		}
+		data = encodeVarintPopulateUnrecognized(data, uint64(v27))
+	case 1:
+		data = encodeVarintPopulateUnrecognized(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateUnrecognized(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateUnrecognized(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateUnrecognized(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateUnrecognized(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
+func (m *A) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.B) > 0 {
+		for _, e := range m.B {
+			l = e.Size()
+			n += 1 + l + sovUnrecognized(uint64(l))
+		}
+	}
+	if m.Field1 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field1))
+	}
+	return n
+}
+
+func (m *B) Size() (n int) {
+	var l int
+	_ = l
+	if m.C != nil {
+		l = m.C.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.D != nil {
+		l = m.D.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.F != nil {
+		l = m.F.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *D) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field1))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *C) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field2 != nil {
+		n += 9
+	}
+	if m.Field3 != nil {
+		l = len(*m.Field3)
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.Field4 != nil {
+		n += 9
+	}
+	if len(m.Field5) > 0 {
+		for _, b := range m.Field5 {
+			l = len(b)
+			n += 1 + l + sovUnrecognized(uint64(l))
+		}
+	}
+	if m.Field6 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field6))
+	}
+	if len(m.Field7) > 0 {
+		n += 5 * len(m.Field7)
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *U) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.Field2) > 0 {
+		n += 9 * len(m.Field2)
+	}
+	if m.Field3 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field3))
+	}
+	return n
+}
+
+func (m *OldA) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.B) > 0 {
+		for _, e := range m.B {
+			l = e.Size()
+			n += 1 + l + sovUnrecognized(uint64(l))
+		}
+	}
+	if m.Field1 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field1))
+	}
+	return n
+}
+
+func (m *OldB) Size() (n int) {
+	var l int
+	_ = l
+	if m.C != nil {
+		l = m.C.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.F != nil {
+		l = m.F.Size()
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *OldC) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		n += 9
+	}
+	if m.Field3 != nil {
+		l = len(*m.Field3)
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovUnrecognized(uint64(*m.Field6))
+	}
+	if len(m.Field7) > 0 {
+		n += 5 * len(m.Field7)
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *OldU) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		l = len(*m.Field1)
+		n += 1 + l + sovUnrecognized(uint64(l))
+	}
+	if len(m.Field2) > 0 {
+		n += 9 * len(m.Field2)
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovUnrecognized(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozUnrecognized(x uint64) (n int) {
+	return sovUnrecognized(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *A) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&A{`,
+		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *B) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&B{`,
+		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "C", "C", 1) + `,`,
+		`D:` + strings.Replace(fmt.Sprintf("%v", this.D), "D", "D", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *D) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&D{`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *C) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&C{`,
+		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
+		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`Field4:` + valueToStringUnrecognized(this.Field4) + `,`,
+		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
+		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *U) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&U{`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UnoM) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UnoM{`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *OldA) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&OldA{`,
+		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "OldB", "OldB", 1) + `,`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *OldB) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&OldB{`,
+		`C:` + strings.Replace(fmt.Sprintf("%v", this.C), "OldC", "OldC", 1) + `,`,
+		`F:` + strings.Replace(fmt.Sprintf("%v", this.F), "OldC", "OldC", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *OldC) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&OldC{`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`Field2:` + valueToStringUnrecognized(this.Field2) + `,`,
+		`Field3:` + valueToStringUnrecognized(this.Field3) + `,`,
+		`Field6:` + valueToStringUnrecognized(this.Field6) + `,`,
+		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *OldU) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&OldU{`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *OldUnoM) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&OldUnoM{`,
+		`Field1:` + valueToStringUnrecognized(this.Field1) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringUnrecognized(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
+}
+func (m *A) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field B", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.B = append(m.B, &B{})
+			if err := m.B[len(m.B)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *B) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field C", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.C == nil {
+				m.C = &C{}
+			}
+			if err := m.C.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field D", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.D == nil {
+				m.D = &D{}
+			}
+			if err := m.D.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.F == nil {
+				m.F = &OldC{}
+			}
+			if err := m.F.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *D) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *C) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 2:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
+			v2 := float64(math.Float64frombits(v))
+			m.Field2 = &v2
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[iNdEx:postIndex])
+			m.Field3 = &s
+			iNdEx = postIndex
+		case 4:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
+			v2 := float64(math.Float64frombits(v))
+			m.Field4 = &v2
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Field5 = append(m.Field5, make([]byte, postIndex-iNdEx))
+			copy(m.Field5[len(m.Field5)-1], data[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 4
+			v = uint32(data[iNdEx-4])
+			v |= uint32(data[iNdEx-3]) << 8
+			v |= uint32(data[iNdEx-2]) << 16
+			v |= uint32(data[iNdEx-1]) << 24
+			v2 := float32(math.Float32frombits(v))
+			m.Field7 = append(m.Field7, v2)
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *U) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 2:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
+			v2 := float64(math.Float64frombits(v))
+			m.Field2 = append(m.Field2, v2)
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field3 = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *OldA) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field B", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.B = append(m.B, &OldB{})
+			if err := m.B[len(m.B)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *OldB) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field C", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.C == nil {
+				m.C = &OldC{}
+			}
+			if err := m.C.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + msglen
+			if msglen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.F == nil {
+				m.F = &OldC{}
+			}
+			if err := m.F.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *OldC) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field1 = &v
+		case 2:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
+			v2 := float64(math.Float64frombits(v))
+			m.Field2 = &v2
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[iNdEx:postIndex])
+			m.Field3 = &s
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Field6 = &v
+		case 7:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 4
+			v = uint32(data[iNdEx-4])
+			v |= uint32(data[iNdEx-3]) << 8
+			v |= uint32(data[iNdEx-2]) << 16
+			v |= uint32(data[iNdEx-1]) << 24
+			v2 := float32(math.Float32frombits(v))
+			m.Field7 = append(m.Field7, v2)
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func (m *OldU) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			s := string(data[iNdEx:postIndex])
+			m.Field1 = &s
+			iNdEx = postIndex
+		case 2:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += 8
+			v = uint64(data[iNdEx-8])
+			v |= uint64(data[iNdEx-7]) << 8
+			v |= uint64(data[iNdEx-6]) << 16
+			v |= uint64(data[iNdEx-5]) << 24
+			v |= uint64(data[iNdEx-4]) << 32
+			v |= uint64(data[iNdEx-3]) << 40
+			v |= uint64(data[iNdEx-2]) << 48
+			v |= uint64(data[iNdEx-1]) << 56
+			v2 := float64(math.Float64frombits(v))
+			m.Field2 = append(m.Field2, v2)
+		default:
+			var sizeOfWire int
+			for {
+				sizeOfWire++
+				wire >>= 7
+				if wire == 0 {
+					break
+				}
+			}
+			iNdEx -= sizeOfWire
+			skippy, err := skipUnrecognized(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	return nil
+}
+func skipUnrecognized(data []byte) (n int, err error) {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if iNdEx >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for {
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				iNdEx++
+				if data[iNdEx-1] < 0x80 {
+					break
+				}
+			}
+			return iNdEx, nil
+		case 1:
+			iNdEx += 8
+			return iNdEx, nil
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthUnrecognized
+			}
+			return iNdEx, nil
+		case 3:
+			for {
+				var innerWire uint64
+				var start int = iNdEx
+				for shift := uint(0); ; shift += 7 {
+					if iNdEx >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					innerWire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
+					break
+				}
+				next, err := skipUnrecognized(data[start:])
+				if err != nil {
+					return 0, err
+				}
+				iNdEx = start + next
+			}
+			return iNdEx, nil
+		case 4:
+			return iNdEx, nil
+		case 5:
+			iNdEx += 4
+			return iNdEx, nil
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+	}
+	panic("unreachable")
+}
+
+var (
+	ErrInvalidLengthUnrecognized = fmt.Errorf("proto: negative length found during unmarshaling")
+)

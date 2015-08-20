@@ -19,17 +19,16 @@ import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
-import fmt "fmt"
-import strings "strings"
-import reflect "reflect"
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
+import fmt "fmt"
+import bytes "bytes"
+
+import strings "strings"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
-
-import bytes "bytes"
-
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import reflect "reflect"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -69,560 +68,6 @@ type Groups2_G struct {
 func (m *Groups2_G) Reset()      { *m = Groups2_G{} }
 func (*Groups2_G) ProtoMessage() {}
 
-func (this *Groups1) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Groups1{`,
-		`G:` + strings.Replace(fmt.Sprintf("%v", this.G), "Groups1_G", "Groups1_G", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Groups1_G) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Groups1_G{`,
-		`Field1:` + valueToStringGroup(this.Field1) + `,`,
-		`Field2:` + valueToStringGroup(this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Groups2) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Groups2{`,
-		`G:` + strings.Replace(fmt.Sprintf("%v", this.G), "Groups2_G", "Groups2_G", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Groups2_G) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Groups2_G{`,
-		`Field1:` + valueToStringGroup(this.Field1) + `,`,
-		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringGroup(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
-}
-func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
-	this := &Groups1{}
-	if r.Intn(10) != 0 {
-		v1 := r.Intn(10)
-		this.G = make([]*Groups1_G, v1)
-		for i := 0; i < v1; i++ {
-			this.G[i] = NewPopulatedGroups1_G(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedGroup(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
-	this := &Groups1_G{}
-	if r.Intn(10) != 0 {
-		v2 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v2 *= -1
-		}
-		this.Field1 = &v2
-	}
-	if r.Intn(10) != 0 {
-		v3 := float64(r.Float64())
-		if r.Intn(2) == 0 {
-			v3 *= -1
-		}
-		this.Field2 = &v3
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedGroup(r, 3)
-	}
-	return this
-}
-
-func NewPopulatedGroups2(r randyGroup, easy bool) *Groups2 {
-	this := &Groups2{}
-	if r.Intn(10) != 0 {
-		this.G = NewPopulatedGroups2_G(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedGroup(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
-	this := &Groups2_G{}
-	if r.Intn(10) != 0 {
-		v4 := int64(r.Int63())
-		if r.Intn(2) == 0 {
-			v4 *= -1
-		}
-		this.Field1 = &v4
-	}
-	if r.Intn(10) != 0 {
-		v5 := r.Intn(100)
-		this.Field2 = make([]float64, v5)
-		for i := 0; i < v5; i++ {
-			this.Field2[i] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.Field2[i] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedGroup(r, 3)
-	}
-	return this
-}
-
-type randyGroup interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneGroup(r randyGroup) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringGroup(r randyGroup) string {
-	v6 := r.Intn(100)
-	tmps := make([]rune, v6)
-	for i := 0; i < v6; i++ {
-		tmps[i] = randUTF8RuneGroup(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedGroup(r randyGroup, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldGroup(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldGroup(data []byte, r randyGroup, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		v7 := r.Int63()
-		if r.Intn(2) == 0 {
-			v7 *= -1
-		}
-		data = encodeVarintPopulateGroup(data, uint64(v7))
-	case 1:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateGroup(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateGroup(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
-func (this *Groups1) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&group.Groups1{` +
-		`G:` + fmt.Sprintf("%#v", this.G),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *Groups1_G) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&group.Groups1_G{` +
-		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
-		`Field2:` + valueToGoStringGroup(this.Field2, "float64"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *Groups2) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&group.Groups2{` +
-		`G:` + fmt.Sprintf("%#v", this.G),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func (this *Groups2_G) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&group.Groups2_G{` +
-		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
-		`Field2:` + fmt.Sprintf("%#v", this.Field2),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func valueToGoStringGroup(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
-}
-func extensionToGoStringGroup(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
-	if e == nil {
-		return "nil"
-	}
-	s := "map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "}"
-	return s
-}
-func (this *Groups1) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Groups1)
-	if !ok {
-		return fmt.Errorf("that is not of type *Groups1")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Groups1 but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Groups1but is not nil && this == nil")
-	}
-	if len(this.G) != len(that1.G) {
-		return fmt.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
-	}
-	for i := range this.G {
-		if !this.G[i].Equal(that1.G[i]) {
-			return fmt.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *Groups1) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Groups1)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.G) != len(that1.G) {
-		return false
-	}
-	for i := range this.G {
-		if !this.G[i].Equal(that1.G[i]) {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *Groups1_G) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Groups1_G)
-	if !ok {
-		return fmt.Errorf("that is not of type *Groups1_G")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Groups1_G but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Groups1_Gbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
-		}
-	} else if this.Field2 != nil {
-		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
-	} else if that1.Field2 != nil {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *Groups1_G) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Groups1_G)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			return false
-		}
-	} else if this.Field2 != nil {
-		return false
-	} else if that1.Field2 != nil {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *Groups2) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Groups2)
-	if !ok {
-		return fmt.Errorf("that is not of type *Groups2")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Groups2 but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Groups2but is not nil && this == nil")
-	}
-	if !this.G.Equal(that1.G) {
-		return fmt.Errorf("G this(%v) Not Equal that(%v)", this.G, that1.G)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *Groups2) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Groups2)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if !this.G.Equal(that1.G) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *Groups2_G) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Groups2_G)
-	if !ok {
-		return fmt.Errorf("that is not of type *Groups2_G")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Groups2_G but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Groups2_Gbut is not nil && this == nil")
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
-		}
-	} else if this.Field1 != nil {
-		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
-	} else if that1.Field1 != nil {
-		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *Groups2_G) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Groups2_G)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			return false
-		}
-	} else if this.Field1 != nil {
-		return false
-	} else if that1.Field1 != nil {
-		return false
-	}
-	if len(this.Field2) != len(that1.Field2) {
-		return false
-	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
 func (this *Groups1) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return GroupDescription()
 }
@@ -1249,4 +694,558 @@ func GroupDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+}
+func (this *Groups1) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Groups1)
+	if !ok {
+		return fmt.Errorf("that is not of type *Groups1")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Groups1 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Groups1but is not nil && this == nil")
+	}
+	if len(this.G) != len(that1.G) {
+		return fmt.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
+	}
+	for i := range this.G {
+		if !this.G[i].Equal(that1.G[i]) {
+			return fmt.Errorf("G this[%v](%v) Not Equal that[%v](%v)", i, this.G[i], i, that1.G[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Groups1) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Groups1)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.G) != len(that1.G) {
+		return false
+	}
+	for i := range this.G {
+		if !this.G[i].Equal(that1.G[i]) {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *Groups1_G) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Groups1_G)
+	if !ok {
+		return fmt.Errorf("that is not of type *Groups1_G")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Groups1_G but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Groups1_Gbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", *this.Field2, *that1.Field2)
+		}
+	} else if this.Field2 != nil {
+		return fmt.Errorf("this.Field2 == nil && that.Field2 != nil")
+	} else if that1.Field2 != nil {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Groups1_G) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Groups1_G)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			return false
+		}
+	} else if this.Field2 != nil {
+		return false
+	} else if that1.Field2 != nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *Groups2) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Groups2)
+	if !ok {
+		return fmt.Errorf("that is not of type *Groups2")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Groups2 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Groups2but is not nil && this == nil")
+	}
+	if !this.G.Equal(that1.G) {
+		return fmt.Errorf("G this(%v) Not Equal that(%v)", this.G, that1.G)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Groups2) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Groups2)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.G.Equal(that1.G) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *Groups2_G) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Groups2_G)
+	if !ok {
+		return fmt.Errorf("that is not of type *Groups2_G")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Groups2_G but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Groups2_Gbut is not nil && this == nil")
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", *this.Field1, *that1.Field1)
+		}
+	} else if this.Field1 != nil {
+		return fmt.Errorf("this.Field1 == nil && that.Field1 != nil")
+	} else if that1.Field1 != nil {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return fmt.Errorf("Field2 this[%v](%v) Not Equal that[%v](%v)", i, this.Field2[i], i, that1.Field2[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Groups2_G) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Groups2_G)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			return false
+		}
+	} else if this.Field1 != nil {
+		return false
+	} else if that1.Field1 != nil {
+		return false
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		return false
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *Groups1) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&group.Groups1{` +
+		`G:` + fmt.Sprintf("%#v", this.G),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *Groups1_G) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&group.Groups1_G{` +
+		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
+		`Field2:` + valueToGoStringGroup(this.Field2, "float64"),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *Groups2) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&group.Groups2{` +
+		`G:` + fmt.Sprintf("%#v", this.G),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *Groups2_G) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&group.Groups2_G{` +
+		`Field1:` + valueToGoStringGroup(this.Field1, "int64"),
+		`Field2:` + fmt.Sprintf("%#v", this.Field2),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func valueToGoStringGroup(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringGroup(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "}"
+	return s
+}
+func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
+	this := &Groups1{}
+	if r.Intn(10) != 0 {
+		v1 := r.Intn(10)
+		this.G = make([]*Groups1_G, v1)
+		for i := 0; i < v1; i++ {
+			this.G[i] = NewPopulatedGroups1_G(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedGroup(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
+	this := &Groups1_G{}
+	if r.Intn(10) != 0 {
+		v2 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
+		this.Field1 = &v2
+	}
+	if r.Intn(10) != 0 {
+		v3 := float64(r.Float64())
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
+		this.Field2 = &v3
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedGroup(r, 3)
+	}
+	return this
+}
+
+func NewPopulatedGroups2(r randyGroup, easy bool) *Groups2 {
+	this := &Groups2{}
+	if r.Intn(10) != 0 {
+		this.G = NewPopulatedGroups2_G(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedGroup(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
+	this := &Groups2_G{}
+	if r.Intn(10) != 0 {
+		v4 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
+		this.Field1 = &v4
+	}
+	if r.Intn(10) != 0 {
+		v5 := r.Intn(100)
+		this.Field2 = make([]float64, v5)
+		for i := 0; i < v5; i++ {
+			this.Field2[i] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.Field2[i] *= -1
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedGroup(r, 3)
+	}
+	return this
+}
+
+type randyGroup interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneGroup(r randyGroup) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringGroup(r randyGroup) string {
+	v6 := r.Intn(100)
+	tmps := make([]rune, v6)
+	for i := 0; i < v6; i++ {
+		tmps[i] = randUTF8RuneGroup(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedGroup(r randyGroup, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldGroup(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldGroup(data []byte, r randyGroup, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateGroup(data, uint64(key))
+		v7 := r.Int63()
+		if r.Intn(2) == 0 {
+			v7 *= -1
+		}
+		data = encodeVarintPopulateGroup(data, uint64(v7))
+	case 1:
+		data = encodeVarintPopulateGroup(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateGroup(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateGroup(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateGroup(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateGroup(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
+func (this *Groups1) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Groups1{`,
+		`G:` + strings.Replace(fmt.Sprintf("%v", this.G), "Groups1_G", "Groups1_G", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Groups1_G) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Groups1_G{`,
+		`Field1:` + valueToStringGroup(this.Field1) + `,`,
+		`Field2:` + valueToStringGroup(this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Groups2) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Groups2{`,
+		`G:` + strings.Replace(fmt.Sprintf("%v", this.G), "Groups2_G", "Groups2_G", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Groups2_G) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Groups2_G{`,
+		`Field1:` + valueToStringGroup(this.Field1) + `,`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringGroup(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }

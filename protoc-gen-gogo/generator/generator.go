@@ -50,6 +50,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
@@ -77,7 +78,21 @@ type Plugin interface {
 	GenerateImports(file *FileDescriptor)
 }
 
-var plugins []Plugin
+type pluginSlice []Plugin
+
+func (ps pluginSlice) Len() int {
+	return len(ps)
+}
+
+func (ps pluginSlice) Less(i, j int) bool {
+	return ps[i].Name() < ps[j].Name()
+}
+
+func (ps pluginSlice) Swap(i, j int) {
+	ps[i], ps[j] = ps[j], ps[i]
+}
+
+var plugins pluginSlice
 
 // RegisterPlugin installs a (second-order) plugin to be run when the Go output is generated.
 // It is typically called during initialization.
@@ -530,12 +545,13 @@ func (g *Generator) CommandLineParameters(parameter string) {
 		for _, name := range strings.Split(pluginList, "+") {
 			enabled[name] = true
 		}
-		var nplugins []Plugin
+		var nplugins pluginSlice
 		for _, p := range plugins {
 			if enabled[p.Name()] {
 				nplugins = append(nplugins, p)
 			}
 		}
+		sort.Sort(nplugins)
 		plugins = nplugins
 	}
 }

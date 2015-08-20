@@ -20,17 +20,17 @@ import math "math"
 
 import github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+
 import fmt "fmt"
-import strings "strings"
-import reflect "reflect"
-
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
-import strconv "strconv"
-
 import bytes "bytes"
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
+import strings "strings"
+import sort "sort"
+import strconv "strconv"
+import reflect "reflect"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -50,417 +50,6 @@ type Castaway struct {
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 
-func (this *Castaway) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Castaway{`,
-		`Int32Ptr:` + valueToStringCasttype(this.Int32Ptr) + `,`,
-		`Int32:` + fmt.Sprintf("%v", this.Int32) + `,`,
-		`MyUint64Ptr:` + valueToStringCasttype(this.MyUint64Ptr) + `,`,
-		`MyUint64:` + fmt.Sprintf("%v", this.MyUint64) + `,`,
-		`MyBytes:` + valueToStringCasttype(this.MyBytes) + `,`,
-		`NormalBytes:` + valueToStringCasttype(this.NormalBytes) + `,`,
-		`MyUint64S:` + fmt.Sprintf("%v", this.MyUint64S) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringCasttype(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
-}
-func (m *Castaway) Size() (n int) {
-	var l int
-	_ = l
-	if m.Int32Ptr != nil {
-		n += 1 + sovCasttype(uint64(*m.Int32Ptr))
-	}
-	n += 1 + sovCasttype(uint64(m.Int32))
-	if m.MyUint64Ptr != nil {
-		n += 1 + sovCasttype(uint64(*m.MyUint64Ptr))
-	}
-	n += 1 + sovCasttype(uint64(m.MyUint64))
-	if m.MyBytes != nil {
-		l = len(m.MyBytes)
-		n += 1 + l + sovCasttype(uint64(l))
-	}
-	if m.NormalBytes != nil {
-		l = len(m.NormalBytes)
-		n += 1 + l + sovCasttype(uint64(l))
-	}
-	if len(m.MyUint64S) > 0 {
-		for _, e := range m.MyUint64S {
-			n += 1 + sovCasttype(uint64(e))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func sovCasttype(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozCasttype(x uint64) (n int) {
-	return sovCasttype(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
-	this := &Castaway{}
-	if r.Intn(10) != 0 {
-		v1 := int32(r.Int63())
-		if r.Intn(2) == 0 {
-			v1 *= -1
-		}
-		this.Int32Ptr = &v1
-	}
-	this.Int32 = int32(r.Int63())
-	if r.Intn(2) == 0 {
-		this.Int32 *= -1
-	}
-	if r.Intn(10) != 0 {
-		v2 := github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
-		this.MyUint64Ptr = &v2
-	}
-	this.MyUint64 = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
-	if r.Intn(10) != 0 {
-		v3 := r.Intn(100)
-		this.MyBytes = make(github_com_gogo_protobuf_test_casttype.Bytes, v3)
-		for i := 0; i < v3; i++ {
-			this.MyBytes[i] = byte(r.Intn(256))
-		}
-	}
-	if r.Intn(10) != 0 {
-		v4 := r.Intn(100)
-		this.NormalBytes = make([]byte, v4)
-		for i := 0; i < v4; i++ {
-			this.NormalBytes[i] = byte(r.Intn(256))
-		}
-	}
-	if r.Intn(10) != 0 {
-		v5 := r.Intn(100)
-		this.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, v5)
-		for i := 0; i < v5; i++ {
-			this.MyUint64S[i] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedCasttype(r, 8)
-	}
-	return this
-}
-
-type randyCasttype interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneCasttype(r randyCasttype) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringCasttype(r randyCasttype) string {
-	v6 := r.Intn(100)
-	tmps := make([]rune, v6)
-	for i := 0; i < v6; i++ {
-		tmps[i] = randUTF8RuneCasttype(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedCasttype(r randyCasttype, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldCasttype(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldCasttype(data []byte, r randyCasttype, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		v7 := r.Int63()
-		if r.Intn(2) == 0 {
-			v7 *= -1
-		}
-		data = encodeVarintPopulateCasttype(data, uint64(v7))
-	case 1:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateCasttype(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateCasttype(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
-func (this *Castaway) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&casttype.Castaway{` +
-		`Int32Ptr:` + valueToGoStringCasttype(this.Int32Ptr, "int32"),
-		`Int32:` + fmt.Sprintf("%#v", this.Int32),
-		`MyUint64Ptr:` + valueToGoStringCasttype(this.MyUint64Ptr, "github_com_gogo_protobuf_test_casttype.MyUint64Type"),
-		`MyUint64:` + fmt.Sprintf("%#v", this.MyUint64),
-		`MyBytes:` + valueToGoStringCasttype(this.MyBytes, "github_com_gogo_protobuf_test_casttype.Bytes"),
-		`NormalBytes:` + valueToGoStringCasttype(this.NormalBytes, "byte"),
-		`MyUint64S:` + fmt.Sprintf("%#v", this.MyUint64S),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
-}
-func valueToGoStringCasttype(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
-}
-func extensionToGoStringCasttype(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
-	if e == nil {
-		return "nil"
-	}
-	s := "map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "}"
-	return s
-}
-
-type CastawayFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetInt32Ptr() *int32
-	GetInt32() int32
-	GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type
-	GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUint64Type
-	GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes
-	GetNormalBytes() []byte
-	GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type
-}
-
-func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *Castaway) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewCastawayFromFace(this)
-}
-
-func (this *Castaway) GetInt32Ptr() *int32 {
-	return this.Int32Ptr
-}
-
-func (this *Castaway) GetInt32() int32 {
-	return this.Int32
-}
-
-func (this *Castaway) GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type {
-	return this.MyUint64Ptr
-}
-
-func (this *Castaway) GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUint64Type {
-	return this.MyUint64
-}
-
-func (this *Castaway) GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes {
-	return this.MyBytes
-}
-
-func (this *Castaway) GetNormalBytes() []byte {
-	return this.NormalBytes
-}
-
-func (this *Castaway) GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type {
-	return this.MyUint64S
-}
-
-func NewCastawayFromFace(that CastawayFace) *Castaway {
-	this := &Castaway{}
-	this.Int32Ptr = that.GetInt32Ptr()
-	this.Int32 = that.GetInt32()
-	this.MyUint64Ptr = that.GetMyUint64Ptr()
-	this.MyUint64 = that.GetMyUint64()
-	this.MyBytes = that.GetMyBytes()
-	this.NormalBytes = that.GetNormalBytes()
-	this.MyUint64S = that.GetMyUint64S()
-	return this
-}
-
-func (this *Castaway) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Castaway)
-	if !ok {
-		return fmt.Errorf("that is not of type *Castaway")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Castaway but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Castawaybut is not nil && this == nil")
-	}
-	if this.Int32Ptr != nil && that1.Int32Ptr != nil {
-		if *this.Int32Ptr != *that1.Int32Ptr {
-			return fmt.Errorf("Int32Ptr this(%v) Not Equal that(%v)", *this.Int32Ptr, *that1.Int32Ptr)
-		}
-	} else if this.Int32Ptr != nil {
-		return fmt.Errorf("this.Int32Ptr == nil && that.Int32Ptr != nil")
-	} else if that1.Int32Ptr != nil {
-		return fmt.Errorf("Int32Ptr this(%v) Not Equal that(%v)", this.Int32Ptr, that1.Int32Ptr)
-	}
-	if this.Int32 != that1.Int32 {
-		return fmt.Errorf("Int32 this(%v) Not Equal that(%v)", this.Int32, that1.Int32)
-	}
-	if this.MyUint64Ptr != nil && that1.MyUint64Ptr != nil {
-		if *this.MyUint64Ptr != *that1.MyUint64Ptr {
-			return fmt.Errorf("MyUint64Ptr this(%v) Not Equal that(%v)", *this.MyUint64Ptr, *that1.MyUint64Ptr)
-		}
-	} else if this.MyUint64Ptr != nil {
-		return fmt.Errorf("this.MyUint64Ptr == nil && that.MyUint64Ptr != nil")
-	} else if that1.MyUint64Ptr != nil {
-		return fmt.Errorf("MyUint64Ptr this(%v) Not Equal that(%v)", this.MyUint64Ptr, that1.MyUint64Ptr)
-	}
-	if this.MyUint64 != that1.MyUint64 {
-		return fmt.Errorf("MyUint64 this(%v) Not Equal that(%v)", this.MyUint64, that1.MyUint64)
-	}
-	if !bytes.Equal(this.MyBytes, that1.MyBytes) {
-		return fmt.Errorf("MyBytes this(%v) Not Equal that(%v)", this.MyBytes, that1.MyBytes)
-	}
-	if !bytes.Equal(this.NormalBytes, that1.NormalBytes) {
-		return fmt.Errorf("NormalBytes this(%v) Not Equal that(%v)", this.NormalBytes, that1.NormalBytes)
-	}
-	if len(this.MyUint64S) != len(that1.MyUint64S) {
-		return fmt.Errorf("MyUint64S this(%v) Not Equal that(%v)", len(this.MyUint64S), len(that1.MyUint64S))
-	}
-	for i := range this.MyUint64S {
-		if this.MyUint64S[i] != that1.MyUint64S[i] {
-			return fmt.Errorf("MyUint64S this[%v](%v) Not Equal that[%v](%v)", i, this.MyUint64S[i], i, that1.MyUint64S[i])
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *Castaway) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Castaway)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Int32Ptr != nil && that1.Int32Ptr != nil {
-		if *this.Int32Ptr != *that1.Int32Ptr {
-			return false
-		}
-	} else if this.Int32Ptr != nil {
-		return false
-	} else if that1.Int32Ptr != nil {
-		return false
-	}
-	if this.Int32 != that1.Int32 {
-		return false
-	}
-	if this.MyUint64Ptr != nil && that1.MyUint64Ptr != nil {
-		if *this.MyUint64Ptr != *that1.MyUint64Ptr {
-			return false
-		}
-	} else if this.MyUint64Ptr != nil {
-		return false
-	} else if that1.MyUint64Ptr != nil {
-		return false
-	}
-	if this.MyUint64 != that1.MyUint64 {
-		return false
-	}
-	if !bytes.Equal(this.MyBytes, that1.MyBytes) {
-		return false
-	}
-	if !bytes.Equal(this.NormalBytes, that1.NormalBytes) {
-		return false
-	}
-	if len(this.MyUint64S) != len(that1.MyUint64S) {
-		return false
-	}
-	for i := range this.MyUint64S {
-		if this.MyUint64S[i] != that1.MyUint64S[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
 func (this *Castaway) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return CasttypeDescription()
 }
@@ -1082,4 +671,415 @@ func CasttypeDescription() (desc *google_protobuf.FileDescriptorSet) {
 	}(3), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+}
+func (this *Castaway) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Castaway)
+	if !ok {
+		return fmt.Errorf("that is not of type *Castaway")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Castaway but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Castawaybut is not nil && this == nil")
+	}
+	if this.Int32Ptr != nil && that1.Int32Ptr != nil {
+		if *this.Int32Ptr != *that1.Int32Ptr {
+			return fmt.Errorf("Int32Ptr this(%v) Not Equal that(%v)", *this.Int32Ptr, *that1.Int32Ptr)
+		}
+	} else if this.Int32Ptr != nil {
+		return fmt.Errorf("this.Int32Ptr == nil && that.Int32Ptr != nil")
+	} else if that1.Int32Ptr != nil {
+		return fmt.Errorf("Int32Ptr this(%v) Not Equal that(%v)", this.Int32Ptr, that1.Int32Ptr)
+	}
+	if this.Int32 != that1.Int32 {
+		return fmt.Errorf("Int32 this(%v) Not Equal that(%v)", this.Int32, that1.Int32)
+	}
+	if this.MyUint64Ptr != nil && that1.MyUint64Ptr != nil {
+		if *this.MyUint64Ptr != *that1.MyUint64Ptr {
+			return fmt.Errorf("MyUint64Ptr this(%v) Not Equal that(%v)", *this.MyUint64Ptr, *that1.MyUint64Ptr)
+		}
+	} else if this.MyUint64Ptr != nil {
+		return fmt.Errorf("this.MyUint64Ptr == nil && that.MyUint64Ptr != nil")
+	} else if that1.MyUint64Ptr != nil {
+		return fmt.Errorf("MyUint64Ptr this(%v) Not Equal that(%v)", this.MyUint64Ptr, that1.MyUint64Ptr)
+	}
+	if this.MyUint64 != that1.MyUint64 {
+		return fmt.Errorf("MyUint64 this(%v) Not Equal that(%v)", this.MyUint64, that1.MyUint64)
+	}
+	if !bytes.Equal(this.MyBytes, that1.MyBytes) {
+		return fmt.Errorf("MyBytes this(%v) Not Equal that(%v)", this.MyBytes, that1.MyBytes)
+	}
+	if !bytes.Equal(this.NormalBytes, that1.NormalBytes) {
+		return fmt.Errorf("NormalBytes this(%v) Not Equal that(%v)", this.NormalBytes, that1.NormalBytes)
+	}
+	if len(this.MyUint64S) != len(that1.MyUint64S) {
+		return fmt.Errorf("MyUint64S this(%v) Not Equal that(%v)", len(this.MyUint64S), len(that1.MyUint64S))
+	}
+	for i := range this.MyUint64S {
+		if this.MyUint64S[i] != that1.MyUint64S[i] {
+			return fmt.Errorf("MyUint64S this[%v](%v) Not Equal that[%v](%v)", i, this.MyUint64S[i], i, that1.MyUint64S[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Castaway) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Castaway)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Int32Ptr != nil && that1.Int32Ptr != nil {
+		if *this.Int32Ptr != *that1.Int32Ptr {
+			return false
+		}
+	} else if this.Int32Ptr != nil {
+		return false
+	} else if that1.Int32Ptr != nil {
+		return false
+	}
+	if this.Int32 != that1.Int32 {
+		return false
+	}
+	if this.MyUint64Ptr != nil && that1.MyUint64Ptr != nil {
+		if *this.MyUint64Ptr != *that1.MyUint64Ptr {
+			return false
+		}
+	} else if this.MyUint64Ptr != nil {
+		return false
+	} else if that1.MyUint64Ptr != nil {
+		return false
+	}
+	if this.MyUint64 != that1.MyUint64 {
+		return false
+	}
+	if !bytes.Equal(this.MyBytes, that1.MyBytes) {
+		return false
+	}
+	if !bytes.Equal(this.NormalBytes, that1.NormalBytes) {
+		return false
+	}
+	if len(this.MyUint64S) != len(that1.MyUint64S) {
+		return false
+	}
+	for i := range this.MyUint64S {
+		if this.MyUint64S[i] != that1.MyUint64S[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+
+type CastawayFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetInt32Ptr() *int32
+	GetInt32() int32
+	GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type
+	GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUint64Type
+	GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes
+	GetNormalBytes() []byte
+	GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type
+}
+
+func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *Castaway) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewCastawayFromFace(this)
+}
+
+func (this *Castaway) GetInt32Ptr() *int32 {
+	return this.Int32Ptr
+}
+
+func (this *Castaway) GetInt32() int32 {
+	return this.Int32
+}
+
+func (this *Castaway) GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	return this.MyUint64Ptr
+}
+
+func (this *Castaway) GetMyUint64() github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	return this.MyUint64
+}
+
+func (this *Castaway) GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes {
+	return this.MyBytes
+}
+
+func (this *Castaway) GetNormalBytes() []byte {
+	return this.NormalBytes
+}
+
+func (this *Castaway) GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	return this.MyUint64S
+}
+
+func NewCastawayFromFace(that CastawayFace) *Castaway {
+	this := &Castaway{}
+	this.Int32Ptr = that.GetInt32Ptr()
+	this.Int32 = that.GetInt32()
+	this.MyUint64Ptr = that.GetMyUint64Ptr()
+	this.MyUint64 = that.GetMyUint64()
+	this.MyBytes = that.GetMyBytes()
+	this.NormalBytes = that.GetNormalBytes()
+	this.MyUint64S = that.GetMyUint64S()
+	return this
+}
+
+func (this *Castaway) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&casttype.Castaway{` +
+		`Int32Ptr:` + valueToGoStringCasttype(this.Int32Ptr, "int32"),
+		`Int32:` + fmt.Sprintf("%#v", this.Int32),
+		`MyUint64Ptr:` + valueToGoStringCasttype(this.MyUint64Ptr, "github_com_gogo_protobuf_test_casttype.MyUint64Type"),
+		`MyUint64:` + fmt.Sprintf("%#v", this.MyUint64),
+		`MyBytes:` + valueToGoStringCasttype(this.MyBytes, "github_com_gogo_protobuf_test_casttype.Bytes"),
+		`NormalBytes:` + valueToGoStringCasttype(this.NormalBytes, "byte"),
+		`MyUint64S:` + fmt.Sprintf("%#v", this.MyUint64S),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func valueToGoStringCasttype(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringCasttype(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "}"
+	return s
+}
+func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
+	this := &Castaway{}
+	if r.Intn(10) != 0 {
+		v1 := int32(r.Int63())
+		if r.Intn(2) == 0 {
+			v1 *= -1
+		}
+		this.Int32Ptr = &v1
+	}
+	this.Int32 = int32(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Int32 *= -1
+	}
+	if r.Intn(10) != 0 {
+		v2 := github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+		this.MyUint64Ptr = &v2
+	}
+	this.MyUint64 = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(100)
+		this.MyBytes = make(github_com_gogo_protobuf_test_casttype.Bytes, v3)
+		for i := 0; i < v3; i++ {
+			this.MyBytes[i] = byte(r.Intn(256))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v4 := r.Intn(100)
+		this.NormalBytes = make([]byte, v4)
+		for i := 0; i < v4; i++ {
+			this.NormalBytes[i] = byte(r.Intn(256))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v5 := r.Intn(100)
+		this.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, v5)
+		for i := 0; i < v5; i++ {
+			this.MyUint64S[i] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedCasttype(r, 8)
+	}
+	return this
+}
+
+type randyCasttype interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneCasttype(r randyCasttype) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringCasttype(r randyCasttype) string {
+	v6 := r.Intn(100)
+	tmps := make([]rune, v6)
+	for i := 0; i < v6; i++ {
+		tmps[i] = randUTF8RuneCasttype(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedCasttype(r randyCasttype, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldCasttype(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldCasttype(data []byte, r randyCasttype, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateCasttype(data, uint64(key))
+		v7 := r.Int63()
+		if r.Intn(2) == 0 {
+			v7 *= -1
+		}
+		data = encodeVarintPopulateCasttype(data, uint64(v7))
+	case 1:
+		data = encodeVarintPopulateCasttype(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateCasttype(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateCasttype(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateCasttype(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateCasttype(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
+func (m *Castaway) Size() (n int) {
+	var l int
+	_ = l
+	if m.Int32Ptr != nil {
+		n += 1 + sovCasttype(uint64(*m.Int32Ptr))
+	}
+	n += 1 + sovCasttype(uint64(m.Int32))
+	if m.MyUint64Ptr != nil {
+		n += 1 + sovCasttype(uint64(*m.MyUint64Ptr))
+	}
+	n += 1 + sovCasttype(uint64(m.MyUint64))
+	if m.MyBytes != nil {
+		l = len(m.MyBytes)
+		n += 1 + l + sovCasttype(uint64(l))
+	}
+	if m.NormalBytes != nil {
+		l = len(m.NormalBytes)
+		n += 1 + l + sovCasttype(uint64(l))
+	}
+	if len(m.MyUint64S) > 0 {
+		for _, e := range m.MyUint64S {
+			n += 1 + sovCasttype(uint64(e))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovCasttype(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozCasttype(x uint64) (n int) {
+	return sovCasttype(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *Castaway) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Castaway{`,
+		`Int32Ptr:` + valueToStringCasttype(this.Int32Ptr) + `,`,
+		`Int32:` + fmt.Sprintf("%v", this.Int32) + `,`,
+		`MyUint64Ptr:` + valueToStringCasttype(this.MyUint64Ptr) + `,`,
+		`MyUint64:` + fmt.Sprintf("%v", this.MyUint64) + `,`,
+		`MyBytes:` + valueToStringCasttype(this.MyBytes) + `,`,
+		`NormalBytes:` + valueToStringCasttype(this.NormalBytes) + `,`,
+		`MyUint64S:` + fmt.Sprintf("%v", this.MyUint64S) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringCasttype(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }

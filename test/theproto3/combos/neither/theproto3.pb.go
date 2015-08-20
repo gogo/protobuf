@@ -22,18 +22,19 @@ import proto "github.com/gogo/protobuf/proto"
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 import test "github.com/gogo/protobuf/test/combos/both"
 
-import fmt "fmt"
-import strings "strings"
-import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
 import strconv "strconv"
 
+import fmt "fmt"
 import bytes "bytes"
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
+import strings "strings"
+import sort "sort"
+import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -146,2206 +147,6 @@ func (*FloatingPoint) ProtoMessage() {}
 func init() {
 	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
-}
-func (this *Message) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForTerrain := make([]int64, 0, len(this.Terrain))
-	for k := range this.Terrain {
-		keysForTerrain = append(keysForTerrain, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
-	mapStringForTerrain := "map[int64]*Nested{"
-	for _, k := range keysForTerrain {
-		mapStringForTerrain += fmt.Sprintf("%v: %v,", k, this.Terrain[k])
-	}
-	mapStringForTerrain += "}"
-	keysForProto2Value := make([]int64, 0, len(this.Proto2Value))
-	for k := range this.Proto2Value {
-		keysForProto2Value = append(keysForProto2Value, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
-	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
-	for _, k := range keysForProto2Value {
-		mapStringForProto2Value += fmt.Sprintf("%v: %v,", k, this.Proto2Value[k])
-	}
-	mapStringForProto2Value += "}"
-	s := strings.Join([]string{`&Message{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Hilarity:` + fmt.Sprintf("%v", this.Hilarity) + `,`,
-		`HeightInCm:` + fmt.Sprintf("%v", this.HeightInCm) + `,`,
-		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`ResultCount:` + fmt.Sprintf("%v", this.ResultCount) + `,`,
-		`TrueScotsman:` + fmt.Sprintf("%v", this.TrueScotsman) + `,`,
-		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,
-		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
-		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
-		`Terrain:` + mapStringForTerrain + `,`,
-		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "test.NinOptNative", 1) + `,`,
-		`Proto2Value:` + mapStringForProto2Value + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Nested) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Nested{`,
-		`Bunny:` + fmt.Sprintf("%v", this.Bunny) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *AllMaps) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForStringToDoubleMap := make([]string, 0, len(this.StringToDoubleMap))
-	for k := range this.StringToDoubleMap {
-		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
-	mapStringForStringToDoubleMap := "map[string]float64{"
-	for _, k := range keysForStringToDoubleMap {
-		mapStringForStringToDoubleMap += fmt.Sprintf("%v: %v,", k, this.StringToDoubleMap[k])
-	}
-	mapStringForStringToDoubleMap += "}"
-	keysForStringToFloatMap := make([]string, 0, len(this.StringToFloatMap))
-	for k := range this.StringToFloatMap {
-		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
-	mapStringForStringToFloatMap := "map[string]float32{"
-	for _, k := range keysForStringToFloatMap {
-		mapStringForStringToFloatMap += fmt.Sprintf("%v: %v,", k, this.StringToFloatMap[k])
-	}
-	mapStringForStringToFloatMap += "}"
-	keysForInt32Map := make([]int32, 0, len(this.Int32Map))
-	for k := range this.Int32Map {
-		keysForInt32Map = append(keysForInt32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
-	mapStringForInt32Map := "map[int32]int32{"
-	for _, k := range keysForInt32Map {
-		mapStringForInt32Map += fmt.Sprintf("%v: %v,", k, this.Int32Map[k])
-	}
-	mapStringForInt32Map += "}"
-	keysForInt64Map := make([]int64, 0, len(this.Int64Map))
-	for k := range this.Int64Map {
-		keysForInt64Map = append(keysForInt64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
-	mapStringForInt64Map := "map[int64]int64{"
-	for _, k := range keysForInt64Map {
-		mapStringForInt64Map += fmt.Sprintf("%v: %v,", k, this.Int64Map[k])
-	}
-	mapStringForInt64Map += "}"
-	keysForUint32Map := make([]uint32, 0, len(this.Uint32Map))
-	for k := range this.Uint32Map {
-		keysForUint32Map = append(keysForUint32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
-	mapStringForUint32Map := "map[uint32]uint32{"
-	for _, k := range keysForUint32Map {
-		mapStringForUint32Map += fmt.Sprintf("%v: %v,", k, this.Uint32Map[k])
-	}
-	mapStringForUint32Map += "}"
-	keysForUint64Map := make([]uint64, 0, len(this.Uint64Map))
-	for k := range this.Uint64Map {
-		keysForUint64Map = append(keysForUint64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
-	mapStringForUint64Map := "map[uint64]uint64{"
-	for _, k := range keysForUint64Map {
-		mapStringForUint64Map += fmt.Sprintf("%v: %v,", k, this.Uint64Map[k])
-	}
-	mapStringForUint64Map += "}"
-	keysForSint32Map := make([]int32, 0, len(this.Sint32Map))
-	for k := range this.Sint32Map {
-		keysForSint32Map = append(keysForSint32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
-	mapStringForSint32Map := "map[int32]int32{"
-	for _, k := range keysForSint32Map {
-		mapStringForSint32Map += fmt.Sprintf("%v: %v,", k, this.Sint32Map[k])
-	}
-	mapStringForSint32Map += "}"
-	keysForSint64Map := make([]int64, 0, len(this.Sint64Map))
-	for k := range this.Sint64Map {
-		keysForSint64Map = append(keysForSint64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
-	mapStringForSint64Map := "map[int64]int64{"
-	for _, k := range keysForSint64Map {
-		mapStringForSint64Map += fmt.Sprintf("%v: %v,", k, this.Sint64Map[k])
-	}
-	mapStringForSint64Map += "}"
-	keysForFixed32Map := make([]uint32, 0, len(this.Fixed32Map))
-	for k := range this.Fixed32Map {
-		keysForFixed32Map = append(keysForFixed32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
-	mapStringForFixed32Map := "map[uint32]uint32{"
-	for _, k := range keysForFixed32Map {
-		mapStringForFixed32Map += fmt.Sprintf("%v: %v,", k, this.Fixed32Map[k])
-	}
-	mapStringForFixed32Map += "}"
-	keysForSfixed32Map := make([]int32, 0, len(this.Sfixed32Map))
-	for k := range this.Sfixed32Map {
-		keysForSfixed32Map = append(keysForSfixed32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
-	mapStringForSfixed32Map := "map[int32]int32{"
-	for _, k := range keysForSfixed32Map {
-		mapStringForSfixed32Map += fmt.Sprintf("%v: %v,", k, this.Sfixed32Map[k])
-	}
-	mapStringForSfixed32Map += "}"
-	keysForFixed64Map := make([]uint64, 0, len(this.Fixed64Map))
-	for k := range this.Fixed64Map {
-		keysForFixed64Map = append(keysForFixed64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
-	mapStringForFixed64Map := "map[uint64]uint64{"
-	for _, k := range keysForFixed64Map {
-		mapStringForFixed64Map += fmt.Sprintf("%v: %v,", k, this.Fixed64Map[k])
-	}
-	mapStringForFixed64Map += "}"
-	keysForSfixed64Map := make([]int64, 0, len(this.Sfixed64Map))
-	for k := range this.Sfixed64Map {
-		keysForSfixed64Map = append(keysForSfixed64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
-	mapStringForSfixed64Map := "map[int64]int64{"
-	for _, k := range keysForSfixed64Map {
-		mapStringForSfixed64Map += fmt.Sprintf("%v: %v,", k, this.Sfixed64Map[k])
-	}
-	mapStringForSfixed64Map += "}"
-	keysForBoolMap := make([]bool, 0, len(this.BoolMap))
-	for k := range this.BoolMap {
-		keysForBoolMap = append(keysForBoolMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
-	mapStringForBoolMap := "map[bool]bool{"
-	for _, k := range keysForBoolMap {
-		mapStringForBoolMap += fmt.Sprintf("%v: %v,", k, this.BoolMap[k])
-	}
-	mapStringForBoolMap += "}"
-	keysForStringMap := make([]string, 0, len(this.StringMap))
-	for k := range this.StringMap {
-		keysForStringMap = append(keysForStringMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-	mapStringForStringMap := "map[string]string{"
-	for _, k := range keysForStringMap {
-		mapStringForStringMap += fmt.Sprintf("%v: %v,", k, this.StringMap[k])
-	}
-	mapStringForStringMap += "}"
-	keysForStringToBytesMap := make([]string, 0, len(this.StringToBytesMap))
-	for k := range this.StringToBytesMap {
-		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
-	mapStringForStringToBytesMap := "map[string][]byte{"
-	for _, k := range keysForStringToBytesMap {
-		mapStringForStringToBytesMap += fmt.Sprintf("%v: %v,", k, this.StringToBytesMap[k])
-	}
-	mapStringForStringToBytesMap += "}"
-	keysForStringToEnumMap := make([]string, 0, len(this.StringToEnumMap))
-	for k := range this.StringToEnumMap {
-		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
-	mapStringForStringToEnumMap := "map[string]MapEnum{"
-	for _, k := range keysForStringToEnumMap {
-		mapStringForStringToEnumMap += fmt.Sprintf("%v: %v,", k, this.StringToEnumMap[k])
-	}
-	mapStringForStringToEnumMap += "}"
-	keysForStringToMsgMap := make([]string, 0, len(this.StringToMsgMap))
-	for k := range this.StringToMsgMap {
-		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
-	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
-	for _, k := range keysForStringToMsgMap {
-		mapStringForStringToMsgMap += fmt.Sprintf("%v: %v,", k, this.StringToMsgMap[k])
-	}
-	mapStringForStringToMsgMap += "}"
-	s := strings.Join([]string{`&AllMaps{`,
-		`StringToDoubleMap:` + mapStringForStringToDoubleMap + `,`,
-		`StringToFloatMap:` + mapStringForStringToFloatMap + `,`,
-		`Int32Map:` + mapStringForInt32Map + `,`,
-		`Int64Map:` + mapStringForInt64Map + `,`,
-		`Uint32Map:` + mapStringForUint32Map + `,`,
-		`Uint64Map:` + mapStringForUint64Map + `,`,
-		`Sint32Map:` + mapStringForSint32Map + `,`,
-		`Sint64Map:` + mapStringForSint64Map + `,`,
-		`Fixed32Map:` + mapStringForFixed32Map + `,`,
-		`Sfixed32Map:` + mapStringForSfixed32Map + `,`,
-		`Fixed64Map:` + mapStringForFixed64Map + `,`,
-		`Sfixed64Map:` + mapStringForSfixed64Map + `,`,
-		`BoolMap:` + mapStringForBoolMap + `,`,
-		`StringMap:` + mapStringForStringMap + `,`,
-		`StringToBytesMap:` + mapStringForStringToBytesMap + `,`,
-		`StringToEnumMap:` + mapStringForStringToEnumMap + `,`,
-		`StringToMsgMap:` + mapStringForStringToMsgMap + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *MessageWithMap) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
-	for k := range this.NameMapping {
-		keysForNameMapping = append(keysForNameMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
-	mapStringForNameMapping := "map[int32]string{"
-	for _, k := range keysForNameMapping {
-		mapStringForNameMapping += fmt.Sprintf("%v: %v,", k, this.NameMapping[k])
-	}
-	mapStringForNameMapping += "}"
-	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
-	for k := range this.MsgMapping {
-		keysForMsgMapping = append(keysForMsgMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
-	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
-	for _, k := range keysForMsgMapping {
-		mapStringForMsgMapping += fmt.Sprintf("%v: %v,", k, this.MsgMapping[k])
-	}
-	mapStringForMsgMapping += "}"
-	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
-	for k := range this.ByteMapping {
-		keysForByteMapping = append(keysForByteMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
-	mapStringForByteMapping := "map[bool][]byte{"
-	for _, k := range keysForByteMapping {
-		mapStringForByteMapping += fmt.Sprintf("%v: %v,", k, this.ByteMapping[k])
-	}
-	mapStringForByteMapping += "}"
-	s := strings.Join([]string{`&MessageWithMap{`,
-		`NameMapping:` + mapStringForNameMapping + `,`,
-		`MsgMapping:` + mapStringForMsgMapping + `,`,
-		`ByteMapping:` + mapStringForByteMapping + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *FloatingPoint) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&FloatingPoint{`,
-		`F:` + fmt.Sprintf("%v", this.F) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringTheproto3(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
-}
-func (m *Message) Size() (n int) {
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovTheproto3(uint64(l))
-	}
-	if m.Hilarity != 0 {
-		n += 1 + sovTheproto3(uint64(m.Hilarity))
-	}
-	if m.HeightInCm != 0 {
-		n += 1 + sovTheproto3(uint64(m.HeightInCm))
-	}
-	if m.Data != nil {
-		l = len(m.Data)
-		if l > 0 {
-			n += 1 + l + sovTheproto3(uint64(l))
-		}
-	}
-	if m.ResultCount != 0 {
-		n += 1 + sovTheproto3(uint64(m.ResultCount))
-	}
-	if m.TrueScotsman {
-		n += 2
-	}
-	if m.Score != 0 {
-		n += 5
-	}
-	if len(m.Key) > 0 {
-		for _, e := range m.Key {
-			n += 1 + sovTheproto3(uint64(e))
-		}
-	}
-	if m.Nested != nil {
-		l = m.Nested.Size()
-		n += 1 + l + sovTheproto3(uint64(l))
-	}
-	if len(m.Terrain) > 0 {
-		for k, v := range m.Terrain {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-			}
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if m.Proto2Field != nil {
-		l = m.Proto2Field.Size()
-		n += 1 + l + sovTheproto3(uint64(l))
-	}
-	if len(m.Proto2Value) > 0 {
-		for k, v := range m.Proto2Value {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-			}
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	return n
-}
-
-func (m *Nested) Size() (n int) {
-	var l int
-	_ = l
-	l = len(m.Bunny)
-	if l > 0 {
-		n += 1 + l + sovTheproto3(uint64(l))
-	}
-	return n
-}
-
-func (m *AllMaps) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.StringToDoubleMap) > 0 {
-		for k, v := range m.StringToDoubleMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.StringToFloatMap) > 0 {
-		for k, v := range m.StringToFloatMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Int32Map) > 0 {
-		for k, v := range m.Int32Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Int64Map) > 0 {
-		for k, v := range m.Int64Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Uint32Map) > 0 {
-		for k, v := range m.Uint32Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Uint64Map) > 0 {
-		for k, v := range m.Uint64Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Sint32Map) > 0 {
-		for k, v := range m.Sint32Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Sint64Map) > 0 {
-		for k, v := range m.Sint64Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Fixed32Map) > 0 {
-		for k, v := range m.Fixed32Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 4 + 1 + 4
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Sfixed32Map) > 0 {
-		for k, v := range m.Sfixed32Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 4 + 1 + 4
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Fixed64Map) > 0 {
-		for k, v := range m.Fixed64Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 8 + 1 + 8
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Sfixed64Map) > 0 {
-		for k, v := range m.Sfixed64Map {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 8 + 1 + 8
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.BoolMap) > 0 {
-		for k, v := range m.BoolMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 1 + 1 + 1
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.StringMap) > 0 {
-		for k, v := range m.StringMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.StringToBytesMap) > 0 {
-		for k, v := range m.StringToBytesMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.StringToEnumMap) > 0 {
-		for k, v := range m.StringToEnumMap {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
-			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.StringToMsgMap) > 0 {
-		for k, v := range m.StringToMsgMap {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-			}
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + l + sovTheproto3(uint64(l))
-			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	return n
-}
-
-func (m *MessageWithMap) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NameMapping) > 0 {
-		for k, v := range m.NameMapping {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.MsgMapping) > 0 {
-		for k, v := range m.MsgMapping {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-			}
-			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	if len(m.ByteMapping) > 0 {
-		for k, v := range m.ByteMapping {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + 1 + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
-		}
-	}
-	return n
-}
-
-func (m *FloatingPoint) Size() (n int) {
-	var l int
-	_ = l
-	if m.F != 0 {
-		n += 9
-	}
-	return n
-}
-
-func sovTheproto3(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozTheproto3(x uint64) (n int) {
-	return sovTheproto3(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
-	this := &Message{}
-	this.Name = randStringTheproto3(r)
-	this.Hilarity = Message_Humour([]int32{0, 1, 2, 3}[r.Intn(4)])
-	this.HeightInCm = uint32(r.Uint32())
-	v1 := r.Intn(100)
-	this.Data = make([]byte, v1)
-	for i := 0; i < v1; i++ {
-		this.Data[i] = byte(r.Intn(256))
-	}
-	this.ResultCount = int64(r.Int63())
-	if r.Intn(2) == 0 {
-		this.ResultCount *= -1
-	}
-	this.TrueScotsman = bool(bool(r.Intn(2) == 0))
-	this.Score = float32(r.Float32())
-	if r.Intn(2) == 0 {
-		this.Score *= -1
-	}
-	v2 := r.Intn(100)
-	this.Key = make([]uint64, v2)
-	for i := 0; i < v2; i++ {
-		this.Key[i] = uint64(uint64(r.Uint32()))
-	}
-	if r.Intn(10) != 0 {
-		this.Nested = NewPopulatedNested(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		v3 := r.Intn(10)
-		this.Terrain = make(map[int64]*Nested)
-		for i := 0; i < v3; i++ {
-			this.Terrain[int64(r.Int63())] = NewPopulatedNested(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		this.Proto2Field = test.NewPopulatedNinOptNative(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		v4 := r.Intn(10)
-		this.Proto2Value = make(map[int64]*test.NinOptEnum)
-		for i := 0; i < v4; i++ {
-			this.Proto2Value[int64(r.Int63())] = test.NewPopulatedNinOptEnum(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedNested(r randyTheproto3, easy bool) *Nested {
-	this := &Nested{}
-	this.Bunny = randStringTheproto3(r)
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
-	this := &AllMaps{}
-	if r.Intn(10) != 0 {
-		v5 := r.Intn(10)
-		this.StringToDoubleMap = make(map[string]float64)
-		for i := 0; i < v5; i++ {
-			v6 := randStringTheproto3(r)
-			this.StringToDoubleMap[v6] = float64(r.Float64())
-			if r.Intn(2) == 0 {
-				this.StringToDoubleMap[v6] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v7 := r.Intn(10)
-		this.StringToFloatMap = make(map[string]float32)
-		for i := 0; i < v7; i++ {
-			v8 := randStringTheproto3(r)
-			this.StringToFloatMap[v8] = float32(r.Float32())
-			if r.Intn(2) == 0 {
-				this.StringToFloatMap[v8] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v9 := r.Intn(10)
-		this.Int32Map = make(map[int32]int32)
-		for i := 0; i < v9; i++ {
-			v10 := int32(r.Int31())
-			this.Int32Map[v10] = int32(r.Int31())
-			if r.Intn(2) == 0 {
-				this.Int32Map[v10] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v11 := r.Intn(10)
-		this.Int64Map = make(map[int64]int64)
-		for i := 0; i < v11; i++ {
-			v12 := int64(r.Int63())
-			this.Int64Map[v12] = int64(r.Int63())
-			if r.Intn(2) == 0 {
-				this.Int64Map[v12] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v13 := r.Intn(10)
-		this.Uint32Map = make(map[uint32]uint32)
-		for i := 0; i < v13; i++ {
-			v14 := uint32(r.Uint32())
-			this.Uint32Map[v14] = uint32(r.Uint32())
-		}
-	}
-	if r.Intn(10) != 0 {
-		v15 := r.Intn(10)
-		this.Uint64Map = make(map[uint64]uint64)
-		for i := 0; i < v15; i++ {
-			v16 := uint64(uint64(r.Uint32()))
-			this.Uint64Map[v16] = uint64(uint64(r.Uint32()))
-		}
-	}
-	if r.Intn(10) != 0 {
-		v17 := r.Intn(10)
-		this.Sint32Map = make(map[int32]int32)
-		for i := 0; i < v17; i++ {
-			v18 := int32(r.Int31())
-			this.Sint32Map[v18] = int32(r.Int31())
-			if r.Intn(2) == 0 {
-				this.Sint32Map[v18] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v19 := r.Intn(10)
-		this.Sint64Map = make(map[int64]int64)
-		for i := 0; i < v19; i++ {
-			v20 := int64(r.Int63())
-			this.Sint64Map[v20] = int64(r.Int63())
-			if r.Intn(2) == 0 {
-				this.Sint64Map[v20] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v21 := r.Intn(10)
-		this.Fixed32Map = make(map[uint32]uint32)
-		for i := 0; i < v21; i++ {
-			v22 := uint32(r.Uint32())
-			this.Fixed32Map[v22] = uint32(r.Uint32())
-		}
-	}
-	if r.Intn(10) != 0 {
-		v23 := r.Intn(10)
-		this.Sfixed32Map = make(map[int32]int32)
-		for i := 0; i < v23; i++ {
-			v24 := int32(r.Int31())
-			this.Sfixed32Map[v24] = int32(r.Int31())
-			if r.Intn(2) == 0 {
-				this.Sfixed32Map[v24] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v25 := r.Intn(10)
-		this.Fixed64Map = make(map[uint64]uint64)
-		for i := 0; i < v25; i++ {
-			v26 := uint64(uint64(r.Uint32()))
-			this.Fixed64Map[v26] = uint64(uint64(r.Uint32()))
-		}
-	}
-	if r.Intn(10) != 0 {
-		v27 := r.Intn(10)
-		this.Sfixed64Map = make(map[int64]int64)
-		for i := 0; i < v27; i++ {
-			v28 := int64(r.Int63())
-			this.Sfixed64Map[v28] = int64(r.Int63())
-			if r.Intn(2) == 0 {
-				this.Sfixed64Map[v28] *= -1
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v29 := r.Intn(10)
-		this.BoolMap = make(map[bool]bool)
-		for i := 0; i < v29; i++ {
-			v30 := bool(bool(r.Intn(2) == 0))
-			this.BoolMap[v30] = bool(bool(r.Intn(2) == 0))
-		}
-	}
-	if r.Intn(10) != 0 {
-		v31 := r.Intn(10)
-		this.StringMap = make(map[string]string)
-		for i := 0; i < v31; i++ {
-			this.StringMap[randStringTheproto3(r)] = randStringTheproto3(r)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v32 := r.Intn(10)
-		this.StringToBytesMap = make(map[string][]byte)
-		for i := 0; i < v32; i++ {
-			v33 := r.Intn(100)
-			v34 := randStringTheproto3(r)
-			this.StringToBytesMap[v34] = make([]byte, v33)
-			for i := 0; i < v33; i++ {
-				this.StringToBytesMap[v34][i] = byte(r.Intn(256))
-			}
-		}
-	}
-	if r.Intn(10) != 0 {
-		v35 := r.Intn(10)
-		this.StringToEnumMap = make(map[string]MapEnum)
-		for i := 0; i < v35; i++ {
-			this.StringToEnumMap[randStringTheproto3(r)] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
-		}
-	}
-	if r.Intn(10) != 0 {
-		v36 := r.Intn(10)
-		this.StringToMsgMap = make(map[string]*FloatingPoint)
-		for i := 0; i < v36; i++ {
-			this.StringToMsgMap[randStringTheproto3(r)] = NewPopulatedFloatingPoint(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
-	this := &MessageWithMap{}
-	if r.Intn(10) != 0 {
-		v37 := r.Intn(10)
-		this.NameMapping = make(map[int32]string)
-		for i := 0; i < v37; i++ {
-			this.NameMapping[int32(r.Int31())] = randStringTheproto3(r)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v38 := r.Intn(10)
-		this.MsgMapping = make(map[int64]*FloatingPoint)
-		for i := 0; i < v38; i++ {
-			this.MsgMapping[int64(r.Int63())] = NewPopulatedFloatingPoint(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v39 := r.Intn(10)
-		this.ByteMapping = make(map[bool][]byte)
-		for i := 0; i < v39; i++ {
-			v40 := r.Intn(100)
-			v41 := bool(bool(r.Intn(2) == 0))
-			this.ByteMapping[v41] = make([]byte, v40)
-			for i := 0; i < v40; i++ {
-				this.ByteMapping[v41][i] = byte(r.Intn(256))
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
-	this := &FloatingPoint{}
-	this.F = float64(r.Float64())
-	if r.Intn(2) == 0 {
-		this.F *= -1
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyTheproto3 interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneTheproto3(r randyTheproto3) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringTheproto3(r randyTheproto3) string {
-	v42 := r.Intn(100)
-	tmps := make([]rune, v42)
-	for i := 0; i < v42; i++ {
-		tmps[i] = randUTF8RuneTheproto3(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedTheproto3(r randyTheproto3, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldTheproto3(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldTheproto3(data []byte, r randyTheproto3, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		v43 := r.Int63()
-		if r.Intn(2) == 0 {
-			v43 *= -1
-		}
-		data = encodeVarintPopulateTheproto3(data, uint64(v43))
-	case 1:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateTheproto3(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateTheproto3(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
-func (this *Message) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForTerrain := make([]int64, 0, len(this.Terrain))
-	for k := range this.Terrain {
-		keysForTerrain = append(keysForTerrain, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
-	mapStringForTerrain := "map[int64]*Nested{"
-	for _, k := range keysForTerrain {
-		mapStringForTerrain += fmt.Sprintf("%#v: %#v,", k, this.Terrain[k])
-	}
-	mapStringForTerrain += "}"
-	keysForProto2Value := make([]int64, 0, len(this.Proto2Value))
-	for k := range this.Proto2Value {
-		keysForProto2Value = append(keysForProto2Value, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
-	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
-	for _, k := range keysForProto2Value {
-		mapStringForProto2Value += fmt.Sprintf("%#v: %#v,", k, this.Proto2Value[k])
-	}
-	mapStringForProto2Value += "}"
-	s := strings.Join([]string{`&theproto3.Message{` +
-		`Name:` + fmt.Sprintf("%#v", this.Name),
-		`Hilarity:` + fmt.Sprintf("%#v", this.Hilarity),
-		`HeightInCm:` + fmt.Sprintf("%#v", this.HeightInCm),
-		`Data:` + fmt.Sprintf("%#v", this.Data),
-		`ResultCount:` + fmt.Sprintf("%#v", this.ResultCount),
-		`TrueScotsman:` + fmt.Sprintf("%#v", this.TrueScotsman),
-		`Score:` + fmt.Sprintf("%#v", this.Score),
-		`Key:` + fmt.Sprintf("%#v", this.Key),
-		`Nested:` + fmt.Sprintf("%#v", this.Nested),
-		`Terrain:` + mapStringForTerrain,
-		`Proto2Field:` + fmt.Sprintf("%#v", this.Proto2Field),
-		`Proto2Value:` + mapStringForProto2Value + `}`}, ", ")
-	return s
-}
-func (this *Nested) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&theproto3.Nested{` +
-		`Bunny:` + fmt.Sprintf("%#v", this.Bunny) + `}`}, ", ")
-	return s
-}
-func (this *AllMaps) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForStringToDoubleMap := make([]string, 0, len(this.StringToDoubleMap))
-	for k := range this.StringToDoubleMap {
-		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
-	mapStringForStringToDoubleMap := "map[string]float64{"
-	for _, k := range keysForStringToDoubleMap {
-		mapStringForStringToDoubleMap += fmt.Sprintf("%#v: %#v,", k, this.StringToDoubleMap[k])
-	}
-	mapStringForStringToDoubleMap += "}"
-	keysForStringToFloatMap := make([]string, 0, len(this.StringToFloatMap))
-	for k := range this.StringToFloatMap {
-		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
-	mapStringForStringToFloatMap := "map[string]float32{"
-	for _, k := range keysForStringToFloatMap {
-		mapStringForStringToFloatMap += fmt.Sprintf("%#v: %#v,", k, this.StringToFloatMap[k])
-	}
-	mapStringForStringToFloatMap += "}"
-	keysForInt32Map := make([]int32, 0, len(this.Int32Map))
-	for k := range this.Int32Map {
-		keysForInt32Map = append(keysForInt32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
-	mapStringForInt32Map := "map[int32]int32{"
-	for _, k := range keysForInt32Map {
-		mapStringForInt32Map += fmt.Sprintf("%#v: %#v,", k, this.Int32Map[k])
-	}
-	mapStringForInt32Map += "}"
-	keysForInt64Map := make([]int64, 0, len(this.Int64Map))
-	for k := range this.Int64Map {
-		keysForInt64Map = append(keysForInt64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
-	mapStringForInt64Map := "map[int64]int64{"
-	for _, k := range keysForInt64Map {
-		mapStringForInt64Map += fmt.Sprintf("%#v: %#v,", k, this.Int64Map[k])
-	}
-	mapStringForInt64Map += "}"
-	keysForUint32Map := make([]uint32, 0, len(this.Uint32Map))
-	for k := range this.Uint32Map {
-		keysForUint32Map = append(keysForUint32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
-	mapStringForUint32Map := "map[uint32]uint32{"
-	for _, k := range keysForUint32Map {
-		mapStringForUint32Map += fmt.Sprintf("%#v: %#v,", k, this.Uint32Map[k])
-	}
-	mapStringForUint32Map += "}"
-	keysForUint64Map := make([]uint64, 0, len(this.Uint64Map))
-	for k := range this.Uint64Map {
-		keysForUint64Map = append(keysForUint64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
-	mapStringForUint64Map := "map[uint64]uint64{"
-	for _, k := range keysForUint64Map {
-		mapStringForUint64Map += fmt.Sprintf("%#v: %#v,", k, this.Uint64Map[k])
-	}
-	mapStringForUint64Map += "}"
-	keysForSint32Map := make([]int32, 0, len(this.Sint32Map))
-	for k := range this.Sint32Map {
-		keysForSint32Map = append(keysForSint32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
-	mapStringForSint32Map := "map[int32]int32{"
-	for _, k := range keysForSint32Map {
-		mapStringForSint32Map += fmt.Sprintf("%#v: %#v,", k, this.Sint32Map[k])
-	}
-	mapStringForSint32Map += "}"
-	keysForSint64Map := make([]int64, 0, len(this.Sint64Map))
-	for k := range this.Sint64Map {
-		keysForSint64Map = append(keysForSint64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
-	mapStringForSint64Map := "map[int64]int64{"
-	for _, k := range keysForSint64Map {
-		mapStringForSint64Map += fmt.Sprintf("%#v: %#v,", k, this.Sint64Map[k])
-	}
-	mapStringForSint64Map += "}"
-	keysForFixed32Map := make([]uint32, 0, len(this.Fixed32Map))
-	for k := range this.Fixed32Map {
-		keysForFixed32Map = append(keysForFixed32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
-	mapStringForFixed32Map := "map[uint32]uint32{"
-	for _, k := range keysForFixed32Map {
-		mapStringForFixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed32Map[k])
-	}
-	mapStringForFixed32Map += "}"
-	keysForSfixed32Map := make([]int32, 0, len(this.Sfixed32Map))
-	for k := range this.Sfixed32Map {
-		keysForSfixed32Map = append(keysForSfixed32Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
-	mapStringForSfixed32Map := "map[int32]int32{"
-	for _, k := range keysForSfixed32Map {
-		mapStringForSfixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed32Map[k])
-	}
-	mapStringForSfixed32Map += "}"
-	keysForFixed64Map := make([]uint64, 0, len(this.Fixed64Map))
-	for k := range this.Fixed64Map {
-		keysForFixed64Map = append(keysForFixed64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
-	mapStringForFixed64Map := "map[uint64]uint64{"
-	for _, k := range keysForFixed64Map {
-		mapStringForFixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed64Map[k])
-	}
-	mapStringForFixed64Map += "}"
-	keysForSfixed64Map := make([]int64, 0, len(this.Sfixed64Map))
-	for k := range this.Sfixed64Map {
-		keysForSfixed64Map = append(keysForSfixed64Map, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
-	mapStringForSfixed64Map := "map[int64]int64{"
-	for _, k := range keysForSfixed64Map {
-		mapStringForSfixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed64Map[k])
-	}
-	mapStringForSfixed64Map += "}"
-	keysForBoolMap := make([]bool, 0, len(this.BoolMap))
-	for k := range this.BoolMap {
-		keysForBoolMap = append(keysForBoolMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
-	mapStringForBoolMap := "map[bool]bool{"
-	for _, k := range keysForBoolMap {
-		mapStringForBoolMap += fmt.Sprintf("%#v: %#v,", k, this.BoolMap[k])
-	}
-	mapStringForBoolMap += "}"
-	keysForStringMap := make([]string, 0, len(this.StringMap))
-	for k := range this.StringMap {
-		keysForStringMap = append(keysForStringMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-	mapStringForStringMap := "map[string]string{"
-	for _, k := range keysForStringMap {
-		mapStringForStringMap += fmt.Sprintf("%#v: %#v,", k, this.StringMap[k])
-	}
-	mapStringForStringMap += "}"
-	keysForStringToBytesMap := make([]string, 0, len(this.StringToBytesMap))
-	for k := range this.StringToBytesMap {
-		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
-	mapStringForStringToBytesMap := "map[string][]byte{"
-	for _, k := range keysForStringToBytesMap {
-		mapStringForStringToBytesMap += fmt.Sprintf("%#v: %#v,", k, this.StringToBytesMap[k])
-	}
-	mapStringForStringToBytesMap += "}"
-	keysForStringToEnumMap := make([]string, 0, len(this.StringToEnumMap))
-	for k := range this.StringToEnumMap {
-		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
-	mapStringForStringToEnumMap := "map[string]MapEnum{"
-	for _, k := range keysForStringToEnumMap {
-		mapStringForStringToEnumMap += fmt.Sprintf("%#v: %#v,", k, this.StringToEnumMap[k])
-	}
-	mapStringForStringToEnumMap += "}"
-	keysForStringToMsgMap := make([]string, 0, len(this.StringToMsgMap))
-	for k := range this.StringToMsgMap {
-		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
-	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
-	for _, k := range keysForStringToMsgMap {
-		mapStringForStringToMsgMap += fmt.Sprintf("%#v: %#v,", k, this.StringToMsgMap[k])
-	}
-	mapStringForStringToMsgMap += "}"
-	s := strings.Join([]string{`&theproto3.AllMaps{` +
-		`StringToDoubleMap:` + mapStringForStringToDoubleMap,
-		`StringToFloatMap:` + mapStringForStringToFloatMap,
-		`Int32Map:` + mapStringForInt32Map,
-		`Int64Map:` + mapStringForInt64Map,
-		`Uint32Map:` + mapStringForUint32Map,
-		`Uint64Map:` + mapStringForUint64Map,
-		`Sint32Map:` + mapStringForSint32Map,
-		`Sint64Map:` + mapStringForSint64Map,
-		`Fixed32Map:` + mapStringForFixed32Map,
-		`Sfixed32Map:` + mapStringForSfixed32Map,
-		`Fixed64Map:` + mapStringForFixed64Map,
-		`Sfixed64Map:` + mapStringForSfixed64Map,
-		`BoolMap:` + mapStringForBoolMap,
-		`StringMap:` + mapStringForStringMap,
-		`StringToBytesMap:` + mapStringForStringToBytesMap,
-		`StringToEnumMap:` + mapStringForStringToEnumMap,
-		`StringToMsgMap:` + mapStringForStringToMsgMap + `}`}, ", ")
-	return s
-}
-func (this *MessageWithMap) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
-	for k := range this.NameMapping {
-		keysForNameMapping = append(keysForNameMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
-	mapStringForNameMapping := "map[int32]string{"
-	for _, k := range keysForNameMapping {
-		mapStringForNameMapping += fmt.Sprintf("%#v: %#v,", k, this.NameMapping[k])
-	}
-	mapStringForNameMapping += "}"
-	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
-	for k := range this.MsgMapping {
-		keysForMsgMapping = append(keysForMsgMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
-	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
-	for _, k := range keysForMsgMapping {
-		mapStringForMsgMapping += fmt.Sprintf("%#v: %#v,", k, this.MsgMapping[k])
-	}
-	mapStringForMsgMapping += "}"
-	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
-	for k := range this.ByteMapping {
-		keysForByteMapping = append(keysForByteMapping, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
-	mapStringForByteMapping := "map[bool][]byte{"
-	for _, k := range keysForByteMapping {
-		mapStringForByteMapping += fmt.Sprintf("%#v: %#v,", k, this.ByteMapping[k])
-	}
-	mapStringForByteMapping += "}"
-	s := strings.Join([]string{`&theproto3.MessageWithMap{` +
-		`NameMapping:` + mapStringForNameMapping,
-		`MsgMapping:` + mapStringForMsgMapping,
-		`ByteMapping:` + mapStringForByteMapping + `}`}, ", ")
-	return s
-}
-func (this *FloatingPoint) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&theproto3.FloatingPoint{` +
-		`F:` + fmt.Sprintf("%#v", this.F) + `}`}, ", ")
-	return s
-}
-func valueToGoStringTheproto3(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
-}
-func extensionToGoStringTheproto3(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
-	if e == nil {
-		return "nil"
-	}
-	s := "map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "}"
-	return s
-}
-
-type MessageFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetName() string
-	GetHilarity() Message_Humour
-	GetHeightInCm() uint32
-	GetData() []byte
-	GetResultCount() int64
-	GetTrueScotsman() bool
-	GetScore() float32
-	GetKey() []uint64
-	GetNested() *Nested
-	GetTerrain() map[int64]*Nested
-	GetProto2Field() *test.NinOptNative
-	GetProto2Value() map[int64]*test.NinOptEnum
-}
-
-func (this *Message) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *Message) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewMessageFromFace(this)
-}
-
-func (this *Message) GetName() string {
-	return this.Name
-}
-
-func (this *Message) GetHilarity() Message_Humour {
-	return this.Hilarity
-}
-
-func (this *Message) GetHeightInCm() uint32 {
-	return this.HeightInCm
-}
-
-func (this *Message) GetData() []byte {
-	return this.Data
-}
-
-func (this *Message) GetResultCount() int64 {
-	return this.ResultCount
-}
-
-func (this *Message) GetTrueScotsman() bool {
-	return this.TrueScotsman
-}
-
-func (this *Message) GetScore() float32 {
-	return this.Score
-}
-
-func (this *Message) GetKey() []uint64 {
-	return this.Key
-}
-
-func (this *Message) GetNested() *Nested {
-	return this.Nested
-}
-
-func (this *Message) GetTerrain() map[int64]*Nested {
-	return this.Terrain
-}
-
-func (this *Message) GetProto2Field() *test.NinOptNative {
-	return this.Proto2Field
-}
-
-func (this *Message) GetProto2Value() map[int64]*test.NinOptEnum {
-	return this.Proto2Value
-}
-
-func NewMessageFromFace(that MessageFace) *Message {
-	this := &Message{}
-	this.Name = that.GetName()
-	this.Hilarity = that.GetHilarity()
-	this.HeightInCm = that.GetHeightInCm()
-	this.Data = that.GetData()
-	this.ResultCount = that.GetResultCount()
-	this.TrueScotsman = that.GetTrueScotsman()
-	this.Score = that.GetScore()
-	this.Key = that.GetKey()
-	this.Nested = that.GetNested()
-	this.Terrain = that.GetTerrain()
-	this.Proto2Field = that.GetProto2Field()
-	this.Proto2Value = that.GetProto2Value()
-	return this
-}
-
-type NestedFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetBunny() string
-}
-
-func (this *Nested) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *Nested) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewNestedFromFace(this)
-}
-
-func (this *Nested) GetBunny() string {
-	return this.Bunny
-}
-
-func NewNestedFromFace(that NestedFace) *Nested {
-	this := &Nested{}
-	this.Bunny = that.GetBunny()
-	return this
-}
-
-type AllMapsFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetStringToDoubleMap() map[string]float64
-	GetStringToFloatMap() map[string]float32
-	GetInt32Map() map[int32]int32
-	GetInt64Map() map[int64]int64
-	GetUint32Map() map[uint32]uint32
-	GetUint64Map() map[uint64]uint64
-	GetSint32Map() map[int32]int32
-	GetSint64Map() map[int64]int64
-	GetFixed32Map() map[uint32]uint32
-	GetSfixed32Map() map[int32]int32
-	GetFixed64Map() map[uint64]uint64
-	GetSfixed64Map() map[int64]int64
-	GetBoolMap() map[bool]bool
-	GetStringMap() map[string]string
-	GetStringToBytesMap() map[string][]byte
-	GetStringToEnumMap() map[string]MapEnum
-	GetStringToMsgMap() map[string]*FloatingPoint
-}
-
-func (this *AllMaps) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *AllMaps) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewAllMapsFromFace(this)
-}
-
-func (this *AllMaps) GetStringToDoubleMap() map[string]float64 {
-	return this.StringToDoubleMap
-}
-
-func (this *AllMaps) GetStringToFloatMap() map[string]float32 {
-	return this.StringToFloatMap
-}
-
-func (this *AllMaps) GetInt32Map() map[int32]int32 {
-	return this.Int32Map
-}
-
-func (this *AllMaps) GetInt64Map() map[int64]int64 {
-	return this.Int64Map
-}
-
-func (this *AllMaps) GetUint32Map() map[uint32]uint32 {
-	return this.Uint32Map
-}
-
-func (this *AllMaps) GetUint64Map() map[uint64]uint64 {
-	return this.Uint64Map
-}
-
-func (this *AllMaps) GetSint32Map() map[int32]int32 {
-	return this.Sint32Map
-}
-
-func (this *AllMaps) GetSint64Map() map[int64]int64 {
-	return this.Sint64Map
-}
-
-func (this *AllMaps) GetFixed32Map() map[uint32]uint32 {
-	return this.Fixed32Map
-}
-
-func (this *AllMaps) GetSfixed32Map() map[int32]int32 {
-	return this.Sfixed32Map
-}
-
-func (this *AllMaps) GetFixed64Map() map[uint64]uint64 {
-	return this.Fixed64Map
-}
-
-func (this *AllMaps) GetSfixed64Map() map[int64]int64 {
-	return this.Sfixed64Map
-}
-
-func (this *AllMaps) GetBoolMap() map[bool]bool {
-	return this.BoolMap
-}
-
-func (this *AllMaps) GetStringMap() map[string]string {
-	return this.StringMap
-}
-
-func (this *AllMaps) GetStringToBytesMap() map[string][]byte {
-	return this.StringToBytesMap
-}
-
-func (this *AllMaps) GetStringToEnumMap() map[string]MapEnum {
-	return this.StringToEnumMap
-}
-
-func (this *AllMaps) GetStringToMsgMap() map[string]*FloatingPoint {
-	return this.StringToMsgMap
-}
-
-func NewAllMapsFromFace(that AllMapsFace) *AllMaps {
-	this := &AllMaps{}
-	this.StringToDoubleMap = that.GetStringToDoubleMap()
-	this.StringToFloatMap = that.GetStringToFloatMap()
-	this.Int32Map = that.GetInt32Map()
-	this.Int64Map = that.GetInt64Map()
-	this.Uint32Map = that.GetUint32Map()
-	this.Uint64Map = that.GetUint64Map()
-	this.Sint32Map = that.GetSint32Map()
-	this.Sint64Map = that.GetSint64Map()
-	this.Fixed32Map = that.GetFixed32Map()
-	this.Sfixed32Map = that.GetSfixed32Map()
-	this.Fixed64Map = that.GetFixed64Map()
-	this.Sfixed64Map = that.GetSfixed64Map()
-	this.BoolMap = that.GetBoolMap()
-	this.StringMap = that.GetStringMap()
-	this.StringToBytesMap = that.GetStringToBytesMap()
-	this.StringToEnumMap = that.GetStringToEnumMap()
-	this.StringToMsgMap = that.GetStringToMsgMap()
-	return this
-}
-
-type MessageWithMapFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetNameMapping() map[int32]string
-	GetMsgMapping() map[int64]*FloatingPoint
-	GetByteMapping() map[bool][]byte
-}
-
-func (this *MessageWithMap) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *MessageWithMap) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewMessageWithMapFromFace(this)
-}
-
-func (this *MessageWithMap) GetNameMapping() map[int32]string {
-	return this.NameMapping
-}
-
-func (this *MessageWithMap) GetMsgMapping() map[int64]*FloatingPoint {
-	return this.MsgMapping
-}
-
-func (this *MessageWithMap) GetByteMapping() map[bool][]byte {
-	return this.ByteMapping
-}
-
-func NewMessageWithMapFromFace(that MessageWithMapFace) *MessageWithMap {
-	this := &MessageWithMap{}
-	this.NameMapping = that.GetNameMapping()
-	this.MsgMapping = that.GetMsgMapping()
-	this.ByteMapping = that.GetByteMapping()
-	return this
-}
-
-type FloatingPointFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
-	GetF() float64
-}
-
-func (this *FloatingPoint) Proto() github_com_gogo_protobuf_proto.Message {
-	return this
-}
-
-func (this *FloatingPoint) TestProto() github_com_gogo_protobuf_proto.Message {
-	return NewFloatingPointFromFace(this)
-}
-
-func (this *FloatingPoint) GetF() float64 {
-	return this.F
-}
-
-func NewFloatingPointFromFace(that FloatingPointFace) *FloatingPoint {
-	this := &FloatingPoint{}
-	this.F = that.GetF()
-	return this
-}
-
-func (this *Message) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Message)
-	if !ok {
-		return fmt.Errorf("that is not of type *Message")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Message but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Messagebut is not nil && this == nil")
-	}
-	if this.Name != that1.Name {
-		return fmt.Errorf("Name this(%v) Not Equal that(%v)", this.Name, that1.Name)
-	}
-	if this.Hilarity != that1.Hilarity {
-		return fmt.Errorf("Hilarity this(%v) Not Equal that(%v)", this.Hilarity, that1.Hilarity)
-	}
-	if this.HeightInCm != that1.HeightInCm {
-		return fmt.Errorf("HeightInCm this(%v) Not Equal that(%v)", this.HeightInCm, that1.HeightInCm)
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
-	}
-	if this.ResultCount != that1.ResultCount {
-		return fmt.Errorf("ResultCount this(%v) Not Equal that(%v)", this.ResultCount, that1.ResultCount)
-	}
-	if this.TrueScotsman != that1.TrueScotsman {
-		return fmt.Errorf("TrueScotsman this(%v) Not Equal that(%v)", this.TrueScotsman, that1.TrueScotsman)
-	}
-	if this.Score != that1.Score {
-		return fmt.Errorf("Score this(%v) Not Equal that(%v)", this.Score, that1.Score)
-	}
-	if len(this.Key) != len(that1.Key) {
-		return fmt.Errorf("Key this(%v) Not Equal that(%v)", len(this.Key), len(that1.Key))
-	}
-	for i := range this.Key {
-		if this.Key[i] != that1.Key[i] {
-			return fmt.Errorf("Key this[%v](%v) Not Equal that[%v](%v)", i, this.Key[i], i, that1.Key[i])
-		}
-	}
-	if !this.Nested.Equal(that1.Nested) {
-		return fmt.Errorf("Nested this(%v) Not Equal that(%v)", this.Nested, that1.Nested)
-	}
-	if len(this.Terrain) != len(that1.Terrain) {
-		return fmt.Errorf("Terrain this(%v) Not Equal that(%v)", len(this.Terrain), len(that1.Terrain))
-	}
-	for i := range this.Terrain {
-		if !this.Terrain[i].Equal(that1.Terrain[i]) {
-			return fmt.Errorf("Terrain this[%v](%v) Not Equal that[%v](%v)", i, this.Terrain[i], i, that1.Terrain[i])
-		}
-	}
-	if !this.Proto2Field.Equal(that1.Proto2Field) {
-		return fmt.Errorf("Proto2Field this(%v) Not Equal that(%v)", this.Proto2Field, that1.Proto2Field)
-	}
-	if len(this.Proto2Value) != len(that1.Proto2Value) {
-		return fmt.Errorf("Proto2Value this(%v) Not Equal that(%v)", len(this.Proto2Value), len(that1.Proto2Value))
-	}
-	for i := range this.Proto2Value {
-		if !this.Proto2Value[i].Equal(that1.Proto2Value[i]) {
-			return fmt.Errorf("Proto2Value this[%v](%v) Not Equal that[%v](%v)", i, this.Proto2Value[i], i, that1.Proto2Value[i])
-		}
-	}
-	return nil
-}
-func (this *Message) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Message)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Hilarity != that1.Hilarity {
-		return false
-	}
-	if this.HeightInCm != that1.HeightInCm {
-		return false
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return false
-	}
-	if this.ResultCount != that1.ResultCount {
-		return false
-	}
-	if this.TrueScotsman != that1.TrueScotsman {
-		return false
-	}
-	if this.Score != that1.Score {
-		return false
-	}
-	if len(this.Key) != len(that1.Key) {
-		return false
-	}
-	for i := range this.Key {
-		if this.Key[i] != that1.Key[i] {
-			return false
-		}
-	}
-	if !this.Nested.Equal(that1.Nested) {
-		return false
-	}
-	if len(this.Terrain) != len(that1.Terrain) {
-		return false
-	}
-	for i := range this.Terrain {
-		if !this.Terrain[i].Equal(that1.Terrain[i]) {
-			return false
-		}
-	}
-	if !this.Proto2Field.Equal(that1.Proto2Field) {
-		return false
-	}
-	if len(this.Proto2Value) != len(that1.Proto2Value) {
-		return false
-	}
-	for i := range this.Proto2Value {
-		if !this.Proto2Value[i].Equal(that1.Proto2Value[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *Nested) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Nested)
-	if !ok {
-		return fmt.Errorf("that is not of type *Nested")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Nested but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Nestedbut is not nil && this == nil")
-	}
-	if this.Bunny != that1.Bunny {
-		return fmt.Errorf("Bunny this(%v) Not Equal that(%v)", this.Bunny, that1.Bunny)
-	}
-	return nil
-}
-func (this *Nested) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Nested)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Bunny != that1.Bunny {
-		return false
-	}
-	return true
-}
-func (this *AllMaps) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*AllMaps)
-	if !ok {
-		return fmt.Errorf("that is not of type *AllMaps")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *AllMaps but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *AllMapsbut is not nil && this == nil")
-	}
-	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
-		return fmt.Errorf("StringToDoubleMap this(%v) Not Equal that(%v)", len(this.StringToDoubleMap), len(that1.StringToDoubleMap))
-	}
-	for i := range this.StringToDoubleMap {
-		if this.StringToDoubleMap[i] != that1.StringToDoubleMap[i] {
-			return fmt.Errorf("StringToDoubleMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToDoubleMap[i], i, that1.StringToDoubleMap[i])
-		}
-	}
-	if len(this.StringToFloatMap) != len(that1.StringToFloatMap) {
-		return fmt.Errorf("StringToFloatMap this(%v) Not Equal that(%v)", len(this.StringToFloatMap), len(that1.StringToFloatMap))
-	}
-	for i := range this.StringToFloatMap {
-		if this.StringToFloatMap[i] != that1.StringToFloatMap[i] {
-			return fmt.Errorf("StringToFloatMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToFloatMap[i], i, that1.StringToFloatMap[i])
-		}
-	}
-	if len(this.Int32Map) != len(that1.Int32Map) {
-		return fmt.Errorf("Int32Map this(%v) Not Equal that(%v)", len(this.Int32Map), len(that1.Int32Map))
-	}
-	for i := range this.Int32Map {
-		if this.Int32Map[i] != that1.Int32Map[i] {
-			return fmt.Errorf("Int32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Int32Map[i], i, that1.Int32Map[i])
-		}
-	}
-	if len(this.Int64Map) != len(that1.Int64Map) {
-		return fmt.Errorf("Int64Map this(%v) Not Equal that(%v)", len(this.Int64Map), len(that1.Int64Map))
-	}
-	for i := range this.Int64Map {
-		if this.Int64Map[i] != that1.Int64Map[i] {
-			return fmt.Errorf("Int64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Int64Map[i], i, that1.Int64Map[i])
-		}
-	}
-	if len(this.Uint32Map) != len(that1.Uint32Map) {
-		return fmt.Errorf("Uint32Map this(%v) Not Equal that(%v)", len(this.Uint32Map), len(that1.Uint32Map))
-	}
-	for i := range this.Uint32Map {
-		if this.Uint32Map[i] != that1.Uint32Map[i] {
-			return fmt.Errorf("Uint32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Uint32Map[i], i, that1.Uint32Map[i])
-		}
-	}
-	if len(this.Uint64Map) != len(that1.Uint64Map) {
-		return fmt.Errorf("Uint64Map this(%v) Not Equal that(%v)", len(this.Uint64Map), len(that1.Uint64Map))
-	}
-	for i := range this.Uint64Map {
-		if this.Uint64Map[i] != that1.Uint64Map[i] {
-			return fmt.Errorf("Uint64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Uint64Map[i], i, that1.Uint64Map[i])
-		}
-	}
-	if len(this.Sint32Map) != len(that1.Sint32Map) {
-		return fmt.Errorf("Sint32Map this(%v) Not Equal that(%v)", len(this.Sint32Map), len(that1.Sint32Map))
-	}
-	for i := range this.Sint32Map {
-		if this.Sint32Map[i] != that1.Sint32Map[i] {
-			return fmt.Errorf("Sint32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sint32Map[i], i, that1.Sint32Map[i])
-		}
-	}
-	if len(this.Sint64Map) != len(that1.Sint64Map) {
-		return fmt.Errorf("Sint64Map this(%v) Not Equal that(%v)", len(this.Sint64Map), len(that1.Sint64Map))
-	}
-	for i := range this.Sint64Map {
-		if this.Sint64Map[i] != that1.Sint64Map[i] {
-			return fmt.Errorf("Sint64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sint64Map[i], i, that1.Sint64Map[i])
-		}
-	}
-	if len(this.Fixed32Map) != len(that1.Fixed32Map) {
-		return fmt.Errorf("Fixed32Map this(%v) Not Equal that(%v)", len(this.Fixed32Map), len(that1.Fixed32Map))
-	}
-	for i := range this.Fixed32Map {
-		if this.Fixed32Map[i] != that1.Fixed32Map[i] {
-			return fmt.Errorf("Fixed32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Fixed32Map[i], i, that1.Fixed32Map[i])
-		}
-	}
-	if len(this.Sfixed32Map) != len(that1.Sfixed32Map) {
-		return fmt.Errorf("Sfixed32Map this(%v) Not Equal that(%v)", len(this.Sfixed32Map), len(that1.Sfixed32Map))
-	}
-	for i := range this.Sfixed32Map {
-		if this.Sfixed32Map[i] != that1.Sfixed32Map[i] {
-			return fmt.Errorf("Sfixed32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sfixed32Map[i], i, that1.Sfixed32Map[i])
-		}
-	}
-	if len(this.Fixed64Map) != len(that1.Fixed64Map) {
-		return fmt.Errorf("Fixed64Map this(%v) Not Equal that(%v)", len(this.Fixed64Map), len(that1.Fixed64Map))
-	}
-	for i := range this.Fixed64Map {
-		if this.Fixed64Map[i] != that1.Fixed64Map[i] {
-			return fmt.Errorf("Fixed64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Fixed64Map[i], i, that1.Fixed64Map[i])
-		}
-	}
-	if len(this.Sfixed64Map) != len(that1.Sfixed64Map) {
-		return fmt.Errorf("Sfixed64Map this(%v) Not Equal that(%v)", len(this.Sfixed64Map), len(that1.Sfixed64Map))
-	}
-	for i := range this.Sfixed64Map {
-		if this.Sfixed64Map[i] != that1.Sfixed64Map[i] {
-			return fmt.Errorf("Sfixed64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sfixed64Map[i], i, that1.Sfixed64Map[i])
-		}
-	}
-	if len(this.BoolMap) != len(that1.BoolMap) {
-		return fmt.Errorf("BoolMap this(%v) Not Equal that(%v)", len(this.BoolMap), len(that1.BoolMap))
-	}
-	for i := range this.BoolMap {
-		if this.BoolMap[i] != that1.BoolMap[i] {
-			return fmt.Errorf("BoolMap this[%v](%v) Not Equal that[%v](%v)", i, this.BoolMap[i], i, that1.BoolMap[i])
-		}
-	}
-	if len(this.StringMap) != len(that1.StringMap) {
-		return fmt.Errorf("StringMap this(%v) Not Equal that(%v)", len(this.StringMap), len(that1.StringMap))
-	}
-	for i := range this.StringMap {
-		if this.StringMap[i] != that1.StringMap[i] {
-			return fmt.Errorf("StringMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringMap[i], i, that1.StringMap[i])
-		}
-	}
-	if len(this.StringToBytesMap) != len(that1.StringToBytesMap) {
-		return fmt.Errorf("StringToBytesMap this(%v) Not Equal that(%v)", len(this.StringToBytesMap), len(that1.StringToBytesMap))
-	}
-	for i := range this.StringToBytesMap {
-		if !bytes.Equal(this.StringToBytesMap[i], that1.StringToBytesMap[i]) {
-			return fmt.Errorf("StringToBytesMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToBytesMap[i], i, that1.StringToBytesMap[i])
-		}
-	}
-	if len(this.StringToEnumMap) != len(that1.StringToEnumMap) {
-		return fmt.Errorf("StringToEnumMap this(%v) Not Equal that(%v)", len(this.StringToEnumMap), len(that1.StringToEnumMap))
-	}
-	for i := range this.StringToEnumMap {
-		if this.StringToEnumMap[i] != that1.StringToEnumMap[i] {
-			return fmt.Errorf("StringToEnumMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToEnumMap[i], i, that1.StringToEnumMap[i])
-		}
-	}
-	if len(this.StringToMsgMap) != len(that1.StringToMsgMap) {
-		return fmt.Errorf("StringToMsgMap this(%v) Not Equal that(%v)", len(this.StringToMsgMap), len(that1.StringToMsgMap))
-	}
-	for i := range this.StringToMsgMap {
-		if !this.StringToMsgMap[i].Equal(that1.StringToMsgMap[i]) {
-			return fmt.Errorf("StringToMsgMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToMsgMap[i], i, that1.StringToMsgMap[i])
-		}
-	}
-	return nil
-}
-func (this *AllMaps) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*AllMaps)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
-		return false
-	}
-	for i := range this.StringToDoubleMap {
-		if this.StringToDoubleMap[i] != that1.StringToDoubleMap[i] {
-			return false
-		}
-	}
-	if len(this.StringToFloatMap) != len(that1.StringToFloatMap) {
-		return false
-	}
-	for i := range this.StringToFloatMap {
-		if this.StringToFloatMap[i] != that1.StringToFloatMap[i] {
-			return false
-		}
-	}
-	if len(this.Int32Map) != len(that1.Int32Map) {
-		return false
-	}
-	for i := range this.Int32Map {
-		if this.Int32Map[i] != that1.Int32Map[i] {
-			return false
-		}
-	}
-	if len(this.Int64Map) != len(that1.Int64Map) {
-		return false
-	}
-	for i := range this.Int64Map {
-		if this.Int64Map[i] != that1.Int64Map[i] {
-			return false
-		}
-	}
-	if len(this.Uint32Map) != len(that1.Uint32Map) {
-		return false
-	}
-	for i := range this.Uint32Map {
-		if this.Uint32Map[i] != that1.Uint32Map[i] {
-			return false
-		}
-	}
-	if len(this.Uint64Map) != len(that1.Uint64Map) {
-		return false
-	}
-	for i := range this.Uint64Map {
-		if this.Uint64Map[i] != that1.Uint64Map[i] {
-			return false
-		}
-	}
-	if len(this.Sint32Map) != len(that1.Sint32Map) {
-		return false
-	}
-	for i := range this.Sint32Map {
-		if this.Sint32Map[i] != that1.Sint32Map[i] {
-			return false
-		}
-	}
-	if len(this.Sint64Map) != len(that1.Sint64Map) {
-		return false
-	}
-	for i := range this.Sint64Map {
-		if this.Sint64Map[i] != that1.Sint64Map[i] {
-			return false
-		}
-	}
-	if len(this.Fixed32Map) != len(that1.Fixed32Map) {
-		return false
-	}
-	for i := range this.Fixed32Map {
-		if this.Fixed32Map[i] != that1.Fixed32Map[i] {
-			return false
-		}
-	}
-	if len(this.Sfixed32Map) != len(that1.Sfixed32Map) {
-		return false
-	}
-	for i := range this.Sfixed32Map {
-		if this.Sfixed32Map[i] != that1.Sfixed32Map[i] {
-			return false
-		}
-	}
-	if len(this.Fixed64Map) != len(that1.Fixed64Map) {
-		return false
-	}
-	for i := range this.Fixed64Map {
-		if this.Fixed64Map[i] != that1.Fixed64Map[i] {
-			return false
-		}
-	}
-	if len(this.Sfixed64Map) != len(that1.Sfixed64Map) {
-		return false
-	}
-	for i := range this.Sfixed64Map {
-		if this.Sfixed64Map[i] != that1.Sfixed64Map[i] {
-			return false
-		}
-	}
-	if len(this.BoolMap) != len(that1.BoolMap) {
-		return false
-	}
-	for i := range this.BoolMap {
-		if this.BoolMap[i] != that1.BoolMap[i] {
-			return false
-		}
-	}
-	if len(this.StringMap) != len(that1.StringMap) {
-		return false
-	}
-	for i := range this.StringMap {
-		if this.StringMap[i] != that1.StringMap[i] {
-			return false
-		}
-	}
-	if len(this.StringToBytesMap) != len(that1.StringToBytesMap) {
-		return false
-	}
-	for i := range this.StringToBytesMap {
-		if !bytes.Equal(this.StringToBytesMap[i], that1.StringToBytesMap[i]) {
-			return false
-		}
-	}
-	if len(this.StringToEnumMap) != len(that1.StringToEnumMap) {
-		return false
-	}
-	for i := range this.StringToEnumMap {
-		if this.StringToEnumMap[i] != that1.StringToEnumMap[i] {
-			return false
-		}
-	}
-	if len(this.StringToMsgMap) != len(that1.StringToMsgMap) {
-		return false
-	}
-	for i := range this.StringToMsgMap {
-		if !this.StringToMsgMap[i].Equal(that1.StringToMsgMap[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *MessageWithMap) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*MessageWithMap)
-	if !ok {
-		return fmt.Errorf("that is not of type *MessageWithMap")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *MessageWithMap but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *MessageWithMapbut is not nil && this == nil")
-	}
-	if len(this.NameMapping) != len(that1.NameMapping) {
-		return fmt.Errorf("NameMapping this(%v) Not Equal that(%v)", len(this.NameMapping), len(that1.NameMapping))
-	}
-	for i := range this.NameMapping {
-		if this.NameMapping[i] != that1.NameMapping[i] {
-			return fmt.Errorf("NameMapping this[%v](%v) Not Equal that[%v](%v)", i, this.NameMapping[i], i, that1.NameMapping[i])
-		}
-	}
-	if len(this.MsgMapping) != len(that1.MsgMapping) {
-		return fmt.Errorf("MsgMapping this(%v) Not Equal that(%v)", len(this.MsgMapping), len(that1.MsgMapping))
-	}
-	for i := range this.MsgMapping {
-		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
-			return fmt.Errorf("MsgMapping this[%v](%v) Not Equal that[%v](%v)", i, this.MsgMapping[i], i, that1.MsgMapping[i])
-		}
-	}
-	if len(this.ByteMapping) != len(that1.ByteMapping) {
-		return fmt.Errorf("ByteMapping this(%v) Not Equal that(%v)", len(this.ByteMapping), len(that1.ByteMapping))
-	}
-	for i := range this.ByteMapping {
-		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
-			return fmt.Errorf("ByteMapping this[%v](%v) Not Equal that[%v](%v)", i, this.ByteMapping[i], i, that1.ByteMapping[i])
-		}
-	}
-	return nil
-}
-func (this *MessageWithMap) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*MessageWithMap)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.NameMapping) != len(that1.NameMapping) {
-		return false
-	}
-	for i := range this.NameMapping {
-		if this.NameMapping[i] != that1.NameMapping[i] {
-			return false
-		}
-	}
-	if len(this.MsgMapping) != len(that1.MsgMapping) {
-		return false
-	}
-	for i := range this.MsgMapping {
-		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
-			return false
-		}
-	}
-	if len(this.ByteMapping) != len(that1.ByteMapping) {
-		return false
-	}
-	for i := range this.ByteMapping {
-		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *FloatingPoint) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*FloatingPoint)
-	if !ok {
-		return fmt.Errorf("that is not of type *FloatingPoint")
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *FloatingPoint but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *FloatingPointbut is not nil && this == nil")
-	}
-	if this.F != that1.F {
-		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
-	}
-	return nil
-}
-func (this *FloatingPoint) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*FloatingPoint)
-	if !ok {
-		return false
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.F != that1.F {
-		return false
-	}
-	return true
-}
-func (x MapEnum) String() string {
-	s, ok := MapEnum_name[int32(x)]
-	if ok {
-		return s
-	}
-	return strconv.Itoa(int(x))
-}
-func (x Message_Humour) String() string {
-	s, ok := Message_Humour_name[int32(x)]
-	if ok {
-		return s
-	}
-	return strconv.Itoa(int(x))
 }
 func (this *Message) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return Theproto3Description()
@@ -4476,4 +2277,2204 @@ func Theproto3Description() (desc *google_protobuf.FileDescriptorSet) {
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
 	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto{{Name: func(v string) *string { return &v }("MapEnum"), Value: []*google_protobuf.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("MA"), Number: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("MB"), Number: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("MC"), Number: func(v int32) *int32 { return &v }(2), Options: nil, XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: func(v string) *string { return &v }("proto3"), XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+}
+func (x MapEnum) String() string {
+	s, ok := MapEnum_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
+}
+func (x Message_Humour) String() string {
+	s, ok := Message_Humour_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
+}
+func (this *Message) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Message)
+	if !ok {
+		return fmt.Errorf("that is not of type *Message")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Message but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Messagebut is not nil && this == nil")
+	}
+	if this.Name != that1.Name {
+		return fmt.Errorf("Name this(%v) Not Equal that(%v)", this.Name, that1.Name)
+	}
+	if this.Hilarity != that1.Hilarity {
+		return fmt.Errorf("Hilarity this(%v) Not Equal that(%v)", this.Hilarity, that1.Hilarity)
+	}
+	if this.HeightInCm != that1.HeightInCm {
+		return fmt.Errorf("HeightInCm this(%v) Not Equal that(%v)", this.HeightInCm, that1.HeightInCm)
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
+	}
+	if this.ResultCount != that1.ResultCount {
+		return fmt.Errorf("ResultCount this(%v) Not Equal that(%v)", this.ResultCount, that1.ResultCount)
+	}
+	if this.TrueScotsman != that1.TrueScotsman {
+		return fmt.Errorf("TrueScotsman this(%v) Not Equal that(%v)", this.TrueScotsman, that1.TrueScotsman)
+	}
+	if this.Score != that1.Score {
+		return fmt.Errorf("Score this(%v) Not Equal that(%v)", this.Score, that1.Score)
+	}
+	if len(this.Key) != len(that1.Key) {
+		return fmt.Errorf("Key this(%v) Not Equal that(%v)", len(this.Key), len(that1.Key))
+	}
+	for i := range this.Key {
+		if this.Key[i] != that1.Key[i] {
+			return fmt.Errorf("Key this[%v](%v) Not Equal that[%v](%v)", i, this.Key[i], i, that1.Key[i])
+		}
+	}
+	if !this.Nested.Equal(that1.Nested) {
+		return fmt.Errorf("Nested this(%v) Not Equal that(%v)", this.Nested, that1.Nested)
+	}
+	if len(this.Terrain) != len(that1.Terrain) {
+		return fmt.Errorf("Terrain this(%v) Not Equal that(%v)", len(this.Terrain), len(that1.Terrain))
+	}
+	for i := range this.Terrain {
+		if !this.Terrain[i].Equal(that1.Terrain[i]) {
+			return fmt.Errorf("Terrain this[%v](%v) Not Equal that[%v](%v)", i, this.Terrain[i], i, that1.Terrain[i])
+		}
+	}
+	if !this.Proto2Field.Equal(that1.Proto2Field) {
+		return fmt.Errorf("Proto2Field this(%v) Not Equal that(%v)", this.Proto2Field, that1.Proto2Field)
+	}
+	if len(this.Proto2Value) != len(that1.Proto2Value) {
+		return fmt.Errorf("Proto2Value this(%v) Not Equal that(%v)", len(this.Proto2Value), len(that1.Proto2Value))
+	}
+	for i := range this.Proto2Value {
+		if !this.Proto2Value[i].Equal(that1.Proto2Value[i]) {
+			return fmt.Errorf("Proto2Value this[%v](%v) Not Equal that[%v](%v)", i, this.Proto2Value[i], i, that1.Proto2Value[i])
+		}
+	}
+	return nil
+}
+func (this *Message) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Message)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Name != that1.Name {
+		return false
+	}
+	if this.Hilarity != that1.Hilarity {
+		return false
+	}
+	if this.HeightInCm != that1.HeightInCm {
+		return false
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return false
+	}
+	if this.ResultCount != that1.ResultCount {
+		return false
+	}
+	if this.TrueScotsman != that1.TrueScotsman {
+		return false
+	}
+	if this.Score != that1.Score {
+		return false
+	}
+	if len(this.Key) != len(that1.Key) {
+		return false
+	}
+	for i := range this.Key {
+		if this.Key[i] != that1.Key[i] {
+			return false
+		}
+	}
+	if !this.Nested.Equal(that1.Nested) {
+		return false
+	}
+	if len(this.Terrain) != len(that1.Terrain) {
+		return false
+	}
+	for i := range this.Terrain {
+		if !this.Terrain[i].Equal(that1.Terrain[i]) {
+			return false
+		}
+	}
+	if !this.Proto2Field.Equal(that1.Proto2Field) {
+		return false
+	}
+	if len(this.Proto2Value) != len(that1.Proto2Value) {
+		return false
+	}
+	for i := range this.Proto2Value {
+		if !this.Proto2Value[i].Equal(that1.Proto2Value[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Nested) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Nested)
+	if !ok {
+		return fmt.Errorf("that is not of type *Nested")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Nested but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Nestedbut is not nil && this == nil")
+	}
+	if this.Bunny != that1.Bunny {
+		return fmt.Errorf("Bunny this(%v) Not Equal that(%v)", this.Bunny, that1.Bunny)
+	}
+	return nil
+}
+func (this *Nested) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Nested)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Bunny != that1.Bunny {
+		return false
+	}
+	return true
+}
+func (this *AllMaps) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*AllMaps)
+	if !ok {
+		return fmt.Errorf("that is not of type *AllMaps")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *AllMaps but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *AllMapsbut is not nil && this == nil")
+	}
+	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
+		return fmt.Errorf("StringToDoubleMap this(%v) Not Equal that(%v)", len(this.StringToDoubleMap), len(that1.StringToDoubleMap))
+	}
+	for i := range this.StringToDoubleMap {
+		if this.StringToDoubleMap[i] != that1.StringToDoubleMap[i] {
+			return fmt.Errorf("StringToDoubleMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToDoubleMap[i], i, that1.StringToDoubleMap[i])
+		}
+	}
+	if len(this.StringToFloatMap) != len(that1.StringToFloatMap) {
+		return fmt.Errorf("StringToFloatMap this(%v) Not Equal that(%v)", len(this.StringToFloatMap), len(that1.StringToFloatMap))
+	}
+	for i := range this.StringToFloatMap {
+		if this.StringToFloatMap[i] != that1.StringToFloatMap[i] {
+			return fmt.Errorf("StringToFloatMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToFloatMap[i], i, that1.StringToFloatMap[i])
+		}
+	}
+	if len(this.Int32Map) != len(that1.Int32Map) {
+		return fmt.Errorf("Int32Map this(%v) Not Equal that(%v)", len(this.Int32Map), len(that1.Int32Map))
+	}
+	for i := range this.Int32Map {
+		if this.Int32Map[i] != that1.Int32Map[i] {
+			return fmt.Errorf("Int32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Int32Map[i], i, that1.Int32Map[i])
+		}
+	}
+	if len(this.Int64Map) != len(that1.Int64Map) {
+		return fmt.Errorf("Int64Map this(%v) Not Equal that(%v)", len(this.Int64Map), len(that1.Int64Map))
+	}
+	for i := range this.Int64Map {
+		if this.Int64Map[i] != that1.Int64Map[i] {
+			return fmt.Errorf("Int64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Int64Map[i], i, that1.Int64Map[i])
+		}
+	}
+	if len(this.Uint32Map) != len(that1.Uint32Map) {
+		return fmt.Errorf("Uint32Map this(%v) Not Equal that(%v)", len(this.Uint32Map), len(that1.Uint32Map))
+	}
+	for i := range this.Uint32Map {
+		if this.Uint32Map[i] != that1.Uint32Map[i] {
+			return fmt.Errorf("Uint32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Uint32Map[i], i, that1.Uint32Map[i])
+		}
+	}
+	if len(this.Uint64Map) != len(that1.Uint64Map) {
+		return fmt.Errorf("Uint64Map this(%v) Not Equal that(%v)", len(this.Uint64Map), len(that1.Uint64Map))
+	}
+	for i := range this.Uint64Map {
+		if this.Uint64Map[i] != that1.Uint64Map[i] {
+			return fmt.Errorf("Uint64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Uint64Map[i], i, that1.Uint64Map[i])
+		}
+	}
+	if len(this.Sint32Map) != len(that1.Sint32Map) {
+		return fmt.Errorf("Sint32Map this(%v) Not Equal that(%v)", len(this.Sint32Map), len(that1.Sint32Map))
+	}
+	for i := range this.Sint32Map {
+		if this.Sint32Map[i] != that1.Sint32Map[i] {
+			return fmt.Errorf("Sint32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sint32Map[i], i, that1.Sint32Map[i])
+		}
+	}
+	if len(this.Sint64Map) != len(that1.Sint64Map) {
+		return fmt.Errorf("Sint64Map this(%v) Not Equal that(%v)", len(this.Sint64Map), len(that1.Sint64Map))
+	}
+	for i := range this.Sint64Map {
+		if this.Sint64Map[i] != that1.Sint64Map[i] {
+			return fmt.Errorf("Sint64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sint64Map[i], i, that1.Sint64Map[i])
+		}
+	}
+	if len(this.Fixed32Map) != len(that1.Fixed32Map) {
+		return fmt.Errorf("Fixed32Map this(%v) Not Equal that(%v)", len(this.Fixed32Map), len(that1.Fixed32Map))
+	}
+	for i := range this.Fixed32Map {
+		if this.Fixed32Map[i] != that1.Fixed32Map[i] {
+			return fmt.Errorf("Fixed32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Fixed32Map[i], i, that1.Fixed32Map[i])
+		}
+	}
+	if len(this.Sfixed32Map) != len(that1.Sfixed32Map) {
+		return fmt.Errorf("Sfixed32Map this(%v) Not Equal that(%v)", len(this.Sfixed32Map), len(that1.Sfixed32Map))
+	}
+	for i := range this.Sfixed32Map {
+		if this.Sfixed32Map[i] != that1.Sfixed32Map[i] {
+			return fmt.Errorf("Sfixed32Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sfixed32Map[i], i, that1.Sfixed32Map[i])
+		}
+	}
+	if len(this.Fixed64Map) != len(that1.Fixed64Map) {
+		return fmt.Errorf("Fixed64Map this(%v) Not Equal that(%v)", len(this.Fixed64Map), len(that1.Fixed64Map))
+	}
+	for i := range this.Fixed64Map {
+		if this.Fixed64Map[i] != that1.Fixed64Map[i] {
+			return fmt.Errorf("Fixed64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Fixed64Map[i], i, that1.Fixed64Map[i])
+		}
+	}
+	if len(this.Sfixed64Map) != len(that1.Sfixed64Map) {
+		return fmt.Errorf("Sfixed64Map this(%v) Not Equal that(%v)", len(this.Sfixed64Map), len(that1.Sfixed64Map))
+	}
+	for i := range this.Sfixed64Map {
+		if this.Sfixed64Map[i] != that1.Sfixed64Map[i] {
+			return fmt.Errorf("Sfixed64Map this[%v](%v) Not Equal that[%v](%v)", i, this.Sfixed64Map[i], i, that1.Sfixed64Map[i])
+		}
+	}
+	if len(this.BoolMap) != len(that1.BoolMap) {
+		return fmt.Errorf("BoolMap this(%v) Not Equal that(%v)", len(this.BoolMap), len(that1.BoolMap))
+	}
+	for i := range this.BoolMap {
+		if this.BoolMap[i] != that1.BoolMap[i] {
+			return fmt.Errorf("BoolMap this[%v](%v) Not Equal that[%v](%v)", i, this.BoolMap[i], i, that1.BoolMap[i])
+		}
+	}
+	if len(this.StringMap) != len(that1.StringMap) {
+		return fmt.Errorf("StringMap this(%v) Not Equal that(%v)", len(this.StringMap), len(that1.StringMap))
+	}
+	for i := range this.StringMap {
+		if this.StringMap[i] != that1.StringMap[i] {
+			return fmt.Errorf("StringMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringMap[i], i, that1.StringMap[i])
+		}
+	}
+	if len(this.StringToBytesMap) != len(that1.StringToBytesMap) {
+		return fmt.Errorf("StringToBytesMap this(%v) Not Equal that(%v)", len(this.StringToBytesMap), len(that1.StringToBytesMap))
+	}
+	for i := range this.StringToBytesMap {
+		if !bytes.Equal(this.StringToBytesMap[i], that1.StringToBytesMap[i]) {
+			return fmt.Errorf("StringToBytesMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToBytesMap[i], i, that1.StringToBytesMap[i])
+		}
+	}
+	if len(this.StringToEnumMap) != len(that1.StringToEnumMap) {
+		return fmt.Errorf("StringToEnumMap this(%v) Not Equal that(%v)", len(this.StringToEnumMap), len(that1.StringToEnumMap))
+	}
+	for i := range this.StringToEnumMap {
+		if this.StringToEnumMap[i] != that1.StringToEnumMap[i] {
+			return fmt.Errorf("StringToEnumMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToEnumMap[i], i, that1.StringToEnumMap[i])
+		}
+	}
+	if len(this.StringToMsgMap) != len(that1.StringToMsgMap) {
+		return fmt.Errorf("StringToMsgMap this(%v) Not Equal that(%v)", len(this.StringToMsgMap), len(that1.StringToMsgMap))
+	}
+	for i := range this.StringToMsgMap {
+		if !this.StringToMsgMap[i].Equal(that1.StringToMsgMap[i]) {
+			return fmt.Errorf("StringToMsgMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToMsgMap[i], i, that1.StringToMsgMap[i])
+		}
+	}
+	return nil
+}
+func (this *AllMaps) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*AllMaps)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
+		return false
+	}
+	for i := range this.StringToDoubleMap {
+		if this.StringToDoubleMap[i] != that1.StringToDoubleMap[i] {
+			return false
+		}
+	}
+	if len(this.StringToFloatMap) != len(that1.StringToFloatMap) {
+		return false
+	}
+	for i := range this.StringToFloatMap {
+		if this.StringToFloatMap[i] != that1.StringToFloatMap[i] {
+			return false
+		}
+	}
+	if len(this.Int32Map) != len(that1.Int32Map) {
+		return false
+	}
+	for i := range this.Int32Map {
+		if this.Int32Map[i] != that1.Int32Map[i] {
+			return false
+		}
+	}
+	if len(this.Int64Map) != len(that1.Int64Map) {
+		return false
+	}
+	for i := range this.Int64Map {
+		if this.Int64Map[i] != that1.Int64Map[i] {
+			return false
+		}
+	}
+	if len(this.Uint32Map) != len(that1.Uint32Map) {
+		return false
+	}
+	for i := range this.Uint32Map {
+		if this.Uint32Map[i] != that1.Uint32Map[i] {
+			return false
+		}
+	}
+	if len(this.Uint64Map) != len(that1.Uint64Map) {
+		return false
+	}
+	for i := range this.Uint64Map {
+		if this.Uint64Map[i] != that1.Uint64Map[i] {
+			return false
+		}
+	}
+	if len(this.Sint32Map) != len(that1.Sint32Map) {
+		return false
+	}
+	for i := range this.Sint32Map {
+		if this.Sint32Map[i] != that1.Sint32Map[i] {
+			return false
+		}
+	}
+	if len(this.Sint64Map) != len(that1.Sint64Map) {
+		return false
+	}
+	for i := range this.Sint64Map {
+		if this.Sint64Map[i] != that1.Sint64Map[i] {
+			return false
+		}
+	}
+	if len(this.Fixed32Map) != len(that1.Fixed32Map) {
+		return false
+	}
+	for i := range this.Fixed32Map {
+		if this.Fixed32Map[i] != that1.Fixed32Map[i] {
+			return false
+		}
+	}
+	if len(this.Sfixed32Map) != len(that1.Sfixed32Map) {
+		return false
+	}
+	for i := range this.Sfixed32Map {
+		if this.Sfixed32Map[i] != that1.Sfixed32Map[i] {
+			return false
+		}
+	}
+	if len(this.Fixed64Map) != len(that1.Fixed64Map) {
+		return false
+	}
+	for i := range this.Fixed64Map {
+		if this.Fixed64Map[i] != that1.Fixed64Map[i] {
+			return false
+		}
+	}
+	if len(this.Sfixed64Map) != len(that1.Sfixed64Map) {
+		return false
+	}
+	for i := range this.Sfixed64Map {
+		if this.Sfixed64Map[i] != that1.Sfixed64Map[i] {
+			return false
+		}
+	}
+	if len(this.BoolMap) != len(that1.BoolMap) {
+		return false
+	}
+	for i := range this.BoolMap {
+		if this.BoolMap[i] != that1.BoolMap[i] {
+			return false
+		}
+	}
+	if len(this.StringMap) != len(that1.StringMap) {
+		return false
+	}
+	for i := range this.StringMap {
+		if this.StringMap[i] != that1.StringMap[i] {
+			return false
+		}
+	}
+	if len(this.StringToBytesMap) != len(that1.StringToBytesMap) {
+		return false
+	}
+	for i := range this.StringToBytesMap {
+		if !bytes.Equal(this.StringToBytesMap[i], that1.StringToBytesMap[i]) {
+			return false
+		}
+	}
+	if len(this.StringToEnumMap) != len(that1.StringToEnumMap) {
+		return false
+	}
+	for i := range this.StringToEnumMap {
+		if this.StringToEnumMap[i] != that1.StringToEnumMap[i] {
+			return false
+		}
+	}
+	if len(this.StringToMsgMap) != len(that1.StringToMsgMap) {
+		return false
+	}
+	for i := range this.StringToMsgMap {
+		if !this.StringToMsgMap[i].Equal(that1.StringToMsgMap[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *MessageWithMap) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*MessageWithMap)
+	if !ok {
+		return fmt.Errorf("that is not of type *MessageWithMap")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *MessageWithMap but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *MessageWithMapbut is not nil && this == nil")
+	}
+	if len(this.NameMapping) != len(that1.NameMapping) {
+		return fmt.Errorf("NameMapping this(%v) Not Equal that(%v)", len(this.NameMapping), len(that1.NameMapping))
+	}
+	for i := range this.NameMapping {
+		if this.NameMapping[i] != that1.NameMapping[i] {
+			return fmt.Errorf("NameMapping this[%v](%v) Not Equal that[%v](%v)", i, this.NameMapping[i], i, that1.NameMapping[i])
+		}
+	}
+	if len(this.MsgMapping) != len(that1.MsgMapping) {
+		return fmt.Errorf("MsgMapping this(%v) Not Equal that(%v)", len(this.MsgMapping), len(that1.MsgMapping))
+	}
+	for i := range this.MsgMapping {
+		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
+			return fmt.Errorf("MsgMapping this[%v](%v) Not Equal that[%v](%v)", i, this.MsgMapping[i], i, that1.MsgMapping[i])
+		}
+	}
+	if len(this.ByteMapping) != len(that1.ByteMapping) {
+		return fmt.Errorf("ByteMapping this(%v) Not Equal that(%v)", len(this.ByteMapping), len(that1.ByteMapping))
+	}
+	for i := range this.ByteMapping {
+		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
+			return fmt.Errorf("ByteMapping this[%v](%v) Not Equal that[%v](%v)", i, this.ByteMapping[i], i, that1.ByteMapping[i])
+		}
+	}
+	return nil
+}
+func (this *MessageWithMap) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MessageWithMap)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.NameMapping) != len(that1.NameMapping) {
+		return false
+	}
+	for i := range this.NameMapping {
+		if this.NameMapping[i] != that1.NameMapping[i] {
+			return false
+		}
+	}
+	if len(this.MsgMapping) != len(that1.MsgMapping) {
+		return false
+	}
+	for i := range this.MsgMapping {
+		if !this.MsgMapping[i].Equal(that1.MsgMapping[i]) {
+			return false
+		}
+	}
+	if len(this.ByteMapping) != len(that1.ByteMapping) {
+		return false
+	}
+	for i := range this.ByteMapping {
+		if !bytes.Equal(this.ByteMapping[i], that1.ByteMapping[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *FloatingPoint) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*FloatingPoint)
+	if !ok {
+		return fmt.Errorf("that is not of type *FloatingPoint")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *FloatingPoint but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *FloatingPointbut is not nil && this == nil")
+	}
+	if this.F != that1.F {
+		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
+	}
+	return nil
+}
+func (this *FloatingPoint) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*FloatingPoint)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.F != that1.F {
+		return false
+	}
+	return true
+}
+
+type MessageFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetName() string
+	GetHilarity() Message_Humour
+	GetHeightInCm() uint32
+	GetData() []byte
+	GetResultCount() int64
+	GetTrueScotsman() bool
+	GetScore() float32
+	GetKey() []uint64
+	GetNested() *Nested
+	GetTerrain() map[int64]*Nested
+	GetProto2Field() *test.NinOptNative
+	GetProto2Value() map[int64]*test.NinOptEnum
+}
+
+func (this *Message) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *Message) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewMessageFromFace(this)
+}
+
+func (this *Message) GetName() string {
+	return this.Name
+}
+
+func (this *Message) GetHilarity() Message_Humour {
+	return this.Hilarity
+}
+
+func (this *Message) GetHeightInCm() uint32 {
+	return this.HeightInCm
+}
+
+func (this *Message) GetData() []byte {
+	return this.Data
+}
+
+func (this *Message) GetResultCount() int64 {
+	return this.ResultCount
+}
+
+func (this *Message) GetTrueScotsman() bool {
+	return this.TrueScotsman
+}
+
+func (this *Message) GetScore() float32 {
+	return this.Score
+}
+
+func (this *Message) GetKey() []uint64 {
+	return this.Key
+}
+
+func (this *Message) GetNested() *Nested {
+	return this.Nested
+}
+
+func (this *Message) GetTerrain() map[int64]*Nested {
+	return this.Terrain
+}
+
+func (this *Message) GetProto2Field() *test.NinOptNative {
+	return this.Proto2Field
+}
+
+func (this *Message) GetProto2Value() map[int64]*test.NinOptEnum {
+	return this.Proto2Value
+}
+
+func NewMessageFromFace(that MessageFace) *Message {
+	this := &Message{}
+	this.Name = that.GetName()
+	this.Hilarity = that.GetHilarity()
+	this.HeightInCm = that.GetHeightInCm()
+	this.Data = that.GetData()
+	this.ResultCount = that.GetResultCount()
+	this.TrueScotsman = that.GetTrueScotsman()
+	this.Score = that.GetScore()
+	this.Key = that.GetKey()
+	this.Nested = that.GetNested()
+	this.Terrain = that.GetTerrain()
+	this.Proto2Field = that.GetProto2Field()
+	this.Proto2Value = that.GetProto2Value()
+	return this
+}
+
+type NestedFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetBunny() string
+}
+
+func (this *Nested) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *Nested) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewNestedFromFace(this)
+}
+
+func (this *Nested) GetBunny() string {
+	return this.Bunny
+}
+
+func NewNestedFromFace(that NestedFace) *Nested {
+	this := &Nested{}
+	this.Bunny = that.GetBunny()
+	return this
+}
+
+type AllMapsFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetStringToDoubleMap() map[string]float64
+	GetStringToFloatMap() map[string]float32
+	GetInt32Map() map[int32]int32
+	GetInt64Map() map[int64]int64
+	GetUint32Map() map[uint32]uint32
+	GetUint64Map() map[uint64]uint64
+	GetSint32Map() map[int32]int32
+	GetSint64Map() map[int64]int64
+	GetFixed32Map() map[uint32]uint32
+	GetSfixed32Map() map[int32]int32
+	GetFixed64Map() map[uint64]uint64
+	GetSfixed64Map() map[int64]int64
+	GetBoolMap() map[bool]bool
+	GetStringMap() map[string]string
+	GetStringToBytesMap() map[string][]byte
+	GetStringToEnumMap() map[string]MapEnum
+	GetStringToMsgMap() map[string]*FloatingPoint
+}
+
+func (this *AllMaps) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *AllMaps) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewAllMapsFromFace(this)
+}
+
+func (this *AllMaps) GetStringToDoubleMap() map[string]float64 {
+	return this.StringToDoubleMap
+}
+
+func (this *AllMaps) GetStringToFloatMap() map[string]float32 {
+	return this.StringToFloatMap
+}
+
+func (this *AllMaps) GetInt32Map() map[int32]int32 {
+	return this.Int32Map
+}
+
+func (this *AllMaps) GetInt64Map() map[int64]int64 {
+	return this.Int64Map
+}
+
+func (this *AllMaps) GetUint32Map() map[uint32]uint32 {
+	return this.Uint32Map
+}
+
+func (this *AllMaps) GetUint64Map() map[uint64]uint64 {
+	return this.Uint64Map
+}
+
+func (this *AllMaps) GetSint32Map() map[int32]int32 {
+	return this.Sint32Map
+}
+
+func (this *AllMaps) GetSint64Map() map[int64]int64 {
+	return this.Sint64Map
+}
+
+func (this *AllMaps) GetFixed32Map() map[uint32]uint32 {
+	return this.Fixed32Map
+}
+
+func (this *AllMaps) GetSfixed32Map() map[int32]int32 {
+	return this.Sfixed32Map
+}
+
+func (this *AllMaps) GetFixed64Map() map[uint64]uint64 {
+	return this.Fixed64Map
+}
+
+func (this *AllMaps) GetSfixed64Map() map[int64]int64 {
+	return this.Sfixed64Map
+}
+
+func (this *AllMaps) GetBoolMap() map[bool]bool {
+	return this.BoolMap
+}
+
+func (this *AllMaps) GetStringMap() map[string]string {
+	return this.StringMap
+}
+
+func (this *AllMaps) GetStringToBytesMap() map[string][]byte {
+	return this.StringToBytesMap
+}
+
+func (this *AllMaps) GetStringToEnumMap() map[string]MapEnum {
+	return this.StringToEnumMap
+}
+
+func (this *AllMaps) GetStringToMsgMap() map[string]*FloatingPoint {
+	return this.StringToMsgMap
+}
+
+func NewAllMapsFromFace(that AllMapsFace) *AllMaps {
+	this := &AllMaps{}
+	this.StringToDoubleMap = that.GetStringToDoubleMap()
+	this.StringToFloatMap = that.GetStringToFloatMap()
+	this.Int32Map = that.GetInt32Map()
+	this.Int64Map = that.GetInt64Map()
+	this.Uint32Map = that.GetUint32Map()
+	this.Uint64Map = that.GetUint64Map()
+	this.Sint32Map = that.GetSint32Map()
+	this.Sint64Map = that.GetSint64Map()
+	this.Fixed32Map = that.GetFixed32Map()
+	this.Sfixed32Map = that.GetSfixed32Map()
+	this.Fixed64Map = that.GetFixed64Map()
+	this.Sfixed64Map = that.GetSfixed64Map()
+	this.BoolMap = that.GetBoolMap()
+	this.StringMap = that.GetStringMap()
+	this.StringToBytesMap = that.GetStringToBytesMap()
+	this.StringToEnumMap = that.GetStringToEnumMap()
+	this.StringToMsgMap = that.GetStringToMsgMap()
+	return this
+}
+
+type MessageWithMapFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetNameMapping() map[int32]string
+	GetMsgMapping() map[int64]*FloatingPoint
+	GetByteMapping() map[bool][]byte
+}
+
+func (this *MessageWithMap) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *MessageWithMap) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewMessageWithMapFromFace(this)
+}
+
+func (this *MessageWithMap) GetNameMapping() map[int32]string {
+	return this.NameMapping
+}
+
+func (this *MessageWithMap) GetMsgMapping() map[int64]*FloatingPoint {
+	return this.MsgMapping
+}
+
+func (this *MessageWithMap) GetByteMapping() map[bool][]byte {
+	return this.ByteMapping
+}
+
+func NewMessageWithMapFromFace(that MessageWithMapFace) *MessageWithMap {
+	this := &MessageWithMap{}
+	this.NameMapping = that.GetNameMapping()
+	this.MsgMapping = that.GetMsgMapping()
+	this.ByteMapping = that.GetByteMapping()
+	return this
+}
+
+type FloatingPointFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetF() float64
+}
+
+func (this *FloatingPoint) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *FloatingPoint) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewFloatingPointFromFace(this)
+}
+
+func (this *FloatingPoint) GetF() float64 {
+	return this.F
+}
+
+func NewFloatingPointFromFace(that FloatingPointFace) *FloatingPoint {
+	this := &FloatingPoint{}
+	this.F = that.GetF()
+	return this
+}
+
+func (this *Message) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForTerrain := make([]int64, 0, len(this.Terrain))
+	for k := range this.Terrain {
+		keysForTerrain = append(keysForTerrain, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
+	mapStringForTerrain := "map[int64]*Nested{"
+	for _, k := range keysForTerrain {
+		mapStringForTerrain += fmt.Sprintf("%#v: %#v,", k, this.Terrain[k])
+	}
+	mapStringForTerrain += "}"
+	keysForProto2Value := make([]int64, 0, len(this.Proto2Value))
+	for k := range this.Proto2Value {
+		keysForProto2Value = append(keysForProto2Value, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
+	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
+	for _, k := range keysForProto2Value {
+		mapStringForProto2Value += fmt.Sprintf("%#v: %#v,", k, this.Proto2Value[k])
+	}
+	mapStringForProto2Value += "}"
+	s := strings.Join([]string{`&theproto3.Message{` +
+		`Name:` + fmt.Sprintf("%#v", this.Name),
+		`Hilarity:` + fmt.Sprintf("%#v", this.Hilarity),
+		`HeightInCm:` + fmt.Sprintf("%#v", this.HeightInCm),
+		`Data:` + fmt.Sprintf("%#v", this.Data),
+		`ResultCount:` + fmt.Sprintf("%#v", this.ResultCount),
+		`TrueScotsman:` + fmt.Sprintf("%#v", this.TrueScotsman),
+		`Score:` + fmt.Sprintf("%#v", this.Score),
+		`Key:` + fmt.Sprintf("%#v", this.Key),
+		`Nested:` + fmt.Sprintf("%#v", this.Nested),
+		`Terrain:` + mapStringForTerrain,
+		`Proto2Field:` + fmt.Sprintf("%#v", this.Proto2Field),
+		`Proto2Value:` + mapStringForProto2Value + `}`}, ", ")
+	return s
+}
+func (this *Nested) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&theproto3.Nested{` +
+		`Bunny:` + fmt.Sprintf("%#v", this.Bunny) + `}`}, ", ")
+	return s
+}
+func (this *AllMaps) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForStringToDoubleMap := make([]string, 0, len(this.StringToDoubleMap))
+	for k := range this.StringToDoubleMap {
+		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
+	mapStringForStringToDoubleMap := "map[string]float64{"
+	for _, k := range keysForStringToDoubleMap {
+		mapStringForStringToDoubleMap += fmt.Sprintf("%#v: %#v,", k, this.StringToDoubleMap[k])
+	}
+	mapStringForStringToDoubleMap += "}"
+	keysForStringToFloatMap := make([]string, 0, len(this.StringToFloatMap))
+	for k := range this.StringToFloatMap {
+		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
+	mapStringForStringToFloatMap := "map[string]float32{"
+	for _, k := range keysForStringToFloatMap {
+		mapStringForStringToFloatMap += fmt.Sprintf("%#v: %#v,", k, this.StringToFloatMap[k])
+	}
+	mapStringForStringToFloatMap += "}"
+	keysForInt32Map := make([]int32, 0, len(this.Int32Map))
+	for k := range this.Int32Map {
+		keysForInt32Map = append(keysForInt32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
+	mapStringForInt32Map := "map[int32]int32{"
+	for _, k := range keysForInt32Map {
+		mapStringForInt32Map += fmt.Sprintf("%#v: %#v,", k, this.Int32Map[k])
+	}
+	mapStringForInt32Map += "}"
+	keysForInt64Map := make([]int64, 0, len(this.Int64Map))
+	for k := range this.Int64Map {
+		keysForInt64Map = append(keysForInt64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
+	mapStringForInt64Map := "map[int64]int64{"
+	for _, k := range keysForInt64Map {
+		mapStringForInt64Map += fmt.Sprintf("%#v: %#v,", k, this.Int64Map[k])
+	}
+	mapStringForInt64Map += "}"
+	keysForUint32Map := make([]uint32, 0, len(this.Uint32Map))
+	for k := range this.Uint32Map {
+		keysForUint32Map = append(keysForUint32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
+	mapStringForUint32Map := "map[uint32]uint32{"
+	for _, k := range keysForUint32Map {
+		mapStringForUint32Map += fmt.Sprintf("%#v: %#v,", k, this.Uint32Map[k])
+	}
+	mapStringForUint32Map += "}"
+	keysForUint64Map := make([]uint64, 0, len(this.Uint64Map))
+	for k := range this.Uint64Map {
+		keysForUint64Map = append(keysForUint64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
+	mapStringForUint64Map := "map[uint64]uint64{"
+	for _, k := range keysForUint64Map {
+		mapStringForUint64Map += fmt.Sprintf("%#v: %#v,", k, this.Uint64Map[k])
+	}
+	mapStringForUint64Map += "}"
+	keysForSint32Map := make([]int32, 0, len(this.Sint32Map))
+	for k := range this.Sint32Map {
+		keysForSint32Map = append(keysForSint32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
+	mapStringForSint32Map := "map[int32]int32{"
+	for _, k := range keysForSint32Map {
+		mapStringForSint32Map += fmt.Sprintf("%#v: %#v,", k, this.Sint32Map[k])
+	}
+	mapStringForSint32Map += "}"
+	keysForSint64Map := make([]int64, 0, len(this.Sint64Map))
+	for k := range this.Sint64Map {
+		keysForSint64Map = append(keysForSint64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
+	mapStringForSint64Map := "map[int64]int64{"
+	for _, k := range keysForSint64Map {
+		mapStringForSint64Map += fmt.Sprintf("%#v: %#v,", k, this.Sint64Map[k])
+	}
+	mapStringForSint64Map += "}"
+	keysForFixed32Map := make([]uint32, 0, len(this.Fixed32Map))
+	for k := range this.Fixed32Map {
+		keysForFixed32Map = append(keysForFixed32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
+	mapStringForFixed32Map := "map[uint32]uint32{"
+	for _, k := range keysForFixed32Map {
+		mapStringForFixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed32Map[k])
+	}
+	mapStringForFixed32Map += "}"
+	keysForSfixed32Map := make([]int32, 0, len(this.Sfixed32Map))
+	for k := range this.Sfixed32Map {
+		keysForSfixed32Map = append(keysForSfixed32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
+	mapStringForSfixed32Map := "map[int32]int32{"
+	for _, k := range keysForSfixed32Map {
+		mapStringForSfixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed32Map[k])
+	}
+	mapStringForSfixed32Map += "}"
+	keysForFixed64Map := make([]uint64, 0, len(this.Fixed64Map))
+	for k := range this.Fixed64Map {
+		keysForFixed64Map = append(keysForFixed64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
+	mapStringForFixed64Map := "map[uint64]uint64{"
+	for _, k := range keysForFixed64Map {
+		mapStringForFixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed64Map[k])
+	}
+	mapStringForFixed64Map += "}"
+	keysForSfixed64Map := make([]int64, 0, len(this.Sfixed64Map))
+	for k := range this.Sfixed64Map {
+		keysForSfixed64Map = append(keysForSfixed64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
+	mapStringForSfixed64Map := "map[int64]int64{"
+	for _, k := range keysForSfixed64Map {
+		mapStringForSfixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed64Map[k])
+	}
+	mapStringForSfixed64Map += "}"
+	keysForBoolMap := make([]bool, 0, len(this.BoolMap))
+	for k := range this.BoolMap {
+		keysForBoolMap = append(keysForBoolMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
+	mapStringForBoolMap := "map[bool]bool{"
+	for _, k := range keysForBoolMap {
+		mapStringForBoolMap += fmt.Sprintf("%#v: %#v,", k, this.BoolMap[k])
+	}
+	mapStringForBoolMap += "}"
+	keysForStringMap := make([]string, 0, len(this.StringMap))
+	for k := range this.StringMap {
+		keysForStringMap = append(keysForStringMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
+	mapStringForStringMap := "map[string]string{"
+	for _, k := range keysForStringMap {
+		mapStringForStringMap += fmt.Sprintf("%#v: %#v,", k, this.StringMap[k])
+	}
+	mapStringForStringMap += "}"
+	keysForStringToBytesMap := make([]string, 0, len(this.StringToBytesMap))
+	for k := range this.StringToBytesMap {
+		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
+	mapStringForStringToBytesMap := "map[string][]byte{"
+	for _, k := range keysForStringToBytesMap {
+		mapStringForStringToBytesMap += fmt.Sprintf("%#v: %#v,", k, this.StringToBytesMap[k])
+	}
+	mapStringForStringToBytesMap += "}"
+	keysForStringToEnumMap := make([]string, 0, len(this.StringToEnumMap))
+	for k := range this.StringToEnumMap {
+		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
+	mapStringForStringToEnumMap := "map[string]MapEnum{"
+	for _, k := range keysForStringToEnumMap {
+		mapStringForStringToEnumMap += fmt.Sprintf("%#v: %#v,", k, this.StringToEnumMap[k])
+	}
+	mapStringForStringToEnumMap += "}"
+	keysForStringToMsgMap := make([]string, 0, len(this.StringToMsgMap))
+	for k := range this.StringToMsgMap {
+		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
+	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
+	for _, k := range keysForStringToMsgMap {
+		mapStringForStringToMsgMap += fmt.Sprintf("%#v: %#v,", k, this.StringToMsgMap[k])
+	}
+	mapStringForStringToMsgMap += "}"
+	s := strings.Join([]string{`&theproto3.AllMaps{` +
+		`StringToDoubleMap:` + mapStringForStringToDoubleMap,
+		`StringToFloatMap:` + mapStringForStringToFloatMap,
+		`Int32Map:` + mapStringForInt32Map,
+		`Int64Map:` + mapStringForInt64Map,
+		`Uint32Map:` + mapStringForUint32Map,
+		`Uint64Map:` + mapStringForUint64Map,
+		`Sint32Map:` + mapStringForSint32Map,
+		`Sint64Map:` + mapStringForSint64Map,
+		`Fixed32Map:` + mapStringForFixed32Map,
+		`Sfixed32Map:` + mapStringForSfixed32Map,
+		`Fixed64Map:` + mapStringForFixed64Map,
+		`Sfixed64Map:` + mapStringForSfixed64Map,
+		`BoolMap:` + mapStringForBoolMap,
+		`StringMap:` + mapStringForStringMap,
+		`StringToBytesMap:` + mapStringForStringToBytesMap,
+		`StringToEnumMap:` + mapStringForStringToEnumMap,
+		`StringToMsgMap:` + mapStringForStringToMsgMap + `}`}, ", ")
+	return s
+}
+func (this *MessageWithMap) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
+	for k := range this.NameMapping {
+		keysForNameMapping = append(keysForNameMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
+	mapStringForNameMapping := "map[int32]string{"
+	for _, k := range keysForNameMapping {
+		mapStringForNameMapping += fmt.Sprintf("%#v: %#v,", k, this.NameMapping[k])
+	}
+	mapStringForNameMapping += "}"
+	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
+	for k := range this.MsgMapping {
+		keysForMsgMapping = append(keysForMsgMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
+	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
+	for _, k := range keysForMsgMapping {
+		mapStringForMsgMapping += fmt.Sprintf("%#v: %#v,", k, this.MsgMapping[k])
+	}
+	mapStringForMsgMapping += "}"
+	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
+	for k := range this.ByteMapping {
+		keysForByteMapping = append(keysForByteMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
+	mapStringForByteMapping := "map[bool][]byte{"
+	for _, k := range keysForByteMapping {
+		mapStringForByteMapping += fmt.Sprintf("%#v: %#v,", k, this.ByteMapping[k])
+	}
+	mapStringForByteMapping += "}"
+	s := strings.Join([]string{`&theproto3.MessageWithMap{` +
+		`NameMapping:` + mapStringForNameMapping,
+		`MsgMapping:` + mapStringForMsgMapping,
+		`ByteMapping:` + mapStringForByteMapping + `}`}, ", ")
+	return s
+}
+func (this *FloatingPoint) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&theproto3.FloatingPoint{` +
+		`F:` + fmt.Sprintf("%#v", this.F) + `}`}, ", ")
+	return s
+}
+func valueToGoStringTheproto3(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringTheproto3(e map[int32]github_com_gogo_protobuf_proto.Extension) string {
+	if e == nil {
+		return "nil"
+	}
+	s := "map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "}"
+	return s
+}
+func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
+	this := &Message{}
+	this.Name = randStringTheproto3(r)
+	this.Hilarity = Message_Humour([]int32{0, 1, 2, 3}[r.Intn(4)])
+	this.HeightInCm = uint32(r.Uint32())
+	v1 := r.Intn(100)
+	this.Data = make([]byte, v1)
+	for i := 0; i < v1; i++ {
+		this.Data[i] = byte(r.Intn(256))
+	}
+	this.ResultCount = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.ResultCount *= -1
+	}
+	this.TrueScotsman = bool(bool(r.Intn(2) == 0))
+	this.Score = float32(r.Float32())
+	if r.Intn(2) == 0 {
+		this.Score *= -1
+	}
+	v2 := r.Intn(100)
+	this.Key = make([]uint64, v2)
+	for i := 0; i < v2; i++ {
+		this.Key[i] = uint64(uint64(r.Uint32()))
+	}
+	if r.Intn(10) != 0 {
+		this.Nested = NewPopulatedNested(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(10)
+		this.Terrain = make(map[int64]*Nested)
+		for i := 0; i < v3; i++ {
+			this.Terrain[int64(r.Int63())] = NewPopulatedNested(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		this.Proto2Field = test.NewPopulatedNinOptNative(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		v4 := r.Intn(10)
+		this.Proto2Value = make(map[int64]*test.NinOptEnum)
+		for i := 0; i < v4; i++ {
+			this.Proto2Value[int64(r.Int63())] = test.NewPopulatedNinOptEnum(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedNested(r randyTheproto3, easy bool) *Nested {
+	this := &Nested{}
+	this.Bunny = randStringTheproto3(r)
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
+	this := &AllMaps{}
+	if r.Intn(10) != 0 {
+		v5 := r.Intn(10)
+		this.StringToDoubleMap = make(map[string]float64)
+		for i := 0; i < v5; i++ {
+			v6 := randStringTheproto3(r)
+			this.StringToDoubleMap[v6] = float64(r.Float64())
+			if r.Intn(2) == 0 {
+				this.StringToDoubleMap[v6] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v7 := r.Intn(10)
+		this.StringToFloatMap = make(map[string]float32)
+		for i := 0; i < v7; i++ {
+			v8 := randStringTheproto3(r)
+			this.StringToFloatMap[v8] = float32(r.Float32())
+			if r.Intn(2) == 0 {
+				this.StringToFloatMap[v8] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v9 := r.Intn(10)
+		this.Int32Map = make(map[int32]int32)
+		for i := 0; i < v9; i++ {
+			v10 := int32(r.Int31())
+			this.Int32Map[v10] = int32(r.Int31())
+			if r.Intn(2) == 0 {
+				this.Int32Map[v10] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v11 := r.Intn(10)
+		this.Int64Map = make(map[int64]int64)
+		for i := 0; i < v11; i++ {
+			v12 := int64(r.Int63())
+			this.Int64Map[v12] = int64(r.Int63())
+			if r.Intn(2) == 0 {
+				this.Int64Map[v12] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v13 := r.Intn(10)
+		this.Uint32Map = make(map[uint32]uint32)
+		for i := 0; i < v13; i++ {
+			v14 := uint32(r.Uint32())
+			this.Uint32Map[v14] = uint32(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v15 := r.Intn(10)
+		this.Uint64Map = make(map[uint64]uint64)
+		for i := 0; i < v15; i++ {
+			v16 := uint64(uint64(r.Uint32()))
+			this.Uint64Map[v16] = uint64(uint64(r.Uint32()))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v17 := r.Intn(10)
+		this.Sint32Map = make(map[int32]int32)
+		for i := 0; i < v17; i++ {
+			v18 := int32(r.Int31())
+			this.Sint32Map[v18] = int32(r.Int31())
+			if r.Intn(2) == 0 {
+				this.Sint32Map[v18] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v19 := r.Intn(10)
+		this.Sint64Map = make(map[int64]int64)
+		for i := 0; i < v19; i++ {
+			v20 := int64(r.Int63())
+			this.Sint64Map[v20] = int64(r.Int63())
+			if r.Intn(2) == 0 {
+				this.Sint64Map[v20] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v21 := r.Intn(10)
+		this.Fixed32Map = make(map[uint32]uint32)
+		for i := 0; i < v21; i++ {
+			v22 := uint32(r.Uint32())
+			this.Fixed32Map[v22] = uint32(r.Uint32())
+		}
+	}
+	if r.Intn(10) != 0 {
+		v23 := r.Intn(10)
+		this.Sfixed32Map = make(map[int32]int32)
+		for i := 0; i < v23; i++ {
+			v24 := int32(r.Int31())
+			this.Sfixed32Map[v24] = int32(r.Int31())
+			if r.Intn(2) == 0 {
+				this.Sfixed32Map[v24] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v25 := r.Intn(10)
+		this.Fixed64Map = make(map[uint64]uint64)
+		for i := 0; i < v25; i++ {
+			v26 := uint64(uint64(r.Uint32()))
+			this.Fixed64Map[v26] = uint64(uint64(r.Uint32()))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v27 := r.Intn(10)
+		this.Sfixed64Map = make(map[int64]int64)
+		for i := 0; i < v27; i++ {
+			v28 := int64(r.Int63())
+			this.Sfixed64Map[v28] = int64(r.Int63())
+			if r.Intn(2) == 0 {
+				this.Sfixed64Map[v28] *= -1
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v29 := r.Intn(10)
+		this.BoolMap = make(map[bool]bool)
+		for i := 0; i < v29; i++ {
+			v30 := bool(bool(r.Intn(2) == 0))
+			this.BoolMap[v30] = bool(bool(r.Intn(2) == 0))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v31 := r.Intn(10)
+		this.StringMap = make(map[string]string)
+		for i := 0; i < v31; i++ {
+			this.StringMap[randStringTheproto3(r)] = randStringTheproto3(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v32 := r.Intn(10)
+		this.StringToBytesMap = make(map[string][]byte)
+		for i := 0; i < v32; i++ {
+			v33 := r.Intn(100)
+			v34 := randStringTheproto3(r)
+			this.StringToBytesMap[v34] = make([]byte, v33)
+			for i := 0; i < v33; i++ {
+				this.StringToBytesMap[v34][i] = byte(r.Intn(256))
+			}
+		}
+	}
+	if r.Intn(10) != 0 {
+		v35 := r.Intn(10)
+		this.StringToEnumMap = make(map[string]MapEnum)
+		for i := 0; i < v35; i++ {
+			this.StringToEnumMap[randStringTheproto3(r)] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
+		}
+	}
+	if r.Intn(10) != 0 {
+		v36 := r.Intn(10)
+		this.StringToMsgMap = make(map[string]*FloatingPoint)
+		for i := 0; i < v36; i++ {
+			this.StringToMsgMap[randStringTheproto3(r)] = NewPopulatedFloatingPoint(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
+	this := &MessageWithMap{}
+	if r.Intn(10) != 0 {
+		v37 := r.Intn(10)
+		this.NameMapping = make(map[int32]string)
+		for i := 0; i < v37; i++ {
+			this.NameMapping[int32(r.Int31())] = randStringTheproto3(r)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v38 := r.Intn(10)
+		this.MsgMapping = make(map[int64]*FloatingPoint)
+		for i := 0; i < v38; i++ {
+			this.MsgMapping[int64(r.Int63())] = NewPopulatedFloatingPoint(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v39 := r.Intn(10)
+		this.ByteMapping = make(map[bool][]byte)
+		for i := 0; i < v39; i++ {
+			v40 := r.Intn(100)
+			v41 := bool(bool(r.Intn(2) == 0))
+			this.ByteMapping[v41] = make([]byte, v40)
+			for i := 0; i < v40; i++ {
+				this.ByteMapping[v41][i] = byte(r.Intn(256))
+			}
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
+	this := &FloatingPoint{}
+	this.F = float64(r.Float64())
+	if r.Intn(2) == 0 {
+		this.F *= -1
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+type randyTheproto3 interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneTheproto3(r randyTheproto3) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringTheproto3(r randyTheproto3) string {
+	v42 := r.Intn(100)
+	tmps := make([]rune, v42)
+	for i := 0; i < v42; i++ {
+		tmps[i] = randUTF8RuneTheproto3(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedTheproto3(r randyTheproto3, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldTheproto3(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldTheproto3(data []byte, r randyTheproto3, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		v43 := r.Int63()
+		if r.Intn(2) == 0 {
+			v43 *= -1
+		}
+		data = encodeVarintPopulateTheproto3(data, uint64(v43))
+	case 1:
+		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateTheproto3(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateTheproto3(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
+func (m *Message) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	if m.Hilarity != 0 {
+		n += 1 + sovTheproto3(uint64(m.Hilarity))
+	}
+	if m.HeightInCm != 0 {
+		n += 1 + sovTheproto3(uint64(m.HeightInCm))
+	}
+	if m.Data != nil {
+		l = len(m.Data)
+		if l > 0 {
+			n += 1 + l + sovTheproto3(uint64(l))
+		}
+	}
+	if m.ResultCount != 0 {
+		n += 1 + sovTheproto3(uint64(m.ResultCount))
+	}
+	if m.TrueScotsman {
+		n += 2
+	}
+	if m.Score != 0 {
+		n += 5
+	}
+	if len(m.Key) > 0 {
+		for _, e := range m.Key {
+			n += 1 + sovTheproto3(uint64(e))
+		}
+	}
+	if m.Nested != nil {
+		l = m.Nested.Size()
+		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	if len(m.Terrain) > 0 {
+		for k, v := range m.Terrain {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if m.Proto2Field != nil {
+		l = m.Proto2Field.Size()
+		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	if len(m.Proto2Value) > 0 {
+		for k, v := range m.Proto2Value {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *Nested) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Bunny)
+	if l > 0 {
+		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	return n
+}
+
+func (m *AllMaps) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.StringToDoubleMap) > 0 {
+		for k, v := range m.StringToDoubleMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.StringToFloatMap) > 0 {
+		for k, v := range m.StringToFloatMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Int32Map) > 0 {
+		for k, v := range m.Int32Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Int64Map) > 0 {
+		for k, v := range m.Int64Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Uint32Map) > 0 {
+		for k, v := range m.Uint32Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Uint64Map) > 0 {
+		for k, v := range m.Uint64Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Sint32Map) > 0 {
+		for k, v := range m.Sint32Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Sint64Map) > 0 {
+		for k, v := range m.Sint64Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Fixed32Map) > 0 {
+		for k, v := range m.Fixed32Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 4 + 1 + 4
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Sfixed32Map) > 0 {
+		for k, v := range m.Sfixed32Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 4 + 1 + 4
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Fixed64Map) > 0 {
+		for k, v := range m.Fixed64Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 8 + 1 + 8
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Sfixed64Map) > 0 {
+		for k, v := range m.Sfixed64Map {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 8 + 1 + 8
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.BoolMap) > 0 {
+		for k, v := range m.BoolMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 1 + 1 + 1
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.StringMap) > 0 {
+		for k, v := range m.StringMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.StringToBytesMap) > 0 {
+		for k, v := range m.StringToBytesMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.StringToEnumMap) > 0 {
+		for k, v := range m.StringToEnumMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
+			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.StringToMsgMap) > 0 {
+		for k, v := range m.StringToMsgMap {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + l + sovTheproto3(uint64(l))
+			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *MessageWithMap) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NameMapping) > 0 {
+		for k, v := range m.NameMapping {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + sovTheproto3(uint64(k)) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.MsgMapping) > 0 {
+		for k, v := range m.MsgMapping {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
+			mapEntrySize := 1 + sozTheproto3(uint64(k)) + 1 + l + sovTheproto3(uint64(l))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if len(m.ByteMapping) > 0 {
+		for k, v := range m.ByteMapping {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + 1 + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *FloatingPoint) Size() (n int) {
+	var l int
+	_ = l
+	if m.F != 0 {
+		n += 9
+	}
+	return n
+}
+
+func sovTheproto3(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozTheproto3(x uint64) (n int) {
+	return sovTheproto3(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *Message) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForTerrain := make([]int64, 0, len(this.Terrain))
+	for k := range this.Terrain {
+		keysForTerrain = append(keysForTerrain, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
+	mapStringForTerrain := "map[int64]*Nested{"
+	for _, k := range keysForTerrain {
+		mapStringForTerrain += fmt.Sprintf("%v: %v,", k, this.Terrain[k])
+	}
+	mapStringForTerrain += "}"
+	keysForProto2Value := make([]int64, 0, len(this.Proto2Value))
+	for k := range this.Proto2Value {
+		keysForProto2Value = append(keysForProto2Value, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
+	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
+	for _, k := range keysForProto2Value {
+		mapStringForProto2Value += fmt.Sprintf("%v: %v,", k, this.Proto2Value[k])
+	}
+	mapStringForProto2Value += "}"
+	s := strings.Join([]string{`&Message{`,
+		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
+		`Hilarity:` + fmt.Sprintf("%v", this.Hilarity) + `,`,
+		`HeightInCm:` + fmt.Sprintf("%v", this.HeightInCm) + `,`,
+		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`ResultCount:` + fmt.Sprintf("%v", this.ResultCount) + `,`,
+		`TrueScotsman:` + fmt.Sprintf("%v", this.TrueScotsman) + `,`,
+		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,
+		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
+		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
+		`Terrain:` + mapStringForTerrain + `,`,
+		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "test.NinOptNative", 1) + `,`,
+		`Proto2Value:` + mapStringForProto2Value + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Nested) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Nested{`,
+		`Bunny:` + fmt.Sprintf("%v", this.Bunny) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AllMaps) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForStringToDoubleMap := make([]string, 0, len(this.StringToDoubleMap))
+	for k := range this.StringToDoubleMap {
+		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
+	mapStringForStringToDoubleMap := "map[string]float64{"
+	for _, k := range keysForStringToDoubleMap {
+		mapStringForStringToDoubleMap += fmt.Sprintf("%v: %v,", k, this.StringToDoubleMap[k])
+	}
+	mapStringForStringToDoubleMap += "}"
+	keysForStringToFloatMap := make([]string, 0, len(this.StringToFloatMap))
+	for k := range this.StringToFloatMap {
+		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
+	mapStringForStringToFloatMap := "map[string]float32{"
+	for _, k := range keysForStringToFloatMap {
+		mapStringForStringToFloatMap += fmt.Sprintf("%v: %v,", k, this.StringToFloatMap[k])
+	}
+	mapStringForStringToFloatMap += "}"
+	keysForInt32Map := make([]int32, 0, len(this.Int32Map))
+	for k := range this.Int32Map {
+		keysForInt32Map = append(keysForInt32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
+	mapStringForInt32Map := "map[int32]int32{"
+	for _, k := range keysForInt32Map {
+		mapStringForInt32Map += fmt.Sprintf("%v: %v,", k, this.Int32Map[k])
+	}
+	mapStringForInt32Map += "}"
+	keysForInt64Map := make([]int64, 0, len(this.Int64Map))
+	for k := range this.Int64Map {
+		keysForInt64Map = append(keysForInt64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
+	mapStringForInt64Map := "map[int64]int64{"
+	for _, k := range keysForInt64Map {
+		mapStringForInt64Map += fmt.Sprintf("%v: %v,", k, this.Int64Map[k])
+	}
+	mapStringForInt64Map += "}"
+	keysForUint32Map := make([]uint32, 0, len(this.Uint32Map))
+	for k := range this.Uint32Map {
+		keysForUint32Map = append(keysForUint32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
+	mapStringForUint32Map := "map[uint32]uint32{"
+	for _, k := range keysForUint32Map {
+		mapStringForUint32Map += fmt.Sprintf("%v: %v,", k, this.Uint32Map[k])
+	}
+	mapStringForUint32Map += "}"
+	keysForUint64Map := make([]uint64, 0, len(this.Uint64Map))
+	for k := range this.Uint64Map {
+		keysForUint64Map = append(keysForUint64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
+	mapStringForUint64Map := "map[uint64]uint64{"
+	for _, k := range keysForUint64Map {
+		mapStringForUint64Map += fmt.Sprintf("%v: %v,", k, this.Uint64Map[k])
+	}
+	mapStringForUint64Map += "}"
+	keysForSint32Map := make([]int32, 0, len(this.Sint32Map))
+	for k := range this.Sint32Map {
+		keysForSint32Map = append(keysForSint32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
+	mapStringForSint32Map := "map[int32]int32{"
+	for _, k := range keysForSint32Map {
+		mapStringForSint32Map += fmt.Sprintf("%v: %v,", k, this.Sint32Map[k])
+	}
+	mapStringForSint32Map += "}"
+	keysForSint64Map := make([]int64, 0, len(this.Sint64Map))
+	for k := range this.Sint64Map {
+		keysForSint64Map = append(keysForSint64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
+	mapStringForSint64Map := "map[int64]int64{"
+	for _, k := range keysForSint64Map {
+		mapStringForSint64Map += fmt.Sprintf("%v: %v,", k, this.Sint64Map[k])
+	}
+	mapStringForSint64Map += "}"
+	keysForFixed32Map := make([]uint32, 0, len(this.Fixed32Map))
+	for k := range this.Fixed32Map {
+		keysForFixed32Map = append(keysForFixed32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
+	mapStringForFixed32Map := "map[uint32]uint32{"
+	for _, k := range keysForFixed32Map {
+		mapStringForFixed32Map += fmt.Sprintf("%v: %v,", k, this.Fixed32Map[k])
+	}
+	mapStringForFixed32Map += "}"
+	keysForSfixed32Map := make([]int32, 0, len(this.Sfixed32Map))
+	for k := range this.Sfixed32Map {
+		keysForSfixed32Map = append(keysForSfixed32Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
+	mapStringForSfixed32Map := "map[int32]int32{"
+	for _, k := range keysForSfixed32Map {
+		mapStringForSfixed32Map += fmt.Sprintf("%v: %v,", k, this.Sfixed32Map[k])
+	}
+	mapStringForSfixed32Map += "}"
+	keysForFixed64Map := make([]uint64, 0, len(this.Fixed64Map))
+	for k := range this.Fixed64Map {
+		keysForFixed64Map = append(keysForFixed64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
+	mapStringForFixed64Map := "map[uint64]uint64{"
+	for _, k := range keysForFixed64Map {
+		mapStringForFixed64Map += fmt.Sprintf("%v: %v,", k, this.Fixed64Map[k])
+	}
+	mapStringForFixed64Map += "}"
+	keysForSfixed64Map := make([]int64, 0, len(this.Sfixed64Map))
+	for k := range this.Sfixed64Map {
+		keysForSfixed64Map = append(keysForSfixed64Map, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
+	mapStringForSfixed64Map := "map[int64]int64{"
+	for _, k := range keysForSfixed64Map {
+		mapStringForSfixed64Map += fmt.Sprintf("%v: %v,", k, this.Sfixed64Map[k])
+	}
+	mapStringForSfixed64Map += "}"
+	keysForBoolMap := make([]bool, 0, len(this.BoolMap))
+	for k := range this.BoolMap {
+		keysForBoolMap = append(keysForBoolMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
+	mapStringForBoolMap := "map[bool]bool{"
+	for _, k := range keysForBoolMap {
+		mapStringForBoolMap += fmt.Sprintf("%v: %v,", k, this.BoolMap[k])
+	}
+	mapStringForBoolMap += "}"
+	keysForStringMap := make([]string, 0, len(this.StringMap))
+	for k := range this.StringMap {
+		keysForStringMap = append(keysForStringMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
+	mapStringForStringMap := "map[string]string{"
+	for _, k := range keysForStringMap {
+		mapStringForStringMap += fmt.Sprintf("%v: %v,", k, this.StringMap[k])
+	}
+	mapStringForStringMap += "}"
+	keysForStringToBytesMap := make([]string, 0, len(this.StringToBytesMap))
+	for k := range this.StringToBytesMap {
+		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
+	mapStringForStringToBytesMap := "map[string][]byte{"
+	for _, k := range keysForStringToBytesMap {
+		mapStringForStringToBytesMap += fmt.Sprintf("%v: %v,", k, this.StringToBytesMap[k])
+	}
+	mapStringForStringToBytesMap += "}"
+	keysForStringToEnumMap := make([]string, 0, len(this.StringToEnumMap))
+	for k := range this.StringToEnumMap {
+		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
+	mapStringForStringToEnumMap := "map[string]MapEnum{"
+	for _, k := range keysForStringToEnumMap {
+		mapStringForStringToEnumMap += fmt.Sprintf("%v: %v,", k, this.StringToEnumMap[k])
+	}
+	mapStringForStringToEnumMap += "}"
+	keysForStringToMsgMap := make([]string, 0, len(this.StringToMsgMap))
+	for k := range this.StringToMsgMap {
+		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
+	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
+	for _, k := range keysForStringToMsgMap {
+		mapStringForStringToMsgMap += fmt.Sprintf("%v: %v,", k, this.StringToMsgMap[k])
+	}
+	mapStringForStringToMsgMap += "}"
+	s := strings.Join([]string{`&AllMaps{`,
+		`StringToDoubleMap:` + mapStringForStringToDoubleMap + `,`,
+		`StringToFloatMap:` + mapStringForStringToFloatMap + `,`,
+		`Int32Map:` + mapStringForInt32Map + `,`,
+		`Int64Map:` + mapStringForInt64Map + `,`,
+		`Uint32Map:` + mapStringForUint32Map + `,`,
+		`Uint64Map:` + mapStringForUint64Map + `,`,
+		`Sint32Map:` + mapStringForSint32Map + `,`,
+		`Sint64Map:` + mapStringForSint64Map + `,`,
+		`Fixed32Map:` + mapStringForFixed32Map + `,`,
+		`Sfixed32Map:` + mapStringForSfixed32Map + `,`,
+		`Fixed64Map:` + mapStringForFixed64Map + `,`,
+		`Sfixed64Map:` + mapStringForSfixed64Map + `,`,
+		`BoolMap:` + mapStringForBoolMap + `,`,
+		`StringMap:` + mapStringForStringMap + `,`,
+		`StringToBytesMap:` + mapStringForStringToBytesMap + `,`,
+		`StringToEnumMap:` + mapStringForStringToEnumMap + `,`,
+		`StringToMsgMap:` + mapStringForStringToMsgMap + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *MessageWithMap) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForNameMapping := make([]int32, 0, len(this.NameMapping))
+	for k := range this.NameMapping {
+		keysForNameMapping = append(keysForNameMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
+	mapStringForNameMapping := "map[int32]string{"
+	for _, k := range keysForNameMapping {
+		mapStringForNameMapping += fmt.Sprintf("%v: %v,", k, this.NameMapping[k])
+	}
+	mapStringForNameMapping += "}"
+	keysForMsgMapping := make([]int64, 0, len(this.MsgMapping))
+	for k := range this.MsgMapping {
+		keysForMsgMapping = append(keysForMsgMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
+	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
+	for _, k := range keysForMsgMapping {
+		mapStringForMsgMapping += fmt.Sprintf("%v: %v,", k, this.MsgMapping[k])
+	}
+	mapStringForMsgMapping += "}"
+	keysForByteMapping := make([]bool, 0, len(this.ByteMapping))
+	for k := range this.ByteMapping {
+		keysForByteMapping = append(keysForByteMapping, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
+	mapStringForByteMapping := "map[bool][]byte{"
+	for _, k := range keysForByteMapping {
+		mapStringForByteMapping += fmt.Sprintf("%v: %v,", k, this.ByteMapping[k])
+	}
+	mapStringForByteMapping += "}"
+	s := strings.Join([]string{`&MessageWithMap{`,
+		`NameMapping:` + mapStringForNameMapping + `,`,
+		`MsgMapping:` + mapStringForMsgMapping + `,`,
+		`ByteMapping:` + mapStringForByteMapping + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *FloatingPoint) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&FloatingPoint{`,
+		`F:` + fmt.Sprintf("%v", this.F) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringTheproto3(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }

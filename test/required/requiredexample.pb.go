@@ -21,9 +21,10 @@ import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
 import io "io"
 import fmt "fmt"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -333,6 +334,683 @@ func (m *NestedNinOptNative) GetNestedNinOpts() []*NinOptNative {
 	return nil
 }
 
+func (m *RequiredExample) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *RequiredExample) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.TheRequiredString == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("theRequiredString")
+	} else {
+		data[i] = 0xa
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheRequiredString)))
+		i += copy(data[i:], *m.TheRequiredString)
+	}
+	if m.TheOptionalString != nil {
+		data[i] = 0x12
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheOptionalString)))
+		i += copy(data[i:], *m.TheOptionalString)
+	}
+	if len(m.TheRepeatedStrings) > 0 {
+		for _, s := range m.TheRepeatedStrings {
+			data[i] = 0x1a
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			data[i] = uint8(l)
+			i++
+			i += copy(data[i:], s)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0x9
+	i++
+	i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(m.Field1)))
+	data[i] = 0x15
+	i++
+	i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(m.Field2)))
+	data[i] = 0x18
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64(m.Field3))
+	data[i] = 0x20
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64(m.Field4))
+	data[i] = 0x28
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64(m.Field5))
+	data[i] = 0x30
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64(m.Field6))
+	data[i] = 0x38
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	data[i] = 0x40
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	data[i] = 0x4d
+	i++
+	i = encodeFixed32Requiredexample(data, i, uint32(m.Field9))
+	data[i] = 0x55
+	i++
+	i = encodeFixed32Requiredexample(data, i, uint32(m.Field10))
+	data[i] = 0x59
+	i++
+	i = encodeFixed64Requiredexample(data, i, uint64(m.Field11))
+	data[i] = 0x61
+	i++
+	i = encodeFixed64Requiredexample(data, i, uint64(m.Field12))
+	data[i] = 0x68
+	i++
+	if m.Field13 {
+		data[i] = 1
+	} else {
+		data[i] = 0
+	}
+	i++
+	data[i] = 0x72
+	i++
+	i = encodeVarintRequiredexample(data, i, uint64(len(m.Field14)))
+	i += copy(data[i:], m.Field14)
+	if m.Field15 != nil {
+		data[i] = 0x7a
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
+		i += copy(data[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field1")
+	} else {
+		data[i] = 0x9
+		i++
+		i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(*m.Field1)))
+	}
+	if m.Field2 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
+	} else {
+		data[i] = 0x15
+		i++
+		i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(*m.Field2)))
+	}
+	if m.Field3 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")
+	} else {
+		data[i] = 0x18
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(*m.Field3))
+	}
+	if m.Field4 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field4")
+	} else {
+		data[i] = 0x20
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(*m.Field4))
+	}
+	if m.Field5 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field5")
+	} else {
+		data[i] = 0x28
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(*m.Field5))
+	}
+	if m.Field6 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field6")
+	} else {
+		data[i] = 0x30
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(*m.Field6))
+	}
+	if m.Field7 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field7")
+	} else {
+		data[i] = 0x38
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+	}
+	if m.Field8 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field8")
+	} else {
+		data[i] = 0x40
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
+	}
+	if m.Field9 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field9")
+	} else {
+		data[i] = 0x4d
+		i++
+		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field9))
+	}
+	if m.Field10 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field10")
+	} else {
+		data[i] = 0x55
+		i++
+		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field10))
+	}
+	if m.Field11 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field11")
+	} else {
+		data[i] = 0x59
+		i++
+		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field11))
+	}
+	if m.Field12 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field12")
+	} else {
+		data[i] = 0x61
+		i++
+		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field12))
+	}
+	if m.Field13 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field13")
+	} else {
+		data[i] = 0x68
+		i++
+		if *m.Field13 {
+			data[i] = 1
+		} else {
+			data[i] = 0
+		}
+		i++
+	}
+	if m.Field14 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field14")
+	} else {
+		data[i] = 0x72
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(len(*m.Field14)))
+		i += copy(data[i:], *m.Field14)
+	}
+	if m.Field15 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field15")
+	} else {
+		data[i] = 0x7a
+		i++
+		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
+		i += copy(data[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedNinOptNative) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *NestedNinOptNative) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.NestedNinOpts) > 0 {
+		for _, msg := range m.NestedNinOpts {
+			data[i] = 0xa
+			i++
+			i = encodeVarintRequiredexample(data, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Requiredexample(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Requiredexample(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintRequiredexample(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func NewPopulatedRequiredExample(r randyRequiredexample, easy bool) *RequiredExample {
+	this := &RequiredExample{}
+	v1 := randStringRequiredexample(r)
+	this.TheRequiredString = &v1
+	if r.Intn(10) != 0 {
+		v2 := randStringRequiredexample(r)
+		this.TheOptionalString = &v2
+	}
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(10)
+		this.TheRepeatedStrings = make([]string, v3)
+		for i := 0; i < v3; i++ {
+			this.TheRepeatedStrings[i] = randStringRequiredexample(r)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 4)
+	}
+	return this
+}
+
+func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
+	this := &NidOptNative{}
+	this.Field1 = float64(r.Float64())
+	if r.Intn(2) == 0 {
+		this.Field1 *= -1
+	}
+	this.Field2 = float32(r.Float32())
+	if r.Intn(2) == 0 {
+		this.Field2 *= -1
+	}
+	this.Field3 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Field3 *= -1
+	}
+	this.Field4 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Field4 *= -1
+	}
+	this.Field5 = uint32(r.Uint32())
+	this.Field6 = uint64(uint64(r.Uint32()))
+	this.Field7 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Field7 *= -1
+	}
+	this.Field8 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Field8 *= -1
+	}
+	this.Field9 = uint32(r.Uint32())
+	this.Field10 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Field10 *= -1
+	}
+	this.Field11 = uint64(uint64(r.Uint32()))
+	this.Field12 = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Field12 *= -1
+	}
+	this.Field13 = bool(bool(r.Intn(2) == 0))
+	this.Field14 = randStringRequiredexample(r)
+	v4 := r.Intn(100)
+	this.Field15 = make([]byte, v4)
+	for i := 0; i < v4; i++ {
+		this.Field15[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 16)
+	}
+	return this
+}
+
+func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
+	this := &NinOptNative{}
+	v5 := float64(r.Float64())
+	if r.Intn(2) == 0 {
+		v5 *= -1
+	}
+	this.Field1 = &v5
+	v6 := float32(r.Float32())
+	if r.Intn(2) == 0 {
+		v6 *= -1
+	}
+	this.Field2 = &v6
+	v7 := int32(r.Int31())
+	if r.Intn(2) == 0 {
+		v7 *= -1
+	}
+	this.Field3 = &v7
+	v8 := int64(r.Int63())
+	if r.Intn(2) == 0 {
+		v8 *= -1
+	}
+	this.Field4 = &v8
+	v9 := uint32(r.Uint32())
+	this.Field5 = &v9
+	v10 := uint64(uint64(r.Uint32()))
+	this.Field6 = &v10
+	v11 := int32(r.Int31())
+	if r.Intn(2) == 0 {
+		v11 *= -1
+	}
+	this.Field7 = &v11
+	v12 := int64(r.Int63())
+	if r.Intn(2) == 0 {
+		v12 *= -1
+	}
+	this.Field8 = &v12
+	v13 := uint32(r.Uint32())
+	this.Field9 = &v13
+	v14 := int32(r.Int31())
+	if r.Intn(2) == 0 {
+		v14 *= -1
+	}
+	this.Field10 = &v14
+	v15 := uint64(uint64(r.Uint32()))
+	this.Field11 = &v15
+	v16 := int64(r.Int63())
+	if r.Intn(2) == 0 {
+		v16 *= -1
+	}
+	this.Field12 = &v16
+	v17 := bool(bool(r.Intn(2) == 0))
+	this.Field13 = &v17
+	v18 := randStringRequiredexample(r)
+	this.Field14 = &v18
+	v19 := r.Intn(100)
+	this.Field15 = make([]byte, v19)
+	for i := 0; i < v19; i++ {
+		this.Field15[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 16)
+	}
+	return this
+}
+
+func NewPopulatedNestedNinOptNative(r randyRequiredexample, easy bool) *NestedNinOptNative {
+	this := &NestedNinOptNative{}
+	if r.Intn(10) != 0 {
+		v20 := r.Intn(10)
+		this.NestedNinOpts = make([]*NinOptNative, v20)
+		for i := 0; i < v20; i++ {
+			this.NestedNinOpts[i] = NewPopulatedNinOptNative(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 2)
+	}
+	return this
+}
+
+type randyRequiredexample interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneRequiredexample(r randyRequiredexample) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringRequiredexample(r randyRequiredexample) string {
+	v21 := r.Intn(100)
+	tmps := make([]rune, v21)
+	for i := 0; i < v21; i++ {
+		tmps[i] = randUTF8RuneRequiredexample(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedRequiredexample(r randyRequiredexample, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldRequiredexample(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldRequiredexample(data []byte, r randyRequiredexample, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		v22 := r.Int63()
+		if r.Intn(2) == 0 {
+			v22 *= -1
+		}
+		data = encodeVarintPopulateRequiredexample(data, uint64(v22))
+	case 1:
+		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateRequiredexample(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateRequiredexample(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
+func (m *RequiredExample) Size() (n int) {
+	var l int
+	_ = l
+	if m.TheRequiredString != nil {
+		l = len(*m.TheRequiredString)
+		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if m.TheOptionalString != nil {
+		l = len(*m.TheOptionalString)
+		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if len(m.TheRepeatedStrings) > 0 {
+		for _, s := range m.TheRepeatedStrings {
+			l = len(s)
+			n += 1 + l + sovRequiredexample(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *NidOptNative) Size() (n int) {
+	var l int
+	_ = l
+	n += 9
+	n += 5
+	n += 1 + sovRequiredexample(uint64(m.Field3))
+	n += 1 + sovRequiredexample(uint64(m.Field4))
+	n += 1 + sovRequiredexample(uint64(m.Field5))
+	n += 1 + sovRequiredexample(uint64(m.Field6))
+	n += 1 + sozRequiredexample(uint64(m.Field7))
+	n += 1 + sozRequiredexample(uint64(m.Field8))
+	n += 5
+	n += 5
+	n += 9
+	n += 9
+	n += 2
+	l = len(m.Field14)
+	n += 1 + l + sovRequiredexample(uint64(l))
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *NinOptNative) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		n += 9
+	}
+	if m.Field2 != nil {
+		n += 5
+	}
+	if m.Field3 != nil {
+		n += 1 + sovRequiredexample(uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		n += 1 + sovRequiredexample(uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		n += 1 + sovRequiredexample(uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		n += 1 + sovRequiredexample(uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		n += 1 + sozRequiredexample(uint64(*m.Field7))
+	}
+	if m.Field8 != nil {
+		n += 1 + sozRequiredexample(uint64(*m.Field8))
+	}
+	if m.Field9 != nil {
+		n += 5
+	}
+	if m.Field10 != nil {
+		n += 5
+	}
+	if m.Field11 != nil {
+		n += 9
+	}
+	if m.Field12 != nil {
+		n += 9
+	}
+	if m.Field13 != nil {
+		n += 2
+	}
+	if m.Field14 != nil {
+		l = len(*m.Field14)
+		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if m.Field15 != nil {
+		l = len(m.Field15)
+		n += 1 + l + sovRequiredexample(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *NestedNinOptNative) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NestedNinOpts) > 0 {
+		for _, e := range m.NestedNinOpts {
+			l = e.Size()
+			n += 1 + l + sovRequiredexample(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovRequiredexample(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozRequiredexample(x uint64) (n int) {
+	return sovRequiredexample(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *RequiredExample) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)
@@ -1356,681 +2034,3 @@ func skipRequiredexample(data []byte) (n int, err error) {
 var (
 	ErrInvalidLengthRequiredexample = fmt.Errorf("proto: negative length found during unmarshaling")
 )
-
-func (m *RequiredExample) Size() (n int) {
-	var l int
-	_ = l
-	if m.TheRequiredString != nil {
-		l = len(*m.TheRequiredString)
-		n += 1 + l + sovRequiredexample(uint64(l))
-	}
-	if m.TheOptionalString != nil {
-		l = len(*m.TheOptionalString)
-		n += 1 + l + sovRequiredexample(uint64(l))
-	}
-	if len(m.TheRepeatedStrings) > 0 {
-		for _, s := range m.TheRepeatedStrings {
-			l = len(s)
-			n += 1 + l + sovRequiredexample(uint64(l))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *NidOptNative) Size() (n int) {
-	var l int
-	_ = l
-	n += 9
-	n += 5
-	n += 1 + sovRequiredexample(uint64(m.Field3))
-	n += 1 + sovRequiredexample(uint64(m.Field4))
-	n += 1 + sovRequiredexample(uint64(m.Field5))
-	n += 1 + sovRequiredexample(uint64(m.Field6))
-	n += 1 + sozRequiredexample(uint64(m.Field7))
-	n += 1 + sozRequiredexample(uint64(m.Field8))
-	n += 5
-	n += 5
-	n += 9
-	n += 9
-	n += 2
-	l = len(m.Field14)
-	n += 1 + l + sovRequiredexample(uint64(l))
-	if m.Field15 != nil {
-		l = len(m.Field15)
-		n += 1 + l + sovRequiredexample(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *NinOptNative) Size() (n int) {
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		n += 9
-	}
-	if m.Field2 != nil {
-		n += 5
-	}
-	if m.Field3 != nil {
-		n += 1 + sovRequiredexample(uint64(*m.Field3))
-	}
-	if m.Field4 != nil {
-		n += 1 + sovRequiredexample(uint64(*m.Field4))
-	}
-	if m.Field5 != nil {
-		n += 1 + sovRequiredexample(uint64(*m.Field5))
-	}
-	if m.Field6 != nil {
-		n += 1 + sovRequiredexample(uint64(*m.Field6))
-	}
-	if m.Field7 != nil {
-		n += 1 + sozRequiredexample(uint64(*m.Field7))
-	}
-	if m.Field8 != nil {
-		n += 1 + sozRequiredexample(uint64(*m.Field8))
-	}
-	if m.Field9 != nil {
-		n += 5
-	}
-	if m.Field10 != nil {
-		n += 5
-	}
-	if m.Field11 != nil {
-		n += 9
-	}
-	if m.Field12 != nil {
-		n += 9
-	}
-	if m.Field13 != nil {
-		n += 2
-	}
-	if m.Field14 != nil {
-		l = len(*m.Field14)
-		n += 1 + l + sovRequiredexample(uint64(l))
-	}
-	if m.Field15 != nil {
-		l = len(m.Field15)
-		n += 1 + l + sovRequiredexample(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func (m *NestedNinOptNative) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NestedNinOpts) > 0 {
-		for _, e := range m.NestedNinOpts {
-			l = e.Size()
-			n += 1 + l + sovRequiredexample(uint64(l))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
-func sovRequiredexample(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozRequiredexample(x uint64) (n int) {
-	return sovRequiredexample(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func NewPopulatedRequiredExample(r randyRequiredexample, easy bool) *RequiredExample {
-	this := &RequiredExample{}
-	v1 := randStringRequiredexample(r)
-	this.TheRequiredString = &v1
-	if r.Intn(10) != 0 {
-		v2 := randStringRequiredexample(r)
-		this.TheOptionalString = &v2
-	}
-	if r.Intn(10) != 0 {
-		v3 := r.Intn(10)
-		this.TheRepeatedStrings = make([]string, v3)
-		for i := 0; i < v3; i++ {
-			this.TheRepeatedStrings[i] = randStringRequiredexample(r)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 4)
-	}
-	return this
-}
-
-func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
-	this := &NidOptNative{}
-	this.Field1 = float64(r.Float64())
-	if r.Intn(2) == 0 {
-		this.Field1 *= -1
-	}
-	this.Field2 = float32(r.Float32())
-	if r.Intn(2) == 0 {
-		this.Field2 *= -1
-	}
-	this.Field3 = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.Field3 *= -1
-	}
-	this.Field4 = int64(r.Int63())
-	if r.Intn(2) == 0 {
-		this.Field4 *= -1
-	}
-	this.Field5 = uint32(r.Uint32())
-	this.Field6 = uint64(uint64(r.Uint32()))
-	this.Field7 = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.Field7 *= -1
-	}
-	this.Field8 = int64(r.Int63())
-	if r.Intn(2) == 0 {
-		this.Field8 *= -1
-	}
-	this.Field9 = uint32(r.Uint32())
-	this.Field10 = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.Field10 *= -1
-	}
-	this.Field11 = uint64(uint64(r.Uint32()))
-	this.Field12 = int64(r.Int63())
-	if r.Intn(2) == 0 {
-		this.Field12 *= -1
-	}
-	this.Field13 = bool(bool(r.Intn(2) == 0))
-	this.Field14 = randStringRequiredexample(r)
-	v4 := r.Intn(100)
-	this.Field15 = make([]byte, v4)
-	for i := 0; i < v4; i++ {
-		this.Field15[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 16)
-	}
-	return this
-}
-
-func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
-	this := &NinOptNative{}
-	v5 := float64(r.Float64())
-	if r.Intn(2) == 0 {
-		v5 *= -1
-	}
-	this.Field1 = &v5
-	v6 := float32(r.Float32())
-	if r.Intn(2) == 0 {
-		v6 *= -1
-	}
-	this.Field2 = &v6
-	v7 := int32(r.Int31())
-	if r.Intn(2) == 0 {
-		v7 *= -1
-	}
-	this.Field3 = &v7
-	v8 := int64(r.Int63())
-	if r.Intn(2) == 0 {
-		v8 *= -1
-	}
-	this.Field4 = &v8
-	v9 := uint32(r.Uint32())
-	this.Field5 = &v9
-	v10 := uint64(uint64(r.Uint32()))
-	this.Field6 = &v10
-	v11 := int32(r.Int31())
-	if r.Intn(2) == 0 {
-		v11 *= -1
-	}
-	this.Field7 = &v11
-	v12 := int64(r.Int63())
-	if r.Intn(2) == 0 {
-		v12 *= -1
-	}
-	this.Field8 = &v12
-	v13 := uint32(r.Uint32())
-	this.Field9 = &v13
-	v14 := int32(r.Int31())
-	if r.Intn(2) == 0 {
-		v14 *= -1
-	}
-	this.Field10 = &v14
-	v15 := uint64(uint64(r.Uint32()))
-	this.Field11 = &v15
-	v16 := int64(r.Int63())
-	if r.Intn(2) == 0 {
-		v16 *= -1
-	}
-	this.Field12 = &v16
-	v17 := bool(bool(r.Intn(2) == 0))
-	this.Field13 = &v17
-	v18 := randStringRequiredexample(r)
-	this.Field14 = &v18
-	v19 := r.Intn(100)
-	this.Field15 = make([]byte, v19)
-	for i := 0; i < v19; i++ {
-		this.Field15[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 16)
-	}
-	return this
-}
-
-func NewPopulatedNestedNinOptNative(r randyRequiredexample, easy bool) *NestedNinOptNative {
-	this := &NestedNinOptNative{}
-	if r.Intn(10) != 0 {
-		v20 := r.Intn(10)
-		this.NestedNinOpts = make([]*NinOptNative, v20)
-		for i := 0; i < v20; i++ {
-			this.NestedNinOpts[i] = NewPopulatedNinOptNative(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedRequiredexample(r, 2)
-	}
-	return this
-}
-
-type randyRequiredexample interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneRequiredexample(r randyRequiredexample) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringRequiredexample(r randyRequiredexample) string {
-	v21 := r.Intn(100)
-	tmps := make([]rune, v21)
-	for i := 0; i < v21; i++ {
-		tmps[i] = randUTF8RuneRequiredexample(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedRequiredexample(r randyRequiredexample, maxFieldNumber int) (data []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldRequiredexample(data, r, fieldNumber, wire)
-	}
-	return data
-}
-func randFieldRequiredexample(data []byte, r randyRequiredexample, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		v22 := r.Int63()
-		if r.Intn(2) == 0 {
-			v22 *= -1
-		}
-		data = encodeVarintPopulateRequiredexample(data, uint64(v22))
-	case 1:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		ll := r.Intn(100)
-		data = encodeVarintPopulateRequiredexample(data, uint64(ll))
-		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
-		}
-	default:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return data
-}
-func encodeVarintPopulateRequiredexample(data []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	data = append(data, uint8(v))
-	return data
-}
-func (m *RequiredExample) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *RequiredExample) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.TheRequiredString == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("theRequiredString")
-	} else {
-		data[i] = 0xa
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheRequiredString)))
-		i += copy(data[i:], *m.TheRequiredString)
-	}
-	if m.TheOptionalString != nil {
-		data[i] = 0x12
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheOptionalString)))
-		i += copy(data[i:], *m.TheOptionalString)
-	}
-	if len(m.TheRepeatedStrings) > 0 {
-		for _, s := range m.TheRepeatedStrings {
-			data[i] = 0x1a
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				data[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			data[i] = uint8(l)
-			i++
-			i += copy(data[i:], s)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidOptNative) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	data[i] = 0x9
-	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(m.Field1)))
-	data[i] = 0x15
-	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(m.Field2)))
-	data[i] = 0x18
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field3))
-	data[i] = 0x20
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field4))
-	data[i] = 0x28
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field5))
-	data[i] = 0x30
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field6))
-	data[i] = 0x38
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
-	data[i] = 0x40
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
-	data[i] = 0x4d
-	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(m.Field9))
-	data[i] = 0x55
-	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(m.Field10))
-	data[i] = 0x59
-	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(m.Field11))
-	data[i] = 0x61
-	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(m.Field12))
-	data[i] = 0x68
-	i++
-	if m.Field13 {
-		data[i] = 1
-	} else {
-		data[i] = 0
-	}
-	i++
-	data[i] = 0x72
-	i++
-	i = encodeVarintRequiredexample(data, i, uint64(len(m.Field14)))
-	i += copy(data[i:], m.Field14)
-	if m.Field15 != nil {
-		data[i] = 0x7a
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
-		i += copy(data[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptNative) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field1")
-	} else {
-		data[i] = 0x9
-		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(*m.Field1)))
-	}
-	if m.Field2 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
-	} else {
-		data[i] = 0x15
-		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(*m.Field2)))
-	}
-	if m.Field3 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")
-	} else {
-		data[i] = 0x18
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field3))
-	}
-	if m.Field4 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field4")
-	} else {
-		data[i] = 0x20
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field4))
-	}
-	if m.Field5 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field5")
-	} else {
-		data[i] = 0x28
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field5))
-	}
-	if m.Field6 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field6")
-	} else {
-		data[i] = 0x30
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field6))
-	}
-	if m.Field7 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field7")
-	} else {
-		data[i] = 0x38
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
-	}
-	if m.Field8 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field8")
-	} else {
-		data[i] = 0x40
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
-	}
-	if m.Field9 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field9")
-	} else {
-		data[i] = 0x4d
-		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field9))
-	}
-	if m.Field10 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field10")
-	} else {
-		data[i] = 0x55
-		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field10))
-	}
-	if m.Field11 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field11")
-	} else {
-		data[i] = 0x59
-		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field11))
-	}
-	if m.Field12 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field12")
-	} else {
-		data[i] = 0x61
-		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field12))
-	}
-	if m.Field13 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field13")
-	} else {
-		data[i] = 0x68
-		i++
-		if *m.Field13 {
-			data[i] = 1
-		} else {
-			data[i] = 0
-		}
-		i++
-	}
-	if m.Field14 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field14")
-	} else {
-		data[i] = 0x72
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.Field14)))
-		i += copy(data[i:], *m.Field14)
-	}
-	if m.Field15 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field15")
-	} else {
-		data[i] = 0x7a
-		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
-		i += copy(data[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NestedNinOptNative) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *NestedNinOptNative) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.NestedNinOpts) > 0 {
-		for _, msg := range m.NestedNinOpts {
-			data[i] = 0xa
-			i++
-			i = encodeVarintRequiredexample(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func encodeFixed64Requiredexample(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Requiredexample(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintRequiredexample(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}

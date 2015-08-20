@@ -47,6 +47,80 @@ func (m *A) GetInt() int64 {
 	return 0
 }
 
+func (m *A) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *A) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	data[i] = 0xa
+	i++
+	i = encodeVarintVanity(data, i, uint64(len(m.Strings)))
+	i += copy(data[i:], m.Strings)
+	data[i] = 0x10
+	i++
+	i = encodeVarintVanity(data, i, uint64(m.Int))
+	return i, nil
+}
+
+func encodeFixed64Vanity(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Vanity(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintVanity(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func (m *A) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Strings)
+	n += 1 + l + sovVanity(uint64(l))
+	n += 1 + sovVanity(uint64(m.Int))
+	return n
+}
+
+func sovVanity(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozVanity(x uint64) (n int) {
+	return sovVanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *A) Unmarshal(data []byte) error {
 	var hasFields [1]uint64
 	l := len(data)
@@ -226,78 +300,3 @@ func skipVanity(data []byte) (n int, err error) {
 var (
 	ErrInvalidLengthVanity = fmt.Errorf("proto: negative length found during unmarshaling")
 )
-
-func (m *A) Size() (n int) {
-	var l int
-	_ = l
-	l = len(m.Strings)
-	n += 1 + l + sovVanity(uint64(l))
-	n += 1 + sovVanity(uint64(m.Int))
-	return n
-}
-
-func sovVanity(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozVanity(x uint64) (n int) {
-	return sovVanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *A) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *A) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	data[i] = 0xa
-	i++
-	i = encodeVarintVanity(data, i, uint64(len(m.Strings)))
-	i += copy(data[i:], m.Strings)
-	data[i] = 0x10
-	i++
-	i = encodeVarintVanity(data, i, uint64(m.Int))
-	return i, nil
-}
-
-func encodeFixed64Vanity(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Vanity(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintVanity(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}
