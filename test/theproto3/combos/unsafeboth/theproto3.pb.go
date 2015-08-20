@@ -5742,6 +5742,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
@@ -5825,6 +5828,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
@@ -6744,6 +6750,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
@@ -6773,6 +6782,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if stringLenmapvalue < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postStringIndexmapvalue := iNdEx + int(stringLenmapvalue)
 			if postStringIndexmapvalue > l {
@@ -6831,6 +6843,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
@@ -6921,6 +6936,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
@@ -7002,6 +7020,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if stringLenmapkey < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
 			if postStringIndexmapkey > l {
@@ -7165,6 +7186,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if stringLenmapvalue < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postStringIndexmapvalue := iNdEx + int(stringLenmapvalue)
 			if postStringIndexmapvalue > l {

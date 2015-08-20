@@ -315,6 +315,11 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
 		p.P(`var stringLen`, varName, ` uint64`)
 		p.decodeVarint("stringLen"+varName, "uint64")
+		p.P(`if stringLen`, varName, ` < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`postStringIndex`, varName, ` := iNdEx + int(stringLen`, varName, `)`)
 		p.P(`if postStringIndex`, varName, ` > l {`)
 		p.In()
