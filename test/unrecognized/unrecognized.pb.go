@@ -3435,6 +3435,9 @@ func (m *C) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3894,6 +3897,9 @@ func (m *OldC) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3995,6 +4001,9 @@ func (m *OldU) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthUnrecognized
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

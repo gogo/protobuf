@@ -1048,6 +1048,9 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1072,6 +1075,9 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1095,6 +1101,9 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1389,6 +1398,9 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1764,6 +1776,9 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

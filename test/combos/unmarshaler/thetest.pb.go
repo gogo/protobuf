@@ -18873,6 +18873,9 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19187,6 +19190,9 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19500,6 +19506,9 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19813,6 +19822,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21455,6 +21467,9 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21725,6 +21740,9 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21989,6 +22007,9 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22253,6 +22274,9 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23403,6 +23427,9 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23644,6 +23671,9 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24350,6 +24380,9 @@ func (m *Leaf) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25851,6 +25884,9 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26264,6 +26300,9 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26640,6 +26679,9 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26954,6 +26996,9 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27267,6 +27312,9 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27536,6 +27584,9 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -28083,6 +28134,9 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -28179,6 +28233,9 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -28337,6 +28394,9 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthThetest
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

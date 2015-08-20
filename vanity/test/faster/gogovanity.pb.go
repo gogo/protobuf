@@ -180,6 +180,9 @@ func (m *B) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthGogovanity
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

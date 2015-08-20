@@ -308,6 +308,9 @@ func (m *IndexQuery) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthIndex
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -331,6 +334,9 @@ func (m *IndexQuery) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthIndex
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

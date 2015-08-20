@@ -5223,6 +5223,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthTheproto3
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5647,6 +5650,9 @@ func (m *Nested) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthTheproto3
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

@@ -378,6 +378,9 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthSizeunderscore
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

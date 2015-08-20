@@ -220,6 +220,9 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthProto3
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

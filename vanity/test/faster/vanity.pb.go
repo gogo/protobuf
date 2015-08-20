@@ -158,6 +158,9 @@ func (m *A) Unmarshal(data []byte) error {
 				}
 			}
 			postIndex := iNdEx + int(stringLen)
+			if stringLen < 0 {
+				return ErrInvalidLengthVanity
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
