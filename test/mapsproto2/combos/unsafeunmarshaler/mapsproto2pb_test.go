@@ -3,7 +3,7 @@
 // DO NOT EDIT!
 
 /*
-Package mapsproto2 is a generated protocol buffer package.
+Package proto2_maps is a generated protocol buffer package.
 
 It is generated from these files:
 	combos/unsafeunmarshaler/mapsproto2.proto
@@ -12,7 +12,7 @@ It has these top-level messages:
 	FloatingPoint
 	AllMaps
 */
-package mapsproto2
+package proto2_maps
 
 import testing "testing"
 import math_rand "math/rand"
