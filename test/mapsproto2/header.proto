@@ -34,7 +34,7 @@
 
 syntax = "proto2";
 
-package mapsproto2;
+package proto2.maps;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
