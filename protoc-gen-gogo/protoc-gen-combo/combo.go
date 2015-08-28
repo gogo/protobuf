@@ -27,14 +27,17 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"flag"
 	"fmt"
-	"github.com/gogo/protobuf/protoc-gen-gogo/version"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/gogo/protobuf/protoc-gen-gogo/version"
 )
 
 type MixMatch struct {
@@ -69,9 +72,24 @@ func (this MixMatch) Gen(folder string, news []string) {
 	args = append(args, filepath.Join(folder, this.Filename))
 	var regenerate = exec.Command("protoc", args...)
 	out, err := regenerate.CombinedOutput()
+
+	failed := false
+	scanner := bufio.NewScanner(bytes.NewReader(out))
+	for scanner.Scan() {
+		text := scanner.Text()
+		fmt.Println("protoc-gen-combo: ", text)
+		if !strings.Contains(text, "WARNING") {
+			failed = true
+		}
+	}
+
 	if err != nil {
-		fmt.Printf("%s\n", string(out))
-		panic(err)
+		fmt.Print("protoc-gen-combo: error: ", err)
+		failed = true
+	}
+
+	if failed {
+		os.Exit(1)
 	}
 }
 
