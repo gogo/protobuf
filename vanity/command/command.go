@@ -52,6 +52,8 @@ import (
 	_ "github.com/gogo/protobuf/plugin/stringer"
 	_ "github.com/gogo/protobuf/plugin/union"
 	_ "github.com/gogo/protobuf/plugin/unmarshal"
+	_ "github.com/gogo/protobuf/plugin/validator"
+
 
 	"github.com/gogo/protobuf/plugin/testgen"
 
