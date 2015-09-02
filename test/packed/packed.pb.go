@@ -1340,6 +1340,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1394,6 +1397,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1439,6 +1445,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -1490,6 +1499,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1539,6 +1551,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -1590,6 +1605,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1639,6 +1657,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -1692,6 +1713,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1744,6 +1768,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1788,6 +1815,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1831,6 +1861,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -1884,6 +1917,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -1935,6 +1971,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPacked
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -2357,6 +2396,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2395,6 +2437,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2432,6 +2477,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -2483,6 +2531,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2532,6 +2583,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -2583,6 +2637,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2632,6 +2689,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -2685,6 +2745,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2737,6 +2800,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2774,6 +2840,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -2813,6 +2882,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2851,6 +2923,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -2888,6 +2963,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthPackedUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {

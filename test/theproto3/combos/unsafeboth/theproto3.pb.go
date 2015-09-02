@@ -5225,10 +5225,11 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5324,10 +5325,10 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5396,10 +5397,10 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5450,6 +5451,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postmsgIndex := iNdEx + mapmsglen
 			if mapmsglen < 0 {
@@ -5484,10 +5488,10 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5514,10 +5518,10 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5568,6 +5572,9 @@ func (m *Message) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postmsgIndex := iNdEx + mapmsglen
 			if mapmsglen < 0 {
@@ -5647,10 +5654,11 @@ func (m *Nested) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5717,10 +5725,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5748,10 +5756,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5804,10 +5813,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5835,10 +5844,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5887,10 +5897,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -5963,10 +5973,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6039,10 +6049,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6115,10 +6125,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6191,10 +6201,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6271,10 +6281,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6351,10 +6361,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6421,10 +6431,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6491,10 +6501,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6569,10 +6579,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6647,10 +6657,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6725,10 +6735,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6756,10 +6766,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6789,10 +6800,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapvalue < 0 {
+			intStringLenmapvalue := int(stringLenmapvalue)
+			if intStringLenmapvalue < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapvalue := iNdEx + int(stringLenmapvalue)
+			postStringIndexmapvalue := iNdEx + intStringLenmapvalue
 			if postStringIndexmapvalue > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6819,10 +6831,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6850,10 +6862,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6883,7 +6896,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postbytesIndex := iNdEx + int(mapbyteLen)
+			intMapbyteLen := int(mapbyteLen)
+			if intMapbyteLen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
+			postbytesIndex := iNdEx + intMapbyteLen
 			if postbytesIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6911,10 +6928,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6942,10 +6959,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -6996,10 +7014,10 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7027,10 +7045,11 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapkey < 0 {
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapkey := iNdEx + int(stringLenmapkey)
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
 			if postStringIndexmapkey > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7059,6 +7078,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				if b < 0x80 {
 					break
 				}
+			}
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
 			}
 			postmsgIndex := iNdEx + mapmsglen
 			if mapmsglen < 0 {
@@ -7138,10 +7160,10 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7193,10 +7215,11 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			if stringLenmapvalue < 0 {
+			intStringLenmapvalue := int(stringLenmapvalue)
+			if intStringLenmapvalue < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
-			postStringIndexmapvalue := iNdEx + int(stringLenmapvalue)
+			postStringIndexmapvalue := iNdEx + intStringLenmapvalue
 			if postStringIndexmapvalue > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7223,10 +7246,10 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7280,6 +7303,9 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			if mapmsglen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
 			postmsgIndex := iNdEx + mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -7313,10 +7339,10 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -7369,7 +7395,11 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postbytesIndex := iNdEx + int(mapbyteLen)
+			intMapbyteLen := int(mapbyteLen)
+			if intMapbyteLen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
+			postbytesIndex := iNdEx + intMapbyteLen
 			if postbytesIndex > l {
 				return io.ErrUnexpectedEOF
 			}

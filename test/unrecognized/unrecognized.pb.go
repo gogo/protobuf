@@ -3126,10 +3126,10 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3216,10 +3216,10 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3246,10 +3246,10 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3276,10 +3276,10 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3434,10 +3434,11 @@ func (m *C) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3664,10 +3665,10 @@ func (m *OldA) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3754,10 +3755,10 @@ func (m *OldB) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3784,10 +3785,10 @@ func (m *OldB) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3896,10 +3897,11 @@ func (m *OldC) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -4000,10 +4002,11 @@ func (m *OldU) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthUnrecognized
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

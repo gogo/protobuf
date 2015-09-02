@@ -856,10 +856,10 @@ func (m *Big) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1344,10 +1344,10 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnmarshalmergeUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}

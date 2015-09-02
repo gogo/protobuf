@@ -18835,10 +18835,11 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19120,10 +19121,11 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19404,10 +19406,11 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19688,10 +19691,11 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -19783,6 +19787,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -19821,6 +19828,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -19858,6 +19868,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -19909,6 +19922,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -19958,6 +19974,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20009,6 +20028,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20058,6 +20080,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20111,6 +20136,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20163,6 +20191,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20200,6 +20231,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20239,6 +20273,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20277,6 +20314,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20314,6 +20354,9 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20411,6 +20454,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20449,6 +20495,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20486,6 +20535,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20537,6 +20589,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20586,6 +20641,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20637,6 +20695,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20686,6 +20747,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20739,6 +20803,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20791,6 +20858,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20828,6 +20898,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -20867,6 +20940,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20905,6 +20981,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
+				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
@@ -20942,6 +21021,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if b < 0x80 {
 						break
 					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthThetestUnsafe
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -21059,10 +21141,10 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21086,10 +21168,10 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21147,10 +21229,10 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21191,10 +21273,11 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21309,10 +21392,10 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21339,10 +21422,10 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21404,10 +21487,10 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21452,10 +21535,11 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21571,10 +21655,10 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21599,10 +21683,10 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21662,10 +21746,10 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21707,10 +21791,11 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21826,10 +21911,10 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21854,10 +21939,10 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21917,10 +22002,10 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -21962,10 +22047,11 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22059,10 +22145,10 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22089,10 +22175,10 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22179,10 +22265,10 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22209,10 +22295,10 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22303,10 +22389,10 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22330,10 +22416,10 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22404,10 +22490,10 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -22434,10 +22520,10 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23103,10 +23189,11 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23222,10 +23309,10 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23252,10 +23339,10 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23335,10 +23422,11 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23432,10 +23520,10 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23462,10 +23550,10 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23556,10 +23644,10 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23586,10 +23674,10 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23616,10 +23704,10 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23692,10 +23780,10 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23722,10 +23810,10 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23752,10 +23840,10 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23828,10 +23916,10 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23855,10 +23943,10 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23928,10 +24016,10 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -23955,10 +24043,10 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24044,10 +24132,11 @@ func (m *Leaf) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24115,10 +24204,10 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24145,10 +24234,10 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24175,10 +24264,10 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24251,10 +24340,10 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24324,10 +24413,10 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24351,10 +24440,10 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -24424,10 +24513,10 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25195,10 +25284,10 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25332,10 +25421,10 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25362,10 +25451,10 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25449,10 +25538,10 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25525,10 +25614,11 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25597,10 +25687,10 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25644,10 +25734,10 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -25909,10 +25999,11 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26006,10 +26097,10 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26250,10 +26341,11 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26535,10 +26627,11 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26819,10 +26912,11 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26938,10 +27032,10 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -26968,10 +27062,10 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27031,10 +27125,10 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27079,10 +27173,11 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27338,10 +27433,10 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27368,10 +27463,10 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27629,10 +27724,11 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27700,10 +27796,10 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27728,10 +27824,11 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27862,10 +27959,10 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + msglen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -27889,10 +27986,11 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			postIndex := iNdEx + int(stringLen)
-			if stringLen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthThetestUnsafe
 			}
+			postIndex := iNdEx + intStringLen
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
