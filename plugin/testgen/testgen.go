@@ -472,7 +472,7 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 			p.In()
 			p.P(`popr := `, randPkg.Use(), `.New(`, randPkg.Use(), `.NewSource(`, timePkg.Use(), `.Now().UnixNano()))`)
 			p.P(`p := NewPopulated`, ccTypeName, `(popr, true)`)
-			p.P(`marshaler := `, jsonPkg.Use(), `.Marshaller{}`)
+			p.P(`marshaler := `, jsonPkg.Use(), `.Marshaler{}`)
 			p.P(`jsondata, err := marshaler.MarshalToString(p)`)
 			p.P(`if err != nil {`)
 			p.In()
