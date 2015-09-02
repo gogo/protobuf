@@ -17,11 +17,11 @@
 package unmarshalmerge
 
 import proto "github.com/gogo/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
-import fmt "fmt"
 import bytes "bytes"
 
 import strings "strings"
@@ -34,6 +34,7 @@ import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type Big struct {

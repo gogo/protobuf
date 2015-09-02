@@ -14,8 +14,9 @@ It has these top-level messages:
 package vanity
 
 import proto "github.com/gogo/protobuf/proto"
-
 import fmt "fmt"
+import math "math"
+
 import strings "strings"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import sort "sort"
@@ -26,6 +27,8 @@ import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
+var _ = math.Inf
 
 type Aproto3 struct {
 	B string `protobuf:"bytes,1,opt,proto3" json:"B,omitempty"`

@@ -14,6 +14,7 @@
 package indeximport
 
 import proto "github.com/gogo/protobuf/proto"
+import fmt "fmt"
 import math "math"
 import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
 
@@ -22,10 +23,10 @@ import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
 import bytes "bytes"
 
 import io "io"
-import fmt "fmt"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type IndexQueries struct {

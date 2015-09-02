@@ -15,6 +15,7 @@
 package moredefaults
 
 import proto "github.com/gogo/protobuf/proto"
+import fmt "fmt"
 import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
@@ -24,6 +25,7 @@ import bytes "bytes"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
 var _ = math.Inf
 
 type MoreDefaultsB struct {
@@ -83,7 +85,7 @@ func (m *MoreDefaultsA) GetB2() MoreDefaultsB {
 	if m != nil {
 		return m.B2
 	}
-	return MoreDefaultsB{}
+	return nil
 }
 
 func (m *MoreDefaultsA) GetA1() *test.A {
@@ -97,7 +99,7 @@ func (m *MoreDefaultsA) GetA2() test.A {
 	if m != nil {
 		return m.A2
 	}
-	return test.A{}
+	return nil
 }
 
 func (this *MoreDefaultsB) Equal(that interface{}) bool {

@@ -25,12 +25,15 @@ import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
+import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 // discarding unused import test "github.com/gogo/protobuf/test/combos/both"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = fmt.Errorf
+var _ = math.Inf
 
 func TestMessageProto(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
