@@ -304,10 +304,10 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 		oneof := field.OneofIndex != nil
 		if !repeated {
 			if oneof {
-				if _, ok := oneofs[p.OneOfTypeName(message, field)]; ok {
+				if _, ok := oneofs[fieldname]; ok {
 					continue
 				} else {
-					oneofs[p.OneOfTypeName(message, field)] = struct{}{}
+					oneofs[fieldname] = struct{}{}
 				}
 				p.P(`if that1.`, fieldname, ` == nil {`)
 				p.In()
@@ -514,7 +514,6 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 		}
 		ccTypeName := p.OneOfTypeName(message, field)
 		fieldname := p.GetOneOfFieldName(message, field)
-		nullable := gogoproto.IsNullable(field)
 		if verbose {
 			p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
 		} else {
@@ -524,11 +523,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 		p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
 
 		if field.IsMessage() || p.IsGroup(field) {
-			if nullable {
-				p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
-			} else {
-				p.P(`if !this.`, fieldname, `.Equal(&that1.`, fieldname, `) {`)
-			}
+			p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
 		} else if field.IsBytes() {
 			p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
 		} else if field.IsString() {

@@ -2030,6 +2030,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if gogoproto.HasVerboseEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P(`VerboseEqual(interface{}) error`)
 		}
+		if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+			gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P(`MarshalTo([]byte) (int, error)`)
+		}
 		g.Out()
 		g.P("}")
 	}
