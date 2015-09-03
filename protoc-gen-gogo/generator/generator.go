@@ -539,7 +539,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck"}
+	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -1149,7 +1149,11 @@ func (g *Generator) generate(file *FileDescriptor) {
 		for line := 1; s.Scan(); line++ {
 			fmt.Fprintf(&src, "%5d\t%s\n", line, s.Bytes())
 		}
-		g.Fail("bad Go source code was generated:", err.Error(), "\n"+src.String())
+		if serr := s.Err(); serr != nil {
+			g.Fail("bad Go source code was generated:", err.Error(), "\n"+string(raw))
+		} else {
+			g.Fail("bad Go source code was generated:", err.Error(), "\n"+src.String())
+		}
 	}
 	g.Reset()
 	err = (&printer.Config{Mode: printer.TabIndent | printer.UseSpaces, Tabwidth: 8}).Fprint(g, fset, ast)
@@ -2017,7 +2021,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// TODO: Revisit this and consider reverting back to anonymous interfaces.
 	for oi := range message.OneofDecl {
 		dname := oneofDisc[int32(oi)]
-		g.P("type ", dname, " interface { ", dname, "() }")
+		g.P("type ", dname, " interface {")
+		g.In()
+		g.P(dname, "()")
+		if gogoproto.HasEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P(`Equal(interface{}) bool`)
+		}
+		if gogoproto.HasVerboseEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P(`VerboseEqual(interface{}) error`)
+		}
+		g.Out()
+		g.P("}")
 	}
 	g.P()
 	for _, field := range message.Field {

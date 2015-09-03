@@ -226,15 +226,7 @@ func (p *plugin) generateNullableField(fieldname string, verbose bool) {
 	p.P(`} else if that1.`, fieldname, ` != nil {`)
 }
 
-func (p *plugin) generateMessage(file *generator.FileDescriptor, message *generator.Descriptor, verbose bool) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-	ccTypeName := generator.CamelCaseSlice(message.TypeName())
-	if verbose {
-		p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
-	} else {
-		p.P(`func (this *`, ccTypeName, `) Equal(that interface{}) bool {`)
-	}
-	p.In()
+func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string, verbose bool) {
 	p.P(`if that == nil {`)
 	p.In()
 	p.P(`if this == nil {`)
@@ -290,14 +282,55 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	}
 	p.Out()
 	p.P(`}`)
+}
+
+func (p *plugin) generateMessage(file *generator.FileDescriptor, message *generator.Descriptor, verbose bool) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+	ccTypeName := generator.CamelCaseSlice(message.TypeName())
+	if verbose {
+		p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
+	} else {
+		p.P(`func (this *`, ccTypeName, `) Equal(that interface{}) bool {`)
+	}
+	p.In()
+	p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
+	oneofs := make(map[string]struct{})
 
 	for _, field := range message.Field {
 		fieldname := p.GetFieldName(message, field)
 		repeated := field.IsRepeated()
 		ctype := gogoproto.IsCustomType(field)
 		nullable := gogoproto.IsNullable(field)
+		oneof := field.OneofIndex != nil
 		if !repeated {
-			if ctype {
+			if oneof {
+				if _, ok := oneofs[p.OneOfTypeName(message, field)]; ok {
+					continue
+				} else {
+					oneofs[p.OneOfTypeName(message, field)] = struct{}{}
+				}
+				p.P(`if that1.`, fieldname, ` == nil {`)
+				p.In()
+				p.P(`if this.`, fieldname, ` != nil {`)
+				p.In()
+				if verbose {
+					p.P(`return `, p.fmtPkg.Use(), `.Errorf("this.`, fieldname, ` != nil && that1.`, fieldname, ` == nil")`)
+				} else {
+					p.P(`return false`)
+				}
+				p.Out()
+				p.P(`}`)
+				p.Out()
+				p.P(`} else if this.`, fieldname, ` == nil {`)
+				p.In()
+				if verbose {
+					p.P(`return `, p.fmtPkg.Use(), `.Errorf("this.`, fieldname, ` == nil && that1.`, fieldname, ` != nil")`)
+				} else {
+					p.P(`return false`)
+				}
+				p.Out()
+				p.P(`} else if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+			} else if ctype {
 				if nullable {
 					p.P(`if that1.`, fieldname, ` == nil {`)
 					p.In()
@@ -472,6 +505,54 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	}
 	p.Out()
 	p.P(`}`)
+
+	//Generate Equal methods for oneof fields
+	for _, field := range message.Field {
+		oneof := field.OneofIndex != nil
+		if !oneof {
+			continue
+		}
+		ccTypeName := p.OneOfTypeName(message, field)
+		fieldname := p.GetOneOfFieldName(message, field)
+		nullable := gogoproto.IsNullable(field)
+		if verbose {
+			p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
+		} else {
+			p.P(`func (this *`, ccTypeName, `) Equal(that interface{}) bool {`)
+		}
+		p.In()
+		p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
+
+		if field.IsMessage() || p.IsGroup(field) {
+			if nullable {
+				p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+			} else {
+				p.P(`if !this.`, fieldname, `.Equal(&that1.`, fieldname, `) {`)
+			}
+		} else if field.IsBytes() {
+			p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
+		} else if field.IsString() {
+			p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
+		} else {
+			p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
+		}
+		p.In()
+		if verbose {
+			p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+		} else {
+			p.P(`return false`)
+		}
+		p.Out()
+		p.P(`}`)
+
+		if verbose {
+			p.P(`return nil`)
+		} else {
+			p.P(`return true`)
+		}
+		p.Out()
+		p.P(`}`)
+	}
 }
 
 func init() {

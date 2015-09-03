@@ -68,6 +68,32 @@ func (g *Generator) TypeNameByObject(typeName string) Object {
 	return o
 }
 
+func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+	typeName := message.TypeName()
+	ccTypeName := CamelCaseSlice(typeName)
+	fieldName := g.GetOneOfFieldName(message, field)
+	tname := ccTypeName + "_" + fieldName
+	// It is possible for this to collide with a message or enum
+	// nested in this message. Check for collisions.
+	ok := true
+	for _, desc := range message.nested {
+		if strings.Join(desc.TypeName(), "_") == tname {
+			ok = false
+			break
+		}
+	}
+	for _, enum := range message.enums {
+		if strings.Join(enum.TypeName(), "_") == tname {
+			ok = false
+			break
+		}
+	}
+	if !ok {
+		tname += "_"
+	}
+	return tname
+}
+
 type PluginImports interface {
 	NewImport(pkg string) Single
 	GenerateImports(file *FileDescriptor)
@@ -138,6 +164,27 @@ func (this *importedPackage) Location() string {
 }
 
 func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+	goTyp, _ := g.GoType(message, field)
+	fieldname := CamelCase(*field.Name)
+	if gogoproto.IsCustomName(field) {
+		fieldname = gogoproto.GetCustomName(field)
+	}
+	if gogoproto.IsEmbed(field) {
+		fieldname = EmbedFieldName(goTyp)
+	}
+	if field.OneofIndex != nil {
+		fieldname = message.OneofDecl[int(*field.OneofIndex)].GetName()
+		fieldname = CamelCase(fieldname)
+	}
+	for _, f := range methodNames {
+		if f == fieldname {
+			return fieldname + "_"
+		}
+	}
+	return fieldname
+}
+
+func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
 	goTyp, _ := g.GoType(message, field)
 	fieldname := CamelCase(*field.Name)
 	if gogoproto.IsCustomName(field) {

@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -24,58 +24,60 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+/*
+The oneofcheck plugin is used to check whether oneof is not used incorrectly.
+For instance:
+An error is caused if a oneof field:
+  - is used in a face
+  - is an embedded field
 
-package one;
+*/
+package oneofcheck
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import (
+	"fmt"
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"os"
+)
 
-option (gogoproto.goproto_stringer_all) = false;
-option (gogoproto.goproto_enum_prefix_all) = false;
-option (gogoproto.goproto_getters_all) = false;
-
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.stringer_all) = true;
-option (gogoproto.gostring_all) = true;
-option (gogoproto.description_all) = true;
-
-option (gogoproto.testgen_all) = true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = true;
-
-option (gogoproto.goproto_enum_stringer_all) = false;
-option (gogoproto.enum_stringer_all) = true;
-
-option (gogoproto.unsafe_marshaler_all) = false;
-option (gogoproto.unsafe_unmarshaler_all) = false;
-
-message Subby1 {
-	optional string sub = 1;
+type plugin struct {
+	*generator.Generator
 }
 
-message SampleOneOf1 {
-  oneof test_oneof {
-    string name = 4;
-    Subby1 sub_message = 9;
-  }
+func NewPlugin() *plugin {
+	return &plugin{}
 }
 
-message Subby2 {
-	option (gogoproto.unmarshaler) = true;
-	option (gogoproto.marshaler) = true;
-	optional string sub = 1;
+func (p *plugin) Name() string {
+	return "oneofcheck"
 }
 
-message SampleOneOf2 {
-  option (gogoproto.unmarshaler) = true;
-  option (gogoproto.marshaler) = true;
-  oneof test_oneof {
-    string name = 4;
-    Subby2 sub_message = 9;
-  }
+func (p *plugin) Init(g *generator.Generator) {
+	p.Generator = g
 }
 
+func (p *plugin) Generate(file *generator.FileDescriptor) {
+	for _, msg := range file.Messages() {
+		face := gogoproto.IsFace(file.FileDescriptorProto, msg.DescriptorProto)
+		for _, field := range msg.GetField() {
+			if field.OneofIndex == nil {
+				continue
+			}
+			if face {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in a face and oneof", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				os.Exit(1)
+			}
+			if gogoproto.IsEmbed(field) {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and an embedded field", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				os.Exit(1)
+			}
+		}
+	}
+}
+
+func (p *plugin) GenerateImports(*generator.FileDescriptor) {}
+
+func init() {
+	generator.RegisterPlugin(NewPlugin())
+}
