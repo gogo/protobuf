@@ -2068,8 +2068,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	var getters []getterSymbol
 	for _, field := range message.Field {
 		oneof := field.OneofIndex != nil
-		if !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
-			break
+		if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
+			continue
 		}
 		if gogoproto.IsEmbed(field) || gogoproto.IsCustomType(field) {
 			continue
