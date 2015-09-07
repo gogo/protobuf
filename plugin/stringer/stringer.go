@@ -174,11 +174,20 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			p.P(mapName, ` += "}"`)
 		}
 		p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
+		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := p.GetFieldName(message, field)
-			if generator.IsMap(file.FileDescriptorProto, field) {
+			oneof := field.OneofIndex != nil
+			if oneof {
+				if _, ok := oneofs[fieldname]; ok {
+					continue
+				} else {
+					oneofs[fieldname] = struct{}{}
+				}
+				p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
+			} else if generator.IsMap(file.FileDescriptorProto, field) {
 				mapName := `mapStringFor` + fieldname
 				p.P("`", fieldname, ":`", ` + `, mapName, " + `,", "`,")
 			} else if field.IsMessage() || p.IsGroup(field) {
@@ -216,6 +225,38 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		p.P(`return s`)
 		p.Out()
 		p.P(`}`)
+
+		//Generate String methods for oneof fields
+		for _, field := range message.Field {
+			oneof := field.OneofIndex != nil
+			if !oneof {
+				continue
+			}
+			ccTypeName := p.OneOfTypeName(message, field)
+			p.P(`func (this *`, ccTypeName, `) String() string {`)
+			p.In()
+			p.P(`if this == nil {`)
+			p.In()
+			p.P(`return "nil"`)
+			p.Out()
+			p.P(`}`)
+			p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
+			fieldname := p.GetOneOfFieldName(message, field)
+			if field.IsMessage() || p.IsGroup(field) {
+				desc := p.ObjectNamed(field.GetTypeName())
+				msgname := p.TypeName(desc)
+				msgnames := strings.Split(msgname, ".")
+				typeName := msgnames[len(msgnames)-1]
+				p.P("`", fieldname, ":`", ` + `, stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, `), "`, typeName, `","`, msgname, `"`, ", 1) + `,", "`,")
+			} else {
+				p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
+			}
+			p.P("`}`,")
+			p.P(`}`, `,""`, ")")
+			p.P(`return s`)
+			p.Out()
+			p.P(`}`)
+		}
 	}
 
 	if !p.atleastOne {
