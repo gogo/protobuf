@@ -2111,22 +2111,44 @@ func _Communique_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	// union
 	switch x := m.Union.(type) {
 	case *Communique_Number:
-		b.EncodeVarint(5<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.Number))
+		if err := b.EncodeVarint(5<<3 | proto.WireVarint); err != nil {
+			return err
+		}
+		if err := b.EncodeVarint(uint64(x.Number)); err != nil {
+			return err
+		}
 	case *Communique_Name:
-		b.EncodeVarint(6<<3 | proto.WireBytes)
-		b.EncodeStringBytes(x.Name)
+		if err := b.EncodeVarint(6<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeStringBytes(x.Name); err != nil {
+			return err
+		}
 	case *Communique_Data:
-		b.EncodeVarint(7<<3 | proto.WireBytes)
-		b.EncodeRawBytes(x.Data)
+		if err := b.EncodeVarint(7<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(x.Data); err != nil {
+			return err
+		}
 	case *Communique_TempC:
-		b.EncodeVarint(8<<3 | proto.WireFixed64)
-		b.EncodeFixed64(math.Float64bits(x.TempC))
+		if err := b.EncodeVarint(8<<3 | proto.WireFixed64); err != nil {
+			return err
+		}
+		if err := b.EncodeFixed64(math.Float64bits(x.TempC)); err != nil {
+			return err
+		}
 	case *Communique_Col:
-		b.EncodeVarint(9<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.Col))
+		if err := b.EncodeVarint(9<<3 | proto.WireVarint); err != nil {
+			return err
+		}
+		if err := b.EncodeVarint(uint64(x.Col)); err != nil {
+			return err
+		}
 	case *Communique_Msg:
-		b.EncodeVarint(10<<3 | proto.WireBytes)
+		if err := b.EncodeVarint(10<<3 | proto.WireBytes); err != nil {
+			return err
+		}
 		if err := b.EncodeMessage(x.Msg); err != nil {
 			return err
 		}

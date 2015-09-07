@@ -2182,18 +2182,20 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 		} else {
 			switch *field.Type {
-			// case descriptor.FieldDescriptorProto_TYPE_GROUP,
-			// 	descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-			// 	goTyp, _ := g.GoType(message, field)
-			// 	goTypName := GoTypeToName(goTyp)
-			// 	g.P("return ", goTypName, "{}")
+			case descriptor.FieldDescriptorProto_TYPE_GROUP,
+				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				if field.OneofIndex != nil {
+					g.P(`return nil`)
+				} else {
+					goTyp, _ := g.GoType(message, field)
+					goTypName := GoTypeToName(goTyp)
+					g.P("return ", goTypName, "{}")
+				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				g.P("return false")
 			case descriptor.FieldDescriptorProto_TYPE_STRING:
 				g.P(`return ""`)
-			case descriptor.FieldDescriptorProto_TYPE_GROUP,
-				descriptor.FieldDescriptorProto_TYPE_MESSAGE,
-				descriptor.FieldDescriptorProto_TYPE_BYTES:
+			case descriptor.FieldDescriptorProto_TYPE_BYTES:
 				// This is only possible for oneof fields.
 				g.P("return nil")
 			case descriptor.FieldDescriptorProto_TYPE_ENUM:
@@ -2278,27 +2280,33 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					wire = "WireFixed64"
 					pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
 					post = "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 					wire = "WireFixed32"
 					pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
 					post = ")))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_INT64,
 					descriptor.FieldDescriptorProto_TYPE_UINT64:
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(uint64(", "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_INT32,
 					descriptor.FieldDescriptorProto_TYPE_UINT32,
 					descriptor.FieldDescriptorProto_TYPE_ENUM:
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(uint64(", "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 					descriptor.FieldDescriptorProto_TYPE_SFIXED64:
 					wire = "WireFixed64"
 					pre, post = "b.EncodeFixed64(uint64(", "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FIXED32,
 					descriptor.FieldDescriptorProto_TYPE_SFIXED32:
 					wire = "WireFixed32"
 					pre, post = "b.EncodeFixed32(uint64(", "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_BOOL:
 					// bool needs special handling.
 					g.P("t := uint64(0)")
@@ -2306,9 +2314,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					val = "t"
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(", ")"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_STRING:
 					wire = "WireBytes"
 					pre, post = "b.EncodeStringBytes(", ")"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_GROUP:
 					wire = "WireStartGroup"
 					pre, post = "b.Marshal(", ")"
@@ -2320,26 +2330,39 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				case descriptor.FieldDescriptorProto_TYPE_BYTES:
 					wire = "WireBytes"
 					pre, post = "b.EncodeRawBytes(", ")"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_SINT32:
 					wire = "WireVarint"
 					pre, post = "b.EncodeZigzag32(uint64(", "))"
+					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_SINT64:
 					wire = "WireVarint"
 					pre, post = "b.EncodeZigzag64(uint64(", "))"
+					canFail = true
 				default:
 					g.Fail("unhandled oneof field type ", field.Type.String())
 				}
 				fieldWire[field] = wire
-				g.P("b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
+				g.P("if err := b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, "); err != nil {")
+				g.In()
+				g.P("return err")
+				g.Out()
+				g.P(`}`)
 				if !canFail {
 					g.P(pre, val, post)
 				} else {
 					g.P("if err := ", pre, val, post, "; err != nil {")
+					g.In()
 					g.P("return err")
+					g.Out()
 					g.P("}")
 				}
 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
-					g.P("b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup)")
+					g.P("if err := b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup); err != nil {")
+					g.In()
+					g.P("return err")
+					g.Out()
+					g.P(`}`)
 				}
 			}
 			g.P("case nil:")

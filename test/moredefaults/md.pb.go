@@ -85,7 +85,7 @@ func (m *MoreDefaultsA) GetB2() MoreDefaultsB {
 	if m != nil {
 		return m.B2
 	}
-	return nil
+	return MoreDefaultsB{}
 }
 
 func (m *MoreDefaultsA) GetA1() *test.A {
@@ -99,7 +99,7 @@ func (m *MoreDefaultsA) GetA2() test.A {
 	if m != nil {
 		return m.A2
 	}
-	return nil
+	return test.A{}
 }
 
 func (this *MoreDefaultsB) Equal(that interface{}) bool {
