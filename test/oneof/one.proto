@@ -61,6 +61,7 @@ message SampleOneOf1 {
   oneof test_oneof {
     string name = 4;
     Subby1 sub_message = 9;
+    double dub = 10;
   }
 }
 
@@ -76,6 +77,7 @@ message SampleOneOf2 {
   oneof test_oneof {
     string name = 4;
     Subby2 sub_message = 9;
+    double dub = 10;
   }
 }
 
