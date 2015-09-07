@@ -84,8 +84,10 @@ package populate
 import (
 	"fmt"
 	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"github.com/gogo/protobuf/vanity"
 	"math"
 	"strconv"
 	"strings"
@@ -214,7 +216,7 @@ func (p *plugin) getEnumVal(field *descriptor.FieldDescriptorProto, goTyp string
 func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	goTyp, _ := p.GoType(message, field)
-	fieldname := p.GetFieldName(message, field)
+	fieldname := p.GetOneOfFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
 	if generator.IsMap(file.FileDescriptorProto, field) {
 		mapmsg := generator.GetMap(file.FileDescriptorProto, field)
@@ -508,18 +510,50 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			p.P(`}`)
 		} else {
 			var maxFieldNumber int32
+			oneofs := make(map[string]struct{})
 			for _, field := range message.Field {
-				if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
-					p.GenerateField(file, message, field)
+				oneof := field.OneofIndex != nil
+				if !oneof {
+					if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
+						p.GenerateField(file, message, field)
+					} else {
+						p.P(`if r.Intn(10) != 0 {`)
+						p.In()
+						p.GenerateField(file, message, field)
+						p.Out()
+						p.P(`}`)
+					}
+					if field.GetNumber() > maxFieldNumber {
+						maxFieldNumber = field.GetNumber()
+					}
 				} else {
-					p.P(`if r.Intn(10) != 0 {`)
-					p.In()
-					p.GenerateField(file, message, field)
-					p.Out()
+					fieldname := p.GetFieldName(message, field)
+					if _, ok := oneofs[fieldname]; ok {
+						continue
+					} else {
+						oneofs[fieldname] = struct{}{}
+					}
+					fieldNumbers := []int32{}
+					for _, f := range message.Field {
+						fname := p.GetFieldName(message, f)
+						if fname == fieldname {
+							fieldNumbers = append(fieldNumbers, f.GetNumber())
+						}
+					}
+					p.P(`oneofNumber_`, fieldname, ` := `, fmt.Sprintf("%#v", fieldNumbers), `[r.Intn(`, strconv.Itoa(len(fieldNumbers)), `)]`)
+					p.P(`switch oneofNumber_`, fieldname, ` {`)
+					for _, f := range message.Field {
+						fname := p.GetFieldName(message, f)
+						if fname != fieldname {
+							continue
+						}
+						p.P(`case `, strconv.Itoa(int(f.GetNumber())), `:`)
+						p.In()
+						ccTypeName := p.OneOfTypeName(message, f)
+						p.P(`this.`, fname, ` = NewPopulated`, ccTypeName, `(r, easy)`)
+						p.Out()
+					}
 					p.P(`}`)
-				}
-				if field.GetNumber() > maxFieldNumber {
-					maxFieldNumber = field.GetNumber()
 				}
 			}
 			if message.DescriptorProto.HasExtension() {
@@ -573,6 +607,23 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P(``)
+
+		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
+		for _, f := range m.Field {
+			oneof := f.OneofIndex != nil
+			if !oneof {
+				continue
+			}
+			ccTypeName := p.OneOfTypeName(message, f)
+			p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
+			p.In()
+			p.P(`this := &`, ccTypeName, `{}`)
+			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(f)
+			p.GenerateField(file, message, f)
+			p.P(`return this`)
+			p.Out()
+			p.P(`}`)
+		}
 	}
 
 	if !p.atleastOne {
