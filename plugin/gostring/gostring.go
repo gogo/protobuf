@@ -157,11 +157,22 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 
 		outFlds := []string{}
+		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
 			fieldname := p.GetFieldName(message, field)
-			if generator.IsMap(file.FileDescriptorProto, field) {
+			oneof := field.OneofIndex != nil
+			if oneof {
+				if _, ok := oneofs[fieldname]; ok {
+					continue
+				} else {
+					oneofs[fieldname] = struct{}{}
+				}
+				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
+				tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
+				outFlds = append(outFlds, tmp)
+			} else if generator.IsMap(file.FileDescriptorProto, field) {
 				mapMsg := generator.GetMap(file.FileDescriptorProto, field)
 				keyField, valueField := mapMsg.GetMapFields()
 				keysName := `keysFor` + fieldname
@@ -237,6 +248,40 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.P(`return s`)
 		p.Out()
 		p.P(`}`)
+
+		//Generate GoString methods for oneof fields
+		for _, field := range message.Field {
+			oneof := field.OneofIndex != nil
+			if !oneof {
+				continue
+			}
+			ccTypeName := p.OneOfTypeName(message, field)
+			p.P(`func (this *`, ccTypeName, `) GoString() string {`)
+			p.In()
+			p.P(`if this == nil {`)
+			p.In()
+			p.P(`return "nil"`)
+			p.Out()
+			p.P(`}`)
+			outFlds := []string{}
+			fieldname := p.GetOneOfFieldName(message, field)
+			if field.IsMessage() || p.IsGroup(field) {
+				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
+				tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
+				outFlds = append(outFlds, tmp)
+			} else {
+				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
+				tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
+				outFlds = append(outFlds, tmp)
+			}
+			outStr := strings.Join([]string{"s := ", stringsPkg.Use(), ".Join([]string{`&", packageName, ".", ccTypeName, "{` + \n"}, "")
+			outStr += strings.Join(outFlds, ",\n")
+			outStr += strings.Join([]string{" + `}`", `}`, `,", "`, ")"}, "")
+			p.P(outStr)
+			p.P(`return s`)
+			p.Out()
+			p.P(`}`)
+		}
 	}
 
 	if !p.atleastOne {
