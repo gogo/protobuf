@@ -2034,6 +2034,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P(`MarshalTo([]byte) (int, error)`)
 		}
+		if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+			g.P(`Size() int`)
+		}
 		g.Out()
 		g.P("}")
 	}

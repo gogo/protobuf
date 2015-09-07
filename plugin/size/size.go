@@ -121,6 +121,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"github.com/gogo/protobuf/vanity"
 	"strconv"
 	"strings"
 )
@@ -194,6 +195,289 @@ func (p *size) sizeZigZag() {
 	}`)
 }
 
+func (p *size) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
+	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+	fieldname := p.GetOneOfFieldName(message, field)
+	nullable := gogoproto.IsNullable(field)
+	repeated := field.IsRepeated()
+	if repeated {
+		p.P(`if len(m.`, fieldname, `) > 0 {`)
+		p.In()
+	} else if ((!proto3 || field.IsMessage()) && nullable) || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+		p.P(`if m.`, fieldname, ` != nil {`)
+		p.In()
+	}
+	packed := field.IsPacked()
+	_, wire := p.GoType(message, field)
+	wireType := wireToType(wire)
+	fieldNumber := field.GetNumber()
+	if packed {
+		wireType = proto.WireBytes
+	}
+	key := keySize(fieldNumber, wireType)
+	switch *field.Type {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+		descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		if packed {
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*8))`, `+len(m.`, fieldname, `)*8`)
+		} else if repeated {
+			p.P(`n+=`, strconv.Itoa(key+8), `*len(m.`, fieldname, `)`)
+		} else if proto3 {
+			p.P(`if m.`, fieldname, ` != 0 {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key+8))
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`n+=`, strconv.Itoa(key+8))
+		} else {
+			p.P(`n+=`, strconv.Itoa(key+8))
+		}
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+		descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		if packed {
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*4))`, `+len(m.`, fieldname, `)*4`)
+		} else if repeated {
+			p.P(`n+=`, strconv.Itoa(key+4), `*len(m.`, fieldname, `)`)
+		} else if proto3 {
+			p.P(`if m.`, fieldname, ` != 0 {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key+4))
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`n+=`, strconv.Itoa(key+4))
+		} else {
+			p.P(`n+=`, strconv.Itoa(key+4))
+		}
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM,
+		descriptor.FieldDescriptorProto_TYPE_INT32:
+		if packed {
+			p.P(`l = 0`)
+			p.P(`for _, e := range m.`, fieldname, ` {`)
+			p.In()
+			p.P(`l+=sov`, p.localName, `(uint64(e))`)
+			p.Out()
+			p.P(`}`)
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(l))+l`)
+		} else if repeated {
+			p.P(`for _, e := range m.`, fieldname, ` {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(e))`)
+			p.Out()
+			p.P(`}`)
+		} else if proto3 {
+			p.P(`if m.`, fieldname, ` != 0 {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(*m.`, fieldname, `))`)
+		} else {
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		if packed {
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)))`, `+len(m.`, fieldname, `)*1`)
+		} else if repeated {
+			p.P(`n+=`, strconv.Itoa(key+1), `*len(m.`, fieldname, `)`)
+		} else if proto3 {
+			p.P(`if m.`, fieldname, ` {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key+1))
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`n+=`, strconv.Itoa(key+1))
+		} else {
+			p.P(`n+=`, strconv.Itoa(key+1))
+		}
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		if repeated {
+			p.P(`for _, s := range m.`, fieldname, ` { `)
+			p.In()
+			p.P(`l = len(s)`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			p.Out()
+			p.P(`}`)
+		} else if proto3 {
+			p.P(`l=len(m.`, fieldname, `)`)
+			p.P(`if l > 0 {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`l=len(*m.`, fieldname, `)`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+		} else {
+			p.P(`l=len(m.`, fieldname, `)`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		panic(fmt.Errorf("size does not support group %v", fieldname))
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if generator.IsMap(file.FileDescriptorProto, field) {
+			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
+			keyField, valueField := mapMsg.GetMapFields()
+			_, keywire := p.GoType(nil, keyField)
+			_, valuewire := p.GoType(nil, valueField)
+			_, fieldwire := p.GoType(nil, field)
+			fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
+			keyKeySize := keySize(1, wireToType(keywire))
+			valueKeySize := keySize(2, wireToType(valuewire))
+			p.P(`for k, v := range m.`, fieldname, ` { `)
+			p.In()
+			p.P(`_ = k`)
+			p.P(`_ = v`)
+			sum := []string{strconv.Itoa(keyKeySize)}
+			switch keyField.GetType() {
+			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+				descriptor.FieldDescriptorProto_TYPE_FIXED64,
+				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+				sum = append(sum, `8`)
+			case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+				descriptor.FieldDescriptorProto_TYPE_FIXED32,
+				descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+				sum = append(sum, `4`)
+			case descriptor.FieldDescriptorProto_TYPE_INT64,
+				descriptor.FieldDescriptorProto_TYPE_UINT64,
+				descriptor.FieldDescriptorProto_TYPE_UINT32,
+				descriptor.FieldDescriptorProto_TYPE_ENUM,
+				descriptor.FieldDescriptorProto_TYPE_INT32:
+				sum = append(sum, `sov`+p.localName+`(uint64(k))`)
+			case descriptor.FieldDescriptorProto_TYPE_BOOL:
+				sum = append(sum, `1`)
+			case descriptor.FieldDescriptorProto_TYPE_STRING,
+				descriptor.FieldDescriptorProto_TYPE_BYTES:
+				sum = append(sum, `len(k)+sov`+p.localName+`(uint64(len(k)))`)
+			case descriptor.FieldDescriptorProto_TYPE_SINT32,
+				descriptor.FieldDescriptorProto_TYPE_SINT64:
+				sum = append(sum, `soz`+p.localName+`(uint64(k))`)
+			}
+			sum = append(sum, strconv.Itoa(valueKeySize))
+			switch valueField.GetType() {
+			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+				descriptor.FieldDescriptorProto_TYPE_FIXED64,
+				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+				sum = append(sum, strconv.Itoa(8))
+			case descriptor.FieldDescriptorProto_TYPE_FLOAT,
+				descriptor.FieldDescriptorProto_TYPE_FIXED32,
+				descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+				sum = append(sum, strconv.Itoa(4))
+			case descriptor.FieldDescriptorProto_TYPE_INT64,
+				descriptor.FieldDescriptorProto_TYPE_UINT64,
+				descriptor.FieldDescriptorProto_TYPE_UINT32,
+				descriptor.FieldDescriptorProto_TYPE_ENUM,
+				descriptor.FieldDescriptorProto_TYPE_INT32:
+				sum = append(sum, `sov`+p.localName+`(uint64(v))`)
+			case descriptor.FieldDescriptorProto_TYPE_BOOL:
+				sum = append(sum, `1`)
+			case descriptor.FieldDescriptorProto_TYPE_STRING,
+				descriptor.FieldDescriptorProto_TYPE_BYTES:
+				sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
+			case descriptor.FieldDescriptorProto_TYPE_SINT32,
+				descriptor.FieldDescriptorProto_TYPE_SINT64:
+				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
+			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				p.P(`l = 0`)
+				p.P(`if v != nil {`)
+				p.In()
+				p.P(`l= v.Size()`)
+				p.Out()
+				p.P(`}`)
+				sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
+			}
+			p.P(`mapEntrySize := `, strings.Join(sum, "+"))
+			p.P(`n+=mapEntrySize+`, fieldKeySize, `+sov`, p.localName, `(uint64(mapEntrySize))`)
+			p.Out()
+			p.P(`}`)
+		} else if repeated {
+			p.P(`for _, e := range m.`, fieldname, ` { `)
+			p.In()
+			p.P(`l=e.Size()`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			p.Out()
+			p.P(`}`)
+		} else {
+			p.P(`l=m.`, fieldname, `.Size()`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+		}
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		if !gogoproto.IsCustomType(field) {
+			if repeated {
+				p.P(`for _, b := range m.`, fieldname, ` { `)
+				p.In()
+				p.P(`l = len(b)`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else if proto3 {
+				p.P(`l=len(m.`, fieldname, `)`)
+				p.P(`if l > 0 {`)
+				p.In()
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.P(`l=len(m.`, fieldname, `)`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			}
+		} else {
+			if repeated {
+				p.P(`for _, e := range m.`, fieldname, ` { `)
+				p.In()
+				p.P(`l=e.Size()`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.P(`l=m.`, fieldname, `.Size()`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			}
+		}
+	case descriptor.FieldDescriptorProto_TYPE_SINT32,
+		descriptor.FieldDescriptorProto_TYPE_SINT64:
+		if packed {
+			p.P(`l = 0`)
+			p.P(`for _, e := range m.`, fieldname, ` {`)
+			p.In()
+			p.P(`l+=soz`, p.localName, `(uint64(e))`)
+			p.Out()
+			p.P(`}`)
+			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(l))+l`)
+		} else if repeated {
+			p.P(`for _, e := range m.`, fieldname, ` {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(e))`)
+			p.Out()
+			p.P(`}`)
+		} else if proto3 {
+			p.P(`if m.`, fieldname, ` != 0 {`)
+			p.In()
+			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
+			p.Out()
+			p.P(`}`)
+		} else if nullable {
+			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(*m.`, fieldname, `))`)
+		} else {
+			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
+		}
+	default:
+		panic("not implemented")
+	}
+	if ((!proto3 || field.IsMessage()) && nullable) || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+		p.Out()
+		p.P(`}`)
+	}
+}
+
 func (p *size) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
@@ -210,290 +494,26 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		p.atleastOne = true
-		proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) Size() (n int) {`)
 		p.In()
 		p.P(`var l int`)
 		p.P(`_ = l`)
+		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(message, field)
-			nullable := gogoproto.IsNullable(field)
-			repeated := field.IsRepeated()
-			if repeated {
-				p.P(`if len(m.`, fieldname, `) > 0 {`)
-				p.In()
-			} else if ((!proto3 || field.IsMessage()) && nullable) || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+			oneof := field.OneofIndex != nil
+			if !oneof {
+				p.generateField(file, message, field)
+			} else {
+				fieldname := p.GetFieldName(message, field)
+				if _, ok := oneofs[fieldname]; ok {
+					continue
+				} else {
+					oneofs[fieldname] = struct{}{}
+				}
 				p.P(`if m.`, fieldname, ` != nil {`)
 				p.In()
-			}
-			packed := field.IsPacked()
-			_, wire := p.GoType(message, field)
-			wireType := wireToType(wire)
-			fieldNumber := field.GetNumber()
-			if packed {
-				wireType = proto.WireBytes
-			}
-			key := keySize(fieldNumber, wireType)
-			switch *field.Type {
-			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
-				descriptor.FieldDescriptorProto_TYPE_FIXED64,
-				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-				if packed {
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*8))`, `+len(m.`, fieldname, `)*8`)
-				} else if repeated {
-					p.P(`n+=`, strconv.Itoa(key+8), `*len(m.`, fieldname, `)`)
-				} else if proto3 {
-					p.P(`if m.`, fieldname, ` != 0 {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key+8))
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`n+=`, strconv.Itoa(key+8))
-				} else {
-					p.P(`n+=`, strconv.Itoa(key+8))
-				}
-			case descriptor.FieldDescriptorProto_TYPE_FLOAT,
-				descriptor.FieldDescriptorProto_TYPE_FIXED32,
-				descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-				if packed {
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*4))`, `+len(m.`, fieldname, `)*4`)
-				} else if repeated {
-					p.P(`n+=`, strconv.Itoa(key+4), `*len(m.`, fieldname, `)`)
-				} else if proto3 {
-					p.P(`if m.`, fieldname, ` != 0 {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key+4))
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`n+=`, strconv.Itoa(key+4))
-				} else {
-					p.P(`n+=`, strconv.Itoa(key+4))
-				}
-			case descriptor.FieldDescriptorProto_TYPE_INT64,
-				descriptor.FieldDescriptorProto_TYPE_UINT64,
-				descriptor.FieldDescriptorProto_TYPE_UINT32,
-				descriptor.FieldDescriptorProto_TYPE_ENUM,
-				descriptor.FieldDescriptorProto_TYPE_INT32:
-				if packed {
-					p.P(`l = 0`)
-					p.P(`for _, e := range m.`, fieldname, ` {`)
-					p.In()
-					p.P(`l+=sov`, p.localName, `(uint64(e))`)
-					p.Out()
-					p.P(`}`)
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(l))+l`)
-				} else if repeated {
-					p.P(`for _, e := range m.`, fieldname, ` {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(e))`)
-					p.Out()
-					p.P(`}`)
-				} else if proto3 {
-					p.P(`if m.`, fieldname, ` != 0 {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(*m.`, fieldname, `))`)
-				} else {
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
-				}
-			case descriptor.FieldDescriptorProto_TYPE_BOOL:
-				if packed {
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)))`, `+len(m.`, fieldname, `)*1`)
-				} else if repeated {
-					p.P(`n+=`, strconv.Itoa(key+1), `*len(m.`, fieldname, `)`)
-				} else if proto3 {
-					p.P(`if m.`, fieldname, ` {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key+1))
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`n+=`, strconv.Itoa(key+1))
-				} else {
-					p.P(`n+=`, strconv.Itoa(key+1))
-				}
-			case descriptor.FieldDescriptorProto_TYPE_STRING:
-				if repeated {
-					p.P(`for _, s := range m.`, fieldname, ` { `)
-					p.In()
-					p.P(`l = len(s)`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					p.Out()
-					p.P(`}`)
-				} else if proto3 {
-					p.P(`l=len(m.`, fieldname, `)`)
-					p.P(`if l > 0 {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`l=len(*m.`, fieldname, `)`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-				} else {
-					p.P(`l=len(m.`, fieldname, `)`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-				}
-			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-				panic(fmt.Errorf("size does not support group %v", fieldname))
-			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if generator.IsMap(file.FileDescriptorProto, field) {
-					mapMsg := generator.GetMap(file.FileDescriptorProto, field)
-					keyField, valueField := mapMsg.GetMapFields()
-					_, keywire := p.GoType(nil, keyField)
-					_, valuewire := p.GoType(nil, valueField)
-					_, fieldwire := p.GoType(nil, field)
-					fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
-					keyKeySize := keySize(1, wireToType(keywire))
-					valueKeySize := keySize(2, wireToType(valuewire))
-					p.P(`for k, v := range m.`, fieldname, ` { `)
-					p.In()
-					p.P(`_ = k`)
-					p.P(`_ = v`)
-					sum := []string{strconv.Itoa(keyKeySize)}
-					switch keyField.GetType() {
-					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
-						descriptor.FieldDescriptorProto_TYPE_FIXED64,
-						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-						sum = append(sum, `8`)
-					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
-						descriptor.FieldDescriptorProto_TYPE_FIXED32,
-						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-						sum = append(sum, `4`)
-					case descriptor.FieldDescriptorProto_TYPE_INT64,
-						descriptor.FieldDescriptorProto_TYPE_UINT64,
-						descriptor.FieldDescriptorProto_TYPE_UINT32,
-						descriptor.FieldDescriptorProto_TYPE_ENUM,
-						descriptor.FieldDescriptorProto_TYPE_INT32:
-						sum = append(sum, `sov`+p.localName+`(uint64(k))`)
-					case descriptor.FieldDescriptorProto_TYPE_BOOL:
-						sum = append(sum, `1`)
-					case descriptor.FieldDescriptorProto_TYPE_STRING,
-						descriptor.FieldDescriptorProto_TYPE_BYTES:
-						sum = append(sum, `len(k)+sov`+p.localName+`(uint64(len(k)))`)
-					case descriptor.FieldDescriptorProto_TYPE_SINT32,
-						descriptor.FieldDescriptorProto_TYPE_SINT64:
-						sum = append(sum, `soz`+p.localName+`(uint64(k))`)
-					}
-					sum = append(sum, strconv.Itoa(valueKeySize))
-					switch valueField.GetType() {
-					case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
-						descriptor.FieldDescriptorProto_TYPE_FIXED64,
-						descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-						sum = append(sum, strconv.Itoa(8))
-					case descriptor.FieldDescriptorProto_TYPE_FLOAT,
-						descriptor.FieldDescriptorProto_TYPE_FIXED32,
-						descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-						sum = append(sum, strconv.Itoa(4))
-					case descriptor.FieldDescriptorProto_TYPE_INT64,
-						descriptor.FieldDescriptorProto_TYPE_UINT64,
-						descriptor.FieldDescriptorProto_TYPE_UINT32,
-						descriptor.FieldDescriptorProto_TYPE_ENUM,
-						descriptor.FieldDescriptorProto_TYPE_INT32:
-						sum = append(sum, `sov`+p.localName+`(uint64(v))`)
-					case descriptor.FieldDescriptorProto_TYPE_BOOL:
-						sum = append(sum, `1`)
-					case descriptor.FieldDescriptorProto_TYPE_STRING,
-						descriptor.FieldDescriptorProto_TYPE_BYTES:
-						sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
-					case descriptor.FieldDescriptorProto_TYPE_SINT32,
-						descriptor.FieldDescriptorProto_TYPE_SINT64:
-						sum = append(sum, `soz`+p.localName+`(uint64(v))`)
-					case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-						p.P(`l = 0`)
-						p.P(`if v != nil {`)
-						p.In()
-						p.P(`l= v.Size()`)
-						p.Out()
-						p.P(`}`)
-						sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
-					}
-					p.P(`mapEntrySize := `, strings.Join(sum, "+"))
-					p.P(`n+=mapEntrySize+`, fieldKeySize, `+sov`, p.localName, `(uint64(mapEntrySize))`)
-					p.Out()
-					p.P(`}`)
-				} else if repeated {
-					p.P(`for _, e := range m.`, fieldname, ` { `)
-					p.In()
-					p.P(`l=e.Size()`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					p.Out()
-					p.P(`}`)
-				} else {
-					p.P(`l=m.`, fieldname, `.Size()`)
-					p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-				}
-			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				if !gogoproto.IsCustomType(field) {
-					if repeated {
-						p.P(`for _, b := range m.`, fieldname, ` { `)
-						p.In()
-						p.P(`l = len(b)`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-						p.Out()
-						p.P(`}`)
-					} else if proto3 {
-						p.P(`l=len(m.`, fieldname, `)`)
-						p.P(`if l > 0 {`)
-						p.In()
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-						p.Out()
-						p.P(`}`)
-					} else {
-						p.P(`l=len(m.`, fieldname, `)`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					}
-				} else {
-					if repeated {
-						p.P(`for _, e := range m.`, fieldname, ` { `)
-						p.In()
-						p.P(`l=e.Size()`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-						p.Out()
-						p.P(`}`)
-					} else {
-						p.P(`l=m.`, fieldname, `.Size()`)
-						p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-					}
-				}
-			case descriptor.FieldDescriptorProto_TYPE_SINT32,
-				descriptor.FieldDescriptorProto_TYPE_SINT64:
-				if packed {
-					p.P(`l = 0`)
-					p.P(`for _, e := range m.`, fieldname, ` {`)
-					p.In()
-					p.P(`l+=soz`, p.localName, `(uint64(e))`)
-					p.Out()
-					p.P(`}`)
-					p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(l))+l`)
-				} else if repeated {
-					p.P(`for _, e := range m.`, fieldname, ` {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(e))`)
-					p.Out()
-					p.P(`}`)
-				} else if proto3 {
-					p.P(`if m.`, fieldname, ` != 0 {`)
-					p.In()
-					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
-					p.Out()
-					p.P(`}`)
-				} else if nullable {
-					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(*m.`, fieldname, `))`)
-				} else {
-					p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
-				}
-			default:
-				panic("not implemented")
-			}
-			if ((!proto3 || field.IsMessage()) && nullable) || repeated || (!gogoproto.IsCustomType(field) && *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES) {
+				p.P(`n+=m.`, fieldname, `.Size()`)
 				p.Out()
 				p.P(`}`)
 			}
@@ -520,6 +540,25 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P()
+
+		//Generate Size methods for oneof fields
+		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
+		for _, f := range m.Field {
+			oneof := f.OneofIndex != nil
+			if !oneof {
+				continue
+			}
+			ccTypeName := p.OneOfTypeName(message, f)
+			p.P(`func (m *`, ccTypeName, `) Size() (n int) {`)
+			p.In()
+			p.P(`var l int`)
+			p.P(`_ = l`)
+			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(f)
+			p.generateField(file, message, f)
+			p.P(`return n`)
+			p.Out()
+			p.P(`}`)
+		}
 	}
 
 	if !p.atleastOne {

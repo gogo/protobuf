@@ -608,6 +608,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(``)
 
+		//Generate NewPopulated functions for oneof fields
 		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 		for _, f := range m.Field {
 			oneof := f.OneofIndex != nil
