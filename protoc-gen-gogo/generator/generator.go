@@ -156,6 +156,10 @@ func (d *Descriptor) TypeName() []string {
 	return s
 }
 
+func (d *Descriptor) allowOneof() bool {
+	return true
+}
+
 // EnumDescriptor describes an enum. If it's at top level, its parent will be nil.
 // Otherwise it will be the descriptor of the message in which it is defined.
 type EnumDescriptor struct {
@@ -1544,7 +1548,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype))
 }
 
-func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool) bool {
+func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf bool) bool {
 	if isRepeated(field) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
@@ -1556,12 +1560,12 @@ func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool) bool {
 	if !gogoproto.IsNullable(field) {
 		return false
 	}
-	if proto3 &&
+	if field.OneofIndex != nil && allowOneOf &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
 	}
-	if field.OneofIndex != nil &&
+	if proto3 &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
@@ -1655,7 +1659,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.customImports = append(g.customImports, packageName)
 		}
 	}
-	if needsStar(field, g.file.proto3) {
+	if needsStar(field, g.file.proto3, message != nil && message.allowOneof()) {
 		typ = "*" + typ
 	}
 	if isRepeated(field) {
@@ -1754,7 +1758,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			fieldName = ""
 		}
 
-		oneof := field.OneofIndex != nil
+		oneof := field.OneofIndex != nil && message.allowOneof()
 		if oneof && oneofFieldName[*field.OneofIndex] == "" {
 			odp := message.OneofDecl[int(*field.OneofIndex)]
 			fname := allocName(odp.GetName())
@@ -1773,7 +1777,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			dname := "is" + ccTypeName + "_" + fname
 			oneofFieldName[*field.OneofIndex] = fname
 			oneofDisc[*field.OneofIndex] = dname
-			g.P(fname, " ", dname, " `protobuf_oneof:\"", odp.GetName(), "\"`")
+			tag := `protobuf_oneof:"` + odp.GetName() + `"`
+			g.P(fname, " ", dname, " `", tag, "`")
 		}
 
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
@@ -2014,63 +2019,64 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	g.P()
 
 	// Oneof per-field types, discriminants and getters.
-	//
-	// Generate unexported named types for the discriminant interfaces.
-	// We shouldn't have to do this, but there was (~19 Aug 2015) a compiler/linker bug
-	// that was triggered by using anonymous interfaces here.
-	// TODO: Revisit this and consider reverting back to anonymous interfaces.
-	for oi := range message.OneofDecl {
-		dname := oneofDisc[int32(oi)]
-		g.P("type ", dname, " interface {")
-		g.In()
-		g.P(dname, "()")
-		if gogoproto.HasEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P(`Equal(interface{}) bool`)
+	if message.allowOneof() {
+		// Generate unexported named types for the discriminant interfaces.
+		// We shouldn't have to do this, but there was (~19 Aug 2015) a compiler/linker bug
+		// that was triggered by using anonymous interfaces here.
+		// TODO: Revisit this and consider reverting back to anonymous interfaces.
+		for oi := range message.OneofDecl {
+			dname := oneofDisc[int32(oi)]
+			g.P("type ", dname, " interface {")
+			g.In()
+			g.P(dname, "()")
+			if gogoproto.HasEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`Equal(interface{}) bool`)
+			}
+			if gogoproto.HasVerboseEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`VerboseEqual(interface{}) error`)
+			}
+			if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+				gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`MarshalTo([]byte) (int, error)`)
+			}
+			if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`Size() int`)
+			}
+			g.Out()
+			g.P("}")
 		}
-		if gogoproto.HasVerboseEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P(`VerboseEqual(interface{}) error`)
+		g.P()
+		for _, field := range message.Field {
+			if field.OneofIndex == nil {
+				continue
+			}
+			_, wiretype := g.GoType(message, field)
+			tag := "protobuf:" + g.goTag(message, field, wiretype)
+			g.P("type ", oneofTypeName[field], " struct{ ", fieldNames[field], " ", fieldTypes[field], " `", tag, "` }")
+			g.RecordTypeUse(field.GetTypeName())
 		}
-		if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
-			gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P(`MarshalTo([]byte) (int, error)`)
+		g.P()
+		for _, field := range message.Field {
+			if field.OneofIndex == nil {
+				continue
+			}
+			g.P("func (*", oneofTypeName[field], ") ", oneofDisc[*field.OneofIndex], "() {}")
 		}
-		if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P(`Size() int`)
+		g.P()
+		for oi := range message.OneofDecl {
+			fname := oneofFieldName[int32(oi)]
+			g.P("func (m *", ccTypeName, ") Get", fname, "() ", oneofDisc[int32(oi)], " {")
+			g.P("if m != nil { return m.", fname, " }")
+			g.P("return nil")
+			g.P("}")
 		}
-		g.Out()
-		g.P("}")
+		g.P()
 	}
-	g.P()
-	for _, field := range message.Field {
-		if field.OneofIndex == nil {
-			continue
-		}
-		_, wiretype := g.GoType(message, field)
-		tag := "protobuf:" + g.goTag(message, field, wiretype)
-		g.P("type ", oneofTypeName[field], " struct{ ", fieldNames[field], " ", fieldTypes[field], " `", tag, "` }")
-		g.RecordTypeUse(field.GetTypeName())
-	}
-	g.P()
-	for _, field := range message.Field {
-		if field.OneofIndex == nil {
-			continue
-		}
-		g.P("func (*", oneofTypeName[field], ") ", oneofDisc[*field.OneofIndex], "() {}")
-	}
-	g.P()
-	for oi := range message.OneofDecl {
-		fname := oneofFieldName[int32(oi)]
-		g.P("func (m *", ccTypeName, ") Get", fname, "() ", oneofDisc[int32(oi)], " {")
-		g.P("if m != nil { return m.", fname, " }")
-		g.P("return nil")
-		g.P("}")
-	}
-	g.P()
 
 	// Field getters
 	var getters []getterSymbol
 	for _, field := range message.Field {
-		oneof := field.OneofIndex != nil
+		oneof := field.OneofIndex != nil && message.allowOneof()
 		if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
 			continue
 		}
@@ -2086,7 +2092,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		star := ""
 		if (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 			(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-			needsStar(field, g.file.proto3) && typename[0] == '*' {
+			needsStar(field, g.file.proto3, message != nil && message.allowOneof()) && typename[0] == '*' {
 			typename = typename[1:]
 			star = "*"
 		}
@@ -2238,7 +2244,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	// Oneof functions
-	if len(message.OneofDecl) > 0 {
+	if len(message.OneofDecl) > 0 && message.allowOneof() {
 		fieldWire := make(map[*descriptor.FieldDescriptorProto]string)
 
 		// method
