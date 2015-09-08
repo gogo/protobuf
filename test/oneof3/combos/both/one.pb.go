@@ -2317,139 +2317,173 @@ func (m *SampleOneOf) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if m.TestOneof != nil {
-		n1, err := m.TestOneof.MarshalTo(data[i:])
+		nn1, err := m.TestOneof.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n1
+		i += nn1
 	}
 	return i, nil
 }
 
 func (m *SampleOneOf_Field1) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x9
-	i++
-	i = encodeFixed64One(data, i, uint64(math.Float64bits(m.Field1)))
+	if m.Field1 != 0 {
+		data[i] = 0x9
+		i++
+		i = encodeFixed64One(data, i, uint64(math.Float64bits(m.Field1)))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field2) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x15
-	i++
-	i = encodeFixed32One(data, i, uint32(math.Float32bits(m.Field2)))
+	if m.Field2 != 0 {
+		data[i] = 0x15
+		i++
+		i = encodeFixed32One(data, i, uint32(math.Float32bits(m.Field2)))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field3) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x18
-	i++
-	i = encodeVarintOne(data, i, uint64(m.Field3))
+	if m.Field3 != 0 {
+		data[i] = 0x18
+		i++
+		i = encodeVarintOne(data, i, uint64(m.Field3))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field4) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x20
-	i++
-	i = encodeVarintOne(data, i, uint64(m.Field4))
+	if m.Field4 != 0 {
+		data[i] = 0x20
+		i++
+		i = encodeVarintOne(data, i, uint64(m.Field4))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field5) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x28
-	i++
-	i = encodeVarintOne(data, i, uint64(m.Field5))
+	if m.Field5 != 0 {
+		data[i] = 0x28
+		i++
+		i = encodeVarintOne(data, i, uint64(m.Field5))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field6) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x30
-	i++
-	i = encodeVarintOne(data, i, uint64(m.Field6))
+	if m.Field6 != 0 {
+		data[i] = 0x30
+		i++
+		i = encodeVarintOne(data, i, uint64(m.Field6))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field7) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x38
-	i++
-	i = encodeVarintOne(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	if m.Field7 != 0 {
+		data[i] = 0x38
+		i++
+		i = encodeVarintOne(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field8) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x40
-	i++
-	i = encodeVarintOne(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	if m.Field8 != 0 {
+		data[i] = 0x40
+		i++
+		i = encodeVarintOne(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field9) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x4d
-	i++
-	i = encodeFixed32One(data, i, uint32(m.Field9))
+	if m.Field9 != 0 {
+		data[i] = 0x4d
+		i++
+		i = encodeFixed32One(data, i, uint32(m.Field9))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field10) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x55
-	i++
-	i = encodeFixed32One(data, i, uint32(m.Field10))
+	if m.Field10 != 0 {
+		data[i] = 0x55
+		i++
+		i = encodeFixed32One(data, i, uint32(m.Field10))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field11) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x59
-	i++
-	i = encodeFixed64One(data, i, uint64(m.Field11))
+	if m.Field11 != 0 {
+		data[i] = 0x59
+		i++
+		i = encodeFixed64One(data, i, uint64(m.Field11))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field12) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x61
-	i++
-	i = encodeFixed64One(data, i, uint64(m.Field12))
+	if m.Field12 != 0 {
+		data[i] = 0x61
+		i++
+		i = encodeFixed64One(data, i, uint64(m.Field12))
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field13) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x68
-	i++
 	if m.Field13 {
-		data[i] = 1
-	} else {
-		data[i] = 0
+		data[i] = 0x68
+		i++
+		if m.Field13 {
+			data[i] = 1
+		} else {
+			data[i] = 0
+		}
+		i++
 	}
-	i++
 	return i, nil
 }
 func (m *SampleOneOf_Field14) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x72
-	i++
-	i = encodeVarintOne(data, i, uint64(len(m.Field14)))
-	i += copy(data[i:], m.Field14)
+	if len(m.Field14) > 0 {
+		data[i] = 0x72
+		i++
+		i = encodeVarintOne(data, i, uint64(len(m.Field14)))
+		i += copy(data[i:], m.Field14)
+	}
 	return i, nil
 }
 func (m *SampleOneOf_Field15) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x7a
-	i++
-	i = encodeVarintOne(data, i, uint64(len(m.Field15)))
-	i += copy(data[i:], m.Field15)
+	if m.Field15 != nil {
+		if len(m.Field15) > 0 {
+			data[i] = 0x7a
+			i++
+			i = encodeVarintOne(data, i, uint64(len(m.Field15)))
+			i += copy(data[i:], m.Field15)
+		}
+	}
 	return i, nil
 }
 func (m *SampleOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
 	i := 0
-	data[i] = 0x82
-	i++
-	data[i] = 0x1
-	i++
-	i = encodeVarintOne(data, i, uint64(m.SubMessage.Size()))
-	n2, err := m.SubMessage.MarshalTo(data[i:])
-	if err != nil {
-		return 0, err
+	if m.SubMessage != nil {
+		data[i] = 0x82
+		i++
+		data[i] = 0x1
+		i++
+		i = encodeVarintOne(data, i, uint64(m.SubMessage.Size()))
+		n2, err := m.SubMessage.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n2
 	}
-	i += n2
 	return i, nil
 }
 func encodeFixed64One(data []byte, offset int, v uint64) int {
