@@ -512,6 +512,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			var maxFieldNumber int32
 			oneofs := make(map[string]struct{})
 			for _, field := range message.Field {
+				if field.GetNumber() > maxFieldNumber {
+					maxFieldNumber = field.GetNumber()
+				}
 				oneof := field.OneofIndex != nil
 				if !oneof {
 					if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
@@ -522,9 +525,6 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 						p.GenerateField(file, message, field)
 						p.Out()
 						p.P(`}`)
-					}
-					if field.GetNumber() > maxFieldNumber {
-						maxFieldNumber = field.GetNumber()
 					}
 				} else {
 					fieldname := p.GetFieldName(message, field)
