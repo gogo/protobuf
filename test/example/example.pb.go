@@ -47,9 +47,9 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type A struct {
-	Description      string                             `protobuf:"bytes,1,opt" json:"Description"`
-	Number           int64                              `protobuf:"varint,2,opt" json:"Number"`
-	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
+	Description      string                             `protobuf:"bytes,1,opt,name=Description" json:"Description"`
+	Number           int64                              `protobuf:"varint,2,opt,name=Number" json:"Number"`
+	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
 	XXX_unrecognized []byte                             `json:"-"`
 }
 
@@ -57,8 +57,8 @@ func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 
 type B struct {
-	A                `protobuf:"bytes,1,opt,embedded=A" json:"A"`
-	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
+	A                `protobuf:"bytes,1,opt,name=A,embedded=A" json:"A"`
+	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -81,8 +81,8 @@ func (m *C) GetMySize() int64 {
 }
 
 type U struct {
-	A                *A     `protobuf:"bytes,1,opt" json:"A,omitempty"`
-	B                *B     `protobuf:"bytes,2,opt" json:"B,omitempty"`
+	A                *A     `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
+	B                *B     `protobuf:"bytes,2,opt,name=B" json:"B,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -140,7 +140,7 @@ func (m *R) GetRecognized() uint32 {
 }
 
 type CastType struct {
-	Int32            *int32 `protobuf:"varint,1,opt,casttype=int32" json:"Int32,omitempty"`
+	Int32            *int32 `protobuf:"varint,1,opt,name=Int32,casttype=int32" json:"Int32,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 

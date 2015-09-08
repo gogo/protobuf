@@ -26,8 +26,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type A struct {
-	Strings string `protobuf:"bytes,1,opt" json:"Strings"`
-	Int     int64  `protobuf:"varint,2,req" json:"Int"`
+	Strings string `protobuf:"bytes,1,opt,name=Strings" json:"Strings"`
+	Int     int64  `protobuf:"varint,2,req,name=Int" json:"Int"`
 }
 
 func (m *A) Reset()         { *m = A{} }

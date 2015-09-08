@@ -1500,11 +1500,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 			name = name[i+1:]
 		}
 	}
-	if name == CamelCase(fieldName) {
-		name = ""
-	} else {
-		name = ",name=" + name
-	}
+	name = ",name=" + name
 
 	embed := ""
 	if gogoproto.IsEmbed(field) {

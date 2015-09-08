@@ -40,12 +40,12 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Castaway struct {
-	Int32Ptr         *int32                                                `protobuf:"varint,1,opt,casttype=int32" json:"Int32Ptr,omitempty"`
-	Int32            int32                                                 `protobuf:"varint,2,opt,casttype=int32" json:"Int32"`
-	MyUint64Ptr      *github_com_gogo_protobuf_test_casttype.MyUint64Type  `protobuf:"varint,3,opt,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64Ptr,omitempty"`
-	MyUint64         github_com_gogo_protobuf_test_casttype.MyUint64Type   `protobuf:"varint,4,opt,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64"`
-	MyBytes          github_com_gogo_protobuf_test_casttype.Bytes          `protobuf:"bytes,5,opt,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
-	NormalBytes      []byte                                                `protobuf:"bytes,6,opt" json:"NormalBytes,omitempty"`
+	Int32Ptr         *int32                                                `protobuf:"varint,1,opt,name=Int32Ptr,casttype=int32" json:"Int32Ptr,omitempty"`
+	Int32            int32                                                 `protobuf:"varint,2,opt,name=Int32,casttype=int32" json:"Int32"`
+	MyUint64Ptr      *github_com_gogo_protobuf_test_casttype.MyUint64Type  `protobuf:"varint,3,opt,name=MyUint64Ptr,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64Ptr,omitempty"`
+	MyUint64         github_com_gogo_protobuf_test_casttype.MyUint64Type   `protobuf:"varint,4,opt,name=MyUint64,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64"`
+	MyBytes          github_com_gogo_protobuf_test_casttype.Bytes          `protobuf:"bytes,5,opt,name=MyBytes,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
+	NormalBytes      []byte                                                `protobuf:"bytes,6,opt,name=NormalBytes" json:"NormalBytes,omitempty"`
 	MyUint64S        []github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,7,rep,name=MyUint64s,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64s,omitempty"`
 	XXX_unrecognized []byte                                                `json:"-"`
 }

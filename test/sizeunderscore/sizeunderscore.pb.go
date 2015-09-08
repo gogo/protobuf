@@ -30,8 +30,8 @@ var _ = math.Inf
 
 type SizeMessage struct {
 	Size_            *int64  `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
-	Equal_           *bool   `protobuf:"varint,2,opt" json:"Equal,omitempty"`
-	String_          *string `protobuf:"bytes,3,opt" json:"String,omitempty"`
+	Equal_           *bool   `protobuf:"varint,2,opt,name=Equal" json:"Equal,omitempty"`
+	String_          *string `protobuf:"bytes,3,opt,name=String" json:"String,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

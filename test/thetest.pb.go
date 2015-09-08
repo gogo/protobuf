@@ -195,21 +195,21 @@ func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
 }
 
 type NidOptNative struct {
-	Field1           float64 `protobuf:"fixed64,1,opt" json:"Field1"`
-	Field2           float32 `protobuf:"fixed32,2,opt" json:"Field2"`
-	Field3           int32   `protobuf:"varint,3,opt" json:"Field3"`
-	Field4           int64   `protobuf:"varint,4,opt" json:"Field4"`
-	Field5           uint32  `protobuf:"varint,5,opt" json:"Field5"`
-	Field6           uint64  `protobuf:"varint,6,opt" json:"Field6"`
-	Field7           int32   `protobuf:"zigzag32,7,opt" json:"Field7"`
-	Field8           int64   `protobuf:"zigzag64,8,opt" json:"Field8"`
-	Field9           uint32  `protobuf:"fixed32,9,opt" json:"Field9"`
-	Field10          int32   `protobuf:"fixed32,10,opt" json:"Field10"`
-	Field11          uint64  `protobuf:"fixed64,11,opt" json:"Field11"`
-	Field12          int64   `protobuf:"fixed64,12,opt" json:"Field12"`
-	Field13          bool    `protobuf:"varint,13,opt" json:"Field13"`
-	Field14          string  `protobuf:"bytes,14,opt" json:"Field14"`
-	Field15          []byte  `protobuf:"bytes,15,opt" json:"Field15"`
+	Field1           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	Field2           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	Field3           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
+	Field4           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
+	Field5           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
+	Field6           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	Field7           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	Field8           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
+	Field9           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
+	Field10          int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
+	Field11          uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
+	Field12          int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
+	Field13          bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	Field14          string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	Field15          []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -217,21 +217,21 @@ func (m *NidOptNative) Reset()      { *m = NidOptNative{} }
 func (*NidOptNative) ProtoMessage() {}
 
 type NinOptNative struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
+	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
+	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
+	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
+	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -239,21 +239,21 @@ func (m *NinOptNative) Reset()      { *m = NinOptNative{} }
 func (*NinOptNative) ProtoMessage() {}
 
 type NidRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep" json:"Field15,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -261,21 +261,21 @@ func (m *NidRepNative) Reset()      { *m = NidRepNative{} }
 func (*NidRepNative) ProtoMessage() {}
 
 type NinRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep" json:"Field15,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -283,19 +283,19 @@ func (m *NinRepNative) Reset()      { *m = NinRepNative{} }
 func (*NinRepNative) ProtoMessage() {}
 
 type NidRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -303,19 +303,19 @@ func (m *NidRepPackedNative) Reset()      { *m = NidRepPackedNative{} }
 func (*NidRepPackedNative) ProtoMessage() {}
 
 type NinRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -323,16 +323,16 @@ func (m *NinRepPackedNative) Reset()      { *m = NinRepPackedNative{} }
 func (*NinRepPackedNative) ProtoMessage() {}
 
 type NidOptStruct struct {
-	Field1           float64      `protobuf:"fixed64,1,opt" json:"Field1"`
-	Field2           float32      `protobuf:"fixed32,2,opt" json:"Field2"`
-	Field3           NidOptNative `protobuf:"bytes,3,opt" json:"Field3"`
-	Field4           NinOptNative `protobuf:"bytes,4,opt" json:"Field4"`
-	Field6           uint64       `protobuf:"varint,6,opt" json:"Field6"`
-	Field7           int32        `protobuf:"zigzag32,7,opt" json:"Field7"`
-	Field8           NidOptNative `protobuf:"bytes,8,opt" json:"Field8"`
-	Field13          bool         `protobuf:"varint,13,opt" json:"Field13"`
-	Field14          string       `protobuf:"bytes,14,opt" json:"Field14"`
-	Field15          []byte       `protobuf:"bytes,15,opt" json:"Field15"`
+	Field1           float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	Field2           float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	Field3           NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3"`
+	Field4           NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4"`
+	Field6           uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	Field7           int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	Field8           NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8"`
+	Field13          bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	Field14          string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	Field15          []byte       `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -340,16 +340,16 @@ func (m *NidOptStruct) Reset()      { *m = NidOptStruct{} }
 func (*NidOptStruct) ProtoMessage() {}
 
 type NinOptStruct struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt" json:"Field7,omitempty"`
-	Field8           *NidOptNative `protobuf:"bytes,8,opt" json:"Field8,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field8           *NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
+	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -357,16 +357,16 @@ func (m *NinOptStruct) Reset()      { *m = NinOptStruct{} }
 func (*NinOptStruct) ProtoMessage() {}
 
 type NidRepStruct struct {
-	Field1           []float64      `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32      `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []NidOptNative `protobuf:"bytes,3,rep" json:"Field3"`
-	Field4           []NinOptNative `protobuf:"bytes,4,rep" json:"Field4"`
-	Field6           []uint64       `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32        `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []NidOptNative `protobuf:"bytes,8,rep" json:"Field8"`
-	Field13          []bool         `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	Field14          []string       `protobuf:"bytes,14,rep" json:"Field14,omitempty"`
-	Field15          [][]byte       `protobuf:"bytes,15,rep" json:"Field15,omitempty"`
+	Field1           []float64      `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32      `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3"`
+	Field4           []NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4"`
+	Field6           []uint64       `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32        `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8"`
+	Field13          []bool         `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14          []string       `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15          [][]byte       `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -374,16 +374,16 @@ func (m *NidRepStruct) Reset()      { *m = NidRepStruct{} }
 func (*NidRepStruct) ProtoMessage() {}
 
 type NinRepStruct struct {
-	Field1           []float64       `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32       `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []*NidOptNative `protobuf:"bytes,3,rep" json:"Field3,omitempty"`
-	Field4           []*NinOptNative `protobuf:"bytes,4,rep" json:"Field4,omitempty"`
-	Field6           []uint64        `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32         `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []*NidOptNative `protobuf:"bytes,8,rep" json:"Field8,omitempty"`
-	Field13          []bool          `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	Field14          []string        `protobuf:"bytes,14,rep" json:"Field14,omitempty"`
-	Field15          [][]byte        `protobuf:"bytes,15,rep" json:"Field15,omitempty"`
+	Field1           []float64       `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32       `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []*NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field6           []uint64        `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32         `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []*NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field13          []bool          `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14          []string        `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15          [][]byte        `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -391,9 +391,9 @@ func (m *NinRepStruct) Reset()      { *m = NinRepStruct{} }
 func (*NinRepStruct) ProtoMessage() {}
 
 type NidEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1,omitempty"`
-	Field200         NidOptNative `protobuf:"bytes,200,opt" json:"Field200"`
-	Field210         bool         `protobuf:"varint,210,opt" json:"Field210"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200"`
+	Field210         bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -401,9 +401,9 @@ func (m *NidEmbeddedStruct) Reset()      { *m = NidEmbeddedStruct{} }
 func (*NidEmbeddedStruct) ProtoMessage() {}
 
 type NinEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NidOptNative `protobuf:"bytes,200,opt" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         *NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -411,8 +411,8 @@ func (m *NinEmbeddedStruct) Reset()      { *m = NinEmbeddedStruct{} }
 func (*NinEmbeddedStruct) ProtoMessage() {}
 
 type NidNestedStruct struct {
-	Field1           NidOptStruct   `protobuf:"bytes,1,opt" json:"Field1"`
-	Field2           []NidRepStruct `protobuf:"bytes,2,rep" json:"Field2"`
+	Field1           NidOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1"`
+	Field2           []NidRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -420,8 +420,8 @@ func (m *NidNestedStruct) Reset()      { *m = NidNestedStruct{} }
 func (*NidNestedStruct) ProtoMessage() {}
 
 type NinNestedStruct struct {
-	Field1           *NinOptStruct   `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
-	Field2           []*NinRepStruct `protobuf:"bytes,2,rep" json:"Field2,omitempty"`
+	Field1           *NinOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           []*NinRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -429,8 +429,8 @@ func (m *NinNestedStruct) Reset()      { *m = NinNestedStruct{} }
 func (*NinNestedStruct) ProtoMessage() {}
 
 type NidOptCustom struct {
-	Id               Uuid                                         `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id"`
-	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Id               Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id"`
+	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_unrecognized []byte                                       `json:"-"`
 }
 
@@ -438,7 +438,7 @@ func (m *NidOptCustom) Reset()      { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage() {}
 
 type CustomDash struct {
-	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                                `json:"-"`
 }
 
@@ -446,8 +446,8 @@ func (m *CustomDash) Reset()      { *m = CustomDash{} }
 func (*CustomDash) ProtoMessage() {}
 
 type NinOptCustom struct {
-	Id               *Uuid                                         `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
-	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Id               *Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                        `json:"-"`
 }
 
@@ -455,8 +455,8 @@ func (m *NinOptCustom) Reset()      { *m = NinOptCustom{} }
 func (*NinOptCustom) ProtoMessage() {}
 
 type NidRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -464,8 +464,8 @@ func (m *NidRepCustom) Reset()      { *m = NidRepCustom{} }
 func (*NidRepCustom) ProtoMessage() {}
 
 type NinRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,customtype=Uuid" json:"Id,omitempty"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -473,15 +473,15 @@ func (m *NinRepCustom) Reset()      { *m = NinRepCustom{} }
 func (*NinRepCustom) ProtoMessage() {}
 
 type NinOptNativeUnion struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -489,15 +489,15 @@ func (m *NinOptNativeUnion) Reset()      { *m = NinOptNativeUnion{} }
 func (*NinOptNativeUnion) ProtoMessage() {}
 
 type NinOptStructUnion struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt" json:"Field7,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -505,9 +505,9 @@ func (m *NinOptStructUnion) Reset()      { *m = NinOptStructUnion{} }
 func (*NinOptStructUnion) ProtoMessage() {}
 
 type NinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NinOptNative `protobuf:"bytes,200,opt" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -515,9 +515,9 @@ func (m *NinEmbeddedStructUnion) Reset()      { *m = NinEmbeddedStructUnion{} }
 func (*NinEmbeddedStructUnion) ProtoMessage() {}
 
 type NinNestedStructUnion struct {
-	Field1           *NinOptNativeUnion      `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
-	Field2           *NinOptStructUnion      `protobuf:"bytes,2,opt" json:"Field2,omitempty"`
-	Field3           *NinEmbeddedStructUnion `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
+	Field1           *NinOptNativeUnion      `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *NinOptStructUnion      `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *NinEmbeddedStructUnion `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
@@ -525,9 +525,9 @@ func (m *NinNestedStructUnion) Reset()      { *m = NinNestedStructUnion{} }
 func (*NinNestedStructUnion) ProtoMessage() {}
 
 type Tree struct {
-	Or               *OrBranch  `protobuf:"bytes,1,opt" json:"Or,omitempty"`
-	And              *AndBranch `protobuf:"bytes,2,opt" json:"And,omitempty"`
-	Leaf             *Leaf      `protobuf:"bytes,3,opt" json:"Leaf,omitempty"`
+	Or               *OrBranch  `protobuf:"bytes,1,opt,name=Or" json:"Or,omitempty"`
+	And              *AndBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
+	Leaf             *Leaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
 
@@ -535,8 +535,8 @@ func (m *Tree) Reset()      { *m = Tree{} }
 func (*Tree) ProtoMessage() {}
 
 type OrBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt" json:"Right"`
+	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -544,8 +544,8 @@ func (m *OrBranch) Reset()      { *m = OrBranch{} }
 func (*OrBranch) ProtoMessage() {}
 
 type AndBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt" json:"Right"`
+	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -553,8 +553,8 @@ func (m *AndBranch) Reset()      { *m = AndBranch{} }
 func (*AndBranch) ProtoMessage() {}
 
 type Leaf struct {
-	Value            int64  `protobuf:"varint,1,opt" json:"Value"`
-	StrValue         string `protobuf:"bytes,2,opt" json:"StrValue"`
+	Value            int64  `protobuf:"varint,1,opt,name=Value" json:"Value"`
+	StrValue         string `protobuf:"bytes,2,opt,name=StrValue" json:"StrValue"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -562,9 +562,9 @@ func (m *Leaf) Reset()      { *m = Leaf{} }
 func (*Leaf) ProtoMessage() {}
 
 type DeepTree struct {
-	Down             *ADeepBranch   `protobuf:"bytes,1,opt" json:"Down,omitempty"`
-	And              *AndDeepBranch `protobuf:"bytes,2,opt" json:"And,omitempty"`
-	Leaf             *DeepLeaf      `protobuf:"bytes,3,opt" json:"Leaf,omitempty"`
+	Down             *ADeepBranch   `protobuf:"bytes,1,opt,name=Down" json:"Down,omitempty"`
+	And              *AndDeepBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
+	Leaf             *DeepLeaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -572,7 +572,7 @@ func (m *DeepTree) Reset()      { *m = DeepTree{} }
 func (*DeepTree) ProtoMessage() {}
 
 type ADeepBranch struct {
-	Down             DeepTree `protobuf:"bytes,2,opt" json:"Down"`
+	Down             DeepTree `protobuf:"bytes,2,opt,name=Down" json:"Down"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -580,8 +580,8 @@ func (m *ADeepBranch) Reset()      { *m = ADeepBranch{} }
 func (*ADeepBranch) ProtoMessage() {}
 
 type AndDeepBranch struct {
-	Left             DeepTree `protobuf:"bytes,1,opt" json:"Left"`
-	Right            DeepTree `protobuf:"bytes,2,opt" json:"Right"`
+	Left             DeepTree `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right            DeepTree `protobuf:"bytes,2,opt,name=Right" json:"Right"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -589,7 +589,7 @@ func (m *AndDeepBranch) Reset()      { *m = AndDeepBranch{} }
 func (*AndDeepBranch) ProtoMessage() {}
 
 type DeepLeaf struct {
-	Tree             Tree   `protobuf:"bytes,1,opt" json:"Tree"`
+	Tree             Tree   `protobuf:"bytes,1,opt,name=Tree" json:"Tree"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -604,7 +604,7 @@ func (m *Nil) Reset()      { *m = Nil{} }
 func (*Nil) ProtoMessage() {}
 
 type NidOptEnum struct {
-	Field1           TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1"`
+	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -612,7 +612,7 @@ func (m *NidOptEnum) Reset()      { *m = NidOptEnum{} }
 func (*NidOptEnum) ProtoMessage() {}
 
 type NinOptEnum struct {
-	Field1           *TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field1           *TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -620,7 +620,7 @@ func (m *NinOptEnum) Reset()      { *m = NinOptEnum{} }
 func (*NinOptEnum) ProtoMessage() {}
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -628,7 +628,7 @@ func (m *NidRepEnum) Reset()      { *m = NidRepEnum{} }
 func (*NidRepEnum) ProtoMessage() {}
 
 type NinRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -636,7 +636,7 @@ func (m *NinRepEnum) Reset()      { *m = NinRepEnum{} }
 func (*NinRepEnum) ProtoMessage() {}
 
 type NinOptEnumDefault struct {
-	Field1           *TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
+	Field1           *TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -653,7 +653,7 @@ func (m *NinOptEnumDefault) GetField1() TheTestEnum {
 }
 
 type AnotherNinOptEnum struct {
-	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
+	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 
@@ -661,7 +661,7 @@ func (m *AnotherNinOptEnum) Reset()      { *m = AnotherNinOptEnum{} }
 func (*AnotherNinOptEnum) ProtoMessage() {}
 
 type AnotherNinOptEnumDefault struct {
-	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
+	Field1           *AnotherTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 
@@ -678,9 +678,9 @@ func (m *AnotherNinOptEnumDefault) GetField1() AnotherTestEnum {
 }
 
 type Timer struct {
-	Time1            int64  `protobuf:"fixed64,1,opt" json:"Time1"`
-	Time2            int64  `protobuf:"fixed64,2,opt" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt" json:"Data"`
+	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1" json:"Time1"`
+	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2" json:"Time2"`
+	Data             []byte `protobuf:"bytes,3,opt,name=Data" json:"Data"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -688,7 +688,7 @@ func (m *Timer) Reset()      { *m = Timer{} }
 func (*Timer) ProtoMessage() {}
 
 type MyExtendable struct {
-	Field1           *int64                    `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field1           *int64                    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
 	XXX_extensions   map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized []byte                    `json:"-"`
 }
@@ -711,9 +711,9 @@ func (m *MyExtendable) ExtensionMap() map[int32]proto.Extension {
 }
 
 type OtherExtenable struct {
-	Field2           *int64                    `protobuf:"varint,2,opt" json:"Field2,omitempty"`
-	Field13          *int64                    `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	M                *MyExtendable             `protobuf:"bytes,1,opt" json:"M,omitempty"`
+	Field2           *int64                    `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field13          *int64                    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	M                *MyExtendable             `protobuf:"bytes,1,opt,name=M" json:"M,omitempty"`
 	XXX_extensions   map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized []byte                    `json:"-"`
 }
@@ -737,10 +737,10 @@ func (m *OtherExtenable) ExtensionMap() map[int32]proto.Extension {
 }
 
 type NestedDefinition struct {
-	Field1           *int64                                          `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	EnumField        *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt" json:"NNM,omitempty"`
-	NM               *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt" json:"NM,omitempty"`
+	Field1           *int64                                          `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	EnumField        *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=EnumField,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
+	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt,name=NNM" json:"NNM,omitempty"`
+	NM               *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt,name=NM" json:"NM,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -748,8 +748,8 @@ func (m *NestedDefinition) Reset()      { *m = NestedDefinition{} }
 func (*NestedDefinition) ProtoMessage() {}
 
 type NestedDefinition_NestedMessage struct {
-	NestedField1     *uint64                                         `protobuf:"fixed64,1,opt" json:"NestedField1,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt" json:"NNM,omitempty"`
+	NestedField1     *uint64                                         `protobuf:"fixed64,1,opt,name=NestedField1" json:"NestedField1,omitempty"`
+	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt,name=NNM" json:"NNM,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -757,7 +757,7 @@ func (m *NestedDefinition_NestedMessage) Reset()      { *m = NestedDefinition_Ne
 func (*NestedDefinition_NestedMessage) ProtoMessage() {}
 
 type NestedDefinition_NestedMessage_NestedNestedMsg struct {
-	NestedNestedField1 *string `protobuf:"bytes,10,opt" json:"NestedNestedField1,omitempty"`
+	NestedNestedField1 *string `protobuf:"bytes,10,opt,name=NestedNestedField1" json:"NestedNestedField1,omitempty"`
 	XXX_unrecognized   []byte  `json:"-"`
 }
 
@@ -767,9 +767,9 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Reset() {
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) ProtoMessage() {}
 
 type NestedScope struct {
-	A                *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt" json:"A,omitempty"`
-	B                *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
-	C                *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt" json:"C,omitempty"`
+	A                *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
+	B                *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=B,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
+	C                *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt,name=C" json:"C,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -777,21 +777,21 @@ func (m *NestedScope) Reset()      { *m = NestedScope{} }
 func (*NestedScope) ProtoMessage() {}
 
 type NinOptNativeDefault struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,def=1234.1234" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,def=1234.1234" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,def=1234" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,def=1234" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,def=1234" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,def=1234" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt,def=1234" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt,def=1234" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt,def=1234" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt,def=1234" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt,def=1234" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt,def=1234" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,def=1" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,def=1234" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,def=1234.1234" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.1234" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,def=1234" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,def=1234" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,def=1234" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,def=1234" json:"Field6,omitempty"`
+	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7,def=1234" json:"Field7,omitempty"`
+	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8,def=1234" json:"Field8,omitempty"`
+	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9,def=1234" json:"Field9,omitempty"`
+	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10,def=1234" json:"Field10,omitempty"`
+	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11,def=1234" json:"Field11,omitempty"`
+	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12,def=1234" json:"Field12,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,def=1" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,def=1234" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -919,7 +919,7 @@ func (m *NinOptNativeDefault) GetField15() []byte {
 }
 
 type CustomContainer struct {
-	CustomStruct     NidOptCustom `protobuf:"bytes,1,opt" json:"CustomStruct"`
+	CustomStruct     NidOptCustom `protobuf:"bytes,1,opt,name=CustomStruct" json:"CustomStruct"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -927,21 +927,21 @@ func (m *CustomContainer) Reset()      { *m = CustomContainer{} }
 func (*CustomContainer) ProtoMessage() {}
 
 type CustomNameNidOptNative struct {
-	FieldA           float64 `protobuf:"fixed64,1,opt" json:"Field1"`
-	FieldB           float32 `protobuf:"fixed32,2,opt" json:"Field2"`
-	FieldC           int32   `protobuf:"varint,3,opt" json:"Field3"`
-	FieldD           int64   `protobuf:"varint,4,opt" json:"Field4"`
-	FieldE           uint32  `protobuf:"varint,5,opt" json:"Field5"`
-	FieldF           uint64  `protobuf:"varint,6,opt" json:"Field6"`
-	FieldG           int32   `protobuf:"zigzag32,7,opt" json:"Field7"`
-	FieldH           int64   `protobuf:"zigzag64,8,opt" json:"Field8"`
-	FieldI           uint32  `protobuf:"fixed32,9,opt" json:"Field9"`
-	FieldJ           int32   `protobuf:"fixed32,10,opt" json:"Field10"`
-	FieldK           uint64  `protobuf:"fixed64,11,opt" json:"Field11"`
-	FieldL           int64   `protobuf:"fixed64,12,opt" json:"Field12"`
-	FieldM           bool    `protobuf:"varint,13,opt" json:"Field13"`
-	FieldN           string  `protobuf:"bytes,14,opt" json:"Field14"`
-	FieldO           []byte  `protobuf:"bytes,15,opt" json:"Field15"`
+	FieldA           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	FieldB           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	FieldC           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
+	FieldD           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
+	FieldE           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
+	FieldF           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	FieldG           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	FieldH           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
+	FieldI           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
+	FieldJ           int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
+	FieldK           uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
+	FieldL           int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
+	FieldM           bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	FieldN           string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	FieldO           []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -949,21 +949,21 @@ func (m *CustomNameNidOptNative) Reset()      { *m = CustomNameNidOptNative{} }
 func (*CustomNameNidOptNative) ProtoMessage() {}
 
 type CustomNameNinOptNative struct {
-	FieldA           *float64 `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	FieldB           *float32 `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	FieldC           *int32   `protobuf:"varint,3,opt" json:"Field3,omitempty"`
-	FieldD           *int64   `protobuf:"varint,4,opt" json:"Field4,omitempty"`
-	FieldE           *uint32  `protobuf:"varint,5,opt" json:"Field5,omitempty"`
-	FieldF           *uint64  `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	FieldG           *int32   `protobuf:"zigzag32,7,opt" json:"Field7,omitempty"`
-	FieldH           *int64   `protobuf:"zigzag64,8,opt" json:"Field8,omitempty"`
-	FieldI           *uint32  `protobuf:"fixed32,9,opt" json:"Field9,omitempty"`
-	FieldJ           *int32   `protobuf:"fixed32,10,opt" json:"Field10,omitempty"`
-	FieldK           *uint64  `protobuf:"fixed64,11,opt" json:"Field11,omitempty"`
-	FielL            *int64   `protobuf:"fixed64,12,opt" json:"Field12,omitempty"`
-	FieldM           *bool    `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	FieldN           *string  `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	FieldO           []byte   `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	FieldA           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	FieldB           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	FieldC           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	FieldD           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	FieldE           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	FieldF           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	FieldG           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	FieldH           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
+	FieldI           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
+	FieldJ           *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
+	FieldK           *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
+	FielL            *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
+	FieldM           *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	FieldN           *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	FieldO           []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -971,21 +971,21 @@ func (m *CustomNameNinOptNative) Reset()      { *m = CustomNameNinOptNative{} }
 func (*CustomNameNinOptNative) ProtoMessage() {}
 
 type CustomNameNinRepNative struct {
-	FieldA           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	FieldB           []float32 `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	FieldC           []int32   `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	FieldD           []int64   `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	FieldE           []uint32  `protobuf:"varint,5,rep" json:"Field5,omitempty"`
-	FieldF           []uint64  `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	FieldG           []int32   `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	FieldH           []int64   `protobuf:"zigzag64,8,rep" json:"Field8,omitempty"`
-	FieldI           []uint32  `protobuf:"fixed32,9,rep" json:"Field9,omitempty"`
-	FieldJ           []int32   `protobuf:"fixed32,10,rep" json:"Field10,omitempty"`
-	FieldK           []uint64  `protobuf:"fixed64,11,rep" json:"Field11,omitempty"`
-	FieldL           []int64   `protobuf:"fixed64,12,rep" json:"Field12,omitempty"`
-	FieldM           []bool    `protobuf:"varint,13,rep" json:"Field13,omitempty"`
-	FieldN           []string  `protobuf:"bytes,14,rep" json:"Field14,omitempty"`
-	FieldO           [][]byte  `protobuf:"bytes,15,rep" json:"Field15,omitempty"`
+	FieldA           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	FieldB           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	FieldC           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	FieldD           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	FieldE           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	FieldF           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	FieldG           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	FieldH           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	FieldI           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	FieldJ           []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	FieldK           []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	FieldL           []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	FieldM           []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	FieldN           []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	FieldO           [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -993,16 +993,16 @@ func (m *CustomNameNinRepNative) Reset()      { *m = CustomNameNinRepNative{} }
 func (*CustomNameNinRepNative) ProtoMessage() {}
 
 type CustomNameNinStruct struct {
-	FieldA           *float64        `protobuf:"fixed64,1,opt" json:"Field1,omitempty"`
-	FieldB           *float32        `protobuf:"fixed32,2,opt" json:"Field2,omitempty"`
-	FieldC           *NidOptNative   `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	FieldD           []*NinOptNative `protobuf:"bytes,4,rep" json:"Field4,omitempty"`
-	FieldE           *uint64         `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	FieldF           *int32          `protobuf:"zigzag32,7,opt" json:"Field7,omitempty"`
-	FieldG           *NidOptNative   `protobuf:"bytes,8,opt" json:"Field8,omitempty"`
-	FieldH           *bool           `protobuf:"varint,13,opt" json:"Field13,omitempty"`
-	FieldI           *string         `protobuf:"bytes,14,opt" json:"Field14,omitempty"`
-	FieldJ           []byte          `protobuf:"bytes,15,opt" json:"Field15,omitempty"`
+	FieldA           *float64        `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	FieldB           *float32        `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	FieldC           *NidOptNative   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	FieldD           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
+	FieldE           *uint64         `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	FieldF           *int32          `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	FieldG           *NidOptNative   `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
+	FieldH           *bool           `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	FieldI           *string         `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	FieldJ           []byte          `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -1010,10 +1010,10 @@ func (m *CustomNameNinStruct) Reset()      { *m = CustomNameNinStruct{} }
 func (*CustomNameNinStruct) ProtoMessage() {}
 
 type CustomNameCustomType struct {
-	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,customtype=Uuid" json:"Id,omitempty"`
-	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
-	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,customtype=Uuid" json:"Ids,omitempty"`
-	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
+	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,customtype=Uuid" json:"Ids,omitempty"`
+	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -1021,9 +1021,9 @@ func (m *CustomNameCustomType) Reset()      { *m = CustomNameCustomType{} }
 func (*CustomNameCustomType) ProtoMessage() {}
 
 type CustomNameNinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,embedded=Field1" json:"Field1,omitempty"`
-	FieldA           *NinOptNative `protobuf:"bytes,200,opt" json:"Field200,omitempty"`
-	FieldB           *bool         `protobuf:"varint,210,opt" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	FieldA           *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	FieldB           *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -1031,8 +1031,8 @@ func (m *CustomNameNinEmbeddedStructUnion) Reset()      { *m = CustomNameNinEmbe
 func (*CustomNameNinEmbeddedStructUnion) ProtoMessage() {}
 
 type CustomNameEnum struct {
-	FieldA           *TheTestEnum  `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	FieldB           []TheTestEnum `protobuf:"varint,2,rep,enum=test.TheTestEnum" json:"Field2,omitempty"`
+	FieldA           *TheTestEnum  `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	FieldB           []TheTestEnum `protobuf:"varint,2,rep,name=Field2,enum=test.TheTestEnum" json:"Field2,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -1040,7 +1040,7 @@ func (m *CustomNameEnum) Reset()      { *m = CustomNameEnum{} }
 func (*CustomNameEnum) ProtoMessage() {}
 
 type NoExtensionsMap struct {
-	Field1           *int64 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field1           *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
 	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
 	XXX_unrecognized []byte `json:"-"`
 }
@@ -1063,7 +1063,7 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 }
 
 type Unrecognized struct {
-	Field1 *string `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
+	Field1 *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
 }
 
 func (m *Unrecognized) Reset()      { *m = Unrecognized{} }
@@ -1071,7 +1071,7 @@ func (*Unrecognized) ProtoMessage() {}
 
 type UnrecognizedWithInner struct {
 	Embedded         []*UnrecognizedWithInner_Inner `protobuf:"bytes,1,rep,name=embedded" json:"embedded,omitempty"`
-	Field2           *string                        `protobuf:"bytes,2,opt" json:"Field2,omitempty"`
+	Field2           *string                        `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte                         `json:"-"`
 }
 
@@ -1079,7 +1079,7 @@ func (m *UnrecognizedWithInner) Reset()      { *m = UnrecognizedWithInner{} }
 func (*UnrecognizedWithInner) ProtoMessage() {}
 
 type UnrecognizedWithInner_Inner struct {
-	Field1 *uint32 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
 }
 
 func (m *UnrecognizedWithInner_Inner) Reset()      { *m = UnrecognizedWithInner_Inner{} }
@@ -1087,7 +1087,7 @@ func (*UnrecognizedWithInner_Inner) ProtoMessage() {}
 
 type UnrecognizedWithEmbed struct {
 	UnrecognizedWithEmbed_Embedded `protobuf:"bytes,1,opt,name=embedded,embedded=embedded" json:"embedded"`
-	Field2                         *string `protobuf:"bytes,2,opt" json:"Field2,omitempty"`
+	Field2                         *string `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized               []byte  `json:"-"`
 }
 
@@ -1095,7 +1095,7 @@ func (m *UnrecognizedWithEmbed) Reset()      { *m = UnrecognizedWithEmbed{} }
 func (*UnrecognizedWithEmbed) ProtoMessage() {}
 
 type UnrecognizedWithEmbed_Embedded struct {
-	Field1 *uint32 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
 }
 
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
@@ -1106,7 +1106,7 @@ var E_FieldA = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         100,
 	Name:          "test.FieldA",
-	Tag:           "fixed64,100,opt",
+	Tag:           "fixed64,100,opt,name=FieldA",
 }
 
 var E_FieldB = &proto.ExtensionDesc{
@@ -1114,7 +1114,7 @@ var E_FieldB = &proto.ExtensionDesc{
 	ExtensionType: (*NinOptNative)(nil),
 	Field:         101,
 	Name:          "test.FieldB",
-	Tag:           "bytes,101,opt",
+	Tag:           "bytes,101,opt,name=FieldB",
 }
 
 var E_FieldC = &proto.ExtensionDesc{
@@ -1122,7 +1122,7 @@ var E_FieldC = &proto.ExtensionDesc{
 	ExtensionType: (*NinEmbeddedStruct)(nil),
 	Field:         102,
 	Name:          "test.FieldC",
-	Tag:           "bytes,102,opt",
+	Tag:           "bytes,102,opt,name=FieldC",
 }
 
 var E_FieldA1 = &proto.ExtensionDesc{
@@ -1130,7 +1130,7 @@ var E_FieldA1 = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         100,
 	Name:          "test.FieldA1",
-	Tag:           "fixed64,100,opt",
+	Tag:           "fixed64,100,opt,name=FieldA1",
 }
 
 var E_FieldB1 = &proto.ExtensionDesc{
@@ -1138,7 +1138,7 @@ var E_FieldB1 = &proto.ExtensionDesc{
 	ExtensionType: (*NinOptNative)(nil),
 	Field:         101,
 	Name:          "test.FieldB1",
-	Tag:           "bytes,101,opt",
+	Tag:           "bytes,101,opt,name=FieldB1",
 }
 
 var E_FieldC1 = &proto.ExtensionDesc{
@@ -1146,7 +1146,7 @@ var E_FieldC1 = &proto.ExtensionDesc{
 	ExtensionType: (*NinEmbeddedStruct)(nil),
 	Field:         102,
 	Name:          "test.FieldC1",
-	Tag:           "bytes,102,opt",
+	Tag:           "bytes,102,opt,name=FieldC1",
 }
 
 func init() {

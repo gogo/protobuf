@@ -27,8 +27,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type A struct {
-	Strings          *string `protobuf:"bytes,1,opt" json:"Strings,omitempty"`
-	Int              *int64  `protobuf:"varint,2,req" json:"Int,omitempty"`
+	Strings          *string `protobuf:"bytes,1,opt,name=Strings" json:"Strings,omitempty"`
+	Int              *int64  `protobuf:"varint,2,req,name=Int" json:"Int,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

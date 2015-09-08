@@ -29,7 +29,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type MoreDefaultsB struct {
-	Field1           *string `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
+	Field1           *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -45,12 +45,12 @@ func (m *MoreDefaultsB) GetField1() string {
 }
 
 type MoreDefaultsA struct {
-	Field1           *int64         `protobuf:"varint,1,opt,def=1234" json:"Field1,omitempty"`
-	Field2           int64          `protobuf:"varint,2,opt" json:"Field2"`
-	B1               *MoreDefaultsB `protobuf:"bytes,3,opt" json:"B1,omitempty"`
-	B2               MoreDefaultsB  `protobuf:"bytes,4,opt" json:"B2"`
-	A1               *test.A        `protobuf:"bytes,5,opt" json:"A1,omitempty"`
-	A2               test.A         `protobuf:"bytes,6,opt" json:"A2"`
+	Field1           *int64         `protobuf:"varint,1,opt,name=Field1,def=1234" json:"Field1,omitempty"`
+	Field2           int64          `protobuf:"varint,2,opt,name=Field2" json:"Field2"`
+	B1               *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1" json:"B1,omitempty"`
+	B2               MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2" json:"B2"`
+	A1               *test.A        `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
+	A2               test.A         `protobuf:"bytes,6,opt,name=A2" json:"A2"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 

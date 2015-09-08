@@ -31,7 +31,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Aproto3 struct {
-	B string `protobuf:"bytes,1,opt,proto3" json:"B,omitempty"`
+	B string `protobuf:"bytes,1,opt,name=B,proto3" json:"B,omitempty"`
 }
 
 func (m *Aproto3) Reset()      { *m = Aproto3{} }

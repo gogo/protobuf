@@ -47,17 +47,17 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type A struct {
-	Field1 *int64 `protobuf:"varint,2,opt" json:"Field1,omitempty"`
-	B      []*B   `protobuf:"bytes,1,rep" json:"B,omitempty"`
+	Field1 *int64 `protobuf:"varint,2,opt,name=Field1" json:"Field1,omitempty"`
+	B      []*B   `protobuf:"bytes,1,rep,name=B" json:"B,omitempty"`
 }
 
 func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 
 type B struct {
-	C                *C     `protobuf:"bytes,1,opt" json:"C,omitempty"`
-	D                *D     `protobuf:"bytes,2,opt" json:"D,omitempty"`
-	F                *OldC  `protobuf:"bytes,5,opt" json:"F,omitempty"`
+	C                *C     `protobuf:"bytes,1,opt,name=C" json:"C,omitempty"`
+	D                *D     `protobuf:"bytes,2,opt,name=D" json:"D,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt,name=F" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -65,7 +65,7 @@ func (m *B) Reset()      { *m = B{} }
 func (*B) ProtoMessage() {}
 
 type D struct {
-	Field1           *int64 `protobuf:"varint,1,opt" json:"Field1,omitempty"`
+	Field1           *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -73,12 +73,12 @@ func (m *D) Reset()      { *m = D{} }
 func (*D) ProtoMessage() {}
 
 type C struct {
-	Field2           *float64  `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
-	Field3           *string   `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	Field4           *float64  `protobuf:"fixed64,4,opt" json:"Field4,omitempty"`
-	Field5           [][]byte  `protobuf:"bytes,5,rep" json:"Field5,omitempty"`
-	Field6           *int64    `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field7           []float32 `protobuf:"fixed32,7,rep" json:"Field7,omitempty"`
+	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4           *float64  `protobuf:"fixed64,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field5           [][]byte  `protobuf:"bytes,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7" json:"Field7,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -86,32 +86,32 @@ func (m *C) Reset()      { *m = C{} }
 func (*C) ProtoMessage() {}
 
 type U struct {
-	Field2 []float64 `protobuf:"fixed64,2,rep" json:"Field2,omitempty"`
-	Field3 *uint32   `protobuf:"varint,3,opt" json:"Field3,omitempty"`
+	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
 }
 
 func (m *U) Reset()      { *m = U{} }
 func (*U) ProtoMessage() {}
 
 type UnoM struct {
-	Field2 []float64 `protobuf:"fixed64,2,rep" json:"Field2,omitempty"`
-	Field3 *uint32   `protobuf:"varint,3,opt" json:"Field3,omitempty"`
+	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
 }
 
 func (m *UnoM) Reset()      { *m = UnoM{} }
 func (*UnoM) ProtoMessage() {}
 
 type OldA struct {
-	Field1 *int64  `protobuf:"varint,2,opt" json:"Field1,omitempty"`
-	B      []*OldB `protobuf:"bytes,1,rep" json:"B,omitempty"`
+	Field1 *int64  `protobuf:"varint,2,opt,name=Field1" json:"Field1,omitempty"`
+	B      []*OldB `protobuf:"bytes,1,rep,name=B" json:"B,omitempty"`
 }
 
 func (m *OldA) Reset()      { *m = OldA{} }
 func (*OldA) ProtoMessage() {}
 
 type OldB struct {
-	C                *OldC  `protobuf:"bytes,1,opt" json:"C,omitempty"`
-	F                *OldC  `protobuf:"bytes,5,opt" json:"F,omitempty"`
+	C                *OldC  `protobuf:"bytes,1,opt,name=C" json:"C,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt,name=F" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -119,11 +119,11 @@ func (m *OldB) Reset()      { *m = OldB{} }
 func (*OldB) ProtoMessage() {}
 
 type OldC struct {
-	Field1           *int64    `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	Field2           *float64  `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
-	Field3           *string   `protobuf:"bytes,3,opt" json:"Field3,omitempty"`
-	Field6           *int64    `protobuf:"varint,6,opt" json:"Field6,omitempty"`
-	Field7           []float32 `protobuf:"fixed32,7,rep" json:"Field7,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7" json:"Field7,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -131,8 +131,8 @@ func (m *OldC) Reset()      { *m = OldC{} }
 func (*OldC) ProtoMessage() {}
 
 type OldU struct {
-	Field1           *string   `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep" json:"Field2,omitempty"`
+	Field1           *string   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -140,8 +140,8 @@ func (m *OldU) Reset()      { *m = OldU{} }
 func (*OldU) ProtoMessage() {}
 
 type OldUnoM struct {
-	Field1           *string   `protobuf:"bytes,1,opt" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep" json:"Field2,omitempty"`
+	Field1           *string   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 

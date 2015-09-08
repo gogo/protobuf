@@ -26,7 +26,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type MyMessage struct {
-	TheField         test.TheTestEnum `protobuf:"varint,1,opt,enum=test.TheTestEnum" json:"TheField"`
+	TheField         test.TheTestEnum `protobuf:"varint,1,opt,name=TheField,enum=test.TheTestEnum" json:"TheField"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 

@@ -77,49 +77,49 @@ type isSampleOneOf_TestOneof interface {
 }
 
 type SampleOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,proto3"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,proto3"`
 }
 type SampleOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,proto3"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,proto3"`
 }
 type SampleOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,proto3"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,proto3"`
 }
 type SampleOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt,proto3"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4,proto3"`
 }
 type SampleOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt,proto3"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,proto3"`
 }
 type SampleOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt,proto3"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,proto3"`
 }
 type SampleOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt,proto3"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,proto3"`
 }
 type SampleOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt,proto3"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,proto3"`
 }
 type SampleOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt,proto3"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,proto3"`
 }
 type SampleOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt,proto3"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,proto3"`
 }
 type SampleOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt,proto3"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,proto3"`
 }
 type SampleOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt,proto3"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,proto3"`
 }
 type SampleOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt,proto3"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13,proto3"`
 }
 type SampleOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt,proto3"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14,proto3"`
 }
 type SampleOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt,proto3"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,proto3"`
 }
 type SampleOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message"`

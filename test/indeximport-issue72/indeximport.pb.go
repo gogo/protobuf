@@ -30,7 +30,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type IndexQueries struct {
-	Queries          []*index.IndexQuery `protobuf:"bytes,1,rep" json:"Queries,omitempty"`
+	Queries          []*index.IndexQuery `protobuf:"bytes,1,rep,name=Queries" json:"Queries,omitempty"`
 	XXX_unrecognized []byte              `json:"-"`
 }
 

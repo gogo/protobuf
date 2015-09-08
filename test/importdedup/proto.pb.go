@@ -28,8 +28,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Object struct {
-	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
-	SubObject        *subpkg.SubObject                                            `protobuf:"bytes,2,opt" json:"SubObject,omitempty"`
+	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
+	SubObject        *subpkg.SubObject                                            `protobuf:"bytes,2,opt,name=SubObject" json:"SubObject,omitempty"`
 	XXX_unrecognized []byte                                                       `json:"-"`
 }
 

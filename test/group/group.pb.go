@@ -36,7 +36,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Groups1 struct {
-	G                []*Groups1_G `protobuf:"group,1,rep" json:"g,omitempty"`
+	G                []*Groups1_G `protobuf:"group,1,rep,name=G" json:"g,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -44,8 +44,8 @@ func (m *Groups1) Reset()      { *m = Groups1{} }
 func (*Groups1) ProtoMessage() {}
 
 type Groups1_G struct {
-	Field1           *int64   `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	Field2           *float64 `protobuf:"fixed64,2,opt" json:"Field2,omitempty"`
+	Field1           *int64   `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           *float64 `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -53,7 +53,7 @@ func (m *Groups1_G) Reset()      { *m = Groups1_G{} }
 func (*Groups1_G) ProtoMessage() {}
 
 type Groups2 struct {
-	G                *Groups2_G `protobuf:"group,1,opt" json:"g,omitempty"`
+	G                *Groups2_G `protobuf:"group,1,opt,name=G" json:"g,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
 
@@ -61,8 +61,8 @@ func (m *Groups2) Reset()      { *m = Groups2{} }
 func (*Groups2) ProtoMessage() {}
 
 type Groups2_G struct {
-	Field1           *int64    `protobuf:"varint,1,opt" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep" json:"Field2,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 

@@ -29,8 +29,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type IndexQuery struct {
-	Key              *string `protobuf:"bytes,1,opt" json:"Key,omitempty"`
-	Value            *string `protobuf:"bytes,2,opt" json:"Value,omitempty"`
+	Key              *string `protobuf:"bytes,1,opt,name=Key" json:"Key,omitempty"`
+	Value            *string `protobuf:"bytes,2,opt,name=Value" json:"Value,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

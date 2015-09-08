@@ -32,19 +32,19 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type NinRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -144,19 +144,19 @@ func (m *NinRepNative) GetField13() []bool {
 }
 
 type NinRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -256,19 +256,19 @@ func (m *NinRepPackedNative) GetField13() []bool {
 }
 
 type NinRepNativeUnsafe struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -368,19 +368,19 @@ func (m *NinRepNativeUnsafe) GetField13() []bool {
 }
 
 type NinRepPackedNativeUnsafe struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 

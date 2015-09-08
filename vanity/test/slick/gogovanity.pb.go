@@ -33,9 +33,9 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type B struct {
-	String_ *string `protobuf:"bytes,1,opt" json:"String,omitempty"`
-	Int64   int64   `protobuf:"varint,2,opt" json:"Int64"`
-	Int32   *int32  `protobuf:"varint,3,opt,def=1234" json:"Int32,omitempty"`
+	String_ *string `protobuf:"bytes,1,opt,name=String" json:"String,omitempty"`
+	Int64   int64   `protobuf:"varint,2,opt,name=Int64" json:"Int64"`
+	Int32   *int32  `protobuf:"varint,3,opt,name=Int32,def=1234" json:"Int32,omitempty"`
 }
 
 func (m *B) Reset()      { *m = B{} }

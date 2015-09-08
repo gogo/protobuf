@@ -76,49 +76,49 @@ type isSampleOneOf_TestOneof interface {
 }
 
 type SampleOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1"`
 }
 type SampleOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2"`
 }
 type SampleOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3"`
 }
 type SampleOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4"`
 }
 type SampleOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5"`
 }
 type SampleOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6"`
 }
 type SampleOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7"`
 }
 type SampleOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8"`
 }
 type SampleOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9"`
 }
 type SampleOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10"`
 }
 type SampleOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11"`
 }
 type SampleOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12"`
 }
 type SampleOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13"`
 }
 type SampleOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14"`
 }
 type SampleOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15"`
 }
 type SampleOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message"`

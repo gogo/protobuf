@@ -27,8 +27,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Object struct {
-	CustomField1     *CustomType  `protobuf:"bytes,1,opt,customtype=CustomType" json:"CustomField1,omitempty"`
-	CustomField2     []CustomType `protobuf:"bytes,2,rep,customtype=CustomType" json:"CustomField2,omitempty"`
+	CustomField1     *CustomType  `protobuf:"bytes,1,opt,name=CustomField1,customtype=CustomType" json:"CustomField1,omitempty"`
+	CustomField2     []CustomType `protobuf:"bytes,2,rep,name=CustomField2,customtype=CustomType" json:"CustomField2,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 

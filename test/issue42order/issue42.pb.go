@@ -28,8 +28,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type UnorderedFields struct {
-	A                *int64  `protobuf:"varint,10,opt" json:"A,omitempty"`
-	B                *uint64 `protobuf:"fixed64,1,opt" json:"B,omitempty"`
+	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
+	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -52,8 +52,8 @@ func (m *UnorderedFields) GetB() uint64 {
 }
 
 type OrderedFields struct {
-	B                *uint64 `protobuf:"fixed64,1,opt" json:"B,omitempty"`
-	A                *int64  `protobuf:"varint,10,opt" json:"A,omitempty"`
+	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
+	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
