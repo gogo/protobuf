@@ -74,6 +74,7 @@ regenerate:
 	make -C test/packed regenerate
 	make -C test/tags regenerate
 	make -C test/oneof regenerate
+	make -C test/oneof3 regenerate
 	make -C test/theproto3 regenerate
 	make -C test/mapsproto2 regenerate
 	make -C test/issue42order regenerate

@@ -36,8 +36,7 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Subby struct {
-	Sub              *string `protobuf:"bytes,1,opt,name=sub" json:"sub,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Sub string `protobuf:"bytes,1,opt,name=sub,proto3" json:"sub,omitempty"`
 }
 
 func (m *Subby) Reset()      { *m = Subby{} }
@@ -61,8 +60,7 @@ type SampleOneOf struct {
 	//	*SampleOneOf_Field14
 	//	*SampleOneOf_Field15
 	//	*SampleOneOf_SubMessage
-	TestOneof        isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
-	XXX_unrecognized []byte                  `json:"-"`
+	TestOneof isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
 }
 
 func (m *SampleOneOf) Reset()      { *m = SampleOneOf{} }
@@ -76,49 +74,49 @@ type isSampleOneOf_TestOneof interface {
 }
 
 type SampleOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt"`
+	Field1 float64 `protobuf:"fixed64,1,opt,proto3"`
 }
 type SampleOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt"`
+	Field2 float32 `protobuf:"fixed32,2,opt,proto3"`
 }
 type SampleOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt"`
+	Field3 int32 `protobuf:"varint,3,opt,proto3"`
 }
 type SampleOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt"`
+	Field4 int64 `protobuf:"varint,4,opt,proto3"`
 }
 type SampleOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt"`
+	Field5 uint32 `protobuf:"varint,5,opt,proto3"`
 }
 type SampleOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt"`
+	Field6 uint64 `protobuf:"varint,6,opt,proto3"`
 }
 type SampleOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,proto3"`
 }
 type SampleOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,proto3"`
 }
 type SampleOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,proto3"`
 }
 type SampleOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt"`
+	Field10 int32 `protobuf:"fixed32,10,opt,proto3"`
 }
 type SampleOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,proto3"`
 }
 type SampleOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt"`
+	Field12 int64 `protobuf:"fixed64,12,opt,proto3"`
 }
 type SampleOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt"`
+	Field13 bool `protobuf:"varint,13,opt,proto3"`
 }
 type SampleOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt"`
+	Field14 string `protobuf:"bytes,14,opt,proto3"`
 }
 type SampleOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt"`
+	Field15 []byte `protobuf:"bytes,15,opt,proto3"`
 }
 type SampleOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message"`
@@ -1193,7 +1191,7 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("test_oneof"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("test_oneof"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: func(v string) *string { return &v }("proto3"), XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
 func (this *Subby) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -1215,17 +1213,8 @@ func (this *Subby) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt.Errorf("that is type *Subbybut is not nil && this == nil")
 	}
-	if this.Sub != nil && that1.Sub != nil {
-		if *this.Sub != *that1.Sub {
-			return fmt.Errorf("Sub this(%v) Not Equal that(%v)", *this.Sub, *that1.Sub)
-		}
-	} else if this.Sub != nil {
-		return fmt.Errorf("this.Sub == nil && that.Sub != nil")
-	} else if that1.Sub != nil {
+	if this.Sub != that1.Sub {
 		return fmt.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -1249,16 +1238,7 @@ func (this *Subby) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if this.Sub != nil && that1.Sub != nil {
-		if *this.Sub != *that1.Sub {
-			return false
-		}
-	} else if this.Sub != nil {
-		return false
-	} else if that1.Sub != nil {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+	if this.Sub != that1.Sub {
 		return false
 	}
 	return true
@@ -1291,9 +1271,6 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("this.TestOneof == nil && that1.TestOneof != nil")
 	} else if !this.TestOneof.Equal(that1.TestOneof) {
 		return fmt.Errorf("TestOneof this(%v) Not Equal that(%v)", this.TestOneof, that1.TestOneof)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -1726,9 +1703,6 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 	} else if !this.TestOneof.Equal(that1.TestOneof) {
 		return false
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
 }
 func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
@@ -2136,8 +2110,7 @@ func (this *Subby) GoString() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&one.Subby{` +
-		`Sub:` + valueToGoStringOne(this.Sub, "string"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`Sub:` + fmt.Sprintf("%#v", this.Sub) + `}`}, ", ")
 	return s
 }
 func (this *SampleOneOf) GoString() string {
@@ -2145,8 +2118,7 @@ func (this *SampleOneOf) GoString() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&one.SampleOneOf{` +
-		`TestOneof:` + fmt.Sprintf("%#v", this.TestOneof),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+		`TestOneof:` + fmt.Sprintf("%#v", this.TestOneof) + `}`}, ", ")
 	return s
 }
 func (this *SampleOneOf_Field1) GoString() string {
@@ -2304,12 +2276,8 @@ func extensionToGoStringOne(e map[int32]github_com_gogo_protobuf_proto.Extension
 }
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
-	if r.Intn(10) != 0 {
-		v1 := randStringOne(r)
-		this.Sub = &v1
-	}
+	this.Sub = randStringOne(r)
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedOne(r, 2)
 	}
 	return this
 }
@@ -2352,7 +2320,6 @@ func NewPopulatedSampleOneOf(r randyOne, easy bool) *SampleOneOf {
 		this.TestOneof = NewPopulatedSampleOneOf_SubMessage(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedOne(r, 1)
 	}
 	return this
 }
@@ -2453,9 +2420,9 @@ func NewPopulatedSampleOneOf_Field14(r randyOne, easy bool) *SampleOneOf_Field14
 }
 func NewPopulatedSampleOneOf_Field15(r randyOne, easy bool) *SampleOneOf_Field15 {
 	this := &SampleOneOf_Field15{}
-	v2 := r.Intn(100)
-	this.Field15 = make([]byte, v2)
-	for i := 0; i < v2; i++ {
+	v1 := r.Intn(100)
+	this.Field15 = make([]byte, v1)
+	for i := 0; i < v1; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	return this
@@ -2485,9 +2452,9 @@ func randUTF8RuneOne(r randyOne) rune {
 	return rune(ru + 61)
 }
 func randStringOne(r randyOne) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	v2 := r.Intn(100)
+	tmps := make([]rune, v2)
+	for i := 0; i < v2; i++ {
 		tmps[i] = randUTF8RuneOne(r)
 	}
 	return string(tmps)
@@ -2509,11 +2476,11 @@ func randFieldOne(data []byte, r randyOne, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateOne(data, uint64(key))
-		v4 := r.Int63()
+		v3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			v3 *= -1
 		}
-		data = encodeVarintPopulateOne(data, uint64(v4))
+		data = encodeVarintPopulateOne(data, uint64(v3))
 	case 1:
 		data = encodeVarintPopulateOne(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -2541,12 +2508,9 @@ func encodeVarintPopulateOne(data []byte, v uint64) []byte {
 func (m *Subby) Size() (n int) {
 	var l int
 	_ = l
-	if m.Sub != nil {
-		l = len(*m.Sub)
+	l = len(m.Sub)
+	if l > 0 {
 		n += 1 + l + sovOne(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2557,95 +2521,120 @@ func (m *SampleOneOf) Size() (n int) {
 	if m.TestOneof != nil {
 		n += m.TestOneof.Size()
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
 func (m *SampleOneOf_Field1) Size() (n int) {
 	var l int
 	_ = l
-	n += 9
+	if m.Field1 != 0 {
+		n += 9
+	}
 	return n
 }
 func (m *SampleOneOf_Field2) Size() (n int) {
 	var l int
 	_ = l
-	n += 5
+	if m.Field2 != 0 {
+		n += 5
+	}
 	return n
 }
 func (m *SampleOneOf_Field3) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sovOne(uint64(m.Field3))
+	if m.Field3 != 0 {
+		n += 1 + sovOne(uint64(m.Field3))
+	}
 	return n
 }
 func (m *SampleOneOf_Field4) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sovOne(uint64(m.Field4))
+	if m.Field4 != 0 {
+		n += 1 + sovOne(uint64(m.Field4))
+	}
 	return n
 }
 func (m *SampleOneOf_Field5) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sovOne(uint64(m.Field5))
+	if m.Field5 != 0 {
+		n += 1 + sovOne(uint64(m.Field5))
+	}
 	return n
 }
 func (m *SampleOneOf_Field6) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sovOne(uint64(m.Field6))
+	if m.Field6 != 0 {
+		n += 1 + sovOne(uint64(m.Field6))
+	}
 	return n
 }
 func (m *SampleOneOf_Field7) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sozOne(uint64(m.Field7))
+	if m.Field7 != 0 {
+		n += 1 + sozOne(uint64(m.Field7))
+	}
 	return n
 }
 func (m *SampleOneOf_Field8) Size() (n int) {
 	var l int
 	_ = l
-	n += 1 + sozOne(uint64(m.Field8))
+	if m.Field8 != 0 {
+		n += 1 + sozOne(uint64(m.Field8))
+	}
 	return n
 }
 func (m *SampleOneOf_Field9) Size() (n int) {
 	var l int
 	_ = l
-	n += 5
+	if m.Field9 != 0 {
+		n += 5
+	}
 	return n
 }
 func (m *SampleOneOf_Field10) Size() (n int) {
 	var l int
 	_ = l
-	n += 5
+	if m.Field10 != 0 {
+		n += 5
+	}
 	return n
 }
 func (m *SampleOneOf_Field11) Size() (n int) {
 	var l int
 	_ = l
-	n += 9
+	if m.Field11 != 0 {
+		n += 9
+	}
 	return n
 }
 func (m *SampleOneOf_Field12) Size() (n int) {
 	var l int
 	_ = l
-	n += 9
+	if m.Field12 != 0 {
+		n += 9
+	}
 	return n
 }
 func (m *SampleOneOf_Field13) Size() (n int) {
 	var l int
 	_ = l
-	n += 2
+	if m.Field13 {
+		n += 2
+	}
 	return n
 }
 func (m *SampleOneOf_Field14) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Field14)
-	n += 1 + l + sovOne(uint64(l))
+	if l > 0 {
+		n += 1 + l + sovOne(uint64(l))
+	}
 	return n
 }
 func (m *SampleOneOf_Field15) Size() (n int) {
@@ -2653,7 +2642,9 @@ func (m *SampleOneOf_Field15) Size() (n int) {
 	_ = l
 	if m.Field15 != nil {
 		l = len(m.Field15)
-		n += 1 + l + sovOne(uint64(l))
+		if l > 0 {
+			n += 1 + l + sovOne(uint64(l))
+		}
 	}
 	return n
 }
@@ -2685,8 +2676,7 @@ func (this *Subby) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Subby{`,
-		`Sub:` + valueToStringOne(this.Sub) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`Sub:` + fmt.Sprintf("%v", this.Sub) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2697,7 +2687,6 @@ func (this *SampleOneOf) String() string {
 	}
 	s := strings.Join([]string{`&SampleOneOf{`,
 		`TestOneof:` + fmt.Sprintf("%v", this.TestOneof) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
