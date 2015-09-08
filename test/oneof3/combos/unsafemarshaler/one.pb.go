@@ -1272,8 +1272,8 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		}
 	} else if this.TestOneof == nil {
 		return fmt.Errorf("this.TestOneof == nil && that1.TestOneof != nil")
-	} else if !this.TestOneof.Equal(that1.TestOneof) {
-		return fmt.Errorf("TestOneof this(%v) Not Equal that(%v)", this.TestOneof, that1.TestOneof)
+	} else if err := this.TestOneof.VerboseEqual(that1.TestOneof); err != nil {
+		return err
 	}
 	return nil
 }

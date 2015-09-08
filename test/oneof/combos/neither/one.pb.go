@@ -1289,8 +1289,8 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		}
 	} else if this.TestOneof == nil {
 		return fmt.Errorf("this.TestOneof == nil && that1.TestOneof != nil")
-	} else if !this.TestOneof.Equal(that1.TestOneof) {
-		return fmt.Errorf("TestOneof this(%v) Not Equal that(%v)", this.TestOneof, that1.TestOneof)
+	} else if err := this.TestOneof.VerboseEqual(that1.TestOneof); err != nil {
+		return err
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)

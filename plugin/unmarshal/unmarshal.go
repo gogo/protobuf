@@ -992,7 +992,10 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.In()
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
-
+			errFieldname := fieldname
+			if field.OneofIndex != nil {
+				errFieldname = p.GetOneOfFieldName(message, field)
+			}
 			packed := field.IsPacked()
 			p.P(`case `, strconv.Itoa(int(field.GetNumber())), `:`)
 			p.In()
@@ -1025,13 +1028,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`} else {`)
 				p.In()
-				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
+				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + errFieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
 			} else {
 				p.P(`if wireType != `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + fieldname + `", wireType)`)
+				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + errFieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
 				p.field(file.FileDescriptorProto, message, field, fieldname, proto3)

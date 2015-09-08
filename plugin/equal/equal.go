@@ -329,7 +329,19 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 					p.P(`return false`)
 				}
 				p.Out()
-				p.P(`} else if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+				if verbose {
+					p.P(`} else if err := this.`, fieldname, `.VerboseEqual(that1.`, fieldname, `); err != nil {`)
+				} else {
+					p.P(`} else if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+				}
+				p.In()
+				if verbose {
+					p.P(`return err`)
+				} else {
+					p.P(`return false`)
+				}
+				p.Out()
+				p.P(`}`)
 			} else if ctype {
 				if nullable {
 					p.P(`if that1.`, fieldname, ` == nil {`)
@@ -348,6 +360,14 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 				} else {
 					p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
 				}
+				p.In()
+				if verbose {
+					p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+				} else {
+					p.P(`return false`)
+				}
+				p.Out()
+				p.P(`}`)
 			} else {
 				if field.IsMessage() || p.IsGroup(field) {
 					if nullable {
@@ -370,15 +390,15 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 						p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 					}
 				}
+				p.In()
+				if verbose {
+					p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+				} else {
+					p.P(`return false`)
+				}
+				p.Out()
+				p.P(`}`)
 			}
-			p.In()
-			if verbose {
-				p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
-			} else {
-				p.P(`return false`)
-			}
-			p.Out()
-			p.P(`}`)
 		} else {
 			p.P(`if len(this.`, fieldname, `) != len(that1.`, fieldname, `) {`)
 			p.In()

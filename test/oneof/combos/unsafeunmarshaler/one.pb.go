@@ -1292,8 +1292,8 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		}
 	} else if this.TestOneof == nil {
 		return fmt.Errorf("this.TestOneof == nil && that1.TestOneof != nil")
-	} else if !this.TestOneof.Equal(that1.TestOneof) {
-		return fmt.Errorf("TestOneof this(%v) Not Equal that(%v)", this.TestOneof, that1.TestOneof)
+	} else if err := this.TestOneof.VerboseEqual(that1.TestOneof); err != nil {
+		return err
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
@@ -2967,7 +2967,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 			var v float64
 			if iNdEx+8 > l {
@@ -2978,7 +2978,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field1{v}
 		case 2:
 			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
 			var v float32
 			if iNdEx+4 > l {
@@ -2989,7 +2989,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field2{v}
 		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -3006,7 +3006,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field3{v}
 		case 4:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
@@ -3023,7 +3023,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field4{v}
 		case 5:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
@@ -3040,7 +3040,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field5{v}
 		case 6:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -3057,7 +3057,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field6{v}
 		case 7:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
@@ -3075,7 +3075,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field7{v}
 		case 8:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field8", wireType)
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
@@ -3093,7 +3093,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field8{int64(v)}
 		case 9:
 			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
 			if iNdEx+4 > l {
@@ -3104,7 +3104,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field9{v}
 		case 10:
 			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
 			if iNdEx+4 > l {
@@ -3115,7 +3115,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field10{v}
 		case 11:
 			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
 			if iNdEx+8 > l {
@@ -3126,7 +3126,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field11{v}
 		case 12:
 			if wireType != 1 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
 			if iNdEx+8 > l {
@@ -3137,7 +3137,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field12{v}
 		case 13:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
@@ -3155,7 +3155,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_Field13{b}
 		case 14:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field14", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -3181,7 +3181,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Field15", wireType)
 			}
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
@@ -3208,7 +3208,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			iNdEx = postIndex
 		case 16:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TestOneof", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field SubMessage", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
