@@ -677,44 +677,46 @@ func TestOldWithGroup_Group2GoString(t *testing.T) {
 	}
 }
 func TestNewNoGroupSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNewNoGroup(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func TestASize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedA(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 

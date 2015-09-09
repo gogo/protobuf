@@ -11815,23 +11815,24 @@ func TestUnrecognizedWithEmbed_EmbeddedGoString(t *testing.T) {
 	}
 }
 func TestNidOptNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -11850,23 +11851,24 @@ func BenchmarkNidOptNativeSize(b *testing.B) {
 }
 
 func TestNinOptNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -11885,23 +11887,24 @@ func BenchmarkNinOptNativeSize(b *testing.B) {
 }
 
 func TestNidRepNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -11920,23 +11923,24 @@ func BenchmarkNidRepNativeSize(b *testing.B) {
 }
 
 func TestNinRepNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -11955,23 +11959,24 @@ func BenchmarkNinRepNativeSize(b *testing.B) {
 }
 
 func TestNidRepPackedNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepPackedNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -11990,23 +11995,24 @@ func BenchmarkNidRepPackedNativeSize(b *testing.B) {
 }
 
 func TestNinRepPackedNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepPackedNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12025,23 +12031,24 @@ func BenchmarkNinRepPackedNativeSize(b *testing.B) {
 }
 
 func TestNidOptStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12060,23 +12067,24 @@ func BenchmarkNidOptStructSize(b *testing.B) {
 }
 
 func TestNinOptStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12095,23 +12103,24 @@ func BenchmarkNinOptStructSize(b *testing.B) {
 }
 
 func TestNidRepStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12130,23 +12139,24 @@ func BenchmarkNidRepStructSize(b *testing.B) {
 }
 
 func TestNinRepStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12165,23 +12175,24 @@ func BenchmarkNinRepStructSize(b *testing.B) {
 }
 
 func TestNidEmbeddedStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidEmbeddedStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12200,23 +12211,24 @@ func BenchmarkNidEmbeddedStructSize(b *testing.B) {
 }
 
 func TestNinEmbeddedStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12235,23 +12247,24 @@ func BenchmarkNinEmbeddedStructSize(b *testing.B) {
 }
 
 func TestNidNestedStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidNestedStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12270,23 +12283,24 @@ func BenchmarkNidNestedStructSize(b *testing.B) {
 }
 
 func TestNinNestedStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12305,23 +12319,24 @@ func BenchmarkNinNestedStructSize(b *testing.B) {
 }
 
 func TestNidOptCustomSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptCustom(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12340,23 +12355,24 @@ func BenchmarkNidOptCustomSize(b *testing.B) {
 }
 
 func TestCustomDashSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomDash(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12375,23 +12391,24 @@ func BenchmarkCustomDashSize(b *testing.B) {
 }
 
 func TestNinOptCustomSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptCustom(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12410,23 +12427,24 @@ func BenchmarkNinOptCustomSize(b *testing.B) {
 }
 
 func TestNidRepCustomSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepCustom(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12445,23 +12463,24 @@ func BenchmarkNidRepCustomSize(b *testing.B) {
 }
 
 func TestNinRepCustomSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepCustom(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12480,23 +12499,24 @@ func BenchmarkNinRepCustomSize(b *testing.B) {
 }
 
 func TestNinOptNativeUnionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeUnion(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12515,23 +12535,24 @@ func BenchmarkNinOptNativeUnionSize(b *testing.B) {
 }
 
 func TestNinOptStructUnionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStructUnion(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12550,23 +12571,24 @@ func BenchmarkNinOptStructUnionSize(b *testing.B) {
 }
 
 func TestNinEmbeddedStructUnionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12585,23 +12607,24 @@ func BenchmarkNinEmbeddedStructUnionSize(b *testing.B) {
 }
 
 func TestNinNestedStructUnionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStructUnion(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12620,23 +12643,24 @@ func BenchmarkNinNestedStructUnionSize(b *testing.B) {
 }
 
 func TestTreeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTree(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12655,23 +12679,24 @@ func BenchmarkTreeSize(b *testing.B) {
 }
 
 func TestOrBranchSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOrBranch(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12690,23 +12715,24 @@ func BenchmarkOrBranchSize(b *testing.B) {
 }
 
 func TestAndBranchSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndBranch(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12725,23 +12751,24 @@ func BenchmarkAndBranchSize(b *testing.B) {
 }
 
 func TestLeafSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedLeaf(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12760,23 +12787,24 @@ func BenchmarkLeafSize(b *testing.B) {
 }
 
 func TestDeepTreeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepTree(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12795,23 +12823,24 @@ func BenchmarkDeepTreeSize(b *testing.B) {
 }
 
 func TestADeepBranchSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedADeepBranch(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12830,23 +12859,24 @@ func BenchmarkADeepBranchSize(b *testing.B) {
 }
 
 func TestAndDeepBranchSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndDeepBranch(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12865,23 +12895,24 @@ func BenchmarkAndDeepBranchSize(b *testing.B) {
 }
 
 func TestDeepLeafSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepLeaf(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12900,23 +12931,24 @@ func BenchmarkDeepLeafSize(b *testing.B) {
 }
 
 func TestNilSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNil(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12935,23 +12967,24 @@ func BenchmarkNilSize(b *testing.B) {
 }
 
 func TestNidOptEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -12970,23 +13003,24 @@ func BenchmarkNidOptEnumSize(b *testing.B) {
 }
 
 func TestNinOptEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13005,23 +13039,24 @@ func BenchmarkNinOptEnumSize(b *testing.B) {
 }
 
 func TestNidRepEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13040,23 +13075,24 @@ func BenchmarkNidRepEnumSize(b *testing.B) {
 }
 
 func TestNinRepEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13075,23 +13111,24 @@ func BenchmarkNinRepEnumSize(b *testing.B) {
 }
 
 func TestNinOptEnumDefaultSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnumDefault(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13110,23 +13147,24 @@ func BenchmarkNinOptEnumDefaultSize(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13145,23 +13183,24 @@ func BenchmarkAnotherNinOptEnumSize(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumDefaultSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13180,23 +13219,24 @@ func BenchmarkAnotherNinOptEnumDefaultSize(b *testing.B) {
 }
 
 func TestTimerSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTimer(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13215,23 +13255,24 @@ func BenchmarkTimerSize(b *testing.B) {
 }
 
 func TestMyExtendableSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMyExtendable(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13250,23 +13291,24 @@ func BenchmarkMyExtendableSize(b *testing.B) {
 }
 
 func TestOtherExtenableSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOtherExtenable(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13285,23 +13327,24 @@ func BenchmarkOtherExtenableSize(b *testing.B) {
 }
 
 func TestNestedDefinitionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13320,23 +13363,24 @@ func BenchmarkNestedDefinitionSize(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessageSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13355,23 +13399,24 @@ func BenchmarkNestedDefinition_NestedMessageSize(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessage_NestedNestedMsgSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13390,23 +13435,24 @@ func BenchmarkNestedDefinition_NestedMessage_NestedNestedMsgSize(b *testing.B) {
 }
 
 func TestNestedScopeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedScope(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13425,23 +13471,24 @@ func BenchmarkNestedScopeSize(b *testing.B) {
 }
 
 func TestNinOptNativeDefaultSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeDefault(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13460,23 +13507,24 @@ func BenchmarkNinOptNativeDefaultSize(b *testing.B) {
 }
 
 func TestCustomContainerSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomContainer(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13495,23 +13543,24 @@ func BenchmarkCustomContainerSize(b *testing.B) {
 }
 
 func TestCustomNameNidOptNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNidOptNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13530,23 +13579,24 @@ func BenchmarkCustomNameNidOptNativeSize(b *testing.B) {
 }
 
 func TestCustomNameNinOptNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinOptNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13565,23 +13615,24 @@ func BenchmarkCustomNameNinOptNativeSize(b *testing.B) {
 }
 
 func TestCustomNameNinRepNativeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinRepNative(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13600,23 +13651,24 @@ func BenchmarkCustomNameNinRepNativeSize(b *testing.B) {
 }
 
 func TestCustomNameNinStructSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinStruct(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13635,23 +13687,24 @@ func BenchmarkCustomNameNinStructSize(b *testing.B) {
 }
 
 func TestCustomNameCustomTypeSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameCustomType(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13670,23 +13723,24 @@ func BenchmarkCustomNameCustomTypeSize(b *testing.B) {
 }
 
 func TestCustomNameNinEmbeddedStructUnionSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13705,23 +13759,24 @@ func BenchmarkCustomNameNinEmbeddedStructUnionSize(b *testing.B) {
 }
 
 func TestCustomNameEnumSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameEnum(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13740,23 +13795,24 @@ func BenchmarkCustomNameEnumSize(b *testing.B) {
 }
 
 func TestNoExtensionsMapSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNoExtensionsMap(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13775,23 +13831,24 @@ func BenchmarkNoExtensionsMapSize(b *testing.B) {
 }
 
 func TestUnrecognizedSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognized(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13810,23 +13867,24 @@ func BenchmarkUnrecognizedSize(b *testing.B) {
 }
 
 func TestUnrecognizedWithInnerSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13845,23 +13903,24 @@ func BenchmarkUnrecognizedWithInnerSize(b *testing.B) {
 }
 
 func TestUnrecognizedWithInner_InnerSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13880,23 +13939,24 @@ func BenchmarkUnrecognizedWithInner_InnerSize(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbedSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
@@ -13915,23 +13975,24 @@ func BenchmarkUnrecognizedWithEmbedSize(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbed_EmbeddedSize(t *testing.T) {
-	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
-		panic(err)
+		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	size := p.Size()
 	if len(data) != size {
-		t.Errorf("size %v != marshalled size %v", size, len(data))
+		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("size %v != before marshal proto.Size %v", size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("size %v != after marshal proto.Size %v", size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
