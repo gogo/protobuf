@@ -12,7 +12,7 @@
 		Subby
 		AllTypesOneOf
 		TwoOneofs
-		CustomTypeOneof
+		CustomOneof
 */
 package one
 
@@ -687,102 +687,118 @@ func _TwoOneofs_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buff
 	}
 }
 
-type CustomTypeOneof struct {
+type CustomOneof struct {
 	// Types that are valid to be assigned to Custom:
-	//	*CustomTypeOneof_Stringy
-	//	*CustomTypeOneof_CustomType
-	//	*CustomTypeOneof_CastType
-	Custom           isCustomTypeOneof_Custom `protobuf_oneof:"custom"`
-	XXX_unrecognized []byte                   `json:"-"`
+	//	*CustomOneof_Stringy
+	//	*CustomOneof_CustomType
+	//	*CustomOneof_CastType
+	//	*CustomOneof_MyCustomName
+	Custom           isCustomOneof_Custom `protobuf_oneof:"custom"`
+	XXX_unrecognized []byte               `json:"-"`
 }
 
-func (m *CustomTypeOneof) Reset()      { *m = CustomTypeOneof{} }
-func (*CustomTypeOneof) ProtoMessage() {}
+func (m *CustomOneof) Reset()      { *m = CustomOneof{} }
+func (*CustomOneof) ProtoMessage() {}
 
-type isCustomTypeOneof_Custom interface {
-	isCustomTypeOneof_Custom()
+type isCustomOneof_Custom interface {
+	isCustomOneof_Custom()
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	Size() int
 }
 
-type CustomTypeOneof_Stringy struct {
+type CustomOneof_Stringy struct {
 	Stringy string `protobuf:"bytes,34,opt,name=Stringy"`
 }
-type CustomTypeOneof_CustomType struct {
+type CustomOneof_CustomType struct {
 	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
 }
-type CustomTypeOneof_CastType struct {
+type CustomOneof_CastType struct {
 	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
 }
+type CustomOneof_MyCustomName struct {
+	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName"`
+}
 
-func (*CustomTypeOneof_Stringy) isCustomTypeOneof_Custom()    {}
-func (*CustomTypeOneof_CustomType) isCustomTypeOneof_Custom() {}
-func (*CustomTypeOneof_CastType) isCustomTypeOneof_Custom()   {}
+func (*CustomOneof_Stringy) isCustomOneof_Custom()      {}
+func (*CustomOneof_CustomType) isCustomOneof_Custom()   {}
+func (*CustomOneof_CastType) isCustomOneof_Custom()     {}
+func (*CustomOneof_MyCustomName) isCustomOneof_Custom() {}
 
-func (m *CustomTypeOneof) GetCustom() isCustomTypeOneof_Custom {
+func (m *CustomOneof) GetCustom() isCustomOneof_Custom {
 	if m != nil {
 		return m.Custom
 	}
 	return nil
 }
 
-func (m *CustomTypeOneof) GetStringy() string {
-	if x, ok := m.GetCustom().(*CustomTypeOneof_Stringy); ok {
+func (m *CustomOneof) GetStringy() string {
+	if x, ok := m.GetCustom().(*CustomOneof_Stringy); ok {
 		return x.Stringy
 	}
 	return ""
 }
 
-func (m *CustomTypeOneof) GetCastType() github_com_gogo_protobuf_test_casttype.MyUint64Type {
-	if x, ok := m.GetCustom().(*CustomTypeOneof_CastType); ok {
+func (m *CustomOneof) GetCastType() github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	if x, ok := m.GetCustom().(*CustomOneof_CastType); ok {
 		return x.CastType
 	}
 	return 0
 }
 
+func (m *CustomOneof) GetMyCustomName() int64 {
+	if x, ok := m.GetCustom().(*CustomOneof_MyCustomName); ok {
+		return x.MyCustomName
+	}
+	return 0
+}
+
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*CustomTypeOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _CustomTypeOneof_OneofMarshaler, _CustomTypeOneof_OneofUnmarshaler, []interface{}{
-		(*CustomTypeOneof_Stringy)(nil),
-		(*CustomTypeOneof_CustomType)(nil),
-		(*CustomTypeOneof_CastType)(nil),
+func (*CustomOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
+	return _CustomOneof_OneofMarshaler, _CustomOneof_OneofUnmarshaler, []interface{}{
+		(*CustomOneof_Stringy)(nil),
+		(*CustomOneof_CustomType)(nil),
+		(*CustomOneof_CastType)(nil),
+		(*CustomOneof_MyCustomName)(nil),
 	}
 }
 
-func _CustomTypeOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*CustomTypeOneof)
+func _CustomOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*CustomOneof)
 	// custom
 	switch x := m.Custom.(type) {
-	case *CustomTypeOneof_Stringy:
+	case *CustomOneof_Stringy:
 		_ = b.EncodeVarint(34<<3 | proto.WireBytes)
 		_ = b.EncodeStringBytes(x.Stringy)
-	case *CustomTypeOneof_CustomType:
+	case *CustomOneof_CustomType:
 		_ = b.EncodeVarint(35<<3 | proto.WireBytes)
 		data, err := x.CustomType.Marshal()
 		if err != nil {
 			return err
 		}
 		_ = b.EncodeRawBytes(data)
-	case *CustomTypeOneof_CastType:
+	case *CustomOneof_CastType:
 		_ = b.EncodeVarint(36<<3 | proto.WireVarint)
 		_ = b.EncodeVarint(uint64(x.CastType))
+	case *CustomOneof_MyCustomName:
+		_ = b.EncodeVarint(37<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.MyCustomName))
 	case nil:
 	default:
-		return fmt.Errorf("CustomTypeOneof.Custom has unexpected type %T", x)
+		return fmt.Errorf("CustomOneof.Custom has unexpected type %T", x)
 	}
 	return nil
 }
 
-func _CustomTypeOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*CustomTypeOneof)
+func _CustomOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*CustomOneof)
 	switch tag {
 	case 34: // custom.Stringy
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeStringBytes()
-		m.Custom = &CustomTypeOneof_Stringy{x}
+		m.Custom = &CustomOneof_Stringy{x}
 		return true, err
 	case 35: // custom.CustomType
 		if wire != proto.WireBytes {
@@ -795,14 +811,21 @@ func _CustomTypeOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *prot
 		var cc github_com_gogo_protobuf_test_custom.Uint128
 		c := &cc
 		err = c.Unmarshal(x)
-		m.Custom = &CustomTypeOneof_CustomType{*c}
+		m.Custom = &CustomOneof_CustomType{*c}
 		return true, err
 	case 36: // custom.CastType
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.Custom = &CustomTypeOneof_CastType{github_com_gogo_protobuf_test_casttype.MyUint64Type(x)}
+		m.Custom = &CustomOneof_CastType{github_com_gogo_protobuf_test_casttype.MyUint64Type(x)}
+		return true, err
+	case 37: // custom.CustomName
+		if wire != proto.WireVarint {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeVarint()
+		m.Custom = &CustomOneof_MyCustomName{int64(x)}
 		return true, err
 	default:
 		return false, nil
@@ -818,7 +841,7 @@ func (this *AllTypesOneOf) Description() (desc *google_protobuf.FileDescriptorSe
 func (this *TwoOneofs) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *CustomTypeOneof) Description() (desc *google_protobuf.FileDescriptorSet) {
+func (this *CustomOneof) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return OneDescription()
 }
 func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
@@ -1502,7 +1525,7 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("one"), XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("two"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomTypeOneof"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Stringy"), Number: func(v int32) *int32 { return &v }(34), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("one"), XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("two"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomOneof"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Stringy"), Number: func(v int32) *int32 { return &v }(34), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -1514,7 +1537,11 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("custom"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomName"), Number: func(v int32) *int32 { return &v }(37), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(3), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65004: proto.NewExtension([]byte{0xe2, 0xde, 0x1f, 0xc, 0x4d, 0x79, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x4e, 0x61, 0x6d, 0x65})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("custom"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
 func (this *Subby) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -2838,7 +2865,7 @@ func (this *TwoOneofs_SubMessage2) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *CustomTypeOneof) VerboseEqual(that interface{}) error {
+func (this *CustomOneof) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -2846,17 +2873,17 @@ func (this *CustomTypeOneof) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*CustomTypeOneof)
+	that1, ok := that.(*CustomOneof)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomTypeOneof")
+		return fmt.Errorf("that is not of type *CustomOneof")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *CustomTypeOneof but is nil && this != nil")
+		return fmt.Errorf("that is type *CustomOneof but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomTypeOneofbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneofbut is not nil && this == nil")
 	}
 	if that1.Custom == nil {
 		if this.Custom != nil {
@@ -2872,7 +2899,7 @@ func (this *CustomTypeOneof) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *CustomTypeOneof_Stringy) VerboseEqual(that interface{}) error {
+func (this *CustomOneof_Stringy) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -2880,24 +2907,24 @@ func (this *CustomTypeOneof_Stringy) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*CustomTypeOneof_Stringy)
+	that1, ok := that.(*CustomOneof_Stringy)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomTypeOneof_Stringy")
+		return fmt.Errorf("that is not of type *CustomOneof_Stringy")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *CustomTypeOneof_Stringy but is nil && this != nil")
+		return fmt.Errorf("that is type *CustomOneof_Stringy but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomTypeOneof_Stringybut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_Stringybut is not nil && this == nil")
 	}
 	if this.Stringy != that1.Stringy {
 		return fmt.Errorf("Stringy this(%v) Not Equal that(%v)", this.Stringy, that1.Stringy)
 	}
 	return nil
 }
-func (this *CustomTypeOneof_CustomType) VerboseEqual(that interface{}) error {
+func (this *CustomOneof_CustomType) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -2905,24 +2932,24 @@ func (this *CustomTypeOneof_CustomType) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*CustomTypeOneof_CustomType)
+	that1, ok := that.(*CustomOneof_CustomType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomTypeOneof_CustomType")
+		return fmt.Errorf("that is not of type *CustomOneof_CustomType")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *CustomTypeOneof_CustomType but is nil && this != nil")
+		return fmt.Errorf("that is type *CustomOneof_CustomType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomTypeOneof_CustomTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_CustomTypebut is not nil && this == nil")
 	}
 	if !this.CustomType.Equal(that1.CustomType) {
 		return fmt.Errorf("CustomType this(%v) Not Equal that(%v)", this.CustomType, that1.CustomType)
 	}
 	return nil
 }
-func (this *CustomTypeOneof_CastType) VerboseEqual(that interface{}) error {
+func (this *CustomOneof_CastType) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -2930,24 +2957,49 @@ func (this *CustomTypeOneof_CastType) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*CustomTypeOneof_CastType)
+	that1, ok := that.(*CustomOneof_CastType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomTypeOneof_CastType")
+		return fmt.Errorf("that is not of type *CustomOneof_CastType")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *CustomTypeOneof_CastType but is nil && this != nil")
+		return fmt.Errorf("that is type *CustomOneof_CastType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomTypeOneof_CastTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_CastTypebut is not nil && this == nil")
 	}
 	if this.CastType != that1.CastType {
 		return fmt.Errorf("CastType this(%v) Not Equal that(%v)", this.CastType, that1.CastType)
 	}
 	return nil
 }
-func (this *CustomTypeOneof) Equal(that interface{}) bool {
+func (this *CustomOneof_MyCustomName) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomOneof_MyCustomName)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomOneof_MyCustomName")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomOneof_MyCustomName but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomOneof_MyCustomNamebut is not nil && this == nil")
+	}
+	if this.MyCustomName != that1.MyCustomName {
+		return fmt.Errorf("MyCustomName this(%v) Not Equal that(%v)", this.MyCustomName, that1.MyCustomName)
+	}
+	return nil
+}
+func (this *CustomOneof) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2955,7 +3007,7 @@ func (this *CustomTypeOneof) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*CustomTypeOneof)
+	that1, ok := that.(*CustomOneof)
 	if !ok {
 		return false
 	}
@@ -2981,7 +3033,7 @@ func (this *CustomTypeOneof) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *CustomTypeOneof_Stringy) Equal(that interface{}) bool {
+func (this *CustomOneof_Stringy) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2989,7 +3041,7 @@ func (this *CustomTypeOneof_Stringy) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*CustomTypeOneof_Stringy)
+	that1, ok := that.(*CustomOneof_Stringy)
 	if !ok {
 		return false
 	}
@@ -3006,7 +3058,7 @@ func (this *CustomTypeOneof_Stringy) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *CustomTypeOneof_CustomType) Equal(that interface{}) bool {
+func (this *CustomOneof_CustomType) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -3014,7 +3066,7 @@ func (this *CustomTypeOneof_CustomType) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*CustomTypeOneof_CustomType)
+	that1, ok := that.(*CustomOneof_CustomType)
 	if !ok {
 		return false
 	}
@@ -3031,7 +3083,7 @@ func (this *CustomTypeOneof_CustomType) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *CustomTypeOneof_CastType) Equal(that interface{}) bool {
+func (this *CustomOneof_CastType) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -3039,7 +3091,7 @@ func (this *CustomTypeOneof_CastType) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*CustomTypeOneof_CastType)
+	that1, ok := that.(*CustomOneof_CastType)
 	if !ok {
 		return false
 	}
@@ -3052,6 +3104,31 @@ func (this *CustomTypeOneof_CastType) Equal(that interface{}) bool {
 		return false
 	}
 	if this.CastType != that1.CastType {
+		return false
+	}
+	return true
+}
+func (this *CustomOneof_MyCustomName) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomOneof_MyCustomName)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.MyCustomName != that1.MyCustomName {
 		return false
 	}
 	return true
@@ -3260,37 +3337,45 @@ func (this *TwoOneofs_SubMessage2) GoString() string {
 		`SubMessage2:` + fmt.Sprintf("%#v", this.SubMessage2) + `}`}, ", ")
 	return s
 }
-func (this *CustomTypeOneof) GoString() string {
+func (this *CustomOneof) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.CustomTypeOneof{` +
+	s := strings.Join([]string{`&one.CustomOneof{` +
 		`Custom:` + fmt.Sprintf("%#v", this.Custom),
 		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
-func (this *CustomTypeOneof_Stringy) GoString() string {
+func (this *CustomOneof_Stringy) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.CustomTypeOneof_Stringy{` +
+	s := strings.Join([]string{`&one.CustomOneof_Stringy{` +
 		`Stringy:` + fmt.Sprintf("%#v", this.Stringy) + `}`}, ", ")
 	return s
 }
-func (this *CustomTypeOneof_CustomType) GoString() string {
+func (this *CustomOneof_CustomType) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.CustomTypeOneof_CustomType{` +
+	s := strings.Join([]string{`&one.CustomOneof_CustomType{` +
 		`CustomType:` + fmt.Sprintf("%#v", this.CustomType) + `}`}, ", ")
 	return s
 }
-func (this *CustomTypeOneof_CastType) GoString() string {
+func (this *CustomOneof_CastType) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.CustomTypeOneof_CastType{` +
+	s := strings.Join([]string{`&one.CustomOneof_CastType{` +
 		`CastType:` + fmt.Sprintf("%#v", this.CastType) + `}`}, ", ")
+	return s
+}
+func (this *CustomOneof_MyCustomName) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.CustomOneof_MyCustomName{` +
+		`MyCustomName:` + fmt.Sprintf("%#v", this.MyCustomName) + `}`}, ", ")
 	return s
 }
 func valueToGoStringOne(v interface{}, typ string) string {
@@ -3550,37 +3635,47 @@ func NewPopulatedTwoOneofs_SubMessage2(r randyOne, easy bool) *TwoOneofs_SubMess
 	this.SubMessage2 = NewPopulatedSubby(r, easy)
 	return this
 }
-func NewPopulatedCustomTypeOneof(r randyOne, easy bool) *CustomTypeOneof {
-	this := &CustomTypeOneof{}
-	oneofNumber_Custom := []int32{34, 35, 36}[r.Intn(3)]
+func NewPopulatedCustomOneof(r randyOne, easy bool) *CustomOneof {
+	this := &CustomOneof{}
+	oneofNumber_Custom := []int32{34, 35, 36, 37}[r.Intn(4)]
 	switch oneofNumber_Custom {
 	case 34:
-		this.Custom = NewPopulatedCustomTypeOneof_Stringy(r, easy)
+		this.Custom = NewPopulatedCustomOneof_Stringy(r, easy)
 	case 35:
-		this.Custom = NewPopulatedCustomTypeOneof_CustomType(r, easy)
+		this.Custom = NewPopulatedCustomOneof_CustomType(r, easy)
 	case 36:
-		this.Custom = NewPopulatedCustomTypeOneof_CastType(r, easy)
+		this.Custom = NewPopulatedCustomOneof_CastType(r, easy)
+	case 37:
+		this.Custom = NewPopulatedCustomOneof_MyCustomName(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedOne(r, 37)
+		this.XXX_unrecognized = randUnrecognizedOne(r, 38)
 	}
 	return this
 }
 
-func NewPopulatedCustomTypeOneof_Stringy(r randyOne, easy bool) *CustomTypeOneof_Stringy {
-	this := &CustomTypeOneof_Stringy{}
+func NewPopulatedCustomOneof_Stringy(r randyOne, easy bool) *CustomOneof_Stringy {
+	this := &CustomOneof_Stringy{}
 	this.Stringy = randStringOne(r)
 	return this
 }
-func NewPopulatedCustomTypeOneof_CustomType(r randyOne, easy bool) *CustomTypeOneof_CustomType {
-	this := &CustomTypeOneof_CustomType{}
+func NewPopulatedCustomOneof_CustomType(r randyOne, easy bool) *CustomOneof_CustomType {
+	this := &CustomOneof_CustomType{}
 	v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	this.CustomType = *v4
 	return this
 }
-func NewPopulatedCustomTypeOneof_CastType(r randyOne, easy bool) *CustomTypeOneof_CastType {
-	this := &CustomTypeOneof_CastType{}
+func NewPopulatedCustomOneof_CastType(r randyOne, easy bool) *CustomOneof_CastType {
+	this := &CustomOneof_CastType{}
 	this.CastType = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+	return this
+}
+func NewPopulatedCustomOneof_MyCustomName(r randyOne, easy bool) *CustomOneof_MyCustomName {
+	this := &CustomOneof_MyCustomName{}
+	this.MyCustomName = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.MyCustomName *= -1
+	}
 	return this
 }
 
@@ -3842,7 +3937,7 @@ func (m *TwoOneofs_SubMessage2) Size() (n int) {
 	}
 	return n
 }
-func (m *CustomTypeOneof) Size() (n int) {
+func (m *CustomOneof) Size() (n int) {
 	var l int
 	_ = l
 	if m.Custom != nil {
@@ -3854,24 +3949,30 @@ func (m *CustomTypeOneof) Size() (n int) {
 	return n
 }
 
-func (m *CustomTypeOneof_Stringy) Size() (n int) {
+func (m *CustomOneof_Stringy) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Stringy)
 	n += 2 + l + sovOne(uint64(l))
 	return n
 }
-func (m *CustomTypeOneof_CustomType) Size() (n int) {
+func (m *CustomOneof_CustomType) Size() (n int) {
 	var l int
 	_ = l
 	l = m.CustomType.Size()
 	n += 2 + l + sovOne(uint64(l))
 	return n
 }
-func (m *CustomTypeOneof_CastType) Size() (n int) {
+func (m *CustomOneof_CastType) Size() (n int) {
 	var l int
 	_ = l
 	n += 2 + sovOne(uint64(m.CastType))
+	return n
+}
+func (m *CustomOneof_MyCustomName) Size() (n int) {
+	var l int
+	_ = l
+	n += 2 + sovOne(uint64(m.MyCustomName))
 	return n
 }
 
@@ -4142,43 +4243,53 @@ func (this *TwoOneofs_SubMessage2) String() string {
 	}, "")
 	return s
 }
-func (this *CustomTypeOneof) String() string {
+func (this *CustomOneof) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&CustomTypeOneof{`,
+	s := strings.Join([]string{`&CustomOneof{`,
 		`Custom:` + fmt.Sprintf("%v", this.Custom) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *CustomTypeOneof_Stringy) String() string {
+func (this *CustomOneof_Stringy) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&CustomTypeOneof_Stringy{`,
+	s := strings.Join([]string{`&CustomOneof_Stringy{`,
 		`Stringy:` + fmt.Sprintf("%v", this.Stringy) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *CustomTypeOneof_CustomType) String() string {
+func (this *CustomOneof_CustomType) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&CustomTypeOneof_CustomType{`,
+	s := strings.Join([]string{`&CustomOneof_CustomType{`,
 		`CustomType:` + fmt.Sprintf("%v", this.CustomType) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *CustomTypeOneof_CastType) String() string {
+func (this *CustomOneof_CastType) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&CustomTypeOneof_CastType{`,
+	s := strings.Join([]string{`&CustomOneof_CastType{`,
 		`CastType:` + fmt.Sprintf("%v", this.CastType) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomOneof_MyCustomName) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomOneof_MyCustomName{`,
+		`MyCustomName:` + fmt.Sprintf("%v", this.MyCustomName) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4747,7 +4858,7 @@ func (m *TwoOneofs) Unmarshal(data []byte) error {
 
 	return nil
 }
-func (m *CustomTypeOneof) Unmarshal(data []byte) error {
+func (m *CustomOneof) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4790,7 +4901,7 @@ func (m *CustomTypeOneof) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Custom = &CustomTypeOneof_Stringy{string(data[iNdEx:postIndex])}
+			m.Custom = &CustomOneof_Stringy{string(data[iNdEx:postIndex])}
 			iNdEx = postIndex
 		case 35:
 			if wireType != 2 {
@@ -4820,7 +4931,7 @@ func (m *CustomTypeOneof) Unmarshal(data []byte) error {
 			if err := v.Unmarshal(data[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Custom = &CustomTypeOneof_CustomType{*v}
+			m.Custom = &CustomOneof_CustomType{*v}
 			iNdEx = postIndex
 		case 36:
 			if wireType != 0 {
@@ -4838,7 +4949,24 @@ func (m *CustomTypeOneof) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			m.Custom = &CustomTypeOneof_CastType{v}
+			m.Custom = &CustomOneof_CastType{v}
+		case 37:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MyCustomName", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Custom = &CustomOneof_MyCustomName{v}
 		default:
 			var sizeOfWire int
 			for {

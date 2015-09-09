@@ -12,7 +12,7 @@ It has these top-level messages:
 	Subby
 	AllTypesOneOf
 	TwoOneofs
-	CustomTypeOneof
+	CustomOneof
 */
 package one
 
@@ -219,15 +219,15 @@ func TestTwoOneofsMarshalTo(t *testing.T) {
 	}
 }
 
-func TestCustomTypeOneofProto(t *testing.T) {
+func TestCustomOneofProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedCustomTypeOneof(popr, false)
+	p := NewPopulatedCustomOneof(popr, false)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -253,10 +253,10 @@ func TestCustomTypeOneofProto(t *testing.T) {
 	}
 }
 
-func TestCustomTypeOneofMarshalTo(t *testing.T) {
+func TestCustomOneofMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedCustomTypeOneof(popr, false)
+	p := NewPopulatedCustomOneof(popr, false)
 	size := p.Size()
 	data := make([]byte, size)
 	for i := range data {
@@ -266,7 +266,7 @@ func TestCustomTypeOneofMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -344,16 +344,16 @@ func TestTwoOneofsJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestCustomTypeOneofJSON(t *testing.T) {
+func TestCustomOneofJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedCustomTypeOneof(popr, true)
+	p := NewPopulatedCustomOneof(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -467,12 +467,12 @@ func TestTwoOneofsProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestCustomTypeOneofProtoText(t *testing.T) {
+func TestCustomOneofProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedCustomTypeOneof(popr, true)
+	p := NewPopulatedCustomOneof(popr, true)
 	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -484,12 +484,12 @@ func TestCustomTypeOneofProtoText(t *testing.T) {
 	}
 }
 
-func TestCustomTypeOneofProtoCompactText(t *testing.T) {
+func TestCustomOneofProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedCustomTypeOneof(popr, true)
+	p := NewPopulatedCustomOneof(popr, true)
 	data := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -549,14 +549,14 @@ func TestTwoOneofsVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestCustomTypeOneofVerboseEqual(t *testing.T) {
+func TestCustomOneofVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedCustomTypeOneof(popr, false)
+	p := NewPopulatedCustomOneof(popr, false)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &CustomTypeOneof{}
+	msg := &CustomOneof{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		panic(err)
 	}
@@ -603,9 +603,9 @@ func TestTwoOneofsGoString(t *testing.T) {
 		panic(err)
 	}
 }
-func TestCustomTypeOneofGoString(t *testing.T) {
+func TestCustomOneofGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedCustomTypeOneof(popr, false)
+	p := NewPopulatedCustomOneof(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -679,9 +679,9 @@ func TestTwoOneofsSize(t *testing.T) {
 	}
 }
 
-func TestCustomTypeOneofSize(t *testing.T) {
+func TestCustomOneofSize(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedCustomTypeOneof(popr, true)
+	p := NewPopulatedCustomOneof(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -727,9 +727,9 @@ func TestTwoOneofsStringer(t *testing.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestCustomTypeOneofStringer(t *testing.T) {
+func TestCustomOneofStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedCustomTypeOneof(popr, false)
+	p := NewPopulatedCustomOneof(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {

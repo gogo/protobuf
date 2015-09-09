@@ -76,10 +76,6 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and a non-nullable field\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}
-			if gogoproto.IsCustomName(field) {
-				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and have a custom name\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
-				os.Exit(1)
-			}
 			if gogoproto.IsUnion(file.FileDescriptorProto, msg.DescriptorProto) {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and in an union (deprecated)\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
