@@ -216,13 +216,13 @@ func TestTextOneof(t *testing.T) {
 		// zero message
 		{&pb.Communique{}, ``},
 		// scalar field
-		{&pb.Communique{Union: &pb.Communique_Number{4}}, `number:4`},
+		{&pb.Communique{Union: &pb.Communique_Number{Number: 4}}, `number:4`},
 		// message field
 		{&pb.Communique{Union: &pb.Communique_Msg{
-			&pb.Strings{StringField: proto.String("why hello!")},
+			Msg: &pb.Strings{StringField: proto.String("why hello!")},
 		}}, `msg:<string_field:"why hello!" >`},
 		// bad oneof (should not panic)
-		{&pb.Communique{Union: &pb.Communique_Msg{nil}}, `msg:/* nil */`},
+		{&pb.Communique{Union: &pb.Communique_Msg{Msg: nil}}, `msg:/* nil */`},
 	}
 	for _, test := range tests {
 		got := strings.TrimSpace(test.m.String())

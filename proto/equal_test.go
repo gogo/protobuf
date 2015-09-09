@@ -182,20 +182,20 @@ var EqualTests = []struct {
 	},
 	{
 		"oneof same",
-		&pb.Communique{Union: &pb.Communique_Number{41}},
-		&pb.Communique{Union: &pb.Communique_Number{41}},
+		&pb.Communique{Union: &pb.Communique_Number{Number: 41}},
+		&pb.Communique{Union: &pb.Communique_Number{Number: 41}},
 		true,
 	},
 	{
 		"oneof one nil",
-		&pb.Communique{Union: &pb.Communique_Number{41}},
+		&pb.Communique{Union: &pb.Communique_Number{Number: 41}},
 		&pb.Communique{},
 		false,
 	},
 	{
 		"oneof different",
-		&pb.Communique{Union: &pb.Communique_Number{41}},
-		&pb.Communique{Union: &pb.Communique_Name{"Bobby Tables"}},
+		&pb.Communique{Union: &pb.Communique_Number{Number: 41}},
+		&pb.Communique{Union: &pb.Communique_Name{Name: "Bobby Tables"}},
 		false,
 	},
 }

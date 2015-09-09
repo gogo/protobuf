@@ -235,23 +235,23 @@ var mergeTests = []struct {
 	// Oneof fields should merge by assignment.
 	{
 		src: &pb.Communique{
-			Union: &pb.Communique_Number{41},
+			Union: &pb.Communique_Number{Number: 41},
 		},
 		dst: &pb.Communique{
-			Union: &pb.Communique_Name{"Bobby Tables"},
+			Union: &pb.Communique_Name{Name: "Bobby Tables"},
 		},
 		want: &pb.Communique{
-			Union: &pb.Communique_Number{41},
+			Union: &pb.Communique_Number{Number: 41},
 		},
 	},
 	// Oneof nil is the same as not set.
 	{
 		src: &pb.Communique{},
 		dst: &pb.Communique{
-			Union: &pb.Communique_Name{"Bobby Tables"},
+			Union: &pb.Communique_Name{Name: "Bobby Tables"},
 		},
 		want: &pb.Communique{
-			Union: &pb.Communique_Name{"Bobby Tables"},
+			Union: &pb.Communique_Name{Name: "Bobby Tables"},
 		},
 	},
 }

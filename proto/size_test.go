@@ -126,8 +126,8 @@ var SizeTests = []struct {
 	{"map field with big numeric key", &pb.MessageWithMap{NameMapping: map[int32]string{0xf00d: "om nom nom"}}},
 
 	{"oneof not set", &pb.Communique{}},
-	{"oneof int32", &pb.Communique{Union: &pb.Communique_Number{3}}},
-	{"oneof string", &pb.Communique{Union: &pb.Communique_Name{"Rhythmic Fman"}}},
+	{"oneof int32", &pb.Communique{Union: &pb.Communique_Number{Number: 3}}},
+	{"oneof string", &pb.Communique{Union: &pb.Communique_Name{Name: "Rhythmic Fman"}}},
 }
 
 func TestSize(t *testing.T) {
