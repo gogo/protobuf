@@ -10,7 +10,9 @@ It is generated from these files:
 
 It has these top-level messages:
 	Subby
-	SampleOneOf
+	AllTypesOneOf
+	TwoOneofs
+	CustomTypeOneof
 */
 package one
 
@@ -19,6 +21,8 @@ import fmt "fmt"
 import math "math"
 
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
+
+import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 
 import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
@@ -45,335 +49,335 @@ type Subby struct {
 func (m *Subby) Reset()      { *m = Subby{} }
 func (*Subby) ProtoMessage() {}
 
-type SampleOneOf struct {
+type AllTypesOneOf struct {
 	// Types that are valid to be assigned to TestOneof:
-	//	*SampleOneOf_Field1
-	//	*SampleOneOf_Field2
-	//	*SampleOneOf_Field3
-	//	*SampleOneOf_Field4
-	//	*SampleOneOf_Field5
-	//	*SampleOneOf_Field6
-	//	*SampleOneOf_Field7
-	//	*SampleOneOf_Field8
-	//	*SampleOneOf_Field9
-	//	*SampleOneOf_Field10
-	//	*SampleOneOf_Field11
-	//	*SampleOneOf_Field12
-	//	*SampleOneOf_Field13
-	//	*SampleOneOf_Field14
-	//	*SampleOneOf_Field15
-	//	*SampleOneOf_SubMessage
-	TestOneof        isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
-	XXX_unrecognized []byte                  `json:"-"`
+	//	*AllTypesOneOf_Field1
+	//	*AllTypesOneOf_Field2
+	//	*AllTypesOneOf_Field3
+	//	*AllTypesOneOf_Field4
+	//	*AllTypesOneOf_Field5
+	//	*AllTypesOneOf_Field6
+	//	*AllTypesOneOf_Field7
+	//	*AllTypesOneOf_Field8
+	//	*AllTypesOneOf_Field9
+	//	*AllTypesOneOf_Field10
+	//	*AllTypesOneOf_Field11
+	//	*AllTypesOneOf_Field12
+	//	*AllTypesOneOf_Field13
+	//	*AllTypesOneOf_Field14
+	//	*AllTypesOneOf_Field15
+	//	*AllTypesOneOf_SubMessage
+	TestOneof        isAllTypesOneOf_TestOneof `protobuf_oneof:"test_oneof"`
+	XXX_unrecognized []byte                    `json:"-"`
 }
 
-func (m *SampleOneOf) Reset()      { *m = SampleOneOf{} }
-func (*SampleOneOf) ProtoMessage() {}
+func (m *AllTypesOneOf) Reset()      { *m = AllTypesOneOf{} }
+func (*AllTypesOneOf) ProtoMessage() {}
 
-type isSampleOneOf_TestOneof interface {
-	isSampleOneOf_TestOneof()
+type isAllTypesOneOf_TestOneof interface {
+	isAllTypesOneOf_TestOneof()
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	MarshalTo([]byte) (int, error)
 	Size() int
 }
 
-type SampleOneOf_Field1 struct {
+type AllTypesOneOf_Field1 struct {
 	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1"`
 }
-type SampleOneOf_Field2 struct {
+type AllTypesOneOf_Field2 struct {
 	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2"`
 }
-type SampleOneOf_Field3 struct {
+type AllTypesOneOf_Field3 struct {
 	Field3 int32 `protobuf:"varint,3,opt,name=Field3"`
 }
-type SampleOneOf_Field4 struct {
+type AllTypesOneOf_Field4 struct {
 	Field4 int64 `protobuf:"varint,4,opt,name=Field4"`
 }
-type SampleOneOf_Field5 struct {
+type AllTypesOneOf_Field5 struct {
 	Field5 uint32 `protobuf:"varint,5,opt,name=Field5"`
 }
-type SampleOneOf_Field6 struct {
+type AllTypesOneOf_Field6 struct {
 	Field6 uint64 `protobuf:"varint,6,opt,name=Field6"`
 }
-type SampleOneOf_Field7 struct {
+type AllTypesOneOf_Field7 struct {
 	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7"`
 }
-type SampleOneOf_Field8 struct {
+type AllTypesOneOf_Field8 struct {
 	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8"`
 }
-type SampleOneOf_Field9 struct {
+type AllTypesOneOf_Field9 struct {
 	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9"`
 }
-type SampleOneOf_Field10 struct {
+type AllTypesOneOf_Field10 struct {
 	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10"`
 }
-type SampleOneOf_Field11 struct {
+type AllTypesOneOf_Field11 struct {
 	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11"`
 }
-type SampleOneOf_Field12 struct {
+type AllTypesOneOf_Field12 struct {
 	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12"`
 }
-type SampleOneOf_Field13 struct {
+type AllTypesOneOf_Field13 struct {
 	Field13 bool `protobuf:"varint,13,opt,name=Field13"`
 }
-type SampleOneOf_Field14 struct {
+type AllTypesOneOf_Field14 struct {
 	Field14 string `protobuf:"bytes,14,opt,name=Field14"`
 }
-type SampleOneOf_Field15 struct {
+type AllTypesOneOf_Field15 struct {
 	Field15 []byte `protobuf:"bytes,15,opt,name=Field15"`
 }
-type SampleOneOf_SubMessage struct {
+type AllTypesOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message"`
 }
 
-func (*SampleOneOf_Field1) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field2) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field3) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field4) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field5) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field6) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field7) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field8) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field9) isSampleOneOf_TestOneof()     {}
-func (*SampleOneOf_Field10) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_Field11) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_Field12) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_Field13) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_Field14) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_Field15) isSampleOneOf_TestOneof()    {}
-func (*SampleOneOf_SubMessage) isSampleOneOf_TestOneof() {}
+func (*AllTypesOneOf_Field1) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field2) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field3) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field4) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field5) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field6) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field7) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field8) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field9) isAllTypesOneOf_TestOneof()     {}
+func (*AllTypesOneOf_Field10) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_Field11) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_Field12) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_Field13) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_Field14) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_Field15) isAllTypesOneOf_TestOneof()    {}
+func (*AllTypesOneOf_SubMessage) isAllTypesOneOf_TestOneof() {}
 
-func (m *SampleOneOf) GetTestOneof() isSampleOneOf_TestOneof {
+func (m *AllTypesOneOf) GetTestOneof() isAllTypesOneOf_TestOneof {
 	if m != nil {
 		return m.TestOneof
 	}
 	return nil
 }
 
-func (m *SampleOneOf) GetField1() float64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field1); ok {
+func (m *AllTypesOneOf) GetField1() float64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field1); ok {
 		return x.Field1
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField2() float32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field2); ok {
+func (m *AllTypesOneOf) GetField2() float32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field2); ok {
 		return x.Field2
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField3() int32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field3); ok {
+func (m *AllTypesOneOf) GetField3() int32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field3); ok {
 		return x.Field3
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField4() int64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field4); ok {
+func (m *AllTypesOneOf) GetField4() int64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field4); ok {
 		return x.Field4
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField5() uint32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field5); ok {
+func (m *AllTypesOneOf) GetField5() uint32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field5); ok {
 		return x.Field5
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField6() uint64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field6); ok {
+func (m *AllTypesOneOf) GetField6() uint64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field6); ok {
 		return x.Field6
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField7() int32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field7); ok {
+func (m *AllTypesOneOf) GetField7() int32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field7); ok {
 		return x.Field7
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField8() int64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field8); ok {
+func (m *AllTypesOneOf) GetField8() int64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field8); ok {
 		return x.Field8
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField9() uint32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field9); ok {
+func (m *AllTypesOneOf) GetField9() uint32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field9); ok {
 		return x.Field9
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField10() int32 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field10); ok {
+func (m *AllTypesOneOf) GetField10() int32 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field10); ok {
 		return x.Field10
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField11() uint64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field11); ok {
+func (m *AllTypesOneOf) GetField11() uint64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field11); ok {
 		return x.Field11
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField12() int64 {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field12); ok {
+func (m *AllTypesOneOf) GetField12() int64 {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field12); ok {
 		return x.Field12
 	}
 	return 0
 }
 
-func (m *SampleOneOf) GetField13() bool {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field13); ok {
+func (m *AllTypesOneOf) GetField13() bool {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field13); ok {
 		return x.Field13
 	}
 	return false
 }
 
-func (m *SampleOneOf) GetField14() string {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field14); ok {
+func (m *AllTypesOneOf) GetField14() string {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field14); ok {
 		return x.Field14
 	}
 	return ""
 }
 
-func (m *SampleOneOf) GetField15() []byte {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_Field15); ok {
+func (m *AllTypesOneOf) GetField15() []byte {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_Field15); ok {
 		return x.Field15
 	}
 	return nil
 }
 
-func (m *SampleOneOf) GetSubMessage() *Subby {
-	if x, ok := m.GetTestOneof().(*SampleOneOf_SubMessage); ok {
+func (m *AllTypesOneOf) GetSubMessage() *Subby {
+	if x, ok := m.GetTestOneof().(*AllTypesOneOf_SubMessage); ok {
 		return x.SubMessage
 	}
 	return nil
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*SampleOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _SampleOneOf_OneofMarshaler, _SampleOneOf_OneofUnmarshaler, []interface{}{
-		(*SampleOneOf_Field1)(nil),
-		(*SampleOneOf_Field2)(nil),
-		(*SampleOneOf_Field3)(nil),
-		(*SampleOneOf_Field4)(nil),
-		(*SampleOneOf_Field5)(nil),
-		(*SampleOneOf_Field6)(nil),
-		(*SampleOneOf_Field7)(nil),
-		(*SampleOneOf_Field8)(nil),
-		(*SampleOneOf_Field9)(nil),
-		(*SampleOneOf_Field10)(nil),
-		(*SampleOneOf_Field11)(nil),
-		(*SampleOneOf_Field12)(nil),
-		(*SampleOneOf_Field13)(nil),
-		(*SampleOneOf_Field14)(nil),
-		(*SampleOneOf_Field15)(nil),
-		(*SampleOneOf_SubMessage)(nil),
+func (*AllTypesOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
+	return _AllTypesOneOf_OneofMarshaler, _AllTypesOneOf_OneofUnmarshaler, []interface{}{
+		(*AllTypesOneOf_Field1)(nil),
+		(*AllTypesOneOf_Field2)(nil),
+		(*AllTypesOneOf_Field3)(nil),
+		(*AllTypesOneOf_Field4)(nil),
+		(*AllTypesOneOf_Field5)(nil),
+		(*AllTypesOneOf_Field6)(nil),
+		(*AllTypesOneOf_Field7)(nil),
+		(*AllTypesOneOf_Field8)(nil),
+		(*AllTypesOneOf_Field9)(nil),
+		(*AllTypesOneOf_Field10)(nil),
+		(*AllTypesOneOf_Field11)(nil),
+		(*AllTypesOneOf_Field12)(nil),
+		(*AllTypesOneOf_Field13)(nil),
+		(*AllTypesOneOf_Field14)(nil),
+		(*AllTypesOneOf_Field15)(nil),
+		(*AllTypesOneOf_SubMessage)(nil),
 	}
 }
 
-func _SampleOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*SampleOneOf)
+func _AllTypesOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*AllTypesOneOf)
 	// test_oneof
 	switch x := m.TestOneof.(type) {
-	case *SampleOneOf_Field1:
+	case *AllTypesOneOf_Field1:
 		if err := b.EncodeVarint(1<<3 | proto.WireFixed64); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed64(math.Float64bits(x.Field1)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field2:
+	case *AllTypesOneOf_Field2:
 		if err := b.EncodeVarint(2<<3 | proto.WireFixed32); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed32(uint64(math.Float32bits(x.Field2))); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field3:
+	case *AllTypesOneOf_Field3:
 		if err := b.EncodeVarint(3<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeVarint(uint64(x.Field3)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field4:
+	case *AllTypesOneOf_Field4:
 		if err := b.EncodeVarint(4<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeVarint(uint64(x.Field4)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field5:
+	case *AllTypesOneOf_Field5:
 		if err := b.EncodeVarint(5<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeVarint(uint64(x.Field5)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field6:
+	case *AllTypesOneOf_Field6:
 		if err := b.EncodeVarint(6<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeVarint(uint64(x.Field6)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field7:
+	case *AllTypesOneOf_Field7:
 		if err := b.EncodeVarint(7<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeZigzag32(uint64(x.Field7)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field8:
+	case *AllTypesOneOf_Field8:
 		if err := b.EncodeVarint(8<<3 | proto.WireVarint); err != nil {
 			return err
 		}
 		if err := b.EncodeZigzag64(uint64(x.Field8)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field9:
+	case *AllTypesOneOf_Field9:
 		if err := b.EncodeVarint(9<<3 | proto.WireFixed32); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed32(uint64(x.Field9)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field10:
+	case *AllTypesOneOf_Field10:
 		if err := b.EncodeVarint(10<<3 | proto.WireFixed32); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed32(uint64(x.Field10)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field11:
+	case *AllTypesOneOf_Field11:
 		if err := b.EncodeVarint(11<<3 | proto.WireFixed64); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed64(uint64(x.Field11)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field12:
+	case *AllTypesOneOf_Field12:
 		if err := b.EncodeVarint(12<<3 | proto.WireFixed64); err != nil {
 			return err
 		}
 		if err := b.EncodeFixed64(uint64(x.Field12)); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field13:
+	case *AllTypesOneOf_Field13:
 		t := uint64(0)
 		if x.Field13 {
 			t = 1
@@ -384,21 +388,21 @@ func _SampleOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 		if err := b.EncodeVarint(t); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field14:
+	case *AllTypesOneOf_Field14:
 		if err := b.EncodeVarint(14<<3 | proto.WireBytes); err != nil {
 			return err
 		}
 		if err := b.EncodeStringBytes(x.Field14); err != nil {
 			return err
 		}
-	case *SampleOneOf_Field15:
+	case *AllTypesOneOf_Field15:
 		if err := b.EncodeVarint(15<<3 | proto.WireBytes); err != nil {
 			return err
 		}
 		if err := b.EncodeRawBytes(x.Field15); err != nil {
 			return err
 		}
-	case *SampleOneOf_SubMessage:
+	case *AllTypesOneOf_SubMessage:
 		if err := b.EncodeVarint(16<<3 | proto.WireBytes); err != nil {
 			return err
 		}
@@ -407,118 +411,118 @@ func _SampleOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 		}
 	case nil:
 	default:
-		return fmt.Errorf("SampleOneOf.TestOneof has unexpected type %T", x)
+		return fmt.Errorf("AllTypesOneOf.TestOneof has unexpected type %T", x)
 	}
 	return nil
 }
 
-func _SampleOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*SampleOneOf)
+func _AllTypesOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*AllTypesOneOf)
 	switch tag {
 	case 1: // test_oneof.Field1
 		if wire != proto.WireFixed64 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed64()
-		m.TestOneof = &SampleOneOf_Field1{math.Float64frombits(x)}
+		m.TestOneof = &AllTypesOneOf_Field1{math.Float64frombits(x)}
 		return true, err
 	case 2: // test_oneof.Field2
 		if wire != proto.WireFixed32 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed32()
-		m.TestOneof = &SampleOneOf_Field2{math.Float32frombits(uint32(x))}
+		m.TestOneof = &AllTypesOneOf_Field2{math.Float32frombits(uint32(x))}
 		return true, err
 	case 3: // test_oneof.Field3
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.TestOneof = &SampleOneOf_Field3{int32(x)}
+		m.TestOneof = &AllTypesOneOf_Field3{int32(x)}
 		return true, err
 	case 4: // test_oneof.Field4
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.TestOneof = &SampleOneOf_Field4{int64(x)}
+		m.TestOneof = &AllTypesOneOf_Field4{int64(x)}
 		return true, err
 	case 5: // test_oneof.Field5
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.TestOneof = &SampleOneOf_Field5{uint32(x)}
+		m.TestOneof = &AllTypesOneOf_Field5{uint32(x)}
 		return true, err
 	case 6: // test_oneof.Field6
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.TestOneof = &SampleOneOf_Field6{x}
+		m.TestOneof = &AllTypesOneOf_Field6{x}
 		return true, err
 	case 7: // test_oneof.Field7
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeZigzag32()
-		m.TestOneof = &SampleOneOf_Field7{int32(x)}
+		m.TestOneof = &AllTypesOneOf_Field7{int32(x)}
 		return true, err
 	case 8: // test_oneof.Field8
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeZigzag64()
-		m.TestOneof = &SampleOneOf_Field8{int64(x)}
+		m.TestOneof = &AllTypesOneOf_Field8{int64(x)}
 		return true, err
 	case 9: // test_oneof.Field9
 		if wire != proto.WireFixed32 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed32()
-		m.TestOneof = &SampleOneOf_Field9{uint32(x)}
+		m.TestOneof = &AllTypesOneOf_Field9{uint32(x)}
 		return true, err
 	case 10: // test_oneof.Field10
 		if wire != proto.WireFixed32 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed32()
-		m.TestOneof = &SampleOneOf_Field10{int32(x)}
+		m.TestOneof = &AllTypesOneOf_Field10{int32(x)}
 		return true, err
 	case 11: // test_oneof.Field11
 		if wire != proto.WireFixed64 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed64()
-		m.TestOneof = &SampleOneOf_Field11{x}
+		m.TestOneof = &AllTypesOneOf_Field11{x}
 		return true, err
 	case 12: // test_oneof.Field12
 		if wire != proto.WireFixed64 {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeFixed64()
-		m.TestOneof = &SampleOneOf_Field12{int64(x)}
+		m.TestOneof = &AllTypesOneOf_Field12{int64(x)}
 		return true, err
 	case 13: // test_oneof.Field13
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.TestOneof = &SampleOneOf_Field13{x != 0}
+		m.TestOneof = &AllTypesOneOf_Field13{x != 0}
 		return true, err
 	case 14: // test_oneof.Field14
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeStringBytes()
-		m.TestOneof = &SampleOneOf_Field14{x}
+		m.TestOneof = &AllTypesOneOf_Field14{x}
 		return true, err
 	case 15: // test_oneof.Field15
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeRawBytes(true)
-		m.TestOneof = &SampleOneOf_Field15{x}
+		m.TestOneof = &AllTypesOneOf_Field15{x}
 		return true, err
 	case 16: // test_oneof.sub_message
 		if wire != proto.WireBytes {
@@ -526,7 +530,350 @@ func _SampleOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Bu
 		}
 		msg := new(Subby)
 		err := b.DecodeMessage(msg)
-		m.TestOneof = &SampleOneOf_SubMessage{msg}
+		m.TestOneof = &AllTypesOneOf_SubMessage{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+type TwoOneofs struct {
+	// Types that are valid to be assigned to One:
+	//	*TwoOneofs_Field1
+	//	*TwoOneofs_Field2
+	//	*TwoOneofs_Field3
+	One isTwoOneofs_One `protobuf_oneof:"one"`
+	// Types that are valid to be assigned to Two:
+	//	*TwoOneofs_Field34
+	//	*TwoOneofs_Field35
+	//	*TwoOneofs_SubMessage2
+	Two              isTwoOneofs_Two `protobuf_oneof:"two"`
+	XXX_unrecognized []byte          `json:"-"`
+}
+
+func (m *TwoOneofs) Reset()      { *m = TwoOneofs{} }
+func (*TwoOneofs) ProtoMessage() {}
+
+type isTwoOneofs_One interface {
+	isTwoOneofs_One()
+	Equal(interface{}) bool
+	VerboseEqual(interface{}) error
+	MarshalTo([]byte) (int, error)
+	Size() int
+}
+type isTwoOneofs_Two interface {
+	isTwoOneofs_Two()
+	Equal(interface{}) bool
+	VerboseEqual(interface{}) error
+	MarshalTo([]byte) (int, error)
+	Size() int
+}
+
+type TwoOneofs_Field1 struct {
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1"`
+}
+type TwoOneofs_Field2 struct {
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2"`
+}
+type TwoOneofs_Field3 struct {
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3"`
+}
+type TwoOneofs_Field34 struct {
+	Field34 string `protobuf:"bytes,34,opt,name=Field34"`
+}
+type TwoOneofs_Field35 struct {
+	Field35 []byte `protobuf:"bytes,35,opt,name=Field35"`
+}
+type TwoOneofs_SubMessage2 struct {
+	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2"`
+}
+
+func (*TwoOneofs_Field1) isTwoOneofs_One()      {}
+func (*TwoOneofs_Field2) isTwoOneofs_One()      {}
+func (*TwoOneofs_Field3) isTwoOneofs_One()      {}
+func (*TwoOneofs_Field34) isTwoOneofs_Two()     {}
+func (*TwoOneofs_Field35) isTwoOneofs_Two()     {}
+func (*TwoOneofs_SubMessage2) isTwoOneofs_Two() {}
+
+func (m *TwoOneofs) GetOne() isTwoOneofs_One {
+	if m != nil {
+		return m.One
+	}
+	return nil
+}
+func (m *TwoOneofs) GetTwo() isTwoOneofs_Two {
+	if m != nil {
+		return m.Two
+	}
+	return nil
+}
+
+func (m *TwoOneofs) GetField1() float64 {
+	if x, ok := m.GetOne().(*TwoOneofs_Field1); ok {
+		return x.Field1
+	}
+	return 0
+}
+
+func (m *TwoOneofs) GetField2() float32 {
+	if x, ok := m.GetOne().(*TwoOneofs_Field2); ok {
+		return x.Field2
+	}
+	return 0
+}
+
+func (m *TwoOneofs) GetField3() int32 {
+	if x, ok := m.GetOne().(*TwoOneofs_Field3); ok {
+		return x.Field3
+	}
+	return 0
+}
+
+func (m *TwoOneofs) GetField34() string {
+	if x, ok := m.GetTwo().(*TwoOneofs_Field34); ok {
+		return x.Field34
+	}
+	return ""
+}
+
+func (m *TwoOneofs) GetField35() []byte {
+	if x, ok := m.GetTwo().(*TwoOneofs_Field35); ok {
+		return x.Field35
+	}
+	return nil
+}
+
+func (m *TwoOneofs) GetSubMessage2() *Subby {
+	if x, ok := m.GetTwo().(*TwoOneofs_SubMessage2); ok {
+		return x.SubMessage2
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*TwoOneofs) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
+	return _TwoOneofs_OneofMarshaler, _TwoOneofs_OneofUnmarshaler, []interface{}{
+		(*TwoOneofs_Field1)(nil),
+		(*TwoOneofs_Field2)(nil),
+		(*TwoOneofs_Field3)(nil),
+		(*TwoOneofs_Field34)(nil),
+		(*TwoOneofs_Field35)(nil),
+		(*TwoOneofs_SubMessage2)(nil),
+	}
+}
+
+func _TwoOneofs_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*TwoOneofs)
+	// one
+	switch x := m.One.(type) {
+	case *TwoOneofs_Field1:
+		if err := b.EncodeVarint(1<<3 | proto.WireFixed64); err != nil {
+			return err
+		}
+		if err := b.EncodeFixed64(math.Float64bits(x.Field1)); err != nil {
+			return err
+		}
+	case *TwoOneofs_Field2:
+		if err := b.EncodeVarint(2<<3 | proto.WireFixed32); err != nil {
+			return err
+		}
+		if err := b.EncodeFixed32(uint64(math.Float32bits(x.Field2))); err != nil {
+			return err
+		}
+	case *TwoOneofs_Field3:
+		if err := b.EncodeVarint(3<<3 | proto.WireVarint); err != nil {
+			return err
+		}
+		if err := b.EncodeVarint(uint64(x.Field3)); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("TwoOneofs.One has unexpected type %T", x)
+	}
+	// two
+	switch x := m.Two.(type) {
+	case *TwoOneofs_Field34:
+		if err := b.EncodeVarint(34<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeStringBytes(x.Field34); err != nil {
+			return err
+		}
+	case *TwoOneofs_Field35:
+		if err := b.EncodeVarint(35<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(x.Field35); err != nil {
+			return err
+		}
+	case *TwoOneofs_SubMessage2:
+		if err := b.EncodeVarint(36<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeMessage(x.SubMessage2); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("TwoOneofs.Two has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _TwoOneofs_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*TwoOneofs)
+	switch tag {
+	case 1: // one.Field1
+		if wire != proto.WireFixed64 {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeFixed64()
+		m.One = &TwoOneofs_Field1{math.Float64frombits(x)}
+		return true, err
+	case 2: // one.Field2
+		if wire != proto.WireFixed32 {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeFixed32()
+		m.One = &TwoOneofs_Field2{math.Float32frombits(uint32(x))}
+		return true, err
+	case 3: // one.Field3
+		if wire != proto.WireVarint {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeVarint()
+		m.One = &TwoOneofs_Field3{int32(x)}
+		return true, err
+	case 34: // two.Field34
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeStringBytes()
+		m.Two = &TwoOneofs_Field34{x}
+		return true, err
+	case 35: // two.Field35
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeRawBytes(true)
+		m.Two = &TwoOneofs_Field35{x}
+		return true, err
+	case 36: // two.sub_message2
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(Subby)
+		err := b.DecodeMessage(msg)
+		m.Two = &TwoOneofs_SubMessage2{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+type CustomTypeOneof struct {
+	// Types that are valid to be assigned to Custom:
+	//	*CustomTypeOneof_Stringy
+	//	*CustomTypeOneof_CustomType
+	Custom           isCustomTypeOneof_Custom `protobuf_oneof:"custom"`
+	XXX_unrecognized []byte                   `json:"-"`
+}
+
+func (m *CustomTypeOneof) Reset()      { *m = CustomTypeOneof{} }
+func (*CustomTypeOneof) ProtoMessage() {}
+
+type isCustomTypeOneof_Custom interface {
+	isCustomTypeOneof_Custom()
+	Equal(interface{}) bool
+	VerboseEqual(interface{}) error
+	MarshalTo([]byte) (int, error)
+	Size() int
+}
+
+type CustomTypeOneof_Stringy struct {
+	Stringy string `protobuf:"bytes,34,opt,name=Stringy"`
+}
+type CustomTypeOneof_CustomType struct {
+	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
+}
+
+func (*CustomTypeOneof_Stringy) isCustomTypeOneof_Custom()    {}
+func (*CustomTypeOneof_CustomType) isCustomTypeOneof_Custom() {}
+
+func (m *CustomTypeOneof) GetCustom() isCustomTypeOneof_Custom {
+	if m != nil {
+		return m.Custom
+	}
+	return nil
+}
+
+func (m *CustomTypeOneof) GetStringy() string {
+	if x, ok := m.GetCustom().(*CustomTypeOneof_Stringy); ok {
+		return x.Stringy
+	}
+	return ""
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*CustomTypeOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
+	return _CustomTypeOneof_OneofMarshaler, _CustomTypeOneof_OneofUnmarshaler, []interface{}{
+		(*CustomTypeOneof_Stringy)(nil),
+		(*CustomTypeOneof_CustomType)(nil),
+	}
+}
+
+func _CustomTypeOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*CustomTypeOneof)
+	// custom
+	switch x := m.Custom.(type) {
+	case *CustomTypeOneof_Stringy:
+		if err := b.EncodeVarint(34<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		if err := b.EncodeStringBytes(x.Stringy); err != nil {
+			return err
+		}
+	case *CustomTypeOneof_CustomType:
+		if err := b.EncodeVarint(35<<3 | proto.WireBytes); err != nil {
+			return err
+		}
+		data, err := x.CustomType.Marshal()
+		if err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(data); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("CustomTypeOneof.Custom has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _CustomTypeOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*CustomTypeOneof)
+	switch tag {
+	case 34: // custom.Stringy
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeStringBytes()
+		m.Custom = &CustomTypeOneof_Stringy{x}
+		return true, err
+	case 35: // custom.CustomType
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeRawBytes(true)
+		if err != nil {
+			return true, err
+		}
+		var cc github_com_gogo_protobuf_test_custom.Uint128
+		c := &cc
+		err = c.Unmarshal(x)
+		m.Custom = &CustomTypeOneof_CustomType{*c}
 		return true, err
 	default:
 		return false, nil
@@ -536,7 +883,13 @@ func _SampleOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Bu
 func (this *Subby) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *SampleOneOf) Description() (desc *google_protobuf.FileDescriptorSet) {
+func (this *AllTypesOneOf) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return OneDescription()
+}
+func (this *TwoOneofs) Description() (desc *google_protobuf.FileDescriptorSet) {
+	return OneDescription()
+}
+func (this *CustomTypeOneof) Description() (desc *google_protobuf.FileDescriptorSet) {
 	return OneDescription()
 }
 func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
@@ -1132,7 +1485,7 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("SampleOneOf"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: nil, Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto(nil), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("AllTypesOneOf"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
@@ -1196,7 +1549,39 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("test_oneof"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x1}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("test_oneof"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("TwoOneofs"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Field1"), Number: func(v int32) *int32 { return &v }(1), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(1), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field2"), Number: func(v int32) *int32 { return &v }(2), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(2), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field3"), Number: func(v int32) *int32 { return &v }(3), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(5), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field34"), Number: func(v int32) *int32 { return &v }(34), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("Field35"), Number: func(v int32) *int32 { return &v }(35), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("sub_message2"), Number: func(v int32) *int32 { return &v }(36), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(11), TypeName: func(v string) *string { return &v }(".one.Subby"), Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(1), Options: nil, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("one"), XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("two"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomTypeOneof"), Field: []*google_protobuf.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Stringy"), Number: func(v int32) *int32 { return &v }(34), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(9), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: nil, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CustomType"), Number: func(v int32) *int32 { return &v }(35), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("custom"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x1}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
 func (this *Subby) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -1266,7 +1651,7 @@ func (this *Subby) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1274,17 +1659,17 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf)
+	that1, ok := that.(*AllTypesOneOf)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf")
+		return fmt.Errorf("that is not of type *AllTypesOneOf")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOfbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOfbut is not nil && this == nil")
 	}
 	if that1.TestOneof == nil {
 		if this.TestOneof != nil {
@@ -1300,7 +1685,7 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *SampleOneOf_Field1) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field1) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1308,24 +1693,24 @@ func (this *SampleOneOf_Field1) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field1)
+	that1, ok := that.(*AllTypesOneOf_Field1)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field1")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field1")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field1 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field1but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field1but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field2) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field2) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1333,24 +1718,24 @@ func (this *SampleOneOf_Field2) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field2)
+	that1, ok := that.(*AllTypesOneOf_Field2)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field2")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field2")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field2 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field2but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field2but is not nil && this == nil")
 	}
 	if this.Field2 != that1.Field2 {
 		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field3) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field3) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1358,24 +1743,24 @@ func (this *SampleOneOf_Field3) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field3)
+	that1, ok := that.(*AllTypesOneOf_Field3)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field3")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field3")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field3 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field3 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field3but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field3but is not nil && this == nil")
 	}
 	if this.Field3 != that1.Field3 {
 		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field4) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field4) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1383,24 +1768,24 @@ func (this *SampleOneOf_Field4) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field4)
+	that1, ok := that.(*AllTypesOneOf_Field4)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field4")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field4")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field4 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field4 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field4but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field4but is not nil && this == nil")
 	}
 	if this.Field4 != that1.Field4 {
 		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field5) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field5) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1408,24 +1793,24 @@ func (this *SampleOneOf_Field5) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field5)
+	that1, ok := that.(*AllTypesOneOf_Field5)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field5")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field5")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field5 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field5 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field5but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field5but is not nil && this == nil")
 	}
 	if this.Field5 != that1.Field5 {
 		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", this.Field5, that1.Field5)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field6) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field6) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1433,24 +1818,24 @@ func (this *SampleOneOf_Field6) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field6)
+	that1, ok := that.(*AllTypesOneOf_Field6)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field6")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field6")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field6 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field6 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field6but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field6but is not nil && this == nil")
 	}
 	if this.Field6 != that1.Field6 {
 		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field7) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field7) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1458,24 +1843,24 @@ func (this *SampleOneOf_Field7) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field7)
+	that1, ok := that.(*AllTypesOneOf_Field7)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field7")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field7")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field7 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field7 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field7but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field7but is not nil && this == nil")
 	}
 	if this.Field7 != that1.Field7 {
 		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", this.Field7, that1.Field7)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field8) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field8) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1483,24 +1868,24 @@ func (this *SampleOneOf_Field8) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field8)
+	that1, ok := that.(*AllTypesOneOf_Field8)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field8")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field8")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field8 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field8 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field8but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field8but is not nil && this == nil")
 	}
 	if this.Field8 != that1.Field8 {
 		return fmt.Errorf("Field8 this(%v) Not Equal that(%v)", this.Field8, that1.Field8)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field9) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field9) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1508,24 +1893,24 @@ func (this *SampleOneOf_Field9) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field9)
+	that1, ok := that.(*AllTypesOneOf_Field9)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field9")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field9")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field9 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field9 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field9but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field9but is not nil && this == nil")
 	}
 	if this.Field9 != that1.Field9 {
 		return fmt.Errorf("Field9 this(%v) Not Equal that(%v)", this.Field9, that1.Field9)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field10) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field10) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1533,24 +1918,24 @@ func (this *SampleOneOf_Field10) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field10)
+	that1, ok := that.(*AllTypesOneOf_Field10)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field10")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field10")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field10 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field10 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field10but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field10but is not nil && this == nil")
 	}
 	if this.Field10 != that1.Field10 {
 		return fmt.Errorf("Field10 this(%v) Not Equal that(%v)", this.Field10, that1.Field10)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field11) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field11) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1558,24 +1943,24 @@ func (this *SampleOneOf_Field11) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field11)
+	that1, ok := that.(*AllTypesOneOf_Field11)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field11")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field11")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field11 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field11 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field11but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field11but is not nil && this == nil")
 	}
 	if this.Field11 != that1.Field11 {
 		return fmt.Errorf("Field11 this(%v) Not Equal that(%v)", this.Field11, that1.Field11)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field12) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field12) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1583,24 +1968,24 @@ func (this *SampleOneOf_Field12) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field12)
+	that1, ok := that.(*AllTypesOneOf_Field12)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field12")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field12")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field12 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field12 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field12but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field12but is not nil && this == nil")
 	}
 	if this.Field12 != that1.Field12 {
 		return fmt.Errorf("Field12 this(%v) Not Equal that(%v)", this.Field12, that1.Field12)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field13) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field13) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1608,24 +1993,24 @@ func (this *SampleOneOf_Field13) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field13)
+	that1, ok := that.(*AllTypesOneOf_Field13)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field13")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field13")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field13 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field13 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field13but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field13but is not nil && this == nil")
 	}
 	if this.Field13 != that1.Field13 {
 		return fmt.Errorf("Field13 this(%v) Not Equal that(%v)", this.Field13, that1.Field13)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field14) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field14) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1633,24 +2018,24 @@ func (this *SampleOneOf_Field14) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field14)
+	that1, ok := that.(*AllTypesOneOf_Field14)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field14")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field14")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field14 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field14 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field14but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field14but is not nil && this == nil")
 	}
 	if this.Field14 != that1.Field14 {
 		return fmt.Errorf("Field14 this(%v) Not Equal that(%v)", this.Field14, that1.Field14)
 	}
 	return nil
 }
-func (this *SampleOneOf_Field15) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_Field15) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1658,24 +2043,24 @@ func (this *SampleOneOf_Field15) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_Field15)
+	that1, ok := that.(*AllTypesOneOf_Field15)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_Field15")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_Field15")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_Field15 but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field15 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_Field15but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field15but is not nil && this == nil")
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
 	}
 	return nil
 }
-func (this *SampleOneOf_SubMessage) VerboseEqual(that interface{}) error {
+func (this *AllTypesOneOf_SubMessage) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -1683,24 +2068,24 @@ func (this *SampleOneOf_SubMessage) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SampleOneOf_SubMessage)
+	that1, ok := that.(*AllTypesOneOf_SubMessage)
 	if !ok {
-		return fmt.Errorf("that is not of type *SampleOneOf_SubMessage")
+		return fmt.Errorf("that is not of type *AllTypesOneOf_SubMessage")
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SampleOneOf_SubMessage but is nil && this != nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_SubMessage but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SampleOneOf_SubMessagebut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_SubMessagebut is not nil && this == nil")
 	}
 	if !this.SubMessage.Equal(that1.SubMessage) {
 		return fmt.Errorf("SubMessage this(%v) Not Equal that(%v)", this.SubMessage, that1.SubMessage)
 	}
 	return nil
 }
-func (this *SampleOneOf) Equal(that interface{}) bool {
+func (this *AllTypesOneOf) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1708,7 +2093,7 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf)
+	that1, ok := that.(*AllTypesOneOf)
 	if !ok {
 		return false
 	}
@@ -1734,7 +2119,7 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field1) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1742,7 +2127,7 @@ func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field1)
+	that1, ok := that.(*AllTypesOneOf_Field1)
 	if !ok {
 		return false
 	}
@@ -1759,7 +2144,7 @@ func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field2) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1767,7 +2152,7 @@ func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field2)
+	that1, ok := that.(*AllTypesOneOf_Field2)
 	if !ok {
 		return false
 	}
@@ -1784,7 +2169,7 @@ func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field3) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1792,7 +2177,7 @@ func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field3)
+	that1, ok := that.(*AllTypesOneOf_Field3)
 	if !ok {
 		return false
 	}
@@ -1809,7 +2194,7 @@ func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field4) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1817,7 +2202,7 @@ func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field4)
+	that1, ok := that.(*AllTypesOneOf_Field4)
 	if !ok {
 		return false
 	}
@@ -1834,7 +2219,7 @@ func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field5) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1842,7 +2227,7 @@ func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field5)
+	that1, ok := that.(*AllTypesOneOf_Field5)
 	if !ok {
 		return false
 	}
@@ -1859,7 +2244,7 @@ func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field6) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1867,7 +2252,7 @@ func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field6)
+	that1, ok := that.(*AllTypesOneOf_Field6)
 	if !ok {
 		return false
 	}
@@ -1884,7 +2269,7 @@ func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field7) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1892,7 +2277,7 @@ func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field7)
+	that1, ok := that.(*AllTypesOneOf_Field7)
 	if !ok {
 		return false
 	}
@@ -1909,7 +2294,7 @@ func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field8) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1917,7 +2302,7 @@ func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field8)
+	that1, ok := that.(*AllTypesOneOf_Field8)
 	if !ok {
 		return false
 	}
@@ -1934,7 +2319,7 @@ func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field9) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1942,7 +2327,7 @@ func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field9)
+	that1, ok := that.(*AllTypesOneOf_Field9)
 	if !ok {
 		return false
 	}
@@ -1959,7 +2344,7 @@ func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field10) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1967,7 +2352,7 @@ func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field10)
+	that1, ok := that.(*AllTypesOneOf_Field10)
 	if !ok {
 		return false
 	}
@@ -1984,7 +2369,7 @@ func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field11) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -1992,7 +2377,7 @@ func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field11)
+	that1, ok := that.(*AllTypesOneOf_Field11)
 	if !ok {
 		return false
 	}
@@ -2009,7 +2394,7 @@ func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field12) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2017,7 +2402,7 @@ func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field12)
+	that1, ok := that.(*AllTypesOneOf_Field12)
 	if !ok {
 		return false
 	}
@@ -2034,7 +2419,7 @@ func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field13) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2042,7 +2427,7 @@ func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field13)
+	that1, ok := that.(*AllTypesOneOf_Field13)
 	if !ok {
 		return false
 	}
@@ -2059,7 +2444,7 @@ func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field14) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2067,7 +2452,7 @@ func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field14)
+	that1, ok := that.(*AllTypesOneOf_Field14)
 	if !ok {
 		return false
 	}
@@ -2084,7 +2469,7 @@ func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_Field15) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2092,7 +2477,7 @@ func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_Field15)
+	that1, ok := that.(*AllTypesOneOf_Field15)
 	if !ok {
 		return false
 	}
@@ -2109,7 +2494,7 @@ func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SampleOneOf_SubMessage) Equal(that interface{}) bool {
+func (this *AllTypesOneOf_SubMessage) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -2117,7 +2502,7 @@ func (this *SampleOneOf_SubMessage) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*SampleOneOf_SubMessage)
+	that1, ok := that.(*AllTypesOneOf_SubMessage)
 	if !ok {
 		return false
 	}
@@ -2134,6 +2519,560 @@ func (this *SampleOneOf_SubMessage) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *TwoOneofs) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofsbut is not nil && this == nil")
+	}
+	if that1.One == nil {
+		if this.One != nil {
+			return fmt.Errorf("this.One != nil && that1.One == nil")
+		}
+	} else if this.One == nil {
+		return fmt.Errorf("this.One == nil && that1.One != nil")
+	} else if err := this.One.VerboseEqual(that1.One); err != nil {
+		return err
+	}
+	if that1.Two == nil {
+		if this.Two != nil {
+			return fmt.Errorf("this.Two != nil && that1.Two == nil")
+		}
+	} else if this.Two == nil {
+		return fmt.Errorf("this.Two == nil && that1.Two != nil")
+	} else if err := this.Two.VerboseEqual(that1.Two); err != nil {
+		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *TwoOneofs_Field1) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_Field1)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_Field1")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_Field1 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_Field1but is not nil && this == nil")
+	}
+	if this.Field1 != that1.Field1 {
+		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
+	}
+	return nil
+}
+func (this *TwoOneofs_Field2) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_Field2)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_Field2")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_Field2 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_Field2but is not nil && this == nil")
+	}
+	if this.Field2 != that1.Field2 {
+		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
+	}
+	return nil
+}
+func (this *TwoOneofs_Field3) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_Field3)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_Field3")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_Field3 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_Field3but is not nil && this == nil")
+	}
+	if this.Field3 != that1.Field3 {
+		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
+	}
+	return nil
+}
+func (this *TwoOneofs_Field34) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_Field34)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_Field34")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_Field34 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_Field34but is not nil && this == nil")
+	}
+	if this.Field34 != that1.Field34 {
+		return fmt.Errorf("Field34 this(%v) Not Equal that(%v)", this.Field34, that1.Field34)
+	}
+	return nil
+}
+func (this *TwoOneofs_Field35) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_Field35)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_Field35")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_Field35 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_Field35but is not nil && this == nil")
+	}
+	if !bytes.Equal(this.Field35, that1.Field35) {
+		return fmt.Errorf("Field35 this(%v) Not Equal that(%v)", this.Field35, that1.Field35)
+	}
+	return nil
+}
+func (this *TwoOneofs_SubMessage2) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*TwoOneofs_SubMessage2)
+	if !ok {
+		return fmt.Errorf("that is not of type *TwoOneofs_SubMessage2")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *TwoOneofs_SubMessage2 but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *TwoOneofs_SubMessage2but is not nil && this == nil")
+	}
+	if !this.SubMessage2.Equal(that1.SubMessage2) {
+		return fmt.Errorf("SubMessage2 this(%v) Not Equal that(%v)", this.SubMessage2, that1.SubMessage2)
+	}
+	return nil
+}
+func (this *TwoOneofs) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.One == nil {
+		if this.One != nil {
+			return false
+		}
+	} else if this.One == nil {
+		return false
+	} else if !this.One.Equal(that1.One) {
+		return false
+	}
+	if that1.Two == nil {
+		if this.Two != nil {
+			return false
+		}
+	} else if this.Two == nil {
+		return false
+	} else if !this.Two.Equal(that1.Two) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_Field1) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_Field1)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field1 != that1.Field1 {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_Field2) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_Field2)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field2 != that1.Field2 {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_Field3) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_Field3)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field3 != that1.Field3 {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_Field34) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_Field34)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Field34 != that1.Field34 {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_Field35) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_Field35)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !bytes.Equal(this.Field35, that1.Field35) {
+		return false
+	}
+	return true
+}
+func (this *TwoOneofs_SubMessage2) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*TwoOneofs_SubMessage2)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.SubMessage2.Equal(that1.SubMessage2) {
+		return false
+	}
+	return true
+}
+func (this *CustomTypeOneof) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomTypeOneof)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomTypeOneof")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomTypeOneof but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomTypeOneofbut is not nil && this == nil")
+	}
+	if that1.Custom == nil {
+		if this.Custom != nil {
+			return fmt.Errorf("this.Custom != nil && that1.Custom == nil")
+		}
+	} else if this.Custom == nil {
+		return fmt.Errorf("this.Custom == nil && that1.Custom != nil")
+	} else if err := this.Custom.VerboseEqual(that1.Custom); err != nil {
+		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *CustomTypeOneof_Stringy) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomTypeOneof_Stringy)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomTypeOneof_Stringy")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomTypeOneof_Stringy but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomTypeOneof_Stringybut is not nil && this == nil")
+	}
+	if this.Stringy != that1.Stringy {
+		return fmt.Errorf("Stringy this(%v) Not Equal that(%v)", this.Stringy, that1.Stringy)
+	}
+	return nil
+}
+func (this *CustomTypeOneof_CustomType) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomTypeOneof_CustomType)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomTypeOneof_CustomType")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomTypeOneof_CustomType but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomTypeOneof_CustomTypebut is not nil && this == nil")
+	}
+	if !this.CustomType.Equal(that1.CustomType) {
+		return fmt.Errorf("CustomType this(%v) Not Equal that(%v)", this.CustomType, that1.CustomType)
+	}
+	return nil
+}
+func (this *CustomTypeOneof) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomTypeOneof)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.Custom == nil {
+		if this.Custom != nil {
+			return false
+		}
+	} else if this.Custom == nil {
+		return false
+	} else if !this.Custom.Equal(that1.Custom) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *CustomTypeOneof_Stringy) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomTypeOneof_Stringy)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Stringy != that1.Stringy {
+		return false
+	}
+	return true
+}
+func (this *CustomTypeOneof_CustomType) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomTypeOneof_CustomType)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.CustomType.Equal(that1.CustomType) {
+		return false
+	}
+	return true
+}
 func (this *Subby) GoString() string {
 	if this == nil {
 		return "nil"
@@ -2143,141 +3082,224 @@ func (this *Subby) GoString() string {
 		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf) GoString() string {
+func (this *AllTypesOneOf) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf{` +
 		`TestOneof:` + fmt.Sprintf("%#v", this.TestOneof),
 		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field1) GoString() string {
+func (this *AllTypesOneOf_Field1) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field1{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field1{` +
 		`Field1:` + fmt.Sprintf("%#v", this.Field1) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field2) GoString() string {
+func (this *AllTypesOneOf_Field2) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field2{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field2{` +
 		`Field2:` + fmt.Sprintf("%#v", this.Field2) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field3) GoString() string {
+func (this *AllTypesOneOf_Field3) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field3{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field3{` +
 		`Field3:` + fmt.Sprintf("%#v", this.Field3) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field4) GoString() string {
+func (this *AllTypesOneOf_Field4) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field4{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field4{` +
 		`Field4:` + fmt.Sprintf("%#v", this.Field4) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field5) GoString() string {
+func (this *AllTypesOneOf_Field5) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field5{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field5{` +
 		`Field5:` + fmt.Sprintf("%#v", this.Field5) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field6) GoString() string {
+func (this *AllTypesOneOf_Field6) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field6{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field6{` +
 		`Field6:` + fmt.Sprintf("%#v", this.Field6) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field7) GoString() string {
+func (this *AllTypesOneOf_Field7) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field7{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field7{` +
 		`Field7:` + fmt.Sprintf("%#v", this.Field7) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field8) GoString() string {
+func (this *AllTypesOneOf_Field8) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field8{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field8{` +
 		`Field8:` + fmt.Sprintf("%#v", this.Field8) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field9) GoString() string {
+func (this *AllTypesOneOf_Field9) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field9{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field9{` +
 		`Field9:` + fmt.Sprintf("%#v", this.Field9) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field10) GoString() string {
+func (this *AllTypesOneOf_Field10) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field10{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field10{` +
 		`Field10:` + fmt.Sprintf("%#v", this.Field10) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field11) GoString() string {
+func (this *AllTypesOneOf_Field11) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field11{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field11{` +
 		`Field11:` + fmt.Sprintf("%#v", this.Field11) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field12) GoString() string {
+func (this *AllTypesOneOf_Field12) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field12{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field12{` +
 		`Field12:` + fmt.Sprintf("%#v", this.Field12) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field13) GoString() string {
+func (this *AllTypesOneOf_Field13) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field13{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field13{` +
 		`Field13:` + fmt.Sprintf("%#v", this.Field13) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field14) GoString() string {
+func (this *AllTypesOneOf_Field14) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field14{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field14{` +
 		`Field14:` + fmt.Sprintf("%#v", this.Field14) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_Field15) GoString() string {
+func (this *AllTypesOneOf_Field15) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_Field15{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_Field15{` +
 		`Field15:` + fmt.Sprintf("%#v", this.Field15) + `}`}, ", ")
 	return s
 }
-func (this *SampleOneOf_SubMessage) GoString() string {
+func (this *AllTypesOneOf_SubMessage) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&one.SampleOneOf_SubMessage{` +
+	s := strings.Join([]string{`&one.AllTypesOneOf_SubMessage{` +
 		`SubMessage:` + fmt.Sprintf("%#v", this.SubMessage) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs{` +
+		`One:` + fmt.Sprintf("%#v", this.One),
+		`Two:` + fmt.Sprintf("%#v", this.Two),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_Field1) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_Field1{` +
+		`Field1:` + fmt.Sprintf("%#v", this.Field1) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_Field2) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_Field2{` +
+		`Field2:` + fmt.Sprintf("%#v", this.Field2) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_Field3) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_Field3{` +
+		`Field3:` + fmt.Sprintf("%#v", this.Field3) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_Field34) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_Field34{` +
+		`Field34:` + fmt.Sprintf("%#v", this.Field34) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_Field35) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_Field35{` +
+		`Field35:` + fmt.Sprintf("%#v", this.Field35) + `}`}, ", ")
+	return s
+}
+func (this *TwoOneofs_SubMessage2) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.TwoOneofs_SubMessage2{` +
+		`SubMessage2:` + fmt.Sprintf("%#v", this.SubMessage2) + `}`}, ", ")
+	return s
+}
+func (this *CustomTypeOneof) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.CustomTypeOneof{` +
+		`Custom:` + fmt.Sprintf("%#v", this.Custom),
+		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
+	return s
+}
+func (this *CustomTypeOneof_Stringy) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.CustomTypeOneof_Stringy{` +
+		`Stringy:` + fmt.Sprintf("%#v", this.Stringy) + `}`}, ", ")
+	return s
+}
+func (this *CustomTypeOneof_CustomType) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.CustomTypeOneof_CustomType{` +
+		`CustomType:` + fmt.Sprintf("%#v", this.CustomType) + `}`}, ", ")
 	return s
 }
 func valueToGoStringOne(v interface{}, typ string) string {
@@ -2317,42 +3339,42 @@ func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	return this
 }
 
-func NewPopulatedSampleOneOf(r randyOne, easy bool) *SampleOneOf {
-	this := &SampleOneOf{}
+func NewPopulatedAllTypesOneOf(r randyOne, easy bool) *AllTypesOneOf {
+	this := &AllTypesOneOf{}
 	oneofNumber_TestOneof := []int32{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}[r.Intn(16)]
 	switch oneofNumber_TestOneof {
 	case 1:
-		this.TestOneof = NewPopulatedSampleOneOf_Field1(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field1(r, easy)
 	case 2:
-		this.TestOneof = NewPopulatedSampleOneOf_Field2(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field2(r, easy)
 	case 3:
-		this.TestOneof = NewPopulatedSampleOneOf_Field3(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field3(r, easy)
 	case 4:
-		this.TestOneof = NewPopulatedSampleOneOf_Field4(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field4(r, easy)
 	case 5:
-		this.TestOneof = NewPopulatedSampleOneOf_Field5(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field5(r, easy)
 	case 6:
-		this.TestOneof = NewPopulatedSampleOneOf_Field6(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field6(r, easy)
 	case 7:
-		this.TestOneof = NewPopulatedSampleOneOf_Field7(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field7(r, easy)
 	case 8:
-		this.TestOneof = NewPopulatedSampleOneOf_Field8(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field8(r, easy)
 	case 9:
-		this.TestOneof = NewPopulatedSampleOneOf_Field9(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field9(r, easy)
 	case 10:
-		this.TestOneof = NewPopulatedSampleOneOf_Field10(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field10(r, easy)
 	case 11:
-		this.TestOneof = NewPopulatedSampleOneOf_Field11(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field11(r, easy)
 	case 12:
-		this.TestOneof = NewPopulatedSampleOneOf_Field12(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field12(r, easy)
 	case 13:
-		this.TestOneof = NewPopulatedSampleOneOf_Field13(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field13(r, easy)
 	case 14:
-		this.TestOneof = NewPopulatedSampleOneOf_Field14(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field14(r, easy)
 	case 15:
-		this.TestOneof = NewPopulatedSampleOneOf_Field15(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_Field15(r, easy)
 	case 16:
-		this.TestOneof = NewPopulatedSampleOneOf_SubMessage(r, easy)
+		this.TestOneof = NewPopulatedAllTypesOneOf_SubMessage(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedOne(r, 17)
@@ -2360,102 +3382,102 @@ func NewPopulatedSampleOneOf(r randyOne, easy bool) *SampleOneOf {
 	return this
 }
 
-func NewPopulatedSampleOneOf_Field1(r randyOne, easy bool) *SampleOneOf_Field1 {
-	this := &SampleOneOf_Field1{}
+func NewPopulatedAllTypesOneOf_Field1(r randyOne, easy bool) *AllTypesOneOf_Field1 {
+	this := &AllTypesOneOf_Field1{}
 	this.Field1 = float64(r.Float64())
 	if r.Intn(2) == 0 {
 		this.Field1 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field2(r randyOne, easy bool) *SampleOneOf_Field2 {
-	this := &SampleOneOf_Field2{}
+func NewPopulatedAllTypesOneOf_Field2(r randyOne, easy bool) *AllTypesOneOf_Field2 {
+	this := &AllTypesOneOf_Field2{}
 	this.Field2 = float32(r.Float32())
 	if r.Intn(2) == 0 {
 		this.Field2 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field3(r randyOne, easy bool) *SampleOneOf_Field3 {
-	this := &SampleOneOf_Field3{}
+func NewPopulatedAllTypesOneOf_Field3(r randyOne, easy bool) *AllTypesOneOf_Field3 {
+	this := &AllTypesOneOf_Field3{}
 	this.Field3 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field3 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field4(r randyOne, easy bool) *SampleOneOf_Field4 {
-	this := &SampleOneOf_Field4{}
+func NewPopulatedAllTypesOneOf_Field4(r randyOne, easy bool) *AllTypesOneOf_Field4 {
+	this := &AllTypesOneOf_Field4{}
 	this.Field4 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field4 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field5(r randyOne, easy bool) *SampleOneOf_Field5 {
-	this := &SampleOneOf_Field5{}
+func NewPopulatedAllTypesOneOf_Field5(r randyOne, easy bool) *AllTypesOneOf_Field5 {
+	this := &AllTypesOneOf_Field5{}
 	this.Field5 = uint32(r.Uint32())
 	return this
 }
-func NewPopulatedSampleOneOf_Field6(r randyOne, easy bool) *SampleOneOf_Field6 {
-	this := &SampleOneOf_Field6{}
+func NewPopulatedAllTypesOneOf_Field6(r randyOne, easy bool) *AllTypesOneOf_Field6 {
+	this := &AllTypesOneOf_Field6{}
 	this.Field6 = uint64(uint64(r.Uint32()))
 	return this
 }
-func NewPopulatedSampleOneOf_Field7(r randyOne, easy bool) *SampleOneOf_Field7 {
-	this := &SampleOneOf_Field7{}
+func NewPopulatedAllTypesOneOf_Field7(r randyOne, easy bool) *AllTypesOneOf_Field7 {
+	this := &AllTypesOneOf_Field7{}
 	this.Field7 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field7 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field8(r randyOne, easy bool) *SampleOneOf_Field8 {
-	this := &SampleOneOf_Field8{}
+func NewPopulatedAllTypesOneOf_Field8(r randyOne, easy bool) *AllTypesOneOf_Field8 {
+	this := &AllTypesOneOf_Field8{}
 	this.Field8 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field8 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field9(r randyOne, easy bool) *SampleOneOf_Field9 {
-	this := &SampleOneOf_Field9{}
+func NewPopulatedAllTypesOneOf_Field9(r randyOne, easy bool) *AllTypesOneOf_Field9 {
+	this := &AllTypesOneOf_Field9{}
 	this.Field9 = uint32(r.Uint32())
 	return this
 }
-func NewPopulatedSampleOneOf_Field10(r randyOne, easy bool) *SampleOneOf_Field10 {
-	this := &SampleOneOf_Field10{}
+func NewPopulatedAllTypesOneOf_Field10(r randyOne, easy bool) *AllTypesOneOf_Field10 {
+	this := &AllTypesOneOf_Field10{}
 	this.Field10 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field10 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field11(r randyOne, easy bool) *SampleOneOf_Field11 {
-	this := &SampleOneOf_Field11{}
+func NewPopulatedAllTypesOneOf_Field11(r randyOne, easy bool) *AllTypesOneOf_Field11 {
+	this := &AllTypesOneOf_Field11{}
 	this.Field11 = uint64(uint64(r.Uint32()))
 	return this
 }
-func NewPopulatedSampleOneOf_Field12(r randyOne, easy bool) *SampleOneOf_Field12 {
-	this := &SampleOneOf_Field12{}
+func NewPopulatedAllTypesOneOf_Field12(r randyOne, easy bool) *AllTypesOneOf_Field12 {
+	this := &AllTypesOneOf_Field12{}
 	this.Field12 = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Field12 *= -1
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_Field13(r randyOne, easy bool) *SampleOneOf_Field13 {
-	this := &SampleOneOf_Field13{}
+func NewPopulatedAllTypesOneOf_Field13(r randyOne, easy bool) *AllTypesOneOf_Field13 {
+	this := &AllTypesOneOf_Field13{}
 	this.Field13 = bool(bool(r.Intn(2) == 0))
 	return this
 }
-func NewPopulatedSampleOneOf_Field14(r randyOne, easy bool) *SampleOneOf_Field14 {
-	this := &SampleOneOf_Field14{}
+func NewPopulatedAllTypesOneOf_Field14(r randyOne, easy bool) *AllTypesOneOf_Field14 {
+	this := &AllTypesOneOf_Field14{}
 	this.Field14 = randStringOne(r)
 	return this
 }
-func NewPopulatedSampleOneOf_Field15(r randyOne, easy bool) *SampleOneOf_Field15 {
-	this := &SampleOneOf_Field15{}
+func NewPopulatedAllTypesOneOf_Field15(r randyOne, easy bool) *AllTypesOneOf_Field15 {
+	this := &AllTypesOneOf_Field15{}
 	v2 := r.Intn(100)
 	this.Field15 = make([]byte, v2)
 	for i := 0; i < v2; i++ {
@@ -2463,9 +3485,104 @@ func NewPopulatedSampleOneOf_Field15(r randyOne, easy bool) *SampleOneOf_Field15
 	}
 	return this
 }
-func NewPopulatedSampleOneOf_SubMessage(r randyOne, easy bool) *SampleOneOf_SubMessage {
-	this := &SampleOneOf_SubMessage{}
+func NewPopulatedAllTypesOneOf_SubMessage(r randyOne, easy bool) *AllTypesOneOf_SubMessage {
+	this := &AllTypesOneOf_SubMessage{}
 	this.SubMessage = NewPopulatedSubby(r, easy)
+	return this
+}
+func NewPopulatedTwoOneofs(r randyOne, easy bool) *TwoOneofs {
+	this := &TwoOneofs{}
+	oneofNumber_One := []int32{1, 2, 3}[r.Intn(3)]
+	switch oneofNumber_One {
+	case 1:
+		this.One = NewPopulatedTwoOneofs_Field1(r, easy)
+	case 2:
+		this.One = NewPopulatedTwoOneofs_Field2(r, easy)
+	case 3:
+		this.One = NewPopulatedTwoOneofs_Field3(r, easy)
+	}
+	oneofNumber_Two := []int32{34, 35, 36}[r.Intn(3)]
+	switch oneofNumber_Two {
+	case 34:
+		this.Two = NewPopulatedTwoOneofs_Field34(r, easy)
+	case 35:
+		this.Two = NewPopulatedTwoOneofs_Field35(r, easy)
+	case 36:
+		this.Two = NewPopulatedTwoOneofs_SubMessage2(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedOne(r, 37)
+	}
+	return this
+}
+
+func NewPopulatedTwoOneofs_Field1(r randyOne, easy bool) *TwoOneofs_Field1 {
+	this := &TwoOneofs_Field1{}
+	this.Field1 = float64(r.Float64())
+	if r.Intn(2) == 0 {
+		this.Field1 *= -1
+	}
+	return this
+}
+func NewPopulatedTwoOneofs_Field2(r randyOne, easy bool) *TwoOneofs_Field2 {
+	this := &TwoOneofs_Field2{}
+	this.Field2 = float32(r.Float32())
+	if r.Intn(2) == 0 {
+		this.Field2 *= -1
+	}
+	return this
+}
+func NewPopulatedTwoOneofs_Field3(r randyOne, easy bool) *TwoOneofs_Field3 {
+	this := &TwoOneofs_Field3{}
+	this.Field3 = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Field3 *= -1
+	}
+	return this
+}
+func NewPopulatedTwoOneofs_Field34(r randyOne, easy bool) *TwoOneofs_Field34 {
+	this := &TwoOneofs_Field34{}
+	this.Field34 = randStringOne(r)
+	return this
+}
+func NewPopulatedTwoOneofs_Field35(r randyOne, easy bool) *TwoOneofs_Field35 {
+	this := &TwoOneofs_Field35{}
+	v3 := r.Intn(100)
+	this.Field35 = make([]byte, v3)
+	for i := 0; i < v3; i++ {
+		this.Field35[i] = byte(r.Intn(256))
+	}
+	return this
+}
+func NewPopulatedTwoOneofs_SubMessage2(r randyOne, easy bool) *TwoOneofs_SubMessage2 {
+	this := &TwoOneofs_SubMessage2{}
+	this.SubMessage2 = NewPopulatedSubby(r, easy)
+	return this
+}
+func NewPopulatedCustomTypeOneof(r randyOne, easy bool) *CustomTypeOneof {
+	this := &CustomTypeOneof{}
+	oneofNumber_Custom := []int32{34, 35}[r.Intn(2)]
+	switch oneofNumber_Custom {
+	case 34:
+		this.Custom = NewPopulatedCustomTypeOneof_Stringy(r, easy)
+	case 35:
+		this.Custom = NewPopulatedCustomTypeOneof_CustomType(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedOne(r, 36)
+	}
+	return this
+}
+
+func NewPopulatedCustomTypeOneof_Stringy(r randyOne, easy bool) *CustomTypeOneof_Stringy {
+	this := &CustomTypeOneof_Stringy{}
+	this.Stringy = randStringOne(r)
+	return this
+}
+func NewPopulatedCustomTypeOneof_CustomType(r randyOne, easy bool) *CustomTypeOneof_CustomType {
+	this := &CustomTypeOneof_CustomType{}
+	v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+	this.CustomType = *v4
 	return this
 }
 
@@ -2488,9 +3605,9 @@ func randUTF8RuneOne(r randyOne) rune {
 	return rune(ru + 61)
 }
 func randStringOne(r randyOne) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	v5 := r.Intn(100)
+	tmps := make([]rune, v5)
+	for i := 0; i < v5; i++ {
 		tmps[i] = randUTF8RuneOne(r)
 	}
 	return string(tmps)
@@ -2512,11 +3629,11 @@ func randFieldOne(data []byte, r randyOne, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateOne(data, uint64(key))
-		v4 := r.Int63()
+		v6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			v6 *= -1
 		}
-		data = encodeVarintPopulateOne(data, uint64(v4))
+		data = encodeVarintPopulateOne(data, uint64(v6))
 	case 1:
 		data = encodeVarintPopulateOne(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -2554,7 +3671,7 @@ func (m *Subby) Size() (n int) {
 	return n
 }
 
-func (m *SampleOneOf) Size() (n int) {
+func (m *AllTypesOneOf) Size() (n int) {
 	var l int
 	_ = l
 	if m.TestOneof != nil {
@@ -2566,92 +3683,92 @@ func (m *SampleOneOf) Size() (n int) {
 	return n
 }
 
-func (m *SampleOneOf_Field1) Size() (n int) {
+func (m *AllTypesOneOf_Field1) Size() (n int) {
 	var l int
 	_ = l
 	n += 9
 	return n
 }
-func (m *SampleOneOf_Field2) Size() (n int) {
+func (m *AllTypesOneOf_Field2) Size() (n int) {
 	var l int
 	_ = l
 	n += 5
 	return n
 }
-func (m *SampleOneOf_Field3) Size() (n int) {
+func (m *AllTypesOneOf_Field3) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field3))
 	return n
 }
-func (m *SampleOneOf_Field4) Size() (n int) {
+func (m *AllTypesOneOf_Field4) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field4))
 	return n
 }
-func (m *SampleOneOf_Field5) Size() (n int) {
+func (m *AllTypesOneOf_Field5) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field5))
 	return n
 }
-func (m *SampleOneOf_Field6) Size() (n int) {
+func (m *AllTypesOneOf_Field6) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field6))
 	return n
 }
-func (m *SampleOneOf_Field7) Size() (n int) {
+func (m *AllTypesOneOf_Field7) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field7))
 	return n
 }
-func (m *SampleOneOf_Field8) Size() (n int) {
+func (m *AllTypesOneOf_Field8) Size() (n int) {
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field8))
 	return n
 }
-func (m *SampleOneOf_Field9) Size() (n int) {
+func (m *AllTypesOneOf_Field9) Size() (n int) {
 	var l int
 	_ = l
 	n += 5
 	return n
 }
-func (m *SampleOneOf_Field10) Size() (n int) {
+func (m *AllTypesOneOf_Field10) Size() (n int) {
 	var l int
 	_ = l
 	n += 5
 	return n
 }
-func (m *SampleOneOf_Field11) Size() (n int) {
+func (m *AllTypesOneOf_Field11) Size() (n int) {
 	var l int
 	_ = l
 	n += 9
 	return n
 }
-func (m *SampleOneOf_Field12) Size() (n int) {
+func (m *AllTypesOneOf_Field12) Size() (n int) {
 	var l int
 	_ = l
 	n += 9
 	return n
 }
-func (m *SampleOneOf_Field13) Size() (n int) {
+func (m *AllTypesOneOf_Field13) Size() (n int) {
 	var l int
 	_ = l
 	n += 2
 	return n
 }
-func (m *SampleOneOf_Field14) Size() (n int) {
+func (m *AllTypesOneOf_Field14) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Field14)
 	n += 1 + l + sovOne(uint64(l))
 	return n
 }
-func (m *SampleOneOf_Field15) Size() (n int) {
+func (m *AllTypesOneOf_Field15) Size() (n int) {
 	var l int
 	_ = l
 	if m.Field15 != nil {
@@ -2660,13 +3777,97 @@ func (m *SampleOneOf_Field15) Size() (n int) {
 	}
 	return n
 }
-func (m *SampleOneOf_SubMessage) Size() (n int) {
+func (m *AllTypesOneOf_SubMessage) Size() (n int) {
 	var l int
 	_ = l
 	if m.SubMessage != nil {
 		l = m.SubMessage.Size()
 		n += 2 + l + sovOne(uint64(l))
 	}
+	return n
+}
+func (m *TwoOneofs) Size() (n int) {
+	var l int
+	_ = l
+	if m.One != nil {
+		n += m.One.Size()
+	}
+	if m.Two != nil {
+		n += m.Two.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *TwoOneofs_Field1) Size() (n int) {
+	var l int
+	_ = l
+	n += 9
+	return n
+}
+func (m *TwoOneofs_Field2) Size() (n int) {
+	var l int
+	_ = l
+	n += 5
+	return n
+}
+func (m *TwoOneofs_Field3) Size() (n int) {
+	var l int
+	_ = l
+	n += 1 + sovOne(uint64(m.Field3))
+	return n
+}
+func (m *TwoOneofs_Field34) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Field34)
+	n += 2 + l + sovOne(uint64(l))
+	return n
+}
+func (m *TwoOneofs_Field35) Size() (n int) {
+	var l int
+	_ = l
+	if m.Field35 != nil {
+		l = len(m.Field35)
+		n += 2 + l + sovOne(uint64(l))
+	}
+	return n
+}
+func (m *TwoOneofs_SubMessage2) Size() (n int) {
+	var l int
+	_ = l
+	if m.SubMessage2 != nil {
+		l = m.SubMessage2.Size()
+		n += 2 + l + sovOne(uint64(l))
+	}
+	return n
+}
+func (m *CustomTypeOneof) Size() (n int) {
+	var l int
+	_ = l
+	if m.Custom != nil {
+		n += m.Custom.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CustomTypeOneof_Stringy) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Stringy)
+	n += 2 + l + sovOne(uint64(l))
+	return n
+}
+func (m *CustomTypeOneof_CustomType) Size() (n int) {
+	var l int
+	_ = l
+	l = m.CustomType.Size()
+	n += 2 + l + sovOne(uint64(l))
 	return n
 }
 
@@ -2694,173 +3895,276 @@ func (this *Subby) String() string {
 	}, "")
 	return s
 }
-func (this *SampleOneOf) String() string {
+func (this *AllTypesOneOf) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf{`,
+	s := strings.Join([]string{`&AllTypesOneOf{`,
 		`TestOneof:` + fmt.Sprintf("%v", this.TestOneof) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field1) String() string {
+func (this *AllTypesOneOf_Field1) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field1{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field1{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field2) String() string {
+func (this *AllTypesOneOf_Field2) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field2{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field2{`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field3) String() string {
+func (this *AllTypesOneOf_Field3) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field3{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field3{`,
 		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field4) String() string {
+func (this *AllTypesOneOf_Field4) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field4{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field4{`,
 		`Field4:` + fmt.Sprintf("%v", this.Field4) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field5) String() string {
+func (this *AllTypesOneOf_Field5) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field5{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field5{`,
 		`Field5:` + fmt.Sprintf("%v", this.Field5) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field6) String() string {
+func (this *AllTypesOneOf_Field6) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field6{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field6{`,
 		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field7) String() string {
+func (this *AllTypesOneOf_Field7) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field7{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field7{`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field8) String() string {
+func (this *AllTypesOneOf_Field8) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field8{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field8{`,
 		`Field8:` + fmt.Sprintf("%v", this.Field8) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field9) String() string {
+func (this *AllTypesOneOf_Field9) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field9{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field9{`,
 		`Field9:` + fmt.Sprintf("%v", this.Field9) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field10) String() string {
+func (this *AllTypesOneOf_Field10) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field10{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field10{`,
 		`Field10:` + fmt.Sprintf("%v", this.Field10) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field11) String() string {
+func (this *AllTypesOneOf_Field11) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field11{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field11{`,
 		`Field11:` + fmt.Sprintf("%v", this.Field11) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field12) String() string {
+func (this *AllTypesOneOf_Field12) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field12{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field12{`,
 		`Field12:` + fmt.Sprintf("%v", this.Field12) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field13) String() string {
+func (this *AllTypesOneOf_Field13) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field13{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field13{`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field14) String() string {
+func (this *AllTypesOneOf_Field14) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field14{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field14{`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_Field15) String() string {
+func (this *AllTypesOneOf_Field15) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_Field15{`,
+	s := strings.Join([]string{`&AllTypesOneOf_Field15{`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SampleOneOf_SubMessage) String() string {
+func (this *AllTypesOneOf_SubMessage) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SampleOneOf_SubMessage{`,
+	s := strings.Join([]string{`&AllTypesOneOf_SubMessage{`,
 		`SubMessage:` + strings.Replace(fmt.Sprintf("%v", this.SubMessage), "Subby", "Subby", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs{`,
+		`One:` + fmt.Sprintf("%v", this.One) + `,`,
+		`Two:` + fmt.Sprintf("%v", this.Two) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_Field1) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_Field1{`,
+		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_Field2) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_Field2{`,
+		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_Field3) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_Field3{`,
+		`Field3:` + fmt.Sprintf("%v", this.Field3) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_Field34) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_Field34{`,
+		`Field34:` + fmt.Sprintf("%v", this.Field34) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_Field35) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_Field35{`,
+		`Field35:` + fmt.Sprintf("%v", this.Field35) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TwoOneofs_SubMessage2) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TwoOneofs_SubMessage2{`,
+		`SubMessage2:` + strings.Replace(fmt.Sprintf("%v", this.SubMessage2), "Subby", "Subby", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomTypeOneof) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomTypeOneof{`,
+		`Custom:` + fmt.Sprintf("%v", this.Custom) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomTypeOneof_Stringy) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomTypeOneof_Stringy{`,
+		`Stringy:` + fmt.Sprintf("%v", this.Stringy) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomTypeOneof_CustomType) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomTypeOneof_CustomType{`,
+		`CustomType:` + fmt.Sprintf("%v", this.CustomType) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2900,7 +4204,7 @@ func (m *Subby) MarshalTo(data []byte) (int, error) {
 	return i, nil
 }
 
-func (m *SampleOneOf) Marshal() (data []byte, err error) {
+func (m *AllTypesOneOf) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
 	n, err := m.MarshalTo(data)
@@ -2910,7 +4214,7 @@ func (m *SampleOneOf) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *SampleOneOf) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -2928,7 +4232,7 @@ func (m *SampleOneOf) MarshalTo(data []byte) (int, error) {
 	return i, nil
 }
 
-func (m *SampleOneOf_Field1) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field1) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x9
 	i++
@@ -2936,7 +4240,7 @@ func (m *SampleOneOf_Field1) MarshalTo(data []byte) (int, error) {
 	i += 8
 	return i, nil
 }
-func (m *SampleOneOf_Field2) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field2) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x15
 	i++
@@ -2944,49 +4248,49 @@ func (m *SampleOneOf_Field2) MarshalTo(data []byte) (int, error) {
 	i += 4
 	return i, nil
 }
-func (m *SampleOneOf_Field3) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field3) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x18
 	i++
 	i = encodeVarintOne(data, i, uint64(m.Field3))
 	return i, nil
 }
-func (m *SampleOneOf_Field4) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field4) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x20
 	i++
 	i = encodeVarintOne(data, i, uint64(m.Field4))
 	return i, nil
 }
-func (m *SampleOneOf_Field5) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field5) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x28
 	i++
 	i = encodeVarintOne(data, i, uint64(m.Field5))
 	return i, nil
 }
-func (m *SampleOneOf_Field6) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field6) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x30
 	i++
 	i = encodeVarintOne(data, i, uint64(m.Field6))
 	return i, nil
 }
-func (m *SampleOneOf_Field7) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field7) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x38
 	i++
 	i = encodeVarintOne(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
 	return i, nil
 }
-func (m *SampleOneOf_Field8) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field8) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x40
 	i++
 	i = encodeVarintOne(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
 	return i, nil
 }
-func (m *SampleOneOf_Field9) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field9) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x4d
 	i++
@@ -2994,7 +4298,7 @@ func (m *SampleOneOf_Field9) MarshalTo(data []byte) (int, error) {
 	i += 4
 	return i, nil
 }
-func (m *SampleOneOf_Field10) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field10) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x55
 	i++
@@ -3002,7 +4306,7 @@ func (m *SampleOneOf_Field10) MarshalTo(data []byte) (int, error) {
 	i += 4
 	return i, nil
 }
-func (m *SampleOneOf_Field11) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field11) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x59
 	i++
@@ -3010,7 +4314,7 @@ func (m *SampleOneOf_Field11) MarshalTo(data []byte) (int, error) {
 	i += 8
 	return i, nil
 }
-func (m *SampleOneOf_Field12) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field12) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x61
 	i++
@@ -3018,7 +4322,7 @@ func (m *SampleOneOf_Field12) MarshalTo(data []byte) (int, error) {
 	i += 8
 	return i, nil
 }
-func (m *SampleOneOf_Field13) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field13) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x68
 	i++
@@ -3030,7 +4334,7 @@ func (m *SampleOneOf_Field13) MarshalTo(data []byte) (int, error) {
 	i++
 	return i, nil
 }
-func (m *SampleOneOf_Field14) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field14) MarshalTo(data []byte) (int, error) {
 	i := 0
 	data[i] = 0x72
 	i++
@@ -3038,7 +4342,7 @@ func (m *SampleOneOf_Field14) MarshalTo(data []byte) (int, error) {
 	i += copy(data[i:], m.Field14)
 	return i, nil
 }
-func (m *SampleOneOf_Field15) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_Field15) MarshalTo(data []byte) (int, error) {
 	i := 0
 	if m.Field15 != nil {
 		data[i] = 0x7a
@@ -3048,7 +4352,7 @@ func (m *SampleOneOf_Field15) MarshalTo(data []byte) (int, error) {
 	}
 	return i, nil
 }
-func (m *SampleOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
+func (m *AllTypesOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
 	i := 0
 	if m.SubMessage != nil {
 		data[i] = 0x82
@@ -3062,6 +4366,154 @@ func (m *SampleOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
 		}
 		i += n2
 	}
+	return i, nil
+}
+func (m *TwoOneofs) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *TwoOneofs) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.One != nil {
+		nn3, err := m.One.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += nn3
+	}
+	if m.Two != nil {
+		nn4, err := m.Two.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += nn4
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *TwoOneofs_Field1) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x9
+	i++
+	*(*float64)(unsafe.Pointer(&data[i])) = m.Field1
+	i += 8
+	return i, nil
+}
+func (m *TwoOneofs_Field2) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x15
+	i++
+	*(*float32)(unsafe.Pointer(&data[i])) = m.Field2
+	i += 4
+	return i, nil
+}
+func (m *TwoOneofs_Field3) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x18
+	i++
+	i = encodeVarintOne(data, i, uint64(m.Field3))
+	return i, nil
+}
+func (m *TwoOneofs_Field34) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x92
+	i++
+	data[i] = 0x2
+	i++
+	i = encodeVarintOne(data, i, uint64(len(m.Field34)))
+	i += copy(data[i:], m.Field34)
+	return i, nil
+}
+func (m *TwoOneofs_Field35) MarshalTo(data []byte) (int, error) {
+	i := 0
+	if m.Field35 != nil {
+		data[i] = 0x9a
+		i++
+		data[i] = 0x2
+		i++
+		i = encodeVarintOne(data, i, uint64(len(m.Field35)))
+		i += copy(data[i:], m.Field35)
+	}
+	return i, nil
+}
+func (m *TwoOneofs_SubMessage2) MarshalTo(data []byte) (int, error) {
+	i := 0
+	if m.SubMessage2 != nil {
+		data[i] = 0xa2
+		i++
+		data[i] = 0x2
+		i++
+		i = encodeVarintOne(data, i, uint64(m.SubMessage2.Size()))
+		n5, err := m.SubMessage2.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
+	}
+	return i, nil
+}
+func (m *CustomTypeOneof) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *CustomTypeOneof) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Custom != nil {
+		nn6, err := m.Custom.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += nn6
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomTypeOneof_Stringy) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x92
+	i++
+	data[i] = 0x2
+	i++
+	i = encodeVarintOne(data, i, uint64(len(m.Stringy)))
+	i += copy(data[i:], m.Stringy)
+	return i, nil
+}
+func (m *CustomTypeOneof_CustomType) MarshalTo(data []byte) (int, error) {
+	i := 0
+	data[i] = 0x9a
+	i++
+	data[i] = 0x2
+	i++
+	i = encodeVarintOne(data, i, uint64(m.CustomType.Size()))
+	n7, err := m.CustomType.MarshalTo(data[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n7
 	return i, nil
 }
 func encodeFixed64One(data []byte, offset int, v uint64) int {

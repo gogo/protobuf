@@ -56,7 +56,7 @@ message Subby {
 	optional string sub = 1;
 }
 
-message SampleOneOf {
+message AllTypesOneOf {
   oneof test_oneof {
     double Field1 = 1;
     float Field2 = 2;
@@ -77,4 +77,23 @@ message SampleOneOf {
   }
 }
 
+message TwoOneofs {
+  oneof one {
+    double Field1 = 1;
+    float Field2 = 2;
+    int32 Field3 = 3;
+  }
 
+  oneof two {
+    string Field34 = 34;
+    bytes Field35 = 35;
+    Subby sub_message2 = 36;
+  }
+}
+
+message CustomTypeOneof {
+  oneof custom {
+    string Stringy = 34;
+    bytes CustomType = 35 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128"];
+  }
+}

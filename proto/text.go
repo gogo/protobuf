@@ -422,16 +422,18 @@ func writeRaw(w *textWriter, b []byte) error {
 func writeAny(w *textWriter, v reflect.Value, props *Properties) error {
 	v = reflect.Indirect(v)
 
-	if props != nil && len(props.CustomType) > 0 {
-		var custom Marshaler = v.Interface().(Marshaler)
-		data, err := custom.Marshal()
-		if err != nil {
-			return err
+	if _, ok := v.Interface().(string); !ok { // oneof with nil value
+		if props != nil && len(props.CustomType) > 0 {
+			var custom Marshaler = v.Interface().(Marshaler)
+			data, err := custom.Marshal()
+			if err != nil {
+				return err
+			}
+			if err := writeString(w, string(data)); err != nil {
+				return err
+			}
+			return nil
 		}
-		if err := writeString(w, string(data)); err != nil {
-			return err
-		}
-		return nil
 	}
 
 	// Floats have special cases.

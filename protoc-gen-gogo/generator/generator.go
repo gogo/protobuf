@@ -2357,6 +2357,15 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				if !canFail {
 					g.P(pre, val, post)
 				} else {
+					if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
+						g.P(`data, err := `, val, `.Marshal()`)
+						g.P(`if err != nil {`)
+						g.In()
+						g.P(`return err`)
+						g.Out()
+						g.P(`}`)
+						val = "data"
+					}
 					g.P("if err := ", pre, val, post, "; err != nil {")
 					g.In()
 					g.P("return err")
@@ -2443,6 +2452,21 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 			g.P(lhs, " := ", dec)
 			val := "x"
+			if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
+				g.P(`if err != nil {`)
+				g.In()
+				g.P(`return true, err`)
+				g.Out()
+				g.P(`}`)
+				_, ctyp, err := GetCustomType(field)
+				if err != nil {
+					panic(err)
+				}
+				g.P(`var cc `, ctyp)
+				g.P(`c := &cc`)
+				g.P(`err = c.Unmarshal(`, val, `)`)
+				val = "*c"
+			}
 			if cast != "" {
 				val = cast + "(" + val + ")"
 			}

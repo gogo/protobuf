@@ -65,11 +65,23 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				continue
 			}
 			if face {
-				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in a face and oneof", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in a face and oneof\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}
 			if gogoproto.IsEmbed(field) {
-				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and an embedded field", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and an embedded field\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				os.Exit(1)
+			}
+			if !gogoproto.IsNullable(field) {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and a non-nullable field\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				os.Exit(1)
+			}
+			if gogoproto.IsCustomName(field) {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and have a custom name\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
+				os.Exit(1)
+			}
+			if gogoproto.IsCastType(field) {
+				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and have a cast type\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}
 		}
