@@ -195,8 +195,7 @@ func (p *size) sizeZigZag() {
 	}`)
 }
 
-func (p *size) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
 	fieldname := p.GetOneOfFieldName(message, field)
 	nullable := gogoproto.IsNullable(field)
 	repeated := field.IsRepeated()
@@ -503,7 +502,8 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			oneof := field.OneofIndex != nil
 			if !oneof {
-				p.generateField(file, message, field)
+				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+				p.generateField(proto3, file, message, field)
 			} else {
 				fieldname := p.GetFieldName(message, field)
 				if _, ok := oneofs[fieldname]; ok {
@@ -554,7 +554,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			p.P(`var l int`)
 			p.P(`_ = l`)
 			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(f)
-			p.generateField(file, message, f)
+			p.generateField(false, file, message, f)
 			p.P(`return n`)
 			p.Out()
 			p.P(`}`)

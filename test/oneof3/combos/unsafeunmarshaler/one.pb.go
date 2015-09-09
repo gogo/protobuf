@@ -2468,114 +2468,86 @@ func (m *SampleOneOf) Size() (n int) {
 func (m *SampleOneOf_Field1) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field1 != 0 {
-		n += 9
-	}
+	n += 9
 	return n
 }
 func (m *SampleOneOf_Field2) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field2 != 0 {
-		n += 5
-	}
+	n += 5
 	return n
 }
 func (m *SampleOneOf_Field3) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field3 != 0 {
-		n += 1 + sovOne(uint64(m.Field3))
-	}
+	n += 1 + sovOne(uint64(m.Field3))
 	return n
 }
 func (m *SampleOneOf_Field4) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field4 != 0 {
-		n += 1 + sovOne(uint64(m.Field4))
-	}
+	n += 1 + sovOne(uint64(m.Field4))
 	return n
 }
 func (m *SampleOneOf_Field5) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field5 != 0 {
-		n += 1 + sovOne(uint64(m.Field5))
-	}
+	n += 1 + sovOne(uint64(m.Field5))
 	return n
 }
 func (m *SampleOneOf_Field6) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field6 != 0 {
-		n += 1 + sovOne(uint64(m.Field6))
-	}
+	n += 1 + sovOne(uint64(m.Field6))
 	return n
 }
 func (m *SampleOneOf_Field7) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field7 != 0 {
-		n += 1 + sozOne(uint64(m.Field7))
-	}
+	n += 1 + sozOne(uint64(m.Field7))
 	return n
 }
 func (m *SampleOneOf_Field8) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field8 != 0 {
-		n += 1 + sozOne(uint64(m.Field8))
-	}
+	n += 1 + sozOne(uint64(m.Field8))
 	return n
 }
 func (m *SampleOneOf_Field9) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field9 != 0 {
-		n += 5
-	}
+	n += 5
 	return n
 }
 func (m *SampleOneOf_Field10) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field10 != 0 {
-		n += 5
-	}
+	n += 5
 	return n
 }
 func (m *SampleOneOf_Field11) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field11 != 0 {
-		n += 9
-	}
+	n += 9
 	return n
 }
 func (m *SampleOneOf_Field12) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field12 != 0 {
-		n += 9
-	}
+	n += 9
 	return n
 }
 func (m *SampleOneOf_Field13) Size() (n int) {
 	var l int
 	_ = l
-	if m.Field13 {
-		n += 2
-	}
+	n += 2
 	return n
 }
 func (m *SampleOneOf_Field14) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Field14)
-	if l > 0 {
-		n += 1 + l + sovOne(uint64(l))
-	}
+	n += 1 + l + sovOne(uint64(l))
 	return n
 }
 func (m *SampleOneOf_Field15) Size() (n int) {
@@ -2583,9 +2555,7 @@ func (m *SampleOneOf_Field15) Size() (n int) {
 	_ = l
 	if m.Field15 != nil {
 		l = len(m.Field15)
-		if l > 0 {
-			n += 1 + l + sovOne(uint64(l))
-		}
+		n += 1 + l + sovOne(uint64(l))
 	}
 	return n
 }

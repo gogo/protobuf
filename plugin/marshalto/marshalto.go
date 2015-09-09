@@ -366,8 +366,7 @@ func (this orderFields) Swap(i, j int) {
 	this[i], this[j] = this[j], this[i]
 }
 
-func (p *marshalto) generateField(numGen NumGen, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
 	fieldname := p.GetOneOfFieldName(message, field)
 	nullable := gogoproto.IsNullable(field)
 	repeated := field.IsRepeated()
@@ -1147,7 +1146,8 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			oneof := field.OneofIndex != nil
 			if !oneof {
-				p.generateField(numGen, file, message, field)
+				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+				p.generateField(proto3, numGen, file, message, field)
 			} else {
 				fieldname := p.GetFieldName(message, field)
 				if _, ok := oneofs[fieldname]; !ok {
@@ -1212,7 +1212,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			p.In()
 			p.P(`i := 0`)
 			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(field)
-			p.generateField(numGen, file, message, field)
+			p.generateField(false, numGen, file, message, field)
 			p.P(`return i, nil`)
 			p.Out()
 			p.P(`}`)
