@@ -384,19 +384,11 @@ func _MsgWithOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	// union
 	switch x := m.Union.(type) {
 	case *MsgWithOneof_Title:
-		if err := b.EncodeVarint(1<<3 | proto.WireBytes); err != nil {
-			return err
-		}
-		if err := b.EncodeStringBytes(x.Title); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(1<<3 | proto.WireBytes)
+		_ = b.EncodeStringBytes(x.Title)
 	case *MsgWithOneof_Salary:
-		if err := b.EncodeVarint(2<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(uint64(x.Salary)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(2<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Salary))
 	case nil:
 	default:
 		return fmt.Errorf("MsgWithOneof.Union has unexpected type %T", x)

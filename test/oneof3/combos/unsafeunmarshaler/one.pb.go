@@ -288,118 +288,56 @@ func _SampleOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	// test_oneof
 	switch x := m.TestOneof.(type) {
 	case *SampleOneOf_Field1:
-		if err := b.EncodeVarint(1<<3 | proto.WireFixed64); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed64(math.Float64bits(x.Field1)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(1<<3 | proto.WireFixed64)
+		_ = b.EncodeFixed64(math.Float64bits(x.Field1))
 	case *SampleOneOf_Field2:
-		if err := b.EncodeVarint(2<<3 | proto.WireFixed32); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed32(uint64(math.Float32bits(x.Field2))); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(2<<3 | proto.WireFixed32)
+		_ = b.EncodeFixed32(uint64(math.Float32bits(x.Field2)))
 	case *SampleOneOf_Field3:
-		if err := b.EncodeVarint(3<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(uint64(x.Field3)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(3<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Field3))
 	case *SampleOneOf_Field4:
-		if err := b.EncodeVarint(4<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(uint64(x.Field4)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(4<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Field4))
 	case *SampleOneOf_Field5:
-		if err := b.EncodeVarint(5<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(uint64(x.Field5)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(5<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Field5))
 	case *SampleOneOf_Field6:
-		if err := b.EncodeVarint(6<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(uint64(x.Field6)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(6<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Field6))
 	case *SampleOneOf_Field7:
-		if err := b.EncodeVarint(7<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeZigzag32(uint64(x.Field7)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(7<<3 | proto.WireVarint)
+		_ = b.EncodeZigzag32(uint64(x.Field7))
 	case *SampleOneOf_Field8:
-		if err := b.EncodeVarint(8<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeZigzag64(uint64(x.Field8)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(8<<3 | proto.WireVarint)
+		_ = b.EncodeZigzag64(uint64(x.Field8))
 	case *SampleOneOf_Field9:
-		if err := b.EncodeVarint(9<<3 | proto.WireFixed32); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed32(uint64(x.Field9)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(9<<3 | proto.WireFixed32)
+		_ = b.EncodeFixed32(uint64(x.Field9))
 	case *SampleOneOf_Field10:
-		if err := b.EncodeVarint(10<<3 | proto.WireFixed32); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed32(uint64(x.Field10)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(10<<3 | proto.WireFixed32)
+		_ = b.EncodeFixed32(uint64(x.Field10))
 	case *SampleOneOf_Field11:
-		if err := b.EncodeVarint(11<<3 | proto.WireFixed64); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed64(uint64(x.Field11)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(11<<3 | proto.WireFixed64)
+		_ = b.EncodeFixed64(uint64(x.Field11))
 	case *SampleOneOf_Field12:
-		if err := b.EncodeVarint(12<<3 | proto.WireFixed64); err != nil {
-			return err
-		}
-		if err := b.EncodeFixed64(uint64(x.Field12)); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(12<<3 | proto.WireFixed64)
+		_ = b.EncodeFixed64(uint64(x.Field12))
 	case *SampleOneOf_Field13:
 		t := uint64(0)
 		if x.Field13 {
 			t = 1
 		}
-		if err := b.EncodeVarint(13<<3 | proto.WireVarint); err != nil {
-			return err
-		}
-		if err := b.EncodeVarint(t); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(13<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(t)
 	case *SampleOneOf_Field14:
-		if err := b.EncodeVarint(14<<3 | proto.WireBytes); err != nil {
-			return err
-		}
-		if err := b.EncodeStringBytes(x.Field14); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(14<<3 | proto.WireBytes)
+		_ = b.EncodeStringBytes(x.Field14)
 	case *SampleOneOf_Field15:
-		if err := b.EncodeVarint(15<<3 | proto.WireBytes); err != nil {
-			return err
-		}
-		if err := b.EncodeRawBytes(x.Field15); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(15<<3 | proto.WireBytes)
+		_ = b.EncodeRawBytes(x.Field15)
 	case *SampleOneOf_SubMessage:
-		if err := b.EncodeVarint(16<<3 | proto.WireBytes); err != nil {
-			return err
-		}
+		_ = b.EncodeVarint(16<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.SubMessage); err != nil {
 			return err
 		}

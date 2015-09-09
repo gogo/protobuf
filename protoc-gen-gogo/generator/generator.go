@@ -2286,33 +2286,27 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					wire = "WireFixed64"
 					pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
 					post = "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FLOAT:
 					wire = "WireFixed32"
 					pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
 					post = ")))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_INT64,
 					descriptor.FieldDescriptorProto_TYPE_UINT64:
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(uint64(", "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_INT32,
 					descriptor.FieldDescriptorProto_TYPE_UINT32,
 					descriptor.FieldDescriptorProto_TYPE_ENUM:
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(uint64(", "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 					descriptor.FieldDescriptorProto_TYPE_SFIXED64:
 					wire = "WireFixed64"
 					pre, post = "b.EncodeFixed64(uint64(", "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_FIXED32,
 					descriptor.FieldDescriptorProto_TYPE_SFIXED32:
 					wire = "WireFixed32"
 					pre, post = "b.EncodeFixed32(uint64(", "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_BOOL:
 					// bool needs special handling.
 					g.P("t := uint64(0)")
@@ -2320,11 +2314,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					val = "t"
 					wire = "WireVarint"
 					pre, post = "b.EncodeVarint(", ")"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_STRING:
 					wire = "WireBytes"
 					pre, post = "b.EncodeStringBytes(", ")"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_GROUP:
 					wire = "WireStartGroup"
 					pre, post = "b.Marshal(", ")"
@@ -2336,36 +2328,29 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				case descriptor.FieldDescriptorProto_TYPE_BYTES:
 					wire = "WireBytes"
 					pre, post = "b.EncodeRawBytes(", ")"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_SINT32:
 					wire = "WireVarint"
 					pre, post = "b.EncodeZigzag32(uint64(", "))"
-					canFail = true
 				case descriptor.FieldDescriptorProto_TYPE_SINT64:
 					wire = "WireVarint"
 					pre, post = "b.EncodeZigzag64(uint64(", "))"
-					canFail = true
 				default:
 					g.Fail("unhandled oneof field type ", field.Type.String())
 				}
 				fieldWire[field] = wire
-				g.P("if err := b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, "); err != nil {")
-				g.In()
-				g.P("return err")
-				g.Out()
-				g.P(`}`)
+				g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
+				if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
+					g.P(`data, err := `, val, `.Marshal()`)
+					g.P(`if err != nil {`)
+					g.In()
+					g.P(`return err`)
+					g.Out()
+					g.P(`}`)
+					val = "data"
+				}
 				if !canFail {
-					g.P(pre, val, post)
+					g.P("_ = ", pre, val, post)
 				} else {
-					if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
-						g.P(`data, err := `, val, `.Marshal()`)
-						g.P(`if err != nil {`)
-						g.In()
-						g.P(`return err`)
-						g.Out()
-						g.P(`}`)
-						val = "data"
-					}
 					g.P("if err := ", pre, val, post, "; err != nil {")
 					g.In()
 					g.P("return err")
@@ -2373,11 +2358,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					g.P("}")
 				}
 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
-					g.P("if err := b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup); err != nil {")
-					g.In()
-					g.P("return err")
-					g.Out()
-					g.P(`}`)
+					g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup)")
 				}
 			}
 			g.P("case nil:")
