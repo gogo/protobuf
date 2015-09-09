@@ -2461,6 +2461,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 				val = "msg"
 			}
+			if gogoproto.IsCastType(field) {
+				_, typ, err := getCastType(field)
+				if err != nil {
+					g.Fail(err.Error())
+				}
+				val = typ + "(" + val + ")"
+			}
 			g.P("m.", oneofFieldName[*field.OneofIndex], " = &", oneofTypeName[field], "{", val, "}")
 			g.P("return true, err")
 		}

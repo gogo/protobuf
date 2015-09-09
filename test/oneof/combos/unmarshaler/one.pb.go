@@ -23,6 +23,7 @@ import math "math"
 // discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
 
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+import github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 
 import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
@@ -689,6 +690,7 @@ type CustomTypeOneof struct {
 	// Types that are valid to be assigned to Custom:
 	//	*CustomTypeOneof_Stringy
 	//	*CustomTypeOneof_CustomType
+	//	*CustomTypeOneof_CastType
 	Custom           isCustomTypeOneof_Custom `protobuf_oneof:"custom"`
 	XXX_unrecognized []byte                   `json:"-"`
 }
@@ -709,9 +711,13 @@ type CustomTypeOneof_Stringy struct {
 type CustomTypeOneof_CustomType struct {
 	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
 }
+type CustomTypeOneof_CastType struct {
+	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
+}
 
 func (*CustomTypeOneof_Stringy) isCustomTypeOneof_Custom()    {}
 func (*CustomTypeOneof_CustomType) isCustomTypeOneof_Custom() {}
+func (*CustomTypeOneof_CastType) isCustomTypeOneof_Custom()   {}
 
 func (m *CustomTypeOneof) GetCustom() isCustomTypeOneof_Custom {
 	if m != nil {
@@ -727,11 +733,19 @@ func (m *CustomTypeOneof) GetStringy() string {
 	return ""
 }
 
+func (m *CustomTypeOneof) GetCastType() github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	if x, ok := m.GetCustom().(*CustomTypeOneof_CastType); ok {
+		return x.CastType
+	}
+	return 0
+}
+
 // XXX_OneofFuncs is for the internal use of the proto package.
 func (*CustomTypeOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
 	return _CustomTypeOneof_OneofMarshaler, _CustomTypeOneof_OneofUnmarshaler, []interface{}{
 		(*CustomTypeOneof_Stringy)(nil),
 		(*CustomTypeOneof_CustomType)(nil),
+		(*CustomTypeOneof_CastType)(nil),
 	}
 }
 
@@ -749,6 +763,9 @@ func _CustomTypeOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 			return err
 		}
 		_ = b.EncodeRawBytes(data)
+	case *CustomTypeOneof_CastType:
+		_ = b.EncodeVarint(36<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.CastType))
 	case nil:
 	default:
 		return fmt.Errorf("CustomTypeOneof.Custom has unexpected type %T", x)
@@ -778,6 +795,13 @@ func _CustomTypeOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *prot
 		c := &cc
 		err = c.Unmarshal(x)
 		m.Custom = &CustomTypeOneof_CustomType{*c}
+		return true, err
+	case 36: // custom.CastType
+		if wire != proto.WireVarint {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeVarint()
+		m.Custom = &CustomTypeOneof_CastType{github_com_gogo_protobuf_test_casttype.MyUint64Type(x)}
 		return true, err
 	default:
 		return false, nil
@@ -1485,7 +1509,11 @@ func OneDescription() (desc *google_protobuf.FileDescriptorSet) {
 		return &v
 	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
 		return &v
-	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("custom"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
+	}(12), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}, {Name: func(v string) *string { return &v }("CastType"), Number: func(v int32) *int32 { return &v }(36), Label: func(v google_protobuf.FieldDescriptorProto_Label) *google_protobuf.FieldDescriptorProto_Label {
+		return &v
+	}(1), Type: func(v google_protobuf.FieldDescriptorProto_Type) *google_protobuf.FieldDescriptorProto_Type {
+		return &v
+	}(4), TypeName: nil, Extendee: nil, DefaultValue: nil, OneofIndex: func(v int32) *int32 { return &v }(0), Options: &google_protobuf.FieldOptions{Ctype: nil, Packed: nil, Lazy: nil, Deprecated: nil, Weak: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}, XXX_unrecognized: []byte(nil)}, XXX_unrecognized: []byte(nil)}}, Extension: []*google_protobuf.FieldDescriptorProto(nil), NestedType: []*google_protobuf.DescriptorProto(nil), EnumType: []*google_protobuf.EnumDescriptorProto(nil), ExtensionRange: []*google_protobuf.DescriptorProto_ExtensionRange(nil), OneofDecl: []*google_protobuf.OneofDescriptorProto{{Name: func(v string) *string { return &v }("custom"), XXX_unrecognized: []byte(nil)}}, Options: nil, XXX_unrecognized: []byte(nil)}}, EnumType: []*google_protobuf.EnumDescriptorProto(nil), Service: []*google_protobuf.ServiceDescriptorProto(nil), Extension: []*google_protobuf.FieldDescriptorProto(nil), Options: &google_protobuf.FileOptions{JavaPackage: nil, JavaOuterClassname: nil, JavaMultipleFiles: nil, JavaGenerateEqualsAndHash: nil, JavaStringCheckUtf8: nil, OptimizeFor: nil, GoPackage: nil, CcGenericServices: nil, JavaGenericServices: nil, PyGenericServices: nil, Deprecated: nil, CcEnableArenas: nil, UninterpretedOption: []*google_protobuf.UninterpretedOption(nil), XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}, XXX_unrecognized: []byte(nil)}, SourceCodeInfo: nil, Syntax: nil, XXX_unrecognized: []byte(nil)}}, XXX_unrecognized: []byte(nil)}
 }
 func (this *Subby) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -2893,6 +2921,31 @@ func (this *CustomTypeOneof_CustomType) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
+func (this *CustomTypeOneof_CastType) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*CustomTypeOneof_CastType)
+	if !ok {
+		return fmt.Errorf("that is not of type *CustomTypeOneof_CastType")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *CustomTypeOneof_CastType but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *CustomTypeOneof_CastTypebut is not nil && this == nil")
+	}
+	if this.CastType != that1.CastType {
+		return fmt.Errorf("CastType this(%v) Not Equal that(%v)", this.CastType, that1.CastType)
+	}
+	return nil
+}
 func (this *CustomTypeOneof) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
@@ -2973,6 +3026,31 @@ func (this *CustomTypeOneof_CustomType) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.CustomType.Equal(that1.CustomType) {
+		return false
+	}
+	return true
+}
+func (this *CustomTypeOneof_CastType) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*CustomTypeOneof_CastType)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.CastType != that1.CastType {
 		return false
 	}
 	return true
@@ -3204,6 +3282,14 @@ func (this *CustomTypeOneof_CustomType) GoString() string {
 	}
 	s := strings.Join([]string{`&one.CustomTypeOneof_CustomType{` +
 		`CustomType:` + fmt.Sprintf("%#v", this.CustomType) + `}`}, ", ")
+	return s
+}
+func (this *CustomTypeOneof_CastType) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&one.CustomTypeOneof_CastType{` +
+		`CastType:` + fmt.Sprintf("%#v", this.CastType) + `}`}, ", ")
 	return s
 }
 func valueToGoStringOne(v interface{}, typ string) string {
@@ -3465,15 +3551,17 @@ func NewPopulatedTwoOneofs_SubMessage2(r randyOne, easy bool) *TwoOneofs_SubMess
 }
 func NewPopulatedCustomTypeOneof(r randyOne, easy bool) *CustomTypeOneof {
 	this := &CustomTypeOneof{}
-	oneofNumber_Custom := []int32{34, 35}[r.Intn(2)]
+	oneofNumber_Custom := []int32{34, 35, 36}[r.Intn(3)]
 	switch oneofNumber_Custom {
 	case 34:
 		this.Custom = NewPopulatedCustomTypeOneof_Stringy(r, easy)
 	case 35:
 		this.Custom = NewPopulatedCustomTypeOneof_CustomType(r, easy)
+	case 36:
+		this.Custom = NewPopulatedCustomTypeOneof_CastType(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedOne(r, 36)
+		this.XXX_unrecognized = randUnrecognizedOne(r, 37)
 	}
 	return this
 }
@@ -3487,6 +3575,11 @@ func NewPopulatedCustomTypeOneof_CustomType(r randyOne, easy bool) *CustomTypeOn
 	this := &CustomTypeOneof_CustomType{}
 	v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	this.CustomType = *v4
+	return this
+}
+func NewPopulatedCustomTypeOneof_CastType(r randyOne, easy bool) *CustomTypeOneof_CastType {
+	this := &CustomTypeOneof_CastType{}
+	this.CastType = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 	return this
 }
 
@@ -3772,6 +3865,12 @@ func (m *CustomTypeOneof_CustomType) Size() (n int) {
 	_ = l
 	l = m.CustomType.Size()
 	n += 2 + l + sovOne(uint64(l))
+	return n
+}
+func (m *CustomTypeOneof_CastType) Size() (n int) {
+	var l int
+	_ = l
+	n += 2 + sovOne(uint64(m.CastType))
 	return n
 }
 
@@ -4069,6 +4168,16 @@ func (this *CustomTypeOneof_CustomType) String() string {
 	}
 	s := strings.Join([]string{`&CustomTypeOneof_CustomType{`,
 		`CustomType:` + fmt.Sprintf("%v", this.CustomType) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *CustomTypeOneof_CastType) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&CustomTypeOneof_CastType{`,
+		`CastType:` + fmt.Sprintf("%v", this.CastType) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4752,6 +4861,23 @@ func (m *CustomTypeOneof) Unmarshal(data []byte) error {
 			}
 			m.Custom = &CustomTypeOneof_CustomType{*v}
 			iNdEx = postIndex
+		case 36:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CastType", wireType)
+			}
+			var v github_com_gogo_protobuf_test_casttype.MyUint64Type
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (github_com_gogo_protobuf_test_casttype.MyUint64Type(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Custom = &CustomTypeOneof_CastType{v}
 		default:
 			var sizeOfWire int
 			for {

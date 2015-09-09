@@ -95,5 +95,6 @@ message CustomTypeOneof {
   oneof custom {
     string Stringy = 34;
     bytes CustomType = 35 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128"];
+    uint64 CastType = 36 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.MyUint64Type"];
   }
 }

@@ -422,9 +422,9 @@ func writeRaw(w *textWriter, b []byte) error {
 func writeAny(w *textWriter, v reflect.Value, props *Properties) error {
 	v = reflect.Indirect(v)
 
-	if _, ok := v.Interface().(string); !ok { // oneof with nil value
-		if props != nil && len(props.CustomType) > 0 {
-			var custom Marshaler = v.Interface().(Marshaler)
+	if props != nil && len(props.CustomType) > 0 {
+		custom, ok := v.Interface().(Marshaler)
+		if ok {
 			data, err := custom.Marshal()
 			if err != nil {
 				return err
