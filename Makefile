@@ -96,10 +96,7 @@ tests:
 
 vet:
 	go vet ./...
-
-# See https://github.com/golang/go/issues/11843
-vetshadow:
-	! go tool vet --shadow . 2>&1 | grep -vE 'declaration of err shadows declaration at (proto/text.go:535|proto/text.go:570)'
+	go tool vet --shadow .
 
 errcheck:
 	go get -u github.com/kisielk/errcheck
