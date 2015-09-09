@@ -562,8 +562,8 @@ func writeMessageSet(w *textWriter, ms *MessageSet) error {
 
 			pb := reflect.New(msd.t.Elem())
 			if err := Unmarshal(item.Message, pb.Interface().(Message)); err != nil {
-				if _, err := fmt.Fprintf(w, "/* bad message: %v */\n", err); err != nil {
-					return err
+				if _, ferr := fmt.Fprintf(w, "/* bad message: %v */\n", err); ferr != nil {
+					return ferr
 				}
 			} else {
 				if err := writeStruct(w, pb.Elem()); err != nil {
@@ -598,19 +598,19 @@ func writeUnknownStruct(w *textWriter, data []byte) error {
 	for b.index < len(b.buf) {
 		x, err := b.DecodeVarint()
 		if err != nil {
-			_, err := fmt.Fprintf(w, "/* %v */\n", err)
-			return err
+			_, ferr := fmt.Fprintf(w, "/* %v */\n", err)
+			return ferr
 		}
 		wire, tag := x&7, x>>3
 		if wire == WireEndGroup {
 			w.unindent()
-			if _, err := w.Write(endBraceNewline); err != nil {
-				return err
+			if _, werr := w.Write(endBraceNewline); werr != nil {
+				return werr
 			}
 			continue
 		}
-		if _, err := fmt.Fprint(w, tag); err != nil {
-			return err
+		if _, ferr := fmt.Fprint(w, tag); ferr != nil {
+			return ferr
 		}
 		if wire != WireStartGroup {
 			if err := w.WriteByte(':'); err != nil {

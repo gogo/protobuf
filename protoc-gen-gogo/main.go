@@ -135,9 +135,9 @@ func main() {
 	}
 
 	for i := 0; i < len(g.Response.File); i++ {
-		formatted, err := format.Source([]byte(g.Response.File[i].GetContent()))
-		if err != nil {
-			g.Error(err, "go format error")
+		formatted, ferr := format.Source([]byte(g.Response.File[i].GetContent()))
+		if ferr != nil {
+			g.Error(ferr, "go format error")
 		}
 		fmts := string(formatted)
 		g.Response.File[i].Content = &fmts
