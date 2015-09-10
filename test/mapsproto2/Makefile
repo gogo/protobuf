@@ -29,5 +29,5 @@
 regenerate:
 	cp header.proto mapsproto2.proto
 	cat ../theproto3/maps.proto >> mapsproto2.proto
-	go install github.com/gogo/protobuf/protoc-gen-gogo/protoc-gen-combo
+	go install github.com/gogo/protobuf/protoc-gen-combo
 	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. mapsproto2.proto

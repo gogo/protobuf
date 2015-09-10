@@ -30,5 +30,5 @@ regenerate:
 	cp header.proto theproto3.proto
 	cat maps.proto >> theproto3.proto
 	cat footer.proto >> theproto3.proto
-	go install github.com/gogo/protobuf/protoc-gen-gogo/protoc-gen-combo
+	go install github.com/gogo/protobuf/protoc-gen-combo
 	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. theproto3.proto

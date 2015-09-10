@@ -30,7 +30,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/protoc-gen-gogo/version"
+	"github.com/gogo/protobuf/version"
 	"os"
 	"os/exec"
 	"strings"

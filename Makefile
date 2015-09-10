@@ -39,8 +39,8 @@ install:
 	go install ./protoc-gen-gogofast
 	go install ./protoc-gen-gogofaster
 	go install ./protoc-gen-gogoslick
-	go install ./protoc-gen-gogo/version/protoc-min-version
-	go install ./protoc-gen-gogo/protoc-gen-combo
+	go install ./protoc-min-version
+	go install ./protoc-gen-combo
 
 clean:
 	go clean ./...
