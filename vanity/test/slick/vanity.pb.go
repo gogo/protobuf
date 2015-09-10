@@ -84,10 +84,12 @@ func (this *A) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&vanity.A{` +
-		`Strings:` + fmt.Sprintf("%#v", this.Strings),
-		`Int:` + fmt.Sprintf("%#v", this.Int) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&vanity.A{")
+	s = append(s, "Strings: "+fmt.Sprintf("%#v", this.Strings)+",\n")
+	s = append(s, "Int: "+fmt.Sprintf("%#v", this.Int)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func valueToGoStringVanity(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)

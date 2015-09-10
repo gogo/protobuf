@@ -97,6 +97,7 @@ package gostring
 import (
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"strconv"
 	"strings"
 )
 
@@ -156,7 +157,9 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 
-		outFlds := []string{}
+		p.P(`s := make([]string, 0, `, strconv.Itoa(len(message.Field)+4), `)`)
+		p.P(`s = append(s, "&`, packageName, ".", ccTypeName, `{")`)
+
 		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
@@ -169,9 +172,11 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				} else {
 					oneofs[fieldname] = struct{}{}
 				}
-				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
-				tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
-				outFlds = append(outFlds, tmp)
+				p.P(`if this.`, fieldname, ` != nil {`)
+				p.In()
+				p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
+				p.Out()
+				p.P(`}`)
 			} else if generator.IsMap(file.FileDescriptorProto, field) {
 				mapMsg := generator.GetMap(file.FileDescriptorProto, field)
 				keyField, valueField := mapMsg.GetMapFields()
@@ -198,54 +203,75 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 				p.P(mapName, ` += "}"`)
-				tmp := strings.Join([]string{"`", fieldname, ":` + ", mapName}, "")
-				outFlds = append(outFlds, tmp)
+				p.P(`if this.`, fieldname, ` != nil {`)
+				p.In()
+				p.P(`s = append(s, "`, fieldname, `: " + `, mapName, `+ ",\n")`)
+				p.Out()
+				p.P(`}`)
 			} else if field.IsMessage() || p.IsGroup(field) {
-				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
-				if nullable {
-					tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")
-				} else if repeated {
-					tmp += strings.Join([]string{stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`, ",`&`,``,1)"}, "")
-				} else {
-					tmp += strings.Join([]string{stringsPkg.Use(), `.Replace(this.`, fieldname, `.GoString()`, ",`&`,``,1)"}, "")
+				if nullable || repeated {
+					p.P(`if this.`, fieldname, ` != nil {`)
+					p.In()
 				}
-				outFlds = append(outFlds, tmp)
+				if nullable {
+					p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
+				} else if repeated {
+					p.P(`s = append(s, "`, fieldname, `: " + `, stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`, ",`&`,``,1)", ` + ",\n")`)
+				} else {
+					p.P(`s = append(s, "`, fieldname, `: " + `, stringsPkg.Use(), `.Replace(this.`, fieldname, `.GoString()`, ",`&`,``,1)", ` + ",\n")`)
+				}
+				if nullable || repeated {
+					p.Out()
+					p.P(`}`)
+				}
 			} else {
-				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
+				if !proto3 && (nullable || repeated) {
+					p.P(`if this.`, fieldname, ` != nil {`)
+					p.In()
+				}
 				if field.IsEnum() {
 					if nullable && !repeated && !proto3 {
 						goTyp, _ := p.GoType(message, field)
-						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, `) + ",\n")`)
 					} else {
-						tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
+						p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
 					}
 				} else {
 					if nullable && !repeated && !proto3 {
 						goTyp, _ := p.GoType(message, field)
-						tmp += strings.Join([]string{`valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, ")"}, "")
+						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, `) + ",\n")`)
 					} else {
-						tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, ")"}, "")
+						p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
 					}
 				}
-				outFlds = append(outFlds, tmp)
+				if !proto3 && (nullable || repeated) {
+					p.Out()
+					p.P(`}`)
+				}
 			}
 		}
 		if message.DescriptorProto.HasExtension() {
+			p.P(`if this.XXX_extensions != nil {`)
+			p.In()
 			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
-				outFlds = append(outFlds, strings.Join([]string{"`XXX_extensions: ` + extensionToGoString", p.localName, `(this.XXX_extensions)`}, ""))
+				p.P(`s = append(s, "XXX_extensions: " + extensionToGoString`, p.localName, `(this.XXX_extensions) + ",\n")`)
 			} else {
-				outFlds = append(outFlds, strings.Join([]string{"`XXX_extensions:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions)`}, ""))
+				p.P(`s = append(s, "XXX_extensions: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.XXX_extensions) + ",\n")`)
 			}
+			p.Out()
+			p.P(`}`)
 		}
 		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
-			outFlds = append(outFlds, strings.Join([]string{"`XXX_unrecognized:` + ", fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized)`}, ""))
+			p.P(`if this.XXX_unrecognized != nil {`)
+			p.In()
+			p.P(`s = append(s, "XXX_unrecognized:" + `, fmtPkg.Use(), `.Sprintf("%#v", this.XXX_unrecognized) + ",\n")`)
+			p.Out()
+			p.P(`}`)
 		}
 
-		outStr := strings.Join([]string{"s := ", stringsPkg.Use(), ".Join([]string{`&", packageName, ".", ccTypeName, "{` + \n"}, "")
-		outStr += strings.Join(outFlds, ",\n")
-		outStr += strings.Join([]string{" + `}`", `}`, `,", "`, ")"}, "")
-		p.P(outStr)
-		p.P(`return s`)
+		p.P(`s = append(s, "}")`)
+		//outStr += strings.Join([]string{" + `}`", `}`, `,", "`, ")"}, "")
+		p.P(`return `, stringsPkg.Use(), `.Join(s, "")`)
 		p.Out()
 		p.P(`}`)
 

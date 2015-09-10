@@ -28,8 +28,8 @@
 
 regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-gogo/protoc-gen-combo
-	protoc-gen-combo --default=false --proto_path=../:../../../../:../protobuf/:. thetest.proto
 	protoc --gogo_out=. --proto_path=../:../../../../:../protobuf/:. thetest.proto
+	protoc-gen-combo --default=false --proto_path=../:../../../../:../protobuf/:. thetest.proto
 	cp uuid.go ./combos/both/
 	cp uuid.go ./combos/marshaler/
 	cp uuid.go ./combos/unmarshaler/

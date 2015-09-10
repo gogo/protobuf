@@ -529,49 +529,75 @@ func (this *Big) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&unmarshalmerge.Big{` +
-		`Sub:` + fmt.Sprintf("%#v", this.Sub),
-		`Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&unmarshalmerge.Big{")
+	if this.Sub != nil {
+		s = append(s, "Sub: "+fmt.Sprintf("%#v", this.Sub)+",\n")
+	}
+	if this.Number != nil {
+		s = append(s, "Number: "+valueToGoStringUnmarshalmerge(this.Number, "int64")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *BigUnsafe) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&unmarshalmerge.BigUnsafe{` +
-		`Sub:` + fmt.Sprintf("%#v", this.Sub),
-		`Number:` + valueToGoStringUnmarshalmerge(this.Number, "int64"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&unmarshalmerge.BigUnsafe{")
+	if this.Sub != nil {
+		s = append(s, "Sub: "+fmt.Sprintf("%#v", this.Sub)+",\n")
+	}
+	if this.Number != nil {
+		s = append(s, "Number: "+valueToGoStringUnmarshalmerge(this.Number, "int64")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *Sub) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&unmarshalmerge.Sub{` +
-		`SubNumber:` + valueToGoStringUnmarshalmerge(this.SubNumber, "int64"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 5)
+	s = append(s, "&unmarshalmerge.Sub{")
+	if this.SubNumber != nil {
+		s = append(s, "SubNumber: "+valueToGoStringUnmarshalmerge(this.SubNumber, "int64")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *IntMerge) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&unmarshalmerge.IntMerge{` +
-		`Int64:` + fmt.Sprintf("%#v", this.Int64),
-		`Int32:` + fmt.Sprintf("%#v", this.Int32),
-		`Sint32:` + fmt.Sprintf("%#v", this.Sint32),
-		`Sint64:` + fmt.Sprintf("%#v", this.Sint64),
-		`Uint64:` + fmt.Sprintf("%#v", this.Uint64),
-		`Uint32:` + fmt.Sprintf("%#v", this.Uint32),
-		`Fixed64:` + fmt.Sprintf("%#v", this.Fixed64),
-		`Fixed32:` + fmt.Sprintf("%#v", this.Fixed32),
-		`Sfixed32:` + fmt.Sprintf("%#v", this.Sfixed32),
-		`Sfixed64:` + fmt.Sprintf("%#v", this.Sfixed64),
-		`Bool:` + fmt.Sprintf("%#v", this.Bool),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 15)
+	s = append(s, "&unmarshalmerge.IntMerge{")
+	s = append(s, "Int64: "+fmt.Sprintf("%#v", this.Int64)+",\n")
+	s = append(s, "Int32: "+fmt.Sprintf("%#v", this.Int32)+",\n")
+	s = append(s, "Sint32: "+fmt.Sprintf("%#v", this.Sint32)+",\n")
+	s = append(s, "Sint64: "+fmt.Sprintf("%#v", this.Sint64)+",\n")
+	s = append(s, "Uint64: "+fmt.Sprintf("%#v", this.Uint64)+",\n")
+	s = append(s, "Uint32: "+fmt.Sprintf("%#v", this.Uint32)+",\n")
+	s = append(s, "Fixed64: "+fmt.Sprintf("%#v", this.Fixed64)+",\n")
+	s = append(s, "Fixed32: "+fmt.Sprintf("%#v", this.Fixed32)+",\n")
+	s = append(s, "Sfixed32: "+fmt.Sprintf("%#v", this.Sfixed32)+",\n")
+	s = append(s, "Sfixed64: "+fmt.Sprintf("%#v", this.Sfixed64)+",\n")
+	s = append(s, "Bool: "+fmt.Sprintf("%#v", this.Bool)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)

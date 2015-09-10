@@ -11,271 +11,559 @@ func (this *FileDescriptorSet) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.FileDescriptorSet{` +
-		`File:` + fmt.Sprintf("%#v", this.File),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 5)
+	s = append(s, "&google_protobuf.FileDescriptorSet{")
+	if this.File != nil {
+		s = append(s, "File: "+fmt.Sprintf("%#v", this.File)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *FileDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.FileDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Package:` + valueToGoStringDescriptor(this.Package, "string"),
-		`Dependency:` + fmt.Sprintf("%#v", this.Dependency),
-		`PublicDependency:` + fmt.Sprintf("%#v", this.PublicDependency),
-		`WeakDependency:` + fmt.Sprintf("%#v", this.WeakDependency),
-		`MessageType:` + fmt.Sprintf("%#v", this.MessageType),
-		`EnumType:` + fmt.Sprintf("%#v", this.EnumType),
-		`Service:` + fmt.Sprintf("%#v", this.Service),
-		`Extension:` + fmt.Sprintf("%#v", this.Extension),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`SourceCodeInfo:` + fmt.Sprintf("%#v", this.SourceCodeInfo),
-		`Syntax:` + valueToGoStringDescriptor(this.Syntax, "string"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 16)
+	s = append(s, "&google_protobuf.FileDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Package != nil {
+		s = append(s, "Package: "+valueToGoStringDescriptor(this.Package, "string")+",\n")
+	}
+	if this.Dependency != nil {
+		s = append(s, "Dependency: "+fmt.Sprintf("%#v", this.Dependency)+",\n")
+	}
+	if this.PublicDependency != nil {
+		s = append(s, "PublicDependency: "+fmt.Sprintf("%#v", this.PublicDependency)+",\n")
+	}
+	if this.WeakDependency != nil {
+		s = append(s, "WeakDependency: "+fmt.Sprintf("%#v", this.WeakDependency)+",\n")
+	}
+	if this.MessageType != nil {
+		s = append(s, "MessageType: "+fmt.Sprintf("%#v", this.MessageType)+",\n")
+	}
+	if this.EnumType != nil {
+		s = append(s, "EnumType: "+fmt.Sprintf("%#v", this.EnumType)+",\n")
+	}
+	if this.Service != nil {
+		s = append(s, "Service: "+fmt.Sprintf("%#v", this.Service)+",\n")
+	}
+	if this.Extension != nil {
+		s = append(s, "Extension: "+fmt.Sprintf("%#v", this.Extension)+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.SourceCodeInfo != nil {
+		s = append(s, "SourceCodeInfo: "+fmt.Sprintf("%#v", this.SourceCodeInfo)+",\n")
+	}
+	if this.Syntax != nil {
+		s = append(s, "Syntax: "+valueToGoStringDescriptor(this.Syntax, "string")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *DescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.DescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Field:` + fmt.Sprintf("%#v", this.Field),
-		`Extension:` + fmt.Sprintf("%#v", this.Extension),
-		`NestedType:` + fmt.Sprintf("%#v", this.NestedType),
-		`EnumType:` + fmt.Sprintf("%#v", this.EnumType),
-		`ExtensionRange:` + fmt.Sprintf("%#v", this.ExtensionRange),
-		`OneofDecl:` + fmt.Sprintf("%#v", this.OneofDecl),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 12)
+	s = append(s, "&google_protobuf.DescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Field != nil {
+		s = append(s, "Field: "+fmt.Sprintf("%#v", this.Field)+",\n")
+	}
+	if this.Extension != nil {
+		s = append(s, "Extension: "+fmt.Sprintf("%#v", this.Extension)+",\n")
+	}
+	if this.NestedType != nil {
+		s = append(s, "NestedType: "+fmt.Sprintf("%#v", this.NestedType)+",\n")
+	}
+	if this.EnumType != nil {
+		s = append(s, "EnumType: "+fmt.Sprintf("%#v", this.EnumType)+",\n")
+	}
+	if this.ExtensionRange != nil {
+		s = append(s, "ExtensionRange: "+fmt.Sprintf("%#v", this.ExtensionRange)+",\n")
+	}
+	if this.OneofDecl != nil {
+		s = append(s, "OneofDecl: "+fmt.Sprintf("%#v", this.OneofDecl)+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *DescriptorProto_ExtensionRange) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.DescriptorProto_ExtensionRange{` +
-		`Start:` + valueToGoStringDescriptor(this.Start, "int32"),
-		`End:` + valueToGoStringDescriptor(this.End, "int32"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&google_protobuf.DescriptorProto_ExtensionRange{")
+	if this.Start != nil {
+		s = append(s, "Start: "+valueToGoStringDescriptor(this.Start, "int32")+",\n")
+	}
+	if this.End != nil {
+		s = append(s, "End: "+valueToGoStringDescriptor(this.End, "int32")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *FieldDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.FieldDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Number:` + valueToGoStringDescriptor(this.Number, "int32"),
-		`Label:` + valueToGoStringDescriptor(this.Label, "google_protobuf.FieldDescriptorProto_Label"),
-		`Type:` + valueToGoStringDescriptor(this.Type, "google_protobuf.FieldDescriptorProto_Type"),
-		`TypeName:` + valueToGoStringDescriptor(this.TypeName, "string"),
-		`Extendee:` + valueToGoStringDescriptor(this.Extendee, "string"),
-		`DefaultValue:` + valueToGoStringDescriptor(this.DefaultValue, "string"),
-		`OneofIndex:` + valueToGoStringDescriptor(this.OneofIndex, "int32"),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 13)
+	s = append(s, "&google_protobuf.FieldDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Number != nil {
+		s = append(s, "Number: "+valueToGoStringDescriptor(this.Number, "int32")+",\n")
+	}
+	if this.Label != nil {
+		s = append(s, "Label: "+valueToGoStringDescriptor(this.Label, "google_protobuf.FieldDescriptorProto_Label")+",\n")
+	}
+	if this.Type != nil {
+		s = append(s, "Type: "+valueToGoStringDescriptor(this.Type, "google_protobuf.FieldDescriptorProto_Type")+",\n")
+	}
+	if this.TypeName != nil {
+		s = append(s, "TypeName: "+valueToGoStringDescriptor(this.TypeName, "string")+",\n")
+	}
+	if this.Extendee != nil {
+		s = append(s, "Extendee: "+valueToGoStringDescriptor(this.Extendee, "string")+",\n")
+	}
+	if this.DefaultValue != nil {
+		s = append(s, "DefaultValue: "+valueToGoStringDescriptor(this.DefaultValue, "string")+",\n")
+	}
+	if this.OneofIndex != nil {
+		s = append(s, "OneofIndex: "+valueToGoStringDescriptor(this.OneofIndex, "int32")+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *OneofDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.OneofDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 5)
+	s = append(s, "&google_protobuf.OneofDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *EnumDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.EnumDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Value:` + fmt.Sprintf("%#v", this.Value),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 7)
+	s = append(s, "&google_protobuf.EnumDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Value != nil {
+		s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *EnumValueDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.EnumValueDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Number:` + valueToGoStringDescriptor(this.Number, "int32"),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 7)
+	s = append(s, "&google_protobuf.EnumValueDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Number != nil {
+		s = append(s, "Number: "+valueToGoStringDescriptor(this.Number, "int32")+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *ServiceDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.ServiceDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`Method:` + fmt.Sprintf("%#v", this.Method),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 7)
+	s = append(s, "&google_protobuf.ServiceDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.Method != nil {
+		s = append(s, "Method: "+fmt.Sprintf("%#v", this.Method)+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *MethodDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.MethodDescriptorProto{` +
-		`Name:` + valueToGoStringDescriptor(this.Name, "string"),
-		`InputType:` + valueToGoStringDescriptor(this.InputType, "string"),
-		`OutputType:` + valueToGoStringDescriptor(this.OutputType, "string"),
-		`Options:` + fmt.Sprintf("%#v", this.Options),
-		`ClientStreaming:` + valueToGoStringDescriptor(this.ClientStreaming, "bool"),
-		`ServerStreaming:` + valueToGoStringDescriptor(this.ServerStreaming, "bool"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 10)
+	s = append(s, "&google_protobuf.MethodDescriptorProto{")
+	if this.Name != nil {
+		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
+	}
+	if this.InputType != nil {
+		s = append(s, "InputType: "+valueToGoStringDescriptor(this.InputType, "string")+",\n")
+	}
+	if this.OutputType != nil {
+		s = append(s, "OutputType: "+valueToGoStringDescriptor(this.OutputType, "string")+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.ClientStreaming != nil {
+		s = append(s, "ClientStreaming: "+valueToGoStringDescriptor(this.ClientStreaming, "bool")+",\n")
+	}
+	if this.ServerStreaming != nil {
+		s = append(s, "ServerStreaming: "+valueToGoStringDescriptor(this.ServerStreaming, "bool")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *FileOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.FileOptions{` +
-		`JavaPackage:` + valueToGoStringDescriptor(this.JavaPackage, "string"),
-		`JavaOuterClassname:` + valueToGoStringDescriptor(this.JavaOuterClassname, "string"),
-		`JavaMultipleFiles:` + valueToGoStringDescriptor(this.JavaMultipleFiles, "bool"),
-		`JavaGenerateEqualsAndHash:` + valueToGoStringDescriptor(this.JavaGenerateEqualsAndHash, "bool"),
-		`JavaStringCheckUtf8:` + valueToGoStringDescriptor(this.JavaStringCheckUtf8, "bool"),
-		`OptimizeFor:` + valueToGoStringDescriptor(this.OptimizeFor, "google_protobuf.FileOptions_OptimizeMode"),
-		`GoPackage:` + valueToGoStringDescriptor(this.GoPackage, "string"),
-		`CcGenericServices:` + valueToGoStringDescriptor(this.CcGenericServices, "bool"),
-		`JavaGenericServices:` + valueToGoStringDescriptor(this.JavaGenericServices, "bool"),
-		`PyGenericServices:` + valueToGoStringDescriptor(this.PyGenericServices, "bool"),
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`CcEnableArenas:` + valueToGoStringDescriptor(this.CcEnableArenas, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 17)
+	s = append(s, "&google_protobuf.FileOptions{")
+	if this.JavaPackage != nil {
+		s = append(s, "JavaPackage: "+valueToGoStringDescriptor(this.JavaPackage, "string")+",\n")
+	}
+	if this.JavaOuterClassname != nil {
+		s = append(s, "JavaOuterClassname: "+valueToGoStringDescriptor(this.JavaOuterClassname, "string")+",\n")
+	}
+	if this.JavaMultipleFiles != nil {
+		s = append(s, "JavaMultipleFiles: "+valueToGoStringDescriptor(this.JavaMultipleFiles, "bool")+",\n")
+	}
+	if this.JavaGenerateEqualsAndHash != nil {
+		s = append(s, "JavaGenerateEqualsAndHash: "+valueToGoStringDescriptor(this.JavaGenerateEqualsAndHash, "bool")+",\n")
+	}
+	if this.JavaStringCheckUtf8 != nil {
+		s = append(s, "JavaStringCheckUtf8: "+valueToGoStringDescriptor(this.JavaStringCheckUtf8, "bool")+",\n")
+	}
+	if this.OptimizeFor != nil {
+		s = append(s, "OptimizeFor: "+valueToGoStringDescriptor(this.OptimizeFor, "google_protobuf.FileOptions_OptimizeMode")+",\n")
+	}
+	if this.GoPackage != nil {
+		s = append(s, "GoPackage: "+valueToGoStringDescriptor(this.GoPackage, "string")+",\n")
+	}
+	if this.CcGenericServices != nil {
+		s = append(s, "CcGenericServices: "+valueToGoStringDescriptor(this.CcGenericServices, "bool")+",\n")
+	}
+	if this.JavaGenericServices != nil {
+		s = append(s, "JavaGenericServices: "+valueToGoStringDescriptor(this.JavaGenericServices, "bool")+",\n")
+	}
+	if this.PyGenericServices != nil {
+		s = append(s, "PyGenericServices: "+valueToGoStringDescriptor(this.PyGenericServices, "bool")+",\n")
+	}
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.CcEnableArenas != nil {
+		s = append(s, "CcEnableArenas: "+valueToGoStringDescriptor(this.CcEnableArenas, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *MessageOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.MessageOptions{` +
-		`MessageSetWireFormat:` + valueToGoStringDescriptor(this.MessageSetWireFormat, "bool"),
-		`NoStandardDescriptorAccessor:` + valueToGoStringDescriptor(this.NoStandardDescriptorAccessor, "bool"),
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`MapEntry:` + valueToGoStringDescriptor(this.MapEntry, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 9)
+	s = append(s, "&google_protobuf.MessageOptions{")
+	if this.MessageSetWireFormat != nil {
+		s = append(s, "MessageSetWireFormat: "+valueToGoStringDescriptor(this.MessageSetWireFormat, "bool")+",\n")
+	}
+	if this.NoStandardDescriptorAccessor != nil {
+		s = append(s, "NoStandardDescriptorAccessor: "+valueToGoStringDescriptor(this.NoStandardDescriptorAccessor, "bool")+",\n")
+	}
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.MapEntry != nil {
+		s = append(s, "MapEntry: "+valueToGoStringDescriptor(this.MapEntry, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *FieldOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.FieldOptions{` +
-		`Ctype:` + valueToGoStringDescriptor(this.Ctype, "google_protobuf.FieldOptions_CType"),
-		`Packed:` + valueToGoStringDescriptor(this.Packed, "bool"),
-		`Lazy:` + valueToGoStringDescriptor(this.Lazy, "bool"),
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`Weak:` + valueToGoStringDescriptor(this.Weak, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 10)
+	s = append(s, "&google_protobuf.FieldOptions{")
+	if this.Ctype != nil {
+		s = append(s, "Ctype: "+valueToGoStringDescriptor(this.Ctype, "google_protobuf.FieldOptions_CType")+",\n")
+	}
+	if this.Packed != nil {
+		s = append(s, "Packed: "+valueToGoStringDescriptor(this.Packed, "bool")+",\n")
+	}
+	if this.Lazy != nil {
+		s = append(s, "Lazy: "+valueToGoStringDescriptor(this.Lazy, "bool")+",\n")
+	}
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.Weak != nil {
+		s = append(s, "Weak: "+valueToGoStringDescriptor(this.Weak, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *EnumOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.EnumOptions{` +
-		`AllowAlias:` + valueToGoStringDescriptor(this.AllowAlias, "bool"),
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 7)
+	s = append(s, "&google_protobuf.EnumOptions{")
+	if this.AllowAlias != nil {
+		s = append(s, "AllowAlias: "+valueToGoStringDescriptor(this.AllowAlias, "bool")+",\n")
+	}
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *EnumValueOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.EnumValueOptions{` +
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&google_protobuf.EnumValueOptions{")
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *ServiceOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.ServiceOptions{` +
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&google_protobuf.ServiceOptions{")
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *MethodOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.MethodOptions{` +
-		`Deprecated:` + valueToGoStringDescriptor(this.Deprecated, "bool"),
-		`UninterpretedOption:` + fmt.Sprintf("%#v", this.UninterpretedOption),
-		`XXX_extensions: ` + extensionToGoStringDescriptor(this.XXX_extensions),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&google_protobuf.MethodOptions{")
+	if this.Deprecated != nil {
+		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
+	}
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	if this.XXX_extensions != nil {
+		s = append(s, "XXX_extensions: "+extensionToGoStringDescriptor(this.XXX_extensions)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *UninterpretedOption) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.UninterpretedOption{` +
-		`Name:` + fmt.Sprintf("%#v", this.Name),
-		`IdentifierValue:` + valueToGoStringDescriptor(this.IdentifierValue, "string"),
-		`PositiveIntValue:` + valueToGoStringDescriptor(this.PositiveIntValue, "uint64"),
-		`NegativeIntValue:` + valueToGoStringDescriptor(this.NegativeIntValue, "int64"),
-		`DoubleValue:` + valueToGoStringDescriptor(this.DoubleValue, "float64"),
-		`StringValue:` + valueToGoStringDescriptor(this.StringValue, "byte"),
-		`AggregateValue:` + valueToGoStringDescriptor(this.AggregateValue, "string"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 11)
+	s = append(s, "&google_protobuf.UninterpretedOption{")
+	if this.Name != nil {
+		s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
+	}
+	if this.IdentifierValue != nil {
+		s = append(s, "IdentifierValue: "+valueToGoStringDescriptor(this.IdentifierValue, "string")+",\n")
+	}
+	if this.PositiveIntValue != nil {
+		s = append(s, "PositiveIntValue: "+valueToGoStringDescriptor(this.PositiveIntValue, "uint64")+",\n")
+	}
+	if this.NegativeIntValue != nil {
+		s = append(s, "NegativeIntValue: "+valueToGoStringDescriptor(this.NegativeIntValue, "int64")+",\n")
+	}
+	if this.DoubleValue != nil {
+		s = append(s, "DoubleValue: "+valueToGoStringDescriptor(this.DoubleValue, "float64")+",\n")
+	}
+	if this.StringValue != nil {
+		s = append(s, "StringValue: "+valueToGoStringDescriptor(this.StringValue, "byte")+",\n")
+	}
+	if this.AggregateValue != nil {
+		s = append(s, "AggregateValue: "+valueToGoStringDescriptor(this.AggregateValue, "string")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *UninterpretedOption_NamePart) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.UninterpretedOption_NamePart{` +
-		`NamePart:` + valueToGoStringDescriptor(this.NamePart, "string"),
-		`IsExtension:` + valueToGoStringDescriptor(this.IsExtension, "bool"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 6)
+	s = append(s, "&google_protobuf.UninterpretedOption_NamePart{")
+	if this.NamePart != nil {
+		s = append(s, "NamePart: "+valueToGoStringDescriptor(this.NamePart, "string")+",\n")
+	}
+	if this.IsExtension != nil {
+		s = append(s, "IsExtension: "+valueToGoStringDescriptor(this.IsExtension, "bool")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *SourceCodeInfo) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.SourceCodeInfo{` +
-		`Location:` + fmt.Sprintf("%#v", this.Location),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 5)
+	s = append(s, "&google_protobuf.SourceCodeInfo{")
+	if this.Location != nil {
+		s = append(s, "Location: "+fmt.Sprintf("%#v", this.Location)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *SourceCodeInfo_Location) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&google_protobuf.SourceCodeInfo_Location{` +
-		`Path:` + fmt.Sprintf("%#v", this.Path),
-		`Span:` + fmt.Sprintf("%#v", this.Span),
-		`LeadingComments:` + valueToGoStringDescriptor(this.LeadingComments, "string"),
-		`TrailingComments:` + valueToGoStringDescriptor(this.TrailingComments, "string"),
-		`XXX_unrecognized:` + fmt.Sprintf("%#v", this.XXX_unrecognized) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 8)
+	s = append(s, "&google_protobuf.SourceCodeInfo_Location{")
+	if this.Path != nil {
+		s = append(s, "Path: "+fmt.Sprintf("%#v", this.Path)+",\n")
+	}
+	if this.Span != nil {
+		s = append(s, "Span: "+fmt.Sprintf("%#v", this.Span)+",\n")
+	}
+	if this.LeadingComments != nil {
+		s = append(s, "LeadingComments: "+valueToGoStringDescriptor(this.LeadingComments, "string")+",\n")
+	}
+	if this.TrailingComments != nil {
+		s = append(s, "TrailingComments: "+valueToGoStringDescriptor(this.TrailingComments, "string")+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func valueToGoStringDescriptor(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)

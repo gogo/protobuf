@@ -111,11 +111,17 @@ func (this *B) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&vanity.B{` +
-		`String_:` + valueToGoStringGogovanity(this.String_, "string"),
-		`Int64:` + fmt.Sprintf("%#v", this.Int64),
-		`Int32:` + valueToGoStringGogovanity(this.Int32, "int32") + `}`}, ", ")
-	return s
+	s := make([]string, 0, 7)
+	s = append(s, "&vanity.B{")
+	if this.String_ != nil {
+		s = append(s, "String_: "+valueToGoStringGogovanity(this.String_, "string")+",\n")
+	}
+	s = append(s, "Int64: "+fmt.Sprintf("%#v", this.Int64)+",\n")
+	if this.Int32 != nil {
+		s = append(s, "Int32: "+valueToGoStringGogovanity(this.Int32, "int32")+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func valueToGoStringGogovanity(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)

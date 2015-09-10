@@ -66,9 +66,11 @@ func (this *Aproto3) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&vanity.Aproto3{` +
-		`B:` + fmt.Sprintf("%#v", this.B) + `}`}, ", ")
-	return s
+	s := make([]string, 0, 5)
+	s = append(s, "&vanity.Aproto3{")
+	s = append(s, "B: "+fmt.Sprintf("%#v", this.B)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func valueToGoStringProto3(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
