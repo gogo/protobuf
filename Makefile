@@ -39,9 +39,6 @@ install:
 	go install ./protoc-gen-gogofast
 	go install ./protoc-gen-gogofaster
 	go install ./protoc-gen-gogoslick
-	go install ./fieldpath/fieldpath-gen
-	go install ./fieldpath
-	go install ./pbpath
 	go install ./protoc-gen-gogo/version/protoc-min-version
 	go install ./protoc-gen-gogo/protoc-gen-combo
 
@@ -58,7 +55,6 @@ regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C gogoproto regenerate
-	make -C fieldpath/fieldpath-gen regenerate
 	make -C proto/testdata regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
 	make -C test regenerate
