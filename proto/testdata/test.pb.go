@@ -2013,22 +2013,22 @@ type isCommunique_Union interface {
 }
 
 type Communique_Number struct {
-	Number int32 `protobuf:"varint,5,opt,name=number"`
+	Number int32 `protobuf:"varint,5,opt,name=number,oneof"`
 }
 type Communique_Name struct {
-	Name string `protobuf:"bytes,6,opt,name=name"`
+	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=data"`
+	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
 }
 type Communique_TempC struct {
-	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c"`
+	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,oneof"`
 }
 type Communique_Col struct {
-	Col MyMessage_Color `protobuf:"varint,9,opt,name=col,enum=testdata.MyMessage_Color"`
+	Col MyMessage_Color `protobuf:"varint,9,opt,name=col,enum=testdata.MyMessage_Color,oneof"`
 }
 type Communique_Msg struct {
-	Msg *Strings `protobuf:"bytes,10,opt,name=msg"`
+	Msg *Strings `protobuf:"bytes,10,opt,name=msg,oneof"`
 }
 
 func (*Communique_Number) isCommunique_Union() {}

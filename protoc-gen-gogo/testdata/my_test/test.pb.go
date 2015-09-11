@@ -489,34 +489,34 @@ type isCommunique_Union interface {
 }
 
 type Communique_Number struct {
-	Number int32 `protobuf:"varint,5,opt,name=number"`
+	Number int32 `protobuf:"varint,5,opt,name=number,oneof"`
 }
 type Communique_Name struct {
-	Name string `protobuf:"bytes,6,opt,name=name"`
+	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=data"`
+	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
 }
 type Communique_TempC struct {
-	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c"`
+	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,oneof"`
 }
 type Communique_Height struct {
-	Height float32 `protobuf:"fixed32,9,opt,name=height"`
+	Height float32 `protobuf:"fixed32,9,opt,name=height,oneof"`
 }
 type Communique_Today struct {
-	Today Days `protobuf:"varint,10,opt,name=today,enum=my.test.Days"`
+	Today Days `protobuf:"varint,10,opt,name=today,enum=my.test.Days,oneof"`
 }
 type Communique_Maybe struct {
-	Maybe bool `protobuf:"varint,11,opt,name=maybe"`
+	Maybe bool `protobuf:"varint,11,opt,name=maybe,oneof"`
 }
 type Communique_Delta_ struct {
-	Delta int32 `protobuf:"zigzag32,12,opt,name=delta"`
+	Delta int32 `protobuf:"zigzag32,12,opt,name=delta,oneof"`
 }
 type Communique_Msg struct {
-	Msg *Reply `protobuf:"bytes,13,opt,name=msg"`
+	Msg *Reply `protobuf:"bytes,13,opt,name=msg,oneof"`
 }
 type Communique_Somegroup struct {
-	Somegroup *Communique_SomeGroup `protobuf:"group,14,opt,name=SomeGroup"`
+	Somegroup *Communique_SomeGroup `protobuf:"group,14,opt,name=SomeGroup,oneof"`
 }
 
 func (*Communique_Number) isCommunique_Union()    {}
@@ -635,44 +635,44 @@ func _Communique_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	// union
 	switch x := m.Union.(type) {
 	case *Communique_Number:
-		b.EncodeVarint(5<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.Number))
+		_ = b.EncodeVarint(5<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Number))
 	case *Communique_Name:
-		b.EncodeVarint(6<<3 | proto.WireBytes)
-		b.EncodeStringBytes(x.Name)
+		_ = b.EncodeVarint(6<<3 | proto.WireBytes)
+		_ = b.EncodeStringBytes(x.Name)
 	case *Communique_Data:
-		b.EncodeVarint(7<<3 | proto.WireBytes)
-		b.EncodeRawBytes(x.Data)
+		_ = b.EncodeVarint(7<<3 | proto.WireBytes)
+		_ = b.EncodeRawBytes(x.Data)
 	case *Communique_TempC:
-		b.EncodeVarint(8<<3 | proto.WireFixed64)
-		b.EncodeFixed64(math.Float64bits(x.TempC))
+		_ = b.EncodeVarint(8<<3 | proto.WireFixed64)
+		_ = b.EncodeFixed64(math.Float64bits(x.TempC))
 	case *Communique_Height:
-		b.EncodeVarint(9<<3 | proto.WireFixed32)
-		b.EncodeFixed32(uint64(math.Float32bits(x.Height)))
+		_ = b.EncodeVarint(9<<3 | proto.WireFixed32)
+		_ = b.EncodeFixed32(uint64(math.Float32bits(x.Height)))
 	case *Communique_Today:
-		b.EncodeVarint(10<<3 | proto.WireVarint)
-		b.EncodeVarint(uint64(x.Today))
+		_ = b.EncodeVarint(10<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(uint64(x.Today))
 	case *Communique_Maybe:
 		t := uint64(0)
 		if x.Maybe {
 			t = 1
 		}
-		b.EncodeVarint(11<<3 | proto.WireVarint)
-		b.EncodeVarint(t)
+		_ = b.EncodeVarint(11<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(t)
 	case *Communique_Delta_:
-		b.EncodeVarint(12<<3 | proto.WireVarint)
-		b.EncodeZigzag32(uint64(x.Delta))
+		_ = b.EncodeVarint(12<<3 | proto.WireVarint)
+		_ = b.EncodeZigzag32(uint64(x.Delta))
 	case *Communique_Msg:
-		b.EncodeVarint(13<<3 | proto.WireBytes)
+		_ = b.EncodeVarint(13<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.Msg); err != nil {
 			return err
 		}
 	case *Communique_Somegroup:
-		b.EncodeVarint(14<<3 | proto.WireStartGroup)
+		_ = b.EncodeVarint(14<<3 | proto.WireStartGroup)
 		if err := b.Marshal(x.Somegroup); err != nil {
 			return err
 		}
-		b.EncodeVarint(14<<3 | proto.WireEndGroup)
+		_ = b.EncodeVarint(14<<3 | proto.WireEndGroup)
 	case nil:
 	default:
 		return fmt.Errorf("Communique.Union has unexpected type %T", x)

@@ -39,7 +39,7 @@ test:	golden testbuild
 #	@echo PASS
 
 golden:
-	go install github.com/gogo/protobuf/protoc-gen-gogo/version/protoc-min-version
+	go install github.com/gogo/protobuf/protoc-min-version
 	protoc-min-version --version="3.0.0" --gogo_out=. ./my_test/test.proto
 	diff -w my_test/test.pb.go my_test/test.pb.go.golden
 
