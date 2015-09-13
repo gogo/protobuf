@@ -1183,12 +1183,26 @@ func (g *Generator) generateHeader() {
 // The path is a comma-separated list of integers.
 // See descriptor.proto for its format.
 func (g *Generator) PrintComments(path string) {
-	if loc, ok := g.file.comments[path]; ok {
-		text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
-		for _, line := range strings.Split(text, "\n") {
-			g.P("// ", strings.TrimPrefix(line, " "))
-		}
+	text := g.Comments(path)
+	if text == "" {
+		return
 	}
+
+	for _, line := range strings.Split(text, "\n") {
+		g.P("// ", strings.TrimPrefix(line, " "))
+	}
+}
+
+// Comments returns any comments from the source .proto file and empty string if comments not found.
+// The path is a comma-separated list of intergers.
+// See descriptor.proto for its format.
+func (g *Generator) Comments(path string) string {
+	loc, ok := g.file.comments[path]
+	if !ok {
+		return ""
+	}
+	text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
+	return text
 }
 
 func (g *Generator) fileByName(filename string) *FileDescriptor {
