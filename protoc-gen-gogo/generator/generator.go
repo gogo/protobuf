@@ -1260,6 +1260,18 @@ func (g *Generator) PrintComments(path string) bool {
 	return false
 }
 
+// Comments returns any comments from the source .proto file and empty string if comments not found.
+// The path is a comma-separated list of intergers.
+// See descriptor.proto for its format.
+func (g *Generator) Comments(path string) string {
+	loc, ok := g.file.comments[path]
+	if !ok {
+		return ""
+	}
+	text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
+	return text
+}
+
 func (g *Generator) fileByName(filename string) *FileDescriptor {
 	for _, fd := range g.allFiles {
 		if fd.GetName() == filename {
