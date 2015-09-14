@@ -1183,13 +1183,11 @@ func (g *Generator) generateHeader() {
 // The path is a comma-separated list of integers.
 // See descriptor.proto for its format.
 func (g *Generator) PrintComments(path string) {
-	text := g.Comments(path)
-	if text == "" {
-		return
-	}
-
-	for _, line := range strings.Split(text, "\n") {
-		g.P("// ", strings.TrimPrefix(line, " "))
+	if loc, ok := g.file.comments[path]; ok {
+		text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
+		for _, line := range strings.Split(text, "\n") {
+			g.P("// ", strings.TrimPrefix(line, " "))
+		}
 	}
 }
 
