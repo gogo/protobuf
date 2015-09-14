@@ -259,6 +259,10 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 	}
 }
 
+func (g *Generator) SetFile(file *descriptor.FileDescriptorProto) {
+	g.file = g.FileOf(file)
+}
+
 func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.writtenImports = make(map[string]bool)
 	g.file = g.FileOf(file.FileDescriptorProto)
@@ -346,4 +350,8 @@ func (g *Generator) AllFiles() *descriptor.FileDescriptorSet {
 		set.File[i] = g.allFiles[i].FileDescriptorProto
 	}
 	return set
+}
+
+func (d *Descriptor) Path() string {
+	return d.path
 }
