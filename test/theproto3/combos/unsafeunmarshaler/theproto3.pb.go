@@ -10268,7 +10268,10 @@ func skipTheproto3Unsafe(data []byte) (n int, err error) {
 		wireType := int(wire & 0x7)
 		switch wireType {
 		case 0:
-			for {
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowTheproto3Unsafe
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
