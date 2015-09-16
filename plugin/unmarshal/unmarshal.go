@@ -991,9 +991,21 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`var wire uint64`)
 		p.decodeVarint("wire", "uint64")
 		p.P(`fieldNum := int32(wire >> 3)`)
-		if len(message.Field) > 0 {
+		if len(message.Field) > 0 || !message.IsGroup() {
 			p.P(`wireType := int(wire & 0x7)`)
 		}
+		if !message.IsGroup() {
+			p.P(`if wireType == `, strconv.Itoa(proto.WireEndGroup), ` {`)
+			p.In()
+			p.P(`return `, fmtPkg.Use(), `.Errorf("proto: `+message.GetName()+`: wiretype end group for non-group")`)
+			p.Out()
+			p.P(`}`)
+		}
+		p.P(`if fieldNum <= 0 {`)
+		p.In()
+		p.P(`return `, fmtPkg.Use(), `.Errorf("proto: `+message.GetName()+`: illegal tag %d (wire type %d)", fieldNum, wire)`)
+		p.Out()
+		p.P(`}`)
 		p.P(`switch fieldNum {`)
 		p.In()
 		for _, field := range message.Field {
