@@ -166,8 +166,12 @@ func (m *Foo) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowProto
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -187,6 +191,9 @@ func (m *Foo) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProto
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -200,15 +207,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 			m.Bar = &v
 			hasFields[0] |= uint64(0x00000001)
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipProto(data[iNdEx:])
 			if err != nil {
 				return err
@@ -227,6 +226,9 @@ func (m *Foo) Unmarshal(data []byte) error {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("bar")
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipProto(data []byte) (n int, err error) {
@@ -235,6 +237,9 @@ func skipProto(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowProto
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -264,6 +269,9 @@ func skipProto(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowProto
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -284,6 +292,9 @@ func skipProto(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowProto
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -319,4 +330,5 @@ func skipProto(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthProto = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowProto   = fmt.Errorf("proto: integer overflow")
 )

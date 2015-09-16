@@ -216,6 +216,11 @@ func (p *unmarshal) Init(g *generator.Generator) {
 func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`for shift := uint(0); ; shift += 7 {`)
 	p.In()
+	p.P(`if shift >= 64 {`)
+	p.In()
+	p.P(`return ErrIntOverflow` + p.localName)
+	p.Out()
+	p.P(`}`)
 	p.P(`if iNdEx >= l {`)
 	p.In()
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -982,6 +987,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`iNdEx := 0`)
 		p.P(`for iNdEx < l {`)
 		p.In()
+		p.P(`preIndex := iNdEx`)
 		p.P(`var wire uint64`)
 		p.decodeVarint("wire", "uint64")
 		p.P(`fieldNum := int32(wire >> 3)`)
@@ -1102,19 +1108,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`} else {`)
 			p.In()
 		}
-		p.P(`var sizeOfWire int`)
-		p.P(`for {`)
-		p.In()
-		p.P(`sizeOfWire++`)
-		p.P(`wire >>= 7`)
-		p.P(`if wire == 0 {`)
-		p.In()
-		p.P(`break`)
-		p.Out()
-		p.P(`}`)
-		p.Out()
-		p.P(`}`)
-		p.P(`iNdEx-=sizeOfWire`)
+		p.P(`iNdEx=preIndex`)
 		p.P(`skippy, err := skip`, p.localName, `(data[iNdEx:])`)
 		p.P(`if err != nil {`)
 		p.In()
@@ -1166,6 +1160,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`}`)
 		}
 		p.P()
+		p.P(`if iNdEx > l {`)
+		p.In()
+		p.P(`return ` + p.ioPkg.Use() + `.ErrUnexpectedEOF`)
+		p.Out()
+		p.P(`}`)
 		p.P(`return nil`)
 		p.Out()
 		p.P(`}`)
@@ -1180,6 +1179,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		for iNdEx < l {
 			var wire uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflow` + p.localName + `
+				}
 				if iNdEx >= l {
 					return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 				}
@@ -1209,6 +1211,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			case 2:
 				var length int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflow` + p.localName + `
+					}
 					if iNdEx >= l {
 						return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 					}
@@ -1229,6 +1234,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					var innerWire uint64
 					var start int = iNdEx
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return 0, ErrIntOverflow` + p.localName + `
+						}
 						if iNdEx >= l {
 							return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 						}
@@ -1264,6 +1272,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 	var (
 		ErrInvalidLength` + p.localName + ` = ` + fmtPkg.Use() + `.Errorf("proto: negative length found during unmarshaling")
+		ErrIntOverflow` + p.localName + ` = ` + fmtPkg.Use() + `.Errorf("proto: integer overflow")
 	)
 	`)
 }

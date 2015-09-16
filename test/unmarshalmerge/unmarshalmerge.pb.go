@@ -852,8 +852,12 @@ func (m *Big) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowUnmarshalmerge
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -873,6 +877,9 @@ func (m *Big) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -903,6 +910,9 @@ func (m *Big) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -915,15 +925,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			}
 			m.Number = &v
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipUnmarshalmerge(data[iNdEx:])
 			if err != nil {
 				return err
@@ -939,14 +941,21 @@ func (m *Big) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *Sub) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowUnmarshalmerge
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -966,6 +975,9 @@ func (m *Sub) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -978,15 +990,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 			}
 			m.SubNumber = &v
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipUnmarshalmerge(data[iNdEx:])
 			if err != nil {
 				return err
@@ -1002,6 +1006,9 @@ func (m *Sub) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *IntMerge) Unmarshal(data []byte) error {
@@ -1009,8 +1016,12 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowUnmarshalmerge
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1030,6 +1041,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			m.Int64 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1047,6 +1061,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			m.Int32 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1063,6 +1080,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1082,6 +1102,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1100,6 +1123,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			m.Uint64 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1116,6 +1142,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			m.Uint32 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1194,6 +1223,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1206,15 +1238,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			}
 			m.Bool = bool(v != 0)
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipUnmarshalmerge(data[iNdEx:])
 			if err != nil {
 				return err
@@ -1242,6 +1266,9 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Sfixed32")
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipUnmarshalmerge(data []byte) (n int, err error) {
@@ -1250,6 +1277,9 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowUnmarshalmerge
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -1279,6 +1309,9 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowUnmarshalmerge
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -1299,6 +1332,9 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowUnmarshalmerge
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -1334,14 +1370,19 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthUnmarshalmerge = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowUnmarshalmerge   = fmt.Errorf("proto: integer overflow")
 )
 
 func (m *BigUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowUnmarshalmergeUnsafe
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1361,6 +1402,9 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmergeUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1391,6 +1435,9 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowUnmarshalmergeUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1403,15 +1450,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			}
 			m.Number = &v
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipUnmarshalmergeUnsafe(data[iNdEx:])
 			if err != nil {
 				return err
@@ -1427,6 +1466,9 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
@@ -1435,6 +1477,9 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowUnmarshalmergeUnsafe
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -1464,6 +1509,9 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowUnmarshalmergeUnsafe
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -1484,6 +1532,9 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowUnmarshalmergeUnsafe
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -1519,4 +1570,5 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthUnmarshalmergeUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowUnmarshalmergeUnsafe   = fmt.Errorf("proto: integer overflow")
 )

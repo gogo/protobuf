@@ -214,8 +214,12 @@ func (m *A) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowVanity
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -235,6 +239,9 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowVanity
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -261,6 +268,9 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			m.Int = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowVanity
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -273,15 +283,7 @@ func (m *A) Unmarshal(data []byte) error {
 			}
 			hasFields[0] |= uint64(0x00000001)
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipVanity(data[iNdEx:])
 			if err != nil {
 				return err
@@ -299,6 +301,9 @@ func (m *A) Unmarshal(data []byte) error {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("Int")
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipVanity(data []byte) (n int, err error) {
@@ -307,6 +312,9 @@ func skipVanity(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowVanity
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -336,6 +344,9 @@ func skipVanity(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowVanity
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -356,6 +367,9 @@ func skipVanity(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowVanity
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -391,4 +405,5 @@ func skipVanity(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthVanity = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowVanity   = fmt.Errorf("proto: integer overflow")
 )

@@ -1995,8 +1995,12 @@ func (m *Castaway) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCasttype
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2016,6 +2020,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2033,6 +2040,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			m.Int32 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2049,6 +2059,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2066,6 +2079,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			m.MyUint64 = 0
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2082,6 +2098,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2107,6 +2126,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2132,6 +2154,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2144,15 +2169,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			}
 			m.MyUint64S = append(m.MyUint64S, v)
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipCasttype(data[iNdEx:])
 			if err != nil {
 				return err
@@ -2168,6 +2185,9 @@ func (m *Castaway) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipCasttype(data []byte) (n int, err error) {
@@ -2176,6 +2196,9 @@ func skipCasttype(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowCasttype
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -2205,6 +2228,9 @@ func skipCasttype(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowCasttype
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -2225,6 +2251,9 @@ func skipCasttype(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowCasttype
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -2260,4 +2289,5 @@ func skipCasttype(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthCasttype = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowCasttype   = fmt.Errorf("proto: integer overflow")
 )

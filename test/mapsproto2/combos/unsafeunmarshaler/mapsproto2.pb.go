@@ -3561,8 +3561,12 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowMapsproto2Unsafe
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3588,15 +3592,7 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 			iNdEx += 8
 			m.F = &v
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipMapsproto2Unsafe(data[iNdEx:])
 			if err != nil {
 				return err
@@ -3612,14 +3608,21 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *AllMaps) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowMapsproto2Unsafe
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3639,6 +3642,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3658,6 +3664,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3670,6 +3679,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3692,6 +3704,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3727,6 +3742,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3746,6 +3764,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3758,6 +3779,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3780,6 +3804,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3811,6 +3838,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3830,6 +3860,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3842,6 +3875,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3854,6 +3890,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3866,6 +3905,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3887,6 +3929,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3906,6 +3951,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3918,6 +3966,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3930,6 +3981,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3942,6 +3996,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3963,6 +4020,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3982,6 +4042,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3994,6 +4057,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey uint32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4006,6 +4072,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4018,6 +4087,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue uint32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4039,6 +4111,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4058,6 +4133,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4070,6 +4148,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4082,6 +4163,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4094,6 +4178,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4115,6 +4202,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4134,6 +4224,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4146,6 +4239,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4160,6 +4256,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := int32(mapkeytemp)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4172,6 +4271,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4195,6 +4297,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4214,6 +4319,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4226,6 +4334,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4240,6 +4351,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := int64(mapkeytemp)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4252,6 +4366,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4275,6 +4392,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4294,6 +4414,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4315,6 +4438,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey |= uint32(data[iNdEx-1]) << 24
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4345,6 +4471,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4364,6 +4493,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4385,6 +4517,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey |= int32(data[iNdEx-1]) << 24
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4415,6 +4550,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4434,6 +4572,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4459,6 +4600,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey |= uint64(data[iNdEx-1]) << 56
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4493,6 +4637,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4512,6 +4659,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4537,6 +4687,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey |= int64(data[iNdEx-1]) << 56
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4571,6 +4724,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4590,6 +4746,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4602,6 +4761,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapkeytemp int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4615,6 +4777,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			mapkey := bool(mapkeytemp != 0)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4627,6 +4792,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvaluetemp int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4649,6 +4817,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4668,6 +4839,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4680,6 +4854,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4702,6 +4879,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4714,6 +4894,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapvalue uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4745,6 +4928,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4764,6 +4950,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4776,6 +4965,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4798,6 +4990,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4810,6 +5005,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapbyteLen uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4842,6 +5040,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4861,6 +5062,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4873,6 +5077,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4895,6 +5102,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4907,6 +5117,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapvalue MapEnum
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4928,6 +5141,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4947,6 +5163,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var keykey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4959,6 +5178,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4981,6 +5203,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			iNdEx = postStringIndexmapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4993,6 +5218,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			}
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -5024,15 +5252,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			m.StringToMsgMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipMapsproto2Unsafe(data[iNdEx:])
 			if err != nil {
 				return err
@@ -5048,6 +5268,9 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipMapsproto2Unsafe(data []byte) (n int, err error) {
@@ -5056,6 +5279,9 @@ func skipMapsproto2Unsafe(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowMapsproto2Unsafe
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -5085,6 +5311,9 @@ func skipMapsproto2Unsafe(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowMapsproto2Unsafe
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -5105,6 +5334,9 @@ func skipMapsproto2Unsafe(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowMapsproto2Unsafe
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -5140,4 +5372,5 @@ func skipMapsproto2Unsafe(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthMapsproto2Unsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowMapsproto2Unsafe   = fmt.Errorf("proto: integer overflow")
 )

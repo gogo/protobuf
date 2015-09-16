@@ -193,8 +193,12 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowProto3
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -214,6 +218,9 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProto3
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -235,15 +242,7 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 			m.B = string(data[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipProto3(data[iNdEx:])
 			if err != nil {
 				return err
@@ -258,6 +257,9 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipProto3(data []byte) (n int, err error) {
@@ -266,6 +268,9 @@ func skipProto3(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowProto3
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -295,6 +300,9 @@ func skipProto3(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowProto3
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -315,6 +323,9 @@ func skipProto3(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowProto3
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -350,4 +361,5 @@ func skipProto3(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthProto3 = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowProto3   = fmt.Errorf("proto: integer overflow")
 )

@@ -3725,8 +3725,12 @@ func (m *Subby) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowOne
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3746,6 +3750,9 @@ func (m *Subby) Unmarshal(data []byte) error {
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3767,15 +3774,7 @@ func (m *Subby) Unmarshal(data []byte) error {
 			m.Sub = string(data[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipOne(data[iNdEx:])
 			if err != nil {
 				return err
@@ -3790,14 +3789,21 @@ func (m *Subby) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *SampleOneOf) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowOne
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3849,6 +3855,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3866,6 +3875,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3883,6 +3895,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3900,6 +3915,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3917,6 +3935,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -3935,6 +3956,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4017,6 +4041,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4035,6 +4062,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4061,6 +4091,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4088,6 +4121,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -4112,15 +4148,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 			m.TestOneof = &SampleOneOf_SubMessage{v}
 			iNdEx = postIndex
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipOne(data[iNdEx:])
 			if err != nil {
 				return err
@@ -4135,6 +4163,9 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipOne(data []byte) (n int, err error) {
@@ -4143,6 +4174,9 @@ func skipOne(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowOne
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -4172,6 +4206,9 @@ func skipOne(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowOne
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -4192,6 +4229,9 @@ func skipOne(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowOne
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -4227,4 +4267,5 @@ func skipOne(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthOne = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowOne   = fmt.Errorf("proto: integer overflow")
 )

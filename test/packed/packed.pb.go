@@ -1047,8 +1047,12 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPacked
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1102,6 +1106,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1119,6 +1126,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1136,6 +1146,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1153,6 +1166,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1170,6 +1186,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1188,6 +1207,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1270,6 +1292,9 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1282,15 +1307,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			}
 			m.Field13 = append(m.Field13, bool(v != 0))
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipPacked(data[iNdEx:])
 			if err != nil {
 				return err
@@ -1306,14 +1323,21 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPacked
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1331,6 +1355,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1388,6 +1415,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1437,6 +1467,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1457,6 +1490,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1472,6 +1508,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1490,6 +1529,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1510,6 +1552,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1525,6 +1570,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1543,6 +1591,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1563,6 +1614,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1578,6 +1632,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1596,6 +1653,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1616,6 +1676,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1631,6 +1694,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1649,6 +1715,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1669,6 +1738,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1685,6 +1757,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1704,6 +1779,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1724,6 +1802,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1740,6 +1821,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1759,6 +1843,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1806,6 +1893,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1853,6 +1943,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1908,6 +2001,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1963,6 +2059,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1983,6 +2082,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPacked
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -1998,6 +2100,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2013,15 +2118,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipPacked(data[iNdEx:])
 			if err != nil {
 				return err
@@ -2037,6 +2134,9 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipPacked(data []byte) (n int, err error) {
@@ -2045,6 +2145,9 @@ func skipPacked(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowPacked
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -2074,6 +2177,9 @@ func skipPacked(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowPacked
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -2094,6 +2200,9 @@ func skipPacked(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowPacked
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -2129,14 +2238,19 @@ func skipPacked(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthPacked = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowPacked   = fmt.Errorf("proto: integer overflow")
 )
 
 func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPackedUnsafe
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2178,6 +2292,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2195,6 +2312,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v int64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2212,6 +2332,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2229,6 +2352,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2246,6 +2372,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v int32
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2264,6 +2393,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2326,6 +2458,9 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			var v int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2338,15 +2473,7 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 			}
 			m.Field13 = append(m.Field13, bool(v != 0))
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipPackedUnsafe(data[iNdEx:])
 			if err != nil {
 				return err
@@ -2362,14 +2489,21 @@ func (m *NinRepNativeUnsafe) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
 	for iNdEx < l {
+		preIndex := iNdEx
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPackedUnsafe
+			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2387,6 +2521,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2428,6 +2565,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2469,6 +2609,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2489,6 +2632,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2504,6 +2650,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2522,6 +2671,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2542,6 +2694,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2557,6 +2712,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2575,6 +2733,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2595,6 +2756,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2610,6 +2774,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2628,6 +2795,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2648,6 +2818,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2663,6 +2836,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2681,6 +2857,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2701,6 +2880,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2717,6 +2899,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2736,6 +2921,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2756,6 +2944,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2772,6 +2963,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2791,6 +2985,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2832,6 +3029,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2873,6 +3073,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2914,6 +3117,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2955,6 +3161,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -2975,6 +3184,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				for iNdEx < postIndex {
 					var v int
 					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPackedUnsafe
+						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
@@ -2990,6 +3202,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 			} else if wireType == 0 {
 				var v int
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
@@ -3005,15 +3220,7 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
 			}
 		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
-				}
-			}
-			iNdEx -= sizeOfWire
+			iNdEx = preIndex
 			skippy, err := skipPackedUnsafe(data[iNdEx:])
 			if err != nil {
 				return err
@@ -3029,6 +3236,9 @@ func (m *NinRepPackedNativeUnsafe) Unmarshal(data []byte) error {
 		}
 	}
 
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
 	return nil
 }
 func skipPackedUnsafe(data []byte) (n int, err error) {
@@ -3037,6 +3247,9 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowPackedUnsafe
+			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
@@ -3066,6 +3279,9 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowPackedUnsafe
+				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
@@ -3086,6 +3302,9 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 				var innerWire uint64
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowPackedUnsafe
+					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
@@ -3121,4 +3340,5 @@ func skipPackedUnsafe(data []byte) (n int, err error) {
 
 var (
 	ErrInvalidLengthPackedUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowPackedUnsafe   = fmt.Errorf("proto: integer overflow")
 )
