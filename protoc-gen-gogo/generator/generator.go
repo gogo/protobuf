@@ -1850,8 +1850,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				default:
 					valType = strings.TrimPrefix(valType, "*")
 				}
-
-				typename = fmt.Sprintf("map[%s]%s", keyType, valType)
+				_, typename, err = getCastType(field)
+				if err != nil {
+					g.Fail(err.Error())
+				}
+				if typename == "" {
+					typename = fmt.Sprintf("map[%s]%s", keyType, valType)
+				}
 				mapFieldTypes[field] = typename // record for the getter generation
 
 				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", keyTag, valTag)
