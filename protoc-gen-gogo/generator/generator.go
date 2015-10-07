@@ -1766,22 +1766,38 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	g.P("type ", ccTypeName, " struct {")
 	g.In()
 
-	allocName := func(basis string) string {
-		n := CamelCase(basis)
-		for usedNames[n] {
-			n += "_"
+	// allocNames finds a conflict-free variation of the given strings,
+	// consistently mutating their suffixes.
+	// It returns the same number of strings.
+	allocNames := func(ns ...string) []string {
+		for {
+			for _, n := range ns {
+				if usedNames[n] {
+					for i := range ns {
+						ns[i] += "_"
+					}
+					break
+				}
+			}
+			for _, n := range ns {
+				usedNames[n] = true
+			}
+			return ns
 		}
-		usedNames[n] = true
-		return n
 	}
 
 	for i, field := range message.Field {
-		fieldName := *field.Name
+		// Allocate the getter and the field at the same time so name
+		// collisions create field/method consistent names.
+		// TODO: This allocation occurs based on the order of the fields
+		// in the proto file, meaning that a change in the field
+		// ordering can change generated Method/Field names.
+		base := CamelCase(*field.Name)
 		if gogoproto.IsCustomName(field) {
-			fieldName = gogoproto.GetCustomName(field)
+			base = gogoproto.GetCustomName(field)
 		}
-		fieldName = allocName(fieldName)
-		fieldGetterName := fieldName
+		ns := allocNames(base, "Get"+base)
+		fieldName, fieldGetterName := ns[0], ns[1]
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
 		jsonTag := jsonName + ",omitempty"
@@ -1808,7 +1824,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		oneof := field.OneofIndex != nil && message.allowOneof()
 		if oneof && oneofFieldName[*field.OneofIndex] == "" {
 			odp := message.OneofDecl[int(*field.OneofIndex)]
-			fname := allocName(odp.GetName())
+			fname := allocNames(CamelCase(odp.GetName()))[0]
 
 			// This is the first field of a oneof we haven't seen before.
 			// Generate the union field.
@@ -2135,7 +2151,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if t, ok := mapFieldTypes[field]; ok {
 			typename = t
 		}
-		mname := "Get" + fieldGetterNames[field]
+		mname := fieldGetterNames[field]
 		star := ""
 		if (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 			(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
