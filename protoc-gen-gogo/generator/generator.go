@@ -1770,13 +1770,14 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// consistently mutating their suffixes.
 	// It returns the same number of strings.
 	allocNames := func(ns ...string) []string {
+	Loop:
 		for {
 			for _, n := range ns {
 				if usedNames[n] {
 					for i := range ns {
 						ns[i] += "_"
 					}
-					break
+					continue Loop
 				}
 			}
 			for _, n := range ns {
