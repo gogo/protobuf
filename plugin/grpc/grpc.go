@@ -163,7 +163,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P()
 
 	var methodIndex, streamIndex int
-	serviceDescVar := "_" + servName + "_serviceDesc"
+	serviceDescVar := servName + "_serviceDesc"
 	// Client method implementations.
 	for _, method := range service.Method {
 		var descExpr string
