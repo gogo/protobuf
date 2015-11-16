@@ -277,6 +277,9 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.generateHeader()
 	p.GenerateImports(g.file)
 	g.generateImports()
+	if !g.writeOutput {
+		return
+	}
 	g.Write(rem.Bytes())
 
 	// Reformat generated code.
