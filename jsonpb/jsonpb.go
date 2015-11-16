@@ -192,13 +192,30 @@ func (m *Marshaler) marshalValue(out *errWriter, v reflect.Value,
 		// value. Such values should _not_ be quoted or they will be interpreted
 		// as an enum string instead of their value.
 		enumStr := v.Interface().(fmt.Stringer).String()
+
 		var valStr string
 		if v.Kind() == reflect.Ptr {
 			valStr = strconv.Itoa(int(v.Elem().Int()))
 		} else {
 			valStr = strconv.Itoa(int(v.Int()))
 		}
+
+		if m, ok := v.Interface().(interface {
+			MarshalJSON() ([]byte, error)
+		}); ok {
+			data, err := m.MarshalJSON()
+			if err != nil {
+				return err
+			}
+			enumStr = string(data)
+			enumStr, err = strconv.Unquote(enumStr)
+			if err != nil {
+				return err
+			}
+		}
+
 		isKnownEnum := enumStr != valStr
+
 		if isKnownEnum {
 			out.write(`"`)
 		}
