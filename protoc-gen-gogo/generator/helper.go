@@ -248,8 +248,9 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 	i := 0
 	for _, file := range g.allFiles {
 		g.Reset()
+		g.writeOutput = genFileMap[file]
 		g.generatePlugin(file, p)
-		if _, ok := genFileMap[file]; !ok {
+		if !g.writeOutput {
 			continue
 		}
 		g.Response.File[i] = new(plugin.CodeGeneratorResponse_File)
