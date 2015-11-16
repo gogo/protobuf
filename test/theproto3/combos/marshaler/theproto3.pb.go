@@ -6738,12 +6738,7 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 		i = encodeFixed32Theproto3(data, i, uint32(math.Float32bits(m.Score)))
 	}
 	if len(m.Terrain) > 0 {
-		keysForTerrain := make([]int64, 0, len(m.Terrain))
 		for k := range m.Terrain {
-			keysForTerrain = append(keysForTerrain, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
-		for _, k := range keysForTerrain {
 			data[i] = 0x52
 			i++
 			v := m.Terrain[k]
@@ -6777,12 +6772,7 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 		i += n3
 	}
 	if len(m.Proto2Value) > 0 {
-		keysForProto2Value := make([]int64, 0, len(m.Proto2Value))
 		for k := range m.Proto2Value {
-			keysForProto2Value = append(keysForProto2Value, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
-		for _, k := range keysForProto2Value {
 			data[i] = 0x6a
 			i++
 			v := m.Proto2Value[k]
@@ -6848,12 +6838,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.StringToDoubleMap) > 0 {
-		keysForStringToDoubleMap := make([]string, 0, len(m.StringToDoubleMap))
 		for k := range m.StringToDoubleMap {
-			keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
-		for _, k := range keysForStringToDoubleMap {
 			data[i] = 0xa
 			i++
 			v := m.StringToDoubleMap[k]
@@ -6869,12 +6854,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.StringToFloatMap) > 0 {
-		keysForStringToFloatMap := make([]string, 0, len(m.StringToFloatMap))
 		for k := range m.StringToFloatMap {
-			keysForStringToFloatMap = append(keysForStringToFloatMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
-		for _, k := range keysForStringToFloatMap {
 			data[i] = 0x12
 			i++
 			v := m.StringToFloatMap[k]
@@ -6890,12 +6870,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Int32Map) > 0 {
-		keysForInt32Map := make([]int32, 0, len(m.Int32Map))
 		for k := range m.Int32Map {
-			keysForInt32Map = append(keysForInt32Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
-		for _, k := range keysForInt32Map {
 			data[i] = 0x1a
 			i++
 			v := m.Int32Map[k]
@@ -6910,12 +6885,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Int64Map) > 0 {
-		keysForInt64Map := make([]int64, 0, len(m.Int64Map))
 		for k := range m.Int64Map {
-			keysForInt64Map = append(keysForInt64Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
-		for _, k := range keysForInt64Map {
 			data[i] = 0x22
 			i++
 			v := m.Int64Map[k]
@@ -6930,12 +6900,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Uint32Map) > 0 {
-		keysForUint32Map := make([]uint32, 0, len(m.Uint32Map))
 		for k := range m.Uint32Map {
-			keysForUint32Map = append(keysForUint32Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
-		for _, k := range keysForUint32Map {
 			data[i] = 0x2a
 			i++
 			v := m.Uint32Map[k]
@@ -6950,12 +6915,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Uint64Map) > 0 {
-		keysForUint64Map := make([]uint64, 0, len(m.Uint64Map))
 		for k := range m.Uint64Map {
-			keysForUint64Map = append(keysForUint64Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
-		for _, k := range keysForUint64Map {
 			data[i] = 0x32
 			i++
 			v := m.Uint64Map[k]
@@ -6970,12 +6930,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Sint32Map) > 0 {
-		keysForSint32Map := make([]int32, 0, len(m.Sint32Map))
 		for k := range m.Sint32Map {
-			keysForSint32Map = append(keysForSint32Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
-		for _, k := range keysForSint32Map {
 			data[i] = 0x3a
 			i++
 			v := m.Sint32Map[k]
@@ -6990,12 +6945,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Sint64Map) > 0 {
-		keysForSint64Map := make([]int64, 0, len(m.Sint64Map))
 		for k := range m.Sint64Map {
-			keysForSint64Map = append(keysForSint64Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
-		for _, k := range keysForSint64Map {
 			data[i] = 0x42
 			i++
 			v := m.Sint64Map[k]
@@ -7010,12 +6960,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Fixed32Map) > 0 {
-		keysForFixed32Map := make([]uint32, 0, len(m.Fixed32Map))
 		for k := range m.Fixed32Map {
-			keysForFixed32Map = append(keysForFixed32Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
-		for _, k := range keysForFixed32Map {
 			data[i] = 0x4a
 			i++
 			v := m.Fixed32Map[k]
@@ -7030,12 +6975,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Sfixed32Map) > 0 {
-		keysForSfixed32Map := make([]int32, 0, len(m.Sfixed32Map))
 		for k := range m.Sfixed32Map {
-			keysForSfixed32Map = append(keysForSfixed32Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
-		for _, k := range keysForSfixed32Map {
 			data[i] = 0x52
 			i++
 			v := m.Sfixed32Map[k]
@@ -7050,12 +6990,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Fixed64Map) > 0 {
-		keysForFixed64Map := make([]uint64, 0, len(m.Fixed64Map))
 		for k := range m.Fixed64Map {
-			keysForFixed64Map = append(keysForFixed64Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
-		for _, k := range keysForFixed64Map {
 			data[i] = 0x5a
 			i++
 			v := m.Fixed64Map[k]
@@ -7070,12 +7005,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Sfixed64Map) > 0 {
-		keysForSfixed64Map := make([]int64, 0, len(m.Sfixed64Map))
 		for k := range m.Sfixed64Map {
-			keysForSfixed64Map = append(keysForSfixed64Map, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
-		for _, k := range keysForSfixed64Map {
 			data[i] = 0x62
 			i++
 			v := m.Sfixed64Map[k]
@@ -7090,12 +7020,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.BoolMap) > 0 {
-		keysForBoolMap := make([]bool, 0, len(m.BoolMap))
 		for k := range m.BoolMap {
-			keysForBoolMap = append(keysForBoolMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
-		for _, k := range keysForBoolMap {
 			data[i] = 0x6a
 			i++
 			v := m.BoolMap[k]
@@ -7120,12 +7045,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.StringMap) > 0 {
-		keysForStringMap := make([]string, 0, len(m.StringMap))
 		for k := range m.StringMap {
-			keysForStringMap = append(keysForStringMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
 			data[i] = 0x72
 			i++
 			v := m.StringMap[k]
@@ -7142,12 +7062,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.StringToBytesMap) > 0 {
-		keysForStringToBytesMap := make([]string, 0, len(m.StringToBytesMap))
 		for k := range m.StringToBytesMap {
-			keysForStringToBytesMap = append(keysForStringToBytesMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
-		for _, k := range keysForStringToBytesMap {
 			data[i] = 0x7a
 			i++
 			v := m.StringToBytesMap[k]
@@ -7164,12 +7079,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.StringToEnumMap) > 0 {
-		keysForStringToEnumMap := make([]string, 0, len(m.StringToEnumMap))
 		for k := range m.StringToEnumMap {
-			keysForStringToEnumMap = append(keysForStringToEnumMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
-		for _, k := range keysForStringToEnumMap {
 			data[i] = 0x82
 			i++
 			data[i] = 0x1
@@ -7187,12 +7097,7 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.StringToMsgMap) > 0 {
-		keysForStringToMsgMap := make([]string, 0, len(m.StringToMsgMap))
 		for k := range m.StringToMsgMap {
-			keysForStringToMsgMap = append(keysForStringToMsgMap, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
-		for _, k := range keysForStringToMsgMap {
 			data[i] = 0x8a
 			i++
 			data[i] = 0x1
@@ -7237,12 +7142,7 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.NameMapping) > 0 {
-		keysForNameMapping := make([]int32, 0, len(m.NameMapping))
 		for k := range m.NameMapping {
-			keysForNameMapping = append(keysForNameMapping, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
-		for _, k := range keysForNameMapping {
 			data[i] = 0xa
 			i++
 			v := m.NameMapping[k]
@@ -7258,12 +7158,7 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.MsgMapping) > 0 {
-		keysForMsgMapping := make([]int64, 0, len(m.MsgMapping))
 		for k := range m.MsgMapping {
-			keysForMsgMapping = append(keysForMsgMapping, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
-		for _, k := range keysForMsgMapping {
 			data[i] = 0x12
 			i++
 			v := m.MsgMapping[k]
@@ -7287,12 +7182,7 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.ByteMapping) > 0 {
-		keysForByteMapping := make([]bool, 0, len(m.ByteMapping))
 		for k := range m.ByteMapping {
-			keysForByteMapping = append(keysForByteMapping, k)
-		}
-		github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
-		for _, k := range keysForByteMapping {
 			data[i] = 0x1a
 			i++
 			v := m.ByteMapping[k]

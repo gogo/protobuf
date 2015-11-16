@@ -819,21 +819,11 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 		if generator.IsMap(file.FileDescriptorProto, field) {
 			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
 			keyField, valueField := mapMsg.GetMapFields()
-			keysName := `keysFor` + fieldname
-			keygoTyp, keywire := p.GoType(nil, keyField)
-			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
+			_, keywire := p.GoType(nil, keyField)
 			_, valuewire := p.GoType(nil, valueField)
-			keyCapTyp := generator.CamelCase(keygoTyp)
 			keyKeySize := keySize(1, wireToType(keywire))
 			valueKeySize := keySize(2, wireToType(valuewire))
-			p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(m.`, fieldname, `))`)
 			p.P(`for k, _ := range m.`, fieldname, ` {`)
-			p.In()
-			p.P(keysName, ` = append(`, keysName, `, k)`)
-			p.Out()
-			p.P(`}`)
-			p.P(p.sortKeysPkg.Use(), `.`, keyCapTyp, `s(`, keysName, `)`)
-			p.P(`for _, k := range `, keysName, ` {`)
 			p.In()
 			p.encodeKey(fieldNumber, wireType)
 			sum := []string{strconv.Itoa(keyKeySize)}
