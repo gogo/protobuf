@@ -193,6 +193,12 @@ func (m *IntMerge) GetBool() bool {
 	return false
 }
 
+func init() {
+	proto.RegisterType((*Big)(nil), "unmarshalmerge.Big")
+	proto.RegisterType((*BigUnsafe)(nil), "unmarshalmerge.BigUnsafe")
+	proto.RegisterType((*Sub)(nil), "unmarshalmerge.Sub")
+	proto.RegisterType((*IntMerge)(nil), "unmarshalmerge.IntMerge")
+}
 func (this *Big) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {

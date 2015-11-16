@@ -479,6 +479,12 @@ func (m *NinRepPackedNativeUnsafe) GetField13() []bool {
 	return nil
 }
 
+func init() {
+	proto.RegisterType((*NinRepNative)(nil), "packed.NinRepNative")
+	proto.RegisterType((*NinRepPackedNative)(nil), "packed.NinRepPackedNative")
+	proto.RegisterType((*NinRepNativeUnsafe)(nil), "packed.NinRepNativeUnsafe")
+	proto.RegisterType((*NinRepPackedNativeUnsafe)(nil), "packed.NinRepPackedNativeUnsafe")
+}
 func NewPopulatedNinRepNative(r randyPacked, easy bool) *NinRepNative {
 	this := &NinRepNative{}
 	if r.Intn(10) != 0 {

@@ -85,3 +85,8 @@ func (m *Mappy) GetBooly() map[bool]bool {
 	}
 	return nil
 }
+
+func init() {
+	proto.RegisterType((*Simple3)(nil), "jsonpb.Simple3")
+	proto.RegisterType((*Mappy)(nil), "jsonpb.Mappy")
+}

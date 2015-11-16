@@ -59,6 +59,10 @@ func (m *FooWithRepeated) GetBar() [][]byte {
 	return nil
 }
 
+func init() {
+	proto.RegisterType((*Foo)(nil), "issue34.Foo")
+	proto.RegisterType((*FooWithRepeated)(nil), "issue34.FooWithRepeated")
+}
 func (m *Foo) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

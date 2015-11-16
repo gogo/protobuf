@@ -86,6 +86,13 @@ type OldWithGroup_Group2 struct {
 func (m *OldWithGroup_Group2) Reset()      { *m = OldWithGroup_Group2{} }
 func (*OldWithGroup_Group2) ProtoMessage() {}
 
+func init() {
+	proto.RegisterType((*NewNoGroup)(nil), "unrecognizedgroup.NewNoGroup")
+	proto.RegisterType((*A)(nil), "unrecognizedgroup.A")
+	proto.RegisterType((*OldWithGroup)(nil), "unrecognizedgroup.OldWithGroup")
+	proto.RegisterType((*OldWithGroup_Group1)(nil), "unrecognizedgroup.OldWithGroup.Group1")
+	proto.RegisterType((*OldWithGroup_Group2)(nil), "unrecognizedgroup.OldWithGroup.Group2")
+}
 func (this *NewNoGroup) Description() (desc *descriptor.FileDescriptorSet) {
 	return UnrecognizedgroupDescription()
 }

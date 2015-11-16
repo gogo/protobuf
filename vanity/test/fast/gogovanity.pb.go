@@ -60,6 +60,9 @@ func (m *B) GetInt32() int32 {
 	return Default_B_Int32
 }
 
+func init() {
+	proto.RegisterType((*B)(nil), "vanity.B")
+}
 func (m *B) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)

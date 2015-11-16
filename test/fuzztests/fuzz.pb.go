@@ -371,6 +371,12 @@ func (m *NinOptStruct) GetField15() []byte {
 	return nil
 }
 
+func init() {
+	proto.RegisterType((*Nil)(nil), "fuzztests.Nil")
+	proto.RegisterType((*NinRepPackedNative)(nil), "fuzztests.NinRepPackedNative")
+	proto.RegisterType((*NinOptNative)(nil), "fuzztests.NinOptNative")
+	proto.RegisterType((*NinOptStruct)(nil), "fuzztests.NinOptStruct")
+}
 func (this *Nil) GoString() string {
 	if this == nil {
 		return "nil"

@@ -154,6 +154,15 @@ func (m *CastType) GetInt32() int32 {
 	return 0
 }
 
+func init() {
+	proto.RegisterType((*A)(nil), "test.A")
+	proto.RegisterType((*B)(nil), "test.B")
+	proto.RegisterType((*C)(nil), "test.C")
+	proto.RegisterType((*U)(nil), "test.U")
+	proto.RegisterType((*E)(nil), "test.E")
+	proto.RegisterType((*R)(nil), "test.R")
+	proto.RegisterType((*CastType)(nil), "test.CastType")
+}
 func (this *B) Description() (desc *descriptor.FileDescriptorSet) {
 	return ExampleDescription()
 }

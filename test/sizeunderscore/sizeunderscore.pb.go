@@ -60,6 +60,9 @@ func (m *SizeMessage) GetString_() string {
 	return ""
 }
 
+func init() {
+	proto.RegisterType((*SizeMessage)(nil), "sizeunderscore.SizeMessage")
+}
 func (this *SizeMessage) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

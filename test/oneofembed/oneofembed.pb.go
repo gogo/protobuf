@@ -135,6 +135,10 @@ func _Bar_OneofUnmarshaler(msg proto1.Message, tag, wire int, b *proto1.Buffer) 
 	}
 }
 
+func init() {
+	proto1.RegisterType((*Foo)(nil), "proto.Foo")
+	proto1.RegisterType((*Bar)(nil), "proto.Bar")
+}
 func (this *Foo) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

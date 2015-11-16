@@ -335,6 +335,12 @@ func (m *NestedNinOptNative) GetNestedNinOpts() []*NinOptNative {
 	return nil
 }
 
+func init() {
+	proto.RegisterType((*RequiredExample)(nil), "required.RequiredExample")
+	proto.RegisterType((*NidOptNative)(nil), "required.NidOptNative")
+	proto.RegisterType((*NinOptNative)(nil), "required.NinOptNative")
+	proto.RegisterType((*NestedNinOptNative)(nil), "required.NestedNinOptNative")
+}
 func (m *RequiredExample) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)

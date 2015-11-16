@@ -102,6 +102,10 @@ func (m *MoreDefaultsA) GetA2() test.A {
 	return test.A{}
 }
 
+func init() {
+	proto.RegisterType((*MoreDefaultsB)(nil), "moredefaults.MoreDefaultsB")
+	proto.RegisterType((*MoreDefaultsA)(nil), "moredefaults.MoreDefaultsA")
+}
 func (this *MoreDefaultsB) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

@@ -833,6 +833,12 @@ func _CustomOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Bu
 	}
 }
 
+func init() {
+	proto.RegisterType((*Subby)(nil), "one.Subby")
+	proto.RegisterType((*AllTypesOneOf)(nil), "one.AllTypesOneOf")
+	proto.RegisterType((*TwoOneofs)(nil), "one.TwoOneofs")
+	proto.RegisterType((*CustomOneof)(nil), "one.CustomOneof")
+}
 func (this *Subby) Description() (desc *descriptor.FileDescriptorSet) {
 	return OneDescription()
 }

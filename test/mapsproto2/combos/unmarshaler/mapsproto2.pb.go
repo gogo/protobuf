@@ -109,6 +109,8 @@ func (m *AllMaps) Reset()      { *m = AllMaps{} }
 func (*AllMaps) ProtoMessage() {}
 
 func init() {
+	proto.RegisterType((*FloatingPoint)(nil), "proto2.maps.FloatingPoint")
+	proto.RegisterType((*AllMaps)(nil), "proto2.maps.AllMaps")
 	proto.RegisterEnum("proto2.maps.MapEnum", MapEnum_name, MapEnum_value)
 }
 func (this *FloatingPoint) Description() (desc *descriptor.FileDescriptorSet) {

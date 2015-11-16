@@ -64,6 +64,9 @@ func (m *B) GetInt32() int32 {
 	return Default_B_Int32
 }
 
+func init() {
+	proto.RegisterType((*B)(nil), "vanity.B")
+}
 func (this *B) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

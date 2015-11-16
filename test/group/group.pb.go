@@ -69,6 +69,12 @@ type Groups2_G struct {
 func (m *Groups2_G) Reset()      { *m = Groups2_G{} }
 func (*Groups2_G) ProtoMessage() {}
 
+func init() {
+	proto.RegisterType((*Groups1)(nil), "group.Groups1")
+	proto.RegisterType((*Groups1_G)(nil), "group.Groups1.G")
+	proto.RegisterType((*Groups2)(nil), "group.Groups2")
+	proto.RegisterType((*Groups2_G)(nil), "group.Groups2.G")
+}
 func (this *Groups1) Description() (desc *descriptor.FileDescriptorSet) {
 	return GroupDescription()
 }

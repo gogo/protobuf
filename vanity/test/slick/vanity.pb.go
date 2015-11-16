@@ -52,6 +52,9 @@ func (m *A) GetInt() int64 {
 	return 0
 }
 
+func init() {
+	proto.RegisterType((*A)(nil), "vanity.A")
+}
 func (this *A) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

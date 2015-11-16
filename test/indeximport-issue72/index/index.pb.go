@@ -52,6 +52,9 @@ func (m *IndexQuery) GetValue() string {
 	return ""
 }
 
+func init() {
+	proto.RegisterType((*IndexQuery)(nil), "index.IndexQuery")
+}
 func (this *IndexQuery) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

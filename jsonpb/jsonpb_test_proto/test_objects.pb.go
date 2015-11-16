@@ -497,6 +497,13 @@ var E_Name = &proto.ExtensionDesc{
 }
 
 func init() {
+	proto.RegisterType((*Simple)(nil), "jsonpb.Simple")
+	proto.RegisterType((*Repeats)(nil), "jsonpb.Repeats")
+	proto.RegisterType((*Widget)(nil), "jsonpb.Widget")
+	proto.RegisterType((*Maps)(nil), "jsonpb.Maps")
+	proto.RegisterType((*MsgWithOneof)(nil), "jsonpb.MsgWithOneof")
+	proto.RegisterType((*Real)(nil), "jsonpb.Real")
+	proto.RegisterType((*Complex)(nil), "jsonpb.Complex")
 	proto.RegisterEnum("jsonpb.Widget_Color", Widget_Color_name, Widget_Color_value)
 	proto.RegisterExtension(E_Complex_RealExtension)
 	proto.RegisterExtension(E_Name)

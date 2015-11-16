@@ -53,6 +53,9 @@ type Castaway struct {
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 
+func init() {
+	proto.RegisterType((*Castaway)(nil), "casttype.Castaway")
+}
 func (this *Castaway) Description() (desc *descriptor.FileDescriptorSet) {
 	return CasttypeDescription()
 }

@@ -45,6 +45,9 @@ func (m *Foo) GetBar() uint64 {
 	return 0
 }
 
+func init() {
+	proto1.RegisterType((*Foo)(nil), "proto.Foo")
+}
 func (this *Foo) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

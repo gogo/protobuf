@@ -32,6 +32,9 @@ func (m *Aproto3) Reset()         { *m = Aproto3{} }
 func (m *Aproto3) String() string { return proto.CompactTextString(m) }
 func (*Aproto3) ProtoMessage()    {}
 
+func init() {
+	proto.RegisterType((*Aproto3)(nil), "vanity.Aproto3")
+}
 func (m *Aproto3) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)

@@ -186,3 +186,9 @@ func (m *CodeGeneratorResponse_File) GetContent() string {
 	}
 	return ""
 }
+
+func init() {
+	proto.RegisterType((*CodeGeneratorRequest)(nil), "google.protobuf.compiler.CodeGeneratorRequest")
+	proto.RegisterType((*CodeGeneratorResponse)(nil), "google.protobuf.compiler.CodeGeneratorResponse")
+	proto.RegisterType((*CodeGeneratorResponse_File)(nil), "google.protobuf.compiler.CodeGeneratorResponse.File")
+}

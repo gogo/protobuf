@@ -148,6 +148,19 @@ type OldUnoM struct {
 func (m *OldUnoM) Reset()      { *m = OldUnoM{} }
 func (*OldUnoM) ProtoMessage() {}
 
+func init() {
+	proto.RegisterType((*A)(nil), "unrecognized.A")
+	proto.RegisterType((*B)(nil), "unrecognized.B")
+	proto.RegisterType((*D)(nil), "unrecognized.D")
+	proto.RegisterType((*C)(nil), "unrecognized.C")
+	proto.RegisterType((*U)(nil), "unrecognized.U")
+	proto.RegisterType((*UnoM)(nil), "unrecognized.UnoM")
+	proto.RegisterType((*OldA)(nil), "unrecognized.OldA")
+	proto.RegisterType((*OldB)(nil), "unrecognized.OldB")
+	proto.RegisterType((*OldC)(nil), "unrecognized.OldC")
+	proto.RegisterType((*OldU)(nil), "unrecognized.OldU")
+	proto.RegisterType((*OldUnoM)(nil), "unrecognized.OldUnoM")
+}
 func (this *A) Description() (desc *descriptor.FileDescriptorSet) {
 	return UnrecognizedDescription()
 }

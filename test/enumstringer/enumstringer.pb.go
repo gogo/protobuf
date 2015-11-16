@@ -130,6 +130,10 @@ func (m *NinRepEnum) GetField1() []TheTestEnum {
 }
 
 func init() {
+	proto.RegisterType((*NidOptEnum)(nil), "enumstringer.NidOptEnum")
+	proto.RegisterType((*NinOptEnum)(nil), "enumstringer.NinOptEnum")
+	proto.RegisterType((*NidRepEnum)(nil), "enumstringer.NidRepEnum")
+	proto.RegisterType((*NinRepEnum)(nil), "enumstringer.NinRepEnum")
 	proto.RegisterEnum("enumstringer.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
 }
 func (this *NidOptEnum) VerboseEqual(that interface{}) error {

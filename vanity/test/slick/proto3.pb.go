@@ -37,6 +37,9 @@ type Aproto3 struct {
 func (m *Aproto3) Reset()      { *m = Aproto3{} }
 func (*Aproto3) ProtoMessage() {}
 
+func init() {
+	proto.RegisterType((*Aproto3)(nil), "vanity.Aproto3")
+}
 func (this *Aproto3) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {

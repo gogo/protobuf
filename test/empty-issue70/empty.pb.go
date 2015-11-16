@@ -34,6 +34,9 @@ func (m *TestRequest) Reset()         { *m = TestRequest{} }
 func (m *TestRequest) String() string { return proto.CompactTextString(m) }
 func (*TestRequest) ProtoMessage()    {}
 
+func init() {
+	proto.RegisterType((*TestRequest)(nil), "empty.TestRequest")
+}
 func (m *TestRequest) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0

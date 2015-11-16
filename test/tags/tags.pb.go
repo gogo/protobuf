@@ -58,6 +58,10 @@ func (m *Inside) GetField1() string {
 	return ""
 }
 
+func init() {
+	proto.RegisterType((*Outside)(nil), "tags.Outside")
+	proto.RegisterType((*Inside)(nil), "tags.Inside")
+}
 func NewPopulatedOutside(r randyTags, easy bool) *Outside {
 	this := &Outside{}
 	if r.Intn(10) != 0 {

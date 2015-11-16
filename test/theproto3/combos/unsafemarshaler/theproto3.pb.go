@@ -151,6 +151,11 @@ func (m *FloatingPoint) Reset()      { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage() {}
 
 func init() {
+	proto.RegisterType((*Message)(nil), "theproto3.Message")
+	proto.RegisterType((*Nested)(nil), "theproto3.Nested")
+	proto.RegisterType((*AllMaps)(nil), "theproto3.AllMaps")
+	proto.RegisterType((*MessageWithMap)(nil), "theproto3.MessageWithMap")
+	proto.RegisterType((*FloatingPoint)(nil), "theproto3.FloatingPoint")
 	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
 }

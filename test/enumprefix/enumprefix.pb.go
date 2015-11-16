@@ -40,3 +40,7 @@ func (m *MyMessage) GetTheField() test.TheTestEnum {
 	}
 	return test.A
 }
+
+func init() {
+	proto.RegisterType((*MyMessage)(nil), "enumprefix.MyMessage")
+}
