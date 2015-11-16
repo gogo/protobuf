@@ -20,8 +20,7 @@ package theproto3
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/gogo/protobuf/gogoproto"
 import test "github.com/gogo/protobuf/test/combos/both"
 
 import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"

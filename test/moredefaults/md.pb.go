@@ -17,8 +17,7 @@ package moredefaults
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-// discarding unused import gogoproto "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/gogo/protobuf/gogoproto"
 import test "github.com/gogo/protobuf/test/example"
 
 import bytes "bytes"
