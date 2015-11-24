@@ -62,5 +62,6 @@ message Castaway {
 	optional bytes MyBytes = 5 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.Bytes"];
 	optional bytes NormalBytes = 6;
 	repeated uint64 MyUint64s = 7 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.MyUint64Type"];
+	map<string,uint64> MyMap = 8 [(gogoproto.casttype) = "github.com/gogo/protobuf/test/casttype.MyMapType"];
 }
 

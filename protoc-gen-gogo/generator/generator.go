@@ -1747,6 +1747,44 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	return
 }
 
+func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorProto) (typ string, keyTag string, valTag string) {
+	// Figure out the Go types and tags for the key and value types.
+	keyField, valField := d.Field[0], d.Field[1]
+	keyType, keyWire := g.GoType(d, keyField)
+	valType, valWire := g.GoType(d, valField)
+	keyTag, valTag = g.goTag(d, keyField, keyWire), g.goTag(d, valField, valWire)
+
+	if gogoproto.IsCastType(field) {
+		var packageName string
+		var err error
+		packageName, typ, err := getCastType(field)
+		if err != nil {
+			g.Fail(err.Error())
+		}
+		if len(packageName) > 0 {
+			g.customImports = append(g.customImports, packageName)
+		}
+
+		return typ, keyTag, valTag
+	}
+
+	// We don't use stars, except for message-typed values.
+	// Message and enum types are the only two possibly foreign types used in maps,
+	// so record their use. They are not permitted as map keys.
+	keyType = strings.TrimPrefix(keyType, "*")
+	switch *valField.Type {
+	case descriptor.FieldDescriptorProto_TYPE_ENUM:
+		valType = strings.TrimPrefix(valType, "*")
+		g.RecordTypeUse(valField.GetTypeName())
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		g.RecordTypeUse(valField.GetTypeName())
+	default:
+		valType = strings.TrimPrefix(valType, "*")
+	}
+
+	return fmt.Sprintf("map[%s]%s", keyType, valType), keyTag, valTag
+}
+
 func (g *Generator) RecordTypeUse(t string) {
 	if obj, ok := g.typeNameToObject[t]; ok {
 		// Call ObjectNamed to get the true object to record the use.
@@ -1880,27 +1918,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 			desc := g.ObjectNamed(field.GetTypeName())
 			if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
-				// Figure out the Go types and tags for the key and value types.
-				keyField, valField := d.Field[0], d.Field[1]
-				keyType, keyWire := g.GoType(d, keyField)
-				valType, valWire := g.GoType(d, valField)
-				keyTag, valTag := g.goTag(d, keyField, keyWire), g.goTag(d, valField, valWire)
-
-				// We don't use stars, except for message-typed values.
-				// Message and enum types are the only two possibly foreign types used in maps,
-				// so record their use. They are not permitted as map keys.
-				keyType = strings.TrimPrefix(keyType, "*")
-				switch *valField.Type {
-				case descriptor.FieldDescriptorProto_TYPE_ENUM:
-					valType = strings.TrimPrefix(valType, "*")
-					g.RecordTypeUse(valField.GetTypeName())
-				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-					g.RecordTypeUse(valField.GetTypeName())
-				default:
-					valType = strings.TrimPrefix(valType, "*")
-				}
-
-				typename = fmt.Sprintf("map[%s]%s", keyType, valType)
+				var keyTag, valTag string
+				typename, keyTag, valTag = g.GoMapType(d, field)
 				mapFieldTypes[field] = typename // record for the getter generation
 
 				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", keyTag, valTag)
