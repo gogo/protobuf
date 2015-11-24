@@ -438,6 +438,22 @@ var E_Casttype = &proto.ExtensionDesc{
 	Tag:           "bytes,65007,opt,name=casttype",
 }
 
+var E_Castkey = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65008,
+	Name:          "gogoproto.castkey",
+	Tag:           "bytes,65008,opt,name=castkey",
+}
+
+var E_Castvalue = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65009,
+	Name:          "gogoproto.castvalue",
+	Tag:           "bytes,65009,opt,name=castvalue",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -491,4 +507,6 @@ func init() {
 	proto.RegisterExtension(E_Jsontag)
 	proto.RegisterExtension(E_Moretags)
 	proto.RegisterExtension(E_Casttype)
+	proto.RegisterExtension(E_Castkey)
+	proto.RegisterExtension(E_Castvalue)
 }

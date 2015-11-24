@@ -340,6 +340,32 @@ func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, ty
 	return "", "", err
 }
 
+func getCastKey(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	if field.Options != nil {
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Castkey)
+		if err == nil && v.(*string) != nil {
+			ctype := *(v.(*string))
+			packageName, typ = splitCPackageType(ctype)
+			return packageName, typ, nil
+		}
+	}
+	return "", "", err
+}
+
+func getCastValue(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	if field.Options != nil {
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Castvalue)
+		if err == nil && v.(*string) != nil {
+			ctype := *(v.(*string))
+			packageName, typ = splitCPackageType(ctype)
+			return packageName, typ, nil
+		}
+	}
+	return "", "", err
+}
+
 func FileName(file *FileDescriptor) string {
 	fname := path.Base(file.FileDescriptorProto.GetName())
 	fname = strings.Replace(fname, ".proto", "", -1)

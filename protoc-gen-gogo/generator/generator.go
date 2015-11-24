@@ -1600,6 +1600,16 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype = ",casttype=" + gogoproto.GetCastType(field)
 	}
 
+	castkey := ""
+	if gogoproto.IsCastKey(field) {
+		castkey = ",castkey=" + gogoproto.GetCastKey(field)
+	}
+
+	castvalue := ""
+	if gogoproto.IsCastValue(field) {
+		castvalue = ",castvalue=" + gogoproto.GetCastValue(field)
+	}
+
 	if message.proto3() {
 		// We only need the extra tag for []byte fields;
 		// no need to add noise for the others.
@@ -1613,7 +1623,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if field.OneofIndex != nil {
 		oneof = ",oneof"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1624,7 +1634,9 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		defaultValue,
 		embed,
 		ctype,
-		casttype))
+		casttype,
+		castkey,
+		castvalue))
 }
 
 func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf bool) bool {
@@ -1713,10 +1725,10 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	default:
 		g.Fail("unknown type for", field.GetName())
 	}
-	if gogoproto.IsCustomType(field) && gogoproto.IsCastType(field) {
+	switch {
+	case gogoproto.IsCustomType(field) && gogoproto.IsCastType(field):
 		g.Fail(field.GetName() + " cannot be custom type and cast type")
-	}
-	if gogoproto.IsCustomType(field) {
+	case gogoproto.IsCustomType(field):
 		var packageName string
 		var err error
 		packageName, typ, err = getCustomType(field)
@@ -1726,8 +1738,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		if len(packageName) > 0 {
 			g.customImports = append(g.customImports, packageName)
 		}
-	}
-	if gogoproto.IsCastType(field) {
+	case gogoproto.IsCastType(field):
 		var packageName string
 		var err error
 		packageName, typ, err = getCastType(field)
