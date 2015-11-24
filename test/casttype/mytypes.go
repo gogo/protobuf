@@ -24,4 +24,6 @@ func (this *Bytes) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type MyStringType string
+
 type MyMapType map[string]uint64
