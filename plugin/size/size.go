@@ -325,6 +325,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		if generator.IsMap(file.FileDescriptorProto, field) {
 			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
 			keyField, valueField := mapMsg.GetMapFields()
+			keyField, valueField = p.GetMapKeyField(field, keyField), p.GetMapValueField(field, valueField)
 			_, keywire := p.GoType(nil, keyField)
 			_, valuewire := p.GoType(nil, valueField)
 			_, fieldwire := p.GoType(nil, field)

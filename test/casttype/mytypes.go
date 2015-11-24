@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 )
 
+type MyInt32Type int32
+
 type MyUint64Type uint64
 
 type Bytes []byte

@@ -479,6 +479,10 @@ func unmarshalValue(target reflect.Value, inputValue json.RawMessage) error {
 				}
 			}
 
+			if !k.Type().AssignableTo(targetType.Key()) {
+				k = k.Convert(targetType.Key())
+			}
+
 			// Unmarshal map value.
 			v := reflect.New(targetType.Elem()).Elem()
 			if err := unmarshalValue(v, raw); err != nil {

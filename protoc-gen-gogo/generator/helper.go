@@ -220,6 +220,49 @@ func IsMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescript
 	return msg.GetOptions().GetMapEntry()
 }
 
+func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
+	if !gogoproto.IsCastKey(field) {
+		return keyField
+	}
+	keyField = cloneFieldExtensions(keyField)
+	keyType := gogoproto.GetCastKey(field)
+	if err := proto.SetExtension(keyField.Options, gogoproto.E_Casttype, &keyType); err != nil {
+		g.Fail(err.Error())
+	}
+	return keyField
+}
+
+func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
+	if !gogoproto.IsCastValue(field) {
+		return valField
+	}
+	valField = cloneFieldExtensions(valField)
+	valType := gogoproto.GetCastValue(field)
+	if err := proto.SetExtension(valField.Options, gogoproto.E_Casttype, &valType); err != nil {
+		g.Fail(err.Error())
+	}
+	return valField
+}
+
+// cloneFieldExtensions creates a copy of field where field.Options.XXX_extensions is safe to mutate.
+func cloneFieldExtensions(field *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
+	f := *field
+	if field.Options != nil {
+		opt := *f.Options
+		f.Options = &opt
+	} else {
+		f.Options = &descriptor.FieldOptions{}
+	}
+
+	extensions := make(map[int32]proto.Extension)
+	for k, v := range f.Options.XXX_extensions {
+		extensions[k] = v
+	}
+	f.Options.XXX_extensions = extensions
+
+	return &f
+}
+
 func GoTypeToName(goTyp string) string {
 	return strings.Replace(strings.Replace(goTyp, "*", "", -1), "[]", "", -1)
 }
