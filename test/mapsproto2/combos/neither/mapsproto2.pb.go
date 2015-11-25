@@ -1017,6 +1017,16 @@ func Mapsproto2Description() (desc *descriptor.FileDescriptorSet) {
 			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
 			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
 			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
+		}, {Name: func(v string) *string { return &v }("castkey"),
+			Number:   func(v int32) *int32 { return &v }(65008),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
+		}, {Name: func(v string) *string { return &v }("castvalue"),
+			Number:   func(v int32) *int32 { return &v }(65009),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
 		}},
 		Options: &descriptor.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"),
 			JavaOuterClassname: func(v string) *string { return &v }("GoGoProtos"),
@@ -2190,7 +2200,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v2 := r.Intn(10)
 		this.StringToDoubleMap = make(map[string]float64)
 		for i := 0; i < v2; i++ {
-			v3 := randStringMapsproto2(r)
+			v3 := string(randStringMapsproto2(r))
 			this.StringToDoubleMap[v3] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.StringToDoubleMap[v3] *= -1
@@ -2201,7 +2211,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v4 := r.Intn(10)
 		this.StringToFloatMap = make(map[string]float32)
 		for i := 0; i < v4; i++ {
-			v5 := randStringMapsproto2(r)
+			v5 := string(randStringMapsproto2(r))
 			this.StringToFloatMap[v5] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.StringToFloatMap[v5] *= -1
@@ -2212,7 +2222,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v6 := r.Intn(10)
 		this.Int32Map = make(map[int32]int32)
 		for i := 0; i < v6; i++ {
-			v7 := int32(r.Int31())
+			v7 := int32(int32(r.Int31()))
 			this.Int32Map[v7] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Int32Map[v7] *= -1
@@ -2223,7 +2233,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v8 := r.Intn(10)
 		this.Int64Map = make(map[int64]int64)
 		for i := 0; i < v8; i++ {
-			v9 := int64(r.Int63())
+			v9 := int64(int64(r.Int63()))
 			this.Int64Map[v9] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Int64Map[v9] *= -1
@@ -2234,7 +2244,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v10 := r.Intn(10)
 		this.Uint32Map = make(map[uint32]uint32)
 		for i := 0; i < v10; i++ {
-			v11 := uint32(r.Uint32())
+			v11 := uint32(uint32(r.Uint32()))
 			this.Uint32Map[v11] = uint32(r.Uint32())
 		}
 	}
@@ -2242,7 +2252,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v12 := r.Intn(10)
 		this.Uint64Map = make(map[uint64]uint64)
 		for i := 0; i < v12; i++ {
-			v13 := uint64(uint64(r.Uint32()))
+			v13 := uint64(uint64(uint64(r.Uint32())))
 			this.Uint64Map[v13] = uint64(uint64(r.Uint32()))
 		}
 	}
@@ -2250,7 +2260,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v14 := r.Intn(10)
 		this.Sint32Map = make(map[int32]int32)
 		for i := 0; i < v14; i++ {
-			v15 := int32(r.Int31())
+			v15 := int32(int32(r.Int31()))
 			this.Sint32Map[v15] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Sint32Map[v15] *= -1
@@ -2261,7 +2271,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v16 := r.Intn(10)
 		this.Sint64Map = make(map[int64]int64)
 		for i := 0; i < v16; i++ {
-			v17 := int64(r.Int63())
+			v17 := int64(int64(r.Int63()))
 			this.Sint64Map[v17] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Sint64Map[v17] *= -1
@@ -2272,7 +2282,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v18 := r.Intn(10)
 		this.Fixed32Map = make(map[uint32]uint32)
 		for i := 0; i < v18; i++ {
-			v19 := uint32(r.Uint32())
+			v19 := uint32(uint32(r.Uint32()))
 			this.Fixed32Map[v19] = uint32(r.Uint32())
 		}
 	}
@@ -2280,7 +2290,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v20 := r.Intn(10)
 		this.Sfixed32Map = make(map[int32]int32)
 		for i := 0; i < v20; i++ {
-			v21 := int32(r.Int31())
+			v21 := int32(int32(r.Int31()))
 			this.Sfixed32Map[v21] = int32(r.Int31())
 			if r.Intn(2) == 0 {
 				this.Sfixed32Map[v21] *= -1
@@ -2291,7 +2301,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v22 := r.Intn(10)
 		this.Fixed64Map = make(map[uint64]uint64)
 		for i := 0; i < v22; i++ {
-			v23 := uint64(uint64(r.Uint32()))
+			v23 := uint64(uint64(uint64(r.Uint32())))
 			this.Fixed64Map[v23] = uint64(uint64(r.Uint32()))
 		}
 	}
@@ -2299,7 +2309,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v24 := r.Intn(10)
 		this.Sfixed64Map = make(map[int64]int64)
 		for i := 0; i < v24; i++ {
-			v25 := int64(r.Int63())
+			v25 := int64(int64(r.Int63()))
 			this.Sfixed64Map[v25] = int64(r.Int63())
 			if r.Intn(2) == 0 {
 				this.Sfixed64Map[v25] *= -1
@@ -2310,7 +2320,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v26 := r.Intn(10)
 		this.BoolMap = make(map[bool]bool)
 		for i := 0; i < v26; i++ {
-			v27 := bool(bool(r.Intn(2) == 0))
+			v27 := bool(bool(bool(r.Intn(2) == 0)))
 			this.BoolMap[v27] = bool(bool(r.Intn(2) == 0))
 		}
 	}
@@ -2318,7 +2328,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v28 := r.Intn(10)
 		this.StringMap = make(map[string]string)
 		for i := 0; i < v28; i++ {
-			this.StringMap[randStringMapsproto2(r)] = randStringMapsproto2(r)
+			this.StringMap[string(randStringMapsproto2(r))] = randStringMapsproto2(r)
 		}
 	}
 	if r.Intn(10) != 0 {
@@ -2326,7 +2336,7 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		this.StringToBytesMap = make(map[string][]byte)
 		for i := 0; i < v29; i++ {
 			v30 := r.Intn(100)
-			v31 := randStringMapsproto2(r)
+			v31 := string(randStringMapsproto2(r))
 			this.StringToBytesMap[v31] = make([]byte, v30)
 			for i := 0; i < v30; i++ {
 				this.StringToBytesMap[v31][i] = byte(r.Intn(256))
@@ -2337,14 +2347,14 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 		v32 := r.Intn(10)
 		this.StringToEnumMap = make(map[string]MapEnum)
 		for i := 0; i < v32; i++ {
-			this.StringToEnumMap[randStringMapsproto2(r)] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
+			this.StringToEnumMap[string(randStringMapsproto2(r))] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
 	if r.Intn(10) != 0 {
 		v33 := r.Intn(10)
 		this.StringToMsgMap = make(map[string]*FloatingPoint)
 		for i := 0; i < v33; i++ {
-			this.StringToMsgMap[randStringMapsproto2(r)] = NewPopulatedFloatingPoint(r, easy)
+			this.StringToMsgMap[string(randStringMapsproto2(r))] = NewPopulatedFloatingPoint(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2619,9 +2629,9 @@ func (this *AllMaps) String() string {
 		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
-	mapStringForStringToDoubleMap := "map[string]*float64{"
+	mapStringForStringToDoubleMap := "map[string]float64{"
 	for _, k := range keysForStringToDoubleMap {
-		mapStringForStringToDoubleMap += fmt.Sprintf("%v: %v,", k, this.StringToDoubleMap[k])
+		mapStringForStringToDoubleMap += fmt.Sprintf("%#v: %#v,", k, this.StringToDoubleMap[k])
 	}
 	mapStringForStringToDoubleMap += "}"
 	keysForStringToFloatMap := make([]string, 0, len(this.StringToFloatMap))
@@ -2629,9 +2639,9 @@ func (this *AllMaps) String() string {
 		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
-	mapStringForStringToFloatMap := "map[string]*float32{"
+	mapStringForStringToFloatMap := "map[string]float32{"
 	for _, k := range keysForStringToFloatMap {
-		mapStringForStringToFloatMap += fmt.Sprintf("%v: %v,", k, this.StringToFloatMap[k])
+		mapStringForStringToFloatMap += fmt.Sprintf("%#v: %#v,", k, this.StringToFloatMap[k])
 	}
 	mapStringForStringToFloatMap += "}"
 	keysForInt32Map := make([]int32, 0, len(this.Int32Map))
@@ -2639,9 +2649,9 @@ func (this *AllMaps) String() string {
 		keysForInt32Map = append(keysForInt32Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
-	mapStringForInt32Map := "map[int32]*int32{"
+	mapStringForInt32Map := "map[int32]int32{"
 	for _, k := range keysForInt32Map {
-		mapStringForInt32Map += fmt.Sprintf("%v: %v,", k, this.Int32Map[k])
+		mapStringForInt32Map += fmt.Sprintf("%#v: %#v,", k, this.Int32Map[k])
 	}
 	mapStringForInt32Map += "}"
 	keysForInt64Map := make([]int64, 0, len(this.Int64Map))
@@ -2649,9 +2659,9 @@ func (this *AllMaps) String() string {
 		keysForInt64Map = append(keysForInt64Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
-	mapStringForInt64Map := "map[int64]*int64{"
+	mapStringForInt64Map := "map[int64]int64{"
 	for _, k := range keysForInt64Map {
-		mapStringForInt64Map += fmt.Sprintf("%v: %v,", k, this.Int64Map[k])
+		mapStringForInt64Map += fmt.Sprintf("%#v: %#v,", k, this.Int64Map[k])
 	}
 	mapStringForInt64Map += "}"
 	keysForUint32Map := make([]uint32, 0, len(this.Uint32Map))
@@ -2659,9 +2669,9 @@ func (this *AllMaps) String() string {
 		keysForUint32Map = append(keysForUint32Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
-	mapStringForUint32Map := "map[uint32]*uint32{"
+	mapStringForUint32Map := "map[uint32]uint32{"
 	for _, k := range keysForUint32Map {
-		mapStringForUint32Map += fmt.Sprintf("%v: %v,", k, this.Uint32Map[k])
+		mapStringForUint32Map += fmt.Sprintf("%#v: %#v,", k, this.Uint32Map[k])
 	}
 	mapStringForUint32Map += "}"
 	keysForUint64Map := make([]uint64, 0, len(this.Uint64Map))
@@ -2669,9 +2679,9 @@ func (this *AllMaps) String() string {
 		keysForUint64Map = append(keysForUint64Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
-	mapStringForUint64Map := "map[uint64]*uint64{"
+	mapStringForUint64Map := "map[uint64]uint64{"
 	for _, k := range keysForUint64Map {
-		mapStringForUint64Map += fmt.Sprintf("%v: %v,", k, this.Uint64Map[k])
+		mapStringForUint64Map += fmt.Sprintf("%#v: %#v,", k, this.Uint64Map[k])
 	}
 	mapStringForUint64Map += "}"
 	keysForSint32Map := make([]int32, 0, len(this.Sint32Map))
@@ -2679,9 +2689,9 @@ func (this *AllMaps) String() string {
 		keysForSint32Map = append(keysForSint32Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
-	mapStringForSint32Map := "map[int32]*int32{"
+	mapStringForSint32Map := "map[int32]int32{"
 	for _, k := range keysForSint32Map {
-		mapStringForSint32Map += fmt.Sprintf("%v: %v,", k, this.Sint32Map[k])
+		mapStringForSint32Map += fmt.Sprintf("%#v: %#v,", k, this.Sint32Map[k])
 	}
 	mapStringForSint32Map += "}"
 	keysForSint64Map := make([]int64, 0, len(this.Sint64Map))
@@ -2689,9 +2699,9 @@ func (this *AllMaps) String() string {
 		keysForSint64Map = append(keysForSint64Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
-	mapStringForSint64Map := "map[int64]*int64{"
+	mapStringForSint64Map := "map[int64]int64{"
 	for _, k := range keysForSint64Map {
-		mapStringForSint64Map += fmt.Sprintf("%v: %v,", k, this.Sint64Map[k])
+		mapStringForSint64Map += fmt.Sprintf("%#v: %#v,", k, this.Sint64Map[k])
 	}
 	mapStringForSint64Map += "}"
 	keysForFixed32Map := make([]uint32, 0, len(this.Fixed32Map))
@@ -2699,9 +2709,9 @@ func (this *AllMaps) String() string {
 		keysForFixed32Map = append(keysForFixed32Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
-	mapStringForFixed32Map := "map[uint32]*uint32{"
+	mapStringForFixed32Map := "map[uint32]uint32{"
 	for _, k := range keysForFixed32Map {
-		mapStringForFixed32Map += fmt.Sprintf("%v: %v,", k, this.Fixed32Map[k])
+		mapStringForFixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed32Map[k])
 	}
 	mapStringForFixed32Map += "}"
 	keysForSfixed32Map := make([]int32, 0, len(this.Sfixed32Map))
@@ -2709,9 +2719,9 @@ func (this *AllMaps) String() string {
 		keysForSfixed32Map = append(keysForSfixed32Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
-	mapStringForSfixed32Map := "map[int32]*int32{"
+	mapStringForSfixed32Map := "map[int32]int32{"
 	for _, k := range keysForSfixed32Map {
-		mapStringForSfixed32Map += fmt.Sprintf("%v: %v,", k, this.Sfixed32Map[k])
+		mapStringForSfixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed32Map[k])
 	}
 	mapStringForSfixed32Map += "}"
 	keysForFixed64Map := make([]uint64, 0, len(this.Fixed64Map))
@@ -2719,9 +2729,9 @@ func (this *AllMaps) String() string {
 		keysForFixed64Map = append(keysForFixed64Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
-	mapStringForFixed64Map := "map[uint64]*uint64{"
+	mapStringForFixed64Map := "map[uint64]uint64{"
 	for _, k := range keysForFixed64Map {
-		mapStringForFixed64Map += fmt.Sprintf("%v: %v,", k, this.Fixed64Map[k])
+		mapStringForFixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed64Map[k])
 	}
 	mapStringForFixed64Map += "}"
 	keysForSfixed64Map := make([]int64, 0, len(this.Sfixed64Map))
@@ -2729,9 +2739,9 @@ func (this *AllMaps) String() string {
 		keysForSfixed64Map = append(keysForSfixed64Map, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
-	mapStringForSfixed64Map := "map[int64]*int64{"
+	mapStringForSfixed64Map := "map[int64]int64{"
 	for _, k := range keysForSfixed64Map {
-		mapStringForSfixed64Map += fmt.Sprintf("%v: %v,", k, this.Sfixed64Map[k])
+		mapStringForSfixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed64Map[k])
 	}
 	mapStringForSfixed64Map += "}"
 	keysForBoolMap := make([]bool, 0, len(this.BoolMap))
@@ -2739,9 +2749,9 @@ func (this *AllMaps) String() string {
 		keysForBoolMap = append(keysForBoolMap, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
-	mapStringForBoolMap := "map[bool]*bool{"
+	mapStringForBoolMap := "map[bool]bool{"
 	for _, k := range keysForBoolMap {
-		mapStringForBoolMap += fmt.Sprintf("%v: %v,", k, this.BoolMap[k])
+		mapStringForBoolMap += fmt.Sprintf("%#v: %#v,", k, this.BoolMap[k])
 	}
 	mapStringForBoolMap += "}"
 	keysForStringMap := make([]string, 0, len(this.StringMap))
@@ -2749,9 +2759,9 @@ func (this *AllMaps) String() string {
 		keysForStringMap = append(keysForStringMap, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-	mapStringForStringMap := "map[string]*string{"
+	mapStringForStringMap := "map[string]string{"
 	for _, k := range keysForStringMap {
-		mapStringForStringMap += fmt.Sprintf("%v: %v,", k, this.StringMap[k])
+		mapStringForStringMap += fmt.Sprintf("%#v: %#v,", k, this.StringMap[k])
 	}
 	mapStringForStringMap += "}"
 	keysForStringToBytesMap := make([]string, 0, len(this.StringToBytesMap))
@@ -2761,7 +2771,7 @@ func (this *AllMaps) String() string {
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
 	mapStringForStringToBytesMap := "map[string][]byte{"
 	for _, k := range keysForStringToBytesMap {
-		mapStringForStringToBytesMap += fmt.Sprintf("%v: %v,", k, this.StringToBytesMap[k])
+		mapStringForStringToBytesMap += fmt.Sprintf("%#v: %#v,", k, this.StringToBytesMap[k])
 	}
 	mapStringForStringToBytesMap += "}"
 	keysForStringToEnumMap := make([]string, 0, len(this.StringToEnumMap))
@@ -2769,9 +2779,9 @@ func (this *AllMaps) String() string {
 		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
-	mapStringForStringToEnumMap := "map[string]*MapEnum{"
+	mapStringForStringToEnumMap := "map[string]MapEnum{"
 	for _, k := range keysForStringToEnumMap {
-		mapStringForStringToEnumMap += fmt.Sprintf("%v: %v,", k, this.StringToEnumMap[k])
+		mapStringForStringToEnumMap += fmt.Sprintf("%#v: %#v,", k, this.StringToEnumMap[k])
 	}
 	mapStringForStringToEnumMap += "}"
 	keysForStringToMsgMap := make([]string, 0, len(this.StringToMsgMap))
@@ -2781,7 +2791,7 @@ func (this *AllMaps) String() string {
 	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
 	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
 	for _, k := range keysForStringToMsgMap {
-		mapStringForStringToMsgMap += fmt.Sprintf("%v: %v,", k, this.StringToMsgMap[k])
+		mapStringForStringToMsgMap += fmt.Sprintf("%#v: %#v,", k, this.StringToMsgMap[k])
 	}
 	mapStringForStringToMsgMap += "}"
 	s := strings.Join([]string{`&AllMaps{`,

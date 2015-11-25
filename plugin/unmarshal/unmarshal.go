@@ -332,7 +332,9 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		p.P(varName, ` := string(data[iNdEx:postStringIndex`, varName, `])`)
+		cast, _ := p.GoType(nil, field)
+		cast = strings.Replace(cast, "*", "", 1)
+		p.P(varName, ` := `, cast, `(data[iNdEx:postStringIndex`, varName, `])`)
 		p.P(`iNdEx = postStringIndex`, varName)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		p.P(`var mapmsglen int`)
@@ -675,26 +677,41 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.P(`}`)
 			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if generator.IsMap(file, field) {
-			mapMsg := generator.GetMap(file, field)
-			keyField, valueField := mapMsg.GetMapFields()
+			m := p.GoMapType(nil, field)
+			mapgoTyp, keyField, valueField, keyAliasField, valueAliasField := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
 			keygoTyp, _ := p.GoType(nil, keyField)
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
+			keygoAliasTyp, _ := p.GoType(nil, keyAliasField)
+			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 			valuegoTyp, _ := p.GoType(nil, valueField)
+			valuegoAliasTyp, _ := p.GoType(nil, valueAliasField)
 			if !valueField.IsMessage() {
-				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
+				valuegoAliasTyp = strings.Replace(valuegoAliasTyp, "*", "", 1)
 			}
 			p.P(`var keykey uint64`)
 			p.decodeVarint("keykey", "uint64")
-			p.mapField("mapkey", keyField)
+			p.mapField("mapkey", keyAliasField)
 			p.P(`var valuekey uint64`)
 			p.decodeVarint("valuekey", "uint64")
-			p.mapField("mapvalue", valueField)
+			p.mapField("mapvalue", valueAliasField)
 			p.P(`if m.`, fieldname, ` == nil {`)
 			p.In()
-			p.P(`m.`, fieldname, ` = make(map[`, keygoTyp, `]`, valuegoTyp, `)`)
+			p.P(`m.`, fieldname, ` = make(`, mapgoTyp, `)`)
 			p.Out()
 			p.P(`}`)
-			p.P(`m.`, fieldname, `[mapkey] = mapvalue`)
+			if valuegoTyp == valuegoAliasTyp {
+				if keygoTyp == keygoAliasTyp {
+					p.P(`m.`, fieldname, `[mapkey] = mapvalue`)
+				} else {
+					p.P(`m.`, fieldname, `[`, keygoAliasTyp, `(mapkey)] = mapvalue`)
+				}
+			} else {
+				if keygoTyp == keygoAliasTyp {
+					p.P(`m.`, fieldname, `[mapkey] = `, valuegoAliasTyp, `(mapvalue)`)
+				} else {
+					p.P(`m.`, fieldname, `[`, keygoAliasTyp, `(mapkey)] = `, valuegoAliasTyp, `(mapvalue)`)
+				}
+			}
 		} else if repeated {
 			if nullable {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)

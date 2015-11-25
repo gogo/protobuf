@@ -103,5 +103,7 @@ extend google.protobuf.FieldOptions {
   optional string jsontag = 65005;
   optional string moretags = 65006;
   optional string casttype = 65007;
+  optional string castkey = 65008;
+  optional string castvalue = 65009;
 }
 

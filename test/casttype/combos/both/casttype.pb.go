@@ -10,6 +10,7 @@
 
 	It has these top-level messages:
 		Castaway
+		Wilson
 */
 package casttype
 
@@ -30,6 +31,9 @@ import strings "strings"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+
+import errors "errors"
 
 import io "io"
 
@@ -39,23 +43,38 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 type Castaway struct {
-	Int32Ptr         *int32                                                `protobuf:"varint,1,opt,name=Int32Ptr,casttype=int32" json:"Int32Ptr,omitempty"`
-	Int32            int32                                                 `protobuf:"varint,2,opt,name=Int32,casttype=int32" json:"Int32"`
-	MyUint64Ptr      *github_com_gogo_protobuf_test_casttype.MyUint64Type  `protobuf:"varint,3,opt,name=MyUint64Ptr,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64Ptr,omitempty"`
-	MyUint64         github_com_gogo_protobuf_test_casttype.MyUint64Type   `protobuf:"varint,4,opt,name=MyUint64,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64"`
-	MyBytes          github_com_gogo_protobuf_test_casttype.Bytes          `protobuf:"bytes,5,opt,name=MyBytes,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
-	NormalBytes      []byte                                                `protobuf:"bytes,6,opt,name=NormalBytes" json:"NormalBytes,omitempty"`
-	MyUint64S        []github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,7,rep,name=MyUint64s,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64s,omitempty"`
-	XXX_unrecognized []byte                                                `json:"-"`
+	Int32Ptr         *int32                                                                                                      `protobuf:"varint,1,opt,name=Int32Ptr,casttype=int32" json:"Int32Ptr,omitempty"`
+	Int32            int32                                                                                                       `protobuf:"varint,2,opt,name=Int32,casttype=int32" json:"Int32"`
+	MyUint64Ptr      *github_com_gogo_protobuf_test_casttype.MyUint64Type                                                        `protobuf:"varint,3,opt,name=MyUint64Ptr,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64Ptr,omitempty"`
+	MyUint64         github_com_gogo_protobuf_test_casttype.MyUint64Type                                                         `protobuf:"varint,4,opt,name=MyUint64,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64"`
+	MyBytes          github_com_gogo_protobuf_test_casttype.Bytes                                                                `protobuf:"bytes,5,opt,name=MyBytes,casttype=github.com/gogo/protobuf/test/casttype.Bytes" json:"MyBytes,omitempty"`
+	NormalBytes      []byte                                                                                                      `protobuf:"bytes,6,opt,name=NormalBytes" json:"NormalBytes,omitempty"`
+	MyUint64S        []github_com_gogo_protobuf_test_casttype.MyUint64Type                                                       `protobuf:"varint,7,rep,name=MyUint64s,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64s,omitempty"`
+	MyMap            github_com_gogo_protobuf_test_casttype.MyMapType                                                            `protobuf:"bytes,8,rep,name=MyMap,casttype=github.com/gogo/protobuf/test/casttype.MyMapType" json:"MyMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	MyCustomMap      map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"bytes,9,rep,name=MyCustomMap,castkey=github.com/gogo/protobuf/test/casttype.MyStringType,castvalue=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyCustomMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	MyMessageMap     map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson                                              `protobuf:"bytes,10,rep,name=MyMessageMap,castkey=github.com/gogo/protobuf/test/casttype.MyInt32Type" json:"MyMessageMap" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_unrecognized []byte                                                                                                      `json:"-"`
 }
 
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 
+type Wilson struct {
+	Int64            *int64 `protobuf:"varint,1,opt,name=Int64" json:"Int64,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *Wilson) Reset()      { *m = Wilson{} }
+func (*Wilson) ProtoMessage() {}
+
 func init() {
 	proto.RegisterType((*Castaway)(nil), "casttype.Castaway")
+	proto.RegisterType((*Wilson)(nil), "casttype.Wilson")
 }
 func (this *Castaway) Description() (desc *descriptor.FileDescriptorSet) {
+	return CasttypeDescription()
+}
+func (this *Wilson) Description() (desc *descriptor.FileDescriptorSet) {
 	return CasttypeDescription()
 }
 func CasttypeDescription() (desc *descriptor.FileDescriptorSet) {
@@ -959,6 +978,16 @@ func CasttypeDescription() (desc *descriptor.FileDescriptorSet) {
 			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
 			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
 			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
+		}, {Name: func(v string) *string { return &v }("castkey"),
+			Number:   func(v int32) *int32 { return &v }(65008),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
+		}, {Name: func(v string) *string { return &v }("castvalue"),
+			Number:   func(v int32) *int32 { return &v }(65009),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.FieldOptions"),
 		}},
 		Options: &descriptor.FileOptions{JavaPackage: func(v string) *string { return &v }("com.google.protobuf"),
 			JavaOuterClassname: func(v string) *string { return &v }("GoGoProtos"),
@@ -1002,6 +1031,71 @@ func CasttypeDescription() (desc *descriptor.FileDescriptorSet) {
 				Label:   func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(3),
 				Type:    func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(4),
 				Options: &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}},
+			}, {Name: func(v string) *string { return &v }("MyMap"),
+				Number:   func(v int32) *int32 { return &v }(8),
+				Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(3),
+				Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(11),
+				TypeName: func(v string) *string { return &v }(".casttype.Castaway.MyMapEntry"),
+				Options:  &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65007: proto.NewExtension([]byte{0xfa, 0xde, 0x1f, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x4d, 0x61, 0x70, 0x54, 0x79, 0x70, 0x65})}},
+			}, {Name: func(v string) *string { return &v }("MyCustomMap"),
+				Number:   func(v int32) *int32 { return &v }(9),
+				Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(3),
+				Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(11),
+				TypeName: func(v string) *string { return &v }(".casttype.Castaway.MyCustomMapEntry"),
+				Options:  &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65008: proto.NewExtension([]byte{0x82, 0xdf, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x54, 0x79, 0x70, 0x65}), 65009: proto.NewExtension([]byte{0x8a, 0xdf, 0x1f, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x55, 0x69, 0x6e, 0x74, 0x36, 0x34, 0x54, 0x79, 0x70, 0x65})}},
+			}, {Name: func(v string) *string { return &v }("MyMessageMap"),
+				Number:   func(v int32) *int32 { return &v }(10),
+				Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(3),
+				Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(11),
+				TypeName: func(v string) *string { return &v }(".casttype.Castaway.MyMessageMapEntry"),
+				Options:  &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65008: proto.NewExtension([]byte{0x82, 0xdf, 0x1f, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x61, 0x73, 0x74, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x4d, 0x79, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x54, 0x79, 0x70, 0x65})}},
+			}},
+			NestedType: []*descriptor.DescriptorProto{{Name: func(v string) *string { return &v }("MyMapEntry"),
+				Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"),
+					Number: func(v int32) *int32 { return &v }(1),
+					Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+				}, {Name: func(v string) *string { return &v }("value"),
+					Number: func(v int32) *int32 { return &v }(2),
+					Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(4),
+				}},
+				Options: &descriptor.MessageOptions{MapEntry: func(v bool) *bool { return &v }(true),
+					XXX_extensions: map[int32]proto.Extension{},
+				},
+			}, {Name: func(v string) *string { return &v }("MyCustomMapEntry"),
+				Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"),
+					Number: func(v int32) *int32 { return &v }(1),
+					Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+				}, {Name: func(v string) *string { return &v }("value"),
+					Number: func(v int32) *int32 { return &v }(2),
+					Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(4),
+				}},
+				Options: &descriptor.MessageOptions{MapEntry: func(v bool) *bool { return &v }(true),
+					XXX_extensions: map[int32]proto.Extension{},
+				},
+			}, {Name: func(v string) *string { return &v }("MyMessageMapEntry"),
+				Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("key"),
+					Number: func(v int32) *int32 { return &v }(1),
+					Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(5),
+				}, {Name: func(v string) *string { return &v }("value"),
+					Number:   func(v int32) *int32 { return &v }(2),
+					Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+					Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(11),
+					TypeName: func(v string) *string { return &v }(".casttype.Wilson"),
+				}},
+				Options: &descriptor.MessageOptions{MapEntry: func(v bool) *bool { return &v }(true),
+					XXX_extensions: map[int32]proto.Extension{},
+				},
+			}},
+		}, {Name: func(v string) *string { return &v }("Wilson"),
+			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Int64"),
+				Number: func(v int32) *int32 { return &v }(1),
+				Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+				Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(3),
 			}},
 		}},
 		Options: &descriptor.FileOptions{XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x1}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x1}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x0}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x0})}},
@@ -1064,6 +1158,30 @@ func (this *Castaway) VerboseEqual(that interface{}) error {
 	for i := range this.MyUint64S {
 		if this.MyUint64S[i] != that1.MyUint64S[i] {
 			return fmt.Errorf("MyUint64S this[%v](%v) Not Equal that[%v](%v)", i, this.MyUint64S[i], i, that1.MyUint64S[i])
+		}
+	}
+	if len(this.MyMap) != len(that1.MyMap) {
+		return fmt.Errorf("MyMap this(%v) Not Equal that(%v)", len(this.MyMap), len(that1.MyMap))
+	}
+	for i := range this.MyMap {
+		if this.MyMap[i] != that1.MyMap[i] {
+			return fmt.Errorf("MyMap this[%v](%v) Not Equal that[%v](%v)", i, this.MyMap[i], i, that1.MyMap[i])
+		}
+	}
+	if len(this.MyCustomMap) != len(that1.MyCustomMap) {
+		return fmt.Errorf("MyCustomMap this(%v) Not Equal that(%v)", len(this.MyCustomMap), len(that1.MyCustomMap))
+	}
+	for i := range this.MyCustomMap {
+		if this.MyCustomMap[i] != that1.MyCustomMap[i] {
+			return fmt.Errorf("MyCustomMap this[%v](%v) Not Equal that[%v](%v)", i, this.MyCustomMap[i], i, that1.MyCustomMap[i])
+		}
+	}
+	if len(this.MyMessageMap) != len(that1.MyMessageMap) {
+		return fmt.Errorf("MyMessageMap this(%v) Not Equal that(%v)", len(this.MyMessageMap), len(that1.MyMessageMap))
+	}
+	for i := range this.MyMessageMap {
+		if !this.MyMessageMap[i].Equal(that1.MyMessageMap[i]) {
+			return fmt.Errorf("MyMessageMap this[%v](%v) Not Equal that[%v](%v)", i, this.MyMessageMap[i], i, that1.MyMessageMap[i])
 		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1129,6 +1247,98 @@ func (this *Castaway) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if len(this.MyMap) != len(that1.MyMap) {
+		return false
+	}
+	for i := range this.MyMap {
+		if this.MyMap[i] != that1.MyMap[i] {
+			return false
+		}
+	}
+	if len(this.MyCustomMap) != len(that1.MyCustomMap) {
+		return false
+	}
+	for i := range this.MyCustomMap {
+		if this.MyCustomMap[i] != that1.MyCustomMap[i] {
+			return false
+		}
+	}
+	if len(this.MyMessageMap) != len(that1.MyMessageMap) {
+		return false
+	}
+	for i := range this.MyMessageMap {
+		if !this.MyMessageMap[i].Equal(that1.MyMessageMap[i]) {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *Wilson) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Wilson)
+	if !ok {
+		return fmt.Errorf("that is not of type *Wilson")
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Wilson but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Wilsonbut is not nil && this == nil")
+	}
+	if this.Int64 != nil && that1.Int64 != nil {
+		if *this.Int64 != *that1.Int64 {
+			return fmt.Errorf("Int64 this(%v) Not Equal that(%v)", *this.Int64, *that1.Int64)
+		}
+	} else if this.Int64 != nil {
+		return fmt.Errorf("this.Int64 == nil && that.Int64 != nil")
+	} else if that1.Int64 != nil {
+		return fmt.Errorf("Int64 this(%v) Not Equal that(%v)", this.Int64, that1.Int64)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *Wilson) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Wilson)
+	if !ok {
+		return false
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Int64 != nil && that1.Int64 != nil {
+		if *this.Int64 != *that1.Int64 {
+			return false
+		}
+	} else if this.Int64 != nil {
+		return false
+	} else if that1.Int64 != nil {
+		return false
+	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
@@ -1144,6 +1354,9 @@ type CastawayFace interface {
 	GetMyBytes() github_com_gogo_protobuf_test_casttype.Bytes
 	GetNormalBytes() []byte
 	GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type
+	GetMyMap() github_com_gogo_protobuf_test_casttype.MyMapType
+	GetMyCustomMap() map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type
+	GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson
 }
 
 func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
@@ -1182,6 +1395,18 @@ func (this *Castaway) GetMyUint64S() []github_com_gogo_protobuf_test_casttype.My
 	return this.MyUint64S
 }
 
+func (this *Castaway) GetMyMap() github_com_gogo_protobuf_test_casttype.MyMapType {
+	return this.MyMap
+}
+
+func (this *Castaway) GetMyCustomMap() map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type {
+	return this.MyCustomMap
+}
+
+func (this *Castaway) GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson {
+	return this.MyMessageMap
+}
+
 func NewCastawayFromFace(that CastawayFace) *Castaway {
 	this := &Castaway{}
 	this.Int32Ptr = that.GetInt32Ptr()
@@ -1191,6 +1416,32 @@ func NewCastawayFromFace(that CastawayFace) *Castaway {
 	this.MyBytes = that.GetMyBytes()
 	this.NormalBytes = that.GetNormalBytes()
 	this.MyUint64S = that.GetMyUint64S()
+	this.MyMap = that.GetMyMap()
+	this.MyCustomMap = that.GetMyCustomMap()
+	this.MyMessageMap = that.GetMyMessageMap()
+	return this
+}
+
+type WilsonFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetInt64() *int64
+}
+
+func (this *Wilson) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *Wilson) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewWilsonFromFace(this)
+}
+
+func (this *Wilson) GetInt64() *int64 {
+	return this.Int64
+}
+
+func NewWilsonFromFace(that WilsonFace) *Wilson {
+	this := &Wilson{}
+	this.Int64 = that.GetInt64()
 	return this
 }
 
@@ -1198,7 +1449,7 @@ func (this *Castaway) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 11)
+	s := make([]string, 0, 14)
 	s = append(s, "&casttype.Castaway{")
 	if this.Int32Ptr != nil {
 		s = append(s, "Int32Ptr: "+valueToGoStringCasttype(this.Int32Ptr, "int32")+",\n")
@@ -1216,6 +1467,60 @@ func (this *Castaway) GoString() string {
 	}
 	if this.MyUint64S != nil {
 		s = append(s, "MyUint64S: "+fmt.Sprintf("%#v", this.MyUint64S)+",\n")
+	}
+	keysForMyMap := make([]string, 0, len(this.MyMap))
+	for k := range this.MyMap {
+		keysForMyMap = append(keysForMyMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyMap)
+	mapStringForMyMap := "github_com_gogo_protobuf_test_casttype.MyMapType{"
+	for _, k := range keysForMyMap {
+		mapStringForMyMap += fmt.Sprintf("%#v: %#v,", k, this.MyMap[k])
+	}
+	mapStringForMyMap += "}"
+	if this.MyMap != nil {
+		s = append(s, "MyMap: "+mapStringForMyMap+",\n")
+	}
+	keysForMyCustomMap := make([]string, 0, len(this.MyCustomMap))
+	for k := range this.MyCustomMap {
+		keysForMyCustomMap = append(keysForMyCustomMap, string(k))
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyCustomMap)
+	mapStringForMyCustomMap := "map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type{"
+	for _, k := range keysForMyCustomMap {
+		mapStringForMyCustomMap += fmt.Sprintf("%#v: %#v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
+	}
+	mapStringForMyCustomMap += "}"
+	if this.MyCustomMap != nil {
+		s = append(s, "MyCustomMap: "+mapStringForMyCustomMap+",\n")
+	}
+	keysForMyMessageMap := make([]int32, 0, len(this.MyMessageMap))
+	for k := range this.MyMessageMap {
+		keysForMyMessageMap = append(keysForMyMessageMap, int32(k))
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyMessageMap)
+	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
+	for _, k := range keysForMyMessageMap {
+		mapStringForMyMessageMap += fmt.Sprintf("%#v: %#v,", k, this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
+	}
+	mapStringForMyMessageMap += "}"
+	if this.MyMessageMap != nil {
+		s = append(s, "MyMessageMap: "+mapStringForMyMessageMap+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Wilson) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&casttype.Wilson{")
+	if this.Int64 != nil {
+		s = append(s, "Int64: "+valueToGoStringCasttype(this.Int64, "int64")+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
@@ -1298,6 +1603,88 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintCasttype(data, i, uint64(num))
 		}
 	}
+	if len(m.MyMap) > 0 {
+		for k := range m.MyMap {
+			data[i] = 0x42
+			i++
+			v := m.MyMap[k]
+			mapSize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
+			i = encodeVarintCasttype(data, i, uint64(mapSize))
+			data[i] = 0xa
+			i++
+			i = encodeVarintCasttype(data, i, uint64(len(k)))
+			i += copy(data[i:], k)
+			data[i] = 0x10
+			i++
+			i = encodeVarintCasttype(data, i, uint64(v))
+		}
+	}
+	if len(m.MyCustomMap) > 0 {
+		for k := range m.MyCustomMap {
+			data[i] = 0x4a
+			i++
+			v := m.MyCustomMap[k]
+			mapSize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
+			i = encodeVarintCasttype(data, i, uint64(mapSize))
+			data[i] = 0xa
+			i++
+			i = encodeVarintCasttype(data, i, uint64(len(k)))
+			i += copy(data[i:], k)
+			data[i] = 0x10
+			i++
+			i = encodeVarintCasttype(data, i, uint64(v))
+		}
+	}
+	if len(m.MyMessageMap) > 0 {
+		for k := range m.MyMessageMap {
+			data[i] = 0x52
+			i++
+			v := m.MyMessageMap[k]
+			if v == nil {
+				return 0, errors.New("proto: map has nil element")
+			}
+			msgSize := v.Size()
+			mapSize := 1 + sovCasttype(uint64(k)) + 1 + msgSize + sovCasttype(uint64(msgSize))
+			i = encodeVarintCasttype(data, i, uint64(mapSize))
+			data[i] = 0x8
+			i++
+			i = encodeVarintCasttype(data, i, uint64(k))
+			data[i] = 0x12
+			i++
+			i = encodeVarintCasttype(data, i, uint64(v.Size()))
+			n1, err := v.MarshalTo(data[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n1
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Wilson) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Wilson) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Int64 != nil {
+		data[i] = 0x8
+		i++
+		i = encodeVarintCasttype(data, i, uint64(*m.Int64))
+	}
 	if m.XXX_unrecognized != nil {
 		i += copy(data[i:], m.XXX_unrecognized)
 	}
@@ -1370,8 +1757,46 @@ func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 			this.MyUint64S[i] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 		}
 	}
+	if r.Intn(10) != 0 {
+		v6 := r.Intn(10)
+		this.MyMap = make(github_com_gogo_protobuf_test_casttype.MyMapType)
+		for i := 0; i < v6; i++ {
+			v7 := string(randStringCasttype(r))
+			this.MyMap[v7] = uint64(uint64(r.Uint32()))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v8 := r.Intn(10)
+		this.MyCustomMap = make(map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type)
+		for i := 0; i < v8; i++ {
+			v9 := github_com_gogo_protobuf_test_casttype.MyStringType(randStringCasttype(r))
+			this.MyCustomMap[v9] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+		}
+	}
+	if r.Intn(10) != 0 {
+		v10 := r.Intn(10)
+		this.MyMessageMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson)
+		for i := 0; i < v10; i++ {
+			this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(int32(r.Int31()))] = NewPopulatedWilson(r, easy)
+		}
+	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedCasttype(r, 8)
+		this.XXX_unrecognized = randUnrecognizedCasttype(r, 11)
+	}
+	return this
+}
+
+func NewPopulatedWilson(r randyCasttype, easy bool) *Wilson {
+	this := &Wilson{}
+	if r.Intn(10) != 0 {
+		v11 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v11 *= -1
+		}
+		this.Int64 = &v11
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedCasttype(r, 2)
 	}
 	return this
 }
@@ -1395,9 +1820,9 @@ func randUTF8RuneCasttype(r randyCasttype) rune {
 	return rune(ru + 61)
 }
 func randStringCasttype(r randyCasttype) string {
-	v6 := r.Intn(100)
-	tmps := make([]rune, v6)
-	for i := 0; i < v6; i++ {
+	v12 := r.Intn(100)
+	tmps := make([]rune, v12)
+	for i := 0; i < v12; i++ {
 		tmps[i] = randUTF8RuneCasttype(r)
 	}
 	return string(tmps)
@@ -1419,11 +1844,11 @@ func randFieldCasttype(data []byte, r randyCasttype, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateCasttype(data, uint64(key))
-		v7 := r.Int63()
+		v13 := r.Int63()
 		if r.Intn(2) == 0 {
-			v7 *= -1
+			v13 *= -1
 		}
-		data = encodeVarintPopulateCasttype(data, uint64(v7))
+		data = encodeVarintPopulateCasttype(data, uint64(v13))
 	case 1:
 		data = encodeVarintPopulateCasttype(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -1472,6 +1897,46 @@ func (m *Castaway) Size() (n int) {
 			n += 1 + sovCasttype(uint64(e))
 		}
 	}
+	if len(m.MyMap) > 0 {
+		for k, v := range m.MyMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
+			n += mapEntrySize + 1 + sovCasttype(uint64(mapEntrySize))
+		}
+	}
+	if len(m.MyCustomMap) > 0 {
+		for k, v := range m.MyCustomMap {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
+			n += mapEntrySize + 1 + sovCasttype(uint64(mapEntrySize))
+		}
+	}
+	if len(m.MyMessageMap) > 0 {
+		for k, v := range m.MyMessageMap {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+			}
+			mapEntrySize := 1 + sovCasttype(uint64(k)) + 1 + l + sovCasttype(uint64(l))
+			n += mapEntrySize + 1 + sovCasttype(uint64(mapEntrySize))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *Wilson) Size() (n int) {
+	var l int
+	_ = l
+	if m.Int64 != nil {
+		n += 1 + sovCasttype(uint64(*m.Int64))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1495,6 +1960,36 @@ func (this *Castaway) String() string {
 	if this == nil {
 		return "nil"
 	}
+	keysForMyMap := make([]string, 0, len(this.MyMap))
+	for k := range this.MyMap {
+		keysForMyMap = append(keysForMyMap, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyMap)
+	mapStringForMyMap := "github_com_gogo_protobuf_test_casttype.MyMapType{"
+	for _, k := range keysForMyMap {
+		mapStringForMyMap += fmt.Sprintf("%#v: %#v,", k, this.MyMap[k])
+	}
+	mapStringForMyMap += "}"
+	keysForMyCustomMap := make([]string, 0, len(this.MyCustomMap))
+	for k := range this.MyCustomMap {
+		keysForMyCustomMap = append(keysForMyCustomMap, string(k))
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyCustomMap)
+	mapStringForMyCustomMap := "map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type{"
+	for _, k := range keysForMyCustomMap {
+		mapStringForMyCustomMap += fmt.Sprintf("%#v: %#v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
+	}
+	mapStringForMyCustomMap += "}"
+	keysForMyMessageMap := make([]int32, 0, len(this.MyMessageMap))
+	for k := range this.MyMessageMap {
+		keysForMyMessageMap = append(keysForMyMessageMap, int32(k))
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyMessageMap)
+	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
+	for _, k := range keysForMyMessageMap {
+		mapStringForMyMessageMap += fmt.Sprintf("%#v: %#v,", k, this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
+	}
+	mapStringForMyMessageMap += "}"
 	s := strings.Join([]string{`&Castaway{`,
 		`Int32Ptr:` + valueToStringCasttype(this.Int32Ptr) + `,`,
 		`Int32:` + fmt.Sprintf("%v", this.Int32) + `,`,
@@ -1503,6 +1998,20 @@ func (this *Castaway) String() string {
 		`MyBytes:` + valueToStringCasttype(this.MyBytes) + `,`,
 		`NormalBytes:` + valueToStringCasttype(this.NormalBytes) + `,`,
 		`MyUint64S:` + fmt.Sprintf("%v", this.MyUint64S) + `,`,
+		`MyMap:` + mapStringForMyMap + `,`,
+		`MyCustomMap:` + mapStringForMyCustomMap + `,`,
+		`MyMessageMap:` + mapStringForMyMessageMap + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Wilson) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Wilson{`,
+		`Int64:` + valueToStringCasttype(this.Int64) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -1699,6 +2208,385 @@ func (m *Castaway) Unmarshal(data []byte) error {
 				}
 			}
 			m.MyUint64S = append(m.MyUint64S, v)
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MyMap", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var stringLenmapkey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLenmapkey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
+			if postStringIndexmapkey > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapkey := string(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapvalue uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				mapvalue |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if m.MyMap == nil {
+				m.MyMap = make(github_com_gogo_protobuf_test_casttype.MyMapType)
+			}
+			m.MyMap[mapkey] = uint64(mapvalue)
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MyCustomMap", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var stringLenmapkey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLenmapkey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLenmapkey := int(stringLenmapkey)
+			if intStringLenmapkey < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postStringIndexmapkey := iNdEx + intStringLenmapkey
+			if postStringIndexmapkey > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapkey := github_com_gogo_protobuf_test_casttype.MyStringType(data[iNdEx:postStringIndexmapkey])
+			iNdEx = postStringIndexmapkey
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapvalue uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				mapvalue |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if m.MyCustomMap == nil {
+				m.MyCustomMap = make(map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type)
+			}
+			m.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(mapkey)] = github_com_gogo_protobuf_test_casttype.MyUint64Type(mapvalue)
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MyMessageMap", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var keykey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				keykey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapkey int32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				mapkey |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var valuekey uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				valuekey |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			var mapmsglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				mapmsglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if mapmsglen < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			postmsgIndex := iNdEx + mapmsglen
+			if mapmsglen < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			if postmsgIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			mapvalue := &Wilson{}
+			if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+				return err
+			}
+			iNdEx = postmsgIndex
+			if m.MyMessageMap == nil {
+				m.MyMessageMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson)
+			}
+			m.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(mapkey)] = mapvalue
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipCasttype(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthCasttype
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Wilson) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowCasttype
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Wilson: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Wilson: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int64", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCasttype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Int64 = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := skipCasttype(data[iNdEx:])

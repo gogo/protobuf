@@ -219,18 +219,21 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 	fieldname := p.GetOneOfFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
 	if generator.IsMap(file.FileDescriptorProto, field) {
-		mapmsg := generator.GetMap(file.FileDescriptorProto, field)
-		mapkey, mapvalue := mapmsg.GetMapFields()
+		m := p.GoMapType(nil, field)
+		mapgoTyp, mapkey, mapvalue, mapkeyalias, mapvaluealias := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
 		keygoTyp, _ := p.GoType(nil, mapkey)
+		keygoAliasTyp, _ := p.GoType(nil, mapkeyalias)
 		valuegoTyp, _ := p.GoType(nil, mapvalue)
+		valuegoAliasTyp, _ := p.GoType(nil, mapvaluealias)
 		keytypName := generator.GoTypeToName(keygoTyp)
-		valuetypName := generator.GoTypeToName(valuegoTyp)
+		keygoAliasTyp = generator.GoTypeToName(keygoAliasTyp)
+		valuetypAliasName := generator.GoTypeToName(valuegoAliasTyp)
 		mapvaluegoType := valuegoTyp
 		if !mapvalue.IsMessage() {
 			mapvaluegoType = strings.Replace(mapvaluegoType, "*", "", 1)
 		}
 		p.P(p.varGen.Next(), ` := r.Intn(10)`)
-		p.P(`this.`, fieldname, ` = make(map[`, strings.Replace(keygoTyp, "*", "", 1), `]`, mapvaluegoType, `)`)
+		p.P(`this.`, fieldname, ` = make(`, mapgoTyp, `)`)
 		p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 		p.In()
 		keyval := ""
@@ -238,6 +241,9 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			keyval = fmt.Sprintf("randString%v(r)", p.localName)
 		} else {
 			keyval = value(keytypName, mapkey.GetType())
+		}
+		if keygoAliasTyp != keygoTyp {
+			keyval = keygoAliasTyp + `(` + keyval + `)`
 		}
 		if mapvalue.IsMessage() || p.IsGroup(field) {
 			s := `this.` + fieldname + `[` + keyval + `]` + ` = `
@@ -263,7 +269,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(s)
 		} else {
 			p.P(p.varGen.Next(), ` := `, keyval)
-			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypName, mapvalue.GetType()))
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypAliasName, mapvalue.GetType()))
 			if negative(mapvalue.GetType()) {
 				p.P(`if r.Intn(2) == 0 {`)
 				p.In()
