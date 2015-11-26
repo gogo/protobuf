@@ -323,11 +323,10 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		panic(fmt.Errorf("size does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if generator.IsMap(file.FileDescriptorProto, field) {
-			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
-			keyField, valueField := mapMsg.GetMapFields()
-			keyField, valueField = p.GetMapKeyField(field, keyField), p.GetMapValueField(field, valueField)
+			desc := p.GoMapType(nil, field)
+			keyField, valueField := desc.KeyAliasField, desc.ValueAliasField
 			_, keywire := p.GoType(nil, keyField)
-			_, valuewire := p.GoType(nil, valueField)
+			valuetypAliasGo, valuewire := p.GoType(nil, valueField)
 			_, fieldwire := p.GoType(nil, field)
 			fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
 			keyKeySize := keySize(1, wireToType(keywire))
@@ -386,12 +385,16 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				p.P(`l = 0`)
-				p.P(`if v != nil {`)
-				p.In()
-				p.P(`l= v.Size()`)
-				p.Out()
-				p.P(`}`)
+				if strings.HasPrefix(valuetypAliasGo, "*") {
+					p.P(`l = 0`)
+					p.P(`if v != nil {`)
+					p.In()
+					p.P(`l= v.Size()`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`l = v.Size()`)
+				}
 				sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
 			}
 			p.P(`mapEntrySize := `, strings.Join(sum, "+"))

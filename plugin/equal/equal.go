@@ -161,6 +161,8 @@ and the following test code:
 package equal
 
 import (
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -368,10 +370,18 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 		} else {
 			if generator.IsMap(file.FileDescriptorProto, field) {
-				mapMsg := generator.GetMap(file.FileDescriptorProto, field)
-				_, mapValue := mapMsg.GetMapFields()
+				desc := p.GoMapType(nil, field)
+				mapValue := desc.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
-					p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					valuetypGo, _ := p.GoType(nil, mapValue)
+					if strings.HasPrefix(valuetypGo, "*") {
+						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					} else {
+						// Equal() has a pointer receiver
+						p.P(`a := this.`, fieldname, `[i]`)
+						p.P(`b := that1.`, fieldname, `[i]`)
+						p.P(`if !(&a).Equal(&b) {`)
+					}
 				} else if mapValue.IsBytes() {
 					p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
 				} else if mapValue.IsString() {

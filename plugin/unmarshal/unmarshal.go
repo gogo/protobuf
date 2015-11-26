@@ -685,8 +685,16 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 			valuegoTyp, _ := p.GoType(nil, valueField)
 			valuegoAliasTyp, _ := p.GoType(nil, valueAliasField)
+			embedded := !strings.HasPrefix(valuegoAliasTyp, "*")
 			if !valueField.IsMessage() {
+				embedded = true
 				valuegoAliasTyp = strings.Replace(valuegoAliasTyp, "*", "", 1)
+			} else if embedded {
+				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
+			} else {
+				if !strings.HasPrefix(valuegoTyp, "*") {
+					valuegoTyp = "*" + valuegoTyp
+				}
 			}
 			p.P(`var keykey uint64`)
 			p.decodeVarint("keykey", "uint64")
@@ -699,19 +707,20 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.P(`m.`, fieldname, ` = make(`, mapgoTyp, `)`)
 			p.Out()
 			p.P(`}`)
-			if valuegoTyp == valuegoAliasTyp {
-				if keygoTyp == keygoAliasTyp {
-					p.P(`m.`, fieldname, `[mapkey] = mapvalue`)
-				} else {
-					p.P(`m.`, fieldname, `[`, keygoAliasTyp, `(mapkey)] = mapvalue`)
-				}
+			s := `m.` + fieldname
+			if keygoTyp == keygoAliasTyp {
+				s += `[mapkey]`
 			} else {
-				if keygoTyp == keygoAliasTyp {
-					p.P(`m.`, fieldname, `[mapkey] = `, valuegoAliasTyp, `(mapvalue)`)
-				} else {
-					p.P(`m.`, fieldname, `[`, keygoAliasTyp, `(mapkey)] = `, valuegoAliasTyp, `(mapvalue)`)
-				}
+				s += `[` + keygoAliasTyp + `(mapkey)]`
 			}
+			v := `mapvalue`
+			if valueField.IsMessage() && embedded {
+				v = `*` + v
+			}
+			if valuegoTyp != valuegoAliasTyp {
+				v = valuegoAliasTyp + `(` + v + `)`
+			}
+			p.P(s, ` = `, v)
 		} else if repeated {
 			if nullable {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)

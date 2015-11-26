@@ -246,7 +246,10 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			keyval = keygoAliasTyp + `(` + keyval + `)`
 		}
 		if mapvalue.IsMessage() || p.IsGroup(field) {
-			s := `this.` + fieldname + `[` + keyval + `]` + ` = `
+			s := `this.` + fieldname + `[` + keyval + `] = `
+			if !strings.HasPrefix(valuegoAliasTyp, "*") {
+				s = s + "*"
+			}
 			goTypName := generator.GoTypeToName(valuegoTyp)
 			funcCall := getFuncCall(goTypName)
 			s += funcCall

@@ -1817,6 +1817,9 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		valType = strings.TrimPrefix(valType, "*")
 		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if !gogoproto.IsNullable(m.ValueAliasField) {
+			valType = strings.TrimPrefix(valType, "*")
+		}
 		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
 	default:
 		valType = strings.TrimPrefix(valType, "*")
