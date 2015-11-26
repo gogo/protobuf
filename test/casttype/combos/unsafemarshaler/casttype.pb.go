@@ -33,8 +33,6 @@ import strconv "strconv"
 import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import errors "errors"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -50,7 +48,7 @@ type Castaway struct {
 	MyUint64S        []github_com_gogo_protobuf_test_casttype.MyUint64Type                                                       `protobuf:"varint,7,rep,name=MyUint64s,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyUint64s,omitempty"`
 	MyMap            github_com_gogo_protobuf_test_casttype.MyMapType                                                            `protobuf:"bytes,8,rep,name=MyMap,casttype=github.com/gogo/protobuf/test/casttype.MyMapType" json:"MyMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	MyCustomMap      map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"bytes,9,rep,name=MyCustomMap,castkey=github.com/gogo/protobuf/test/casttype.MyStringType,castvalue=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"MyCustomMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	MyMessageMap     map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson                                              `protobuf:"bytes,10,rep,name=MyMessageMap,castkey=github.com/gogo/protobuf/test/casttype.MyInt32Type" json:"MyMessageMap" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MyMessageMap     map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson                                               `protobuf:"bytes,10,rep,name=MyMessageMap,castkey=github.com/gogo/protobuf/test/casttype.MyInt32Type" json:"MyMessageMap" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_unrecognized []byte                                                                                                      `json:"-"`
 }
 
@@ -1178,7 +1176,9 @@ func (this *Castaway) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("MyMessageMap this(%v) Not Equal that(%v)", len(this.MyMessageMap), len(that1.MyMessageMap))
 	}
 	for i := range this.MyMessageMap {
-		if !this.MyMessageMap[i].Equal(that1.MyMessageMap[i]) {
+		a := this.MyMessageMap[i]
+		b := that1.MyMessageMap[i]
+		if !(&a).Equal(&b) {
 			return fmt.Errorf("MyMessageMap this[%v](%v) Not Equal that[%v](%v)", i, this.MyMessageMap[i], i, that1.MyMessageMap[i])
 		}
 	}
@@ -1265,7 +1265,9 @@ func (this *Castaway) Equal(that interface{}) bool {
 		return false
 	}
 	for i := range this.MyMessageMap {
-		if !this.MyMessageMap[i].Equal(that1.MyMessageMap[i]) {
+		a := this.MyMessageMap[i]
+		b := that1.MyMessageMap[i]
+		if !(&a).Equal(&b) {
 			return false
 		}
 	}
@@ -1354,7 +1356,7 @@ type CastawayFace interface {
 	GetMyUint64S() []github_com_gogo_protobuf_test_casttype.MyUint64Type
 	GetMyMap() github_com_gogo_protobuf_test_casttype.MyMapType
 	GetMyCustomMap() map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type
-	GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson
+	GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson
 }
 
 func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
@@ -1401,7 +1403,7 @@ func (this *Castaway) GetMyCustomMap() map[github_com_gogo_protobuf_test_casttyp
 	return this.MyCustomMap
 }
 
-func (this *Castaway) GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson {
+func (this *Castaway) GetMyMessageMap() map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson {
 	return this.MyMessageMap
 }
 
@@ -1497,7 +1499,7 @@ func (this *Castaway) GoString() string {
 		keysForMyMessageMap = append(keysForMyMessageMap, int32(k))
 	}
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyMessageMap)
-	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
+	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson{"
 	for _, k := range keysForMyMessageMap {
 		mapStringForMyMessageMap += fmt.Sprintf("%#v: %#v,", k, this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
 	}
@@ -1608,9 +1610,9 @@ func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 	}
 	if r.Intn(10) != 0 {
 		v10 := r.Intn(10)
-		this.MyMessageMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson)
+		this.MyMessageMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson)
 		for i := 0; i < v10; i++ {
-			this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(int32(r.Int31()))] = NewPopulatedWilson(r, easy)
+			this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(int32(r.Int31()))] = *NewPopulatedWilson(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1750,10 +1752,7 @@ func (m *Castaway) Size() (n int) {
 		for k, v := range m.MyMessageMap {
 			_ = k
 			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-			}
+			l = v.Size()
 			mapEntrySize := 1 + sovCasttype(uint64(k)) + 1 + l + sovCasttype(uint64(l))
 			n += mapEntrySize + 1 + sovCasttype(uint64(mapEntrySize))
 		}
@@ -1818,7 +1817,7 @@ func (this *Castaway) String() string {
 		keysForMyMessageMap = append(keysForMyMessageMap, int32(k))
 	}
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyMessageMap)
-	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
+	mapStringForMyMessageMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson{"
 	for _, k := range keysForMyMessageMap {
 		mapStringForMyMessageMap += fmt.Sprintf("%#v: %#v,", k, this.MyMessageMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
 	}
@@ -1945,9 +1944,6 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x52
 			i++
 			v := m.MyMessageMap[k]
-			if v == nil {
-				return 0, errors.New("proto: map has nil element")
-			}
 			msgSize := v.Size()
 			mapSize := 1 + sovCasttype(uint64(k)) + 1 + msgSize + sovCasttype(uint64(msgSize))
 			i = encodeVarintCasttype(data, i, uint64(mapSize))
