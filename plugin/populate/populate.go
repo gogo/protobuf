@@ -222,7 +222,10 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		m := p.GoMapType(nil, field)
 		mapgoTyp, mapkey, mapvalue, mapkeyalias, mapvaluealias := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
 		keygoTyp, _ := p.GoType(nil, mapkey)
+		keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 		keygoAliasTyp, _ := p.GoType(nil, mapkeyalias)
+		keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
+
 		valuegoTyp, _ := p.GoType(nil, mapvalue)
 		valuegoAliasTyp, _ := p.GoType(nil, mapvaluealias)
 		keytypName := generator.GoTypeToName(keygoTyp)
