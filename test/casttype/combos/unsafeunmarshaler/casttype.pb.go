@@ -1876,7 +1876,7 @@ func (this *Castaway) String() string {
 	github_com_gogo_protobuf_sortkeys.Strings(keysForMyMap)
 	mapStringForMyMap := "github_com_gogo_protobuf_test_casttype.MyMapType{"
 	for _, k := range keysForMyMap {
-		mapStringForMyMap += fmt.Sprintf("%#v: %#v,", k, this.MyMap[k])
+		mapStringForMyMap += fmt.Sprintf("%v: %v,", k, this.MyMap[k])
 	}
 	mapStringForMyMap += "}"
 	keysForMyCustomMap := make([]string, 0, len(this.MyCustomMap))
@@ -1886,7 +1886,7 @@ func (this *Castaway) String() string {
 	github_com_gogo_protobuf_sortkeys.Strings(keysForMyCustomMap)
 	mapStringForMyCustomMap := "map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type{"
 	for _, k := range keysForMyCustomMap {
-		mapStringForMyCustomMap += fmt.Sprintf("%#v: %#v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
+		mapStringForMyCustomMap += fmt.Sprintf("%v: %v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
 	}
 	mapStringForMyCustomMap += "}"
 	keysForMyNullableMap := make([]int32, 0, len(this.MyNullableMap))
@@ -1896,7 +1896,7 @@ func (this *Castaway) String() string {
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyNullableMap)
 	mapStringForMyNullableMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
 	for _, k := range keysForMyNullableMap {
-		mapStringForMyNullableMap += fmt.Sprintf("%#v: %#v,", k, this.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
+		mapStringForMyNullableMap += fmt.Sprintf("%v: %v,", k, this.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
 	}
 	mapStringForMyNullableMap += "}"
 	keysForMyEmbeddedMap := make([]int32, 0, len(this.MyEmbeddedMap))
@@ -1906,7 +1906,7 @@ func (this *Castaway) String() string {
 	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyEmbeddedMap)
 	mapStringForMyEmbeddedMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson{"
 	for _, k := range keysForMyEmbeddedMap {
-		mapStringForMyEmbeddedMap += fmt.Sprintf("%#v: %#v,", k, this.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
+		mapStringForMyEmbeddedMap += fmt.Sprintf("%v: %v,", k, this.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
 	}
 	mapStringForMyEmbeddedMap += "}"
 	s := strings.Join([]string{`&Castaway{`,
