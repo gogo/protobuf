@@ -175,9 +175,9 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			p.P(`for _, k := range `, keysName, ` {`)
 			p.In()
 			if keygoAliasTyp == keygoTyp {
-				p.P(mapName, ` += fmt.Sprintf("%#v: %#v,", k, this.`, fieldname, `[k])`)
+				p.P(mapName, ` += fmt.Sprintf("%v: %v,", k, this.`, fieldname, `[k])`)
 			} else {
-				p.P(mapName, ` += fmt.Sprintf("%#v: %#v,", k, this.`, fieldname, `[`, keygoAliasTyp, `(k)])`)
+				p.P(mapName, ` += fmt.Sprintf("%v: %v,", k, this.`, fieldname, `[`, keygoAliasTyp, `(k)])`)
 			}
 			p.Out()
 			p.P(`}`)
