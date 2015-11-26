@@ -679,19 +679,29 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 		} else if generator.IsMap(file, field) {
 			m := p.GoMapType(nil, field)
 			mapgoTyp, keyField, valueField, keyAliasField, valueAliasField := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
+
 			keygoTyp, _ := p.GoType(nil, keyField)
-			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			keygoAliasTyp, _ := p.GoType(nil, keyAliasField)
+			// keys may not be pointers
+			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
+
 			valuegoTyp, _ := p.GoType(nil, valueField)
 			valuegoAliasTyp, _ := p.GoType(nil, valueAliasField)
-			embedded := !strings.HasPrefix(valuegoAliasTyp, "*")
+
+			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
+			// we need to explicitly record their use here.
+			p.RecordTypeUse(keyAliasField.GetTypeName())
+			p.RecordTypeUse(valueAliasField.GetTypeName())
+
+			nullable := gogoproto.IsNullable(field)
 			if !valueField.IsMessage() {
-				embedded = true
+				nullable = false
 				valuegoAliasTyp = strings.Replace(valuegoAliasTyp, "*", "", 1)
-			} else if embedded {
+			} else if !nullable {
 				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
 			} else {
+				// ensure the non-aliased Go value type is a pointer for consistency
 				if !strings.HasPrefix(valuegoTyp, "*") {
 					valuegoTyp = "*" + valuegoTyp
 				}
@@ -714,7 +724,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				s += `[` + keygoAliasTyp + `(mapkey)]`
 			}
 			v := `mapvalue`
-			if valueField.IsMessage() && embedded {
+			if valueField.IsMessage() && !nullable {
 				v = `*` + v
 			}
 			if valuegoTyp != valuegoAliasTyp {
