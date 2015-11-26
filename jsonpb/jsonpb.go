@@ -274,7 +274,14 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 
 	// Handle nested messages.
 	if v.Kind() == reflect.Struct {
-		return m.marshalObject(out, v.Addr().Interface().(proto.Message), indent+m.Indent)
+		i := v
+		if v.CanAddr() {
+			i = v.Addr()
+		} else {
+			i = reflect.New(v.Type())
+			i.Elem().Set(v)
+		}
+		return m.marshalObject(out, i.Interface().(proto.Message), indent+m.Indent)
 	}
 
 	// Handle maps.
