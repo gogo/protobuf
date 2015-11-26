@@ -821,7 +821,6 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			keyField, valueField := m.KeyField, m.ValueField
 			_, keywire := p.GoType(nil, keyField)
 			_, valuewire := p.GoType(nil, valueField)
-			valuetypAliasGo, _ := p.GoType(nil, m.ValueAliasField)
 			keyKeySize := keySize(1, wireToType(keywire))
 			valueKeySize := keySize(2, wireToType(valuewire))
 			p.P(`for k, _ := range m.`, fieldname, ` {`)
@@ -878,7 +877,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if strings.HasPrefix(valuetypAliasGo, "*") {
+				if gogoproto.IsNullable(field) {
 					p.P(`if v == nil {`)
 					p.In()
 					p.P(`return 0, `, p.errorsPkg.Use(), `.New("proto: map has nil element")`)

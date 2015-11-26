@@ -161,8 +161,6 @@ and the following test code:
 package equal
 
 import (
-	"strings"
-
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -373,11 +371,10 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				desc := p.GoMapType(nil, field)
 				mapValue := desc.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
-					valuetypGo, _ := p.GoType(nil, mapValue)
-					if strings.HasPrefix(valuetypGo, "*") {
+					if gogoproto.IsNullable(field) {
 						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 					} else {
-						// Equal() has a pointer receiver
+						// Equal() has a pointer receiver, but map value is a value type
 						p.P(`a := this.`, fieldname, `[i]`)
 						p.P(`b := that1.`, fieldname, `[i]`)
 						p.P(`if !(&a).Equal(&b) {`)

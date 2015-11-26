@@ -326,7 +326,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			desc := p.GoMapType(nil, field)
 			keyField, valueField := desc.KeyAliasField, desc.ValueAliasField
 			_, keywire := p.GoType(nil, keyField)
-			valuetypAliasGo, valuewire := p.GoType(nil, valueField)
+			_, valuewire := p.GoType(nil, valueField)
 			_, fieldwire := p.GoType(nil, field)
 			fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
 			keyKeySize := keySize(1, wireToType(keywire))
@@ -385,7 +385,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if strings.HasPrefix(valuetypAliasGo, "*") {
+				if gogoproto.IsNullable(field) {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)
 					p.In()
