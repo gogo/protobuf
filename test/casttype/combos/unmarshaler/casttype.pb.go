@@ -2227,7 +2227,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			if m.MyMap == nil {
 				m.MyMap = make(github_com_gogo_protobuf_test_casttype.MyMapType)
 			}
-			m.MyMap[mapkey] = uint64(mapvalue)
+			m.MyMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 9:
 			if wireType != 2 {

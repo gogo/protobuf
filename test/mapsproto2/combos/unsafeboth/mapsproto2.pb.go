@@ -3380,7 +3380,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.StringToDoubleMap == nil {
 				m.StringToDoubleMap = make(map[string]float64)
 			}
-			m.StringToDoubleMap[mapkey] = float64(mapvalue)
+			m.StringToDoubleMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -3476,7 +3476,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.StringToFloatMap == nil {
 				m.StringToFloatMap = make(map[string]float32)
 			}
-			m.StringToFloatMap[mapkey] = float32(mapvalue)
+			m.StringToFloatMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -3567,7 +3567,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Int32Map == nil {
 				m.Int32Map = make(map[int32]int32)
 			}
-			m.Int32Map[mapkey] = int32(mapvalue)
+			m.Int32Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -3658,7 +3658,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Int64Map == nil {
 				m.Int64Map = make(map[int64]int64)
 			}
-			m.Int64Map[mapkey] = int64(mapvalue)
+			m.Int64Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
@@ -3749,7 +3749,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Uint32Map == nil {
 				m.Uint32Map = make(map[uint32]uint32)
 			}
-			m.Uint32Map[mapkey] = uint32(mapvalue)
+			m.Uint32Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
@@ -3840,7 +3840,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Uint64Map == nil {
 				m.Uint64Map = make(map[uint64]uint64)
 			}
-			m.Uint64Map[mapkey] = uint64(mapvalue)
+			m.Uint64Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 7:
 			if wireType != 2 {
@@ -3935,7 +3935,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Sint32Map == nil {
 				m.Sint32Map = make(map[int32]int32)
 			}
-			m.Sint32Map[mapkey] = int32(mapvalue)
+			m.Sint32Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 8:
 			if wireType != 2 {
@@ -4030,7 +4030,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Sint64Map == nil {
 				m.Sint64Map = make(map[int64]int64)
 			}
-			m.Sint64Map[mapkey] = int64(mapvalue)
+			m.Sint64Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 9:
 			if wireType != 2 {
@@ -4109,7 +4109,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Fixed32Map == nil {
 				m.Fixed32Map = make(map[uint32]uint32)
 			}
-			m.Fixed32Map[mapkey] = uint32(mapvalue)
+			m.Fixed32Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 10:
 			if wireType != 2 {
@@ -4188,7 +4188,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Sfixed32Map == nil {
 				m.Sfixed32Map = make(map[int32]int32)
 			}
-			m.Sfixed32Map[mapkey] = int32(mapvalue)
+			m.Sfixed32Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 11:
 			if wireType != 2 {
@@ -4275,7 +4275,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Fixed64Map == nil {
 				m.Fixed64Map = make(map[uint64]uint64)
 			}
-			m.Fixed64Map[mapkey] = uint64(mapvalue)
+			m.Fixed64Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 12:
 			if wireType != 2 {
@@ -4362,7 +4362,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.Sfixed64Map == nil {
 				m.Sfixed64Map = make(map[int64]int64)
 			}
-			m.Sfixed64Map[mapkey] = int64(mapvalue)
+			m.Sfixed64Map[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 13:
 			if wireType != 2 {
@@ -4455,7 +4455,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.BoolMap == nil {
 				m.BoolMap = make(map[bool]bool)
 			}
-			m.BoolMap[mapkey] = bool(mapvalue)
+			m.BoolMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 14:
 			if wireType != 2 {
@@ -4566,7 +4566,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.StringMap == nil {
 				m.StringMap = make(map[string]string)
 			}
-			m.StringMap[mapkey] = string(mapvalue)
+			m.StringMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -4779,7 +4779,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 			if m.StringToEnumMap == nil {
 				m.StringToEnumMap = make(map[string]MapEnum)
 			}
-			m.StringToEnumMap[mapkey] = MapEnum(mapvalue)
+			m.StringToEnumMap[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 17:
 			if wireType != 2 {
