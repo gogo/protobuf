@@ -79,6 +79,7 @@ regenerate:
 	make -C test/custombytesnonstruct regenerate
 	make -C test/required regenerate
 	make -C test/casttype regenerate
+	make -C test/castvalue regenerate
 	make -C vanity/test regenerate
 	make -C test/sizeunderscore regenerate
 	make -C test/issue34 regenerate
