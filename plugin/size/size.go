@@ -323,11 +323,14 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		panic(fmt.Errorf("size does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if generator.IsMap(file.FileDescriptorProto, field) {
-			desc := p.GoMapType(nil, field)
-			keyField, valueField := desc.KeyAliasField, desc.ValueAliasField
-			_, keywire := p.GoType(nil, keyField)
-			_, valuewire := p.GoType(nil, valueField)
+			m := p.GoMapType(nil, field)
+			_, keywire := p.GoType(nil, m.KeyAliasField)
+			valuegoTyp, _ := p.GoType(nil, m.ValueField)
+			valuegoAliasTyp, valuewire := p.GoType(nil, m.ValueAliasField)
 			_, fieldwire := p.GoType(nil, field)
+
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+
 			fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
 			keyKeySize := keySize(1, wireToType(keywire))
 			valueKeySize := keySize(2, wireToType(valuewire))
@@ -336,7 +339,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`_ = k`)
 			p.P(`_ = v`)
 			sum := []string{strconv.Itoa(keyKeySize)}
-			switch keyField.GetType() {
+			switch m.KeyField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -361,7 +364,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, `soz`+p.localName+`(uint64(k))`)
 			}
 			sum = append(sum, strconv.Itoa(valueKeySize))
-			switch valueField.GetType() {
+			switch m.ValueField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -385,15 +388,23 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				if gogoproto.IsNullable(field) {
+				if nullable {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)
 					p.In()
-					p.P(`l= v.Size()`)
+					if valuegoTyp != valuegoAliasTyp {
+						p.P(`l = ((`, valuegoTyp, `)(v)).Size()`)
+					} else {
+						p.P(`l = v.Size()`)
+					}
 					p.Out()
 					p.P(`}`)
 				} else {
-					p.P(`l = v.Size()`)
+					if valuegoTyp != valuegoAliasTyp {
+						p.P(`l = ((*`, valuegoTyp, `)(&v)).Size()`)
+					} else {
+						p.P(`l = v.Size()`)
+					}
 				}
 				sum = append(sum, `l+sov`+p.localName+`(uint64(l))`)
 			}

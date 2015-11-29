@@ -678,43 +678,32 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if generator.IsMap(file, field) {
 			m := p.GoMapType(nil, field)
-			mapgoTyp, keyField, valueField, keyAliasField, valueAliasField := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
 
-			keygoTyp, _ := p.GoType(nil, keyField)
-			keygoAliasTyp, _ := p.GoType(nil, keyAliasField)
+			keygoTyp, _ := p.GoType(nil, m.KeyField)
+			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
 			// keys may not be pointers
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 
-			valuegoTyp, _ := p.GoType(nil, valueField)
-			valuegoAliasTyp, _ := p.GoType(nil, valueAliasField)
+			valuegoTyp, _ := p.GoType(nil, m.ValueField)
+			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
 
 			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
 			// we need to explicitly record their use here.
-			p.RecordTypeUse(keyAliasField.GetTypeName())
-			p.RecordTypeUse(valueAliasField.GetTypeName())
+			p.RecordTypeUse(m.KeyAliasField.GetTypeName())
+			p.RecordTypeUse(m.ValueAliasField.GetTypeName())
 
-			nullable := gogoproto.IsNullable(field)
-			if !valueField.IsMessage() {
-				nullable = false
-				valuegoAliasTyp = strings.Replace(valuegoAliasTyp, "*", "", 1)
-			} else if !nullable {
-				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
-			} else {
-				// ensure the non-aliased Go value type is a pointer for consistency
-				if !strings.HasPrefix(valuegoTyp, "*") {
-					valuegoTyp = "*" + valuegoTyp
-				}
-			}
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+
 			p.P(`var keykey uint64`)
 			p.decodeVarint("keykey", "uint64")
-			p.mapField("mapkey", keyAliasField)
+			p.mapField("mapkey", m.KeyAliasField)
 			p.P(`var valuekey uint64`)
 			p.decodeVarint("valuekey", "uint64")
-			p.mapField("mapvalue", valueAliasField)
+			p.mapField("mapvalue", m.ValueAliasField)
 			p.P(`if m.`, fieldname, ` == nil {`)
 			p.In()
-			p.P(`m.`, fieldname, ` = make(`, mapgoTyp, `)`)
+			p.P(`m.`, fieldname, ` = make(`, m.GoType, `)`)
 			p.Out()
 			p.P(`}`)
 			s := `m.` + fieldname
@@ -724,7 +713,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				s += `[` + keygoAliasTyp + `(mapkey)]`
 			}
 			v := `mapvalue`
-			if valueField.IsMessage() && !nullable {
+			if m.ValueField.IsMessage() && !nullable {
 				v = `*` + v
 			}
 			if valuegoTyp != valuegoAliasTyp {

@@ -220,47 +220,48 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 	goTypName := generator.GoTypeToName(goTyp)
 	if generator.IsMap(file.FileDescriptorProto, field) {
 		m := p.GoMapType(nil, field)
-		mapgoTyp, mapkey, mapvalue, mapkeyalias, mapvaluealias := m.GoType, m.KeyField, m.ValueField, m.KeyAliasField, m.ValueAliasField
-		keygoTyp, _ := p.GoType(nil, mapkey)
+		keygoTyp, _ := p.GoType(nil, m.KeyField)
 		keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
-		keygoAliasTyp, _ := p.GoType(nil, mapkeyalias)
+		keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
 		keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 
-		valuegoTyp, _ := p.GoType(nil, mapvalue)
-		valuegoAliasTyp, _ := p.GoType(nil, mapvaluealias)
+		valuegoTyp, _ := p.GoType(nil, m.ValueField)
+		valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
 		keytypName := generator.GoTypeToName(keygoTyp)
 		keygoAliasTyp = generator.GoTypeToName(keygoAliasTyp)
 		valuetypAliasName := generator.GoTypeToName(valuegoAliasTyp)
-		mapvaluegoType := valuegoTyp
-		if !mapvalue.IsMessage() {
-			mapvaluegoType = strings.Replace(mapvaluegoType, "*", "", 1)
-		}
+
+		nullable, valuegoTyp, valuegoAliasTyp := generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+
 		p.P(p.varGen.Next(), ` := r.Intn(10)`)
-		p.P(`this.`, fieldname, ` = make(`, mapgoTyp, `)`)
+		p.P(`this.`, fieldname, ` = make(`, m.GoType, `)`)
 		p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 		p.In()
 		keyval := ""
-		if mapkey.IsString() {
+		if m.KeyField.IsString() {
 			keyval = fmt.Sprintf("randString%v(r)", p.localName)
 		} else {
-			keyval = value(keytypName, mapkey.GetType())
+			keyval = value(keytypName, m.KeyField.GetType())
 		}
 		if keygoAliasTyp != keygoTyp {
 			keyval = keygoAliasTyp + `(` + keyval + `)`
 		}
-		if mapvalue.IsMessage() || p.IsGroup(field) {
+		if m.ValueField.IsMessage() || p.IsGroup(field) {
 			s := `this.` + fieldname + `[` + keyval + `] = `
-			if !gogoproto.IsNullable(field) {
-				s = s + "*"
-			}
 			goTypName := generator.GoTypeToName(valuegoTyp)
 			funcCall := getFuncCall(goTypName)
+			if !nullable {
+				funcCall = `*` + funcCall
+			}
+			if valuegoTyp != valuegoAliasTyp {
+				funcCall = `(` + valuegoAliasTyp + `)(` + funcCall + `)`
+			}
 			s += funcCall
 			p.P(s)
-		} else if mapvalue.IsEnum() {
-			s := `this.` + fieldname + `[` + keyval + `]` + ` = ` + p.getEnumVal(mapvalue, valuegoTyp)
+		} else if m.ValueField.IsEnum() {
+			s := `this.` + fieldname + `[` + keyval + `]` + ` = ` + p.getEnumVal(m.ValueField, valuegoTyp)
 			p.P(s)
-		} else if mapvalue.IsBytes() {
+		} else if m.ValueField.IsBytes() {
 			count := p.varGen.Next()
 			p.P(count, ` := r.Intn(100)`)
 			p.P(p.varGen.Next(), ` := `, keyval)
@@ -270,13 +271,13 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `][i] = byte(r.Intn(256))`)
 			p.Out()
 			p.P(`}`)
-		} else if mapvalue.IsString() {
+		} else if m.ValueField.IsString() {
 			s := `this.` + fieldname + `[` + keyval + `]` + ` = ` + fmt.Sprintf("randString%v(r)", p.localName)
 			p.P(s)
 		} else {
 			p.P(p.varGen.Next(), ` := `, keyval)
-			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypAliasName, mapvalue.GetType()))
-			if negative(mapvalue.GetType()) {
+			p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] = `, value(valuetypAliasName, m.ValueField.GetType()))
+			if negative(m.ValueField.GetType()) {
 				p.P(`if r.Intn(2) == 0 {`)
 				p.In()
 				p.P(`this.`, fieldname, `[`, p.varGen.Current(), `] *= -1`)

@@ -818,16 +818,15 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if generator.IsMap(file.FileDescriptorProto, field) {
 			m := p.GoMapType(nil, field)
-			keyField, valueField := m.KeyField, m.ValueField
-			_, keywire := p.GoType(nil, keyField)
-			_, valuewire := p.GoType(nil, valueField)
+			_, keywire := p.GoType(nil, m.KeyField)
+			_, valuewire := p.GoType(nil, m.ValueField)
 			keyKeySize := keySize(1, wireToType(keywire))
 			valueKeySize := keySize(2, wireToType(valuewire))
 			p.P(`for k, _ := range m.`, fieldname, ` {`)
 			p.In()
 			p.encodeKey(fieldNumber, wireType)
 			sum := []string{strconv.Itoa(keyKeySize)}
-			switch keyField.GetType() {
+			switch m.KeyField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -853,7 +852,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			}
 			p.P(`v := m.`, fieldname, `[k]`)
 			sum = append(sum, strconv.Itoa(valueKeySize))
-			switch valueField.GetType() {
+			switch m.ValueField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -890,9 +889,9 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.P(`mapSize := `, strings.Join(sum, " + "))
 			p.callVarint("mapSize")
 			p.encodeKey(1, wireToType(keywire))
-			p.mapField(numGen, keyField.GetType(), "k")
+			p.mapField(numGen, m.KeyField.GetType(), "k")
 			p.encodeKey(2, wireToType(valuewire))
-			p.mapField(numGen, valueField.GetType(), "v")
+			p.mapField(numGen, m.ValueField.GetType(), "v")
 			p.Out()
 			p.P(`}`)
 		} else if repeated {

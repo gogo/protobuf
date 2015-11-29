@@ -224,7 +224,10 @@ func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorPr
 	if !gogoproto.IsCastKey(field) {
 		return keyField
 	}
-	keyField = cloneFieldExtensions(keyField)
+	keyField = proto.Clone(keyField).(*descriptor.FieldDescriptorProto)
+	if keyField.Options == nil {
+		keyField.Options = &descriptor.FieldOptions{}
+	}
 	keyType := gogoproto.GetCastKey(field)
 	if err := proto.SetExtension(keyField.Options, gogoproto.E_Casttype, &keyType); err != nil {
 		g.Fail(err.Error())
@@ -236,7 +239,10 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 	if !gogoproto.IsCastValue(field) && gogoproto.IsNullable(field) {
 		return valField
 	}
-	valField = cloneFieldExtensions(valField)
+	valField = proto.Clone(valField).(*descriptor.FieldDescriptorProto)
+	if valField.Options == nil {
+		valField.Options = &descriptor.FieldOptions{}
+	}
 	if valType := gogoproto.GetCastValue(field); len(valType) > 0 {
 		if err := proto.SetExtension(valField.Options, gogoproto.E_Casttype, &valType); err != nil {
 			g.Fail(err.Error())
@@ -250,23 +256,23 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 	return valField
 }
 
-// cloneFieldExtensions creates a copy of field where field.Options.XXX_extensions is safe to mutate.
-func cloneFieldExtensions(field *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
-	f := *field
-	if field.Options != nil {
-		opt := *f.Options
-		f.Options = &opt
+// GoMapValueTypes returns the map value Go type and the alias map value Go type (for casting), taking into
+// account whether the map is nullable or the value is a message.
+func GoMapValueTypes(mapField, valueField *descriptor.FieldDescriptorProto, goValueType, goValueAliasType string) (nullable bool, outGoType string, outGoAliasType string) {
+	nullable = gogoproto.IsNullable(mapField) && valueField.IsMessage()
+	if nullable {
+		// ensure the non-aliased Go value type is a pointer for consistency
+		if strings.HasPrefix(goValueType, "*") {
+			outGoType = goValueType
+		} else {
+			outGoType = "*" + goValueType
+		}
+		outGoAliasType = goValueAliasType
 	} else {
-		f.Options = &descriptor.FieldOptions{}
+		outGoType = strings.Replace(goValueType, "*", "", 1)
+		outGoAliasType = strings.Replace(goValueAliasType, "*", "", 1)
 	}
-
-	extensions := make(map[int32]proto.Extension)
-	for k, v := range f.Options.XXX_extensions {
-		extensions[k] = v
-	}
-	f.Options.XXX_extensions = extensions
-
-	return &f
+	return
 }
 
 func GoTypeToName(goTyp string) string {
