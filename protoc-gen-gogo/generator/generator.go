@@ -1608,6 +1608,14 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	castvalue := ""
 	if gogoproto.IsCastValue(field) {
 		castvalue = ",castvalue=" + gogoproto.GetCastValue(field)
+		// record the original message type for jsonpb reconstruction
+		desc := g.ObjectNamed(field.GetTypeName())
+		if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
+			valueField := d.Field[1]
+			if valueField.IsMessage() {
+				castvalue += ",castvaluetype=" + strings.TrimPrefix(valueField.GetTypeName(), ".")
+			}
+		}
 	}
 
 	if message.proto3() {

@@ -128,6 +128,22 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent string
 		if !firstField {
 			m.writeSep(out)
 		}
+		// If the map value is a cast type, it may not implement proto.Message, therefore
+		// allow the struct tag to declare the underlying message type. Instead of changing
+		// the signatures of the child types (and because prop.mvalue is not public), use
+		// CustomType as a passer.
+		if value.Kind() == reflect.Map {
+			if tag := valueField.Tag.Get("protobuf"); tag != "" {
+				for _, v := range strings.Split(tag, ",") {
+					if !strings.HasPrefix(v, "castvaluetype=") {
+						continue
+					}
+					v = strings.TrimPrefix(v, "castvaluetype=")
+					prop.CustomType = v
+					break
+				}
+			}
+		}
 		if err := m.marshalField(out, prop, value, indent); err != nil {
 			return err
 		}
@@ -281,7 +297,23 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 			i = reflect.New(v.Type())
 			i.Elem().Set(v)
 		}
-		return m.marshalObject(out, i.Interface().(proto.Message), indent+m.Indent)
+		iface := i.Interface()
+		if iface == nil {
+			out.write(`null`)
+			return out.err
+		}
+		pm, ok := iface.(proto.Message)
+		if !ok {
+			if prop.CustomType == "" {
+				return fmt.Errorf("%v does not implement proto.Message", v.Type())
+			}
+			t := proto.MessageType(prop.CustomType)
+			if t == nil || !i.Type().ConvertibleTo(t) {
+				return fmt.Errorf("%v declared custom type %s but it is not convertible to %v", v.Type(), prop.CustomType, t)
+			}
+			pm = i.Convert(t).Interface().(proto.Message)
+		}
+		return m.marshalObject(out, pm, indent+m.Indent)
 	}
 
 	// Handle maps.
