@@ -1724,7 +1724,7 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x5a
 			i++
 			v := m.MyEmbeddedMap[k]
-			msgSize := v.Size()
+			msgSize := (&v).Size()
 			mapSize := 1 + sovCasttype(uint64(k)) + 1 + msgSize + sovCasttype(uint64(msgSize))
 			i = encodeVarintCasttype(data, i, uint64(mapSize))
 			data[i] = 0x8
@@ -1732,8 +1732,8 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintCasttype(data, i, uint64(k))
 			data[i] = 0x12
 			i++
-			i = encodeVarintCasttype(data, i, uint64(v.Size()))
-			n2, err := v.MarshalTo(data[i:])
+			i = encodeVarintCasttype(data, i, uint64((&v).Size()))
+			n2, err := (&v).MarshalTo(data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -2516,7 +2516,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			if m.MyCustomMap == nil {
 				m.MyCustomMap = make(map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type)
 			}
-			m.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(mapkey)] = github_com_gogo_protobuf_test_casttype.MyUint64Type(mapvalue)
+			m.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(mapkey)] = ((github_com_gogo_protobuf_test_casttype.MyUint64Type)(mapvalue))
 			iNdEx = postIndex
 		case 10:
 			if wireType != 2 {
