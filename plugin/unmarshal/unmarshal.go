@@ -717,7 +717,7 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				v = `*` + v
 			}
 			if valuegoTyp != valuegoAliasTyp {
-				v = valuegoAliasTyp + `(` + v + `)`
+				v = `((` + valuegoAliasTyp + `)(` + v + `))`
 			}
 			p.P(s, ` = `, v)
 		} else if repeated {

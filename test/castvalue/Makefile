@@ -27,4 +27,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	(protoc --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogo_out=. castvalue.proto)
+	go install github.com/gogo/protobuf/protoc-gen-combo
+	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. castvalue.proto
