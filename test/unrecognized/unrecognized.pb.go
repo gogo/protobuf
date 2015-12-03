@@ -1275,7 +1275,7 @@ func (this *A) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *A but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Abut is not nil && this == nil")
+		return fmt.Errorf("that is type *A but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1353,7 +1353,7 @@ func (this *B) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *B but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Bbut is not nil && this == nil")
+		return fmt.Errorf("that is type *B but is not nil && this == nil")
 	}
 	if !this.C.Equal(that1.C) {
 		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
@@ -1421,7 +1421,7 @@ func (this *D) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *D but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Dbut is not nil && this == nil")
+		return fmt.Errorf("that is type *D but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1489,7 +1489,7 @@ func (this *C) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *C but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Cbut is not nil && this == nil")
+		return fmt.Errorf("that is type *C but is not nil && this == nil")
 	}
 	if this.Field2 != nil && that1.Field2 != nil {
 		if *this.Field2 != *that1.Field2 {
@@ -1643,7 +1643,7 @@ func (this *U) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *U but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Ubut is not nil && this == nil")
+		return fmt.Errorf("that is type *U but is not nil && this == nil")
 	}
 	if len(this.Field2) != len(that1.Field2) {
 		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
@@ -1721,7 +1721,7 @@ func (this *UnoM) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *UnoM but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *UnoMbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnoM but is not nil && this == nil")
 	}
 	if len(this.Field2) != len(that1.Field2) {
 		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", len(this.Field2), len(that1.Field2))
@@ -1799,7 +1799,7 @@ func (this *OldA) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldA but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldAbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldA but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1877,7 +1877,7 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldB but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldBbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldB but is not nil && this == nil")
 	}
 	if !this.C.Equal(that1.C) {
 		return fmt.Errorf("C this(%v) Not Equal that(%v)", this.C, that1.C)
@@ -1939,7 +1939,7 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldC but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldCbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldC but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -2077,7 +2077,7 @@ func (this *OldU) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldU but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldUbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldU but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -2161,7 +2161,7 @@ func (this *OldUnoM) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldUnoM but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldUnoMbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldUnoM but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {

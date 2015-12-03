@@ -3311,7 +3311,7 @@ func (this *Message) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Message but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Messagebut is not nil && this == nil")
+		return fmt.Errorf("that is type *Message but is not nil && this == nil")
 	}
 	if this.Name != that1.Name {
 		return fmt.Errorf("Name this(%v) Not Equal that(%v)", this.Name, that1.Name)
@@ -3457,7 +3457,7 @@ func (this *Nested) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Nested but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Nestedbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Nested but is not nil && this == nil")
 	}
 	if this.Bunny != that1.Bunny {
 		return fmt.Errorf("Bunny this(%v) Not Equal that(%v)", this.Bunny, that1.Bunny)
@@ -3507,7 +3507,7 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllMaps but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllMapsbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllMaps but is not nil && this == nil")
 	}
 	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
 		return fmt.Errorf("StringToDoubleMap this(%v) Not Equal that(%v)", len(this.StringToDoubleMap), len(that1.StringToDoubleMap))
@@ -3823,7 +3823,7 @@ func (this *MessageWithMap) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *MessageWithMap but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *MessageWithMapbut is not nil && this == nil")
+		return fmt.Errorf("that is type *MessageWithMap but is not nil && this == nil")
 	}
 	if len(this.NameMapping) != len(that1.NameMapping) {
 		return fmt.Errorf("NameMapping this(%v) Not Equal that(%v)", len(this.NameMapping), len(that1.NameMapping))
@@ -3915,7 +3915,7 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *FloatingPoint but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *FloatingPointbut is not nil && this == nil")
+		return fmt.Errorf("that is type *FloatingPoint but is not nil && this == nil")
 	}
 	if this.F != that1.F {
 		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)

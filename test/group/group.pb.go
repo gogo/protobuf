@@ -1054,7 +1054,7 @@ func (this *Groups1) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Groups1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Groups1but is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups1 but is not nil && this == nil")
 	}
 	if len(this.G) != len(that1.G) {
 		return fmt.Errorf("G this(%v) Not Equal that(%v)", len(this.G), len(that1.G))
@@ -1120,7 +1120,7 @@ func (this *Groups1_G) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Groups1_G but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Groups1_Gbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups1_G but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1206,7 +1206,7 @@ func (this *Groups2) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Groups2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Groups2but is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups2 but is not nil && this == nil")
 	}
 	if !this.G.Equal(that1.G) {
 		return fmt.Errorf("G this(%v) Not Equal that(%v)", this.G, that1.G)
@@ -1262,7 +1262,7 @@ func (this *Groups2_G) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Groups2_G but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Groups2_Gbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Groups2_G but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
