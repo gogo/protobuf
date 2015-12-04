@@ -1168,7 +1168,7 @@ func (this *A) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *A but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Abut is not nil && this == nil")
+		return fmt.Errorf("that is type *A but is not nil && this == nil")
 	}
 	if this.Description != that1.Description {
 		return fmt.Errorf("Description this(%v) Not Equal that(%v)", this.Description, that1.Description)
@@ -1236,7 +1236,7 @@ func (this *B) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *B but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Bbut is not nil && this == nil")
+		return fmt.Errorf("that is type *B but is not nil && this == nil")
 	}
 	if !this.A.Equal(&that1.A) {
 		return fmt.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
@@ -1308,7 +1308,7 @@ func (this *C) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *C but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Cbut is not nil && this == nil")
+		return fmt.Errorf("that is type *C but is not nil && this == nil")
 	}
 	if this.MySize != nil && that1.MySize != nil {
 		if *this.MySize != *that1.MySize {
@@ -1376,7 +1376,7 @@ func (this *U) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *U but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Ubut is not nil && this == nil")
+		return fmt.Errorf("that is type *U but is not nil && this == nil")
 	}
 	if !this.A.Equal(that1.A) {
 		return fmt.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
@@ -1438,7 +1438,7 @@ func (this *E) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *E but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Ebut is not nil && this == nil")
+		return fmt.Errorf("that is type *E but is not nil && this == nil")
 	}
 	if !bytes.Equal(this.XXX_extensions, that1.XXX_extensions) {
 		return fmt.Errorf("XXX_extensions this(%v) Not Equal that(%v)", this.XXX_extensions, that1.XXX_extensions)
@@ -1494,7 +1494,7 @@ func (this *R) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *R but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Rbut is not nil && this == nil")
+		return fmt.Errorf("that is type *R but is not nil && this == nil")
 	}
 	if this.Recognized != nil && that1.Recognized != nil {
 		if *this.Recognized != *that1.Recognized {
@@ -1556,7 +1556,7 @@ func (this *CastType) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CastType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CastTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CastType but is not nil && this == nil")
 	}
 	if this.Int32 != nil && that1.Int32 != nil {
 		if *this.Int32 != *that1.Int32 {

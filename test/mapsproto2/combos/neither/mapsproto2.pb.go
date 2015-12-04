@@ -1381,7 +1381,7 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *FloatingPoint but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *FloatingPointbut is not nil && this == nil")
+		return fmt.Errorf("that is type *FloatingPoint but is not nil && this == nil")
 	}
 	if this.F != nil && that1.F != nil {
 		if *this.F != *that1.F {
@@ -1449,7 +1449,7 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllMaps but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllMapsbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllMaps but is not nil && this == nil")
 	}
 	if len(this.StringToDoubleMap) != len(that1.StringToDoubleMap) {
 		return fmt.Errorf("StringToDoubleMap this(%v) Not Equal that(%v)", len(this.StringToDoubleMap), len(that1.StringToDoubleMap))

@@ -216,7 +216,7 @@ func (this *Big) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Big but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Bigbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Big but is not nil && this == nil")
 	}
 	if !this.Sub.Equal(that1.Sub) {
 		return fmt.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
@@ -290,7 +290,7 @@ func (this *BigUnsafe) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *BigUnsafe but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *BigUnsafebut is not nil && this == nil")
+		return fmt.Errorf("that is type *BigUnsafe but is not nil && this == nil")
 	}
 	if !this.Sub.Equal(that1.Sub) {
 		return fmt.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
@@ -364,7 +364,7 @@ func (this *Sub) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Sub but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Subbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Sub but is not nil && this == nil")
 	}
 	if this.SubNumber != nil && that1.SubNumber != nil {
 		if *this.SubNumber != *that1.SubNumber {
@@ -432,7 +432,7 @@ func (this *IntMerge) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *IntMerge but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *IntMergebut is not nil && this == nil")
+		return fmt.Errorf("that is type *IntMerge but is not nil && this == nil")
 	}
 	if this.Int64 != that1.Int64 {
 		return fmt.Errorf("Int64 this(%v) Not Equal that(%v)", this.Int64, that1.Int64)

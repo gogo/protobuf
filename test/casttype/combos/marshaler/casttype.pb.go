@@ -1024,7 +1024,7 @@ func (this *Castaway) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Castaway but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Castawaybut is not nil && this == nil")
+		return fmt.Errorf("that is type *Castaway but is not nil && this == nil")
 	}
 	if this.Int32Ptr != nil && that1.Int32Ptr != nil {
 		if *this.Int32Ptr != *that1.Int32Ptr {

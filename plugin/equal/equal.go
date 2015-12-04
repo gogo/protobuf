@@ -84,7 +84,7 @@ given to the equal plugin, will generate the following code:
 			}
 			return fmt2.Errorf("that is type *B but is nil && this != nil")
 		} else if this == nil {
-			return fmt2.Errorf("that is type *Bbut is not nil && this == nil")
+			return fmt2.Errorf("that is type *B but is not nil && this == nil")
 		}
 		if !this.A.Equal(&that1.A) {
 			return fmt2.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
@@ -279,7 +279,7 @@ func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string, verbose bool) {
 	p.P(`} else if this == nil {`)
 	p.In()
 	if verbose {
-		p.P(`return `, p.fmtPkg.Use(), `.Errorf("that is type *`, ccTypeName, `but is not nil && this == nil")`)
+		p.P(`return `, p.fmtPkg.Use(), `.Errorf("that is type *`, ccTypeName, ` but is not nil && this == nil")`)
 	} else {
 		p.P(`return false`)
 	}

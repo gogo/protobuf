@@ -1930,7 +1930,7 @@ func (this *Subby) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Subby but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Subbybut is not nil && this == nil")
+		return fmt.Errorf("that is type *Subby but is not nil && this == nil")
 	}
 	if this.Sub != nil && that1.Sub != nil {
 		if *this.Sub != *that1.Sub {
@@ -1998,7 +1998,7 @@ func (this *AllTypesOneOf) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOfbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf but is not nil && this == nil")
 	}
 	if that1.TestOneof == nil {
 		if this.TestOneof != nil {
@@ -2032,7 +2032,7 @@ func (this *AllTypesOneOf_Field1) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field1but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field1 but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -2057,7 +2057,7 @@ func (this *AllTypesOneOf_Field2) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field2but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field2 but is not nil && this == nil")
 	}
 	if this.Field2 != that1.Field2 {
 		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
@@ -2082,7 +2082,7 @@ func (this *AllTypesOneOf_Field3) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field3 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field3but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field3 but is not nil && this == nil")
 	}
 	if this.Field3 != that1.Field3 {
 		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
@@ -2107,7 +2107,7 @@ func (this *AllTypesOneOf_Field4) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field4 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field4but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field4 but is not nil && this == nil")
 	}
 	if this.Field4 != that1.Field4 {
 		return fmt.Errorf("Field4 this(%v) Not Equal that(%v)", this.Field4, that1.Field4)
@@ -2132,7 +2132,7 @@ func (this *AllTypesOneOf_Field5) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field5 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field5but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field5 but is not nil && this == nil")
 	}
 	if this.Field5 != that1.Field5 {
 		return fmt.Errorf("Field5 this(%v) Not Equal that(%v)", this.Field5, that1.Field5)
@@ -2157,7 +2157,7 @@ func (this *AllTypesOneOf_Field6) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field6 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field6but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field6 but is not nil && this == nil")
 	}
 	if this.Field6 != that1.Field6 {
 		return fmt.Errorf("Field6 this(%v) Not Equal that(%v)", this.Field6, that1.Field6)
@@ -2182,7 +2182,7 @@ func (this *AllTypesOneOf_Field7) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field7 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field7but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field7 but is not nil && this == nil")
 	}
 	if this.Field7 != that1.Field7 {
 		return fmt.Errorf("Field7 this(%v) Not Equal that(%v)", this.Field7, that1.Field7)
@@ -2207,7 +2207,7 @@ func (this *AllTypesOneOf_Field8) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field8 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field8but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field8 but is not nil && this == nil")
 	}
 	if this.Field8 != that1.Field8 {
 		return fmt.Errorf("Field8 this(%v) Not Equal that(%v)", this.Field8, that1.Field8)
@@ -2232,7 +2232,7 @@ func (this *AllTypesOneOf_Field9) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field9 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field9but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field9 but is not nil && this == nil")
 	}
 	if this.Field9 != that1.Field9 {
 		return fmt.Errorf("Field9 this(%v) Not Equal that(%v)", this.Field9, that1.Field9)
@@ -2257,7 +2257,7 @@ func (this *AllTypesOneOf_Field10) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field10 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field10but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field10 but is not nil && this == nil")
 	}
 	if this.Field10 != that1.Field10 {
 		return fmt.Errorf("Field10 this(%v) Not Equal that(%v)", this.Field10, that1.Field10)
@@ -2282,7 +2282,7 @@ func (this *AllTypesOneOf_Field11) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field11 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field11but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field11 but is not nil && this == nil")
 	}
 	if this.Field11 != that1.Field11 {
 		return fmt.Errorf("Field11 this(%v) Not Equal that(%v)", this.Field11, that1.Field11)
@@ -2307,7 +2307,7 @@ func (this *AllTypesOneOf_Field12) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field12 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field12but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field12 but is not nil && this == nil")
 	}
 	if this.Field12 != that1.Field12 {
 		return fmt.Errorf("Field12 this(%v) Not Equal that(%v)", this.Field12, that1.Field12)
@@ -2332,7 +2332,7 @@ func (this *AllTypesOneOf_Field13) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field13 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field13but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field13 but is not nil && this == nil")
 	}
 	if this.Field13 != that1.Field13 {
 		return fmt.Errorf("Field13 this(%v) Not Equal that(%v)", this.Field13, that1.Field13)
@@ -2357,7 +2357,7 @@ func (this *AllTypesOneOf_Field14) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field14 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field14but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field14 but is not nil && this == nil")
 	}
 	if this.Field14 != that1.Field14 {
 		return fmt.Errorf("Field14 this(%v) Not Equal that(%v)", this.Field14, that1.Field14)
@@ -2382,7 +2382,7 @@ func (this *AllTypesOneOf_Field15) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_Field15 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_Field15but is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_Field15 but is not nil && this == nil")
 	}
 	if !bytes.Equal(this.Field15, that1.Field15) {
 		return fmt.Errorf("Field15 this(%v) Not Equal that(%v)", this.Field15, that1.Field15)
@@ -2407,7 +2407,7 @@ func (this *AllTypesOneOf_SubMessage) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AllTypesOneOf_SubMessage but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AllTypesOneOf_SubMessagebut is not nil && this == nil")
+		return fmt.Errorf("that is type *AllTypesOneOf_SubMessage but is not nil && this == nil")
 	}
 	if !this.SubMessage.Equal(that1.SubMessage) {
 		return fmt.Errorf("SubMessage this(%v) Not Equal that(%v)", this.SubMessage, that1.SubMessage)
@@ -2866,7 +2866,7 @@ func (this *TwoOneofs) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofsbut is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs but is not nil && this == nil")
 	}
 	if that1.One == nil {
 		if this.One != nil {
@@ -2909,7 +2909,7 @@ func (this *TwoOneofs_Field1) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_Field1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_Field1but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_Field1 but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -2934,7 +2934,7 @@ func (this *TwoOneofs_Field2) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_Field2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_Field2but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_Field2 but is not nil && this == nil")
 	}
 	if this.Field2 != that1.Field2 {
 		return fmt.Errorf("Field2 this(%v) Not Equal that(%v)", this.Field2, that1.Field2)
@@ -2959,7 +2959,7 @@ func (this *TwoOneofs_Field3) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_Field3 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_Field3but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_Field3 but is not nil && this == nil")
 	}
 	if this.Field3 != that1.Field3 {
 		return fmt.Errorf("Field3 this(%v) Not Equal that(%v)", this.Field3, that1.Field3)
@@ -2984,7 +2984,7 @@ func (this *TwoOneofs_Field34) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_Field34 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_Field34but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_Field34 but is not nil && this == nil")
 	}
 	if this.Field34 != that1.Field34 {
 		return fmt.Errorf("Field34 this(%v) Not Equal that(%v)", this.Field34, that1.Field34)
@@ -3009,7 +3009,7 @@ func (this *TwoOneofs_Field35) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_Field35 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_Field35but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_Field35 but is not nil && this == nil")
 	}
 	if !bytes.Equal(this.Field35, that1.Field35) {
 		return fmt.Errorf("Field35 this(%v) Not Equal that(%v)", this.Field35, that1.Field35)
@@ -3034,7 +3034,7 @@ func (this *TwoOneofs_SubMessage2) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *TwoOneofs_SubMessage2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TwoOneofs_SubMessage2but is not nil && this == nil")
+		return fmt.Errorf("that is type *TwoOneofs_SubMessage2 but is not nil && this == nil")
 	}
 	if !this.SubMessage2.Equal(that1.SubMessage2) {
 		return fmt.Errorf("SubMessage2 this(%v) Not Equal that(%v)", this.SubMessage2, that1.SubMessage2)
@@ -3252,7 +3252,7 @@ func (this *CustomOneof) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomOneof but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomOneofbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof but is not nil && this == nil")
 	}
 	if that1.Custom == nil {
 		if this.Custom != nil {
@@ -3286,7 +3286,7 @@ func (this *CustomOneof_Stringy) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomOneof_Stringy but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomOneof_Stringybut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_Stringy but is not nil && this == nil")
 	}
 	if this.Stringy != that1.Stringy {
 		return fmt.Errorf("Stringy this(%v) Not Equal that(%v)", this.Stringy, that1.Stringy)
@@ -3311,7 +3311,7 @@ func (this *CustomOneof_CustomType) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomOneof_CustomType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomOneof_CustomTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_CustomType but is not nil && this == nil")
 	}
 	if !this.CustomType.Equal(that1.CustomType) {
 		return fmt.Errorf("CustomType this(%v) Not Equal that(%v)", this.CustomType, that1.CustomType)
@@ -3336,7 +3336,7 @@ func (this *CustomOneof_CastType) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomOneof_CastType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomOneof_CastTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_CastType but is not nil && this == nil")
 	}
 	if this.CastType != that1.CastType {
 		return fmt.Errorf("CastType this(%v) Not Equal that(%v)", this.CastType, that1.CastType)
@@ -3361,7 +3361,7 @@ func (this *CustomOneof_MyCustomName) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomOneof_MyCustomName but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomOneof_MyCustomNamebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomOneof_MyCustomName but is not nil && this == nil")
 	}
 	if this.MyCustomName != that1.MyCustomName {
 		return fmt.Errorf("MyCustomName this(%v) Not Equal that(%v)", this.MyCustomName, that1.MyCustomName)

@@ -153,7 +153,7 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidOptEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidOptEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidOptEnum but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -209,7 +209,7 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptEnum but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -277,7 +277,7 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepEnum but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -343,7 +343,7 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepEnum but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))

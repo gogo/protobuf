@@ -1107,7 +1107,7 @@ func (this *NewNoGroup) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NewNoGroup but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NewNoGroupbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NewNoGroup but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1197,7 +1197,7 @@ func (this *A) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *A but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Abut is not nil && this == nil")
+		return fmt.Errorf("that is type *A but is not nil && this == nil")
 	}
 	if this.AField != nil && that1.AField != nil {
 		if *this.AField != *that1.AField {
@@ -1265,7 +1265,7 @@ func (this *OldWithGroup) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldWithGroup but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldWithGroupbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OldWithGroup but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1361,7 +1361,7 @@ func (this *OldWithGroup_Group1) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldWithGroup_Group1 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldWithGroup_Group1but is not nil && this == nil")
+		return fmt.Errorf("that is type *OldWithGroup_Group1 but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -1463,7 +1463,7 @@ func (this *OldWithGroup_Group2) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OldWithGroup_Group2 but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OldWithGroup_Group2but is not nil && this == nil")
+		return fmt.Errorf("that is type *OldWithGroup_Group2 but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {

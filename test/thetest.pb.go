@@ -4058,7 +4058,7 @@ func (this *NidOptNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidOptNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidOptNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidOptNative but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -4198,7 +4198,7 @@ func (this *NinOptNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptNative but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -4506,7 +4506,7 @@ func (this *NidRepNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepNative but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -4796,7 +4796,7 @@ func (this *NinRepNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepNative but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -5086,7 +5086,7 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepPackedNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepPackedNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepPackedNative but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -5344,7 +5344,7 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepPackedNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepPackedNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepPackedNative but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -5602,7 +5602,7 @@ func (this *NidOptStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidOptStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidOptStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidOptStruct but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -5712,7 +5712,7 @@ func (this *NinOptStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptStruct but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -5894,7 +5894,7 @@ func (this *NidRepStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepStruct but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -6104,7 +6104,7 @@ func (this *NinRepStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepStruct but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -6314,7 +6314,7 @@ func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidEmbeddedStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidEmbeddedStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidEmbeddedStruct but is not nil && this == nil")
 	}
 	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return fmt.Errorf("NidOptNative this(%v) Not Equal that(%v)", this.NidOptNative, that1.NidOptNative)
@@ -6382,7 +6382,7 @@ func (this *NinEmbeddedStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinEmbeddedStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinEmbeddedStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinEmbeddedStruct but is not nil && this == nil")
 	}
 	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return fmt.Errorf("NidOptNative this(%v) Not Equal that(%v)", this.NidOptNative, that1.NidOptNative)
@@ -6462,7 +6462,7 @@ func (this *NidNestedStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidNestedStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidNestedStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidNestedStruct but is not nil && this == nil")
 	}
 	if !this.Field1.Equal(&that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -6534,7 +6534,7 @@ func (this *NinNestedStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinNestedStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinNestedStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinNestedStruct but is not nil && this == nil")
 	}
 	if !this.Field1.Equal(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -6606,7 +6606,7 @@ func (this *NidOptCustom) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidOptCustom but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidOptCustombut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidOptCustom but is not nil && this == nil")
 	}
 	if !this.Id.Equal(that1.Id) {
 		return fmt.Errorf("Id this(%v) Not Equal that(%v)", this.Id, that1.Id)
@@ -6668,7 +6668,7 @@ func (this *CustomDash) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomDash but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomDashbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomDash but is not nil && this == nil")
 	}
 	if that1.Value == nil {
 		if this.Value != nil {
@@ -6732,7 +6732,7 @@ func (this *NinOptCustom) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptCustom but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptCustombut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptCustom but is not nil && this == nil")
 	}
 	if that1.Id == nil {
 		if this.Id != nil {
@@ -6810,7 +6810,7 @@ func (this *NidRepCustom) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepCustom but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepCustombut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepCustom but is not nil && this == nil")
 	}
 	if len(this.Id) != len(that1.Id) {
 		return fmt.Errorf("Id this(%v) Not Equal that(%v)", len(this.Id), len(that1.Id))
@@ -6892,7 +6892,7 @@ func (this *NinRepCustom) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepCustom but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepCustombut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepCustom but is not nil && this == nil")
 	}
 	if len(this.Id) != len(that1.Id) {
 		return fmt.Errorf("Id this(%v) Not Equal that(%v)", len(this.Id), len(that1.Id))
@@ -6974,7 +6974,7 @@ func (this *NinOptNativeUnion) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptNativeUnion but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptNativeUnionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptNativeUnion but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -7174,7 +7174,7 @@ func (this *NinOptStructUnion) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptStructUnion but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptStructUnionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptStructUnion but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -7350,7 +7350,7 @@ func (this *NinEmbeddedStructUnion) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinEmbeddedStructUnion but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinEmbeddedStructUnionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinEmbeddedStructUnion but is not nil && this == nil")
 	}
 	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return fmt.Errorf("NidOptNative this(%v) Not Equal that(%v)", this.NidOptNative, that1.NidOptNative)
@@ -7430,7 +7430,7 @@ func (this *NinNestedStructUnion) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinNestedStructUnion but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinNestedStructUnionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinNestedStructUnion but is not nil && this == nil")
 	}
 	if !this.Field1.Equal(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -7498,7 +7498,7 @@ func (this *Tree) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Tree but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Treebut is not nil && this == nil")
+		return fmt.Errorf("that is type *Tree but is not nil && this == nil")
 	}
 	if !this.Or.Equal(that1.Or) {
 		return fmt.Errorf("Or this(%v) Not Equal that(%v)", this.Or, that1.Or)
@@ -7566,7 +7566,7 @@ func (this *OrBranch) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OrBranch but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OrBranchbut is not nil && this == nil")
+		return fmt.Errorf("that is type *OrBranch but is not nil && this == nil")
 	}
 	if !this.Left.Equal(&that1.Left) {
 		return fmt.Errorf("Left this(%v) Not Equal that(%v)", this.Left, that1.Left)
@@ -7628,7 +7628,7 @@ func (this *AndBranch) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AndBranch but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AndBranchbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AndBranch but is not nil && this == nil")
 	}
 	if !this.Left.Equal(&that1.Left) {
 		return fmt.Errorf("Left this(%v) Not Equal that(%v)", this.Left, that1.Left)
@@ -7690,7 +7690,7 @@ func (this *Leaf) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Leaf but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Leafbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Leaf but is not nil && this == nil")
 	}
 	if this.Value != that1.Value {
 		return fmt.Errorf("Value this(%v) Not Equal that(%v)", this.Value, that1.Value)
@@ -7752,7 +7752,7 @@ func (this *DeepTree) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *DeepTree but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *DeepTreebut is not nil && this == nil")
+		return fmt.Errorf("that is type *DeepTree but is not nil && this == nil")
 	}
 	if !this.Down.Equal(that1.Down) {
 		return fmt.Errorf("Down this(%v) Not Equal that(%v)", this.Down, that1.Down)
@@ -7820,7 +7820,7 @@ func (this *ADeepBranch) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *ADeepBranch but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ADeepBranchbut is not nil && this == nil")
+		return fmt.Errorf("that is type *ADeepBranch but is not nil && this == nil")
 	}
 	if !this.Down.Equal(&that1.Down) {
 		return fmt.Errorf("Down this(%v) Not Equal that(%v)", this.Down, that1.Down)
@@ -7876,7 +7876,7 @@ func (this *AndDeepBranch) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AndDeepBranch but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AndDeepBranchbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AndDeepBranch but is not nil && this == nil")
 	}
 	if !this.Left.Equal(&that1.Left) {
 		return fmt.Errorf("Left this(%v) Not Equal that(%v)", this.Left, that1.Left)
@@ -7938,7 +7938,7 @@ func (this *DeepLeaf) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *DeepLeaf but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *DeepLeafbut is not nil && this == nil")
+		return fmt.Errorf("that is type *DeepLeaf but is not nil && this == nil")
 	}
 	if !this.Tree.Equal(&that1.Tree) {
 		return fmt.Errorf("Tree this(%v) Not Equal that(%v)", this.Tree, that1.Tree)
@@ -7994,7 +7994,7 @@ func (this *Nil) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Nil but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Nilbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Nil but is not nil && this == nil")
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
@@ -8044,7 +8044,7 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidOptEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidOptEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidOptEnum but is not nil && this == nil")
 	}
 	if this.Field1 != that1.Field1 {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
@@ -8100,7 +8100,7 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptEnum but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8168,7 +8168,7 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NidRepEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NidRepEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NidRepEnum but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -8234,7 +8234,7 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinRepEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinRepEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinRepEnum but is not nil && this == nil")
 	}
 	if len(this.Field1) != len(that1.Field1) {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", len(this.Field1), len(that1.Field1))
@@ -8300,7 +8300,7 @@ func (this *NinOptEnumDefault) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptEnumDefault but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptEnumDefaultbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptEnumDefault but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8368,7 +8368,7 @@ func (this *AnotherNinOptEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AnotherNinOptEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AnotherNinOptEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AnotherNinOptEnum but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8436,7 +8436,7 @@ func (this *AnotherNinOptEnumDefault) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *AnotherNinOptEnumDefault but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *AnotherNinOptEnumDefaultbut is not nil && this == nil")
+		return fmt.Errorf("that is type *AnotherNinOptEnumDefault but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8504,7 +8504,7 @@ func (this *Timer) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Timer but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Timerbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Timer but is not nil && this == nil")
 	}
 	if this.Time1 != that1.Time1 {
 		return fmt.Errorf("Time1 this(%v) Not Equal that(%v)", this.Time1, that1.Time1)
@@ -8572,7 +8572,7 @@ func (this *MyExtendable) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *MyExtendable but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *MyExtendablebut is not nil && this == nil")
+		return fmt.Errorf("that is type *MyExtendable but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8668,7 +8668,7 @@ func (this *OtherExtenable) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *OtherExtenable but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *OtherExtenablebut is not nil && this == nil")
+		return fmt.Errorf("that is type *OtherExtenable but is not nil && this == nil")
 	}
 	if this.Field2 != nil && that1.Field2 != nil {
 		if *this.Field2 != *that1.Field2 {
@@ -8788,7 +8788,7 @@ func (this *NestedDefinition) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NestedDefinition but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NestedDefinitionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NestedDefinition but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -8886,7 +8886,7 @@ func (this *NestedDefinition_NestedMessage) VerboseEqual(that interface{}) error
 		}
 		return fmt.Errorf("that is type *NestedDefinition_NestedMessage but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NestedDefinition_NestedMessagebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NestedDefinition_NestedMessage but is not nil && this == nil")
 	}
 	if this.NestedField1 != nil && that1.NestedField1 != nil {
 		if *this.NestedField1 != *that1.NestedField1 {
@@ -8960,7 +8960,7 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) VerboseEqual(that in
 		}
 		return fmt.Errorf("that is type *NestedDefinition_NestedMessage_NestedNestedMsg but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NestedDefinition_NestedMessage_NestedNestedMsgbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NestedDefinition_NestedMessage_NestedNestedMsg but is not nil && this == nil")
 	}
 	if this.NestedNestedField1 != nil && that1.NestedNestedField1 != nil {
 		if *this.NestedNestedField1 != *that1.NestedNestedField1 {
@@ -9028,7 +9028,7 @@ func (this *NestedScope) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NestedScope but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NestedScopebut is not nil && this == nil")
+		return fmt.Errorf("that is type *NestedScope but is not nil && this == nil")
 	}
 	if !this.A.Equal(that1.A) {
 		return fmt.Errorf("A this(%v) Not Equal that(%v)", this.A, that1.A)
@@ -9108,7 +9108,7 @@ func (this *NinOptNativeDefault) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NinOptNativeDefault but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NinOptNativeDefaultbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NinOptNativeDefault but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -9416,7 +9416,7 @@ func (this *CustomContainer) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomContainer but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomContainerbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomContainer but is not nil && this == nil")
 	}
 	if !this.CustomStruct.Equal(&that1.CustomStruct) {
 		return fmt.Errorf("CustomStruct this(%v) Not Equal that(%v)", this.CustomStruct, that1.CustomStruct)
@@ -9472,7 +9472,7 @@ func (this *CustomNameNidOptNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameNidOptNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameNidOptNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameNidOptNative but is not nil && this == nil")
 	}
 	if this.FieldA != that1.FieldA {
 		return fmt.Errorf("FieldA this(%v) Not Equal that(%v)", this.FieldA, that1.FieldA)
@@ -9612,7 +9612,7 @@ func (this *CustomNameNinOptNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameNinOptNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameNinOptNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameNinOptNative but is not nil && this == nil")
 	}
 	if this.FieldA != nil && that1.FieldA != nil {
 		if *this.FieldA != *that1.FieldA {
@@ -9920,7 +9920,7 @@ func (this *CustomNameNinRepNative) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameNinRepNative but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameNinRepNativebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameNinRepNative but is not nil && this == nil")
 	}
 	if len(this.FieldA) != len(that1.FieldA) {
 		return fmt.Errorf("FieldA this(%v) Not Equal that(%v)", len(this.FieldA), len(that1.FieldA))
@@ -10210,7 +10210,7 @@ func (this *CustomNameNinStruct) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameNinStruct but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameNinStructbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameNinStruct but is not nil && this == nil")
 	}
 	if this.FieldA != nil && that1.FieldA != nil {
 		if *this.FieldA != *that1.FieldA {
@@ -10402,7 +10402,7 @@ func (this *CustomNameCustomType) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameCustomType but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameCustomTypebut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameCustomType but is not nil && this == nil")
 	}
 	if that1.FieldA == nil {
 		if this.FieldA != nil {
@@ -10512,7 +10512,7 @@ func (this *CustomNameNinEmbeddedStructUnion) VerboseEqual(that interface{}) err
 		}
 		return fmt.Errorf("that is type *CustomNameNinEmbeddedStructUnion but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameNinEmbeddedStructUnionbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameNinEmbeddedStructUnion but is not nil && this == nil")
 	}
 	if !this.NidOptNative.Equal(that1.NidOptNative) {
 		return fmt.Errorf("NidOptNative this(%v) Not Equal that(%v)", this.NidOptNative, that1.NidOptNative)
@@ -10592,7 +10592,7 @@ func (this *CustomNameEnum) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *CustomNameEnum but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *CustomNameEnumbut is not nil && this == nil")
+		return fmt.Errorf("that is type *CustomNameEnum but is not nil && this == nil")
 	}
 	if this.FieldA != nil && that1.FieldA != nil {
 		if *this.FieldA != *that1.FieldA {
@@ -10676,7 +10676,7 @@ func (this *NoExtensionsMap) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *NoExtensionsMap but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *NoExtensionsMapbut is not nil && this == nil")
+		return fmt.Errorf("that is type *NoExtensionsMap but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -10750,7 +10750,7 @@ func (this *Unrecognized) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Unrecognized but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Unrecognizedbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Unrecognized but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -10812,7 +10812,7 @@ func (this *UnrecognizedWithInner) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *UnrecognizedWithInner but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *UnrecognizedWithInnerbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnrecognizedWithInner but is not nil && this == nil")
 	}
 	if len(this.Embedded) != len(that1.Embedded) {
 		return fmt.Errorf("Embedded this(%v) Not Equal that(%v)", len(this.Embedded), len(that1.Embedded))
@@ -10896,7 +10896,7 @@ func (this *UnrecognizedWithInner_Inner) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *UnrecognizedWithInner_Inner but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *UnrecognizedWithInner_Innerbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnrecognizedWithInner_Inner but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
@@ -10958,7 +10958,7 @@ func (this *UnrecognizedWithEmbed) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *UnrecognizedWithEmbed but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *UnrecognizedWithEmbedbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnrecognizedWithEmbed but is not nil && this == nil")
 	}
 	if !this.UnrecognizedWithEmbed_Embedded.Equal(&that1.UnrecognizedWithEmbed_Embedded) {
 		return fmt.Errorf("UnrecognizedWithEmbed_Embedded this(%v) Not Equal that(%v)", this.UnrecognizedWithEmbed_Embedded, that1.UnrecognizedWithEmbed_Embedded)
@@ -11032,7 +11032,7 @@ func (this *UnrecognizedWithEmbed_Embedded) VerboseEqual(that interface{}) error
 		}
 		return fmt.Errorf("that is type *UnrecognizedWithEmbed_Embedded but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *UnrecognizedWithEmbed_Embeddedbut is not nil && this == nil")
+		return fmt.Errorf("that is type *UnrecognizedWithEmbed_Embedded but is not nil && this == nil")
 	}
 	if this.Field1 != nil && that1.Field1 != nil {
 		if *this.Field1 != *that1.Field1 {
