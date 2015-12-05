@@ -111,6 +111,16 @@ func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetValidator(field *google_protobuf.FieldDescriptorProto) *FieldValidator {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Validator)
+		if err == nil && v.(*FieldValidator) != nil {
+			return (v.(*FieldValidator))
+		}
+	}
+	return nil
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {

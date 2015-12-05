@@ -9,6 +9,7 @@ It is generated from these files:
 	gogo.proto
 
 It has these top-level messages:
+	FieldValidator
 */
 package gogoproto
 
@@ -21,6 +22,46 @@ import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+type FieldValidator struct {
+	Regex            *string `protobuf:"bytes,1,opt,name=regex" json:"regex,omitempty"`
+	IntGt            *int64  `protobuf:"varint,2,opt,name=int_gt" json:"int_gt,omitempty"`
+	IntLt            *int64  `protobuf:"varint,3,opt,name=int_lt" json:"int_lt,omitempty"`
+	MsgExists        *bool   `protobuf:"varint,4,opt,name=msg_exists" json:"msg_exists,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *FieldValidator) Reset()         { *m = FieldValidator{} }
+func (m *FieldValidator) String() string { return proto.CompactTextString(m) }
+func (*FieldValidator) ProtoMessage()    {}
+
+func (m *FieldValidator) GetRegex() string {
+	if m != nil && m.Regex != nil {
+		return *m.Regex
+	}
+	return ""
+}
+
+func (m *FieldValidator) GetIntGt() int64 {
+	if m != nil && m.IntGt != nil {
+		return *m.IntGt
+	}
+	return 0
+}
+
+func (m *FieldValidator) GetIntLt() int64 {
+	if m != nil && m.IntLt != nil {
+		return *m.IntLt
+	}
+	return 0
+}
+
+func (m *FieldValidator) GetMsgExists() bool {
+	if m != nil && m.MsgExists != nil {
+		return *m.MsgExists
+	}
+	return false
+}
 
 var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
@@ -438,6 +479,14 @@ var E_Casttype = &proto.ExtensionDesc{
 	Tag:           "bytes,65007,opt,name=casttype",
 }
 
+var E_Validator = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*FieldValidator)(nil),
+	Field:         65008,
+	Name:          "gogoproto.validator",
+	Tag:           "bytes,65008,opt,name=validator",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -491,4 +540,5 @@ func init() {
 	proto.RegisterExtension(E_Jsontag)
 	proto.RegisterExtension(E_Moretags)
 	proto.RegisterExtension(E_Casttype)
+	proto.RegisterExtension(E_Validator)
 }

@@ -103,5 +103,12 @@ extend google.protobuf.FieldOptions {
   optional string jsontag = 65005;
   optional string moretags = 65006;
   optional string casttype = 65007;
+	optional FieldValidator validator = 65008;
 }
 
+message FieldValidator {
+	optional string regex = 1;
+	optional int64 int_gt = 2;
+	optional int64 int_lt = 3;
+	optional bool msg_exists = 4;
+}
