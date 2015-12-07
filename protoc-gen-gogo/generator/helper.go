@@ -220,6 +220,18 @@ func IsMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescript
 	return msg.GetOptions().GetMapEntry()
 }
 
+func (g *Generator) IsMap(field *descriptor.FieldDescriptorProto) bool {
+	if !field.IsMessage() {
+		return false
+	}
+	byName := g.ObjectNamed(field.GetTypeName())
+	desc, ok := byName.(*Descriptor)
+	if byName == nil || !ok || !desc.GetOptions().GetMapEntry() {
+		return false
+	}
+	return true
+}
+
 func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
 	if !gogoproto.IsCastKey(field) {
 		return keyField

@@ -218,7 +218,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 	goTyp, _ := p.GoType(message, field)
 	fieldname := p.GetOneOfFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
-	if generator.IsMap(file.FileDescriptorProto, field) {
+	if p.IsMap(field) {
 		m := p.GoMapType(nil, field)
 		keygoTyp, _ := p.GoType(nil, m.KeyField)
 		keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
@@ -426,8 +426,17 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 }
 
 func (p *plugin) hasLoop(field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor) *generator.Descriptor {
-	if field.IsMessage() || p.IsGroup(field) {
-		fieldMessage := p.ObjectNamed(field.GetTypeName()).(*generator.Descriptor)
+	if field.IsMessage() || p.IsGroup(field) || p.IsMap(field) {
+		var fieldMessage *generator.Descriptor
+		if p.IsMap(field) {
+			m := p.GoMapType(nil, field)
+			if !m.ValueField.IsMessage() {
+				return nil
+			}
+			fieldMessage = p.ObjectNamed(m.ValueField.GetTypeName()).(*generator.Descriptor)
+		} else {
+			fieldMessage = p.ObjectNamed(field.GetTypeName()).(*generator.Descriptor)
+		}
 		fieldTypeName := generator.CamelCaseSlice(fieldMessage.TypeName())
 		for _, message := range visited {
 			messageTypeName := generator.CamelCaseSlice(message.TypeName())
@@ -489,23 +498,23 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
+		loopLevels := make([]int, len(message.Field))
+		maxLoopLevel := 0
+		for i, field := range message.Field {
+			loopLevels[i] = p.loops(field, message)
+			if loopLevels[i] > maxLoopLevel {
+				maxLoopLevel = loopLevels[i]
+			}
+		}
+		ranTotal := 0
+		for i := range loopLevels {
+			ranTotal += int(math.Pow10(maxLoopLevel - loopLevels[i]))
+		}
 		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
 		if gogoproto.IsUnion(message.File(), message.DescriptorProto) && len(message.Field) > 0 {
-			loopLevels := make([]int, len(message.Field))
-			maxLoopLevel := 0
-			for i, field := range message.Field {
-				loopLevels[i] = p.loops(field, message)
-				if loopLevels[i] > maxLoopLevel {
-					maxLoopLevel = loopLevels[i]
-				}
-			}
-			ran := 0
-			for i := range loopLevels {
-				ran += int(math.Pow10(maxLoopLevel - loopLevels[i]))
-			}
-			p.P(`fieldNum := r.Intn(`, fmt.Sprintf("%d", ran), `)`)
+			p.P(`fieldNum := r.Intn(`, fmt.Sprintf("%d", ranTotal), `)`)
 			p.P(`switch fieldNum {`)
 			k := 0
 			for i, field := range message.Field {
@@ -524,7 +533,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		} else {
 			var maxFieldNumber int32
 			oneofs := make(map[string]struct{})
-			for _, field := range message.Field {
+			for fieldIndex, field := range message.Field {
 				if field.GetNumber() > maxFieldNumber {
 					maxFieldNumber = field.GetNumber()
 				}
@@ -533,7 +542,11 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
 						p.GenerateField(file, message, field)
 					} else {
-						p.P(`if r.Intn(10) != 0 {`)
+						if loopLevels[fieldIndex] > 0 {
+							p.P(`if r.Intn(10) == 0 {`)
+						} else {
+							p.P(`if r.Intn(10) != 0 {`)
+						}
 						p.In()
 						p.GenerateField(file, message, field)
 						p.Out()
@@ -553,6 +566,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 							fieldNumbers = append(fieldNumbers, f.GetNumber())
 						}
 					}
+
 					p.P(`oneofNumber_`, fieldname, ` := `, fmt.Sprintf("%#v", fieldNumbers), `[r.Intn(`, strconv.Itoa(len(fieldNumbers)), `)]`)
 					p.P(`switch oneofNumber_`, fieldname, ` {`)
 					for _, f := range message.Field {

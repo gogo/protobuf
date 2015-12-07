@@ -1056,7 +1056,7 @@ func (this *Castaway) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Castaway but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Castawaybut is not nil && this == nil")
+		return fmt.Errorf("that is type *Castaway but is not nil && this == nil")
 	}
 	if len(this.CastMapValueMessage) != len(that1.CastMapValueMessage) {
 		return fmt.Errorf("CastMapValueMessage this(%v) Not Equal that(%v)", len(this.CastMapValueMessage), len(that1.CastMapValueMessage))
@@ -1146,7 +1146,7 @@ func (this *Wilson) VerboseEqual(that interface{}) error {
 		}
 		return fmt.Errorf("that is type *Wilson but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *Wilsonbut is not nil && this == nil")
+		return fmt.Errorf("that is type *Wilson but is not nil && this == nil")
 	}
 	if this.Int64 != nil && that1.Int64 != nil {
 		if *this.Int64 != *that1.Int64 {

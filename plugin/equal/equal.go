@@ -367,7 +367,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 		if ctype {
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 		} else {
-			if generator.IsMap(file.FileDescriptorProto, field) {
+			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
 				valuegoTyp, _ := p.GoType(nil, m.ValueField)
 				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
@@ -375,10 +375,9 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 
 				mapValue := m.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
-					switch {
-					case nullable && valuegoTyp == valuegoAliasTyp:
+					if nullable && valuegoTyp == valuegoAliasTyp {
 						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
-					default:
+					} else {
 						// Equal() has a pointer receiver, but map value is a value type
 						a := `this.` + fieldname + `[i]`
 						b := `that1.` + fieldname + `[i]`

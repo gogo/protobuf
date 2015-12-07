@@ -1,4 +1,6 @@
-// Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
+// Extensions for Protocol Buffers to create more go like structures.
+//
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
@@ -24,41 +26,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+package castvalue
 
-package castvalue;
-
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.goproto_stringer_all) = false;
-option (gogoproto.goproto_enum_prefix_all) = false;
-option (gogoproto.goproto_getters_all) = false;
-
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.stringer_all) = true;
-option (gogoproto.gostring_all) = true;
-option (gogoproto.face_all) = true;
-option (gogoproto.description_all) = true;
-
-option (gogoproto.testgen_all) = true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = true;
-
-option (gogoproto.goproto_enum_stringer_all) = false;
-option (gogoproto.enum_stringer_all) = true;
-
-option (gogoproto.unsafe_marshaler_all) = false;
-option (gogoproto.unsafe_unmarshaler_all) = false;
-
-message Castaway {
-  map<int32,Wilson> CastMapValueMessage = 1 [(gogoproto.castvalue) = "MyWilson", (gogoproto.nullable) = false];
-  map<int32,Wilson> CastMapValueMessageNullable = 2 [(gogoproto.castvalue) = "MyWilson"];
-}
-
-message Wilson {
-  optional int64 Int64 = 1;
-}
+type MyWilson Wilson
