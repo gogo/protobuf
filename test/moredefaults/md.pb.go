@@ -115,7 +115,12 @@ func (this *MoreDefaultsB) Equal(that interface{}) bool {
 
 	that1, ok := that.(*MoreDefaultsB)
 	if !ok {
-		return false
+		that2, ok := that.(MoreDefaultsB)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -149,7 +154,12 @@ func (this *MoreDefaultsA) Equal(that interface{}) bool {
 
 	that1, ok := that.(*MoreDefaultsA)
 	if !ok {
-		return false
+		that2, ok := that.(MoreDefaultsA)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

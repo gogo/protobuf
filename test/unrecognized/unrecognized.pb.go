@@ -1277,7 +1277,12 @@ func (this *A) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*A)
 	if !ok {
-		return fmt.Errorf("that is not of type *A")
+		that2, ok := that.(A)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *A")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1316,7 +1321,12 @@ func (this *A) Equal(that interface{}) bool {
 
 	that1, ok := that.(*A)
 	if !ok {
-		return false
+		that2, ok := that.(A)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1355,7 +1365,12 @@ func (this *B) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*B)
 	if !ok {
-		return fmt.Errorf("that is not of type *B")
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *B")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1389,7 +1404,12 @@ func (this *B) Equal(that interface{}) bool {
 
 	that1, ok := that.(*B)
 	if !ok {
-		return false
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1423,7 +1443,12 @@ func (this *D) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*D)
 	if !ok {
-		return fmt.Errorf("that is not of type *D")
+		that2, ok := that.(D)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *D")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1457,7 +1482,12 @@ func (this *D) Equal(that interface{}) bool {
 
 	that1, ok := that.(*D)
 	if !ok {
-		return false
+		that2, ok := that.(D)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1491,7 +1521,12 @@ func (this *C) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*C)
 	if !ok {
-		return fmt.Errorf("that is not of type *C")
+		that2, ok := that.(C)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *C")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1568,7 +1603,12 @@ func (this *C) Equal(that interface{}) bool {
 
 	that1, ok := that.(*C)
 	if !ok {
-		return false
+		that2, ok := that.(C)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1645,7 +1685,12 @@ func (this *U) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*U)
 	if !ok {
-		return fmt.Errorf("that is not of type *U")
+		that2, ok := that.(U)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *U")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1684,7 +1729,12 @@ func (this *U) Equal(that interface{}) bool {
 
 	that1, ok := that.(*U)
 	if !ok {
-		return false
+		that2, ok := that.(U)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1723,7 +1773,12 @@ func (this *UnoM) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*UnoM)
 	if !ok {
-		return fmt.Errorf("that is not of type *UnoM")
+		that2, ok := that.(UnoM)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *UnoM")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1762,7 +1817,12 @@ func (this *UnoM) Equal(that interface{}) bool {
 
 	that1, ok := that.(*UnoM)
 	if !ok {
-		return false
+		that2, ok := that.(UnoM)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1801,7 +1861,12 @@ func (this *OldA) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OldA)
 	if !ok {
-		return fmt.Errorf("that is not of type *OldA")
+		that2, ok := that.(OldA)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OldA")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1840,7 +1905,12 @@ func (this *OldA) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OldA)
 	if !ok {
-		return false
+		that2, ok := that.(OldA)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1879,7 +1949,12 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OldB)
 	if !ok {
-		return fmt.Errorf("that is not of type *OldB")
+		that2, ok := that.(OldB)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OldB")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1910,7 +1985,12 @@ func (this *OldB) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OldB)
 	if !ok {
-		return false
+		that2, ok := that.(OldB)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1941,7 +2021,12 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OldC)
 	if !ok {
-		return fmt.Errorf("that is not of type *OldC")
+		that2, ok := that.(OldC)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OldC")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2010,7 +2095,12 @@ func (this *OldC) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OldC)
 	if !ok {
-		return false
+		that2, ok := that.(OldC)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2079,7 +2169,12 @@ func (this *OldU) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OldU)
 	if !ok {
-		return fmt.Errorf("that is not of type *OldU")
+		that2, ok := that.(OldU)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OldU")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2121,7 +2216,12 @@ func (this *OldU) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OldU)
 	if !ok {
-		return false
+		that2, ok := that.(OldU)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2163,7 +2263,12 @@ func (this *OldUnoM) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OldUnoM)
 	if !ok {
-		return fmt.Errorf("that is not of type *OldUnoM")
+		that2, ok := that.(OldUnoM)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OldUnoM")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2205,7 +2310,12 @@ func (this *OldUnoM) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OldUnoM)
 	if !ok {
-		return false
+		that2, ok := that.(OldUnoM)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

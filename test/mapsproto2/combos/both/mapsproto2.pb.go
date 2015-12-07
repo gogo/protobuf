@@ -1387,7 +1387,12 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*FloatingPoint)
 	if !ok {
-		return fmt.Errorf("that is not of type *FloatingPoint")
+		that2, ok := that.(FloatingPoint)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *FloatingPoint")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1421,7 +1426,12 @@ func (this *FloatingPoint) Equal(that interface{}) bool {
 
 	that1, ok := that.(*FloatingPoint)
 	if !ok {
-		return false
+		that2, ok := that.(FloatingPoint)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1455,7 +1465,12 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllMaps)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllMaps")
+		that2, ok := that.(AllMaps)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllMaps")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1616,7 +1631,12 @@ func (this *AllMaps) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllMaps)
 	if !ok {
-		return false
+		that2, ok := that.(AllMaps)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

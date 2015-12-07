@@ -145,7 +145,12 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidOptEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidOptEnum")
+		that2, ok := that.(NidOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidOptEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -173,7 +178,12 @@ func (this *NidOptEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidOptEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NidOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -201,7 +211,12 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptEnum")
+		that2, ok := that.(NinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -235,7 +250,12 @@ func (this *NinOptEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -269,7 +289,12 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepEnum")
+		that2, ok := that.(NidRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -302,7 +327,12 @@ func (this *NidRepEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -335,7 +365,12 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepEnum")
+		that2, ok := that.(NinRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -368,7 +403,12 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

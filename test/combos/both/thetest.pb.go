@@ -4062,7 +4062,12 @@ func (this *NidOptNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidOptNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidOptNative")
+		that2, ok := that.(NidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidOptNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4132,7 +4137,12 @@ func (this *NidOptNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidOptNative)
 	if !ok {
-		return false
+		that2, ok := that.(NidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4202,7 +4212,12 @@ func (this *NinOptNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptNative")
+		that2, ok := that.(NinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4356,7 +4371,12 @@ func (this *NinOptNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptNative)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4510,7 +4530,12 @@ func (this *NidRepNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepNative")
+		that2, ok := that.(NidRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4655,7 +4680,12 @@ func (this *NidRepNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepNative)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4800,7 +4830,12 @@ func (this *NinRepNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepNative")
+		that2, ok := that.(NinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -4945,7 +4980,12 @@ func (this *NinRepNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepNative)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5090,7 +5130,12 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepPackedNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepPackedNative")
+		that2, ok := that.(NidRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepPackedNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5219,7 +5264,12 @@ func (this *NidRepPackedNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepPackedNative)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5348,7 +5398,12 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepPackedNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepPackedNative")
+		that2, ok := that.(NinRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepPackedNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5477,7 +5532,12 @@ func (this *NinRepPackedNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepPackedNative)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5606,7 +5666,12 @@ func (this *NidOptStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidOptStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidOptStruct")
+		that2, ok := that.(NidOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidOptStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5661,7 +5726,12 @@ func (this *NidOptStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidOptStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NidOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5716,7 +5786,12 @@ func (this *NinOptStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptStruct")
+		that2, ok := that.(NinOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5807,7 +5882,12 @@ func (this *NinOptStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -5898,7 +5978,12 @@ func (this *NidRepStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepStruct")
+		that2, ok := that.(NidRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6003,7 +6088,12 @@ func (this *NidRepStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6108,7 +6198,12 @@ func (this *NinRepStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepStruct")
+		that2, ok := that.(NinRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6213,7 +6308,12 @@ func (this *NinRepStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6318,7 +6418,12 @@ func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidEmbeddedStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidEmbeddedStruct")
+		that2, ok := that.(NidEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidEmbeddedStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6352,7 +6457,12 @@ func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidEmbeddedStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NidEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6386,7 +6496,12 @@ func (this *NinEmbeddedStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinEmbeddedStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinEmbeddedStruct")
+		that2, ok := that.(NinEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinEmbeddedStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6426,7 +6541,12 @@ func (this *NinEmbeddedStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinEmbeddedStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NinEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6466,7 +6586,12 @@ func (this *NidNestedStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidNestedStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidNestedStruct")
+		that2, ok := that.(NidNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidNestedStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6502,7 +6627,12 @@ func (this *NidNestedStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidNestedStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NidNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6538,7 +6668,12 @@ func (this *NinNestedStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinNestedStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinNestedStruct")
+		that2, ok := that.(NinNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinNestedStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6574,7 +6709,12 @@ func (this *NinNestedStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinNestedStruct)
 	if !ok {
-		return false
+		that2, ok := that.(NinNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6610,7 +6750,12 @@ func (this *NidOptCustom) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidOptCustom)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidOptCustom")
+		that2, ok := that.(NidOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidOptCustom")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6641,7 +6786,12 @@ func (this *NidOptCustom) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidOptCustom)
 	if !ok {
-		return false
+		that2, ok := that.(NidOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6672,7 +6822,12 @@ func (this *CustomDash) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomDash)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomDash")
+		that2, ok := that.(CustomDash)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomDash")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6704,7 +6859,12 @@ func (this *CustomDash) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomDash)
 	if !ok {
-		return false
+		that2, ok := that.(CustomDash)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6736,7 +6896,12 @@ func (this *NinOptCustom) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptCustom)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptCustom")
+		that2, ok := that.(NinOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptCustom")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6775,7 +6940,12 @@ func (this *NinOptCustom) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptCustom)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6814,7 +6984,12 @@ func (this *NidRepCustom) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepCustom)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepCustom")
+		that2, ok := that.(NidRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepCustom")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6855,7 +7030,12 @@ func (this *NidRepCustom) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepCustom)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6896,7 +7076,12 @@ func (this *NinRepCustom) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepCustom)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepCustom")
+		that2, ok := that.(NinRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepCustom")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6937,7 +7122,12 @@ func (this *NinRepCustom) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepCustom)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -6978,7 +7168,12 @@ func (this *NinOptNativeUnion) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptNativeUnion)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptNativeUnion")
+		that2, ok := that.(NinOptNativeUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptNativeUnion")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7078,7 +7273,12 @@ func (this *NinOptNativeUnion) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptNativeUnion)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptNativeUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7178,7 +7378,12 @@ func (this *NinOptStructUnion) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptStructUnion)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptStructUnion")
+		that2, ok := that.(NinOptStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptStructUnion")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7266,7 +7471,12 @@ func (this *NinOptStructUnion) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptStructUnion)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7354,7 +7564,12 @@ func (this *NinEmbeddedStructUnion) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinEmbeddedStructUnion)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinEmbeddedStructUnion")
+		that2, ok := that.(NinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinEmbeddedStructUnion")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7394,7 +7609,12 @@ func (this *NinEmbeddedStructUnion) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinEmbeddedStructUnion)
 	if !ok {
-		return false
+		that2, ok := that.(NinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7434,7 +7654,12 @@ func (this *NinNestedStructUnion) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinNestedStructUnion)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinNestedStructUnion")
+		that2, ok := that.(NinNestedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinNestedStructUnion")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7468,7 +7693,12 @@ func (this *NinNestedStructUnion) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinNestedStructUnion)
 	if !ok {
-		return false
+		that2, ok := that.(NinNestedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7502,7 +7732,12 @@ func (this *Tree) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Tree)
 	if !ok {
-		return fmt.Errorf("that is not of type *Tree")
+		that2, ok := that.(Tree)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Tree")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7536,7 +7771,12 @@ func (this *Tree) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Tree)
 	if !ok {
-		return false
+		that2, ok := that.(Tree)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7570,7 +7810,12 @@ func (this *OrBranch) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OrBranch)
 	if !ok {
-		return fmt.Errorf("that is not of type *OrBranch")
+		that2, ok := that.(OrBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OrBranch")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7601,7 +7846,12 @@ func (this *OrBranch) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OrBranch)
 	if !ok {
-		return false
+		that2, ok := that.(OrBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7632,7 +7882,12 @@ func (this *AndBranch) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AndBranch)
 	if !ok {
-		return fmt.Errorf("that is not of type *AndBranch")
+		that2, ok := that.(AndBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AndBranch")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7663,7 +7918,12 @@ func (this *AndBranch) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AndBranch)
 	if !ok {
-		return false
+		that2, ok := that.(AndBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7694,7 +7954,12 @@ func (this *Leaf) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Leaf)
 	if !ok {
-		return fmt.Errorf("that is not of type *Leaf")
+		that2, ok := that.(Leaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Leaf")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7725,7 +7990,12 @@ func (this *Leaf) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Leaf)
 	if !ok {
-		return false
+		that2, ok := that.(Leaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7756,7 +8026,12 @@ func (this *DeepTree) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*DeepTree)
 	if !ok {
-		return fmt.Errorf("that is not of type *DeepTree")
+		that2, ok := that.(DeepTree)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *DeepTree")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7790,7 +8065,12 @@ func (this *DeepTree) Equal(that interface{}) bool {
 
 	that1, ok := that.(*DeepTree)
 	if !ok {
-		return false
+		that2, ok := that.(DeepTree)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7824,7 +8104,12 @@ func (this *ADeepBranch) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*ADeepBranch)
 	if !ok {
-		return fmt.Errorf("that is not of type *ADeepBranch")
+		that2, ok := that.(ADeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *ADeepBranch")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7852,7 +8137,12 @@ func (this *ADeepBranch) Equal(that interface{}) bool {
 
 	that1, ok := that.(*ADeepBranch)
 	if !ok {
-		return false
+		that2, ok := that.(ADeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7880,7 +8170,12 @@ func (this *AndDeepBranch) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AndDeepBranch)
 	if !ok {
-		return fmt.Errorf("that is not of type *AndDeepBranch")
+		that2, ok := that.(AndDeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AndDeepBranch")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7911,7 +8206,12 @@ func (this *AndDeepBranch) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AndDeepBranch)
 	if !ok {
-		return false
+		that2, ok := that.(AndDeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7942,7 +8242,12 @@ func (this *DeepLeaf) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*DeepLeaf)
 	if !ok {
-		return fmt.Errorf("that is not of type *DeepLeaf")
+		that2, ok := that.(DeepLeaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *DeepLeaf")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7970,7 +8275,12 @@ func (this *DeepLeaf) Equal(that interface{}) bool {
 
 	that1, ok := that.(*DeepLeaf)
 	if !ok {
-		return false
+		that2, ok := that.(DeepLeaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -7998,7 +8308,12 @@ func (this *Nil) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Nil)
 	if !ok {
-		return fmt.Errorf("that is not of type *Nil")
+		that2, ok := that.(Nil)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Nil")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8023,7 +8338,12 @@ func (this *Nil) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Nil)
 	if !ok {
-		return false
+		that2, ok := that.(Nil)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8048,7 +8368,12 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidOptEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidOptEnum")
+		that2, ok := that.(NidOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidOptEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8076,7 +8401,12 @@ func (this *NidOptEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidOptEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NidOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8104,7 +8434,12 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptEnum")
+		that2, ok := that.(NinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8138,7 +8473,12 @@ func (this *NinOptEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8172,7 +8512,12 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NidRepEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NidRepEnum")
+		that2, ok := that.(NidRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NidRepEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8205,7 +8550,12 @@ func (this *NidRepEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NidRepEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NidRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8238,7 +8588,12 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinRepEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinRepEnum")
+		that2, ok := that.(NinRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinRepEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8271,7 +8626,12 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinRepEnum)
 	if !ok {
-		return false
+		that2, ok := that.(NinRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8304,7 +8664,12 @@ func (this *NinOptEnumDefault) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptEnumDefault)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptEnumDefault")
+		that2, ok := that.(NinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptEnumDefault")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8338,7 +8703,12 @@ func (this *NinOptEnumDefault) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptEnumDefault)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8372,7 +8742,12 @@ func (this *AnotherNinOptEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AnotherNinOptEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *AnotherNinOptEnum")
+		that2, ok := that.(AnotherNinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AnotherNinOptEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8406,7 +8781,12 @@ func (this *AnotherNinOptEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AnotherNinOptEnum)
 	if !ok {
-		return false
+		that2, ok := that.(AnotherNinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8440,7 +8820,12 @@ func (this *AnotherNinOptEnumDefault) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AnotherNinOptEnumDefault)
 	if !ok {
-		return fmt.Errorf("that is not of type *AnotherNinOptEnumDefault")
+		that2, ok := that.(AnotherNinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AnotherNinOptEnumDefault")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8474,7 +8859,12 @@ func (this *AnotherNinOptEnumDefault) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AnotherNinOptEnumDefault)
 	if !ok {
-		return false
+		that2, ok := that.(AnotherNinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8508,7 +8898,12 @@ func (this *Timer) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Timer)
 	if !ok {
-		return fmt.Errorf("that is not of type *Timer")
+		that2, ok := that.(Timer)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Timer")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8542,7 +8937,12 @@ func (this *Timer) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Timer)
 	if !ok {
-		return false
+		that2, ok := that.(Timer)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8576,7 +8976,12 @@ func (this *MyExtendable) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*MyExtendable)
 	if !ok {
-		return fmt.Errorf("that is not of type *MyExtendable")
+		that2, ok := that.(MyExtendable)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *MyExtendable")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8624,7 +9029,12 @@ func (this *MyExtendable) Equal(that interface{}) bool {
 
 	that1, ok := that.(*MyExtendable)
 	if !ok {
-		return false
+		that2, ok := that.(MyExtendable)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8672,7 +9082,12 @@ func (this *OtherExtenable) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*OtherExtenable)
 	if !ok {
-		return fmt.Errorf("that is not of type *OtherExtenable")
+		that2, ok := that.(OtherExtenable)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OtherExtenable")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8732,7 +9147,12 @@ func (this *OtherExtenable) Equal(that interface{}) bool {
 
 	that1, ok := that.(*OtherExtenable)
 	if !ok {
-		return false
+		that2, ok := that.(OtherExtenable)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8792,7 +9212,12 @@ func (this *NestedDefinition) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NestedDefinition)
 	if !ok {
-		return fmt.Errorf("that is not of type *NestedDefinition")
+		that2, ok := that.(NestedDefinition)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NestedDefinition")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8841,7 +9266,12 @@ func (this *NestedDefinition) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NestedDefinition)
 	if !ok {
-		return false
+		that2, ok := that.(NestedDefinition)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8890,7 +9320,12 @@ func (this *NestedDefinition_NestedMessage) VerboseEqual(that interface{}) error
 
 	that1, ok := that.(*NestedDefinition_NestedMessage)
 	if !ok {
-		return fmt.Errorf("that is not of type *NestedDefinition_NestedMessage")
+		that2, ok := that.(NestedDefinition_NestedMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NestedDefinition_NestedMessage")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8927,7 +9362,12 @@ func (this *NestedDefinition_NestedMessage) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NestedDefinition_NestedMessage)
 	if !ok {
-		return false
+		that2, ok := that.(NestedDefinition_NestedMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8964,7 +9404,12 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) VerboseEqual(that in
 
 	that1, ok := that.(*NestedDefinition_NestedMessage_NestedNestedMsg)
 	if !ok {
-		return fmt.Errorf("that is not of type *NestedDefinition_NestedMessage_NestedNestedMsg")
+		that2, ok := that.(NestedDefinition_NestedMessage_NestedNestedMsg)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NestedDefinition_NestedMessage_NestedNestedMsg")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -8998,7 +9443,12 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Equal(that interface
 
 	that1, ok := that.(*NestedDefinition_NestedMessage_NestedNestedMsg)
 	if !ok {
-		return false
+		that2, ok := that.(NestedDefinition_NestedMessage_NestedNestedMsg)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9032,7 +9482,12 @@ func (this *NestedScope) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NestedScope)
 	if !ok {
-		return fmt.Errorf("that is not of type *NestedScope")
+		that2, ok := that.(NestedScope)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NestedScope")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9072,7 +9527,12 @@ func (this *NestedScope) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NestedScope)
 	if !ok {
-		return false
+		that2, ok := that.(NestedScope)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9112,7 +9572,12 @@ func (this *NinOptNativeDefault) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NinOptNativeDefault)
 	if !ok {
-		return fmt.Errorf("that is not of type *NinOptNativeDefault")
+		that2, ok := that.(NinOptNativeDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NinOptNativeDefault")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9266,7 +9731,12 @@ func (this *NinOptNativeDefault) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NinOptNativeDefault)
 	if !ok {
-		return false
+		that2, ok := that.(NinOptNativeDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9420,7 +9890,12 @@ func (this *CustomContainer) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomContainer)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomContainer")
+		that2, ok := that.(CustomContainer)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomContainer")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9448,7 +9923,12 @@ func (this *CustomContainer) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomContainer)
 	if !ok {
-		return false
+		that2, ok := that.(CustomContainer)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9476,7 +9956,12 @@ func (this *CustomNameNidOptNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameNidOptNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameNidOptNative")
+		that2, ok := that.(CustomNameNidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameNidOptNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9546,7 +10031,12 @@ func (this *CustomNameNidOptNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameNidOptNative)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameNidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9616,7 +10106,12 @@ func (this *CustomNameNinOptNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameNinOptNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameNinOptNative")
+		that2, ok := that.(CustomNameNinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameNinOptNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9770,7 +10265,12 @@ func (this *CustomNameNinOptNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameNinOptNative)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameNinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -9924,7 +10424,12 @@ func (this *CustomNameNinRepNative) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameNinRepNative)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameNinRepNative")
+		that2, ok := that.(CustomNameNinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameNinRepNative")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10069,7 +10574,12 @@ func (this *CustomNameNinRepNative) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameNinRepNative)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameNinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10214,7 +10724,12 @@ func (this *CustomNameNinStruct) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameNinStruct)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameNinStruct")
+		that2, ok := that.(CustomNameNinStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameNinStruct")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10310,7 +10825,12 @@ func (this *CustomNameNinStruct) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameNinStruct)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameNinStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10406,7 +10926,12 @@ func (this *CustomNameCustomType) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameCustomType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameCustomType")
+		that2, ok := that.(CustomNameCustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameCustomType")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10461,7 +10986,12 @@ func (this *CustomNameCustomType) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameCustomType)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameCustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10516,7 +11046,12 @@ func (this *CustomNameNinEmbeddedStructUnion) VerboseEqual(that interface{}) err
 
 	that1, ok := that.(*CustomNameNinEmbeddedStructUnion)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameNinEmbeddedStructUnion")
+		that2, ok := that.(CustomNameNinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameNinEmbeddedStructUnion")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10556,7 +11091,12 @@ func (this *CustomNameNinEmbeddedStructUnion) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameNinEmbeddedStructUnion)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameNinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10596,7 +11136,12 @@ func (this *CustomNameEnum) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomNameEnum)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomNameEnum")
+		that2, ok := that.(CustomNameEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomNameEnum")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10638,7 +11183,12 @@ func (this *CustomNameEnum) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomNameEnum)
 	if !ok {
-		return false
+		that2, ok := that.(CustomNameEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10680,7 +11230,12 @@ func (this *NoExtensionsMap) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*NoExtensionsMap)
 	if !ok {
-		return fmt.Errorf("that is not of type *NoExtensionsMap")
+		that2, ok := that.(NoExtensionsMap)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *NoExtensionsMap")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10717,7 +11272,12 @@ func (this *NoExtensionsMap) Equal(that interface{}) bool {
 
 	that1, ok := that.(*NoExtensionsMap)
 	if !ok {
-		return false
+		that2, ok := that.(NoExtensionsMap)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10754,7 +11314,12 @@ func (this *Unrecognized) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Unrecognized)
 	if !ok {
-		return fmt.Errorf("that is not of type *Unrecognized")
+		that2, ok := that.(Unrecognized)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Unrecognized")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10785,7 +11350,12 @@ func (this *Unrecognized) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Unrecognized)
 	if !ok {
-		return false
+		that2, ok := that.(Unrecognized)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10816,7 +11386,12 @@ func (this *UnrecognizedWithInner) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*UnrecognizedWithInner)
 	if !ok {
-		return fmt.Errorf("that is not of type *UnrecognizedWithInner")
+		that2, ok := that.(UnrecognizedWithInner)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *UnrecognizedWithInner")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10858,7 +11433,12 @@ func (this *UnrecognizedWithInner) Equal(that interface{}) bool {
 
 	that1, ok := that.(*UnrecognizedWithInner)
 	if !ok {
-		return false
+		that2, ok := that.(UnrecognizedWithInner)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10900,7 +11480,12 @@ func (this *UnrecognizedWithInner_Inner) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*UnrecognizedWithInner_Inner)
 	if !ok {
-		return fmt.Errorf("that is not of type *UnrecognizedWithInner_Inner")
+		that2, ok := that.(UnrecognizedWithInner_Inner)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *UnrecognizedWithInner_Inner")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10931,7 +11516,12 @@ func (this *UnrecognizedWithInner_Inner) Equal(that interface{}) bool {
 
 	that1, ok := that.(*UnrecognizedWithInner_Inner)
 	if !ok {
-		return false
+		that2, ok := that.(UnrecognizedWithInner_Inner)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10962,7 +11552,12 @@ func (this *UnrecognizedWithEmbed) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*UnrecognizedWithEmbed)
 	if !ok {
-		return fmt.Errorf("that is not of type *UnrecognizedWithEmbed")
+		that2, ok := that.(UnrecognizedWithEmbed)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *UnrecognizedWithEmbed")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -10999,7 +11594,12 @@ func (this *UnrecognizedWithEmbed) Equal(that interface{}) bool {
 
 	that1, ok := that.(*UnrecognizedWithEmbed)
 	if !ok {
-		return false
+		that2, ok := that.(UnrecognizedWithEmbed)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -11036,7 +11636,12 @@ func (this *UnrecognizedWithEmbed_Embedded) VerboseEqual(that interface{}) error
 
 	that1, ok := that.(*UnrecognizedWithEmbed_Embedded)
 	if !ok {
-		return fmt.Errorf("that is not of type *UnrecognizedWithEmbed_Embedded")
+		that2, ok := that.(UnrecognizedWithEmbed_Embedded)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *UnrecognizedWithEmbed_Embedded")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -11067,7 +11672,12 @@ func (this *UnrecognizedWithEmbed_Embedded) Equal(that interface{}) bool {
 
 	that1, ok := that.(*UnrecognizedWithEmbed_Embedded)
 	if !ok {
-		return false
+		that2, ok := that.(UnrecognizedWithEmbed_Embedded)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

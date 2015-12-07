@@ -252,11 +252,20 @@ func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string, verbose bool) {
 	p.P(`that1, ok := that.(*`, ccTypeName, `)`)
 	p.P(`if !ok {`)
 	p.In()
+	p.P(`that2, ok := that.(`, ccTypeName, `)`)
+	p.P(`if ok {`)
+	p.In()
+	p.P(`that1 = &that2`)
+	p.Out()
+	p.P(`} else {`)
+	p.In()
 	if verbose {
 		p.P(`return `, p.fmtPkg.Use(), `.Errorf("that is not of type *`, ccTypeName, `")`)
 	} else {
 		p.P(`return false`)
 	}
+	p.Out()
+	p.P(`}`)
 	p.Out()
 	p.P(`}`)
 	p.P(`if that1 == nil {`)

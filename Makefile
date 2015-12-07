@@ -87,6 +87,7 @@ regenerate:
 	make -C test/indeximport-issue72 regenerate
 	make -C test/fuzztests regenerate
 	make -C test/oneofembed regenerate
+	make -C test/asymetric-issue125 regenerate
 	make gofmt
 
 tests:

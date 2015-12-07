@@ -24,32 +24,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package casttype
+package asym
 
 import (
-	"encoding/json"
+	"testing"
 )
 
-type MyInt32Type int32
-
-type MyUint64Type uint64
-
-type Bytes []byte
-
-func (this Bytes) MarshalJSON() ([]byte, error) {
-	return json.Marshal([]byte(this))
-}
-
-func (this *Bytes) UnmarshalJSON(data []byte) error {
-	v := new([]byte)
-	err := json.Unmarshal(data, v)
-	if err != nil {
-		return err
+func TestAsym(t *testing.T) {
+	m := &M{[]MyType{{}, {}}, nil}
+	if err := m.VerboseEqual(m); err != nil {
+		t.Fatalf("should be equal: %v", err)
 	}
-	*this = *v
-	return nil
 }
-
-type MyStringType string
-
-type MyMapType map[string]uint64

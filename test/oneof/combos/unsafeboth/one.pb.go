@@ -1938,7 +1938,12 @@ func (this *Subby) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Subby)
 	if !ok {
-		return fmt.Errorf("that is not of type *Subby")
+		that2, ok := that.(Subby)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Subby")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1972,7 +1977,12 @@ func (this *Subby) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Subby)
 	if !ok {
-		return false
+		that2, ok := that.(Subby)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2006,7 +2016,12 @@ func (this *AllTypesOneOf) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf")
+		that2, ok := that.(AllTypesOneOf)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2040,7 +2055,12 @@ func (this *AllTypesOneOf_Field1) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field1)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field1")
+		that2, ok := that.(AllTypesOneOf_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field1")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2065,7 +2085,12 @@ func (this *AllTypesOneOf_Field2) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field2)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field2")
+		that2, ok := that.(AllTypesOneOf_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field2")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2090,7 +2115,12 @@ func (this *AllTypesOneOf_Field3) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field3)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field3")
+		that2, ok := that.(AllTypesOneOf_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field3")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2115,7 +2145,12 @@ func (this *AllTypesOneOf_Field4) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field4)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field4")
+		that2, ok := that.(AllTypesOneOf_Field4)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field4")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2140,7 +2175,12 @@ func (this *AllTypesOneOf_Field5) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field5)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field5")
+		that2, ok := that.(AllTypesOneOf_Field5)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field5")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2165,7 +2205,12 @@ func (this *AllTypesOneOf_Field6) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field6)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field6")
+		that2, ok := that.(AllTypesOneOf_Field6)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field6")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2190,7 +2235,12 @@ func (this *AllTypesOneOf_Field7) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field7)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field7")
+		that2, ok := that.(AllTypesOneOf_Field7)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field7")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2215,7 +2265,12 @@ func (this *AllTypesOneOf_Field8) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field8)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field8")
+		that2, ok := that.(AllTypesOneOf_Field8)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field8")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2240,7 +2295,12 @@ func (this *AllTypesOneOf_Field9) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field9)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field9")
+		that2, ok := that.(AllTypesOneOf_Field9)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field9")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2265,7 +2325,12 @@ func (this *AllTypesOneOf_Field10) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field10)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field10")
+		that2, ok := that.(AllTypesOneOf_Field10)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field10")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2290,7 +2355,12 @@ func (this *AllTypesOneOf_Field11) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field11)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field11")
+		that2, ok := that.(AllTypesOneOf_Field11)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field11")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2315,7 +2385,12 @@ func (this *AllTypesOneOf_Field12) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field12)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field12")
+		that2, ok := that.(AllTypesOneOf_Field12)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field12")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2340,7 +2415,12 @@ func (this *AllTypesOneOf_Field13) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field13)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field13")
+		that2, ok := that.(AllTypesOneOf_Field13)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field13")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2365,7 +2445,12 @@ func (this *AllTypesOneOf_Field14) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field14)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field14")
+		that2, ok := that.(AllTypesOneOf_Field14)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field14")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2390,7 +2475,12 @@ func (this *AllTypesOneOf_Field15) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_Field15)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_Field15")
+		that2, ok := that.(AllTypesOneOf_Field15)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_Field15")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2415,7 +2505,12 @@ func (this *AllTypesOneOf_SubMessage) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*AllTypesOneOf_SubMessage)
 	if !ok {
-		return fmt.Errorf("that is not of type *AllTypesOneOf_SubMessage")
+		that2, ok := that.(AllTypesOneOf_SubMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *AllTypesOneOf_SubMessage")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2440,7 +2535,12 @@ func (this *AllTypesOneOf) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2474,7 +2574,12 @@ func (this *AllTypesOneOf_Field1) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field1)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2499,7 +2604,12 @@ func (this *AllTypesOneOf_Field2) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field2)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2524,7 +2634,12 @@ func (this *AllTypesOneOf_Field3) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field3)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2549,7 +2664,12 @@ func (this *AllTypesOneOf_Field4) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field4)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field4)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2574,7 +2694,12 @@ func (this *AllTypesOneOf_Field5) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field5)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field5)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2599,7 +2724,12 @@ func (this *AllTypesOneOf_Field6) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field6)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field6)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2624,7 +2754,12 @@ func (this *AllTypesOneOf_Field7) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field7)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field7)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2649,7 +2784,12 @@ func (this *AllTypesOneOf_Field8) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field8)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field8)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2674,7 +2814,12 @@ func (this *AllTypesOneOf_Field9) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field9)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field9)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2699,7 +2844,12 @@ func (this *AllTypesOneOf_Field10) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field10)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field10)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2724,7 +2874,12 @@ func (this *AllTypesOneOf_Field11) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field11)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field11)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2749,7 +2904,12 @@ func (this *AllTypesOneOf_Field12) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field12)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field12)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2774,7 +2934,12 @@ func (this *AllTypesOneOf_Field13) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field13)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field13)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2799,7 +2964,12 @@ func (this *AllTypesOneOf_Field14) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field14)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field14)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2824,7 +2994,12 @@ func (this *AllTypesOneOf_Field15) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_Field15)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_Field15)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2849,7 +3024,12 @@ func (this *AllTypesOneOf_SubMessage) Equal(that interface{}) bool {
 
 	that1, ok := that.(*AllTypesOneOf_SubMessage)
 	if !ok {
-		return false
+		that2, ok := that.(AllTypesOneOf_SubMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2874,7 +3054,12 @@ func (this *TwoOneofs) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs")
+		that2, ok := that.(TwoOneofs)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2917,7 +3102,12 @@ func (this *TwoOneofs_Field1) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_Field1)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_Field1")
+		that2, ok := that.(TwoOneofs_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_Field1")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2942,7 +3132,12 @@ func (this *TwoOneofs_Field2) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_Field2)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_Field2")
+		that2, ok := that.(TwoOneofs_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_Field2")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2967,7 +3162,12 @@ func (this *TwoOneofs_Field3) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_Field3)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_Field3")
+		that2, ok := that.(TwoOneofs_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_Field3")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -2992,7 +3192,12 @@ func (this *TwoOneofs_Field34) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_Field34)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_Field34")
+		that2, ok := that.(TwoOneofs_Field34)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_Field34")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3017,7 +3222,12 @@ func (this *TwoOneofs_Field35) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_Field35)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_Field35")
+		that2, ok := that.(TwoOneofs_Field35)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_Field35")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3042,7 +3252,12 @@ func (this *TwoOneofs_SubMessage2) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*TwoOneofs_SubMessage2)
 	if !ok {
-		return fmt.Errorf("that is not of type *TwoOneofs_SubMessage2")
+		that2, ok := that.(TwoOneofs_SubMessage2)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *TwoOneofs_SubMessage2")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3067,7 +3282,12 @@ func (this *TwoOneofs) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3110,7 +3330,12 @@ func (this *TwoOneofs_Field1) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_Field1)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3135,7 +3360,12 @@ func (this *TwoOneofs_Field2) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_Field2)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3160,7 +3390,12 @@ func (this *TwoOneofs_Field3) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_Field3)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3185,7 +3420,12 @@ func (this *TwoOneofs_Field34) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_Field34)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_Field34)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3210,7 +3450,12 @@ func (this *TwoOneofs_Field35) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_Field35)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_Field35)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3235,7 +3480,12 @@ func (this *TwoOneofs_SubMessage2) Equal(that interface{}) bool {
 
 	that1, ok := that.(*TwoOneofs_SubMessage2)
 	if !ok {
-		return false
+		that2, ok := that.(TwoOneofs_SubMessage2)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3260,7 +3510,12 @@ func (this *CustomOneof) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomOneof)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomOneof")
+		that2, ok := that.(CustomOneof)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomOneof")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3294,7 +3549,12 @@ func (this *CustomOneof_Stringy) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomOneof_Stringy)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomOneof_Stringy")
+		that2, ok := that.(CustomOneof_Stringy)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomOneof_Stringy")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3319,7 +3579,12 @@ func (this *CustomOneof_CustomType) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomOneof_CustomType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomOneof_CustomType")
+		that2, ok := that.(CustomOneof_CustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomOneof_CustomType")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3344,7 +3609,12 @@ func (this *CustomOneof_CastType) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomOneof_CastType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomOneof_CastType")
+		that2, ok := that.(CustomOneof_CastType)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomOneof_CastType")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3369,7 +3639,12 @@ func (this *CustomOneof_MyCustomName) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CustomOneof_MyCustomName)
 	if !ok {
-		return fmt.Errorf("that is not of type *CustomOneof_MyCustomName")
+		that2, ok := that.(CustomOneof_MyCustomName)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CustomOneof_MyCustomName")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3394,7 +3669,12 @@ func (this *CustomOneof) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomOneof)
 	if !ok {
-		return false
+		that2, ok := that.(CustomOneof)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3428,7 +3708,12 @@ func (this *CustomOneof_Stringy) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomOneof_Stringy)
 	if !ok {
-		return false
+		that2, ok := that.(CustomOneof_Stringy)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3453,7 +3738,12 @@ func (this *CustomOneof_CustomType) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomOneof_CustomType)
 	if !ok {
-		return false
+		that2, ok := that.(CustomOneof_CustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3478,7 +3768,12 @@ func (this *CustomOneof_CastType) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomOneof_CastType)
 	if !ok {
-		return false
+		that2, ok := that.(CustomOneof_CastType)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -3503,7 +3798,12 @@ func (this *CustomOneof_MyCustomName) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CustomOneof_MyCustomName)
 	if !ok {
-		return false
+		that2, ok := that.(CustomOneof_MyCustomName)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

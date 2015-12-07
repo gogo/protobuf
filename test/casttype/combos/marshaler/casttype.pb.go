@@ -1131,7 +1131,12 @@ func (this *Castaway) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Castaway)
 	if !ok {
-		return fmt.Errorf("that is not of type *Castaway")
+		that2, ok := that.(Castaway)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Castaway")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1228,7 +1233,12 @@ func (this *Castaway) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Castaway)
 	if !ok {
-		return false
+		that2, ok := that.(Castaway)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1325,7 +1335,12 @@ func (this *Wilson) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Wilson)
 	if !ok {
-		return fmt.Errorf("that is not of type *Wilson")
+		that2, ok := that.(Wilson)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Wilson")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1359,7 +1374,12 @@ func (this *Wilson) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Wilson)
 	if !ok {
-		return false
+		that2, ok := that.(Wilson)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

@@ -208,7 +208,12 @@ func (this *Big) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Big)
 	if !ok {
-		return fmt.Errorf("that is not of type *Big")
+		that2, ok := that.(Big)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Big")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -245,7 +250,12 @@ func (this *Big) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Big)
 	if !ok {
-		return false
+		that2, ok := that.(Big)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -282,7 +292,12 @@ func (this *BigUnsafe) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*BigUnsafe)
 	if !ok {
-		return fmt.Errorf("that is not of type *BigUnsafe")
+		that2, ok := that.(BigUnsafe)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *BigUnsafe")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -319,7 +334,12 @@ func (this *BigUnsafe) Equal(that interface{}) bool {
 
 	that1, ok := that.(*BigUnsafe)
 	if !ok {
-		return false
+		that2, ok := that.(BigUnsafe)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -356,7 +376,12 @@ func (this *Sub) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Sub)
 	if !ok {
-		return fmt.Errorf("that is not of type *Sub")
+		that2, ok := that.(Sub)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Sub")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -390,7 +415,12 @@ func (this *Sub) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Sub)
 	if !ok {
-		return false
+		that2, ok := that.(Sub)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -424,7 +454,12 @@ func (this *IntMerge) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*IntMerge)
 	if !ok {
-		return fmt.Errorf("that is not of type *IntMerge")
+		that2, ok := that.(IntMerge)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *IntMerge")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -482,7 +517,12 @@ func (this *IntMerge) Equal(that interface{}) bool {
 
 	that1, ok := that.(*IntMerge)
 	if !ok {
-		return false
+		that2, ok := that.(IntMerge)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

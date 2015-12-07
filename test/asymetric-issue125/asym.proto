@@ -1,4 +1,4 @@
-// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
@@ -24,32 +24,19 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package casttype
+syntax = "proto2";
 
-import (
-	"encoding/json"
-)
+package asym;
 
-type MyInt32Type int32
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-type MyUint64Type uint64
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
 
-type Bytes []byte
-
-func (this Bytes) MarshalJSON() ([]byte, error) {
-	return json.Marshal([]byte(this))
+message M {
+    repeated bytes arr = 1 [(gogoproto.customtype) = "MyType", (gogoproto.nullable) = false];
 }
 
-func (this *Bytes) UnmarshalJSON(data []byte) error {
-	v := new([]byte)
-	err := json.Unmarshal(data, v)
-	if err != nil {
-		return err
-	}
-	*this = *v
-	return nil
+message MyType {
+
 }
-
-type MyStringType string
-
-type MyMapType map[string]uint64

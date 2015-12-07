@@ -1056,7 +1056,12 @@ func (this *Groups1) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Groups1)
 	if !ok {
-		return fmt.Errorf("that is not of type *Groups1")
+		that2, ok := that.(Groups1)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Groups1")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1089,7 +1094,12 @@ func (this *Groups1) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Groups1)
 	if !ok {
-		return false
+		that2, ok := that.(Groups1)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1122,7 +1132,12 @@ func (this *Groups1_G) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Groups1_G)
 	if !ok {
-		return fmt.Errorf("that is not of type *Groups1_G")
+		that2, ok := that.(Groups1_G)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Groups1_G")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1165,7 +1180,12 @@ func (this *Groups1_G) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Groups1_G)
 	if !ok {
-		return false
+		that2, ok := that.(Groups1_G)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1208,7 +1228,12 @@ func (this *Groups2) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Groups2)
 	if !ok {
-		return fmt.Errorf("that is not of type *Groups2")
+		that2, ok := that.(Groups2)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Groups2")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1236,7 +1261,12 @@ func (this *Groups2) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Groups2)
 	if !ok {
-		return false
+		that2, ok := that.(Groups2)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1264,7 +1294,12 @@ func (this *Groups2_G) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*Groups2_G)
 	if !ok {
-		return fmt.Errorf("that is not of type *Groups2_G")
+		that2, ok := that.(Groups2_G)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Groups2_G")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1306,7 +1341,12 @@ func (this *Groups2_G) Equal(that interface{}) bool {
 
 	that1, ok := that.(*Groups2_G)
 	if !ok {
-		return false
+		that2, ok := that.(Groups2_G)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

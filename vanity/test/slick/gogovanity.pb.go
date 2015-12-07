@@ -76,7 +76,12 @@ func (this *B) Equal(that interface{}) bool {
 
 	that1, ok := that.(*B)
 	if !ok {
-		return false
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

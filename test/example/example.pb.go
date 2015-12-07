@@ -1170,7 +1170,12 @@ func (this *A) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*A)
 	if !ok {
-		return fmt.Errorf("that is not of type *A")
+		that2, ok := that.(A)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *A")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1204,7 +1209,12 @@ func (this *A) Equal(that interface{}) bool {
 
 	that1, ok := that.(*A)
 	if !ok {
-		return false
+		that2, ok := that.(A)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1238,7 +1248,12 @@ func (this *B) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*B)
 	if !ok {
-		return fmt.Errorf("that is not of type *B")
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *B")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1274,7 +1289,12 @@ func (this *B) Equal(that interface{}) bool {
 
 	that1, ok := that.(*B)
 	if !ok {
-		return false
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1310,7 +1330,12 @@ func (this *C) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*C)
 	if !ok {
-		return fmt.Errorf("that is not of type *C")
+		that2, ok := that.(C)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *C")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1344,7 +1369,12 @@ func (this *C) Equal(that interface{}) bool {
 
 	that1, ok := that.(*C)
 	if !ok {
-		return false
+		that2, ok := that.(C)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1378,7 +1408,12 @@ func (this *U) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*U)
 	if !ok {
-		return fmt.Errorf("that is not of type *U")
+		that2, ok := that.(U)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *U")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1409,7 +1444,12 @@ func (this *U) Equal(that interface{}) bool {
 
 	that1, ok := that.(*U)
 	if !ok {
-		return false
+		that2, ok := that.(U)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1440,7 +1480,12 @@ func (this *E) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*E)
 	if !ok {
-		return fmt.Errorf("that is not of type *E")
+		that2, ok := that.(E)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *E")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1468,7 +1513,12 @@ func (this *E) Equal(that interface{}) bool {
 
 	that1, ok := that.(*E)
 	if !ok {
-		return false
+		that2, ok := that.(E)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1496,7 +1546,12 @@ func (this *R) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*R)
 	if !ok {
-		return fmt.Errorf("that is not of type *R")
+		that2, ok := that.(R)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *R")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1527,7 +1582,12 @@ func (this *R) Equal(that interface{}) bool {
 
 	that1, ok := that.(*R)
 	if !ok {
-		return false
+		that2, ok := that.(R)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1558,7 +1618,12 @@ func (this *CastType) VerboseEqual(that interface{}) error {
 
 	that1, ok := that.(*CastType)
 	if !ok {
-		return fmt.Errorf("that is not of type *CastType")
+		that2, ok := that.(CastType)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *CastType")
+		}
 	}
 	if that1 == nil {
 		if this == nil {
@@ -1592,7 +1657,12 @@ func (this *CastType) Equal(that interface{}) bool {
 
 	that1, ok := that.(*CastType)
 	if !ok {
-		return false
+		that2, ok := that.(CastType)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {

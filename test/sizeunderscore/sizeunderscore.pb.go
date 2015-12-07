@@ -72,7 +72,12 @@ func (this *SizeMessage) Equal(that interface{}) bool {
 
 	that1, ok := that.(*SizeMessage)
 	if !ok {
-		return false
+		that2, ok := that.(SizeMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
 	if that1 == nil {
 		if this == nil {
