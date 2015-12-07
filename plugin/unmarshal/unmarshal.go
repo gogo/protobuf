@@ -332,7 +332,9 @@ func (p *unmarshal) mapField(varName string, field *descriptor.FieldDescriptorPr
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		p.P(varName, ` := string(data[iNdEx:postStringIndex`, varName, `])`)
+		cast, _ := p.GoType(nil, field)
+		cast = strings.Replace(cast, "*", "", 1)
+		p.P(varName, ` := `, cast, `(data[iNdEx:postStringIndex`, varName, `])`)
 		p.P(`iNdEx = postStringIndex`, varName)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		p.P(`var mapmsglen int`)
@@ -675,26 +677,49 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 			p.P(`}`)
 			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if generator.IsMap(file, field) {
-			mapMsg := generator.GetMap(file, field)
-			keyField, valueField := mapMsg.GetMapFields()
-			keygoTyp, _ := p.GoType(nil, keyField)
+			m := p.GoMapType(nil, field)
+
+			keygoTyp, _ := p.GoType(nil, m.KeyField)
+			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
+			// keys may not be pointers
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
-			valuegoTyp, _ := p.GoType(nil, valueField)
-			if !valueField.IsMessage() {
-				valuegoTyp = strings.Replace(valuegoTyp, "*", "", 1)
-			}
+			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
+
+			valuegoTyp, _ := p.GoType(nil, m.ValueField)
+			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
+
+			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
+			// we need to explicitly record their use here.
+			p.RecordTypeUse(m.KeyAliasField.GetTypeName())
+			p.RecordTypeUse(m.ValueAliasField.GetTypeName())
+
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+
 			p.P(`var keykey uint64`)
 			p.decodeVarint("keykey", "uint64")
-			p.mapField("mapkey", keyField)
+			p.mapField("mapkey", m.KeyAliasField)
 			p.P(`var valuekey uint64`)
 			p.decodeVarint("valuekey", "uint64")
-			p.mapField("mapvalue", valueField)
+			p.mapField("mapvalue", m.ValueAliasField)
 			p.P(`if m.`, fieldname, ` == nil {`)
 			p.In()
-			p.P(`m.`, fieldname, ` = make(map[`, keygoTyp, `]`, valuegoTyp, `)`)
+			p.P(`m.`, fieldname, ` = make(`, m.GoType, `)`)
 			p.Out()
 			p.P(`}`)
-			p.P(`m.`, fieldname, `[mapkey] = mapvalue`)
+			s := `m.` + fieldname
+			if keygoTyp == keygoAliasTyp {
+				s += `[mapkey]`
+			} else {
+				s += `[` + keygoAliasTyp + `(mapkey)]`
+			}
+			v := `mapvalue`
+			if m.ValueField.IsMessage() && !nullable {
+				v = `*` + v
+			}
+			if valuegoTyp != valuegoAliasTyp {
+				v = `((` + valuegoAliasTyp + `)(` + v + `))`
+			}
+			p.P(s, ` = `, v)
 		} else if repeated {
 			if nullable {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)

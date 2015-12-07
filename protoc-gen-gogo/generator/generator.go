@@ -1600,6 +1600,24 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype = ",casttype=" + gogoproto.GetCastType(field)
 	}
 
+	castkey := ""
+	if gogoproto.IsCastKey(field) {
+		castkey = ",castkey=" + gogoproto.GetCastKey(field)
+	}
+
+	castvalue := ""
+	if gogoproto.IsCastValue(field) {
+		castvalue = ",castvalue=" + gogoproto.GetCastValue(field)
+		// record the original message type for jsonpb reconstruction
+		desc := g.ObjectNamed(field.GetTypeName())
+		if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
+			valueField := d.Field[1]
+			if valueField.IsMessage() {
+				castvalue += ",castvaluetype=" + strings.TrimPrefix(valueField.GetTypeName(), ".")
+			}
+		}
+	}
+
 	if message.proto3() {
 		// We only need the extra tag for []byte fields;
 		// no need to add noise for the others.
@@ -1613,7 +1631,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if field.OneofIndex != nil {
 		oneof = ",oneof"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1624,7 +1642,9 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		defaultValue,
 		embed,
 		ctype,
-		casttype))
+		casttype,
+		castkey,
+		castvalue))
 }
 
 func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf bool) bool {
@@ -1713,10 +1733,10 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 	default:
 		g.Fail("unknown type for", field.GetName())
 	}
-	if gogoproto.IsCustomType(field) && gogoproto.IsCastType(field) {
+	switch {
+	case gogoproto.IsCustomType(field) && gogoproto.IsCastType(field):
 		g.Fail(field.GetName() + " cannot be custom type and cast type")
-	}
-	if gogoproto.IsCustomType(field) {
+	case gogoproto.IsCustomType(field):
 		var packageName string
 		var err error
 		packageName, typ, err = getCustomType(field)
@@ -1726,8 +1746,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		if len(packageName) > 0 {
 			g.customImports = append(g.customImports, packageName)
 		}
-	}
-	if gogoproto.IsCastType(field) {
+	case gogoproto.IsCastType(field):
 		var packageName string
 		var err error
 		packageName, typ, err = getCastType(field)
@@ -1745,6 +1764,77 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		typ = "[]" + typ
 	}
 	return
+}
+
+// GoMapDescriptor is a full description of the map output struct.
+type GoMapDescriptor struct {
+	GoType string
+
+	KeyField      *descriptor.FieldDescriptorProto
+	KeyAliasField *descriptor.FieldDescriptorProto
+	KeyTag        string
+
+	ValueField      *descriptor.FieldDescriptorProto
+	ValueAliasField *descriptor.FieldDescriptorProto
+	ValueTag        string
+}
+
+func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorProto) *GoMapDescriptor {
+	if d == nil {
+		byName := g.ObjectNamed(field.GetTypeName())
+		desc, ok := byName.(*Descriptor)
+		if byName == nil || !ok || !desc.GetOptions().GetMapEntry() {
+			g.Fail(fmt.Sprintf("field %s is not a map", field.GetTypeName()))
+			return nil
+		}
+		d = desc
+	}
+
+	m := &GoMapDescriptor{
+		KeyField:   d.Field[0],
+		ValueField: d.Field[1],
+	}
+
+	// Figure out the Go types and tags for the key and value types.
+	m.KeyAliasField, m.ValueAliasField = g.GetMapKeyField(field, m.KeyField), g.GetMapValueField(field, m.ValueField)
+	keyType, keyWire := g.GoType(d, m.KeyAliasField)
+	valType, valWire := g.GoType(d, m.ValueAliasField)
+
+	m.KeyTag, m.ValueTag = g.goTag(d, m.KeyField, keyWire), g.goTag(d, m.ValueField, valWire)
+
+	if gogoproto.IsCastType(field) {
+		var packageName string
+		var err error
+		packageName, typ, err := getCastType(field)
+		if err != nil {
+			g.Fail(err.Error())
+		}
+		if len(packageName) > 0 {
+			g.customImports = append(g.customImports, packageName)
+		}
+		m.GoType = typ
+		return m
+	}
+
+	// We don't use stars, except for message-typed values.
+	// Message and enum types are the only two possibly foreign types used in maps,
+	// so record their use. They are not permitted as map keys.
+	keyType = strings.TrimPrefix(keyType, "*")
+	switch *m.ValueAliasField.Type {
+	case descriptor.FieldDescriptorProto_TYPE_ENUM:
+		valType = strings.TrimPrefix(valType, "*")
+		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if !gogoproto.IsNullable(m.ValueAliasField) {
+			valType = strings.TrimPrefix(valType, "*")
+		}
+		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
+	default:
+		valType = strings.TrimPrefix(valType, "*")
+	}
+
+	m.GoType = fmt.Sprintf("map[%s]%s", keyType, valType)
+	return m
 }
 
 func (g *Generator) RecordTypeUse(t string) {
@@ -1880,30 +1970,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 			desc := g.ObjectNamed(field.GetTypeName())
 			if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
-				// Figure out the Go types and tags for the key and value types.
-				keyField, valField := d.Field[0], d.Field[1]
-				keyType, keyWire := g.GoType(d, keyField)
-				valType, valWire := g.GoType(d, valField)
-				keyTag, valTag := g.goTag(d, keyField, keyWire), g.goTag(d, valField, valWire)
-
-				// We don't use stars, except for message-typed values.
-				// Message and enum types are the only two possibly foreign types used in maps,
-				// so record their use. They are not permitted as map keys.
-				keyType = strings.TrimPrefix(keyType, "*")
-				switch *valField.Type {
-				case descriptor.FieldDescriptorProto_TYPE_ENUM:
-					valType = strings.TrimPrefix(valType, "*")
-					g.RecordTypeUse(valField.GetTypeName())
-				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-					g.RecordTypeUse(valField.GetTypeName())
-				default:
-					valType = strings.TrimPrefix(valType, "*")
-				}
-
-				typename = fmt.Sprintf("map[%s]%s", keyType, valType)
+				m := g.GoMapType(d, field)
+				typename = m.GoType
 				mapFieldTypes[field] = typename // record for the getter generation
 
-				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", keyTag, valTag)
+				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
 			}
 		}
 

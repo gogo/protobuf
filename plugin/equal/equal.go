@@ -368,10 +368,33 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 		} else {
 			if generator.IsMap(file.FileDescriptorProto, field) {
-				mapMsg := generator.GetMap(file.FileDescriptorProto, field)
-				_, mapValue := mapMsg.GetMapFields()
+				m := p.GoMapType(nil, field)
+				valuegoTyp, _ := p.GoType(nil, m.ValueField)
+				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
+				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+
+				mapValue := m.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
-					p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					switch {
+					case nullable && valuegoTyp == valuegoAliasTyp:
+						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					default:
+						// Equal() has a pointer receiver, but map value is a value type
+						a := `this.` + fieldname + `[i]`
+						b := `that1.` + fieldname + `[i]`
+						if valuegoTyp != valuegoAliasTyp {
+							// cast back to the type that has the generated methods on it
+							a = `(` + valuegoTyp + `)(` + a + `)`
+							b = `(` + valuegoTyp + `)(` + b + `)`
+						}
+						p.P(`a := `, a)
+						p.P(`b := `, b)
+						if nullable {
+							p.P(`if !a.Equal(b) {`)
+						} else {
+							p.P(`if !(&a).Equal(&b) {`)
+						}
+					}
 				} else if mapValue.IsBytes() {
 					p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
 				} else if mapValue.IsString() {

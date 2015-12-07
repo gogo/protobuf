@@ -817,17 +817,18 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 		panic(fmt.Errorf("marshaler does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if generator.IsMap(file.FileDescriptorProto, field) {
-			mapMsg := generator.GetMap(file.FileDescriptorProto, field)
-			keyField, valueField := mapMsg.GetMapFields()
-			_, keywire := p.GoType(nil, keyField)
-			_, valuewire := p.GoType(nil, valueField)
+			m := p.GoMapType(nil, field)
+			_, keywire := p.GoType(nil, m.KeyField)
+			valuegoTyp, valuewire := p.GoType(nil, m.ValueField)
+			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
 			keyKeySize := keySize(1, wireToType(keywire))
 			valueKeySize := keySize(2, wireToType(valuewire))
 			p.P(`for k, _ := range m.`, fieldname, ` {`)
 			p.In()
 			p.encodeKey(fieldNumber, wireType)
 			sum := []string{strconv.Itoa(keyKeySize)}
-			switch keyField.GetType() {
+			switch m.KeyField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -852,8 +853,9 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				sum = append(sum, `soz`+p.localName+`(uint64(k))`)
 			}
 			p.P(`v := m.`, fieldname, `[k]`)
+			accessor := `v`
 			sum = append(sum, strconv.Itoa(valueKeySize))
-			switch valueField.GetType() {
+			switch m.ValueField.GetType() {
 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
 				descriptor.FieldDescriptorProto_TYPE_FIXED64,
 				descriptor.FieldDescriptorProto_TYPE_SFIXED64:
@@ -877,20 +879,32 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				p.P(`if v == nil {`)
-				p.In()
-				p.P(`return 0, `, p.errorsPkg.Use(), `.New("proto: map has nil element")`)
-				p.Out()
-				p.P(`}`)
-				p.P(`msgSize := v.Size()`)
+				if nullable {
+					p.P(`if v == nil {`)
+					p.In()
+					p.P(`return 0, `, p.errorsPkg.Use(), `.New("proto: map has nil element")`)
+					p.Out()
+					p.P(`}`)
+				}
+				if valuegoTyp != valuegoAliasTyp {
+					if nullable {
+						// cast back to the type that has the generated methods on it
+						accessor = `((` + valuegoTyp + `)(` + accessor + `))`
+					} else {
+						accessor = `((*` + valuegoTyp + `)(&` + accessor + `))`
+					}
+				} else if !nullable {
+					accessor = `(&v)`
+				}
+				p.P(`msgSize := `, accessor, `.Size()`)
 				sum = append(sum, `msgSize + sov`+p.localName+`(uint64(msgSize))`)
 			}
 			p.P(`mapSize := `, strings.Join(sum, " + "))
 			p.callVarint("mapSize")
 			p.encodeKey(1, wireToType(keywire))
-			p.mapField(numGen, keyField.GetType(), "k")
+			p.mapField(numGen, m.KeyField.GetType(), "k")
 			p.encodeKey(2, wireToType(valuewire))
-			p.mapField(numGen, valueField.GetType(), "v")
+			p.mapField(numGen, m.ValueField.GetType(), accessor)
 			p.Out()
 			p.P(`}`)
 		} else if repeated {
