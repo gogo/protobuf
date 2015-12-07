@@ -1,4 +1,4 @@
-// Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
+// Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
 // http://github.com/gogo/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
@@ -24,27 +24,39 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+package asym
 
-package asym;
-
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.marshaler_all) = true;
-option (gogoproto.sizer_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.testgen_all) = true;
-
-message M {
-    repeated bytes arr = 1 [(gogoproto.customtype) = "MyType", (gogoproto.nullable) = false];
+func NewPopulatedMyType(r randyAsym) *MyType {
+	this := &MyType{}
+	return this
 }
 
-message MyType {
-	option (gogoproto.marshaler) = false;
-	option (gogoproto.sizer) = false;
-	option (gogoproto.populate) = false;
-	option (gogoproto.testgen) = false;
+func (m MyType) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *MyType) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i += copy(data[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *MyType) Size() (n int) {
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
 }
