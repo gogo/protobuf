@@ -31,9 +31,9 @@ regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-combo
 	protoc-min-version --version="3.0.0" --gogo_out=. --proto_path=../../../../../:../../protobuf/:. castvalue.proto
 	protoc-gen-combo --default=false --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. castvalue.proto
-	cp mytypes.go ./combos/both/
-	cp mytypes.go ./combos/marshaler/
-	cp mytypes.go ./combos/unmarshaler/
-	cp mytypes.go ./combos/unsafeboth/
-	cp mytypes.go ./combos/unsafemarshaler/
-	cp mytypes.go ./combos/unsafeunmarshaler/
+	cp mytypes.go ./combos/both/ || true
+	cp mytypes.go ./combos/marshaler/ || true
+	cp mytypes.go ./combos/unmarshaler/ || true
+	cp mytypes.go ./combos/unsafeboth/ || true
+	cp mytypes.go ./combos/unsafemarshaler/ || true
+	cp mytypes.go ./combos/unsafeunmarshaler/ || true
