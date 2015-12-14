@@ -14661,10 +14661,10 @@ func (this *NidRepStruct) GoString() string {
 		s = append(s, "Field2: "+fmt.Sprintf("%#v", this.Field2)+",\n")
 	}
 	if this.Field3 != nil {
-		s = append(s, "Field3: "+strings.Replace(fmt.Sprintf("%#v", this.Field3), `&`, ``, 1)+",\n")
+		s = append(s, "Field3: "+fmt.Sprintf("%#v", this.Field3)+",\n")
 	}
 	if this.Field4 != nil {
-		s = append(s, "Field4: "+strings.Replace(fmt.Sprintf("%#v", this.Field4), `&`, ``, 1)+",\n")
+		s = append(s, "Field4: "+fmt.Sprintf("%#v", this.Field4)+",\n")
 	}
 	if this.Field6 != nil {
 		s = append(s, "Field6: "+fmt.Sprintf("%#v", this.Field6)+",\n")
@@ -14673,7 +14673,7 @@ func (this *NidRepStruct) GoString() string {
 		s = append(s, "Field7: "+fmt.Sprintf("%#v", this.Field7)+",\n")
 	}
 	if this.Field8 != nil {
-		s = append(s, "Field8: "+strings.Replace(fmt.Sprintf("%#v", this.Field8), `&`, ``, 1)+",\n")
+		s = append(s, "Field8: "+fmt.Sprintf("%#v", this.Field8)+",\n")
 	}
 	if this.Field13 != nil {
 		s = append(s, "Field13: "+fmt.Sprintf("%#v", this.Field13)+",\n")
@@ -14778,7 +14778,7 @@ func (this *NidNestedStruct) GoString() string {
 	s = append(s, "&test.NidNestedStruct{")
 	s = append(s, "Field1: "+strings.Replace(this.Field1.GoString(), `&`, ``, 1)+",\n")
 	if this.Field2 != nil {
-		s = append(s, "Field2: "+strings.Replace(fmt.Sprintf("%#v", this.Field2), `&`, ``, 1)+",\n")
+		s = append(s, "Field2: "+fmt.Sprintf("%#v", this.Field2)+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")

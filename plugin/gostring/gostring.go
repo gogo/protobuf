@@ -219,10 +219,8 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 					p.P(`if this.`, fieldname, ` != nil {`)
 					p.In()
 				}
-				if nullable {
+				if nullable || repeated {
 					p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
-				} else if repeated {
-					p.P(`s = append(s, "`, fieldname, `: " + `, stringsPkg.Use(), `.Replace(`, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`, ",`&`,``,1)", ` + ",\n")`)
 				} else {
 					p.P(`s = append(s, "`, fieldname, `: " + `, stringsPkg.Use(), `.Replace(this.`, fieldname, `.GoString()`, ",`&`,``,1)", ` + ",\n")`)
 				}
