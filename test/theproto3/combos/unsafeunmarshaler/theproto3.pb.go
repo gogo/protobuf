@@ -14,6 +14,7 @@
 		AllMaps
 		MessageWithMap
 		FloatingPoint
+		Uint128Pair
 */
 package theproto3
 
@@ -22,6 +23,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 import test "github.com/gogo/protobuf/test/combos/both"
+
+import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 
 import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
@@ -149,12 +152,21 @@ type FloatingPoint struct {
 func (m *FloatingPoint) Reset()      { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage() {}
 
+type Uint128Pair struct {
+	Left  github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
+	Right *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
+}
+
+func (m *Uint128Pair) Reset()      { *m = Uint128Pair{} }
+func (*Uint128Pair) ProtoMessage() {}
+
 func init() {
 	proto.RegisterType((*Message)(nil), "theproto3.Message")
 	proto.RegisterType((*Nested)(nil), "theproto3.Nested")
 	proto.RegisterType((*AllMaps)(nil), "theproto3.AllMaps")
 	proto.RegisterType((*MessageWithMap)(nil), "theproto3.MessageWithMap")
 	proto.RegisterType((*FloatingPoint)(nil), "theproto3.FloatingPoint")
+	proto.RegisterType((*Uint128Pair)(nil), "theproto3.Uint128Pair")
 	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
 }
@@ -171,6 +183,9 @@ func (this *MessageWithMap) Description() (desc *descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
 func (this *FloatingPoint) Description() (desc *descriptor.FileDescriptorSet) {
+	return Theproto3Description()
+}
+func (this *Uint128Pair) Description() (desc *descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
 func Theproto3Description() (desc *descriptor.FileDescriptorSet) {
@@ -3275,6 +3290,18 @@ func Theproto3Description() (desc *descriptor.FileDescriptorSet) {
 				Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
 				Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(1),
 			}},
+		}, {Name: func(v string) *string { return &v }("Uint128Pair"),
+			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("left"),
+				Number:  func(v int32) *int32 { return &v }(1),
+				Label:   func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+				Type:    func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(12),
+				Options: &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65001: proto.NewExtension([]byte{0xc8, 0xde, 0x1f, 0x0}), 65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}},
+			}, {Name: func(v string) *string { return &v }("right"),
+				Number:  func(v int32) *int32 { return &v }(2),
+				Label:   func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+				Type:    func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(12),
+				Options: &descriptor.FieldOptions{XXX_extensions: map[int32]proto.Extension{65003: proto.NewExtension([]byte{0xda, 0xde, 0x1f, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x2e, 0x55, 0x69, 0x6e, 0x74, 0x31, 0x32, 0x38})}},
+			}},
 		}},
 		EnumType: []*descriptor.EnumDescriptorProto{{Name: func(v string) *string { return &v }("MapEnum"),
 			Value: []*descriptor.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("MA"),
@@ -4008,6 +4035,80 @@ func (this *FloatingPoint) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *Uint128Pair) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Uint128Pair)
+	if !ok {
+		that2, ok := that.(Uint128Pair)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Uint128Pair")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Uint128Pair but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Uint128Pair but is not nil && this == nil")
+	}
+	if !this.Left.Equal(that1.Left) {
+		return fmt.Errorf("Left this(%v) Not Equal that(%v)", this.Left, that1.Left)
+	}
+	if that1.Right == nil {
+		if this.Right != nil {
+			return fmt.Errorf("this.Right != nil && that1.Right == nil")
+		}
+	} else if !this.Right.Equal(*that1.Right) {
+		return fmt.Errorf("Right this(%v) Not Equal that(%v)", this.Right, that1.Right)
+	}
+	return nil
+}
+func (this *Uint128Pair) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Uint128Pair)
+	if !ok {
+		that2, ok := that.(Uint128Pair)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.Left.Equal(that1.Left) {
+		return false
+	}
+	if that1.Right == nil {
+		if this.Right != nil {
+			return false
+		}
+	} else if !this.Right.Equal(*that1.Right) {
+		return false
+	}
+	return true
+}
 
 type MessageFace interface {
 	Proto() github_com_gogo_protobuf_proto.Message
@@ -4295,6 +4396,35 @@ func (this *FloatingPoint) GetF() float64 {
 func NewFloatingPointFromFace(that FloatingPointFace) *FloatingPoint {
 	this := &FloatingPoint{}
 	this.F = that.GetF()
+	return this
+}
+
+type Uint128PairFace interface {
+	Proto() github_com_gogo_protobuf_proto.Message
+	GetLeft() github_com_gogo_protobuf_test_custom.Uint128
+	GetRight() *github_com_gogo_protobuf_test_custom.Uint128
+}
+
+func (this *Uint128Pair) Proto() github_com_gogo_protobuf_proto.Message {
+	return this
+}
+
+func (this *Uint128Pair) TestProto() github_com_gogo_protobuf_proto.Message {
+	return NewUint128PairFromFace(this)
+}
+
+func (this *Uint128Pair) GetLeft() github_com_gogo_protobuf_test_custom.Uint128 {
+	return this.Left
+}
+
+func (this *Uint128Pair) GetRight() *github_com_gogo_protobuf_test_custom.Uint128 {
+	return this.Right
+}
+
+func NewUint128PairFromFace(that Uint128PairFace) *Uint128Pair {
+	this := &Uint128Pair{}
+	this.Left = that.GetLeft()
+	this.Right = that.GetRight()
 	return this
 }
 
@@ -4645,6 +4775,17 @@ func (this *FloatingPoint) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *Uint128Pair) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&theproto3.Uint128Pair{")
+	s = append(s, "Left: "+fmt.Sprintf("%#v", this.Left)+",\n")
+	s = append(s, "Right: "+fmt.Sprintf("%#v", this.Right)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringTheproto3(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -4939,6 +5080,16 @@ func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
 	return this
 }
 
+func NewPopulatedUint128Pair(r randyTheproto3, easy bool) *Uint128Pair {
+	this := &Uint128Pair{}
+	v42 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+	this.Left = *v42
+	this.Right = github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 type randyTheproto3 interface {
 	Float32() float32
 	Float64() float64
@@ -4958,9 +5109,9 @@ func randUTF8RuneTheproto3(r randyTheproto3) rune {
 	return rune(ru + 61)
 }
 func randStringTheproto3(r randyTheproto3) string {
-	v42 := r.Intn(100)
-	tmps := make([]rune, v42)
-	for i := 0; i < v42; i++ {
+	v43 := r.Intn(100)
+	tmps := make([]rune, v43)
+	for i := 0; i < v43; i++ {
 		tmps[i] = randUTF8RuneTheproto3(r)
 	}
 	return string(tmps)
@@ -4982,11 +5133,11 @@ func randFieldTheproto3(data []byte, r randyTheproto3, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		v43 := r.Int63()
+		v44 := r.Int63()
 		if r.Intn(2) == 0 {
-			v43 *= -1
+			v44 *= -1
 		}
-		data = encodeVarintPopulateTheproto3(data, uint64(v43))
+		data = encodeVarintPopulateTheproto3(data, uint64(v44))
 	case 1:
 		data = encodeVarintPopulateTheproto3(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -5275,6 +5426,16 @@ func (m *FloatingPoint) Size() (n int) {
 	if m.F != 0 {
 		n += 9
 	}
+	return n
+}
+
+func (m *Uint128Pair) Size() (n int) {
+	var l int
+	_ = l
+	l = m.Left.Size()
+	n += 1 + l + sovTheproto3(uint64(l))
+	l = m.Right.Size()
+	n += 1 + l + sovTheproto3(uint64(l))
 	return n
 }
 
@@ -5586,6 +5747,17 @@ func (this *FloatingPoint) String() string {
 	}
 	s := strings.Join([]string{`&FloatingPoint{`,
 		`F:` + fmt.Sprintf("%v", this.F) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Uint128Pair) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Uint128Pair{`,
+		`Left:` + fmt.Sprintf("%v", this.Left) + `,`,
+		`Right:` + fmt.Sprintf("%v", this.Right) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -8233,6 +8405,118 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 			}
 			m.F = *(*float64)(unsafe.Pointer(&data[iNdEx]))
 			iNdEx += 8
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTheproto3Unsafe(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Uint128Pair) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTheproto3Unsafe
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Uint128Pair: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Uint128Pair: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Left", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTheproto3Unsafe
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Left.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Right", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTheproto3Unsafe
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTheproto3Unsafe
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var v github_com_gogo_protobuf_test_custom.Uint128
+			m.Right = &v
+			if err := m.Right.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTheproto3Unsafe(data[iNdEx:])

@@ -1666,7 +1666,8 @@ func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf b
 	}
 	if proto3 &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
-		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
+		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
+		!gogoproto.IsCustomType(field) {
 		return false
 	}
 	return true
