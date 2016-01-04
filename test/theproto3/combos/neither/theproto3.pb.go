@@ -2755,6 +2755,17 @@ func Theproto3Description() (desc *descriptor.FileDescriptorSet) {
 				}},
 				Options: &descriptor.MessageOptions{XXX_extensions: map[int32]proto.Extension{64026: proto.NewExtension([]byte{0xd0, 0xa1, 0x1f, 0x0})}},
 			}},
+		}, {Name: func(v string) *string { return &v }("Node"),
+			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Label"),
+				Number: func(v int32) *int32 { return &v }(1),
+				Label:  func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+				Type:   func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(9),
+			}, {Name: func(v string) *string { return &v }("Children"),
+				Number:   func(v int32) *int32 { return &v }(2),
+				Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(3),
+				Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(11),
+				TypeName: func(v string) *string { return &v }(".test.Node"),
+			}},
 		}},
 		EnumType: []*descriptor.EnumDescriptorProto{{Name: func(v string) *string { return &v }("TheTestEnum"),
 			Value: []*descriptor.EnumValueDescriptorProto{{Name: func(v string) *string { return &v }("A"),
@@ -4827,7 +4838,7 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 	if r.Intn(2) == 0 {
 		this.Score *= -1
 	}
-	v2 := r.Intn(100)
+	v2 := r.Intn(10)
 	this.Key = make([]uint64, v2)
 	for i := 0; i < v2; i++ {
 		this.Key[i] = uint64(uint64(r.Uint32()))

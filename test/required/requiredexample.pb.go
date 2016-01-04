@@ -798,7 +798,7 @@ func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
 func NewPopulatedNestedNinOptNative(r randyRequiredexample, easy bool) *NestedNinOptNative {
 	this := &NestedNinOptNative{}
 	if r.Intn(10) != 0 {
-		v20 := r.Intn(10)
+		v20 := r.Intn(5)
 		this.NestedNinOpts = make([]*NinOptNative, v20)
 		for i := 0; i < v20; i++ {
 			this.NestedNinOpts[i] = NewPopulatedNinOptNative(r, easy)

@@ -1666,7 +1666,7 @@ func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 		}
 	}
 	if r.Intn(10) != 0 {
-		v5 := r.Intn(100)
+		v5 := r.Intn(10)
 		this.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, v5)
 		for i := 0; i < v5; i++ {
 			this.MyUint64S[i] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))

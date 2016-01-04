@@ -582,3 +582,9 @@ message UnrecognizedWithEmbed {
 	optional Embedded embedded = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 	optional string Field2 = 2;
 }
+
+message Node {
+	optional string Label = 1;
+	repeated Node Children = 2;
+}
+

@@ -148,7 +148,7 @@ func encodeVarintIndeximport(data []byte, offset int, v uint64) int {
 func NewPopulatedIndexQueries(r randyIndeximport, easy bool) *IndexQueries {
 	this := &IndexQueries{}
 	if r.Intn(10) != 0 {
-		v1 := r.Intn(10)
+		v1 := r.Intn(5)
 		this.Queries = make([]*index.IndexQuery, v1)
 		for i := 0; i < v1; i++ {
 			this.Queries[i] = index.NewPopulatedIndexQuery(r, easy)

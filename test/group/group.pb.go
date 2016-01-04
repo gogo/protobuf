@@ -1472,7 +1472,7 @@ func extensionToGoStringGroup(e map[int32]github_com_gogo_protobuf_proto.Extensi
 func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
 	this := &Groups1{}
 	if r.Intn(10) != 0 {
-		v1 := r.Intn(10)
+		v1 := r.Intn(5)
 		this.G = make([]*Groups1_G, v1)
 		for i := 0; i < v1; i++ {
 			this.G[i] = NewPopulatedGroups1_G(r, easy)
@@ -1527,7 +1527,7 @@ func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
 		this.Field1 = &v4
 	}
 	if r.Intn(10) != 0 {
-		v5 := r.Intn(100)
+		v5 := r.Intn(10)
 		this.Field2 = make([]float64, v5)
 		for i := 0; i < v5; i++ {
 			this.Field2[i] = float64(r.Float64())

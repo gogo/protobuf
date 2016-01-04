@@ -3015,7 +3015,7 @@ func encodeVarintUnrecognized(data []byte, offset int, v uint64) int {
 func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}
 	if r.Intn(10) != 0 {
-		v1 := r.Intn(10)
+		v1 := r.Intn(5)
 		this.B = make([]*B, v1)
 		for i := 0; i < v1; i++ {
 			this.B[i] = NewPopulatedB(r, easy)
@@ -3086,7 +3086,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		this.Field4 = &v6
 	}
 	if r.Intn(10) != 0 {
-		v7 := r.Intn(100)
+		v7 := r.Intn(10)
 		this.Field5 = make([][]byte, v7)
 		for i := 0; i < v7; i++ {
 			v8 := r.Intn(100)
@@ -3104,7 +3104,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 		this.Field6 = &v9
 	}
 	if r.Intn(10) != 0 {
-		v10 := r.Intn(100)
+		v10 := r.Intn(10)
 		this.Field7 = make([]float32, v10)
 		for i := 0; i < v10; i++ {
 			this.Field7[i] = float32(r.Float32())
@@ -3122,7 +3122,7 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 	this := &U{}
 	if r.Intn(10) != 0 {
-		v11 := r.Intn(100)
+		v11 := r.Intn(10)
 		this.Field2 = make([]float64, v11)
 		for i := 0; i < v11; i++ {
 			this.Field2[i] = float64(r.Float64())
@@ -3143,7 +3143,7 @@ func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 	this := &UnoM{}
 	if r.Intn(10) != 0 {
-		v13 := r.Intn(100)
+		v13 := r.Intn(10)
 		this.Field2 = make([]float64, v13)
 		for i := 0; i < v13; i++ {
 			this.Field2[i] = float64(r.Float64())
@@ -3164,7 +3164,7 @@ func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
 	this := &OldA{}
 	if r.Intn(10) != 0 {
-		v15 := r.Intn(10)
+		v15 := r.Intn(5)
 		this.B = make([]*OldB, v15)
 		for i := 0; i < v15; i++ {
 			this.B[i] = NewPopulatedOldB(r, easy)
@@ -3224,7 +3224,7 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 		this.Field6 = &v20
 	}
 	if r.Intn(10) != 0 {
-		v21 := r.Intn(100)
+		v21 := r.Intn(10)
 		this.Field7 = make([]float32, v21)
 		for i := 0; i < v21; i++ {
 			this.Field7[i] = float32(r.Float32())
@@ -3246,7 +3246,7 @@ func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
 		this.Field1 = &v22
 	}
 	if r.Intn(10) != 0 {
-		v23 := r.Intn(100)
+		v23 := r.Intn(10)
 		this.Field2 = make([]float64, v23)
 		for i := 0; i < v23; i++ {
 			this.Field2[i] = float64(r.Float64())
@@ -3268,7 +3268,7 @@ func NewPopulatedOldUnoM(r randyUnrecognized, easy bool) *OldUnoM {
 		this.Field1 = &v24
 	}
 	if r.Intn(10) != 0 {
-		v25 := r.Intn(100)
+		v25 := r.Intn(10)
 		this.Field2 = make([]float64, v25)
 		for i := 0; i < v25; i++ {
 			this.Field2[i] = float64(r.Float64())
