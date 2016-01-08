@@ -117,9 +117,27 @@ func IsCustomName(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsEnumCustomName(field *google_protobuf.EnumValueDescriptorProto) bool {
+	name := GetEnumCustomName(field)
+	if len(name) > 0 {
+		return true
+	}
+	return false
+}
+
 func GetCustomName(field *google_protobuf.FieldDescriptorProto) string {
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, E_Customname)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetEnumCustomName(field *google_protobuf.EnumValueDescriptorProto) string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_EnumCustomname)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}
@@ -151,6 +169,10 @@ type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
 	return proto.GetBoolExtension(enum.Options, E_GoprotoEnumPrefix, proto.GetBoolExtension(file.Options, E_GoprotoEnumPrefixAll, true))
+}
+
+func EnabledEnumGoStyle(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
+	return proto.GetBoolExtension(enum.Options, E_EnumGostyle, proto.GetBoolExtension(file.Options, E_EnumGostyleAll, false))
 }
 
 func EnabledGoStringer(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {

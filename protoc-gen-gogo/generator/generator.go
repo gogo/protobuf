@@ -1415,6 +1415,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
 	ccPrefix := enum.prefix()
+	goStyle := gogoproto.EnabledEnumGoStyle(enum.file, enum.EnumDescriptorProto)
 
 	g.PrintComments(enum.path)
 	if !gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
@@ -1428,6 +1429,14 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.PrintComments(fmt.Sprintf("%s,%d,%d", enum.path, enumValuePath, i))
 
 		name := ccPrefix + *e.Name
+		if gogoproto.IsEnumCustomName(e) {
+			name = gogoproto.GetEnumCustomName(e)
+		} else if goStyle {
+			// For go style const definitions, we trim the underscore and
+			// camelcase the target name to be more idiomatic.
+			name = ccPrefix[:len(ccPrefix)-1] + strings.Replace(CamelCase(strings.ToLower(*e.Name)), "_", "", -1)
+		}
+
 		g.P(name, " ", ccTypeName, " = ", e.Number)
 		g.file.addExport(enum, constOrVarSymbol{name, "const", ccTypeName})
 	}
