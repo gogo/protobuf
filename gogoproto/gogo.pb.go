@@ -46,6 +46,22 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	Tag:           "varint,62022,opt,name=enum_stringer",
 }
 
+var E_EnumCustomname = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         62023,
+	Name:          "gogoproto.enum_customname",
+	Tag:           "bytes,62023,opt,name=enum_customname",
+}
+
+var E_EnumvalueCustomname = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         66001,
+	Name:          "gogoproto.enumvalue_customname",
+	Tag:           "bytes,66001,opt,name=enumvalue_customname",
+}
+
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -474,6 +490,8 @@ func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
 	proto.RegisterExtension(E_EnumStringer)
+	proto.RegisterExtension(E_EnumCustomname)
+	proto.RegisterExtension(E_EnumvalueCustomname)
 	proto.RegisterExtension(E_GoprotoGettersAll)
 	proto.RegisterExtension(E_GoprotoEnumPrefixAll)
 	proto.RegisterExtension(E_GoprotoStringerAll)

@@ -190,14 +190,26 @@ func (e *EnumDescriptor) TypeName() (s []string) {
 	return s
 }
 
+// alias provides the TypeName corrected for the application of any naming
+// extensions on the enum type. It should be used for generating references to
+// the Go types and for calculating prefixes.
+func (e *EnumDescriptor) alias() (s []string) {
+	s = e.TypeName()
+	if gogoproto.IsEnumCustomName(e.EnumDescriptorProto) {
+		s[len(s)-1] = gogoproto.GetEnumCustomName(e.EnumDescriptorProto)
+	}
+
+	return
+}
+
 // Everything but the last element of the full type name, CamelCased.
 // The values of type Foo.Bar are call Foo_value1... not Foo_Bar_value1... .
 func (e *EnumDescriptor) prefix() string {
+	typeName := e.alias()
 	if e.parent == nil {
 		// If the enum is not part of a message, the prefix is just the type name.
-		return CamelCase(*e.Name) + "_"
+		return CamelCase(typeName[len(typeName)-1]) + "_"
 	}
-	typeName := e.TypeName()
 	return CamelCaseSlice(typeName[0:len(typeName)-1]) + "_"
 }
 
@@ -1411,7 +1423,7 @@ func (g *Generator) generateImported(id *ImportedDescriptor) {
 // Generate the enum definitions for this EnumDescriptor.
 func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	// The full type name
-	typeName := enum.TypeName()
+	typeName := enum.alias()
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
 	ccPrefix := enum.prefix()
@@ -1426,8 +1438,12 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	g.In()
 	for i, e := range enum.Value {
 		g.PrintComments(fmt.Sprintf("%s,%d,%d", enum.path, enumValuePath, i))
+		name := *e.Name
+		if gogoproto.IsEnumValueCustomName(e) {
+			name = gogoproto.GetEnumValueCustomName(e)
+		}
+		name = ccPrefix + name
 
-		name := ccPrefix + *e.Name
 		g.P(name, " ", ccTypeName, " = ", e.Number)
 		g.file.addExport(enum, constOrVarSymbol{name, "const", ccTypeName})
 	}
@@ -2178,6 +2194,25 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				log.Printf("don't know how to generate constant for %s", fieldname)
 				continue
 			}
+
+			// hunt down the actual enum corresponding to the default
+			var enumValue *descriptor.EnumValueDescriptorProto
+			for _, ev := range enum.Value {
+				if def == ev.GetName() {
+					enumValue = ev
+				}
+			}
+
+			if enumValue != nil {
+				if gogoproto.IsEnumValueCustomName(enumValue) {
+					def = gogoproto.GetEnumValueCustomName(enumValue)
+				}
+			} else {
+				g.Fail(fmt.Sprintf("could not resolve default enum value for %v.%v",
+					g.DefaultPackageName(obj), def))
+
+			}
+
 			if gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 				def = g.DefaultPackageName(obj) + enum.prefix() + def
 			} else {
@@ -2397,6 +2432,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					g.P("return 0 // empty enum")
 				} else {
 					first := enum.Value[0].GetName()
+					if gogoproto.IsEnumValueCustomName(enum.Value[0]) {
+						first = gogoproto.GetEnumValueCustomName(enum.Value[0])
+					}
+
 					if gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 						g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
 					} else {

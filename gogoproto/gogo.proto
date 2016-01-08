@@ -36,6 +36,11 @@ extend google.protobuf.EnumOptions {
 	optional bool goproto_enum_prefix = 62001;
 	optional bool goproto_enum_stringer = 62021;
 	optional bool enum_stringer = 62022;
+	optional string enum_customname = 62023;
+}
+
+extend google.protobuf.EnumValueOptions {
+	optional string enumvalue_customname = 66001;
 }
 
 extend google.protobuf.FileOptions {
@@ -67,7 +72,6 @@ extend google.protobuf.FileOptions {
 	optional bool goproto_extensions_map_all = 63025;
 	optional bool goproto_unrecognized_all = 63026;
 	optional bool gogoproto_import = 63027;
-
 	optional bool protosizer_all = 63028;
 }
 
