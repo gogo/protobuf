@@ -2098,7 +2098,10 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MyBytes = append([]byte{}, data[iNdEx:postIndex]...)
+			m.MyBytes = append(m.MyBytes[:0], data[iNdEx:postIndex]...)
+			if m.MyBytes == nil {
+				m.MyBytes = []byte{}
+			}
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
@@ -2126,7 +2129,10 @@ func (m *Castaway) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NormalBytes = append([]byte{}, data[iNdEx:postIndex]...)
+			m.NormalBytes = append(m.NormalBytes[:0], data[iNdEx:postIndex]...)
+			if m.NormalBytes == nil {
+				m.NormalBytes = []byte{}
+			}
 			iNdEx = postIndex
 		case 7:
 			if wireType != 0 {

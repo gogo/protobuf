@@ -1491,7 +1491,10 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00004000)
 		default:
@@ -1903,7 +1906,10 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00004000)
 		default:

@@ -25420,7 +25420,10 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -25771,7 +25774,10 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -28393,7 +28399,10 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -28697,7 +28706,10 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -30573,7 +30585,10 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -30844,7 +30859,10 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -32686,7 +32704,10 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Data = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Data = append(m.Data[:0], data[iNdEx:postIndex]...)
+			if m.Data == nil {
+				m.Data = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -33763,7 +33784,10 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			if m.Field15 == nil {
+				m.Field15 = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -34182,7 +34206,10 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldO = append([]byte{}, data[iNdEx:postIndex]...)
+			m.FieldO = append(m.FieldO[:0], data[iNdEx:postIndex]...)
+			if m.FieldO == nil {
+				m.FieldO = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -34533,7 +34560,10 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldO = append([]byte{}, data[iNdEx:postIndex]...)
+			m.FieldO = append(m.FieldO[:0], data[iNdEx:postIndex]...)
+			if m.FieldO == nil {
+				m.FieldO = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -35184,7 +35214,10 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldJ = append([]byte{}, data[iNdEx:postIndex]...)
+			m.FieldJ = append(m.FieldJ[:0], data[iNdEx:postIndex]...)
+			if m.FieldJ == nil {
+				m.FieldJ = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

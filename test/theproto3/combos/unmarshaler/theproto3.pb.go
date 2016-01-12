@@ -5902,7 +5902,10 @@ func (m *Message) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Data = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Data = append(m.Data[:0], data[iNdEx:postIndex]...)
+			if m.Data == nil {
+				m.Data = []byte{}
+			}
 			iNdEx = postIndex
 		case 7:
 			if wireType != 0 {

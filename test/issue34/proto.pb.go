@@ -117,7 +117,10 @@ func (m *Foo) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Bar = append([]byte{}, data[iNdEx:postIndex]...)
+			m.Bar = append(m.Bar[:0], data[iNdEx:postIndex]...)
+			if m.Bar == nil {
+				m.Bar = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

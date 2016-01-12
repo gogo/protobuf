@@ -773,7 +773,12 @@ func (p *unmarshal) field(file *descriptor.FileDescriptorProto, msg *generator.D
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-iNdEx))`)
 				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[iNdEx:postIndex])`)
 			} else {
-				p.P(`m.`, fieldname, ` = append([]byte{}`, `, data[iNdEx:postIndex]...)`)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `[:0] , data[iNdEx:postIndex]...)`)
+				p.P(`if m.`, fieldname, ` == nil {`)
+				p.In()
+				p.P(`m.`, fieldname, ` = []byte{}`)
+				p.Out()
+				p.P(`}`)
 			}
 		} else {
 			_, ctyp, err := generator.GetCustomType(field)
