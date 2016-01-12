@@ -8,7 +8,7 @@ before_install:
   - PATH=/home/travis/bin:$PATH protoc --version
 
 script:
-  - PATH=/home/travis/bin:$PATH make all
+  - PATH=/home/travis/bin:$PATH make buildserverall
 
 language: go
 

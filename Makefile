@@ -30,6 +30,8 @@
 
 all: clean install regenerate install tests errcheck vet
 
+buildserverall: clean install regenerate install tests vet
+
 install:
 	go install ./proto
 	go install ./gogoproto
@@ -104,7 +106,7 @@ errcheck:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	(cd $(GOPATH)/src/github.com/gogo/protobuf && make all)
+	(cd $(GOPATH)/src/github.com/gogo/protobuf && make buildserverall)
 
 testall:
 	make -C protoc-gen-gogo/testdata test
