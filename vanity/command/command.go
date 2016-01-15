@@ -29,8 +29,11 @@
 package command
 
 import (
+	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"os"
+	"path"
 
 	"github.com/gogo/protobuf/proto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
@@ -127,12 +130,28 @@ func Generate(req *plugin.CodeGeneratorRequest) *plugin.CodeGeneratorResponse {
 	}
 
 	for i := 0; i < len(g.Response.File); i++ {
-		formatted, err := format.Source([]byte(g.Response.File[i].GetContent()))
-		if err != nil {
-			g.Error(err, "go format error")
+
+		// Format .go files
+		if path.Ext(g.Response.File[i].GetName()) == ".go" {
+			formatted, err := format.Source([]byte(g.Response.File[i].GetContent()))
+			if err != nil {
+				g.Error(err, "go format error")
+			}
+			fmts := string(formatted)
+			g.Response.File[i].Content = &fmts
 		}
-		fmts := string(formatted)
-		g.Response.File[i].Content = &fmts
+
+		// Format .json files
+		if path.Ext(g.Response.File[i].GetName()) == ".json" {
+			formatted := bytes.Buffer{}
+			err := json.Indent(&formatted, []byte(g.Response.File[i].GetContent()), "", "  ")
+			if err != nil {
+				g.Error(err, "go format error")
+			}
+			fmts := formatted.String()
+			g.Response.File[i].Content = &fmts
+		}
+
 	}
 	return g.Response
 }
