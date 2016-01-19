@@ -31,8 +31,10 @@ import (
 )
 
 type MyInt32Type int32
+type MyFloat32Type float32
 
 type MyUint64Type uint64
+type MyFloat64Type float64
 
 type Bytes []byte
 
