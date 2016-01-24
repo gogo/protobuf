@@ -174,7 +174,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.In()
 		p.P(`Proto() `, protoPkg.Use(), `.Message`)
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
@@ -198,7 +198,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(``)
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			goTyp, _ := p.GoType(message, field)
 			if generator.IsMap(file.FileDescriptorProto, field) {
 				m := p.GoMapType(nil, field)
@@ -216,7 +216,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			p.P(`this.`, fieldname, ` = that.Get`, fieldname, `()`)
 		}
 		p.P(`return this`)

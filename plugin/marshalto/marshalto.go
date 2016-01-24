@@ -371,7 +371,7 @@ func (this orderFields) Swap(i, j int) {
 }
 
 func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	fieldname := p.GetOneOfFieldName(file, message, field)
+	fieldname := p.GetOneOfFieldName(message, field)
 	nullable := gogoproto.IsNullable(field)
 	repeated := field.IsRepeated()
 	required := field.IsRequired()
@@ -1183,7 +1183,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 				p.generateField(proto3, numGen, file, message, field)
 			} else {
-				fieldname := p.GetFieldName(file, message, field)
+				fieldname := p.GetFieldName(message, field)
 				if _, ok := oneofs[fieldname]; !ok {
 					oneofs[fieldname] = struct{}{}
 					p.P(`if m.`, fieldname, ` != nil {`)
@@ -1241,7 +1241,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(file, message, field)
+			ccTypeName := p.OneOfTypeName(message, field)
 			p.P(`func (m *`, ccTypeName, `) MarshalTo(data []byte) (int, error) {`)
 			p.In()
 			p.P(`i := 0`)

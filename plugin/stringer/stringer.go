@@ -149,7 +149,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			if !generator.IsMap(file.FileDescriptorProto, field) {
 				continue
 			}
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 
 			m := p.GoMapType(nil, field)
 			mapgoTyp, keyField, keyAliasField := m.GoType, m.KeyField, m.KeyAliasField
@@ -188,7 +188,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			oneof := field.OneofIndex != nil
 			if oneof {
 				if _, ok := oneofs[fieldname]; ok {
@@ -242,7 +242,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(file, message, field)
+			ccTypeName := p.OneOfTypeName(message, field)
 			p.P(`func (this *`, ccTypeName, `) String() string {`)
 			p.In()
 			p.P(`if this == nil {`)
@@ -251,7 +251,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 			p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
-			fieldname := p.GetOneOfFieldName(file, message, field)
+			fieldname := p.GetOneOfFieldName(message, field)
 			if field.IsMessage() || p.IsGroup(field) {
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)

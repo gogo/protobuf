@@ -430,7 +430,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`var v uint64`)
 			p.decodeFixed64("v", "uint64")
 			if oneof {
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))}`)
 			} else if repeated {
 				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
@@ -444,7 +444,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v float64`)
 				p.unsafeFixed64("v", "float64")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v float64`)
 				p.unsafeFixed64("v", "float64")
@@ -462,7 +462,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`var v uint32`)
 			p.decodeFixed32("v", "uint32")
 			if oneof {
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))}`)
 			} else if repeated {
 				p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
@@ -476,7 +476,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v float32`)
 				p.unsafeFixed32("v", "float32")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v float32`)
 				p.unsafeFixed32("v", "float32")
@@ -493,7 +493,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
@@ -510,7 +510,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
@@ -527,7 +527,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
@@ -545,7 +545,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v `, typ)
 				p.decodeFixed64("v", typ)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v `, typ)
 				p.decodeFixed64("v", typ)
@@ -562,7 +562,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v uint64`)
 				p.unsafeFixed64("v", "uint64")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v uint64`)
 				p.unsafeFixed64("v", "uint64")
@@ -580,7 +580,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v `, typ)
 				p.decodeFixed32("v", typ)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v `, typ)
 				p.decodeFixed32("v", typ)
@@ -597,7 +597,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v uint32`)
 				p.unsafeFixed32("v", "uint32")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v uint32`)
 				p.unsafeFixed32("v", "uint32")
@@ -615,7 +615,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", "int")
 		if oneof {
 			p.P(`b := `, typ, `(v != 0)`)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{b}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{b}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v != 0))`)
 		} else if proto3 || !nullable {
@@ -640,7 +640,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{`, typ, `(data[iNdEx:postIndex])}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(data[iNdEx:postIndex])}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(data[iNdEx:postIndex]))`)
 		} else if proto3 || !nullable {
@@ -675,7 +675,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`return err`)
 			p.Out()
 			p.P(`}`)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if generator.IsMap(file.FileDescriptorProto, field) {
 			m := p.GoMapType(nil, field)
 
@@ -768,7 +768,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`v := make([]byte, postIndex-iNdEx)`)
 				p.P(`copy(v, data[iNdEx:postIndex])`)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-iNdEx))`)
 				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[iNdEx:postIndex])`)
@@ -793,7 +793,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				p.P(`return err`)
 				p.Out()
 				p.P(`}`)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{*v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{*v}`)
 			} else if repeated {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
@@ -823,7 +823,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
@@ -841,7 +841,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typName)
 			p.decodeVarint("v", typName)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typName)
 			p.decodeVarint("v", typName)
@@ -859,7 +859,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v `, typ)
 				p.decodeFixed32("v", typ)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v `, typ)
 				p.decodeFixed32("v", typ)
@@ -876,7 +876,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v int32`)
 				p.unsafeFixed32("v", "int32")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v int32`)
 				p.unsafeFixed32("v", "int32")
@@ -894,7 +894,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v `, typ)
 				p.decodeFixed64("v", typ)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v `, typ)
 				p.decodeFixed64("v", typ)
@@ -911,7 +911,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var v int64`)
 				p.unsafeFixed64("v", "int64")
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`var v int64`)
 				p.unsafeFixed64("v", "int64")
@@ -929,7 +929,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", typ)
 		p.P(`v = `, typ, `((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
 		} else if proto3 || !nullable {
@@ -942,7 +942,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", "uint64")
 		p.P(`v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(file, msg, field), `{`, typ, `(v)}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(v)}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v))`)
 		} else if proto3 || !nullable {
@@ -1039,10 +1039,10 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`switch fieldNum {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			errFieldname := fieldname
 			if field.OneofIndex != nil {
-				errFieldname = p.GetOneOfFieldName(file, message, field)
+				errFieldname = p.GetOneOfFieldName(message, field)
 			}
 			packed := field.IsPacked()
 			p.P(`case `, strconv.Itoa(int(field.GetNumber())), `:`)

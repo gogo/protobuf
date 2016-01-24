@@ -164,7 +164,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		for _, field := range message.Field {
 			nullable := gogoproto.IsNullable(field)
 			repeated := field.IsRepeated()
-			fieldname := p.GetFieldName(file, message, field)
+			fieldname := p.GetFieldName(message, field)
 			oneof := field.OneofIndex != nil
 			if oneof {
 				if _, ok := oneofs[fieldname]; ok {
@@ -285,7 +285,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(file, message, field)
+			ccTypeName := p.OneOfTypeName(message, field)
 			p.P(`func (this *`, ccTypeName, `) GoString() string {`)
 			p.In()
 			p.P(`if this == nil {`)
@@ -294,7 +294,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 			outFlds := []string{}
-			fieldname := p.GetOneOfFieldName(file, message, field)
+			fieldname := p.GetOneOfFieldName(message, field)
 			if field.IsMessage() || p.IsGroup(field) {
 				tmp := strings.Join([]string{"`", fieldname, ":` + "}, "")
 				tmp += strings.Join([]string{fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `)`}, "")

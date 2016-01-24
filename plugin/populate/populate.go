@@ -216,7 +216,7 @@ func (p *plugin) getEnumVal(field *descriptor.FieldDescriptorProto, goTyp string
 func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	goTyp, _ := p.GoType(message, field)
-	fieldname := p.GetOneOfFieldName(file, message, field)
+	fieldname := p.GetOneOfFieldName(message, field)
 	goTypName := generator.GoTypeToName(goTyp)
 	if p.IsMap(field) {
 		m := p.GoMapType(nil, field)
@@ -553,7 +553,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 						p.P(`}`)
 					}
 				} else {
-					fieldname := p.GetFieldName(file, message, field)
+					fieldname := p.GetFieldName(message, field)
 					if _, ok := oneofs[fieldname]; ok {
 						continue
 					} else {
@@ -561,7 +561,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					}
 					fieldNumbers := []int32{}
 					for _, f := range message.Field {
-						fname := p.GetFieldName(file, message, f)
+						fname := p.GetFieldName(message, f)
 						if fname == fieldname {
 							fieldNumbers = append(fieldNumbers, f.GetNumber())
 						}
@@ -570,13 +570,13 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					p.P(`oneofNumber_`, fieldname, ` := `, fmt.Sprintf("%#v", fieldNumbers), `[r.Intn(`, strconv.Itoa(len(fieldNumbers)), `)]`)
 					p.P(`switch oneofNumber_`, fieldname, ` {`)
 					for _, f := range message.Field {
-						fname := p.GetFieldName(file, message, f)
+						fname := p.GetFieldName(message, f)
 						if fname != fieldname {
 							continue
 						}
 						p.P(`case `, strconv.Itoa(int(f.GetNumber())), `:`)
 						p.In()
-						ccTypeName := p.OneOfTypeName(file, message, f)
+						ccTypeName := p.OneOfTypeName(message, f)
 						p.P(`this.`, fname, ` = NewPopulated`, ccTypeName, `(r, easy)`)
 						p.Out()
 					}
@@ -642,7 +642,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(file, message, f)
+			ccTypeName := p.OneOfTypeName(message, f)
 			p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 			p.In()
 			p.P(`this := &`, ccTypeName, `{}`)

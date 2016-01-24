@@ -68,10 +68,10 @@ func (g *Generator) TypeNameByObject(typeName string) Object {
 	return o
 }
 
-func (g *Generator) OneOfTypeName(file *FileDescriptor, message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
 	typeName := message.TypeName()
 	ccTypeName := CamelCaseSlice(typeName)
-	fieldName := g.GetOneOfFieldName(file, message, field)
+	fieldName := g.GetOneOfFieldName(message, field)
 	tname := ccTypeName + "_" + fieldName
 	// It is possible for this to collide with a message or enum
 	// nested in this message. Check for collisions.
@@ -163,7 +163,7 @@ func (this *importedPackage) Location() string {
 	return this.importPrefix + this.pkg
 }
 
-func (g *Generator) GetFieldName(file *FileDescriptor, message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
 	goTyp, _ := g.GoType(message, field)
 	fieldname := CamelCase(*field.Name)
 	if gogoproto.IsCustomName(field) {
@@ -181,7 +181,7 @@ func (g *Generator) GetFieldName(file *FileDescriptor, message *Descriptor, fiel
 			return fieldname + "_"
 		}
 	}
-	if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+	if gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
 		if fieldname == "ProtoSize" {
 			return fieldname + "_"
 		}
@@ -193,7 +193,7 @@ func (g *Generator) GetFieldName(file *FileDescriptor, message *Descriptor, fiel
 	return fieldname
 }
 
-func (g *Generator) GetOneOfFieldName(file *FileDescriptor, message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
 	goTyp, _ := g.GoType(message, field)
 	fieldname := CamelCase(*field.Name)
 	if gogoproto.IsCustomName(field) {
@@ -207,7 +207,7 @@ func (g *Generator) GetOneOfFieldName(file *FileDescriptor, message *Descriptor,
 			return fieldname + "_"
 		}
 	}
-	if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+	if gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
 		if fieldname == "ProtoSize" {
 			return fieldname + "_"
 		}

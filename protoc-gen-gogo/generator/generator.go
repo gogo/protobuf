@@ -1186,7 +1186,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 		if desc.GetOptions().GetMapEntry() {
 			continue
 		}
-		g.generateMessage(file, desc)
+		g.generateMessage(desc)
 	}
 	for _, ext := range g.file.ext {
 		g.generateExtension(ext)
@@ -1864,7 +1864,7 @@ var methodNames = [...]string{
 }
 
 // Generate the type and default constant definitions for this Descriptor.
-func (g *Generator) generateMessage(file *FileDescriptor, message *Descriptor) {
+func (g *Generator) generateMessage(message *Descriptor) {
 	// The full type name
 	typeName := message.TypeName()
 	// The full type name, CamelCased.
@@ -1874,7 +1874,7 @@ func (g *Generator) generateMessage(file *FileDescriptor, message *Descriptor) {
 	for _, n := range methodNames {
 		usedNames[n] = true
 	}
-	if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+	if gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
 		usedNames["ProtoSize"] = true
 	} else {
 		usedNames["Size"] = true

@@ -12,6 +12,7 @@ option (gogoproto.equal_all) = true;
 
 message SizeMessage {
 	optional int64 size = 1;
-	optional bool Equal = 2;
-	optional string String = 3;
+	optional int64 proto_size = 2;
+	optional bool Equal = 3;
+	optional string String = 4;
 }

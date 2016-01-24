@@ -29,8 +29,9 @@ var _ = math.Inf
 
 type SizeMessage struct {
 	Size             *int64  `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
-	Equal_           *bool   `protobuf:"varint,2,opt,name=Equal" json:"Equal,omitempty"`
-	String_          *string `protobuf:"bytes,3,opt,name=String" json:"String,omitempty"`
+	ProtoSize_       *int64  `protobuf:"varint,2,opt,name=proto_size" json:"proto_size,omitempty"`
+	Equal_           *bool   `protobuf:"varint,3,opt,name=Equal" json:"Equal,omitempty"`
+	String_          *string `protobuf:"bytes,4,opt,name=String" json:"String,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -41,6 +42,13 @@ func (*SizeMessage) ProtoMessage()    {}
 func (m *SizeMessage) GetSize() int64 {
 	if m != nil && m.Size != nil {
 		return *m.Size
+	}
+	return 0
+}
+
+func (m *SizeMessage) GetProtoSize_() int64 {
+	if m != nil && m.ProtoSize_ != nil {
+		return *m.ProtoSize_
 	}
 	return 0
 }
@@ -96,6 +104,15 @@ func (this *SizeMessage) Equal(that interface{}) bool {
 	} else if that1.Size != nil {
 		return false
 	}
+	if this.ProtoSize_ != nil && that1.ProtoSize_ != nil {
+		if *this.ProtoSize_ != *that1.ProtoSize_ {
+			return false
+		}
+	} else if this.ProtoSize_ != nil {
+		return false
+	} else if that1.ProtoSize_ != nil {
+		return false
+	}
 	if this.Equal_ != nil && that1.Equal_ != nil {
 		if *this.Equal_ != *that1.Equal_ {
 			return false
@@ -139,8 +156,13 @@ func (m *SizeMessage) MarshalTo(data []byte) (int, error) {
 		i++
 		i = encodeVarintProtosize(data, i, uint64(*m.Size))
 	}
-	if m.Equal_ != nil {
+	if m.ProtoSize_ != nil {
 		data[i] = 0x10
+		i++
+		i = encodeVarintProtosize(data, i, uint64(*m.ProtoSize_))
+	}
+	if m.Equal_ != nil {
+		data[i] = 0x18
 		i++
 		if *m.Equal_ {
 			data[i] = 1
@@ -150,7 +172,7 @@ func (m *SizeMessage) MarshalTo(data []byte) (int, error) {
 		i++
 	}
 	if m.String_ != nil {
-		data[i] = 0x1a
+		data[i] = 0x22
 		i++
 		i = encodeVarintProtosize(data, i, uint64(len(*m.String_)))
 		i += copy(data[i:], *m.String_)
@@ -198,15 +220,22 @@ func NewPopulatedSizeMessage(r randyProtosize, easy bool) *SizeMessage {
 		this.Size = &v1
 	}
 	if r.Intn(10) != 0 {
-		v2 := bool(bool(r.Intn(2) == 0))
-		this.Equal_ = &v2
+		v2 := int64(r.Int63())
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
+		this.ProtoSize_ = &v2
 	}
 	if r.Intn(10) != 0 {
-		v3 := randStringProtosize(r)
-		this.String_ = &v3
+		v3 := bool(bool(r.Intn(2) == 0))
+		this.Equal_ = &v3
+	}
+	if r.Intn(10) != 0 {
+		v4 := randStringProtosize(r)
+		this.String_ = &v4
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedProtosize(r, 4)
+		this.XXX_unrecognized = randUnrecognizedProtosize(r, 5)
 	}
 	return this
 }
@@ -230,9 +259,9 @@ func randUTF8RuneProtosize(r randyProtosize) rune {
 	return rune(ru + 61)
 }
 func randStringProtosize(r randyProtosize) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	v5 := r.Intn(100)
+	tmps := make([]rune, v5)
+	for i := 0; i < v5; i++ {
 		tmps[i] = randUTF8RuneProtosize(r)
 	}
 	return string(tmps)
@@ -254,11 +283,11 @@ func randFieldProtosize(data []byte, r randyProtosize, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		data = encodeVarintPopulateProtosize(data, uint64(key))
-		v5 := r.Int63()
+		v6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			v6 *= -1
 		}
-		data = encodeVarintPopulateProtosize(data, uint64(v5))
+		data = encodeVarintPopulateProtosize(data, uint64(v6))
 	case 1:
 		data = encodeVarintPopulateProtosize(data, uint64(key))
 		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -288,6 +317,9 @@ func (m *SizeMessage) ProtoSize() (n int) {
 	_ = l
 	if m.Size != nil {
 		n += 1 + sovProtosize(uint64(*m.Size))
+	}
+	if m.ProtoSize_ != nil {
+		n += 1 + sovProtosize(uint64(*m.ProtoSize_))
 	}
 	if m.Equal_ != nil {
 		n += 2
@@ -366,6 +398,26 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			m.Size = &v
 		case 2:
 			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProtoSize_", wireType)
+			}
+			var v int64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowProtosize
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				v |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ProtoSize_ = &v
+		case 3:
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Equal_", wireType)
 			}
 			var v int
@@ -385,7 +437,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			}
 			b := bool(v != 0)
 			m.Equal_ = &b
-		case 3:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field String_", wireType)
 			}

@@ -196,7 +196,7 @@ func (p *size) sizeZigZag() {
 }
 
 func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	fieldname := p.GetOneOfFieldName(file, message, field)
+	fieldname := p.GetOneOfFieldName(message, field)
 	nullable := gogoproto.IsNullable(field)
 	repeated := field.IsRepeated()
 	if repeated {
@@ -520,7 +520,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 				p.generateField(proto3, file, message, field)
 			} else {
-				fieldname := p.GetFieldName(file, message, field)
+				fieldname := p.GetFieldName(message, field)
 				if _, ok := oneofs[fieldname]; ok {
 					continue
 				} else {
@@ -563,7 +563,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(file, message, f)
+			ccTypeName := p.OneOfTypeName(message, f)
 			p.P(`func (m *`, ccTypeName, `) ProtoSize() (n int) {`)
 			p.In()
 			p.P(`var l int`)
