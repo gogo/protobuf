@@ -298,7 +298,7 @@ func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string, verbose bool) {
 
 func (p *plugin) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, verbose bool) {
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-	fieldname := p.GetOneOfFieldName(message, field)
+	fieldname := p.GetOneOfFieldName(file, message, field)
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
 	nullable := gogoproto.IsNullable(field)
@@ -451,7 +451,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	for _, field := range message.Field {
 		oneof := field.OneofIndex != nil
 		if oneof {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(file, message, field)
 			if _, ok := oneofs[fieldname]; ok {
 				continue
 			} else {
@@ -575,7 +575,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 		if !oneof {
 			continue
 		}
-		ccTypeName := p.OneOfTypeName(message, field)
+		ccTypeName := p.OneOfTypeName(file, message, field)
 		if verbose {
 			p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
 		} else {

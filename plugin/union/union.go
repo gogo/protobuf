@@ -148,7 +148,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`func (this *`, ccTypeName, `) GetValue() interface{} {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(file, message, field)
 			if fieldname == "Value" {
 				panic("cannot have a onlyone message " + ccTypeName + " with a field named Value")
 			}
@@ -167,7 +167,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`switch vt := value.(type) {`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(file, message, field)
 			goTyp, _ := p.GoType(message, field)
 			p.P(`case `, goTyp, `:`)
 			p.In()
@@ -177,7 +177,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(`default:`)
 		p.In()
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(file, message, field)
 			if field.IsMessage() {
 				goTyp, _ := p.GoType(message, field)
 				obj := p.ObjectNamed(field.GetTypeName()).(*generator.Descriptor)

@@ -601,7 +601,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck"}
+	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -1186,7 +1186,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 		if desc.GetOptions().GetMapEntry() {
 			continue
 		}
-		g.generateMessage(desc)
+		g.generateMessage(file, desc)
 	}
 	for _, ext := range g.file.ext {
 		g.generateExtension(ext)
@@ -1857,7 +1857,6 @@ var methodNames = [...]string{
 	"ExtensionRangeArray",
 	"ExtensionMap",
 	"Descriptor",
-	"Size",
 	"MarshalTo",
 	"Equal",
 	"VerboseEqual",
@@ -1865,7 +1864,7 @@ var methodNames = [...]string{
 }
 
 // Generate the type and default constant definitions for this Descriptor.
-func (g *Generator) generateMessage(message *Descriptor) {
+func (g *Generator) generateMessage(file *FileDescriptor, message *Descriptor) {
 	// The full type name
 	typeName := message.TypeName()
 	// The full type name, CamelCased.
@@ -1874,6 +1873,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	usedNames := make(map[string]bool)
 	for _, n := range methodNames {
 		usedNames[n] = true
+	}
+	if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+		usedNames["ProtoSize"] = true
+	} else {
+		usedNames["Size"] = true
 	}
 	fieldNames := make(map[*descriptor.FieldDescriptorProto]string)
 	fieldGetterNames := make(map[*descriptor.FieldDescriptorProto]string)
@@ -2209,6 +2213,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 			if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
 				g.P(`Size() int`)
+			}
+			if gogoproto.IsProtoSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`ProtoSize() int`)
 			}
 			g.Out()
 			g.P("}")
