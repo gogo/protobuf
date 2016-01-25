@@ -46,6 +46,22 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	Tag:           "varint,62022,opt,name=enum_stringer",
 }
 
+var E_EnumGostyle = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         62023,
+	Name:          "gogoproto.enum_gostyle",
+	Tag:           "varint,62023,opt,name=enum_gostyle",
+}
+
+var E_EnumCustomname = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         62024,
+	Name:          "gogoproto.enum_customname",
+	Tag:           "bytes,62024,opt,name=enum_customname",
+}
+
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -228,6 +244,14 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
 	Tag:           "varint,63027,opt,name=gogoproto_import",
+}
+
+var E_EnumGostyleAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63028,
+	Name:          "gogoproto.enum_gostyle_all",
+	Tag:           "varint,63028,opt,name=enum_gostyle_all",
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
@@ -458,6 +482,8 @@ func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
 	proto.RegisterExtension(E_EnumStringer)
+	proto.RegisterExtension(E_EnumGostyle)
+	proto.RegisterExtension(E_EnumCustomname)
 	proto.RegisterExtension(E_GoprotoGettersAll)
 	proto.RegisterExtension(E_GoprotoEnumPrefixAll)
 	proto.RegisterExtension(E_GoprotoStringerAll)
@@ -481,6 +507,7 @@ func init() {
 	proto.RegisterExtension(E_GoprotoExtensionsMapAll)
 	proto.RegisterExtension(E_GoprotoUnrecognizedAll)
 	proto.RegisterExtension(E_GogoprotoImport)
+	proto.RegisterExtension(E_EnumGostyleAll)
 	proto.RegisterExtension(E_GoprotoGetters)
 	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)
