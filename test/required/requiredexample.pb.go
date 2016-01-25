@@ -407,10 +407,10 @@ func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
 	_ = l
 	data[i] = 0x9
 	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(m.Field1)))
+	i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(float64(m.Field1))))
 	data[i] = 0x15
 	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(m.Field2)))
+	i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(float32(m.Field2))))
 	data[i] = 0x18
 	i++
 	i = encodeVarintRequiredexample(data, i, uint64(m.Field3))
@@ -485,14 +485,14 @@ func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
 	} else {
 		data[i] = 0x9
 		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(*m.Field1)))
+		i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(float64(*m.Field1))))
 	}
 	if m.Field2 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
 	} else {
 		data[i] = 0x15
 		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(*m.Field2)))
+		i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(float32(*m.Field2))))
 	}
 	if m.Field3 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")

@@ -306,9 +306,9 @@ func wireToType(wire string) int {
 func (p *marshalto) mapField(numGen NumGen, fieldTyp descriptor.FieldDescriptorProto_Type, varName string) {
 	switch fieldTyp {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		p.callFixed64(p.mathPkg.Use(), `.Float64bits(`, varName, `)`)
+		p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(`, varName, `))`)
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		p.callFixed32(p.mathPkg.Use(), `.Float32bits(`, varName, `)`)
+		p.callFixed32(p.mathPkg.Use(), `.Float32bits(float32(`, varName, `))`)
 	case descriptor.FieldDescriptorProto_TYPE_INT64,
 		descriptor.FieldDescriptorProto_TYPE_UINT64,
 		descriptor.FieldDescriptorProto_TYPE_INT32,
@@ -397,13 +397,13 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 	}
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if packed {
 				p.encodeKey(fieldNumber, wireType)
 				p.callVarint(`len(m.`, fieldname, `) * 8`)
 				p.P(`for _, num := range m.`, fieldname, ` {`)
 				p.In()
-				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float64bits(num)`)
+				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float64bits(float64(num))`)
 				p.encodeFixed64("f" + numGen.Current())
 				p.Out()
 				p.P(`}`)
@@ -411,7 +411,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`for _, num := range m.`, fieldname, ` {`)
 				p.In()
 				p.encodeKey(fieldNumber, wireType)
-				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float64bits(num)`)
+				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float64bits(float64(num))`)
 				p.encodeFixed64("f" + numGen.Current())
 				p.Out()
 				p.P(`}`)
@@ -419,15 +419,15 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`if m.`, fieldname, ` != 0 {`)
 				p.In()
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed64(p.mathPkg.Use(), `.Float64bits(m.`+fieldname, `)`)
+				p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(m.`+fieldname, `))`)
 				p.Out()
 				p.P(`}`)
 			} else if !nullable {
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed64(p.mathPkg.Use(), `.Float64bits(m.`+fieldname, `)`)
+				p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(m.`+fieldname, `))`)
 			} else {
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed64(p.mathPkg.Use(), `.Float64bits(*m.`+fieldname, `)`)
+				p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(*m.`+fieldname, `))`)
 			}
 		} else {
 			if packed {
@@ -461,13 +461,13 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		if !p.unsafe {
+		if !p.unsafe || gogoproto.IsCastType(field) {
 			if packed {
 				p.encodeKey(fieldNumber, wireType)
 				p.callVarint(`len(m.`, fieldname, `) * 4`)
 				p.P(`for _, num := range m.`, fieldname, ` {`)
 				p.In()
-				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float32bits(num)`)
+				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float32bits(float32(num))`)
 				p.encodeFixed32("f" + numGen.Current())
 				p.Out()
 				p.P(`}`)
@@ -475,7 +475,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`for _, num := range m.`, fieldname, ` {`)
 				p.In()
 				p.encodeKey(fieldNumber, wireType)
-				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float32bits(num)`)
+				p.P(`f`, numGen.Next(), ` := `, p.mathPkg.Use(), `.Float32bits(float32(num))`)
 				p.encodeFixed32("f" + numGen.Current())
 				p.Out()
 				p.P(`}`)
@@ -483,15 +483,15 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`if m.`, fieldname, ` != 0 {`)
 				p.In()
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed32(p.mathPkg.Use(), `.Float32bits(m.`+fieldname, `)`)
+				p.callFixed32(p.mathPkg.Use(), `.Float32bits(float32(m.`+fieldname, `))`)
 				p.Out()
 				p.P(`}`)
 			} else if !nullable {
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed32(p.mathPkg.Use(), `.Float32bits(m.`+fieldname, `)`)
+				p.callFixed32(p.mathPkg.Use(), `.Float32bits(float32(m.`+fieldname, `))`)
 			} else {
 				p.encodeKey(fieldNumber, wireType)
-				p.callFixed32(p.mathPkg.Use(), `.Float32bits(*m.`+fieldname, `)`)
+				p.callFixed32(p.mathPkg.Use(), `.Float32bits(float32(*m.`+fieldname, `))`)
 			}
 		} else {
 			if packed {

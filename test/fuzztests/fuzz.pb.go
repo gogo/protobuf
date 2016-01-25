@@ -604,7 +604,7 @@ func (m *NinRepPackedNative) MarshalTo(data []byte) (int, error) {
 		i++
 		i = encodeVarintFuzz(data, i, uint64(len(m.Field1)*8))
 		for _, num := range m.Field1 {
-			f1 := math.Float64bits(num)
+			f1 := math.Float64bits(float64(num))
 			data[i] = uint8(f1)
 			i++
 			data[i] = uint8(f1 >> 8)
@@ -628,7 +628,7 @@ func (m *NinRepPackedNative) MarshalTo(data []byte) (int, error) {
 		i++
 		i = encodeVarintFuzz(data, i, uint64(len(m.Field2)*4))
 		for _, num := range m.Field2 {
-			f2 := math.Float32bits(num)
+			f2 := math.Float32bits(float32(num))
 			data[i] = uint8(f2)
 			i++
 			data[i] = uint8(f2 >> 8)
@@ -858,12 +858,12 @@ func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
 	if m.Field1 != nil {
 		data[i] = 0x9
 		i++
-		i = encodeFixed64Fuzz(data, i, uint64(math.Float64bits(*m.Field1)))
+		i = encodeFixed64Fuzz(data, i, uint64(math.Float64bits(float64(*m.Field1))))
 	}
 	if m.Field2 != nil {
 		data[i] = 0x15
 		i++
-		i = encodeFixed32Fuzz(data, i, uint32(math.Float32bits(*m.Field2)))
+		i = encodeFixed32Fuzz(data, i, uint32(math.Float32bits(float32(*m.Field2))))
 	}
 	if m.Field3 != nil {
 		data[i] = 0x18
@@ -961,12 +961,12 @@ func (m *NinOptStruct) MarshalTo(data []byte) (int, error) {
 	if m.Field1 != nil {
 		data[i] = 0x9
 		i++
-		i = encodeFixed64Fuzz(data, i, uint64(math.Float64bits(*m.Field1)))
+		i = encodeFixed64Fuzz(data, i, uint64(math.Float64bits(float64(*m.Field1))))
 	}
 	if m.Field2 != nil {
 		data[i] = 0x15
 		i++
-		i = encodeFixed32Fuzz(data, i, uint32(math.Float32bits(*m.Field2)))
+		i = encodeFixed32Fuzz(data, i, uint32(math.Float32bits(float32(*m.Field2))))
 	}
 	if m.Field3 != nil {
 		data[i] = 0x1a
