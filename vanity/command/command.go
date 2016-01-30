@@ -48,7 +48,6 @@ import (
 	_ "github.com/gogo/protobuf/plugin/marshalto"
 	_ "github.com/gogo/protobuf/plugin/oneofcheck"
 	_ "github.com/gogo/protobuf/plugin/populate"
-	_ "github.com/gogo/protobuf/plugin/protosizer"
 	_ "github.com/gogo/protobuf/plugin/size"
 	_ "github.com/gogo/protobuf/plugin/stringer"
 	_ "github.com/gogo/protobuf/plugin/union"
