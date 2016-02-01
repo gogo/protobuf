@@ -38,7 +38,20 @@ type Codec interface {
 
 type marshaler interface {
 	MarshalTo(data []byte) (n int, err error)
-	Size() (n int)
+}
+
+func getSize(v interface{}) (int, bool) {
+	if sz, ok := v.(interface {
+		Size() (n int)
+	}); ok {
+		return sz.Size(), true
+	} else if sz, ok := v.(interface {
+		ProtoSize() (n int)
+	}); ok {
+		return sz.ProtoSize(), true
+	} else {
+		return 0, false
+	}
 }
 
 type codec struct {
@@ -55,7 +68,10 @@ func New(size int) Codec {
 
 func (this *codec) Marshal(v interface{}) ([]byte, error) {
 	if m, ok := v.(marshaler); ok {
-		n := m.Size()
+		n, ok := getSize(v)
+		if !ok {
+			return proto.Marshal(v.(proto.Message))
+		}
 		if n > len(this.buf) {
 			this.buf = make([]byte, n)
 		}

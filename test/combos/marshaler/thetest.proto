@@ -46,6 +46,7 @@ option (gogoproto.benchgen_all) = true;
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
+option (gogoproto.protosizer_all) = false;
 
 option (gogoproto.goproto_enum_stringer_all) = false;
 option (gogoproto.enum_stringer_all) = true;
