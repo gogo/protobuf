@@ -144,11 +144,11 @@ func TestSizeMessageProtoSize(t *testing.T) {
 		t.Errorf("seed = %d, size %v != marshalled size %v", seed, size, len(data))
 	}
 	if size2 != size {
-		t.Errorf("seed = %d, size %v != before marshal proto.ProtoSize %v", seed, size, size2)
+		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
 	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
-		t.Errorf("seed = %d, size %v != after marshal proto.ProtoSize %v", seed, size, size3)
+		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
