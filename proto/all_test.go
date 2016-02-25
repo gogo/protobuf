@@ -1034,7 +1034,7 @@ func TestSubmessageUnrecognizedFields(t *testing.T) {
 
 	// Unmarshal into an OldMessage.
 	om := new(OldMessage)
-	if err := Unmarshal(b, om); err != nil {
+	if err = Unmarshal(b, om); err != nil {
 		t.Fatalf("Unmarshal to OldMessage: %v", err)
 	}
 	exp := &OldMessage{
@@ -1711,7 +1711,7 @@ func TestMessageSetMarshalOrder(t *testing.T) {
 		}
 
 		m2 := &MyMessageSet{}
-		if err := Unmarshal(buf, m2); err != nil {
+		if err = Unmarshal(buf, m2); err != nil {
 			t.Errorf("Unmarshal: %v", err)
 		}
 		b2, err := Marshal(m2)
@@ -1981,7 +1981,7 @@ func TestOneof(t *testing.T) {
 		t.Errorf("Incorrect marshal of message with oneof: %v", b)
 	}
 	m.Reset()
-	if err := Unmarshal(b, m); err != nil {
+	if err = Unmarshal(b, m); err != nil {
 		t.Fatalf("Unmarshal of message with oneof: %v", err)
 	}
 	if x, ok := m.Union.(*Communique_Name); !ok || x.Name != "Barry" {

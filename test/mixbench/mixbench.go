@@ -45,7 +45,7 @@ func (this *MixMatch) Regenerate() {
 	if err != nil {
 		panic(err)
 	}
-	if err := ioutil.WriteFile("./testdata/uuid.go", uuidData, 0666); err != nil {
+	if err = ioutil.WriteFile("./testdata/uuid.go", uuidData, 0666); err != nil {
 		panic(err)
 	}
 	data, err := ioutil.ReadFile("../thetest.proto")
@@ -56,7 +56,7 @@ func (this *MixMatch) Regenerate() {
 	for i, old := range this.Old {
 		content = strings.Replace(content, old, this.New[i], -1)
 	}
-	if err := ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
+	if err = ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
 		panic(err)
 	}
 	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../protobuf/:../../../../../:.", "./testdata/thetest.proto")

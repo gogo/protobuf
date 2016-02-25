@@ -65,7 +65,7 @@ func (this MixMatch) Gen(folder string, news []string) {
 			panic(fmt.Errorf("found another string {%s} after it was replaced with {%s}", old, news[i]))
 		}
 	}
-	if err := ioutil.WriteFile(filepath.Join(folder, this.Filename), []byte(content), 0666); err != nil {
+	if err = ioutil.WriteFile(filepath.Join(folder, this.Filename), []byte(content), 0666); err != nil {
 		panic(err)
 	}
 	args := append([]string{"--gogo_out=" + this.Plugins + "."}, this.Args...)

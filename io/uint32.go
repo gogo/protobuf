@@ -73,7 +73,7 @@ func (this *uint32Writer) WriteMsg(msg proto.Message) (err error) {
 		}
 	}
 	length := uint32(len(data))
-	if err := binary.Write(this.w, this.byteOrder, &length); err != nil {
+	if err = binary.Write(this.w, this.byteOrder, &length); err != nil {
 		return err
 	}
 	_, err = this.w.Write(data)

@@ -724,15 +724,15 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 				if err != nil {
 					return err
 				}
-				tok := p.next()
-				if tok.err != nil {
-					return tok.err
+				ntok := p.next()
+				if ntok.err != nil {
+					return ntok.err
 				}
-				if tok.value == "]" {
+				if ntok.value == "]" {
 					break
 				}
-				if tok.value != "," {
-					return p.errorf("Expected ']' or ',' found %q", tok.value)
+				if ntok.value != "," {
+					return p.errorf("Expected ']' or ',' found %q", ntok.value)
 				}
 			}
 			return nil

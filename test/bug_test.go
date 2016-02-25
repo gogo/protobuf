@@ -120,7 +120,7 @@ func TestInt32Int64Compatibility(t *testing.T) {
 	//change marshaled data1 to unmarshal into 4th field which is an int64
 	data1[0] = uint8(uint32(4 /*fieldNumber*/)<<3 | uint32(0 /*wireType*/))
 	u1 := &NinOptNative{}
-	if err := proto.Unmarshal(data1, u1); err != nil {
+	if err = proto.Unmarshal(data1, u1); err != nil {
 		t.Error(err)
 	}
 	if !u1.Equal(&NinOptNative{
@@ -148,7 +148,7 @@ func TestInt32Int64Compatibility(t *testing.T) {
 		}
 	}
 	u2 := &NidOptNative{}
-	if err := proto.Unmarshal(data2, u2); err != nil {
+	if err = proto.Unmarshal(data2, u2); err != nil {
 		t.Error(err)
 	}
 	if !u2.Equal(&NidOptNative{

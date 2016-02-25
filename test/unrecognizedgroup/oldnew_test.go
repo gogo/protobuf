@@ -41,7 +41,7 @@ func TestNewOld(t *testing.T) {
 		panic(err)
 	}
 	older := &OldWithGroup{}
-	if err := proto.Unmarshal(data1, older); err != nil {
+	if err = proto.Unmarshal(data1, older); err != nil {
 		panic(err)
 	}
 	data2, err := proto.Marshal(older)
@@ -65,7 +65,7 @@ func TestOldNew(t *testing.T) {
 		panic(err)
 	}
 	newer := &NewNoGroup{}
-	if err := proto.Unmarshal(data1, newer); err != nil {
+	if err = proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
 	data2, err := proto.Marshal(newer)
@@ -89,7 +89,7 @@ func TestOldNewOldNew(t *testing.T) {
 		panic(err)
 	}
 	newer := &NewNoGroup{}
-	if err := proto.Unmarshal(data1, newer); err != nil {
+	if err = proto.Unmarshal(data1, newer); err != nil {
 		panic(err)
 	}
 	data2, err := proto.Marshal(newer)
@@ -97,10 +97,10 @@ func TestOldNewOldNew(t *testing.T) {
 		panic(err)
 	}
 	bluer := &OldWithGroup{}
-	if err := proto.Unmarshal(data2, bluer); err != nil {
+	if err = proto.Unmarshal(data2, bluer); err != nil {
 		panic(err)
 	}
-	if err := older.VerboseEqual(bluer); err != nil {
+	if err = older.VerboseEqual(bluer); err != nil {
 		t.Fatalf("%#v !VerboseProto %#v, since %v", older, bluer, err)
 	}
 
@@ -109,7 +109,7 @@ func TestOldNewOldNew(t *testing.T) {
 		panic(err)
 	}
 	purple := &NewNoGroup{}
-	if err := proto.Unmarshal(data3, purple); err != nil {
+	if err = proto.Unmarshal(data3, purple); err != nil {
 		panic(err)
 	}
 	data4, err := proto.Marshal(purple)

@@ -439,11 +439,11 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 					valTyp = "*" + valTyp
 				}
 
-				typ := "map[" + keyTyp + "]" + valTyp
+				maptyp := "map[" + keyTyp + "]" + valTyp
 				g.P("func (m *", ms.sym, ") ", get.name, "() ", typ, " {")
 				g.P("o := ", val)
 				g.P("if o == nil { return nil }")
-				g.P("s := make(", typ, ", len(o))")
+				g.P("s := make(", maptyp, ", len(o))")
 				g.P("for k, v := range o {")
 				g.P("s[k] = (", valTyp, ")(v)")
 				g.P("}")
@@ -1967,8 +1967,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			dname := "is" + ccTypeName + "_" + fname
 			oneofFieldName[*field.OneofIndex] = fname
 			oneofDisc[*field.OneofIndex] = dname
-			tag := `protobuf_oneof:"` + odp.GetName() + `"`
-			g.P(fname, " ", dname, " `", tag, "`")
+			otag := `protobuf_oneof:"` + odp.GetName() + `"`
+			g.P(fname, " ", dname, " `", otag, "`")
 		}
 
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {

@@ -38,7 +38,7 @@ func testDefaultConflict(t *testing.T, name string) {
 	data, err := cmd.CombinedOutput()
 	if err == nil && !strings.Contains(string(data), "Plugin failed with status code 1") {
 		t.Errorf("Expected error, got: %s", data)
-		if err := os.Remove(name + ".pb.go"); err != nil {
+		if err = os.Remove(name + ".pb.go"); err != nil {
 			t.Error(err)
 		}
 	}

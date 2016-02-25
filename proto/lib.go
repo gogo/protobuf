@@ -441,7 +441,7 @@ func (p *Buffer) DebugPrint(s string, b []byte) {
 	var u uint64
 
 	obuf := p.buf
-	index := p.index
+	sindex := p.index
 	p.buf = b
 	p.index = 0
 	depth := 0
@@ -536,7 +536,7 @@ out:
 	fmt.Printf("\n")
 
 	p.buf = obuf
-	p.index = index
+	p.index = sindex
 }
 
 // SetDefaults sets unset protocol buffer fields to their default values.

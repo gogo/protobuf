@@ -41,7 +41,7 @@ func TestIssue42Order(t *testing.T) {
 		t.Fatal(err)
 	}
 	ordered := &OrderedFields{}
-	if err := proto.Unmarshal(udata, ordered); err != nil {
+	if err = proto.Unmarshal(udata, ordered); err != nil {
 		t.Fatal(err)
 	}
 	data, err := proto.Marshal(ordered)
