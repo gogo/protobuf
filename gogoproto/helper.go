@@ -117,9 +117,45 @@ func IsCustomName(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsEnumCustomName(field *google_protobuf.EnumDescriptorProto) bool {
+	name := GetEnumCustomName(field)
+	if len(name) > 0 {
+		return true
+	}
+	return false
+}
+
+func IsEnumValueCustomName(field *google_protobuf.EnumValueDescriptorProto) bool {
+	name := GetEnumValueCustomName(field)
+	if len(name) > 0 {
+		return true
+	}
+	return false
+}
+
 func GetCustomName(field *google_protobuf.FieldDescriptorProto) string {
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, E_Customname)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetEnumCustomName(field *google_protobuf.EnumDescriptorProto) string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_EnumCustomname)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetEnumValueCustomName(field *google_protobuf.EnumValueDescriptorProto) string {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_EnumvalueCustomname)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}
