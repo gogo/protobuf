@@ -26,7 +26,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-.PHONY: nuke regenerate tests clean install gofmt vet
+.PHONY: nuke regenerate tests clean install gofmt vet contributors
 
 all: clean install regenerate install tests errcheck vet
 
@@ -118,4 +118,8 @@ testall:
 bench:
 	(cd test/mixbench && go build .)
 	(cd test/mixbench && ./mixbench)
+
+contributors:
+	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
+
 

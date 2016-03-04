@@ -1,15 +1,15 @@
-This is a list of contributors to the GoGo protobuf repository.
-
-# Names should be added to this file like so:
-#     Name <email address>
-
-# Please keep the list sorted.
-
-Stephen Day <stephen.day@docker.com>
+Anton Povarov <anton.povarov@gmail.com>
+Clayton Coleman <ccoleman@redhat.com>
+Denis Smirnov <denis.smirnov.91@gmail.com>
+DongYun Kang <ceram1000@gmail.com>
+Dwayne Schultz <dschultz@pivotal.io>
+Georg Apitz <gapitz@pivotal.io>
+Gustav Paul <gustav.paul@gmail.com>
+John Tuley <john@tuley.org>
+Laurent <laurent@adyoulike.com>
+Patrick Lee <patrick@dropbox.com>
+Stephen J Day <stephen.day@docker.com>
+Tamir Duberstein <tamird@gmail.com>
+Todd Eisenberger <teisenberger@dropbox.com>
+Tormod Erevik Lea <tormodlea@gmail.com>
 Walter Schulze <awalterschulze@gmail.com>
-
-The contributors to the Go protobuf repository:
-
-# This source code was written by the Go contributors.
-# The master list of contributors is in the main Go distribution,
-# visible at http://tip.golang.org/CONTRIBUTORS.
