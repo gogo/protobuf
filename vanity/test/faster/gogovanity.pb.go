@@ -167,6 +167,7 @@ func (m *B) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -195,6 +196,7 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthGogovanity
@@ -225,6 +227,7 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Int64
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Int32", wireType)
@@ -244,6 +247,7 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Int32 = &v
 		default:
 			iNdEx = preIndex

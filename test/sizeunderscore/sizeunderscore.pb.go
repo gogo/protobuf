@@ -335,6 +335,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -363,6 +364,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Size_ = &v
 		case 2:
 			if wireType != 0 {
@@ -383,6 +385,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Equal_ = &b
 		case 3:
@@ -404,6 +407,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthSizeunderscore

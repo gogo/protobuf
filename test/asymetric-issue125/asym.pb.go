@@ -381,6 +381,7 @@ func (m *M) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -409,6 +410,7 @@ func (m *M) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthAsym
 			}
@@ -464,6 +466,7 @@ func (m *MyType) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {

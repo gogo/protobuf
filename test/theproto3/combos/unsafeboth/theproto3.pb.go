@@ -7095,6 +7095,7 @@ func (m *Message) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -7123,6 +7124,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -7152,6 +7154,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Hilarity
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field HeightInCm", wireType)
@@ -7171,6 +7174,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.HeightInCm
 		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
@@ -7190,6 +7194,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7221,6 +7226,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Key = append(m.Key, v)
 		case 6:
 			if wireType != 2 {
@@ -7241,6 +7247,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7274,6 +7281,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.ResultCount
 		case 8:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field TrueScotsman", wireType)
@@ -7293,6 +7301,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.TrueScotsman = bool(v != 0)
 		case 9:
 			if wireType != 5 {
@@ -7322,6 +7331,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7344,6 +7354,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7359,6 +7370,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7374,6 +7386,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7389,6 +7402,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7428,6 +7442,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7461,6 +7476,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7483,6 +7499,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7498,6 +7515,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7513,6 +7531,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7528,6 +7547,7 @@ func (m *Message) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7589,6 +7609,7 @@ func (m *Nested) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -7617,6 +7638,7 @@ func (m *Nested) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -7668,6 +7690,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -7696,6 +7719,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7718,6 +7742,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7733,6 +7758,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -7758,6 +7784,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvaluetemp uint64
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
@@ -7796,6 +7823,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7818,6 +7846,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7833,6 +7862,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -7858,6 +7888,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvaluetemp uint32
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
@@ -7892,6 +7923,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -7914,6 +7946,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7929,6 +7962,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7944,6 +7978,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -7959,6 +7994,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.Int32Map == nil {
 				m.Int32Map = make(map[int32]int32)
 			}
@@ -7983,6 +8019,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8005,6 +8042,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8020,6 +8058,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8035,6 +8074,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8050,6 +8090,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.Int64Map == nil {
 				m.Int64Map = make(map[int64]int64)
 			}
@@ -8074,6 +8115,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8096,6 +8138,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8111,6 +8154,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8126,6 +8170,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8141,6 +8186,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.Uint32Map == nil {
 				m.Uint32Map = make(map[uint32]uint32)
 			}
@@ -8165,6 +8211,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8187,6 +8234,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8202,6 +8250,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8217,6 +8266,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8232,6 +8282,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.Uint64Map == nil {
 				m.Uint64Map = make(map[uint64]uint64)
 			}
@@ -8256,6 +8307,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8278,6 +8330,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkeytemp int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8293,6 +8346,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkeytemp
 			mapkeytemp = int32((uint32(mapkeytemp) >> 1) ^ uint32(((mapkeytemp&1)<<31)>>31))
 			mapkey := int32(mapkeytemp)
 			var valuekey uint64
@@ -8310,6 +8364,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvaluetemp int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8325,6 +8380,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvaluetemp
 			mapvaluetemp = int32((uint32(mapvaluetemp) >> 1) ^ uint32(((mapvaluetemp&1)<<31)>>31))
 			mapvalue := int32(mapvaluetemp)
 			if m.Sint32Map == nil {
@@ -8351,6 +8407,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8373,6 +8430,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkeytemp uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8388,6 +8446,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkeytemp
 			mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
 			mapkey := int64(mapkeytemp)
 			var valuekey uint64
@@ -8405,6 +8464,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvaluetemp uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8420,6 +8480,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvaluetemp
 			mapvaluetemp = (mapvaluetemp >> 1) ^ uint64((int64(mapvaluetemp&1)<<63)>>63)
 			mapvalue := int64(mapvaluetemp)
 			if m.Sint64Map == nil {
@@ -8446,6 +8507,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8468,6 +8530,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey uint32
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
@@ -8492,6 +8555,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint32
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
@@ -8525,6 +8589,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8547,6 +8612,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int32
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
@@ -8571,6 +8637,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue int32
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
@@ -8604,6 +8671,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8626,6 +8694,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey uint64
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
@@ -8654,6 +8723,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint64
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
@@ -8691,6 +8761,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8713,6 +8784,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int64
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
@@ -8741,6 +8813,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue int64
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
@@ -8778,6 +8851,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8800,6 +8874,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkeytemp int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8815,6 +8890,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkeytemp
 			mapkey := bool(mapkeytemp != 0)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
@@ -8831,6 +8907,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvaluetemp int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8846,6 +8923,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvaluetemp
 			mapvalue := bool(mapvaluetemp != 0)
 			if m.BoolMap == nil {
 				m.BoolMap = make(map[bool]bool)
@@ -8871,6 +8949,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -8893,6 +8972,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8908,6 +8988,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -8933,6 +9014,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var stringLenmapvalue uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -8948,6 +9030,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapvalue
 			intStringLenmapvalue := int(stringLenmapvalue)
 			if intStringLenmapvalue < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -8982,6 +9065,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9004,6 +9088,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9019,6 +9104,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9044,6 +9130,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapbyteLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9059,6 +9146,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapbyteLen
 			intMapbyteLen := int(mapbyteLen)
 			if intMapbyteLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9094,6 +9182,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9116,6 +9205,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9131,6 +9221,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9156,6 +9247,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue MapEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9171,6 +9263,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.StringToEnumMap == nil {
 				m.StringToEnumMap = make(map[string]MapEnum)
 			}
@@ -9195,6 +9288,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9217,6 +9311,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9232,6 +9327,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9257,6 +9353,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9272,6 +9369,7 @@ func (m *AllMaps) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9333,6 +9431,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -9361,6 +9460,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9383,6 +9483,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9398,6 +9499,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9413,6 +9515,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var stringLenmapvalue uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9428,6 +9531,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapvalue
 			intStringLenmapvalue := int(stringLenmapvalue)
 			if intStringLenmapvalue < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9462,6 +9566,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9484,6 +9589,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkeytemp uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9499,6 +9605,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkeytemp
 			mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
 			mapkey := int64(mapkeytemp)
 			var valuekey uint64
@@ -9516,6 +9623,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9531,6 +9639,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9570,6 +9679,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9592,6 +9702,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkeytemp int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9607,6 +9718,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkeytemp
 			mapkey := bool(mapkeytemp != 0)
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
@@ -9623,6 +9735,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapbyteLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -9638,6 +9751,7 @@ func (m *MessageWithMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapbyteLen
 			intMapbyteLen := int(mapbyteLen)
 			if intMapbyteLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
@@ -9695,6 +9809,7 @@ func (m *FloatingPoint) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -9754,6 +9869,7 @@ func (m *Uint128Pair) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -9782,6 +9898,7 @@ func (m *Uint128Pair) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}
@@ -9812,6 +9929,7 @@ func (m *Uint128Pair) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthTheproto3Unsafe
 			}

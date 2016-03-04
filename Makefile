@@ -28,7 +28,7 @@
 
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
 
-all: clean install regenerate install tests errcheck vet
+all: clean install regenerate install tests errcheck vet ineffassign
 
 buildserverall: clean install regenerate install tests vet
 
@@ -98,6 +98,10 @@ regenerate:
 tests:
 	go build ./test/enumprefix
 	go test ./...
+
+ineffassign:
+	go get -u github.com/gordonklaus/ineffassign
+	ineffassign .
 
 vet:
 	go vet ./...

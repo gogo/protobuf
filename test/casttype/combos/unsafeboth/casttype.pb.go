@@ -2534,6 +2534,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2562,6 +2563,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Int32Ptr = &v
 		case 2:
 			if wireType != 0 {
@@ -2582,6 +2584,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Int32
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field MyUint64Ptr", wireType)
@@ -2601,6 +2604,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.MyUint64Ptr = &v
 		case 4:
 			if wireType != 0 {
@@ -2621,6 +2625,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.MyUint64
 		case 5:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field MyFloat32Ptr", wireType)
@@ -2706,6 +2711,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -2737,6 +2743,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -2768,6 +2775,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.MyUint64S = append(m.MyUint64S, v)
 		case 12:
 			if wireType != 2 {
@@ -2788,6 +2796,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -2810,6 +2819,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -2825,6 +2835,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
@@ -2850,6 +2861,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -2865,6 +2877,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.MyMap == nil {
 				m.MyMap = make(github_com_gogo_protobuf_test_casttype.MyMapType)
 			}
@@ -2889,6 +2902,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -2911,6 +2925,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var stringLenmapkey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -2926,6 +2941,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLenmapkey
 			intStringLenmapkey := int(stringLenmapkey)
 			if intStringLenmapkey < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
@@ -2951,6 +2967,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapvalue uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -2966,6 +2983,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapvalue
 			if m.MyCustomMap == nil {
 				m.MyCustomMap = make(map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type)
 			}
@@ -2990,6 +3008,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -3012,6 +3031,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3027,6 +3047,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3042,6 +3063,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3057,6 +3079,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -3096,6 +3119,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -3118,6 +3142,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = keykey
 			var mapkey int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3133,6 +3158,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapkey
 			var valuekey uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3148,6 +3174,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = valuekey
 			var mapmsglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
@@ -3163,6 +3190,7 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = mapmsglen
 			if mapmsglen < 0 {
 				return ErrInvalidLengthCasttypeUnsafe
 			}
@@ -3225,6 +3253,7 @@ func (m *Wilson) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3253,6 +3282,7 @@ func (m *Wilson) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Int64 = &v
 		default:
 			iNdEx = preIndex

@@ -340,6 +340,7 @@ func (m *UnorderedFields) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -386,6 +387,7 @@ func (m *UnorderedFields) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.A = &v
 		default:
 			iNdEx = preIndex
@@ -429,6 +431,7 @@ func (m *OrderedFields) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -475,6 +478,7 @@ func (m *OrderedFields) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.A = &v
 		default:
 			iNdEx = preIndex

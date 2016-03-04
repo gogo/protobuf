@@ -913,6 +913,7 @@ func (m *Big) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -941,6 +942,7 @@ func (m *Big) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
@@ -974,6 +976,7 @@ func (m *Big) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Number = &v
 		default:
 			iNdEx = preIndex
@@ -1017,6 +1020,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1045,6 +1049,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.SubNumber = &v
 		default:
 			iNdEx = preIndex
@@ -1089,6 +1094,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1117,6 +1123,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Int64
 			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 0 {
@@ -1137,6 +1144,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Int32
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sint32", wireType)
@@ -1156,6 +1164,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Sint32 = v
 			hasFields[0] |= uint64(0x00000002)
@@ -1178,6 +1187,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Sint64 = int64(v)
 		case 5:
@@ -1199,6 +1209,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Uint64
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Uint32", wireType)
@@ -1218,6 +1229,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Uint32
 			hasFields[0] |= uint64(0x00000004)
 		case 7:
 			if wireType != 1 {
@@ -1299,6 +1311,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Bool = bool(v != 0)
 		default:
 			iNdEx = preIndex
@@ -1459,6 +1472,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1487,6 +1501,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnmarshalmergeUnsafe
 			}
@@ -1520,6 +1535,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Number = &v
 		default:
 			iNdEx = preIndex

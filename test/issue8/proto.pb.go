@@ -189,6 +189,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -217,6 +218,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Bar = &v
 			hasFields[0] |= uint64(0x00000001)
 		default:

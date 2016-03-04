@@ -3749,6 +3749,7 @@ func (m *Subby) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3777,6 +3778,7 @@ func (m *Subby) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthOneUnsafe
@@ -3828,6 +3830,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3878,6 +3881,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.TestOneof = &SampleOneOf_Field3{v}
 		case 4:
 			if wireType != 0 {
@@ -3898,6 +3902,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.TestOneof = &SampleOneOf_Field4{v}
 		case 5:
 			if wireType != 0 {
@@ -3918,6 +3923,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.TestOneof = &SampleOneOf_Field5{v}
 		case 6:
 			if wireType != 0 {
@@ -3938,6 +3944,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.TestOneof = &SampleOneOf_Field6{v}
 		case 7:
 			if wireType != 0 {
@@ -3958,6 +3965,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.TestOneof = &SampleOneOf_Field7{v}
 		case 8:
@@ -3979,6 +3987,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.TestOneof = &SampleOneOf_Field8{int64(v)}
 		case 9:
@@ -4044,6 +4053,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.TestOneof = &SampleOneOf_Field13{b}
 		case 14:
@@ -4065,6 +4075,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthOneUnsafe
@@ -4094,6 +4105,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthOneUnsafe
 			}
@@ -4124,6 +4136,7 @@ func (m *SampleOneOf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthOneUnsafe
 			}

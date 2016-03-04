@@ -2359,6 +2359,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2387,6 +2388,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 3:
 			if wireType != 1 {
@@ -2426,6 +2428,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthUnrecognizedgroup
 			}
@@ -2482,6 +2485,7 @@ func (m *A) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2510,6 +2514,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.AField = &v
 		default:
 			iNdEx = preIndex

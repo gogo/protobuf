@@ -2700,6 +2700,7 @@ func (m *A) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2728,6 +2729,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthExample
@@ -2757,6 +2759,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Number
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
@@ -2776,6 +2779,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthExample
 			}
@@ -2829,6 +2833,7 @@ func (m *B) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2857,6 +2862,7 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthExample
 			}
@@ -2887,6 +2893,7 @@ func (m *B) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthExample
 			}
@@ -2942,6 +2949,7 @@ func (m *C) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2970,6 +2978,7 @@ func (m *C) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.MySize = &v
 		default:
 			iNdEx = preIndex
@@ -3013,6 +3022,7 @@ func (m *U) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3041,6 +3051,7 @@ func (m *U) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthExample
 			}
@@ -3074,6 +3085,7 @@ func (m *U) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthExample
 			}
@@ -3130,6 +3142,7 @@ func (m *E) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3205,6 +3218,7 @@ func (m *R) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3233,6 +3247,7 @@ func (m *R) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Recognized = &v
 		default:
 			iNdEx = preIndex
@@ -3275,6 +3290,7 @@ func (m *CastType) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -3303,6 +3319,7 @@ func (m *CastType) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Int32 = &v
 		default:
 			iNdEx = preIndex
