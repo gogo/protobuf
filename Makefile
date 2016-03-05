@@ -56,6 +56,7 @@ gofmt:
 regenerate:
 	make -C protoc-gen-gogo/descriptor regenerate
 	make -C protoc-gen-gogo/plugin regenerate
+	make -C protoc-gen-gogo/testdata regenerate
 	make -C gogoproto regenerate
 	make -C proto/testdata regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
