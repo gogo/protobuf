@@ -22194,6 +22194,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -22254,6 +22255,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field3
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
@@ -22273,6 +22275,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field4
 		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
@@ -22292,6 +22295,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field5
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
@@ -22311,6 +22315,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field6
 		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
@@ -22330,6 +22335,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = v
 		case 8:
@@ -22351,6 +22357,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Field8 = int64(v)
 		case 9:
@@ -22432,6 +22439,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = bool(v != 0)
 		case 14:
 			if wireType != 2 {
@@ -22452,6 +22460,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -22481,6 +22490,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -22535,6 +22545,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -22597,6 +22608,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		case 4:
 			if wireType != 0 {
@@ -22617,6 +22629,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = &v
 		case 5:
 			if wireType != 0 {
@@ -22637,6 +22650,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = &v
 		case 6:
 			if wireType != 0 {
@@ -22657,6 +22671,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 		case 7:
 			if wireType != 0 {
@@ -22677,6 +22692,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
 		case 8:
@@ -22698,6 +22714,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			v2 := int64(v)
 			m.Field8 = &v2
@@ -22784,6 +22801,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 		case 14:
@@ -22805,6 +22823,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -22835,6 +22854,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -22889,6 +22909,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -22951,6 +22972,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = append(m.Field3, v)
 		case 4:
 			if wireType != 0 {
@@ -22971,6 +22993,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = append(m.Field4, v)
 		case 5:
 			if wireType != 0 {
@@ -22991,6 +23014,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = append(m.Field5, v)
 		case 6:
 			if wireType != 0 {
@@ -23011,6 +23035,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
@@ -23031,6 +23056,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = append(m.Field7, v)
 		case 8:
@@ -23052,6 +23078,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Field8 = append(m.Field8, int64(v))
 		case 9:
@@ -23137,6 +23164,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = append(m.Field13, bool(v != 0))
 		case 14:
 			if wireType != 2 {
@@ -23157,6 +23185,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -23186,6 +23215,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -23238,6 +23268,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -23300,6 +23331,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = append(m.Field3, v)
 		case 4:
 			if wireType != 0 {
@@ -23320,6 +23352,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = append(m.Field4, v)
 		case 5:
 			if wireType != 0 {
@@ -23340,6 +23373,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = append(m.Field5, v)
 		case 6:
 			if wireType != 0 {
@@ -23360,6 +23394,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
@@ -23380,6 +23415,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = append(m.Field7, v)
 		case 8:
@@ -23401,6 +23437,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Field8 = append(m.Field8, int64(v))
 		case 9:
@@ -23486,6 +23523,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = append(m.Field13, bool(v != 0))
 		case 14:
 			if wireType != 2 {
@@ -23506,6 +23544,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -23535,6 +23574,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -23587,6 +23627,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -23613,6 +23654,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23673,6 +23715,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23725,6 +23768,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23748,6 +23792,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field3 = append(m.Field3, v)
 				}
 			} else if wireType == 0 {
@@ -23766,6 +23811,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field3 = append(m.Field3, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -23787,6 +23833,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23810,6 +23857,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field4 = append(m.Field4, v)
 				}
 			} else if wireType == 0 {
@@ -23828,6 +23876,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field4 = append(m.Field4, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
@@ -23849,6 +23898,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23872,6 +23922,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field5 = append(m.Field5, v)
 				}
 			} else if wireType == 0 {
@@ -23890,6 +23941,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field5 = append(m.Field5, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
@@ -23911,6 +23963,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23934,6 +23987,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field6 = append(m.Field6, v)
 				}
 			} else if wireType == 0 {
@@ -23952,6 +24006,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field6 = append(m.Field6, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
@@ -23973,6 +24028,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -23996,6 +24052,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 					m.Field7 = append(m.Field7, v)
 				}
@@ -24015,6 +24072,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 				m.Field7 = append(m.Field7, v)
 			} else {
@@ -24037,6 +24095,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24060,6 +24119,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 					m.Field8 = append(m.Field8, int64(v))
 				}
@@ -24079,6 +24139,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 				m.Field8 = append(m.Field8, int64(v))
 			} else {
@@ -24101,6 +24162,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24151,6 +24213,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24201,6 +24264,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24259,6 +24323,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24317,6 +24382,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24340,6 +24406,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field13 = append(m.Field13, bool(v != 0))
 				}
 			} else if wireType == 0 {
@@ -24358,6 +24425,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field13 = append(m.Field13, bool(v != 0))
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
@@ -24404,6 +24472,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -24430,6 +24499,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24490,6 +24560,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24542,6 +24613,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24565,6 +24637,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field3 = append(m.Field3, v)
 				}
 			} else if wireType == 0 {
@@ -24583,6 +24656,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field3 = append(m.Field3, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -24604,6 +24678,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24627,6 +24702,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field4 = append(m.Field4, v)
 				}
 			} else if wireType == 0 {
@@ -24645,6 +24721,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field4 = append(m.Field4, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field4", wireType)
@@ -24666,6 +24743,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24689,6 +24767,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field5 = append(m.Field5, v)
 				}
 			} else if wireType == 0 {
@@ -24707,6 +24786,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field5 = append(m.Field5, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field5", wireType)
@@ -24728,6 +24808,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24751,6 +24832,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field6 = append(m.Field6, v)
 				}
 			} else if wireType == 0 {
@@ -24769,6 +24851,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field6 = append(m.Field6, v)
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field6", wireType)
@@ -24790,6 +24873,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24813,6 +24897,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 					m.Field7 = append(m.Field7, v)
 				}
@@ -24832,6 +24917,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 				m.Field7 = append(m.Field7, v)
 			} else {
@@ -24854,6 +24940,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24877,6 +24964,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 					m.Field8 = append(m.Field8, int64(v))
 				}
@@ -24896,6 +24984,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 				m.Field8 = append(m.Field8, int64(v))
 			} else {
@@ -24918,6 +25007,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -24968,6 +25058,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -25018,6 +25109,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -25076,6 +25168,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -25134,6 +25227,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = packedLen
 				if packedLen < 0 {
 					return ErrInvalidLengthThetest
 				}
@@ -25157,6 +25251,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 							break
 						}
 					}
+					_ = v
 					m.Field13 = append(m.Field13, bool(v != 0))
 				}
 			} else if wireType == 0 {
@@ -25175,6 +25270,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						break
 					}
 				}
+				_ = v
 				m.Field13 = append(m.Field13, bool(v != 0))
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
@@ -25221,6 +25317,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -25281,6 +25378,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25311,6 +25409,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25341,6 +25440,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field6
 		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field7", wireType)
@@ -25360,6 +25460,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = v
 		case 8:
@@ -25381,6 +25482,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25411,6 +25513,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = bool(v != 0)
 		case 14:
 			if wireType != 2 {
@@ -25431,6 +25534,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -25460,6 +25564,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25514,6 +25619,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -25576,6 +25682,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25609,6 +25716,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25642,6 +25750,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 		case 7:
 			if wireType != 0 {
@@ -25662,6 +25771,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
 		case 8:
@@ -25683,6 +25793,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25716,6 +25827,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 		case 14:
@@ -25737,6 +25849,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -25767,6 +25880,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25821,6 +25935,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -25883,6 +25998,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25914,6 +26030,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -25945,6 +26062,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
@@ -25965,6 +26083,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = append(m.Field7, v)
 		case 8:
@@ -25986,6 +26105,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26017,6 +26137,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = append(m.Field13, bool(v != 0))
 		case 14:
 			if wireType != 2 {
@@ -26037,6 +26158,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -26066,6 +26188,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26118,6 +26241,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26180,6 +26304,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26211,6 +26336,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26242,6 +26368,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = append(m.Field6, v)
 		case 7:
 			if wireType != 0 {
@@ -26262,6 +26389,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = append(m.Field7, v)
 		case 8:
@@ -26283,6 +26411,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26314,6 +26443,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = append(m.Field13, bool(v != 0))
 		case 14:
 			if wireType != 2 {
@@ -26334,6 +26464,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -26363,6 +26494,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26415,6 +26547,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26443,6 +26576,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26476,6 +26610,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26506,6 +26641,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field210 = bool(v != 0)
 		default:
 			iNdEx = preIndex
@@ -26549,6 +26685,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26577,6 +26714,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26610,6 +26748,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26643,6 +26782,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field210 = &b
 		default:
@@ -26687,6 +26827,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26715,6 +26856,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26745,6 +26887,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26799,6 +26942,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26827,6 +26971,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26860,6 +27005,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26914,6 +27060,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -26942,6 +27089,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -26972,6 +27120,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27025,6 +27174,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27053,6 +27203,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27108,6 +27259,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27136,6 +27288,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27168,6 +27321,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27223,6 +27377,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27251,6 +27406,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27283,6 +27439,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27338,6 +27495,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27366,6 +27524,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27398,6 +27557,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27453,6 +27613,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27515,6 +27676,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		case 4:
 			if wireType != 0 {
@@ -27535,6 +27697,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = &v
 		case 5:
 			if wireType != 0 {
@@ -27555,6 +27718,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = &v
 		case 6:
 			if wireType != 0 {
@@ -27575,6 +27739,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 		case 13:
 			if wireType != 0 {
@@ -27595,6 +27760,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 		case 14:
@@ -27616,6 +27782,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -27646,6 +27813,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27700,6 +27868,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -27762,6 +27931,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27795,6 +27965,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27828,6 +27999,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 		case 7:
 			if wireType != 0 {
@@ -27848,6 +28020,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
 		case 13:
@@ -27869,6 +28042,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 		case 14:
@@ -27890,6 +28064,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -27920,6 +28095,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -27974,6 +28150,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28002,6 +28179,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28035,6 +28213,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28068,6 +28247,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field210 = &b
 		default:
@@ -28112,6 +28292,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28140,6 +28321,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28173,6 +28355,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28206,6 +28389,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28262,6 +28446,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28290,6 +28475,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28323,6 +28509,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28356,6 +28543,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28412,6 +28600,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28440,6 +28629,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28470,6 +28660,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28523,6 +28714,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28551,6 +28743,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28581,6 +28774,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28634,6 +28828,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28662,6 +28857,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Value
 		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StrValue", wireType)
@@ -28681,6 +28877,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -28733,6 +28930,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28761,6 +28959,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28794,6 +28993,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28827,6 +29027,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28883,6 +29084,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28911,6 +29113,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -28964,6 +29167,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -28992,6 +29196,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -29022,6 +29227,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -29075,6 +29281,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29103,6 +29310,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -29156,6 +29364,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29207,6 +29416,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29235,6 +29445,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field1
 		default:
 			iNdEx = preIndex
 			skippy, err := skipThetest(data[iNdEx:])
@@ -29277,6 +29488,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29305,6 +29517,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 2:
 			if wireType != 0 {
@@ -29325,6 +29538,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = &v
 		case 3:
 			if wireType != 0 {
@@ -29345,6 +29559,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
@@ -29388,6 +29603,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29416,6 +29632,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = append(m.Field1, v)
 		case 2:
 			if wireType != 0 {
@@ -29436,6 +29653,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = append(m.Field2, v)
 		case 3:
 			if wireType != 0 {
@@ -29456,6 +29674,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = append(m.Field3, v)
 		default:
 			iNdEx = preIndex
@@ -29499,6 +29718,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29527,6 +29747,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = append(m.Field1, v)
 		case 2:
 			if wireType != 0 {
@@ -29547,6 +29768,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = append(m.Field2, v)
 		case 3:
 			if wireType != 0 {
@@ -29567,6 +29789,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = append(m.Field3, v)
 		default:
 			iNdEx = preIndex
@@ -29610,6 +29833,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29638,6 +29862,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 2:
 			if wireType != 0 {
@@ -29658,6 +29883,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = &v
 		case 3:
 			if wireType != 0 {
@@ -29678,6 +29904,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
@@ -29721,6 +29948,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29749,6 +29977,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 2:
 			if wireType != 0 {
@@ -29769,6 +29998,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = &v
 		case 3:
 			if wireType != 0 {
@@ -29789,6 +30019,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
@@ -29832,6 +30063,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -29860,6 +30092,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 2:
 			if wireType != 0 {
@@ -29880,6 +30113,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = &v
 		case 3:
 			if wireType != 0 {
@@ -29900,6 +30134,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
@@ -29943,6 +30178,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30005,6 +30241,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30059,6 +30296,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30087,6 +30325,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		default:
 			if (fieldNum >= 100) && (fieldNum < 200) {
@@ -30157,6 +30396,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30185,6 +30425,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field2 = &v
 		case 13:
 			if wireType != 0 {
@@ -30205,6 +30446,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = &v
 		case 1:
 			if wireType != 2 {
@@ -30225,6 +30467,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30308,6 +30551,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30336,6 +30580,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		case 2:
 			if wireType != 0 {
@@ -30356,6 +30601,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.EnumField = &v
 		case 3:
 			if wireType != 2 {
@@ -30376,6 +30622,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30409,6 +30656,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30465,6 +30713,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30511,6 +30760,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30567,6 +30817,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30595,6 +30846,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -30648,6 +30900,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30676,6 +30929,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30709,6 +30963,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.B = &v
 		case 3:
 			if wireType != 2 {
@@ -30729,6 +30984,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -30785,6 +31041,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -30847,6 +31104,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 		case 4:
 			if wireType != 0 {
@@ -30867,6 +31125,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = &v
 		case 5:
 			if wireType != 0 {
@@ -30887,6 +31146,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = &v
 		case 6:
 			if wireType != 0 {
@@ -30907,6 +31167,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 		case 7:
 			if wireType != 0 {
@@ -30927,6 +31188,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
 		case 8:
@@ -30948,6 +31210,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			v2 := int64(v)
 			m.Field8 = &v2
@@ -31034,6 +31297,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 		case 14:
@@ -31055,6 +31319,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -31085,6 +31350,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -31139,6 +31405,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -31167,6 +31434,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -31220,6 +31488,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -31280,6 +31549,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.FieldC
 		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldD", wireType)
@@ -31299,6 +31569,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.FieldD
 		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldE", wireType)
@@ -31318,6 +31589,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.FieldE
 		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldF", wireType)
@@ -31337,6 +31609,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.FieldF
 		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldG", wireType)
@@ -31356,6 +31629,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.FieldG = v
 		case 8:
@@ -31377,6 +31651,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.FieldH = int64(v)
 		case 9:
@@ -31458,6 +31733,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldM = bool(v != 0)
 		case 14:
 			if wireType != 2 {
@@ -31478,6 +31754,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -31507,6 +31784,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -31561,6 +31839,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -31623,6 +31902,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldC = &v
 		case 4:
 			if wireType != 0 {
@@ -31643,6 +31923,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldD = &v
 		case 5:
 			if wireType != 0 {
@@ -31663,6 +31944,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldE = &v
 		case 6:
 			if wireType != 0 {
@@ -31683,6 +31965,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldF = &v
 		case 7:
 			if wireType != 0 {
@@ -31703,6 +31986,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.FieldG = &v
 		case 8:
@@ -31724,6 +32008,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			v2 := int64(v)
 			m.FieldH = &v2
@@ -31810,6 +32095,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.FieldM = &b
 		case 14:
@@ -31831,6 +32117,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -31861,6 +32148,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -31915,6 +32203,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -31977,6 +32266,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldC = append(m.FieldC, v)
 		case 4:
 			if wireType != 0 {
@@ -31997,6 +32287,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldD = append(m.FieldD, v)
 		case 5:
 			if wireType != 0 {
@@ -32017,6 +32308,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldE = append(m.FieldE, v)
 		case 6:
 			if wireType != 0 {
@@ -32037,6 +32329,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldF = append(m.FieldF, v)
 		case 7:
 			if wireType != 0 {
@@ -32057,6 +32350,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.FieldG = append(m.FieldG, v)
 		case 8:
@@ -32078,6 +32372,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.FieldH = append(m.FieldH, int64(v))
 		case 9:
@@ -32163,6 +32458,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldM = append(m.FieldM, bool(v != 0))
 		case 14:
 			if wireType != 2 {
@@ -32183,6 +32479,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -32212,6 +32509,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32264,6 +32562,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -32326,6 +32625,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32359,6 +32659,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32390,6 +32691,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldE = &v
 		case 7:
 			if wireType != 0 {
@@ -32410,6 +32712,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.FieldF = &v
 		case 8:
@@ -32431,6 +32734,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32464,6 +32768,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.FieldH = &b
 		case 14:
@@ -32485,6 +32790,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -32515,6 +32821,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32569,6 +32876,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -32597,6 +32905,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32629,6 +32938,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32661,6 +32971,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32693,6 +33004,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32748,6 +33060,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -32776,6 +33089,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32809,6 +33123,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -32842,6 +33157,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.FieldB = &b
 		default:
@@ -32886,6 +33202,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -32914,6 +33231,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldA = &v
 		case 2:
 			if wireType != 0 {
@@ -32934,6 +33252,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.FieldB = append(m.FieldB, v)
 		default:
 			iNdEx = preIndex
@@ -32977,6 +33296,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33005,6 +33325,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		default:
 			if (fieldNum >= 100) && (fieldNum < 200) {
@@ -33072,6 +33393,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33100,6 +33422,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -33152,6 +33475,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33180,6 +33504,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -33211,6 +33536,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -33264,6 +33590,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33292,6 +33619,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
@@ -33334,6 +33662,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33362,6 +33691,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}
@@ -33392,6 +33722,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -33445,6 +33776,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33473,6 +33805,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
@@ -33515,6 +33848,7 @@ func (m *Node) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -33543,6 +33877,7 @@ func (m *Node) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthThetest
@@ -33573,6 +33908,7 @@ func (m *Node) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthThetest
 			}

@@ -82,6 +82,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -110,6 +111,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthProto
 			}
@@ -164,6 +166,7 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -192,6 +195,7 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthProto
 			}

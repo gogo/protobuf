@@ -236,6 +236,7 @@ func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`}`)
 	p.Out()
 	p.P(`}`)
+	p.P(`_ = `, varName) // satisfy ineffassign
 }
 
 func (p *unmarshal) decodeFixed32(varName string, typeName string) {

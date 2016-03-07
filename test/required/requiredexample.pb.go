@@ -1038,6 +1038,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1066,6 +1067,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthRequiredexample
@@ -1097,6 +1099,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthRequiredexample
@@ -1127,6 +1130,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthRequiredexample
@@ -1183,6 +1187,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1245,6 +1250,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field3
 			hasFields[0] |= uint64(0x00000004)
 		case 4:
 			if wireType != 0 {
@@ -1265,6 +1271,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field4
 			hasFields[0] |= uint64(0x00000008)
 		case 5:
 			if wireType != 0 {
@@ -1285,6 +1292,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field5
 			hasFields[0] |= uint64(0x00000010)
 		case 6:
 			if wireType != 0 {
@@ -1305,6 +1313,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Field6
 			hasFields[0] |= uint64(0x00000020)
 		case 7:
 			if wireType != 0 {
@@ -1325,6 +1334,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = v
 			hasFields[0] |= uint64(0x00000040)
@@ -1347,6 +1357,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			m.Field8 = int64(v)
 			hasFields[0] |= uint64(0x00000080)
@@ -1433,6 +1444,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field13 = bool(v != 0)
 			hasFields[0] |= uint64(0x00001000)
 		case 14:
@@ -1454,6 +1466,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthRequiredexample
@@ -1484,6 +1497,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
@@ -1585,6 +1599,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -1649,6 +1664,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field3 = &v
 			hasFields[0] |= uint64(0x00000004)
 		case 4:
@@ -1670,6 +1686,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field4 = &v
 			hasFields[0] |= uint64(0x00000008)
 		case 5:
@@ -1691,6 +1708,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field5 = &v
 			hasFields[0] |= uint64(0x00000010)
 		case 6:
@@ -1712,6 +1730,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			m.Field6 = &v
 			hasFields[0] |= uint64(0x00000020)
 		case 7:
@@ -1733,6 +1752,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = int32((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))
 			m.Field7 = &v
 			hasFields[0] |= uint64(0x00000040)
@@ -1755,6 +1775,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)
 			v2 := int64(v)
 			m.Field8 = &v2
@@ -1846,6 +1867,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = v
 			b := bool(v != 0)
 			m.Field13 = &b
 			hasFields[0] |= uint64(0x00001000)
@@ -1868,6 +1890,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthRequiredexample
@@ -1899,6 +1922,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = byteLen
 			if byteLen < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
@@ -1999,6 +2023,7 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -2027,6 +2052,7 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = msglen
 			if msglen < 0 {
 				return ErrInvalidLengthRequiredexample
 			}

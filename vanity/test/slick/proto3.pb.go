@@ -217,6 +217,7 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -245,6 +246,7 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthProto3

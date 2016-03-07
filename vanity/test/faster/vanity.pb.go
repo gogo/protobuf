@@ -146,6 +146,7 @@ func (m *A) Unmarshal(data []byte) error {
 				break
 			}
 		}
+		_ = wire
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
@@ -174,6 +175,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = stringLen
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
 				return ErrInvalidLengthVanity
@@ -203,6 +205,7 @@ func (m *A) Unmarshal(data []byte) error {
 					break
 				}
 			}
+			_ = m.Int
 			hasFields[0] |= uint64(0x00000001)
 		default:
 			iNdEx = preIndex
