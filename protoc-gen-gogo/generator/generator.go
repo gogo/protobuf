@@ -2948,7 +2948,9 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 	w.Close()
 	b = buf.Bytes()
 
-	g.P("var fileDescriptor", FileName(file), " = []byte{")
+	v := fmt.Sprintf("fileDescriptor%v", FileName(file))
+	g.P()
+	g.P("var ", v, " = []byte{")
 	g.In()
 	g.P("// ", len(b), " bytes of a gzipped FileDescriptorProto")
 	for len(b) > 0 {
