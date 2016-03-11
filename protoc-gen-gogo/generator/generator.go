@@ -44,6 +44,7 @@ package generator
 import (
 	"bufio"
 	"bytes"
+	"compress/gzip"
 	"fmt"
 	"go/parser"
 	"go/printer"
@@ -1208,6 +1209,8 @@ func (g *Generator) generate(file *FileDescriptor) {
 	// Run the plugins before the imports so we know which imports are necessary.
 	g.runPlugins(file)
 
+	g.generateFileDescriptor(file)
+
 	// Generate header and imports last, though they appear first in the output.
 	rem := g.Buffer
 	g.Buffer = new(bytes.Buffer)
@@ -1509,6 +1512,15 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.Out()
 		g.P("}")
 	}
+
+	var indexes []string
+	for m := enum.parent; m != nil; m = m.parent {
+		// XXX: skip groups?
+		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
+	}
+	indexes = append(indexes, strconv.Itoa(enum.index))
+	g.P("func (", ccTypeName, ") EnumDescriptor() ([]byte, []int) { return fileDescriptor", FileName(g.file), ", []int{", strings.Join(indexes, ", "), "} }")
+
 	g.P()
 }
 
@@ -2069,6 +2081,14 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
 	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
+	if !message.group {
+		var indexes []string
+		for m := message; m != nil; m = m.parent {
+			// XXX: skip groups?
+			indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
+		}
+		g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return fileDescriptor", FileName(g.file), ", []int{", strings.Join(indexes, ", "), "} }")
+	}
 
 	// Extension support methods
 	var hasExtensions, isMessageSet bool
@@ -2791,6 +2811,44 @@ func (g *Generator) generateInitFunction() {
 	g.Out()
 	g.P("}")
 	g.init = nil
+}
+
+func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
+	// Make a copy and trim source_code_info data.
+	// TODO: Trim this more when we know exactly what we need.
+	pb := proto.Clone(file.FileDescriptorProto).(*descriptor.FileDescriptorProto)
+	pb.SourceCodeInfo = nil
+
+	b, err := proto.Marshal(pb)
+	if err != nil {
+		g.Fail(err.Error())
+	}
+
+	var buf bytes.Buffer
+	w, _ := gzip.NewWriterLevel(&buf, gzip.BestCompression)
+	w.Write(b)
+	w.Close()
+	b = buf.Bytes()
+
+	g.P("var fileDescriptor", FileName(file), " = []byte{")
+	g.In()
+	g.P("// ", len(b), " bytes of a gzipped FileDescriptorProto")
+	for len(b) > 0 {
+		n := 16
+		if n > len(b) {
+			n = len(b)
+		}
+
+		s := ""
+		for _, c := range b[:n] {
+			s += fmt.Sprintf("0x%02x,", c)
+		}
+		g.P(s)
+
+		b = b[n:]
+	}
+	g.Out()
+	g.P("}")
 }
 
 func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
