@@ -272,8 +272,8 @@ func (m *AllTypesOneOf) GetSubMessage() *Subby {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*AllTypesOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _AllTypesOneOf_OneofMarshaler, _AllTypesOneOf_OneofUnmarshaler, []interface{}{
+func (*AllTypesOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _AllTypesOneOf_OneofMarshaler, _AllTypesOneOf_OneofUnmarshaler, _AllTypesOneOf_OneofSizer, []interface{}{
 		(*AllTypesOneOf_Field1)(nil),
 		(*AllTypesOneOf_Field2)(nil),
 		(*AllTypesOneOf_Field3)(nil),
@@ -479,6 +479,69 @@ func _AllTypesOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.
 	}
 }
 
+func _AllTypesOneOf_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*AllTypesOneOf)
+	// test_oneof
+	switch x := m.TestOneof.(type) {
+	case *AllTypesOneOf_Field1:
+		n += proto.SizeVarint(1<<3 | proto.WireFixed64)
+		n += 8
+	case *AllTypesOneOf_Field2:
+		n += proto.SizeVarint(2<<3 | proto.WireFixed32)
+		n += 4
+	case *AllTypesOneOf_Field3:
+		n += proto.SizeVarint(3<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field3))
+	case *AllTypesOneOf_Field4:
+		n += proto.SizeVarint(4<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field4))
+	case *AllTypesOneOf_Field5:
+		n += proto.SizeVarint(5<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field5))
+	case *AllTypesOneOf_Field6:
+		n += proto.SizeVarint(6<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field6))
+	case *AllTypesOneOf_Field7:
+		n += proto.SizeVarint(7<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64((uint32(x.Field7) << 1) ^ uint32((int32(x.Field7) >> 31))))
+	case *AllTypesOneOf_Field8:
+		n += proto.SizeVarint(8<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(uint64(x.Field8<<1) ^ uint64((int64(x.Field8) >> 63))))
+	case *AllTypesOneOf_Field9:
+		n += proto.SizeVarint(9<<3 | proto.WireFixed32)
+		n += 4
+	case *AllTypesOneOf_Field10:
+		n += proto.SizeVarint(10<<3 | proto.WireFixed32)
+		n += 4
+	case *AllTypesOneOf_Field11:
+		n += proto.SizeVarint(11<<3 | proto.WireFixed64)
+		n += 8
+	case *AllTypesOneOf_Field12:
+		n += proto.SizeVarint(12<<3 | proto.WireFixed64)
+		n += 8
+	case *AllTypesOneOf_Field13:
+		n += proto.SizeVarint(13<<3 | proto.WireVarint)
+		n += 1
+	case *AllTypesOneOf_Field14:
+		n += proto.SizeVarint(14<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field14)))
+		n += len(x.Field14)
+	case *AllTypesOneOf_Field15:
+		n += proto.SizeVarint(15<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field15)))
+		n += len(x.Field15)
+	case *AllTypesOneOf_SubMessage:
+		s := proto.Size(x.SubMessage)
+		n += proto.SizeVarint(16<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
+}
+
 type TwoOneofs struct {
 	// Types that are valid to be assigned to One:
 	//	*TwoOneofs_Field1
@@ -594,8 +657,8 @@ func (m *TwoOneofs) GetSubMessage2() *Subby {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*TwoOneofs) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _TwoOneofs_OneofMarshaler, _TwoOneofs_OneofUnmarshaler, []interface{}{
+func (*TwoOneofs) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _TwoOneofs_OneofMarshaler, _TwoOneofs_OneofUnmarshaler, _TwoOneofs_OneofSizer, []interface{}{
 		(*TwoOneofs_Field1)(nil),
 		(*TwoOneofs_Field2)(nil),
 		(*TwoOneofs_Field3)(nil),
@@ -693,6 +756,45 @@ func _TwoOneofs_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buff
 	}
 }
 
+func _TwoOneofs_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*TwoOneofs)
+	// one
+	switch x := m.One.(type) {
+	case *TwoOneofs_Field1:
+		n += proto.SizeVarint(1<<3 | proto.WireFixed64)
+		n += 8
+	case *TwoOneofs_Field2:
+		n += proto.SizeVarint(2<<3 | proto.WireFixed32)
+		n += 4
+	case *TwoOneofs_Field3:
+		n += proto.SizeVarint(3<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field3))
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	// two
+	switch x := m.Two.(type) {
+	case *TwoOneofs_Field34:
+		n += proto.SizeVarint(34<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field34)))
+		n += len(x.Field34)
+	case *TwoOneofs_Field35:
+		n += proto.SizeVarint(35<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field35)))
+		n += len(x.Field35)
+	case *TwoOneofs_SubMessage2:
+		s := proto.Size(x.SubMessage2)
+		n += proto.SizeVarint(36<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
+}
+
 type CustomOneof struct {
 	// Types that are valid to be assigned to Custom:
 	//	*CustomOneof_Stringy
@@ -762,8 +864,8 @@ func (m *CustomOneof) GetMyCustomName() int64 {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*CustomOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _CustomOneof_OneofMarshaler, _CustomOneof_OneofUnmarshaler, []interface{}{
+func (*CustomOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _CustomOneof_OneofMarshaler, _CustomOneof_OneofUnmarshaler, _CustomOneof_OneofSizer, []interface{}{
 		(*CustomOneof_Stringy)(nil),
 		(*CustomOneof_CustomType)(nil),
 		(*CustomOneof_CastType)(nil),
@@ -838,6 +940,31 @@ func _CustomOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Bu
 	default:
 		return false, nil
 	}
+}
+
+func _CustomOneof_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*CustomOneof)
+	// custom
+	switch x := m.Custom.(type) {
+	case *CustomOneof_Stringy:
+		n += proto.SizeVarint(34<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Stringy)))
+		n += len(x.Stringy)
+	case *CustomOneof_CustomType:
+		n += proto.SizeVarint(35<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(x.CustomType.Size()))
+		n += x.CustomType.Size()
+	case *CustomOneof_CastType:
+		n += proto.SizeVarint(36<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.CastType))
+	case *CustomOneof_MyCustomName:
+		n += proto.SizeVarint(37<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.MyCustomName))
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 func init() {

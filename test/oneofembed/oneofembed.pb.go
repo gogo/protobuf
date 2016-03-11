@@ -82,8 +82,8 @@ func (m *Bar) GetB() bool {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*Bar) XXX_OneofFuncs() (func(msg proto1.Message, b *proto1.Buffer) error, func(msg proto1.Message, tag, wire int, b *proto1.Buffer) (bool, error), []interface{}) {
-	return _Bar_OneofMarshaler, _Bar_OneofUnmarshaler, []interface{}{
+func (*Bar) XXX_OneofFuncs() (func(msg proto1.Message, b *proto1.Buffer) error, func(msg proto1.Message, tag, wire int, b *proto1.Buffer) (bool, error), func(msg proto1.Message) (n int), []interface{}) {
+	return _Bar_OneofMarshaler, _Bar_OneofUnmarshaler, _Bar_OneofSizer, []interface{}{
 		(*Bar_A)(nil),
 		(*Bar_B)(nil),
 	}
@@ -134,6 +134,23 @@ func _Bar_OneofUnmarshaler(msg proto1.Message, tag, wire int, b *proto1.Buffer) 
 	default:
 		return false, nil
 	}
+}
+
+func _Bar_OneofSizer(msg proto1.Message) (n int) {
+	m := msg.(*Bar)
+	// pick
+	switch x := m.Pick.(type) {
+	case *Bar_A:
+		n += proto1.SizeVarint(11<<3 | proto1.WireVarint)
+		n += 1
+	case *Bar_B:
+		n += proto1.SizeVarint(12<<3 | proto1.WireVarint)
+		n += 1
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 func init() {

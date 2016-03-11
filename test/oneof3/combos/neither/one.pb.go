@@ -260,8 +260,8 @@ func (m *SampleOneOf) GetSubMessage() *Subby {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*SampleOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), []interface{}) {
-	return _SampleOneOf_OneofMarshaler, _SampleOneOf_OneofUnmarshaler, []interface{}{
+func (*SampleOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _SampleOneOf_OneofMarshaler, _SampleOneOf_OneofUnmarshaler, _SampleOneOf_OneofSizer, []interface{}{
 		(*SampleOneOf_Field1)(nil),
 		(*SampleOneOf_Field2)(nil),
 		(*SampleOneOf_Field3)(nil),
@@ -465,6 +465,69 @@ func _SampleOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Bu
 	default:
 		return false, nil
 	}
+}
+
+func _SampleOneOf_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*SampleOneOf)
+	// test_oneof
+	switch x := m.TestOneof.(type) {
+	case *SampleOneOf_Field1:
+		n += proto.SizeVarint(1<<3 | proto.WireFixed64)
+		n += 8
+	case *SampleOneOf_Field2:
+		n += proto.SizeVarint(2<<3 | proto.WireFixed32)
+		n += 4
+	case *SampleOneOf_Field3:
+		n += proto.SizeVarint(3<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field3))
+	case *SampleOneOf_Field4:
+		n += proto.SizeVarint(4<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field4))
+	case *SampleOneOf_Field5:
+		n += proto.SizeVarint(5<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field5))
+	case *SampleOneOf_Field6:
+		n += proto.SizeVarint(6<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(x.Field6))
+	case *SampleOneOf_Field7:
+		n += proto.SizeVarint(7<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64((uint32(x.Field7) << 1) ^ uint32((int32(x.Field7) >> 31))))
+	case *SampleOneOf_Field8:
+		n += proto.SizeVarint(8<<3 | proto.WireVarint)
+		n += proto.SizeVarint(uint64(uint64(x.Field8<<1) ^ uint64((int64(x.Field8) >> 63))))
+	case *SampleOneOf_Field9:
+		n += proto.SizeVarint(9<<3 | proto.WireFixed32)
+		n += 4
+	case *SampleOneOf_Field10:
+		n += proto.SizeVarint(10<<3 | proto.WireFixed32)
+		n += 4
+	case *SampleOneOf_Field11:
+		n += proto.SizeVarint(11<<3 | proto.WireFixed64)
+		n += 8
+	case *SampleOneOf_Field12:
+		n += proto.SizeVarint(12<<3 | proto.WireFixed64)
+		n += 8
+	case *SampleOneOf_Field13:
+		n += proto.SizeVarint(13<<3 | proto.WireVarint)
+		n += 1
+	case *SampleOneOf_Field14:
+		n += proto.SizeVarint(14<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field14)))
+		n += len(x.Field14)
+	case *SampleOneOf_Field15:
+		n += proto.SizeVarint(15<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(len(x.Field15)))
+		n += len(x.Field15)
+	case *SampleOneOf_SubMessage:
+		s := proto.Size(x.SubMessage)
+		n += proto.SizeVarint(16<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 func init() {
