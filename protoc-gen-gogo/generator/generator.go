@@ -64,6 +64,12 @@ import (
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
 
+// generatedCodeVersion indicates a version of the generated code.
+// It is incremented whenever an incompatibility between the generated code and
+// proto package is introduced; the generated code references
+// a constant, proto.ProtoPackageIsVersionN (where N is generatedCodeVersion).
+const generatedCodeVersion = 1
+
 // A Plugin provides functionality to add to the output during Go code generation,
 // such as to produce RPC stubs.
 type Plugin interface {
@@ -1194,6 +1200,19 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.customImports = make([]string, 0)
 	g.file = g.FileOf(file.FileDescriptorProto)
 	g.usedPackages = make(map[string]bool)
+
+	if g.file.index == 0 {
+		// For one file in the package, assert version compatibility.
+		g.P("// This is a compile-time assertion to ensure that this generated file")
+		g.P("// is compatible with the proto package it is being compiled against.")
+		if gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+			g.P("const _ = ", g.Pkg["proto"], ".GoGoProtoPackageIsVersion", generatedCodeVersion)
+		} else {
+			g.P("const _ = ", g.Pkg["proto"], ".ProtoPackageIsVersion", generatedCodeVersion)
+		}
+		g.P()
+	}
+
 	// Reset on each file
 	g.writtenImports = make(map[string]bool)
 

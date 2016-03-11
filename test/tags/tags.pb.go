@@ -24,6 +24,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type Outside struct {
 	*Inside          `protobuf:"bytes,1,opt,name=Inside,embedded=Inside" json:""`
 	Field2           *string `protobuf:"bytes,2,opt,name=Field2" json:"MyField2" xml:",comment"`

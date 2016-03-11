@@ -34,6 +34,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type Groups1 struct {
 	G                []*Groups1_G `protobuf:"group,1,rep,name=G" json:"g,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`

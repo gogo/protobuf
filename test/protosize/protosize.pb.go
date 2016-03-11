@@ -27,6 +27,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type SizeMessage struct {
 	Size             *int64  `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
 	ProtoSize_       *int64  `protobuf:"varint,2,opt,name=proto_size" json:"proto_size,omitempty"`

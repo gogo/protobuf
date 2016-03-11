@@ -22,6 +22,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),

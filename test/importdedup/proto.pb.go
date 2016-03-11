@@ -26,6 +26,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type Object struct {
 	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
 	SubObject        *subpkg.SubObject                                            `protobuf:"bytes,2,opt,name=SubObject" json:"SubObject,omitempty"`

@@ -25,6 +25,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type Object struct {
 	CustomField1     *CustomType  `protobuf:"bytes,1,opt,name=CustomField1,customtype=CustomType" json:"CustomField1,omitempty"`
 	CustomField2     []CustomType `protobuf:"bytes,2,rep,name=CustomField2,customtype=CustomType" json:"CustomField2,omitempty"`

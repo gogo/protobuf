@@ -30,6 +30,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type NinRepNative struct {
 	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
 	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
