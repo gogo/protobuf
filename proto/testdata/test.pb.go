@@ -319,8 +319,8 @@ func (m *GoEnum) GetFoo() FOO {
 }
 
 type GoTestField struct {
-	Label            *string `protobuf:"bytes,1,req,name=Label" json:"Label,omitempty"`
-	Type             *string `protobuf:"bytes,2,req,name=Type" json:"Type,omitempty"`
+	Label            *string `protobuf:"bytes,1,req,name=Label,json=label" json:"Label,omitempty"`
+	Type             *string `protobuf:"bytes,2,req,name=Type,json=type" json:"Type,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -345,84 +345,84 @@ func (m *GoTestField) GetType() string {
 
 type GoTest struct {
 	// Some typical parameters
-	Kind  *GoTest_KIND `protobuf:"varint,1,req,name=Kind,enum=testdata.GoTest_KIND" json:"Kind,omitempty"`
-	Table *string      `protobuf:"bytes,2,opt,name=Table" json:"Table,omitempty"`
-	Param *int32       `protobuf:"varint,3,opt,name=Param" json:"Param,omitempty"`
+	Kind  *GoTest_KIND `protobuf:"varint,1,req,name=Kind,json=kind,enum=testdata.GoTest_KIND" json:"Kind,omitempty"`
+	Table *string      `protobuf:"bytes,2,opt,name=Table,json=table" json:"Table,omitempty"`
+	Param *int32       `protobuf:"varint,3,opt,name=Param,json=param" json:"Param,omitempty"`
 	// Required, repeated and optional foreign fields.
-	RequiredField *GoTestField   `protobuf:"bytes,4,req,name=RequiredField" json:"RequiredField,omitempty"`
-	RepeatedField []*GoTestField `protobuf:"bytes,5,rep,name=RepeatedField" json:"RepeatedField,omitempty"`
-	OptionalField *GoTestField   `protobuf:"bytes,6,opt,name=OptionalField" json:"OptionalField,omitempty"`
+	RequiredField *GoTestField   `protobuf:"bytes,4,req,name=RequiredField,json=requiredField" json:"RequiredField,omitempty"`
+	RepeatedField []*GoTestField `protobuf:"bytes,5,rep,name=RepeatedField,json=repeatedField" json:"RepeatedField,omitempty"`
+	OptionalField *GoTestField   `protobuf:"bytes,6,opt,name=OptionalField,json=optionalField" json:"OptionalField,omitempty"`
 	// Required fields of all basic types
-	F_BoolRequired    *bool    `protobuf:"varint,10,req,name=F_Bool_required" json:"F_Bool_required,omitempty"`
-	F_Int32Required   *int32   `protobuf:"varint,11,req,name=F_Int32_required" json:"F_Int32_required,omitempty"`
-	F_Int64Required   *int64   `protobuf:"varint,12,req,name=F_Int64_required" json:"F_Int64_required,omitempty"`
-	F_Fixed32Required *uint32  `protobuf:"fixed32,13,req,name=F_Fixed32_required" json:"F_Fixed32_required,omitempty"`
-	F_Fixed64Required *uint64  `protobuf:"fixed64,14,req,name=F_Fixed64_required" json:"F_Fixed64_required,omitempty"`
-	F_Uint32Required  *uint32  `protobuf:"varint,15,req,name=F_Uint32_required" json:"F_Uint32_required,omitempty"`
-	F_Uint64Required  *uint64  `protobuf:"varint,16,req,name=F_Uint64_required" json:"F_Uint64_required,omitempty"`
-	F_FloatRequired   *float32 `protobuf:"fixed32,17,req,name=F_Float_required" json:"F_Float_required,omitempty"`
-	F_DoubleRequired  *float64 `protobuf:"fixed64,18,req,name=F_Double_required" json:"F_Double_required,omitempty"`
-	F_StringRequired  *string  `protobuf:"bytes,19,req,name=F_String_required" json:"F_String_required,omitempty"`
-	F_BytesRequired   []byte   `protobuf:"bytes,101,req,name=F_Bytes_required" json:"F_Bytes_required,omitempty"`
-	F_Sint32Required  *int32   `protobuf:"zigzag32,102,req,name=F_Sint32_required" json:"F_Sint32_required,omitempty"`
-	F_Sint64Required  *int64   `protobuf:"zigzag64,103,req,name=F_Sint64_required" json:"F_Sint64_required,omitempty"`
+	F_BoolRequired    *bool    `protobuf:"varint,10,req,name=F_Bool_required,json=fBoolRequired" json:"F_Bool_required,omitempty"`
+	F_Int32Required   *int32   `protobuf:"varint,11,req,name=F_Int32_required,json=fInt32Required" json:"F_Int32_required,omitempty"`
+	F_Int64Required   *int64   `protobuf:"varint,12,req,name=F_Int64_required,json=fInt64Required" json:"F_Int64_required,omitempty"`
+	F_Fixed32Required *uint32  `protobuf:"fixed32,13,req,name=F_Fixed32_required,json=fFixed32Required" json:"F_Fixed32_required,omitempty"`
+	F_Fixed64Required *uint64  `protobuf:"fixed64,14,req,name=F_Fixed64_required,json=fFixed64Required" json:"F_Fixed64_required,omitempty"`
+	F_Uint32Required  *uint32  `protobuf:"varint,15,req,name=F_Uint32_required,json=fUint32Required" json:"F_Uint32_required,omitempty"`
+	F_Uint64Required  *uint64  `protobuf:"varint,16,req,name=F_Uint64_required,json=fUint64Required" json:"F_Uint64_required,omitempty"`
+	F_FloatRequired   *float32 `protobuf:"fixed32,17,req,name=F_Float_required,json=fFloatRequired" json:"F_Float_required,omitempty"`
+	F_DoubleRequired  *float64 `protobuf:"fixed64,18,req,name=F_Double_required,json=fDoubleRequired" json:"F_Double_required,omitempty"`
+	F_StringRequired  *string  `protobuf:"bytes,19,req,name=F_String_required,json=fStringRequired" json:"F_String_required,omitempty"`
+	F_BytesRequired   []byte   `protobuf:"bytes,101,req,name=F_Bytes_required,json=fBytesRequired" json:"F_Bytes_required,omitempty"`
+	F_Sint32Required  *int32   `protobuf:"zigzag32,102,req,name=F_Sint32_required,json=fSint32Required" json:"F_Sint32_required,omitempty"`
+	F_Sint64Required  *int64   `protobuf:"zigzag64,103,req,name=F_Sint64_required,json=fSint64Required" json:"F_Sint64_required,omitempty"`
 	// Repeated fields of all basic types
-	F_BoolRepeated    []bool    `protobuf:"varint,20,rep,name=F_Bool_repeated" json:"F_Bool_repeated,omitempty"`
-	F_Int32Repeated   []int32   `protobuf:"varint,21,rep,name=F_Int32_repeated" json:"F_Int32_repeated,omitempty"`
-	F_Int64Repeated   []int64   `protobuf:"varint,22,rep,name=F_Int64_repeated" json:"F_Int64_repeated,omitempty"`
-	F_Fixed32Repeated []uint32  `protobuf:"fixed32,23,rep,name=F_Fixed32_repeated" json:"F_Fixed32_repeated,omitempty"`
-	F_Fixed64Repeated []uint64  `protobuf:"fixed64,24,rep,name=F_Fixed64_repeated" json:"F_Fixed64_repeated,omitempty"`
-	F_Uint32Repeated  []uint32  `protobuf:"varint,25,rep,name=F_Uint32_repeated" json:"F_Uint32_repeated,omitempty"`
-	F_Uint64Repeated  []uint64  `protobuf:"varint,26,rep,name=F_Uint64_repeated" json:"F_Uint64_repeated,omitempty"`
-	F_FloatRepeated   []float32 `protobuf:"fixed32,27,rep,name=F_Float_repeated" json:"F_Float_repeated,omitempty"`
-	F_DoubleRepeated  []float64 `protobuf:"fixed64,28,rep,name=F_Double_repeated" json:"F_Double_repeated,omitempty"`
-	F_StringRepeated  []string  `protobuf:"bytes,29,rep,name=F_String_repeated" json:"F_String_repeated,omitempty"`
-	F_BytesRepeated   [][]byte  `protobuf:"bytes,201,rep,name=F_Bytes_repeated" json:"F_Bytes_repeated,omitempty"`
-	F_Sint32Repeated  []int32   `protobuf:"zigzag32,202,rep,name=F_Sint32_repeated" json:"F_Sint32_repeated,omitempty"`
-	F_Sint64Repeated  []int64   `protobuf:"zigzag64,203,rep,name=F_Sint64_repeated" json:"F_Sint64_repeated,omitempty"`
+	F_BoolRepeated    []bool    `protobuf:"varint,20,rep,name=F_Bool_repeated,json=fBoolRepeated" json:"F_Bool_repeated,omitempty"`
+	F_Int32Repeated   []int32   `protobuf:"varint,21,rep,name=F_Int32_repeated,json=fInt32Repeated" json:"F_Int32_repeated,omitempty"`
+	F_Int64Repeated   []int64   `protobuf:"varint,22,rep,name=F_Int64_repeated,json=fInt64Repeated" json:"F_Int64_repeated,omitempty"`
+	F_Fixed32Repeated []uint32  `protobuf:"fixed32,23,rep,name=F_Fixed32_repeated,json=fFixed32Repeated" json:"F_Fixed32_repeated,omitempty"`
+	F_Fixed64Repeated []uint64  `protobuf:"fixed64,24,rep,name=F_Fixed64_repeated,json=fFixed64Repeated" json:"F_Fixed64_repeated,omitempty"`
+	F_Uint32Repeated  []uint32  `protobuf:"varint,25,rep,name=F_Uint32_repeated,json=fUint32Repeated" json:"F_Uint32_repeated,omitempty"`
+	F_Uint64Repeated  []uint64  `protobuf:"varint,26,rep,name=F_Uint64_repeated,json=fUint64Repeated" json:"F_Uint64_repeated,omitempty"`
+	F_FloatRepeated   []float32 `protobuf:"fixed32,27,rep,name=F_Float_repeated,json=fFloatRepeated" json:"F_Float_repeated,omitempty"`
+	F_DoubleRepeated  []float64 `protobuf:"fixed64,28,rep,name=F_Double_repeated,json=fDoubleRepeated" json:"F_Double_repeated,omitempty"`
+	F_StringRepeated  []string  `protobuf:"bytes,29,rep,name=F_String_repeated,json=fStringRepeated" json:"F_String_repeated,omitempty"`
+	F_BytesRepeated   [][]byte  `protobuf:"bytes,201,rep,name=F_Bytes_repeated,json=fBytesRepeated" json:"F_Bytes_repeated,omitempty"`
+	F_Sint32Repeated  []int32   `protobuf:"zigzag32,202,rep,name=F_Sint32_repeated,json=fSint32Repeated" json:"F_Sint32_repeated,omitempty"`
+	F_Sint64Repeated  []int64   `protobuf:"zigzag64,203,rep,name=F_Sint64_repeated,json=fSint64Repeated" json:"F_Sint64_repeated,omitempty"`
 	// Optional fields of all basic types
-	F_BoolOptional    *bool    `protobuf:"varint,30,opt,name=F_Bool_optional" json:"F_Bool_optional,omitempty"`
-	F_Int32Optional   *int32   `protobuf:"varint,31,opt,name=F_Int32_optional" json:"F_Int32_optional,omitempty"`
-	F_Int64Optional   *int64   `protobuf:"varint,32,opt,name=F_Int64_optional" json:"F_Int64_optional,omitempty"`
-	F_Fixed32Optional *uint32  `protobuf:"fixed32,33,opt,name=F_Fixed32_optional" json:"F_Fixed32_optional,omitempty"`
-	F_Fixed64Optional *uint64  `protobuf:"fixed64,34,opt,name=F_Fixed64_optional" json:"F_Fixed64_optional,omitempty"`
-	F_Uint32Optional  *uint32  `protobuf:"varint,35,opt,name=F_Uint32_optional" json:"F_Uint32_optional,omitempty"`
-	F_Uint64Optional  *uint64  `protobuf:"varint,36,opt,name=F_Uint64_optional" json:"F_Uint64_optional,omitempty"`
-	F_FloatOptional   *float32 `protobuf:"fixed32,37,opt,name=F_Float_optional" json:"F_Float_optional,omitempty"`
-	F_DoubleOptional  *float64 `protobuf:"fixed64,38,opt,name=F_Double_optional" json:"F_Double_optional,omitempty"`
-	F_StringOptional  *string  `protobuf:"bytes,39,opt,name=F_String_optional" json:"F_String_optional,omitempty"`
-	F_BytesOptional   []byte   `protobuf:"bytes,301,opt,name=F_Bytes_optional" json:"F_Bytes_optional,omitempty"`
-	F_Sint32Optional  *int32   `protobuf:"zigzag32,302,opt,name=F_Sint32_optional" json:"F_Sint32_optional,omitempty"`
-	F_Sint64Optional  *int64   `protobuf:"zigzag64,303,opt,name=F_Sint64_optional" json:"F_Sint64_optional,omitempty"`
+	F_BoolOptional    *bool    `protobuf:"varint,30,opt,name=F_Bool_optional,json=fBoolOptional" json:"F_Bool_optional,omitempty"`
+	F_Int32Optional   *int32   `protobuf:"varint,31,opt,name=F_Int32_optional,json=fInt32Optional" json:"F_Int32_optional,omitempty"`
+	F_Int64Optional   *int64   `protobuf:"varint,32,opt,name=F_Int64_optional,json=fInt64Optional" json:"F_Int64_optional,omitempty"`
+	F_Fixed32Optional *uint32  `protobuf:"fixed32,33,opt,name=F_Fixed32_optional,json=fFixed32Optional" json:"F_Fixed32_optional,omitempty"`
+	F_Fixed64Optional *uint64  `protobuf:"fixed64,34,opt,name=F_Fixed64_optional,json=fFixed64Optional" json:"F_Fixed64_optional,omitempty"`
+	F_Uint32Optional  *uint32  `protobuf:"varint,35,opt,name=F_Uint32_optional,json=fUint32Optional" json:"F_Uint32_optional,omitempty"`
+	F_Uint64Optional  *uint64  `protobuf:"varint,36,opt,name=F_Uint64_optional,json=fUint64Optional" json:"F_Uint64_optional,omitempty"`
+	F_FloatOptional   *float32 `protobuf:"fixed32,37,opt,name=F_Float_optional,json=fFloatOptional" json:"F_Float_optional,omitempty"`
+	F_DoubleOptional  *float64 `protobuf:"fixed64,38,opt,name=F_Double_optional,json=fDoubleOptional" json:"F_Double_optional,omitempty"`
+	F_StringOptional  *string  `protobuf:"bytes,39,opt,name=F_String_optional,json=fStringOptional" json:"F_String_optional,omitempty"`
+	F_BytesOptional   []byte   `protobuf:"bytes,301,opt,name=F_Bytes_optional,json=fBytesOptional" json:"F_Bytes_optional,omitempty"`
+	F_Sint32Optional  *int32   `protobuf:"zigzag32,302,opt,name=F_Sint32_optional,json=fSint32Optional" json:"F_Sint32_optional,omitempty"`
+	F_Sint64Optional  *int64   `protobuf:"zigzag64,303,opt,name=F_Sint64_optional,json=fSint64Optional" json:"F_Sint64_optional,omitempty"`
 	// Default-valued fields of all basic types
-	F_BoolDefaulted    *bool    `protobuf:"varint,40,opt,name=F_Bool_defaulted,def=1" json:"F_Bool_defaulted,omitempty"`
-	F_Int32Defaulted   *int32   `protobuf:"varint,41,opt,name=F_Int32_defaulted,def=32" json:"F_Int32_defaulted,omitempty"`
-	F_Int64Defaulted   *int64   `protobuf:"varint,42,opt,name=F_Int64_defaulted,def=64" json:"F_Int64_defaulted,omitempty"`
-	F_Fixed32Defaulted *uint32  `protobuf:"fixed32,43,opt,name=F_Fixed32_defaulted,def=320" json:"F_Fixed32_defaulted,omitempty"`
-	F_Fixed64Defaulted *uint64  `protobuf:"fixed64,44,opt,name=F_Fixed64_defaulted,def=640" json:"F_Fixed64_defaulted,omitempty"`
-	F_Uint32Defaulted  *uint32  `protobuf:"varint,45,opt,name=F_Uint32_defaulted,def=3200" json:"F_Uint32_defaulted,omitempty"`
-	F_Uint64Defaulted  *uint64  `protobuf:"varint,46,opt,name=F_Uint64_defaulted,def=6400" json:"F_Uint64_defaulted,omitempty"`
-	F_FloatDefaulted   *float32 `protobuf:"fixed32,47,opt,name=F_Float_defaulted,def=314159" json:"F_Float_defaulted,omitempty"`
-	F_DoubleDefaulted  *float64 `protobuf:"fixed64,48,opt,name=F_Double_defaulted,def=271828" json:"F_Double_defaulted,omitempty"`
-	F_StringDefaulted  *string  `protobuf:"bytes,49,opt,name=F_String_defaulted,def=hello, \"world!\"\n" json:"F_String_defaulted,omitempty"`
-	F_BytesDefaulted   []byte   `protobuf:"bytes,401,opt,name=F_Bytes_defaulted,def=Bignose" json:"F_Bytes_defaulted,omitempty"`
-	F_Sint32Defaulted  *int32   `protobuf:"zigzag32,402,opt,name=F_Sint32_defaulted,def=-32" json:"F_Sint32_defaulted,omitempty"`
-	F_Sint64Defaulted  *int64   `protobuf:"zigzag64,403,opt,name=F_Sint64_defaulted,def=-64" json:"F_Sint64_defaulted,omitempty"`
+	F_BoolDefaulted    *bool    `protobuf:"varint,40,opt,name=F_Bool_defaulted,json=fBoolDefaulted,def=1" json:"F_Bool_defaulted,omitempty"`
+	F_Int32Defaulted   *int32   `protobuf:"varint,41,opt,name=F_Int32_defaulted,json=fInt32Defaulted,def=32" json:"F_Int32_defaulted,omitempty"`
+	F_Int64Defaulted   *int64   `protobuf:"varint,42,opt,name=F_Int64_defaulted,json=fInt64Defaulted,def=64" json:"F_Int64_defaulted,omitempty"`
+	F_Fixed32Defaulted *uint32  `protobuf:"fixed32,43,opt,name=F_Fixed32_defaulted,json=fFixed32Defaulted,def=320" json:"F_Fixed32_defaulted,omitempty"`
+	F_Fixed64Defaulted *uint64  `protobuf:"fixed64,44,opt,name=F_Fixed64_defaulted,json=fFixed64Defaulted,def=640" json:"F_Fixed64_defaulted,omitempty"`
+	F_Uint32Defaulted  *uint32  `protobuf:"varint,45,opt,name=F_Uint32_defaulted,json=fUint32Defaulted,def=3200" json:"F_Uint32_defaulted,omitempty"`
+	F_Uint64Defaulted  *uint64  `protobuf:"varint,46,opt,name=F_Uint64_defaulted,json=fUint64Defaulted,def=6400" json:"F_Uint64_defaulted,omitempty"`
+	F_FloatDefaulted   *float32 `protobuf:"fixed32,47,opt,name=F_Float_defaulted,json=fFloatDefaulted,def=314159" json:"F_Float_defaulted,omitempty"`
+	F_DoubleDefaulted  *float64 `protobuf:"fixed64,48,opt,name=F_Double_defaulted,json=fDoubleDefaulted,def=271828" json:"F_Double_defaulted,omitempty"`
+	F_StringDefaulted  *string  `protobuf:"bytes,49,opt,name=F_String_defaulted,json=fStringDefaulted,def=hello, \"world!\"\n" json:"F_String_defaulted,omitempty"`
+	F_BytesDefaulted   []byte   `protobuf:"bytes,401,opt,name=F_Bytes_defaulted,json=fBytesDefaulted,def=Bignose" json:"F_Bytes_defaulted,omitempty"`
+	F_Sint32Defaulted  *int32   `protobuf:"zigzag32,402,opt,name=F_Sint32_defaulted,json=fSint32Defaulted,def=-32" json:"F_Sint32_defaulted,omitempty"`
+	F_Sint64Defaulted  *int64   `protobuf:"zigzag64,403,opt,name=F_Sint64_defaulted,json=fSint64Defaulted,def=-64" json:"F_Sint64_defaulted,omitempty"`
 	// Packed repeated fields (no string or bytes).
-	F_BoolRepeatedPacked    []bool                  `protobuf:"varint,50,rep,packed,name=F_Bool_repeated_packed" json:"F_Bool_repeated_packed,omitempty"`
-	F_Int32RepeatedPacked   []int32                 `protobuf:"varint,51,rep,packed,name=F_Int32_repeated_packed" json:"F_Int32_repeated_packed,omitempty"`
-	F_Int64RepeatedPacked   []int64                 `protobuf:"varint,52,rep,packed,name=F_Int64_repeated_packed" json:"F_Int64_repeated_packed,omitempty"`
-	F_Fixed32RepeatedPacked []uint32                `protobuf:"fixed32,53,rep,packed,name=F_Fixed32_repeated_packed" json:"F_Fixed32_repeated_packed,omitempty"`
-	F_Fixed64RepeatedPacked []uint64                `protobuf:"fixed64,54,rep,packed,name=F_Fixed64_repeated_packed" json:"F_Fixed64_repeated_packed,omitempty"`
-	F_Uint32RepeatedPacked  []uint32                `protobuf:"varint,55,rep,packed,name=F_Uint32_repeated_packed" json:"F_Uint32_repeated_packed,omitempty"`
-	F_Uint64RepeatedPacked  []uint64                `protobuf:"varint,56,rep,packed,name=F_Uint64_repeated_packed" json:"F_Uint64_repeated_packed,omitempty"`
-	F_FloatRepeatedPacked   []float32               `protobuf:"fixed32,57,rep,packed,name=F_Float_repeated_packed" json:"F_Float_repeated_packed,omitempty"`
-	F_DoubleRepeatedPacked  []float64               `protobuf:"fixed64,58,rep,packed,name=F_Double_repeated_packed" json:"F_Double_repeated_packed,omitempty"`
-	F_Sint32RepeatedPacked  []int32                 `protobuf:"zigzag32,502,rep,packed,name=F_Sint32_repeated_packed" json:"F_Sint32_repeated_packed,omitempty"`
-	F_Sint64RepeatedPacked  []int64                 `protobuf:"zigzag64,503,rep,packed,name=F_Sint64_repeated_packed" json:"F_Sint64_repeated_packed,omitempty"`
-	Requiredgroup           *GoTest_RequiredGroup   `protobuf:"group,70,req,name=RequiredGroup" json:"requiredgroup,omitempty"`
-	Repeatedgroup           []*GoTest_RepeatedGroup `protobuf:"group,80,rep,name=RepeatedGroup" json:"repeatedgroup,omitempty"`
-	Optionalgroup           *GoTest_OptionalGroup   `protobuf:"group,90,opt,name=OptionalGroup" json:"optionalgroup,omitempty"`
+	F_BoolRepeatedPacked    []bool                  `protobuf:"varint,50,rep,packed,name=F_Bool_repeated_packed,json=fBoolRepeatedPacked" json:"F_Bool_repeated_packed,omitempty"`
+	F_Int32RepeatedPacked   []int32                 `protobuf:"varint,51,rep,packed,name=F_Int32_repeated_packed,json=fInt32RepeatedPacked" json:"F_Int32_repeated_packed,omitempty"`
+	F_Int64RepeatedPacked   []int64                 `protobuf:"varint,52,rep,packed,name=F_Int64_repeated_packed,json=fInt64RepeatedPacked" json:"F_Int64_repeated_packed,omitempty"`
+	F_Fixed32RepeatedPacked []uint32                `protobuf:"fixed32,53,rep,packed,name=F_Fixed32_repeated_packed,json=fFixed32RepeatedPacked" json:"F_Fixed32_repeated_packed,omitempty"`
+	F_Fixed64RepeatedPacked []uint64                `protobuf:"fixed64,54,rep,packed,name=F_Fixed64_repeated_packed,json=fFixed64RepeatedPacked" json:"F_Fixed64_repeated_packed,omitempty"`
+	F_Uint32RepeatedPacked  []uint32                `protobuf:"varint,55,rep,packed,name=F_Uint32_repeated_packed,json=fUint32RepeatedPacked" json:"F_Uint32_repeated_packed,omitempty"`
+	F_Uint64RepeatedPacked  []uint64                `protobuf:"varint,56,rep,packed,name=F_Uint64_repeated_packed,json=fUint64RepeatedPacked" json:"F_Uint64_repeated_packed,omitempty"`
+	F_FloatRepeatedPacked   []float32               `protobuf:"fixed32,57,rep,packed,name=F_Float_repeated_packed,json=fFloatRepeatedPacked" json:"F_Float_repeated_packed,omitempty"`
+	F_DoubleRepeatedPacked  []float64               `protobuf:"fixed64,58,rep,packed,name=F_Double_repeated_packed,json=fDoubleRepeatedPacked" json:"F_Double_repeated_packed,omitempty"`
+	F_Sint32RepeatedPacked  []int32                 `protobuf:"zigzag32,502,rep,packed,name=F_Sint32_repeated_packed,json=fSint32RepeatedPacked" json:"F_Sint32_repeated_packed,omitempty"`
+	F_Sint64RepeatedPacked  []int64                 `protobuf:"zigzag64,503,rep,packed,name=F_Sint64_repeated_packed,json=fSint64RepeatedPacked" json:"F_Sint64_repeated_packed,omitempty"`
+	Requiredgroup           *GoTest_RequiredGroup   `protobuf:"group,70,req,name=RequiredGroup,json=requiredgroup" json:"requiredgroup,omitempty"`
+	Repeatedgroup           []*GoTest_RepeatedGroup `protobuf:"group,80,rep,name=RepeatedGroup,json=repeatedgroup" json:"repeatedgroup,omitempty"`
+	Optionalgroup           *GoTest_OptionalGroup   `protobuf:"group,90,opt,name=OptionalGroup,json=optionalgroup" json:"optionalgroup,omitempty"`
 	XXX_unrecognized        []byte                  `json:"-"`
 }
 
@@ -953,7 +953,7 @@ func (m *GoTest) GetOptionalgroup() *GoTest_OptionalGroup {
 
 // Required, repeated, and optional groups.
 type GoTest_RequiredGroup struct {
-	RequiredField    *string `protobuf:"bytes,71,req,name=RequiredField" json:"RequiredField,omitempty"`
+	RequiredField    *string `protobuf:"bytes,71,req,name=RequiredField,json=requiredField" json:"RequiredField,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -969,7 +969,7 @@ func (m *GoTest_RequiredGroup) GetRequiredField() string {
 }
 
 type GoTest_RepeatedGroup struct {
-	RequiredField    *string `protobuf:"bytes,81,req,name=RequiredField" json:"RequiredField,omitempty"`
+	RequiredField    *string `protobuf:"bytes,81,req,name=RequiredField,json=requiredField" json:"RequiredField,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -985,7 +985,7 @@ func (m *GoTest_RepeatedGroup) GetRequiredField() string {
 }
 
 type GoTest_OptionalGroup struct {
-	RequiredField    *string `protobuf:"bytes,91,req,name=RequiredField" json:"RequiredField,omitempty"`
+	RequiredField    *string `protobuf:"bytes,91,req,name=RequiredField,json=requiredField" json:"RequiredField,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1004,11 +1004,11 @@ func (m *GoTest_OptionalGroup) GetRequiredField() string {
 // Numbers are all big, larger than tag numbers in GoTestField,
 // the message used in the corresponding test.
 type GoSkipTest struct {
-	SkipInt32        *int32                `protobuf:"varint,11,req,name=skip_int32" json:"skip_int32,omitempty"`
-	SkipFixed32      *uint32               `protobuf:"fixed32,12,req,name=skip_fixed32" json:"skip_fixed32,omitempty"`
-	SkipFixed64      *uint64               `protobuf:"fixed64,13,req,name=skip_fixed64" json:"skip_fixed64,omitempty"`
-	SkipString       *string               `protobuf:"bytes,14,req,name=skip_string" json:"skip_string,omitempty"`
-	Skipgroup        *GoSkipTest_SkipGroup `protobuf:"group,15,req,name=SkipGroup" json:"skipgroup,omitempty"`
+	SkipInt32        *int32                `protobuf:"varint,11,req,name=skip_int32,json=skipInt32" json:"skip_int32,omitempty"`
+	SkipFixed32      *uint32               `protobuf:"fixed32,12,req,name=skip_fixed32,json=skipFixed32" json:"skip_fixed32,omitempty"`
+	SkipFixed64      *uint64               `protobuf:"fixed64,13,req,name=skip_fixed64,json=skipFixed64" json:"skip_fixed64,omitempty"`
+	SkipString       *string               `protobuf:"bytes,14,req,name=skip_string,json=skipString" json:"skip_string,omitempty"`
+	Skipgroup        *GoSkipTest_SkipGroup `protobuf:"group,15,req,name=SkipGroup,json=skipgroup" json:"skipgroup,omitempty"`
 	XXX_unrecognized []byte                `json:"-"`
 }
 
@@ -1053,8 +1053,8 @@ func (m *GoSkipTest) GetSkipgroup() *GoSkipTest_SkipGroup {
 }
 
 type GoSkipTest_SkipGroup struct {
-	GroupInt32       *int32  `protobuf:"varint,16,req,name=group_int32" json:"group_int32,omitempty"`
-	GroupString      *string `protobuf:"bytes,17,req,name=group_string" json:"group_string,omitempty"`
+	GroupInt32       *int32  `protobuf:"varint,16,req,name=group_int32,json=groupInt32" json:"group_int32,omitempty"`
+	GroupString      *string `protobuf:"bytes,17,req,name=group_string,json=groupString" json:"group_string,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1114,7 +1114,7 @@ func (m *PackedTest) GetB() []int32 {
 
 type MaxTag struct {
 	// Maximum possible tag number.
-	LastField        *string `protobuf:"bytes,536870911,opt,name=last_field" json:"last_field,omitempty"`
+	LastField        *string `protobuf:"bytes,536870911,opt,name=last_field,json=lastField" json:"last_field,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1202,7 +1202,7 @@ func (m *NewMessage) GetNum() int64 {
 
 type NewMessage_Nested struct {
 	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	FoodGroup        *string `protobuf:"bytes,2,opt,name=food_group" json:"food_group,omitempty"`
+	FoodGroup        *string `protobuf:"bytes,2,opt,name=food_group,json=foodGroup" json:"food_group,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1323,11 +1323,11 @@ type MyMessage struct {
 	Pet       []string             `protobuf:"bytes,4,rep,name=pet" json:"pet,omitempty"`
 	Inner     *InnerMessage        `protobuf:"bytes,5,opt,name=inner" json:"inner,omitempty"`
 	Others    []*OtherMessage      `protobuf:"bytes,6,rep,name=others" json:"others,omitempty"`
-	RepInner  []*InnerMessage      `protobuf:"bytes,12,rep,name=rep_inner" json:"rep_inner,omitempty"`
+	RepInner  []*InnerMessage      `protobuf:"bytes,12,rep,name=rep_inner,json=repInner" json:"rep_inner,omitempty"`
 	Bikeshed  *MyMessage_Color     `protobuf:"varint,7,opt,name=bikeshed,enum=testdata.MyMessage_Color" json:"bikeshed,omitempty"`
-	Somegroup *MyMessage_SomeGroup `protobuf:"group,8,opt,name=SomeGroup" json:"somegroup,omitempty"`
+	Somegroup *MyMessage_SomeGroup `protobuf:"group,8,opt,name=SomeGroup,json=somegroup" json:"somegroup,omitempty"`
 	// This field becomes [][]byte in the generated code.
-	RepBytes         [][]byte                  `protobuf:"bytes,10,rep,name=rep_bytes" json:"rep_bytes,omitempty"`
+	RepBytes         [][]byte                  `protobuf:"bytes,10,rep,name=rep_bytes,json=repBytes" json:"rep_bytes,omitempty"`
 	Bigfloat         *float64                  `protobuf:"fixed64,11,opt,name=bigfloat" json:"bigfloat,omitempty"`
 	XXX_extensions   map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized []byte                    `json:"-"`
@@ -1430,7 +1430,7 @@ func (m *MyMessage) GetBigfloat() float64 {
 }
 
 type MyMessage_SomeGroup struct {
-	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field" json:"group_field,omitempty"`
+	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field,json=groupField" json:"group_field,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -1594,7 +1594,7 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{16} }
 
 type MessageList struct {
-	Message          []*MessageList_Message `protobuf:"group,1,rep,name=Message" json:"message,omitempty"`
+	Message          []*MessageList_Message `protobuf:"group,1,rep,name=Message,json=message" json:"message,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
@@ -1635,8 +1635,8 @@ func (m *MessageList_Message) GetCount() int32 {
 }
 
 type Strings struct {
-	StringField      *string `protobuf:"bytes,1,opt,name=string_field" json:"string_field,omitempty"`
-	BytesField       []byte  `protobuf:"bytes,2,opt,name=bytes_field" json:"bytes_field,omitempty"`
+	StringField      *string `protobuf:"bytes,1,opt,name=string_field,json=stringField" json:"string_field,omitempty"`
+	BytesField       []byte  `protobuf:"bytes,2,opt,name=bytes_field,json=bytesField" json:"bytes_field,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1662,28 +1662,28 @@ func (m *Strings) GetBytesField() []byte {
 type Defaults struct {
 	// Default-valued fields of all basic types.
 	// Same as GoTest, but copied here to make testing easier.
-	F_Bool    *bool           `protobuf:"varint,1,opt,name=F_Bool,def=1" json:"F_Bool,omitempty"`
-	F_Int32   *int32          `protobuf:"varint,2,opt,name=F_Int32,def=32" json:"F_Int32,omitempty"`
-	F_Int64   *int64          `protobuf:"varint,3,opt,name=F_Int64,def=64" json:"F_Int64,omitempty"`
-	F_Fixed32 *uint32         `protobuf:"fixed32,4,opt,name=F_Fixed32,def=320" json:"F_Fixed32,omitempty"`
-	F_Fixed64 *uint64         `protobuf:"fixed64,5,opt,name=F_Fixed64,def=640" json:"F_Fixed64,omitempty"`
-	F_Uint32  *uint32         `protobuf:"varint,6,opt,name=F_Uint32,def=3200" json:"F_Uint32,omitempty"`
-	F_Uint64  *uint64         `protobuf:"varint,7,opt,name=F_Uint64,def=6400" json:"F_Uint64,omitempty"`
-	F_Float   *float32        `protobuf:"fixed32,8,opt,name=F_Float,def=314159" json:"F_Float,omitempty"`
-	F_Double  *float64        `protobuf:"fixed64,9,opt,name=F_Double,def=271828" json:"F_Double,omitempty"`
-	F_String  *string         `protobuf:"bytes,10,opt,name=F_String,def=hello, \"world!\"\n" json:"F_String,omitempty"`
-	F_Bytes   []byte          `protobuf:"bytes,11,opt,name=F_Bytes,def=Bignose" json:"F_Bytes,omitempty"`
-	F_Sint32  *int32          `protobuf:"zigzag32,12,opt,name=F_Sint32,def=-32" json:"F_Sint32,omitempty"`
-	F_Sint64  *int64          `protobuf:"zigzag64,13,opt,name=F_Sint64,def=-64" json:"F_Sint64,omitempty"`
-	F_Enum    *Defaults_Color `protobuf:"varint,14,opt,name=F_Enum,enum=testdata.Defaults_Color,def=1" json:"F_Enum,omitempty"`
+	F_Bool    *bool           `protobuf:"varint,1,opt,name=F_Bool,json=fBool,def=1" json:"F_Bool,omitempty"`
+	F_Int32   *int32          `protobuf:"varint,2,opt,name=F_Int32,json=fInt32,def=32" json:"F_Int32,omitempty"`
+	F_Int64   *int64          `protobuf:"varint,3,opt,name=F_Int64,json=fInt64,def=64" json:"F_Int64,omitempty"`
+	F_Fixed32 *uint32         `protobuf:"fixed32,4,opt,name=F_Fixed32,json=fFixed32,def=320" json:"F_Fixed32,omitempty"`
+	F_Fixed64 *uint64         `protobuf:"fixed64,5,opt,name=F_Fixed64,json=fFixed64,def=640" json:"F_Fixed64,omitempty"`
+	F_Uint32  *uint32         `protobuf:"varint,6,opt,name=F_Uint32,json=fUint32,def=3200" json:"F_Uint32,omitempty"`
+	F_Uint64  *uint64         `protobuf:"varint,7,opt,name=F_Uint64,json=fUint64,def=6400" json:"F_Uint64,omitempty"`
+	F_Float   *float32        `protobuf:"fixed32,8,opt,name=F_Float,json=fFloat,def=314159" json:"F_Float,omitempty"`
+	F_Double  *float64        `protobuf:"fixed64,9,opt,name=F_Double,json=fDouble,def=271828" json:"F_Double,omitempty"`
+	F_String  *string         `protobuf:"bytes,10,opt,name=F_String,json=fString,def=hello, \"world!\"\n" json:"F_String,omitempty"`
+	F_Bytes   []byte          `protobuf:"bytes,11,opt,name=F_Bytes,json=fBytes,def=Bignose" json:"F_Bytes,omitempty"`
+	F_Sint32  *int32          `protobuf:"zigzag32,12,opt,name=F_Sint32,json=fSint32,def=-32" json:"F_Sint32,omitempty"`
+	F_Sint64  *int64          `protobuf:"zigzag64,13,opt,name=F_Sint64,json=fSint64,def=-64" json:"F_Sint64,omitempty"`
+	F_Enum    *Defaults_Color `protobuf:"varint,14,opt,name=F_Enum,json=fEnum,enum=testdata.Defaults_Color,def=1" json:"F_Enum,omitempty"`
 	// More fields with crazy defaults.
-	F_Pinf *float32 `protobuf:"fixed32,15,opt,name=F_Pinf,def=inf" json:"F_Pinf,omitempty"`
-	F_Ninf *float32 `protobuf:"fixed32,16,opt,name=F_Ninf,def=-inf" json:"F_Ninf,omitempty"`
-	F_Nan  *float32 `protobuf:"fixed32,17,opt,name=F_Nan,def=nan" json:"F_Nan,omitempty"`
+	F_Pinf *float32 `protobuf:"fixed32,15,opt,name=F_Pinf,json=fPinf,def=inf" json:"F_Pinf,omitempty"`
+	F_Ninf *float32 `protobuf:"fixed32,16,opt,name=F_Ninf,json=fNinf,def=-inf" json:"F_Ninf,omitempty"`
+	F_Nan  *float32 `protobuf:"fixed32,17,opt,name=F_Nan,json=fNan,def=nan" json:"F_Nan,omitempty"`
 	// Sub-message.
 	Sub *SubDefaults `protobuf:"bytes,18,opt,name=sub" json:"sub,omitempty"`
 	// Redundant but explicit defaults.
-	StrZero          *string `protobuf:"bytes,19,opt,name=str_zero,def=" json:"str_zero,omitempty"`
+	StrZero          *string `protobuf:"bytes,19,opt,name=str_zero,json=strZero,def=" json:"str_zero,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1884,10 +1884,10 @@ func (m *RepeatedEnum) GetColor() []RepeatedEnum_Color {
 
 type MoreRepeated struct {
 	Bools            []bool   `protobuf:"varint,1,rep,name=bools" json:"bools,omitempty"`
-	BoolsPacked      []bool   `protobuf:"varint,2,rep,packed,name=bools_packed" json:"bools_packed,omitempty"`
+	BoolsPacked      []bool   `protobuf:"varint,2,rep,packed,name=bools_packed,json=boolsPacked" json:"bools_packed,omitempty"`
 	Ints             []int32  `protobuf:"varint,3,rep,name=ints" json:"ints,omitempty"`
-	IntsPacked       []int32  `protobuf:"varint,4,rep,packed,name=ints_packed" json:"ints_packed,omitempty"`
-	Int64SPacked     []int64  `protobuf:"varint,7,rep,packed,name=int64s_packed" json:"int64s_packed,omitempty"`
+	IntsPacked       []int32  `protobuf:"varint,4,rep,packed,name=ints_packed,json=intsPacked" json:"ints_packed,omitempty"`
+	Int64SPacked     []int64  `protobuf:"varint,7,rep,packed,name=int64s_packed,json=int64sPacked" json:"int64s_packed,omitempty"`
 	Strings          []string `protobuf:"bytes,5,rep,name=strings" json:"strings,omitempty"`
 	Fixeds           []uint32 `protobuf:"fixed32,6,rep,name=fixeds" json:"fixeds,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
@@ -1948,7 +1948,7 @@ func (m *MoreRepeated) GetFixeds() []uint32 {
 }
 
 type GroupOld struct {
-	G                *GroupOld_G `protobuf:"group,101,opt,name=G" json:"g,omitempty"`
+	G                *GroupOld_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -1981,7 +1981,7 @@ func (m *GroupOld_G) GetX() int32 {
 }
 
 type GroupNew struct {
-	G                *GroupNew_G `protobuf:"group,101,opt,name=G" json:"g,omitempty"`
+	G                *GroupNew_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -2039,10 +2039,10 @@ func (m *FloatingPoint) GetF() float64 {
 }
 
 type MessageWithMap struct {
-	NameMapping      map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	MsgMapping       map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ByteMapping      map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	StrToStr         map[string]string        `protobuf:"bytes,4,rep,name=str_to_str" json:"str_to_str,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	NameMapping      map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MsgMapping       map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ByteMapping      map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StrToStr         map[string]string        `protobuf:"bytes,4,rep,name=str_to_str,json=strToStr" json:"str_to_str,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_unrecognized []byte                   `json:"-"`
 }
 
@@ -2118,55 +2118,55 @@ type isOneof_Tormato interface {
 }
 
 type Oneof_F_Bool struct {
-	F_Bool bool `protobuf:"varint,1,opt,name=F_Bool,oneof"`
+	F_Bool bool `protobuf:"varint,1,opt,name=F_Bool,json=fBool,oneof"`
 }
 type Oneof_F_Int32 struct {
-	F_Int32 int32 `protobuf:"varint,2,opt,name=F_Int32,oneof"`
+	F_Int32 int32 `protobuf:"varint,2,opt,name=F_Int32,json=fInt32,oneof"`
 }
 type Oneof_F_Int64 struct {
-	F_Int64 int64 `protobuf:"varint,3,opt,name=F_Int64,oneof"`
+	F_Int64 int64 `protobuf:"varint,3,opt,name=F_Int64,json=fInt64,oneof"`
 }
 type Oneof_F_Fixed32 struct {
-	F_Fixed32 uint32 `protobuf:"fixed32,4,opt,name=F_Fixed32,oneof"`
+	F_Fixed32 uint32 `protobuf:"fixed32,4,opt,name=F_Fixed32,json=fFixed32,oneof"`
 }
 type Oneof_F_Fixed64 struct {
-	F_Fixed64 uint64 `protobuf:"fixed64,5,opt,name=F_Fixed64,oneof"`
+	F_Fixed64 uint64 `protobuf:"fixed64,5,opt,name=F_Fixed64,json=fFixed64,oneof"`
 }
 type Oneof_F_Uint32 struct {
-	F_Uint32 uint32 `protobuf:"varint,6,opt,name=F_Uint32,oneof"`
+	F_Uint32 uint32 `protobuf:"varint,6,opt,name=F_Uint32,json=fUint32,oneof"`
 }
 type Oneof_F_Uint64 struct {
-	F_Uint64 uint64 `protobuf:"varint,7,opt,name=F_Uint64,oneof"`
+	F_Uint64 uint64 `protobuf:"varint,7,opt,name=F_Uint64,json=fUint64,oneof"`
 }
 type Oneof_F_Float struct {
-	F_Float float32 `protobuf:"fixed32,8,opt,name=F_Float,oneof"`
+	F_Float float32 `protobuf:"fixed32,8,opt,name=F_Float,json=fFloat,oneof"`
 }
 type Oneof_F_Double struct {
-	F_Double float64 `protobuf:"fixed64,9,opt,name=F_Double,oneof"`
+	F_Double float64 `protobuf:"fixed64,9,opt,name=F_Double,json=fDouble,oneof"`
 }
 type Oneof_F_String struct {
-	F_String string `protobuf:"bytes,10,opt,name=F_String,oneof"`
+	F_String string `protobuf:"bytes,10,opt,name=F_String,json=fString,oneof"`
 }
 type Oneof_F_Bytes struct {
-	F_Bytes []byte `protobuf:"bytes,11,opt,name=F_Bytes,oneof"`
+	F_Bytes []byte `protobuf:"bytes,11,opt,name=F_Bytes,json=fBytes,oneof"`
 }
 type Oneof_F_Sint32 struct {
-	F_Sint32 int32 `protobuf:"zigzag32,12,opt,name=F_Sint32,oneof"`
+	F_Sint32 int32 `protobuf:"zigzag32,12,opt,name=F_Sint32,json=fSint32,oneof"`
 }
 type Oneof_F_Sint64 struct {
-	F_Sint64 int64 `protobuf:"zigzag64,13,opt,name=F_Sint64,oneof"`
+	F_Sint64 int64 `protobuf:"zigzag64,13,opt,name=F_Sint64,json=fSint64,oneof"`
 }
 type Oneof_F_Enum struct {
-	F_Enum MyMessage_Color `protobuf:"varint,14,opt,name=F_Enum,enum=testdata.MyMessage_Color,oneof"`
+	F_Enum MyMessage_Color `protobuf:"varint,14,opt,name=F_Enum,json=fEnum,enum=testdata.MyMessage_Color,oneof"`
 }
 type Oneof_F_Message struct {
-	F_Message *GoTestField `protobuf:"bytes,15,opt,name=F_Message,oneof"`
+	F_Message *GoTestField `protobuf:"bytes,15,opt,name=F_Message,json=fMessage,oneof"`
 }
 type Oneof_FGroup struct {
-	FGroup *Oneof_F_Group `protobuf:"group,16,opt,name=F_Group,oneof"`
+	FGroup *Oneof_F_Group `protobuf:"group,16,opt,name=F_Group,json=fGroup,oneof"`
 }
 type Oneof_F_Largest_Tag struct {
-	F_Largest_Tag int32 `protobuf:"varint,536870911,opt,name=F_Largest_Tag,oneof"`
+	F_Largest_Tag int32 `protobuf:"varint,536870911,opt,name=F_Largest_Tag,json=fLargestTag,oneof"`
 }
 type Oneof_Value struct {
 	Value int32 `protobuf:"varint,100,opt,name=value,oneof"`
@@ -2663,7 +2663,7 @@ func (m *Oneof_F_Group) GetX() int32 {
 }
 
 type Communique struct {
-	MakeMeCry *bool `protobuf:"varint,1,opt,name=make_me_cry" json:"make_me_cry,omitempty"`
+	MakeMeCry *bool `protobuf:"varint,1,opt,name=make_me_cry,json=makeMeCry" json:"make_me_cry,omitempty"`
 	// This is a oneof, called "union".
 	//
 	// Types that are valid to be assigned to Union:
@@ -2696,7 +2696,7 @@ type Communique_Data struct {
 	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
 }
 type Communique_TempC struct {
-	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,oneof"`
+	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof"`
 }
 type Communique_Col struct {
 	Col MyMessage_Color `protobuf:"varint,9,opt,name=col,enum=testdata.MyMessage_Color,oneof"`
@@ -2916,7 +2916,7 @@ var E_RComplex = &proto.ExtensionDesc{
 	ExtensionType: ([]*ComplexExtension)(nil),
 	Field:         201,
 	Name:          "testdata.r_complex",
-	Tag:           "bytes,201,rep,name=r_complex",
+	Tag:           "bytes,201,rep,name=r_complex,json=rComplex",
 }
 
 var E_NoDefaultDouble = &proto.ExtensionDesc{
@@ -2924,7 +2924,7 @@ var E_NoDefaultDouble = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         101,
 	Name:          "testdata.no_default_double",
-	Tag:           "fixed64,101,opt,name=no_default_double",
+	Tag:           "fixed64,101,opt,name=no_default_double,json=noDefaultDouble",
 }
 
 var E_NoDefaultFloat = &proto.ExtensionDesc{
@@ -2932,7 +2932,7 @@ var E_NoDefaultFloat = &proto.ExtensionDesc{
 	ExtensionType: (*float32)(nil),
 	Field:         102,
 	Name:          "testdata.no_default_float",
-	Tag:           "fixed32,102,opt,name=no_default_float",
+	Tag:           "fixed32,102,opt,name=no_default_float,json=noDefaultFloat",
 }
 
 var E_NoDefaultInt32 = &proto.ExtensionDesc{
@@ -2940,7 +2940,7 @@ var E_NoDefaultInt32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         103,
 	Name:          "testdata.no_default_int32",
-	Tag:           "varint,103,opt,name=no_default_int32",
+	Tag:           "varint,103,opt,name=no_default_int32,json=noDefaultInt32",
 }
 
 var E_NoDefaultInt64 = &proto.ExtensionDesc{
@@ -2948,7 +2948,7 @@ var E_NoDefaultInt64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         104,
 	Name:          "testdata.no_default_int64",
-	Tag:           "varint,104,opt,name=no_default_int64",
+	Tag:           "varint,104,opt,name=no_default_int64,json=noDefaultInt64",
 }
 
 var E_NoDefaultUint32 = &proto.ExtensionDesc{
@@ -2956,7 +2956,7 @@ var E_NoDefaultUint32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         105,
 	Name:          "testdata.no_default_uint32",
-	Tag:           "varint,105,opt,name=no_default_uint32",
+	Tag:           "varint,105,opt,name=no_default_uint32,json=noDefaultUint32",
 }
 
 var E_NoDefaultUint64 = &proto.ExtensionDesc{
@@ -2964,7 +2964,7 @@ var E_NoDefaultUint64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         106,
 	Name:          "testdata.no_default_uint64",
-	Tag:           "varint,106,opt,name=no_default_uint64",
+	Tag:           "varint,106,opt,name=no_default_uint64,json=noDefaultUint64",
 }
 
 var E_NoDefaultSint32 = &proto.ExtensionDesc{
@@ -2972,7 +2972,7 @@ var E_NoDefaultSint32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         107,
 	Name:          "testdata.no_default_sint32",
-	Tag:           "zigzag32,107,opt,name=no_default_sint32",
+	Tag:           "zigzag32,107,opt,name=no_default_sint32,json=noDefaultSint32",
 }
 
 var E_NoDefaultSint64 = &proto.ExtensionDesc{
@@ -2980,7 +2980,7 @@ var E_NoDefaultSint64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         108,
 	Name:          "testdata.no_default_sint64",
-	Tag:           "zigzag64,108,opt,name=no_default_sint64",
+	Tag:           "zigzag64,108,opt,name=no_default_sint64,json=noDefaultSint64",
 }
 
 var E_NoDefaultFixed32 = &proto.ExtensionDesc{
@@ -2988,7 +2988,7 @@ var E_NoDefaultFixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         109,
 	Name:          "testdata.no_default_fixed32",
-	Tag:           "fixed32,109,opt,name=no_default_fixed32",
+	Tag:           "fixed32,109,opt,name=no_default_fixed32,json=noDefaultFixed32",
 }
 
 var E_NoDefaultFixed64 = &proto.ExtensionDesc{
@@ -2996,7 +2996,7 @@ var E_NoDefaultFixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         110,
 	Name:          "testdata.no_default_fixed64",
-	Tag:           "fixed64,110,opt,name=no_default_fixed64",
+	Tag:           "fixed64,110,opt,name=no_default_fixed64,json=noDefaultFixed64",
 }
 
 var E_NoDefaultSfixed32 = &proto.ExtensionDesc{
@@ -3004,7 +3004,7 @@ var E_NoDefaultSfixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         111,
 	Name:          "testdata.no_default_sfixed32",
-	Tag:           "fixed32,111,opt,name=no_default_sfixed32",
+	Tag:           "fixed32,111,opt,name=no_default_sfixed32,json=noDefaultSfixed32",
 }
 
 var E_NoDefaultSfixed64 = &proto.ExtensionDesc{
@@ -3012,7 +3012,7 @@ var E_NoDefaultSfixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         112,
 	Name:          "testdata.no_default_sfixed64",
-	Tag:           "fixed64,112,opt,name=no_default_sfixed64",
+	Tag:           "fixed64,112,opt,name=no_default_sfixed64,json=noDefaultSfixed64",
 }
 
 var E_NoDefaultBool = &proto.ExtensionDesc{
@@ -3020,7 +3020,7 @@ var E_NoDefaultBool = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         113,
 	Name:          "testdata.no_default_bool",
-	Tag:           "varint,113,opt,name=no_default_bool",
+	Tag:           "varint,113,opt,name=no_default_bool,json=noDefaultBool",
 }
 
 var E_NoDefaultString = &proto.ExtensionDesc{
@@ -3028,7 +3028,7 @@ var E_NoDefaultString = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         114,
 	Name:          "testdata.no_default_string",
-	Tag:           "bytes,114,opt,name=no_default_string",
+	Tag:           "bytes,114,opt,name=no_default_string,json=noDefaultString",
 }
 
 var E_NoDefaultBytes = &proto.ExtensionDesc{
@@ -3036,7 +3036,7 @@ var E_NoDefaultBytes = &proto.ExtensionDesc{
 	ExtensionType: ([]byte)(nil),
 	Field:         115,
 	Name:          "testdata.no_default_bytes",
-	Tag:           "bytes,115,opt,name=no_default_bytes",
+	Tag:           "bytes,115,opt,name=no_default_bytes,json=noDefaultBytes",
 }
 
 var E_NoDefaultEnum = &proto.ExtensionDesc{
@@ -3044,7 +3044,7 @@ var E_NoDefaultEnum = &proto.ExtensionDesc{
 	ExtensionType: (*DefaultsMessage_DefaultsEnum)(nil),
 	Field:         116,
 	Name:          "testdata.no_default_enum",
-	Tag:           "varint,116,opt,name=no_default_enum,enum=testdata.DefaultsMessage_DefaultsEnum",
+	Tag:           "varint,116,opt,name=no_default_enum,json=noDefaultEnum,enum=testdata.DefaultsMessage_DefaultsEnum",
 }
 
 var E_DefaultDouble = &proto.ExtensionDesc{
@@ -3052,7 +3052,7 @@ var E_DefaultDouble = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         201,
 	Name:          "testdata.default_double",
-	Tag:           "fixed64,201,opt,name=default_double,def=3.1415",
+	Tag:           "fixed64,201,opt,name=default_double,json=defaultDouble,def=3.1415",
 }
 
 var E_DefaultFloat = &proto.ExtensionDesc{
@@ -3060,7 +3060,7 @@ var E_DefaultFloat = &proto.ExtensionDesc{
 	ExtensionType: (*float32)(nil),
 	Field:         202,
 	Name:          "testdata.default_float",
-	Tag:           "fixed32,202,opt,name=default_float,def=3.14",
+	Tag:           "fixed32,202,opt,name=default_float,json=defaultFloat,def=3.14",
 }
 
 var E_DefaultInt32 = &proto.ExtensionDesc{
@@ -3068,7 +3068,7 @@ var E_DefaultInt32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         203,
 	Name:          "testdata.default_int32",
-	Tag:           "varint,203,opt,name=default_int32,def=42",
+	Tag:           "varint,203,opt,name=default_int32,json=defaultInt32,def=42",
 }
 
 var E_DefaultInt64 = &proto.ExtensionDesc{
@@ -3076,7 +3076,7 @@ var E_DefaultInt64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         204,
 	Name:          "testdata.default_int64",
-	Tag:           "varint,204,opt,name=default_int64,def=43",
+	Tag:           "varint,204,opt,name=default_int64,json=defaultInt64,def=43",
 }
 
 var E_DefaultUint32 = &proto.ExtensionDesc{
@@ -3084,7 +3084,7 @@ var E_DefaultUint32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         205,
 	Name:          "testdata.default_uint32",
-	Tag:           "varint,205,opt,name=default_uint32,def=44",
+	Tag:           "varint,205,opt,name=default_uint32,json=defaultUint32,def=44",
 }
 
 var E_DefaultUint64 = &proto.ExtensionDesc{
@@ -3092,7 +3092,7 @@ var E_DefaultUint64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         206,
 	Name:          "testdata.default_uint64",
-	Tag:           "varint,206,opt,name=default_uint64,def=45",
+	Tag:           "varint,206,opt,name=default_uint64,json=defaultUint64,def=45",
 }
 
 var E_DefaultSint32 = &proto.ExtensionDesc{
@@ -3100,7 +3100,7 @@ var E_DefaultSint32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         207,
 	Name:          "testdata.default_sint32",
-	Tag:           "zigzag32,207,opt,name=default_sint32,def=46",
+	Tag:           "zigzag32,207,opt,name=default_sint32,json=defaultSint32,def=46",
 }
 
 var E_DefaultSint64 = &proto.ExtensionDesc{
@@ -3108,7 +3108,7 @@ var E_DefaultSint64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         208,
 	Name:          "testdata.default_sint64",
-	Tag:           "zigzag64,208,opt,name=default_sint64,def=47",
+	Tag:           "zigzag64,208,opt,name=default_sint64,json=defaultSint64,def=47",
 }
 
 var E_DefaultFixed32 = &proto.ExtensionDesc{
@@ -3116,7 +3116,7 @@ var E_DefaultFixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         209,
 	Name:          "testdata.default_fixed32",
-	Tag:           "fixed32,209,opt,name=default_fixed32,def=48",
+	Tag:           "fixed32,209,opt,name=default_fixed32,json=defaultFixed32,def=48",
 }
 
 var E_DefaultFixed64 = &proto.ExtensionDesc{
@@ -3124,7 +3124,7 @@ var E_DefaultFixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         210,
 	Name:          "testdata.default_fixed64",
-	Tag:           "fixed64,210,opt,name=default_fixed64,def=49",
+	Tag:           "fixed64,210,opt,name=default_fixed64,json=defaultFixed64,def=49",
 }
 
 var E_DefaultSfixed32 = &proto.ExtensionDesc{
@@ -3132,7 +3132,7 @@ var E_DefaultSfixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         211,
 	Name:          "testdata.default_sfixed32",
-	Tag:           "fixed32,211,opt,name=default_sfixed32,def=50",
+	Tag:           "fixed32,211,opt,name=default_sfixed32,json=defaultSfixed32,def=50",
 }
 
 var E_DefaultSfixed64 = &proto.ExtensionDesc{
@@ -3140,7 +3140,7 @@ var E_DefaultSfixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         212,
 	Name:          "testdata.default_sfixed64",
-	Tag:           "fixed64,212,opt,name=default_sfixed64,def=51",
+	Tag:           "fixed64,212,opt,name=default_sfixed64,json=defaultSfixed64,def=51",
 }
 
 var E_DefaultBool = &proto.ExtensionDesc{
@@ -3148,7 +3148,7 @@ var E_DefaultBool = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         213,
 	Name:          "testdata.default_bool",
-	Tag:           "varint,213,opt,name=default_bool,def=1",
+	Tag:           "varint,213,opt,name=default_bool,json=defaultBool,def=1",
 }
 
 var E_DefaultString = &proto.ExtensionDesc{
@@ -3156,7 +3156,7 @@ var E_DefaultString = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         214,
 	Name:          "testdata.default_string",
-	Tag:           "bytes,214,opt,name=default_string,def=Hello, string",
+	Tag:           "bytes,214,opt,name=default_string,json=defaultString,def=Hello, string",
 }
 
 var E_DefaultBytes = &proto.ExtensionDesc{
@@ -3164,7 +3164,7 @@ var E_DefaultBytes = &proto.ExtensionDesc{
 	ExtensionType: ([]byte)(nil),
 	Field:         215,
 	Name:          "testdata.default_bytes",
-	Tag:           "bytes,215,opt,name=default_bytes,def=Hello, bytes",
+	Tag:           "bytes,215,opt,name=default_bytes,json=defaultBytes,def=Hello, bytes",
 }
 
 var E_DefaultEnum = &proto.ExtensionDesc{
@@ -3172,7 +3172,7 @@ var E_DefaultEnum = &proto.ExtensionDesc{
 	ExtensionType: (*DefaultsMessage_DefaultsEnum)(nil),
 	Field:         216,
 	Name:          "testdata.default_enum",
-	Tag:           "varint,216,opt,name=default_enum,enum=testdata.DefaultsMessage_DefaultsEnum,def=1",
+	Tag:           "varint,216,opt,name=default_enum,json=defaultEnum,enum=testdata.DefaultsMessage_DefaultsEnum,def=1",
 }
 
 var E_X201 = &proto.ExtensionDesc{

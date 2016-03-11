@@ -50,8 +50,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type A struct {
-	Field1 *int64 `protobuf:"varint,2,opt,name=Field1" json:"Field1,omitempty"`
-	B      []*B   `protobuf:"bytes,1,rep,name=B" json:"B,omitempty"`
+	Field1 *int64 `protobuf:"varint,2,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	B      []*B   `protobuf:"bytes,1,rep,name=B,json=b" json:"B,omitempty"`
 }
 
 func (m *A) Reset()                    { *m = A{} }
@@ -59,9 +59,9 @@ func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{0} }
 
 type B struct {
-	C                *C     `protobuf:"bytes,1,opt,name=C" json:"C,omitempty"`
-	D                *D     `protobuf:"bytes,2,opt,name=D" json:"D,omitempty"`
-	F                *OldC  `protobuf:"bytes,5,opt,name=F" json:"F,omitempty"`
+	C                *C     `protobuf:"bytes,1,opt,name=C,json=c" json:"C,omitempty"`
+	D                *D     `protobuf:"bytes,2,opt,name=D,json=d" json:"D,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt,name=F,json=f" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -70,7 +70,7 @@ func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{1} }
 
 type D struct {
-	Field1           *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1           *int64 `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -79,12 +79,12 @@ func (*D) ProtoMessage()               {}
 func (*D) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{2} }
 
 type C struct {
-	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *string   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *float64  `protobuf:"fixed64,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field5           [][]byte  `protobuf:"bytes,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           *int64    `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           *float64  `protobuf:"fixed64,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           [][]byte  `protobuf:"bytes,5,rep,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -93,8 +93,8 @@ func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{3} }
 
 type U struct {
-	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
 }
 
 func (m *U) Reset()                    { *m = U{} }
@@ -102,8 +102,8 @@ func (*U) ProtoMessage()               {}
 func (*U) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{4} }
 
 type UnoM struct {
-	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field2 []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3 *uint32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
 }
 
 func (m *UnoM) Reset()                    { *m = UnoM{} }
@@ -111,8 +111,8 @@ func (*UnoM) ProtoMessage()               {}
 func (*UnoM) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{5} }
 
 type OldA struct {
-	Field1 *int64  `protobuf:"varint,2,opt,name=Field1" json:"Field1,omitempty"`
-	B      []*OldB `protobuf:"bytes,1,rep,name=B" json:"B,omitempty"`
+	Field1 *int64  `protobuf:"varint,2,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	B      []*OldB `protobuf:"bytes,1,rep,name=B,json=b" json:"B,omitempty"`
 }
 
 func (m *OldA) Reset()                    { *m = OldA{} }
@@ -120,8 +120,8 @@ func (*OldA) ProtoMessage()               {}
 func (*OldA) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{6} }
 
 type OldB struct {
-	C                *OldC  `protobuf:"bytes,1,opt,name=C" json:"C,omitempty"`
-	F                *OldC  `protobuf:"bytes,5,opt,name=F" json:"F,omitempty"`
+	C                *OldC  `protobuf:"bytes,1,opt,name=C,json=c" json:"C,omitempty"`
+	F                *OldC  `protobuf:"bytes,5,opt,name=F,json=f" json:"F,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -130,11 +130,11 @@ func (*OldB) ProtoMessage()               {}
 func (*OldB) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{7} }
 
 type OldC struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *string   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field6           *int64    `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float64  `protobuf:"fixed64,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *string   `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field6           *int64    `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []float32 `protobuf:"fixed32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -143,8 +143,8 @@ func (*OldC) ProtoMessage()               {}
 func (*OldC) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{8} }
 
 type OldU struct {
-	Field1           *string   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field1           *string   `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -153,8 +153,8 @@ func (*OldU) ProtoMessage()               {}
 func (*OldU) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{9} }
 
 type OldUnoM struct {
-	Field1           *string   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field1           *string   `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 

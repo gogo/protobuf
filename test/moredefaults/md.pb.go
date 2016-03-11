@@ -32,7 +32,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type MoreDefaultsB struct {
-	Field1           *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1           *string `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -49,12 +49,12 @@ func (m *MoreDefaultsB) GetField1() string {
 }
 
 type MoreDefaultsA struct {
-	Field1           *int64         `protobuf:"varint,1,opt,name=Field1,def=1234" json:"Field1,omitempty"`
-	Field2           int64          `protobuf:"varint,2,opt,name=Field2" json:"Field2"`
-	B1               *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1" json:"B1,omitempty"`
-	B2               MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2" json:"B2"`
-	A1               *test.A        `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
-	A2               test.A         `protobuf:"bytes,6,opt,name=A2" json:"A2"`
+	Field1           *int64         `protobuf:"varint,1,opt,name=Field1,json=field1,def=1234" json:"Field1,omitempty"`
+	Field2           int64          `protobuf:"varint,2,opt,name=Field2,json=field2" json:"Field2"`
+	B1               *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1,json=b1" json:"B1,omitempty"`
+	B2               MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2,json=b2" json:"B2"`
+	A1               *test.A        `protobuf:"bytes,5,opt,name=A1,json=a1" json:"A1,omitempty"`
+	A2               test.A         `protobuf:"bytes,6,opt,name=A2,json=a2" json:"A2"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 

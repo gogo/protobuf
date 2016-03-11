@@ -35,8 +35,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type A struct {
-	Strings string `protobuf:"bytes,1,opt,name=Strings" json:"Strings"`
-	Int     int64  `protobuf:"varint,2,req,name=Int" json:"Int"`
+	Strings string `protobuf:"bytes,1,opt,name=Strings,json=strings" json:"Strings"`
+	Int     int64  `protobuf:"varint,2,req,name=Int,json=int" json:"Int"`
 }
 
 func (m *A) Reset()                    { *m = A{} }

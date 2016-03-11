@@ -52,17 +52,17 @@ func (Widget_Color) EnumDescriptor() ([]byte, []int) { return fileDescriptorTest
 
 // Test message for holding primitive types.
 type Simple struct {
-	OBool            *bool    `protobuf:"varint,1,opt,name=o_bool" json:"o_bool,omitempty"`
-	OInt32           *int32   `protobuf:"varint,2,opt,name=o_int32" json:"o_int32,omitempty"`
-	OInt64           *int64   `protobuf:"varint,3,opt,name=o_int64" json:"o_int64,omitempty"`
-	OUint32          *uint32  `protobuf:"varint,4,opt,name=o_uint32" json:"o_uint32,omitempty"`
-	OUint64          *uint64  `protobuf:"varint,5,opt,name=o_uint64" json:"o_uint64,omitempty"`
-	OSint32          *int32   `protobuf:"zigzag32,6,opt,name=o_sint32" json:"o_sint32,omitempty"`
-	OSint64          *int64   `protobuf:"zigzag64,7,opt,name=o_sint64" json:"o_sint64,omitempty"`
-	OFloat           *float32 `protobuf:"fixed32,8,opt,name=o_float" json:"o_float,omitempty"`
-	ODouble          *float64 `protobuf:"fixed64,9,opt,name=o_double" json:"o_double,omitempty"`
-	OString          *string  `protobuf:"bytes,10,opt,name=o_string" json:"o_string,omitempty"`
-	OBytes           []byte   `protobuf:"bytes,11,opt,name=o_bytes" json:"o_bytes,omitempty"`
+	OBool            *bool    `protobuf:"varint,1,opt,name=o_bool,json=oBool" json:"o_bool,omitempty"`
+	OInt32           *int32   `protobuf:"varint,2,opt,name=o_int32,json=oInt32" json:"o_int32,omitempty"`
+	OInt64           *int64   `protobuf:"varint,3,opt,name=o_int64,json=oInt64" json:"o_int64,omitempty"`
+	OUint32          *uint32  `protobuf:"varint,4,opt,name=o_uint32,json=oUint32" json:"o_uint32,omitempty"`
+	OUint64          *uint64  `protobuf:"varint,5,opt,name=o_uint64,json=oUint64" json:"o_uint64,omitempty"`
+	OSint32          *int32   `protobuf:"zigzag32,6,opt,name=o_sint32,json=oSint32" json:"o_sint32,omitempty"`
+	OSint64          *int64   `protobuf:"zigzag64,7,opt,name=o_sint64,json=oSint64" json:"o_sint64,omitempty"`
+	OFloat           *float32 `protobuf:"fixed32,8,opt,name=o_float,json=oFloat" json:"o_float,omitempty"`
+	ODouble          *float64 `protobuf:"fixed64,9,opt,name=o_double,json=oDouble" json:"o_double,omitempty"`
+	OString          *string  `protobuf:"bytes,10,opt,name=o_string,json=oString" json:"o_string,omitempty"`
+	OBytes           []byte   `protobuf:"bytes,11,opt,name=o_bytes,json=oBytes" json:"o_bytes,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -150,17 +150,17 @@ func (m *Simple) GetOBytes() []byte {
 
 // Test message for holding repeated primitives.
 type Repeats struct {
-	RBool            []bool    `protobuf:"varint,1,rep,name=r_bool" json:"r_bool,omitempty"`
-	RInt32           []int32   `protobuf:"varint,2,rep,name=r_int32" json:"r_int32,omitempty"`
-	RInt64           []int64   `protobuf:"varint,3,rep,name=r_int64" json:"r_int64,omitempty"`
-	RUint32          []uint32  `protobuf:"varint,4,rep,name=r_uint32" json:"r_uint32,omitempty"`
-	RUint64          []uint64  `protobuf:"varint,5,rep,name=r_uint64" json:"r_uint64,omitempty"`
-	RSint32          []int32   `protobuf:"zigzag32,6,rep,name=r_sint32" json:"r_sint32,omitempty"`
-	RSint64          []int64   `protobuf:"zigzag64,7,rep,name=r_sint64" json:"r_sint64,omitempty"`
-	RFloat           []float32 `protobuf:"fixed32,8,rep,name=r_float" json:"r_float,omitempty"`
-	RDouble          []float64 `protobuf:"fixed64,9,rep,name=r_double" json:"r_double,omitempty"`
-	RString          []string  `protobuf:"bytes,10,rep,name=r_string" json:"r_string,omitempty"`
-	RBytes           [][]byte  `protobuf:"bytes,11,rep,name=r_bytes" json:"r_bytes,omitempty"`
+	RBool            []bool    `protobuf:"varint,1,rep,name=r_bool,json=rBool" json:"r_bool,omitempty"`
+	RInt32           []int32   `protobuf:"varint,2,rep,name=r_int32,json=rInt32" json:"r_int32,omitempty"`
+	RInt64           []int64   `protobuf:"varint,3,rep,name=r_int64,json=rInt64" json:"r_int64,omitempty"`
+	RUint32          []uint32  `protobuf:"varint,4,rep,name=r_uint32,json=rUint32" json:"r_uint32,omitempty"`
+	RUint64          []uint64  `protobuf:"varint,5,rep,name=r_uint64,json=rUint64" json:"r_uint64,omitempty"`
+	RSint32          []int32   `protobuf:"zigzag32,6,rep,name=r_sint32,json=rSint32" json:"r_sint32,omitempty"`
+	RSint64          []int64   `protobuf:"zigzag64,7,rep,name=r_sint64,json=rSint64" json:"r_sint64,omitempty"`
+	RFloat           []float32 `protobuf:"fixed32,8,rep,name=r_float,json=rFloat" json:"r_float,omitempty"`
+	RDouble          []float64 `protobuf:"fixed64,9,rep,name=r_double,json=rDouble" json:"r_double,omitempty"`
+	RString          []string  `protobuf:"bytes,10,rep,name=r_string,json=rString" json:"r_string,omitempty"`
+	RBytes           [][]byte  `protobuf:"bytes,11,rep,name=r_bytes,json=rBytes" json:"r_bytes,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -249,11 +249,11 @@ func (m *Repeats) GetRBytes() [][]byte {
 // Test message for holding enums and nested messages.
 type Widget struct {
 	Color            *Widget_Color  `protobuf:"varint,1,opt,name=color,enum=jsonpb.Widget_Color" json:"color,omitempty"`
-	RColor           []Widget_Color `protobuf:"varint,2,rep,name=r_color,enum=jsonpb.Widget_Color" json:"r_color,omitempty"`
+	RColor           []Widget_Color `protobuf:"varint,2,rep,name=r_color,json=rColor,enum=jsonpb.Widget_Color" json:"r_color,omitempty"`
 	Simple           *Simple        `protobuf:"bytes,10,opt,name=simple" json:"simple,omitempty"`
-	RSimple          []*Simple      `protobuf:"bytes,11,rep,name=r_simple" json:"r_simple,omitempty"`
+	RSimple          []*Simple      `protobuf:"bytes,11,rep,name=r_simple,json=rSimple" json:"r_simple,omitempty"`
 	Repeats          *Repeats       `protobuf:"bytes,20,opt,name=repeats" json:"repeats,omitempty"`
-	RRepeats         []*Repeats     `protobuf:"bytes,21,rep,name=r_repeats" json:"r_repeats,omitempty"`
+	RRepeats         []*Repeats     `protobuf:"bytes,21,rep,name=r_repeats,json=rRepeats" json:"r_repeats,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -305,8 +305,8 @@ func (m *Widget) GetRRepeats() []*Repeats {
 }
 
 type Maps struct {
-	MInt64Str        map[int64]string `protobuf:"bytes,1,rep,name=m_int64_str" json:"m_int64_str,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	MBoolSimple      map[bool]*Simple `protobuf:"bytes,2,rep,name=m_bool_simple" json:"m_bool_simple,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MInt64Str        map[int64]string `protobuf:"bytes,1,rep,name=m_int64_str,json=mInt64Str" json:"m_int64_str,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MBoolSimple      map[bool]*Simple `protobuf:"bytes,2,rep,name=m_bool_simple,json=mBoolSimple" json:"m_bool_simple,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 
@@ -511,7 +511,7 @@ var E_Complex_RealExtension = &proto.ExtensionDesc{
 	ExtensionType: (*Complex)(nil),
 	Field:         123,
 	Name:          "jsonpb.Complex.real_extension",
-	Tag:           "bytes,123,opt,name=real_extension",
+	Tag:           "bytes,123,opt,name=real_extension,json=realExtension",
 }
 
 var E_Name = &proto.ExtensionDesc{

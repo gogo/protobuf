@@ -33,9 +33,9 @@ const _ = proto.GoGoProtoPackageIsVersion1
 
 type SizeMessage struct {
 	Size             *int64  `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
-	ProtoSize_       *int64  `protobuf:"varint,2,opt,name=proto_size" json:"proto_size,omitempty"`
-	Equal_           *bool   `protobuf:"varint,3,opt,name=Equal" json:"Equal,omitempty"`
-	String_          *string `protobuf:"bytes,4,opt,name=String" json:"String,omitempty"`
+	ProtoSize_       *int64  `protobuf:"varint,2,opt,name=proto_size,json=protoSize" json:"proto_size,omitempty"`
+	Equal_           *bool   `protobuf:"varint,3,opt,name=Equal,json=equal" json:"Equal,omitempty"`
+	String_          *string `protobuf:"bytes,4,opt,name=String,json=string" json:"String,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

@@ -59,16 +59,16 @@ func (Message_Humour) EnumDescriptor() ([]byte, []int) { return fileDescriptorPr
 type Message struct {
 	Name         string                           `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Hilarity     Message_Humour                   `protobuf:"varint,2,opt,name=hilarity,proto3,enum=proto3_proto.Message_Humour" json:"hilarity,omitempty"`
-	HeightInCm   uint32                           `protobuf:"varint,3,opt,name=height_in_cm,proto3" json:"height_in_cm,omitempty"`
+	HeightInCm   uint32                           `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
 	Data         []byte                           `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	ResultCount  int64                            `protobuf:"varint,7,opt,name=result_count,proto3" json:"result_count,omitempty"`
-	TrueScotsman bool                             `protobuf:"varint,8,opt,name=true_scotsman,proto3" json:"true_scotsman,omitempty"`
+	ResultCount  int64                            `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
+	TrueScotsman bool                             `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
 	Score        float32                          `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
 	Key          []uint64                         `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
 	Nested       *Nested                          `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
 	Terrain      map[string]*Nested               `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Proto2Field  *testdata.SubDefaults            `protobuf:"bytes,11,opt,name=proto2_field" json:"proto2_field,omitempty"`
-	Proto2Value  map[string]*testdata.SubDefaults `protobuf:"bytes,13,rep,name=proto2_value" json:"proto2_value,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Proto2Field  *testdata.SubDefaults            `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
+	Proto2Value  map[string]*testdata.SubDefaults `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 }
 
 func (m *Message) Reset()                    { *m = Message{} }
@@ -114,7 +114,7 @@ func (*Nested) ProtoMessage()               {}
 func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{1} }
 
 type MessageWithMap struct {
-	ByteMapping map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ByteMapping map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (m *MessageWithMap) Reset()                    { *m = MessageWithMap{} }

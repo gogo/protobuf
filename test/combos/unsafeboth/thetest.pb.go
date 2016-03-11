@@ -280,21 +280,21 @@ func (NestedDefinition_NestedEnum) EnumDescriptor() ([]byte, []int) {
 }
 
 type NidOptNative struct {
-	Field1           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	Field2           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	Field3           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
-	Field4           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
-	Field5           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
-	Field6           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	Field7           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	Field8           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
-	Field9           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
-	Field10          int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
-	Field11          uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
-	Field12          int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
-	Field13          bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	Field14          string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	Field15          []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	Field1           float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1"`
+	Field2           float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2"`
+	Field3           int32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3"`
+	Field4           int64   `protobuf:"varint,4,opt,name=Field4,json=field4" json:"Field4"`
+	Field5           uint32  `protobuf:"varint,5,opt,name=Field5,json=field5" json:"Field5"`
+	Field6           uint64  `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6"`
+	Field7           int32   `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7"`
+	Field8           int64   `protobuf:"zigzag64,8,opt,name=Field8,json=field8" json:"Field8"`
+	Field9           uint32  `protobuf:"fixed32,9,opt,name=Field9,json=field9" json:"Field9"`
+	Field10          int32   `protobuf:"fixed32,10,opt,name=Field10,json=field10" json:"Field10"`
+	Field11          uint64  `protobuf:"fixed64,11,opt,name=Field11,json=field11" json:"Field11"`
+	Field12          int64   `protobuf:"fixed64,12,opt,name=Field12,json=field12" json:"Field12"`
+	Field13          bool    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13"`
+	Field14          string  `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14"`
+	Field15          []byte  `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -303,21 +303,21 @@ func (*NidOptNative) ProtoMessage()               {}
 func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{0} }
 
 type NinOptNative struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9,json=field9" json:"Field9,omitempty"`
+	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10,json=field10" json:"Field10,omitempty"`
+	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11,json=field11" json:"Field11,omitempty"`
+	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12,json=field12" json:"Field12,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -326,21 +326,21 @@ func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{1} }
 
 type NidRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9,json=field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10,json=field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11,json=field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12,json=field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          []string  `protobuf:"bytes,14,rep,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -349,21 +349,21 @@ func (*NidRepNative) ProtoMessage()               {}
 func (*NidRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{2} }
 
 type NinRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9,json=field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10,json=field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11,json=field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12,json=field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          []string  `protobuf:"bytes,14,rep,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -372,19 +372,19 @@ func (*NinRepNative) ProtoMessage()               {}
 func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{3} }
 
 type NidRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9,json=field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10,json=field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11,json=field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12,json=field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13,json=field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -393,19 +393,19 @@ func (*NidRepPackedNative) ProtoMessage()               {}
 func (*NidRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{4} }
 
 type NinRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9,json=field9" json:"Field9,omitempty"`
+	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10,json=field10" json:"Field10,omitempty"`
+	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11,json=field11" json:"Field11,omitempty"`
+	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12,json=field12" json:"Field12,omitempty"`
+	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13,json=field13" json:"Field13,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -414,16 +414,16 @@ func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{5} }
 
 type NidOptStruct struct {
-	Field1           float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	Field2           float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	Field3           NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3"`
-	Field4           NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4"`
-	Field6           uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	Field7           int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	Field8           NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8"`
-	Field13          bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	Field14          string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	Field15          []byte       `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	Field1           float64      `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1"`
+	Field2           float32      `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2"`
+	Field3           NidOptNative `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3"`
+	Field4           NinOptNative `protobuf:"bytes,4,opt,name=Field4,json=field4" json:"Field4"`
+	Field6           uint64       `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6"`
+	Field7           int32        `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7"`
+	Field8           NidOptNative `protobuf:"bytes,8,opt,name=Field8,json=field8" json:"Field8"`
+	Field13          bool         `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13"`
+	Field14          string       `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14"`
+	Field15          []byte       `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -432,16 +432,16 @@ func (*NidOptStruct) ProtoMessage()               {}
 func (*NidOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{6} }
 
 type NinOptStruct struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field8           *NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           *NidOptNative `protobuf:"bytes,8,opt,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field13          *bool         `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          *string       `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -450,16 +450,16 @@ func (*NinOptStruct) ProtoMessage()               {}
 func (*NinOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{7} }
 
 type NidRepStruct struct {
-	Field1           []float64      `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32      `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3"`
-	Field4           []NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4"`
-	Field6           []uint64       `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32        `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8"`
-	Field13          []bool         `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string       `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte       `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	Field1           []float64      `protobuf:"fixed64,1,rep,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32      `protobuf:"fixed32,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []NidOptNative `protobuf:"bytes,3,rep,name=Field3,json=field3" json:"Field3"`
+	Field4           []NinOptNative `protobuf:"bytes,4,rep,name=Field4,json=field4" json:"Field4"`
+	Field6           []uint64       `protobuf:"varint,6,rep,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32        `protobuf:"zigzag32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []NidOptNative `protobuf:"bytes,8,rep,name=Field8,json=field8" json:"Field8"`
+	Field13          []bool         `protobuf:"varint,13,rep,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          []string       `protobuf:"bytes,14,rep,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          [][]byte       `protobuf:"bytes,15,rep,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -468,16 +468,16 @@ func (*NidRepStruct) ProtoMessage()               {}
 func (*NidRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{8} }
 
 type NinRepStruct struct {
-	Field1           []float64       `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32       `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []*NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field6           []uint64        `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32         `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []*NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field13          []bool          `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string        `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte        `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	Field1           []float64       `protobuf:"fixed64,1,rep,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float32       `protobuf:"fixed32,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []*NidOptNative `protobuf:"bytes,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field6           []uint64        `protobuf:"varint,6,rep,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           []int32         `protobuf:"zigzag32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field8           []*NidOptNative `protobuf:"bytes,8,rep,name=Field8,json=field8" json:"Field8,omitempty"`
+	Field13          []bool          `protobuf:"varint,13,rep,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          []string        `protobuf:"bytes,14,rep,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          [][]byte        `protobuf:"bytes,15,rep,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -486,9 +486,9 @@ func (*NinRepStruct) ProtoMessage()               {}
 func (*NinRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{9} }
 
 type NidEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200"`
-	Field210         bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,json=field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         NidOptNative `protobuf:"bytes,200,opt,name=Field200,json=field200" json:"Field200"`
+	Field210         bool         `protobuf:"varint,210,opt,name=Field210,json=field210" json:"Field210"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -497,9 +497,9 @@ func (*NidEmbeddedStruct) ProtoMessage()               {}
 func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{10} }
 
 type NinEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,json=field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         *NidOptNative `protobuf:"bytes,200,opt,name=Field200,json=field200" json:"Field200,omitempty"`
+	Field210         *bool         `protobuf:"varint,210,opt,name=Field210,json=field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -508,8 +508,8 @@ func (*NinEmbeddedStruct) ProtoMessage()               {}
 func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{11} }
 
 type NidNestedStruct struct {
-	Field1           NidOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1"`
-	Field2           []NidRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2"`
+	Field1           NidOptStruct   `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1"`
+	Field2           []NidRepStruct `protobuf:"bytes,2,rep,name=Field2,json=field2" json:"Field2"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -518,8 +518,8 @@ func (*NidNestedStruct) ProtoMessage()               {}
 func (*NidNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{12} }
 
 type NinNestedStruct struct {
-	Field1           *NinOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []*NinRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field1           *NinOptStruct   `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []*NinRepStruct `protobuf:"bytes,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -528,8 +528,8 @@ func (*NinNestedStruct) ProtoMessage()               {}
 func (*NinNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{13} }
 
 type NidOptCustom struct {
-	Id               Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id"`
-	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Id               Uuid                                         `protobuf:"bytes,1,opt,name=Id,json=id,customtype=Uuid" json:"Id"`
+	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_unrecognized []byte                                       `json:"-"`
 }
 
@@ -538,7 +538,7 @@ func (*NidOptCustom) ProtoMessage()               {}
 func (*NidOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{14} }
 
 type CustomDash struct {
-	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                                `json:"-"`
 }
 
@@ -547,8 +547,8 @@ func (*CustomDash) ProtoMessage()               {}
 func (*CustomDash) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{15} }
 
 type NinOptCustom struct {
-	Id               *Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Id               *Uuid                                         `protobuf:"bytes,1,opt,name=Id,json=id,customtype=Uuid" json:"Id,omitempty"`
+	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                        `json:"-"`
 }
 
@@ -557,8 +557,8 @@ func (*NinOptCustom) ProtoMessage()               {}
 func (*NinOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{16} }
 
 type NidRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,json=id,customtype=Uuid" json:"Id"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -567,8 +567,8 @@ func (*NidRepCustom) ProtoMessage()               {}
 func (*NidRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{17} }
 
 type NinRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,json=id,customtype=Uuid" json:"Id,omitempty"`
+	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -577,15 +577,15 @@ func (*NinRepCustom) ProtoMessage()               {}
 func (*NinRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{18} }
 
 type NinOptNativeUnion struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,json=field5" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -594,15 +594,15 @@ func (*NinOptNativeUnion) ProtoMessage()               {}
 func (*NinOptNativeUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{19} }
 
 type NinOptStructUnion struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7,omitempty"`
+	Field13          *bool         `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	Field14          *string       `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -611,9 +611,9 @@ func (*NinOptStructUnion) ProtoMessage()               {}
 func (*NinOptStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{20} }
 
 type NinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,json=field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200         *NinOptNative `protobuf:"bytes,200,opt,name=Field200,json=field200" json:"Field200,omitempty"`
+	Field210         *bool         `protobuf:"varint,210,opt,name=Field210,json=field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -622,9 +622,9 @@ func (*NinEmbeddedStructUnion) ProtoMessage()               {}
 func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{21} }
 
 type NinNestedStructUnion struct {
-	Field1           *NinOptNativeUnion      `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *NinOptStructUnion      `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NinEmbeddedStructUnion `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field1           *NinOptNativeUnion      `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *NinOptStructUnion      `protobuf:"bytes,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           *NinEmbeddedStructUnion `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
@@ -633,9 +633,9 @@ func (*NinNestedStructUnion) ProtoMessage()               {}
 func (*NinNestedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{22} }
 
 type Tree struct {
-	Or               *OrBranch  `protobuf:"bytes,1,opt,name=Or" json:"Or,omitempty"`
-	And              *AndBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
-	Leaf             *Leaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
+	Or               *OrBranch  `protobuf:"bytes,1,opt,name=Or,json=or" json:"Or,omitempty"`
+	And              *AndBranch `protobuf:"bytes,2,opt,name=And,json=and" json:"And,omitempty"`
+	Leaf             *Leaf      `protobuf:"bytes,3,opt,name=Leaf,json=leaf" json:"Leaf,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
 
@@ -644,8 +644,8 @@ func (*Tree) ProtoMessage()               {}
 func (*Tree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{23} }
 
 type OrBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	Left             Tree   `protobuf:"bytes,1,opt,name=Left,json=left" json:"Left"`
+	Right            Tree   `protobuf:"bytes,2,opt,name=Right,json=right" json:"Right"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -654,8 +654,8 @@ func (*OrBranch) ProtoMessage()               {}
 func (*OrBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{24} }
 
 type AndBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	Left             Tree   `protobuf:"bytes,1,opt,name=Left,json=left" json:"Left"`
+	Right            Tree   `protobuf:"bytes,2,opt,name=Right,json=right" json:"Right"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -664,8 +664,8 @@ func (*AndBranch) ProtoMessage()               {}
 func (*AndBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{25} }
 
 type Leaf struct {
-	Value            int64  `protobuf:"varint,1,opt,name=Value" json:"Value"`
-	StrValue         string `protobuf:"bytes,2,opt,name=StrValue" json:"StrValue"`
+	Value            int64  `protobuf:"varint,1,opt,name=Value,json=value" json:"Value"`
+	StrValue         string `protobuf:"bytes,2,opt,name=StrValue,json=strValue" json:"StrValue"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -674,9 +674,9 @@ func (*Leaf) ProtoMessage()               {}
 func (*Leaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{26} }
 
 type DeepTree struct {
-	Down             *ADeepBranch   `protobuf:"bytes,1,opt,name=Down" json:"Down,omitempty"`
-	And              *AndDeepBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
-	Leaf             *DeepLeaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
+	Down             *ADeepBranch   `protobuf:"bytes,1,opt,name=Down,json=down" json:"Down,omitempty"`
+	And              *AndDeepBranch `protobuf:"bytes,2,opt,name=And,json=and" json:"And,omitempty"`
+	Leaf             *DeepLeaf      `protobuf:"bytes,3,opt,name=Leaf,json=leaf" json:"Leaf,omitempty"`
 	XXX_unrecognized []byte         `json:"-"`
 }
 
@@ -685,7 +685,7 @@ func (*DeepTree) ProtoMessage()               {}
 func (*DeepTree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{27} }
 
 type ADeepBranch struct {
-	Down             DeepTree `protobuf:"bytes,2,opt,name=Down" json:"Down"`
+	Down             DeepTree `protobuf:"bytes,2,opt,name=Down,json=down" json:"Down"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -694,8 +694,8 @@ func (*ADeepBranch) ProtoMessage()               {}
 func (*ADeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{28} }
 
 type AndDeepBranch struct {
-	Left             DeepTree `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            DeepTree `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	Left             DeepTree `protobuf:"bytes,1,opt,name=Left,json=left" json:"Left"`
+	Right            DeepTree `protobuf:"bytes,2,opt,name=Right,json=right" json:"Right"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -704,7 +704,7 @@ func (*AndDeepBranch) ProtoMessage()               {}
 func (*AndDeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{29} }
 
 type DeepLeaf struct {
-	Tree             Tree   `protobuf:"bytes,1,opt,name=Tree" json:"Tree"`
+	Tree             Tree   `protobuf:"bytes,1,opt,name=Tree,json=tree" json:"Tree"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -721,7 +721,7 @@ func (*Nil) ProtoMessage()               {}
 func (*Nil) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{31} }
 
 type NidOptEnum struct {
-	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1"`
+	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.TheTestEnum" json:"Field1"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -730,9 +730,9 @@ func (*NidOptEnum) ProtoMessage()               {}
 func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{32} }
 
 type NinOptEnum struct {
-	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,json=field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
@@ -741,9 +741,9 @@ func (*NinOptEnum) ProtoMessage()               {}
 func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{33} }
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,json=field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,json=field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
@@ -752,9 +752,9 @@ func (*NidRepEnum) ProtoMessage()               {}
 func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{34} }
 
 type NinRepEnum struct {
-	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,json=field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,json=field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                  `json:"-"`
 }
 
@@ -763,9 +763,9 @@ func (*NinRepEnum) ProtoMessage()               {}
 func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{35} }
 
 type NinOptEnumDefault struct {
-	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
+	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
+	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,json=field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
+	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
@@ -799,9 +799,9 @@ func (m *NinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 }
 
 type AnotherNinOptEnum struct {
-	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
+	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,json=field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
@@ -810,9 +810,9 @@ func (*AnotherNinOptEnum) ProtoMessage()               {}
 func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{37} }
 
 type AnotherNinOptEnumDefault struct {
-	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
+	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
+	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,json=field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
+	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,json=field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
 	XXX_unrecognized []byte                 `json:"-"`
 }
 
@@ -846,9 +846,9 @@ func (m *AnotherNinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 }
 
 type Timer struct {
-	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1" json:"Time1"`
-	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt,name=Data" json:"Data"`
+	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1,json=time1" json:"Time1"`
+	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2,json=time2" json:"Time2"`
+	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=data" json:"Data"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -857,7 +857,7 @@ func (*Timer) ProtoMessage()               {}
 func (*Timer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{39} }
 
 type MyExtendable struct {
-	Field1           *int64                    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1           *int64                    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 	XXX_extensions   map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized []byte                    `json:"-"`
 }
@@ -881,9 +881,9 @@ func (m *MyExtendable) ExtensionMap() map[int32]proto.Extension {
 }
 
 type OtherExtenable struct {
-	Field2           *int64                    `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field13          *int64                    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	M                *MyExtendable             `protobuf:"bytes,1,opt,name=M" json:"M,omitempty"`
+	Field2           *int64                    `protobuf:"varint,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field13          *int64                    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	M                *MyExtendable             `protobuf:"bytes,1,opt,name=M,json=m" json:"M,omitempty"`
 	XXX_extensions   map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized []byte                    `json:"-"`
 }
@@ -908,10 +908,10 @@ func (m *OtherExtenable) ExtensionMap() map[int32]proto.Extension {
 }
 
 type NestedDefinition struct {
-	Field1           *int64                                          `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	EnumField        *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=EnumField,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt,name=NNM" json:"NNM,omitempty"`
-	NM               *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt,name=NM" json:"NM,omitempty"`
+	Field1           *int64                                          `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	EnumField        *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=EnumField,json=enumField,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
+	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt,name=NNM,json=nNM" json:"NNM,omitempty"`
+	NM               *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt,name=NM,json=nM" json:"NM,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -920,8 +920,8 @@ func (*NestedDefinition) ProtoMessage()               {}
 func (*NestedDefinition) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{42} }
 
 type NestedDefinition_NestedMessage struct {
-	NestedField1     *uint64                                         `protobuf:"fixed64,1,opt,name=NestedField1" json:"NestedField1,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt,name=NNM" json:"NNM,omitempty"`
+	NestedField1     *uint64                                         `protobuf:"fixed64,1,opt,name=NestedField1,json=nestedField1" json:"NestedField1,omitempty"`
+	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt,name=NNM,json=nNM" json:"NNM,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -932,7 +932,7 @@ func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
 }
 
 type NestedDefinition_NestedMessage_NestedNestedMsg struct {
-	NestedNestedField1 *string `protobuf:"bytes,10,opt,name=NestedNestedField1" json:"NestedNestedField1,omitempty"`
+	NestedNestedField1 *string `protobuf:"bytes,10,opt,name=NestedNestedField1,json=nestedNestedField1" json:"NestedNestedField1,omitempty"`
 	XXX_unrecognized   []byte  `json:"-"`
 }
 
@@ -945,9 +945,9 @@ func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []i
 }
 
 type NestedScope struct {
-	A                *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
-	B                *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=B,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
-	C                *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt,name=C" json:"C,omitempty"`
+	A                *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt,name=A,json=a" json:"A,omitempty"`
+	B                *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=B,json=b,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
+	C                *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt,name=C,json=c" json:"C,omitempty"`
 	XXX_unrecognized []byte                                          `json:"-"`
 }
 
@@ -956,21 +956,21 @@ func (*NestedScope) ProtoMessage()               {}
 func (*NestedScope) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{43} }
 
 type NinOptNativeDefault struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,def=1234.1234" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.1234" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,def=1234" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,def=1234" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,def=1234" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,def=1234" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7,def=1234" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8,def=1234" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9,def=1234" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10,def=1234" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11,def=1234" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12,def=1234" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,def=1" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,def=1234" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1,def=1234.1234" json:"Field1,omitempty"`
+	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2,def=1234.1234" json:"Field2,omitempty"`
+	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,json=field3,def=1234" json:"Field3,omitempty"`
+	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,json=field4,def=1234" json:"Field4,omitempty"`
+	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,json=field5,def=1234" json:"Field5,omitempty"`
+	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,json=field6,def=1234" json:"Field6,omitempty"`
+	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7,json=field7,def=1234" json:"Field7,omitempty"`
+	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8,json=field8,def=1234" json:"Field8,omitempty"`
+	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9,json=field9,def=1234" json:"Field9,omitempty"`
+	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10,json=field10,def=1234" json:"Field10,omitempty"`
+	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11,json=field11,def=1234" json:"Field11,omitempty"`
+	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12,json=field12,def=1234" json:"Field12,omitempty"`
+	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,json=field13,def=1" json:"Field13,omitempty"`
+	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,json=field14,def=1234" json:"Field14,omitempty"`
+	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -1099,7 +1099,7 @@ func (m *NinOptNativeDefault) GetField15() []byte {
 }
 
 type CustomContainer struct {
-	CustomStruct     NidOptCustom `protobuf:"bytes,1,opt,name=CustomStruct" json:"CustomStruct"`
+	CustomStruct     NidOptCustom `protobuf:"bytes,1,opt,name=CustomStruct,json=customStruct" json:"CustomStruct"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -1108,21 +1108,21 @@ func (*CustomContainer) ProtoMessage()               {}
 func (*CustomContainer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{45} }
 
 type CustomNameNidOptNative struct {
-	FieldA           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	FieldB           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	FieldC           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
-	FieldD           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
-	FieldE           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
-	FieldF           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	FieldG           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	FieldH           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
-	FieldI           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
-	FieldJ           int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
-	FieldK           uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
-	FieldL           int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
-	FieldM           bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	FieldN           string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	FieldO           []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	FieldA           float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1"`
+	FieldB           float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2"`
+	FieldC           int32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3"`
+	FieldD           int64   `protobuf:"varint,4,opt,name=Field4,json=field4" json:"Field4"`
+	FieldE           uint32  `protobuf:"varint,5,opt,name=Field5,json=field5" json:"Field5"`
+	FieldF           uint64  `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6"`
+	FieldG           int32   `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7"`
+	FieldH           int64   `protobuf:"zigzag64,8,opt,name=Field8,json=field8" json:"Field8"`
+	FieldI           uint32  `protobuf:"fixed32,9,opt,name=Field9,json=field9" json:"Field9"`
+	FieldJ           int32   `protobuf:"fixed32,10,opt,name=Field10,json=field10" json:"Field10"`
+	FieldK           uint64  `protobuf:"fixed64,11,opt,name=Field11,json=field11" json:"Field11"`
+	FieldL           int64   `protobuf:"fixed64,12,opt,name=Field12,json=field12" json:"Field12"`
+	FieldM           bool    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13"`
+	FieldN           string  `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14"`
+	FieldO           []byte  `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1131,21 +1131,21 @@ func (*CustomNameNidOptNative) ProtoMessage()               {}
 func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{46} }
 
 type CustomNameNinOptNative struct {
-	FieldA           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	FieldB           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	FieldC           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	FieldD           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	FieldE           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	FieldF           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	FieldG           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	FieldH           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
-	FieldI           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
-	FieldJ           *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
-	FieldK           *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
-	FielL            *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
-	FieldM           *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	FieldN           *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	FieldO           []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	FieldA           *float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	FieldB           *float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	FieldC           *int32   `protobuf:"varint,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	FieldD           *int64   `protobuf:"varint,4,opt,name=Field4,json=field4" json:"Field4,omitempty"`
+	FieldE           *uint32  `protobuf:"varint,5,opt,name=Field5,json=field5" json:"Field5,omitempty"`
+	FieldF           *uint64  `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	FieldG           *int32   `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7,omitempty"`
+	FieldH           *int64   `protobuf:"zigzag64,8,opt,name=Field8,json=field8" json:"Field8,omitempty"`
+	FieldI           *uint32  `protobuf:"fixed32,9,opt,name=Field9,json=field9" json:"Field9,omitempty"`
+	FieldJ           *int32   `protobuf:"fixed32,10,opt,name=Field10,json=field10" json:"Field10,omitempty"`
+	FieldK           *uint64  `protobuf:"fixed64,11,opt,name=Field11,json=field11" json:"Field11,omitempty"`
+	FielL            *int64   `protobuf:"fixed64,12,opt,name=Field12,json=field12" json:"Field12,omitempty"`
+	FieldM           *bool    `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	FieldN           *string  `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	FieldO           []byte   `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -1154,21 +1154,21 @@ func (*CustomNameNinOptNative) ProtoMessage()               {}
 func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{47} }
 
 type CustomNameNinRepNative struct {
-	FieldA           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	FieldB           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	FieldC           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	FieldD           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	FieldE           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	FieldF           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	FieldG           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	FieldH           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	FieldI           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	FieldJ           []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	FieldK           []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	FieldL           []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	FieldM           []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	FieldN           []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	FieldO           [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	FieldA           []float64 `protobuf:"fixed64,1,rep,name=Field1,json=field1" json:"Field1,omitempty"`
+	FieldB           []float32 `protobuf:"fixed32,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
+	FieldC           []int32   `protobuf:"varint,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	FieldD           []int64   `protobuf:"varint,4,rep,name=Field4,json=field4" json:"Field4,omitempty"`
+	FieldE           []uint32  `protobuf:"varint,5,rep,name=Field5,json=field5" json:"Field5,omitempty"`
+	FieldF           []uint64  `protobuf:"varint,6,rep,name=Field6,json=field6" json:"Field6,omitempty"`
+	FieldG           []int32   `protobuf:"zigzag32,7,rep,name=Field7,json=field7" json:"Field7,omitempty"`
+	FieldH           []int64   `protobuf:"zigzag64,8,rep,name=Field8,json=field8" json:"Field8,omitempty"`
+	FieldI           []uint32  `protobuf:"fixed32,9,rep,name=Field9,json=field9" json:"Field9,omitempty"`
+	FieldJ           []int32   `protobuf:"fixed32,10,rep,name=Field10,json=field10" json:"Field10,omitempty"`
+	FieldK           []uint64  `protobuf:"fixed64,11,rep,name=Field11,json=field11" json:"Field11,omitempty"`
+	FieldL           []int64   `protobuf:"fixed64,12,rep,name=Field12,json=field12" json:"Field12,omitempty"`
+	FieldM           []bool    `protobuf:"varint,13,rep,name=Field13,json=field13" json:"Field13,omitempty"`
+	FieldN           []string  `protobuf:"bytes,14,rep,name=Field14,json=field14" json:"Field14,omitempty"`
+	FieldO           [][]byte  `protobuf:"bytes,15,rep,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -1177,16 +1177,16 @@ func (*CustomNameNinRepNative) ProtoMessage()               {}
 func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{48} }
 
 type CustomNameNinStruct struct {
-	FieldA           *float64        `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	FieldB           *float32        `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	FieldC           *NidOptNative   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	FieldD           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
-	FieldE           *uint64         `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	FieldF           *int32          `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	FieldG           *NidOptNative   `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
-	FieldH           *bool           `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	FieldI           *string         `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	FieldJ           []byte          `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	FieldA           *float64        `protobuf:"fixed64,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	FieldB           *float32        `protobuf:"fixed32,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	FieldC           *NidOptNative   `protobuf:"bytes,3,opt,name=Field3,json=field3" json:"Field3,omitempty"`
+	FieldD           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4,json=field4" json:"Field4,omitempty"`
+	FieldE           *uint64         `protobuf:"varint,6,opt,name=Field6,json=field6" json:"Field6,omitempty"`
+	FieldF           *int32          `protobuf:"zigzag32,7,opt,name=Field7,json=field7" json:"Field7,omitempty"`
+	FieldG           *NidOptNative   `protobuf:"bytes,8,opt,name=Field8,json=field8" json:"Field8,omitempty"`
+	FieldH           *bool           `protobuf:"varint,13,opt,name=Field13,json=field13" json:"Field13,omitempty"`
+	FieldI           *string         `protobuf:"bytes,14,opt,name=Field14,json=field14" json:"Field14,omitempty"`
+	FieldJ           []byte          `protobuf:"bytes,15,opt,name=Field15,json=field15" json:"Field15,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
@@ -1195,10 +1195,10 @@ func (*CustomNameNinStruct) ProtoMessage()               {}
 func (*CustomNameNinStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{49} }
 
 type CustomNameCustomType struct {
-	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
-	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,customtype=Uuid" json:"Ids,omitempty"`
-	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
+	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,name=Id,json=id,customtype=Uuid" json:"Id,omitempty"`
+	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,json=value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,json=ids,customtype=Uuid" json:"Ids,omitempty"`
+	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,json=values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -1207,9 +1207,9 @@ func (*CustomNameCustomType) ProtoMessage()               {}
 func (*CustomNameCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{50} }
 
 type CustomNameNinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	FieldA           *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	FieldB           *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,json=field1,embedded=Field1" json:"Field1,omitempty"`
+	FieldA           *NinOptNative `protobuf:"bytes,200,opt,name=Field200,json=field200" json:"Field200,omitempty"`
+	FieldB           *bool         `protobuf:"varint,210,opt,name=Field210,json=field210" json:"Field210,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -1220,8 +1220,8 @@ func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 }
 
 type CustomNameEnum struct {
-	FieldA           *TheTestEnum  `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	FieldB           []TheTestEnum `protobuf:"varint,2,rep,name=Field2,enum=test.TheTestEnum" json:"Field2,omitempty"`
+	FieldA           *TheTestEnum  `protobuf:"varint,1,opt,name=Field1,json=field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	FieldB           []TheTestEnum `protobuf:"varint,2,rep,name=Field2,json=field2,enum=test.TheTestEnum" json:"Field2,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -1230,7 +1230,7 @@ func (*CustomNameEnum) ProtoMessage()               {}
 func (*CustomNameEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{52} }
 
 type NoExtensionsMap struct {
-	Field1           *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1           *int64 `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
 	XXX_unrecognized []byte `json:"-"`
 }
@@ -1254,7 +1254,7 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 }
 
 type Unrecognized struct {
-	Field1 *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1 *string `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 }
 
 func (m *Unrecognized) Reset()                    { *m = Unrecognized{} }
@@ -1263,7 +1263,7 @@ func (*Unrecognized) Descriptor() ([]byte, []int) { return fileDescriptorThetest
 
 type UnrecognizedWithInner struct {
 	Embedded         []*UnrecognizedWithInner_Inner `protobuf:"bytes,1,rep,name=embedded" json:"embedded,omitempty"`
-	Field2           *string                        `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field2           *string                        `protobuf:"bytes,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte                         `json:"-"`
 }
 
@@ -1272,7 +1272,7 @@ func (*UnrecognizedWithInner) ProtoMessage()               {}
 func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{55} }
 
 type UnrecognizedWithInner_Inner struct {
-	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 }
 
 func (m *UnrecognizedWithInner_Inner) Reset()      { *m = UnrecognizedWithInner_Inner{} }
@@ -1283,7 +1283,7 @@ func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
 
 type UnrecognizedWithEmbed struct {
 	UnrecognizedWithEmbed_Embedded `protobuf:"bytes,1,opt,name=embedded,embedded=embedded" json:"embedded"`
-	Field2                         *string `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field2                         *string `protobuf:"bytes,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized               []byte  `json:"-"`
 }
 
@@ -1292,7 +1292,7 @@ func (*UnrecognizedWithEmbed) ProtoMessage()               {}
 func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{56} }
 
 type UnrecognizedWithEmbed_Embedded struct {
-	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
 }
 
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
@@ -1302,8 +1302,8 @@ func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
 }
 
 type Node struct {
-	Label            *string `protobuf:"bytes,1,opt,name=Label" json:"Label,omitempty"`
-	Children         []*Node `protobuf:"bytes,2,rep,name=Children" json:"Children,omitempty"`
+	Label            *string `protobuf:"bytes,1,opt,name=Label,json=label" json:"Label,omitempty"`
+	Children         []*Node `protobuf:"bytes,2,rep,name=Children,json=children" json:"Children,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1316,7 +1316,7 @@ var E_FieldA = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         100,
 	Name:          "test.FieldA",
-	Tag:           "fixed64,100,opt,name=FieldA",
+	Tag:           "fixed64,100,opt,name=FieldA,json=fieldA",
 }
 
 var E_FieldB = &proto.ExtensionDesc{
@@ -1324,7 +1324,7 @@ var E_FieldB = &proto.ExtensionDesc{
 	ExtensionType: (*NinOptNative)(nil),
 	Field:         101,
 	Name:          "test.FieldB",
-	Tag:           "bytes,101,opt,name=FieldB",
+	Tag:           "bytes,101,opt,name=FieldB,json=fieldB",
 }
 
 var E_FieldC = &proto.ExtensionDesc{
@@ -1332,7 +1332,7 @@ var E_FieldC = &proto.ExtensionDesc{
 	ExtensionType: (*NinEmbeddedStruct)(nil),
 	Field:         102,
 	Name:          "test.FieldC",
-	Tag:           "bytes,102,opt,name=FieldC",
+	Tag:           "bytes,102,opt,name=FieldC,json=fieldC",
 }
 
 var E_FieldA1 = &proto.ExtensionDesc{
@@ -1340,7 +1340,7 @@ var E_FieldA1 = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         100,
 	Name:          "test.FieldA1",
-	Tag:           "fixed64,100,opt,name=FieldA1",
+	Tag:           "fixed64,100,opt,name=FieldA1,json=fieldA1",
 }
 
 var E_FieldB1 = &proto.ExtensionDesc{
@@ -1348,7 +1348,7 @@ var E_FieldB1 = &proto.ExtensionDesc{
 	ExtensionType: (*NinOptNative)(nil),
 	Field:         101,
 	Name:          "test.FieldB1",
-	Tag:           "bytes,101,opt,name=FieldB1",
+	Tag:           "bytes,101,opt,name=FieldB1,json=fieldB1",
 }
 
 var E_FieldC1 = &proto.ExtensionDesc{
@@ -1356,7 +1356,7 @@ var E_FieldC1 = &proto.ExtensionDesc{
 	ExtensionType: (*NinEmbeddedStruct)(nil),
 	Field:         102,
 	Name:          "test.FieldC1",
-	Tag:           "bytes,102,opt,name=FieldC1",
+	Tag:           "bytes,102,opt,name=FieldC1,json=fieldC1",
 }
 
 func init() {

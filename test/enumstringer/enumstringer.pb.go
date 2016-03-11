@@ -70,7 +70,7 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 func (TheTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{0} }
 
 type NidOptEnum struct {
-	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=enumstringer.TheTestEnum" json:"Field1"`
+	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,json=field1,enum=enumstringer.TheTestEnum" json:"Field1"`
 	XXX_unrecognized []byte      `json:"-"`
 }
 
@@ -87,7 +87,7 @@ func (m *NidOptEnum) GetField1() TheTestEnum {
 }
 
 type NinOptEnum struct {
-	Field1           *TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
+	Field1           *TheTestEnum `protobuf:"varint,1,opt,name=Field1,json=field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -104,7 +104,7 @@ func (m *NinOptEnum) GetField1() TheTestEnum {
 }
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,json=field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 
@@ -121,7 +121,7 @@ func (m *NidRepEnum) GetField1() []TheTestEnum {
 }
 
 type NinRepEnum struct {
-	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
+	Field1           []TheTestEnum `protobuf:"varint,1,rep,name=Field1,json=field1,enum=enumstringer.TheTestEnum" json:"Field1,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
 

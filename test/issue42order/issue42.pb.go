@@ -31,8 +31,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type UnorderedFields struct {
-	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
-	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
+	A                *int64  `protobuf:"varint,10,opt,name=A,json=a" json:"A,omitempty"`
+	B                *uint64 `protobuf:"fixed64,1,opt,name=B,json=b" json:"B,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -56,8 +56,8 @@ func (m *UnorderedFields) GetB() uint64 {
 }
 
 type OrderedFields struct {
-	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
-	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
+	B                *uint64 `protobuf:"fixed64,1,opt,name=B,json=b" json:"B,omitempty"`
+	A                *int64  `protobuf:"varint,10,opt,name=A,json=a" json:"A,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

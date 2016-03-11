@@ -42,9 +42,9 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type NewNoGroup struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
-	A                *A        `protobuf:"bytes,5,opt,name=A" json:"A,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	A                *A        `protobuf:"bytes,5,opt,name=A,json=a" json:"A,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -53,7 +53,7 @@ func (*NewNoGroup) ProtoMessage()               {}
 func (*NewNoGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{0} }
 
 type A struct {
-	AField           *int64 `protobuf:"varint,1,opt,name=AField" json:"AField,omitempty"`
+	AField           *int64 `protobuf:"varint,1,opt,name=AField,json=aField" json:"AField,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -62,10 +62,10 @@ func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{1} }
 
 type OldWithGroup struct {
-	Field1           *int64               `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Group1           *OldWithGroup_Group1 `protobuf:"group,2,opt,name=Group1" json:"group1,omitempty"`
-	Field3           []float64            `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
-	Group2           *OldWithGroup_Group2 `protobuf:"group,4,opt,name=Group2" json:"group2,omitempty"`
+	Field1           *int64               `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Group1           *OldWithGroup_Group1 `protobuf:"group,2,opt,name=Group1,json=group1" json:"group1,omitempty"`
+	Field3           []float64            `protobuf:"fixed64,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
+	Group2           *OldWithGroup_Group2 `protobuf:"group,4,opt,name=Group2,json=group2" json:"group2,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
@@ -74,9 +74,9 @@ func (*OldWithGroup) ProtoMessage()               {}
 func (*OldWithGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{2} }
 
 type OldWithGroup_Group1 struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *int32    `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *int32    `protobuf:"varint,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
+	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3,json=field3" json:"Field3,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
@@ -84,8 +84,8 @@ func (m *OldWithGroup_Group1) Reset()      { *m = OldWithGroup_Group1{} }
 func (*OldWithGroup_Group1) ProtoMessage() {}
 
 type OldWithGroup_Group2 struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 

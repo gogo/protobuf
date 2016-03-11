@@ -33,7 +33,7 @@ type CodeGeneratorRequest struct {
 	// The .proto files that were explicitly listed on the command-line.  The
 	// code generator should generate code only for these files.  Each file's
 	// descriptor will be included in proto_file, below.
-	FileToGenerate []string `protobuf:"bytes,1,rep,name=file_to_generate" json:"file_to_generate,omitempty"`
+	FileToGenerate []string `protobuf:"bytes,1,rep,name=file_to_generate,json=fileToGenerate" json:"file_to_generate,omitempty"`
 	// The generator parameter passed on the command-line.
 	Parameter *string `protobuf:"bytes,2,opt,name=parameter" json:"parameter,omitempty"`
 	// FileDescriptorProtos for all files in files_to_generate and everything
@@ -47,7 +47,7 @@ type CodeGeneratorRequest struct {
 	// the entire set into memory at once.  However, as of this writing, this
 	// is not similarly optimized on protoc's end -- it will store all fields in
 	// memory at once before sending them to the plugin.
-	ProtoFile        []*google_protobuf.FileDescriptorProto `protobuf:"bytes,15,rep,name=proto_file" json:"proto_file,omitempty"`
+	ProtoFile        []*google_protobuf.FileDescriptorProto `protobuf:"bytes,15,rep,name=proto_file,json=protoFile" json:"proto_file,omitempty"`
 	XXX_unrecognized []byte                                 `json:"-"`
 }
 
@@ -162,7 +162,7 @@ type CodeGeneratorResponse_File struct {
 	// command line.
 	//
 	// If |insertion_point| is present, |name| must also be present.
-	InsertionPoint *string `protobuf:"bytes,2,opt,name=insertion_point" json:"insertion_point,omitempty"`
+	InsertionPoint *string `protobuf:"bytes,2,opt,name=insertion_point,json=insertionPoint" json:"insertion_point,omitempty"`
 	// The file contents.
 	Content          *string `protobuf:"bytes,15,opt,name=content" json:"content,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`

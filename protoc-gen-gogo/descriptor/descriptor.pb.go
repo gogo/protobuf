@@ -323,13 +323,13 @@ type FileDescriptorProto struct {
 	// Names of files imported by this file.
 	Dependency []string `protobuf:"bytes,3,rep,name=dependency" json:"dependency,omitempty"`
 	// Indexes of the public imported files in the dependency list above.
-	PublicDependency []int32 `protobuf:"varint,10,rep,name=public_dependency" json:"public_dependency,omitempty"`
+	PublicDependency []int32 `protobuf:"varint,10,rep,name=public_dependency,json=publicDependency" json:"public_dependency,omitempty"`
 	// Indexes of the weak imported files in the dependency list.
 	// For Google-internal migration only. Do not use.
-	WeakDependency []int32 `protobuf:"varint,11,rep,name=weak_dependency" json:"weak_dependency,omitempty"`
+	WeakDependency []int32 `protobuf:"varint,11,rep,name=weak_dependency,json=weakDependency" json:"weak_dependency,omitempty"`
 	// All top-level definitions in this file.
-	MessageType []*DescriptorProto        `protobuf:"bytes,4,rep,name=message_type" json:"message_type,omitempty"`
-	EnumType    []*EnumDescriptorProto    `protobuf:"bytes,5,rep,name=enum_type" json:"enum_type,omitempty"`
+	MessageType []*DescriptorProto        `protobuf:"bytes,4,rep,name=message_type,json=messageType" json:"message_type,omitempty"`
+	EnumType    []*EnumDescriptorProto    `protobuf:"bytes,5,rep,name=enum_type,json=enumType" json:"enum_type,omitempty"`
 	Service     []*ServiceDescriptorProto `protobuf:"bytes,6,rep,name=service" json:"service,omitempty"`
 	Extension   []*FieldDescriptorProto   `protobuf:"bytes,7,rep,name=extension" json:"extension,omitempty"`
 	Options     *FileOptions              `protobuf:"bytes,8,opt,name=options" json:"options,omitempty"`
@@ -337,7 +337,7 @@ type FileDescriptorProto struct {
 	// You may safely remove this entire field without harming runtime
 	// functionality of the descriptors -- the information is needed only by
 	// development tools.
-	SourceCodeInfo *SourceCodeInfo `protobuf:"bytes,9,opt,name=source_code_info" json:"source_code_info,omitempty"`
+	SourceCodeInfo *SourceCodeInfo `protobuf:"bytes,9,opt,name=source_code_info,json=sourceCodeInfo" json:"source_code_info,omitempty"`
 	// The syntax of the proto file.
 	// The supported values are "proto2" and "proto3".
 	Syntax           *string `protobuf:"bytes,12,opt,name=syntax" json:"syntax,omitempty"`
@@ -438,15 +438,15 @@ type DescriptorProto struct {
 	Name           *string                           `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	Field          []*FieldDescriptorProto           `protobuf:"bytes,2,rep,name=field" json:"field,omitempty"`
 	Extension      []*FieldDescriptorProto           `protobuf:"bytes,6,rep,name=extension" json:"extension,omitempty"`
-	NestedType     []*DescriptorProto                `protobuf:"bytes,3,rep,name=nested_type" json:"nested_type,omitempty"`
-	EnumType       []*EnumDescriptorProto            `protobuf:"bytes,4,rep,name=enum_type" json:"enum_type,omitempty"`
-	ExtensionRange []*DescriptorProto_ExtensionRange `protobuf:"bytes,5,rep,name=extension_range" json:"extension_range,omitempty"`
-	OneofDecl      []*OneofDescriptorProto           `protobuf:"bytes,8,rep,name=oneof_decl" json:"oneof_decl,omitempty"`
+	NestedType     []*DescriptorProto                `protobuf:"bytes,3,rep,name=nested_type,json=nestedType" json:"nested_type,omitempty"`
+	EnumType       []*EnumDescriptorProto            `protobuf:"bytes,4,rep,name=enum_type,json=enumType" json:"enum_type,omitempty"`
+	ExtensionRange []*DescriptorProto_ExtensionRange `protobuf:"bytes,5,rep,name=extension_range,json=extensionRange" json:"extension_range,omitempty"`
+	OneofDecl      []*OneofDescriptorProto           `protobuf:"bytes,8,rep,name=oneof_decl,json=oneofDecl" json:"oneof_decl,omitempty"`
 	Options        *MessageOptions                   `protobuf:"bytes,7,opt,name=options" json:"options,omitempty"`
-	ReservedRange  []*DescriptorProto_ReservedRange  `protobuf:"bytes,9,rep,name=reserved_range" json:"reserved_range,omitempty"`
+	ReservedRange  []*DescriptorProto_ReservedRange  `protobuf:"bytes,9,rep,name=reserved_range,json=reservedRange" json:"reserved_range,omitempty"`
 	// Reserved field names, which may not be used by fields in the same message.
 	// A given name may only be reserved once.
-	ReservedName     []string `protobuf:"bytes,10,rep,name=reserved_name" json:"reserved_name,omitempty"`
+	ReservedName     []string `protobuf:"bytes,10,rep,name=reserved_name,json=reservedName" json:"reserved_name,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -595,7 +595,7 @@ type FieldDescriptorProto struct {
 	// rules are used to find the type (i.e. first the nested types within this
 	// message are searched, then within the parent, on up to the root
 	// namespace).
-	TypeName *string `protobuf:"bytes,6,opt,name=type_name" json:"type_name,omitempty"`
+	TypeName *string `protobuf:"bytes,6,opt,name=type_name,json=typeName" json:"type_name,omitempty"`
 	// For extensions, this is the name of the type being extended.  It is
 	// resolved in the same manner as type_name.
 	Extendee *string `protobuf:"bytes,2,opt,name=extendee" json:"extendee,omitempty"`
@@ -604,15 +604,15 @@ type FieldDescriptorProto struct {
 	// For strings, contains the default text contents (not escaped in any way).
 	// For bytes, contains the C escaped value.  All bytes >= 128 are escaped.
 	// TODO(kenton):  Base-64 encode?
-	DefaultValue *string `protobuf:"bytes,7,opt,name=default_value" json:"default_value,omitempty"`
+	DefaultValue *string `protobuf:"bytes,7,opt,name=default_value,json=defaultValue" json:"default_value,omitempty"`
 	// If set, gives the index of a oneof in the containing type's oneof_decl
 	// list.  This field is a member of that oneof.
-	OneofIndex *int32 `protobuf:"varint,9,opt,name=oneof_index" json:"oneof_index,omitempty"`
+	OneofIndex *int32 `protobuf:"varint,9,opt,name=oneof_index,json=oneofIndex" json:"oneof_index,omitempty"`
 	// JSON name of this field. The value is set by protocol compiler. If the
 	// user has set a "json_name" option on this field, that option's value
 	// will be used. Otherwise, it's deduced from the field's name by converting
 	// it to camelCase.
-	JsonName         *string       `protobuf:"bytes,10,opt,name=json_name" json:"json_name,omitempty"`
+	JsonName         *string       `protobuf:"bytes,10,opt,name=json_name,json=jsonName" json:"json_name,omitempty"`
 	Options          *FieldOptions `protobuf:"bytes,8,opt,name=options" json:"options,omitempty"`
 	XXX_unrecognized []byte        `json:"-"`
 }
@@ -819,13 +819,13 @@ type MethodDescriptorProto struct {
 	Name *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 	// Input and output type names.  These are resolved in the same way as
 	// FieldDescriptorProto.type_name, but must refer to a message type.
-	InputType  *string        `protobuf:"bytes,2,opt,name=input_type" json:"input_type,omitempty"`
-	OutputType *string        `protobuf:"bytes,3,opt,name=output_type" json:"output_type,omitempty"`
+	InputType  *string        `protobuf:"bytes,2,opt,name=input_type,json=inputType" json:"input_type,omitempty"`
+	OutputType *string        `protobuf:"bytes,3,opt,name=output_type,json=outputType" json:"output_type,omitempty"`
 	Options    *MethodOptions `protobuf:"bytes,4,opt,name=options" json:"options,omitempty"`
 	// Identifies if client streams multiple client messages
-	ClientStreaming *bool `protobuf:"varint,5,opt,name=client_streaming,def=0" json:"client_streaming,omitempty"`
+	ClientStreaming *bool `protobuf:"varint,5,opt,name=client_streaming,json=clientStreaming,def=0" json:"client_streaming,omitempty"`
 	// Identifies if server streams multiple server messages
-	ServerStreaming  *bool  `protobuf:"varint,6,opt,name=server_streaming,def=0" json:"server_streaming,omitempty"`
+	ServerStreaming  *bool  `protobuf:"varint,6,opt,name=server_streaming,json=serverStreaming,def=0" json:"server_streaming,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -884,20 +884,20 @@ type FileOptions struct {
 	// placed.  By default, the proto package is used, but this is often
 	// inappropriate because proto packages do not normally start with backwards
 	// domain names.
-	JavaPackage *string `protobuf:"bytes,1,opt,name=java_package" json:"java_package,omitempty"`
+	JavaPackage *string `protobuf:"bytes,1,opt,name=java_package,json=javaPackage" json:"java_package,omitempty"`
 	// If set, all the classes from the .proto file are wrapped in a single
 	// outer class with the given name.  This applies to both Proto1
 	// (equivalent to the old "--one_java_file" option) and Proto2 (where
 	// a .proto always translates to a single class, but you may want to
 	// explicitly choose the class name).
-	JavaOuterClassname *string `protobuf:"bytes,8,opt,name=java_outer_classname" json:"java_outer_classname,omitempty"`
+	JavaOuterClassname *string `protobuf:"bytes,8,opt,name=java_outer_classname,json=javaOuterClassname" json:"java_outer_classname,omitempty"`
 	// If set true, then the Java code generator will generate a separate .java
 	// file for each top-level message, enum, and service defined in the .proto
 	// file.  Thus, these types will *not* be nested inside the outer class
 	// named by java_outer_classname.  However, the outer class will still be
 	// generated to contain the file's getDescriptor() method as well as any
 	// top-level extensions defined in the file.
-	JavaMultipleFiles *bool `protobuf:"varint,10,opt,name=java_multiple_files,def=0" json:"java_multiple_files,omitempty"`
+	JavaMultipleFiles *bool `protobuf:"varint,10,opt,name=java_multiple_files,json=javaMultipleFiles,def=0" json:"java_multiple_files,omitempty"`
 	// If set true, then the Java code generator will generate equals() and
 	// hashCode() methods for all messages defined in the .proto file.
 	// This increases generated code size, potentially substantially for large
@@ -910,21 +910,21 @@ type FileOptions struct {
 	// the generated methods compute their results based on field values rather
 	// than object identity. (Implementations should not assume that hashcodes
 	// will be consistent across runtimes or versions of the protocol compiler.)
-	JavaGenerateEqualsAndHash *bool `protobuf:"varint,20,opt,name=java_generate_equals_and_hash,def=0" json:"java_generate_equals_and_hash,omitempty"`
+	JavaGenerateEqualsAndHash *bool `protobuf:"varint,20,opt,name=java_generate_equals_and_hash,json=javaGenerateEqualsAndHash,def=0" json:"java_generate_equals_and_hash,omitempty"`
 	// If set true, then the Java2 code generator will generate code that
 	// throws an exception whenever an attempt is made to assign a non-UTF-8
 	// byte sequence to a string field.
 	// Message reflection will do the same.
 	// However, an extension field still accepts non-UTF-8 byte sequences.
 	// This option has no effect on when used with the lite runtime.
-	JavaStringCheckUtf8 *bool                     `protobuf:"varint,27,opt,name=java_string_check_utf8,def=0" json:"java_string_check_utf8,omitempty"`
-	OptimizeFor         *FileOptions_OptimizeMode `protobuf:"varint,9,opt,name=optimize_for,enum=google.protobuf.FileOptions_OptimizeMode,def=1" json:"optimize_for,omitempty"`
+	JavaStringCheckUtf8 *bool                     `protobuf:"varint,27,opt,name=java_string_check_utf8,json=javaStringCheckUtf8,def=0" json:"java_string_check_utf8,omitempty"`
+	OptimizeFor         *FileOptions_OptimizeMode `protobuf:"varint,9,opt,name=optimize_for,json=optimizeFor,enum=google.protobuf.FileOptions_OptimizeMode,def=1" json:"optimize_for,omitempty"`
 	// Sets the Go package where structs generated from this .proto will be
 	// placed. If omitted, the Go package will be derived from the following:
 	//   - The basename of the package import path, if provided.
 	//   - Otherwise, the package statement in the .proto file, if present.
 	//   - Otherwise, the basename of the .proto file, without extension.
-	GoPackage *string `protobuf:"bytes,11,opt,name=go_package" json:"go_package,omitempty"`
+	GoPackage *string `protobuf:"bytes,11,opt,name=go_package,json=goPackage" json:"go_package,omitempty"`
 	// Should generic services be generated in each language?  "Generic" services
 	// are not specific to any particular RPC system.  They are generated by the
 	// main code generators in each language (without additional plugins).
@@ -935,9 +935,9 @@ type FileOptions struct {
 	// that generate code specific to your particular RPC system.  Therefore,
 	// these default to false.  Old code which depends on generic services should
 	// explicitly set them to true.
-	CcGenericServices   *bool `protobuf:"varint,16,opt,name=cc_generic_services,def=0" json:"cc_generic_services,omitempty"`
-	JavaGenericServices *bool `protobuf:"varint,17,opt,name=java_generic_services,def=0" json:"java_generic_services,omitempty"`
-	PyGenericServices   *bool `protobuf:"varint,18,opt,name=py_generic_services,def=0" json:"py_generic_services,omitempty"`
+	CcGenericServices   *bool `protobuf:"varint,16,opt,name=cc_generic_services,json=ccGenericServices,def=0" json:"cc_generic_services,omitempty"`
+	JavaGenericServices *bool `protobuf:"varint,17,opt,name=java_generic_services,json=javaGenericServices,def=0" json:"java_generic_services,omitempty"`
+	PyGenericServices   *bool `protobuf:"varint,18,opt,name=py_generic_services,json=pyGenericServices,def=0" json:"py_generic_services,omitempty"`
 	// Is this file deprecated?
 	// Depending on the target platform, this can emit Deprecated annotations
 	// for everything in the file, or it will be completely ignored; in the very
@@ -945,17 +945,17 @@ type FileOptions struct {
 	Deprecated *bool `protobuf:"varint,23,opt,name=deprecated,def=0" json:"deprecated,omitempty"`
 	// Enables the use of arenas for the proto messages in this file. This applies
 	// only to generated classes for C++.
-	CcEnableArenas *bool `protobuf:"varint,31,opt,name=cc_enable_arenas,def=0" json:"cc_enable_arenas,omitempty"`
+	CcEnableArenas *bool `protobuf:"varint,31,opt,name=cc_enable_arenas,json=ccEnableArenas,def=0" json:"cc_enable_arenas,omitempty"`
 	// Sets the objective c class prefix which is prepended to all objective c
 	// generated classes from this .proto. There is no default.
-	ObjcClassPrefix *string `protobuf:"bytes,36,opt,name=objc_class_prefix" json:"objc_class_prefix,omitempty"`
+	ObjcClassPrefix *string `protobuf:"bytes,36,opt,name=objc_class_prefix,json=objcClassPrefix" json:"objc_class_prefix,omitempty"`
 	// Namespace for generated classes; defaults to the package.
-	CsharpNamespace *string `protobuf:"bytes,37,opt,name=csharp_namespace" json:"csharp_namespace,omitempty"`
+	CsharpNamespace *string `protobuf:"bytes,37,opt,name=csharp_namespace,json=csharpNamespace" json:"csharp_namespace,omitempty"`
 	// Whether the nano proto compiler should generate in the deprecated non-nano
 	// suffixed package.
-	JavananoUseDeprecatedPackage *bool `protobuf:"varint,38,opt,name=javanano_use_deprecated_package" json:"javanano_use_deprecated_package,omitempty"`
+	JavananoUseDeprecatedPackage *bool `protobuf:"varint,38,opt,name=javanano_use_deprecated_package,json=javananoUseDeprecatedPackage" json:"javanano_use_deprecated_package,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1120,11 +1120,11 @@ type MessageOptions struct {
 	//
 	// Because this is an option, the above two restrictions are not enforced by
 	// the protocol compiler.
-	MessageSetWireFormat *bool `protobuf:"varint,1,opt,name=message_set_wire_format,def=0" json:"message_set_wire_format,omitempty"`
+	MessageSetWireFormat *bool `protobuf:"varint,1,opt,name=message_set_wire_format,json=messageSetWireFormat,def=0" json:"message_set_wire_format,omitempty"`
 	// Disables the generation of the standard "descriptor()" accessor, which can
 	// conflict with a field of the same name.  This is meant to make migration
 	// from proto1 easier; new code should avoid fields named "descriptor".
-	NoStandardDescriptorAccessor *bool `protobuf:"varint,2,opt,name=no_standard_descriptor_accessor,def=0" json:"no_standard_descriptor_accessor,omitempty"`
+	NoStandardDescriptorAccessor *bool `protobuf:"varint,2,opt,name=no_standard_descriptor_accessor,json=noStandardDescriptorAccessor,def=0" json:"no_standard_descriptor_accessor,omitempty"`
 	// Is this message deprecated?
 	// Depending on the target platform, this can emit Deprecated annotations
 	// for the message, or it will be completely ignored; in the very least,
@@ -1151,9 +1151,9 @@ type MessageOptions struct {
 	// NOTE: Do not set the option in .proto files. Always use the maps syntax
 	// instead. The option should only be implicitly set by the proto compiler
 	// parser.
-	MapEntry *bool `protobuf:"varint,7,opt,name=map_entry" json:"map_entry,omitempty"`
+	MapEntry *bool `protobuf:"varint,7,opt,name=map_entry,json=mapEntry" json:"map_entry,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1275,7 +1275,7 @@ type FieldOptions struct {
 	// For Google-internal migration only. Do not use.
 	Weak *bool `protobuf:"varint,10,opt,name=weak,def=0" json:"weak,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1357,14 +1357,14 @@ func (m *FieldOptions) GetUninterpretedOption() []*UninterpretedOption {
 type EnumOptions struct {
 	// Set this option to true to allow mapping different tag names to the same
 	// value.
-	AllowAlias *bool `protobuf:"varint,2,opt,name=allow_alias" json:"allow_alias,omitempty"`
+	AllowAlias *bool `protobuf:"varint,2,opt,name=allow_alias,json=allowAlias" json:"allow_alias,omitempty"`
 	// Is this enum deprecated?
 	// Depending on the target platform, this can emit Deprecated annotations
 	// for the enum, or it will be completely ignored; in the very least, this
 	// is a formalization for deprecating enums.
 	Deprecated *bool `protobuf:"varint,3,opt,name=deprecated,def=0" json:"deprecated,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1418,7 +1418,7 @@ type EnumValueOptions struct {
 	// this is a formalization for deprecating enum values.
 	Deprecated *bool `protobuf:"varint,1,opt,name=deprecated,def=0" json:"deprecated,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1465,7 +1465,7 @@ type ServiceOptions struct {
 	// this is a formalization for deprecating services.
 	Deprecated *bool `protobuf:"varint,33,opt,name=deprecated,def=0" json:"deprecated,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1512,7 +1512,7 @@ type MethodOptions struct {
 	// this is a formalization for deprecating methods.
 	Deprecated *bool `protobuf:"varint,33,opt,name=deprecated,def=0" json:"deprecated,omitempty"`
 	// The parser stores options it doesn't recognize here. See above.
-	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option" json:"uninterpreted_option,omitempty"`
+	UninterpretedOption []*UninterpretedOption    `protobuf:"bytes,999,rep,name=uninterpreted_option,json=uninterpretedOption" json:"uninterpreted_option,omitempty"`
 	XXX_extensions      map[int32]proto.Extension `json:"-"`
 	XXX_unrecognized    []byte                    `json:"-"`
 }
@@ -1562,12 +1562,12 @@ type UninterpretedOption struct {
 	Name []*UninterpretedOption_NamePart `protobuf:"bytes,2,rep,name=name" json:"name,omitempty"`
 	// The value of the uninterpreted option, in whatever type the tokenizer
 	// identified it as during parsing. Exactly one of these should be set.
-	IdentifierValue  *string  `protobuf:"bytes,3,opt,name=identifier_value" json:"identifier_value,omitempty"`
-	PositiveIntValue *uint64  `protobuf:"varint,4,opt,name=positive_int_value" json:"positive_int_value,omitempty"`
-	NegativeIntValue *int64   `protobuf:"varint,5,opt,name=negative_int_value" json:"negative_int_value,omitempty"`
-	DoubleValue      *float64 `protobuf:"fixed64,6,opt,name=double_value" json:"double_value,omitempty"`
-	StringValue      []byte   `protobuf:"bytes,7,opt,name=string_value" json:"string_value,omitempty"`
-	AggregateValue   *string  `protobuf:"bytes,8,opt,name=aggregate_value" json:"aggregate_value,omitempty"`
+	IdentifierValue  *string  `protobuf:"bytes,3,opt,name=identifier_value,json=identifierValue" json:"identifier_value,omitempty"`
+	PositiveIntValue *uint64  `protobuf:"varint,4,opt,name=positive_int_value,json=positiveIntValue" json:"positive_int_value,omitempty"`
+	NegativeIntValue *int64   `protobuf:"varint,5,opt,name=negative_int_value,json=negativeIntValue" json:"negative_int_value,omitempty"`
+	DoubleValue      *float64 `protobuf:"fixed64,6,opt,name=double_value,json=doubleValue" json:"double_value,omitempty"`
+	StringValue      []byte   `protobuf:"bytes,7,opt,name=string_value,json=stringValue" json:"string_value,omitempty"`
+	AggregateValue   *string  `protobuf:"bytes,8,opt,name=aggregate_value,json=aggregateValue" json:"aggregate_value,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -1631,8 +1631,8 @@ func (m *UninterpretedOption) GetAggregateValue() string {
 // E.g.,{ ["foo", false], ["bar.baz", true], ["qux", false] } represents
 // "foo.(bar.baz).qux".
 type UninterpretedOption_NamePart struct {
-	NamePart         *string `protobuf:"bytes,1,req,name=name_part" json:"name_part,omitempty"`
-	IsExtension      *bool   `protobuf:"varint,2,req,name=is_extension" json:"is_extension,omitempty"`
+	NamePart         *string `protobuf:"bytes,1,req,name=name_part,json=namePart" json:"name_part,omitempty"`
+	IsExtension      *bool   `protobuf:"varint,2,req,name=is_extension,json=isExtension" json:"is_extension,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -1797,9 +1797,9 @@ type SourceCodeInfo_Location struct {
 	//   optional int32 grault = 6;
 	//
 	//   // ignored detached comments.
-	LeadingComments         *string  `protobuf:"bytes,3,opt,name=leading_comments" json:"leading_comments,omitempty"`
-	TrailingComments        *string  `protobuf:"bytes,4,opt,name=trailing_comments" json:"trailing_comments,omitempty"`
-	LeadingDetachedComments []string `protobuf:"bytes,6,rep,name=leading_detached_comments" json:"leading_detached_comments,omitempty"`
+	LeadingComments         *string  `protobuf:"bytes,3,opt,name=leading_comments,json=leadingComments" json:"leading_comments,omitempty"`
+	TrailingComments        *string  `protobuf:"bytes,4,opt,name=trailing_comments,json=trailingComments" json:"trailing_comments,omitempty"`
+	LeadingDetachedComments []string `protobuf:"bytes,6,rep,name=leading_detached_comments,json=leadingDetachedComments" json:"leading_detached_comments,omitempty"`
 	XXX_unrecognized        []byte   `json:"-"`
 }
 

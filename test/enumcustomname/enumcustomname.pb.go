@@ -142,18 +142,18 @@ func (MyEnumWithEnumStringer) EnumDescriptor() ([]byte, []int) {
 }
 
 type OnlyEnums struct {
-	MyEnum                         *MyCustomEnum               `protobuf:"varint,1,opt,name=my_enum,enum=enumcustomname.MyCustomEnum" json:"my_enum,omitempty"`
-	MyEnumDefaultA                 *MyCustomEnum               `protobuf:"varint,2,opt,name=my_enum_default_a,enum=enumcustomname.MyCustomEnum,def=0" json:"my_enum_default_a,omitempty"`
-	MyEnumDefaultB                 *MyCustomEnum               `protobuf:"varint,3,opt,name=my_enum_default_b,enum=enumcustomname.MyCustomEnum,def=1" json:"my_enum_default_b,omitempty"`
-	MyUnprefixedEnum               *MyCustomUnprefixedEnum     `protobuf:"varint,4,opt,name=my_unprefixed_enum,enum=enumcustomname.MyCustomUnprefixedEnum" json:"my_unprefixed_enum,omitempty"`
-	MyUnprefixedEnumDefaultA       *MyCustomUnprefixedEnum     `protobuf:"varint,5,opt,name=my_unprefixed_enum_default_a,enum=enumcustomname.MyCustomUnprefixedEnum,def=0" json:"my_unprefixed_enum_default_a,omitempty"`
-	MyUnprefixedEnumDefaultB       *MyCustomUnprefixedEnum     `protobuf:"varint,6,opt,name=my_unprefixed_enum_default_b,enum=enumcustomname.MyCustomUnprefixedEnum,def=1" json:"my_unprefixed_enum_default_b,omitempty"`
-	YetAnotherTestEnum             *test.YetAnotherTestEnum    `protobuf:"varint,7,opt,name=yet_another_test_enum,enum=test.YetAnotherTestEnum" json:"yet_another_test_enum,omitempty"`
-	YetAnotherTestEnumDefaultAa    *test.YetAnotherTestEnum    `protobuf:"varint,8,opt,name=yet_another_test_enum_default_aa,enum=test.YetAnotherTestEnum,def=0" json:"yet_another_test_enum_default_aa,omitempty"`
-	YetAnotherTestEnumDefaultBb    *test.YetAnotherTestEnum    `protobuf:"varint,9,opt,name=yet_another_test_enum_default_bb,enum=test.YetAnotherTestEnum,def=1" json:"yet_another_test_enum_default_bb,omitempty"`
-	YetYetAnotherTestEnum          *test.YetYetAnotherTestEnum `protobuf:"varint,10,opt,name=yet_yet_another_test_enum,enum=test.YetYetAnotherTestEnum" json:"yet_yet_another_test_enum,omitempty"`
-	YetYetAnotherTestEnumDefaultCc *test.YetYetAnotherTestEnum `protobuf:"varint,11,opt,name=yet_yet_another_test_enum_default_cc,enum=test.YetYetAnotherTestEnum,def=0" json:"yet_yet_another_test_enum_default_cc,omitempty"`
-	YetYetAnotherTestEnumDefaultDd *test.YetYetAnotherTestEnum `protobuf:"varint,12,opt,name=yet_yet_another_test_enum_default_dd,enum=test.YetYetAnotherTestEnum,def=1" json:"yet_yet_another_test_enum_default_dd,omitempty"`
+	MyEnum                         *MyCustomEnum               `protobuf:"varint,1,opt,name=my_enum,json=myEnum,enum=enumcustomname.MyCustomEnum" json:"my_enum,omitempty"`
+	MyEnumDefaultA                 *MyCustomEnum               `protobuf:"varint,2,opt,name=my_enum_default_a,json=myEnumDefaultA,enum=enumcustomname.MyCustomEnum,def=0" json:"my_enum_default_a,omitempty"`
+	MyEnumDefaultB                 *MyCustomEnum               `protobuf:"varint,3,opt,name=my_enum_default_b,json=myEnumDefaultB,enum=enumcustomname.MyCustomEnum,def=1" json:"my_enum_default_b,omitempty"`
+	MyUnprefixedEnum               *MyCustomUnprefixedEnum     `protobuf:"varint,4,opt,name=my_unprefixed_enum,json=myUnprefixedEnum,enum=enumcustomname.MyCustomUnprefixedEnum" json:"my_unprefixed_enum,omitempty"`
+	MyUnprefixedEnumDefaultA       *MyCustomUnprefixedEnum     `protobuf:"varint,5,opt,name=my_unprefixed_enum_default_a,json=myUnprefixedEnumDefaultA,enum=enumcustomname.MyCustomUnprefixedEnum,def=0" json:"my_unprefixed_enum_default_a,omitempty"`
+	MyUnprefixedEnumDefaultB       *MyCustomUnprefixedEnum     `protobuf:"varint,6,opt,name=my_unprefixed_enum_default_b,json=myUnprefixedEnumDefaultB,enum=enumcustomname.MyCustomUnprefixedEnum,def=1" json:"my_unprefixed_enum_default_b,omitempty"`
+	YetAnotherTestEnum             *test.YetAnotherTestEnum    `protobuf:"varint,7,opt,name=yet_another_test_enum,json=yetAnotherTestEnum,enum=test.YetAnotherTestEnum" json:"yet_another_test_enum,omitempty"`
+	YetAnotherTestEnumDefaultAa    *test.YetAnotherTestEnum    `protobuf:"varint,8,opt,name=yet_another_test_enum_default_aa,json=yetAnotherTestEnumDefaultAa,enum=test.YetAnotherTestEnum,def=0" json:"yet_another_test_enum_default_aa,omitempty"`
+	YetAnotherTestEnumDefaultBb    *test.YetAnotherTestEnum    `protobuf:"varint,9,opt,name=yet_another_test_enum_default_bb,json=yetAnotherTestEnumDefaultBb,enum=test.YetAnotherTestEnum,def=1" json:"yet_another_test_enum_default_bb,omitempty"`
+	YetYetAnotherTestEnum          *test.YetYetAnotherTestEnum `protobuf:"varint,10,opt,name=yet_yet_another_test_enum,json=yetYetAnotherTestEnum,enum=test.YetYetAnotherTestEnum" json:"yet_yet_another_test_enum,omitempty"`
+	YetYetAnotherTestEnumDefaultCc *test.YetYetAnotherTestEnum `protobuf:"varint,11,opt,name=yet_yet_another_test_enum_default_cc,json=yetYetAnotherTestEnumDefaultCc,enum=test.YetYetAnotherTestEnum,def=0" json:"yet_yet_another_test_enum_default_cc,omitempty"`
+	YetYetAnotherTestEnumDefaultDd *test.YetYetAnotherTestEnum `protobuf:"varint,12,opt,name=yet_yet_another_test_enum_default_dd,json=yetYetAnotherTestEnumDefaultDd,enum=test.YetYetAnotherTestEnum,def=1" json:"yet_yet_another_test_enum_default_dd,omitempty"`
 	XXX_unrecognized               []byte                      `json:"-"`
 }
 

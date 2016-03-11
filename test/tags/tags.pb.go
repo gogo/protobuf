@@ -29,8 +29,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type Outside struct {
-	*Inside          `protobuf:"bytes,1,opt,name=Inside,embedded=Inside" json:""`
-	Field2           *string `protobuf:"bytes,2,opt,name=Field2" json:"MyField2" xml:",comment"`
+	*Inside          `protobuf:"bytes,1,opt,name=Inside,json=inside,embedded=Inside" json:""`
+	Field2           *string `protobuf:"bytes,2,opt,name=Field2,json=field2" json:"MyField2" xml:",comment"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -47,7 +47,7 @@ func (m *Outside) GetField2() string {
 }
 
 type Inside struct {
-	Field1           *string `protobuf:"bytes,1,opt,name=Field1" json:"MyField1" xml:",chardata"`
+	Field1           *string `protobuf:"bytes,1,opt,name=Field1,json=field1" json:"MyField1" xml:",chardata"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

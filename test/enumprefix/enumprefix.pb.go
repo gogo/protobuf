@@ -29,7 +29,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type MyMessage struct {
-	TheField         test.TheTestEnum `protobuf:"varint,1,opt,name=TheField,enum=test.TheTestEnum" json:"TheField"`
+	TheField         test.TheTestEnum `protobuf:"varint,1,opt,name=TheField,json=theField,enum=test.TheTestEnum" json:"TheField"`
 	XXX_unrecognized []byte           `json:"-"`
 }
 

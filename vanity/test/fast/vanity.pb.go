@@ -31,8 +31,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type A struct {
-	Strings          *string `protobuf:"bytes,1,opt,name=Strings" json:"Strings,omitempty"`
-	Int              *int64  `protobuf:"varint,2,req,name=Int" json:"Int,omitempty"`
+	Strings          *string `protobuf:"bytes,1,opt,name=Strings,json=strings" json:"Strings,omitempty"`
+	Int              *int64  `protobuf:"varint,2,req,name=Int,json=int" json:"Int,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

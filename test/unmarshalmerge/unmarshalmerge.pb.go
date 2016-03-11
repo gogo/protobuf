@@ -41,8 +41,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type Big struct {
-	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
-	Number           *int64 `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
+	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub,json=sub" json:"Sub,omitempty"`
+	Number           *int64 `protobuf:"varint,2,opt,name=Number,json=number" json:"Number,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -65,8 +65,8 @@ func (m *Big) GetNumber() int64 {
 }
 
 type BigUnsafe struct {
-	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
-	Number           *int64 `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
+	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub,json=sub" json:"Sub,omitempty"`
+	Number           *int64 `protobuf:"varint,2,opt,name=Number,json=number" json:"Number,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -89,7 +89,7 @@ func (m *BigUnsafe) GetNumber() int64 {
 }
 
 type Sub struct {
-	SubNumber        *int64 `protobuf:"varint,1,opt,name=SubNumber" json:"SubNumber,omitempty"`
+	SubNumber        *int64 `protobuf:"varint,1,opt,name=SubNumber,json=subNumber" json:"SubNumber,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -105,17 +105,17 @@ func (m *Sub) GetSubNumber() int64 {
 }
 
 type IntMerge struct {
-	Int64            int64  `protobuf:"varint,1,req,name=Int64" json:"Int64"`
-	Int32            int32  `protobuf:"varint,2,opt,name=Int32" json:"Int32"`
-	Sint32           int32  `protobuf:"zigzag32,3,req,name=Sint32" json:"Sint32"`
-	Sint64           int64  `protobuf:"zigzag64,4,opt,name=Sint64" json:"Sint64"`
-	Uint64           uint64 `protobuf:"varint,5,opt,name=Uint64" json:"Uint64"`
-	Uint32           uint32 `protobuf:"varint,6,req,name=Uint32" json:"Uint32"`
-	Fixed64          uint64 `protobuf:"fixed64,7,opt,name=Fixed64" json:"Fixed64"`
-	Fixed32          uint32 `protobuf:"fixed32,8,opt,name=Fixed32" json:"Fixed32"`
-	Sfixed32         int32  `protobuf:"fixed32,9,req,name=Sfixed32" json:"Sfixed32"`
-	Sfixed64         int64  `protobuf:"fixed64,10,opt,name=Sfixed64" json:"Sfixed64"`
-	Bool             bool   `protobuf:"varint,11,opt,name=Bool" json:"Bool"`
+	Int64            int64  `protobuf:"varint,1,req,name=Int64,json=int64" json:"Int64"`
+	Int32            int32  `protobuf:"varint,2,opt,name=Int32,json=int32" json:"Int32"`
+	Sint32           int32  `protobuf:"zigzag32,3,req,name=Sint32,json=sint32" json:"Sint32"`
+	Sint64           int64  `protobuf:"zigzag64,4,opt,name=Sint64,json=sint64" json:"Sint64"`
+	Uint64           uint64 `protobuf:"varint,5,opt,name=Uint64,json=uint64" json:"Uint64"`
+	Uint32           uint32 `protobuf:"varint,6,req,name=Uint32,json=uint32" json:"Uint32"`
+	Fixed64          uint64 `protobuf:"fixed64,7,opt,name=Fixed64,json=fixed64" json:"Fixed64"`
+	Fixed32          uint32 `protobuf:"fixed32,8,opt,name=Fixed32,json=fixed32" json:"Fixed32"`
+	Sfixed32         int32  `protobuf:"fixed32,9,req,name=Sfixed32,json=sfixed32" json:"Sfixed32"`
+	Sfixed64         int64  `protobuf:"fixed64,10,opt,name=Sfixed64,json=sfixed64" json:"Sfixed64"`
+	Bool             bool   `protobuf:"varint,11,opt,name=Bool,json=bool" json:"Bool"`
 	XXX_unrecognized []byte `json:"-"`
 }
 

@@ -32,8 +32,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type IndexQuery struct {
-	Key              *string `protobuf:"bytes,1,opt,name=Key" json:"Key,omitempty"`
-	Value            *string `protobuf:"bytes,2,opt,name=Value" json:"Value,omitempty"`
+	Key              *string `protobuf:"bytes,1,opt,name=Key,json=key" json:"Key,omitempty"`
+	Value            *string `protobuf:"bytes,2,opt,name=Value,json=value" json:"Value,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 

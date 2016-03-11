@@ -31,7 +31,7 @@ var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62001,
 	Name:          "gogoproto.goproto_enum_prefix",
-	Tag:           "varint,62001,opt,name=goproto_enum_prefix",
+	Tag:           "varint,62001,opt,name=goproto_enum_prefix,json=goprotoEnumPrefix",
 }
 
 var E_GoprotoEnumStringer = &proto.ExtensionDesc{
@@ -39,7 +39,7 @@ var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62021,
 	Name:          "gogoproto.goproto_enum_stringer",
-	Tag:           "varint,62021,opt,name=goproto_enum_stringer",
+	Tag:           "varint,62021,opt,name=goproto_enum_stringer,json=goprotoEnumStringer",
 }
 
 var E_EnumStringer = &proto.ExtensionDesc{
@@ -47,7 +47,7 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62022,
 	Name:          "gogoproto.enum_stringer",
-	Tag:           "varint,62022,opt,name=enum_stringer",
+	Tag:           "varint,62022,opt,name=enum_stringer,json=enumStringer",
 }
 
 var E_EnumCustomname = &proto.ExtensionDesc{
@@ -55,7 +55,7 @@ var E_EnumCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         62023,
 	Name:          "gogoproto.enum_customname",
-	Tag:           "bytes,62023,opt,name=enum_customname",
+	Tag:           "bytes,62023,opt,name=enum_customname,json=enumCustomname",
 }
 
 var E_EnumvalueCustomname = &proto.ExtensionDesc{
@@ -63,7 +63,7 @@ var E_EnumvalueCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         66001,
 	Name:          "gogoproto.enumvalue_customname",
-	Tag:           "bytes,66001,opt,name=enumvalue_customname",
+	Tag:           "bytes,66001,opt,name=enumvalue_customname,json=enumvalueCustomname",
 }
 
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
@@ -71,7 +71,7 @@ var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63001,
 	Name:          "gogoproto.goproto_getters_all",
-	Tag:           "varint,63001,opt,name=goproto_getters_all",
+	Tag:           "varint,63001,opt,name=goproto_getters_all,json=goprotoGettersAll",
 }
 
 var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
@@ -79,7 +79,7 @@ var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63002,
 	Name:          "gogoproto.goproto_enum_prefix_all",
-	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all",
+	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all,json=goprotoEnumPrefixAll",
 }
 
 var E_GoprotoStringerAll = &proto.ExtensionDesc{
@@ -87,7 +87,7 @@ var E_GoprotoStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63003,
 	Name:          "gogoproto.goproto_stringer_all",
-	Tag:           "varint,63003,opt,name=goproto_stringer_all",
+	Tag:           "varint,63003,opt,name=goproto_stringer_all,json=goprotoStringerAll",
 }
 
 var E_VerboseEqualAll = &proto.ExtensionDesc{
@@ -95,7 +95,7 @@ var E_VerboseEqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63004,
 	Name:          "gogoproto.verbose_equal_all",
-	Tag:           "varint,63004,opt,name=verbose_equal_all",
+	Tag:           "varint,63004,opt,name=verbose_equal_all,json=verboseEqualAll",
 }
 
 var E_FaceAll = &proto.ExtensionDesc{
@@ -103,7 +103,7 @@ var E_FaceAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63005,
 	Name:          "gogoproto.face_all",
-	Tag:           "varint,63005,opt,name=face_all",
+	Tag:           "varint,63005,opt,name=face_all,json=faceAll",
 }
 
 var E_GostringAll = &proto.ExtensionDesc{
@@ -111,7 +111,7 @@ var E_GostringAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63006,
 	Name:          "gogoproto.gostring_all",
-	Tag:           "varint,63006,opt,name=gostring_all",
+	Tag:           "varint,63006,opt,name=gostring_all,json=gostringAll",
 }
 
 var E_PopulateAll = &proto.ExtensionDesc{
@@ -119,7 +119,7 @@ var E_PopulateAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63007,
 	Name:          "gogoproto.populate_all",
-	Tag:           "varint,63007,opt,name=populate_all",
+	Tag:           "varint,63007,opt,name=populate_all,json=populateAll",
 }
 
 var E_StringerAll = &proto.ExtensionDesc{
@@ -127,7 +127,7 @@ var E_StringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63008,
 	Name:          "gogoproto.stringer_all",
-	Tag:           "varint,63008,opt,name=stringer_all",
+	Tag:           "varint,63008,opt,name=stringer_all,json=stringerAll",
 }
 
 var E_OnlyoneAll = &proto.ExtensionDesc{
@@ -135,7 +135,7 @@ var E_OnlyoneAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63009,
 	Name:          "gogoproto.onlyone_all",
-	Tag:           "varint,63009,opt,name=onlyone_all",
+	Tag:           "varint,63009,opt,name=onlyone_all,json=onlyoneAll",
 }
 
 var E_EqualAll = &proto.ExtensionDesc{
@@ -143,7 +143,7 @@ var E_EqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63013,
 	Name:          "gogoproto.equal_all",
-	Tag:           "varint,63013,opt,name=equal_all",
+	Tag:           "varint,63013,opt,name=equal_all,json=equalAll",
 }
 
 var E_DescriptionAll = &proto.ExtensionDesc{
@@ -151,7 +151,7 @@ var E_DescriptionAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63014,
 	Name:          "gogoproto.description_all",
-	Tag:           "varint,63014,opt,name=description_all",
+	Tag:           "varint,63014,opt,name=description_all,json=descriptionAll",
 }
 
 var E_TestgenAll = &proto.ExtensionDesc{
@@ -159,7 +159,7 @@ var E_TestgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63015,
 	Name:          "gogoproto.testgen_all",
-	Tag:           "varint,63015,opt,name=testgen_all",
+	Tag:           "varint,63015,opt,name=testgen_all,json=testgenAll",
 }
 
 var E_BenchgenAll = &proto.ExtensionDesc{
@@ -167,7 +167,7 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
-	Tag:           "varint,63016,opt,name=benchgen_all",
+	Tag:           "varint,63016,opt,name=benchgen_all,json=benchgenAll",
 }
 
 var E_MarshalerAll = &proto.ExtensionDesc{
@@ -175,7 +175,7 @@ var E_MarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63017,
 	Name:          "gogoproto.marshaler_all",
-	Tag:           "varint,63017,opt,name=marshaler_all",
+	Tag:           "varint,63017,opt,name=marshaler_all,json=marshalerAll",
 }
 
 var E_UnmarshalerAll = &proto.ExtensionDesc{
@@ -183,7 +183,7 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63018,
 	Name:          "gogoproto.unmarshaler_all",
-	Tag:           "varint,63018,opt,name=unmarshaler_all",
+	Tag:           "varint,63018,opt,name=unmarshaler_all,json=unmarshalerAll",
 }
 
 var E_SizerAll = &proto.ExtensionDesc{
@@ -191,7 +191,7 @@ var E_SizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
-	Tag:           "varint,63020,opt,name=sizer_all",
+	Tag:           "varint,63020,opt,name=sizer_all,json=sizerAll",
 }
 
 var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
@@ -199,7 +199,7 @@ var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63021,
 	Name:          "gogoproto.goproto_enum_stringer_all",
-	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all",
+	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all,json=goprotoEnumStringerAll",
 }
 
 var E_EnumStringerAll = &proto.ExtensionDesc{
@@ -207,7 +207,7 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63022,
 	Name:          "gogoproto.enum_stringer_all",
-	Tag:           "varint,63022,opt,name=enum_stringer_all",
+	Tag:           "varint,63022,opt,name=enum_stringer_all,json=enumStringerAll",
 }
 
 var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
@@ -215,7 +215,7 @@ var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63023,
 	Name:          "gogoproto.unsafe_marshaler_all",
-	Tag:           "varint,63023,opt,name=unsafe_marshaler_all",
+	Tag:           "varint,63023,opt,name=unsafe_marshaler_all,json=unsafeMarshalerAll",
 }
 
 var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
@@ -223,7 +223,7 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63024,
 	Name:          "gogoproto.unsafe_unmarshaler_all",
-	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all",
+	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all,json=unsafeUnmarshalerAll",
 }
 
 var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
@@ -231,7 +231,7 @@ var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63025,
 	Name:          "gogoproto.goproto_extensions_map_all",
-	Tag:           "varint,63025,opt,name=goproto_extensions_map_all",
+	Tag:           "varint,63025,opt,name=goproto_extensions_map_all,json=goprotoExtensionsMapAll",
 }
 
 var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
@@ -239,7 +239,7 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63026,
 	Name:          "gogoproto.goproto_unrecognized_all",
-	Tag:           "varint,63026,opt,name=goproto_unrecognized_all",
+	Tag:           "varint,63026,opt,name=goproto_unrecognized_all,json=goprotoUnrecognizedAll",
 }
 
 var E_GogoprotoImport = &proto.ExtensionDesc{
@@ -247,7 +247,7 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
-	Tag:           "varint,63027,opt,name=gogoproto_import",
+	Tag:           "varint,63027,opt,name=gogoproto_import,json=gogoprotoImport",
 }
 
 var E_ProtosizerAll = &proto.ExtensionDesc{
@@ -255,7 +255,7 @@ var E_ProtosizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63028,
 	Name:          "gogoproto.protosizer_all",
-	Tag:           "varint,63028,opt,name=protosizer_all",
+	Tag:           "varint,63028,opt,name=protosizer_all,json=protosizerAll",
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
@@ -263,7 +263,7 @@ var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64001,
 	Name:          "gogoproto.goproto_getters",
-	Tag:           "varint,64001,opt,name=goproto_getters",
+	Tag:           "varint,64001,opt,name=goproto_getters,json=goprotoGetters",
 }
 
 var E_GoprotoStringer = &proto.ExtensionDesc{
@@ -271,7 +271,7 @@ var E_GoprotoStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64003,
 	Name:          "gogoproto.goproto_stringer",
-	Tag:           "varint,64003,opt,name=goproto_stringer",
+	Tag:           "varint,64003,opt,name=goproto_stringer,json=goprotoStringer",
 }
 
 var E_VerboseEqual = &proto.ExtensionDesc{
@@ -279,7 +279,7 @@ var E_VerboseEqual = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64004,
 	Name:          "gogoproto.verbose_equal",
-	Tag:           "varint,64004,opt,name=verbose_equal",
+	Tag:           "varint,64004,opt,name=verbose_equal,json=verboseEqual",
 }
 
 var E_Face = &proto.ExtensionDesc{
@@ -383,7 +383,7 @@ var E_UnsafeMarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64023,
 	Name:          "gogoproto.unsafe_marshaler",
-	Tag:           "varint,64023,opt,name=unsafe_marshaler",
+	Tag:           "varint,64023,opt,name=unsafe_marshaler,json=unsafeMarshaler",
 }
 
 var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
@@ -391,7 +391,7 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64024,
 	Name:          "gogoproto.unsafe_unmarshaler",
-	Tag:           "varint,64024,opt,name=unsafe_unmarshaler",
+	Tag:           "varint,64024,opt,name=unsafe_unmarshaler,json=unsafeUnmarshaler",
 }
 
 var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
@@ -399,7 +399,7 @@ var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64025,
 	Name:          "gogoproto.goproto_extensions_map",
-	Tag:           "varint,64025,opt,name=goproto_extensions_map",
+	Tag:           "varint,64025,opt,name=goproto_extensions_map,json=goprotoExtensionsMap",
 }
 
 var E_GoprotoUnrecognized = &proto.ExtensionDesc{
@@ -407,7 +407,7 @@ var E_GoprotoUnrecognized = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64026,
 	Name:          "gogoproto.goproto_unrecognized",
-	Tag:           "varint,64026,opt,name=goproto_unrecognized",
+	Tag:           "varint,64026,opt,name=goproto_unrecognized,json=goprotoUnrecognized",
 }
 
 var E_Protosizer = &proto.ExtensionDesc{

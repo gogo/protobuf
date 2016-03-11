@@ -39,7 +39,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type Groups1 struct {
-	G                []*Groups1_G `protobuf:"group,1,rep,name=G" json:"g,omitempty"`
+	G                []*Groups1_G `protobuf:"group,1,rep,name=G,json=g" json:"g,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -48,8 +48,8 @@ func (*Groups1) ProtoMessage()               {}
 func (*Groups1) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{0} }
 
 type Groups1_G struct {
-	Field1           *int64   `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float64 `protobuf:"fixed64,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field1           *int64   `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           *float64 `protobuf:"fixed64,2,opt,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
@@ -57,7 +57,7 @@ func (m *Groups1_G) Reset()      { *m = Groups1_G{} }
 func (*Groups1_G) ProtoMessage() {}
 
 type Groups2 struct {
-	G                *Groups2_G `protobuf:"group,1,opt,name=G" json:"g,omitempty"`
+	G                *Groups2_G `protobuf:"group,1,opt,name=G,json=g" json:"g,omitempty"`
 	XXX_unrecognized []byte     `json:"-"`
 }
 
@@ -66,8 +66,8 @@ func (*Groups2) ProtoMessage()               {}
 func (*Groups2) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{1} }
 
 type Groups2_G struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
+	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2,json=field2" json:"Field2,omitempty"`
 	XXX_unrecognized []byte    `json:"-"`
 }
 
