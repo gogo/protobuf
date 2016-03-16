@@ -60,6 +60,7 @@ extend google.protobuf.FileOptions {
 	optional bool benchgen_all = 63016;
 	optional bool marshaler_all = 63017;
 	optional bool unmarshaler_all = 63018;
+	optional bool stable_marshaler_all = 63019;
 
 	optional bool sizer_all = 63020;
 
@@ -82,7 +83,7 @@ extend google.protobuf.MessageOptions {
 	optional bool face = 64005;
 	optional bool gostring = 64006;
 	optional bool populate = 64007;
-  	optional bool stringer = 67008;
+	optional bool stringer = 67008;
 	optional bool onlyone = 64009;
 
 	optional bool equal = 64013;
@@ -91,6 +92,7 @@ extend google.protobuf.MessageOptions {
 	optional bool benchgen = 64016;
 	optional bool marshaler = 64017;
 	optional bool unmarshaler = 64018;
+	optional bool stable_marshaler = 64019;
 
 	optional bool sizer = 64020;
 
@@ -104,14 +106,13 @@ extend google.protobuf.MessageOptions {
 }
 
 extend google.protobuf.FieldOptions {
-  optional bool nullable = 65001;
-  optional bool embed = 65002;
-  optional string customtype = 65003;
-  optional string customname = 65004;
-  optional string jsontag = 65005;
-  optional string moretags = 65006;
-  optional string casttype = 65007;
-  optional string castkey = 65008;
-  optional string castvalue = 65009;
+	optional bool nullable = 65001;
+	optional bool embed = 65002;
+	optional string customtype = 65003;
+	optional string customname = 65004;
+	optional string jsontag = 65005;
+	optional string moretags = 65006;
+	optional string casttype = 65007;
+	optional string castkey = 65008;
+	optional string castvalue = 65009;
 }
-
