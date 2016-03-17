@@ -36,7 +36,7 @@ install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./jsonpb
-	go install ./types
+	go install ./ptypes
 	go install ./protoc-gen-gogo
 	go install ./protoc-gen-gofast
 	go install ./protoc-gen-gogofast
@@ -61,7 +61,7 @@ regenerate:
 	make -C gogoproto regenerate
 	make -C proto/testdata regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
-	make -C types regenerate
+	make -C ptypes regenerate
 	make -C test regenerate
 	make -C test/example regenerate
 	make -C test/unrecognized regenerate
