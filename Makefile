@@ -36,6 +36,7 @@ install:
 	go install ./proto
 	go install ./gogoproto
 	go install ./jsonpb
+	go install ./types
 	go install ./protoc-gen-gogo
 	go install ./protoc-gen-gofast
 	go install ./protoc-gen-gogofast

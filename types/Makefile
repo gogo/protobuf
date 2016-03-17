@@ -5,6 +5,7 @@ regenerate:
 	protoc --gogo_out=. struct/*.proto
 	protoc --gogo_out=. timestamp/*.proto
 	protoc --gogo_out=. wrappers/*.proto
+	protoc --gogo_out=. duration/*.proto
 
 fetch:
 	./regen.sh
