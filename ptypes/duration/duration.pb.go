@@ -84,6 +84,7 @@ func (m *Duration) Reset()                    { *m = Duration{} }
 func (m *Duration) String() string            { return proto.CompactTextString(m) }
 func (*Duration) ProtoMessage()               {}
 func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
+func (*Duration) XXX_WellKnownType() string   { return "Duration" }
 
 func init() {
 	proto.RegisterType((*Duration)(nil), "google.protobuf.Duration")

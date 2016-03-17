@@ -1925,6 +1925,13 @@ var methodNames = [...]string{
 	"ProtoSize",
 }
 
+// Names of messages in the `google.protobuf` package for which
+// we will generate XXX_WellKnownType methods.
+var wellKnownTypes = map[string]bool{
+	"Duration":  true,
+	"Timestamp": true,
+}
+
 // Generate the type and default constant definitions for this Descriptor.
 func (g *Generator) generateMessage(message *Descriptor) {
 	// The full type name
@@ -2121,6 +2128,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 		}
 		g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return fileDescriptor", FileName(g.file), ", []int{", strings.Join(indexes, ", "), "} }")
+	}
+	// TODO: Revisit the decision to use a XXX_WellKnownType method
+	// if we change proto.MessageName to work with multiple equivalents.
+	if message.file.GetPackage() == "google.protobuf" && wellKnownTypes[message.GetName()] {
+		g.P("func (*", ccTypeName, `) XXX_WellKnownType() string { return "`, message.GetName(), `" }`)
 	}
 
 	// Extension support methods
