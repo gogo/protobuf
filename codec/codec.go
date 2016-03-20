@@ -1,5 +1,5 @@
 // Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -27,7 +27,7 @@
 package codec
 
 import (
-	"github.com/gogo/protobuf/proto"
+	"github.com/nourish/protobuf/proto"
 )
 
 type Codec interface {

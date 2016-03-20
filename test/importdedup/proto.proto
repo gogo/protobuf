@@ -1,5 +1,5 @@
 // Copyright (c) 2015, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -28,11 +28,11 @@ syntax = "proto2";
 
 package importdedup;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
 
-import "github.com/gogo/protobuf/test/importdedup/subpkg/subproto.proto";
+import "github.com/nourish/protobuf/test/importdedup/subpkg/subproto.proto";
 
 message Object {
-    optional bytes CustomField = 1 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/importdedup/subpkg.CustomType"];
+    optional bytes CustomField = 1 [(gogoproto.customtype) = "github.com/nourish/protobuf/test/importdedup/subpkg.CustomType"];
     optional subpkg.SubObject SubObject = 2;
 }

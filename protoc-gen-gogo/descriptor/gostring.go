@@ -3,7 +3,7 @@ package descriptor
 import fmt "fmt"
 
 import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/nourish/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"

@@ -40,8 +40,8 @@ import (
 	"strconv"
 	"strings"
 
-	pb "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	pb "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/nourish/protobuf/protoc-gen-gogo/generator"
 )
 
 // Paths for packages used by code generated in this file,

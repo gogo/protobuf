@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -27,7 +27,7 @@
 syntax = "proto2";
 package embedconflict;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
 
 message C {
 	optional int64 Field1 = 1;

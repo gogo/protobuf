@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/nourish/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -38,16 +38,17 @@ It is enabled by the following extensions:
 
 For incorrect usage of embed with tests see:
 
-  github.com/gogo/protobuf/test/embedconflict
+  github.com/nourish/protobuf/test/embedconflict
 
 */
 package embedcheck
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"os"
+
+	"github.com/nourish/protobuf/gogoproto"
+	"github.com/nourish/protobuf/protoc-gen-gogo/generator"
 )
 
 type plugin struct {

@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/nourish/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -26,8 +26,8 @@
 
 package gogoproto
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import proto "github.com/gogo/protobuf/proto"
+import google_protobuf "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
+import proto "github.com/nourish/protobuf/proto"
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)
@@ -183,6 +183,16 @@ func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetBinding(field *google_protobuf.FieldDescriptorProto) *FieldBinding {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Binding)
+		if err == nil && v.(*FieldBinding) != nil {
+			return (v.(*FieldBinding))
+		}
+	}
+	return nil
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
@@ -282,6 +292,18 @@ func HasUnrecognized(file *google_protobuf.FileDescriptorProto, message *google_
 		return false
 	}
 	return proto.GetBoolExtension(message.Options, E_GoprotoUnrecognized, proto.GetBoolExtension(file.Options, E_GoprotoUnrecognizedAll, true))
+}
+
+func BindingEnabled(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_BindingEnabled, proto.GetBoolExtension(file.Options, E_BindingEnabledAll, true))
+}
+
+func ValidationEnabled(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_ValidationEnabled, true)
+}
+
+func BindingEnabledAll(file *google_protobuf.FileDescriptorProto) bool {
+	return proto.GetBoolExtension(file.Options, E_BindingEnabledAll, true)
 }
 
 func IsProto3(file *google_protobuf.FileDescriptorProto) bool {

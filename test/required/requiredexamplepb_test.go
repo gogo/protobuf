@@ -1,13 +1,14 @@
 package required
 
 import (
-	"github.com/gogo/protobuf/proto"
-	"github.com/gogo/protobuf/test"
 	"math/rand"
 	"reflect"
 	"strconv"
 	"testing"
 	"time"
+
+	"github.com/nourish/protobuf/proto"
+	"github.com/nourish/protobuf/test"
 )
 
 func TestMarshalToErrorsWhenRequiredFieldIsNotPresent(t *testing.T) {

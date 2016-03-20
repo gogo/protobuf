@@ -1,7 +1,7 @@
 # Extensions for Protocol Buffers to create more go like structures.
 #
 # Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-# http://github.com/gogo/protobuf
+# http://github.com/nourish/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -28,7 +28,7 @@
 
 regenerate:
 	rm -rf combos
-	go install github.com/gogo/protobuf/protoc-gen-combo
+	go install github.com/nourish/protobuf/protoc-gen-combo
 	protoc-min-version --version="3.0.0" --gogo_out=. --proto_path=../../../../../:../../protobuf/:. castvalue.proto
 	protoc-gen-combo --default=false --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. castvalue.proto
 	cp mytypes.go ./combos/both/ || true

@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -74,6 +74,7 @@ extend google.protobuf.FileOptions {
 	optional bool goproto_unrecognized_all = 63026;
 	optional bool gogoproto_import = 63027;
 	optional bool protosizer_all = 63028;
+	optional bool binding_enabled_all = 63029;
 }
 
 extend google.protobuf.MessageOptions {
@@ -83,7 +84,7 @@ extend google.protobuf.MessageOptions {
 	optional bool face = 64005;
 	optional bool gostring = 64006;
 	optional bool populate = 64007;
-	optional bool stringer = 67008;
+  optional bool stringer = 67008;
 	optional bool onlyone = 64009;
 
 	optional bool equal = 64013;
@@ -103,16 +104,33 @@ extend google.protobuf.MessageOptions {
 	optional bool goproto_unrecognized = 64026;
 
 	optional bool protosizer = 64028;
+	optional bool binding_enabled = 64029;
+  optional bool validation_enabled = 64030;
 }
 
 extend google.protobuf.FieldOptions {
-	optional bool nullable = 65001;
-	optional bool embed = 65002;
-	optional string customtype = 65003;
-	optional string customname = 65004;
-	optional string jsontag = 65005;
-	optional string moretags = 65006;
-	optional string casttype = 65007;
-	optional string castkey = 65008;
-	optional string castvalue = 65009;
+  optional bool nullable = 65001;
+  optional bool embed = 65002;
+  optional string customtype = 65003;
+  optional string customname = 65004;
+  optional string jsontag = 65005;
+  optional string moretags = 65006;
+  optional string casttype = 65007;
+  optional string castkey = 65008;
+  optional string castvalue = 65009;
+  optional FieldBinding binding = 65010;
+}
+
+message FieldBinding {
+  optional bool ignore = 1;
+  optional bool required = 2;
+  optional string valid_regex = 3;
+  optional int64 int_gt = 4;
+  optional int64 int_gte = 5;
+  optional int64 int_lt = 6;
+  optional int64 int_lte = 7;
+  optional int64 max_len = 8;
+  optional int64 min_len = 9;
+  optional string invalid_message = 10;
+  optional string custom_binder = 11;
 }

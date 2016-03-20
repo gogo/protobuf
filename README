@@ -1,4 +1,4 @@
-GoGoProtobuf http://github.com/gogo/protobuf extends 
+GoGoProtobuf http://github.com/nourish/protobuf extends 
 GoProtobuf http://github.com/golang/protobuf
 
 # Go support for Protocol Buffers
@@ -42,7 +42,7 @@ See the note at the bottom of this file for details.
 There are no insertion points in the plugin.
 
 GoGoProtobuf provides extensions for protocol buffers and GoProtobuf
-see http://github.com/gogo/protobuf/gogoproto/doc.go
+see http://github.com/nourish/protobuf/gogoproto/doc.go
 
 ## Using protocol buffers with Go ##
 
@@ -64,13 +64,13 @@ version.
 
 If you are using any gogo.proto extensions you will need to specify the
 proto_path to include the descriptor.proto and gogo.proto.
-gogo.proto is located in github.com/gogo/protobuf/gogoproto
+gogo.proto is located in github.com/nourish/protobuf/gogoproto
 This should be fine, since your import is the same.
-descriptor.proto is located in either github.com/gogo/protobuf/protobuf
+descriptor.proto is located in either github.com/nourish/protobuf/protobuf
 or code.google.com/p/protobuf/trunk/src/
 Its import is google/protobuf/descriptor.proto so it might need some help.
 
-	protoc --gogo_out=. -I=.:github.com/gogo/protobuf/protobuf *.proto
+	protoc --gogo_out=. -I=.:github.com/nourish/protobuf/protobuf *.proto
 
 ==========
 
@@ -146,7 +146,7 @@ To create and play with a Test object from the example package,
 	import (
 		"log"
 
-		"github.com/gogo/protobuf/proto"
+		"github.com/nourish/protobuf/proto"
 		"path/to/example"
 	)
 

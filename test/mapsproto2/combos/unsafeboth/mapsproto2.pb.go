@@ -15,23 +15,23 @@
 */
 package proto2_maps
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/nourish/protobuf/gogoproto"
 
-import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
 
 import strconv "strconv"
 
 import bytes "bytes"
 
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/nourish/protobuf/proto"
 
 import strings "strings"
 import sort "sort"
 import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+import github_com_gogo_protobuf_sortkeys "github.com/nourish/protobuf/sortkeys"
 
 import unsafe "unsafe"
 import errors "errors"
@@ -901,7 +901,7 @@ func Mapsproto2Description() (desc *descriptor.FileDescriptorSet) {
 			CsharpNamespace:    func(v string) *string { return &v }("Google.Protobuf.Reflection"),
 			XXX_extensions:     map[int32]proto.Extension{},
 		},
-	}, {Name: func(v string) *string { return &v }("github.com/gogo/protobuf/gogoproto/gogo.proto"),
+	}, {Name: func(v string) *string { return &v }("github.com/nourish/protobuf/gogoproto/gogo.proto"),
 		Package:    func(v string) *string { return &v }("gogoproto"),
 		Dependency: []string{"google/protobuf/descriptor.proto"},
 		Extension: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("goproto_enum_prefix"),
@@ -1271,7 +1271,7 @@ func Mapsproto2Description() (desc *descriptor.FileDescriptorSet) {
 		},
 	}, {Name: func(v string) *string { return &v }("combos/unsafeboth/mapsproto2.proto"),
 		Package:    func(v string) *string { return &v }("proto2.maps"),
-		Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"},
+		Dependency: []string{"github.com/nourish/protobuf/gogoproto/gogo.proto"},
 		MessageType: []*descriptor.DescriptorProto{{Name: func(v string) *string { return &v }("FloatingPoint"),
 			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("f"),
 				Number:   func(v int32) *int32 { return &v }(1),

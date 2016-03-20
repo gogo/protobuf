@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package issue34;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.unmarshaler_all) = true;
 

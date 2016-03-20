@@ -14,17 +14,17 @@ It has these top-level messages:
 */
 package one
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/nourish/protobuf/gogoproto"
 
-import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
 
 import bytes "bytes"
 
 import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/nourish/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"
@@ -1288,7 +1288,7 @@ func OneDescription() (desc *descriptor.FileDescriptorSet) {
 			CsharpNamespace:    func(v string) *string { return &v }("Google.Protobuf.Reflection"),
 			XXX_extensions:     map[int32]proto.Extension{},
 		},
-	}, {Name: func(v string) *string { return &v }("github.com/gogo/protobuf/gogoproto/gogo.proto"),
+	}, {Name: func(v string) *string { return &v }("github.com/nourish/protobuf/gogoproto/gogo.proto"),
 		Package:    func(v string) *string { return &v }("gogoproto"),
 		Dependency: []string{"google/protobuf/descriptor.proto"},
 		Extension: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("goproto_enum_prefix"),
@@ -1658,7 +1658,7 @@ func OneDescription() (desc *descriptor.FileDescriptorSet) {
 		},
 	}, {Name: func(v string) *string { return &v }("combos/marshaler/one.proto"),
 		Package:    func(v string) *string { return &v }("one"),
-		Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"},
+		Dependency: []string{"github.com/nourish/protobuf/gogoproto/gogo.proto"},
 		MessageType: []*descriptor.DescriptorProto{{Name: func(v string) *string { return &v }("Subby"),
 			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("sub"),
 				Number:   func(v int32) *int32 { return &v }(1),

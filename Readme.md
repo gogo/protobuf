@@ -1,6 +1,6 @@
 # Protocol Buffers for Go with Gadgets
 
-Drone.io Basic Tests: [![Build Status](https://drone.io/github.com/gogo/protobuf/status.png)](https://drone.io/github.com/gogo/protobuf/latest)
+Drone.io Basic Tests: [![Build Status](https://drone.io/github.com/nourish/protobuf/status.png)](https://drone.io/github.com/nourish/protobuf/latest)
 
 Travis CI Matrix Builds: [![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
 
@@ -8,7 +8,7 @@ Travis CI Matrix Builds: [![Build Status](https://travis-ci.org/gogo/protobuf.sv
 
 Install the protoc-gen-gofast binary
 
-    go get github.com/gogo/protobuf/protoc-gen-gofast
+    go get github.com/nourish/protobuf/protoc-gen-gofast
 
 Use it to generate faster marshaling and unmarshaling go code for you protocol buffers.
 
@@ -35,14 +35,14 @@ Most versions from 2.3.1 should not give any problems, but 2.5.0, 2.6.1 and 3 al
 
 Finally run:
 
-    go get github.com/gogo/protobuf/proto
-    go get github.com/gogo/protobuf/protoc-gen-gogo
-    go get github.com/gogo/protobuf/gogoproto
+    go get github.com/nourish/protobuf/proto
+    go get github.com/nourish/protobuf/protoc-gen-gogo
+    go get github.com/nourish/protobuf/gogoproto
 
 ### Proto3
 
 Proto3 is supported, but most of the new native types are not supported yet.
-[See Proto3 Issue](https://github.com/gogo/protobuf/issues/57) for more details.
+[See Proto3 Issue](https://github.com/nourish/protobuf/issues/57) for more details.
 
 ### GRPC
 
