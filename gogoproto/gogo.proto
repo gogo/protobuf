@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -60,6 +60,7 @@ extend google.protobuf.FileOptions {
 	optional bool benchgen_all = 63016;
 	optional bool marshaler_all = 63017;
 	optional bool unmarshaler_all = 63018;
+	optional bool stable_marshaler_all = 63019;
 
 	optional bool sizer_all = 63020;
 
@@ -73,7 +74,7 @@ extend google.protobuf.FileOptions {
 	optional bool goproto_unrecognized_all = 63026;
 	optional bool gogoproto_import = 63027;
 	optional bool protosizer_all = 63028;
-  optional bool binding_enabled_all = 63029;
+	optional bool binding_enabled_all = 63029;
 }
 
 extend google.protobuf.MessageOptions {
@@ -92,6 +93,7 @@ extend google.protobuf.MessageOptions {
 	optional bool benchgen = 64016;
 	optional bool marshaler = 64017;
 	optional bool unmarshaler = 64018;
+	optional bool stable_marshaler = 64019;
 
 	optional bool sizer = 64020;
 

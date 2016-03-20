@@ -4,7 +4,7 @@
 
 package testdata
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import json "encoding/json"
 import math "math"
 

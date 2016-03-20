@@ -48,7 +48,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/nourish/protobuf/proto"
 )
 
 var (

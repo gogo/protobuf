@@ -1,8 +1,9 @@
 package test
 
 import (
-	"github.com/gogo/protobuf/proto"
 	"testing"
+
+	"github.com/nourish/protobuf/proto"
 )
 
 func TestBugUuid(t *testing.T) {

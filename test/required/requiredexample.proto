@@ -1,7 +1,7 @@
 syntax = "proto2";
 package required;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;

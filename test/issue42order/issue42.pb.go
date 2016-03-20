@@ -14,10 +14,10 @@
 */
 package issue42
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/nourish/protobuf/gogoproto"
 
 import io "io"
 

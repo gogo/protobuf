@@ -33,7 +33,7 @@ syntax = "proto3";
 
 package proto3_proto;
 
-import "github.com/gogo/protobuf/proto/testdata/test.proto";
+import "github.com/nourish/protobuf/proto/testdata/test.proto";
 
 message Message {
   enum Humour {

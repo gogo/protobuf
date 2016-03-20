@@ -19,19 +19,19 @@
 */
 package test
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/nourish/protobuf/gogoproto"
 
-import github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
-import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+import github_com_gogo_protobuf_test "github.com/nourish/protobuf/test"
+import github_com_gogo_protobuf_test_custom "github.com/nourish/protobuf/test/custom"
 
-import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
 
 import bytes "bytes"
 
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import github_com_gogo_protobuf_proto "github.com/nourish/protobuf/proto"
 
 import strings "strings"
 import sort "sort"
@@ -52,7 +52,7 @@ const _ = proto.GoGoProtoPackageIsVersion1
 type A struct {
 	Description      string                             `protobuf:"bytes,1,opt,name=Description,json=description" json:"Description"`
 	Number           int64                              `protobuf:"varint,2,opt,name=Number,json=number" json:"Number"`
-	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,json=id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
+	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,json=id,customtype=github.com/nourish/protobuf/test.Uuid" json:"Id"`
 	XXX_unrecognized []byte                             `json:"-"`
 }
 
@@ -62,7 +62,7 @@ func (*A) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{0} 
 
 type B struct {
 	A                `protobuf:"bytes,1,opt,name=A,json=a,embedded=A" json:"A"`
-	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,json=g,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
+	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,json=g,customtype=github.com/nourish/protobuf/test/custom.Uint128" json:"G"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 
@@ -919,7 +919,7 @@ func ExampleDescription() (desc *descriptor.FileDescriptorSet) {
 			CsharpNamespace:    func(v string) *string { return &v }("Google.Protobuf.Reflection"),
 			XXX_extensions:     map[int32]proto.Extension{},
 		},
-	}, {Name: func(v string) *string { return &v }("github.com/gogo/protobuf/gogoproto/gogo.proto"),
+	}, {Name: func(v string) *string { return &v }("github.com/nourish/protobuf/gogoproto/gogo.proto"),
 		Package:    func(v string) *string { return &v }("gogoproto"),
 		Dependency: []string{"google/protobuf/descriptor.proto"},
 		Extension: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("goproto_enum_prefix"),
@@ -1289,7 +1289,7 @@ func ExampleDescription() (desc *descriptor.FileDescriptorSet) {
 		},
 	}, {Name: func(v string) *string { return &v }("example.proto"),
 		Package:    func(v string) *string { return &v }("test"),
-		Dependency: []string{"github.com/gogo/protobuf/gogoproto/gogo.proto"},
+		Dependency: []string{"github.com/nourish/protobuf/gogoproto/gogo.proto"},
 		MessageType: []*descriptor.DescriptorProto{{Name: func(v string) *string { return &v }("A"),
 			Field: []*descriptor.FieldDescriptorProto{{Name: func(v string) *string { return &v }("Description"),
 				Number:   func(v int32) *int32 { return &v }(1),

@@ -13,34 +13,39 @@ It has these top-level messages:
 */
 package gogoproto
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import google_protobuf "github.com/nourish/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+const _ = proto.GoGoProtoPackageIsVersion1
+
 type FieldBinding struct {
 	Ignore           *bool   `protobuf:"varint,1,opt,name=ignore" json:"ignore,omitempty"`
 	Required         *bool   `protobuf:"varint,2,opt,name=required" json:"required,omitempty"`
-	ValidRegex       *string `protobuf:"bytes,3,opt,name=valid_regex" json:"valid_regex,omitempty"`
-	IntGt            *int64  `protobuf:"varint,4,opt,name=int_gt" json:"int_gt,omitempty"`
-	IntGte           *int64  `protobuf:"varint,5,opt,name=int_gte" json:"int_gte,omitempty"`
-	IntLt            *int64  `protobuf:"varint,6,opt,name=int_lt" json:"int_lt,omitempty"`
-	IntLte           *int64  `protobuf:"varint,7,opt,name=int_lte" json:"int_lte,omitempty"`
-	MaxLen           *int64  `protobuf:"varint,8,opt,name=max_len" json:"max_len,omitempty"`
-	MinLen           *int64  `protobuf:"varint,9,opt,name=min_len" json:"min_len,omitempty"`
-	InvalidMessage   *string `protobuf:"bytes,10,opt,name=invalid_message" json:"invalid_message,omitempty"`
-	CustomBinder     *string `protobuf:"bytes,11,opt,name=custom_binder" json:"custom_binder,omitempty"`
+	ValidRegex       *string `protobuf:"bytes,3,opt,name=valid_regex,json=validRegex" json:"valid_regex,omitempty"`
+	IntGt            *int64  `protobuf:"varint,4,opt,name=int_gt,json=intGt" json:"int_gt,omitempty"`
+	IntGte           *int64  `protobuf:"varint,5,opt,name=int_gte,json=intGte" json:"int_gte,omitempty"`
+	IntLt            *int64  `protobuf:"varint,6,opt,name=int_lt,json=intLt" json:"int_lt,omitempty"`
+	IntLte           *int64  `protobuf:"varint,7,opt,name=int_lte,json=intLte" json:"int_lte,omitempty"`
+	MaxLen           *int64  `protobuf:"varint,8,opt,name=max_len,json=maxLen" json:"max_len,omitempty"`
+	MinLen           *int64  `protobuf:"varint,9,opt,name=min_len,json=minLen" json:"min_len,omitempty"`
+	InvalidMessage   *string `protobuf:"bytes,10,opt,name=invalid_message,json=invalidMessage" json:"invalid_message,omitempty"`
+	CustomBinder     *string `protobuf:"bytes,11,opt,name=custom_binder,json=customBinder" json:"custom_binder,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *FieldBinding) Reset()         { *m = FieldBinding{} }
-func (m *FieldBinding) String() string { return proto.CompactTextString(m) }
-func (*FieldBinding) ProtoMessage()    {}
+func (m *FieldBinding) Reset()                    { *m = FieldBinding{} }
+func (m *FieldBinding) String() string            { return proto.CompactTextString(m) }
+func (*FieldBinding) ProtoMessage()               {}
+func (*FieldBinding) Descriptor() ([]byte, []int) { return fileDescriptorGogo, []int{0} }
 
 func (m *FieldBinding) GetIgnore() bool {
 	if m != nil && m.Ignore != nil {
@@ -124,7 +129,7 @@ var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62001,
 	Name:          "gogoproto.goproto_enum_prefix",
-	Tag:           "varint,62001,opt,name=goproto_enum_prefix",
+	Tag:           "varint,62001,opt,name=goproto_enum_prefix,json=goprotoEnumPrefix",
 }
 
 var E_GoprotoEnumStringer = &proto.ExtensionDesc{
@@ -132,7 +137,7 @@ var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62021,
 	Name:          "gogoproto.goproto_enum_stringer",
-	Tag:           "varint,62021,opt,name=goproto_enum_stringer",
+	Tag:           "varint,62021,opt,name=goproto_enum_stringer,json=goprotoEnumStringer",
 }
 
 var E_EnumStringer = &proto.ExtensionDesc{
@@ -140,7 +145,7 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62022,
 	Name:          "gogoproto.enum_stringer",
-	Tag:           "varint,62022,opt,name=enum_stringer",
+	Tag:           "varint,62022,opt,name=enum_stringer,json=enumStringer",
 }
 
 var E_EnumCustomname = &proto.ExtensionDesc{
@@ -148,7 +153,7 @@ var E_EnumCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         62023,
 	Name:          "gogoproto.enum_customname",
-	Tag:           "bytes,62023,opt,name=enum_customname",
+	Tag:           "bytes,62023,opt,name=enum_customname,json=enumCustomname",
 }
 
 var E_EnumvalueCustomname = &proto.ExtensionDesc{
@@ -156,7 +161,7 @@ var E_EnumvalueCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         66001,
 	Name:          "gogoproto.enumvalue_customname",
-	Tag:           "bytes,66001,opt,name=enumvalue_customname",
+	Tag:           "bytes,66001,opt,name=enumvalue_customname,json=enumvalueCustomname",
 }
 
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
@@ -164,7 +169,7 @@ var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63001,
 	Name:          "gogoproto.goproto_getters_all",
-	Tag:           "varint,63001,opt,name=goproto_getters_all",
+	Tag:           "varint,63001,opt,name=goproto_getters_all,json=goprotoGettersAll",
 }
 
 var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
@@ -172,7 +177,7 @@ var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63002,
 	Name:          "gogoproto.goproto_enum_prefix_all",
-	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all",
+	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all,json=goprotoEnumPrefixAll",
 }
 
 var E_GoprotoStringerAll = &proto.ExtensionDesc{
@@ -180,7 +185,7 @@ var E_GoprotoStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63003,
 	Name:          "gogoproto.goproto_stringer_all",
-	Tag:           "varint,63003,opt,name=goproto_stringer_all",
+	Tag:           "varint,63003,opt,name=goproto_stringer_all,json=goprotoStringerAll",
 }
 
 var E_VerboseEqualAll = &proto.ExtensionDesc{
@@ -188,7 +193,7 @@ var E_VerboseEqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63004,
 	Name:          "gogoproto.verbose_equal_all",
-	Tag:           "varint,63004,opt,name=verbose_equal_all",
+	Tag:           "varint,63004,opt,name=verbose_equal_all,json=verboseEqualAll",
 }
 
 var E_FaceAll = &proto.ExtensionDesc{
@@ -196,7 +201,7 @@ var E_FaceAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63005,
 	Name:          "gogoproto.face_all",
-	Tag:           "varint,63005,opt,name=face_all",
+	Tag:           "varint,63005,opt,name=face_all,json=faceAll",
 }
 
 var E_GostringAll = &proto.ExtensionDesc{
@@ -204,7 +209,7 @@ var E_GostringAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63006,
 	Name:          "gogoproto.gostring_all",
-	Tag:           "varint,63006,opt,name=gostring_all",
+	Tag:           "varint,63006,opt,name=gostring_all,json=gostringAll",
 }
 
 var E_PopulateAll = &proto.ExtensionDesc{
@@ -212,7 +217,7 @@ var E_PopulateAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63007,
 	Name:          "gogoproto.populate_all",
-	Tag:           "varint,63007,opt,name=populate_all",
+	Tag:           "varint,63007,opt,name=populate_all,json=populateAll",
 }
 
 var E_StringerAll = &proto.ExtensionDesc{
@@ -220,7 +225,7 @@ var E_StringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63008,
 	Name:          "gogoproto.stringer_all",
-	Tag:           "varint,63008,opt,name=stringer_all",
+	Tag:           "varint,63008,opt,name=stringer_all,json=stringerAll",
 }
 
 var E_OnlyoneAll = &proto.ExtensionDesc{
@@ -228,7 +233,7 @@ var E_OnlyoneAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63009,
 	Name:          "gogoproto.onlyone_all",
-	Tag:           "varint,63009,opt,name=onlyone_all",
+	Tag:           "varint,63009,opt,name=onlyone_all,json=onlyoneAll",
 }
 
 var E_EqualAll = &proto.ExtensionDesc{
@@ -236,7 +241,7 @@ var E_EqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63013,
 	Name:          "gogoproto.equal_all",
-	Tag:           "varint,63013,opt,name=equal_all",
+	Tag:           "varint,63013,opt,name=equal_all,json=equalAll",
 }
 
 var E_DescriptionAll = &proto.ExtensionDesc{
@@ -244,7 +249,7 @@ var E_DescriptionAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63014,
 	Name:          "gogoproto.description_all",
-	Tag:           "varint,63014,opt,name=description_all",
+	Tag:           "varint,63014,opt,name=description_all,json=descriptionAll",
 }
 
 var E_TestgenAll = &proto.ExtensionDesc{
@@ -252,7 +257,7 @@ var E_TestgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63015,
 	Name:          "gogoproto.testgen_all",
-	Tag:           "varint,63015,opt,name=testgen_all",
+	Tag:           "varint,63015,opt,name=testgen_all,json=testgenAll",
 }
 
 var E_BenchgenAll = &proto.ExtensionDesc{
@@ -260,7 +265,7 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
-	Tag:           "varint,63016,opt,name=benchgen_all",
+	Tag:           "varint,63016,opt,name=benchgen_all,json=benchgenAll",
 }
 
 var E_MarshalerAll = &proto.ExtensionDesc{
@@ -268,7 +273,7 @@ var E_MarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63017,
 	Name:          "gogoproto.marshaler_all",
-	Tag:           "varint,63017,opt,name=marshaler_all",
+	Tag:           "varint,63017,opt,name=marshaler_all,json=marshalerAll",
 }
 
 var E_UnmarshalerAll = &proto.ExtensionDesc{
@@ -276,7 +281,15 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63018,
 	Name:          "gogoproto.unmarshaler_all",
-	Tag:           "varint,63018,opt,name=unmarshaler_all",
+	Tag:           "varint,63018,opt,name=unmarshaler_all,json=unmarshalerAll",
+}
+
+var E_StableMarshalerAll = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         63019,
+	Name:          "gogoproto.stable_marshaler_all",
+	Tag:           "varint,63019,opt,name=stable_marshaler_all,json=stableMarshalerAll",
 }
 
 var E_SizerAll = &proto.ExtensionDesc{
@@ -284,7 +297,7 @@ var E_SizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
-	Tag:           "varint,63020,opt,name=sizer_all",
+	Tag:           "varint,63020,opt,name=sizer_all,json=sizerAll",
 }
 
 var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
@@ -292,7 +305,7 @@ var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63021,
 	Name:          "gogoproto.goproto_enum_stringer_all",
-	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all",
+	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all,json=goprotoEnumStringerAll",
 }
 
 var E_EnumStringerAll = &proto.ExtensionDesc{
@@ -300,7 +313,7 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63022,
 	Name:          "gogoproto.enum_stringer_all",
-	Tag:           "varint,63022,opt,name=enum_stringer_all",
+	Tag:           "varint,63022,opt,name=enum_stringer_all,json=enumStringerAll",
 }
 
 var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
@@ -308,7 +321,7 @@ var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63023,
 	Name:          "gogoproto.unsafe_marshaler_all",
-	Tag:           "varint,63023,opt,name=unsafe_marshaler_all",
+	Tag:           "varint,63023,opt,name=unsafe_marshaler_all,json=unsafeMarshalerAll",
 }
 
 var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
@@ -316,7 +329,7 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63024,
 	Name:          "gogoproto.unsafe_unmarshaler_all",
-	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all",
+	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all,json=unsafeUnmarshalerAll",
 }
 
 var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
@@ -324,7 +337,7 @@ var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63025,
 	Name:          "gogoproto.goproto_extensions_map_all",
-	Tag:           "varint,63025,opt,name=goproto_extensions_map_all",
+	Tag:           "varint,63025,opt,name=goproto_extensions_map_all,json=goprotoExtensionsMapAll",
 }
 
 var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
@@ -332,7 +345,7 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63026,
 	Name:          "gogoproto.goproto_unrecognized_all",
-	Tag:           "varint,63026,opt,name=goproto_unrecognized_all",
+	Tag:           "varint,63026,opt,name=goproto_unrecognized_all,json=goprotoUnrecognizedAll",
 }
 
 var E_GogoprotoImport = &proto.ExtensionDesc{
@@ -340,7 +353,7 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
-	Tag:           "varint,63027,opt,name=gogoproto_import",
+	Tag:           "varint,63027,opt,name=gogoproto_import,json=gogoprotoImport",
 }
 
 var E_ProtosizerAll = &proto.ExtensionDesc{
@@ -348,7 +361,7 @@ var E_ProtosizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63028,
 	Name:          "gogoproto.protosizer_all",
-	Tag:           "varint,63028,opt,name=protosizer_all",
+	Tag:           "varint,63028,opt,name=protosizer_all,json=protosizerAll",
 }
 
 var E_BindingEnabledAll = &proto.ExtensionDesc{
@@ -356,7 +369,7 @@ var E_BindingEnabledAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63029,
 	Name:          "gogoproto.binding_enabled_all",
-	Tag:           "varint,63029,opt,name=binding_enabled_all",
+	Tag:           "varint,63029,opt,name=binding_enabled_all,json=bindingEnabledAll",
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
@@ -364,7 +377,7 @@ var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64001,
 	Name:          "gogoproto.goproto_getters",
-	Tag:           "varint,64001,opt,name=goproto_getters",
+	Tag:           "varint,64001,opt,name=goproto_getters,json=goprotoGetters",
 }
 
 var E_GoprotoStringer = &proto.ExtensionDesc{
@@ -372,7 +385,7 @@ var E_GoprotoStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64003,
 	Name:          "gogoproto.goproto_stringer",
-	Tag:           "varint,64003,opt,name=goproto_stringer",
+	Tag:           "varint,64003,opt,name=goproto_stringer,json=goprotoStringer",
 }
 
 var E_VerboseEqual = &proto.ExtensionDesc{
@@ -380,7 +393,7 @@ var E_VerboseEqual = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64004,
 	Name:          "gogoproto.verbose_equal",
-	Tag:           "varint,64004,opt,name=verbose_equal",
+	Tag:           "varint,64004,opt,name=verbose_equal,json=verboseEqual",
 }
 
 var E_Face = &proto.ExtensionDesc{
@@ -471,6 +484,14 @@ var E_Unmarshaler = &proto.ExtensionDesc{
 	Tag:           "varint,64018,opt,name=unmarshaler",
 }
 
+var E_StableMarshaler = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtensionType: (*bool)(nil),
+	Field:         64019,
+	Name:          "gogoproto.stable_marshaler",
+	Tag:           "varint,64019,opt,name=stable_marshaler,json=stableMarshaler",
+}
+
 var E_Sizer = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -484,7 +505,7 @@ var E_UnsafeMarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64023,
 	Name:          "gogoproto.unsafe_marshaler",
-	Tag:           "varint,64023,opt,name=unsafe_marshaler",
+	Tag:           "varint,64023,opt,name=unsafe_marshaler,json=unsafeMarshaler",
 }
 
 var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
@@ -492,7 +513,7 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64024,
 	Name:          "gogoproto.unsafe_unmarshaler",
-	Tag:           "varint,64024,opt,name=unsafe_unmarshaler",
+	Tag:           "varint,64024,opt,name=unsafe_unmarshaler,json=unsafeUnmarshaler",
 }
 
 var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
@@ -500,7 +521,7 @@ var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64025,
 	Name:          "gogoproto.goproto_extensions_map",
-	Tag:           "varint,64025,opt,name=goproto_extensions_map",
+	Tag:           "varint,64025,opt,name=goproto_extensions_map,json=goprotoExtensionsMap",
 }
 
 var E_GoprotoUnrecognized = &proto.ExtensionDesc{
@@ -508,7 +529,7 @@ var E_GoprotoUnrecognized = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64026,
 	Name:          "gogoproto.goproto_unrecognized",
-	Tag:           "varint,64026,opt,name=goproto_unrecognized",
+	Tag:           "varint,64026,opt,name=goproto_unrecognized,json=goprotoUnrecognized",
 }
 
 var E_Protosizer = &proto.ExtensionDesc{
@@ -524,7 +545,7 @@ var E_BindingEnabled = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64029,
 	Name:          "gogoproto.binding_enabled",
-	Tag:           "varint,64029,opt,name=binding_enabled",
+	Tag:           "varint,64029,opt,name=binding_enabled,json=bindingEnabled",
 }
 
 var E_ValidationEnabled = &proto.ExtensionDesc{
@@ -532,7 +553,7 @@ var E_ValidationEnabled = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64030,
 	Name:          "gogoproto.validation_enabled",
-	Tag:           "varint,64030,opt,name=validation_enabled",
+	Tag:           "varint,64030,opt,name=validation_enabled,json=validationEnabled",
 }
 
 var E_Nullable = &proto.ExtensionDesc{
@@ -616,6 +637,7 @@ var E_Binding = &proto.ExtensionDesc{
 }
 
 func init() {
+	proto.RegisterType((*FieldBinding)(nil), "gogoproto.FieldBinding")
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
 	proto.RegisterExtension(E_EnumStringer)
@@ -636,6 +658,7 @@ func init() {
 	proto.RegisterExtension(E_BenchgenAll)
 	proto.RegisterExtension(E_MarshalerAll)
 	proto.RegisterExtension(E_UnmarshalerAll)
+	proto.RegisterExtension(E_StableMarshalerAll)
 	proto.RegisterExtension(E_SizerAll)
 	proto.RegisterExtension(E_GoprotoEnumStringerAll)
 	proto.RegisterExtension(E_EnumStringerAll)
@@ -660,6 +683,7 @@ func init() {
 	proto.RegisterExtension(E_Benchgen)
 	proto.RegisterExtension(E_Marshaler)
 	proto.RegisterExtension(E_Unmarshaler)
+	proto.RegisterExtension(E_StableMarshaler)
 	proto.RegisterExtension(E_Sizer)
 	proto.RegisterExtension(E_UnsafeMarshaler)
 	proto.RegisterExtension(E_UnsafeUnmarshaler)
@@ -678,4 +702,92 @@ func init() {
 	proto.RegisterExtension(E_Castkey)
 	proto.RegisterExtension(E_Castvalue)
 	proto.RegisterExtension(E_Binding)
+}
+
+var fileDescriptorGogo = []byte{
+	// 1331 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x98, 0xdb, 0x6f, 0x1b, 0x45,
+	0x17, 0xc0, 0xd5, 0xe6, 0x62, 0x7b, 0xec, 0x24, 0x5f, 0x36, 0x69, 0xb2, 0x5f, 0x04, 0x6a, 0x0b,
+	0x0f, 0xf0, 0xe4, 0x4a, 0x48, 0x08, 0x75, 0x23, 0x84, 0x9a, 0x2a, 0xb1, 0x8a, 0x12, 0x88, 0x0c,
+	0x29, 0x20, 0x1e, 0xac, 0xb5, 0x3d, 0xd9, 0x2e, 0xac, 0x67, 0xcc, 0xee, 0xba, 0x4a, 0x78, 0x43,
+	0xe5, 0x22, 0x84, 0xb8, 0x23, 0x41, 0x4b, 0x5b, 0xe0, 0x81, 0xfb, 0xb5, 0x5c, 0xde, 0x91, 0x10,
+	0xf0, 0xcc, 0xff, 0xd0, 0x17, 0xa0, 0x5c, 0x95, 0xb7, 0xbc, 0x30, 0x33, 0x7b, 0xce, 0x7a, 0xd7,
+	0xb1, 0x34, 0xe3, 0x37, 0xef, 0xcc, 0xfc, 0x7e, 0x99, 0x3d, 0x67, 0xe7, 0x9c, 0xdd, 0x10, 0xe2,
+	0x71, 0x8f, 0x57, 0xbb, 0x21, 0x8f, 0xb9, 0x55, 0x92, 0xbf, 0xd5, 0xcf, 0xa5, 0x63, 0x1e, 0xe7,
+	0x5e, 0x40, 0x4f, 0xa8, 0xab, 0x66, 0x6f, 0xfb, 0x44, 0x9b, 0x46, 0xad, 0xd0, 0xef, 0xc6, 0x3c,
+	0x4c, 0x16, 0xdf, 0xf2, 0xc3, 0x61, 0x52, 0x59, 0xf3, 0x69, 0xd0, 0x5e, 0xf1, 0x59, 0xdb, 0x67,
+	0x9e, 0xb5, 0x40, 0x26, 0x7d, 0x8f, 0xf1, 0x90, 0xda, 0x87, 0x8e, 0x1d, 0xba, 0xbd, 0x58, 0x87,
+	0x2b, 0x6b, 0x89, 0x14, 0x43, 0xfa, 0x44, 0xcf, 0x0f, 0x69, 0xdb, 0x3e, 0xac, 0x66, 0xd2, 0x6b,
+	0xeb, 0x28, 0x29, 0x9f, 0x77, 0x03, 0xbf, 0xdd, 0x08, 0xa9, 0x47, 0x77, 0xec, 0x31, 0x31, 0x5d,
+	0xaa, 0x13, 0x35, 0x54, 0x97, 0x23, 0xd6, 0x11, 0x21, 0x65, 0x71, 0xc3, 0x8b, 0xed, 0x71, 0x31,
+	0x37, 0x56, 0x9f, 0x10, 0x57, 0xb5, 0xd8, 0x5a, 0x24, 0x85, 0x64, 0x98, 0xda, 0x13, 0x6a, 0x7c,
+	0x52, 0x8d, 0x53, 0x5c, 0x1f, 0xc4, 0xf6, 0x64, 0xba, 0x7e, 0x3d, 0x5d, 0x1f, 0x88, 0xf5, 0x85,
+	0x74, 0xfd, 0xba, 0x58, 0x2f, 0x26, 0x3a, 0xee, 0x4e, 0x23, 0xa0, 0xcc, 0x2e, 0x26, 0x13, 0xe2,
+	0x72, 0x9d, 0x32, 0x35, 0xe1, 0x33, 0x35, 0x51, 0x82, 0x09, 0x9f, 0xc9, 0x89, 0xdb, 0xc8, 0x8c,
+	0xcf, 0x92, 0x4d, 0x77, 0x68, 0x14, 0xb9, 0x1e, 0xb5, 0x89, 0xda, 0xf6, 0x34, 0x0c, 0x6f, 0x24,
+	0xa3, 0xd6, 0xad, 0x64, 0xaa, 0xd5, 0x8b, 0x62, 0xde, 0x69, 0x34, 0x45, 0x84, 0x68, 0x68, 0x97,
+	0xd5, 0xb2, 0x4a, 0x32, 0xb8, 0xa2, 0xc6, 0x9c, 0xfb, 0xc8, 0x1c, 0x84, 0xbc, 0x41, 0x59, 0xaf,
+	0xd3, 0xe8, 0x86, 0x74, 0xdb, 0xdf, 0xb1, 0x6e, 0xaa, 0x26, 0xf1, 0xaf, 0x62, 0xfc, 0xab, 0xab,
+	0x62, 0xf6, 0xfe, 0x6e, 0xec, 0x73, 0x16, 0xd9, 0xd7, 0xae, 0x8f, 0xa9, 0x38, 0xce, 0x02, 0x2a,
+	0xe7, 0x36, 0x15, 0xe8, 0xd4, 0xc9, 0x91, 0x9c, 0x2f, 0x8a, 0x43, 0x91, 0x1b, 0x1a, 0x6a, 0x8c,
+	0x3f, 0x82, 0x71, 0x2e, 0x63, 0x7c, 0x00, 0x50, 0xe7, 0x34, 0x99, 0x1a, 0xc5, 0xf5, 0x13, 0xb8,
+	0x2a, 0x34, 0x2b, 0xa9, 0x91, 0x19, 0x25, 0x49, 0xee, 0x9e, 0xb9, 0x1d, 0xaa, 0xd1, 0xfc, 0x7c,
+	0x3d, 0x79, 0x1a, 0xa6, 0x25, 0x76, 0x3a, 0xa5, 0x9c, 0xb3, 0x64, 0x5e, 0x8e, 0x88, 0x50, 0xf7,
+	0x68, 0xd6, 0x76, 0x7c, 0xa8, 0xed, 0xac, 0x5c, 0x86, 0xca, 0x5f, 0x2e, 0x8c, 0x2b, 0xe5, 0x5c,
+	0x2a, 0xc8, 0x78, 0x33, 0x99, 0xf0, 0x68, 0x1c, 0xd3, 0x30, 0x6a, 0xb8, 0x41, 0x30, 0x64, 0x93,
+	0x6b, 0x7e, 0x90, 0x1a, 0x2f, 0xde, 0xc8, 0x67, 0xa2, 0x96, 0x90, 0xa7, 0x82, 0xc0, 0xd9, 0x22,
+	0x8b, 0x43, 0x32, 0x6b, 0xe0, 0xbc, 0x04, 0xce, 0xf9, 0x03, 0xd9, 0x95, 0xda, 0x4d, 0x82, 0xe3,
+	0x69, 0x3e, 0x0c, 0x9c, 0x6f, 0x83, 0xd3, 0x02, 0x16, 0xd3, 0x22, 0x8d, 0xf7, 0x92, 0xd9, 0xf3,
+	0x34, 0x6c, 0xf2, 0x88, 0x36, 0xc4, 0xb1, 0x74, 0x03, 0x03, 0xdd, 0x65, 0xd0, 0xcd, 0x00, 0xb8,
+	0x2a, 0x39, 0xe9, 0x3a, 0x49, 0x8a, 0xdb, 0x6e, 0x8b, 0x1a, 0x28, 0xae, 0x80, 0xa2, 0x20, 0xd7,
+	0x4b, 0xf4, 0x14, 0xa9, 0x78, 0x3c, 0xb9, 0x25, 0x03, 0xfc, 0x2a, 0xe0, 0x65, 0x64, 0x40, 0xd1,
+	0xe5, 0xdd, 0x5e, 0xe0, 0xc6, 0x26, 0x3b, 0x78, 0x07, 0x15, 0xc8, 0x80, 0x62, 0x84, 0xb0, 0xbe,
+	0x8b, 0x8a, 0x28, 0x13, 0xcf, 0x7b, 0x48, 0x99, 0xb3, 0x60, 0x97, 0x33, 0x93, 0x4d, 0xbc, 0x07,
+	0x06, 0x02, 0x88, 0x14, 0x2c, 0x93, 0x92, 0x69, 0x22, 0xde, 0x07, 0xbc, 0x48, 0x31, 0x03, 0xe2,
+	0x9c, 0x61, 0xa9, 0x16, 0x2b, 0x0c, 0x14, 0x1f, 0x80, 0x62, 0x3a, 0x83, 0xc1, 0x6d, 0xc4, 0x34,
+	0x8a, 0x3d, 0x6a, 0x22, 0xf9, 0x10, 0x6f, 0x03, 0x10, 0x08, 0x65, 0x93, 0xb2, 0xd6, 0x39, 0x33,
+	0xc3, 0x47, 0x18, 0x4a, 0x64, 0xa4, 0x42, 0x54, 0x9e, 0x8e, 0x1b, 0x46, 0xe7, 0xdc, 0xc0, 0x28,
+	0x1d, 0x1f, 0x83, 0xa3, 0x92, 0x42, 0x10, 0x91, 0x1e, 0x1b, 0x45, 0xf3, 0x09, 0x46, 0x24, 0x83,
+	0xc1, 0xd1, 0x8b, 0x62, 0xb7, 0x19, 0xd0, 0xc6, 0x28, 0xb6, 0x4f, 0xf1, 0xe8, 0x25, 0xec, 0x46,
+	0xd6, 0x28, 0x32, 0x1d, 0xf9, 0x4f, 0x1a, 0x69, 0x3e, 0xc3, 0x4c, 0x2b, 0x40, 0xc2, 0x8f, 0x90,
+	0xff, 0x0f, 0x2d, 0xf5, 0x06, 0xb2, 0xcf, 0x41, 0xb6, 0x30, 0xa4, 0xdc, 0x43, 0x49, 0x18, 0x55,
+	0xf9, 0x05, 0x96, 0x04, 0x3a, 0xe0, 0x12, 0x51, 0xeb, 0xb1, 0xc8, 0xdd, 0x1e, 0x2d, 0x6a, 0x5f,
+	0x62, 0xd4, 0x12, 0x36, 0x17, 0xb5, 0x07, 0xc9, 0x02, 0x18, 0x47, 0xcb, 0xeb, 0x57, 0x58, 0x58,
+	0x13, 0x7a, 0x2b, 0x9f, 0xdd, 0x47, 0xc9, 0x52, 0x1a, 0xce, 0x9d, 0x98, 0xb2, 0x48, 0x32, 0x62,
+	0xcf, 0x5d, 0x03, 0xf3, 0x35, 0x30, 0x63, 0xc5, 0x5f, 0x4d, 0x05, 0x1b, 0x6e, 0x57, 0xca, 0x1f,
+	0x26, 0x36, 0xca, 0x7b, 0x2c, 0xa4, 0x2d, 0xee, 0x31, 0x91, 0xc6, 0xb6, 0x81, 0xfa, 0xeb, 0x81,
+	0x54, 0x6d, 0x65, 0x70, 0x69, 0x3e, 0x43, 0xfe, 0x97, 0xbe, 0xb5, 0x35, 0xfc, 0x4e, 0x97, 0x87,
+	0xb1, 0xc6, 0xf8, 0x0d, 0x66, 0x2a, 0xe5, 0xce, 0x28, 0xcc, 0x59, 0x25, 0xd3, 0xea, 0xd2, 0xf4,
+	0x91, 0xfc, 0x16, 0x44, 0x53, 0x7d, 0x4a, 0xee, 0x48, 0x34, 0xd2, 0x66, 0xf2, 0x4a, 0x28, 0x9e,
+	0x4b, 0xf9, 0xc8, 0x9b, 0xdc, 0xe6, 0x77, 0xd8, 0x48, 0x01, 0x5d, 0x4d, 0xc8, 0xe4, 0x61, 0x9c,
+	0x19, 0x68, 0xcc, 0xd6, 0xd1, 0x03, 0x2e, 0x78, 0xe9, 0x42, 0xdd, 0x53, 0x7b, 0x70, 0x84, 0xf3,
+	0x7d, 0xd9, 0x59, 0x97, 0xd1, 0xca, 0x77, 0x4f, 0xbd, 0xec, 0xc2, 0x5e, 0x1a, 0xb0, 0x5c, 0xf3,
+	0x74, 0xd6, 0xc8, 0x54, 0xae, 0x73, 0xea, 0x55, 0x4f, 0x83, 0xaa, 0x92, 0x6d, 0x9c, 0xce, 0x9d,
+	0x64, 0x5c, 0x76, 0x41, 0x3d, 0xfe, 0x0c, 0xe0, 0x6a, 0xb9, 0x73, 0x37, 0x29, 0x62, 0xf7, 0xd3,
+	0xa3, 0xcf, 0x02, 0x9a, 0x22, 0x12, 0xc7, 0xce, 0xa7, 0xc7, 0x9f, 0x43, 0x1c, 0x11, 0x89, 0x9b,
+	0x87, 0xf0, 0xfb, 0x17, 0xc6, 0xa1, 0x7a, 0x61, 0xec, 0x96, 0x49, 0x01, 0x5a, 0x9e, 0x9e, 0x7e,
+	0x1e, 0xfe, 0x38, 0x12, 0xce, 0x5d, 0x64, 0xc2, 0x30, 0xe0, 0x2f, 0x02, 0x9a, 0xac, 0x17, 0x0d,
+	0xa5, 0x9c, 0x69, 0x73, 0x7a, 0xfc, 0x25, 0xc0, 0xb3, 0x94, 0xdc, 0x3a, 0xb4, 0x39, 0xbd, 0xe0,
+	0x65, 0xdc, 0x3a, 0x10, 0x32, 0x6c, 0xd8, 0xe1, 0xf4, 0xf4, 0x2b, 0x18, 0x75, 0x44, 0x44, 0x57,
+	0x2e, 0xa5, 0x55, 0x4b, 0xcf, 0xbf, 0x0a, 0x7c, 0x9f, 0x91, 0x11, 0xc8, 0x54, 0x4d, 0xbd, 0xe2,
+	0x35, 0x8c, 0x40, 0x86, 0x92, 0xc7, 0x68, 0xb0, 0x13, 0xea, 0x4d, 0xaf, 0xe3, 0x31, 0x1a, 0x68,
+	0x84, 0x32, 0x9b, 0xaa, 0x78, 0xe8, 0x15, 0x6f, 0x60, 0x36, 0xd5, 0x7a, 0xb9, 0x8d, 0xc1, 0xd6,
+	0xa2, 0x77, 0xbc, 0x89, 0xdb, 0x18, 0xe8, 0x2c, 0xa2, 0x51, 0x59, 0x07, 0xdb, 0x8a, 0xde, 0xf7,
+	0x16, 0xf8, 0x66, 0x0f, 0x74, 0x15, 0xe7, 0x21, 0xb2, 0x30, 0xbc, 0xa5, 0xe8, 0xad, 0x17, 0xf7,
+	0x06, 0x3e, 0x02, 0xb2, 0x1d, 0x45, 0x74, 0xc0, 0xf9, 0x61, 0xed, 0x44, 0xaf, 0xbd, 0xb4, 0x97,
+	0xff, 0xce, 0xcb, 0x76, 0x13, 0xf1, 0xc2, 0x46, 0xfa, 0x95, 0x5c, 0xef, 0xba, 0x0c, 0xae, 0x0c,
+	0x24, 0x6b, 0xf5, 0x40, 0xed, 0xd7, 0x7b, 0xae, 0x60, 0xad, 0xce, 0x97, 0x7e, 0x99, 0x0f, 0xf5,
+	0x3d, 0xed, 0xaa, 0x17, 0x59, 0x63, 0xdd, 0x55, 0xcc, 0x47, 0x1f, 0x46, 0xe3, 0x32, 0x29, 0xb2,
+	0x5e, 0x10, 0xc8, 0x0b, 0xeb, 0xe6, 0x21, 0xed, 0x88, 0x06, 0x6d, 0xb4, 0xfc, 0xba, 0x0f, 0x27,
+	0x0f, 0x01, 0x51, 0xa4, 0x27, 0x68, 0xa7, 0x29, 0x76, 0xa0, 0x21, 0x7f, 0xdb, 0xc7, 0x8a, 0x23,
+	0x57, 0x8b, 0x03, 0x4b, 0x92, 0x8f, 0xd4, 0x78, 0xb7, 0xab, 0xfd, 0xab, 0xbf, 0xef, 0xc3, 0x7f,
+	0x40, 0xfa, 0x48, 0x5f, 0xa0, 0xbe, 0x72, 0x35, 0x82, 0x1b, 0x79, 0x81, 0xfa, 0xb0, 0x3d, 0x49,
+	0x0a, 0x8f, 0x45, 0x9c, 0xc5, 0xae, 0xa7, 0xa3, 0xff, 0x00, 0x1a, 0xd7, 0xcb, 0x80, 0x75, 0x78,
+	0x48, 0xc5, 0xcf, 0x48, 0xc7, 0xfe, 0x09, 0x6c, 0x0a, 0x48, 0xb8, 0xe5, 0x46, 0xb1, 0xc9, 0x7d,
+	0xff, 0x85, 0x30, 0x02, 0x72, 0xd3, 0xf2, 0xf7, 0xe3, 0x74, 0x57, 0xc7, 0xfe, 0x8d, 0x9b, 0x86,
+	0xf5, 0xa2, 0xc2, 0x96, 0xe4, 0x4f, 0xf5, 0x7d, 0xaf, 0x83, 0xff, 0x01, 0xb8, 0x4f, 0x38, 0x75,
+	0x52, 0x80, 0x07, 0x51, 0x07, 0xff, 0xab, 0xe0, 0xf2, 0x1d, 0x8b, 0xd5, 0xf4, 0x4d, 0xaa, 0x9a,
+	0xfd, 0x8f, 0x58, 0x1d, 0x45, 0x2b, 0xc7, 0xc9, 0x5c, 0x8b, 0x77, 0x06, 0x6d, 0x2b, 0xa4, 0xc6,
+	0x6b, 0x7c, 0x53, 0x9d, 0x9e, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x4a, 0x23, 0x98, 0x14, 0x88,
+	0x13, 0x00, 0x00,
 }

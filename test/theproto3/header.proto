@@ -1,5 +1,5 @@
 // Copyright (c) 2013, Vastech SA (PTY) LTD. All rights reserved.
-// http://github.com/gogo/protobuf/gogoproto
+// http://github.com/nourish/protobuf/gogoproto
 //
 // Go support for Protocol Buffers - Google's data interchange format
 //
@@ -36,9 +36,9 @@ syntax = "proto3";
 
 package theproto3;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
 
-import "github.com/gogo/protobuf/test/combos/both/thetest.proto";
+import "github.com/nourish/protobuf/test/combos/both/thetest.proto";
 
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.goproto_enum_prefix_all) = false;

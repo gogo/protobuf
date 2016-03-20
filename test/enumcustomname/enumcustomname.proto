@@ -4,8 +4,8 @@ syntax = "proto2";
 // enumvalue_customname extensions.
 package enumcustomname;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/gogo/protobuf/test/thetest.proto";
+import "github.com/nourish/protobuf/gogoproto/gogo.proto";
+import "github.com/nourish/protobuf/test/thetest.proto";
 
 enum MyEnum {
 	option (gogoproto.enum_customname) = "MyCustomEnum";

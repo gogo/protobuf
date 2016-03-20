@@ -46,4 +46,4 @@ BenchmarkNestedDefinition_NestedMessage_NestedNestedMsgProtoUnmarshal-4	 5000000
 BenchmarkNestedScopeProtoUnmarshal-4	 1000000	      1803 ns/op	 247.86 MB/s
 BenchmarkNinOptNativeDefaultProtoUnmarshal-4	 1000000	      1330 ns/op	 255.61 MB/s
 BenchmarkCustomContainerProtoUnmarshal-4	 2000000	       803 ns/op	 134.48 MB/s
-ok  	github.com/gogo/protobuf/test/mixbench/testdata	168.327s
+ok  	github.com/nourish/protobuf/test/mixbench/testdata	168.327s

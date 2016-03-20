@@ -13,13 +13,13 @@ It has these top-level messages:
 */
 package importdedup
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/nourish/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+import _ "github.com/nourish/protobuf/gogoproto"
+import subpkg "github.com/nourish/protobuf/test/importdedup/subpkg"
 
-import github_com_gogo_protobuf_test_importdedup_subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+import github_com_gogo_protobuf_test_importdedup_subpkg "github.com/nourish/protobuf/test/importdedup/subpkg"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -31,7 +31,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion1
 
 type Object struct {
-	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,json=customField,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
+	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,json=customField,customtype=github.com/nourish/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
 	SubObject        *subpkg.SubObject                                            `protobuf:"bytes,2,opt,name=SubObject,json=subObject" json:"SubObject,omitempty"`
 	XXX_unrecognized []byte                                                       `json:"-"`
 }
