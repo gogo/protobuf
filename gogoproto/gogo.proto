@@ -116,16 +116,7 @@ extend google.protobuf.FieldOptions {
   optional string casttype = 65007;
   optional string castkey = 65008;
   optional string castvalue = 65009;
-  optional FieldValidator validator = 65010;
-  optional FieldBinding binding = 65011;
-  optional bool ignore = 65012;
-}
-
-message FieldValidator {
-	optional string regex = 1;
-	optional int64 int_gt = 2;
-	optional int64 int_lt = 3;
-	optional bool msg_exists = 4;
+  optional FieldBinding binding = 65010;
 }
 
 message FieldBinding {
