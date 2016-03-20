@@ -183,6 +183,16 @@ func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetBinding(field *google_protobuf.FieldDescriptorProto) *FieldBinding {
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Binding)
+		if err == nil && v.(*FieldBinding) != nil {
+			return (v.(*FieldBinding))
+		}
+	}
+	return nil
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
