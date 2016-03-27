@@ -431,6 +431,8 @@ extend MyExtendable {
 	optional double FieldA = 100;
 	optional NinOptNative FieldB = 101;
 	optional NinEmbeddedStruct FieldC = 102;
+	repeated int64 FieldD = 104;
+	repeated NinOptNative FieldE = 105;
 }
 
 message OtherExtenable {

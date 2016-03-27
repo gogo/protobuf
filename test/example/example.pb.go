@@ -3183,7 +3183,7 @@ func (m *E) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				m.XXX_extensions = append(m.XXX_extensions, data[iNdEx:iNdEx+skippy]...)
+				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), data[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
