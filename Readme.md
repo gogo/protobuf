@@ -10,7 +10,7 @@ Install the protoc-gen-gofast binary
 
     go get github.com/gogo/protobuf/protoc-gen-gofast
 
-Use it to generate faster marshaling and unmarshaling go code for you protocol buffers.
+Use it to generate faster marshaling and unmarshaling go code for your protocol buffers.
 
     protoc --gofast_out=. myproto.proto
 
