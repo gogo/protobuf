@@ -27,8 +27,9 @@
 package theproto3
 
 import (
-	"github.com/gogo/protobuf/proto"
 	"testing"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func TestNilMaps(t *testing.T) {
