@@ -101,7 +101,7 @@ func (u Uint128) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-func (u *Uint128) Size() int {
+func (u Uint128) Size() int {
 	return 16
 }
 
