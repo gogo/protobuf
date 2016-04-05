@@ -32,3 +32,4 @@ regenerate:
 	cat footer.proto >> theproto3.proto
 	go install github.com/gogo/protobuf/protoc-gen-combo
 	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. theproto3.proto
+	find combos -type d -not -name combos -exec cp proto3_test.go.in {}/proto3_test.go \;

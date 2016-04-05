@@ -27,13 +27,35 @@
 package theproto3
 
 import (
-	"github.com/gogo/protobuf/proto"
+	"reflect"
 	"testing"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func TestNilMaps(t *testing.T) {
 	m := &AllMaps{StringToMsgMap: map[string]*FloatingPoint{"a": nil}}
 	if _, err := proto.Marshal(m); err == nil {
 		t.Fatalf("expected error")
+	}
+}
+
+func TestCustomTypeSize(t *testing.T) {
+	m := &Uint128Pair{}
+	m.Size() // Should not panic.
+}
+
+func TestCustomTypeMarshalUnmarshal(t *testing.T) {
+	m1 := &Uint128Pair{}
+	if b, err := proto.Marshal(m1); err != nil {
+		t.Fatal(err)
+	} else {
+		m2 := &Uint128Pair{}
+		if err := proto.Unmarshal(b, m2); err != nil {
+			t.Fatal(err)
+		}
+		if !reflect.DeepEqual(m1, m2) {
+			t.Errorf("expected %+v, got %+v", m1, m2)
+		}
 	}
 }

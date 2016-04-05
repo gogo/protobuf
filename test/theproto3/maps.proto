@@ -1,8 +1,8 @@
 
 enum MapEnum {
-    MA = 0;
-    MB = 1;
-    MC = 2;
+  MA = 0;
+  MB = 1;
+  MC = 2;
 }
 
 message AllMaps {

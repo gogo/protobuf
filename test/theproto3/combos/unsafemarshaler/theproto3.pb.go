@@ -7122,11 +7122,9 @@ func (m *Message) Size() (n int) {
 	if m.HeightInCm != 0 {
 		n += 1 + sovTheproto3(uint64(m.HeightInCm))
 	}
-	if m.Data != nil {
-		l = len(m.Data)
-		if l > 0 {
-			n += 1 + l + sovTheproto3(uint64(l))
-		}
+	l = len(m.Data)
+	if l > 0 {
+		n += 1 + l + sovTheproto3(uint64(l))
 	}
 	if m.ResultCount != 0 {
 		n += 1 + sovTheproto3(uint64(m.ResultCount))
@@ -7527,8 +7525,10 @@ func (m *Uint128Pair) Size() (n int) {
 	_ = l
 	l = m.Left.Size()
 	n += 1 + l + sovTheproto3(uint64(l))
-	l = m.Right.Size()
-	n += 1 + l + sovTheproto3(uint64(l))
+	if m.Right != nil {
+		l = m.Right.Size()
+		n += 1 + l + sovTheproto3(uint64(l))
+	}
 	return n
 }
 
@@ -8090,13 +8090,11 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 		i++
 		i = encodeVarintTheproto3(data, i, uint64(m.HeightInCm))
 	}
-	if m.Data != nil {
-		if len(m.Data) > 0 {
-			data[i] = 0x22
-			i++
-			i = encodeVarintTheproto3(data, i, uint64(len(m.Data)))
-			i += copy(data[i:], m.Data)
-		}
+	if len(m.Data) > 0 {
+		data[i] = 0x22
+		i++
+		i = encodeVarintTheproto3(data, i, uint64(len(m.Data)))
+		i += copy(data[i:], m.Data)
 	}
 	if len(m.Key) > 0 {
 		for _, num := range m.Key {
@@ -9040,14 +9038,16 @@ func (m *Uint128Pair) MarshalTo(data []byte) (int, error) {
 		return 0, err
 	}
 	i += n8
-	data[i] = 0x12
-	i++
-	i = encodeVarintTheproto3(data, i, uint64(m.Right.Size()))
-	n9, err := m.Right.MarshalTo(data[i:])
-	if err != nil {
-		return 0, err
+	if m.Right != nil {
+		data[i] = 0x12
+		i++
+		i = encodeVarintTheproto3(data, i, uint64(m.Right.Size()))
+		n9, err := m.Right.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n9
 	}
-	i += n9
 	return i, nil
 }
 

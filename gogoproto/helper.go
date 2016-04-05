@@ -37,6 +37,17 @@ func IsNullable(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Nullable, true)
 }
 
+func NeedsNilCheck(proto3 bool, field *google_protobuf.FieldDescriptorProto) bool {
+	nullable := IsNullable(field)
+	if field.IsMessage() || IsCustomType(field) {
+		return nullable
+	}
+	if proto3 {
+		return false
+	}
+	return nullable || *field.Type == google_protobuf.FieldDescriptorProto_TYPE_BYTES
+}
+
 func IsCustomType(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCustomType(field)
 	if len(typ) > 0 {
