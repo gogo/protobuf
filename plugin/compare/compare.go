@@ -37,8 +37,9 @@ import (
 type plugin struct {
 	*generator.Generator
 	generator.PluginImports
-	fmtPkg   generator.Single
-	bytesPkg generator.Single
+	fmtPkg      generator.Single
+	bytesPkg    generator.Single
+	sortkeysPkg generator.Single
 }
 
 func NewPlugin() *plugin {
@@ -57,6 +58,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.fmtPkg = p.NewImport("fmt")
 	p.bytesPkg = p.NewImport("bytes")
+	p.sortkeysPkg = p.NewImport("github.com/gogo/protobuf/sortkeys")
 
 	for _, msg := range file.Messages() {
 		if msg.DescriptorProto.GetOptions().GetMapEntry() {
@@ -431,8 +433,25 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	if message.DescriptorProto.HasExtension() {
 		fieldname := "XXX_extensions"
 		if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
-			//TODO sort the union of keys and do nil compare
-			p.P(`for k, v := range this.`, fieldname, ` {`)
+			p.P(`extkeys := make([]int32, 0, len(this.`, fieldname, `)+len(that1.`, fieldname, `))`)
+			p.P(`for k, _ := range this.`, fieldname, ` {`)
+			p.In()
+			p.P(`extkeys = append(extkeys, k)`)
+			p.Out()
+			p.P(`}`)
+			p.P(`for k, _ := range that1.`, fieldname, ` {`)
+			p.In()
+			p.P(`if _, ok := this.`, fieldname, `[k]; !ok {`)
+			p.In()
+			p.P(`extkeys = append(extkeys, k)`)
+			p.Out()
+			p.P(`}`)
+			p.Out()
+			p.P(`}`)
+			p.P(p.sortkeysPkg.Use(), `.Int32s(extkeys)`)
+			p.P(`for _, k := range extkeys {`)
+			p.In()
+			p.P(`if v, ok := this.`, fieldname, `[k]; ok {`)
 			p.In()
 			p.P(`if v2, ok := that1.`, fieldname, `[k]; ok {`)
 			p.In()
@@ -445,6 +464,12 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.P(`} else  {`)
 			p.In()
 			p.P(`return 1`)
+			p.Out()
+			p.P(`}`)
+			p.Out()
+			p.P(`} else {`)
+			p.In()
+			p.P(`return -1`)
 			p.Out()
 			p.P(`}`)
 			p.Out()

@@ -79,6 +79,7 @@ import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custo
 import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
 import bytes "bytes"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
@@ -4757,13 +4758,27 @@ func (this *MyExtendable) Compare(that interface{}) int {
 	} else if that1.Field1 != nil {
 		return -1
 	}
-	for k, v := range this.XXX_extensions {
-		if v2, ok := that1.XXX_extensions[k]; ok {
-			if c := v.Compare(&v2); c != 0 {
-				return c
+	extkeys := make([]int32, 0, len(this.XXX_extensions)+len(that1.XXX_extensions))
+	for k := range this.XXX_extensions {
+		extkeys = append(extkeys, k)
+	}
+	for k := range that1.XXX_extensions {
+		if _, ok := this.XXX_extensions[k]; !ok {
+			extkeys = append(extkeys, k)
+		}
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(extkeys)
+	for _, k := range extkeys {
+		if v, ok := this.XXX_extensions[k]; ok {
+			if v2, ok := that1.XXX_extensions[k]; ok {
+				if c := v.Compare(&v2); c != 0 {
+					return c
+				}
+			} else {
+				return 1
 			}
 		} else {
-			return 1
+			return -1
 		}
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
@@ -4823,13 +4838,27 @@ func (this *OtherExtenable) Compare(that interface{}) int {
 	if c := this.M.Compare(that1.M); c != 0 {
 		return c
 	}
-	for k, v := range this.XXX_extensions {
-		if v2, ok := that1.XXX_extensions[k]; ok {
-			if c := v.Compare(&v2); c != 0 {
-				return c
+	extkeys := make([]int32, 0, len(this.XXX_extensions)+len(that1.XXX_extensions))
+	for k := range this.XXX_extensions {
+		extkeys = append(extkeys, k)
+	}
+	for k := range that1.XXX_extensions {
+		if _, ok := this.XXX_extensions[k]; !ok {
+			extkeys = append(extkeys, k)
+		}
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(extkeys)
+	for _, k := range extkeys {
+		if v, ok := this.XXX_extensions[k]; ok {
+			if v2, ok := that1.XXX_extensions[k]; ok {
+				if c := v.Compare(&v2); c != 0 {
+					return c
+				}
+			} else {
+				return 1
 			}
 		} else {
-			return 1
+			return -1
 		}
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
