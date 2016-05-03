@@ -99,6 +99,10 @@ func (uuid Uuid) Equal(other Uuid) bool {
 	return bytes.Equal(uuid[0:], other[0:])
 }
 
+func (uuid Uuid) Compare(other Uuid) int {
+	return bytes.Compare(uuid[0:], other[0:])
+}
+
 type int63 interface {
 	Int63() int64
 }

@@ -338,6 +338,10 @@ func (f *FieldDescriptorProto) IsString() bool {
 	return *f.Type == FieldDescriptorProto_TYPE_STRING
 }
 
+func (f *FieldDescriptorProto) IsBool() bool {
+	return *f.Type == FieldDescriptorProto_TYPE_BOOL
+}
+
 func (f *FieldDescriptorProto) IsRequired() bool {
 	return f.Label != nil && *f.Label == FieldDescriptorProto_LABEL_REQUIRED
 }

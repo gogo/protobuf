@@ -84,6 +84,10 @@ func (this Bytes) Equal(that Bytes) bool {
 	return bytes.Equal(this, that)
 }
 
+func (this Bytes) Compare(that Bytes) int {
+	return bytes.Compare(this, that)
+}
+
 type randy interface {
 	Intn(n int) int
 }

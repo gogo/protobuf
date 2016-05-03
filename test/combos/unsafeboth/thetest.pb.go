@@ -78,11 +78,11 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
+import bytes "bytes"
+
 import "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 import strconv "strconv"
-
-import bytes "bytes"
 
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
@@ -1452,6 +1452,4985 @@ func init() {
 	proto.RegisterExtension(E_FieldB1)
 	proto.RegisterExtension(E_FieldC1)
 }
+func (this *NidOptNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidOptNative)
+	if !ok {
+		that2, ok := that.(NidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != that1.Field1 {
+		if this.Field1 < that1.Field1 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field2 != that1.Field2 {
+		if this.Field2 < that1.Field2 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field3 != that1.Field3 {
+		if this.Field3 < that1.Field3 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field4 != that1.Field4 {
+		if this.Field4 < that1.Field4 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field5 != that1.Field5 {
+		if this.Field5 < that1.Field5 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field6 != that1.Field6 {
+		if this.Field6 < that1.Field6 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field7 != that1.Field7 {
+		if this.Field7 < that1.Field7 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field8 != that1.Field8 {
+		if this.Field8 < that1.Field8 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field9 != that1.Field9 {
+		if this.Field9 < that1.Field9 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field10 != that1.Field10 {
+		if this.Field10 < that1.Field10 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field11 != that1.Field11 {
+		if this.Field11 < that1.Field11 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field12 != that1.Field12 {
+		if this.Field12 < that1.Field12 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field13 != that1.Field13 {
+		if !this.Field13 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field14 != that1.Field14 {
+		if this.Field14 < that1.Field14 {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptNative)
+	if !ok {
+		that2, ok := that.(NinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			if *this.Field4 < *that1.Field4 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field4 != nil {
+		return 1
+	} else if that1.Field4 != nil {
+		return -1
+	}
+	if this.Field5 != nil && that1.Field5 != nil {
+		if *this.Field5 != *that1.Field5 {
+			if *this.Field5 < *that1.Field5 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field5 != nil {
+		return 1
+	} else if that1.Field5 != nil {
+		return -1
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			if *this.Field6 < *that1.Field6 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field6 != nil {
+		return 1
+	} else if that1.Field6 != nil {
+		return -1
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			if *this.Field7 < *that1.Field7 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field7 != nil {
+		return 1
+	} else if that1.Field7 != nil {
+		return -1
+	}
+	if this.Field8 != nil && that1.Field8 != nil {
+		if *this.Field8 != *that1.Field8 {
+			if *this.Field8 < *that1.Field8 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field8 != nil {
+		return 1
+	} else if that1.Field8 != nil {
+		return -1
+	}
+	if this.Field9 != nil && that1.Field9 != nil {
+		if *this.Field9 != *that1.Field9 {
+			if *this.Field9 < *that1.Field9 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field9 != nil {
+		return 1
+	} else if that1.Field9 != nil {
+		return -1
+	}
+	if this.Field10 != nil && that1.Field10 != nil {
+		if *this.Field10 != *that1.Field10 {
+			if *this.Field10 < *that1.Field10 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field10 != nil {
+		return 1
+	} else if that1.Field10 != nil {
+		return -1
+	}
+	if this.Field11 != nil && that1.Field11 != nil {
+		if *this.Field11 != *that1.Field11 {
+			if *this.Field11 < *that1.Field11 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field11 != nil {
+		return 1
+	} else if that1.Field11 != nil {
+		return -1
+	}
+	if this.Field12 != nil && that1.Field12 != nil {
+		if *this.Field12 != *that1.Field12 {
+			if *this.Field12 < *that1.Field12 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field12 != nil {
+		return 1
+	} else if that1.Field12 != nil {
+		return -1
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if !*this.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			if *this.Field14 < *that1.Field14 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field14 != nil {
+		return 1
+	} else if that1.Field14 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidRepNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidRepNative)
+	if !ok {
+		that2, ok := that.(NidRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if this.Field4[i] != that1.Field4[i] {
+			if this.Field4[i] < that1.Field4[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		if len(this.Field5) < len(that1.Field5) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			if this.Field5[i] < that1.Field5[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			if this.Field8[i] < that1.Field8[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		if len(this.Field9) < len(that1.Field9) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			if this.Field9[i] < that1.Field9[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		if len(this.Field10) < len(that1.Field10) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			if this.Field10[i] < that1.Field10[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		if len(this.Field11) < len(that1.Field11) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			if this.Field11[i] < that1.Field11[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		if len(this.Field12) < len(that1.Field12) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			if this.Field12[i] < that1.Field12[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field14) != len(that1.Field14) {
+		if len(this.Field14) < len(that1.Field14) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field14 {
+		if this.Field14[i] != that1.Field14[i] {
+			if this.Field14[i] < that1.Field14[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field15) != len(that1.Field15) {
+		if len(this.Field15) < len(that1.Field15) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field15 {
+		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinRepNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinRepNative)
+	if !ok {
+		that2, ok := that.(NinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if this.Field4[i] != that1.Field4[i] {
+			if this.Field4[i] < that1.Field4[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		if len(this.Field5) < len(that1.Field5) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			if this.Field5[i] < that1.Field5[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			if this.Field8[i] < that1.Field8[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		if len(this.Field9) < len(that1.Field9) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			if this.Field9[i] < that1.Field9[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		if len(this.Field10) < len(that1.Field10) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			if this.Field10[i] < that1.Field10[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		if len(this.Field11) < len(that1.Field11) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			if this.Field11[i] < that1.Field11[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		if len(this.Field12) < len(that1.Field12) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			if this.Field12[i] < that1.Field12[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field14) != len(that1.Field14) {
+		if len(this.Field14) < len(that1.Field14) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field14 {
+		if this.Field14[i] != that1.Field14[i] {
+			if this.Field14[i] < that1.Field14[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field15) != len(that1.Field15) {
+		if len(this.Field15) < len(that1.Field15) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field15 {
+		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidRepPackedNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidRepPackedNative)
+	if !ok {
+		that2, ok := that.(NidRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if this.Field4[i] != that1.Field4[i] {
+			if this.Field4[i] < that1.Field4[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		if len(this.Field5) < len(that1.Field5) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			if this.Field5[i] < that1.Field5[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			if this.Field8[i] < that1.Field8[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		if len(this.Field9) < len(that1.Field9) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			if this.Field9[i] < that1.Field9[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		if len(this.Field10) < len(that1.Field10) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			if this.Field10[i] < that1.Field10[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		if len(this.Field11) < len(that1.Field11) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			if this.Field11[i] < that1.Field11[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		if len(this.Field12) < len(that1.Field12) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			if this.Field12[i] < that1.Field12[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinRepPackedNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinRepPackedNative)
+	if !ok {
+		that2, ok := that.(NinRepPackedNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if this.Field4[i] != that1.Field4[i] {
+			if this.Field4[i] < that1.Field4[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field5) != len(that1.Field5) {
+		if len(this.Field5) < len(that1.Field5) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field5 {
+		if this.Field5[i] != that1.Field5[i] {
+			if this.Field5[i] < that1.Field5[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if this.Field8[i] != that1.Field8[i] {
+			if this.Field8[i] < that1.Field8[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field9) != len(that1.Field9) {
+		if len(this.Field9) < len(that1.Field9) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field9 {
+		if this.Field9[i] != that1.Field9[i] {
+			if this.Field9[i] < that1.Field9[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field10) != len(that1.Field10) {
+		if len(this.Field10) < len(that1.Field10) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field10 {
+		if this.Field10[i] != that1.Field10[i] {
+			if this.Field10[i] < that1.Field10[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field11) != len(that1.Field11) {
+		if len(this.Field11) < len(that1.Field11) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field11 {
+		if this.Field11[i] != that1.Field11[i] {
+			if this.Field11[i] < that1.Field11[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field12) != len(that1.Field12) {
+		if len(this.Field12) < len(that1.Field12) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field12 {
+		if this.Field12[i] != that1.Field12[i] {
+			if this.Field12[i] < that1.Field12[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidOptStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidOptStruct)
+	if !ok {
+		that2, ok := that.(NidOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != that1.Field1 {
+		if this.Field1 < that1.Field1 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field2 != that1.Field2 {
+		if this.Field2 < that1.Field2 {
+			return -1
+		}
+		return 1
+	}
+	if c := this.Field3.Compare(&that1.Field3); c != 0 {
+		return c
+	}
+	if c := this.Field4.Compare(&that1.Field4); c != 0 {
+		return c
+	}
+	if this.Field6 != that1.Field6 {
+		if this.Field6 < that1.Field6 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field7 != that1.Field7 {
+		if this.Field7 < that1.Field7 {
+			return -1
+		}
+		return 1
+	}
+	if c := this.Field8.Compare(&that1.Field8); c != 0 {
+		return c
+	}
+	if this.Field13 != that1.Field13 {
+		if !this.Field13 {
+			return -1
+		}
+		return 1
+	}
+	if this.Field14 != that1.Field14 {
+		if this.Field14 < that1.Field14 {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptStruct)
+	if !ok {
+		that2, ok := that.(NinOptStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if c := this.Field3.Compare(that1.Field3); c != 0 {
+		return c
+	}
+	if c := this.Field4.Compare(that1.Field4); c != 0 {
+		return c
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			if *this.Field6 < *that1.Field6 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field6 != nil {
+		return 1
+	} else if that1.Field6 != nil {
+		return -1
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			if *this.Field7 < *that1.Field7 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field7 != nil {
+		return 1
+	} else if that1.Field7 != nil {
+		return -1
+	}
+	if c := this.Field8.Compare(that1.Field8); c != 0 {
+		return c
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if !*this.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			if *this.Field14 < *that1.Field14 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field14 != nil {
+		return 1
+	} else if that1.Field14 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidRepStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidRepStruct)
+	if !ok {
+		that2, ok := that.(NidRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if c := this.Field3[i].Compare(&that1.Field3[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if c := this.Field4[i].Compare(&that1.Field4[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if c := this.Field8[i].Compare(&that1.Field8[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field14) != len(that1.Field14) {
+		if len(this.Field14) < len(that1.Field14) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field14 {
+		if this.Field14[i] != that1.Field14[i] {
+			if this.Field14[i] < that1.Field14[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field15) != len(that1.Field15) {
+		if len(this.Field15) < len(that1.Field15) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field15 {
+		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinRepStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinRepStruct)
+	if !ok {
+		that2, ok := that.(NinRepStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if c := this.Field3[i].Compare(that1.Field3[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field4) != len(that1.Field4) {
+		if len(this.Field4) < len(that1.Field4) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field4 {
+		if c := this.Field4[i].Compare(that1.Field4[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field6) != len(that1.Field6) {
+		if len(this.Field6) < len(that1.Field6) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field6 {
+		if this.Field6[i] != that1.Field6[i] {
+			if this.Field6[i] < that1.Field6[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field7) != len(that1.Field7) {
+		if len(this.Field7) < len(that1.Field7) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field7 {
+		if this.Field7[i] != that1.Field7[i] {
+			if this.Field7[i] < that1.Field7[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field8) != len(that1.Field8) {
+		if len(this.Field8) < len(that1.Field8) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field8 {
+		if c := this.Field8[i].Compare(that1.Field8[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Field13) != len(that1.Field13) {
+		if len(this.Field13) < len(that1.Field13) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field13 {
+		if this.Field13[i] != that1.Field13[i] {
+			if !this.Field13[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field14) != len(that1.Field14) {
+		if len(this.Field14) < len(that1.Field14) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field14 {
+		if this.Field14[i] != that1.Field14[i] {
+			if this.Field14[i] < that1.Field14[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field15) != len(that1.Field15) {
+		if len(this.Field15) < len(that1.Field15) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field15 {
+		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidEmbeddedStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidEmbeddedStruct)
+	if !ok {
+		that2, ok := that.(NidEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.NidOptNative.Compare(that1.NidOptNative); c != 0 {
+		return c
+	}
+	if c := this.Field200.Compare(&that1.Field200); c != 0 {
+		return c
+	}
+	if this.Field210 != that1.Field210 {
+		if !this.Field210 {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinEmbeddedStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinEmbeddedStruct)
+	if !ok {
+		that2, ok := that.(NinEmbeddedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.NidOptNative.Compare(that1.NidOptNative); c != 0 {
+		return c
+	}
+	if c := this.Field200.Compare(that1.Field200); c != 0 {
+		return c
+	}
+	if this.Field210 != nil && that1.Field210 != nil {
+		if *this.Field210 != *that1.Field210 {
+			if !*this.Field210 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field210 != nil {
+		return 1
+	} else if that1.Field210 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidNestedStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidNestedStruct)
+	if !ok {
+		that2, ok := that.(NidNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Field1.Compare(&that1.Field1); c != 0 {
+		return c
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if c := this.Field2[i].Compare(&that1.Field2[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinNestedStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinNestedStruct)
+	if !ok {
+		that2, ok := that.(NinNestedStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Field1.Compare(that1.Field1); c != 0 {
+		return c
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if c := this.Field2[i].Compare(that1.Field2[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidOptCustom) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidOptCustom)
+	if !ok {
+		that2, ok := that.(NidOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Id.Compare(that1.Id); c != 0 {
+		return c
+	}
+	if c := this.Value.Compare(that1.Value); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomDash) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomDash)
+	if !ok {
+		that2, ok := that.(CustomDash)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.Value == nil {
+		if this.Value != nil {
+			return 1
+		}
+	} else if this.Value == nil {
+		return -1
+	} else if c := this.Value.Compare(*that1.Value); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptCustom) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptCustom)
+	if !ok {
+		that2, ok := that.(NinOptCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.Id == nil {
+		if this.Id != nil {
+			return 1
+		}
+	} else if this.Id == nil {
+		return -1
+	} else if c := this.Id.Compare(*that1.Id); c != 0 {
+		return c
+	}
+	if that1.Value == nil {
+		if this.Value != nil {
+			return 1
+		}
+	} else if this.Value == nil {
+		return -1
+	} else if c := this.Value.Compare(*that1.Value); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidRepCustom) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidRepCustom)
+	if !ok {
+		that2, ok := that.(NidRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Id) != len(that1.Id) {
+		if len(this.Id) < len(that1.Id) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Id {
+		if c := this.Id[i].Compare(that1.Id[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Value) != len(that1.Value) {
+		if len(this.Value) < len(that1.Value) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Value {
+		if c := this.Value[i].Compare(that1.Value[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinRepCustom) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinRepCustom)
+	if !ok {
+		that2, ok := that.(NinRepCustom)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Id) != len(that1.Id) {
+		if len(this.Id) < len(that1.Id) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Id {
+		if c := this.Id[i].Compare(that1.Id[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.Value) != len(that1.Value) {
+		if len(this.Value) < len(that1.Value) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Value {
+		if c := this.Value[i].Compare(that1.Value[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptNativeUnion) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptNativeUnion)
+	if !ok {
+		that2, ok := that.(NinOptNativeUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			if *this.Field4 < *that1.Field4 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field4 != nil {
+		return 1
+	} else if that1.Field4 != nil {
+		return -1
+	}
+	if this.Field5 != nil && that1.Field5 != nil {
+		if *this.Field5 != *that1.Field5 {
+			if *this.Field5 < *that1.Field5 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field5 != nil {
+		return 1
+	} else if that1.Field5 != nil {
+		return -1
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			if *this.Field6 < *that1.Field6 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field6 != nil {
+		return 1
+	} else if that1.Field6 != nil {
+		return -1
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if !*this.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			if *this.Field14 < *that1.Field14 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field14 != nil {
+		return 1
+	} else if that1.Field14 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptStructUnion) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptStructUnion)
+	if !ok {
+		that2, ok := that.(NinOptStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if c := this.Field3.Compare(that1.Field3); c != 0 {
+		return c
+	}
+	if c := this.Field4.Compare(that1.Field4); c != 0 {
+		return c
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			if *this.Field6 < *that1.Field6 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field6 != nil {
+		return 1
+	} else if that1.Field6 != nil {
+		return -1
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			if *this.Field7 < *that1.Field7 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field7 != nil {
+		return 1
+	} else if that1.Field7 != nil {
+		return -1
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if !*this.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			if *this.Field14 < *that1.Field14 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field14 != nil {
+		return 1
+	} else if that1.Field14 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinEmbeddedStructUnion) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinEmbeddedStructUnion)
+	if !ok {
+		that2, ok := that.(NinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.NidOptNative.Compare(that1.NidOptNative); c != 0 {
+		return c
+	}
+	if c := this.Field200.Compare(that1.Field200); c != 0 {
+		return c
+	}
+	if this.Field210 != nil && that1.Field210 != nil {
+		if *this.Field210 != *that1.Field210 {
+			if !*this.Field210 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field210 != nil {
+		return 1
+	} else if that1.Field210 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinNestedStructUnion) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinNestedStructUnion)
+	if !ok {
+		that2, ok := that.(NinNestedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Field1.Compare(that1.Field1); c != 0 {
+		return c
+	}
+	if c := this.Field2.Compare(that1.Field2); c != 0 {
+		return c
+	}
+	if c := this.Field3.Compare(that1.Field3); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *Tree) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Tree)
+	if !ok {
+		that2, ok := that.(Tree)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Or.Compare(that1.Or); c != 0 {
+		return c
+	}
+	if c := this.And.Compare(that1.And); c != 0 {
+		return c
+	}
+	if c := this.Leaf.Compare(that1.Leaf); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *OrBranch) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*OrBranch)
+	if !ok {
+		that2, ok := that.(OrBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Left.Compare(&that1.Left); c != 0 {
+		return c
+	}
+	if c := this.Right.Compare(&that1.Right); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AndBranch) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AndBranch)
+	if !ok {
+		that2, ok := that.(AndBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Left.Compare(&that1.Left); c != 0 {
+		return c
+	}
+	if c := this.Right.Compare(&that1.Right); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *Leaf) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Leaf)
+	if !ok {
+		that2, ok := that.(Leaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Value != that1.Value {
+		if this.Value < that1.Value {
+			return -1
+		}
+		return 1
+	}
+	if this.StrValue != that1.StrValue {
+		if this.StrValue < that1.StrValue {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *DeepTree) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*DeepTree)
+	if !ok {
+		that2, ok := that.(DeepTree)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Down.Compare(that1.Down); c != 0 {
+		return c
+	}
+	if c := this.And.Compare(that1.And); c != 0 {
+		return c
+	}
+	if c := this.Leaf.Compare(that1.Leaf); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *ADeepBranch) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*ADeepBranch)
+	if !ok {
+		that2, ok := that.(ADeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Down.Compare(&that1.Down); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AndDeepBranch) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AndDeepBranch)
+	if !ok {
+		that2, ok := that.(AndDeepBranch)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Left.Compare(&that1.Left); c != 0 {
+		return c
+	}
+	if c := this.Right.Compare(&that1.Right); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *DeepLeaf) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*DeepLeaf)
+	if !ok {
+		that2, ok := that.(DeepLeaf)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.Tree.Compare(&that1.Tree); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *Nil) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Nil)
+	if !ok {
+		that2, ok := that.(Nil)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidOptEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidOptEnum)
+	if !ok {
+		that2, ok := that.(NidOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != that1.Field1 {
+		if this.Field1 < that1.Field1 {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptEnum)
+	if !ok {
+		that2, ok := that.(NinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NidRepEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NidRepEnum)
+	if !ok {
+		that2, ok := that.(NidRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinRepEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinRepEnum)
+	if !ok {
+		that2, ok := that.(NinRepEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Field1) != len(that1.Field1) {
+		if len(this.Field1) < len(that1.Field1) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field1 {
+		if this.Field1[i] != that1.Field1[i] {
+			if this.Field1[i] < that1.Field1[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field2) != len(that1.Field2) {
+		if len(this.Field2) < len(that1.Field2) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field2 {
+		if this.Field2[i] != that1.Field2[i] {
+			if this.Field2[i] < that1.Field2[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.Field3) != len(that1.Field3) {
+		if len(this.Field3) < len(that1.Field3) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Field3 {
+		if this.Field3[i] != that1.Field3[i] {
+			if this.Field3[i] < that1.Field3[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptEnumDefault) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptEnumDefault)
+	if !ok {
+		that2, ok := that.(NinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AnotherNinOptEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AnotherNinOptEnum)
+	if !ok {
+		that2, ok := that.(AnotherNinOptEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AnotherNinOptEnumDefault) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AnotherNinOptEnumDefault)
+	if !ok {
+		that2, ok := that.(AnotherNinOptEnumDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *Timer) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Timer)
+	if !ok {
+		that2, ok := that.(Timer)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Time1 != that1.Time1 {
+		if this.Time1 < that1.Time1 {
+			return -1
+		}
+		return 1
+	}
+	if this.Time2 != that1.Time2 {
+		if this.Time2 < that1.Time2 {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.Data, that1.Data); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *MyExtendable) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*MyExtendable)
+	if !ok {
+		that2, ok := that.(MyExtendable)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	for k, v := range this.XXX_extensions {
+		if v2, ok := that1.XXX_extensions[k]; ok {
+			if c := v.Compare(&v2); c != 0 {
+				return c
+			}
+		} else {
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *OtherExtenable) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*OtherExtenable)
+	if !ok {
+		that2, ok := that.(OtherExtenable)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if *this.Field13 < *that1.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if c := this.M.Compare(that1.M); c != 0 {
+		return c
+	}
+	for k, v := range this.XXX_extensions {
+		if v2, ok := that1.XXX_extensions[k]; ok {
+			if c := v.Compare(&v2); c != 0 {
+				return c
+			}
+		} else {
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NestedDefinition) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NestedDefinition)
+	if !ok {
+		that2, ok := that.(NestedDefinition)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.EnumField != nil && that1.EnumField != nil {
+		if *this.EnumField != *that1.EnumField {
+			if *this.EnumField < *that1.EnumField {
+				return -1
+			}
+			return 1
+		}
+	} else if this.EnumField != nil {
+		return 1
+	} else if that1.EnumField != nil {
+		return -1
+	}
+	if c := this.NNM.Compare(that1.NNM); c != 0 {
+		return c
+	}
+	if c := this.NM.Compare(that1.NM); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NestedDefinition_NestedMessage) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NestedDefinition_NestedMessage)
+	if !ok {
+		that2, ok := that.(NestedDefinition_NestedMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.NestedField1 != nil && that1.NestedField1 != nil {
+		if *this.NestedField1 != *that1.NestedField1 {
+			if *this.NestedField1 < *that1.NestedField1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.NestedField1 != nil {
+		return 1
+	} else if that1.NestedField1 != nil {
+		return -1
+	}
+	if c := this.NNM.Compare(that1.NNM); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NestedDefinition_NestedMessage_NestedNestedMsg)
+	if !ok {
+		that2, ok := that.(NestedDefinition_NestedMessage_NestedNestedMsg)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.NestedNestedField1 != nil && that1.NestedNestedField1 != nil {
+		if *this.NestedNestedField1 != *that1.NestedNestedField1 {
+			if *this.NestedNestedField1 < *that1.NestedNestedField1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.NestedNestedField1 != nil {
+		return 1
+	} else if that1.NestedNestedField1 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NestedScope) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NestedScope)
+	if !ok {
+		that2, ok := that.(NestedScope)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.A.Compare(that1.A); c != 0 {
+		return c
+	}
+	if this.B != nil && that1.B != nil {
+		if *this.B != *that1.B {
+			if *this.B < *that1.B {
+				return -1
+			}
+			return 1
+		}
+	} else if this.B != nil {
+		return 1
+	} else if that1.B != nil {
+		return -1
+	}
+	if c := this.C.Compare(that1.C); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NinOptNativeDefault) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NinOptNativeDefault)
+	if !ok {
+		that2, ok := that.(NinOptNativeDefault)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if this.Field3 != nil && that1.Field3 != nil {
+		if *this.Field3 != *that1.Field3 {
+			if *this.Field3 < *that1.Field3 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field3 != nil {
+		return 1
+	} else if that1.Field3 != nil {
+		return -1
+	}
+	if this.Field4 != nil && that1.Field4 != nil {
+		if *this.Field4 != *that1.Field4 {
+			if *this.Field4 < *that1.Field4 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field4 != nil {
+		return 1
+	} else if that1.Field4 != nil {
+		return -1
+	}
+	if this.Field5 != nil && that1.Field5 != nil {
+		if *this.Field5 != *that1.Field5 {
+			if *this.Field5 < *that1.Field5 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field5 != nil {
+		return 1
+	} else if that1.Field5 != nil {
+		return -1
+	}
+	if this.Field6 != nil && that1.Field6 != nil {
+		if *this.Field6 != *that1.Field6 {
+			if *this.Field6 < *that1.Field6 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field6 != nil {
+		return 1
+	} else if that1.Field6 != nil {
+		return -1
+	}
+	if this.Field7 != nil && that1.Field7 != nil {
+		if *this.Field7 != *that1.Field7 {
+			if *this.Field7 < *that1.Field7 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field7 != nil {
+		return 1
+	} else if that1.Field7 != nil {
+		return -1
+	}
+	if this.Field8 != nil && that1.Field8 != nil {
+		if *this.Field8 != *that1.Field8 {
+			if *this.Field8 < *that1.Field8 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field8 != nil {
+		return 1
+	} else if that1.Field8 != nil {
+		return -1
+	}
+	if this.Field9 != nil && that1.Field9 != nil {
+		if *this.Field9 != *that1.Field9 {
+			if *this.Field9 < *that1.Field9 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field9 != nil {
+		return 1
+	} else if that1.Field9 != nil {
+		return -1
+	}
+	if this.Field10 != nil && that1.Field10 != nil {
+		if *this.Field10 != *that1.Field10 {
+			if *this.Field10 < *that1.Field10 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field10 != nil {
+		return 1
+	} else if that1.Field10 != nil {
+		return -1
+	}
+	if this.Field11 != nil && that1.Field11 != nil {
+		if *this.Field11 != *that1.Field11 {
+			if *this.Field11 < *that1.Field11 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field11 != nil {
+		return 1
+	} else if that1.Field11 != nil {
+		return -1
+	}
+	if this.Field12 != nil && that1.Field12 != nil {
+		if *this.Field12 != *that1.Field12 {
+			if *this.Field12 < *that1.Field12 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field12 != nil {
+		return 1
+	} else if that1.Field12 != nil {
+		return -1
+	}
+	if this.Field13 != nil && that1.Field13 != nil {
+		if *this.Field13 != *that1.Field13 {
+			if !*this.Field13 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field13 != nil {
+		return 1
+	} else if that1.Field13 != nil {
+		return -1
+	}
+	if this.Field14 != nil && that1.Field14 != nil {
+		if *this.Field14 != *that1.Field14 {
+			if *this.Field14 < *that1.Field14 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field14 != nil {
+		return 1
+	} else if that1.Field14 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomContainer) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomContainer)
+	if !ok {
+		that2, ok := that.(CustomContainer)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.CustomStruct.Compare(&that1.CustomStruct); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameNidOptNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameNidOptNative)
+	if !ok {
+		that2, ok := that.(CustomNameNidOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.FieldA != that1.FieldA {
+		if this.FieldA < that1.FieldA {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldB != that1.FieldB {
+		if this.FieldB < that1.FieldB {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldC != that1.FieldC {
+		if this.FieldC < that1.FieldC {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldD != that1.FieldD {
+		if this.FieldD < that1.FieldD {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldE != that1.FieldE {
+		if this.FieldE < that1.FieldE {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldF != that1.FieldF {
+		if this.FieldF < that1.FieldF {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldG != that1.FieldG {
+		if this.FieldG < that1.FieldG {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldH != that1.FieldH {
+		if this.FieldH < that1.FieldH {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldI != that1.FieldI {
+		if this.FieldI < that1.FieldI {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldJ != that1.FieldJ {
+		if this.FieldJ < that1.FieldJ {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldK != that1.FieldK {
+		if this.FieldK < that1.FieldK {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldL != that1.FieldL {
+		if this.FieldL < that1.FieldL {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldM != that1.FieldM {
+		if !this.FieldM {
+			return -1
+		}
+		return 1
+	}
+	if this.FieldN != that1.FieldN {
+		if this.FieldN < that1.FieldN {
+			return -1
+		}
+		return 1
+	}
+	if c := bytes.Compare(this.FieldO, that1.FieldO); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameNinOptNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameNinOptNative)
+	if !ok {
+		that2, ok := that.(CustomNameNinOptNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.FieldA != nil && that1.FieldA != nil {
+		if *this.FieldA != *that1.FieldA {
+			if *this.FieldA < *that1.FieldA {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldA != nil {
+		return 1
+	} else if that1.FieldA != nil {
+		return -1
+	}
+	if this.FieldB != nil && that1.FieldB != nil {
+		if *this.FieldB != *that1.FieldB {
+			if *this.FieldB < *that1.FieldB {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldB != nil {
+		return 1
+	} else if that1.FieldB != nil {
+		return -1
+	}
+	if this.FieldC != nil && that1.FieldC != nil {
+		if *this.FieldC != *that1.FieldC {
+			if *this.FieldC < *that1.FieldC {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldC != nil {
+		return 1
+	} else if that1.FieldC != nil {
+		return -1
+	}
+	if this.FieldD != nil && that1.FieldD != nil {
+		if *this.FieldD != *that1.FieldD {
+			if *this.FieldD < *that1.FieldD {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldD != nil {
+		return 1
+	} else if that1.FieldD != nil {
+		return -1
+	}
+	if this.FieldE != nil && that1.FieldE != nil {
+		if *this.FieldE != *that1.FieldE {
+			if *this.FieldE < *that1.FieldE {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldE != nil {
+		return 1
+	} else if that1.FieldE != nil {
+		return -1
+	}
+	if this.FieldF != nil && that1.FieldF != nil {
+		if *this.FieldF != *that1.FieldF {
+			if *this.FieldF < *that1.FieldF {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldF != nil {
+		return 1
+	} else if that1.FieldF != nil {
+		return -1
+	}
+	if this.FieldG != nil && that1.FieldG != nil {
+		if *this.FieldG != *that1.FieldG {
+			if *this.FieldG < *that1.FieldG {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldG != nil {
+		return 1
+	} else if that1.FieldG != nil {
+		return -1
+	}
+	if this.FieldH != nil && that1.FieldH != nil {
+		if *this.FieldH != *that1.FieldH {
+			if *this.FieldH < *that1.FieldH {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldH != nil {
+		return 1
+	} else if that1.FieldH != nil {
+		return -1
+	}
+	if this.FieldI != nil && that1.FieldI != nil {
+		if *this.FieldI != *that1.FieldI {
+			if *this.FieldI < *that1.FieldI {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldI != nil {
+		return 1
+	} else if that1.FieldI != nil {
+		return -1
+	}
+	if this.FieldJ != nil && that1.FieldJ != nil {
+		if *this.FieldJ != *that1.FieldJ {
+			if *this.FieldJ < *that1.FieldJ {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldJ != nil {
+		return 1
+	} else if that1.FieldJ != nil {
+		return -1
+	}
+	if this.FieldK != nil && that1.FieldK != nil {
+		if *this.FieldK != *that1.FieldK {
+			if *this.FieldK < *that1.FieldK {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldK != nil {
+		return 1
+	} else if that1.FieldK != nil {
+		return -1
+	}
+	if this.FielL != nil && that1.FielL != nil {
+		if *this.FielL != *that1.FielL {
+			if *this.FielL < *that1.FielL {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FielL != nil {
+		return 1
+	} else if that1.FielL != nil {
+		return -1
+	}
+	if this.FieldM != nil && that1.FieldM != nil {
+		if *this.FieldM != *that1.FieldM {
+			if !*this.FieldM {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldM != nil {
+		return 1
+	} else if that1.FieldM != nil {
+		return -1
+	}
+	if this.FieldN != nil && that1.FieldN != nil {
+		if *this.FieldN != *that1.FieldN {
+			if *this.FieldN < *that1.FieldN {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldN != nil {
+		return 1
+	} else if that1.FieldN != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.FieldO, that1.FieldO); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameNinRepNative) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameNinRepNative)
+	if !ok {
+		that2, ok := that.(CustomNameNinRepNative)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.FieldA) != len(that1.FieldA) {
+		if len(this.FieldA) < len(that1.FieldA) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldA {
+		if this.FieldA[i] != that1.FieldA[i] {
+			if this.FieldA[i] < that1.FieldA[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldB) != len(that1.FieldB) {
+		if len(this.FieldB) < len(that1.FieldB) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldB {
+		if this.FieldB[i] != that1.FieldB[i] {
+			if this.FieldB[i] < that1.FieldB[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldC) != len(that1.FieldC) {
+		if len(this.FieldC) < len(that1.FieldC) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldC {
+		if this.FieldC[i] != that1.FieldC[i] {
+			if this.FieldC[i] < that1.FieldC[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldD) != len(that1.FieldD) {
+		if len(this.FieldD) < len(that1.FieldD) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldD {
+		if this.FieldD[i] != that1.FieldD[i] {
+			if this.FieldD[i] < that1.FieldD[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldE) != len(that1.FieldE) {
+		if len(this.FieldE) < len(that1.FieldE) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldE {
+		if this.FieldE[i] != that1.FieldE[i] {
+			if this.FieldE[i] < that1.FieldE[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldF) != len(that1.FieldF) {
+		if len(this.FieldF) < len(that1.FieldF) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldF {
+		if this.FieldF[i] != that1.FieldF[i] {
+			if this.FieldF[i] < that1.FieldF[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldG) != len(that1.FieldG) {
+		if len(this.FieldG) < len(that1.FieldG) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldG {
+		if this.FieldG[i] != that1.FieldG[i] {
+			if this.FieldG[i] < that1.FieldG[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldH) != len(that1.FieldH) {
+		if len(this.FieldH) < len(that1.FieldH) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldH {
+		if this.FieldH[i] != that1.FieldH[i] {
+			if this.FieldH[i] < that1.FieldH[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldI) != len(that1.FieldI) {
+		if len(this.FieldI) < len(that1.FieldI) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldI {
+		if this.FieldI[i] != that1.FieldI[i] {
+			if this.FieldI[i] < that1.FieldI[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldJ) != len(that1.FieldJ) {
+		if len(this.FieldJ) < len(that1.FieldJ) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldJ {
+		if this.FieldJ[i] != that1.FieldJ[i] {
+			if this.FieldJ[i] < that1.FieldJ[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldK) != len(that1.FieldK) {
+		if len(this.FieldK) < len(that1.FieldK) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldK {
+		if this.FieldK[i] != that1.FieldK[i] {
+			if this.FieldK[i] < that1.FieldK[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldL) != len(that1.FieldL) {
+		if len(this.FieldL) < len(that1.FieldL) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldL {
+		if this.FieldL[i] != that1.FieldL[i] {
+			if this.FieldL[i] < that1.FieldL[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldM) != len(that1.FieldM) {
+		if len(this.FieldM) < len(that1.FieldM) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldM {
+		if this.FieldM[i] != that1.FieldM[i] {
+			if !this.FieldM[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldN) != len(that1.FieldN) {
+		if len(this.FieldN) < len(that1.FieldN) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldN {
+		if this.FieldN[i] != that1.FieldN[i] {
+			if this.FieldN[i] < that1.FieldN[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if len(this.FieldO) != len(that1.FieldO) {
+		if len(this.FieldO) < len(that1.FieldO) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldO {
+		if c := bytes.Compare(this.FieldO[i], that1.FieldO[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameNinStruct) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameNinStruct)
+	if !ok {
+		that2, ok := that.(CustomNameNinStruct)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.FieldA != nil && that1.FieldA != nil {
+		if *this.FieldA != *that1.FieldA {
+			if *this.FieldA < *that1.FieldA {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldA != nil {
+		return 1
+	} else if that1.FieldA != nil {
+		return -1
+	}
+	if this.FieldB != nil && that1.FieldB != nil {
+		if *this.FieldB != *that1.FieldB {
+			if *this.FieldB < *that1.FieldB {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldB != nil {
+		return 1
+	} else if that1.FieldB != nil {
+		return -1
+	}
+	if c := this.FieldC.Compare(that1.FieldC); c != 0 {
+		return c
+	}
+	if len(this.FieldD) != len(that1.FieldD) {
+		if len(this.FieldD) < len(that1.FieldD) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldD {
+		if c := this.FieldD[i].Compare(that1.FieldD[i]); c != 0 {
+			return c
+		}
+	}
+	if this.FieldE != nil && that1.FieldE != nil {
+		if *this.FieldE != *that1.FieldE {
+			if *this.FieldE < *that1.FieldE {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldE != nil {
+		return 1
+	} else if that1.FieldE != nil {
+		return -1
+	}
+	if this.FieldF != nil && that1.FieldF != nil {
+		if *this.FieldF != *that1.FieldF {
+			if *this.FieldF < *that1.FieldF {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldF != nil {
+		return 1
+	} else if that1.FieldF != nil {
+		return -1
+	}
+	if c := this.FieldG.Compare(that1.FieldG); c != 0 {
+		return c
+	}
+	if this.FieldH != nil && that1.FieldH != nil {
+		if *this.FieldH != *that1.FieldH {
+			if !*this.FieldH {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldH != nil {
+		return 1
+	} else if that1.FieldH != nil {
+		return -1
+	}
+	if this.FieldI != nil && that1.FieldI != nil {
+		if *this.FieldI != *that1.FieldI {
+			if *this.FieldI < *that1.FieldI {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldI != nil {
+		return 1
+	} else if that1.FieldI != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.FieldJ, that1.FieldJ); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameCustomType) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameCustomType)
+	if !ok {
+		that2, ok := that.(CustomNameCustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.FieldA == nil {
+		if this.FieldA != nil {
+			return 1
+		}
+	} else if this.FieldA == nil {
+		return -1
+	} else if c := this.FieldA.Compare(*that1.FieldA); c != 0 {
+		return c
+	}
+	if that1.FieldB == nil {
+		if this.FieldB != nil {
+			return 1
+		}
+	} else if this.FieldB == nil {
+		return -1
+	} else if c := this.FieldB.Compare(*that1.FieldB); c != 0 {
+		return c
+	}
+	if len(this.FieldC) != len(that1.FieldC) {
+		if len(this.FieldC) < len(that1.FieldC) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldC {
+		if c := this.FieldC[i].Compare(that1.FieldC[i]); c != 0 {
+			return c
+		}
+	}
+	if len(this.FieldD) != len(that1.FieldD) {
+		if len(this.FieldD) < len(that1.FieldD) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldD {
+		if c := this.FieldD[i].Compare(that1.FieldD[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameNinEmbeddedStructUnion) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameNinEmbeddedStructUnion)
+	if !ok {
+		that2, ok := that.(CustomNameNinEmbeddedStructUnion)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.NidOptNative.Compare(that1.NidOptNative); c != 0 {
+		return c
+	}
+	if c := this.FieldA.Compare(that1.FieldA); c != 0 {
+		return c
+	}
+	if this.FieldB != nil && that1.FieldB != nil {
+		if *this.FieldB != *that1.FieldB {
+			if !*this.FieldB {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldB != nil {
+		return 1
+	} else if that1.FieldB != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomNameEnum) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomNameEnum)
+	if !ok {
+		that2, ok := that.(CustomNameEnum)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.FieldA != nil && that1.FieldA != nil {
+		if *this.FieldA != *that1.FieldA {
+			if *this.FieldA < *that1.FieldA {
+				return -1
+			}
+			return 1
+		}
+	} else if this.FieldA != nil {
+		return 1
+	} else if that1.FieldA != nil {
+		return -1
+	}
+	if len(this.FieldB) != len(that1.FieldB) {
+		if len(this.FieldB) < len(that1.FieldB) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.FieldB {
+		if this.FieldB[i] != that1.FieldB[i] {
+			if this.FieldB[i] < that1.FieldB[i] {
+				return -1
+			}
+			return 1
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *NoExtensionsMap) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*NoExtensionsMap)
+	if !ok {
+		that2, ok := that.(NoExtensionsMap)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_extensions, that1.XXX_extensions); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *Unrecognized) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Unrecognized)
+	if !ok {
+		that2, ok := that.(Unrecognized)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	return 0
+}
+func (this *UnrecognizedWithInner) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*UnrecognizedWithInner)
+	if !ok {
+		that2, ok := that.(UnrecognizedWithInner)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if len(this.Embedded) != len(that1.Embedded) {
+		if len(this.Embedded) < len(that1.Embedded) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Embedded {
+		if c := this.Embedded[i].Compare(that1.Embedded[i]); c != 0 {
+			return c
+		}
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *UnrecognizedWithInner_Inner) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*UnrecognizedWithInner_Inner)
+	if !ok {
+		that2, ok := that.(UnrecognizedWithInner_Inner)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	return 0
+}
+func (this *UnrecognizedWithEmbed) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*UnrecognizedWithEmbed)
+	if !ok {
+		that2, ok := that.(UnrecognizedWithEmbed)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.UnrecognizedWithEmbed_Embedded.Compare(&that1.UnrecognizedWithEmbed_Embedded); c != 0 {
+		return c
+	}
+	if this.Field2 != nil && that1.Field2 != nil {
+		if *this.Field2 != *that1.Field2 {
+			if *this.Field2 < *that1.Field2 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field2 != nil {
+		return 1
+	} else if that1.Field2 != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *UnrecognizedWithEmbed_Embedded) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*UnrecognizedWithEmbed_Embedded)
+	if !ok {
+		that2, ok := that.(UnrecognizedWithEmbed_Embedded)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != nil && that1.Field1 != nil {
+		if *this.Field1 != *that1.Field1 {
+			if *this.Field1 < *that1.Field1 {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Field1 != nil {
+		return 1
+	} else if that1.Field1 != nil {
+		return -1
+	}
+	return 0
+}
+func (this *Node) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Node)
+	if !ok {
+		that2, ok := that.(Node)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Label != nil && that1.Label != nil {
+		if *this.Label != *that1.Label {
+			if *this.Label < *that1.Label {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Label != nil {
+		return 1
+	} else if that1.Label != nil {
+		return -1
+	}
+	if len(this.Children) != len(that1.Children) {
+		if len(this.Children) < len(that1.Children) {
+			return -1
+		}
+		return 1
+	}
+	for i := range this.Children {
+		if c := this.Children[i].Compare(that1.Children[i]); c != 0 {
+			return c
+		}
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
 func (this *NidOptNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
@@ -2564,6 +7543,12 @@ func ThetestDescription() (desc *descriptor.FileDescriptorSet) {
 			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(8),
 			Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"),
 			JsonName: func(v string) *string { return &v }("protosizerAll"),
+		}, {Name: func(v string) *string { return &v }("compare_all"),
+			Number:   func(v int32) *int32 { return &v }(63029),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(8),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.FileOptions"),
+			JsonName: func(v string) *string { return &v }("compareAll"),
 		}, {Name: func(v string) *string { return &v }("goproto_getters"),
 			Number:   func(v int32) *int32 { return &v }(64001),
 			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
@@ -2690,6 +7675,12 @@ func ThetestDescription() (desc *descriptor.FileDescriptorSet) {
 			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(8),
 			Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"),
 			JsonName: func(v string) *string { return &v }("protosizer"),
+		}, {Name: func(v string) *string { return &v }("compare"),
+			Number:   func(v int32) *int32 { return &v }(64029),
+			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
+			Type:     func(v descriptor.FieldDescriptorProto_Type) *descriptor.FieldDescriptorProto_Type { return &v }(8),
+			Extendee: func(v string) *string { return &v }(".google.protobuf.MessageOptions"),
+			JsonName: func(v string) *string { return &v }("compare"),
 		}, {Name: func(v string) *string { return &v }("nullable"),
 			Number:   func(v int32) *int32 { return &v }(65001),
 			Label:    func(v descriptor.FieldDescriptorProto_Label) *descriptor.FieldDescriptorProto_Label { return &v }(1),
@@ -4878,7 +9869,7 @@ func ThetestDescription() (desc *descriptor.FileDescriptorSet) {
 			Extendee: func(v string) *string { return &v }(".test.NoExtensionsMap"),
 			JsonName: func(v string) *string { return &v }("fieldC1"),
 		}},
-		Options: &descriptor.FileOptions{XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x1}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1}), 63028: proto.NewExtension([]byte{0xa0, 0xe3, 0x1e, 0x0})}},
+		Options: &descriptor.FileOptions{XXX_extensions: map[int32]proto.Extension{63001: proto.NewExtension([]byte{0xc8, 0xe1, 0x1e, 0x0}), 63002: proto.NewExtension([]byte{0xd0, 0xe1, 0x1e, 0x0}), 63003: proto.NewExtension([]byte{0xd8, 0xe1, 0x1e, 0x0}), 63004: proto.NewExtension([]byte{0xe0, 0xe1, 0x1e, 0x1}), 63005: proto.NewExtension([]byte{0xe8, 0xe1, 0x1e, 0x1}), 63006: proto.NewExtension([]byte{0xf0, 0xe1, 0x1e, 0x1}), 63007: proto.NewExtension([]byte{0xf8, 0xe1, 0x1e, 0x1}), 63008: proto.NewExtension([]byte{0x80, 0xe2, 0x1e, 0x1}), 63013: proto.NewExtension([]byte{0xa8, 0xe2, 0x1e, 0x1}), 63014: proto.NewExtension([]byte{0xb0, 0xe2, 0x1e, 0x1}), 63015: proto.NewExtension([]byte{0xb8, 0xe2, 0x1e, 0x1}), 63016: proto.NewExtension([]byte{0xc0, 0xe2, 0x1e, 0x1}), 63017: proto.NewExtension([]byte{0xc8, 0xe2, 0x1e, 0x0}), 63018: proto.NewExtension([]byte{0xd0, 0xe2, 0x1e, 0x0}), 63020: proto.NewExtension([]byte{0xe0, 0xe2, 0x1e, 0x1}), 63021: proto.NewExtension([]byte{0xe8, 0xe2, 0x1e, 0x0}), 63022: proto.NewExtension([]byte{0xf0, 0xe2, 0x1e, 0x1}), 63023: proto.NewExtension([]byte{0xf8, 0xe2, 0x1e, 0x1}), 63024: proto.NewExtension([]byte{0x80, 0xe3, 0x1e, 0x1}), 63028: proto.NewExtension([]byte{0xa0, 0xe3, 0x1e, 0x0}), 63029: proto.NewExtension([]byte{0xa8, 0xe3, 0x1e, 0x1})}},
 	}},
 	}
 }
@@ -37139,30 +42130,30 @@ var (
 )
 
 var fileDescriptorThetest = []byte{
-	// 3008 bytes of a gzipped FileDescriptorProto
+	// 3011 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xcc, 0x5a, 0x4d, 0x6c, 0x1b, 0xc7,
 	0xf5, 0xd7, 0xee, 0x90, 0x32, 0x35, 0xa2, 0x24, 0x7a, 0x13, 0x33, 0x0b, 0x46, 0x7f, 0x49, 0xde,
-	0xbf, 0xac, 0x2a, 0x84, 0x2d, 0x91, 0x14, 0x25, 0xcb, 0x4c, 0x93, 0x42, 0xfc, 0x70, 0x6d, 0xd7,
+	0xbf, 0xa2, 0x2a, 0x84, 0x2d, 0x91, 0x14, 0x25, 0xcb, 0x4c, 0x93, 0x42, 0xfc, 0x70, 0x6d, 0xd7,
 	0xa2, 0x0c, 0x46, 0x6e, 0x6b, 0xa0, 0x40, 0x41, 0x89, 0x2b, 0x89, 0xa8, 0xb4, 0x14, 0xc8, 0xa5,
-	0x6b, 0xf7, 0x50, 0x04, 0x39, 0x14, 0x46, 0xaf, 0x45, 0x8f, 0x6d, 0x5c, 0x14, 0x05, 0xd2, 0x5b,
+	0x6b, 0xf7, 0x50, 0x04, 0x39, 0x14, 0x46, 0xaf, 0x45, 0x8f, 0x6d, 0x5c, 0x14, 0x05, 0xdc, 0x5b,
 	0x0e, 0x45, 0x51, 0x14, 0x45, 0xe3, 0x4b, 0x01, 0xf5, 0x66, 0xf4, 0x54, 0x14, 0x85, 0x91, 0x38,
 	0x97, 0x1c, 0xd3, 0x53, 0x73, 0xc8, 0xa1, 0xb3, 0xbb, 0x33, 0xb3, 0x33, 0xb3, 0xbb, 0xdc, 0xa5,
 	0x25, 0xb7, 0x39, 0x2c, 0x3f, 0xe6, 0xbd, 0x37, 0xf3, 0xf6, 0xfd, 0x7e, 0x6f, 0xe6, 0xed, 0xce,
 	0xc0, 0xd9, 0xdd, 0xce, 0xd1, 0x4e, 0xa7, 0xb7, 0xdc, 0x37, 0x7a, 0xcd, 0x3d, 0x7d, 0xa7, 0x63,
 	0x1e, 0x2c, 0x9b, 0x07, 0xba, 0xa9, 0xf7, 0xcc, 0xa5, 0xe3, 0x6e, 0xc7, 0xec, 0x28, 0x31, 0xeb,
-	0x77, 0xe6, 0xca, 0x7e, 0xdb, 0x3c, 0xe8, 0xef, 0x2c, 0x21, 0xed, 0xe5, 0xfd, 0xce, 0x7e, 0x67,
+	0x77, 0xe6, 0xf2, 0x7e, 0xdb, 0x3c, 0xe8, 0xef, 0x2c, 0x21, 0xed, 0xe5, 0xfd, 0xce, 0x7e, 0x67,
 	0xd9, 0x16, 0xee, 0xf4, 0xf7, 0xec, 0x7f, 0xf6, 0x1f, 0xfb, 0x97, 0x63, 0xa4, 0xfd, 0x13, 0xc0,
-	0x64, 0xbd, 0xdd, 0xda, 0x3a, 0x36, 0xeb, 0x4d, 0xb3, 0x7d, 0x5f, 0x57, 0xa6, 0xe1, 0xe8, 0xf5,
+	0x64, 0xbd, 0xdd, 0xda, 0x3a, 0x36, 0xeb, 0x4d, 0xb3, 0x7d, 0x4f, 0x57, 0xa6, 0xe1, 0xe8, 0xb5,
 	0xb6, 0x7e, 0xd8, 0xca, 0xab, 0xd2, 0x9c, 0xb4, 0x28, 0x95, 0x63, 0x27, 0xcf, 0x66, 0x47, 0x1a,
 	0xa3, 0x7b, 0x76, 0x1b, 0x95, 0x16, 0x54, 0x19, 0x49, 0x65, 0x4e, 0x5a, 0xa0, 0xd2, 0x15, 0x15,
 	0x20, 0x69, 0x9c, 0x93, 0xae, 0x50, 0x69, 0x51, 0x8d, 0x21, 0x29, 0xe0, 0xa4, 0x45, 0x2a, 0x5d,
 	0x55, 0xe3, 0x48, 0x3a, 0xc1, 0x49, 0x57, 0xa9, 0x74, 0x4d, 0x1d, 0x45, 0xd2, 0x18, 0x27, 0x5d,
-	0xa3, 0xd2, 0xab, 0xea, 0x39, 0x24, 0x3d, 0xcf, 0x49, 0xaf, 0x52, 0xe9, 0xba, 0x9a, 0x40, 0x52,
-	0x85, 0x93, 0xae, 0x53, 0xe9, 0x35, 0x75, 0x0c, 0x49, 0xcf, 0x71, 0xd2, 0x6b, 0xca, 0x0c, 0x3c,
+	0xa3, 0xd2, 0x2b, 0xea, 0x39, 0x24, 0x3d, 0xcf, 0x49, 0xaf, 0x50, 0xe9, 0xba, 0x9a, 0x40, 0x52,
+	0x85, 0x93, 0xae, 0x53, 0xe9, 0x55, 0x75, 0x0c, 0x49, 0xcf, 0x71, 0xd2, 0xab, 0xca, 0x0c, 0x3c,
 	0xe7, 0x44, 0x23, 0xa7, 0x42, 0x24, 0x9e, 0xc2, 0xe2, 0x73, 0x4e, 0x38, 0x72, 0xae, 0x3c, 0xaf,
 	0x8e, 0x23, 0xf9, 0x28, 0x2f, 0xcf, 0xbb, 0xf2, 0x82, 0x9a, 0x44, 0xf2, 0x14, 0x2f, 0x2f, 0xb8,
 	0xf2, 0x15, 0x75, 0x02, 0xc9, 0x13, 0xbc, 0x7c, 0xc5, 0x95, 0x17, 0xd5, 0x49, 0x24, 0x1f, 0xe3,
-	0xe5, 0x45, 0x57, 0xbe, 0xaa, 0x4e, 0x21, 0x79, 0x92, 0x97, 0xaf, 0x6a, 0xef, 0xd9, 0xf0, 0x1a,
+	0xe5, 0x45, 0x57, 0xbe, 0xaa, 0x4e, 0x21, 0x79, 0x92, 0x97, 0xaf, 0x6a, 0xef, 0xdb, 0xf0, 0x1a,
 	0x2e, 0xbc, 0x69, 0x1e, 0x5e, 0x0a, 0x6c, 0x9a, 0x07, 0x96, 0x42, 0x9a, 0xe6, 0x21, 0xa5, 0x60,
 	0xa6, 0x79, 0x30, 0x29, 0x8c, 0x69, 0x1e, 0x46, 0x0a, 0x60, 0x9a, 0x07, 0x90, 0x42, 0x97, 0xe6,
 	0xa1, 0xa3, 0xa0, 0xa5, 0x79, 0xd0, 0x28, 0x5c, 0x69, 0x1e, 0x2e, 0x0a, 0x94, 0x2a, 0x00, 0xe5,
@@ -37174,18 +42165,18 @@ var fileDescriptorThetest = []byte{
 	0xe6, 0xc2, 0x9b, 0xe6, 0xe1, 0xf5, 0xcd, 0x31, 0x10, 0x90, 0x63, 0x20, 0x20, 0xc7, 0x40, 0x40,
 	0x8e, 0x81, 0x80, 0x1c, 0x03, 0x01, 0x39, 0x06, 0x02, 0x72, 0x0c, 0x04, 0xe4, 0x18, 0x08, 0xca,
 	0x31, 0x10, 0x98, 0x63, 0x20, 0x30, 0xc7, 0x40, 0x60, 0x8e, 0x81, 0xc0, 0x1c, 0x03, 0x81, 0x39,
-	0x06, 0xd8, 0x1c, 0xfb, 0x13, 0x80, 0x8a, 0x93, 0x63, 0x77, 0x9a, 0xbb, 0x3f, 0xd0, 0x5b, 0x18,
+	0x06, 0xd8, 0x1c, 0xfb, 0x13, 0x80, 0x8a, 0x93, 0x63, 0xb7, 0x9b, 0xbb, 0x3f, 0xd0, 0x5b, 0x18,
 	0x8a, 0x19, 0x21, 0xd3, 0x46, 0x2d, 0xe8, 0x52, 0x2e, 0x24, 0x33, 0x42, 0xae, 0xf1, 0xf2, 0x02,
 	0x95, 0x93, 0x6c, 0xe3, 0xe5, 0x2b, 0x54, 0x4e, 0xf2, 0x8d, 0x97, 0x17, 0xa9, 0x9c, 0x64, 0x1c,
-	0x2f, 0x5f, 0xa5, 0x72, 0x92, 0x73, 0xbc, 0x7c, 0x8d, 0xca, 0x49, 0xd6, 0xf1, 0xf2, 0xab, 0x54,
-	0x4e, 0xf2, 0x8e, 0x97, 0xaf, 0x53, 0x39, 0xc9, 0x3c, 0x5e, 0x7e, 0x4d, 0x99, 0x13, 0x73, 0x8f,
+	0x2f, 0x5f, 0xa5, 0x72, 0x92, 0x73, 0xbc, 0x7c, 0x8d, 0xca, 0x49, 0xd6, 0xf1, 0xf2, 0x2b, 0x54,
+	0x4e, 0xf2, 0x8e, 0x97, 0xaf, 0x53, 0x39, 0xc9, 0x3c, 0x5e, 0x7e, 0x55, 0x99, 0x13, 0x73, 0x8f,
 	0x28, 0x50, 0x68, 0xe7, 0xc4, 0xec, 0x13, 0x34, 0xf2, 0xae, 0x06, 0xc9, 0x3f, 0x41, 0xa3, 0xe0,
-	0x6a, 0x90, 0x0c, 0x14, 0x34, 0x56, 0xb4, 0x47, 0x36, 0x7c, 0x86, 0x08, 0x5f, 0x46, 0x80, 0x4f,
+	0x6a, 0x90, 0x0c, 0x14, 0x34, 0x56, 0xb4, 0x87, 0x36, 0x7c, 0x86, 0x08, 0x5f, 0x46, 0x80, 0x4f,
 	0x66, 0xa0, 0xcb, 0x08, 0xd0, 0xc9, 0x0c, 0x6c, 0x19, 0x01, 0x36, 0x99, 0x81, 0x2c, 0x23, 0x40,
 	0x26, 0x33, 0x70, 0x65, 0x04, 0xb8, 0x64, 0x06, 0xaa, 0x8c, 0x00, 0x95, 0xcc, 0xc0, 0x94, 0x11,
 	0x60, 0x92, 0x19, 0x88, 0x32, 0x02, 0x44, 0x32, 0x03, 0x4f, 0x46, 0x80, 0x47, 0x66, 0xa0, 0x99,
 	0x16, 0xa1, 0x91, 0x59, 0x58, 0xa6, 0x45, 0x58, 0x64, 0x16, 0x92, 0x69, 0x11, 0x12, 0x99, 0x85,
-	0x63, 0x5a, 0x84, 0x43, 0x66, 0xa1, 0xf8, 0x52, 0x26, 0x15, 0xe1, 0x3b, 0x66, 0xb7, 0xbf, 0x6b,
+	0x63, 0x5a, 0x84, 0x43, 0x66, 0xa1, 0xf8, 0x52, 0x26, 0x15, 0xe1, 0xbb, 0x66, 0xb7, 0xbf, 0x6b,
 	0x9e, 0xaa, 0x22, 0xcc, 0x71, 0xe5, 0xc3, 0x78, 0x41, 0x59, 0xb2, 0x0b, 0x56, 0xb6, 0xe2, 0x14,
 	0x56, 0xb0, 0x1c, 0x57, 0x58, 0x30, 0x16, 0x86, 0xbf, 0x45, 0xf1, 0x54, 0xb5, 0x61, 0x8e, 0x2b,
 	0x33, 0xc2, 0xfd, 0x5b, 0x7f, 0xe9, 0x15, 0xdb, 0x13, 0x99, 0x54, 0x6c, 0x38, 0xfc, 0xc3, 0x56,
@@ -37194,60 +42185,60 @@ var fileDescriptorThetest = []byte{
 	0x6f, 0xe5, 0xb8, 0xa9, 0x64, 0x58, 0x06, 0x83, 0xa1, 0x19, 0x3c, 0x6c, 0xe5, 0x95, 0xe3, 0xa6,
 	0x97, 0xa1, 0x19, 0xfc, 0x12, 0xea, 0x21, 0xcc, 0x60, 0x37, 0xfc, 0xc3, 0xd6, 0x43, 0xd9, 0xf0,
 	0x90, 0xfb, 0x32, 0x18, 0x0c, 0xc1, 0xe0, 0x28, 0xf5, 0x51, 0x36, 0x3c, 0xb4, 0xfe, 0x0c, 0x3e,
-	0x75, 0x35, 0xf3, 0xbe, 0x04, 0xcf, 0xa3, 0x61, 0x6a, 0x47, 0x3b, 0x7a, 0xab, 0xa5, 0xb7, 0x70,
+	0x75, 0x35, 0xf3, 0x81, 0x04, 0xcf, 0xa3, 0x61, 0x6a, 0x47, 0x3b, 0x7a, 0xab, 0xa5, 0xb7, 0x70,
 	0x1c, 0x73, 0xdc, 0x4c, 0x10, 0x00, 0xf5, 0xd3, 0x67, 0xb3, 0x6e, 0x84, 0x57, 0x61, 0xc2, 0x89,
 	0x70, 0x2e, 0xa7, 0x9e, 0x48, 0x21, 0x33, 0x5c, 0x62, 0x0f, 0xab, 0x2a, 0x17, 0x89, 0x19, 0x5a,
 	0x7b, 0xfe, 0x26, 0x31, 0xb3, 0x1c, 0x56, 0xc9, 0xe7, 0xb4, 0x9f, 0xd9, 0x1e, 0x1a, 0xa7, 0xf6,
 	0x70, 0x39, 0x92, 0x87, 0x8c, 0x6f, 0xaf, 0x7b, 0x7c, 0x63, 0xbc, 0xea, 0xc3, 0x29, 0x64, 0x56,
 	0x47, 0xe6, 0xd1, 0x5c, 0x72, 0x74, 0x84, 0xf9, 0x20, 0xc7, 0xd1, 0x92, 0xb5, 0xa0, 0x94, 0xe6,
 	0xe7, 0x08, 0xad, 0x6d, 0x0d, 0x6b, 0x70, 0xc3, 0x66, 0x83, 0x86, 0x75, 0x67, 0x76, 0x3a, 0x60,
-	0x36, 0x68, 0x40, 0x37, 0x87, 0xe8, 0x50, 0x0f, 0xc8, 0xe2, 0x5c, 0xe9, 0xf7, 0xcc, 0xce, 0x11,
-	0x9a, 0x1c, 0xe4, 0x9b, 0x2d, 0x7b, 0x8c, 0x64, 0x39, 0x69, 0x39, 0xf5, 0x8f, 0x67, 0xb3, 0xb1,
-	0xbb, 0x7d, 0xe4, 0xab, 0xdc, 0x6e, 0x29, 0xb7, 0x60, 0xfc, 0xdb, 0xcd, 0xc3, 0xbe, 0x6e, 0x2f,
-	0x11, 0xc9, 0x72, 0x11, 0x2b, 0x5c, 0x0e, 0x7c, 0x47, 0x64, 0x0d, 0xbc, 0xbc, 0x6b, 0x77, 0xbd,
-	0x74, 0xb7, 0x6d, 0x98, 0xf9, 0xc2, 0x7a, 0x23, 0x7e, 0xdf, 0xea, 0x42, 0xfb, 0x1e, 0x84, 0xce,
+	0x36, 0x68, 0x40, 0x37, 0x87, 0xe8, 0x50, 0xf7, 0xc9, 0xe2, 0x5c, 0xe9, 0xf7, 0xcc, 0xce, 0x11,
+	0x9a, 0x1c, 0xe4, 0x1b, 0x2d, 0x7b, 0x8c, 0x64, 0x39, 0x69, 0x39, 0xf5, 0x8f, 0x67, 0xb3, 0xb1,
+	0x3b, 0x7d, 0xe4, 0xab, 0xdc, 0x6e, 0x29, 0x37, 0x61, 0xfc, 0xdb, 0xcd, 0xc3, 0xbe, 0x6e, 0x2f,
+	0x11, 0xc9, 0x72, 0x11, 0x2b, 0x5c, 0x0a, 0x7c, 0x47, 0x64, 0x0d, 0xbc, 0xbc, 0x6b, 0x77, 0xbd,
+	0x74, 0xa7, 0x6d, 0x98, 0xf9, 0xc2, 0x7a, 0x23, 0x7e, 0xcf, 0xea, 0x42, 0xfb, 0x1e, 0x84, 0xce,
 	0x98, 0xd5, 0x66, 0xef, 0x40, 0xa9, 0x93, 0x9e, 0x9d, 0xa1, 0xd7, 0x51, 0xaf, 0xc5, 0x28, 0xbd,
-	0x5e, 0x69, 0x21, 0xeb, 0x2b, 0xe6, 0xc3, 0x63, 0x7d, 0xa9, 0xfc, 0x10, 0xb5, 0x93, 0xde, 0x8f,
-	0xc9, 0xaa, 0x87, 0xef, 0x4b, 0x65, 0xee, 0x2b, 0xc1, 0xdd, 0xd3, 0x75, 0xfe, 0x9e, 0x72, 0x2f,
-	0x7a, 0x3f, 0x0f, 0xc8, 0x22, 0x21, 0x44, 0x12, 0x84, 0x45, 0x12, 0x9c, 0x36, 0x92, 0xc7, 0x64,
+	0x5e, 0x6e, 0x21, 0xeb, 0xcb, 0xe6, 0x83, 0x63, 0x7d, 0xa9, 0xfc, 0x00, 0xb5, 0x93, 0xde, 0x8f,
+	0xc9, 0xaa, 0x87, 0xef, 0x4b, 0x65, 0xee, 0x2b, 0xc1, 0xdd, 0xd3, 0x35, 0xfe, 0x9e, 0x72, 0x2f,
+	0x7a, 0x3f, 0xf7, 0xc9, 0x22, 0x21, 0x44, 0x12, 0x84, 0x45, 0x12, 0x9c, 0x36, 0x92, 0xc7, 0x64,
 	0x7e, 0x14, 0xee, 0x15, 0x0c, 0xba, 0x57, 0x70, 0x9a, 0x7b, 0xfd, 0xb7, 0x93, 0xad, 0x34, 0x9f,
-	0xee, 0x1a, 0xed, 0x8e, 0xf1, 0x95, 0x7b, 0x17, 0x74, 0xa6, 0x55, 0x40, 0x29, 0x76, 0xf2, 0x78,
-	0x56, 0xd2, 0xde, 0x97, 0xc9, 0x9d, 0x3b, 0x89, 0xf4, 0x62, 0x77, 0xfe, 0x55, 0xa9, 0xa9, 0x5e,
+	0xee, 0x18, 0xed, 0x8e, 0xf1, 0x95, 0x7b, 0x17, 0x74, 0xa6, 0x55, 0x40, 0x29, 0x76, 0xf2, 0x68,
+	0x56, 0xd2, 0x3e, 0x90, 0xc9, 0x9d, 0x3b, 0x89, 0xf4, 0x62, 0x77, 0xfe, 0x55, 0xa9, 0xa9, 0x5e,
 	0x46, 0x84, 0x7e, 0x29, 0xc1, 0xb4, 0x67, 0x26, 0x77, 0xc2, 0x74, 0xb6, 0xd3, 0xb9, 0x31, 0xec,
 	0x74, 0x8e, 0x1d, 0xfc, 0x9d, 0x04, 0x5f, 0x15, 0xa6, 0x57, 0xc7, 0xbd, 0x65, 0xc1, 0xbd, 0xd7,
 	0xbc, 0x23, 0xd9, 0x8a, 0x8c, 0x77, 0x2c, 0xbc, 0x82, 0x01, 0xd3, 0x33, 0xc5, 0xbd, 0x28, 0xe0,
 	0x3e, 0x4d, 0x0d, 0x7c, 0xc2, 0x45, 0x18, 0x80, 0xdd, 0xee, 0xc0, 0xd8, 0x76, 0x57, 0xb7, 0x5e,
 	0x41, 0xc8, 0x5b, 0x5d, 0xec, 0xe1, 0xa4, 0x63, 0xbf, 0xd5, 0x2d, 0x77, 0x9b, 0xc6, 0xee, 0x41,
 	0x43, 0xee, 0x74, 0xd1, 0x62, 0x0b, 0x36, 0x8c, 0x16, 0xf6, 0x68, 0xca, 0x51, 0x40, 0x0d, 0x58,
-	0x03, 0x34, 0x8d, 0x16, 0xea, 0x22, 0x76, 0x5b, 0x6f, 0xee, 0x61, 0x27, 0xa0, 0xa3, 0x63, 0xb5,
+	0x03, 0x34, 0x8d, 0x16, 0xea, 0x22, 0x76, 0x4b, 0x6f, 0xee, 0x61, 0x27, 0xa0, 0xa3, 0x63, 0xb5,
 	0x34, 0x62, 0x87, 0xe8, 0x13, 0x0f, 0xf8, 0x5d, 0x98, 0x20, 0x1d, 0x2b, 0xf3, 0x96, 0xc5, 0x9e,
 	0x89, 0x87, 0xc5, 0x16, 0x96, 0x3b, 0x78, 0xe5, 0x42, 0x76, 0x7b, 0xa6, 0xb2, 0x00, 0xe3, 0x8d,
-	0xf6, 0xfe, 0x81, 0x89, 0x07, 0xf7, 0xaa, 0xc5, 0xbb, 0x96, 0x58, 0xbb, 0x07, 0xc7, 0xa8, 0x47,
+	0xf6, 0xfe, 0x81, 0x89, 0x07, 0xf7, 0xaa, 0xc5, 0xbb, 0x96, 0x58, 0xbb, 0x0b, 0xc7, 0xa8, 0x47,
 	0x67, 0xdc, 0x75, 0xd5, 0xb9, 0x35, 0xf4, 0x24, 0xcc, 0xac, 0x27, 0xe4, 0xbd, 0xa5, 0x33, 0x7b,
-	0x29, 0x73, 0x30, 0x81, 0xc2, 0xec, 0x4e, 0xfa, 0xa4, 0x22, 0x4d, 0xf4, 0x70, 0xab, 0xf6, 0x9e,
-	0x04, 0x13, 0x55, 0x5d, 0x3f, 0xb6, 0x03, 0x7e, 0x09, 0xc6, 0xaa, 0x9d, 0x1f, 0x1a, 0xd8, 0xc1,
-	0xf3, 0x38, 0xa2, 0x96, 0x18, 0xc7, 0x34, 0xd6, 0x42, 0x62, 0xa4, 0xc6, 0xc4, 0xfd, 0x15, 0x1a,
-	0x77, 0x46, 0xcf, 0x8e, 0xbd, 0xc6, 0xc5, 0x1e, 0x03, 0x68, 0x29, 0x79, 0xe2, 0x7f, 0x15, 0x8e,
-	0x33, 0xa3, 0x28, 0x8b, 0xd8, 0x0d, 0x59, 0x34, 0x64, 0x63, 0x65, 0x79, 0xa2, 0xe9, 0x70, 0x82,
-	0x1b, 0xd8, 0x32, 0x65, 0x42, 0x1c, 0x60, 0x6a, 0x87, 0x39, 0xcb, 0x87, 0xd9, 0x5f, 0x15, 0x87,
-	0x3a, 0xe7, 0xc4, 0xc8, 0x0e, 0xf7, 0xbc, 0x43, 0xce, 0x60, 0x10, 0x4d, 0xf4, 0x5b, 0x8b, 0x43,
-	0x50, 0x6f, 0x1f, 0x6a, 0x6f, 0x41, 0xe8, 0xa4, 0x7c, 0xcd, 0xe8, 0x1f, 0x09, 0x59, 0x37, 0x49,
-	0x02, 0xbc, 0x7d, 0xa0, 0x6f, 0xa3, 0x6f, 0x4b, 0x85, 0xaf, 0xa7, 0xac, 0x09, 0x06, 0x3a, 0x29,
-	0x66, 0xdb, 0xbf, 0x11, 0x6a, 0xef, 0x5b, 0x89, 0x59, 0xaa, 0xaa, 0xa3, 0x7a, 0x4f, 0x37, 0x37,
-	0x8c, 0x8e, 0x79, 0xa0, 0x77, 0x05, 0x8b, 0x82, 0xb2, 0xc2, 0x25, 0xec, 0x64, 0xe1, 0x75, 0x6a,
-	0x11, 0x68, 0xb4, 0xa2, 0x7d, 0x68, 0x3b, 0x68, 0x95, 0x02, 0x9e, 0x1b, 0x04, 0x11, 0x6e, 0x50,
-	0x59, 0xe3, 0xea, 0xb7, 0x01, 0x6e, 0x0a, 0x8f, 0x96, 0xd7, 0xb8, 0xe7, 0x9c, 0xc1, 0xce, 0xf2,
-	0xcf, 0x98, 0x24, 0xa6, 0xc4, 0xe5, 0x37, 0x42, 0x5d, 0x0e, 0xa8, 0x6e, 0x87, 0x8d, 0x29, 0x88,
-	0x1a, 0xd3, 0x3f, 0xd2, 0x8a, 0xc3, 0x6a, 0xae, 0xea, 0x7b, 0xcd, 0xfe, 0xa1, 0xa9, 0x5c, 0x0e,
-	0xc5, 0xbe, 0x24, 0x55, 0xa8, 0xab, 0xc5, 0xa8, 0xf0, 0x97, 0xe4, 0x72, 0x99, 0xba, 0x7b, 0x75,
-	0x08, 0x0a, 0x94, 0xe4, 0x4a, 0x85, 0x4e, 0xdb, 0x89, 0x47, 0x28, 0x8b, 0x3f, 0x78, 0x3c, 0x3b,
-	0xa2, 0xfd, 0x16, 0x39, 0x8f, 0x35, 0x19, 0xe2, 0x5e, 0x11, 0x9c, 0xbf, 0x40, 0xe6, 0x0c, 0xbf,
+	0x29, 0x73, 0x30, 0x81, 0xc2, 0xec, 0x4e, 0xfa, 0xa4, 0x22, 0x4d, 0xf4, 0x70, 0xab, 0xf6, 0xbe,
+	0x04, 0x13, 0x55, 0x5d, 0x3f, 0xb6, 0x03, 0xfe, 0x06, 0x8c, 0x55, 0x3b, 0x3f, 0x34, 0xb0, 0x83,
+	0xe7, 0x71, 0x44, 0x2d, 0x31, 0x8e, 0x69, 0xac, 0x85, 0xc4, 0x48, 0x8d, 0x89, 0xfb, 0x2b, 0x34,
+	0xee, 0x8c, 0x9e, 0x1d, 0x7b, 0x8d, 0x8b, 0x3d, 0x06, 0xd0, 0x52, 0xf2, 0xc4, 0xff, 0x0a, 0x1c,
+	0x67, 0x46, 0x51, 0x16, 0xb1, 0x1b, 0xb2, 0x68, 0xc8, 0xc6, 0xca, 0xf2, 0x44, 0xd3, 0xe1, 0x04,
+	0x37, 0xb0, 0x65, 0xca, 0x84, 0x38, 0xc0, 0xd4, 0x0e, 0x73, 0x96, 0x0f, 0xb3, 0xbf, 0x2a, 0x0e,
+	0x75, 0xce, 0x89, 0x91, 0x1d, 0xee, 0x79, 0x87, 0x9c, 0xc1, 0x20, 0x9a, 0xe8, 0xb7, 0x16, 0x87,
+	0xa0, 0xde, 0x3e, 0xd4, 0xde, 0x86, 0xd0, 0x49, 0xf9, 0x9a, 0xd1, 0x3f, 0x12, 0xb2, 0x6e, 0x92,
+	0x04, 0x78, 0xfb, 0x40, 0xdf, 0x46, 0xdf, 0x96, 0x0a, 0x5f, 0x4f, 0x59, 0x13, 0x0c, 0x74, 0x52,
+	0xcc, 0xb6, 0x7f, 0x33, 0xd4, 0xde, 0xb7, 0x12, 0xb3, 0x54, 0x55, 0x47, 0xf5, 0xae, 0x6e, 0x6e,
+	0x18, 0x1d, 0xf3, 0x40, 0xef, 0x0a, 0x16, 0x05, 0x65, 0x85, 0x4b, 0xd8, 0xc9, 0xc2, 0xeb, 0xd4,
+	0x22, 0xd0, 0x68, 0x45, 0xfb, 0xd0, 0x76, 0xd0, 0x2a, 0x05, 0x3c, 0x37, 0x08, 0x22, 0xdc, 0xa0,
+	0xb2, 0xc6, 0xd5, 0x6f, 0x03, 0xdc, 0x14, 0x1e, 0x2d, 0xaf, 0x72, 0xcf, 0x39, 0x83, 0x9d, 0xe5,
+	0x9f, 0x31, 0x49, 0x4c, 0x89, 0xcb, 0x6f, 0x86, 0xba, 0x1c, 0x50, 0xdd, 0x0e, 0x1b, 0x53, 0x10,
+	0x35, 0xa6, 0x7f, 0xa4, 0x15, 0x87, 0xd5, 0x5c, 0xd5, 0xf7, 0x9a, 0xfd, 0x43, 0x53, 0xb9, 0x14,
+	0x8a, 0x7d, 0x49, 0xaa, 0x50, 0x57, 0x8b, 0x51, 0xe1, 0x2f, 0xc9, 0xe5, 0x32, 0x75, 0xf7, 0xca,
+	0x10, 0x14, 0x28, 0xc9, 0x95, 0x0a, 0x9d, 0xb6, 0x13, 0x0f, 0x51, 0x16, 0x3f, 0x7e, 0x34, 0x3b,
+	0xa2, 0xfd, 0x16, 0x39, 0x8f, 0x35, 0x19, 0xe2, 0x5e, 0x16, 0x9c, 0xbf, 0x40, 0xe6, 0x0c, 0xbf,
 	0x08, 0xfc, 0xd7, 0xc8, 0xfb, 0x17, 0x09, 0xaa, 0x1e, 0x5f, 0x49, 0xbc, 0x73, 0x91, 0x5c, 0x2e,
-	0x49, 0xb5, 0xff, 0x7d, 0xcc, 0xef, 0xc1, 0xf8, 0x76, 0xfb, 0x48, 0xef, 0x5a, 0x2b, 0x81, 0xf5,
+	0x49, 0xb5, 0xff, 0x7d, 0xcc, 0xef, 0xc2, 0xf8, 0x76, 0xfb, 0x48, 0xef, 0x5a, 0x2b, 0x81, 0xf5,
 	0xc3, 0x71, 0x99, 0x6c, 0xe6, 0xc4, 0x4d, 0xab, 0x89, 0xc8, 0x1c, 0xe7, 0x38, 0x99, 0xb5, 0x9f,
 	0x10, 0xab, 0x36, 0xcd, 0xa6, 0xed, 0x41, 0x92, 0xce, 0xaf, 0xa8, 0x45, 0x5b, 0x81, 0xc9, 0xcd,
-	0x87, 0xb5, 0x07, 0xa6, 0x6e, 0xb4, 0x9a, 0x3b, 0x87, 0xe2, 0x1e, 0x28, 0xa9, 0x57, 0xf3, 0xd9,
-	0x78, 0xa2, 0x95, 0x3a, 0x91, 0x4a, 0x31, 0xdb, 0x9f, 0xfb, 0x70, 0x72, 0xcb, 0x72, 0xdb, 0xb6,
+	0x07, 0xb5, 0xfb, 0xa6, 0x6e, 0xb4, 0x9a, 0x3b, 0x87, 0xe2, 0x1e, 0x28, 0xa9, 0x57, 0xf3, 0xd9,
+	0x78, 0xa2, 0x95, 0x3a, 0x91, 0x4a, 0x31, 0xdb, 0x9f, 0x7b, 0x70, 0x72, 0xcb, 0x72, 0xdb, 0xb6,
 	0xb3, 0xcd, 0xe6, 0xa0, 0xb4, 0xc9, 0x17, 0x42, 0x6c, 0xaf, 0x0d, 0xe9, 0x48, 0x28, 0x1f, 0x01,
 	0x0d, 0x8f, 0x50, 0xb6, 0x01, 0x5a, 0xb6, 0x65, 0x63, 0x89, 0xc9, 0xd4, 0x79, 0xf4, 0x09, 0x53,
 	0x13, 0x78, 0xdc, 0xbf, 0x02, 0x98, 0x72, 0x4a, 0x1d, 0x04, 0x62, 0xdb, 0x68, 0x9b, 0xde, 0x7a,
@@ -37258,7 +42249,7 @@ var fileDescriptorThetest = []byte{
 	0x6c, 0x66, 0xfe, 0x2c, 0xc1, 0x09, 0xae, 0x15, 0xad, 0xb6, 0x49, 0xa7, 0x81, 0xb9, 0xdd, 0xd1,
 	0x46, 0xd2, 0x60, 0xda, 0x88, 0xcf, 0xf2, 0x29, 0x7d, 0xce, 0x6c, 0xa0, 0xa7, 0x76, 0xbe, 0x5d,
 	0x59, 0x82, 0x0a, 0xdb, 0x84, 0x9d, 0x80, 0x76, 0x41, 0xad, 0x18, 0x1e, 0x89, 0xf6, 0x7f, 0x68,
-	0x16, 0xa6, 0x71, 0x55, 0xa6, 0xe0, 0xf8, 0xf6, 0xbd, 0x3b, 0xb5, 0xef, 0xd7, 0x6b, 0xef, 0x6c,
+	0x16, 0xa6, 0x71, 0x55, 0xa6, 0xe0, 0xf8, 0xf6, 0xdd, 0xdb, 0xb5, 0xef, 0xd7, 0x6b, 0xef, 0x6e,
 	0xd7, 0xaa, 0x29, 0x49, 0xfb, 0xbd, 0x04, 0xc7, 0x71, 0xd9, 0xba, 0xdb, 0x39, 0xd6, 0x95, 0x32,
 	0x94, 0x36, 0x30, 0x83, 0x5e, 0xcc, 0x6f, 0xa9, 0x89, 0x56, 0x27, 0xa9, 0x1c, 0x1d, 0x6a, 0x69,
 	0x47, 0x29, 0x40, 0xa9, 0x82, 0x01, 0x8e, 0x86, 0x8c, 0xb4, 0xab, 0xfd, 0x0b, 0xc0, 0x57, 0xd8,
@@ -37273,11 +42264,11 @@ var fileDescriptorThetest = []byte{
 	0xde, 0x3c, 0xd2, 0xb9, 0x43, 0x46, 0x0b, 0xc2, 0x96, 0xd2, 0xa4, 0x65, 0xfe, 0xfc, 0xd9, 0xac,
 	0xd3, 0xba, 0x41, 0xc9, 0xb4, 0x20, 0x6c, 0x2e, 0xf1, 0x7a, 0xee, 0xfa, 0xb3, 0x20, 0x1c, 0x3c,
 	0xe2, 0xf5, 0xe8, 0x72, 0x43, 0xf5, 0xc8, 0x11, 0x24, 0x5e, 0xaf, 0x4a, 0x59, 0xb6, 0x20, 0x1c,
-	0x46, 0xe2, 0xf5, 0x6a, 0x94, 0x6f, 0x0b, 0xc2, 0xd6, 0x13, 0xaf, 0x77, 0x9d, 0x32, 0x6f, 0x41,
-	0xd8, 0x84, 0xe2, 0xf5, 0xbe, 0x49, 0x39, 0xb8, 0x20, 0x1c, 0x55, 0xe2, 0xf5, 0x6e, 0x50, 0x36,
-	0x2e, 0x08, 0x87, 0x96, 0x78, 0xbd, 0x9b, 0x94, 0x97, 0x8b, 0xe2, 0xf1, 0x25, 0x5e, 0xf1, 0x96,
+	0x46, 0xe2, 0xf5, 0x6a, 0x94, 0x6f, 0x0b, 0xc2, 0xd6, 0x13, 0xaf, 0x77, 0x8d, 0x32, 0x6f, 0x41,
+	0xd8, 0x84, 0xe2, 0xf5, 0xbe, 0x49, 0x39, 0xb8, 0x20, 0x1c, 0x55, 0xe2, 0xf5, 0xae, 0x53, 0x36,
+	0x2e, 0x08, 0x87, 0x96, 0x78, 0xbd, 0x1b, 0x94, 0x97, 0x8b, 0xe2, 0xf1, 0x25, 0x5e, 0xf1, 0xa6,
 	0xcb, 0xd0, 0x45, 0xf1, 0x20, 0x13, 0xaf, 0xf9, 0x2d, 0x97, 0xab, 0x8b, 0xe2, 0x91, 0x26, 0x5e,
-	0xf3, 0xb6, 0xcb, 0xda, 0x45, 0x71, 0xab, 0x8c, 0xd7, 0xdc, 0x74, 0xf9, 0xbb, 0x28, 0x6e, 0x9a,
+	0xf3, 0x96, 0xcb, 0xda, 0x45, 0x71, 0xab, 0x8c, 0xd7, 0xdc, 0x74, 0xf9, 0xbb, 0x28, 0x6e, 0x9a,
 	0xf1, 0x9a, 0x75, 0x97, 0xc9, 0x8b, 0xe2, 0xf6, 0x19, 0xaf, 0xb9, 0xe5, 0xbe, 0x43, 0xff, 0x48,
 	0xa0, 0x1f, 0x73, 0x08, 0x4a, 0x13, 0xe8, 0x07, 0x7d, 0xa8, 0xa7, 0x09, 0xd4, 0x83, 0x3e, 0xb4,
 	0xd3, 0x04, 0xda, 0x41, 0x1f, 0xca, 0x69, 0x02, 0xe5, 0xa0, 0x0f, 0xdd, 0x34, 0x81, 0x6e, 0xd0,
@@ -37291,41 +42282,42 @@ var fileDescriptorThetest = []byte{
 	0x07, 0x1e, 0xa0, 0xdf, 0x84, 0x34, 0x2f, 0xee, 0x7c, 0x86, 0x53, 0x08, 0x44, 0xa2, 0x10, 0x08,
 	0xa2, 0xd0, 0x47, 0xa8, 0x90, 0xe2, 0x28, 0x84, 0xb7, 0x87, 0xce, 0x6a, 0x06, 0x5a, 0x8b, 0x70,
 	0xbe, 0xc2, 0x8f, 0x53, 0x6b, 0x11, 0xf6, 0xa8, 0x07, 0xf1, 0xcc, 0x3b, 0x0b, 0xd5, 0x22, 0xcc,
-	0x42, 0xd7, 0x29, 0x87, 0xd6, 0x22, 0x9c, 0xbb, 0xf0, 0x72, 0x6f, 0x7d, 0xd0, 0x24, 0x70, 0x23,
-	0xd2, 0x24, 0x70, 0x33, 0xd2, 0x24, 0x70, 0xcb, 0x45, 0xf0, 0x27, 0x32, 0x7c, 0xd5, 0x45, 0xd0,
-	0xf9, 0xb5, 0xfd, 0xf0, 0xd8, 0x9a, 0x02, 0xdc, 0x1d, 0x2a, 0x85, 0xec, 0xda, 0x30, 0x30, 0x5a,
-	0xfb, 0x37, 0x77, 0xf8, 0xbd, 0xaa, 0xd2, 0xb0, 0xfb, 0x37, 0x0c, 0xe2, 0xf8, 0x5d, 0xe8, 0x3c,
-	0x04, 0x37, 0x5b, 0x3d, 0x7b, 0xb6, 0xf0, 0x1b, 0xb6, 0xd2, 0x00, 0xed, 0x56, 0x4f, 0x69, 0xc0,
+	0x42, 0xd7, 0x28, 0x87, 0xd6, 0x22, 0x9c, 0xbb, 0xf0, 0x72, 0x6f, 0x7d, 0xd0, 0x24, 0x70, 0x3d,
+	0xd2, 0x24, 0x70, 0x23, 0xd2, 0x24, 0x70, 0xd3, 0x45, 0xf0, 0x27, 0x32, 0x7c, 0xd5, 0x45, 0xd0,
+	0xf9, 0xb5, 0xfd, 0xe0, 0xd8, 0x9a, 0x02, 0xdc, 0x1d, 0x2a, 0x85, 0xec, 0xda, 0x30, 0x30, 0x5a,
+	0xfb, 0x37, 0xb7, 0xf9, 0xbd, 0xaa, 0xd2, 0xb0, 0xfb, 0x37, 0x0c, 0xe2, 0xf8, 0x5d, 0xe8, 0x3c,
+	0x04, 0x37, 0x5a, 0x3d, 0x7b, 0xb6, 0xf0, 0x1b, 0xb6, 0xd2, 0x00, 0xed, 0x56, 0x4f, 0x69, 0xc0,
 	0x51, 0x7b, 0xdc, 0x9e, 0x0d, 0xef, 0x69, 0x06, 0x46, 0xd0, 0xdb, 0x03, 0xf7, 0xb4, 0x27, 0x12,
-	0x9c, 0xe3, 0xa8, 0x7c, 0x36, 0x3b, 0x06, 0x6f, 0x46, 0xda, 0x31, 0xe0, 0x12, 0xc4, 0xdd, 0x3d,
+	0x9c, 0xe3, 0xa8, 0x7c, 0x36, 0x3b, 0x06, 0x6f, 0x45, 0xda, 0x31, 0xe0, 0x12, 0xc4, 0xdd, 0x3d,
 	0xf8, 0x9a, 0x77, 0xa3, 0x9a, 0xcd, 0x12, 0x71, 0x27, 0xe1, 0xc7, 0x70, 0xd2, 0xbd, 0x03, 0xfb,
 	0x91, 0x6d, 0x35, 0xfc, 0x65, 0xa6, 0x5f, 0x6a, 0xae, 0x0a, 0x2f, 0xd1, 0x06, 0x9a, 0xd1, 0x6c,
 	0xd5, 0x4a, 0xe8, 0x89, 0xb3, 0x63, 0xbf, 0x32, 0xe8, 0xa1, 0x60, 0xf5, 0x36, 0x9b, 0xc7, 0x61,
-	0xef, 0x22, 0x12, 0x56, 0x69, 0x7e, 0xf2, 0x2b, 0x54, 0x9e, 0x5f, 0x86, 0xc9, 0xbb, 0x46, 0x57,
+	0xef, 0x22, 0x12, 0x56, 0x69, 0x7e, 0xf2, 0x2b, 0x54, 0x9e, 0x5f, 0x82, 0xc9, 0x3b, 0x46, 0x57,
 	0xdf, 0xed, 0xec, 0x1b, 0xed, 0x1f, 0xe9, 0x2d, 0xc1, 0x70, 0x8c, 0x18, 0x96, 0x62, 0x4f, 0x2d,
-	0xed, 0x9f, 0x4b, 0xf0, 0x02, 0xab, 0xfe, 0x1d, 0x84, 0xfd, 0x4d, 0xc3, 0xaa, 0xe9, 0xdf, 0x82,
+	0xed, 0x9f, 0x4b, 0xf0, 0x02, 0xab, 0xfe, 0x1d, 0x84, 0xfd, 0x0d, 0xc3, 0xaa, 0xe9, 0xdf, 0x86,
 	0x09, 0x1d, 0x03, 0x67, 0xaf, 0x5d, 0xe3, 0xe4, 0x31, 0xd2, 0x57, 0x7d, 0xc9, 0xfe, 0x6c, 0x50,
-	0x13, 0xe1, 0x15, 0x07, 0x19, 0xb6, 0x90, 0xb9, 0x04, 0xe3, 0x4e, 0xff, 0xbc, 0x5f, 0x13, 0x82,
-	0x5f, 0xbf, 0xf1, 0xf1, 0xcb, 0xe6, 0x91, 0x72, 0x8b, 0xf3, 0x8b, 0x79, 0x5a, 0xf5, 0x55, 0x5f,
-	0x22, 0xe4, 0x2b, 0x27, 0xac, 0xfa, 0xcf, 0x66, 0x54, 0xb8, 0x93, 0x8b, 0x30, 0x51, 0x13, 0x75,
-	0xfc, 0xfd, 0xac, 0xc2, 0x58, 0xbd, 0xd3, 0xd2, 0x95, 0x57, 0x61, 0xfc, 0x76, 0x73, 0x47, 0x3f,
-	0xc4, 0x41, 0x8e, 0x1f, 0x5a, 0x7f, 0x50, 0xf9, 0x9d, 0xa8, 0x1c, 0xb4, 0x0f, 0x5b, 0x5d, 0xdd,
-	0xc0, 0x5b, 0xf6, 0xf8, 0x0d, 0xba, 0x65, 0xd3, 0x48, 0xec, 0x62, 0x59, 0x56, 0x83, 0xe3, 0x0c,
-	0x25, 0x94, 0x38, 0x7a, 0xfc, 0x4f, 0x8d, 0x58, 0x5f, 0xe5, 0x94, 0x64, 0x7d, 0x55, 0x52, 0x72,
-	0xf6, 0x12, 0x9c, 0x12, 0x5e, 0x90, 0x59, 0x92, 0x6a, 0x0a, 0x5a, 0x5f, 0xb5, 0xd4, 0x78, 0x26,
-	0xf6, 0xe8, 0xd7, 0x33, 0x23, 0xd9, 0x37, 0xa1, 0xe2, 0x7d, 0x95, 0xa6, 0x8c, 0x42, 0x79, 0xc3,
-	0xea, 0xf2, 0x35, 0x28, 0x97, 0x51, 0x9f, 0x99, 0xa9, 0x9f, 0xfe, 0x62, 0x6e, 0xbc, 0xac, 0x9b,
-	0xa6, 0xde, 0x45, 0xda, 0xe5, 0x32, 0x36, 0x7e, 0x1b, 0x5e, 0xf0, 0x7d, 0x15, 0x67, 0xd9, 0x57,
-	0x2a, 0x8e, 0x7d, 0xb5, 0xea, 0xb1, 0xaf, 0x56, 0x6d, 0x7b, 0xa9, 0x44, 0xb6, 0x34, 0x37, 0x14,
-	0x9f, 0x17, 0x5f, 0x6a, 0x8b, 0xd9, 0x42, 0xdd, 0x28, 0xbd, 0x8d, 0x75, 0xcb, 0xbe, 0xba, 0x7a,
-	0xc8, 0x96, 0x68, 0xb9, 0x54, 0xc1, 0xf6, 0x15, 0x5f, 0xfb, 0x3d, 0x61, 0xdf, 0x8e, 0x9f, 0x83,
-	0x70, 0x27, 0x15, 0xea, 0x70, 0xd5, 0xb7, 0x93, 0x03, 0xe6, 0x34, 0x75, 0x95, 0x3a, 0x5c, 0xf3,
-	0xd5, 0x6d, 0x87, 0x9c, 0x2a, 0xaa, 0x95, 0x96, 0xf1, 0x32, 0xb2, 0x91, 0x57, 0x2e, 0x10, 0x16,
-	0x70, 0x39, 0x8e, 0x03, 0xe4, 0xac, 0x28, 0x1b, 0x79, 0x74, 0x87, 0x8e, 0x41, 0x39, 0xd0, 0x20,
-	0x38, 0x4a, 0x4e, 0x27, 0xe5, 0x7c, 0xe9, 0x06, 0xee, 0xa4, 0x12, 0xd8, 0x49, 0x48, 0xa8, 0x9c,
-	0x9e, 0x2a, 0xf9, 0xf2, 0x9d, 0x93, 0x4f, 0x66, 0x46, 0x9e, 0xa2, 0xeb, 0xef, 0xe8, 0xfa, 0xf8,
-	0x93, 0x19, 0xe9, 0x33, 0x74, 0x7d, 0x8e, 0xae, 0x2f, 0xd0, 0xf5, 0xee, 0xf3, 0x19, 0xe9, 0x03,
+	0x13, 0xe1, 0x15, 0x07, 0x19, 0xb6, 0x90, 0x79, 0x03, 0xc6, 0x9d, 0xfe, 0x79, 0xbf, 0x26, 0x04,
+	0xbf, 0x7e, 0xe3, 0xe3, 0x97, 0xcd, 0x23, 0xe5, 0x26, 0xe7, 0x17, 0xf3, 0xb4, 0xea, 0xab, 0xbe,
+	0x44, 0xc8, 0x57, 0x4e, 0x58, 0xf5, 0x9f, 0xcd, 0xa8, 0x70, 0x27, 0x17, 0x61, 0xa2, 0x26, 0xea,
+	0xf8, 0xfb, 0x59, 0x85, 0xb1, 0x7a, 0xa7, 0xa5, 0x2b, 0xaf, 0xc2, 0xf8, 0xad, 0xe6, 0x8e, 0x7e,
+	0x88, 0x83, 0x1c, 0x3f, 0xb4, 0xfe, 0xa0, 0xf2, 0x3b, 0x51, 0x39, 0x68, 0x1f, 0xb6, 0xba, 0xba,
+	0x81, 0xb7, 0xec, 0xf1, 0x1b, 0x74, 0xcb, 0xa6, 0x91, 0xd8, 0xc5, 0xb2, 0xac, 0x06, 0xc7, 0x19,
+	0x4a, 0x28, 0x71, 0xf4, 0xf8, 0x9f, 0x1a, 0xb1, 0xbe, 0xca, 0x29, 0xc9, 0xfa, 0xaa, 0xa4, 0xe4,
+	0xec, 0x1b, 0x70, 0x4a, 0x78, 0x41, 0x66, 0x49, 0xaa, 0x29, 0x68, 0x7d, 0xd5, 0x52, 0xe3, 0x99,
+	0xd8, 0xc3, 0x5f, 0xcf, 0x8c, 0x64, 0xdf, 0x82, 0x8a, 0xf7, 0x55, 0x9a, 0x32, 0x0a, 0xe5, 0x0d,
+	0xab, 0xcb, 0xd7, 0xa0, 0x5c, 0x46, 0x7d, 0x66, 0xa6, 0x7e, 0xfa, 0x8b, 0xb9, 0xf1, 0xb2, 0x6e,
+	0x9a, 0x7a, 0x17, 0x69, 0x97, 0xcb, 0xd8, 0xf8, 0x1d, 0x78, 0xc1, 0xf7, 0x55, 0x9c, 0x65, 0x5f,
+	0xa9, 0x38, 0xf6, 0xd5, 0xaa, 0xc7, 0xbe, 0x5a, 0xb5, 0xed, 0xa5, 0x12, 0xd9, 0xd2, 0xdc, 0x50,
+	0x7c, 0x5e, 0x7c, 0xa9, 0x2d, 0x66, 0x0b, 0x75, 0xa3, 0xf4, 0x0e, 0xd6, 0x2d, 0xfb, 0xea, 0xea,
+	0x21, 0x5b, 0xa2, 0xe5, 0x52, 0x05, 0xdb, 0x57, 0x7c, 0xed, 0xf7, 0x84, 0x7d, 0x3b, 0x7e, 0x0e,
+	0xc2, 0x9d, 0x54, 0xa8, 0xc3, 0x55, 0xdf, 0x4e, 0x0e, 0x98, 0xd3, 0xd4, 0x55, 0xea, 0x70, 0xcd,
+	0x57, 0xb7, 0x1d, 0x72, 0xaa, 0xa8, 0x56, 0x5a, 0xc6, 0xcb, 0xc8, 0x46, 0x5e, 0xb9, 0x40, 0x58,
+	0xc0, 0xe5, 0x38, 0x0e, 0x90, 0xb3, 0xa2, 0x6c, 0xe4, 0xd1, 0x1d, 0x3a, 0x06, 0xe5, 0x40, 0x83,
+	0xe0, 0x28, 0x39, 0x9d, 0x94, 0xf3, 0xa5, 0xeb, 0xb8, 0x93, 0x4a, 0x60, 0x27, 0x21, 0xa1, 0x72,
+	0x7a, 0xaa, 0xe4, 0xcb, 0xdb, 0x27, 0x9f, 0xcc, 0x8c, 0x3c, 0x45, 0xd7, 0xdf, 0xd1, 0xf5, 0xf1,
+	0x27, 0x33, 0xd2, 0x67, 0xe8, 0xfa, 0x1c, 0x5d, 0x5f, 0xa0, 0xeb, 0xbd, 0xe7, 0x33, 0xd2, 0x63,
 	0x74, 0x7d, 0x88, 0xae, 0x3f, 0xa0, 0xeb, 0x09, 0xba, 0x4e, 0x9e, 0x23, 0x7d, 0x74, 0x7d, 0x8c,
-	0x7e, 0x7f, 0x86, 0xbe, 0x3f, 0x47, 0xdf, 0x5f, 0xa0, 0xeb, 0xdd, 0x4f, 0x67, 0xa4, 0xc7, 0x9f,
-	0xce, 0x8c, 0xfc, 0x27, 0x00, 0x00, 0xff, 0xff, 0xf4, 0x13, 0x87, 0x52, 0xaa, 0x34, 0x00, 0x00,
+	0x7e, 0x7f, 0x86, 0xbe, 0x3f, 0x47, 0xdf, 0x5f, 0xa0, 0xeb, 0xbd, 0x4f, 0x67, 0xa4, 0x47, 0x9f,
+	0xce, 0x8c, 0x3c, 0x46, 0xdf, 0xff, 0x09, 0x00, 0x00, 0xff, 0xff, 0xcf, 0x5f, 0xbd, 0x69, 0xae,
+	0x34, 0x00, 0x00,
 }

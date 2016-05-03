@@ -31,6 +31,7 @@
 package custom
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"unsafe"
@@ -116,6 +117,18 @@ func (u *Uint128) UnmarshalJSON(data []byte) error {
 
 func (this Uint128) Equal(that Uint128) bool {
 	return this == that
+}
+
+func (this Uint128) Compare(that Uint128) int {
+	thisdata, err := this.Marshal()
+	if err != nil {
+		panic(err)
+	}
+	thatdata, err := that.Marshal()
+	if err != nil {
+		panic(err)
+	}
+	return bytes.Compare(thisdata, thatdata)
 }
 
 type randy interface {
