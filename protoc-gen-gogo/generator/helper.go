@@ -31,9 +31,8 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
-	"strings"
-
 	"path"
+	"strings"
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
@@ -209,25 +208,6 @@ func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.Fie
 		}
 	}
 	return fieldname
-}
-
-func GetMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto) *descriptor.DescriptorProto {
-	if !field.IsMessage() {
-		return nil
-	}
-	typeName := strings.TrimPrefix(field.GetTypeName(), "."+file.GetPackage()+".")
-	if strings.Contains(typeName, "Map") && !strings.HasSuffix(typeName, "Entry") {
-		typeName += "." + CamelCase(field.GetName()) + "Entry"
-	}
-	return file.GetMessage(typeName)
-}
-
-func IsMap(file *descriptor.FileDescriptorProto, field *descriptor.FieldDescriptorProto) bool {
-	msg := GetMap(file, field)
-	if msg == nil {
-		return false
-	}
-	return msg.GetOptions().GetMapEntry()
 }
 
 func (g *Generator) IsMap(field *descriptor.FieldDescriptorProto) bool {

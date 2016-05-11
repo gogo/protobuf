@@ -326,7 +326,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
 		panic(fmt.Errorf("size does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-		if generator.IsMap(file.FileDescriptorProto, field) {
+		if p.IsMap(field) {
 			m := p.GoMapType(nil, field)
 			_, keywire := p.GoType(nil, m.KeyAliasField)
 			valuegoTyp, _ := p.GoType(nil, m.ValueField)

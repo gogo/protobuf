@@ -676,7 +676,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
-		} else if generator.IsMap(file.FileDescriptorProto, field) {
+		} else if p.IsMap(field) {
 			m := p.GoMapType(nil, field)
 
 			keygoTyp, _ := p.GoType(nil, m.KeyField)

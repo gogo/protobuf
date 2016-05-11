@@ -94,6 +94,7 @@ regenerate:
 	make -C test/oneofembed regenerate
 	make -C test/asymetric-issue125 regenerate
 	make -C test/filedotname regenerate
+	make -C test/nopackage regenerate
 	make gofmt
 
 tests:

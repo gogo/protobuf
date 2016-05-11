@@ -826,7 +826,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
 		panic(fmt.Errorf("marshaler does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-		if generator.IsMap(file.FileDescriptorProto, field) {
+		if p.IsMap(field) {
 			m := p.GoMapType(nil, field)
 			keygoTyp, keywire := p.GoType(nil, m.KeyField)
 			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
