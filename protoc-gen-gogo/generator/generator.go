@@ -2088,6 +2088,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) && !message.proto3() {
 		g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 	}
+
+	if content := gogoproto.GetExtraContent(message.DescriptorProto); content != "" {
+		g.P(content)
+	}
+
 	g.Out()
 	g.P("}")
 

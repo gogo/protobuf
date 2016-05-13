@@ -105,6 +105,8 @@ extend google.protobuf.MessageOptions {
 
 	optional bool protosizer = 64028;
 	optional bool compare = 64029;
+
+	optional string extra_struct_content = 64030;
 }
 
 extend google.protobuf.FieldOptions {

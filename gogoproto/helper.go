@@ -223,7 +223,6 @@ func HasEqual(file *google_protobuf.FileDescriptorProto, message *google_protobu
 func HasVerboseEqual(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_VerboseEqual, proto.GetBoolExtension(file.Options, E_VerboseEqualAll, false))
 }
-
 func IsStringer(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Stringer, proto.GetBoolExtension(file.Options, E_StringerAll, false))
 }
@@ -305,4 +304,14 @@ func ImportsGoGoProto(file *google_protobuf.FileDescriptorProto) bool {
 
 func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Compare, proto.GetBoolExtension(file.Options, E_CompareAll, false))
+}
+
+func GetExtraContent(message *google_protobuf.DescriptorProto) string {
+	if message.Options != nil {
+		v, err := proto.GetExtension(message.Options, E_ExtraStructContent)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
 }

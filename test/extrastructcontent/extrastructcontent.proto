@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+// Package extrastructcontent tests the behavior of extra_struct_content extensions.
+package extrastructcontent;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+
+message ExtraStructContent {
+	option (gogoproto.extra_struct_content) = "MyMagicValue int64\nMyOtherMagicValue string";
+	optional int64 Foo = 1;
+}
