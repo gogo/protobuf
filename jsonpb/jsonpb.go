@@ -51,10 +51,6 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-var (
-	byteArrayType = reflect.TypeOf([]byte{})
-)
-
 // Marshaler is a configurable object for converting between
 // protocol buffer objects and a JSON representation for them.
 type Marshaler struct {
@@ -250,7 +246,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 	v = reflect.Indirect(v)
 
 	// Handle repeated elements.
-	if v.Type() != byteArrayType && v.Kind() == reflect.Slice {
+	if v.Kind() == reflect.Slice && v.Type().Elem().Kind() != reflect.Uint8 {
 		out.write("[")
 		comma := ""
 		for i := 0; i < v.Len(); i++ {
@@ -507,8 +503,21 @@ func unmarshalValue(target reflect.Value, inputValue json.RawMessage) error {
 		return nil
 	}
 
-	// Handle arrays (which aren't encoded bytes)
-	if targetType != byteArrayType && targetType.Kind() == reflect.Slice {
+	// Handle arrays
+	if targetType.Kind() == reflect.Slice {
+		// Special case for encoded bytes. Pre-go1.5 doesn't support unmarshalling
+		// strings into aliased []byte types.
+		// https://github.com/golang/go/commit/4302fd0409da5e4f1d71471a6770dacdc3301197
+		// https://github.com/golang/go/commit/c60707b14d6be26bf4213114d13070bff00d0b0a
+		if targetType.Elem().Kind() == reflect.Uint8 {
+			var out []byte
+			if err := json.Unmarshal(inputValue, &out); err != nil {
+				return err
+			}
+			target.SetBytes(out)
+			return nil
+		}
+
 		var slc []json.RawMessage
 		if err := json.Unmarshal(inputValue, &slc); err != nil {
 			return err

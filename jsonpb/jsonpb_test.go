@@ -48,17 +48,18 @@ var (
 	}
 
 	simpleObject = &pb.Simple{
-		OInt32:  proto.Int32(-32),
-		OInt64:  proto.Int64(-6400000000),
-		OUint32: proto.Uint32(32),
-		OUint64: proto.Uint64(6400000000),
-		OSint32: proto.Int32(-13),
-		OSint64: proto.Int64(-2600000000),
-		OFloat:  proto.Float32(3.14),
-		ODouble: proto.Float64(6.02214179e23),
-		OBool:   proto.Bool(true),
-		OString: proto.String("hello \"there\""),
-		OBytes:  []byte("beep boop"),
+		OInt32:     proto.Int32(-32),
+		OInt64:     proto.Int64(-6400000000),
+		OUint32:    proto.Uint32(32),
+		OUint64:    proto.Uint64(6400000000),
+		OSint32:    proto.Int32(-13),
+		OSint64:    proto.Int64(-2600000000),
+		OFloat:     proto.Float32(3.14),
+		ODouble:    proto.Float64(6.02214179e23),
+		OBool:      proto.Bool(true),
+		OString:    proto.String("hello \"there\""),
+		OBytes:     []byte("beep boop"),
+		OCastBytes: pb.Bytes("wow"),
 	}
 
 	simpleObjectJSON = `{` +
@@ -72,7 +73,8 @@ var (
 		`"o_float":3.14,` +
 		`"o_double":6.02214179e+23,` +
 		`"o_string":"hello \"there\"",` +
-		`"o_bytes":"YmVlcCBib29w"` +
+		`"o_bytes":"YmVlcCBib29w",` +
+		`"o_cast_bytes":"d293"` +
 		`}`
 
 	simpleObjectPrettyJSON = `{
@@ -86,7 +88,8 @@ var (
   "o_float": 3.14,
   "o_double": 6.02214179e+23,
   "o_string": "hello \"there\"",
-  "o_bytes": "YmVlcCBib29w"
+  "o_bytes": "YmVlcCBib29w",
+  "o_cast_bytes": "d293"
 }`
 
 	repeatsObject = &pb.Repeats{
