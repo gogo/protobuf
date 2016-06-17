@@ -30,4 +30,4 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	protoc-min-version --version="3.0.0" --gogo_out=. *.proto
+	protoc-min-version --version="3.0.0" --gogo_out=. *.proto -I . -I ../../ -I ../../protobuf/
