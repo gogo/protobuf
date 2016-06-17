@@ -300,6 +300,11 @@ type FileDescriptor struct {
 // PackageName is the package name we'll use in the generated code to refer to this file.
 func (d *FileDescriptor) PackageName() string { return uniquePackageOf(d.FileDescriptorProto) }
 
+// VarName is the variable name we'll use in the generated code to refer
+// to the compressed bytes of this descriptor. It is not exported, so
+// it is only valid inside the generated package.
+func (d *FileDescriptor) VarName() string { return fmt.Sprintf("fileDescriptor%v", FileName(d)) }
+
 // goPackageName returns the Go package name to use in the
 // generated Go file.  The result explicit reports whether the name
 // came from an option go_package statement.  If explicit is false,
@@ -1547,7 +1552,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
 	indexes = append(indexes, strconv.Itoa(enum.index))
-	g.P("func (", ccTypeName, ") EnumDescriptor() ([]byte, []int) { return fileDescriptor", FileName(g.file), ", []int{", strings.Join(indexes, ", "), "} }")
+	g.P("func (", ccTypeName, ") EnumDescriptor() ([]byte, []int) { return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "} }")
 
 	g.P()
 }
@@ -2120,7 +2125,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// XXX: skip groups?
 			indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 		}
-		g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return fileDescriptor", FileName(g.file), ", []int{", strings.Join(indexes, ", "), "} }")
+		g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "} }")
 	}
 
 	// Extension support methods
@@ -2953,7 +2958,7 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 	w.Close()
 	b = buf.Bytes()
 
-	v := fmt.Sprintf("fileDescriptor%v", FileName(file))
+	v := file.VarName()
 	g.P()
 	g.P("var ", v, " = []byte{")
 	g.In()
