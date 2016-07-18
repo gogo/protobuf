@@ -314,7 +314,7 @@ var marshalingTests = []struct {
 		&pb.Maps{MBoolSimple: map[bool]*pb.Simple{true: {OInt32: proto.Int32(1)}}},
 		`{"mBoolSimple":{"true":{"oInt32":1}}}`},
 	{"oneof, not set", marshaler, &pb.MsgWithOneof{}, `{}`},
-	{"oneof, set", marshaler, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_Title{"Grand Poobah"}}, `{"title":"Grand Poobah"}`},
+	{"oneof, set", marshaler, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_Title{Title: "Grand Poobah"}}, `{"title":"Grand Poobah"}`},
 	{"force orig_name", Marshaler{OrigName: true}, &pb.Simple{OInt32: proto.Int32(4)},
 		`{"o_int32":4}`},
 	{"proto2 extension", marshaler, realNumber, realNumberJSON},
