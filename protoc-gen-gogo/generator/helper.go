@@ -311,7 +311,7 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 			continue
 		}
 		g.Response.File[i] = new(plugin.CodeGeneratorResponse_File)
-		g.Response.File[i].Name = proto.String(goFileName(*file.Name))
+		g.Response.File[i].Name = proto.String(file.goFileName())
 		g.Response.File[i].Content = proto.String(g.String())
 		i++
 	}
