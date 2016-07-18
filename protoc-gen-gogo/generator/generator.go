@@ -2119,14 +2119,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
 	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
-	if !message.group {
-		var indexes []string
-		for m := message; m != nil; m = m.parent {
-			// XXX: skip groups?
-			indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
-		}
-		g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "} }")
+	var indexes []string
+	for m := message; m != nil; m = m.parent {
+		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
+	g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "} }")
 
 	// Extension support methods
 	var hasExtensions, isMessageSet bool

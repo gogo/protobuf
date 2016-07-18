@@ -275,9 +275,10 @@ type Request_SomeGroup struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *Request_SomeGroup) Reset()         { *m = Request_SomeGroup{} }
-func (m *Request_SomeGroup) String() string { return proto.CompactTextString(m) }
-func (*Request_SomeGroup) ProtoMessage()    {}
+func (m *Request_SomeGroup) Reset()                    { *m = Request_SomeGroup{} }
+func (m *Request_SomeGroup) String() string            { return proto.CompactTextString(m) }
+func (*Request_SomeGroup) ProtoMessage()               {}
+func (*Request_SomeGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{0, 0} }
 
 func (m *Request_SomeGroup) GetGroupField() int32 {
 	if m != nil && m.GroupField != nil {
@@ -835,9 +836,10 @@ type Communique_SomeGroup struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *Communique_SomeGroup) Reset()         { *m = Communique_SomeGroup{} }
-func (m *Communique_SomeGroup) String() string { return proto.CompactTextString(m) }
-func (*Communique_SomeGroup) ProtoMessage()    {}
+func (m *Communique_SomeGroup) Reset()                    { *m = Communique_SomeGroup{} }
+func (m *Communique_SomeGroup) String() string            { return proto.CompactTextString(m) }
+func (*Communique_SomeGroup) ProtoMessage()               {}
+func (*Communique_SomeGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{6, 0} }
 
 func (m *Communique_SomeGroup) GetMember() string {
 	if m != nil && m.Member != nil {

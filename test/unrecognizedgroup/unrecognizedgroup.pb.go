@@ -83,6 +83,9 @@ type OldWithGroup_Group1 struct {
 
 func (m *OldWithGroup_Group1) Reset()      { *m = OldWithGroup_Group1{} }
 func (*OldWithGroup_Group1) ProtoMessage() {}
+func (*OldWithGroup_Group1) Descriptor() ([]byte, []int) {
+	return fileDescriptorUnrecognizedgroup, []int{2, 0}
+}
 
 type OldWithGroup_Group2 struct {
 	Field1           *int64    `protobuf:"varint,1,opt,name=Field1,json=field1" json:"Field1,omitempty"`
@@ -92,6 +95,9 @@ type OldWithGroup_Group2 struct {
 
 func (m *OldWithGroup_Group2) Reset()      { *m = OldWithGroup_Group2{} }
 func (*OldWithGroup_Group2) ProtoMessage() {}
+func (*OldWithGroup_Group2) Descriptor() ([]byte, []int) {
+	return fileDescriptorUnrecognizedgroup, []int{2, 1}
+}
 
 func init() {
 	proto.RegisterType((*NewNoGroup)(nil), "unrecognizedgroup.NewNoGroup")
