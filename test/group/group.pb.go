@@ -948,6 +948,8 @@ func valueToStringGroup(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
+func init() { proto.RegisterFile("group.proto", fileDescriptorGroup) }
+
 var fileDescriptorGroup = []byte{
 	// 195 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0x2f, 0xca, 0x2f,

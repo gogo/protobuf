@@ -28277,6 +28277,8 @@ func encodeVarintThetest(data []byte, offset int, v uint64) int {
 	return offset + 1
 }
 
+func init() { proto.RegisterFile("combos/unsafemarshaler/thetest.proto", fileDescriptorThetest) }
+
 var fileDescriptorThetest = []byte{
 	// 3015 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xcc, 0x5a, 0x4d, 0x6c, 0x1b, 0xc7,

@@ -40,6 +40,8 @@ func init() {
 	proto.RegisterType((*SubObject)(nil), "subpkg.SubObject")
 }
 
+func init() { proto.RegisterFile("subpkg/subproto.proto", fileDescriptorSubproto) }
+
 var fileDescriptorSubproto = []byte{
 	// 88 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x12, 0x2d, 0x2e, 0x4d, 0x2a,

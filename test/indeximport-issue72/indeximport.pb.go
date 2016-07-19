@@ -452,6 +452,8 @@ var (
 	ErrIntOverflowIndeximport   = fmt.Errorf("proto: integer overflow")
 )
 
+func init() { proto.RegisterFile("indeximport.proto", fileDescriptorIndeximport) }
+
 var fileDescriptorIndeximport = []byte{
 	// 163 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x12, 0xcc, 0xcc, 0x4b, 0x49,

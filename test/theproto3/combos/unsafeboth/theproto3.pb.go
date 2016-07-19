@@ -10464,6 +10464,8 @@ var (
 	ErrIntOverflowTheproto3Unsafe   = fmt.Errorf("proto: integer overflow")
 )
 
+func init() { proto.RegisterFile("combos/unsafeboth/theproto3.proto", fileDescriptorTheproto3) }
+
 var fileDescriptorTheproto3 = []byte{
 	// 1581 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x59, 0xcd, 0x6f, 0x1b, 0xc5,

@@ -130,6 +130,8 @@ func init() {
 	proto.RegisterEnum("jsonpb.Numeral", Numeral_name, Numeral_value)
 }
 
+func init() { proto.RegisterFile("more_test_objects.proto", fileDescriptorMoreTestObjects) }
+
 var fileDescriptorMoreTestObjects = []byte{
 	// 357 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x84, 0x93, 0xcd, 0x4a, 0xf3, 0x40,

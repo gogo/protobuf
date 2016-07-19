@@ -830,6 +830,8 @@ func valueToStringCastvalue(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
+func init() { proto.RegisterFile("castvalue.proto", fileDescriptorCastvalue) }
+
 var fileDescriptorCastvalue = []byte{
 	// 322 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x4f, 0x4e, 0x2c, 0x2e,

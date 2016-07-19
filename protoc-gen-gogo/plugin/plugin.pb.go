@@ -202,6 +202,8 @@ func init() {
 	proto.RegisterType((*CodeGeneratorResponse_File)(nil), "google.protobuf.compiler.CodeGeneratorResponse.File")
 }
 
+func init() { proto.RegisterFile("plugin.proto", fileDescriptorPlugin) }
+
 var fileDescriptorPlugin = []byte{
 	// 304 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x51, 0x4f, 0x4b, 0xfb, 0x40,

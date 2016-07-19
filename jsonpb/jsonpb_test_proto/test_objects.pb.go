@@ -572,6 +572,8 @@ func init() {
 	proto.RegisterExtension(E_Name)
 }
 
+func init() { proto.RegisterFile("test_objects.proto", fileDescriptorTestObjects) }
+
 var fileDescriptorTestObjects = []byte{
 	// 784 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x94, 0xdf, 0x6e, 0xd3, 0x48,

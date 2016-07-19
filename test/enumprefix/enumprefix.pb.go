@@ -49,6 +49,8 @@ func init() {
 	proto.RegisterType((*MyMessage)(nil), "enumprefix.MyMessage")
 }
 
+func init() { proto.RegisterFile("enumprefix.proto", fileDescriptorEnumprefix) }
+
 var fileDescriptorEnumprefix = []byte{
 	// 148 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcd, 0x2b, 0xcd,

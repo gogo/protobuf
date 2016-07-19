@@ -2167,6 +2167,8 @@ var (
 	ErrIntOverflowCasttype   = fmt.Errorf("proto: integer overflow")
 )
 
+func init() { proto.RegisterFile("combos/unmarshaler/casttype.proto", fileDescriptorCasttype) }
+
 var fileDescriptorCasttype = []byte{
 	// 673 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xa4, 0x95, 0xbb, 0x6f, 0xd3, 0x5e,

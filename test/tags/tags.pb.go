@@ -167,6 +167,8 @@ func encodeVarintPopulateTags(data []byte, v uint64) []byte {
 	return data
 }
 
+func init() { proto.RegisterFile("tags.proto", fileDescriptorTags) }
+
 var fileDescriptorTags = []byte{
 	// 202 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x2a, 0x49, 0x4c, 0x2f,

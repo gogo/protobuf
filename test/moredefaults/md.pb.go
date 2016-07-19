@@ -318,6 +318,8 @@ func encodeVarintPopulateMd(data []byte, v uint64) []byte {
 	return data
 }
 
+func init() { proto.RegisterFile("md.proto", fileDescriptorMd) }
+
 var fileDescriptorMd = []byte{
 	// 252 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0xc8, 0x4d, 0xd1, 0x2b,

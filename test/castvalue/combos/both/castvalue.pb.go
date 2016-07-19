@@ -1391,6 +1391,8 @@ var (
 	ErrIntOverflowCastvalue   = fmt.Errorf("proto: integer overflow")
 )
 
+func init() { proto.RegisterFile("combos/both/castvalue.proto", fileDescriptorCastvalue) }
+
 var fileDescriptorCastvalue = []byte{
 	// 333 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0xce, 0xcf, 0x4d,

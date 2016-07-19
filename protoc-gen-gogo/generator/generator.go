@@ -2998,6 +2998,7 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 
 	v := file.VarName()
 	g.P()
+	g.P("func init() { ", g.Pkg["proto"], ".RegisterFile(", strconv.Quote(*file.Name), ", ", v, ") }")
 	g.P("var ", v, " = []byte{")
 	g.In()
 	g.P("// ", len(b), " bytes of a gzipped FileDescriptorProto")

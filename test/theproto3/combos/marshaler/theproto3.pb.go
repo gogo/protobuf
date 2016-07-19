@@ -5718,6 +5718,8 @@ func valueToStringTheproto3(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
+func init() { proto.RegisterFile("combos/marshaler/theproto3.proto", fileDescriptorTheproto3) }
+
 var fileDescriptorTheproto3 = []byte{
 	// 1585 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x59, 0x4d, 0x6f, 0xdb, 0xc6,
