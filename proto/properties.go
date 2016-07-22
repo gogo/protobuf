@@ -744,7 +744,9 @@ func getPropertiesLocked(t reflect.Type) *StructProperties {
 	propertiesMap[t] = prop
 
 	// build properties
-	prop.extendable = reflect.PtrTo(t).Implements(extendableProtoType)
+	prop.extendable = reflect.PtrTo(t).Implements(extendableProtoType) ||
+		reflect.PtrTo(t).Implements(extendableProtoV1Type) ||
+		reflect.PtrTo(t).Implements(extendableBytesType)
 	prop.unrecField = invalidField
 	prop.Prop = make([]*Properties, t.NumField())
 	prop.order = make([]int, t.NumField())
@@ -756,7 +758,11 @@ func getPropertiesLocked(t reflect.Type) *StructProperties {
 		name := f.Name
 		p.init(f.Type, name, f.Tag.Get("protobuf"), &f, false)
 
-		if f.Name == "XXX_extensions" { // special case
+		if f.Name == "XXX_InternalExtensions" { // special case
+			p.enc = (*Buffer).enc_exts
+			p.dec = nil // not needed
+			p.size = size_exts
+		} else if f.Name == "XXX_extensions" { // special case
 			if len(f.Tag.Get("protobuf")) > 0 {
 				p.enc = (*Buffer).enc_ext_slice_byte
 				p.dec = nil // not needed
@@ -766,8 +772,7 @@ func getPropertiesLocked(t reflect.Type) *StructProperties {
 				p.dec = nil // not needed
 				p.size = size_map
 			}
-		}
-		if f.Name == "XXX_unrecognized" { // special case
+		} else if f.Name == "XXX_unrecognized" { // special case
 			prop.unrecField = toField(&f)
 		}
 		oneof := f.Tag.Get("protobuf_oneof") // special case

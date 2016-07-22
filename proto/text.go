@@ -50,6 +50,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"sync"
 )
 
 var (
@@ -387,7 +388,7 @@ func writeStruct(w *textWriter, sv reflect.Value) error {
 		pv = reflect.New(sv.Type())
 		pv.Elem().Set(sv)
 	}
-	if pv.Type().Implements(extendableProtoType) {
+	if pv.Type().Implements(extensionRangeType) {
 		if err := writeExtensions(w, pv); err != nil {
 			return err
 		}
@@ -635,28 +636,37 @@ func (s int32Slice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 // pv is assumed to be a pointer to a protocol message struct that is extendable.
 func writeExtensions(w *textWriter, pv reflect.Value) error {
 	emap := extensionMaps[pv.Type().Elem()]
-	ep := pv.Interface().(extendableProto)
+	e := pv.Interface().(Message)
 
-	// Order the extensions by ID.
-	// This isn't strictly necessary, but it will give us
-	// canonical output, which will also make testing easier.
 	var m map[int32]Extension
-	if em, ok := ep.(extensionsMap); ok {
-		m = em.ExtensionMap()
-	} else if em, ok := ep.(extensionsBytes); ok {
+	var mu sync.Locker
+	if em, ok := e.(extensionsBytes); ok {
 		eb := em.GetExtensions()
 		var err error
 		m, err = BytesToExtensionsMap(*eb)
 		if err != nil {
 			return err
 		}
+		mu = notLocker{}
+	} else if _, ok := e.(extendableProto); ok {
+		ep, _ := extendable(e)
+		m, mu = ep.extensionsRead()
+		if m == nil {
+			return nil
+		}
 	}
 
+	// Order the extensions by ID.
+	// This isn't strictly necessary, but it will give us
+	// canonical output, which will also make testing easier.
+
+	mu.Lock()
 	ids := make([]int32, 0, len(m))
 	for id := range m {
 		ids = append(ids, id)
 	}
 	sort.Sort(int32Slice(ids))
+	mu.Unlock()
 
 	for _, extNum := range ids {
 		ext := m[extNum]
@@ -672,7 +682,7 @@ func writeExtensions(w *textWriter, pv reflect.Value) error {
 			continue
 		}
 
-		pb, err := GetExtension(ep, desc)
+		pb, err := GetExtension(e, desc)
 		if err != nil {
 			return fmt.Errorf("failed getting extension: %v", err)
 		}

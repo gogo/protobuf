@@ -54,7 +54,9 @@ var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
-const _ = proto.GoGoProtoPackageIsVersion1
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type FOO int32
 
@@ -1304,12 +1306,12 @@ func (m *InnerMessage) GetConnected() bool {
 }
 
 type OtherMessage struct {
-	Key              *int64                    `protobuf:"varint,1,opt,name=key" json:"key,omitempty"`
-	Value            []byte                    `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	Weight           *float32                  `protobuf:"fixed32,3,opt,name=weight" json:"weight,omitempty"`
-	Inner            *InnerMessage             `protobuf:"bytes,4,opt,name=inner" json:"inner,omitempty"`
-	XXX_extensions   map[int32]proto.Extension `json:"-"`
-	XXX_unrecognized []byte                    `json:"-"`
+	Key                          *int64        `protobuf:"varint,1,opt,name=key" json:"key,omitempty"`
+	Value                        []byte        `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	Weight                       *float32      `protobuf:"fixed32,3,opt,name=weight" json:"weight,omitempty"`
+	Inner                        *InnerMessage `protobuf:"bytes,4,opt,name=inner" json:"inner,omitempty"`
+	proto.XXX_InternalExtensions `json:"-"`
+	XXX_unrecognized             []byte `json:"-"`
 }
 
 func (m *OtherMessage) Reset()                    { *m = OtherMessage{} }
@@ -1323,12 +1325,6 @@ var extRange_OtherMessage = []proto.ExtensionRange{
 
 func (*OtherMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherMessage
-}
-func (m *OtherMessage) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
-	}
-	return m.XXX_extensions
 }
 
 func (m *OtherMessage) GetKey() int64 {
@@ -1388,10 +1384,10 @@ type MyMessage struct {
 	Bikeshed       *MyMessage_Color      `protobuf:"varint,7,opt,name=bikeshed,enum=testdata.MyMessage_Color" json:"bikeshed,omitempty"`
 	Somegroup      *MyMessage_SomeGroup  `protobuf:"group,8,opt,name=SomeGroup,json=somegroup" json:"somegroup,omitempty"`
 	// This field becomes [][]byte in the generated code.
-	RepBytes         [][]byte                  `protobuf:"bytes,10,rep,name=rep_bytes,json=repBytes" json:"rep_bytes,omitempty"`
-	Bigfloat         *float64                  `protobuf:"fixed64,11,opt,name=bigfloat" json:"bigfloat,omitempty"`
-	XXX_extensions   map[int32]proto.Extension `json:"-"`
-	XXX_unrecognized []byte                    `json:"-"`
+	RepBytes                     [][]byte `protobuf:"bytes,10,rep,name=rep_bytes,json=repBytes" json:"rep_bytes,omitempty"`
+	Bigfloat                     *float64 `protobuf:"fixed64,11,opt,name=bigfloat" json:"bigfloat,omitempty"`
+	proto.XXX_InternalExtensions `json:"-"`
+	XXX_unrecognized             []byte `json:"-"`
 }
 
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
@@ -1405,12 +1401,6 @@ var extRange_MyMessage = []proto.ExtensionRange{
 
 func (*MyMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyMessage
-}
-func (m *MyMessage) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
-	}
-	return m.XXX_extensions
 }
 
 func (m *MyMessage) GetCount() int32 {
@@ -1589,8 +1579,8 @@ func (m *ComplexExtension) GetThird() []int32 {
 }
 
 type DefaultsMessage struct {
-	XXX_extensions   map[int32]proto.Extension `json:"-"`
-	XXX_unrecognized []byte                    `json:"-"`
+	proto.XXX_InternalExtensions `json:"-"`
+	XXX_unrecognized             []byte `json:"-"`
 }
 
 func (m *DefaultsMessage) Reset()                    { *m = DefaultsMessage{} }
@@ -1605,16 +1595,10 @@ var extRange_DefaultsMessage = []proto.ExtensionRange{
 func (*DefaultsMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_DefaultsMessage
 }
-func (m *DefaultsMessage) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
-	}
-	return m.XXX_extensions
-}
 
 type MyMessageSet struct {
-	XXX_extensions   map[int32]proto.Extension `json:"-"`
-	XXX_unrecognized []byte                    `json:"-"`
+	proto.XXX_InternalExtensions `json:"-"`
+	XXX_unrecognized             []byte `json:"-"`
 }
 
 func (m *MyMessageSet) Reset()                    { *m = MyMessageSet{} }
@@ -1623,16 +1607,16 @@ func (*MyMessageSet) ProtoMessage()               {}
 func (*MyMessageSet) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{17} }
 
 func (m *MyMessageSet) Marshal() ([]byte, error) {
-	return proto.MarshalMessageSet(m.ExtensionMap())
+	return proto.MarshalMessageSet(&m.XXX_InternalExtensions)
 }
 func (m *MyMessageSet) Unmarshal(buf []byte) error {
-	return proto.UnmarshalMessageSet(buf, m.ExtensionMap())
+	return proto.UnmarshalMessageSet(buf, &m.XXX_InternalExtensions)
 }
 func (m *MyMessageSet) MarshalJSON() ([]byte, error) {
-	return proto.MarshalMessageSetJSON(m.XXX_extensions)
+	return proto.MarshalMessageSetJSON(&m.XXX_InternalExtensions)
 }
 func (m *MyMessageSet) UnmarshalJSON(buf []byte) error {
-	return proto.UnmarshalMessageSetJSON(buf, m.XXX_extensions)
+	return proto.UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)
 }
 
 // ensure MyMessageSet satisfies proto.Marshaler and proto.Unmarshaler
@@ -1645,12 +1629,6 @@ var extRange_MyMessageSet = []proto.ExtensionRange{
 
 func (*MyMessageSet) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyMessageSet
-}
-func (m *MyMessageSet) ExtensionMap() map[int32]proto.Extension {
-	if m.XXX_extensions == nil {
-		m.XXX_extensions = make(map[int32]proto.Extension)
-	}
-	return m.XXX_extensions
 }
 
 type Empty struct {

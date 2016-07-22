@@ -68,7 +68,7 @@ import (
 // It is incremented whenever an incompatibility between the generated code and
 // proto package is introduced; the generated code references
 // a constant, proto.ProtoPackageIsVersionN (where N is generatedCodeVersion).
-const generatedCodeVersion = 1
+const generatedCodeVersion = 2
 
 // A Plugin provides functionality to add to the output during Go code generation,
 // such as to produce RPC stubs.
@@ -404,8 +404,6 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 	if ms.hasExtensions {
 		g.P("func (*", ms.sym, ") ExtensionRangeArray() []", g.Pkg["proto"], ".ExtensionRange ",
 			"{ return (*", remoteSym, ")(nil).ExtensionRangeArray() }")
-		g.P("func (m *", ms.sym, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension ",
-			"{ return (*", remoteSym, ")(m).ExtensionMap() }")
 		if ms.isMessageSet {
 			g.P("func (m *", ms.sym, ") Marshal() ([]byte, error) ",
 				"{ return (*", remoteSym, ")(m).Marshal() }")
@@ -1251,10 +1249,12 @@ func (g *Generator) generate(file *FileDescriptor) {
 		// For one file in the package, assert version compatibility.
 		g.P("// This is a compile-time assertion to ensure that this generated file")
 		g.P("// is compatible with the proto package it is being compiled against.")
+		g.P("// A compilation error at this line likely means your copy of the")
+		g.P("// proto package needs to be updated.")
 		if gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
-			g.P("const _ = ", g.Pkg["proto"], ".GoGoProtoPackageIsVersion", generatedCodeVersion)
+			g.P("const _ = ", g.Pkg["proto"], ".GoGoProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
 		} else {
-			g.P("const _ = ", g.Pkg["proto"], ".ProtoPackageIsVersion", generatedCodeVersion)
+			g.P("const _ = ", g.Pkg["proto"], ".ProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
 		}
 		g.P()
 	}
@@ -1954,7 +1954,8 @@ func (g *Generator) RecordTypeUse(t string) {
 }
 
 // Method names that may be generated.  Fields with these names get an
-// underscore appended.
+// underscore appended. Any change to this set is a potential incompatible
+// API change because it changes generated field names.
 var methodNames = [...]string{
 	"Reset",
 	"String",
@@ -2126,7 +2127,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 	if len(message.ExtensionRange) > 0 {
 		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P("XXX_extensions\t\tmap[int32]", g.Pkg["proto"], ".Extension `json:\"-\"`")
+			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `json:\"-\"`")
 		} else {
 			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
 		}
@@ -2176,22 +2177,22 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P()
 			g.P("func (m *", ccTypeName, ") Marshal() ([]byte, error) {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".MarshalMessageSet(m.ExtensionMap())")
+			g.P("return ", g.Pkg["proto"], ".MarshalMessageSet(&m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
 			g.P("func (m *", ccTypeName, ") Unmarshal(buf []byte) error {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSet(buf, m.ExtensionMap())")
+			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSet(buf, &m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
 			g.P("func (m *", ccTypeName, ") MarshalJSON() ([]byte, error) {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".MarshalMessageSetJSON(m.XXX_extensions)")
+			g.P("return ", g.Pkg["proto"], ".MarshalMessageSetJSON(&m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
 			g.P("func (m *", ccTypeName, ") UnmarshalJSON(buf []byte) error {")
 			g.In()
-			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSetJSON(buf, m.XXX_extensions)")
+			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
 			g.P("// ensure ", ccTypeName, " satisfies proto.Marshaler and proto.Unmarshaler")
@@ -2213,18 +2214,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("return extRange_", ccTypeName)
 		g.Out()
 		g.P("}")
-		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P("func (m *", ccTypeName, ") ExtensionMap() map[int32]", g.Pkg["proto"], ".Extension {")
-			g.In()
-			g.P("if m.XXX_extensions == nil {")
-			g.In()
-			g.P("m.XXX_extensions = make(map[int32]", g.Pkg["proto"], ".Extension)")
-			g.Out()
-			g.P("}")
-			g.P("return m.XXX_extensions")
-			g.Out()
-			g.P("}")
-		} else {
+		if !gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P("func (m *", ccTypeName, ") GetExtensions() *[]byte {")
 			g.In()
 			g.P("if m.XXX_extensions == nil {")
