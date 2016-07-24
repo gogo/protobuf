@@ -39,8 +39,7 @@ import (
 	"time"
 )
 
-func iotest(writer io.WriteCloser, reader io.ReadCloser) error {
-	size := 1000
+func writetest(writer io.WriteCloser, size int) ([]*test.NinOptNative, error) {
 	msgs := make([]*test.NinOptNative, size)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := range msgs {
@@ -55,14 +54,62 @@ func iotest(writer io.WriteCloser, reader io.ReadCloser) error {
 		}
 		err := writer.WriteMsg(msgs[i])
 		if err != nil {
-			return err
+			return nil, err
 		}
 	}
 	if err := writer.Close(); err != nil {
+		return nil, err
+	}
+	return msgs, nil
+}
+
+func iotest(writer io.WriteCloser, reader io.ReadCloser) error {
+	size := 1000
+	msgs, err := writetest(writer, size)
+	if err != nil {
 		return err
 	}
 	i := 0
 	for {
+		msg := &test.NinOptNative{}
+		if err := reader.ReadMsg(msg); err != nil {
+			if err == goio.EOF {
+				break
+			}
+			return err
+		}
+		if err := msg.VerboseEqual(msgs[i]); err != nil {
+			return err
+		}
+		i++
+	}
+	if i != size {
+		panic("not enough messages read")
+	}
+	if err := reader.Close(); err != nil {
+		return err
+	}
+	return nil
+}
+
+func skiptest(writer io.WriteCloser, reader io.ReadSkipCloser) error {
+	size := 1000
+	msgs, err := writetest(writer, size)
+	if err != nil {
+		return err
+	}
+	i := 0
+	for {
+		if i%2 == 0 || i == 999 {
+			if err := reader.SkipMsg(); err != nil {
+				if err == goio.EOF {
+					break
+				}
+				return err
+			}
+			i++
+			continue
+		}
 		msg := &test.NinOptNative{}
 		if err := reader.ReadMsg(msg); err != nil {
 			if err == goio.EOF {
@@ -121,6 +168,18 @@ func TestBigUint32MaxSize(t *testing.T) {
 	}
 }
 
+func TestBigUint32Skip(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewUint32DelimitedWriter(buf, binary.BigEndian)
+	reader := io.NewUint32DelimitedReader(buf, binary.BigEndian, 1024*1024)
+	if err := skiptest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
+	}
+}
+
 func TestLittleUint32Normal(t *testing.T) {
 	buf := newBuffer()
 	writer := io.NewUint32DelimitedWriter(buf, binary.LittleEndian)
@@ -141,6 +200,18 @@ func TestLittleUint32MaxSize(t *testing.T) {
 		t.Error(err)
 	} else {
 		t.Logf("%s", err)
+	}
+}
+
+func TestLittleUint32Skip(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewUint32DelimitedWriter(buf, binary.LittleEndian)
+	reader := io.NewUint32DelimitedReader(buf, binary.LittleEndian, 1024*1024)
+	if err := skiptest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
 	}
 }
 
@@ -185,6 +256,18 @@ func TestVarintError(t *testing.T) {
 	err := reader.ReadMsg(msg)
 	if err == nil {
 		t.Fatalf("Expected error")
+	}
+}
+
+func TestVarintSkip(t *testing.T) {
+	buf := newBuffer()
+	writer := io.NewDelimitedWriter(buf)
+	reader := io.NewDelimitedReader(buf, 1024*1024)
+	if err := skiptest(writer, reader); err != nil {
+		t.Error(err)
+	}
+	if !buf.closed {
+		t.Fatalf("did not close buffer")
 	}
 }
 
