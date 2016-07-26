@@ -30,4 +30,5 @@ regenerate:
 	cp header.proto mapsproto2.proto
 	cat ../theproto3/maps.proto >> mapsproto2.proto
 	go install github.com/gogo/protobuf/protoc-gen-combo
+	find combos -type d -not -name combos -exec cp mapsproto2_test.go.in {}/mapsproto2_test.go \;
 	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. mapsproto2.proto

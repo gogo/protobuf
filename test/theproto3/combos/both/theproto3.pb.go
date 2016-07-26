@@ -3517,16 +3517,22 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x7a
 			i++
 			v := m.StringToBytesMap[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
 			i = encodeVarintTheproto3(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintTheproto3(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(data, i, uint64(len(v)))
-			i += copy(data[i:], v)
+			if len(v) > 0 {
+				data[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(data, i, uint64(len(v)))
+				i += copy(data[i:], v)
+			}
 		}
 	}
 	if len(m.StringToEnumMap) > 0 {
@@ -3899,16 +3905,22 @@ func (m *AllMapsOrdered) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x7a
 			i++
 			v := m.StringToBytesMap[string(k)]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
 			i = encodeVarintTheproto3(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintTheproto3(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(data, i, uint64(len(v)))
-			i += copy(data[i:], v)
+			if len(v) > 0 {
+				data[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(data, i, uint64(len(v)))
+				i += copy(data[i:], v)
+			}
 		}
 	}
 	if len(m.StringToEnumMap) > 0 {
@@ -4035,7 +4047,11 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x1a
 			i++
 			v := m.ByteMapping[k]
-			mapSize := 1 + 1 + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + 1 + byteSize
 			i = encodeVarintTheproto3(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++
@@ -4045,10 +4061,12 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 				data[i] = 0
 			}
 			i++
-			data[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(data, i, uint64(len(v)))
-			i += copy(data[i:], v)
+			if len(v) > 0 {
+				data[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(data, i, uint64(len(v)))
+				i += copy(data[i:], v)
+			}
 		}
 	}
 	return i, nil
@@ -4933,7 +4951,11 @@ func (m *AllMaps) Size() (n int) {
 		for k, v := range m.StringToBytesMap {
 			_ = k
 			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			l = 0
+			if len(v) > 0 {
+				l = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + l
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
@@ -5080,7 +5102,11 @@ func (m *AllMapsOrdered) Size() (n int) {
 		for k, v := range m.StringToBytesMap {
 			_ = k
 			_ = v
-			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			l = 0
+			if len(v) > 0 {
+				l = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + l
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
@@ -5136,7 +5162,11 @@ func (m *MessageWithMap) Size() (n int) {
 		for k, v := range m.ByteMapping {
 			_ = k
 			_ = v
-			mapEntrySize := 1 + 1 + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			l = 0
+			if len(v) > 0 {
+				l = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapEntrySize := 1 + 1 + l
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}

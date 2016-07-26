@@ -2509,7 +2509,11 @@ func (m *AllMaps) Size() (n int) {
 		for k, v := range m.StringToBytesMap {
 			_ = k
 			_ = v
-			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			l = 0
+			if v != nil {
+				l = 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + l
 			n += mapEntrySize + 1 + sovMapsproto2(uint64(mapEntrySize))
 		}
 	}
@@ -2659,7 +2663,11 @@ func (m *AllMapsOrdered) Size() (n int) {
 		for k, v := range m.StringToBytesMap {
 			_ = k
 			_ = v
-			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			l = 0
+			if v != nil {
+				l = 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + l
 			n += mapEntrySize + 1 + sovMapsproto2(uint64(mapEntrySize))
 		}
 	}
@@ -3387,16 +3395,22 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x7a
 			i++
 			v := m.StringToBytesMap[k]
-			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			byteSize := 0
+			if v != nil {
+				byteSize = 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + byteSize
 			i = encodeVarintMapsproto2(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintMapsproto2(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintMapsproto2(data, i, uint64(len(v)))
-			i += copy(data[i:], v)
+			if v != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintMapsproto2(data, i, uint64(len(v)))
+				i += copy(data[i:], v)
+			}
 		}
 	}
 	if len(m.StringToEnumMap) > 0 {
@@ -3772,16 +3786,22 @@ func (m *AllMapsOrdered) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x7a
 			i++
 			v := m.StringToBytesMap[string(k)]
-			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			byteSize := 0
+			if v != nil {
+				byteSize = 1 + len(v) + sovMapsproto2(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + byteSize
 			i = encodeVarintMapsproto2(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintMapsproto2(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintMapsproto2(data, i, uint64(len(v)))
-			i += copy(data[i:], v)
+			if v != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintMapsproto2(data, i, uint64(len(v)))
+				i += copy(data[i:], v)
+			}
 		}
 	}
 	if len(m.StringToEnumMap) > 0 {

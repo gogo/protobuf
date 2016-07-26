@@ -24,10 +24,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package theproto3
+package proto2_maps
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/gogo/protobuf/proto"
@@ -99,25 +98,5 @@ func TestEmptyMapsBytes(t *testing.T) {
 		t.Error("element not in map")
 	} else if len(v) != 0 {
 		t.Errorf("element should be empty, but its %v", v)
-	}
-}
-
-func TestCustomTypeSize(t *testing.T) {
-	m := &Uint128Pair{}
-	m.Size() // Should not panic.
-}
-
-func TestCustomTypeMarshalUnmarshal(t *testing.T) {
-	m1 := &Uint128Pair{}
-	if b, err := proto.Marshal(m1); err != nil {
-		t.Fatal(err)
-	} else {
-		m2 := &Uint128Pair{}
-		if err := proto.Unmarshal(b, m2); err != nil {
-			t.Fatal(err)
-		}
-		if !reflect.DeepEqual(m1, m2) {
-			t.Errorf("expected %+v, got %+v", m1, m2)
-		}
 	}
 }

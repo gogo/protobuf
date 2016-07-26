@@ -39,6 +39,12 @@ func TestNilMaps(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	size := m.Size()
+	protoSize := proto.Size(m)
+	marshaledSize := len(data)
+	if size != protoSize || marshaledSize != protoSize {
+		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
+	}
 	m2 := &AllMaps{}
 	if err := proto.Unmarshal(data, m2); err != nil {
 		t.Fatal(err)
@@ -51,10 +57,16 @@ func TestNilMaps(t *testing.T) {
 }
 
 func TestNilMapsBytes(t *testing.T) {
-	m := &AllMaps{StringToBytesMap: map[string][]byte{"a": nil, "b": {}}}
+	m := &AllMaps{StringToBytesMap: map[string][]byte{"a": nil}}
 	data, err := proto.Marshal(m)
 	if err != nil {
 		t.Fatal(err)
+	}
+	size := m.Size()
+	protoSize := proto.Size(m)
+	marshaledSize := len(data)
+	if size != protoSize || marshaledSize != protoSize {
+		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
 	}
 	m2 := &AllMaps{}
 	if err := proto.Unmarshal(data, m2); err != nil {
@@ -64,6 +76,24 @@ func TestNilMapsBytes(t *testing.T) {
 		t.Error("element not in map")
 	} else if len(v) != 0 {
 		t.Errorf("element should be empty, but its %v", v)
+	}
+}
+
+func TestEmptyMapsBytes(t *testing.T) {
+	m := &AllMaps{StringToBytesMap: map[string][]byte{"b": {}}}
+	data, err := proto.Marshal(m)
+	if err != nil {
+		t.Fatal(err)
+	}
+	size := m.Size()
+	protoSize := proto.Size(m)
+	marshaledSize := len(data)
+	if size != protoSize || marshaledSize != protoSize {
+		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
+	}
+	m2 := &AllMaps{}
+	if err := proto.Unmarshal(data, m2); err != nil {
+		t.Fatal(err)
 	}
 	if v, ok := m2.StringToBytesMap["b"]; !ok {
 		t.Error("element not in map")

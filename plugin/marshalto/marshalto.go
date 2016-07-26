@@ -906,10 +906,21 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `1`)
-			case descriptor.FieldDescriptorProto_TYPE_STRING,
-				descriptor.FieldDescriptorProto_TYPE_BYTES:
+			case descriptor.FieldDescriptorProto_TYPE_STRING:
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
+			case descriptor.FieldDescriptorProto_TYPE_BYTES:
+				p.P(`byteSize := 0`)
+				if proto3 {
+					p.P(`if len(v) > 0 {`)
+				} else {
+					p.P(`if v != nil {`)
+				}
+				p.In()
+				p.P(`byteSize = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
+				p.Out()
+				p.P(`}`)
+				sum = append(sum, `byteSize`)
 			case descriptor.FieldDescriptorProto_TYPE_SINT32,
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, strconv.Itoa(valueKeySize))
@@ -947,9 +958,17 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`if `, accessor, ` != nil {`)
 				p.In()
 			}
+			if m.ValueField.IsBytes() {
+				if proto3 {
+					p.P(`if len(`, accessor, `) > 0 {`)
+				} else {
+					p.P(`if `, accessor, ` != nil {`)
+				}
+				p.In()
+			}
 			p.encodeKey(2, wireToType(valuewire))
 			p.mapField(numGen, m.ValueField.GetType(), accessor, protoSizer)
-			if nullableMsg {
+			if nullableMsg || m.ValueField.IsBytes() {
 				p.Out()
 				p.P(`}`)
 			}
