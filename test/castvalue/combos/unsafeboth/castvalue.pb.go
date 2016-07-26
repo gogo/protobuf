@@ -31,8 +31,6 @@ import strconv "strconv"
 import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import errors "errors"
-
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -749,8 +747,9 @@ func (m *Castaway) Size() (n int) {
 			l = 0
 			if v != nil {
 				l = ((*Wilson)(v)).Size()
+				l += 1 + sovCastvalue(uint64(l))
 			}
-			mapEntrySize := 1 + sovCastvalue(uint64(k)) + 1 + l + sovCastvalue(uint64(l))
+			mapEntrySize := 1 + sovCastvalue(uint64(k)) + l
 			n += mapEntrySize + 1 + sovCastvalue(uint64(mapEntrySize))
 		}
 	}
@@ -856,8 +855,12 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0xa
 			i++
 			v := m.CastMapValueMessage[k]
-			msgSize := ((*Wilson)(&v)).Size()
-			mapSize := 1 + sovCastvalue(uint64(k)) + 1 + msgSize + sovCastvalue(uint64(msgSize))
+			msgSize := 0
+			if ((*Wilson)(&v)) != nil {
+				msgSize = ((*Wilson)(&v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
+			}
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
 			i = encodeVarintCastvalue(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++
@@ -877,23 +880,26 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x12
 			i++
 			v := m.CastMapValueMessageNullable[k]
-			if v == nil {
-				return 0, errors.New("proto: map has nil element")
+			msgSize := 0
+			if ((*Wilson)(v)) != nil {
+				msgSize = ((*Wilson)(v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
 			}
-			msgSize := ((*Wilson)(v)).Size()
-			mapSize := 1 + sovCastvalue(uint64(k)) + 1 + msgSize + sovCastvalue(uint64(msgSize))
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
 			i = encodeVarintCastvalue(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++
 			i = encodeVarintCastvalue(data, i, uint64(k))
-			data[i] = 0x12
-			i++
-			i = encodeVarintCastvalue(data, i, uint64(((*Wilson)(v)).Size()))
-			n2, err := ((*Wilson)(v)).MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
+			if ((*Wilson)(v)) != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintCastvalue(data, i, uint64(((*Wilson)(v)).Size()))
+				n2, err := ((*Wilson)(v)).MarshalTo(data[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n2
 			}
-			i += n2
 		}
 	}
 	if m.XXX_unrecognized != nil {
@@ -1040,55 +1046,60 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			var valuekey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				valuekey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapmsglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				mapmsglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if mapmsglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
-			}
-			postmsgIndex := iNdEx + mapmsglen
-			if mapmsglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
-			}
-			if postmsgIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			mapvalue := &Wilson{}
-			if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
-				return err
-			}
-			iNdEx = postmsgIndex
 			if m.CastMapValueMessage == nil {
 				m.CastMapValueMessage = make(map[int32]MyWilson)
 			}
-			m.CastMapValueMessage[mapkey] = ((MyWilson)(*mapvalue))
+			if iNdEx < postIndex {
+				var valuekey uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowCastvalueUnsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					valuekey |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				var mapmsglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowCastvalueUnsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					mapmsglen |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if mapmsglen < 0 {
+					return ErrInvalidLengthCastvalueUnsafe
+				}
+				postmsgIndex := iNdEx + mapmsglen
+				if mapmsglen < 0 {
+					return ErrInvalidLengthCastvalueUnsafe
+				}
+				if postmsgIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				mapvalue := &Wilson{}
+				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+					return err
+				}
+				iNdEx = postmsgIndex
+				m.CastMapValueMessage[mapkey] = ((MyWilson)(*mapvalue))
+			} else {
+				var mapvalue MyWilson
+				m.CastMapValueMessage[mapkey] = mapvalue
+			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -1146,55 +1157,60 @@ func (m *Castaway) Unmarshal(data []byte) error {
 					break
 				}
 			}
-			var valuekey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				valuekey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapmsglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := data[iNdEx]
-				iNdEx++
-				mapmsglen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if mapmsglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
-			}
-			postmsgIndex := iNdEx + mapmsglen
-			if mapmsglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
-			}
-			if postmsgIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			mapvalue := &Wilson{}
-			if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
-				return err
-			}
-			iNdEx = postmsgIndex
 			if m.CastMapValueMessageNullable == nil {
 				m.CastMapValueMessageNullable = make(map[int32]*MyWilson)
 			}
-			m.CastMapValueMessageNullable[mapkey] = ((*MyWilson)(mapvalue))
+			if iNdEx < postIndex {
+				var valuekey uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowCastvalueUnsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					valuekey |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				var mapmsglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowCastvalueUnsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					mapmsglen |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if mapmsglen < 0 {
+					return ErrInvalidLengthCastvalueUnsafe
+				}
+				postmsgIndex := iNdEx + mapmsglen
+				if mapmsglen < 0 {
+					return ErrInvalidLengthCastvalueUnsafe
+				}
+				if postmsgIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				mapvalue := &Wilson{}
+				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+					return err
+				}
+				iNdEx = postmsgIndex
+				m.CastMapValueMessageNullable[mapkey] = ((*MyWilson)(mapvalue))
+			} else {
+				var mapvalue *MyWilson
+				m.CastMapValueMessageNullable[mapkey] = mapvalue
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

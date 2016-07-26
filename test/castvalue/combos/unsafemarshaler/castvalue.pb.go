@@ -31,8 +31,6 @@ import strconv "strconv"
 import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import errors "errors"
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -747,8 +745,9 @@ func (m *Castaway) Size() (n int) {
 			l = 0
 			if v != nil {
 				l = ((*Wilson)(v)).Size()
+				l += 1 + sovCastvalue(uint64(l))
 			}
-			mapEntrySize := 1 + sovCastvalue(uint64(k)) + 1 + l + sovCastvalue(uint64(l))
+			mapEntrySize := 1 + sovCastvalue(uint64(k)) + l
 			n += mapEntrySize + 1 + sovCastvalue(uint64(mapEntrySize))
 		}
 	}
@@ -854,8 +853,12 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0xa
 			i++
 			v := m.CastMapValueMessage[k]
-			msgSize := ((*Wilson)(&v)).Size()
-			mapSize := 1 + sovCastvalue(uint64(k)) + 1 + msgSize + sovCastvalue(uint64(msgSize))
+			msgSize := 0
+			if ((*Wilson)(&v)) != nil {
+				msgSize = ((*Wilson)(&v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
+			}
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
 			i = encodeVarintCastvalue(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++
@@ -875,23 +878,26 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x12
 			i++
 			v := m.CastMapValueMessageNullable[k]
-			if v == nil {
-				return 0, errors.New("proto: map has nil element")
+			msgSize := 0
+			if ((*Wilson)(v)) != nil {
+				msgSize = ((*Wilson)(v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
 			}
-			msgSize := ((*Wilson)(v)).Size()
-			mapSize := 1 + sovCastvalue(uint64(k)) + 1 + msgSize + sovCastvalue(uint64(msgSize))
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
 			i = encodeVarintCastvalue(data, i, uint64(mapSize))
 			data[i] = 0x8
 			i++
 			i = encodeVarintCastvalue(data, i, uint64(k))
-			data[i] = 0x12
-			i++
-			i = encodeVarintCastvalue(data, i, uint64(((*Wilson)(v)).Size()))
-			n2, err := ((*Wilson)(v)).MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
+			if ((*Wilson)(v)) != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintCastvalue(data, i, uint64(((*Wilson)(v)).Size()))
+				n2, err := ((*Wilson)(v)).MarshalTo(data[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n2
 			}
-			i += n2
 		}
 	}
 	if m.XXX_unrecognized != nil {

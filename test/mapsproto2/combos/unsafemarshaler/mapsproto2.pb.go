@@ -34,7 +34,6 @@ import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import unsafe "unsafe"
-import errors "errors"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -2527,8 +2526,9 @@ func (m *AllMaps) Size() (n int) {
 			l = 0
 			if v != nil {
 				l = v.Size()
+				l += 1 + sovMapsproto2(uint64(l))
 			}
-			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + l + sovMapsproto2(uint64(l))
+			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + l
 			n += mapEntrySize + 2 + sovMapsproto2(uint64(mapEntrySize))
 		}
 	}
@@ -2676,8 +2676,9 @@ func (m *AllMapsOrdered) Size() (n int) {
 			l = 0
 			if v != nil {
 				l = v.Size()
+				l += 1 + sovMapsproto2(uint64(l))
 			}
-			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + l + sovMapsproto2(uint64(l))
+			mapEntrySize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + l
 			n += mapEntrySize + 2 + sovMapsproto2(uint64(mapEntrySize))
 		}
 	}
@@ -3421,24 +3422,27 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x1
 			i++
 			v := m.StringToMsgMap[k]
-			if v == nil {
-				return 0, errors.New("proto: map has nil element")
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovMapsproto2(uint64(msgSize))
 			}
-			msgSize := v.Size()
-			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + msgSize + sovMapsproto2(uint64(msgSize))
+			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + msgSize
 			i = encodeVarintMapsproto2(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintMapsproto2(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
-			n1, err := v.MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
+			if v != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
+				n1, err := v.MarshalTo(data[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n1
 			}
-			i += n1
 		}
 	}
 	if m.XXX_unrecognized != nil {
@@ -3813,24 +3817,27 @@ func (m *AllMapsOrdered) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x1
 			i++
 			v := m.StringToMsgMap[string(k)]
-			if v == nil {
-				return 0, errors.New("proto: map has nil element")
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovMapsproto2(uint64(msgSize))
 			}
-			msgSize := v.Size()
-			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + 1 + msgSize + sovMapsproto2(uint64(msgSize))
+			mapSize := 1 + len(k) + sovMapsproto2(uint64(len(k))) + msgSize
 			i = encodeVarintMapsproto2(data, i, uint64(mapSize))
 			data[i] = 0xa
 			i++
 			i = encodeVarintMapsproto2(data, i, uint64(len(k)))
 			i += copy(data[i:], k)
-			data[i] = 0x12
-			i++
-			i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
-			n2, err := v.MarshalTo(data[i:])
-			if err != nil {
-				return 0, err
+			if v != nil {
+				data[i] = 0x12
+				i++
+				i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
+				n2, err := v.MarshalTo(data[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n2
 			}
-			i += n2
 		}
 	}
 	if m.XXX_unrecognized != nil {
