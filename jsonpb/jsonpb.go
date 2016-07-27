@@ -563,16 +563,28 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 	// Handle arrays
 	if targetType.Kind() == reflect.Slice {
-		// Special case for encoded bytes. Pre-go1.5 doesn't support unmarshalling
-		// strings into aliased []byte types.
-		// https://github.com/golang/go/commit/4302fd0409da5e4f1d71471a6770dacdc3301197
-		// https://github.com/golang/go/commit/c60707b14d6be26bf4213114d13070bff00d0b0a
 		if targetType.Elem().Kind() == reflect.Uint8 {
-			out := reflect.New(targetType)
-			if err := json.Unmarshal(inputValue, out.Interface()); err != nil {
+			outRef := reflect.New(targetType)
+			outVal := outRef.Interface()
+			//CustomType with underlying type []byte
+			if _, ok := outVal.(interface {
+				UnmarshalJSON([]byte) error
+			}); ok {
+				if err := json.Unmarshal(inputValue, outVal); err != nil {
+					return err
+				}
+				target.Set(outRef.Elem())
+				return nil
+			}
+			// Special case for encoded bytes. Pre-go1.5 doesn't support unmarshalling
+			// strings into aliased []byte types.
+			// https://github.com/golang/go/commit/4302fd0409da5e4f1d71471a6770dacdc3301197
+			// https://github.com/golang/go/commit/c60707b14d6be26bf4213114d13070bff00d0b0a
+			var out []byte
+			if err := json.Unmarshal(inputValue, &out); err != nil {
 				return err
 			}
-			target.Set(out.Elem())
+			target.SetBytes(out)
 			return nil
 		}
 
