@@ -30,6 +30,7 @@ package test
 
 import (
 	"bytes"
+	"encoding/hex"
 	"encoding/json"
 )
 
@@ -83,16 +84,22 @@ func (uuid *Uuid) Size() int {
 }
 
 func (uuid Uuid) MarshalJSON() ([]byte, error) {
-	return json.Marshal([]byte(uuid))
+	s := hex.EncodeToString([]byte(uuid))
+	return json.Marshal(s)
 }
 
 func (uuid *Uuid) UnmarshalJSON(data []byte) error {
-	v := new([]byte)
-	err := json.Unmarshal(data, v)
+	var s string
+	err := json.Unmarshal(data, &s)
 	if err != nil {
 		return err
 	}
-	return uuid.Unmarshal(*v)
+	d, err := hex.DecodeString(s)
+	if err != nil {
+		return err
+	}
+	*uuid = Uuid(d)
+	return nil
 }
 
 func (uuid Uuid) Equal(other Uuid) bool {

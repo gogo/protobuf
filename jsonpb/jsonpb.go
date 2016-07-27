@@ -568,11 +568,11 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		// https://github.com/golang/go/commit/4302fd0409da5e4f1d71471a6770dacdc3301197
 		// https://github.com/golang/go/commit/c60707b14d6be26bf4213114d13070bff00d0b0a
 		if targetType.Elem().Kind() == reflect.Uint8 {
-			var out []byte
-			if err := json.Unmarshal(inputValue, &out); err != nil {
+			out := reflect.New(targetType)
+			if err := json.Unmarshal(inputValue, out.Interface()); err != nil {
 				return err
 			}
-			target.SetBytes(out)
+			target.Set(out.Elem())
 			return nil
 		}
 
