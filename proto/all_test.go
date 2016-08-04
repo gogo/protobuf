@@ -1839,42 +1839,42 @@ func TestRequiredNotSetError(t *testing.T) {
 		"b8067f" // field 103, encoding 0, 0x7f zigzag64
 
 	o := old()
-	bytes, err := Marshal(pb)
+	mbytes, err := Marshal(pb)
 	if _, ok := err.(*RequiredNotSetError); !ok {
 		fmt.Printf("marshal-1 err = %v, want *RequiredNotSetError", err)
-		o.DebugPrint("", bytes)
+		o.DebugPrint("", mbytes)
 		t.Fatalf("expected = %s", expected)
 	}
 	if strings.Index(err.Error(), "RequiredField.Label") < 0 {
 		t.Errorf("marshal-1 wrong err msg: %v", err)
 	}
-	if !equal(bytes, expected, t) {
-		o.DebugPrint("neq 1", bytes)
+	if !equal(mbytes, expected, t) {
+		o.DebugPrint("neq 1", mbytes)
 		t.Fatalf("expected = %s", expected)
 	}
 
 	// Now test Unmarshal by recreating the original buffer.
 	pbd := new(GoTest)
-	err = Unmarshal(bytes, pbd)
+	err = Unmarshal(mbytes, pbd)
 	if _, ok := err.(*RequiredNotSetError); !ok {
 		t.Fatalf("unmarshal err = %v, want *RequiredNotSetError", err)
-		o.DebugPrint("", bytes)
+		o.DebugPrint("", mbytes)
 		t.Fatalf("string = %s", expected)
 	}
 	if strings.Index(err.Error(), "RequiredField.{Unknown}") < 0 {
 		t.Errorf("unmarshal wrong err msg: %v", err)
 	}
-	bytes, err = Marshal(pbd)
+	mbytes, err = Marshal(pbd)
 	if _, ok := err.(*RequiredNotSetError); !ok {
 		t.Errorf("marshal-2 err = %v, want *RequiredNotSetError", err)
-		o.DebugPrint("", bytes)
+		o.DebugPrint("", mbytes)
 		t.Fatalf("string = %s", expected)
 	}
 	if strings.Index(err.Error(), "RequiredField.Label") < 0 {
 		t.Errorf("marshal-2 wrong err msg: %v", err)
 	}
-	if !equal(bytes, expected, t) {
-		o.DebugPrint("neq 2", bytes)
+	if !equal(mbytes, expected, t) {
+		o.DebugPrint("neq 2", mbytes)
 		t.Fatalf("string = %s", expected)
 	}
 }
