@@ -869,7 +869,7 @@ func (*MyExtendable) ProtoMessage()               {}
 func (*MyExtendable) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{40} }
 
 var extRange_MyExtendable = []proto.ExtensionRange{
-	{100, 199},
+	{Start: 100, End: 199},
 }
 
 func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
@@ -889,8 +889,8 @@ func (*OtherExtenable) ProtoMessage()               {}
 func (*OtherExtenable) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{41} }
 
 var extRange_OtherExtenable = []proto.ExtensionRange{
-	{14, 16},
-	{10, 12},
+	{Start: 14, End: 16},
+	{Start: 10, End: 12},
 }
 
 func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1230,7 +1230,7 @@ func (*NoExtensionsMap) ProtoMessage()               {}
 func (*NoExtensionsMap) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{53} }
 
 var extRange_NoExtensionsMap = []proto.ExtensionRange{
-	{100, 199},
+	{Start: 100, End: 199},
 }
 
 func (*NoExtensionsMap) ExtensionRangeArray() []proto.ExtensionRange {

@@ -122,7 +122,7 @@ func (*E) ProtoMessage()               {}
 func (*E) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{4} }
 
 var extRange_E = []proto.ExtensionRange{
-	{1, 536870911},
+	{Start: 1, End: 536870911},
 }
 
 func (*E) ExtensionRangeArray() []proto.ExtensionRange {

@@ -1320,7 +1320,7 @@ func (*OtherMessage) ProtoMessage()               {}
 func (*OtherMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{11} }
 
 var extRange_OtherMessage = []proto.ExtensionRange{
-	{100, 536870911},
+	{Start: 100, End: 536870911},
 }
 
 func (*OtherMessage) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1396,7 +1396,7 @@ func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{13} }
 
 var extRange_MyMessage = []proto.ExtensionRange{
-	{100, 536870911},
+	{Start: 100, End: 536870911},
 }
 
 func (*MyMessage) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1589,7 +1589,7 @@ func (*DefaultsMessage) ProtoMessage()               {}
 func (*DefaultsMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{16} }
 
 var extRange_DefaultsMessage = []proto.ExtensionRange{
-	{100, 536870911},
+	{Start: 100, End: 536870911},
 }
 
 func (*DefaultsMessage) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1624,7 +1624,7 @@ var _ proto.Marshaler = (*MyMessageSet)(nil)
 var _ proto.Unmarshaler = (*MyMessageSet)(nil)
 
 var extRange_MyMessageSet = []proto.ExtensionRange{
-	{100, 2147483646},
+	{Start: 100, End: 2147483646},
 }
 
 func (*MyMessageSet) ExtensionRangeArray() []proto.ExtensionRange {

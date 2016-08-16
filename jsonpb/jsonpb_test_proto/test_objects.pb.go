@@ -491,7 +491,7 @@ func (*Real) ProtoMessage()               {}
 func (*Real) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{5} }
 
 var extRange_Real = []proto.ExtensionRange{
-	{100, 536870911},
+	{Start: 100, End: 536870911},
 }
 
 func (*Real) ExtensionRangeArray() []proto.ExtensionRange {
@@ -517,7 +517,7 @@ func (*Complex) ProtoMessage()               {}
 func (*Complex) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{6} }
 
 var extRange_Complex = []proto.ExtensionRange{
-	{100, 536870911},
+	{Start: 100, End: 536870911},
 }
 
 func (*Complex) ExtensionRangeArray() []proto.ExtensionRange {

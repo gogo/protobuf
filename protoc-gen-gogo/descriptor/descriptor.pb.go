@@ -968,7 +968,7 @@ func (*FileOptions) ProtoMessage()               {}
 func (*FileOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{9} }
 
 var extRange_FileOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*FileOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1160,7 +1160,7 @@ func (*MessageOptions) ProtoMessage()               {}
 func (*MessageOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{10} }
 
 var extRange_MessageOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*MessageOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1276,7 +1276,7 @@ func (*FieldOptions) ProtoMessage()               {}
 func (*FieldOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{11} }
 
 var extRange_FieldOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*FieldOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1359,7 +1359,7 @@ func (*EnumOptions) ProtoMessage()               {}
 func (*EnumOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{12} }
 
 var extRange_EnumOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*EnumOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1407,7 +1407,7 @@ func (*EnumValueOptions) ProtoMessage()               {}
 func (*EnumValueOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{13} }
 
 var extRange_EnumValueOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*EnumValueOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1448,7 +1448,7 @@ func (*ServiceOptions) ProtoMessage()               {}
 func (*ServiceOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{14} }
 
 var extRange_ServiceOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*ServiceOptions) ExtensionRangeArray() []proto.ExtensionRange {
@@ -1489,7 +1489,7 @@ func (*MethodOptions) ProtoMessage()               {}
 func (*MethodOptions) Descriptor() ([]byte, []int) { return fileDescriptorDescriptor, []int{15} }
 
 var extRange_MethodOptions = []proto.ExtensionRange{
-	{1000, 536870911},
+	{Start: 1000, End: 536870911},
 }
 
 func (*MethodOptions) ExtensionRangeArray() []proto.ExtensionRange {
