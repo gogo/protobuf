@@ -296,6 +296,7 @@ func EmbedFieldName(goTyp string) string {
 }
 
 func (g *Generator) GeneratePlugin(p Plugin) {
+	plugins = []Plugin{p}
 	p.Init(g)
 	// Generate the output. The generator runs for every file, even the files
 	// that we don't generate output for, so that we can collate the full list
