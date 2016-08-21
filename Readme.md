@@ -69,7 +69,7 @@ Use it to generate faster marshaling and unmarshaling go code for your protocol 
 
     protoc --gofast_out=. myproto.proto
 
-This does not allow you to use any of the other gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extension.md).
+This does not allow you to use any of the other gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md).
 
 ### More Speed and more generated code
 
@@ -88,14 +88,14 @@ Installing any of these binaries is easy.  Simply run:
     go get github.com/gogo/protobuf/{binary}
     go get github.com/gogo/protobuf/gogoproto
 
-These binaries allow you to using gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extension.md).
+These binaries allow you to using gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md).
 
 ### Most Speed and most customization
 
 Customizing the fields of the messages to be the fields that you actually want to use removes the need to copy between the structs you use and structs you use to serialize.
 gogoprotobuf also offers more serialization formats and generation of tests and even more methods.
 
-Please visit the [extensions](https://github.com/gogo/protobuf/blob/master/extension.md) page for more documentation.
+Please visit the [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md) page for more documentation.
 
 Install protoc-gen-gogo:
 
