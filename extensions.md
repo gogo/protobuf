@@ -134,8 +134,6 @@ Each of these are the same as their Message Option counterparts, except they app
 
 # Tests
 
-[![Build Status](https://drone.io/github.com/gogo/protobuf/status.png)](https://drone.io/github.com/gogo/protobuf/latest)
-
   * The normal barrage of tests are run with: `make tests` 
   * A few weird tests: `make testall`
   * Tests for compatibility with [golang/protobuf](https://github.com/golang/protobuf) are handled by a different project [harmonytests](https://github.com/gogo/harmonytests), since it requires goprotobuf.
