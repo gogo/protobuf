@@ -1,8 +1,65 @@
 # Protocol Buffers for Go with Gadgets
 
-Travis CI Matrix Builds: [![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
+[![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
 
-### Getting Started (Give me the speed I don't care about the rest)
+gogoprotobuf is a fork of <a href="https://github.com/golang/protobuf">golang/protobuf</a> with extra code generation features.
+
+This code generation is used to achieve:
+  
+  - fast marshalling and unmarshalling
+  - more canonical Go structures
+  - goprotobuf compatibility
+  - less typing by optionally generating extra helper code
+  - peace of mind by optionally generating test and benchmark code
+  - other serialization formats
+
+Keeping track of how up to date gogoprotobuf is relative to golang/protobuf is done in this
+<a href="https://github.com/gogo/protobuf/issues/191">issue</a>
+
+## Users
+
+These projects use gogoprotobuf:
+
+  - <a href="http://godoc.org/github.com/coreos/etcd/raft">etcd/raft</a>
+  - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">go-space-monkey-blog-post</a>
+  - <a href="http://bazil.org">bazil</a>
+  - <a href="http://badoo.com">badoo</a>
+  - <a href="https://github.com/mesos/mesos-go">mesos-go</a>
+  - <a href="https://github.com/mozilla-services/heka">heka</a>
+  - <a href="https://github.com/cockroachdb/cockroach">cockroachdb</a>
+  - <a href="https://github.com/jbenet/go-ipfs">go-ipfs</a>
+  - <a href="https://github.com/philhofer/rkive">rkive-go</a>
+  - <a href="https://www.dropbox.com">dropbox</a>
+  - <a href="https://srclib.org/">srclib</a> - <a href="https://sourcegraph.com/sourcegraph.com/sourcegraph/srclib@97f54fed4f9a4bff0a28edf6eb7c0e013afc7bcd/.tree/graph/def.proto">sample proto file</a>
+  - <a href="http://www.adyoulike.com/">adyoulike</a>
+  - <a href="http://www.cloudfoundry.org/">cloudfoundry</a>
+  - <a href="http://kubernetes.io/">kubernetes</a>
+  - <a href="https://dgraph.io/">dgraph</a> - <a href="https://github.com/dgraph-io/dgraph/releases/tag/v0.4.3">release notes</a> - <a href="https://discuss.dgraph.io/t/gogoprotobuf-is-extremely-fast/639">benchmarks</a></a>
+
+Please lets us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
+
+### Mentioned
+
+  - <a href="http://gophercon.sourcegraph.com/post/83747547505/writing-a-high-performance-database-in-go">gophercon</a>
+  - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">cloudflare</a>
+
+## Getting Started 
+
+There are several ways to use gogoprotobuf, but for all you need to install go and protoc.
+After that you can choose:
+ 
+  - Speed
+  - More Speed and more generated code
+  - Most Speed and most customization
+
+### Installation
+
+To install it, you must first have Go (at least version 1.3.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.4.2, 1.5.4, 1.6.3 and 1.7 are continuously tested.
+
+Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
+Most versions from 2.3.1 should not give any problems, but 2.5.0, 2.6.1 and 3 are continuously tested.
+
+### Speed
 
 Install the protoc-gen-gofast binary
 
@@ -12,7 +69,12 @@ Use it to generate faster marshaling and unmarshaling go code for your protocol 
 
     protoc --gofast_out=. myproto.proto
 
-### Getting started (I have heard about fields without pointers and more code generation)
+This does not allow you to use any of the other gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extension.md).
+
+### More Speed and more generated code
+
+Fields without pointers cause less time in the garbage collector.
+More code generation results in more convenient methods.
 
 Other binaries are also included:
 
@@ -20,29 +82,33 @@ Other binaries are also included:
     protoc-gen-gogofaster (same as gogofast, without XXX_unrecognized, less pointer fields)
     protoc-gen-gogoslick (same as gogofaster, but with generated string, gostring and equal methods)
 
-### Getting started (I want more customization power over fields, speed, other serialization formats and tests, etc.)
+Installing any of these binaries is easy.  Simply run:
 
-Please visit the [homepage](http://gogo.github.io) for more documentation.
+    go get github.com/gogo/protobuf/proto
+    go get github.com/gogo/protobuf/{binary}
+    go get github.com/gogo/protobuf/gogoproto
 
-### Installation
+These binaries allow you to using gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extension.md).
 
-To install it, you must first have Go (at least version 1.3.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.4.2, 1.5.4, 1.6.3 and 1.7 are continiuosly tested.
+### Most Speed and most customization
 
-Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
-Most versions from 2.3.1 should not give any problems, but 2.5.0, 2.6.1 and 3 are continuously tested.
+Customizing the fields of the messages to be the fields that you actually want to use removes the need to copy between the structs you use and structs you use to serialize.
+gogoprotobuf also offers more serialization formats and generation of tests and even more methods.
 
-Finally run:
+Please visit the [extensions](https://github.com/gogo/protobuf/blob/master/extension.md) page for more documentation.
+
+Install protoc-gen-gogo:
 
     go get github.com/gogo/protobuf/proto
     go get github.com/gogo/protobuf/protoc-gen-gogo
     go get github.com/gogo/protobuf/gogoproto
 
-### Proto3
+## Proto3
 
-Proto3 is supported, but most of the new native types are not supported yet.
+Proto3 is supported, but the new well known types are not supported yet.
 [See Proto3 Issue](https://github.com/gogo/protobuf/issues/57) for more details.
 
-### GRPC
+## GRPC
 
 It works the same as golang/protobuf, simply specify the plugin.
 Here is an example using gofast:
