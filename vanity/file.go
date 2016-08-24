@@ -29,15 +29,17 @@
 package vanity
 
 import (
-	"strings"
+	"path/filepath"
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 )
 
-func NotInPackageGoogleProtobuf(file *descriptor.FileDescriptorProto) bool {
-	return !strings.HasPrefix(file.GetPackage(), "google.protobuf")
+func NotGoogleProtobufDescriptorProto(file *descriptor.FileDescriptorProto) bool {
+	// can not just check if file.GetName() == "google/protobuf/descriptor.proto" because we do not want to assume compile path
+	_, fileName := filepath.Split(file.GetName())
+	return !(file.GetPackage() == "google.protobuf" && fileName == "descriptor.proto")
 }
 
 func FilterFiles(files []*descriptor.FileDescriptorProto, f func(file *descriptor.FileDescriptorProto) bool) []*descriptor.FileDescriptorProto {
