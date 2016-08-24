@@ -126,4 +126,5 @@ bench:
 contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
 
-
+update:
+	(cd protobuf && make update)
