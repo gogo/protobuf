@@ -21,7 +21,7 @@ Keeping track of how up to date gogoprotobuf is relative to golang/protobuf is d
 These projects use gogoprotobuf:
 
   - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a>
-  - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">go-space-monkey-blog-post</a>
+  - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">blog</a>
   - <a href="http://bazil.org">bazil</a>
   - <a href="http://badoo.com">badoo</a>
   - <a href="https://github.com/mesos/mesos-go">mesos-go</a>
@@ -41,8 +41,8 @@ Please lets us know if you are using gogoprotobuf by posting on our <a href="htt
 
 ### Mentioned
 
+  - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">Cloudflare - go serialization talk - Albert Strasheim</a>
   - <a href="http://gophercon.sourcegraph.com/post/83747547505/writing-a-high-performance-database-in-go">gophercon</a>
-  - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">cloudflare</a>
   - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
 
 ## Getting Started 
