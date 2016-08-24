@@ -1,7 +1,7 @@
-# Go support for Protocol Buffers - Google's data interchange format
+# Protocol Buffers for Go with Gadgets
 #
-# Copyright 2010 The Go Authors.  All rights reserved.
-# https://github.com/golang/protobuf
+# Copyright (c) 2016, The GoGo Authors. All rights reserved.
+# http://github.com/gogo/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -13,9 +13,6 @@
 # copyright notice, this list of conditions and the following disclaimer
 # in the documentation and/or other materials provided with the
 # distribution.
-#     * Neither the name of Google Inc. nor the names of its
-# contributors may be used to endorse or promote products derived from
-# this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +27,21 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-gen-gogo
+	go install github.com/gogo/protobuf/protoc-gen-gogofast
 	go install github.com/gogo/protobuf/protoc-gen-gostring
-	protoc --gogo_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
-	protoc --gostring_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
+
+	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
+	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
+
+	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
+	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
+
+	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
+	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
+
+	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
+	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
+
+	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
+	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
+
