@@ -20,7 +20,7 @@ Keeping track of how up to date gogoprotobuf is relative to golang/protobuf is d
 
 These projects use gogoprotobuf:
 
-  - <a href="http://godoc.org/github.com/coreos/etcd/raft">etcd/raft</a>
+  - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a>
   - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">go-space-monkey-blog-post</a>
   - <a href="http://bazil.org">bazil</a>
   - <a href="http://badoo.com">badoo</a>
@@ -35,6 +35,7 @@ These projects use gogoprotobuf:
   - <a href="http://www.cloudfoundry.org/">cloudfoundry</a>
   - <a href="http://kubernetes.io/">kubernetes</a>
   - <a href="https://dgraph.io/">dgraph</a> - <a href="https://github.com/dgraph-io/dgraph/releases/tag/v0.4.3">release notes</a> - <a href="https://discuss.dgraph.io/t/gogoprotobuf-is-extremely-fast/639">benchmarks</a></a>
+  - <a href="https://github.com/centrifugal/centrifugo">centrifugo</a> - <a href="https://forum.golangbridge.org/t/centrifugo-real-time-messaging-websocket-or-sockjs-server-v1-5-0-released/2861">release notes</a> - <a href="https://medium.com/@fzambia/centrifugo-protobuf-inside-json-outside-21d39bdabd68#.o3icmgjqd">blog</a>
 
 Please lets us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
@@ -42,6 +43,7 @@ Please lets us know if you are using gogoprotobuf by posting on our <a href="htt
 
   - <a href="http://gophercon.sourcegraph.com/post/83747547505/writing-a-high-performance-database-in-go">gophercon</a>
   - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">cloudflare</a>
+  - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
 
 ## Getting Started 
 
@@ -100,6 +102,7 @@ Please visit the [extensions](https://github.com/gogo/protobuf/blob/master/exten
 Install protoc-gen-gogo:
 
     go get github.com/gogo/protobuf/proto
+    go get github.com/gogo/protobuf/jsonpb
     go get github.com/gogo/protobuf/protoc-gen-gogo
     go get github.com/gogo/protobuf/gogoproto
 
