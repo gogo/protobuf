@@ -29,19 +29,20 @@
 regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-gogofast
 	go install github.com/gogo/protobuf/protoc-gen-gostring
+	go install github.com/gogo/protobuf/protoc-min-version
 
-	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
-	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
+	protoc-min-version --version="3.0.0" --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
+	protoc-min-version --version="3.0.0" --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
 
-	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
-	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
+	protoc-min-version --version="3.0.0" --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
+	protoc-min-version --version="3.0.0" --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
 
-	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
-	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
+	protoc-min-version --version="3.0.0" --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
+	protoc-min-version --version="3.0.0" --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
 
-	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
-	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
+	protoc-min-version --version="3.0.0" --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
+	protoc-min-version --version="3.0.0" --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
 
-	protoc --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
-	protoc --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
+	protoc-min-version --version="3.0.0" --gogofast_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
+	protoc-min-version --version="3.0.0" --gostring_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
 
