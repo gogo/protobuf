@@ -32,5 +32,6 @@
 regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-gogo
 	go install github.com/gogo/protobuf/protoc-gen-gostring
-	protoc --gogo_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
-	protoc --gostring_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
+	go install github.com/gogo/protobuf/protoc-min-version
+	protoc-min-version --version="3.0.0" --gogo_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
+	protoc-min-version  --version="3.0.0" --gostring_out=. -I=../../protobuf/google/protobuf ../../protobuf/google/protobuf/descriptor.proto
