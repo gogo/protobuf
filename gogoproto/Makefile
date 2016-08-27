@@ -27,7 +27,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	protoc --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:. --proto_path=../../../../:../protobuf/:. *.proto
+	go install github.com/gogo/protobuf/protoc-gen-gogo
+	go install github.com/gogo/protobuf/protoc-min-version
+	protoc-min-version --version="3.0.0" --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:. --proto_path=../../../../:../protobuf/:. *.proto
 
 restore:
 	cp gogo.pb.golden gogo.pb.go
