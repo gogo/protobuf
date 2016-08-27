@@ -4,6 +4,9 @@ update:
 	go install github.com/gogo/protobuf/gogoreplace
 
 	(cd ./google/protobuf && rm descriptor.proto; wget ${URL}/descriptor.proto)
+	# gogoprotobuf requires users to import gogo.proto which imports descriptor.proto
+	# The descriptor.proto is only compatible with proto3 just because of the reserved keyword.
+	# We remove it to stay compatible with previous versions of protoc before proto3
 	gogoreplace 'reserved 38;' '//reserved 38;' ./google/protobuf/descriptor.proto
 
 	(cd ./google/protobuf/compiler && rm plugin.proto; wget ${URL}/compiler/plugin.proto)
