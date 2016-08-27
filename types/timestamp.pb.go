@@ -17,6 +17,12 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import strings "strings"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import sort "sort"
+import strconv "strconv"
+import reflect "reflect"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -98,12 +104,81 @@ type Timestamp struct {
 }
 
 func (m *Timestamp) Reset()                    { *m = Timestamp{} }
-func (m *Timestamp) String() string            { return proto.CompactTextString(m) }
 func (*Timestamp) ProtoMessage()               {}
 func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
 
 func init() {
 	proto.RegisterType((*Timestamp)(nil), "google.protobuf.Timestamp")
+}
+func (this *Timestamp) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Timestamp)
+	if !ok {
+		that2, ok := that.(Timestamp)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Seconds != that1.Seconds {
+		return false
+	}
+	if this.Nanos != that1.Nanos {
+		return false
+	}
+	return true
+}
+func (this *Timestamp) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&types.Timestamp{")
+	s = append(s, "Seconds: "+fmt.Sprintf("%#v", this.Seconds)+",\n")
+	s = append(s, "Nanos: "+fmt.Sprintf("%#v", this.Nanos)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func valueToGoStringTimestamp(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringTimestamp(m github_com_gogo_protobuf_proto.Message) string {
+	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
+	if e == nil {
+		return "nil"
+	}
+	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "})"
+	return s
 }
 func (m *Timestamp) Marshal() (data []byte, err error) {
 	size := m.Size()
@@ -160,6 +235,93 @@ func encodeVarintTimestamp(data []byte, offset int, v uint64) int {
 	data[offset] = uint8(v)
 	return offset + 1
 }
+func NewPopulatedTimestamp(r randyTimestamp, easy bool) *Timestamp {
+	this := &Timestamp{}
+	this.Seconds = int64(r.Int63())
+	if r.Intn(2) == 0 {
+		this.Seconds *= -1
+	}
+	this.Nanos = int32(r.Int31())
+	if r.Intn(2) == 0 {
+		this.Nanos *= -1
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+type randyTimestamp interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneTimestamp(r randyTimestamp) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringTimestamp(r randyTimestamp) string {
+	v1 := r.Intn(100)
+	tmps := make([]rune, v1)
+	for i := 0; i < v1; i++ {
+		tmps[i] = randUTF8RuneTimestamp(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedTimestamp(r randyTimestamp, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldTimestamp(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldTimestamp(data []byte, r randyTimestamp, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateTimestamp(data, uint64(key))
+		v2 := r.Int63()
+		if r.Intn(2) == 0 {
+			v2 *= -1
+		}
+		data = encodeVarintPopulateTimestamp(data, uint64(v2))
+	case 1:
+		data = encodeVarintPopulateTimestamp(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateTimestamp(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateTimestamp(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateTimestamp(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateTimestamp(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
 func (m *Timestamp) Size() (n int) {
 	var l int
 	_ = l
@@ -184,6 +346,25 @@ func sovTimestamp(x uint64) (n int) {
 }
 func sozTimestamp(x uint64) (n int) {
 	return sovTimestamp(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *Timestamp) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Timestamp{`,
+		`Seconds:` + fmt.Sprintf("%v", this.Seconds) + `,`,
+		`Nanos:` + fmt.Sprintf("%v", this.Nanos) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringTimestamp(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *Timestamp) Unmarshal(data []byte) error {
 	l := len(data)
@@ -381,17 +562,19 @@ var (
 func init() { proto.RegisterFile("timestamp.proto", fileDescriptorTimestamp) }
 
 var fileDescriptorTimestamp = []byte{
-	// 177 bytes of a gzipped FileDescriptorProto
+	// 212 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0xc9, 0xcc, 0x4d,
 	0x2d, 0x2e, 0x49, 0xcc, 0x2d, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4f, 0xcf, 0xcf,
 	0x4f, 0xcf, 0x49, 0x85, 0xf0, 0x92, 0x4a, 0xd3, 0x94, 0xac, 0xb9, 0x38, 0x43, 0x60, 0x6a, 0x84,
 	0x24, 0xb8, 0xd8, 0x8b, 0x53, 0x93, 0xf3, 0xf3, 0x52, 0x8a, 0x25, 0x18, 0x15, 0x18, 0x35, 0x98,
 	0x83, 0x60, 0x5c, 0x21, 0x11, 0x2e, 0xd6, 0xbc, 0xc4, 0xbc, 0xfc, 0x62, 0x09, 0x26, 0x05, 0x46,
-	0x0d, 0xd6, 0x20, 0x08, 0xc7, 0x29, 0xfd, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f,
-	0x3c, 0x92, 0x63, 0xe4, 0x12, 0x4e, 0xce, 0xcf, 0xd5, 0x43, 0x33, 0xdf, 0x89, 0x0f, 0x6e, 0x7a,
-	0x00, 0x48, 0x28, 0x80, 0x31, 0x8a, 0xb5, 0xa4, 0xb2, 0x20, 0xb5, 0x78, 0x01, 0x23, 0xe3, 0x0f,
-	0x46, 0xc6, 0x45, 0x4c, 0xcc, 0xee, 0x01, 0x4e, 0xab, 0x98, 0xe4, 0xdc, 0x21, 0xda, 0x02, 0xa0,
-	0xda, 0xf4, 0xc2, 0x53, 0x73, 0x72, 0xbc, 0xf3, 0xf2, 0xcb, 0xf3, 0x42, 0x40, 0x8a, 0x93, 0xd8,
-	0xc0, 0xe6, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xdc, 0x94, 0x1d, 0xcc, 0xd0, 0x00, 0x00,
-	0x00,
+	0x0d, 0xd6, 0x20, 0x08, 0xc7, 0xa9, 0x9d, 0xf1, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18,
+	0x3e, 0x3c, 0x94, 0x63, 0xfc, 0xf1, 0x50, 0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72,
+	0x8c, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8b, 0x47,
+	0x72, 0x0c, 0x1f, 0x1e, 0xc9, 0x31, 0x72, 0x09, 0x27, 0xe7, 0xe7, 0xea, 0xa1, 0x39, 0xc0, 0x89,
+	0x0f, 0x6e, 0x7d, 0x00, 0x48, 0x28, 0x80, 0x31, 0x8a, 0xb5, 0xa4, 0xb2, 0x20, 0xb5, 0x78, 0x01,
+	0x23, 0xe3, 0x0f, 0x46, 0xc6, 0x45, 0x4c, 0xcc, 0xee, 0x01, 0x4e, 0xab, 0x98, 0xe4, 0xdc, 0x21,
+	0xda, 0x02, 0xa0, 0xda, 0xf4, 0xc2, 0x53, 0x73, 0x72, 0xbc, 0xf3, 0xf2, 0xcb, 0xf3, 0x42, 0x40,
+	0x8a, 0x93, 0xd8, 0xc0, 0xe6, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xfa, 0x7e, 0x8f, 0x0c,
+	0xf1, 0x00, 0x00, 0x00,
 }

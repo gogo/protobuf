@@ -19,6 +19,14 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import strconv "strconv"
+
+import strings "strings"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import sort "sort"
+import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -40,7 +48,7 @@ type NullValue int32
 
 const (
 	// Null value.
-	NullValue_NULL_VALUE NullValue = 0
+	NULL_VALUE NullValue = 0
 )
 
 var NullValue_name = map[int32]string{
@@ -50,9 +58,6 @@ var NullValue_value = map[string]int32{
 	"NULL_VALUE": 0,
 }
 
-func (x NullValue) String() string {
-	return proto.EnumName(NullValue_name, int32(x))
-}
 func (NullValue) EnumDescriptor() ([]byte, []int) { return fileDescriptorStruct, []int{0} }
 
 // `Struct` represents a structured data value, consisting of fields
@@ -69,7 +74,6 @@ type Struct struct {
 }
 
 func (m *Struct) Reset()                    { *m = Struct{} }
-func (m *Struct) String() string            { return proto.CompactTextString(m) }
 func (*Struct) ProtoMessage()               {}
 func (*Struct) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{0} }
 
@@ -100,12 +104,12 @@ type Value struct {
 }
 
 func (m *Value) Reset()                    { *m = Value{} }
-func (m *Value) String() string            { return proto.CompactTextString(m) }
 func (*Value) ProtoMessage()               {}
 func (*Value) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{1} }
 
 type isValue_Kind interface {
 	isValue_Kind()
+	Equal(interface{}) bool
 	MarshalTo([]byte) (int, error)
 	Size() int
 }
@@ -147,7 +151,7 @@ func (m *Value) GetNullValue() NullValue {
 	if x, ok := m.GetKind().(*Value_NullValue); ok {
 		return x.NullValue
 	}
-	return NullValue_NULL_VALUE
+	return NULL_VALUE
 }
 
 func (m *Value) GetNumberValue() float64 {
@@ -329,7 +333,6 @@ type ListValue struct {
 }
 
 func (m *ListValue) Reset()                    { *m = ListValue{} }
-func (m *ListValue) String() string            { return proto.CompactTextString(m) }
 func (*ListValue) ProtoMessage()               {}
 func (*ListValue) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{2} }
 
@@ -345,6 +348,419 @@ func init() {
 	proto.RegisterType((*Value)(nil), "google.protobuf.Value")
 	proto.RegisterType((*ListValue)(nil), "google.protobuf.ListValue")
 	proto.RegisterEnum("google.protobuf.NullValue", NullValue_name, NullValue_value)
+}
+func (x NullValue) String() string {
+	s, ok := NullValue_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
+}
+func (this *Struct) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Struct)
+	if !ok {
+		that2, ok := that.(Struct)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Fields) != len(that1.Fields) {
+		return false
+	}
+	for i := range this.Fields {
+		if !this.Fields[i].Equal(that1.Fields[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Value) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value)
+	if !ok {
+		that2, ok := that.(Value)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.Kind == nil {
+		if this.Kind != nil {
+			return false
+		}
+	} else if this.Kind == nil {
+		return false
+	} else if !this.Kind.Equal(that1.Kind) {
+		return false
+	}
+	return true
+}
+func (this *Value_NullValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_NullValue)
+	if !ok {
+		that2, ok := that.(Value_NullValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.NullValue != that1.NullValue {
+		return false
+	}
+	return true
+}
+func (this *Value_NumberValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_NumberValue)
+	if !ok {
+		that2, ok := that.(Value_NumberValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.NumberValue != that1.NumberValue {
+		return false
+	}
+	return true
+}
+func (this *Value_StringValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_StringValue)
+	if !ok {
+		that2, ok := that.(Value_StringValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.StringValue != that1.StringValue {
+		return false
+	}
+	return true
+}
+func (this *Value_BoolValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_BoolValue)
+	if !ok {
+		that2, ok := that.(Value_BoolValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.BoolValue != that1.BoolValue {
+		return false
+	}
+	return true
+}
+func (this *Value_StructValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_StructValue)
+	if !ok {
+		that2, ok := that.(Value_StructValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.StructValue.Equal(that1.StructValue) {
+		return false
+	}
+	return true
+}
+func (this *Value_ListValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Value_ListValue)
+	if !ok {
+		that2, ok := that.(Value_ListValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if !this.ListValue.Equal(that1.ListValue) {
+		return false
+	}
+	return true
+}
+func (this *ListValue) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*ListValue)
+	if !ok {
+		that2, ok := that.(ListValue)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.Values) != len(that1.Values) {
+		return false
+	}
+	for i := range this.Values {
+		if !this.Values[i].Equal(that1.Values[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Struct) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&types.Struct{")
+	keysForFields := make([]string, 0, len(this.Fields))
+	for k := range this.Fields {
+		keysForFields = append(keysForFields, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForFields)
+	mapStringForFields := "map[string]*Value{"
+	for _, k := range keysForFields {
+		mapStringForFields += fmt.Sprintf("%#v: %#v,", k, this.Fields[k])
+	}
+	mapStringForFields += "}"
+	if this.Fields != nil {
+		s = append(s, "Fields: "+mapStringForFields+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Value) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 10)
+	s = append(s, "&types.Value{")
+	if this.Kind != nil {
+		s = append(s, "Kind: "+fmt.Sprintf("%#v", this.Kind)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Value_NullValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_NullValue{` +
+		`NullValue:` + fmt.Sprintf("%#v", this.NullValue) + `}`}, ", ")
+	return s
+}
+func (this *Value_NumberValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_NumberValue{` +
+		`NumberValue:` + fmt.Sprintf("%#v", this.NumberValue) + `}`}, ", ")
+	return s
+}
+func (this *Value_StringValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_StringValue{` +
+		`StringValue:` + fmt.Sprintf("%#v", this.StringValue) + `}`}, ", ")
+	return s
+}
+func (this *Value_BoolValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_BoolValue{` +
+		`BoolValue:` + fmt.Sprintf("%#v", this.BoolValue) + `}`}, ", ")
+	return s
+}
+func (this *Value_StructValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_StructValue{` +
+		`StructValue:` + fmt.Sprintf("%#v", this.StructValue) + `}`}, ", ")
+	return s
+}
+func (this *Value_ListValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&types.Value_ListValue{` +
+		`ListValue:` + fmt.Sprintf("%#v", this.ListValue) + `}`}, ", ")
+	return s
+}
+func (this *ListValue) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&types.ListValue{")
+	if this.Values != nil {
+		s = append(s, "Values: "+fmt.Sprintf("%#v", this.Values)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func valueToGoStringStruct(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringStruct(m github_com_gogo_protobuf_proto.Message) string {
+	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
+	if e == nil {
+		return "nil"
+	}
+	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "})"
+	return s
 }
 func (m *Struct) Marshal() (data []byte, err error) {
 	size := m.Size()
@@ -536,6 +952,161 @@ func encodeVarintStruct(data []byte, offset int, v uint64) int {
 	data[offset] = uint8(v)
 	return offset + 1
 }
+func NewPopulatedStruct(r randyStruct, easy bool) *Struct {
+	this := &Struct{}
+	if r.Intn(10) == 0 {
+		v1 := r.Intn(10)
+		this.Fields = make(map[string]*Value)
+		for i := 0; i < v1; i++ {
+			this.Fields[randStringStruct(r)] = NewPopulatedValue(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedValue(r randyStruct, easy bool) *Value {
+	this := &Value{}
+	oneofNumber_Kind := []int32{1, 2, 3, 4, 5, 6}[r.Intn(6)]
+	switch oneofNumber_Kind {
+	case 1:
+		this.Kind = NewPopulatedValue_NullValue(r, easy)
+	case 2:
+		this.Kind = NewPopulatedValue_NumberValue(r, easy)
+	case 3:
+		this.Kind = NewPopulatedValue_StringValue(r, easy)
+	case 4:
+		this.Kind = NewPopulatedValue_BoolValue(r, easy)
+	case 5:
+		this.Kind = NewPopulatedValue_StructValue(r, easy)
+	case 6:
+		this.Kind = NewPopulatedValue_ListValue(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedValue_NullValue(r randyStruct, easy bool) *Value_NullValue {
+	this := &Value_NullValue{}
+	this.NullValue = NullValue([]int32{0}[r.Intn(1)])
+	return this
+}
+func NewPopulatedValue_NumberValue(r randyStruct, easy bool) *Value_NumberValue {
+	this := &Value_NumberValue{}
+	this.NumberValue = float64(r.Float64())
+	if r.Intn(2) == 0 {
+		this.NumberValue *= -1
+	}
+	return this
+}
+func NewPopulatedValue_StringValue(r randyStruct, easy bool) *Value_StringValue {
+	this := &Value_StringValue{}
+	this.StringValue = randStringStruct(r)
+	return this
+}
+func NewPopulatedValue_BoolValue(r randyStruct, easy bool) *Value_BoolValue {
+	this := &Value_BoolValue{}
+	this.BoolValue = bool(bool(r.Intn(2) == 0))
+	return this
+}
+func NewPopulatedValue_StructValue(r randyStruct, easy bool) *Value_StructValue {
+	this := &Value_StructValue{}
+	this.StructValue = NewPopulatedStruct(r, easy)
+	return this
+}
+func NewPopulatedValue_ListValue(r randyStruct, easy bool) *Value_ListValue {
+	this := &Value_ListValue{}
+	this.ListValue = NewPopulatedListValue(r, easy)
+	return this
+}
+func NewPopulatedListValue(r randyStruct, easy bool) *ListValue {
+	this := &ListValue{}
+	if r.Intn(10) == 0 {
+		v2 := r.Intn(5)
+		this.Values = make([]*Value, v2)
+		for i := 0; i < v2; i++ {
+			this.Values[i] = NewPopulatedValue(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+type randyStruct interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneStruct(r randyStruct) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringStruct(r randyStruct) string {
+	v3 := r.Intn(100)
+	tmps := make([]rune, v3)
+	for i := 0; i < v3; i++ {
+		tmps[i] = randUTF8RuneStruct(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedStruct(r randyStruct, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldStruct(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldStruct(data []byte, r randyStruct, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateStruct(data, uint64(key))
+		v4 := r.Int63()
+		if r.Intn(2) == 0 {
+			v4 *= -1
+		}
+		data = encodeVarintPopulateStruct(data, uint64(v4))
+	case 1:
+		data = encodeVarintPopulateStruct(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateStruct(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateStruct(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateStruct(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateStruct(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
 func (m *Struct) Size() (n int) {
 	var l int
 	_ = l
@@ -631,6 +1202,114 @@ func sovStruct(x uint64) (n int) {
 }
 func sozStruct(x uint64) (n int) {
 	return sovStruct(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *Struct) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForFields := make([]string, 0, len(this.Fields))
+	for k := range this.Fields {
+		keysForFields = append(keysForFields, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForFields)
+	mapStringForFields := "map[string]*Value{"
+	for _, k := range keysForFields {
+		mapStringForFields += fmt.Sprintf("%v: %v,", k, this.Fields[k])
+	}
+	mapStringForFields += "}"
+	s := strings.Join([]string{`&Struct{`,
+		`Fields:` + mapStringForFields + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value{`,
+		`Kind:` + fmt.Sprintf("%v", this.Kind) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_NullValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_NullValue{`,
+		`NullValue:` + fmt.Sprintf("%v", this.NullValue) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_NumberValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_NumberValue{`,
+		`NumberValue:` + fmt.Sprintf("%v", this.NumberValue) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_StringValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_StringValue{`,
+		`StringValue:` + fmt.Sprintf("%v", this.StringValue) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_BoolValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_BoolValue{`,
+		`BoolValue:` + fmt.Sprintf("%v", this.BoolValue) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_StructValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_StructValue{`,
+		`StructValue:` + strings.Replace(fmt.Sprintf("%v", this.StructValue), "Struct", "Struct", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Value_ListValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Value_ListValue{`,
+		`ListValue:` + strings.Replace(fmt.Sprintf("%v", this.ListValue), "ListValue", "ListValue", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListValue) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListValue{`,
+		`Values:` + strings.Replace(fmt.Sprintf("%v", this.Values), "Value", "Value", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringStruct(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *Struct) Unmarshal(data []byte) error {
 	l := len(data)
@@ -1194,30 +1873,32 @@ var (
 func init() { proto.RegisterFile("struct.proto", fileDescriptorStruct) }
 
 var fileDescriptorStruct = []byte{
-	// 397 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x91, 0xc1, 0xaa, 0xd3, 0x40,
-	0x14, 0x86, 0x3b, 0xc9, 0x4d, 0x30, 0x27, 0x97, 0x6b, 0x19, 0x41, 0x4b, 0x85, 0x18, 0xda, 0x4d,
-	0x10, 0xc9, 0xa2, 0x6e, 0xc4, 0xba, 0x31, 0x50, 0x5b, 0x30, 0x94, 0x18, 0x6d, 0x05, 0x37, 0xa5,
-	0x69, 0xd3, 0x12, 0x3a, 0x9d, 0x29, 0xc9, 0x44, 0xe9, 0x9b, 0xb8, 0x14, 0x97, 0x2e, 0x7d, 0x0a,
-	0x97, 0x3e, 0x82, 0xf4, 0x49, 0x64, 0x66, 0x92, 0x28, 0x2d, 0xdd, 0xe5, 0xfc, 0xf9, 0xce, 0x7f,
-	0xce, 0x7f, 0x06, 0x6e, 0x0b, 0x9e, 0x97, 0x2b, 0xee, 0x1f, 0x72, 0xc6, 0x19, 0xbe, 0xbf, 0x65,
-	0x6c, 0x4b, 0x52, 0x55, 0x25, 0xe5, 0xa6, 0xf7, 0x15, 0x81, 0xf9, 0x5e, 0x12, 0x78, 0x08, 0xe6,
-	0x26, 0x4b, 0xc9, 0xba, 0xe8, 0x20, 0x57, 0xf7, 0xec, 0x41, 0xdf, 0x3f, 0x83, 0x7d, 0x05, 0xfa,
-	0x6f, 0x24, 0x35, 0xa2, 0x3c, 0x3f, 0xc6, 0x55, 0x4b, 0xf7, 0x1d, 0xd8, 0xff, 0xc9, 0xb8, 0x0d,
-	0xfa, 0x2e, 0x3d, 0x76, 0x90, 0x8b, 0x3c, 0x2b, 0x16, 0x9f, 0xf8, 0x19, 0x18, 0x9f, 0x97, 0xa4,
-	0x4c, 0x3b, 0x9a, 0x8b, 0x3c, 0x7b, 0xf0, 0xf0, 0xc2, 0x7c, 0x2e, 0xfe, 0xc6, 0x0a, 0x7a, 0xa9,
-	0xbd, 0x40, 0xbd, 0x9f, 0x1a, 0x18, 0x52, 0xc4, 0x43, 0x00, 0x5a, 0x12, 0xb2, 0x50, 0x06, 0xc2,
-	0xf4, 0x6e, 0xd0, 0xbd, 0x30, 0x98, 0x96, 0x84, 0x48, 0x7e, 0xd2, 0x8a, 0x2d, 0x5a, 0x17, 0xb8,
-	0x0f, 0xb7, 0xb4, 0xdc, 0x27, 0x69, 0xbe, 0xf8, 0x37, 0x1f, 0x4d, 0x5a, 0xb1, 0xad, 0xd4, 0x06,
-	0x2a, 0x78, 0x9e, 0xd1, 0x6d, 0x05, 0xe9, 0x62, 0x71, 0x01, 0x29, 0x55, 0x41, 0x4f, 0x00, 0x12,
-	0xc6, 0xea, 0x35, 0x6e, 0x5c, 0xe4, 0xdd, 0x13, 0xa3, 0x84, 0xa6, 0x80, 0x57, 0xf5, 0xb5, 0x2b,
-	0xc4, 0x90, 0x51, 0x1f, 0x5d, 0xb9, 0x63, 0x65, 0x5f, 0xae, 0x78, 0x93, 0x92, 0x64, 0x45, 0xdd,
-	0x6b, 0xca, 0xde, 0xcb, 0x94, 0x61, 0x56, 0xf0, 0x26, 0x25, 0xa9, 0x8b, 0xc0, 0x84, 0x9b, 0x5d,
-	0x46, 0xd7, 0xbd, 0x21, 0x58, 0x0d, 0x81, 0x7d, 0x30, 0xa5, 0x59, 0xfd, 0xa2, 0xd7, 0x8e, 0x5e,
-	0x51, 0x4f, 0x1f, 0x83, 0xd5, 0x1c, 0x11, 0xdf, 0x01, 0x4c, 0x67, 0x61, 0xb8, 0x98, 0xbf, 0x0e,
-	0x67, 0xa3, 0x76, 0x2b, 0x58, 0xfe, 0x3a, 0x39, 0xe8, 0xf7, 0xc9, 0x41, 0x7f, 0x4e, 0x0e, 0x82,
-	0x07, 0x2b, 0xb6, 0x3f, 0x77, 0x0b, 0x6c, 0x15, 0x2c, 0x12, 0x75, 0x84, 0x3e, 0x19, 0xfc, 0x78,
-	0x48, 0x8b, 0x6f, 0x08, 0x7d, 0xd7, 0xf4, 0x71, 0x14, 0xfc, 0xd0, 0x9c, 0xb1, 0x6a, 0x88, 0xea,
-	0xf1, 0x1f, 0x53, 0x42, 0xde, 0x52, 0xf6, 0x85, 0x7e, 0x10, 0x64, 0x62, 0x4a, 0xa7, 0xe7, 0x7f,
-	0x03, 0x00, 0x00, 0xff, 0xff, 0xe8, 0x43, 0x3c, 0x2f, 0xb4, 0x02, 0x00, 0x00,
+	// 432 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x74, 0x91, 0xc1, 0x6b, 0xd4, 0x40,
+	0x14, 0xc6, 0xf3, 0xb2, 0xdd, 0xe0, 0xbe, 0x94, 0x5a, 0x46, 0xd0, 0xa5, 0xc2, 0xb8, 0x6c, 0x2f,
+	0x41, 0x24, 0x87, 0xf5, 0x22, 0xae, 0x17, 0x03, 0xb5, 0x05, 0x43, 0x89, 0xd1, 0x56, 0xf0, 0xb2,
+	0x98, 0x6d, 0xba, 0x84, 0x4e, 0x67, 0x4a, 0x32, 0x51, 0xf6, 0xa6, 0xff, 0x85, 0x47, 0xf1, 0x24,
+	0x1e, 0xfd, 0x2b, 0x3c, 0xf6, 0xe8, 0xd1, 0xe4, 0xe4, 0xb1, 0x47, 0x8f, 0x32, 0x33, 0x49, 0x94,
+	0x2e, 0x7b, 0xcb, 0xfb, 0xf2, 0x7b, 0xdf, 0x7b, 0xdf, 0x1b, 0xdc, 0x2c, 0x64, 0x5e, 0xce, 0xa5,
+	0x7f, 0x91, 0x0b, 0x29, 0xc8, 0xcd, 0x85, 0x10, 0x0b, 0x96, 0x9a, 0x2a, 0x29, 0x4f, 0xc7, 0x9f,
+	0x00, 0x9d, 0x97, 0x9a, 0x20, 0x53, 0x74, 0x4e, 0xb3, 0x94, 0x9d, 0x14, 0x43, 0x18, 0xf5, 0x3c,
+	0x77, 0xb2, 0xeb, 0x5f, 0x83, 0x7d, 0x03, 0xfa, 0xcf, 0x34, 0xb5, 0xc7, 0x65, 0xbe, 0x8c, 0x9b,
+	0x96, 0x9d, 0x17, 0xe8, 0xfe, 0x27, 0x93, 0x6d, 0xec, 0x9d, 0xa5, 0xcb, 0x21, 0x8c, 0xc0, 0x1b,
+	0xc4, 0xea, 0x93, 0x3c, 0xc0, 0xfe, 0xbb, 0xb7, 0xac, 0x4c, 0x87, 0xf6, 0x08, 0x3c, 0x77, 0x72,
+	0x7b, 0xc5, 0xfc, 0x58, 0xfd, 0x8d, 0x0d, 0xf4, 0xd8, 0x7e, 0x04, 0xe3, 0xef, 0x36, 0xf6, 0xb5,
+	0x48, 0xa6, 0x88, 0xbc, 0x64, 0x6c, 0x66, 0x0c, 0x94, 0xe9, 0xd6, 0x64, 0x67, 0xc5, 0xe0, 0xb0,
+	0x64, 0x4c, 0xf3, 0x07, 0x56, 0x3c, 0xe0, 0x6d, 0x41, 0x76, 0x71, 0x93, 0x97, 0xe7, 0x49, 0x9a,
+	0xcf, 0xfe, 0xcd, 0x87, 0x03, 0x2b, 0x76, 0x8d, 0xda, 0x41, 0x85, 0xcc, 0x33, 0xbe, 0x68, 0xa0,
+	0x9e, 0x5a, 0x5c, 0x41, 0x46, 0x35, 0xd0, 0x3d, 0xc4, 0x44, 0x88, 0x76, 0x8d, 0x8d, 0x11, 0x78,
+	0x37, 0xd4, 0x28, 0xa5, 0x19, 0xe0, 0x49, 0x7b, 0xed, 0x06, 0xe9, 0xeb, 0xa8, 0x77, 0xd6, 0xdc,
+	0xb1, 0xb1, 0x2f, 0xe7, 0xb2, 0x4b, 0xc9, 0xb2, 0xa2, 0xed, 0x75, 0x74, 0xef, 0x6a, 0xca, 0x30,
+	0x2b, 0x64, 0x97, 0x92, 0xb5, 0x45, 0xe0, 0xe0, 0xc6, 0x59, 0xc6, 0x4f, 0xc6, 0x53, 0x1c, 0x74,
+	0x04, 0xf1, 0xd1, 0xd1, 0x66, 0xed, 0x8b, 0xae, 0x3b, 0x7a, 0x43, 0xdd, 0xbf, 0x8b, 0x83, 0xee,
+	0x88, 0x64, 0x0b, 0xf1, 0xf0, 0x28, 0x0c, 0x67, 0xc7, 0x4f, 0xc3, 0xa3, 0xbd, 0x6d, 0x2b, 0xf8,
+	0x08, 0x97, 0x15, 0xb5, 0x7e, 0x56, 0xd4, 0xba, 0xaa, 0x28, 0xfc, 0xa9, 0x28, 0x7c, 0xa8, 0x29,
+	0x7c, 0xad, 0x29, 0xfc, 0xa8, 0x29, 0x5c, 0xd6, 0x14, 0x7e, 0xd5, 0x14, 0x7e, 0xd7, 0xd4, 0xba,
+	0xaa, 0x29, 0xe0, 0xad, 0xb9, 0x38, 0xbf, 0x3e, 0x2e, 0x70, 0x4d, 0xf2, 0x48, 0xd5, 0x11, 0xbc,
+	0xe9, 0xcb, 0xe5, 0x45, 0x5a, 0x7c, 0x06, 0xf8, 0x62, 0xf7, 0xf6, 0xa3, 0xe0, 0x9b, 0x4d, 0xf7,
+	0x4d, 0x43, 0xd4, 0xee, 0xf7, 0x3a, 0x65, 0xec, 0x39, 0x17, 0xef, 0xf9, 0x2b, 0x45, 0x26, 0x8e,
+	0x76, 0x7a, 0xf8, 0x37, 0x00, 0x00, 0xff, 0xff, 0x52, 0x64, 0x2c, 0x57, 0xd5, 0x02, 0x00, 0x00,
 }

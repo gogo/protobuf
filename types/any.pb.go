@@ -17,6 +17,14 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
+import strings "strings"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import sort "sort"
+import strconv "strconv"
+import reflect "reflect"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -129,12 +137,81 @@ type Any struct {
 }
 
 func (m *Any) Reset()                    { *m = Any{} }
-func (m *Any) String() string            { return proto.CompactTextString(m) }
 func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
 
 func init() {
 	proto.RegisterType((*Any)(nil), "google.protobuf.Any")
+}
+func (this *Any) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*Any)
+	if !ok {
+		that2, ok := that.(Any)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.TypeUrl != that1.TypeUrl {
+		return false
+	}
+	if !bytes.Equal(this.Value, that1.Value) {
+		return false
+	}
+	return true
+}
+func (this *Any) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&types.Any{")
+	s = append(s, "TypeUrl: "+fmt.Sprintf("%#v", this.TypeUrl)+",\n")
+	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func valueToGoStringAny(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func extensionToGoStringAny(m github_com_gogo_protobuf_proto.Message) string {
+	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
+	if e == nil {
+		return "nil"
+	}
+	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
+	keys := make([]int, 0, len(e))
+	for k := range e {
+		keys = append(keys, int(k))
+	}
+	sort.Ints(keys)
+	ss := []string{}
+	for _, k := range keys {
+		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
+	}
+	s += strings.Join(ss, ",") + "})"
+	return s
 }
 func (m *Any) Marshal() (data []byte, err error) {
 	size := m.Size()
@@ -193,6 +270,91 @@ func encodeVarintAny(data []byte, offset int, v uint64) int {
 	data[offset] = uint8(v)
 	return offset + 1
 }
+func NewPopulatedAny(r randyAny, easy bool) *Any {
+	this := &Any{}
+	this.TypeUrl = randStringAny(r)
+	v1 := r.Intn(100)
+	this.Value = make([]byte, v1)
+	for i := 0; i < v1; i++ {
+		this.Value[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+type randyAny interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneAny(r randyAny) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringAny(r randyAny) string {
+	v2 := r.Intn(100)
+	tmps := make([]rune, v2)
+	for i := 0; i < v2; i++ {
+		tmps[i] = randUTF8RuneAny(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedAny(r randyAny, maxFieldNumber int) (data []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		data = randFieldAny(data, r, fieldNumber, wire)
+	}
+	return data
+}
+func randFieldAny(data []byte, r randyAny, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		data = encodeVarintPopulateAny(data, uint64(key))
+		v3 := r.Int63()
+		if r.Intn(2) == 0 {
+			v3 *= -1
+		}
+		data = encodeVarintPopulateAny(data, uint64(v3))
+	case 1:
+		data = encodeVarintPopulateAny(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		data = encodeVarintPopulateAny(data, uint64(key))
+		ll := r.Intn(100)
+		data = encodeVarintPopulateAny(data, uint64(ll))
+		for j := 0; j < ll; j++ {
+			data = append(data, byte(r.Intn(256)))
+		}
+	default:
+		data = encodeVarintPopulateAny(data, uint64(key))
+		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return data
+}
+func encodeVarintPopulateAny(data []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	data = append(data, uint8(v))
+	return data
+}
 func (m *Any) Size() (n int) {
 	var l int
 	_ = l
@@ -219,6 +381,25 @@ func sovAny(x uint64) (n int) {
 }
 func sozAny(x uint64) (n int) {
 	return sovAny(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *Any) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Any{`,
+		`TypeUrl:` + fmt.Sprintf("%v", this.TypeUrl) + `,`,
+		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringAny(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *Any) Unmarshal(data []byte) error {
 	l := len(data)
@@ -438,16 +619,18 @@ var (
 func init() { proto.RegisterFile("any.proto", fileDescriptorAny) }
 
 var fileDescriptorAny = []byte{
-	// 172 bytes of a gzipped FileDescriptorProto
+	// 206 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x4c, 0xcc, 0xab, 0xd4,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4f, 0xcf, 0xcf, 0x4f, 0xcf, 0x49, 0x85, 0xf0, 0x92,
 	0x4a, 0xd3, 0x94, 0xcc, 0xb8, 0x98, 0x1d, 0xf3, 0x2a, 0x85, 0x24, 0xb9, 0x38, 0x4a, 0x2a, 0x0b,
 	0x52, 0xe3, 0x4b, 0x8b, 0x72, 0x24, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0xd8, 0x41, 0xfc, 0xd0,
 	0xa2, 0x1c, 0x21, 0x11, 0x2e, 0xd6, 0xb2, 0xc4, 0x9c, 0xd2, 0x54, 0x09, 0x26, 0x05, 0x46, 0x0d,
-	0x9e, 0x20, 0x08, 0xc7, 0x29, 0xee, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c,
-	0x92, 0x63, 0xe4, 0x12, 0x4e, 0xce, 0xcf, 0xd5, 0x43, 0x33, 0xda, 0x89, 0xc3, 0x31, 0xaf, 0x32,
-	0x00, 0xc4, 0x09, 0x60, 0x8c, 0x62, 0x05, 0x99, 0x56, 0xbc, 0x80, 0x91, 0x71, 0x11, 0x13, 0xb3,
-	0x7b, 0x80, 0xd3, 0x2a, 0x26, 0x39, 0x77, 0x88, 0xea, 0x00, 0xa8, 0x6a, 0xbd, 0xf0, 0xd4, 0x9c,
-	0x1c, 0xef, 0xbc, 0xfc, 0xf2, 0xbc, 0x10, 0x90, 0xca, 0x24, 0x36, 0xb0, 0x31, 0xc6, 0x80, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0xd4, 0xd6, 0x46, 0x7b, 0xbc, 0x00, 0x00, 0x00,
+	0x9e, 0x20, 0x08, 0xc7, 0xa9, 0xee, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18, 0x3e, 0x3c,
+	0x94, 0x63, 0xfc, 0xf1, 0x50, 0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72, 0x8c, 0x27,
+	0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8b, 0x47, 0x72, 0x0c,
+	0x1f, 0x1e, 0xc9, 0x31, 0x72, 0x09, 0x27, 0xe7, 0xe7, 0xea, 0xa1, 0x59, 0xed, 0xc4, 0xe1, 0x98,
+	0x57, 0x19, 0x00, 0xe2, 0x04, 0x30, 0x46, 0xb1, 0x82, 0x6c, 0x2b, 0x5e, 0xc0, 0xc8, 0xb8, 0x88,
+	0x89, 0xd9, 0x3d, 0xc0, 0x69, 0x15, 0x93, 0x9c, 0x3b, 0x44, 0x75, 0x00, 0x54, 0xb5, 0x5e, 0x78,
+	0x6a, 0x4e, 0x8e, 0x77, 0x5e, 0x7e, 0x79, 0x5e, 0x08, 0x48, 0x65, 0x12, 0x1b, 0xd8, 0x18, 0x63,
+	0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0x9f, 0x90, 0x29, 0x9f, 0xdc, 0x00, 0x00, 0x00,
 }
