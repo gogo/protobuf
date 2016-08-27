@@ -385,7 +385,7 @@ message FileOptions {
   // Clients can define custom options in extensions of this message. See above.
   extensions 1000 to max;
 
-  reserved 38;
+  //reserved 38;
 }
 
 message MessageOptions {

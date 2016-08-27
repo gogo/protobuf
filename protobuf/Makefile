@@ -1,11 +1,13 @@
 URL="https://raw.githubusercontent.com/google/protobuf/master/src/google/protobuf/"
 
 update:
+	go install github.com/gogo/protobuf/gogoreplace
+
 	(cd ./google/protobuf && rm descriptor.proto; wget ${URL}/descriptor.proto)
+	gogoreplace 'reserved 38;' '//reserved 38;' ./google/protobuf/descriptor.proto
 
 	(cd ./google/protobuf/compiler && rm plugin.proto; wget ${URL}/compiler/plugin.proto)
 
-	go install github.com/gogo/protobuf/gogoreplace
 	
 	(cd ./google/protobuf && rm any.proto; wget ${URL}/any.proto)
 	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/any";' 'go_package = "types";' ./google/protobuf/any.proto
