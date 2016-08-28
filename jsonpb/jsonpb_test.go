@@ -270,6 +270,41 @@ var (
 		`"[jsonpb.Complex.real_extension]":{"imaginary":0.5772156649},` +
 		`"[jsonpb.name]":"Pi"` +
 		`}`
+
+	anySimple = &pb.KnownTypes{
+		An: &types.Any{
+			TypeUrl: "something.example.com/jsonpb.Simple",
+			Value: []byte{
+				// &pb.Simple{OBool:true}
+				1 << 3, 1,
+			},
+		},
+	}
+	anySimpleJSON       = `{"an":{"@type":"something.example.com/jsonpb.Simple","oBool":true}}`
+	anySimplePrettyJSON = `{
+  "an": {
+    "@type": "something.example.com/jsonpb.Simple",
+    "oBool": true
+  }
+}`
+
+	anyWellKnown = &pb.KnownTypes{
+		An: &types.Any{
+			TypeUrl: "type.googleapis.com/google.protobuf.Duration",
+			Value: []byte{
+				// &durpb.Duration{Seconds: 1, Nanos: 212000000 }
+				1 << 3, 1, // seconds
+				2 << 3, 0x80, 0xba, 0x8b, 0x65, // nanos
+			},
+		},
+	}
+	anyWellKnownJSON       = `{"an":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"1.212s"}}`
+	anyWellKnownPrettyJSON = `{
+  "an": {
+    "@type": "type.googleapis.com/google.protobuf.Duration",
+    "value": "1.212s"
+  }
+}`
 )
 
 func init() {
@@ -342,21 +377,10 @@ var marshalingTests = []struct {
 	{"force orig_name", Marshaler{OrigName: true}, &pb.Simple{OInt32: proto.Int32(4)},
 		`{"o_int32":4}`},
 	{"proto2 extension", marshaler, realNumber, realNumberJSON},
-	{"Any with message", marshaler, &pb.KnownTypes{An: &types.Any{
-		TypeUrl: "something.example.com/jsonpb.Simple",
-		Value: []byte{
-			// &pb.Simple{OBool:true}
-			1 << 3, 1,
-		},
-	}}, `{"an":{"@type":"something.example.com/jsonpb.Simple","oBool":true}}`},
-	{"Any with WKT", marshaler, &pb.KnownTypes{An: &types.Any{
-		TypeUrl: "type.googleapis.com/google.protobuf.Duration",
-		Value: []byte{
-			// &durpb.Duration{Seconds: 1, Nanos: 212000000 }
-			1 << 3, 1, // seconds
-			2 << 3, 0x80, 0xba, 0x8b, 0x65, // nanos
-		},
-	}}, `{"an":{"@type":"type.googleapis.com/google.protobuf.Duration","value":"1.212s"}}`},
+	{"Any with message", marshaler, anySimple, anySimpleJSON},
+	{"Any with message and indent", marshalerAllOptions, anySimple, anySimplePrettyJSON},
+	{"Any with WKT", marshaler, anyWellKnown, anyWellKnownJSON},
+	{"Any with WKT and indent", marshalerAllOptions, anyWellKnown, anyWellKnownPrettyJSON},
 	{"Duration", marshaler, &pb.KnownTypes{Dur: &types.Duration{Seconds: 3}}, `{"dur":"3.000s"}`},
 	{"Struct", marshaler, &pb.KnownTypes{St: &types.Struct{
 		Fields: map[string]*types.Value{
