@@ -31,6 +31,7 @@ regenerate:
 	go install github.com/gogo/protobuf/protoc-min-version
 
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/any.proto
+	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/empty.proto
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/timestamp.proto
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/duration.proto
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto

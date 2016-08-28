@@ -14,6 +14,8 @@ update:
 	
 	(cd ./google/protobuf && rm any.proto; wget ${URL}/any.proto)
 	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/any";' 'go_package = "types";' ./google/protobuf/any.proto
+	(cd ./google/protobuf && rm empty.proto; wget ${URL}/empty.proto)
+	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/empty";' 'go_package = "types";' ./google/protobuf/empty.proto
 	(cd ./google/protobuf && rm timestamp.proto; wget ${URL}/timestamp.proto)
 	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/timestamp";' 'go_package = "types";' ./google/protobuf/timestamp.proto
 	(cd ./google/protobuf && rm duration.proto; wget ${URL}/duration.proto)
