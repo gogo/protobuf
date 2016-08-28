@@ -39,6 +39,7 @@ import (
 
 	pb "github.com/gogo/protobuf/proto/proto3_proto"
 	testpb "github.com/gogo/protobuf/proto/testdata"
+	"github.com/gogo/protobuf/types"
 )
 
 var (
@@ -77,24 +78,24 @@ func makeGolden() []golden {
 	m1 := &pb.Message{
 		Name:        "David",
 		ResultCount: 47,
-		Anything:    &Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(nested), Value: nb},
+		Anything:    &types.Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(nested), Value: nb},
 	}
 	m2 := &pb.Message{
 		Name:        "David",
 		ResultCount: 47,
-		Anything:    &Any{TypeUrl: "http://[::1]/type.googleapis.com/" + proto.MessageName(nested), Value: nb},
+		Anything:    &types.Any{TypeUrl: "http://[::1]/type.googleapis.com/" + proto.MessageName(nested), Value: nb},
 	}
 	m3 := &pb.Message{
 		Name:        "David",
 		ResultCount: 47,
-		Anything:    &Any{TypeUrl: `type.googleapis.com/"/` + proto.MessageName(nested), Value: nb},
+		Anything:    &types.Any{TypeUrl: `type.googleapis.com/"/` + proto.MessageName(nested), Value: nb},
 	}
 	m4 := &pb.Message{
 		Name:        "David",
 		ResultCount: 47,
-		Anything:    &Any{TypeUrl: "type.googleapis.com/a/path/" + proto.MessageName(nested), Value: nb},
+		Anything:    &types.Any{TypeUrl: "type.googleapis.com/a/path/" + proto.MessageName(nested), Value: nb},
 	}
-	m5 := &Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(nested), Value: nb}
+	m5 := &types.Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(nested), Value: nb}
 
 	any1 := &testpb.MyMessage{Count: proto.Int32(47), Name: proto.String("David")}
 	proto.SetExtension(any1, testpb.E_Ext_More, &testpb.Ext{Data: proto.String("foo")})
@@ -112,10 +113,10 @@ func makeGolden() []golden {
 	m6 := &pb.Message{
 		Name:        "David",
 		ResultCount: 47,
-		Anything:    &Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(any1), Value: any1b},
-		ManyThings: []*Any{
-			&Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(any2), Value: any2b},
-			&Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(any1), Value: any1b},
+		Anything:    &types.Any{TypeUrl: "type.googleapis.com/" + proto.MessageName(any1), Value: any1b},
+		ManyThings: []*types.Any{
+			{TypeUrl: "type.googleapis.com/" + proto.MessageName(any2), Value: any2b},
+			{TypeUrl: "type.googleapis.com/" + proto.MessageName(any1), Value: any1b},
 		},
 	}
 
@@ -240,7 +241,7 @@ func TestUnmarshalGolden(t *testing.T) {
 
 func TestMarsahlUnknownAny(t *testing.T) {
 	m := &pb.Message{
-		Anything: &Any{
+		Anything: &types.Any{
 			TypeUrl: "foo",
 			Value:   []byte("bar"),
 		},
@@ -257,7 +258,7 @@ func TestMarsahlUnknownAny(t *testing.T) {
 }
 
 func TestAmbiguousAny(t *testing.T) {
-	pb := &Any{}
+	pb := &types.Any{}
 	err := proto.UnmarshalText(`
 	[type.googleapis.com/proto3_proto.Nested]: <
 	  bunny: "Monty"
