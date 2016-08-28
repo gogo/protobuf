@@ -51,6 +51,7 @@ type Empty struct {
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
+func (*Empty) XXX_WellKnownType() string   { return "Empty" }
 
 func init() {
 	proto.RegisterType((*Empty)(nil), "google.protobuf.Empty")

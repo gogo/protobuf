@@ -76,6 +76,7 @@ type Struct struct {
 func (m *Struct) Reset()                    { *m = Struct{} }
 func (*Struct) ProtoMessage()               {}
 func (*Struct) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{0} }
+func (*Struct) XXX_WellKnownType() string   { return "Struct" }
 
 func (m *Struct) GetFields() map[string]*Value {
 	if m != nil {
@@ -106,6 +107,7 @@ type Value struct {
 func (m *Value) Reset()                    { *m = Value{} }
 func (*Value) ProtoMessage()               {}
 func (*Value) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{1} }
+func (*Value) XXX_WellKnownType() string   { return "Value" }
 
 type isValue_Kind interface {
 	isValue_Kind()
@@ -335,6 +337,7 @@ type ListValue struct {
 func (m *ListValue) Reset()                    { *m = ListValue{} }
 func (*ListValue) ProtoMessage()               {}
 func (*ListValue) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{2} }
+func (*ListValue) XXX_WellKnownType() string   { return "ListValue" }
 
 func (m *ListValue) GetValues() []*Value {
 	if m != nil {

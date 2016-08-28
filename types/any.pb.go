@@ -139,6 +139,7 @@ type Any struct {
 func (m *Any) Reset()                    { *m = Any{} }
 func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
+func (*Any) XXX_WellKnownType() string   { return "Any" }
 
 func init() {
 	proto.RegisterType((*Any)(nil), "google.protobuf.Any")

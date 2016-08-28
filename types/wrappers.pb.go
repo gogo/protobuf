@@ -57,6 +57,7 @@ type DoubleValue struct {
 func (m *DoubleValue) Reset()                    { *m = DoubleValue{} }
 func (*DoubleValue) ProtoMessage()               {}
 func (*DoubleValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{0} }
+func (*DoubleValue) XXX_WellKnownType() string   { return "DoubleValue" }
 
 // Wrapper message for `float`.
 //
@@ -69,6 +70,7 @@ type FloatValue struct {
 func (m *FloatValue) Reset()                    { *m = FloatValue{} }
 func (*FloatValue) ProtoMessage()               {}
 func (*FloatValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{1} }
+func (*FloatValue) XXX_WellKnownType() string   { return "FloatValue" }
 
 // Wrapper message for `int64`.
 //
@@ -81,6 +83,7 @@ type Int64Value struct {
 func (m *Int64Value) Reset()                    { *m = Int64Value{} }
 func (*Int64Value) ProtoMessage()               {}
 func (*Int64Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{2} }
+func (*Int64Value) XXX_WellKnownType() string   { return "Int64Value" }
 
 // Wrapper message for `uint64`.
 //
@@ -93,6 +96,7 @@ type UInt64Value struct {
 func (m *UInt64Value) Reset()                    { *m = UInt64Value{} }
 func (*UInt64Value) ProtoMessage()               {}
 func (*UInt64Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{3} }
+func (*UInt64Value) XXX_WellKnownType() string   { return "UInt64Value" }
 
 // Wrapper message for `int32`.
 //
@@ -105,6 +109,7 @@ type Int32Value struct {
 func (m *Int32Value) Reset()                    { *m = Int32Value{} }
 func (*Int32Value) ProtoMessage()               {}
 func (*Int32Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{4} }
+func (*Int32Value) XXX_WellKnownType() string   { return "Int32Value" }
 
 // Wrapper message for `uint32`.
 //
@@ -117,6 +122,7 @@ type UInt32Value struct {
 func (m *UInt32Value) Reset()                    { *m = UInt32Value{} }
 func (*UInt32Value) ProtoMessage()               {}
 func (*UInt32Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{5} }
+func (*UInt32Value) XXX_WellKnownType() string   { return "UInt32Value" }
 
 // Wrapper message for `bool`.
 //
@@ -129,6 +135,7 @@ type BoolValue struct {
 func (m *BoolValue) Reset()                    { *m = BoolValue{} }
 func (*BoolValue) ProtoMessage()               {}
 func (*BoolValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{6} }
+func (*BoolValue) XXX_WellKnownType() string   { return "BoolValue" }
 
 // Wrapper message for `string`.
 //
@@ -141,6 +148,7 @@ type StringValue struct {
 func (m *StringValue) Reset()                    { *m = StringValue{} }
 func (*StringValue) ProtoMessage()               {}
 func (*StringValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{7} }
+func (*StringValue) XXX_WellKnownType() string   { return "StringValue" }
 
 // Wrapper message for `bytes`.
 //
@@ -153,6 +161,7 @@ type BytesValue struct {
 func (m *BytesValue) Reset()                    { *m = BytesValue{} }
 func (*BytesValue) ProtoMessage()               {}
 func (*BytesValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{8} }
+func (*BytesValue) XXX_WellKnownType() string   { return "BytesValue" }
 
 func init() {
 	proto.RegisterType((*DoubleValue)(nil), "google.protobuf.DoubleValue")
