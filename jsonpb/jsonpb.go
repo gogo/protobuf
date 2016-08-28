@@ -103,6 +103,12 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent string
 	}
 	if wkt, ok := v.(isWkt); ok {
 		switch wkt.XXX_WellKnownType() {
+		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			// "Wrappers use the same representation in JSON
+			//  as the wrapped primitive type, ..."
+			sprop := proto.GetProperties(s.Type())
+			return m.marshalValue(out, sprop.Prop[0], s.Field(0), indent)
 		case "Duration":
 			// "Generated output always contains 3, 6, or 9 fractional digits,
 			//  depending on required precision."
@@ -512,6 +518,13 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 	}
 	if wkt, ok := target.Addr().Interface().(isWkt); ok {
 		switch wkt.XXX_WellKnownType() {
+		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			// "Wrappers use the same representation in JSON
+			//  as the wrapped primitive type, except that null is allowed."
+			// encoding/json will turn JSON `null` into Go `nil`,
+			// so we don't have to do any extra work.
+			return u.unmarshalValue(target.Field(0), inputValue, prop)
 		case "Duration":
 			unq, err := strconv.Unquote(string(inputValue))
 			if err != nil {
