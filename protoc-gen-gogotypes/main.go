@@ -51,14 +51,14 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOnEqualAll)
 	vanity.ForEachFile(files, vanity.TurnOnGoStringAll)
 	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
+
 	for _, file := range files {
 		if strings.HasSuffix(file.GetName(), "timestamp.proto") {
 			continue
 		}
 		vanity.TurnOnStringerAll(file)
+		vanity.TurnOnPopulateAll(file)
 	}
-
-	vanity.ForEachFile(files, vanity.TurnOnPopulateAll)
 
 	resp := command.Generate(req)
 	command.Write(resp)
