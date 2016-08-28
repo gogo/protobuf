@@ -121,7 +121,3 @@ func TimestampString(ts *Timestamp) string {
 	}
 	return t.Format(time.RFC3339Nano)
 }
-
-func (ts *Timestamp) String() string {
-	return TimestampString(ts)
-}

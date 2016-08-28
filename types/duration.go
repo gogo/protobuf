@@ -56,14 +56,14 @@ func validateDuration(d *Duration) error {
 		return errors.New("duration: nil Duration")
 	}
 	if d.Seconds < minSeconds || d.Seconds > maxSeconds {
-		return fmt.Errorf("duration: %v: seconds out of range", d)
+		return fmt.Errorf("duration: %#v: seconds out of range", d)
 	}
 	if d.Nanos <= -1e9 || d.Nanos >= 1e9 {
-		return fmt.Errorf("duration: %v: nanos out of range", d)
+		return fmt.Errorf("duration: %#v: nanos out of range", d)
 	}
 	// Seconds and Nanos must have the same sign, unless d.Nanos is zero.
 	if (d.Seconds < 0 && d.Nanos > 0) || (d.Seconds > 0 && d.Nanos < 0) {
-		return fmt.Errorf("duration: %v: seconds and nanos have different signs", d)
+		return fmt.Errorf("duration: %#v: seconds and nanos have different signs", d)
 	}
 	return nil
 }
@@ -77,12 +77,12 @@ func DurationFromProto(p *Duration) (time.Duration, error) {
 	}
 	d := time.Duration(p.Seconds) * time.Second
 	if int64(d/time.Second) != p.Seconds {
-		return 0, fmt.Errorf("duration: %v is out of range for time.Duration", p)
+		return 0, fmt.Errorf("duration: %#v is out of range for time.Duration", p)
 	}
 	if p.Nanos != 0 {
 		d += time.Duration(p.Nanos)
 		if (d < 0) != (p.Nanos < 0) {
-			return 0, fmt.Errorf("duration: %v is out of range for time.Duration", p)
+			return 0, fmt.Errorf("duration: %#v is out of range for time.Duration", p)
 		}
 	}
 	return d, nil

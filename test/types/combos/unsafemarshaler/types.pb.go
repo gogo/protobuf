@@ -9,7 +9,7 @@ It is generated from these files:
 	combos/unsafemarshaler/types.proto
 
 It has these top-level messages:
-	WellKnownTypes
+	KnownTypes
 */
 package types
 
@@ -18,6 +18,9 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 import google_protobuf1 "github.com/gogo/protobuf/types"
+import google_protobuf2 "github.com/gogo/protobuf/types"
+import google_protobuf3 "github.com/gogo/protobuf/types"
+import google_protobuf4 "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -30,26 +33,115 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
-type WellKnownTypes struct {
-	Timestamp *google_protobuf1.Timestamp `protobuf:"bytes,1,opt,name=timestamp" json:"timestamp,omitempty"`
+type KnownTypes struct {
+	// google.protobuf.Any an = 14;
+	Dur   *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	St    *google_protobuf2.Struct      `protobuf:"bytes,12,opt,name=st" json:"st,omitempty"`
+	Ts    *google_protobuf3.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Dbl   *google_protobuf4.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt   *google_protobuf4.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64   *google_protobuf4.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64   *google_protobuf4.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32   *google_protobuf4.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32   *google_protobuf4.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool  *google_protobuf4.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str   *google_protobuf4.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes *google_protobuf4.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
 }
 
-func (m *WellKnownTypes) Reset()                    { *m = WellKnownTypes{} }
-func (m *WellKnownTypes) String() string            { return proto.CompactTextString(m) }
-func (*WellKnownTypes) ProtoMessage()               {}
-func (*WellKnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
+func (m *KnownTypes) Reset()                    { *m = KnownTypes{} }
+func (m *KnownTypes) String() string            { return proto.CompactTextString(m) }
+func (*KnownTypes) ProtoMessage()               {}
+func (*KnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
 
-func (m *WellKnownTypes) GetTimestamp() *google_protobuf1.Timestamp {
+func (m *KnownTypes) GetDur() *google_protobuf1.Duration {
 	if m != nil {
-		return m.Timestamp
+		return m.Dur
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetSt() *google_protobuf2.Struct {
+	if m != nil {
+		return m.St
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetTs() *google_protobuf3.Timestamp {
+	if m != nil {
+		return m.Ts
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetDbl() *google_protobuf4.DoubleValue {
+	if m != nil {
+		return m.Dbl
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetFlt() *google_protobuf4.FloatValue {
+	if m != nil {
+		return m.Flt
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetI64() *google_protobuf4.Int64Value {
+	if m != nil {
+		return m.I64
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetU64() *google_protobuf4.UInt64Value {
+	if m != nil {
+		return m.U64
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetI32() *google_protobuf4.Int32Value {
+	if m != nil {
+		return m.I32
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetU32() *google_protobuf4.UInt32Value {
+	if m != nil {
+		return m.U32
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetBool() *google_protobuf4.BoolValue {
+	if m != nil {
+		return m.Bool
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetStr() *google_protobuf4.StringValue {
+	if m != nil {
+		return m.Str
+	}
+	return nil
+}
+
+func (m *KnownTypes) GetBytes() *google_protobuf4.BytesValue {
+	if m != nil {
+		return m.Bytes
 	}
 	return nil
 }
 
 func init() {
-	proto.RegisterType((*WellKnownTypes)(nil), "types.WellKnownTypes")
+	proto.RegisterType((*KnownTypes)(nil), "types.KnownTypes")
 }
-func (this *WellKnownTypes) Equal(that interface{}) bool {
+func (this *KnownTypes) Equal(that interface{}) bool {
 	if that == nil {
 		if this == nil {
 			return true
@@ -57,9 +149,9 @@ func (this *WellKnownTypes) Equal(that interface{}) bool {
 		return false
 	}
 
-	that1, ok := that.(*WellKnownTypes)
+	that1, ok := that.(*KnownTypes)
 	if !ok {
-		that2, ok := that.(WellKnownTypes)
+		that2, ok := that.(KnownTypes)
 		if ok {
 			that1 = &that2
 		} else {
@@ -74,15 +166,81 @@ func (this *WellKnownTypes) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if !this.Timestamp.Equal(that1.Timestamp) {
+	if !this.Dur.Equal(that1.Dur) {
+		return false
+	}
+	if !this.St.Equal(that1.St) {
+		return false
+	}
+	if !this.Ts.Equal(that1.Ts) {
+		return false
+	}
+	if !this.Dbl.Equal(that1.Dbl) {
+		return false
+	}
+	if !this.Flt.Equal(that1.Flt) {
+		return false
+	}
+	if !this.I64.Equal(that1.I64) {
+		return false
+	}
+	if !this.U64.Equal(that1.U64) {
+		return false
+	}
+	if !this.I32.Equal(that1.I32) {
+		return false
+	}
+	if !this.U32.Equal(that1.U32) {
+		return false
+	}
+	if !this.Bool.Equal(that1.Bool) {
+		return false
+	}
+	if !this.Str.Equal(that1.Str) {
+		return false
+	}
+	if !this.Bytes.Equal(that1.Bytes) {
 		return false
 	}
 	return true
 }
-func NewPopulatedWellKnownTypes(r randyTypes, easy bool) *WellKnownTypes {
-	this := &WellKnownTypes{}
+func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
+	this := &KnownTypes{}
 	if r.Intn(10) != 0 {
-		this.Timestamp = google_protobuf1.NewPopulatedTimestamp(r, easy)
+		this.Dur = google_protobuf1.NewPopulatedDuration(r, easy)
+	}
+	if r.Intn(10) == 0 {
+		this.St = google_protobuf2.NewPopulatedStruct(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Ts = google_protobuf3.NewPopulatedTimestamp(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Dbl = google_protobuf4.NewPopulatedDoubleValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Flt = google_protobuf4.NewPopulatedFloatValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.I64 = google_protobuf4.NewPopulatedInt64Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.U64 = google_protobuf4.NewPopulatedUInt64Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.I32 = google_protobuf4.NewPopulatedInt32Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.U32 = google_protobuf4.NewPopulatedUInt32Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Bool = google_protobuf4.NewPopulatedBoolValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Str = google_protobuf4.NewPopulatedStringValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Bytes = google_protobuf4.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -161,11 +319,55 @@ func encodeVarintPopulateTypes(data []byte, v uint64) []byte {
 	data = append(data, uint8(v))
 	return data
 }
-func (m *WellKnownTypes) Size() (n int) {
+func (m *KnownTypes) Size() (n int) {
 	var l int
 	_ = l
-	if m.Timestamp != nil {
-		l = m.Timestamp.Size()
+	if m.Dur != nil {
+		l = m.Dur.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.St != nil {
+		l = m.St.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Ts != nil {
+		l = m.Ts.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Dbl != nil {
+		l = m.Dbl.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Flt != nil {
+		l = m.Flt.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.I64 != nil {
+		l = m.I64.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.U64 != nil {
+		l = m.U64.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.I32 != nil {
+		l = m.I32.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.U32 != nil {
+		l = m.U32.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Bool != nil {
+		l = m.Bool.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Str != nil {
+		l = m.Str.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Bytes != nil {
+		l = m.Bytes.Size()
 		n += 1 + l + sovTypes(uint64(l))
 	}
 	return n
@@ -184,7 +386,7 @@ func sovTypes(x uint64) (n int) {
 func sozTypes(x uint64) (n int) {
 	return sovTypes(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *WellKnownTypes) Marshal() (data []byte, err error) {
+func (m *KnownTypes) Marshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
 	n, err := m.MarshalTo(data)
@@ -194,20 +396,130 @@ func (m *WellKnownTypes) Marshal() (data []byte, err error) {
 	return data[:n], nil
 }
 
-func (m *WellKnownTypes) MarshalTo(data []byte) (int, error) {
+func (m *KnownTypes) MarshalTo(data []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
-	if m.Timestamp != nil {
+	if m.Dur != nil {
 		data[i] = 0xa
 		i++
-		i = encodeVarintTypes(data, i, uint64(m.Timestamp.Size()))
-		n1, err := m.Timestamp.MarshalTo(data[i:])
+		i = encodeVarintTypes(data, i, uint64(m.Dur.Size()))
+		n1, err := m.Dur.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n1
+	}
+	if m.Ts != nil {
+		data[i] = 0x12
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Ts.Size()))
+		n2, err := m.Ts.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n2
+	}
+	if m.Dbl != nil {
+		data[i] = 0x1a
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Dbl.Size()))
+		n3, err := m.Dbl.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
+	}
+	if m.Flt != nil {
+		data[i] = 0x22
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Flt.Size()))
+		n4, err := m.Flt.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n4
+	}
+	if m.I64 != nil {
+		data[i] = 0x2a
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.I64.Size()))
+		n5, err := m.I64.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
+	}
+	if m.U64 != nil {
+		data[i] = 0x32
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.U64.Size()))
+		n6, err := m.U64.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n6
+	}
+	if m.I32 != nil {
+		data[i] = 0x3a
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.I32.Size()))
+		n7, err := m.I32.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n7
+	}
+	if m.U32 != nil {
+		data[i] = 0x42
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.U32.Size()))
+		n8, err := m.U32.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n8
+	}
+	if m.Bool != nil {
+		data[i] = 0x4a
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Bool.Size()))
+		n9, err := m.Bool.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n9
+	}
+	if m.Str != nil {
+		data[i] = 0x52
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Str.Size()))
+		n10, err := m.Str.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n10
+	}
+	if m.Bytes != nil {
+		data[i] = 0x5a
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.Bytes.Size()))
+		n11, err := m.Bytes.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n11
+	}
+	if m.St != nil {
+		data[i] = 0x62
+		i++
+		i = encodeVarintTypes(data, i, uint64(m.St.Size()))
+		n12, err := m.St.MarshalTo(data[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n12
 	}
 	return i, nil
 }
@@ -243,18 +555,31 @@ func encodeVarintTypes(data []byte, offset int, v uint64) int {
 func init() { proto.RegisterFile("combos/unsafemarshaler/types.proto", fileDescriptorTypes) }
 
 var fileDescriptorTypes = []byte{
-	// 204 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x52, 0x4a, 0xce, 0xcf, 0x4d,
-	0xca, 0x2f, 0xd6, 0x2f, 0xcd, 0x2b, 0x4e, 0x4c, 0x4b, 0xcd, 0x4d, 0x2c, 0x2a, 0xce, 0x48, 0xcc,
-	0x49, 0x2d, 0xd2, 0x2f, 0xa9, 0x2c, 0x48, 0x2d, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62,
-	0x05, 0x73, 0xa4, 0x74, 0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3,
-	0xf3, 0xd3, 0xf3, 0xf5, 0xc1, 0xb2, 0x49, 0xa5, 0x69, 0x60, 0x1e, 0x98, 0x03, 0x66, 0x41, 0x74,
-	0x49, 0xc9, 0xa7, 0xe7, 0xe7, 0xa7, 0xe7, 0xa4, 0x22, 0x54, 0x95, 0x64, 0xe6, 0xa6, 0x16, 0x97,
-	0x24, 0xe6, 0x16, 0x40, 0x14, 0x28, 0x79, 0x71, 0xf1, 0x85, 0xa7, 0xe6, 0xe4, 0x78, 0xe7, 0xe5,
-	0x97, 0xe7, 0x85, 0x80, 0x6c, 0x10, 0xb2, 0xe0, 0xe2, 0x84, 0x2b, 0x92, 0x60, 0x54, 0x60, 0xd4,
-	0xe0, 0x36, 0x92, 0xd2, 0x83, 0x18, 0xa3, 0x07, 0x33, 0x46, 0x2f, 0x04, 0xa6, 0x22, 0x08, 0xa1,
-	0xd8, 0x49, 0xe5, 0xc7, 0x43, 0x39, 0xc6, 0x15, 0x8f, 0xe4, 0x18, 0x77, 0x3c, 0x92, 0x63, 0x3c,
-	0xf0, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0x86, 0x0b, 0x8f, 0xe4, 0x18, 0x1e, 0x3c, 0x92, 0x63,
-	0xfc, 0xf1, 0x48, 0x8e, 0xb1, 0xe1, 0xb1, 0x1c, 0x43, 0x12, 0x1b, 0xd8, 0x10, 0x63, 0x40, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0x30, 0x7b, 0xa5, 0x50, 0xf5, 0x00, 0x00, 0x00,
+	// 416 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x7c, 0x90, 0x41, 0x8e, 0x94, 0x40,
+	0x14, 0x86, 0xbb, 0xe8, 0xee, 0x51, 0x6b, 0x5c, 0xb1, 0xb1, 0x6c, 0x27, 0xa5, 0x99, 0x98, 0x68,
+	0x34, 0x43, 0x47, 0x20, 0x1c, 0xa0, 0x63, 0x4c, 0x8c, 0xbb, 0x76, 0x74, 0x5f, 0x45, 0x17, 0x0c,
+	0x49, 0xc1, 0x23, 0x55, 0xaf, 0x32, 0x99, 0x9d, 0xc7, 0xf1, 0x08, 0xae, 0x8c, 0x4b, 0x97, 0x1e,
+	0x41, 0xf1, 0x12, 0xb3, 0x34, 0x14, 0xb4, 0x9a, 0x69, 0x71, 0xc7, 0xcb, 0xff, 0xfd, 0x1f, 0x3f,
+	0xd0, 0xd3, 0x1c, 0x6a, 0x09, 0x76, 0xed, 0x1a, 0x2b, 0x0a, 0x55, 0x0b, 0x63, 0x2f, 0x84, 0x56,
+	0x66, 0x8d, 0x57, 0xad, 0xb2, 0x51, 0x6b, 0x00, 0x21, 0x5c, 0xfa, 0x63, 0x75, 0x56, 0x56, 0x78,
+	0xe1, 0x64, 0x94, 0x43, 0xbd, 0x2e, 0xa1, 0x84, 0xb5, 0x4f, 0xa5, 0x2b, 0xfc, 0xe5, 0x0f, 0xff,
+	0x34, 0xb4, 0x56, 0xbc, 0x04, 0x28, 0xb5, 0xfa, 0x43, 0xed, 0x9c, 0x11, 0x58, 0x41, 0x33, 0xe6,
+	0x27, 0x37, 0x73, 0x8b, 0xc6, 0xe5, 0x38, 0xa6, 0x0f, 0x6f, 0xa6, 0x58, 0xd5, 0xca, 0xa2, 0xa8,
+	0xdb, 0x29, 0xfd, 0xa5, 0x11, 0x6d, 0xab, 0xcc, 0x38, 0xfa, 0xf4, 0xf3, 0x82, 0xd2, 0x37, 0x0d,
+	0x5c, 0x36, 0xe7, 0xfd, 0xf8, 0xf0, 0x39, 0x9d, 0xef, 0x9c, 0x61, 0xe4, 0x11, 0x79, 0x7a, 0x1c,
+	0xdf, 0x8f, 0x86, 0x72, 0xb4, 0x2f, 0x47, 0x2f, 0xc7, 0x6d, 0xdb, 0x9e, 0x0a, 0x9f, 0xd1, 0x00,
+	0x2d, 0x0b, 0x3c, 0xbb, 0x3a, 0x60, 0xcf, 0xf7, 0x4b, 0xb6, 0x01, 0xda, 0x30, 0xa2, 0xf3, 0x9d,
+	0xd4, 0x6c, 0xee, 0xe1, 0x93, 0x43, 0x31, 0x38, 0xa9, 0xd5, 0x7b, 0xa1, 0x9d, 0xda, 0xf6, 0x60,
+	0x78, 0x46, 0xe7, 0x85, 0x46, 0xb6, 0xf0, 0xfc, 0x83, 0x03, 0xfe, 0x95, 0x06, 0x81, 0x23, 0x5e,
+	0x68, 0xec, 0xf1, 0x2a, 0x4b, 0xd9, 0x72, 0x02, 0x7f, 0xdd, 0x60, 0x96, 0x8e, 0x78, 0x95, 0xa5,
+	0xfd, 0x1a, 0x97, 0xa5, 0xec, 0x68, 0x62, 0xcd, 0xbb, 0xbf, 0x79, 0x97, 0xa5, 0x5e, 0x9f, 0xc4,
+	0xec, 0xd6, 0xb4, 0x3e, 0x89, 0xf7, 0xfa, 0x24, 0xf6, 0xfa, 0x24, 0x66, 0xb7, 0xff, 0xa3, 0xff,
+	0xcd, 0x3b, 0xcf, 0x2f, 0x24, 0x80, 0x66, 0x77, 0x26, 0x7e, 0xe5, 0x06, 0x40, 0x0f, 0xb8, 0xe7,
+	0x7a, 0xbf, 0x45, 0xc3, 0xe8, 0x84, 0xff, 0x2d, 0x9a, 0xaa, 0x29, 0x47, 0xbf, 0x45, 0x13, 0xbe,
+	0xa0, 0x4b, 0x79, 0x85, 0xca, 0xb2, 0xe3, 0x89, 0x0f, 0xd8, 0xf4, 0xe9, 0x50, 0x18, 0xc8, 0xf0,
+	0x09, 0x0d, 0x2c, 0xb2, 0xbb, 0x9e, 0xbf, 0xf7, 0xaf, 0x37, 0xb8, 0x1c, 0xb7, 0x81, 0xc5, 0xcd,
+	0xe3, 0xeb, 0x1f, 0x9c, 0x7c, 0xec, 0x38, 0xf9, 0xd4, 0x71, 0xf2, 0xa5, 0xe3, 0xe4, 0x6b, 0xc7,
+	0x67, 0xdf, 0x3a, 0x3e, 0xfb, 0xde, 0x71, 0x72, 0xdd, 0x71, 0xf2, 0xe1, 0x27, 0x9f, 0xc9, 0x23,
+	0x5f, 0x4d, 0x7e, 0x05, 0x00, 0x00, 0xff, 0xff, 0xee, 0x05, 0x26, 0x06, 0x48, 0x03, 0x00, 0x00,
 }

@@ -26,42 +26,34 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+package types
 
-package types;
+import (
+	"fmt"
+	"time"
+)
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-//import "google/protobuf/any.proto";
-import "google/protobuf/duration.proto";
-import "google/protobuf/struct.proto";
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
-
-option (gogoproto.testgen_all) = true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = true;
-option (gogoproto.equal_all) = true;
-option (gogoproto.unsafe_marshaler_all) = false;
-option (gogoproto.unsafe_unmarshaler_all) = false;
-
-message KnownTypes {
-  //google.protobuf.Any an = 14;
-  google.protobuf.Duration dur = 1;
-  google.protobuf.Struct st = 12;
-  google.protobuf.Timestamp ts = 2;
-
-  google.protobuf.DoubleValue dbl = 3;
-  google.protobuf.FloatValue flt = 4;
-  google.protobuf.Int64Value i64 = 5;
-  google.protobuf.UInt64Value u64 = 6;
-  google.protobuf.Int32Value i32 = 7;
-  google.protobuf.UInt32Value u32 = 8;
-  google.protobuf.BoolValue bool = 9;
-  google.protobuf.StringValue str = 10;
-  google.protobuf.BytesValue bytes = 11;
+func NewPopulatedDuration(r interface {
+	Int63() int64
+}, easy bool) *Duration {
+	this := &Duration{}
+	maxSecs := time.Hour.Nanoseconds() / 1e9
+	max := 2 * maxSecs
+	s := int64(r.Int63()) % max
+	s -= maxSecs
+	neg := int64(1)
+	if s < 0 {
+		neg = -1
+	}
+	this.Seconds = s
+	this.Nanos = int32(neg * (r.Int63() % 1e9))
+	return this
 }
-  
+
+func (d *Duration) String() string {
+	td, err := DurationFromProto(d)
+	if err != nil {
+		return fmt.Sprintf("(%v)", err)
+	}
+	return td.String()
+}

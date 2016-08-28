@@ -53,7 +53,8 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
 
 	for _, file := range files {
-		if strings.HasSuffix(file.GetName(), "timestamp.proto") {
+		if strings.HasSuffix(file.GetName(), "timestamp.proto") ||
+			strings.HasSuffix(file.GetName(), "duration.proto") {
 			continue
 		}
 		vanity.TurnOnStringerAll(file)

@@ -9,7 +9,7 @@ It is generated from these files:
 	combos/unsafeboth/types.proto
 
 It has these top-level messages:
-	WellKnownTypes
+	KnownTypes
 */
 package types
 
@@ -23,21 +23,24 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 import _ "github.com/gogo/protobuf/types"
+import _ "github.com/gogo/protobuf/types"
+import _ "github.com/gogo/protobuf/types"
+import _ "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func TestWellKnownTypesProto(t *testing.T) {
+func TestKnownTypesProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, false)
+	p := NewPopulatedKnownTypes(popr, false)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -60,10 +63,10 @@ func TestWellKnownTypesProto(t *testing.T) {
 	}
 }
 
-func TestWellKnownTypesMarshalTo(t *testing.T) {
+func TestKnownTypesMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, false)
+	p := NewPopulatedKnownTypes(popr, false)
 	size := p.Size()
 	data := make([]byte, size)
 	for i := range data {
@@ -73,7 +76,7 @@ func TestWellKnownTypesMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -85,12 +88,12 @@ func TestWellKnownTypesMarshalTo(t *testing.T) {
 	}
 }
 
-func BenchmarkWellKnownTypesProtoMarshal(b *testing.B) {
+func BenchmarkKnownTypesProtoMarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
-	pops := make([]*WellKnownTypes, 10000)
+	pops := make([]*KnownTypes, 10000)
 	for i := 0; i < 10000; i++ {
-		pops[i] = NewPopulatedWellKnownTypes(popr, false)
+		pops[i] = NewPopulatedKnownTypes(popr, false)
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -103,18 +106,18 @@ func BenchmarkWellKnownTypesProtoMarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func BenchmarkWellKnownTypesProtoUnmarshal(b *testing.B) {
+func BenchmarkKnownTypesProtoUnmarshal(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		data, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedWellKnownTypes(popr, false))
+		data, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedKnownTypes(popr, false))
 		if err != nil {
 			panic(err)
 		}
 		datas[i] = data
 	}
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
@@ -125,16 +128,16 @@ func BenchmarkWellKnownTypesProtoUnmarshal(b *testing.B) {
 	b.SetBytes(int64(total / b.N))
 }
 
-func TestWellKnownTypesJSON(t *testing.T) {
+func TestKnownTypesJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, true)
+	p := NewPopulatedKnownTypes(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -143,12 +146,12 @@ func TestWellKnownTypesJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestWellKnownTypesProtoText(t *testing.T) {
+func TestKnownTypesProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, true)
+	p := NewPopulatedKnownTypes(popr, true)
 	data := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -157,12 +160,12 @@ func TestWellKnownTypesProtoText(t *testing.T) {
 	}
 }
 
-func TestWellKnownTypesProtoCompactText(t *testing.T) {
+func TestKnownTypesProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, true)
+	p := NewPopulatedKnownTypes(popr, true)
 	data := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &WellKnownTypes{}
+	msg := &KnownTypes{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(data, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -171,10 +174,10 @@ func TestWellKnownTypesProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestWellKnownTypesSize(t *testing.T) {
+func TestKnownTypesSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedWellKnownTypes(popr, true)
+	p := NewPopulatedKnownTypes(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	data, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -193,12 +196,12 @@ func TestWellKnownTypesSize(t *testing.T) {
 	}
 }
 
-func BenchmarkWellKnownTypesSize(b *testing.B) {
+func BenchmarkKnownTypesSize(b *testing.B) {
 	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
-	pops := make([]*WellKnownTypes, 1000)
+	pops := make([]*KnownTypes, 1000)
 	for i := 0; i < 1000; i++ {
-		pops[i] = NewPopulatedWellKnownTypes(popr, false)
+		pops[i] = NewPopulatedKnownTypes(popr, false)
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
