@@ -384,8 +384,8 @@ var marshalingTests = []struct {
 	{"Duration", marshaler, &pb.KnownTypes{Dur: &types.Duration{Seconds: 3}}, `{"dur":"3.000s"}`},
 	{"Struct", marshaler, &pb.KnownTypes{St: &types.Struct{
 		Fields: map[string]*types.Value{
-			"one": {Kind: &types.Value_StringValue{"loneliest number"}},
-			"two": {Kind: &types.Value_NullValue{types.NULL_VALUE}},
+			"one": {Kind: &types.Value_StringValue{StringValue: "loneliest number"}},
+			"two": {Kind: &types.Value_NullValue{NullValue: types.NULL_VALUE}},
 		},
 	}}, `{"st":{"one":"loneliest number","two":null}}`},
 	{"Timestamp", marshaler, &pb.KnownTypes{Ts: &types.Timestamp{Seconds: 14e8, Nanos: 21e6}}, `{"ts":"2014-05-13T16:53:20.021Z"}`},
