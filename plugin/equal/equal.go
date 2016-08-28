@@ -306,9 +306,11 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
 	nullable := gogoproto.IsNullable(field)
+	isDuration := gogoproto.IsDuration(field) && gogoproto.IsStdDuration(field)
+	isTimestamp := gogoproto.IsTimestamp(field) && gogoproto.IsStdTime(field)
 	// oneof := field.OneofIndex != nil
 	if !repeated {
-		if ctype {
+		if ctype || isTimestamp {
 			if nullable {
 				p.P(`if that1.`, fieldname, ` == nil {`)
 				p.In()
@@ -325,6 +327,20 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.P(`} else if !this.`, fieldname, `.Equal(*that1.`, fieldname, `) {`)
 			} else {
 				p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+			}
+			p.In()
+			if verbose {
+				p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+			} else {
+				p.P(`return false`)
+			}
+			p.Out()
+			p.P(`}`)
+		} else if isDuration {
+			if nullable {
+				p.generateNullableField(fieldname, verbose)
+			} else {
+				p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 			}
 			p.In()
 			if verbose {
@@ -379,6 +395,14 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 		p.In()
 		if ctype {
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+		} else if isTimestamp {
+			if nullable {
+				p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) {`)
+			} else {
+				p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+			}
+		} else if isDuration {
+			p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
 		} else {
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)

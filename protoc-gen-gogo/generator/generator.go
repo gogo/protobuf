@@ -1866,6 +1866,18 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		if len(packageName) > 0 {
 			g.customImports = append(g.customImports, packageName)
 		}
+	case gogoproto.IsStdTime(field):
+		if !gogoproto.IsTimestamp(field) {
+			g.Fail(field.GetName() + ":" + field.GetTypeName() + " cannot by time.Time if not of time .google.protobuf.Timestamp")
+		}
+		g.customImports = append(g.customImports, "time")
+		typ = "time.Time"
+	case gogoproto.IsStdDuration(field):
+		if !gogoproto.IsDuration(field) {
+			g.Fail(field.GetName() + ":" + field.GetTypeName() + " cannot by time.Duration if not of time .google.protobuf.Duration")
+		}
+		g.customImports = append(g.customImports, "time")
+		typ = "time.Duration"
 	}
 	if needsStar(field, g.file.proto3, message != nil && message.allowOneof()) {
 		typ = "*" + typ
@@ -2518,7 +2530,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else {
 					goTyp, _ := g.GoType(message, field)
 					goTypName := GoTypeToName(goTyp)
-					g.P("return ", goTypName, "{}")
+					if !gogoproto.IsNullable(field) && gogoproto.IsStdDuration(field) && gogoproto.IsDuration(field) {
+						g.P("return 0")
+					} else {
+						g.P("return ", goTypName, "{}")
+					}
 				}
 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
 				g.P("return false")

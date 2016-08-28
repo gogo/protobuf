@@ -39,6 +39,22 @@ func IsNullable(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Nullable, true)
 }
 
+func IsStdTime(field *google_protobuf.FieldDescriptorProto) bool {
+	return proto.GetBoolExtension(field.Options, E_Stdtime, false)
+}
+
+func IsTimestamp(field *google_protobuf.FieldDescriptorProto) bool {
+	return field.GetTypeName() == ".google.protobuf.Timestamp"
+}
+
+func IsStdDuration(field *google_protobuf.FieldDescriptorProto) bool {
+	return proto.GetBoolExtension(field.Options, E_Stdduration, false)
+}
+
+func IsDuration(field *google_protobuf.FieldDescriptorProto) bool {
+	return field.GetTypeName() == ".google.protobuf.Duration"
+}
+
 func NeedsNilCheck(proto3 bool, field *google_protobuf.FieldDescriptorProto) bool {
 	nullable := IsNullable(field)
 	if field.IsMessage() || IsCustomType(field) {
