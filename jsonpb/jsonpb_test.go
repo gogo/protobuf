@@ -344,6 +344,12 @@ var marshalingTests = []struct {
 	{"proto2 extension", marshaler, realNumber, realNumberJSON},
 
 	{"Duration", marshaler, &pb.KnownTypes{Dur: &types.Duration{Seconds: 3}}, `{"dur":"3.000s"}`},
+	{"Struct", marshaler, &pb.KnownTypes{St: &types.Struct{
+		Fields: map[string]*types.Value{
+			"one": {Kind: &types.Value_StringValue{"loneliest number"}},
+			"two": {Kind: &types.Value_NullValue{types.NULL_VALUE}},
+		},
+	}}, `{"st":{"one":"loneliest number","two":null}}`},
 	{"Timestamp", marshaler, &pb.KnownTypes{Ts: &types.Timestamp{Seconds: 14e8, Nanos: 21e6}}, `{"ts":"2014-05-13T16:53:20.021Z"}`},
 	{"DoubleValue", marshaler, &pb.KnownTypes{Dbl: &types.DoubleValue{Value: 1.2}}, `{"dbl":1.2}`},
 	{"FloatValue", marshaler, &pb.KnownTypes{Flt: &types.FloatValue{Value: 1.2}}, `{"flt":1.2}`},
