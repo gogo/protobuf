@@ -47,11 +47,11 @@ const (
 	minSeconds = -maxSeconds
 )
 
-// ValidateDuration determines whether the Duration is valid according to the
+// validateDuration determines whether the Duration is valid according to the
 // definition in google/protobuf/duration.proto. A valid Duration
 // may still be too large to fit into a time.Duration (the range of Duration
 // is about 10,000 years, and the range of time.Duration is about 290).
-func ValidateDuration(d *Duration) error {
+func validateDuration(d *Duration) error {
 	if d == nil {
 		return errors.New("duration: nil Duration")
 	}
@@ -68,11 +68,11 @@ func ValidateDuration(d *Duration) error {
 	return nil
 }
 
-// DurationFromProto attempts to convert a Duration to a time.Duration. DurationFromProto
+// DurationFromProto converts a Duration to a time.Duration. DurationFromProto
 // returns an error if the Duration is invalid or is too large to be
 // represented in a time.Duration.
 func DurationFromProto(p *Duration) (time.Duration, error) {
-	if err := ValidateDuration(p); err != nil {
+	if err := validateDuration(p); err != nil {
 		return 0, err
 	}
 	d := time.Duration(p.Seconds) * time.Second

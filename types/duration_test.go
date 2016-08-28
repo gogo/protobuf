@@ -86,10 +86,10 @@ var durationTests = []struct {
 
 func TestValidateDuration(t *testing.T) {
 	for _, test := range durationTests {
-		err := ValidateDuration(test.proto)
+		err := validateDuration(test.proto)
 		gotValid := (err == nil)
 		if gotValid != test.isValid {
-			t.Errorf("ValidateDuration(%v) = %t, want %t", test.proto, gotValid, test.isValid)
+			t.Errorf("validateDuration(%v) = %t, want %t", test.proto, gotValid, test.isValid)
 		}
 	}
 }
