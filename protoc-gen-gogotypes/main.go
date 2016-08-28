@@ -29,6 +29,8 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/gogo/protobuf/vanity"
 	"github.com/gogo/protobuf/vanity/command"
 )
@@ -49,7 +51,12 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOnEqualAll)
 	vanity.ForEachFile(files, vanity.TurnOnGoStringAll)
 	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
-	vanity.ForEachFile(files, vanity.TurnOnStringerAll)
+	for _, file := range files {
+		if strings.HasSuffix(file.GetName(), "timestamp.proto") {
+			continue
+		}
+		vanity.TurnOnStringerAll(file)
+	}
 
 	vanity.ForEachFile(files, vanity.TurnOnPopulateAll)
 
