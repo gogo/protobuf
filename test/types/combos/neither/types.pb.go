@@ -24,6 +24,8 @@ import google_protobuf3 "github.com/gogo/protobuf/types"
 
 import time "time"
 
+import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -451,14 +453,14 @@ func NewPopulatedStandardLibrary(r randyTypes, easy bool) *StandardLibrary {
 		this.NullableDuration = google_protobuf1.NewPopulatedDuration(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.NullableStdTime = time.NewPopulatedTime(r, easy)
+		this.NullableStdTime = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.NullableStdDuration = time.NewPopulatedDuration(r, easy)
+		this.NullableStdDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	}
-	v1 := time.NewPopulatedTime(r, easy)
+	v1 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	this.StdTime = *v1
-	v2 := time.NewPopulatedDuration(r, easy)
+	v2 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	this.StdDuration = *v2
 	if r.Intn(10) != 0 {
 		v3 := r.Intn(5)
@@ -478,21 +480,21 @@ func NewPopulatedStandardLibrary(r randyTypes, easy bool) *StandardLibrary {
 		v5 := r.Intn(5)
 		this.NullableStdTimes = make([]*time.Time, v5)
 		for i := 0; i < v5; i++ {
-			this.NullableStdTimes[i] = time.NewPopulatedTime(r, easy)
+			this.NullableStdTimes[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v6 := r.Intn(5)
 		this.NullableStdDurations = make([]*time.Duration, v6)
 		for i := 0; i < v6; i++ {
-			this.NullableStdDurations[i] = time.NewPopulatedDuration(r, easy)
+			this.NullableStdDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v7 := r.Intn(5)
 		this.StdTimes = make([]time.Time, v7)
 		for i := 0; i < v7; i++ {
-			v8 := time.NewPopulatedTime(r, easy)
+			v8 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 			this.StdTimes[i] = *v8
 		}
 	}
@@ -500,7 +502,7 @@ func NewPopulatedStandardLibrary(r randyTypes, easy bool) *StandardLibrary {
 		v9 := r.Intn(5)
 		this.StdDurations = make([]time.Duration, v9)
 		for i := 0; i < v9; i++ {
-			v10 := time.NewPopulatedDuration(r, easy)
+			v10 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 			this.StdDurations[i] = *v10
 		}
 	}

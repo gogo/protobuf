@@ -28,6 +28,10 @@
 
 package types
 
+import (
+	"time"
+)
+
 func NewPopulatedTimestamp(r interface {
 	Int63() int64
 }, easy bool) *Timestamp {
@@ -40,4 +44,15 @@ func NewPopulatedTimestamp(r interface {
 
 func (ts *Timestamp) String() string {
 	return TimestampString(ts)
+}
+
+func NewPopulatedStdTime(r interface {
+	Int63() int64
+}, easy bool) *time.Time {
+	timestamp := NewPopulatedTimestamp(r, easy)
+	t, err := TimestampFromProto(timestamp)
+	if err != nil {
+		panic(err)
+	}
+	return &t
 }

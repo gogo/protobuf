@@ -57,3 +57,14 @@ func (d *Duration) String() string {
 	}
 	return td.String()
 }
+
+func NewPopulatedStdDuration(r interface {
+	Int63() int64
+}, easy bool) *time.Duration {
+	dur := NewPopulatedDuration(r, easy)
+	d, err := DurationFromProto(dur)
+	if err != nil {
+		panic(err)
+	}
+	return &d
+}
