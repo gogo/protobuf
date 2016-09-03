@@ -647,16 +647,16 @@ func (m *StandardLibrary) Size() (n int) {
 		n += 1 + l + sovTypes(uint64(l))
 	}
 	if m.NullableStdTime != nil {
-		l = m.NullableStdTime.Size()
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableStdTime)
 		n += 1 + l + sovTypes(uint64(l))
 	}
 	if m.NullableStdDuration != nil {
-		l = m.NullableStdDuration.Size()
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableStdDuration)
 		n += 1 + l + sovTypes(uint64(l))
 	}
-	l = m.StdTime.Size()
+	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.StdTime)
 	n += 1 + l + sovTypes(uint64(l))
-	l = m.StdDuration.Size()
+	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.StdDuration)
 	n += 1 + l + sovTypes(uint64(l))
 	if len(m.NullableTimestamps) > 0 {
 		for _, e := range m.NullableTimestamps {
@@ -672,25 +672,25 @@ func (m *StandardLibrary) Size() (n int) {
 	}
 	if len(m.NullableStdTimes) > 0 {
 		for _, e := range m.NullableStdTimes {
-			l = e.Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(*e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
 	if len(m.NullableStdDurations) > 0 {
 		for _, e := range m.NullableStdDurations {
-			l = e.Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(*e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
 	if len(m.StdTimes) > 0 {
 		for _, e := range m.StdTimes {
-			l = e.Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
 	if len(m.StdDurations) > 0 {
 		for _, e := range m.StdDurations {
-			l = e.Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(e)
 			n += 2 + l + sovTypes(uint64(l))
 		}
 	}

@@ -64,7 +64,12 @@ func NewPopulatedStdDuration(r interface {
 	dur := NewPopulatedDuration(r, easy)
 	d, err := DurationFromProto(dur)
 	if err != nil {
-		panic(err)
+		return nil
 	}
 	return &d
+}
+
+func SizeOfStdDuration(d time.Duration) int {
+	dur := DurationProto(d)
+	return dur.Size()
 }

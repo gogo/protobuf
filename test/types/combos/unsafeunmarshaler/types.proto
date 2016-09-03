@@ -65,6 +65,8 @@ message KnownTypes {
   //google.protobuf.Any an = 14;
 }
 
+//TODO add tests for time.Time and time.Duration in a map and a oneof
+
 message StandardLibrary {
   google.protobuf.Timestamp nullableTimestamp = 1;
   google.protobuf.Duration nullableDuration = 2;

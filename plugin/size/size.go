@@ -136,6 +136,7 @@ type size struct {
 	generator.PluginImports
 	atleastOne bool
 	localName  string
+	typesPkg   generator.Single
 }
 
 func NewSize() *size {
@@ -440,12 +441,40 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		} else if repeated {
 			p.P(`for _, e := range m.`, fieldname, ` { `)
 			p.In()
-			p.P(`l=e.`, sizeName, `()`)
+			if gogoproto.IsStdTime(field) && gogoproto.IsTimestamp(field) {
+				if gogoproto.IsNullable(field) {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(*e)`)
+				} else {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(e)`)
+				}
+			} else if gogoproto.IsStdDuration(field) && gogoproto.IsDuration(field) {
+				if gogoproto.IsNullable(field) {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(*e)`)
+				} else {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(e)`)
+				}
+			} else {
+				p.P(`l=e.`, sizeName, `()`)
+			}
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 			p.Out()
 			p.P(`}`)
 		} else {
-			p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
+			if gogoproto.IsStdTime(field) && gogoproto.IsTimestamp(field) {
+				if gogoproto.IsNullable(field) {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(*m.`, fieldname, `)`)
+				} else {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(m.`, fieldname, `)`)
+				}
+			} else if gogoproto.IsStdDuration(field) && gogoproto.IsDuration(field) {
+				if gogoproto.IsNullable(field) {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(*m.`, fieldname, `)`)
+				} else {
+					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(m.`, fieldname, `)`)
+				}
+			} else {
+				p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
+			}
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
@@ -521,6 +550,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
+	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 		protoPkg = p.NewImport("github.com/golang/protobuf/proto")

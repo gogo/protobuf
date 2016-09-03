@@ -52,7 +52,15 @@ func NewPopulatedStdTime(r interface {
 	timestamp := NewPopulatedTimestamp(r, easy)
 	t, err := TimestampFromProto(timestamp)
 	if err != nil {
-		panic(err)
+		return nil
 	}
 	return &t
+}
+
+func SizeOfStdTime(t time.Time) int {
+	ts, err := TimestampProto(t)
+	if err != nil {
+		return 0
+	}
+	return ts.Size()
 }
