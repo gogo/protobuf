@@ -34,7 +34,7 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 //import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/struct.proto";
+//import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -51,7 +51,7 @@ option (gogoproto.unsafe_unmarshaler_all) = false;
 message KnownTypes {
   //google.protobuf.Any an = 14;
   google.protobuf.Duration dur = 1;
-  google.protobuf.Struct st = 12;
+  //google.protobuf.Struct st = 12;
   google.protobuf.Timestamp ts = 2;
 
   google.protobuf.DoubleValue dbl = 3;
