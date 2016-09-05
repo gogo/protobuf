@@ -38,7 +38,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/centrifugal/centrifugo">centrifugo</a> - <a href="https://forum.golangbridge.org/t/centrifugo-real-time-messaging-websocket-or-sockjs-server-v1-5-0-released/2861">release notes</a> - <a href="https://medium.com/@fzambia/centrifugo-protobuf-inside-json-outside-21d39bdabd68#.o3icmgjqd">blog</a>
   - <a href="https://github.com/docker/swarmkit">docker swarmkit</a>
   - <a href="https://nats.io/">nats.io</a> - <a href="https://github.com/nats-io/go-nats-streaming/blob/master/pb/protocol.proto">go-nats-streaming</a>
-  - <a href="https://github.com/pingcap/tidb">TiDB</a> - Communication between <a href="https://github.com/pingcap/tipb/blob/master/generate-go.sh#L4">TiDB</a> and <a href="https://github.com/pingcap/kvproto/blob/master/generate_go.sh#L3">TiKV</a>
+  - <a href="https://github.com/pingcap/tidb">tidb</a> - Communication between <a href="https://github.com/pingcap/tipb/blob/master/generate-go.sh#L4">tidb</a> and <a href="https://github.com/pingcap/kvproto/blob/master/generate_go.sh#L3">tikv</a>
 
 Please lets us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
