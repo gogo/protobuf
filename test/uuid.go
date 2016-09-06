@@ -34,7 +34,7 @@ import (
 	"encoding/json"
 )
 
-func PutLittleEndianUint64(b []byte, offset int, v uint64) {
+func PutLittleEndianUint64(b [16]byte, offset int, v uint64) {
 	b[offset] = byte(v)
 	b[offset+1] = byte(v >> 8)
 	b[offset+2] = byte(v >> 16)
@@ -45,46 +45,27 @@ func PutLittleEndianUint64(b []byte, offset int, v uint64) {
 	b[offset+7] = byte(v >> 56)
 }
 
-type Uuid []byte
+type Uuid [16]byte
 
 func (uuid Uuid) Marshal() ([]byte, error) {
-	if len(uuid) == 0 {
-		return nil, nil
-	}
-	return []byte(uuid), nil
+	return uuid[:], nil
 }
 
 func (uuid Uuid) MarshalTo(data []byte) (n int, err error) {
-	if len(uuid) == 0 {
-		return 0, nil
-	}
-	copy(data, uuid)
-	return 16, nil
+	return copy(data, uuid[:]), nil
 }
 
 func (uuid *Uuid) Unmarshal(data []byte) error {
-	if len(data) == 0 {
-		uuid = nil
-		return nil
-	}
-	id := Uuid(make([]byte, 16))
-	copy(id, data)
-	*uuid = id
+	copy(uuid[:], data)
 	return nil
 }
 
-func (uuid *Uuid) Size() int {
-	if uuid == nil {
-		return 0
-	}
-	if len(*uuid) == 0 {
-		return 0
-	}
+func (uuid Uuid) Size() int {
 	return 16
 }
 
 func (uuid Uuid) MarshalJSON() ([]byte, error) {
-	s := hex.EncodeToString([]byte(uuid))
+	s := hex.EncodeToString(uuid[:])
 	return json.Marshal(s)
 }
 
@@ -103,7 +84,7 @@ func (uuid *Uuid) UnmarshalJSON(data []byte) error {
 }
 
 func (uuid Uuid) Equal(other Uuid) bool {
-	return bytes.Equal(uuid[0:], other[0:])
+	return uuid == other
 }
 
 func (uuid Uuid) Compare(other Uuid) int {
@@ -120,7 +101,7 @@ func NewPopulatedUuid(r int63) *Uuid {
 }
 
 func RandV4(r int63) Uuid {
-	uuid := make(Uuid, 16)
+	var uuid Uuid
 	uuid.RandV4(r)
 	return uuid
 }

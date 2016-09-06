@@ -173,6 +173,21 @@ func mergeAny(out, in reflect.Value, viaPtr bool, prop *Properties) {
 			out.Set(reflect.New(in.Elem().Type()))
 		}
 		mergeAny(out.Elem(), in.Elem(), true, nil)
+	case reflect.Array:
+		switch in.Type().Elem().Kind() {
+		case reflect.Uintptr, reflect.Array, reflect.Chan, reflect.Func,
+			reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice,
+			reflect.Struct, reflect.UnsafePointer:
+			// in's element type might contain references, so recursively merge each
+			// element.
+			for i := 0; i < in.Len(); i++ {
+				mergeAny(out.Index(i), in.Index(i), viaPtr, prop)
+			}
+
+		default:
+			// in's element type is a value, so just overwrite the array.
+			out.Set(in)
+		}
 	case reflect.Slice:
 		if in.IsNil() {
 			return
