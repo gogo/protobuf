@@ -106,11 +106,6 @@ Install protoc-gen-gogo:
     go get github.com/gogo/protobuf/protoc-gen-gogo
     go get github.com/gogo/protobuf/gogoproto
 
-## Proto3
-
-Proto3 is supported, but the new well known types are not supported yet.
-[See Proto3 Issue](https://github.com/gogo/protobuf/issues/57) for more details.
-
 ## GRPC
 
 It works the same as golang/protobuf, simply specify the plugin.
