@@ -64,3 +64,11 @@ func SizeOfStdTime(t time.Time) int {
 	}
 	return ts.Size()
 }
+
+func StdTimeMarshalTo(t time.Time, data []byte) (int, error) {
+	ts, err := TimestampProto(t)
+	if err != nil {
+		return 0, err
+	}
+	return ts.MarshalTo(data)
+}
