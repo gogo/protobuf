@@ -31,9 +31,10 @@
 
 syntax = "proto3";
 
-package proto3_proto;
+import "google/protobuf/any.proto";
+import "testdata/test.proto";
 
-import "github.com/gogo/protobuf/proto/testdata/test.proto";
+package proto3_proto;
 
 message Message {
   enum Humour {
@@ -58,6 +59,9 @@ message Message {
   map<string, Nested> terrain = 10;
   testdata.SubDefaults proto2_field = 11;
   map<string, testdata.SubDefaults> proto2_value = 13;
+
+  google.protobuf.Any anything = 14;
+  repeated google.protobuf.Any many_things = 15;
 }
 
 message Nested {

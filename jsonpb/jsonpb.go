@@ -41,12 +41,14 @@ package jsonpb
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gogo/protobuf/proto"
 )
@@ -73,7 +75,7 @@ type Marshaler struct {
 // Marshal marshals a protocol buffer into JSON.
 func (m *Marshaler) Marshal(out io.Writer, pb proto.Message) error {
 	writer := &errWriter{writer: out}
-	return m.marshalObject(writer, pb, "")
+	return m.marshalObject(writer, pb, "", "")
 }
 
 // MarshalToString converts a protocol buffer object to JSON string.
@@ -92,15 +94,83 @@ func (s int32Slice) Len() int           { return len(s) }
 func (s int32Slice) Less(i, j int) bool { return s[i] < s[j] }
 func (s int32Slice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
+type isWkt interface {
+	XXX_WellKnownType() string
+}
+
 // marshalObject writes a struct to the Writer.
-func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent string) error {
+func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeURL string) error {
+	s := reflect.ValueOf(v).Elem()
+
+	// Handle well-known types.
+	if wkt, ok := v.(isWkt); ok {
+		switch wkt.XXX_WellKnownType() {
+		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			// "Wrappers use the same representation in JSON
+			//  as the wrapped primitive type, ..."
+			sprop := proto.GetProperties(s.Type())
+			return m.marshalValue(out, sprop.Prop[0], s.Field(0), indent)
+		case "Any":
+			// Any is a bit more involved.
+			return m.marshalAny(out, v, indent)
+		case "Duration":
+			// "Generated output always contains 3, 6, or 9 fractional digits,
+			//  depending on required precision."
+			s, ns := s.Field(0).Int(), s.Field(1).Int()
+			d := time.Duration(s)*time.Second + time.Duration(ns)*time.Nanosecond
+			x := fmt.Sprintf("%.9f", d.Seconds())
+			x = strings.TrimSuffix(x, "000")
+			x = strings.TrimSuffix(x, "000")
+			out.write(`"`)
+			out.write(x)
+			out.write(`s"`)
+			return out.err
+		case "Struct":
+			// Let marshalValue handle the `fields` map.
+			// TODO: pass the correct Properties if needed.
+			return m.marshalValue(out, &proto.Properties{}, s.Field(0), indent)
+		case "Timestamp":
+			// "RFC 3339, where generated output will always be Z-normalized
+			//  and uses 3, 6 or 9 fractional digits."
+			s, ns := s.Field(0).Int(), s.Field(1).Int()
+			t := time.Unix(s, ns).UTC()
+			// time.RFC3339Nano isn't exactly right (we need to get 3/6/9 fractional digits).
+			x := t.Format("2006-01-02T15:04:05.000000000")
+			x = strings.TrimSuffix(x, "000")
+			x = strings.TrimSuffix(x, "000")
+			out.write(`"`)
+			out.write(x)
+			out.write(`Z"`)
+			return out.err
+		case "Value":
+			// Value has a single oneof.
+			kind := s.Field(0)
+			if kind.IsNil() {
+				// "absence of any variant indicates an error"
+				return errors.New("nil Value")
+			}
+			// oneof -> *T -> T -> T.F
+			x := kind.Elem().Elem().Field(0)
+			// TODO: pass the correct Properties if needed.
+			return m.marshalValue(out, &proto.Properties{}, x, indent)
+		}
+	}
+
 	out.write("{")
 	if m.Indent != "" {
 		out.write("\n")
 	}
 
-	s := reflect.ValueOf(v).Elem()
 	firstField := true
+
+	if typeURL != "" {
+		if err := m.marshalTypeURL(out, indent, typeURL); err != nil {
+			return err
+		}
+		firstField = false
+	}
+
 	for i := 0; i < s.NumField(); i++ {
 		value := s.Field(i)
 		valueField := s.Type().Field(i)
@@ -227,6 +297,76 @@ func (m *Marshaler) writeSep(out *errWriter) {
 	}
 }
 
+func (m *Marshaler) marshalAny(out *errWriter, any proto.Message, indent string) error {
+	// "If the Any contains a value that has a special JSON mapping,
+	//  it will be converted as follows: {"@type": xxx, "value": yyy}.
+	//  Otherwise, the value will be converted into a JSON object,
+	//  and the "@type" field will be inserted to indicate the actual data type."
+	v := reflect.ValueOf(any).Elem()
+	turl := v.Field(0).String()
+	val := v.Field(1).Bytes()
+
+	// Only the part of type_url after the last slash is relevant.
+	mname := turl
+	if slash := strings.LastIndex(mname, "/"); slash >= 0 {
+		mname = mname[slash+1:]
+	}
+	mt := proto.MessageType(mname)
+	if mt == nil {
+		return fmt.Errorf("unknown message type %q", mname)
+	}
+	msg := reflect.New(mt.Elem()).Interface().(proto.Message)
+	if err := proto.Unmarshal(val, msg); err != nil {
+		return err
+	}
+
+	if _, ok := msg.(isWkt); ok {
+		out.write("{")
+		if m.Indent != "" {
+			out.write("\n")
+		}
+		if err := m.marshalTypeURL(out, indent, turl); err != nil {
+			return err
+		}
+		m.writeSep(out)
+		if m.Indent != "" {
+			out.write(indent)
+			out.write(m.Indent)
+			out.write(`"value": `)
+		} else {
+			out.write(`"value":`)
+		}
+		if err := m.marshalObject(out, msg, indent+m.Indent, ""); err != nil {
+			return err
+		}
+		if m.Indent != "" {
+			out.write("\n")
+			out.write(indent)
+		}
+		out.write("}")
+		return out.err
+	}
+
+	return m.marshalObject(out, msg, indent, turl)
+}
+
+func (m *Marshaler) marshalTypeURL(out *errWriter, indent, typeURL string) error {
+	if m.Indent != "" {
+		out.write(indent)
+		out.write(m.Indent)
+	}
+	out.write(`"@type":`)
+	if m.Indent != "" {
+		out.write(" ")
+	}
+	b, err := json.Marshal(typeURL)
+	if err != nil {
+		return err
+	}
+	out.write(string(b))
+	return out.err
+}
+
 // marshalField writes field description and value to the Writer.
 func (m *Marshaler) marshalField(out *errWriter, prop *proto.Properties, v reflect.Value, indent string) error {
 	if m.Indent != "" {
@@ -275,6 +415,16 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 		}
 		out.write("]")
 		return out.err
+	}
+
+	// Handle well-known types.
+	// Most are handled up in marshalObject (because 99% are messages).
+	if wkt, ok := v.Interface().(isWkt); ok {
+		switch wkt.XXX_WellKnownType() {
+		case "NullValue":
+			out.write("null")
+			return out.err
+		}
 	}
 
 	// Handle enumerations.
@@ -341,7 +491,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 			}
 			pm = i.Convert(t).Interface().(proto.Message)
 		}
-		return m.marshalObject(out, pm, indent+m.Indent)
+		return m.marshalObject(out, pm, indent+m.Indent, "")
 	}
 
 	// Handle maps.
@@ -468,6 +618,51 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 	if targetType.Kind() == reflect.Ptr {
 		target.Set(reflect.New(targetType.Elem()))
 		return u.unmarshalValue(target.Elem(), inputValue, prop)
+	}
+
+	// Handle well-known types.
+	if wkt, ok := target.Addr().Interface().(isWkt); ok {
+		switch wkt.XXX_WellKnownType() {
+		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			// "Wrappers use the same representation in JSON
+			//  as the wrapped primitive type, except that null is allowed."
+			// encoding/json will turn JSON `null` into Go `nil`,
+			// so we don't have to do any extra work.
+			return u.unmarshalValue(target.Field(0), inputValue, prop)
+		case "Any":
+			return fmt.Errorf("unmarshaling Any not supported yet")
+		case "Duration":
+			unq, err := strconv.Unquote(string(inputValue))
+			if err != nil {
+				return err
+			}
+			d, err := time.ParseDuration(unq)
+			if err != nil {
+				return fmt.Errorf("bad Duration: %v", err)
+			}
+			ns := d.Nanoseconds()
+			s := ns / 1e9
+			ns %= 1e9
+			target.Field(0).SetInt(s)
+			target.Field(1).SetInt(ns)
+			return nil
+		case "Timestamp":
+			unq, err := strconv.Unquote(string(inputValue))
+			if err != nil {
+				return err
+			}
+			t, err := time.Parse(time.RFC3339Nano, unq)
+			if err != nil {
+				return fmt.Errorf("bad Timestamp: %v", err)
+			}
+			ns := t.UnixNano()
+			s := ns / 1e9
+			ns %= 1e9
+			target.Field(0).SetInt(s)
+			target.Field(1).SetInt(ns)
+			return nil
+		}
 	}
 
 	// Handle enums, which have an underlying type of int32,
