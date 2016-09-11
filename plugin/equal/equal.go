@@ -402,7 +402,11 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 			}
 		} else if isDuration {
-			p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+			if nullable {
+				p.P(`if *(this.`, fieldname, `[i]) != *(that1.`, fieldname, `[i]) {`)
+			} else {
+				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+			}
 		} else {
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
