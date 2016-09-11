@@ -1448,8 +1448,8 @@ func (m *StdTypes) MarshalTo(data []byte) (int, error) {
 	if m.NullableStdTime != nil {
 		data[i] = 0xa
 		i++
-		i = encodeVarintTypes(data, i, uint64(m.NullableStdTime.Size()))
-		n16, err := m.NullableStdTime.MarshalTo(data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableStdTime)))
+		n16, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableStdTime, data[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -1458,8 +1458,8 @@ func (m *StdTypes) MarshalTo(data []byte) (int, error) {
 	if m.NullableStdDuration != nil {
 		data[i] = 0x12
 		i++
-		i = encodeVarintTypes(data, i, uint64(m.NullableStdDuration.Size()))
-		n17, err := m.NullableStdDuration.MarshalTo(data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableStdDuration)))
+		n17, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableStdDuration, data[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -1467,16 +1467,16 @@ func (m *StdTypes) MarshalTo(data []byte) (int, error) {
 	}
 	data[i] = 0x1a
 	i++
-	i = encodeVarintTypes(data, i, uint64(m.StdTime.Size()))
-	n18, err := m.StdTime.MarshalTo(data[i:])
+	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.StdTime)))
+	n18, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.StdTime, data[i:])
 	if err != nil {
 		return 0, err
 	}
 	i += n18
 	data[i] = 0x22
 	i++
-	i = encodeVarintTypes(data, i, uint64(m.StdDuration.Size()))
-	n19, err := m.StdDuration.MarshalTo(data[i:])
+	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(m.StdDuration)))
+	n19, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.StdDuration, data[i:])
 	if err != nil {
 		return 0, err
 	}
@@ -1569,8 +1569,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 		for _, msg := range m.NullableStdTimes {
 			data[i] = 0xa
 			i++
-			i = encodeVarintTypes(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*msg)))
+			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*msg, data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1581,8 +1581,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 		for _, msg := range m.NullableStdDurations {
 			data[i] = 0x12
 			i++
-			i = encodeVarintTypes(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*msg)))
+			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*msg, data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1593,8 +1593,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 		for _, msg := range m.StdTimes {
 			data[i] = 0x1a
 			i++
-			i = encodeVarintTypes(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(msg)))
+			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(msg, data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1605,8 +1605,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 		for _, msg := range m.StdDurations {
 			data[i] = 0x22
 			i++
-			i = encodeVarintTypes(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(msg)))
+			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(msg, data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1759,8 +1759,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.NullableTimestamp[k]
 			msgSize := 0
-			if ((*google_protobuf2.Timestamp)(v)) != nil {
-				msgSize = ((*google_protobuf2.Timestamp)(v)).Size()
+			if v != nil {
+				msgSize = github_com_gogo_protobuf_types.SizeOfStdTime(*v)
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -1768,11 +1768,11 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x8
 			i++
 			i = encodeVarintTypes(data, i, uint64(k))
-			if ((*google_protobuf2.Timestamp)(v)) != nil {
+			if v != nil {
 				data[i] = 0x12
 				i++
-				i = encodeVarintTypes(data, i, uint64(((*google_protobuf2.Timestamp)(v)).Size()))
-				n24, err := ((*google_protobuf2.Timestamp)(v)).MarshalTo(data[i:])
+				i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*v)))
+				n24, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*v, data[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -1786,8 +1786,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.Timestamp[k]
 			msgSize := 0
-			if ((*google_protobuf2.Timestamp)(&v)) != nil {
-				msgSize = ((*google_protobuf2.Timestamp)(&v)).Size()
+			if (&v) != nil {
+				msgSize = github_com_gogo_protobuf_types.SizeOfStdTime(*(&v))
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -1797,8 +1797,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintTypes(data, i, uint64(k))
 			data[i] = 0x12
 			i++
-			i = encodeVarintTypes(data, i, uint64(((*google_protobuf2.Timestamp)(&v)).Size()))
-			n25, err := ((*google_protobuf2.Timestamp)(&v)).MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*(&v))))
+			n25, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*(&v), data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1811,8 +1811,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.NullableDuration[k]
 			msgSize := 0
-			if ((*google_protobuf1.Duration)(v)) != nil {
-				msgSize = ((*google_protobuf1.Duration)(v)).Size()
+			if v != nil {
+				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -1820,11 +1820,11 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x8
 			i++
 			i = encodeVarintTypes(data, i, uint64(k))
-			if ((*google_protobuf1.Duration)(v)) != nil {
+			if v != nil {
 				data[i] = 0x12
 				i++
-				i = encodeVarintTypes(data, i, uint64(((*google_protobuf1.Duration)(v)).Size()))
-				n26, err := ((*google_protobuf1.Duration)(v)).MarshalTo(data[i:])
+				i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
+				n26, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, data[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -1838,8 +1838,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.Duration[k]
 			msgSize := 0
-			if ((*google_protobuf1.Duration)(&v)) != nil {
-				msgSize = ((*google_protobuf1.Duration)(&v)).Size()
+			if (&v) != nil {
+				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*(&v))
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -1849,8 +1849,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintTypes(data, i, uint64(k))
 			data[i] = 0x12
 			i++
-			i = encodeVarintTypes(data, i, uint64(((*google_protobuf1.Duration)(&v)).Size()))
-			n27, err := ((*google_protobuf1.Duration)(&v)).MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*(&v))))
+			n27, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*(&v), data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1943,8 +1943,8 @@ func (m *OneofStdTypes_Timestamp) MarshalTo(data []byte) (int, error) {
 	if m.Timestamp != nil {
 		data[i] = 0xa
 		i++
-		i = encodeVarintTypes(data, i, uint64(m.Timestamp.Size()))
-		n32, err := m.Timestamp.MarshalTo(data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.Timestamp)))
+		n32, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.Timestamp, data[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -1957,8 +1957,8 @@ func (m *OneofStdTypes_Duration) MarshalTo(data []byte) (int, error) {
 	if m.Duration != nil {
 		data[i] = 0x12
 		i++
-		i = encodeVarintTypes(data, i, uint64(m.Duration.Size()))
-		n33, err := m.Duration.MarshalTo(data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration)))
+		n33, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.Duration, data[i:])
 		if err != nil {
 			return 0, err
 		}
