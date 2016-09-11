@@ -428,7 +428,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				stdSizeCall, stdOk := p.std(m.ValueField, "v")
+				stdSizeCall, stdOk := p.std(field, "v")
 				if nullable {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)

@@ -1790,7 +1790,7 @@ func (m *MapStdTypes) Size() (n int) {
 			_ = v
 			l = 0
 			if v != nil {
-				l = ((*google_protobuf2.Timestamp)(v)).Size()
+				l = github_com_gogo_protobuf_types.SizeOfStdTime(*v)
 				l += 1 + sovTypes(uint64(l))
 			}
 			mapEntrySize := 1 + sovTypes(uint64(k)) + l
@@ -1801,7 +1801,7 @@ func (m *MapStdTypes) Size() (n int) {
 		for k, v := range m.Timestamp {
 			_ = k
 			_ = v
-			l = ((*google_protobuf2.Timestamp)(&v)).Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(v)
 			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
@@ -1812,7 +1812,7 @@ func (m *MapStdTypes) Size() (n int) {
 			_ = v
 			l = 0
 			if v != nil {
-				l = ((*google_protobuf1.Duration)(v)).Size()
+				l = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
 				l += 1 + sovTypes(uint64(l))
 			}
 			mapEntrySize := 1 + sovTypes(uint64(k)) + l
@@ -1823,7 +1823,7 @@ func (m *MapStdTypes) Size() (n int) {
 		for k, v := range m.Duration {
 			_ = k
 			_ = v
-			l = ((*google_protobuf1.Duration)(&v)).Size()
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(v)
 			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
