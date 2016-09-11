@@ -65,10 +65,30 @@ func SizeOfStdTime(t time.Time) int {
 	return ts.Size()
 }
 
+func StdTimeMarshal(t time.Time) ([]byte, error) {
+	size := SizeOfStdTime(t)
+	buf := make([]byte, size)
+	_, err := StdTimeMarshalTo(t, buf)
+	return buf, err
+}
+
 func StdTimeMarshalTo(t time.Time, data []byte) (int, error) {
 	ts, err := TimestampProto(t)
 	if err != nil {
 		return 0, err
 	}
 	return ts.MarshalTo(data)
+}
+
+func StdTimeUnmarshal(t *time.Time, data []byte) error {
+	ts := &Timestamp{}
+	if err := ts.Unmarshal(data); err != nil {
+		return err
+	}
+	tt, err := TimestampFromProto(ts)
+	if err != nil {
+		return err
+	}
+	*t = tt
+	return nil
 }

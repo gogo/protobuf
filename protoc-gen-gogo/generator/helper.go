@@ -445,3 +445,9 @@ func (g *Generator) AllFiles() *descriptor.FileDescriptorSet {
 func (d *Descriptor) Path() string {
 	return d.path
 }
+
+func (g *Generator) useTypes() string {
+	pkg := strings.Map(badToUnderscore, "github.com/gogo/protobuf/types")
+	g.customImports = append(g.customImports, "github.com/gogo/protobuf/types")
+	return pkg
+}

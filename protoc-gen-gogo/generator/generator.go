@@ -2692,6 +2692,34 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					g.Out()
 					g.P(`}`)
 					val = "data"
+				} else if gogoproto.IsStdTime(field) {
+					pkg := g.useTypes()
+					if gogoproto.IsNullable(field) {
+						g.P(`data, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
+					} else {
+						g.P(`data, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
+					}
+					g.P(`if err != nil {`)
+					g.In()
+					g.P(`return err`)
+					g.Out()
+					g.P(`}`)
+					val = "data"
+					pre, post = "b.EncodeRawBytes(", ")"
+				} else if gogoproto.IsStdDuration(field) {
+					pkg := g.useTypes()
+					if gogoproto.IsNullable(field) {
+						g.P(`data, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
+					} else {
+						g.P(`data, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
+					}
+					g.P(`if err != nil {`)
+					g.In()
+					g.P(`return err`)
+					g.Out()
+					g.P(`}`)
+					val = "data"
+					pre, post = "b.EncodeRawBytes(", ")"
 				}
 				if !canFail {
 					g.P("_ = ", pre, val, post)
@@ -2755,9 +2783,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				dec = "b.DecodeGroup(msg)"
 				// handled specially below
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
-				lhs = "err"
-				dec = "b.DecodeMessage(msg)"
+				if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
+					dec = "b.DecodeRawBytes(true)"
+				} else {
+					g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
+					lhs = "err"
+					dec = "b.DecodeMessage(msg)"
+				}
 				// handled specially below
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
 				dec = "b.DecodeRawBytes(true)"
@@ -2792,6 +2824,34 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.P(`c := &cc`)
 				g.P(`err = c.Unmarshal(`, val, `)`)
 				val = "*c"
+			} else if gogoproto.IsStdTime(field) {
+				pkg := g.useTypes()
+				g.P(`if err != nil {`)
+				g.In()
+				g.P(`return true, err`)
+				g.Out()
+				g.P(`}`)
+				g.P(`c := new(time.Time)`)
+				g.P(`if err := `, pkg, `.StdTimeUnmarshal(c, `, val, `); err != nil {`)
+				g.In()
+				g.P(`return true, err`)
+				g.Out()
+				g.P(`}`)
+				val = "c"
+			} else if gogoproto.IsStdDuration(field) {
+				pkg := g.useTypes()
+				g.P(`if err != nil {`)
+				g.In()
+				g.P(`return true, err`)
+				g.Out()
+				g.P(`}`)
+				g.P(`c := new(time.Duration)`)
+				g.P(`if err := `, pkg, `.StdDurationUnmarshal(c, `, val, `); err != nil {`)
+				g.In()
+				g.P(`return true, err`)
+				g.Out()
+				g.P(`}`)
+				val = "c"
 			}
 			if cast != "" {
 				val = cast + "(" + val + ")"
@@ -2804,7 +2864,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				val += " != 0"
 			case descriptor.FieldDescriptorProto_TYPE_GROUP,
 				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				val = "msg"
+				if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+					val = "msg"
+				}
 			}
 			if gogoproto.IsCastType(field) {
 				_, typ, err := getCastType(field)
@@ -2869,7 +2931,21 @@ func (g *Generator) generateMessage(message *Descriptor) {
 					fixed = g.Pkg["proto"] + ".Size(" + val + ")"
 				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 					wire = "WireBytes"
-					g.P("s := ", g.Pkg["proto"], ".Size(", val, ")")
+					if gogoproto.IsStdTime(field) {
+						if gogoproto.IsNullable(field) {
+							val = "*" + val
+						}
+						pkg := g.useTypes()
+						g.P("s := ", pkg, ".SizeOfStdTime(", val, ")")
+					} else if gogoproto.IsStdDuration(field) {
+						if gogoproto.IsNullable(field) {
+							val = "*" + val
+						}
+						pkg := g.useTypes()
+						g.P("s := ", pkg, ".SizeOfStdDuration(", val, ")")
+					} else {
+						g.P("s := ", g.Pkg["proto"], ".Size(", val, ")")
+					}
 					fixed = "s"
 					varint = fixed
 				case descriptor.FieldDescriptorProto_TYPE_BYTES:

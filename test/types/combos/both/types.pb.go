@@ -30,7 +30,6 @@ import google_protobuf2 "github.com/gogo/protobuf/types"
 import google_protobuf3 "github.com/gogo/protobuf/types"
 
 import time "time"
-
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
 import io "io"
@@ -570,12 +569,20 @@ func _OneofStdTypes_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	switch x := m.OneOfStdTimes.(type) {
 	case *OneofStdTypes_Timestamp:
 		_ = b.EncodeVarint(1<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Timestamp); err != nil {
+		data, err := github_com_gogo_protobuf_types.StdTimeMarshal(*x.Timestamp)
+		if err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(data); err != nil {
 			return err
 		}
 	case *OneofStdTypes_Duration:
 		_ = b.EncodeVarint(2<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Duration); err != nil {
+		data, err := github_com_gogo_protobuf_types.StdDurationMarshal(*x.Duration)
+		if err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(data); err != nil {
 			return err
 		}
 	case nil:
@@ -592,17 +599,29 @@ func _OneofStdTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(time.Time)
-		err := b.DecodeMessage(msg)
-		m.OneOfStdTimes = &OneofStdTypes_Timestamp{msg}
+		x, err := b.DecodeRawBytes(true)
+		if err != nil {
+			return true, err
+		}
+		c := new(time.Time)
+		if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(c, x); err != nil {
+			return true, err
+		}
+		m.OneOfStdTimes = &OneofStdTypes_Timestamp{c}
 		return true, err
 	case 2: // OneOfStdTimes.duration
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(time.Duration)
-		err := b.DecodeMessage(msg)
-		m.OneOfStdTimes = &OneofStdTypes_Duration{msg}
+		x, err := b.DecodeRawBytes(true)
+		if err != nil {
+			return true, err
+		}
+		c := new(time.Duration)
+		if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(c, x); err != nil {
+			return true, err
+		}
+		m.OneOfStdTimes = &OneofStdTypes_Duration{c}
 		return true, err
 	default:
 		return false, nil
@@ -614,12 +633,12 @@ func _OneofStdTypes_OneofSizer(msg proto.Message) (n int) {
 	// OneOfStdTimes
 	switch x := m.OneOfStdTimes.(type) {
 	case *OneofStdTypes_Timestamp:
-		s := proto.Size(x.Timestamp)
+		s := github_com_gogo_protobuf_types.SizeOfStdTime(*x.Timestamp)
 		n += proto.SizeVarint(1<<3 | proto.WireBytes)
 		n += proto.SizeVarint(uint64(s))
 		n += s
 	case *OneofStdTypes_Duration:
-		s := proto.Size(x.Duration)
+		s := github_com_gogo_protobuf_types.SizeOfStdDuration(*x.Duration)
 		n += proto.SizeVarint(2<<3 | proto.WireBytes)
 		n += proto.SizeVarint(uint64(s))
 		n += s
