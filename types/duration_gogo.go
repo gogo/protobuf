@@ -75,6 +75,6 @@ func SizeOfStdDuration(d time.Duration) int {
 }
 
 func StdDurationMarshalTo(d time.Duration, data []byte) (int, error) {
-	dur := DurationProto(t)
+	dur := DurationProto(d)
 	return dur.MarshalTo(data)
 }

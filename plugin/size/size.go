@@ -201,6 +201,23 @@ func (p *size) sizeZigZag() {
 	}`)
 }
 
+func (p *size) std(field *descriptor.FieldDescriptorProto, name string) (string, bool) {
+	if gogoproto.IsStdTime(field) {
+		if gogoproto.IsNullable(field) {
+			return p.typesPkg.Use() + `.SizeOfStdTime(*` + name + `)`, true
+		} else {
+			return p.typesPkg.Use() + `.SizeOfStdTime(` + name + `)`, true
+		}
+	} else if gogoproto.IsStdDuration(field) {
+		if gogoproto.IsNullable(field) {
+			return p.typesPkg.Use() + `.SizeOfStdDuration(*` + name + `)`, true
+		} else {
+			return p.typesPkg.Use() + `.SizeOfStdDuration(` + name + `)`, true
+		}
+	}
+	return "", false
+}
+
 func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, sizeName string) {
 	fieldname := p.GetOneOfFieldName(message, field)
 	nullable := gogoproto.IsNullable(field)
@@ -411,11 +428,14 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				stdSizeCall, stdOk := p.std(m.ValueField, "v")
 				if nullable {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)
 					p.In()
-					if valuegoTyp != valuegoAliasTyp {
+					if stdOk {
+						p.P(`l = `, stdSizeCall)
+					} else if valuegoTyp != valuegoAliasTyp {
 						p.P(`l = ((`, valuegoTyp, `)(v)).`, sizeName, `()`)
 					} else {
 						p.P(`l = v.`, sizeName, `()`)
@@ -425,7 +445,9 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 					p.P(`}`)
 					sum = append(sum, `l`)
 				} else {
-					if valuegoTyp != valuegoAliasTyp {
+					if stdOk {
+						p.P(`l = `, stdSizeCall)
+					} else if valuegoTyp != valuegoAliasTyp {
 						p.P(`l = ((*`, valuegoTyp, `)(&v)).`, sizeName, `()`)
 					} else {
 						p.P(`l = v.`, sizeName, `()`)
@@ -441,18 +463,9 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		} else if repeated {
 			p.P(`for _, e := range m.`, fieldname, ` { `)
 			p.In()
-			if gogoproto.IsStdTime(field) && gogoproto.IsTimestamp(field) {
-				if gogoproto.IsNullable(field) {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(*e)`)
-				} else {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(e)`)
-				}
-			} else if gogoproto.IsStdDuration(field) && gogoproto.IsDuration(field) {
-				if gogoproto.IsNullable(field) {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(*e)`)
-				} else {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(e)`)
-				}
+			stdSizeCall, stdOk := p.std(field, "e")
+			if stdOk {
+				p.P(`l=`, stdSizeCall)
 			} else {
 				p.P(`l=e.`, sizeName, `()`)
 			}
@@ -460,18 +473,9 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.Out()
 			p.P(`}`)
 		} else {
-			if gogoproto.IsStdTime(field) && gogoproto.IsTimestamp(field) {
-				if gogoproto.IsNullable(field) {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(*m.`, fieldname, `)`)
-				} else {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdTime(m.`, fieldname, `)`)
-				}
-			} else if gogoproto.IsStdDuration(field) && gogoproto.IsDuration(field) {
-				if gogoproto.IsNullable(field) {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(*m.`, fieldname, `)`)
-				} else {
-					p.P(`l=`, p.typesPkg.Use(), `.SizeOfStdDuration(m.`, fieldname, `)`)
-				}
+			stdSizeCall, stdOk := p.std(field, "m."+fieldname)
+			if stdOk {
+				p.P(`l=`, stdSizeCall)
 			} else {
 				p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
 			}

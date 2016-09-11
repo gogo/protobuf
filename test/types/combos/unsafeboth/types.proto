@@ -65,21 +65,60 @@ message KnownTypes {
   //google.protobuf.Any an = 14;
 }
 
-//TODO add tests for time.Time and time.Duration in a map and a oneof
-
-message StandardLibrary {
+message ProtoTypes {
   google.protobuf.Timestamp nullableTimestamp = 1;
   google.protobuf.Duration nullableDuration = 2;
-  google.protobuf.Timestamp nullableStdTime = 3 [(gogoproto.stdtime) = true];
-  google.protobuf.Duration nullableStdDuration = 4 [(gogoproto.stdduration) = true];
-  google.protobuf.Timestamp stdTime = 5 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  google.protobuf.Duration stdDuration = 6 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-
-  repeated google.protobuf.Timestamp nullableTimestamps = 11;
-  repeated google.protobuf.Duration nullableDurations = 12;
-  repeated google.protobuf.Timestamp nullableStdTimes = 13 [(gogoproto.stdtime) = true];
-  repeated google.protobuf.Duration nullableStdDurations = 14 [(gogoproto.stdduration) = true];
-  repeated google.protobuf.Timestamp stdTimes = 15 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  repeated google.protobuf.Duration stdDurations = 16 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+  google.protobuf.Timestamp timestamp = 3 [(gogoproto.nullable) = false];
+  google.protobuf.Duration duration = 4 [(gogoproto.nullable) = false];
 }
 
+message StdTypes {
+  google.protobuf.Timestamp nullableStdTime = 1 [(gogoproto.stdtime) = true];
+  google.protobuf.Duration nullableStdDuration = 2 [(gogoproto.stdduration) = true];
+  google.protobuf.Timestamp stdTime = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+  google.protobuf.Duration stdDuration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+}
+
+message RepProtoTypes {
+  repeated google.protobuf.Timestamp nullableTimestamps = 1;
+  repeated google.protobuf.Duration nullableDurations = 2;
+  repeated google.protobuf.Timestamp timestamps = 3 [(gogoproto.nullable) = false];
+  repeated google.protobuf.Duration durations = 4 [(gogoproto.nullable) = false];
+}
+
+message RepStdTypes {
+  repeated google.protobuf.Timestamp nullableStdTimes = 1 [(gogoproto.stdtime) = true];
+  repeated google.protobuf.Duration nullableStdDurations = 2 [(gogoproto.stdduration) = true];
+  repeated google.protobuf.Timestamp stdTimes = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+  repeated google.protobuf.Duration stdDurations = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+}
+
+message MapProtoTypes {
+  map<int32,google.protobuf.Timestamp> nullableTimestamp = 1;
+  map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.nullable) = false];
+
+  map<int32,google.protobuf.Duration> nullableDuration = 3;
+  map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.nullable) = false];
+}
+
+message MapStdTypes {
+  map<int32,google.protobuf.Timestamp> nullableTimestamp = 1 [(gogoproto.stdtime) = true];
+  map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+
+  map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
+  map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+}
+
+message OneofProtoTypes {
+  oneof OneOfProtoTimes {
+    google.protobuf.Timestamp timestamp = 1;
+    google.protobuf.Duration duration = 2;
+  }
+}
+
+message OneofStdTypes {
+  oneof OneOfStdTimes {
+    google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
+    google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
+  }
+}

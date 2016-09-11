@@ -306,8 +306,8 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
 	nullable := gogoproto.IsNullable(field)
-	isDuration := gogoproto.IsDuration(field) && gogoproto.IsStdDuration(field)
-	isTimestamp := gogoproto.IsTimestamp(field) && gogoproto.IsStdTime(field)
+	isDuration := gogoproto.IsStdDuration(field)
+	isTimestamp := gogoproto.IsStdTime(field)
 	// oneof := field.OneofIndex != nil
 	if !repeated {
 		if ctype || isTimestamp {
