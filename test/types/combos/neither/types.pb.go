@@ -1435,28 +1435,28 @@ func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 		v21 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*time.Time)
 		for i := 0; i < v21; i++ {
-			this.NullableTimestamp[int32(r.Int31())] = (*time.Time)(google_protobuf2.NewPopulatedTimestamp(r, easy))
+			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v22 := r.Intn(10)
 		this.Timestamp = make(map[int32]time.Time)
 		for i := 0; i < v22; i++ {
-			this.Timestamp[int32(r.Int31())] = (time.Time)(*google_protobuf2.NewPopulatedTimestamp(r, easy))
+			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v23 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*time.Duration)
 		for i := 0; i < v23; i++ {
-			this.NullableDuration[int32(r.Int31())] = (*time.Duration)(google_protobuf1.NewPopulatedDuration(r, easy))
+			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v24 := r.Intn(10)
 		this.Duration = make(map[int32]time.Duration)
 		for i := 0; i < v24; i++ {
-			this.Duration[int32(r.Int31())] = (time.Duration)(*google_protobuf1.NewPopulatedDuration(r, easy))
+			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {

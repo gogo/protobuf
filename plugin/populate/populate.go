@@ -85,14 +85,15 @@ package populate
 
 import (
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
-	"math"
-	"strconv"
-	"strings"
 )
 
 type VarGen interface {
@@ -182,6 +183,7 @@ func negative(fieldType descriptor.FieldDescriptorProto_Type) bool {
 }
 
 func (p *plugin) getFuncName(goTypName string) string {
+	//fmt.Fprintf(os.Stderr, "goTypName:%s\n", goTypName)
 	funcName := "NewPopulated" + goTypName
 	goTypNames := strings.Split(goTypName, ".")
 	if len(goTypNames) == 2 {
@@ -258,6 +260,9 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		}
 		if m.ValueField.IsMessage() || p.IsGroup(field) {
 			s := `this.` + fieldname + `[` + keyval + `] = `
+			if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
+				valuegoTyp = valuegoAliasTyp
+			}
 			goTypName = generator.GoTypeToName(valuegoTyp)
 			funcCall := p.getFuncCall(goTypName)
 			if !nullable {
