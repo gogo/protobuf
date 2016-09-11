@@ -3293,9 +3293,9 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableStdTime == nil {
-				m.NullableStdTime = &google_protobuf2.Timestamp{}
+				m.NullableStdTime = new(time.Time)
 			}
-			if err := m.NullableStdTime.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableStdTime, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3326,9 +3326,9 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableStdDuration == nil {
-				m.NullableStdDuration = &google_protobuf1.Duration{}
+				m.NullableStdDuration = new(time.Duration)
 			}
-			if err := m.NullableStdDuration.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableStdDuration, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3358,7 +3358,7 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.StdTime.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&m.StdTime, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3388,7 +3388,7 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.StdDuration.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&m.StdDuration, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3642,8 +3642,8 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableStdTimes = append(m.NullableStdTimes, &google_protobuf2.Timestamp{})
-			if err := m.NullableStdTimes[len(m.NullableStdTimes)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			m.NullableStdTimes = append(m.NullableStdTimes, new(time.Time))
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableStdTimes[len(m.NullableStdTimes)-1], data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3673,8 +3673,8 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableStdDurations = append(m.NullableStdDurations, &google_protobuf1.Duration{})
-			if err := m.NullableStdDurations[len(m.NullableStdDurations)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			m.NullableStdDurations = append(m.NullableStdDurations, new(time.Duration))
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableStdDurations[len(m.NullableStdDurations)-1], data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3704,8 +3704,8 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StdTimes = append(m.StdTimes, google_protobuf2.Timestamp{})
-			if err := m.StdTimes[len(m.StdTimes)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			m.StdTimes = append(m.StdTimes, time.Time{})
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&(m.StdTimes[len(m.StdTimes)-1]), data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3735,8 +3735,8 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StdDurations = append(m.StdDurations, google_protobuf1.Duration{})
-			if err := m.StdDurations[len(m.StdDurations)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			m.StdDurations = append(m.StdDurations, time.Duration(0))
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&(m.StdDurations[len(m.StdDurations)-1]), data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -4384,14 +4384,14 @@ func (m *MapStdTypes) Unmarshal(data []byte) error {
 				if postmsgIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				mapvalue := &google_protobuf2.Timestamp{}
-				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+				mapvalue := new(time.Time)
+				if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, data[iNdEx:postmsgIndex]); err != nil {
 					return err
 				}
 				iNdEx = postmsgIndex
-				m.NullableTimestamp[mapkey] = ((*time.Time)(mapvalue))
+				m.NullableTimestamp[mapkey] = mapvalue
 			} else {
-				var mapvalue *time.Time
+				var mapvalue = new(time.Time)
 				m.NullableTimestamp[mapkey] = mapvalue
 			}
 			iNdEx = postIndex
@@ -4495,15 +4495,15 @@ func (m *MapStdTypes) Unmarshal(data []byte) error {
 				if postmsgIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				mapvalue := &google_protobuf2.Timestamp{}
-				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+				mapvalue := new(time.Time)
+				if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, data[iNdEx:postmsgIndex]); err != nil {
 					return err
 				}
 				iNdEx = postmsgIndex
-				m.Timestamp[mapkey] = ((time.Time)(*mapvalue))
+				m.Timestamp[mapkey] = *mapvalue
 			} else {
-				var mapvalue time.Time
-				m.Timestamp[mapkey] = mapvalue
+				var mapvalue = new(time.Time)
+				m.Timestamp[mapkey] = *mapvalue
 			}
 			iNdEx = postIndex
 		case 3:
@@ -4606,14 +4606,14 @@ func (m *MapStdTypes) Unmarshal(data []byte) error {
 				if postmsgIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				mapvalue := &google_protobuf1.Duration{}
-				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+				mapvalue := new(time.Duration)
+				if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, data[iNdEx:postmsgIndex]); err != nil {
 					return err
 				}
 				iNdEx = postmsgIndex
-				m.NullableDuration[mapkey] = ((*time.Duration)(mapvalue))
+				m.NullableDuration[mapkey] = mapvalue
 			} else {
-				var mapvalue *time.Duration
+				var mapvalue = new(time.Duration)
 				m.NullableDuration[mapkey] = mapvalue
 			}
 			iNdEx = postIndex
@@ -4717,15 +4717,15 @@ func (m *MapStdTypes) Unmarshal(data []byte) error {
 				if postmsgIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				mapvalue := &google_protobuf1.Duration{}
-				if err := mapvalue.Unmarshal(data[iNdEx:postmsgIndex]); err != nil {
+				mapvalue := new(time.Duration)
+				if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, data[iNdEx:postmsgIndex]); err != nil {
 					return err
 				}
 				iNdEx = postmsgIndex
-				m.Duration[mapkey] = ((time.Duration)(*mapvalue))
+				m.Duration[mapkey] = *mapvalue
 			} else {
-				var mapvalue time.Duration
-				m.Duration[mapkey] = mapvalue
+				var mapvalue = new(time.Duration)
+				m.Duration[mapkey] = *mapvalue
 			}
 			iNdEx = postIndex
 		default:
@@ -4918,8 +4918,8 @@ func (m *OneofStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			v := &google_protobuf2.Timestamp{}
-			if err := v.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			v := new(time.Time)
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(v, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			m.OneOfStdTimes = &OneofStdTypes_Timestamp{v}
@@ -4950,8 +4950,8 @@ func (m *OneofStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			v := &google_protobuf1.Duration{}
-			if err := v.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			v := new(time.Duration)
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(v, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			m.OneOfStdTimes = &OneofStdTypes_Duration{v}
