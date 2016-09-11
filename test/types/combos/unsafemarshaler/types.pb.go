@@ -340,10 +340,10 @@ func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf1.Duration {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp         map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration  map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration          map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
@@ -351,28 +351,28 @@ func (m *MapStdTypes) String() string            { return proto.CompactTextStrin
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
 
-func (m *MapStdTypes) GetNullableTimestamp() map[int32]*google_protobuf2.Timestamp {
+func (m *MapStdTypes) GetNullableTimestamp() map[int32]*time.Time {
 	if m != nil {
 		return m.NullableTimestamp
 	}
 	return nil
 }
 
-func (m *MapStdTypes) GetTimestamp() map[int32]google_protobuf2.Timestamp {
+func (m *MapStdTypes) GetTimestamp() map[int32]time.Time {
 	if m != nil {
 		return m.Timestamp
 	}
 	return nil
 }
 
-func (m *MapStdTypes) GetNullableDuration() map[int32]*google_protobuf1.Duration {
+func (m *MapStdTypes) GetNullableDuration() map[int32]*time.Duration {
 	if m != nil {
 		return m.NullableDuration
 	}
 	return nil
 }
 
-func (m *MapStdTypes) GetDuration() map[int32]google_protobuf1.Duration {
+func (m *MapStdTypes) GetDuration() map[int32]time.Duration {
 	if m != nil {
 		return m.Duration
 	}
@@ -1435,30 +1435,30 @@ func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 	this := &MapStdTypes{}
 	if r.Intn(10) != 0 {
 		v21 := r.Intn(10)
-		this.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
+		this.NullableTimestamp = make(map[int32]*time.Time)
 		for i := 0; i < v21; i++ {
-			this.NullableTimestamp[int32(r.Int31())] = google_protobuf2.NewPopulatedTimestamp(r, easy)
+			this.NullableTimestamp[int32(r.Int31())] = (*time.Time)(google_protobuf2.NewPopulatedTimestamp(r, easy))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v22 := r.Intn(10)
-		this.Timestamp = make(map[int32]google_protobuf2.Timestamp)
+		this.Timestamp = make(map[int32]time.Time)
 		for i := 0; i < v22; i++ {
-			this.Timestamp[int32(r.Int31())] = *google_protobuf2.NewPopulatedTimestamp(r, easy)
+			this.Timestamp[int32(r.Int31())] = (time.Time)(*google_protobuf2.NewPopulatedTimestamp(r, easy))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v23 := r.Intn(10)
-		this.NullableDuration = make(map[int32]*google_protobuf1.Duration)
+		this.NullableDuration = make(map[int32]*time.Duration)
 		for i := 0; i < v23; i++ {
-			this.NullableDuration[int32(r.Int31())] = google_protobuf1.NewPopulatedDuration(r, easy)
+			this.NullableDuration[int32(r.Int31())] = (*time.Duration)(google_protobuf1.NewPopulatedDuration(r, easy))
 		}
 	}
 	if r.Intn(10) != 0 {
 		v24 := r.Intn(10)
-		this.Duration = make(map[int32]google_protobuf1.Duration)
+		this.Duration = make(map[int32]time.Duration)
 		for i := 0; i < v24; i++ {
-			this.Duration[int32(r.Int31())] = *google_protobuf1.NewPopulatedDuration(r, easy)
+			this.Duration[int32(r.Int31())] = (time.Duration)(*google_protobuf1.NewPopulatedDuration(r, easy))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1792,7 +1792,7 @@ func (m *MapStdTypes) Size() (n int) {
 			_ = v
 			l = 0
 			if v != nil {
-				l = v.Size()
+				l = ((*google_protobuf2.Timestamp)(v)).Size()
 				l += 1 + sovTypes(uint64(l))
 			}
 			mapEntrySize := 1 + sovTypes(uint64(k)) + l
@@ -1803,7 +1803,7 @@ func (m *MapStdTypes) Size() (n int) {
 		for k, v := range m.Timestamp {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = ((*google_protobuf2.Timestamp)(&v)).Size()
 			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
@@ -1814,7 +1814,7 @@ func (m *MapStdTypes) Size() (n int) {
 			_ = v
 			l = 0
 			if v != nil {
-				l = v.Size()
+				l = ((*google_protobuf1.Duration)(v)).Size()
 				l += 1 + sovTypes(uint64(l))
 			}
 			mapEntrySize := 1 + sovTypes(uint64(k)) + l
@@ -1825,7 +1825,7 @@ func (m *MapStdTypes) Size() (n int) {
 		for k, v := range m.Duration {
 			_ = k
 			_ = v
-			l = v.Size()
+			l = ((*google_protobuf1.Duration)(&v)).Size()
 			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
@@ -2412,8 +2412,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.NullableTimestamp[k]
 			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
+			if ((*google_protobuf2.Timestamp)(v)) != nil {
+				msgSize = ((*google_protobuf2.Timestamp)(v)).Size()
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -2421,11 +2421,11 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x8
 			i++
 			i = encodeVarintTypes(data, i, uint64(k))
-			if v != nil {
+			if ((*google_protobuf2.Timestamp)(v)) != nil {
 				data[i] = 0x12
 				i++
-				i = encodeVarintTypes(data, i, uint64(v.Size()))
-				n24, err := v.MarshalTo(data[i:])
+				i = encodeVarintTypes(data, i, uint64(((*google_protobuf2.Timestamp)(v)).Size()))
+				n24, err := ((*google_protobuf2.Timestamp)(v)).MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -2439,8 +2439,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.Timestamp[k]
 			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
+			if ((*google_protobuf2.Timestamp)(&v)) != nil {
+				msgSize = ((*google_protobuf2.Timestamp)(&v)).Size()
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -2450,8 +2450,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintTypes(data, i, uint64(k))
 			data[i] = 0x12
 			i++
-			i = encodeVarintTypes(data, i, uint64((&v).Size()))
-			n25, err := (&v).MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(((*google_protobuf2.Timestamp)(&v)).Size()))
+			n25, err := ((*google_protobuf2.Timestamp)(&v)).MarshalTo(data[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -2464,8 +2464,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.NullableDuration[k]
 			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
+			if ((*google_protobuf1.Duration)(v)) != nil {
+				msgSize = ((*google_protobuf1.Duration)(v)).Size()
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -2473,11 +2473,11 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			data[i] = 0x8
 			i++
 			i = encodeVarintTypes(data, i, uint64(k))
-			if v != nil {
+			if ((*google_protobuf1.Duration)(v)) != nil {
 				data[i] = 0x12
 				i++
-				i = encodeVarintTypes(data, i, uint64(v.Size()))
-				n26, err := v.MarshalTo(data[i:])
+				i = encodeVarintTypes(data, i, uint64(((*google_protobuf1.Duration)(v)).Size()))
+				n26, err := ((*google_protobuf1.Duration)(v)).MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -2491,8 +2491,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i++
 			v := m.Duration[k]
 			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
+			if ((*google_protobuf1.Duration)(&v)) != nil {
+				msgSize = ((*google_protobuf1.Duration)(&v)).Size()
 				msgSize += 1 + sovTypes(uint64(msgSize))
 			}
 			mapSize := 1 + sovTypes(uint64(k)) + msgSize
@@ -2502,8 +2502,8 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 			i = encodeVarintTypes(data, i, uint64(k))
 			data[i] = 0x12
 			i++
-			i = encodeVarintTypes(data, i, uint64((&v).Size()))
-			n27, err := (&v).MarshalTo(data[i:])
+			i = encodeVarintTypes(data, i, uint64(((*google_protobuf1.Duration)(&v)).Size()))
+			n27, err := ((*google_protobuf1.Duration)(&v)).MarshalTo(data[i:])
 			if err != nil {
 				return 0, err
 			}

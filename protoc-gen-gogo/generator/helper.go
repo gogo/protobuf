@@ -240,13 +240,25 @@ func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorPr
 }
 
 func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
-	if !gogoproto.IsCastValue(field) && gogoproto.IsNullable(field) {
-		return valField
-	}
 	valField = proto.Clone(valField).(*descriptor.FieldDescriptorProto)
 	if valField.Options == nil {
 		valField.Options = &descriptor.FieldOptions{}
 	}
+
+	stdtime := gogoproto.IsStdTime(field)
+	if stdtime {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Stdtime, &stdtime); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
+	stddur := gogoproto.IsStdDuration(field)
+	if stddur {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Stdduration, &stddur); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
 	if valType := gogoproto.GetCastValue(field); len(valType) > 0 {
 		if err := proto.SetExtension(valField.Options, gogoproto.E_Casttype, &valType); err != nil {
 			g.Fail(err.Error())
@@ -257,6 +269,7 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 	if err := proto.SetExtension(valField.Options, gogoproto.E_Nullable, &nullable); err != nil {
 		g.Fail(err.Error())
 	}
+
 	return valField
 }
 
