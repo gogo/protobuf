@@ -51,6 +51,7 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/types"
 )
 
 // Marshaler is a configurable object for converting between
@@ -427,6 +428,14 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 		}
 	}
 
+	if t, ok := v.Interface().(time.Time); ok {
+		ts, err := types.TimestampProto(t)
+		if err != nil {
+			return err
+		}
+		return m.marshalValue(out, prop, reflect.ValueOf(ts), indent)
+	}
+
 	// Handle enumerations.
 	if !m.EnumsAsInts && prop.Enum != "" {
 		// Unknown enum values will are stringified by the proto library as their
@@ -663,6 +672,19 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			target.Field(1).SetInt(ns)
 			return nil
 		}
+	}
+
+	if t, ok := target.Addr().Interface().(*time.Time); ok {
+		ts := &types.Timestamp{}
+		if err := u.unmarshalValue(reflect.ValueOf(ts).Elem(), inputValue, prop); err != nil {
+			return err
+		}
+		tt, err := types.TimestampFromProto(ts)
+		if err != nil {
+			return err
+		}
+		*t = tt
+		return nil
 	}
 
 	// Handle enums, which have an underlying type of int32,
