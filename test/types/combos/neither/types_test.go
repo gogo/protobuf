@@ -33,6 +33,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gogo/protobuf/jsonpb"
 	"github.com/gogo/protobuf/proto"
 )
 
@@ -54,6 +55,32 @@ func TestFullCircleProtoToStd(t *testing.T) {
 	}
 	protoMsgOut := &ProtoTypes{}
 	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+		t.Fatal(err)
+	}
+	if !protoMsg.Equal(protoMsgOut) {
+		t.Fatalf("want %#v got %#v", protoMsg, protoMsgOut)
+	}
+}
+
+func TestJsonFullCircleProtoToStd(t *testing.T) {
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
+	protoMsg := NewPopulatedProtoTypes(popr, true)
+	j := &jsonpb.Marshaler{}
+	protoData, err := j.MarshalToString(protoMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	stdMsg := &StdTypes{}
+	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+		t.Fatal(err)
+	}
+	stdData, err := j.MarshalToString(stdMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	protoMsgOut := &ProtoTypes{}
+	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -86,6 +113,32 @@ func TestFullCircleRepProtoToStd(t *testing.T) {
 	}
 }
 
+func TestJsonFullCircleRepProtoToStd(t *testing.T) {
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
+	protoMsg := NewPopulatedRepProtoTypes(popr, true)
+	j := &jsonpb.Marshaler{}
+	protoData, err := j.MarshalToString(protoMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	stdMsg := &RepStdTypes{}
+	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+		t.Fatal(err)
+	}
+	stdData, err := j.MarshalToString(stdMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	protoMsgOut := &RepProtoTypes{}
+	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+		t.Fatal(err)
+	}
+	if !protoMsg.Equal(protoMsgOut) {
+		t.Fatalf("want %#v got %#v", protoMsg, protoMsgOut)
+	}
+}
+
 func TestFullCircleMapProtoToStd(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
@@ -111,6 +164,32 @@ func TestFullCircleMapProtoToStd(t *testing.T) {
 	}
 }
 
+func TestJsonFullCircleMapProtoToStd(t *testing.T) {
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
+	protoMsg := NewPopulatedMapProtoTypes(popr, true)
+	j := &jsonpb.Marshaler{}
+	protoData, err := j.MarshalToString(protoMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	stdMsg := &MapStdTypes{}
+	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+		t.Fatal(err)
+	}
+	stdData, err := j.MarshalToString(stdMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	protoMsgOut := &MapProtoTypes{}
+	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+		t.Fatal(err)
+	}
+	if !protoMsg.Equal(protoMsgOut) {
+		t.Fatalf("want %#v got %#v", protoMsg, protoMsgOut)
+	}
+}
+
 func TestFullCircleOneofProtoToStd(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
@@ -129,6 +208,32 @@ func TestFullCircleOneofProtoToStd(t *testing.T) {
 	}
 	protoMsgOut := &OneofProtoTypes{}
 	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+		t.Fatal(err)
+	}
+	if !protoMsg.Equal(protoMsgOut) {
+		t.Fatalf("want %#v got %#v", protoMsg, protoMsgOut)
+	}
+}
+
+func TestJsonFullCircleOneofProtoToStd(t *testing.T) {
+	seed := time.Now().UnixNano()
+	popr := math_rand.New(math_rand.NewSource(seed))
+	protoMsg := NewPopulatedOneofProtoTypes(popr, true)
+	j := &jsonpb.Marshaler{}
+	protoData, err := j.MarshalToString(protoMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	stdMsg := &OneofStdTypes{}
+	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+		t.Fatal(err)
+	}
+	stdData, err := j.MarshalToString(stdMsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	protoMsgOut := &OneofProtoTypes{}
+	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {

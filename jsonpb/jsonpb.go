@@ -436,6 +436,11 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 		return m.marshalValue(out, prop, reflect.ValueOf(ts), indent)
 	}
 
+	if d, ok := v.Interface().(time.Duration); ok {
+		dur := types.DurationProto(d)
+		return m.marshalValue(out, prop, reflect.ValueOf(dur), indent)
+	}
+
 	// Handle enumerations.
 	if !m.EnumsAsInts && prop.Enum != "" {
 		// Unknown enum values will are stringified by the proto library as their
@@ -684,6 +689,19 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			return err
 		}
 		*t = tt
+		return nil
+	}
+
+	if d, ok := target.Addr().Interface().(*time.Duration); ok {
+		dur := &types.Duration{}
+		if err := u.unmarshalValue(reflect.ValueOf(dur).Elem(), inputValue, prop); err != nil {
+			return err
+		}
+		dd, err := types.DurationFromProto(dur)
+		if err != nil {
+			return err
+		}
+		*d = dd
 		return nil
 	}
 
