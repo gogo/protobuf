@@ -73,6 +73,7 @@ package test
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
+import unsafe "unsafe"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import fmt "fmt"
@@ -87,6 +88,10 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func TestNidOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptNative(popr, false)
@@ -161,6 +166,10 @@ func BenchmarkNidOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNative(popr, false)
@@ -235,6 +244,10 @@ func BenchmarkNinOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepNative(popr, false)
@@ -309,6 +322,10 @@ func BenchmarkNidRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepNative(popr, false)
@@ -383,6 +400,10 @@ func BenchmarkNinRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepPackedNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepPackedNative(popr, false)
@@ -457,6 +478,10 @@ func BenchmarkNidRepPackedNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepPackedNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepPackedNative(popr, false)
@@ -531,6 +556,10 @@ func BenchmarkNinRepPackedNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptStruct(popr, false)
@@ -605,6 +634,10 @@ func BenchmarkNidOptStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStruct(popr, false)
@@ -679,6 +712,10 @@ func BenchmarkNinOptStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepStruct(popr, false)
@@ -753,6 +790,10 @@ func BenchmarkNidRepStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepStruct(popr, false)
@@ -827,6 +868,10 @@ func BenchmarkNinRepStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidEmbeddedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
@@ -901,6 +946,10 @@ func BenchmarkNidEmbeddedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinEmbeddedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
@@ -975,6 +1024,10 @@ func BenchmarkNinEmbeddedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidNestedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidNestedStruct(popr, false)
@@ -1049,6 +1102,10 @@ func BenchmarkNidNestedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinNestedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStruct(popr, false)
@@ -1123,6 +1180,10 @@ func BenchmarkNinNestedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptCustom(popr, false)
@@ -1197,6 +1258,10 @@ func BenchmarkNidOptCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomDashProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomDash(popr, false)
@@ -1271,6 +1336,10 @@ func BenchmarkCustomDashProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptCustom(popr, false)
@@ -1345,6 +1414,10 @@ func BenchmarkNinOptCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepCustom(popr, false)
@@ -1419,6 +1492,10 @@ func BenchmarkNidRepCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepCustom(popr, false)
@@ -1493,6 +1570,10 @@ func BenchmarkNinRepCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
@@ -1567,6 +1648,10 @@ func BenchmarkNinOptNativeUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStructUnion(popr, false)
@@ -1641,6 +1726,10 @@ func BenchmarkNinOptStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinEmbeddedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
@@ -1715,6 +1804,10 @@ func BenchmarkNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinNestedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
@@ -1789,6 +1882,10 @@ func BenchmarkNinNestedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestTreeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTree(popr, false)
@@ -1863,6 +1960,10 @@ func BenchmarkTreeProtoUnmarshal(b *testing.B) {
 }
 
 func TestOrBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOrBranch(popr, false)
@@ -1937,6 +2038,10 @@ func BenchmarkOrBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestAndBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndBranch(popr, false)
@@ -2011,6 +2116,10 @@ func BenchmarkAndBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestLeafProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedLeaf(popr, false)
@@ -2085,6 +2194,10 @@ func BenchmarkLeafProtoUnmarshal(b *testing.B) {
 }
 
 func TestDeepTreeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepTree(popr, false)
@@ -2159,6 +2272,10 @@ func BenchmarkDeepTreeProtoUnmarshal(b *testing.B) {
 }
 
 func TestADeepBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedADeepBranch(popr, false)
@@ -2233,6 +2350,10 @@ func BenchmarkADeepBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestAndDeepBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndDeepBranch(popr, false)
@@ -2307,6 +2428,10 @@ func BenchmarkAndDeepBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestDeepLeafProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepLeaf(popr, false)
@@ -2381,6 +2506,10 @@ func BenchmarkDeepLeafProtoUnmarshal(b *testing.B) {
 }
 
 func TestNilProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNil(popr, false)
@@ -2455,6 +2584,10 @@ func BenchmarkNilProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptEnum(popr, false)
@@ -2529,6 +2662,10 @@ func BenchmarkNidOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnum(popr, false)
@@ -2603,6 +2740,10 @@ func BenchmarkNinOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepEnum(popr, false)
@@ -2677,6 +2818,10 @@ func BenchmarkNidRepEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepEnum(popr, false)
@@ -2751,6 +2896,10 @@ func BenchmarkNinRepEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptEnumDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnumDefault(popr, false)
@@ -2825,6 +2974,10 @@ func BenchmarkNinOptEnumDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnum(popr, false)
@@ -2899,6 +3052,10 @@ func BenchmarkAnotherNinOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, false)
@@ -2973,6 +3130,10 @@ func BenchmarkAnotherNinOptEnumDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestTimerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTimer(popr, false)
@@ -3047,6 +3208,10 @@ func BenchmarkTimerProtoUnmarshal(b *testing.B) {
 }
 
 func TestMyExtendableProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMyExtendable(popr, false)
@@ -3121,6 +3286,10 @@ func BenchmarkMyExtendableProtoUnmarshal(b *testing.B) {
 }
 
 func TestOtherExtenableProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOtherExtenable(popr, false)
@@ -3195,6 +3364,10 @@ func BenchmarkOtherExtenableProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinitionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition(popr, false)
@@ -3269,6 +3442,10 @@ func BenchmarkNestedDefinitionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessageProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, false)
@@ -3343,6 +3520,10 @@ func BenchmarkNestedDefinition_NestedMessageProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessage_NestedNestedMsgProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, false)
@@ -3417,6 +3598,10 @@ func BenchmarkNestedDefinition_NestedMessage_NestedNestedMsgProtoUnmarshal(b *te
 }
 
 func TestNestedScopeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedScope(popr, false)
@@ -3491,6 +3676,10 @@ func BenchmarkNestedScopeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeDefault(popr, false)
@@ -3565,6 +3754,10 @@ func BenchmarkNinOptNativeDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomContainerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomContainer(popr, false)
@@ -3639,6 +3832,10 @@ func BenchmarkCustomContainerProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNidOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNidOptNative(popr, false)
@@ -3713,6 +3910,10 @@ func BenchmarkCustomNameNidOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinOptNative(popr, false)
@@ -3787,6 +3988,10 @@ func BenchmarkCustomNameNinOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinRepNative(popr, false)
@@ -3861,6 +4066,10 @@ func BenchmarkCustomNameNinRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinStruct(popr, false)
@@ -3935,6 +4144,10 @@ func BenchmarkCustomNameNinStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameCustomType(popr, false)
@@ -4009,6 +4222,10 @@ func BenchmarkCustomNameCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinEmbeddedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
@@ -4083,6 +4300,10 @@ func BenchmarkCustomNameNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameEnum(popr, false)
@@ -4157,6 +4378,10 @@ func BenchmarkCustomNameEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNoExtensionsMapProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNoExtensionsMap(popr, false)
@@ -4231,6 +4456,10 @@ func BenchmarkNoExtensionsMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognized(popr, false)
@@ -4305,6 +4534,10 @@ func BenchmarkUnrecognizedProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithInnerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner(popr, false)
@@ -4379,6 +4612,10 @@ func BenchmarkUnrecognizedWithInnerProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithInner_InnerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, false)
@@ -4453,6 +4690,10 @@ func BenchmarkUnrecognizedWithInner_InnerProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed(popr, false)
@@ -4527,6 +4768,10 @@ func BenchmarkUnrecognizedWithEmbedProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbed_EmbeddedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, false)
@@ -4601,6 +4846,10 @@ func BenchmarkUnrecognizedWithEmbed_EmbeddedProtoUnmarshal(b *testing.B) {
 }
 
 func TestNodeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNode(popr, false)
