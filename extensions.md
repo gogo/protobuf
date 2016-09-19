@@ -50,6 +50,12 @@ You might also find that basic structs that started their life as part of an API
 
 `Warning about customtype: It is your responsibility to test all cases of your marshaling, unmarshaling and size methods implemented for your custom type.`
 
+Issues with customtype include:
+  * <a href="https://github.com/gogo/protobuf/issues/199">A Bytes method is not allowed.<a/>
+  * <a href="https://github.com/gogo/protobuf/issues/132">Defining a customtype as a fake proto message is broken.</a>
+  * <a href="https://github.com/gogo/protobuf/issues/147">proto.Clone is broken.</a>
+  * <a href="https://github.com/gogo/protobuf/issues/125">Using a proto message as a customtype is not allowed.</a>
+
 # Goprotobuf Compatibility 
 
 Gogoprotobuf is compatible with Goprotobuf, because it is compatible with protocol buffers (see the section on tests below).
