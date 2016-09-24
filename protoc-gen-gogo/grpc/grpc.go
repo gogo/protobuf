@@ -232,7 +232,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 			continue
 		}
 		g.P("{")
-		g.P("MethodName: ", strconv.Quote(method.GetName()), ",")
+		g.P("MethodName: ", strconv.Quote(generator.CamelCase(method.GetName())), ",")
 		g.P("Handler: ", handlerNames[i], ",")
 		g.P("},")
 	}
@@ -278,8 +278,8 @@ func (g *grpc) generateClientSignature(servName string, method *pb.MethodDescrip
 }
 
 func (g *grpc) generateClientMethod(servName, fullServName, serviceDescVar string, method *pb.MethodDescriptorProto, descExpr string) {
-	sname := fmt.Sprintf("/%s/%s", fullServName, method.GetName())
 	methName := generator.CamelCase(method.GetName())
+	sname := fmt.Sprintf("/%s/%s", fullServName, methName)
 	inType := g.typeName(method.GetInputType())
 	outType := g.typeName(method.GetOutputType())
 
