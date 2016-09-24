@@ -539,7 +539,7 @@ func TestMapParsing(t *testing.T) {
 func TestOneofParsing(t *testing.T) {
 	const in = `name:"Shrek"`
 	m := new(Communique)
-	want := &Communique{Union: &Communique_Name{"Shrek"}}
+	want := &Communique{Union: &Communique_Name{Name: "Shrek"}}
 	if err := UnmarshalText(in, m); err != nil {
 		t.Fatal(err)
 	}

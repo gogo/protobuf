@@ -1354,7 +1354,7 @@ func TestTypedNilMarshal(t *testing.T) {
 	}
 
 	{
-		m := &Communique{Union: &Communique_Msg{nil}}
+		m := &Communique{Union: &Communique_Msg{Msg: nil}}
 		if _, err := Marshal(m); err == nil || err == ErrNil {
 			t.Errorf("Marshal(%#v): got %v, want errOneofHasNil", m, err)
 		}
@@ -2069,7 +2069,7 @@ func TestOneof(t *testing.T) {
 	}
 
 	m = &Communique{
-		Union: &Communique_Name{"Barry"},
+		Union: &Communique_Name{Name: "Barry"},
 	}
 
 	// Round-trip.
@@ -2092,7 +2092,7 @@ func TestOneof(t *testing.T) {
 	}
 
 	// Let's try with a message in the oneof.
-	m.Union = &Communique_Msg{&Strings{StringField: String("deep deep string")}}
+	m.Union = &Communique_Msg{Msg: &Strings{StringField: String("deep deep string")}}
 	b, err = Marshal(m)
 	if err != nil {
 		t.Fatalf("Marshal of message with oneof set to message: %v", err)
