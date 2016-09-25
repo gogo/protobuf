@@ -32,7 +32,7 @@ These projects use gogoprotobuf:
   - <a href="https://srclib.org/">srclib</a> - <a href="https://github.com/sourcegraph/srclib/blob/6538858f0c410cac5c63440317b8d009e889d3fb/graph/def.proto">sample proto file</a>
   - <a href="http://www.adyoulike.com/">adyoulike</a>
   - <a href="http://www.cloudfoundry.org/">cloudfoundry</a> - <a href="https://github.com/cloudfoundry/bbs/blob/d673710b8c4211037805129944ee4c5373d6588a/models/events.proto">sample proto file</a>
-  - <a href="http://kubernetes.io/">kubernetes</a>
+  - <a href="http://kubernetes.io/">kubernetes</a> - <a href="https://github.com/kubernetes/kubernetes/tree/88d8628137f94ee816aaa6606ae8cd045dee0bff/cmd/libs/go2idl">go2idl built on top of gogoprotobuf</a>
   - <a href="https://dgraph.io/">dgraph</a> - <a href="https://github.com/dgraph-io/dgraph/releases/tag/v0.4.3">release notes</a> - <a href="https://discuss.dgraph.io/t/gogoprotobuf-is-extremely-fast/639">benchmarks</a></a>
   - <a href="https://github.com/centrifugal/centrifugo">centrifugo</a> - <a href="https://forum.golangbridge.org/t/centrifugo-real-time-messaging-websocket-or-sockjs-server-v1-5-0-released/2861">release notes</a> - <a href="https://medium.com/@fzambia/centrifugo-protobuf-inside-json-outside-21d39bdabd68#.o3icmgjqd">blog</a>
   - <a href="https://github.com/docker/swarmkit">docker swarmkit</a>
