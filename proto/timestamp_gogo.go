@@ -61,11 +61,11 @@ func (o *Buffer) decTimestamp() (time.Time, error) {
 }
 
 func (o *Buffer) dec_time(p *Properties, base structPointer) error {
-	panic("todo")
-	_, err := o.decTimestamp()
+	t, err := o.decTimestamp()
 	if err != nil {
 		return err
 	}
+	setPtrCustomType(base, p.field, &t)
 	return nil
 }
 
@@ -96,19 +96,45 @@ func (o *Buffer) dec_slice_ref_time(p *Properties, base structPointer) error {
 	return nil
 }
 
-func (o *Buffer) enc_ref_time(p *Properties, base structPointer) error {
-	panic("todo")
-}
-
 func size_time(p *Properties, base structPointer) (n int) {
-	panic("todo")
+	structp := structPointer_GetStructPointer(base, p.field)
+	if structPointer_IsNil(structp) {
+		return 0
+	}
+	tim := structPointer_Interface(structp, timeType).(*time.Time)
+	t, err := timestampProto(*tim)
+	if err != nil {
+		return 0
+	}
+	size := Size(t)
+	return size + sizeVarint(uint64(size)) + len(p.tagcode)
 }
 
 func (o *Buffer) enc_time(p *Properties, base structPointer) error {
-	panic("todo")
+	var state errorState
+	structp := structPointer_GetStructPointer(base, p.field)
+	if structPointer_IsNil(structp) {
+		return ErrNil
+	}
+	tim := structPointer_Interface(structp, timeType).(*time.Time)
+	t, err := timestampProto(*tim)
+	if err != nil {
+		return err
+	}
+	data, err := Marshal(t)
+	if err != nil {
+		return err
+	}
+	o.buf = append(o.buf, p.tagcode...)
+	o.EncodeRawBytes(data)
+	return state.err
 }
 
 func size_ref_time(p *Properties, base structPointer) (n int) {
+	panic("todo")
+}
+
+func (o *Buffer) enc_ref_time(p *Properties, base structPointer) error {
 	panic("todo")
 }
 
