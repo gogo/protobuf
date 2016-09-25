@@ -77,7 +77,7 @@ message StdTypes {
   google.protobuf.Timestamp nullableStdTime = 1 [(gogoproto.stdtime) = true];
   google.protobuf.Duration nullableStdDuration = 2 [(gogoproto.stdduration) = true];
   google.protobuf.Timestamp stdTime = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-//  google.protobuf.Duration stdDuration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+  google.protobuf.Duration stdDuration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
 }
 
 message RepProtoTypes {
@@ -107,7 +107,7 @@ message MapStdTypes {
   map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
 
   map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
-//   map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+  map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
 }
 
 message OneofProtoTypes {
