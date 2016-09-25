@@ -355,7 +355,7 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 	p.enc = nil
 	p.dec = nil
 	p.size = nil
-	if len(p.CustomType) > 0 {
+	if len(p.CustomType) > 0 && typ.Kind() != reflect.Map {
 		p.setCustomEncAndDec(typ)
 		p.setTag(lockGetProp)
 		return
@@ -630,6 +630,8 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 			// so we need encoders for the pointer to this type.
 			vtype = reflect.PtrTo(vtype)
 		}
+
+		p.mvalprop.CustomType = p.CustomType
 		p.mvalprop.init(vtype, "Value", f.Tag.Get("protobuf_val"), nil, lockGetProp)
 	}
 	p.setTag(lockGetProp)

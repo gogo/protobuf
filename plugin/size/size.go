@@ -412,17 +412,32 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				p.P(`l = 0`)
-				if proto3 {
-					p.P(`if len(v) > 0 {`)
+				if gogoproto.IsCustomType(field) {
+					p.P(`l = 0`)
+					if nullable {
+						p.P(`if v != nil {`)
+						p.In()
+					}
+					p.P(`l = v.`, sizeName, `()`)
+					p.P(`l += `, strconv.Itoa(valueKeySize), ` + sov`+p.localName+`(uint64(l))`)
+					if nullable {
+						p.Out()
+						p.P(`}`)
+					}
+					sum = append(sum, `l`)
 				} else {
-					p.P(`if v != nil {`)
+					p.P(`l = 0`)
+					if proto3 {
+						p.P(`if len(v) > 0 {`)
+					} else {
+						p.P(`if v != nil {`)
+					}
+					p.In()
+					p.P(`l = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
+					p.Out()
+					p.P(`}`)
+					sum = append(sum, `l`)
 				}
-				p.In()
-				p.P(`l = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
-				p.Out()
-				p.P(`}`)
-				sum = append(sum, `l`)
 			case descriptor.FieldDescriptorProto_TYPE_SINT32,
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, strconv.Itoa(valueKeySize))

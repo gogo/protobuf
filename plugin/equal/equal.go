@@ -393,7 +393,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 		p.P(`}`)
 		p.P(`for i := range this.`, fieldname, ` {`)
 		p.In()
-		if ctype {
+		if ctype && !p.IsMap(field) {
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
 		} else if isTimestamp {
 			if nullable {
@@ -436,7 +436,15 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 						}
 					}
 				} else if mapValue.IsBytes() {
-					p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
+					if ctype {
+						if nullable {
+							p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) { //nullable`)
+						} else {
+							p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) { //not nullable`)
+						}
+					} else {
+						p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
+					}
 				} else if mapValue.IsString() {
 					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
 				} else {

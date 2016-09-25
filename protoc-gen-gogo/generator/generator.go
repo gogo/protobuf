@@ -1946,7 +1946,14 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		}
 		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
 	default:
-		valType = strings.TrimPrefix(valType, "*")
+		if gogoproto.IsCustomType(m.ValueAliasField) {
+			if !gogoproto.IsNullable(m.ValueAliasField) {
+				valType = strings.TrimPrefix(valType, "*")
+			}
+			g.RecordTypeUse(m.ValueAliasField.GetTypeName())
+		} else {
+			valType = strings.TrimPrefix(valType, "*")
+		}
 	}
 
 	m.GoType = fmt.Sprintf("map[%s]%s", keyType, valType)

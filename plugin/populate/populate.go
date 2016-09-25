@@ -258,13 +258,17 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		if keygoAliasTyp != keygoTyp {
 			keyval = keygoAliasTyp + `(` + keyval + `)`
 		}
-		if m.ValueField.IsMessage() || p.IsGroup(field) {
+		if m.ValueField.IsMessage() || p.IsGroup(field) ||
+			(m.ValueField.IsBytes() && gogoproto.IsCustomType(field)) {
 			s := `this.` + fieldname + `[` + keyval + `] = `
 			if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
 				valuegoTyp = valuegoAliasTyp
 			}
-			goTypName = generator.GoTypeToName(valuegoTyp)
-			funcCall := p.getFuncCall(goTypName)
+			funcCall := p.getCustomFuncCall(goTypName)
+			if !gogoproto.IsCustomType(field) {
+				goTypName = generator.GoTypeToName(valuegoTyp)
+				funcCall = p.getFuncCall(goTypName)
+			}
 			if !nullable {
 				funcCall = `*` + funcCall
 			}
