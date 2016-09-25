@@ -79,17 +79,16 @@ func (o *Buffer) dec_ref_duration(p *Properties, base structPointer) error {
 }
 
 func (o *Buffer) dec_slice_duration(p *Properties, base structPointer) error {
-	panic("todo")
 	d, err := o.decDuration()
 	if err != nil {
 		return err
 	}
-	structPointer_Word64Slice(base, p.field).Append(uint64(d))
+	newBas := appendStructPointer(base, p.field, reflect.SliceOf(reflect.PtrTo(durationType)))
+	setPtrCustomType(newBas, 0, &d)
 	return nil
 }
 
 func (o *Buffer) dec_slice_ref_duration(p *Properties, base structPointer) error {
-	panic("todo")
 	d, err := o.decDuration()
 	if err != nil {
 		return err
@@ -144,18 +143,60 @@ func (o *Buffer) enc_ref_duration(p *Properties, base structPointer) error {
 	return nil
 }
 
-func (o *Buffer) enc_slice_duration(p *Properties, base structPointer) error {
-	panic("todo")
-}
-
 func size_slice_duration(p *Properties, base structPointer) (n int) {
-	panic("todo")
+	pdurs := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(reflect.PtrTo(durationType))).(*[]*time.Duration)
+	durs := *pdurs
+	for i := 0; i < len(durs); i++ {
+		if durs[i] == nil {
+			return 0
+		}
+		dproto := durationProto(*durs[i])
+		size := Size(dproto)
+		n += len(p.tagcode) + size + sizeVarint(uint64(size))
+	}
+	return n
 }
 
-func (o *Buffer) enc_slice_ref_duration(p *Properties, base structPointer) error {
-	panic("todo")
+func (o *Buffer) enc_slice_duration(p *Properties, base structPointer) error {
+	pdurs := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(reflect.PtrTo(durationType))).(*[]*time.Duration)
+	durs := *pdurs
+	for i := 0; i < len(durs); i++ {
+		if durs[i] == nil {
+			return errRepeatedHasNil
+		}
+		dproto := durationProto(*durs[i])
+		data, err := Marshal(dproto)
+		if err != nil {
+			return err
+		}
+		o.buf = append(o.buf, p.tagcode...)
+		o.EncodeRawBytes(data)
+	}
+	return nil
 }
 
 func size_slice_ref_duration(p *Properties, base structPointer) (n int) {
-	panic("todo")
+	pdurs := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(durationType)).(*[]time.Duration)
+	durs := *pdurs
+	for i := 0; i < len(durs); i++ {
+		dproto := durationProto(durs[i])
+		size := Size(dproto)
+		n += len(p.tagcode) + size + sizeVarint(uint64(size))
+	}
+	return n
+}
+
+func (o *Buffer) enc_slice_ref_duration(p *Properties, base structPointer) error {
+	pdurs := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(durationType)).(*[]time.Duration)
+	durs := *pdurs
+	for i := 0; i < len(durs); i++ {
+		dproto := durationProto(durs[i])
+		data, err := Marshal(dproto)
+		if err != nil {
+			return err
+		}
+		o.buf = append(o.buf, p.tagcode...)
+		o.EncodeRawBytes(data)
+	}
+	return nil
 }

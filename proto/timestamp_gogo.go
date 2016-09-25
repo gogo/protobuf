@@ -79,11 +79,12 @@ func (o *Buffer) dec_ref_time(p *Properties, base structPointer) error {
 }
 
 func (o *Buffer) dec_slice_time(p *Properties, base structPointer) error {
-	panic("todo")
-	_, err := o.decTimestamp()
+	t, err := o.decTimestamp()
 	if err != nil {
 		return err
 	}
+	newBas := appendStructPointer(base, p.field, timeType)
+	setCustomType(newBas, 0, t)
 	return nil
 }
 

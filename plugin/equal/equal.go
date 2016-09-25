@@ -403,7 +403,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			}
 		} else if isDuration {
 			if nullable {
-				p.P(`if *(this.`, fieldname, `[i]) != *(that1.`, fieldname, `[i]) {`)
+				p.P(`if dthis, dthat := this.`, fieldname, `[i], that1.`, fieldname, `[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil)  {`)
 			} else {
 				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
 			}
