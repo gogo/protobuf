@@ -83,17 +83,18 @@ func (o *Buffer) dec_slice_time(p *Properties, base structPointer) error {
 	if err != nil {
 		return err
 	}
-	newBas := appendStructPointer(base, p.field, timeType)
-	setCustomType(newBas, 0, t)
+	newBas := appendStructPointer(base, p.field, reflect.SliceOf(reflect.PtrTo(timeType)))
+	setPtrCustomType(newBas, 0, &t)
 	return nil
 }
 
 func (o *Buffer) dec_slice_ref_time(p *Properties, base structPointer) error {
-	panic("todo")
-	_, err := o.decTimestamp()
+	t, err := o.decTimestamp()
 	if err != nil {
 		return err
 	}
+	newBas := appendStructPointer(base, p.field, reflect.SliceOf(timeType))
+	setCustomType(newBas, 0, &t)
 	return nil
 }
 
@@ -155,18 +156,72 @@ func (o *Buffer) enc_ref_time(p *Properties, base structPointer) error {
 	return nil
 }
 
-func (o *Buffer) enc_slice_time(p *Properties, base structPointer) error {
-	panic("todo")
-}
-
 func size_slice_time(p *Properties, base structPointer) (n int) {
-	panic("todo")
+	ptims := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(reflect.PtrTo(timeType))).(*[]*time.Time)
+	tims := *ptims
+	for i := 0; i < len(tims); i++ {
+		if tims[i] == nil {
+			return 0
+		}
+		tproto, err := timestampProto(*tims[i])
+		if err != nil {
+			return 0
+		}
+		size := Size(tproto)
+		n += len(p.tagcode) + size + sizeVarint(uint64(size))
+	}
+	return n
 }
 
-func (o *Buffer) enc_slice_ref_time(p *Properties, base structPointer) error {
-	panic("todo")
+func (o *Buffer) enc_slice_time(p *Properties, base structPointer) error {
+	ptims := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(reflect.PtrTo(timeType))).(*[]*time.Time)
+	tims := *ptims
+	for i := 0; i < len(tims); i++ {
+		if tims[i] == nil {
+			return errRepeatedHasNil
+		}
+		tproto, err := timestampProto(*tims[i])
+		if err != nil {
+			return err
+		}
+		data, err := Marshal(tproto)
+		if err != nil {
+			return err
+		}
+		o.buf = append(o.buf, p.tagcode...)
+		o.EncodeRawBytes(data)
+	}
+	return nil
 }
 
 func size_slice_ref_time(p *Properties, base structPointer) (n int) {
-	panic("todo")
+	ptims := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(timeType)).(*[]time.Time)
+	tims := *ptims
+	for i := 0; i < len(tims); i++ {
+		tproto, err := timestampProto(tims[i])
+		if err != nil {
+			return 0
+		}
+		size := Size(tproto)
+		n += len(p.tagcode) + size + sizeVarint(uint64(size))
+	}
+	return n
+}
+
+func (o *Buffer) enc_slice_ref_time(p *Properties, base structPointer) error {
+	ptims := structPointer_InterfaceAt(base, p.field, reflect.SliceOf(timeType)).(*[]time.Time)
+	tims := *ptims
+	for i := 0; i < len(tims); i++ {
+		tproto, err := timestampProto(tims[i])
+		if err != nil {
+			return err
+		}
+		data, err := Marshal(tproto)
+		if err != nil {
+			return err
+		}
+		o.buf = append(o.buf, p.tagcode...)
+		o.EncodeRawBytes(data)
+	}
+	return nil
 }

@@ -88,9 +88,9 @@ message RepProtoTypes {
 }
 
 message RepStdTypes {
-//  repeated google.protobuf.Timestamp nullableStdTimes = 1 [(gogoproto.stdtime) = true];
+  repeated google.protobuf.Timestamp nullableStdTimes = 1 [(gogoproto.stdtime) = true];
   repeated google.protobuf.Duration nullableStdDurations = 2 [(gogoproto.stdduration) = true];
-//  repeated google.protobuf.Timestamp stdTimes = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+  repeated google.protobuf.Timestamp stdTimes = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
   repeated google.protobuf.Duration stdDurations = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
 }
 
