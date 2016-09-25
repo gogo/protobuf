@@ -30,7 +30,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/jbenet/go-ipfs">go-ipfs</a>
   - <a href="https://github.com/philhofer/rkive">rkive-go</a>
   - <a href="https://www.dropbox.com">dropbox</a>
-  - <a href="https://srclib.org/">srclib</a> - <a href="https://sourcegraph.com/sourcegraph.com/sourcegraph/srclib@97f54fed4f9a4bff0a28edf6eb7c0e013afc7bcd/.tree/graph/def.proto">sample proto file</a>
+  - <a href="https://srclib.org/">srclib</a> - <a href="https://github.com/sourcegraph/srclib/blob/6538858f0c410cac5c63440317b8d009e889d3fb/graph/def.proto">sample proto file</a>
   - <a href="http://www.adyoulike.com/">adyoulike</a>
   - <a href="http://www.cloudfoundry.org/">cloudfoundry</a>
   - <a href="http://kubernetes.io/">kubernetes</a>
