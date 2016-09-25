@@ -123,3 +123,4 @@ message OneofProtoTypes {
 //     google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
 //   }
 // }
+

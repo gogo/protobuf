@@ -1014,7 +1014,6 @@ func size_slice_struct_message(p *Properties, base structPointer) (n int) {
 		if p.isMarshaler {
 			m := structPointer_Interface(structp, p.stype).(Marshaler)
 			data, _ := m.Marshal()
-			n += len(p.tagcode)
 			n += sizeRawBytes(data)
 			continue
 		}
