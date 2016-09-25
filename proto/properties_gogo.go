@@ -32,7 +32,6 @@ import (
 	"fmt"
 	"os"
 	"reflect"
-	"strings"
 )
 
 func (p *Properties) setCustomEncAndDec(typ reflect.Type) {
@@ -98,13 +97,6 @@ func (p *Properties) setTimeEncAndDec(typ reflect.Type) {
 }
 
 func (p *Properties) setSliceOfNonPointerStructs(typ reflect.Type) {
-	if strings.HasSuffix(typ.String(), "time.Time") {
-		fmt.Fprintf(os.Stderr, "%s\n", typ.String())
-		p.enc = (*Buffer).enc_slice_ref_time
-		p.dec = (*Buffer).dec_slice_ref_time
-		p.size = size_slice_ref_time
-		return
-	}
 	t2 := typ.Elem()
 	p.sstype = typ
 	p.stype = t2

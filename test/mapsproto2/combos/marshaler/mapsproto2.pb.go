@@ -2277,7 +2277,6 @@ func (m *CustomMap) MarshalTo(data []byte) (int, error) {
 			if v != nil {
 				data[i] = 0x12
 				i++
-				//cusomtype
 				i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
 				n1, err := v.MarshalTo(data[i:])
 				if err != nil {
@@ -2303,7 +2302,6 @@ func (m *CustomMap) MarshalTo(data []byte) (int, error) {
 			i += copy(data[i:], k)
 			data[i] = 0x12
 			i++
-			//cusomtype
 			i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
 			n2, err := v.MarshalTo(data[i:])
 			if err != nil {
@@ -2331,7 +2329,6 @@ func (m *CustomMap) MarshalTo(data []byte) (int, error) {
 			if v != nil {
 				data[i] = 0x12
 				i++
-				//cusomtype
 				i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
 				n3, err := v.MarshalTo(data[i:])
 				if err != nil {
@@ -2357,7 +2354,6 @@ func (m *CustomMap) MarshalTo(data []byte) (int, error) {
 			i += copy(data[i:], k)
 			data[i] = 0x12
 			i++
-			//cusomtype
 			i = encodeVarintMapsproto2(data, i, uint64(v.Size()))
 			n4, err := v.MarshalTo(data[i:])
 			if err != nil {

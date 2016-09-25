@@ -183,7 +183,6 @@ func negative(fieldType descriptor.FieldDescriptorProto_Type) bool {
 }
 
 func (p *plugin) getFuncName(goTypName string) string {
-	//fmt.Fprintf(os.Stderr, "goTypName:%s\n", goTypName)
 	funcName := "NewPopulated" + goTypName
 	goTypNames := strings.Split(goTypName, ".")
 	if len(goTypNames) == 2 {

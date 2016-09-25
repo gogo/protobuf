@@ -342,7 +342,6 @@ func (p *marshalto) mapField(numGen NumGen, field *descriptor.FieldDescriptorPro
 	case descriptor.FieldDescriptorProto_TYPE_STRING,
 		descriptor.FieldDescriptorProto_TYPE_BYTES:
 		if gogoproto.IsCustomType(field) && kvField.IsBytes() {
-			p.P(`//cusomtype`)
 			p.callVarint(varName, `.Size()`)
 			p.P(`n`, numGen.Next(), `, err := `, varName, `.MarshalTo(data[i:])`)
 			p.P(`if err != nil {`)

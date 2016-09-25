@@ -380,6 +380,7 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 		fmt.Fprintf(os.Stderr, "proto: no coders for %v\n", t1)
 
 	// proto3 scalar types
+
 	case reflect.Bool:
 		if p.proto3 {
 			p.enc = (*Buffer).enc_proto3_bool
@@ -461,6 +462,7 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 		} else {
 			fmt.Fprintf(os.Stderr, "proto: no coders for struct %T\n", typ)
 		}
+
 	case reflect.Ptr:
 		switch t2 := t1.Elem(); t2.Kind() {
 		default:
