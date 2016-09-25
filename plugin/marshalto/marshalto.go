@@ -309,7 +309,7 @@ func wireToType(wire string) int {
 	panic("unreachable")
 }
 
-func (p *marshalto) mapField(numGen NumGen, fieldTyp descriptor.FieldDescriptorProto_Type, varName string, protoSizer bool) {
+func (p *marshalto) mapField(numGen NumGen, customType bool, fieldTyp descriptor.FieldDescriptorProto_Type, varName string, protoSizer bool) {
 	switch fieldTyp {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(`, varName, `))`)
@@ -340,8 +340,19 @@ func (p *marshalto) mapField(numGen NumGen, fieldTyp descriptor.FieldDescriptorP
 		p.P(`i++`)
 	case descriptor.FieldDescriptorProto_TYPE_STRING,
 		descriptor.FieldDescriptorProto_TYPE_BYTES:
-		p.callVarint(`len(`, varName, `)`)
-		p.P(`i+=copy(data[i:], `, varName, `)`)
+		if customType {
+			p.callVarint(varName, `.Size()`)
+			p.P(`n`, numGen.Next(), `, err := `, varName, `.MarshalTo(data[i:])`)
+			p.P(`if err != nil {`)
+			p.In()
+			p.P(`return 0, err`)
+			p.Out()
+			p.P(`}`)
+			p.P(`i+=n`, numGen.Current())
+		} else {
+			p.callVarint(`len(`, varName, `)`)
+			p.P(`i+=copy(data[i:], `, varName, `)`)
+		}
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
 		p.callVarint(`(uint32(`, varName, `) << 1) ^ uint32((`, varName, ` >> 31))`)
 	case descriptor.FieldDescriptorProto_TYPE_SINT64:
@@ -912,17 +923,32 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				p.P(`byteSize := 0`)
-				if proto3 {
-					p.P(`if len(v) > 0 {`)
+				if gogoproto.IsCustomType(field) {
+					p.P(`cSize := 0`)
+					if gogoproto.IsNullable(field) {
+						p.P(`if `, accessor, ` != nil {`)
+						p.In()
+					}
+					p.P(`cSize = `, accessor, `.Size()`)
+					p.P(`cSize += `, strconv.Itoa(valueKeySize), ` + sov`+p.localName+`(uint64(cSize))`)
+					if gogoproto.IsNullable(field) {
+						p.Out()
+						p.P(`}`)
+					}
+					sum = append(sum, `cSize`)
 				} else {
-					p.P(`if v != nil {`)
+					p.P(`byteSize := 0`)
+					if proto3 {
+						p.P(`if len(v) > 0 {`)
+					} else {
+						p.P(`if v != nil {`)
+					}
+					p.In()
+					p.P(`byteSize = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
+					p.Out()
+					p.P(`}`)
+					sum = append(sum, `byteSize`)
 				}
-				p.In()
-				p.P(`byteSize = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
-				p.Out()
-				p.P(`}`)
-				sum = append(sum, `byteSize`)
 			case descriptor.FieldDescriptorProto_TYPE_SINT32,
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, strconv.Itoa(valueKeySize))
@@ -946,21 +972,22 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				} else {
 					p.P(`msgSize = `, accessor, `.Size()`)
 				}
-				p.Out()
 				p.P(`msgSize += `, strconv.Itoa(valueKeySize), ` + sov`+p.localName+`(uint64(msgSize))`)
+				p.Out()
 				p.P(`}`)
 				sum = append(sum, `msgSize`)
 			}
 			p.P(`mapSize := `, strings.Join(sum, " + "))
 			p.callVarint("mapSize")
 			p.encodeKey(1, wireToType(keywire))
-			p.mapField(numGen, m.KeyField.GetType(), "k", protoSizer)
-			nullableMsg := m.ValueField.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE && nullable
+			p.mapField(numGen, false, m.KeyField.GetType(), "k", protoSizer)
+			nullableMsg := nullable && (m.ValueField.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE ||
+				gogoproto.IsCustomType(field) && m.ValueField.IsBytes())
+			plainBytes := m.ValueField.IsBytes() && !gogoproto.IsCustomType(field)
 			if nullableMsg {
-				p.P(`if `, accessor, ` != nil {`)
+				p.P(`if `, accessor, ` != nil { `)
 				p.In()
-			}
-			if m.ValueField.IsBytes() {
+			} else if plainBytes {
 				if proto3 {
 					p.P(`if len(`, accessor, `) > 0 {`)
 				} else {
@@ -969,8 +996,8 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.In()
 			}
 			p.encodeKey(2, wireToType(valuewire))
-			p.mapField(numGen, m.ValueField.GetType(), accessor, protoSizer)
-			if nullableMsg || m.ValueField.IsBytes() {
+			p.mapField(numGen, gogoproto.IsCustomType(field), m.ValueField.GetType(), accessor, protoSizer)
+			if nullableMsg || plainBytes {
 				p.Out()
 				p.P(`}`)
 			}
