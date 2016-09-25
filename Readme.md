@@ -26,7 +26,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/mesos/mesos-go">mesos-go</a> - <a href="https://github.com/mesos/mesos-go/blob/master/mesosproto/mesos.proto">sample proto file</a>
   - <a href="https://github.com/mozilla-services/heka">heka</a> - <a href="https://github.com/mozilla-services/heka/commit/eb72fbf7d2d28249fbaf8d8dc6607f4eb6f03351">the switch from golang/protobuf to gogo/protobuf when it was still on code.google.com</a>
   - <a href="https://github.com/cockroachdb/cockroach">cockroachdb</a> - <a href="https://github.com/cockroachdb/cockroach/blob/651d54d393e391a30154e9117ab4b18d9ee6d845/roachpb/metadata.proto">sample proto file</a>
-  - <a href="https://github.com/jbenet/go-ipfs">go-ipfs</a>
+  - <a href="https://github.com/jbenet/go-ipfs">go-ipfs</a> - <a href="https://github.com/ipfs/go-ipfs/blob/2b6da0c024f28abeb16947fb452787196a6b56a2/merkledag/pb/merkledag.proto">sample proto file</a>
   - <a href="https://github.com/philhofer/rkive">rkive-go</a>
   - <a href="https://www.dropbox.com">dropbox</a>
   - <a href="https://srclib.org/">srclib</a> - <a href="https://github.com/sourcegraph/srclib/blob/6538858f0c410cac5c63440317b8d009e889d3fb/graph/def.proto">sample proto file</a>
