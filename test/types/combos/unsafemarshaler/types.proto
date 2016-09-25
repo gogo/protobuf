@@ -65,3 +65,7 @@ message KnownTypes {
   google.protobuf.BytesValue bytes = 11;
 }
   
+message RepKnownTypes {
+  repeated google.protobuf.Duration dur = 1;
+  repeated google.protobuf.Timestamp ts = 2;
+}
