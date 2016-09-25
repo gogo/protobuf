@@ -1740,7 +1740,15 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if field.OneofIndex != nil {
 		oneof = ",oneof"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s",
+	stdtime := ""
+	if gogoproto.IsStdTime(field) {
+		stdtime = ",stdtime"
+	}
+	stdduration := ""
+	if gogoproto.IsStdDuration(field) {
+		stdduration = ",stdduration"
+	}
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1753,7 +1761,9 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		ctype,
 		casttype,
 		castkey,
-		castvalue))
+		castvalue,
+		stdtime,
+		stdduration))
 }
 
 func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf bool) bool {

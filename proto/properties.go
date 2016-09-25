@@ -190,10 +190,11 @@ type Properties struct {
 	proto3   bool   // whether this is known to be a proto3 field; set for []byte only
 	oneof    bool   // whether this is a oneof field
 
-	Default    string // default value
-	HasDefault bool   // whether an explicit default was provided
-	CustomType string
-	def_uint64 uint64
+	Default     string // default value
+	HasDefault  bool   // whether an explicit default was provided
+	CustomType  string
+	StdTime     bool
+	StdDuration bool
 
 	enc           encoder
 	valEnc        valueEncoder // set for bool and numeric types only
@@ -340,6 +341,10 @@ func (p *Properties) Parse(s string) {
 			p.OrigName = strings.Split(f, "=")[1]
 		case strings.HasPrefix(f, "customtype="):
 			p.CustomType = strings.Split(f, "=")[1]
+		case f == "stdtime":
+			p.StdTime = true
+		case f == "stdduration":
+			p.StdDuration = true
 		}
 	}
 }
@@ -360,12 +365,21 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 		p.setTag(lockGetProp)
 		return
 	}
+	if p.StdTime {
+		p.setTimeEncAndDec(typ)
+		p.setTag(lockGetProp)
+		return
+	}
+	if p.StdDuration {
+		p.setDurationEncAndDec(typ)
+		p.setTag(lockGetProp)
+		return
+	}
 	switch t1 := typ; t1.Kind() {
 	default:
 		fmt.Fprintf(os.Stderr, "proto: no coders for %v\n", t1)
 
 	// proto3 scalar types
-
 	case reflect.Bool:
 		if p.proto3 {
 			p.enc = (*Buffer).enc_proto3_bool
@@ -447,7 +461,6 @@ func (p *Properties) setEncAndDec(typ reflect.Type, f *reflect.StructField, lock
 		} else {
 			fmt.Fprintf(os.Stderr, "proto: no coders for struct %T\n", typ)
 		}
-
 	case reflect.Ptr:
 		switch t2 := t1.Elem(); t2.Kind() {
 		default:

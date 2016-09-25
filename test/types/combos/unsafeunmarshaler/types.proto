@@ -73,12 +73,12 @@ message ProtoTypes {
   google.protobuf.Duration duration = 4 [(gogoproto.nullable) = false];
 }
 
-message StdTypes {
-  google.protobuf.Timestamp nullableStdTime = 1 [(gogoproto.stdtime) = true];
-  google.protobuf.Duration nullableStdDuration = 2 [(gogoproto.stdduration) = true];
-  google.protobuf.Timestamp stdTime = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  google.protobuf.Duration stdDuration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-}
+// message StdTypes {
+//   google.protobuf.Timestamp nullableStdTime = 1 [(gogoproto.stdtime) = true];
+//   google.protobuf.Duration nullableStdDuration = 2 [(gogoproto.stdduration) = true];
+//   google.protobuf.Timestamp stdTime = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+//   google.protobuf.Duration stdDuration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+// }
 
 message RepProtoTypes {
   repeated google.protobuf.Timestamp nullableTimestamps = 1;
@@ -87,12 +87,12 @@ message RepProtoTypes {
   repeated google.protobuf.Duration durations = 4 [(gogoproto.nullable) = false];
 }
 
-message RepStdTypes {
-  repeated google.protobuf.Timestamp nullableStdTimes = 1 [(gogoproto.stdtime) = true];
-  repeated google.protobuf.Duration nullableStdDurations = 2 [(gogoproto.stdduration) = true];
-  repeated google.protobuf.Timestamp stdTimes = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  repeated google.protobuf.Duration stdDurations = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-}
+// message RepStdTypes {
+//   repeated google.protobuf.Timestamp nullableStdTimes = 1 [(gogoproto.stdtime) = true];
+//   repeated google.protobuf.Duration nullableStdDurations = 2 [(gogoproto.stdduration) = true];
+//   repeated google.protobuf.Timestamp stdTimes = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+//   repeated google.protobuf.Duration stdDurations = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+// }
 
 message MapProtoTypes {
   map<int32,google.protobuf.Timestamp> nullableTimestamp = 1;
@@ -102,13 +102,13 @@ message MapProtoTypes {
   map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.nullable) = false];
 }
 
-message MapStdTypes {
-  map<int32,google.protobuf.Timestamp> nullableTimestamp = 1 [(gogoproto.stdtime) = true];
-  map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+// message MapStdTypes {
+//   map<int32,google.protobuf.Timestamp> nullableTimestamp = 1 [(gogoproto.stdtime) = true];
+//   map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
 
-  map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
-  map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-}
+//   map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
+//   map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
+// }
 
 message OneofProtoTypes {
   oneof OneOfProtoTimes {
@@ -117,9 +117,9 @@ message OneofProtoTypes {
   }
 }
 
-message OneofStdTypes {
-  oneof OneOfStdTimes {
-    google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
-    google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
-  }
-}
+// message OneofStdTypes {
+//   oneof OneOfStdTimes {
+//     google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
+//     google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
+//   }
+// }
