@@ -22,7 +22,6 @@ These projects use gogoprotobuf:
 
   - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a>
   - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">blog</a>
-  - <a href="http://bazil.org">bazil</a>
   - <a href="http://badoo.com">badoo</a>
   - <a href="https://github.com/mesos/mesos-go">mesos-go</a>
   - <a href="https://github.com/mozilla-services/heka">heka</a>
