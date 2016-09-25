@@ -28,7 +28,12 @@
 
 package proto
 
-import "time"
+import (
+	"reflect"
+	"time"
+)
+
+var timeType = reflect.TypeOf((*time.Time)(nil)).Elem()
 
 type timestamp struct {
 	Seconds int64 `protobuf:"varint,1,opt,name=seconds,proto3" json:"seconds,omitempty"`

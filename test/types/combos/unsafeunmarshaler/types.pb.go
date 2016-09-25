@@ -11,9 +11,12 @@
 	It has these top-level messages:
 		KnownTypes
 		ProtoTypes
+		StdTypes
 		RepProtoTypes
 		MapProtoTypes
+		MapStdTypes
 		OneofProtoTypes
+		OneofStdTypes
 */
 package types
 
@@ -24,6 +27,9 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import google_protobuf1 "github.com/gogo/protobuf/types"
 import google_protobuf2 "github.com/gogo/protobuf/types"
 import google_protobuf3 "github.com/gogo/protobuf/types"
+
+import time "time"
+import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
 import io "io"
 
@@ -174,6 +180,23 @@ func (m *ProtoTypes) GetDuration() google_protobuf1.Duration {
 	return google_protobuf1.Duration{}
 }
 
+type StdTypes struct {
+	//  google.protobuf.Timestamp nullableStdTime = 1 [(gogoproto.stdtime) = true];
+	NullableStdDuration *time.Duration `protobuf:"bytes,2,opt,name=nullableStdDuration,stdduration" json:"nullableStdDuration,omitempty"`
+}
+
+func (m *StdTypes) Reset()                    { *m = StdTypes{} }
+func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
+func (*StdTypes) ProtoMessage()               {}
+func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+
+func (m *StdTypes) GetNullableStdDuration() *time.Duration {
+	if m != nil {
+		return m.NullableStdDuration
+	}
+	return nil
+}
+
 type RepProtoTypes struct {
 	NullableTimestamps []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
 	NullableDurations  []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
@@ -184,7 +207,7 @@ type RepProtoTypes struct {
 func (m *RepProtoTypes) Reset()                    { *m = RepProtoTypes{} }
 func (m *RepProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepProtoTypes) ProtoMessage()               {}
-func (*RepProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+func (*RepProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
 
 func (m *RepProtoTypes) GetNullableTimestamps() []*google_protobuf2.Timestamp {
 	if m != nil {
@@ -224,7 +247,7 @@ type MapProtoTypes struct {
 func (m *MapProtoTypes) Reset()                    { *m = MapProtoTypes{} }
 func (m *MapProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapProtoTypes) ProtoMessage()               {}
-func (*MapProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
+func (*MapProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
 
 func (m *MapProtoTypes) GetNullableTimestamp() map[int32]*google_protobuf2.Timestamp {
 	if m != nil {
@@ -254,6 +277,14 @@ func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf1.Duration {
 	return nil
 }
 
+type MapStdTypes struct {
+}
+
+func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
+func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
+func (*MapStdTypes) ProtoMessage()               {}
+func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
+
 type OneofProtoTypes struct {
 	// Types that are valid to be assigned to OneOfProtoTimes:
 	//	*OneofProtoTypes_Timestamp
@@ -264,7 +295,7 @@ type OneofProtoTypes struct {
 func (m *OneofProtoTypes) Reset()                    { *m = OneofProtoTypes{} }
 func (m *OneofProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofProtoTypes) ProtoMessage()               {}
-func (*OneofProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
+func (*OneofProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
 
 type isOneofProtoTypes_OneOfProtoTimes interface {
 	isOneofProtoTypes_OneOfProtoTimes()
@@ -378,12 +409,118 @@ func _OneofProtoTypes_OneofSizer(msg proto.Message) (n int) {
 	return n
 }
 
+type OneofStdTypes struct {
+	// Types that are valid to be assigned to OneOfStdTimes:
+	//	*OneofStdTypes_Duration
+	OneOfStdTimes isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+}
+
+func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
+func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
+func (*OneofStdTypes) ProtoMessage()               {}
+func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{7} }
+
+type isOneofStdTypes_OneOfStdTimes interface {
+	isOneofStdTypes_OneOfStdTimes()
+	Equal(interface{}) bool
+	VerboseEqual(interface{}) error
+	Size() int
+}
+
+type OneofStdTypes_Duration struct {
+	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,oneof,stdduration"`
+}
+
+func (*OneofStdTypes_Duration) isOneofStdTypes_OneOfStdTimes() {}
+
+func (m *OneofStdTypes) GetOneOfStdTimes() isOneofStdTypes_OneOfStdTimes {
+	if m != nil {
+		return m.OneOfStdTimes
+	}
+	return nil
+}
+
+func (m *OneofStdTypes) GetDuration() *time.Duration {
+	if x, ok := m.GetOneOfStdTimes().(*OneofStdTypes_Duration); ok {
+		return x.Duration
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*OneofStdTypes) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _OneofStdTypes_OneofMarshaler, _OneofStdTypes_OneofUnmarshaler, _OneofStdTypes_OneofSizer, []interface{}{
+		(*OneofStdTypes_Duration)(nil),
+	}
+}
+
+func _OneofStdTypes_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*OneofStdTypes)
+	// OneOfStdTimes
+	switch x := m.OneOfStdTimes.(type) {
+	case *OneofStdTypes_Duration:
+		_ = b.EncodeVarint(2<<3 | proto.WireBytes)
+		data, err := github_com_gogo_protobuf_types.StdDurationMarshal(*x.Duration)
+		if err != nil {
+			return err
+		}
+		if err := b.EncodeRawBytes(data); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("OneofStdTypes.OneOfStdTimes has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _OneofStdTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*OneofStdTypes)
+	switch tag {
+	case 2: // OneOfStdTimes.duration
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		x, err := b.DecodeRawBytes(true)
+		if err != nil {
+			return true, err
+		}
+		c := new(time.Duration)
+		if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(c, x); err != nil {
+			return true, err
+		}
+		m.OneOfStdTimes = &OneofStdTypes_Duration{c}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _OneofStdTypes_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*OneofStdTypes)
+	// OneOfStdTimes
+	switch x := m.OneOfStdTimes.(type) {
+	case *OneofStdTypes_Duration:
+		s := github_com_gogo_protobuf_types.SizeOfStdDuration(*x.Duration)
+		n += proto.SizeVarint(2<<3 | proto.WireBytes)
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
+}
+
 func init() {
 	proto.RegisterType((*KnownTypes)(nil), "types.KnownTypes")
 	proto.RegisterType((*ProtoTypes)(nil), "types.ProtoTypes")
+	proto.RegisterType((*StdTypes)(nil), "types.StdTypes")
 	proto.RegisterType((*RepProtoTypes)(nil), "types.RepProtoTypes")
 	proto.RegisterType((*MapProtoTypes)(nil), "types.MapProtoTypes")
+	proto.RegisterType((*MapStdTypes)(nil), "types.MapStdTypes")
 	proto.RegisterType((*OneofProtoTypes)(nil), "types.OneofProtoTypes")
+	proto.RegisterType((*OneofStdTypes)(nil), "types.OneofStdTypes")
 }
 func (this *KnownTypes) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -579,6 +716,78 @@ func (this *ProtoTypes) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Duration.Equal(&that1.Duration) {
+		return false
+	}
+	return true
+}
+func (this *StdTypes) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*StdTypes)
+	if !ok {
+		that2, ok := that.(StdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *StdTypes")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *StdTypes but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *StdTypes but is not nil && this == nil")
+	}
+	if this.NullableStdDuration != nil && that1.NullableStdDuration != nil {
+		if *this.NullableStdDuration != *that1.NullableStdDuration {
+			return fmt.Errorf("NullableStdDuration this(%v) Not Equal that(%v)", *this.NullableStdDuration, *that1.NullableStdDuration)
+		}
+	} else if this.NullableStdDuration != nil {
+		return fmt.Errorf("this.NullableStdDuration == nil && that.NullableStdDuration != nil")
+	} else if that1.NullableStdDuration != nil {
+		return fmt.Errorf("NullableStdDuration this(%v) Not Equal that(%v)", this.NullableStdDuration, that1.NullableStdDuration)
+	}
+	return nil
+}
+func (this *StdTypes) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*StdTypes)
+	if !ok {
+		that2, ok := that.(StdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.NullableStdDuration != nil && that1.NullableStdDuration != nil {
+		if *this.NullableStdDuration != *that1.NullableStdDuration {
+			return false
+		}
+	} else if this.NullableStdDuration != nil {
+		return false
+	} else if that1.NullableStdDuration != nil {
 		return false
 	}
 	return true
@@ -827,6 +1036,60 @@ func (this *MapProtoTypes) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *MapStdTypes) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*MapStdTypes)
+	if !ok {
+		that2, ok := that.(MapStdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *MapStdTypes")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *MapStdTypes but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *MapStdTypes but is not nil && this == nil")
+	}
+	return nil
+}
+func (this *MapStdTypes) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MapStdTypes)
+	if !ok {
+		that2, ok := that.(MapStdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	return true
+}
 func (this *OneofProtoTypes) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -1019,6 +1282,150 @@ func (this *OneofProtoTypes_Duration) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *OneofStdTypes) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OneofStdTypes)
+	if !ok {
+		that2, ok := that.(OneofStdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OneofStdTypes")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OneofStdTypes but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OneofStdTypes but is not nil && this == nil")
+	}
+	if that1.OneOfStdTimes == nil {
+		if this.OneOfStdTimes != nil {
+			return fmt.Errorf("this.OneOfStdTimes != nil && that1.OneOfStdTimes == nil")
+		}
+	} else if this.OneOfStdTimes == nil {
+		return fmt.Errorf("this.OneOfStdTimes == nil && that1.OneOfStdTimes != nil")
+	} else if err := this.OneOfStdTimes.VerboseEqual(that1.OneOfStdTimes); err != nil {
+		return err
+	}
+	return nil
+}
+func (this *OneofStdTypes_Duration) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*OneofStdTypes_Duration)
+	if !ok {
+		that2, ok := that.(OneofStdTypes_Duration)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *OneofStdTypes_Duration")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *OneofStdTypes_Duration but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *OneofStdTypes_Duration but is not nil && this == nil")
+	}
+	if this.Duration != nil && that1.Duration != nil {
+		if *this.Duration != *that1.Duration {
+			return fmt.Errorf("Duration this(%v) Not Equal that(%v)", *this.Duration, *that1.Duration)
+		}
+	} else if this.Duration != nil {
+		return fmt.Errorf("this.Duration == nil && that.Duration != nil")
+	} else if that1.Duration != nil {
+		return fmt.Errorf("Duration this(%v) Not Equal that(%v)", this.Duration, that1.Duration)
+	}
+	return nil
+}
+func (this *OneofStdTypes) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OneofStdTypes)
+	if !ok {
+		that2, ok := that.(OneofStdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if that1.OneOfStdTimes == nil {
+		if this.OneOfStdTimes != nil {
+			return false
+		}
+	} else if this.OneOfStdTimes == nil {
+		return false
+	} else if !this.OneOfStdTimes.Equal(that1.OneOfStdTimes) {
+		return false
+	}
+	return true
+}
+func (this *OneofStdTypes_Duration) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*OneofStdTypes_Duration)
+	if !ok {
+		that2, ok := that.(OneofStdTypes_Duration)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if this.Duration != nil && that1.Duration != nil {
+		if *this.Duration != *that1.Duration {
+			return false
+		}
+	} else if this.Duration != nil {
+		return false
+	} else if that1.Duration != nil {
+		return false
+	}
+	return true
+}
 func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 	this := &KnownTypes{}
 	if r.Intn(10) != 0 {
@@ -1071,6 +1478,16 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	this.Timestamp = *v1
 	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
 	this.Duration = *v2
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
+	this := &StdTypes{}
+	if r.Intn(10) != 0 {
+		this.NullableStdDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+	}
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -1148,6 +1565,13 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 	return this
 }
 
+func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
+	this := &MapStdTypes{}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
 	this := &OneofProtoTypes{}
 	oneofNumber_OneOfProtoTimes := []int32{1, 2}[r.Intn(2)]
@@ -1170,6 +1594,23 @@ func NewPopulatedOneofProtoTypes_Timestamp(r randyTypes, easy bool) *OneofProtoT
 func NewPopulatedOneofProtoTypes_Duration(r randyTypes, easy bool) *OneofProtoTypes_Duration {
 	this := &OneofProtoTypes_Duration{}
 	this.Duration = google_protobuf1.NewPopulatedDuration(r, easy)
+	return this
+}
+func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
+	this := &OneofStdTypes{}
+	oneofNumber_OneOfStdTimes := []int32{2}[r.Intn(1)]
+	switch oneofNumber_OneOfStdTimes {
+	case 2:
+		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOneofStdTypes_Duration(r randyTypes, easy bool) *OneofStdTypes_Duration {
+	this := &OneofStdTypes_Duration{}
+	this.Duration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	return this
 }
 
@@ -1313,6 +1754,16 @@ func (m *ProtoTypes) Size() (n int) {
 	return n
 }
 
+func (m *StdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.NullableStdDuration != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableStdDuration)
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+
 func (m *RepProtoTypes) Size() (n int) {
 	var l int
 	_ = l
@@ -1393,6 +1844,12 @@ func (m *MapProtoTypes) Size() (n int) {
 	return n
 }
 
+func (m *MapStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	return n
+}
+
 func (m *OneofProtoTypes) Size() (n int) {
 	var l int
 	_ = l
@@ -1416,6 +1873,24 @@ func (m *OneofProtoTypes_Duration) Size() (n int) {
 	_ = l
 	if m.Duration != nil {
 		l = m.Duration.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+func (m *OneofStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.OneOfStdTimes != nil {
+		n += m.OneOfStdTimes.Size()
+	}
+	return n
+}
+
+func (m *OneofStdTypes_Duration) Size() (n int) {
+	var l int
+	_ = l
+	if m.Duration != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration)
 		n += 1 + l + sovTypes(uint64(l))
 	}
 	return n
@@ -1999,6 +2474,89 @@ func (m *ProtoTypes) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.Duration.Unmarshal(data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypesUnsafe(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTypesUnsafe
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StdTypes) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypesUnsafe
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StdTypes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StdTypes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NullableStdDuration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypesUnsafe
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypesUnsafe
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.NullableStdDuration == nil {
+				m.NullableStdDuration = new(time.Duration)
+			}
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableStdDuration, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2691,6 +3249,56 @@ func (m *MapProtoTypes) Unmarshal(data []byte) error {
 	}
 	return nil
 }
+func (m *MapStdTypes) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypesUnsafe
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MapStdTypes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MapStdTypes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypesUnsafe(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTypesUnsafe
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *OneofProtoTypes) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -2783,6 +3391,88 @@ func (m *OneofProtoTypes) Unmarshal(data []byte) error {
 				return err
 			}
 			m.OneOfProtoTimes = &OneofProtoTypes_Duration{v}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypesUnsafe(data[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthTypesUnsafe
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *OneofStdTypes) Unmarshal(data []byte) error {
+	l := len(data)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypesUnsafe
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := data[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: OneofStdTypes: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: OneofStdTypes: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Duration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypesUnsafe
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypesUnsafe
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			v := new(time.Duration)
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(v, data[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			m.OneOfStdTimes = &OneofStdTypes_Duration{v}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2913,51 +3603,55 @@ var (
 func init() { proto.RegisterFile("combos/unsafeunmarshaler/types.proto", fileDescriptorTypes) }
 
 var fileDescriptorTypes = []byte{
-	// 725 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xb4, 0x54, 0x4f, 0x6f, 0xd3, 0x48,
-	0x1c, 0x8d, 0xe3, 0xa4, 0xdb, 0xfe, 0xaa, 0xee, 0xb6, 0x23, 0xed, 0xca, 0x1b, 0x90, 0x5b, 0x05,
-	0x0e, 0x55, 0xab, 0x3a, 0x90, 0x44, 0x01, 0x15, 0x81, 0x50, 0xd4, 0xd2, 0x02, 0x82, 0xa2, 0x50,
-	0x2a, 0xb8, 0x20, 0xec, 0x66, 0x92, 0x46, 0x4c, 0x3c, 0x91, 0x3d, 0xa6, 0xca, 0x8d, 0x2f, 0xc1,
-	0x01, 0xee, 0x48, 0x7c, 0x04, 0x8e, 0x5c, 0x90, 0x7a, 0xe4, 0x13, 0xa0, 0xd6, 0x7c, 0x89, 0x1e,
-	0xd1, 0x8c, 0xc7, 0x89, 0x53, 0xff, 0x09, 0x97, 0xde, 0x3c, 0x9e, 0xf7, 0xde, 0xbc, 0x79, 0xf3,
-	0x66, 0xe0, 0xfa, 0x21, 0xed, 0x5b, 0xd4, 0xad, 0x78, 0xb6, 0x6b, 0x76, 0xb0, 0x67, 0xf7, 0x4d,
-	0xc7, 0x3d, 0x32, 0x09, 0x76, 0x2a, 0x6c, 0x38, 0xc0, 0xae, 0x31, 0x70, 0x28, 0xa3, 0xa8, 0x28,
-	0x06, 0xa5, 0x8d, 0x6e, 0x8f, 0x1d, 0x79, 0x96, 0x71, 0x48, 0xfb, 0x95, 0x2e, 0xed, 0xd2, 0x8a,
-	0x98, 0xb5, 0xbc, 0x8e, 0x18, 0x89, 0x81, 0xf8, 0x0a, 0x58, 0x25, 0xbd, 0x4b, 0x69, 0x97, 0xe0,
-	0x31, 0xaa, 0xed, 0x39, 0x26, 0xeb, 0x51, 0x5b, 0xce, 0x2f, 0x5f, 0x9c, 0x67, 0xbd, 0x3e, 0x76,
-	0x99, 0xd9, 0x1f, 0xa4, 0x09, 0x1c, 0x3b, 0xe6, 0x60, 0x80, 0x1d, 0x69, 0xab, 0xfc, 0xa1, 0x00,
-	0xf0, 0xd8, 0xa6, 0xc7, 0xf6, 0x3e, 0xb7, 0x87, 0xd6, 0x41, 0x6d, 0x7b, 0x8e, 0xa6, 0xac, 0x28,
-	0xab, 0xf3, 0xd5, 0xff, 0x8d, 0x80, 0x6c, 0x84, 0x64, 0x63, 0x4b, 0xae, 0xde, 0xe2, 0x28, 0xb4,
-	0x06, 0x79, 0xe6, 0x6a, 0x79, 0x81, 0x2d, 0xc5, 0xb0, 0xfb, 0xa1, 0x93, 0x56, 0x9e, 0xb9, 0xc8,
-	0x00, 0xb5, 0x6d, 0x11, 0x4d, 0x15, 0xe0, 0xab, 0x71, 0x61, 0xea, 0x59, 0x04, 0x1f, 0x98, 0xc4,
-	0xc3, 0x2d, 0x0e, 0x44, 0x1b, 0xa0, 0x76, 0x08, 0xd3, 0x0a, 0x02, 0x7f, 0x25, 0x86, 0x7f, 0x40,
-	0xa8, 0xc9, 0x24, 0xbc, 0x43, 0x18, 0x87, 0xf7, 0x1a, 0x75, 0xad, 0x98, 0x02, 0x7f, 0x68, 0xb3,
-	0x46, 0x5d, 0xc2, 0x7b, 0x8d, 0x3a, 0x77, 0xe3, 0x35, 0xea, 0xda, 0x4c, 0x8a, 0x9b, 0x17, 0x51,
-	0xbc, 0xd7, 0xa8, 0x0b, 0xf9, 0x5a, 0x55, 0xfb, 0x2b, 0x5d, 0xbe, 0x56, 0x0d, 0xe5, 0x6b, 0x55,
-	0x21, 0x5f, 0xab, 0x6a, 0xb3, 0x19, 0xf2, 0x23, 0xbc, 0x27, 0xf0, 0x05, 0x8b, 0x52, 0xa2, 0xcd,
-	0xa5, 0x44, 0xd9, 0xa4, 0x94, 0x04, 0x70, 0x81, 0xe3, 0xfa, 0x2e, 0x73, 0x34, 0x48, 0xd1, 0x7f,
-	0xce, 0x9c, 0x9e, 0xdd, 0x95, 0xfa, 0x2e, 0x73, 0xd0, 0x4d, 0x28, 0x5a, 0x43, 0x86, 0x5d, 0x6d,
-	0x3e, 0x65, 0x03, 0x4d, 0x3e, 0x1b, 0x10, 0x02, 0x64, 0xf9, 0x53, 0x1e, 0xe0, 0x19, 0x9f, 0x0e,
-	0x7a, 0xb1, 0x0b, 0x4b, 0xb6, 0x47, 0x88, 0x69, 0x11, 0x3c, 0x3a, 0x57, 0xd9, 0x92, 0xac, 0x93,
-	0x8f, 0x93, 0xd0, 0x36, 0x2c, 0x86, 0x3f, 0xc3, 0x36, 0xc9, 0x0a, 0x65, 0xd4, 0x2d, 0x46, 0x41,
-	0xf7, 0x60, 0x6e, 0x54, 0x75, 0xd9, 0xaa, 0x0c, 0x23, 0xcd, 0xc2, 0xc9, 0xcf, 0xe5, 0x5c, 0x6b,
-	0x4c, 0x41, 0x77, 0x60, 0x36, 0xbc, 0x4a, 0xb2, 0x64, 0xe9, 0xcb, 0x4b, 0xf6, 0x88, 0x50, 0xfe,
-	0x9c, 0x87, 0x85, 0x16, 0x1e, 0x44, 0xf2, 0x79, 0x04, 0x28, 0xb6, 0x55, 0x57, 0x53, 0x56, 0xd4,
-	0x29, 0x01, 0x25, 0xb0, 0xd0, 0xce, 0x38, 0xeb, 0xd0, 0x01, 0xbf, 0x65, 0x6a, 0x76, 0x44, 0x71,
-	0x0e, 0xba, 0x0f, 0xc0, 0xc6, 0x66, 0xd4, 0x69, 0x66, 0xe4, 0x36, 0x23, 0x1c, 0x74, 0x17, 0xe6,
-	0xda, 0x23, 0x0b, 0x85, 0x29, 0x16, 0xc2, 0x90, 0x47, 0x8c, 0xf2, 0xf7, 0x22, 0x2c, 0x3c, 0x31,
-	0xa3, 0x39, 0xbd, 0x4a, 0xee, 0x11, 0x17, 0x5e, 0x37, 0x82, 0xe7, 0x72, 0x82, 0x60, 0x3c, 0xbd,
-	0x88, 0xde, 0xb6, 0x99, 0x33, 0x4c, 0x2a, 0xd6, 0x4e, 0xb4, 0x11, 0x41, 0x5c, 0xd7, 0x12, 0x25,
-	0x27, 0xa5, 0xe2, 0xd5, 0x38, 0x48, 0x68, 0x68, 0x10, 0xde, 0x5a, 0xa6, 0xc5, 0x10, 0x1c, 0x38,
-	0x8c, 0x57, 0x76, 0x6b, 0xa2, 0x72, 0x5c, 0xaf, 0x9c, 0xa8, 0x37, 0xa1, 0x73, 0xb1, 0x7b, 0xa5,
-	0x37, 0xf0, 0x5f, 0x72, 0x26, 0x68, 0x11, 0xd4, 0xb7, 0x78, 0x28, 0x6e, 0x65, 0xb1, 0xc5, 0x3f,
-	0xd1, 0x0d, 0x28, 0xbe, 0xe3, 0x97, 0xfa, 0x0f, 0xde, 0xe8, 0x00, 0xb8, 0x99, 0xbf, 0xad, 0x94,
-	0x5e, 0xc2, 0xdf, 0x97, 0xa4, 0xfc, 0x1a, 0xfe, 0x4d, 0x0c, 0x2b, 0x61, 0x81, 0xca, 0xe4, 0x02,
-	0x19, 0xc5, 0x8f, 0xe8, 0x1f, 0xc0, 0xc2, 0x65, 0xe8, 0x96, 0x3f, 0x2a, 0xf0, 0xcf, 0x9e, 0x8d,
-	0x69, 0x27, 0xd2, 0xe4, 0xcd, 0x68, 0xdd, 0xa6, 0xbe, 0x84, 0xbb, 0x13, 0x0d, 0xbb, 0x15, 0x69,
-	0xc2, 0x34, 0x1f, 0xbb, 0x91, 0xc3, 0x6f, 0x2e, 0x09, 0x1f, 0x7b, 0xd2, 0x07, 0xd7, 0x6b, 0xae,
-	0x9e, 0x9e, 0xe9, 0xca, 0xf9, 0x99, 0xae, 0x7c, 0xf1, 0x75, 0xe5, 0xab, 0xaf, 0x2b, 0xdf, 0x7c,
-	0x5d, 0x39, 0xf1, 0xf5, 0xdc, 0x0f, 0x5f, 0xcf, 0x9d, 0xfa, 0xba, 0x72, 0xee, 0xeb, 0xb9, 0xf7,
-	0xbf, 0x74, 0xc5, 0x9a, 0x11, 0xda, 0xb5, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x79, 0xea, 0x02,
-	0xb0, 0xb0, 0x08, 0x00, 0x00,
+	// 785 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xb4, 0x55, 0xcb, 0x6e, 0xd3, 0x4c,
+	0x18, 0x8d, 0xe3, 0xa4, 0x7f, 0xfb, 0x55, 0xf9, 0xdb, 0x0e, 0x02, 0x99, 0x80, 0xdc, 0xca, 0xb0,
+	0xa8, 0x5a, 0xd5, 0x81, 0x24, 0x0a, 0xa8, 0xa8, 0x08, 0x45, 0x2d, 0x2d, 0xa0, 0x52, 0x48, 0x4b,
+	0x05, 0x0b, 0x2e, 0x76, 0xe3, 0xa4, 0x11, 0x8e, 0x27, 0xb2, 0xc7, 0x54, 0xd9, 0xf1, 0x12, 0x48,
+	0xc0, 0x1e, 0x89, 0x47, 0x60, 0xc9, 0x06, 0xa9, 0x4b, 0x9e, 0x00, 0xda, 0xf0, 0x12, 0x5d, 0xa2,
+	0x19, 0x5f, 0x62, 0xd7, 0x97, 0x94, 0x45, 0x77, 0x76, 0xe6, 0x9c, 0xf3, 0x1d, 0x9f, 0x39, 0x33,
+	0x81, 0xeb, 0x7b, 0xb8, 0xab, 0x62, 0xab, 0x64, 0x1b, 0x96, 0xd2, 0xd2, 0x6c, 0xa3, 0xab, 0x98,
+	0xd6, 0xbe, 0xa2, 0x6b, 0x66, 0x89, 0xf4, 0x7b, 0x9a, 0x25, 0xf7, 0x4c, 0x4c, 0x30, 0xca, 0xb3,
+	0x97, 0xe2, 0x52, 0xbb, 0x43, 0xf6, 0x6d, 0x55, 0xde, 0xc3, 0xdd, 0x52, 0x1b, 0xb7, 0x71, 0x89,
+	0xad, 0xaa, 0x76, 0x8b, 0xbd, 0xb1, 0x17, 0xf6, 0xe4, 0xb0, 0x8a, 0x62, 0x1b, 0xe3, 0xb6, 0xae,
+	0x0d, 0x51, 0x4d, 0xdb, 0x54, 0x48, 0x07, 0x1b, 0xee, 0xfa, 0xec, 0xe9, 0x75, 0xd2, 0xe9, 0x6a,
+	0x16, 0x51, 0xba, 0xbd, 0x24, 0x81, 0x03, 0x53, 0xe9, 0xf5, 0x34, 0xd3, 0xb5, 0x25, 0x7d, 0xc8,
+	0x01, 0x3c, 0x32, 0xf0, 0x81, 0xb1, 0x43, 0xed, 0xa1, 0x45, 0xe0, 0x9b, 0xb6, 0x29, 0x70, 0x73,
+	0xdc, 0xfc, 0x64, 0xf9, 0xb2, 0xec, 0x90, 0x65, 0x8f, 0x2c, 0xaf, 0xba, 0xd3, 0x1b, 0x14, 0x85,
+	0x16, 0x20, 0x4b, 0x2c, 0x21, 0xcb, 0xb0, 0xc5, 0x08, 0x76, 0xc7, 0x73, 0xd2, 0xc8, 0x12, 0x0b,
+	0xc9, 0xc0, 0x37, 0x55, 0x5d, 0xe0, 0x19, 0xf8, 0x6a, 0x54, 0x18, 0xdb, 0xaa, 0xae, 0xed, 0x2a,
+	0xba, 0xad, 0x35, 0x28, 0x10, 0x2d, 0x01, 0xdf, 0xd2, 0x89, 0x90, 0x63, 0xf8, 0x2b, 0x11, 0xfc,
+	0x7d, 0x1d, 0x2b, 0xc4, 0x85, 0xb7, 0x74, 0x42, 0xe1, 0x9d, 0x5a, 0x55, 0xc8, 0x27, 0xc0, 0x1f,
+	0x18, 0xa4, 0x56, 0x75, 0xe1, 0x9d, 0x5a, 0x95, 0xba, 0xb1, 0x6b, 0x55, 0x61, 0x2c, 0xc1, 0xcd,
+	0xb3, 0x20, 0xde, 0xae, 0x55, 0x99, 0x7c, 0xa5, 0x2c, 0xfc, 0x97, 0x2c, 0x5f, 0x29, 0x7b, 0xf2,
+	0x95, 0x32, 0x93, 0xaf, 0x94, 0x85, 0xf1, 0x14, 0x79, 0x1f, 0x6f, 0x33, 0x7c, 0x4e, 0xc5, 0x58,
+	0x17, 0x26, 0x12, 0xa2, 0xac, 0x63, 0xac, 0x3b, 0x70, 0x86, 0xa3, 0xfa, 0x16, 0x31, 0x05, 0x48,
+	0xd0, 0xdf, 0x26, 0x66, 0xc7, 0x68, 0xbb, 0xfa, 0x16, 0x31, 0xd1, 0x4d, 0xc8, 0xab, 0x7d, 0xa2,
+	0x59, 0xc2, 0x64, 0xc2, 0x07, 0xd4, 0xe9, 0xaa, 0x43, 0x70, 0x90, 0xd2, 0xe7, 0x2c, 0xc0, 0x13,
+	0xba, 0xec, 0xf4, 0x62, 0x03, 0x66, 0x0c, 0x5b, 0xd7, 0x15, 0x55, 0xd7, 0xfc, 0x7d, 0x75, 0x5b,
+	0x92, 0xb6, 0xf3, 0x51, 0x12, 0x5a, 0x83, 0x69, 0xef, 0x47, 0xaf, 0x4d, 0x6e, 0x85, 0x52, 0xea,
+	0x16, 0xa1, 0xa0, 0xbb, 0x30, 0xe1, 0x57, 0xdd, 0x6d, 0x55, 0x8a, 0x91, 0x7a, 0xee, 0xf0, 0xd7,
+	0x6c, 0xa6, 0x31, 0xa4, 0xa0, 0x3b, 0x30, 0xee, 0x1d, 0x25, 0xb7, 0x64, 0xc9, 0xe3, 0x5d, 0xb6,
+	0x4f, 0x90, 0x5e, 0xc2, 0xf8, 0x36, 0x69, 0x3a, 0xc9, 0x3c, 0x85, 0x0b, 0x9e, 0xb9, 0x6d, 0xd2,
+	0x3c, 0xf3, 0x27, 0xd5, 0x73, 0x1f, 0x7f, 0xcf, 0x72, 0x8d, 0x38, 0xae, 0xf4, 0x25, 0x0b, 0x85,
+	0x86, 0xd6, 0x0b, 0xc4, 0xff, 0x10, 0x50, 0x24, 0x49, 0x4b, 0xe0, 0xe6, 0xf8, 0x11, 0xf9, 0xc7,
+	0xb0, 0xd0, 0xfa, 0x70, 0x2b, 0xbd, 0x89, 0xf4, 0x10, 0xf3, 0xe9, 0x3b, 0x10, 0xe5, 0xa0, 0x7b,
+	0x00, 0x64, 0x68, 0x86, 0x1f, 0x65, 0xc6, 0x4d, 0x31, 0xc0, 0x41, 0x2b, 0x30, 0xd1, 0xf4, 0x2d,
+	0xe4, 0x46, 0x58, 0xf0, 0xf6, 0xd0, 0x67, 0x48, 0x3f, 0xf2, 0x50, 0xd8, 0x54, 0x82, 0x39, 0xbd,
+	0x88, 0xaf, 0x29, 0x15, 0x5e, 0x94, 0x9d, 0xdb, 0x38, 0x44, 0x90, 0x1f, 0x9f, 0x46, 0xaf, 0x19,
+	0xc4, 0xec, 0xc7, 0xf5, 0x76, 0x3d, 0x58, 0x38, 0x27, 0xae, 0x6b, 0xb1, 0x92, 0x61, 0xa9, 0x68,
+	0xf3, 0x76, 0x63, 0x0e, 0x80, 0x13, 0xde, 0x42, 0xaa, 0x45, 0x0f, 0xec, 0x38, 0x8c, 0x9e, 0x88,
+	0xd5, 0x50, 0xa3, 0xa9, 0x9e, 0x14, 0xab, 0x17, 0xd2, 0x39, 0x5d, 0xed, 0xe2, 0x1b, 0xb8, 0x14,
+	0x9f, 0x09, 0x9a, 0x06, 0xfe, 0xad, 0xd6, 0x67, 0x87, 0x3e, 0xdf, 0xa0, 0x8f, 0xe8, 0x06, 0xe4,
+	0xdf, 0xd1, 0x3b, 0xe3, 0x0c, 0x7f, 0x01, 0x0e, 0x70, 0x39, 0x7b, 0x9b, 0x2b, 0x3e, 0x87, 0xff,
+	0xcf, 0x49, 0xf9, 0x15, 0x5c, 0x8c, 0x0d, 0x2b, 0x66, 0x40, 0x29, 0x3c, 0x20, 0xa5, 0xf8, 0x01,
+	0xfd, 0x5d, 0x28, 0x9c, 0x87, 0xae, 0x54, 0x80, 0xc9, 0x4d, 0xa5, 0xe7, 0xdd, 0x28, 0xd2, 0x27,
+	0x0e, 0xa6, 0xb6, 0x0c, 0x0d, 0xb7, 0x02, 0xc5, 0x5e, 0x0e, 0xb6, 0x6f, 0xe4, 0xbd, 0xbb, 0x11,
+	0x2a, 0xdc, 0xad, 0x40, 0x31, 0x46, 0xd9, 0xda, 0x08, 0x74, 0xa1, 0x3e, 0xc3, 0x7c, 0x6c, 0xb9,
+	0x3e, 0xa8, 0x9e, 0xf4, 0x1a, 0x0a, 0xcc, 0x9a, 0x7f, 0xfd, 0xad, 0xfc, 0x83, 0xb8, 0x73, 0xe7,
+	0x85, 0x46, 0x4c, 0x31, 0xbd, 0x2d, 0xa6, 0x47, 0x07, 0xd4, 0xe7, 0x8f, 0x8e, 0x45, 0xee, 0xe4,
+	0x58, 0xe4, 0xbe, 0x0e, 0x44, 0xee, 0xdb, 0x40, 0xe4, 0xbe, 0x0f, 0x44, 0xee, 0x70, 0x20, 0x66,
+	0x7e, 0x0e, 0xc4, 0xcc, 0xd1, 0x40, 0xe4, 0x4e, 0x06, 0x62, 0xe6, 0xfd, 0x1f, 0x91, 0x53, 0xc7,
+	0x98, 0x7e, 0xe5, 0x6f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x14, 0xbb, 0x9b, 0x8f, 0x7f, 0x09, 0x00,
+	0x00,
 }
