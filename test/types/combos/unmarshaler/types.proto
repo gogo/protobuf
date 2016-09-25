@@ -106,7 +106,7 @@ message MapStdTypes {
 //   map<int32,google.protobuf.Timestamp> nullableTimestamp = 1 [(gogoproto.stdtime) = true];
 //   map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
 
-//   map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
+   map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
 //   map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
 }
 
