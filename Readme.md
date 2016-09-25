@@ -20,7 +20,7 @@ Keeping track of how up to date gogoprotobuf is relative to golang/protobuf is d
 
 These projects use gogoprotobuf:
 
-  - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a>
+  - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a> - <a href="https://github.com/coreos/etcd/blob/master/etcdserver/etcdserverpb/etcdserver.proto">sample proto file</a>
   - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">blog</a>
   - <a href="http://badoo.com">badoo</a> - <a href="https://github.com/badoo/lsd/blob/32061f501c5eca9c76c596d790b450501ba27b2f/proto/lsd.proto">sample proto file</a>
   - <a href="https://github.com/mesos/mesos-go">mesos-go</a> - <a href="https://github.com/mesos/mesos-go/blob/master/mesosproto/mesos.proto">sample proto file</a>
