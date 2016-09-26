@@ -46,7 +46,7 @@ func TestFullCircleProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &StdTypes{}
-	if err := proto.Unmarshal(protoData, stdMsg); err != nil {
+	if err2 := proto.Unmarshal(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := proto.Marshal(stdMsg)
@@ -54,7 +54,7 @@ func TestFullCircleProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &ProtoTypes{}
-	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+	if err3 := proto.Unmarshal(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -72,7 +72,7 @@ func TestJsonFullCircleProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &StdTypes{}
-	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+	if err2 := jsonpb.UnmarshalString(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := j.MarshalToString(stdMsg)
@@ -80,7 +80,7 @@ func TestJsonFullCircleProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &ProtoTypes{}
-	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+	if err3 := jsonpb.UnmarshalString(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -97,7 +97,7 @@ func TestFullCircleRepProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &RepStdTypes{}
-	if err := proto.Unmarshal(protoData, stdMsg); err != nil {
+	if err2 := proto.Unmarshal(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := proto.Marshal(stdMsg)
@@ -105,7 +105,7 @@ func TestFullCircleRepProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &RepProtoTypes{}
-	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+	if err3 := proto.Unmarshal(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -123,7 +123,7 @@ func TestJsonFullCircleRepProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &RepStdTypes{}
-	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+	if err2 := jsonpb.UnmarshalString(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := j.MarshalToString(stdMsg)
@@ -131,7 +131,7 @@ func TestJsonFullCircleRepProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &RepProtoTypes{}
-	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+	if err3 := jsonpb.UnmarshalString(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -149,7 +149,7 @@ func TestFullCircleMapProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &MapStdTypes{}
-	if err := proto.Unmarshal(protoData, stdMsg); err != nil {
+	if err2 := proto.Unmarshal(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := proto.Marshal(stdMsg)
@@ -157,7 +157,7 @@ func TestFullCircleMapProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &MapProtoTypes{}
-	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+	if err3 := proto.Unmarshal(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -175,7 +175,7 @@ func TestJsonFullCircleMapProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &MapStdTypes{}
-	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+	if err2 := jsonpb.UnmarshalString(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := j.MarshalToString(stdMsg)
@@ -183,7 +183,7 @@ func TestJsonFullCircleMapProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &MapProtoTypes{}
-	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+	if err3 := jsonpb.UnmarshalString(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -200,7 +200,7 @@ func TestFullCircleOneofProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &OneofStdTypes{}
-	if err := proto.Unmarshal(protoData, stdMsg); err != nil {
+	if err2 := proto.Unmarshal(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := proto.Marshal(stdMsg)
@@ -208,7 +208,7 @@ func TestFullCircleOneofProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &OneofProtoTypes{}
-	if err := proto.Unmarshal(stdData, protoMsgOut); err != nil {
+	if err3 := proto.Unmarshal(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {
@@ -226,7 +226,7 @@ func TestJsonFullCircleOneofProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	stdMsg := &OneofStdTypes{}
-	if err := jsonpb.UnmarshalString(protoData, stdMsg); err != nil {
+	if err2 := jsonpb.UnmarshalString(protoData, stdMsg); err2 != nil {
 		t.Fatal(err)
 	}
 	stdData, err := j.MarshalToString(stdMsg)
@@ -234,7 +234,7 @@ func TestJsonFullCircleOneofProtoToStd(t *testing.T) {
 		t.Fatal(err)
 	}
 	protoMsgOut := &OneofProtoTypes{}
-	if err := jsonpb.UnmarshalString(stdData, protoMsgOut); err != nil {
+	if err3 := jsonpb.UnmarshalString(stdData, protoMsgOut); err3 != nil {
 		t.Fatal(err)
 	}
 	if !protoMsg.Equal(protoMsgOut) {

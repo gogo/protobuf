@@ -604,7 +604,7 @@ func _OneofStdTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.
 			return true, err
 		}
 		c := new(time.Time)
-		if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(c, x); err != nil {
+		if err2 := github_com_gogo_protobuf_types.StdTimeUnmarshal(c, x); err2 != nil {
 			return true, err
 		}
 		m.OneOfStdTimes = &OneofStdTypes_Timestamp{c}
@@ -618,7 +618,7 @@ func _OneofStdTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.
 			return true, err
 		}
 		c := new(time.Duration)
-		if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(c, x); err != nil {
+		if err2 := github_com_gogo_protobuf_types.StdDurationUnmarshal(c, x); err2 != nil {
 			return true, err
 		}
 		m.OneOfStdTimes = &OneofStdTypes_Duration{c}
