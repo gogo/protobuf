@@ -46,6 +46,7 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 	"unicode/utf8"
 )
 
@@ -779,6 +780,134 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 				return p.errorf("%v %v: %v", err, v.Type(), tok.value)
 			}
 			v.Set(reflect.Indirect(reflect.ValueOf(custom)))
+		}
+		return nil
+	}
+	if props.StdTime {
+		if props.Repeated {
+			t := reflect.TypeOf(v.Interface())
+			if t.Kind() == reflect.Slice {
+				fv := v
+				p.back()
+				props.StdTime = false
+				tproto := &timestamp{}
+				err := p.readAny(reflect.ValueOf(tproto).Elem(), props)
+				props.StdTime = true
+				if err != nil {
+					return err
+				}
+				tim, err := timestampFromProto(tproto)
+				if err != nil {
+					return err
+				}
+				if t.Elem().Kind() == reflect.Ptr {
+					ts := fv.Interface().([]*time.Time)
+					ts = append(ts, &tim)
+					fv.Set(reflect.ValueOf(ts))
+					return nil
+				} else {
+					ts := fv.Interface().([]time.Time)
+					ts = append(ts, tim)
+					fv.Set(reflect.ValueOf(ts))
+					return nil
+				}
+			}
+		}
+		var terminator string
+		switch tok.value {
+		case "{":
+			terminator = "}"
+		case "<":
+			terminator = ">"
+		default:
+			return p.errorf("expected '{' or '<', found %q", tok.value)
+		}
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			tproto := &timestamp{}
+			err := p.readStruct(reflect.ValueOf(tproto).Elem(), terminator)
+			if err != nil {
+				return err
+			}
+			t, err := timestampFromProto(tproto)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.ValueOf(&t))
+		} else {
+			tproto := &timestamp{}
+			err := p.readStruct(reflect.ValueOf(tproto).Elem(), terminator)
+			if err != nil {
+				return err
+			}
+			t, err := timestampFromProto(tproto)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.Indirect(reflect.ValueOf(&t)))
+		}
+		return nil
+	}
+	if props.StdDuration {
+		if props.Repeated {
+			t := reflect.TypeOf(v.Interface())
+			if t.Kind() == reflect.Slice {
+				fv := v
+				p.back()
+				props.StdDuration = false
+				dproto := &duration{}
+				err := p.readAny(reflect.ValueOf(dproto).Elem(), props)
+				props.StdDuration = true
+				if err != nil {
+					return err
+				}
+				dur, err := durationFromProto(dproto)
+				if err != nil {
+					return err
+				}
+				if t.Elem().Kind() == reflect.Ptr {
+					ds := fv.Interface().([]*time.Duration)
+					ds = append(ds, &dur)
+					fv.Set(reflect.ValueOf(ds))
+					return nil
+				} else {
+					ds := fv.Interface().([]time.Duration)
+					ds = append(ds, dur)
+					fv.Set(reflect.ValueOf(ds))
+					return nil
+				}
+			}
+		}
+		var terminator string
+		switch tok.value {
+		case "{":
+			terminator = "}"
+		case "<":
+			terminator = ">"
+		default:
+			return p.errorf("expected '{' or '<', found %q", tok.value)
+		}
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			dproto := &duration{}
+			err := p.readStruct(reflect.ValueOf(dproto).Elem(), terminator)
+			if err != nil {
+				return err
+			}
+			d, err := durationFromProto(dproto)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.ValueOf(&d))
+		} else {
+			dproto := &duration{}
+			err := p.readStruct(reflect.ValueOf(dproto).Elem(), terminator)
+			if err != nil {
+				return err
+			}
+			d, err := durationFromProto(dproto)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.Indirect(reflect.ValueOf(&d)))
 		}
 		return nil
 	}
