@@ -182,10 +182,10 @@ func (m *ProtoTypes) GetDuration() google_protobuf1.Duration {
 }
 
 type StdTypes struct {
-	NullableStdTime     *time.Time     `protobuf:"bytes,1,opt,name=nullableStdTime,stdtime" json:"nullableStdTime,omitempty"`
-	NullableStdDuration *time.Duration `protobuf:"bytes,2,opt,name=nullableStdDuration,stdduration" json:"nullableStdDuration,omitempty"`
-	StdTime             time.Time      `protobuf:"bytes,3,opt,name=stdTime,stdtime" json:"stdTime"`
-	StdDuration         time.Duration  `protobuf:"bytes,4,opt,name=stdDuration,stdduration" json:"stdDuration"`
+	NullableTimestamp *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration  *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp         time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
+	Duration          time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
 }
 
 func (m *StdTypes) Reset()                    { *m = StdTypes{} }
@@ -193,30 +193,30 @@ func (m *StdTypes) String() string            { return proto.CompactTextString(m
 func (*StdTypes) ProtoMessage()               {}
 func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
 
-func (m *StdTypes) GetNullableStdTime() *time.Time {
+func (m *StdTypes) GetNullableTimestamp() *time.Time {
 	if m != nil {
-		return m.NullableStdTime
+		return m.NullableTimestamp
 	}
 	return nil
 }
 
-func (m *StdTypes) GetNullableStdDuration() *time.Duration {
+func (m *StdTypes) GetNullableDuration() *time.Duration {
 	if m != nil {
-		return m.NullableStdDuration
+		return m.NullableDuration
 	}
 	return nil
 }
 
-func (m *StdTypes) GetStdTime() time.Time {
+func (m *StdTypes) GetTimestamp() time.Time {
 	if m != nil {
-		return m.StdTime
+		return m.Timestamp
 	}
 	return time.Time{}
 }
 
-func (m *StdTypes) GetStdDuration() time.Duration {
+func (m *StdTypes) GetDuration() time.Duration {
 	if m != nil {
-		return m.StdDuration
+		return m.Duration
 	}
 	return 0
 }
@@ -262,10 +262,10 @@ func (m *RepProtoTypes) GetDurations() []google_protobuf1.Duration {
 }
 
 type RepStdTypes struct {
-	NullableStdTimes     []*time.Time     `protobuf:"bytes,1,rep,name=nullableStdTimes,stdtime" json:"nullableStdTimes,omitempty"`
-	NullableStdDurations []*time.Duration `protobuf:"bytes,2,rep,name=nullableStdDurations,stdduration" json:"nullableStdDurations,omitempty"`
-	StdTimes             []time.Time      `protobuf:"bytes,3,rep,name=stdTimes,stdtime" json:"stdTimes"`
-	StdDurations         []time.Duration  `protobuf:"bytes,4,rep,name=stdDurations,stdduration" json:"stdDurations"`
+	NullableTimestamps []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations  []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps         []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
+	Durations          []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
 }
 
 func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
@@ -273,30 +273,30 @@ func (m *RepStdTypes) String() string            { return proto.CompactTextStrin
 func (*RepStdTypes) ProtoMessage()               {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
 
-func (m *RepStdTypes) GetNullableStdTimes() []*time.Time {
+func (m *RepStdTypes) GetNullableTimestamps() []*time.Time {
 	if m != nil {
-		return m.NullableStdTimes
+		return m.NullableTimestamps
 	}
 	return nil
 }
 
-func (m *RepStdTypes) GetNullableStdDurations() []*time.Duration {
+func (m *RepStdTypes) GetNullableDurations() []*time.Duration {
 	if m != nil {
-		return m.NullableStdDurations
+		return m.NullableDurations
 	}
 	return nil
 }
 
-func (m *RepStdTypes) GetStdTimes() []time.Time {
+func (m *RepStdTypes) GetTimestamps() []time.Time {
 	if m != nil {
-		return m.StdTimes
+		return m.Timestamps
 	}
 	return nil
 }
 
-func (m *RepStdTypes) GetStdDurations() []time.Duration {
+func (m *RepStdTypes) GetDurations() []time.Duration {
 	if m != nil {
-		return m.StdDurations
+		return m.Durations
 	}
 	return nil
 }
@@ -885,27 +885,27 @@ func (this *StdTypes) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt.Errorf("that is type *StdTypes but is not nil && this == nil")
 	}
-	if that1.NullableStdTime == nil {
-		if this.NullableStdTime != nil {
-			return fmt.Errorf("this.NullableStdTime != nil && that1.NullableStdTime == nil")
+	if that1.NullableTimestamp == nil {
+		if this.NullableTimestamp != nil {
+			return fmt.Errorf("this.NullableTimestamp != nil && that1.NullableTimestamp == nil")
 		}
-	} else if !this.NullableStdTime.Equal(*that1.NullableStdTime) {
-		return fmt.Errorf("NullableStdTime this(%v) Not Equal that(%v)", this.NullableStdTime, that1.NullableStdTime)
+	} else if !this.NullableTimestamp.Equal(*that1.NullableTimestamp) {
+		return fmt.Errorf("NullableTimestamp this(%v) Not Equal that(%v)", this.NullableTimestamp, that1.NullableTimestamp)
 	}
-	if this.NullableStdDuration != nil && that1.NullableStdDuration != nil {
-		if *this.NullableStdDuration != *that1.NullableStdDuration {
-			return fmt.Errorf("NullableStdDuration this(%v) Not Equal that(%v)", *this.NullableStdDuration, *that1.NullableStdDuration)
+	if this.NullableDuration != nil && that1.NullableDuration != nil {
+		if *this.NullableDuration != *that1.NullableDuration {
+			return fmt.Errorf("NullableDuration this(%v) Not Equal that(%v)", *this.NullableDuration, *that1.NullableDuration)
 		}
-	} else if this.NullableStdDuration != nil {
-		return fmt.Errorf("this.NullableStdDuration == nil && that.NullableStdDuration != nil")
-	} else if that1.NullableStdDuration != nil {
-		return fmt.Errorf("NullableStdDuration this(%v) Not Equal that(%v)", this.NullableStdDuration, that1.NullableStdDuration)
+	} else if this.NullableDuration != nil {
+		return fmt.Errorf("this.NullableDuration == nil && that.NullableDuration != nil")
+	} else if that1.NullableDuration != nil {
+		return fmt.Errorf("NullableDuration this(%v) Not Equal that(%v)", this.NullableDuration, that1.NullableDuration)
 	}
-	if !this.StdTime.Equal(that1.StdTime) {
-		return fmt.Errorf("StdTime this(%v) Not Equal that(%v)", this.StdTime, that1.StdTime)
+	if !this.Timestamp.Equal(that1.Timestamp) {
+		return fmt.Errorf("Timestamp this(%v) Not Equal that(%v)", this.Timestamp, that1.Timestamp)
 	}
-	if this.StdDuration != that1.StdDuration {
-		return fmt.Errorf("StdDuration this(%v) Not Equal that(%v)", this.StdDuration, that1.StdDuration)
+	if this.Duration != that1.Duration {
+		return fmt.Errorf("Duration this(%v) Not Equal that(%v)", this.Duration, that1.Duration)
 	}
 	return nil
 }
@@ -934,26 +934,26 @@ func (this *StdTypes) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if that1.NullableStdTime == nil {
-		if this.NullableStdTime != nil {
+	if that1.NullableTimestamp == nil {
+		if this.NullableTimestamp != nil {
 			return false
 		}
-	} else if !this.NullableStdTime.Equal(*that1.NullableStdTime) {
+	} else if !this.NullableTimestamp.Equal(*that1.NullableTimestamp) {
 		return false
 	}
-	if this.NullableStdDuration != nil && that1.NullableStdDuration != nil {
-		if *this.NullableStdDuration != *that1.NullableStdDuration {
+	if this.NullableDuration != nil && that1.NullableDuration != nil {
+		if *this.NullableDuration != *that1.NullableDuration {
 			return false
 		}
-	} else if this.NullableStdDuration != nil {
+	} else if this.NullableDuration != nil {
 		return false
-	} else if that1.NullableStdDuration != nil {
-		return false
-	}
-	if !this.StdTime.Equal(that1.StdTime) {
+	} else if that1.NullableDuration != nil {
 		return false
 	}
-	if this.StdDuration != that1.StdDuration {
+	if !this.Timestamp.Equal(that1.Timestamp) {
+		return false
+	}
+	if this.Duration != that1.Duration {
 		return false
 	}
 	return true
@@ -1101,36 +1101,36 @@ func (this *RepStdTypes) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt.Errorf("that is type *RepStdTypes but is not nil && this == nil")
 	}
-	if len(this.NullableStdTimes) != len(that1.NullableStdTimes) {
-		return fmt.Errorf("NullableStdTimes this(%v) Not Equal that(%v)", len(this.NullableStdTimes), len(that1.NullableStdTimes))
+	if len(this.NullableTimestamps) != len(that1.NullableTimestamps) {
+		return fmt.Errorf("NullableTimestamps this(%v) Not Equal that(%v)", len(this.NullableTimestamps), len(that1.NullableTimestamps))
 	}
-	for i := range this.NullableStdTimes {
-		if !this.NullableStdTimes[i].Equal(*that1.NullableStdTimes[i]) {
-			return fmt.Errorf("NullableStdTimes this[%v](%v) Not Equal that[%v](%v)", i, this.NullableStdTimes[i], i, that1.NullableStdTimes[i])
+	for i := range this.NullableTimestamps {
+		if !this.NullableTimestamps[i].Equal(*that1.NullableTimestamps[i]) {
+			return fmt.Errorf("NullableTimestamps this[%v](%v) Not Equal that[%v](%v)", i, this.NullableTimestamps[i], i, that1.NullableTimestamps[i])
 		}
 	}
-	if len(this.NullableStdDurations) != len(that1.NullableStdDurations) {
-		return fmt.Errorf("NullableStdDurations this(%v) Not Equal that(%v)", len(this.NullableStdDurations), len(that1.NullableStdDurations))
+	if len(this.NullableDurations) != len(that1.NullableDurations) {
+		return fmt.Errorf("NullableDurations this(%v) Not Equal that(%v)", len(this.NullableDurations), len(that1.NullableDurations))
 	}
-	for i := range this.NullableStdDurations {
-		if dthis, dthat := this.NullableStdDurations[i], that1.NullableStdDurations[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil) {
-			return fmt.Errorf("NullableStdDurations this[%v](%v) Not Equal that[%v](%v)", i, this.NullableStdDurations[i], i, that1.NullableStdDurations[i])
+	for i := range this.NullableDurations {
+		if dthis, dthat := this.NullableDurations[i], that1.NullableDurations[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil) {
+			return fmt.Errorf("NullableDurations this[%v](%v) Not Equal that[%v](%v)", i, this.NullableDurations[i], i, that1.NullableDurations[i])
 		}
 	}
-	if len(this.StdTimes) != len(that1.StdTimes) {
-		return fmt.Errorf("StdTimes this(%v) Not Equal that(%v)", len(this.StdTimes), len(that1.StdTimes))
+	if len(this.Timestamps) != len(that1.Timestamps) {
+		return fmt.Errorf("Timestamps this(%v) Not Equal that(%v)", len(this.Timestamps), len(that1.Timestamps))
 	}
-	for i := range this.StdTimes {
-		if !this.StdTimes[i].Equal(that1.StdTimes[i]) {
-			return fmt.Errorf("StdTimes this[%v](%v) Not Equal that[%v](%v)", i, this.StdTimes[i], i, that1.StdTimes[i])
+	for i := range this.Timestamps {
+		if !this.Timestamps[i].Equal(that1.Timestamps[i]) {
+			return fmt.Errorf("Timestamps this[%v](%v) Not Equal that[%v](%v)", i, this.Timestamps[i], i, that1.Timestamps[i])
 		}
 	}
-	if len(this.StdDurations) != len(that1.StdDurations) {
-		return fmt.Errorf("StdDurations this(%v) Not Equal that(%v)", len(this.StdDurations), len(that1.StdDurations))
+	if len(this.Durations) != len(that1.Durations) {
+		return fmt.Errorf("Durations this(%v) Not Equal that(%v)", len(this.Durations), len(that1.Durations))
 	}
-	for i := range this.StdDurations {
-		if this.StdDurations[i] != that1.StdDurations[i] {
-			return fmt.Errorf("StdDurations this[%v](%v) Not Equal that[%v](%v)", i, this.StdDurations[i], i, that1.StdDurations[i])
+	for i := range this.Durations {
+		if this.Durations[i] != that1.Durations[i] {
+			return fmt.Errorf("Durations this[%v](%v) Not Equal that[%v](%v)", i, this.Durations[i], i, that1.Durations[i])
 		}
 	}
 	return nil
@@ -1160,35 +1160,35 @@ func (this *RepStdTypes) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if len(this.NullableStdTimes) != len(that1.NullableStdTimes) {
+	if len(this.NullableTimestamps) != len(that1.NullableTimestamps) {
 		return false
 	}
-	for i := range this.NullableStdTimes {
-		if !this.NullableStdTimes[i].Equal(*that1.NullableStdTimes[i]) {
+	for i := range this.NullableTimestamps {
+		if !this.NullableTimestamps[i].Equal(*that1.NullableTimestamps[i]) {
 			return false
 		}
 	}
-	if len(this.NullableStdDurations) != len(that1.NullableStdDurations) {
+	if len(this.NullableDurations) != len(that1.NullableDurations) {
 		return false
 	}
-	for i := range this.NullableStdDurations {
-		if dthis, dthat := this.NullableStdDurations[i], that1.NullableStdDurations[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil) {
+	for i := range this.NullableDurations {
+		if dthis, dthat := this.NullableDurations[i], that1.NullableDurations[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil) {
 			return false
 		}
 	}
-	if len(this.StdTimes) != len(that1.StdTimes) {
+	if len(this.Timestamps) != len(that1.Timestamps) {
 		return false
 	}
-	for i := range this.StdTimes {
-		if !this.StdTimes[i].Equal(that1.StdTimes[i]) {
+	for i := range this.Timestamps {
+		if !this.Timestamps[i].Equal(that1.Timestamps[i]) {
 			return false
 		}
 	}
-	if len(this.StdDurations) != len(that1.StdDurations) {
+	if len(this.Durations) != len(that1.Durations) {
 		return false
 	}
-	for i := range this.StdDurations {
-		if this.StdDurations[i] != that1.StdDurations[i] {
+	for i := range this.Durations {
+		if this.Durations[i] != that1.Durations[i] {
 			return false
 		}
 	}
@@ -2039,21 +2039,21 @@ func (m *StdTypes) MarshalTo(data []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.NullableStdTime != nil {
+	if m.NullableTimestamp != nil {
 		data[i] = 0xa
 		i++
-		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableStdTime)))
-		n16, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableStdTime, data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp)))
+		n16, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableTimestamp, data[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n16
 	}
-	if m.NullableStdDuration != nil {
+	if m.NullableDuration != nil {
 		data[i] = 0x12
 		i++
-		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableStdDuration)))
-		n17, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableStdDuration, data[i:])
+		i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration)))
+		n17, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableDuration, data[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -2061,16 +2061,16 @@ func (m *StdTypes) MarshalTo(data []byte) (int, error) {
 	}
 	data[i] = 0x1a
 	i++
-	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.StdTime)))
-	n18, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.StdTime, data[i:])
+	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)))
+	n18, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, data[i:])
 	if err != nil {
 		return 0, err
 	}
 	i += n18
 	data[i] = 0x22
 	i++
-	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(m.StdDuration)))
-	n19, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.StdDuration, data[i:])
+	i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration)))
+	n19, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.Duration, data[i:])
 	if err != nil {
 		return 0, err
 	}
@@ -2159,8 +2159,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.NullableStdTimes) > 0 {
-		for _, msg := range m.NullableStdTimes {
+	if len(m.NullableTimestamps) > 0 {
+		for _, msg := range m.NullableTimestamps {
 			data[i] = 0xa
 			i++
 			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*msg)))
@@ -2171,8 +2171,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 			i += n
 		}
 	}
-	if len(m.NullableStdDurations) > 0 {
-		for _, msg := range m.NullableStdDurations {
+	if len(m.NullableDurations) > 0 {
+		for _, msg := range m.NullableDurations {
 			data[i] = 0x12
 			i++
 			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*msg)))
@@ -2183,8 +2183,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 			i += n
 		}
 	}
-	if len(m.StdTimes) > 0 {
-		for _, msg := range m.StdTimes {
+	if len(m.Timestamps) > 0 {
+		for _, msg := range m.Timestamps {
 			data[i] = 0x1a
 			i++
 			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(msg)))
@@ -2195,8 +2195,8 @@ func (m *RepStdTypes) MarshalTo(data []byte) (int, error) {
 			i += n
 		}
 	}
-	if len(m.StdDurations) > 0 {
-		for _, msg := range m.StdDurations {
+	if len(m.Durations) > 0 {
+		for _, msg := range m.Durations {
 			data[i] = 0x22
 			i++
 			i = encodeVarintTypes(data, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(msg)))
@@ -2226,7 +2226,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.NullableTimestamp) > 0 {
-		for k := range m.NullableTimestamp {
+		for k, _ := range m.NullableTimestamp {
 			data[i] = 0xa
 			i++
 			v := m.NullableTimestamp[k]
@@ -2253,7 +2253,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Timestamp) > 0 {
-		for k := range m.Timestamp {
+		for k, _ := range m.Timestamp {
 			data[i] = 0x12
 			i++
 			v := m.Timestamp[k]
@@ -2278,7 +2278,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.NullableDuration) > 0 {
-		for k := range m.NullableDuration {
+		for k, _ := range m.NullableDuration {
 			data[i] = 0x1a
 			i++
 			v := m.NullableDuration[k]
@@ -2305,7 +2305,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Duration) > 0 {
-		for k := range m.Duration {
+		for k, _ := range m.Duration {
 			data[i] = 0x22
 			i++
 			v := m.Duration[k]
@@ -2348,7 +2348,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.NullableTimestamp) > 0 {
-		for k := range m.NullableTimestamp {
+		for k, _ := range m.NullableTimestamp {
 			data[i] = 0xa
 			i++
 			v := m.NullableTimestamp[k]
@@ -2375,7 +2375,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Timestamp) > 0 {
-		for k := range m.Timestamp {
+		for k, _ := range m.Timestamp {
 			data[i] = 0x12
 			i++
 			v := m.Timestamp[k]
@@ -2400,7 +2400,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.NullableDuration) > 0 {
-		for k := range m.NullableDuration {
+		for k, _ := range m.NullableDuration {
 			data[i] = 0x1a
 			i++
 			v := m.NullableDuration[k]
@@ -2427,7 +2427,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Duration) > 0 {
-		for k := range m.Duration {
+		for k, _ := range m.Duration {
 			data[i] = 0x22
 			i++
 			v := m.Duration[k]
@@ -2647,15 +2647,15 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 	this := &StdTypes{}
 	if r.Intn(10) != 0 {
-		this.NullableStdTime = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.NullableStdDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	}
 	v3 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-	this.StdTime = *v3
+	this.Timestamp = *v3
 	v4 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-	this.StdDuration = *v4
+	this.Duration = *v4
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -2702,32 +2702,32 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 	this := &RepStdTypes{}
 	if r.Intn(10) != 0 {
 		v11 := r.Intn(5)
-		this.NullableStdTimes = make([]*time.Time, v11)
+		this.NullableTimestamps = make([]*time.Time, v11)
 		for i := 0; i < v11; i++ {
-			this.NullableStdTimes[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v12 := r.Intn(5)
-		this.NullableStdDurations = make([]*time.Duration, v12)
+		this.NullableDurations = make([]*time.Duration, v12)
 		for i := 0; i < v12; i++ {
-			this.NullableStdDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v13 := r.Intn(5)
-		this.StdTimes = make([]time.Time, v13)
+		this.Timestamps = make([]time.Time, v13)
 		for i := 0; i < v13; i++ {
 			v14 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-			this.StdTimes[i] = *v14
+			this.Timestamps[i] = *v14
 		}
 	}
 	if r.Intn(10) != 0 {
 		v15 := r.Intn(5)
-		this.StdDurations = make([]time.Duration, v15)
+		this.Durations = make([]time.Duration, v15)
 		for i := 0; i < v15; i++ {
 			v16 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-			this.StdDurations[i] = *v16
+			this.Durations[i] = *v16
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2997,17 +2997,17 @@ func (m *ProtoTypes) Size() (n int) {
 func (m *StdTypes) Size() (n int) {
 	var l int
 	_ = l
-	if m.NullableStdTime != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableStdTime)
+	if m.NullableTimestamp != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp)
 		n += 1 + l + sovTypes(uint64(l))
 	}
-	if m.NullableStdDuration != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableStdDuration)
+	if m.NullableDuration != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration)
 		n += 1 + l + sovTypes(uint64(l))
 	}
-	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.StdTime)
+	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)
 	n += 1 + l + sovTypes(uint64(l))
-	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.StdDuration)
+	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration)
 	n += 1 + l + sovTypes(uint64(l))
 	return n
 }
@@ -3045,26 +3045,26 @@ func (m *RepProtoTypes) Size() (n int) {
 func (m *RepStdTypes) Size() (n int) {
 	var l int
 	_ = l
-	if len(m.NullableStdTimes) > 0 {
-		for _, e := range m.NullableStdTimes {
+	if len(m.NullableTimestamps) > 0 {
+		for _, e := range m.NullableTimestamps {
 			l = github_com_gogo_protobuf_types.SizeOfStdTime(*e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
-	if len(m.NullableStdDurations) > 0 {
-		for _, e := range m.NullableStdDurations {
+	if len(m.NullableDurations) > 0 {
+		for _, e := range m.NullableDurations {
 			l = github_com_gogo_protobuf_types.SizeOfStdDuration(*e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
-	if len(m.StdTimes) > 0 {
-		for _, e := range m.StdTimes {
+	if len(m.Timestamps) > 0 {
+		for _, e := range m.Timestamps {
 			l = github_com_gogo_protobuf_types.SizeOfStdTime(e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
-	if len(m.StdDurations) > 0 {
-		for _, e := range m.StdDurations {
+	if len(m.Durations) > 0 {
+		for _, e := range m.Durations {
 			l = github_com_gogo_protobuf_types.SizeOfStdDuration(e)
 			n += 1 + l + sovTypes(uint64(l))
 		}
@@ -3860,7 +3860,7 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NullableStdTime", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field NullableTimestamp", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3884,16 +3884,16 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.NullableStdTime == nil {
-				m.NullableStdTime = new(time.Time)
+			if m.NullableTimestamp == nil {
+				m.NullableTimestamp = new(time.Time)
 			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableStdTime, data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableTimestamp, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NullableStdDuration", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field NullableDuration", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3917,16 +3917,16 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.NullableStdDuration == nil {
-				m.NullableStdDuration = new(time.Duration)
+			if m.NullableDuration == nil {
+				m.NullableDuration = new(time.Duration)
 			}
-			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableStdDuration, data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableDuration, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StdTime", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Timestamp", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3950,13 +3950,13 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&m.StdTime, data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&m.Timestamp, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StdDuration", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Duration", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3980,7 +3980,7 @@ func (m *StdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&m.StdDuration, data[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&m.Duration, data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -4210,7 +4210,7 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NullableStdTimes", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field NullableTimestamps", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -4234,14 +4234,14 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableStdTimes = append(m.NullableStdTimes, new(time.Time))
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableStdTimes[len(m.NullableStdTimes)-1], data[iNdEx:postIndex]); err != nil {
+			m.NullableTimestamps = append(m.NullableTimestamps, new(time.Time))
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.NullableTimestamps[len(m.NullableTimestamps)-1], data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NullableStdDurations", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field NullableDurations", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -4265,14 +4265,14 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableStdDurations = append(m.NullableStdDurations, new(time.Duration))
-			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableStdDurations[len(m.NullableStdDurations)-1], data[iNdEx:postIndex]); err != nil {
+			m.NullableDurations = append(m.NullableDurations, new(time.Duration))
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(m.NullableDurations[len(m.NullableDurations)-1], data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StdTimes", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Timestamps", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -4296,14 +4296,14 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StdTimes = append(m.StdTimes, time.Time{})
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&(m.StdTimes[len(m.StdTimes)-1]), data[iNdEx:postIndex]); err != nil {
+			m.Timestamps = append(m.Timestamps, time.Time{})
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&(m.Timestamps[len(m.Timestamps)-1]), data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StdDurations", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Durations", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -4327,8 +4327,8 @@ func (m *RepStdTypes) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StdDurations = append(m.StdDurations, time.Duration(0))
-			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&(m.StdDurations[len(m.StdDurations)-1]), data[iNdEx:postIndex]); err != nil {
+			m.Durations = append(m.Durations, time.Duration(0))
+			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&(m.Durations[len(m.Durations)-1]), data[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -5677,65 +5677,62 @@ var (
 func init() { proto.RegisterFile("combos/both/types.proto", fileDescriptorTypes) }
 
 var fileDescriptorTypes = []byte{
-	// 958 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x56, 0x4f, 0x8f, 0xdb, 0x44,
-	0x1c, 0x5d, 0xdb, 0x49, 0x9b, 0xfd, 0x85, 0xb0, 0xed, 0xf0, 0xcf, 0x04, 0xe4, 0x5d, 0xcc, 0x65,
-	0x69, 0x55, 0x07, 0x92, 0x28, 0xa0, 0xa2, 0x56, 0xab, 0xa8, 0xdb, 0xdd, 0x16, 0xca, 0x82, 0xb7,
-	0xac, 0x00, 0x09, 0x84, 0xdd, 0x38, 0x69, 0x84, 0xe3, 0x89, 0xec, 0x31, 0x55, 0x6e, 0x7c, 0x04,
-	0x2e, 0x48, 0x85, 0x1b, 0x07, 0x24, 0x8e, 0x1c, 0x91, 0xb8, 0x70, 0x41, 0xea, 0x0d, 0x3e, 0x01,
-	0xb4, 0xe1, 0x4b, 0xec, 0x11, 0xcd, 0x78, 0xfc, 0x2f, 0xfe, 0xb7, 0x7b, 0x58, 0x71, 0xe9, 0x2d,
-	0xf6, 0xbc, 0xf7, 0xe6, 0xe5, 0xe7, 0x37, 0xcf, 0x86, 0x97, 0xee, 0xe1, 0x99, 0x89, 0xbd, 0x8e,
-	0x89, 0xc9, 0xfd, 0x0e, 0x59, 0xcc, 0x2d, 0x4f, 0x9b, 0xbb, 0x98, 0x60, 0x54, 0x67, 0x17, 0xed,
-	0x2b, 0x93, 0x29, 0xb9, 0xef, 0x9b, 0xda, 0x3d, 0x3c, 0xeb, 0x4c, 0xf0, 0x04, 0x77, 0xd8, 0xaa,
-	0xe9, 0x8f, 0xd9, 0x15, 0xbb, 0x60, 0xbf, 0x02, 0x56, 0x5b, 0x99, 0x60, 0x3c, 0xb1, 0xad, 0x18,
-	0x35, 0xf2, 0x5d, 0x83, 0x4c, 0xb1, 0xc3, 0xd7, 0x37, 0x57, 0xd7, 0xc9, 0x74, 0x66, 0x79, 0xc4,
-	0x98, 0xcd, 0x8b, 0x04, 0x1e, 0xb8, 0xc6, 0x7c, 0x6e, 0xb9, 0xdc, 0x96, 0xfa, 0x5d, 0x0d, 0xe0,
-	0x3d, 0x07, 0x3f, 0x70, 0xee, 0x52, 0x7b, 0xe8, 0x32, 0x48, 0x23, 0xdf, 0x95, 0x85, 0x2d, 0x61,
-	0xbb, 0xd9, 0x7d, 0x59, 0x0b, 0xc8, 0x5a, 0x48, 0xd6, 0x6e, 0xf0, 0xdd, 0x75, 0x8a, 0x42, 0x97,
-	0x40, 0x24, 0x9e, 0x2c, 0x32, 0x6c, 0x3b, 0x83, 0xbd, 0x1b, 0x3a, 0xd1, 0x45, 0xe2, 0x21, 0x0d,
-	0xa4, 0x91, 0x69, 0xcb, 0x12, 0x03, 0xbf, 0x9a, 0x15, 0xc6, 0xbe, 0x69, 0x5b, 0x47, 0x86, 0xed,
-	0x5b, 0x3a, 0x05, 0xa2, 0x2b, 0x20, 0x8d, 0x6d, 0x22, 0xd7, 0x18, 0xfe, 0x95, 0x0c, 0xfe, 0xa6,
-	0x8d, 0x0d, 0xc2, 0xe1, 0x63, 0x9b, 0x50, 0xf8, 0x74, 0xd0, 0x97, 0xeb, 0x05, 0xf0, 0x5b, 0x0e,
-	0x19, 0xf4, 0x39, 0x7c, 0x3a, 0xe8, 0x53, 0x37, 0xfe, 0xa0, 0x2f, 0x9f, 0x2b, 0x70, 0xf3, 0x71,
-	0x12, 0xef, 0x0f, 0xfa, 0x4c, 0xbe, 0xd7, 0x95, 0xcf, 0x17, 0xcb, 0xf7, 0xba, 0xa1, 0x7c, 0xaf,
-	0xcb, 0xe4, 0x7b, 0x5d, 0xb9, 0x51, 0x22, 0x1f, 0xe1, 0x7d, 0x86, 0xaf, 0x99, 0x18, 0xdb, 0xf2,
-	0x7a, 0xc1, 0x28, 0x87, 0x18, 0xdb, 0x01, 0x9c, 0xe1, 0xa8, 0xbe, 0x47, 0x5c, 0x19, 0x0a, 0xf4,
-	0x0f, 0x89, 0x3b, 0x75, 0x26, 0x5c, 0xdf, 0x23, 0x2e, 0x7a, 0x0b, 0xea, 0xe6, 0x82, 0x58, 0x9e,
-	0xdc, 0x2c, 0xf8, 0x03, 0x43, 0xba, 0x1a, 0x10, 0x02, 0xa4, 0xfa, 0x83, 0x08, 0xf0, 0x21, 0x5d,
-	0x0e, 0x72, 0xb1, 0x0f, 0x17, 0x1d, 0xdf, 0xb6, 0x0d, 0xd3, 0xb6, 0xa2, 0xe7, 0xca, 0x53, 0x52,
-	0xf6, 0xe4, 0xb3, 0x24, 0xb4, 0x0b, 0x17, 0xc2, 0x9b, 0x61, 0x9a, 0x78, 0x84, 0x4a, 0xe2, 0x96,
-	0xa1, 0xa0, 0xeb, 0xb0, 0x1e, 0x45, 0x9d, 0xa7, 0xaa, 0xc4, 0xc8, 0xb0, 0xf6, 0xe8, 0xef, 0xcd,
-	0x35, 0x3d, 0xa6, 0xa0, 0x77, 0xa1, 0x11, 0x1e, 0x25, 0x1e, 0xb2, 0xe2, 0xed, 0x39, 0x3b, 0x22,
-	0xa8, 0xbf, 0x88, 0xd0, 0x38, 0x24, 0xa3, 0x60, 0x34, 0xb7, 0x61, 0x23, 0x74, 0x47, 0xef, 0x4d,
-	0x67, 0x56, 0xf5, 0x60, 0x86, 0xb5, 0x6f, 0xff, 0xd9, 0x14, 0xf4, 0x55, 0x22, 0xfa, 0x08, 0x9e,
-	0x4b, 0xdc, 0x3a, 0xf1, 0x7c, 0x86, 0xb5, 0x87, 0x54, 0x2e, 0x8f, 0x8b, 0xae, 0xc3, 0x79, 0x8f,
-	0xdb, 0xaa, 0x1e, 0x53, 0x83, 0xfe, 0x51, 0x66, 0x2d, 0x24, 0xa1, 0x5d, 0x68, 0x7a, 0x09, 0x2b,
-	0x95, 0xb3, 0x62, 0x12, 0xcc, 0x4e, 0x92, 0xa7, 0xfe, 0x24, 0x42, 0x4b, 0xb7, 0xe6, 0x89, 0x48,
-	0xdd, 0x06, 0x94, 0x49, 0x87, 0x27, 0x0b, 0x5b, 0x52, 0x45, 0xa6, 0x72, 0x58, 0x68, 0x2f, 0x8e,
-	0x67, 0xb8, 0x23, 0x2d, 0x26, 0xa9, 0x3c, 0x55, 0x59, 0x0e, 0xda, 0x01, 0x20, 0xb1, 0x19, 0xa9,
-	0xca, 0x0c, 0x4f, 0x46, 0x82, 0x83, 0xae, 0xc1, 0xfa, 0x28, 0xb2, 0x50, 0xab, 0xb0, 0x10, 0xe6,
-	0x32, 0x62, 0xa8, 0xbf, 0x89, 0xd0, 0xd4, 0xad, 0x79, 0x94, 0xae, 0xf7, 0xe3, 0xe3, 0xc2, 0x43,
-	0x72, 0x82, 0x19, 0xf1, 0x78, 0x65, 0x98, 0xe8, 0x10, 0x9e, 0xcf, 0xc9, 0x48, 0xf5, 0xa8, 0x78,
-	0xc0, 0x72, 0xc9, 0x68, 0x07, 0x1a, 0x5e, 0x68, 0xad, 0x7a, 0x62, 0x71, 0xc4, 0x22, 0x16, 0xda,
-	0x83, 0x67, 0xbc, 0xa4, 0x9d, 0xca, 0xb1, 0xc5, 0x21, 0x4b, 0x11, 0xd5, 0x3f, 0xea, 0xd0, 0xba,
-	0x63, 0x24, 0x53, 0xf6, 0x69, 0x7e, 0x71, 0x51, 0xfd, 0xcb, 0x5a, 0xf0, 0x7e, 0x4e, 0x11, 0xb4,
-	0x0f, 0x56, 0xd1, 0xbb, 0x0e, 0x71, 0x17, 0x79, 0x4d, 0xb6, 0x97, 0xac, 0xa0, 0x60, 0x82, 0xaf,
-	0xe7, 0x4a, 0xa6, 0xa5, 0xb2, 0x5d, 0x74, 0x94, 0x53, 0x89, 0xc1, 0x20, 0x2f, 0x95, 0x5a, 0x0c,
-	0xc1, 0x81, 0xc3, 0x6c, 0x47, 0xde, 0x48, 0x75, 0x1c, 0xd5, 0x53, 0x73, 0xf5, 0x52, 0x3a, 0xab,
-	0x65, 0xd7, 0xfe, 0x12, 0x5e, 0xcc, 0x9f, 0x09, 0xba, 0x00, 0xd2, 0x57, 0xd6, 0x82, 0xb5, 0x5d,
-	0x5d, 0xa7, 0x3f, 0xd1, 0x9b, 0x50, 0xff, 0x9a, 0xbe, 0x45, 0x4e, 0xf0, 0x51, 0x10, 0x00, 0xaf,
-	0x8a, 0xef, 0x08, 0xed, 0x4f, 0xe0, 0xd9, 0x33, 0x52, 0xfe, 0x02, 0x5e, 0xc8, 0x1d, 0x56, 0xce,
-	0x06, 0x9d, 0xf4, 0x06, 0x25, 0xb5, 0x91, 0xd0, 0x3f, 0x82, 0xd6, 0x59, 0xe8, 0xaa, 0x7f, 0xd6,
-	0xa1, 0x79, 0xc7, 0x88, 0x5b, 0xe0, 0xf3, 0xe2, 0x14, 0xbf, 0x11, 0x3f, 0xd2, 0x10, 0x5e, 0x90,
-	0x61, 0xde, 0x0a, 0x39, 0x49, 0xbe, 0x95, 0x4d, 0xf2, 0x6b, 0x39, 0xb2, 0x2b, 0x72, 0xf1, 0x49,
-	0x4e, 0x64, 0xf9, 0xb3, 0xc2, 0x2c, 0x6f, 0x97, 0x18, 0x5d, 0x49, 0xe0, 0xc3, 0x54, 0x7b, 0x45,
-	0x79, 0xbe, 0x99, 0xc9, 0xf3, 0x56, 0x8e, 0x66, 0x5a, 0x2b, 0x6e, 0x8a, 0xa7, 0x89, 0xfe, 0x3f,
-	0x13, 0xfd, 0xbd, 0x00, 0x1b, 0x07, 0x8e, 0x85, 0xc7, 0x89, 0x6e, 0xbe, 0x9a, 0x8c, 0x5d, 0xe5,
-	0x37, 0xd3, 0x7e, 0xaa, 0x33, 0xdf, 0x4e, 0x64, 0xa1, 0xca, 0xc7, 0x7e, 0xa2, 0xce, 0x86, 0x17,
-	0x99, 0x8f, 0x03, 0xee, 0x83, 0xea, 0xa9, 0x3f, 0x0a, 0xd0, 0x62, 0xde, 0xa2, 0xf3, 0xb6, 0x73,
-	0x2a, 0x67, 0xc1, 0xc1, 0x4a, 0xfb, 0xbb, 0x76, 0x0a, 0x7f, 0x41, 0xe0, 0x53, 0x2e, 0x37, 0x98,
-	0xa3, 0x83, 0x71, 0xf8, 0xe6, 0x1e, 0x6e, 0x3f, 0x7e, 0xa2, 0x08, 0xc7, 0x4f, 0x14, 0xe1, 0xe7,
-	0xa5, 0x22, 0xfc, 0xba, 0x54, 0x84, 0xdf, 0x97, 0x8a, 0xf0, 0x68, 0xa9, 0x08, 0x7f, 0x2d, 0x15,
-	0xe1, 0xf1, 0x52, 0x11, 0x8e, 0x97, 0xca, 0xda, 0x37, 0xff, 0x2a, 0x6b, 0xe6, 0x39, 0xa6, 0xdf,
-	0xfb, 0x2f, 0x00, 0x00, 0xff, 0xff, 0xdc, 0xe4, 0x8b, 0x9b, 0x8a, 0x0e, 0x00, 0x00,
+	// 911 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x56, 0x4d, 0x6f, 0xeb, 0x44,
+	0x14, 0xad, 0xed, 0xe4, 0x91, 0xde, 0x28, 0xbc, 0xf7, 0x2c, 0x01, 0x26, 0x20, 0xb7, 0x84, 0x4d,
+	0x79, 0x4f, 0xcf, 0x81, 0x24, 0x0a, 0xe8, 0xa1, 0x42, 0xb1, 0xfa, 0x49, 0xd5, 0x0f, 0xa5, 0xa5,
+	0x02, 0x24, 0x10, 0x76, 0xe3, 0xa4, 0x11, 0x8e, 0x27, 0xb2, 0xc7, 0x54, 0xd9, 0xf1, 0x13, 0xd8,
+	0x20, 0x01, 0x3b, 0x16, 0x48, 0x2c, 0xd8, 0xc3, 0x92, 0x0d, 0x52, 0x77, 0xf0, 0x0b, 0xa0, 0x0d,
+	0x7f, 0xa2, 0x4b, 0x34, 0xe3, 0xef, 0x78, 0xec, 0x90, 0x48, 0x15, 0x1b, 0x76, 0x71, 0xe6, 0xdc,
+	0x33, 0xc7, 0x67, 0xce, 0xbd, 0x63, 0x78, 0xe1, 0x1c, 0x0d, 0x75, 0xe4, 0xd4, 0x75, 0x84, 0x2f,
+	0xea, 0x78, 0x3c, 0x32, 0x1c, 0x65, 0x64, 0x23, 0x8c, 0xc4, 0x22, 0x7d, 0xa8, 0x3e, 0xe9, 0x0f,
+	0xf0, 0x85, 0xab, 0x2b, 0xe7, 0x68, 0x58, 0xef, 0xa3, 0x3e, 0xaa, 0xd3, 0x55, 0xdd, 0xed, 0xd1,
+	0x27, 0xfa, 0x40, 0x7f, 0x79, 0x55, 0x55, 0xb9, 0x8f, 0x50, 0xdf, 0x34, 0x22, 0x54, 0xd7, 0xb5,
+	0x35, 0x3c, 0x40, 0x96, 0xbf, 0xbe, 0x32, 0xbd, 0x8e, 0x07, 0x43, 0xc3, 0xc1, 0xda, 0x70, 0x94,
+	0x45, 0x70, 0x69, 0x6b, 0xa3, 0x91, 0x61, 0xfb, 0xb2, 0x6a, 0x5f, 0x17, 0x00, 0xf6, 0x2d, 0x74,
+	0x69, 0x9d, 0x12, 0x79, 0xe2, 0x63, 0x10, 0xba, 0xae, 0x2d, 0x71, 0xab, 0xdc, 0x5a, 0xb9, 0xf1,
+	0xa2, 0xe2, 0x15, 0x2b, 0x41, 0xb1, 0xb2, 0xe9, 0xef, 0xde, 0x21, 0x28, 0xf1, 0x11, 0xf0, 0xd8,
+	0x91, 0x78, 0x8a, 0xad, 0xa6, 0xb0, 0xa7, 0x81, 0x92, 0x0e, 0x8f, 0x1d, 0x51, 0x01, 0xa1, 0xab,
+	0x9b, 0x92, 0x40, 0xc1, 0x2f, 0xa7, 0x89, 0x91, 0xab, 0x9b, 0xc6, 0x99, 0x66, 0xba, 0x46, 0x87,
+	0x00, 0xc5, 0x27, 0x20, 0xf4, 0x4c, 0x2c, 0x15, 0x28, 0xfe, 0xa5, 0x14, 0x7e, 0xdb, 0x44, 0x1a,
+	0xf6, 0xe1, 0x3d, 0x13, 0x13, 0xf8, 0xa0, 0xdd, 0x92, 0x8a, 0x19, 0xf0, 0x3d, 0x0b, 0xb7, 0x5b,
+	0x3e, 0x7c, 0xd0, 0x6e, 0x11, 0x35, 0x6e, 0xbb, 0x25, 0xdd, 0xcb, 0x50, 0xf3, 0x41, 0x1c, 0xef,
+	0xb6, 0x5b, 0x94, 0xbe, 0xd9, 0x90, 0x9e, 0xc9, 0xa6, 0x6f, 0x36, 0x02, 0xfa, 0x66, 0x83, 0xd2,
+	0x37, 0x1b, 0x52, 0x29, 0x87, 0x3e, 0xc4, 0xbb, 0x14, 0x5f, 0xd0, 0x11, 0x32, 0xa5, 0xe5, 0x0c,
+	0x2b, 0x55, 0x84, 0x4c, 0x0f, 0x4e, 0x71, 0x84, 0xdf, 0xc1, 0xb6, 0x04, 0x19, 0xfc, 0x27, 0xd8,
+	0x1e, 0x58, 0x7d, 0x9f, 0xdf, 0xc1, 0xb6, 0xf8, 0x06, 0x14, 0xf5, 0x31, 0x36, 0x1c, 0xa9, 0x9c,
+	0xf1, 0x02, 0x2a, 0x59, 0xf5, 0x0a, 0x3c, 0x64, 0xed, 0x3b, 0x1e, 0xe0, 0x98, 0x2c, 0x7b, 0xb9,
+	0xd8, 0x85, 0x87, 0x96, 0x6b, 0x9a, 0x9a, 0x6e, 0x1a, 0xe1, 0xb9, 0xfa, 0x29, 0xc9, 0x3b, 0xf9,
+	0x74, 0x91, 0xb8, 0x05, 0x0f, 0x82, 0x3f, 0x83, 0x34, 0xf9, 0x11, 0xca, 0x89, 0x5b, 0xaa, 0x44,
+	0x7c, 0x07, 0x96, 0xc3, 0xa8, 0xfb, 0xa9, 0xca, 0x11, 0xa2, 0x16, 0xae, 0xfe, 0x5c, 0x59, 0xea,
+	0x44, 0x25, 0xe2, 0xdb, 0x50, 0x0a, 0x5a, 0xc9, 0x0f, 0x59, 0xf6, 0xf6, 0x7e, 0x75, 0x58, 0x50,
+	0xfb, 0x89, 0x87, 0xd2, 0x09, 0xee, 0x7a, 0xd6, 0x1c, 0x2e, 0x64, 0x8d, 0x5a, 0xf8, 0xea, 0xaf,
+	0x15, 0x8e, 0x65, 0xd0, 0xfe, 0x02, 0x06, 0xa9, 0x85, 0x6f, 0x08, 0x5b, 0xda, 0x26, 0x75, 0x3e,
+	0x9b, 0x4a, 0xe4, 0x45, 0xa9, 0xb0, 0x98, 0x55, 0xef, 0xce, 0x63, 0x15, 0x65, 0xa0, 0x62, 0x22,
+	0xbb, 0x7e, 0xe0, 0xa1, 0xd2, 0x31, 0x46, 0xb1, 0x38, 0xbd, 0x0f, 0x62, 0xea, 0xc5, 0x1d, 0x89,
+	0x5b, 0x15, 0x66, 0xe4, 0x89, 0x51, 0x25, 0xee, 0x44, 0xfe, 0x07, 0x2a, 0xc8, 0x50, 0x12, 0xf2,
+	0x13, 0x95, 0xae, 0x11, 0x37, 0x00, 0x70, 0x24, 0x46, 0x98, 0x25, 0xc6, 0x4f, 0x45, 0xac, 0x46,
+	0x5c, 0x87, 0xe5, 0x6e, 0x28, 0xa1, 0x30, 0x43, 0x42, 0x90, 0xc9, 0xb0, 0xa2, 0xf6, 0x33, 0x0f,
+	0xe5, 0x8e, 0x31, 0x0a, 0x93, 0x75, 0xbc, 0x98, 0x4b, 0x7e, 0xb4, 0x58, 0x5e, 0x1d, 0x2c, 0xe2,
+	0x95, 0x1f, 0x2e, 0x86, 0x63, 0x9b, 0x73, 0x3a, 0x16, 0xc5, 0x2b, 0xee, 0xda, 0x7b, 0x73, 0xb9,
+	0x16, 0x05, 0x2c, 0xe6, 0xdc, 0x6f, 0x45, 0xa8, 0x1c, 0x68, 0xf1, 0x84, 0x7d, 0xc4, 0xee, 0x4a,
+	0x42, 0xfe, 0x58, 0xf1, 0xee, 0xe5, 0x44, 0x81, 0x72, 0x38, 0x8d, 0xde, 0xb2, 0xb0, 0x3d, 0x66,
+	0x35, 0xe8, 0x4e, 0xbc, 0xa7, 0x3c, 0xf3, 0x5e, 0x65, 0x52, 0x26, 0xa9, 0xd2, 0x33, 0xe8, 0x8c,
+	0xd1, 0xe9, 0x9e, 0x89, 0x8f, 0x72, 0x25, 0x06, 0x60, 0x4f, 0x61, 0xba, 0xe9, 0x37, 0x13, 0x0d,
+	0x4b, 0xf8, 0x6a, 0x4c, 0xbe, 0x04, 0xcf, 0xf4, 0x90, 0xab, 0x7e, 0x06, 0xcf, 0xb3, 0x3d, 0x11,
+	0x1f, 0x80, 0xf0, 0xb9, 0x31, 0xa6, 0x33, 0xae, 0xd8, 0x21, 0x3f, 0xc5, 0xd7, 0xa1, 0xf8, 0x05,
+	0xb9, 0x3d, 0xfe, 0xc5, 0xc7, 0x80, 0x07, 0x7c, 0xca, 0xbf, 0xc5, 0x55, 0x3f, 0x84, 0x67, 0xef,
+	0x88, 0xf9, 0x53, 0x78, 0x8e, 0x69, 0x16, 0x63, 0x83, 0x7a, 0x72, 0x83, 0x9c, 0x91, 0x11, 0xe3,
+	0x3f, 0x83, 0xca, 0x5d, 0xf0, 0xd6, 0x7e, 0x2f, 0x42, 0xf9, 0x40, 0x8b, 0x26, 0xc0, 0x27, 0xd9,
+	0x29, 0x7e, 0x2d, 0x3a, 0xd2, 0x00, 0x9e, 0x91, 0xe1, 0xec, 0xab, 0x66, 0x2f, 0x9d, 0xe4, 0x57,
+	0x18, 0xb4, 0x53, 0x74, 0xcc, 0x4b, 0xe2, 0xe3, 0xcc, 0x2c, 0xaf, 0xe5, 0x08, 0x9d, 0x4a, 0x60,
+	0xc6, 0x25, 0xb6, 0x9d, 0xca, 0xf3, 0x2a, 0x83, 0x33, 0xc9, 0xc5, 0xb8, 0x87, 0xfe, 0x4f, 0xf4,
+	0x7f, 0x90, 0xe8, 0x6f, 0x39, 0xb8, 0x7f, 0x64, 0x19, 0xa8, 0x17, 0x9b, 0xcd, 0x4f, 0xe3, 0xb1,
+	0x9b, 0xf9, 0xa5, 0xb4, 0x9b, 0x98, 0x99, 0x6f, 0xc6, 0xb2, 0x30, 0x4b, 0xc7, 0x6e, 0x6c, 0x9c,
+	0xa9, 0x0f, 0xa9, 0x8e, 0x23, 0x5f, 0x07, 0xe1, 0xab, 0x7d, 0xcf, 0x41, 0x85, 0x6a, 0x0b, 0xfb,
+	0x6d, 0x63, 0x2e, 0x65, 0x5e, 0x63, 0x25, 0xf5, 0xad, 0xcf, 0xa1, 0xcf, 0x0b, 0x7c, 0x42, 0xe5,
+	0x7d, 0xaa, 0xe8, 0x88, 0x2a, 0x22, 0x9c, 0xea, 0xda, 0xf5, 0x8d, 0xcc, 0xdd, 0xde, 0xc8, 0xdc,
+	0x8f, 0x13, 0x99, 0xfb, 0x65, 0x22, 0x73, 0xbf, 0x4e, 0x64, 0xee, 0x6a, 0x22, 0x73, 0x7f, 0x4c,
+	0x64, 0xee, 0x7a, 0x22, 0x73, 0xb7, 0x13, 0x79, 0xe9, 0xcb, 0xbf, 0xe5, 0x25, 0xfd, 0x1e, 0xe5,
+	0x6f, 0xfe, 0x13, 0x00, 0x00, 0xff, 0xff, 0xbb, 0x15, 0x5a, 0x40, 0x82, 0x0e, 0x00, 0x00,
 }
