@@ -2877,7 +2877,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.NullableTimestamp) > 0 {
-		for k, _ := range m.NullableTimestamp {
+		for k := range m.NullableTimestamp {
 			data[i] = 0xa
 			i++
 			v := m.NullableTimestamp[k]
@@ -2904,7 +2904,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Timestamp) > 0 {
-		for k, _ := range m.Timestamp {
+		for k := range m.Timestamp {
 			data[i] = 0x12
 			i++
 			v := m.Timestamp[k]
@@ -2929,7 +2929,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.NullableDuration) > 0 {
-		for k, _ := range m.NullableDuration {
+		for k := range m.NullableDuration {
 			data[i] = 0x1a
 			i++
 			v := m.NullableDuration[k]
@@ -2956,7 +2956,7 @@ func (m *MapProtoTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Duration) > 0 {
-		for k, _ := range m.Duration {
+		for k := range m.Duration {
 			data[i] = 0x22
 			i++
 			v := m.Duration[k]
@@ -2999,7 +2999,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.NullableTimestamp) > 0 {
-		for k, _ := range m.NullableTimestamp {
+		for k := range m.NullableTimestamp {
 			data[i] = 0xa
 			i++
 			v := m.NullableTimestamp[k]
@@ -3026,7 +3026,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Timestamp) > 0 {
-		for k, _ := range m.Timestamp {
+		for k := range m.Timestamp {
 			data[i] = 0x12
 			i++
 			v := m.Timestamp[k]
@@ -3051,7 +3051,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.NullableDuration) > 0 {
-		for k, _ := range m.NullableDuration {
+		for k := range m.NullableDuration {
 			data[i] = 0x1a
 			i++
 			v := m.NullableDuration[k]
@@ -3078,7 +3078,7 @@ func (m *MapStdTypes) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if len(m.Duration) > 0 {
-		for k, _ := range m.Duration {
+		for k := range m.Duration {
 			data[i] = 0x22
 			i++
 			v := m.Duration[k]
