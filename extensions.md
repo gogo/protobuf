@@ -44,6 +44,8 @@ You might also find that basic structs that started their life as part of an API
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> castvalue </a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated fieldtype for a map value.  All generated code assumes that this type is castable to the protocol buffer field type.  Only supported on maps. </td><td> goprotobuf field type </td></tr>
 <tr><td>enum_customname  (beta)</td><td> Enum </td><td> string </td><td>Sets the type name of an enum. If goproto_enum_prefix is enabled, this value will be used as a prefix when generating enum values.</td><td>goprotobuf enum type name. Helps with golint issues.</td></tr>
 <tr><td>enumvalue_customname (beta) </td><td> Enum Value </td><td> string </td><td>Changes the generated enum name.  Helps with golint issues.</td><td>goprotobuf enum value name</td></tr>
+<tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/types/types.proto">stdtime</a></td><td> Timestamp Field </td><td> bool </td><td>Changes the Well Known Timestamp Type to time.Time</td><td>Timestamp</td></tr>
+<tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/types/types.proto">stdduration</a></td><td> Duration Field </td><td> bool </td><td>Changes the Well Known Duration Type to time.Duration</td><td>Duration</td></tr>
 </table>
 
 `Warning about nullable: according to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set.` 
