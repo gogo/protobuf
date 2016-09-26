@@ -1867,7 +1867,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.customImports = append(g.customImports, packageName)
 		}
 	}
-	if needsStar(field, g.file.proto3, message != nil && message.allowOneof()) {
+	if needsStar(field, g.file.proto3 && field.Extendee == nil, message != nil && message.allowOneof()) {
 		typ = "*" + typ
 	}
 	if isRepeated(field) {
