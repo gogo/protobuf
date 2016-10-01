@@ -109,7 +109,7 @@ type Message struct {
 	ResultCount  int64                      `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
 	TrueScotsman bool                       `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
 	Score        float32                    `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
-	Key          []uint64                   `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
+	Key          []uint64                   `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
 	Nested       *Nested                    `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
 	Terrain      map[int64]*Nested          `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	Proto2Field  *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
@@ -3693,9 +3693,11 @@ func (m *Message) Size() (n int) {
 		n += 5
 	}
 	if len(m.Key) > 0 {
+		l = 0
 		for _, e := range m.Key {
-			n += 1 + sovTheproto3(uint64(e))
+			l += sovTheproto3(uint64(e))
 		}
+		n += 1 + sovTheproto3(uint64(l)) + l
 	}
 	if m.Nested != nil {
 		l = m.Nested.Size()
@@ -4720,21 +4722,31 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 		i += copy(data[i:], m.Data)
 	}
 	if len(m.Key) > 0 {
+		data2 := make([]byte, len(m.Key)*10)
+		var j1 int
 		for _, num := range m.Key {
-			data[i] = 0x28
-			i++
-			i = encodeVarintTheproto3(data, i, uint64(num))
+			for num >= 1<<7 {
+				data2[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			data2[j1] = uint8(num)
+			j1++
 		}
+		data[i] = 0x2a
+		i++
+		i = encodeVarintTheproto3(data, i, uint64(j1))
+		i += copy(data[i:], data2[:j1])
 	}
 	if m.Nested != nil {
 		data[i] = 0x32
 		i++
 		i = encodeVarintTheproto3(data, i, uint64(m.Nested.Size()))
-		n1, err := m.Nested.MarshalTo(data[i:])
+		n3, err := m.Nested.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n1
+		i += n3
 	}
 	if m.ResultCount != 0 {
 		data[i] = 0x38
@@ -4776,11 +4788,11 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 				data[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(data, i, uint64(v.Size()))
-				n2, err := v.MarshalTo(data[i:])
+				n4, err := v.MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n2
+				i += n4
 			}
 		}
 	}
@@ -4788,11 +4800,11 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 		data[i] = 0x5a
 		i++
 		i = encodeVarintTheproto3(data, i, uint64(m.Proto2Field.Size()))
-		n3, err := m.Proto2Field.MarshalTo(data[i:])
+		n5, err := m.Proto2Field.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n3
+		i += n5
 	}
 	if len(m.Proto2Value) > 0 {
 		for k := range m.Proto2Value {
@@ -4813,11 +4825,11 @@ func (m *Message) MarshalTo(data []byte) (int, error) {
 				data[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(data, i, uint64(v.Size()))
-				n4, err := v.MarshalTo(data[i:])
+				n6, err := v.MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n4
+				i += n6
 			}
 		}
 	}
@@ -5150,11 +5162,11 @@ func (m *AllMaps) MarshalTo(data []byte) (int, error) {
 				data[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(data, i, uint64(v.Size()))
-				n5, err := v.MarshalTo(data[i:])
+				n7, err := v.MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n5
+				i += n7
 			}
 		}
 	}
@@ -5548,11 +5560,11 @@ func (m *AllMapsOrdered) MarshalTo(data []byte) (int, error) {
 				data[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(data, i, uint64(v.Size()))
-				n6, err := v.MarshalTo(data[i:])
+				n8, err := v.MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n6
+				i += n8
 			}
 		}
 	}
@@ -5609,11 +5621,11 @@ func (m *MessageWithMap) MarshalTo(data []byte) (int, error) {
 				data[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(data, i, uint64(v.Size()))
-				n7, err := v.MarshalTo(data[i:])
+				n9, err := v.MarshalTo(data[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n7
+				i += n9
 			}
 		}
 	}
@@ -5689,20 +5701,20 @@ func (m *Uint128Pair) MarshalTo(data []byte) (int, error) {
 	data[i] = 0xa
 	i++
 	i = encodeVarintTheproto3(data, i, uint64(m.Left.Size()))
-	n8, err := m.Left.MarshalTo(data[i:])
+	n10, err := m.Left.MarshalTo(data[i:])
 	if err != nil {
 		return 0, err
 	}
-	i += n8
+	i += n10
 	if m.Right != nil {
 		data[i] = 0x12
 		i++
 		i = encodeVarintTheproto3(data, i, uint64(m.Right.Size()))
-		n9, err := m.Right.MarshalTo(data[i:])
+		n11, err := m.Right.MarshalTo(data[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n9
+		i += n11
 	}
 	return i, nil
 }
@@ -5914,25 +5926,67 @@ func (m *Message) Unmarshal(data []byte) error {
 			}
 			iNdEx = postIndex
 		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
-			}
-			var v uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+			if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowTheproto3Unsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					packedLen |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
 				}
-				if iNdEx >= l {
+				if packedLen < 0 {
+					return ErrInvalidLengthTheproto3Unsafe
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
-				iNdEx++
-				v |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
+				for iNdEx < postIndex {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTheproto3Unsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := data[iNdEx]
+						iNdEx++
+						v |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.Key = append(m.Key, v)
 				}
+			} else if wireType == 0 {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowTheproto3Unsafe
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := data[iNdEx]
+					iNdEx++
+					v |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.Key = append(m.Key, v)
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
 			}
-			m.Key = append(m.Key, v)
 		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Nested", wireType)

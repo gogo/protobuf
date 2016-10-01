@@ -1164,7 +1164,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			if field.OneofIndex != nil {
 				errFieldname = p.GetOneOfFieldName(message, field)
 			}
-			packed := field.IsPacked()
+			packed := field.IsPacked() || (proto3 && field.IsRepeated() && generator.IsScalar(field))
 			p.P(`case `, strconv.Itoa(int(field.GetNumber())), `:`)
 			p.In()
 			wireType := field.WireType()
