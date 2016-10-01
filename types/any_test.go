@@ -105,7 +105,7 @@ func TestEmpty(t *testing.T) {
 
 	// that's a valid type_url for a message which shouldn't be linked into this
 	// test binary. We want an error.
-	a.TypeUrl = "type.googleapis.com/google.protobuf.FieldMask"
+	a.TypeUrl = "type.googleapis.com/google.protobuf.TestAny"
 	if _, err := EmptyAny(a); err == nil {
 		t.Errorf("got no error for an attempt to create a message of type %q, which shouldn't be linked in", a.TypeUrl)
 	}

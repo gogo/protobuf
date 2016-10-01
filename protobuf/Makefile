@@ -24,5 +24,7 @@ update:
 	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/struct;structpb";' 'go_package = "types";' ./google/protobuf/struct.proto
 	(cd ./google/protobuf && rm wrappers.proto; wget ${URL}/wrappers.proto)
 	gogoreplace 'go_package = "github.com/golang/protobuf/ptypes/wrappers";' 'go_package = "types";' ./google/protobuf/wrappers.proto
+	(cd ./google/protobuf && rm field_mask.proto; wget ${URL}/field_mask.proto)
+	gogoreplace 'option csharp_namespace = "Google.Protobuf.WellKnownTypes";' 'option csharp_namespace = "Google.Protobuf.WellKnownTypes"; option go_package = "types";' ./google/protobuf/field_mask.proto
 	
 	
