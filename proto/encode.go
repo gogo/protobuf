@@ -234,10 +234,6 @@ func Marshal(pb Message) ([]byte, error) {
 	}
 	p := NewBuffer(nil)
 	err := p.Marshal(pb)
-	var state errorState
-	if err != nil && !state.shouldContinue(err, nil) {
-		return nil, err
-	}
 	if p.buf == nil && err == nil {
 		// Return a non-nil slice on success.
 		return []byte{}, nil
@@ -266,11 +262,8 @@ func (p *Buffer) Marshal(pb Message) error {
 	// Can the object marshal itself?
 	if m, ok := pb.(Marshaler); ok {
 		data, err := m.Marshal()
-		if err != nil {
-			return err
-		}
 		p.buf = append(p.buf, data...)
-		return nil
+		return err
 	}
 
 	t, base, err := getbase(pb)
@@ -282,7 +275,7 @@ func (p *Buffer) Marshal(pb Message) error {
 	}
 
 	if collectStats {
-		stats.Encode++
+		(stats).Encode++ // Parens are to work around a goimports bug.
 	}
 
 	if len(p.buf) > maxMarshalSize {
@@ -309,7 +302,7 @@ func Size(pb Message) (n int) {
 	}
 
 	if collectStats {
-		stats.Size++
+		(stats).Size++ // Parens are to work around a goimports bug.
 	}
 
 	return
