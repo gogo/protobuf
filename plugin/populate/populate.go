@@ -467,11 +467,14 @@ func (p *plugin) hasLoop(field *descriptor.FieldDescriptorProto, visited []*gene
 				return fieldMessage
 			}
 		}
+		pkg := strings.Split(field.GetTypeName(), ".")[1]
 		for _, f := range fieldMessage.Field {
-			visited = append(visited, fieldMessage)
-			loopTo := p.hasLoop(f, visited, excludes)
-			if loopTo != nil {
-				return loopTo
+			if strings.HasPrefix(f.GetTypeName(), "."+pkg+".") {
+				visited = append(visited, fieldMessage)
+				loopTo := p.hasLoop(f, visited, excludes)
+				if loopTo != nil {
+					return loopTo
+				}
 			}
 		}
 	}
