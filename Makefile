@@ -101,6 +101,7 @@ regenerate:
 	make -C test/nopackage regenerate
 	make -C test/types regenerate
 	make -C test/proto3extension regenerate
+	make -C test/stdtypes regenerate
 	make gofmt
 
 tests:

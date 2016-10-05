@@ -1958,7 +1958,9 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		if !gogoproto.IsNullable(m.ValueAliasField) {
 			valType = strings.TrimPrefix(valType, "*")
 		}
-		g.RecordTypeUse(m.ValueAliasField.GetTypeName())
+		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+			g.RecordTypeUse(m.ValueAliasField.GetTypeName())
+		}
 	default:
 		if gogoproto.IsCustomType(m.ValueAliasField) {
 			if !gogoproto.IsNullable(m.ValueAliasField) {
@@ -2174,7 +2176,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 		g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i))
 		g.P(fieldName, "\t", typename, "\t`", tag, "`")
-		g.RecordTypeUse(field.GetTypeName())
+		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+			g.RecordTypeUse(field.GetTypeName())
+		}
 	}
 	if len(message.ExtensionRange) > 0 {
 		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
@@ -2403,7 +2407,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			_, wiretype := g.GoType(message, field)
 			tag := "protobuf:" + g.goTag(message, field, wiretype)
 			g.P("type ", oneofTypeName[field], " struct{ ", fieldNames[field], " ", fieldTypes[field], " `", tag, "` }")
-			g.RecordTypeUse(field.GetTypeName())
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+				g.RecordTypeUse(field.GetTypeName())
+			}
 		}
 		g.P()
 		for _, field := range message.Field {
