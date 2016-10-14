@@ -480,6 +480,41 @@ var unmarshalingTests = []struct {
 	{"BoolValue", Unmarshaler{}, `{"bool":true}`, &pb.KnownTypes{Bool: &types.BoolValue{Value: true}}},
 	{"StringValue", Unmarshaler{}, `{"str":"plush"}`, &pb.KnownTypes{Str: &types.StringValue{Value: "plush"}}},
 	{"BytesValue", Unmarshaler{}, `{"bytes":"d293"}`, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}},
+	{"ListValue", Unmarshaler{}, `{"list":["kuchikopi"]}`, &pb.KnownTypes{List: &types.ListValue{
+		Values: []*types.Value{
+			&types.Value{
+				Kind: &types.Value_StringValue{
+					StringValue: "kuchikopi",
+				},
+			},
+		},
+	}}},
+	{"Struct", Unmarshaler{}, `{"st":{"string":"hello world","double":42,"null":null,"bool":true,"struct":{"hello": "world"},"list":[1,2,4]}}`, &pb.KnownTypes{
+		St: &types.Struct{
+			Fields: map[string]*types.Value{
+				"string": &types.Value{Kind: &types.Value_StringValue{StringValue: "hello world"}},
+				"double": &types.Value{&types.Value_NumberValue{NumberValue: 42}},
+				"null":   &types.Value{&types.Value_NullValue{}},
+				"bool":   &types.Value{&types.Value_BoolValue{BoolValue: true}},
+				"struct": &types.Value{&types.Value_StructValue{
+					StructValue: &types.Struct{
+						Fields: map[string]*types.Value{
+							"hello": &types.Value{&types.Value_StringValue{StringValue: "world"}},
+						},
+					},
+				}},
+				"list": &types.Value{&types.Value_ListValue{
+					ListValue: &types.ListValue{
+						Values: []*types.Value{
+							&types.Value{&types.Value_NumberValue{NumberValue: 1}},
+							&types.Value{&types.Value_NumberValue{NumberValue: 2}},
+							&types.Value{&types.Value_NumberValue{NumberValue: 4}},
+						},
+					},
+				}},
+			},
+		},
+	}},
 	// `null` is also a permissible value. Let's just test one.
 	{"null DoubleValue", Unmarshaler{}, `{"dbl":null}`, &pb.KnownTypes{Dbl: &types.DoubleValue{}}},
 }
