@@ -76,7 +76,7 @@ func (p *enumstringer) Generate(file *generator.FileDescriptor) {
 			continue
 		}
 		if gogoproto.IsGoEnumStringer(file.FileDescriptorProto, enum.EnumDescriptorProto) {
-			panic("old enum string method needs to be disabled, please use gogoproto.old_enum_stringer or gogoproto.old_enum_string_all and set it to false")
+			panic("Go enum stringer conflicts with new enumstringer plugin: please use gogoproto.goproto_enum_stringer or gogoproto.goproto_enum_string_all and set it to false")
 		}
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(enum.TypeName())
