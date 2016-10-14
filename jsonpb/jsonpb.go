@@ -107,7 +107,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 	if wkt, ok := v.(isWkt); ok {
 		switch wkt.XXX_WellKnownType() {
 		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
-			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue", "ListValue":
 			// "Wrappers use the same representation in JSON
 			//  as the wrapped primitive type, ..."
 			sprop := proto.GetProperties(s.Type())
@@ -644,6 +644,82 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			// encoding/json will turn JSON `null` into Go `nil`,
 			// so we don't have to do any extra work.
 			return u.unmarshalValue(target.Field(0), inputValue, prop)
+		case "ListValue":
+			var jsonValues []json.RawMessage
+			if err := json.Unmarshal(inputValue, &jsonValues); err != nil {
+				return err
+			}
+
+			listValue := target.Field(0)
+			listValue.Set(reflect.MakeSlice(listValue.Type(), len(jsonValues), len(jsonValues)))
+
+			for i, v := range jsonValues {
+				if err := u.unmarshalValue(listValue.Index(i), v, prop); err != nil {
+					return err
+				}
+			}
+			return nil
+		case "Value":
+			var jsonValue interface{}
+			if err := json.Unmarshal(inputValue, &jsonValue); err != nil {
+				return err
+			}
+			var val interface{}
+
+			switch v := jsonValue.(type) {
+			case nil:
+				val = &types.Value_NullValue{}
+			case bool:
+				val = &types.Value_BoolValue{
+					BoolValue: v,
+				}
+			case string:
+				val = &types.Value_StringValue{
+					StringValue: v,
+				}
+			case float64:
+				val = &types.Value_NumberValue{
+					NumberValue: v,
+				}
+			case map[string]interface{}:
+				structValue := reflect.ValueOf(&types.Struct{}).Elem()
+				u.unmarshalValue(structValue, inputValue, prop)
+
+				val = &types.Value_StructValue{
+					StructValue: structValue.Addr().Interface().(*types.Struct),
+				}
+
+			case []interface{}:
+				listValue := reflect.ValueOf(&types.ListValue{}).Elem()
+				u.unmarshalValue(listValue, inputValue, prop)
+
+				val = &types.Value_ListValue{
+					ListValue: listValue.Addr().Interface().(*types.ListValue),
+				}
+			default:
+				return fmt.Errorf("Invalid struct field type: %T", jsonValue)
+			}
+
+			target.Field(0).Set(reflect.ValueOf(val))
+			return nil
+		case "Struct":
+			var jsonFields map[string]json.RawMessage
+			if err := json.Unmarshal(inputValue, &jsonFields); err != nil {
+				return err
+			}
+
+			f := target.Field(0)
+			f.Set(reflect.MakeMap(f.Type()))
+
+			for k, fieldValue := range jsonFields {
+				v := reflect.ValueOf(&types.Value{}).Elem()
+				if err := u.unmarshalValue(v, fieldValue, &proto.Properties{}); err != nil {
+					return err
+				}
+				f.SetMapIndex(reflect.ValueOf(k), v.Addr())
+			}
+
+			return nil
 		case "Any":
 			return fmt.Errorf("unmarshaling Any not supported yet")
 		case "Duration":
