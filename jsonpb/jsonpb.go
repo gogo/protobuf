@@ -107,7 +107,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 	if wkt, ok := v.(isWkt); ok {
 		switch wkt.XXX_WellKnownType() {
 		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
-			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
+			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue", "ListValue":
 			// "Wrappers use the same representation in JSON
 			//  as the wrapped primitive type, ..."
 			sprop := proto.GetProperties(s.Type())

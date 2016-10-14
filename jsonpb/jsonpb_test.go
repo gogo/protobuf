@@ -398,6 +398,11 @@ var marshalingTests = []struct {
 	{"BoolValue", marshaler, &pb.KnownTypes{Bool: &types.BoolValue{Value: true}}, `{"bool":true}`},
 	{"StringValue", marshaler, &pb.KnownTypes{Str: &types.StringValue{Value: "plush"}}, `{"str":"plush"}`},
 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
+	{"ListValue", marshaler, &pb.KnownTypes{List: &types.ListValue{
+		Values: []*types.Value{
+			{Kind: &types.Value_StringValue{StringValue: "kuchikopi"}}},
+	},
+	}, `{"list":["kuchikopi"]}`},
 }
 
 func TestMarshaling(t *testing.T) {
