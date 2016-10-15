@@ -881,11 +881,11 @@ func _CustomOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 		_ = b.EncodeStringBytes(x.Stringy)
 	case *CustomOneof_CustomType:
 		_ = b.EncodeVarint(35<<3 | proto.WireBytes)
-		data, err := x.CustomType.Marshal()
+		dAtA, err := x.CustomType.Marshal()
 		if err != nil {
 			return err
 		}
-		_ = b.EncodeRawBytes(data)
+		_ = b.EncodeRawBytes(dAtA)
 	case *CustomOneof_CastType:
 		_ = b.EncodeVarint(36<<3 | proto.WireVarint)
 		_ = b.EncodeVarint(uint64(x.CastType))
@@ -3734,7 +3734,7 @@ func randStringOne(r randyOne) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedOne(r randyOne, maxFieldNumber int) (data []byte) {
+func randUnrecognizedOne(r randyOne, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -3742,43 +3742,43 @@ func randUnrecognizedOne(r randyOne, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldOne(data, r, fieldNumber, wire)
+		dAtA = randFieldOne(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldOne(data []byte, r randyOne, fieldNumber int, wire int) []byte {
+func randFieldOne(dAtA []byte, r randyOne, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateOne(data, uint64(key))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		v6 := r.Int63()
 		if r.Intn(2) == 0 {
 			v6 *= -1
 		}
-		data = encodeVarintPopulateOne(data, uint64(v6))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(v6))
 	case 1:
-		data = encodeVarintPopulateOne(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateOne(data, uint64(key))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateOne(data, uint64(ll))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateOne(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateOne(data []byte, v uint64) []byte {
+func encodeVarintPopulateOne(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Subby) Size() (n int) {
 	var l int

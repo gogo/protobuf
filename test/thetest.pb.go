@@ -130,8 +130,8 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
-func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
+func (x *TheTestEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, dAtA, "TheTestEnum")
 	if err != nil {
 		return err
 	}
@@ -164,8 +164,8 @@ func (x AnotherTestEnum) Enum() *AnotherTestEnum {
 func (x AnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(AnotherTestEnum_name, int32(x))
 }
-func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, data, "AnotherTestEnum")
+func (x *AnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, dAtA, "AnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -200,8 +200,8 @@ func (x YetAnotherTestEnum) Enum() *YetAnotherTestEnum {
 func (x YetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetAnotherTestEnum_name, int32(x))
 }
-func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(YetAnotherTestEnum_value, data, "YetAnotherTestEnum")
+func (x *YetAnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(YetAnotherTestEnum_value, dAtA, "YetAnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -236,8 +236,8 @@ func (x YetYetAnotherTestEnum) Enum() *YetYetAnotherTestEnum {
 func (x YetYetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetYetAnotherTestEnum_name, int32(x))
 }
-func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(YetYetAnotherTestEnum_value, data, "YetYetAnotherTestEnum")
+func (x *YetYetAnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(YetYetAnotherTestEnum_value, dAtA, "YetYetAnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -267,8 +267,8 @@ func (x NestedDefinition_NestedEnum) Enum() *NestedDefinition_NestedEnum {
 func (x NestedDefinition_NestedEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(NestedDefinition_NestedEnum_name, int32(x))
 }
-func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(NestedDefinition_NestedEnum_value, data, "NestedDefinition_NestedEnum")
+func (x *NestedDefinition_NestedEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(NestedDefinition_NestedEnum_value, dAtA, "NestedDefinition_NestedEnum")
 	if err != nil {
 		return err
 	}
@@ -848,7 +848,7 @@ func (m *AnotherNinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 type Timer struct {
 	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1,json=time1" json:"Time1"`
 	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2,json=time2" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=data" json:"Data"`
+	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=dAtA" json:"Data"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -20797,8 +20797,8 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -20841,8 +20841,8 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -21455,8 +21455,8 @@ func NewPopulatedNoExtensionsMap(r randyThetest, easy bool) *NoExtensionsMap {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -21576,7 +21576,7 @@ func randStringThetest(r randyThetest) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (data []byte) {
+func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -21584,43 +21584,43 @@ func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldThetest(data, r, fieldNumber, wire)
+		dAtA = randFieldThetest(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldThetest(data []byte, r randyThetest, fieldNumber int, wire int) []byte {
+func randFieldThetest(dAtA []byte, r randyThetest, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateThetest(data, uint64(key))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		v253 := r.Int63()
 		if r.Intn(2) == 0 {
 			v253 *= -1
 		}
-		data = encodeVarintPopulateThetest(data, uint64(v253))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v253))
 	case 1:
-		data = encodeVarintPopulateThetest(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateThetest(data, uint64(key))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateThetest(data, uint64(ll))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateThetest(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateThetest(data []byte, v uint64) []byte {
+func encodeVarintPopulateThetest(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *NidOptNative) Size() (n int) {
 	var l int

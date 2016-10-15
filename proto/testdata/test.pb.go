@@ -79,8 +79,8 @@ func (x FOO) Enum() *FOO {
 func (x FOO) String() string {
 	return proto.EnumName(FOO_name, int32(x))
 }
-func (x *FOO) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(FOO_value, data, "FOO")
+func (x *FOO) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(FOO_value, dAtA, "FOO")
 	if err != nil {
 		return err
 	}
@@ -151,8 +151,8 @@ func (x GoTest_KIND) Enum() *GoTest_KIND {
 func (x GoTest_KIND) String() string {
 	return proto.EnumName(GoTest_KIND_name, int32(x))
 }
-func (x *GoTest_KIND) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(GoTest_KIND_value, data, "GoTest_KIND")
+func (x *GoTest_KIND) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(GoTest_KIND_value, dAtA, "GoTest_KIND")
 	if err != nil {
 		return err
 	}
@@ -188,8 +188,8 @@ func (x MyMessage_Color) Enum() *MyMessage_Color {
 func (x MyMessage_Color) String() string {
 	return proto.EnumName(MyMessage_Color_name, int32(x))
 }
-func (x *MyMessage_Color) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(MyMessage_Color_value, data, "MyMessage_Color")
+func (x *MyMessage_Color) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(MyMessage_Color_value, dAtA, "MyMessage_Color")
 	if err != nil {
 		return err
 	}
@@ -225,8 +225,8 @@ func (x DefaultsMessage_DefaultsEnum) Enum() *DefaultsMessage_DefaultsEnum {
 func (x DefaultsMessage_DefaultsEnum) String() string {
 	return proto.EnumName(DefaultsMessage_DefaultsEnum_name, int32(x))
 }
-func (x *DefaultsMessage_DefaultsEnum) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(DefaultsMessage_DefaultsEnum_value, data, "DefaultsMessage_DefaultsEnum")
+func (x *DefaultsMessage_DefaultsEnum) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(DefaultsMessage_DefaultsEnum_value, dAtA, "DefaultsMessage_DefaultsEnum")
 	if err != nil {
 		return err
 	}
@@ -264,8 +264,8 @@ func (x Defaults_Color) Enum() *Defaults_Color {
 func (x Defaults_Color) String() string {
 	return proto.EnumName(Defaults_Color_name, int32(x))
 }
-func (x *Defaults_Color) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Defaults_Color_value, data, "Defaults_Color")
+func (x *Defaults_Color) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(Defaults_Color_value, dAtA, "Defaults_Color")
 	if err != nil {
 		return err
 	}
@@ -295,8 +295,8 @@ func (x RepeatedEnum_Color) Enum() *RepeatedEnum_Color {
 func (x RepeatedEnum_Color) String() string {
 	return proto.EnumName(RepeatedEnum_Color_name, int32(x))
 }
-func (x *RepeatedEnum_Color) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(RepeatedEnum_Color_value, data, "RepeatedEnum_Color")
+func (x *RepeatedEnum_Color) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(RepeatedEnum_Color_value, dAtA, "RepeatedEnum_Color")
 	if err != nil {
 		return err
 	}
@@ -1505,7 +1505,7 @@ func (m *MyMessage_SomeGroup) GetGroupField() int32 {
 }
 
 type Ext struct {
-	Data             *string `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	Data             *string `protobuf:"bytes,1,opt,name=dAtA" json:"data,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -2752,7 +2752,7 @@ type Communique_Name struct {
 	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
+	Data []byte `protobuf:"bytes,7,opt,name=dAtA,oneof"`
 }
 type Communique_TempC struct {
 	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof"`
@@ -2887,7 +2887,7 @@ func _Communique_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buf
 		x, err := b.DecodeStringBytes()
 		m.Union = &Communique_Name{x}
 		return true, err
-	case 7: // union.data
+	case 7: // union.dAtA
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}

@@ -47,8 +47,8 @@ func (x Widget_Color) Enum() *Widget_Color {
 func (x Widget_Color) String() string {
 	return proto.EnumName(Widget_Color_name, int32(x))
 }
-func (x *Widget_Color) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Widget_Color_value, data, "Widget_Color")
+func (x *Widget_Color) UnmarshalJSON(dAtA []byte) error {
+	value, err := proto.UnmarshalJSONEnum(Widget_Color_value, dAtA, "Widget_Color")
 	if err != nil {
 		return err
 	}

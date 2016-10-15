@@ -68,63 +68,63 @@ func (m *B) GetInt32() int32 {
 func init() {
 	proto.RegisterType((*B)(nil), "vanity.B")
 }
-func (m *B) Marshal() (data []byte, err error) {
+func (m *B) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *B) MarshalTo(data []byte) (int, error) {
+func (m *B) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.String_ != nil {
-		data[i] = 0xa
+		dAtA[i] = 0xa
 		i++
-		i = encodeVarintGogovanity(data, i, uint64(len(*m.String_)))
-		i += copy(data[i:], *m.String_)
+		i = encodeVarintGogovanity(dAtA, i, uint64(len(*m.String_)))
+		i += copy(dAtA[i:], *m.String_)
 	}
-	data[i] = 0x10
+	dAtA[i] = 0x10
 	i++
-	i = encodeVarintGogovanity(data, i, uint64(m.Int64))
+	i = encodeVarintGogovanity(dAtA, i, uint64(m.Int64))
 	if m.Int32 != nil {
-		data[i] = 0x18
+		dAtA[i] = 0x18
 		i++
-		i = encodeVarintGogovanity(data, i, uint64(*m.Int32))
+		i = encodeVarintGogovanity(dAtA, i, uint64(*m.Int32))
 	}
 	return i, nil
 }
 
-func encodeFixed64Gogovanity(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Gogovanity(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Gogovanity(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Gogovanity(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintGogovanity(data []byte, offset int, v uint64) int {
+func encodeVarintGogovanity(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func (m *B) Size() (n int) {
@@ -154,8 +154,8 @@ func sovGogovanity(x uint64) (n int) {
 func sozGogovanity(x uint64) (n int) {
 	return sovGogovanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *B) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *B) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -167,7 +167,7 @@ func (m *B) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -195,7 +195,7 @@ func (m *B) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -210,7 +210,7 @@ func (m *B) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.String_ = &s
 			iNdEx = postIndex
 		case 2:
@@ -225,7 +225,7 @@ func (m *B) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Int64 |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -244,7 +244,7 @@ func (m *B) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -254,7 +254,7 @@ func (m *B) Unmarshal(data []byte) error {
 			m.Int32 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipGogovanity(data[iNdEx:])
+			skippy, err := skipGogovanity(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -273,8 +273,8 @@ func (m *B) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipGogovanity(data []byte) (n int, err error) {
-	l := len(data)
+func skipGogovanity(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -285,7 +285,7 @@ func skipGogovanity(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -303,7 +303,7 @@ func skipGogovanity(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -320,7 +320,7 @@ func skipGogovanity(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -343,7 +343,7 @@ func skipGogovanity(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -354,7 +354,7 @@ func skipGogovanity(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipGogovanity(data[start:])
+				next, err := skipGogovanity(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

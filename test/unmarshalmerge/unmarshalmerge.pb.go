@@ -794,7 +794,7 @@ func randStringUnmarshalmerge(r randyUnmarshalmerge) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedUnmarshalmerge(r randyUnmarshalmerge, maxFieldNumber int) (data []byte) {
+func randUnrecognizedUnmarshalmerge(r randyUnmarshalmerge, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -802,43 +802,43 @@ func randUnrecognizedUnmarshalmerge(r randyUnmarshalmerge, maxFieldNumber int) (
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldUnmarshalmerge(data, r, fieldNumber, wire)
+		dAtA = randFieldUnmarshalmerge(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldUnmarshalmerge(data []byte, r randyUnmarshalmerge, fieldNumber int, wire int) []byte {
+func randFieldUnmarshalmerge(dAtA []byte, r randyUnmarshalmerge, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
 		v5 := r.Int63()
 		if r.Intn(2) == 0 {
 			v5 *= -1
 		}
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(v5))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(v5))
 	case 1:
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(ll))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateUnmarshalmerge(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateUnmarshalmerge(data []byte, v uint64) []byte {
+func encodeVarintPopulateUnmarshalmerge(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (this *Big) String() string {
 	if this == nil {
@@ -904,8 +904,8 @@ func valueToStringUnmarshalmerge(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *Big) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Big) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -917,7 +917,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -945,7 +945,7 @@ func (m *Big) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -962,7 +962,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			if m.Sub == nil {
 				m.Sub = &Sub{}
 			}
-			if err := m.Sub.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Sub.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -978,7 +978,7 @@ func (m *Big) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -988,7 +988,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			m.Number = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnmarshalmerge(data[iNdEx:])
+			skippy, err := skipUnmarshalmerge(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -998,7 +998,7 @@ func (m *Big) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1008,8 +1008,8 @@ func (m *Big) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Sub) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Sub) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1021,7 +1021,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1049,7 +1049,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1059,7 +1059,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 			m.SubNumber = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnmarshalmerge(data[iNdEx:])
+			skippy, err := skipUnmarshalmerge(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1069,7 +1069,7 @@ func (m *Sub) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1079,9 +1079,9 @@ func (m *Sub) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *IntMerge) Unmarshal(data []byte) error {
+func (m *IntMerge) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
-	l := len(data)
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1093,7 +1093,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1121,7 +1121,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Int64 |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1141,7 +1141,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Int32 |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1160,7 +1160,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1182,7 +1182,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1203,7 +1203,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Uint64 |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1222,7 +1222,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Uint32 |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1239,14 +1239,14 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			m.Fixed64 = uint64(data[iNdEx-8])
-			m.Fixed64 |= uint64(data[iNdEx-7]) << 8
-			m.Fixed64 |= uint64(data[iNdEx-6]) << 16
-			m.Fixed64 |= uint64(data[iNdEx-5]) << 24
-			m.Fixed64 |= uint64(data[iNdEx-4]) << 32
-			m.Fixed64 |= uint64(data[iNdEx-3]) << 40
-			m.Fixed64 |= uint64(data[iNdEx-2]) << 48
-			m.Fixed64 |= uint64(data[iNdEx-1]) << 56
+			m.Fixed64 = uint64(dAtA[iNdEx-8])
+			m.Fixed64 |= uint64(dAtA[iNdEx-7]) << 8
+			m.Fixed64 |= uint64(dAtA[iNdEx-6]) << 16
+			m.Fixed64 |= uint64(dAtA[iNdEx-5]) << 24
+			m.Fixed64 |= uint64(dAtA[iNdEx-4]) << 32
+			m.Fixed64 |= uint64(dAtA[iNdEx-3]) << 40
+			m.Fixed64 |= uint64(dAtA[iNdEx-2]) << 48
+			m.Fixed64 |= uint64(dAtA[iNdEx-1]) << 56
 		case 8:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Fixed32", wireType)
@@ -1256,10 +1256,10 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			m.Fixed32 = uint32(data[iNdEx-4])
-			m.Fixed32 |= uint32(data[iNdEx-3]) << 8
-			m.Fixed32 |= uint32(data[iNdEx-2]) << 16
-			m.Fixed32 |= uint32(data[iNdEx-1]) << 24
+			m.Fixed32 = uint32(dAtA[iNdEx-4])
+			m.Fixed32 |= uint32(dAtA[iNdEx-3]) << 8
+			m.Fixed32 |= uint32(dAtA[iNdEx-2]) << 16
+			m.Fixed32 |= uint32(dAtA[iNdEx-1]) << 24
 		case 9:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Sfixed32", wireType)
@@ -1269,10 +1269,10 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			m.Sfixed32 = int32(data[iNdEx-4])
-			m.Sfixed32 |= int32(data[iNdEx-3]) << 8
-			m.Sfixed32 |= int32(data[iNdEx-2]) << 16
-			m.Sfixed32 |= int32(data[iNdEx-1]) << 24
+			m.Sfixed32 = int32(dAtA[iNdEx-4])
+			m.Sfixed32 |= int32(dAtA[iNdEx-3]) << 8
+			m.Sfixed32 |= int32(dAtA[iNdEx-2]) << 16
+			m.Sfixed32 |= int32(dAtA[iNdEx-1]) << 24
 			hasFields[0] |= uint64(0x00000008)
 		case 10:
 			if wireType != 1 {
@@ -1283,14 +1283,14 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			m.Sfixed64 = int64(data[iNdEx-8])
-			m.Sfixed64 |= int64(data[iNdEx-7]) << 8
-			m.Sfixed64 |= int64(data[iNdEx-6]) << 16
-			m.Sfixed64 |= int64(data[iNdEx-5]) << 24
-			m.Sfixed64 |= int64(data[iNdEx-4]) << 32
-			m.Sfixed64 |= int64(data[iNdEx-3]) << 40
-			m.Sfixed64 |= int64(data[iNdEx-2]) << 48
-			m.Sfixed64 |= int64(data[iNdEx-1]) << 56
+			m.Sfixed64 = int64(dAtA[iNdEx-8])
+			m.Sfixed64 |= int64(dAtA[iNdEx-7]) << 8
+			m.Sfixed64 |= int64(dAtA[iNdEx-6]) << 16
+			m.Sfixed64 |= int64(dAtA[iNdEx-5]) << 24
+			m.Sfixed64 |= int64(dAtA[iNdEx-4]) << 32
+			m.Sfixed64 |= int64(dAtA[iNdEx-3]) << 40
+			m.Sfixed64 |= int64(dAtA[iNdEx-2]) << 48
+			m.Sfixed64 |= int64(dAtA[iNdEx-1]) << 56
 		case 11:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Bool", wireType)
@@ -1303,7 +1303,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1313,7 +1313,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			m.Bool = bool(v != 0)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnmarshalmerge(data[iNdEx:])
+			skippy, err := skipUnmarshalmerge(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1323,7 +1323,7 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1345,8 +1345,8 @@ func (m *IntMerge) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipUnmarshalmerge(data []byte) (n int, err error) {
-	l := len(data)
+func skipUnmarshalmerge(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -1357,7 +1357,7 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1375,7 +1375,7 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -1392,7 +1392,7 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1415,7 +1415,7 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -1426,7 +1426,7 @@ func skipUnmarshalmerge(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipUnmarshalmerge(data[start:])
+				next, err := skipUnmarshalmerge(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -1450,8 +1450,8 @@ var (
 	ErrIntOverflowUnmarshalmerge   = fmt.Errorf("proto: integer overflow")
 )
 
-func (m *BigUnsafe) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *BigUnsafe) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1463,7 +1463,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1491,7 +1491,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1508,7 +1508,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			if m.Sub == nil {
 				m.Sub = &Sub{}
 			}
-			if err := m.Sub.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Sub.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1524,7 +1524,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1534,7 +1534,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			m.Number = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnmarshalmergeUnsafe(data[iNdEx:])
+			skippy, err := skipUnmarshalmergeUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1544,7 +1544,7 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1554,8 +1554,8 @@ func (m *BigUnsafe) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
-	l := len(data)
+func skipUnmarshalmergeUnsafe(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -1566,7 +1566,7 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1584,7 +1584,7 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -1601,7 +1601,7 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1624,7 +1624,7 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -1635,7 +1635,7 @@ func skipUnmarshalmergeUnsafe(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipUnmarshalmergeUnsafe(data[start:])
+				next, err := skipUnmarshalmergeUnsafe(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
