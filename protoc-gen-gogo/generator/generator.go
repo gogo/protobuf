@@ -547,7 +547,7 @@ func (es enumSymbol) GenerateAlias(g *Generator, pkg string) {
 	g.P("func (x ", s, ") String() string { return (", pkg, ".", s, ")(x).String() }")
 	if !es.proto3 {
 		g.P("func (x ", s, ") Enum() *", s, "{ return (*", s, ")((", pkg, ".", s, ")(x).Enum()) }")
-		g.P("func (x *", s, ") UnmarshalJSON(data []byte) error { return (*", pkg, ".", s, ")(x).UnmarshalJSON(data) }")
+		g.P("func (x *", s, ") UnmarshalJSON(dAtA []byte) error { return (*", pkg, ".", s, ")(x).UnmarshalJSON(dAtA) }")
 	}
 }
 
@@ -1573,9 +1573,9 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("}")
 	}
 	if !enum.proto3() {
-		g.P("func (x *", ccTypeName, ") UnmarshalJSON(data []byte) error {")
+		g.P("func (x *", ccTypeName, ") UnmarshalJSON(dAtA []byte) error {")
 		g.In()
-		g.P("value, err := ", g.Pkg["proto"], ".UnmarshalJSONEnum(", ccTypeName, `_value, data, "`, ccTypeName, `")`)
+		g.P("value, err := ", g.Pkg["proto"], ".UnmarshalJSONEnum(", ccTypeName, `_value, dAtA, "`, ccTypeName, `")`)
 		g.P("if err != nil {")
 		g.In()
 		g.P("return err")
@@ -2712,40 +2712,40 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				fieldWire[field] = wire
 				g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
-					g.P(`data, err := `, val, `.Marshal()`)
+					g.P(`dAtA, err := `, val, `.Marshal()`)
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 				} else if gogoproto.IsStdTime(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
-						g.P(`data, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
 					} else {
-						g.P(`data, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
 					}
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 					pre, post = "b.EncodeRawBytes(", ")"
 				} else if gogoproto.IsStdDuration(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
-						g.P(`data, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
 					} else {
-						g.P(`data, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
 					}
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 					pre, post = "b.EncodeRawBytes(", ")"
 				}
 				if !canFail {
