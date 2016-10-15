@@ -850,7 +850,7 @@ func (m *AnotherNinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 type Timer struct {
 	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1,json=time1" json:"Time1"`
 	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2,json=time2" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=dAtA" json:"Data"`
+	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=data" json:"Data"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -19960,110 +19960,110 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if len(m.Field3) > 0 {
-		data12 := make([]byte, len(m.Field3)*10)
+		dAtA12 := make([]byte, len(m.Field3)*10)
 		var j11 int
 		for _, num1 := range m.Field3 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data12[j11] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA12[j11] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j11++
 			}
-			data12[j11] = uint8(num)
+			dAtA12[j11] = uint8(num)
 			j11++
 		}
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j11))
-		i += copy(dAtA[i:], data12[:j11])
+		i += copy(dAtA[i:], dAtA12[:j11])
 	}
 	if len(m.Field4) > 0 {
-		data14 := make([]byte, len(m.Field4)*10)
+		dAtA14 := make([]byte, len(m.Field4)*10)
 		var j13 int
 		for _, num1 := range m.Field4 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data14[j13] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA14[j13] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j13++
 			}
-			data14[j13] = uint8(num)
+			dAtA14[j13] = uint8(num)
 			j13++
 		}
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j13))
-		i += copy(dAtA[i:], data14[:j13])
+		i += copy(dAtA[i:], dAtA14[:j13])
 	}
 	if len(m.Field5) > 0 {
-		data16 := make([]byte, len(m.Field5)*10)
+		dAtA16 := make([]byte, len(m.Field5)*10)
 		var j15 int
 		for _, num := range m.Field5 {
 			for num >= 1<<7 {
-				data16[j15] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA16[j15] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j15++
 			}
-			data16[j15] = uint8(num)
+			dAtA16[j15] = uint8(num)
 			j15++
 		}
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j15))
-		i += copy(dAtA[i:], data16[:j15])
+		i += copy(dAtA[i:], dAtA16[:j15])
 	}
 	if len(m.Field6) > 0 {
-		data18 := make([]byte, len(m.Field6)*10)
+		dAtA18 := make([]byte, len(m.Field6)*10)
 		var j17 int
 		for _, num := range m.Field6 {
 			for num >= 1<<7 {
-				data18[j17] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA18[j17] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j17++
 			}
-			data18[j17] = uint8(num)
+			dAtA18[j17] = uint8(num)
 			j17++
 		}
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j17))
-		i += copy(dAtA[i:], data18[:j17])
+		i += copy(dAtA[i:], dAtA18[:j17])
 	}
 	if len(m.Field7) > 0 {
-		data19 := make([]byte, len(m.Field7)*5)
+		dAtA19 := make([]byte, len(m.Field7)*5)
 		var j20 int
 		for _, num := range m.Field7 {
 			x21 := (uint32(num) << 1) ^ uint32((num >> 31))
 			for x21 >= 1<<7 {
-				data19[j20] = uint8(uint64(x21)&0x7f | 0x80)
+				dAtA19[j20] = uint8(uint64(x21)&0x7f | 0x80)
 				j20++
 				x21 >>= 7
 			}
-			data19[j20] = uint8(x21)
+			dAtA19[j20] = uint8(x21)
 			j20++
 		}
 		dAtA[i] = 0x3a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j20))
-		i += copy(dAtA[i:], data19[:j20])
+		i += copy(dAtA[i:], dAtA19[:j20])
 	}
 	if len(m.Field8) > 0 {
 		var j22 int
-		data24 := make([]byte, len(m.Field8)*10)
+		dAtA24 := make([]byte, len(m.Field8)*10)
 		for _, num := range m.Field8 {
 			x23 := (uint64(num) << 1) ^ uint64((num >> 63))
 			for x23 >= 1<<7 {
-				data24[j22] = uint8(uint64(x23)&0x7f | 0x80)
+				dAtA24[j22] = uint8(uint64(x23)&0x7f | 0x80)
 				j22++
 				x23 >>= 7
 			}
-			data24[j22] = uint8(x23)
+			dAtA24[j22] = uint8(x23)
 			j22++
 		}
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j22))
-		i += copy(dAtA[i:], data24[:j22])
+		i += copy(dAtA[i:], dAtA24[:j22])
 	}
 	if len(m.Field9) > 0 {
 		dAtA[i] = 0x4a
@@ -20216,110 +20216,110 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if len(m.Field3) > 0 {
-		data28 := make([]byte, len(m.Field3)*10)
+		dAtA28 := make([]byte, len(m.Field3)*10)
 		var j27 int
 		for _, num1 := range m.Field3 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data28[j27] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA28[j27] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j27++
 			}
-			data28[j27] = uint8(num)
+			dAtA28[j27] = uint8(num)
 			j27++
 		}
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j27))
-		i += copy(dAtA[i:], data28[:j27])
+		i += copy(dAtA[i:], dAtA28[:j27])
 	}
 	if len(m.Field4) > 0 {
-		data30 := make([]byte, len(m.Field4)*10)
+		dAtA30 := make([]byte, len(m.Field4)*10)
 		var j29 int
 		for _, num1 := range m.Field4 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data30[j29] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA30[j29] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j29++
 			}
-			data30[j29] = uint8(num)
+			dAtA30[j29] = uint8(num)
 			j29++
 		}
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j29))
-		i += copy(dAtA[i:], data30[:j29])
+		i += copy(dAtA[i:], dAtA30[:j29])
 	}
 	if len(m.Field5) > 0 {
-		data32 := make([]byte, len(m.Field5)*10)
+		dAtA32 := make([]byte, len(m.Field5)*10)
 		var j31 int
 		for _, num := range m.Field5 {
 			for num >= 1<<7 {
-				data32[j31] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA32[j31] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j31++
 			}
-			data32[j31] = uint8(num)
+			dAtA32[j31] = uint8(num)
 			j31++
 		}
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j31))
-		i += copy(dAtA[i:], data32[:j31])
+		i += copy(dAtA[i:], dAtA32[:j31])
 	}
 	if len(m.Field6) > 0 {
-		data34 := make([]byte, len(m.Field6)*10)
+		dAtA34 := make([]byte, len(m.Field6)*10)
 		var j33 int
 		for _, num := range m.Field6 {
 			for num >= 1<<7 {
-				data34[j33] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA34[j33] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j33++
 			}
-			data34[j33] = uint8(num)
+			dAtA34[j33] = uint8(num)
 			j33++
 		}
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j33))
-		i += copy(dAtA[i:], data34[:j33])
+		i += copy(dAtA[i:], dAtA34[:j33])
 	}
 	if len(m.Field7) > 0 {
-		data35 := make([]byte, len(m.Field7)*5)
+		dAtA35 := make([]byte, len(m.Field7)*5)
 		var j36 int
 		for _, num := range m.Field7 {
 			x37 := (uint32(num) << 1) ^ uint32((num >> 31))
 			for x37 >= 1<<7 {
-				data35[j36] = uint8(uint64(x37)&0x7f | 0x80)
+				dAtA35[j36] = uint8(uint64(x37)&0x7f | 0x80)
 				j36++
 				x37 >>= 7
 			}
-			data35[j36] = uint8(x37)
+			dAtA35[j36] = uint8(x37)
 			j36++
 		}
 		dAtA[i] = 0x3a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j36))
-		i += copy(dAtA[i:], data35[:j36])
+		i += copy(dAtA[i:], dAtA35[:j36])
 	}
 	if len(m.Field8) > 0 {
 		var j38 int
-		data40 := make([]byte, len(m.Field8)*10)
+		dAtA40 := make([]byte, len(m.Field8)*10)
 		for _, num := range m.Field8 {
 			x39 := (uint64(num) << 1) ^ uint64((num >> 63))
 			for x39 >= 1<<7 {
-				data40[j38] = uint8(uint64(x39)&0x7f | 0x80)
+				dAtA40[j38] = uint8(uint64(x39)&0x7f | 0x80)
 				j38++
 				x39 >>= 7
 			}
-			data40[j38] = uint8(x39)
+			dAtA40[j38] = uint8(x39)
 			j38++
 		}
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(j38))
-		i += copy(dAtA[i:], data40[:j38])
+		i += copy(dAtA[i:], dAtA40[:j38])
 	}
 	if len(m.Field9) > 0 {
 		dAtA[i] = 0x4a

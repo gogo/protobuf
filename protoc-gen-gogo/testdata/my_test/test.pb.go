@@ -504,7 +504,7 @@ type Communique_Name struct {
 	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=dAtA,oneof"`
+	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
 }
 type Communique_TempC struct {
 	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof"`
@@ -706,7 +706,7 @@ func _Communique_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buf
 		x, err := b.DecodeStringBytes()
 		m.Union = &Communique_Name{x}
 		return true, err
-	case 7: // union.dAtA
+	case 7: // union.data
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}

@@ -104,7 +104,7 @@ type Message struct {
 	Name         string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Hilarity     Message_Humour             `protobuf:"varint,2,opt,name=hilarity,proto3,enum=theproto3.Message_Humour" json:"hilarity,omitempty"`
 	HeightInCm   uint32                     `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
-	Data         []byte                     `protobuf:"bytes,4,opt,name=dAtA,proto3" json:"data,omitempty"`
+	Data         []byte                     `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	ResultCount  int64                      `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
 	TrueScotsman bool                       `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
 	Score        float32                    `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`

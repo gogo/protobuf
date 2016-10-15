@@ -36,18 +36,18 @@ import (
 
 func TestNilMaps(t *testing.T) {
 	m := &AllMaps{StringToMsgMap: map[string]*FloatingPoint{"a": nil}}
-	dAtA, err := proto.Marshal(m)
+	data, err := proto.Marshal(m)
 	if err != nil {
 		t.Fatal(err)
 	}
 	size := m.Size()
 	protoSize := proto.Size(m)
-	marshaledSize := len(dAtA)
+	marshaledSize := len(data)
 	if size != protoSize || marshaledSize != protoSize {
 		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
 	}
 	m2 := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, m2); err != nil {
+	if err := proto.Unmarshal(data, m2); err != nil {
 		t.Fatal(err)
 	}
 	if v, ok := m2.StringToMsgMap["a"]; !ok {
@@ -59,18 +59,18 @@ func TestNilMaps(t *testing.T) {
 
 func TestNilMapsBytes(t *testing.T) {
 	m := &AllMaps{StringToBytesMap: map[string][]byte{"a": nil}}
-	dAtA, err := proto.Marshal(m)
+	data, err := proto.Marshal(m)
 	if err != nil {
 		t.Fatal(err)
 	}
 	size := m.Size()
 	protoSize := proto.Size(m)
-	marshaledSize := len(dAtA)
+	marshaledSize := len(data)
 	if size != protoSize || marshaledSize != protoSize {
 		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
 	}
 	m2 := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, m2); err != nil {
+	if err := proto.Unmarshal(data, m2); err != nil {
 		t.Fatal(err)
 	}
 	if v, ok := m2.StringToBytesMap["a"]; !ok {
@@ -82,18 +82,18 @@ func TestNilMapsBytes(t *testing.T) {
 
 func TestEmptyMapsBytes(t *testing.T) {
 	m := &AllMaps{StringToBytesMap: map[string][]byte{"b": {}}}
-	dAtA, err := proto.Marshal(m)
+	data, err := proto.Marshal(m)
 	if err != nil {
 		t.Fatal(err)
 	}
 	size := m.Size()
 	protoSize := proto.Size(m)
-	marshaledSize := len(dAtA)
+	marshaledSize := len(data)
 	if size != protoSize || marshaledSize != protoSize {
 		t.Errorf("size %d != protoSize %d != marshaledSize %d", size, protoSize, marshaledSize)
 	}
 	m2 := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, m2); err != nil {
+	if err := proto.Unmarshal(data, m2); err != nil {
 		t.Fatal(err)
 	}
 	if v, ok := m2.StringToBytesMap["b"]; !ok {

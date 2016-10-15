@@ -651,110 +651,110 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if len(m.Field3) > 0 {
-		data4 := make([]byte, len(m.Field3)*10)
+		dAtA4 := make([]byte, len(m.Field3)*10)
 		var j3 int
 		for _, num1 := range m.Field3 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data4[j3] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA4[j3] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j3++
 			}
-			data4[j3] = uint8(num)
+			dAtA4[j3] = uint8(num)
 			j3++
 		}
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j3))
-		i += copy(dAtA[i:], data4[:j3])
+		i += copy(dAtA[i:], dAtA4[:j3])
 	}
 	if len(m.Field4) > 0 {
-		data6 := make([]byte, len(m.Field4)*10)
+		dAtA6 := make([]byte, len(m.Field4)*10)
 		var j5 int
 		for _, num1 := range m.Field4 {
 			num := uint64(num1)
 			for num >= 1<<7 {
-				data6[j5] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA6[j5] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j5++
 			}
-			data6[j5] = uint8(num)
+			dAtA6[j5] = uint8(num)
 			j5++
 		}
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j5))
-		i += copy(dAtA[i:], data6[:j5])
+		i += copy(dAtA[i:], dAtA6[:j5])
 	}
 	if len(m.Field5) > 0 {
-		data8 := make([]byte, len(m.Field5)*10)
+		dAtA8 := make([]byte, len(m.Field5)*10)
 		var j7 int
 		for _, num := range m.Field5 {
 			for num >= 1<<7 {
-				data8[j7] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA8[j7] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j7++
 			}
-			data8[j7] = uint8(num)
+			dAtA8[j7] = uint8(num)
 			j7++
 		}
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j7))
-		i += copy(dAtA[i:], data8[:j7])
+		i += copy(dAtA[i:], dAtA8[:j7])
 	}
 	if len(m.Field6) > 0 {
-		data10 := make([]byte, len(m.Field6)*10)
+		dAtA10 := make([]byte, len(m.Field6)*10)
 		var j9 int
 		for _, num := range m.Field6 {
 			for num >= 1<<7 {
-				data10[j9] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA10[j9] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j9++
 			}
-			data10[j9] = uint8(num)
+			dAtA10[j9] = uint8(num)
 			j9++
 		}
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j9))
-		i += copy(dAtA[i:], data10[:j9])
+		i += copy(dAtA[i:], dAtA10[:j9])
 	}
 	if len(m.Field7) > 0 {
-		data11 := make([]byte, len(m.Field7)*5)
+		dAtA11 := make([]byte, len(m.Field7)*5)
 		var j12 int
 		for _, num := range m.Field7 {
 			x13 := (uint32(num) << 1) ^ uint32((num >> 31))
 			for x13 >= 1<<7 {
-				data11[j12] = uint8(uint64(x13)&0x7f | 0x80)
+				dAtA11[j12] = uint8(uint64(x13)&0x7f | 0x80)
 				j12++
 				x13 >>= 7
 			}
-			data11[j12] = uint8(x13)
+			dAtA11[j12] = uint8(x13)
 			j12++
 		}
 		dAtA[i] = 0x3a
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j12))
-		i += copy(dAtA[i:], data11[:j12])
+		i += copy(dAtA[i:], dAtA11[:j12])
 	}
 	if len(m.Field8) > 0 {
 		var j14 int
-		data16 := make([]byte, len(m.Field8)*10)
+		dAtA16 := make([]byte, len(m.Field8)*10)
 		for _, num := range m.Field8 {
 			x15 := (uint64(num) << 1) ^ uint64((num >> 63))
 			for x15 >= 1<<7 {
-				data16[j14] = uint8(uint64(x15)&0x7f | 0x80)
+				dAtA16[j14] = uint8(uint64(x15)&0x7f | 0x80)
 				j14++
 				x15 >>= 7
 			}
-			data16[j14] = uint8(x15)
+			dAtA16[j14] = uint8(x15)
 			j14++
 		}
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(j14))
-		i += copy(dAtA[i:], data16[:j14])
+		i += copy(dAtA[i:], dAtA16[:j14])
 	}
 	if len(m.Field9) > 0 {
 		dAtA[i] = 0x4a

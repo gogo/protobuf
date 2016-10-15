@@ -101,7 +101,7 @@ type Message struct {
 	Name         string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Hilarity     Message_Humour             `protobuf:"varint,2,opt,name=hilarity,proto3,enum=theproto3.Message_Humour" json:"hilarity,omitempty"`
 	HeightInCm   uint32                     `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
-	Data         []byte                     `protobuf:"bytes,4,opt,name=dAtA,proto3" json:"data,omitempty"`
+	Data         []byte                     `protobuf:"bytes,4,opt,name=data,proto3" json:"dAtA,omitempty"`
 	ResultCount  int64                      `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
 	TrueScotsman bool                       `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
 	Score        float32                    `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
@@ -3155,21 +3155,21 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Data)
 	}
 	if len(m.Key) > 0 {
-		data2 := make([]byte, len(m.Key)*10)
+		dAtA2 := make([]byte, len(m.Key)*10)
 		var j1 int
 		for _, num := range m.Key {
 			for num >= 1<<7 {
-				data2[j1] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA2[j1] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
 				j1++
 			}
-			data2[j1] = uint8(num)
+			dAtA2[j1] = uint8(num)
 			j1++
 		}
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintTheproto3(dAtA, i, uint64(j1))
-		i += copy(dAtA[i:], data2[:j1])
+		i += copy(dAtA[i:], dAtA2[:j1])
 	}
 	if m.Nested != nil {
 		dAtA[i] = 0x32

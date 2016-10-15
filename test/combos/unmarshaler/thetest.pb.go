@@ -850,7 +850,7 @@ func (m *AnotherNinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 type Timer struct {
 	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1,json=time1" json:"Time1"`
 	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2,json=time2" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=dAtA" json:"Data"`
+	Data             []byte `protobuf:"bytes,3,opt,name=Data,json=data" json:"Data"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
