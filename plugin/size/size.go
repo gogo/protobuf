@@ -90,13 +90,13 @@ and the following test code:
 	func TestBSize(t *testing5.T) {
 		popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 		p := NewPopulatedB(popr, true)
-		data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+		dAtA, err := github_com_gogo_protobuf_proto2.Marshal(p)
 		if err != nil {
 			panic(err)
 		}
 		size := p.Size()
-		if len(data) != size {
-			t.Fatalf("size %v != marshalled size %v", size, len(data))
+		if len(dAtA) != size {
+			t.Fatalf("size %v != marshalled size %v", size, len(dAtA))
 		}
 	}
 

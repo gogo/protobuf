@@ -147,12 +147,12 @@ and the following test code:
 	func TestBVerboseEqual(t *testing8.T) {
 		popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 		p := NewPopulatedB(popr, false)
-		data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+		dAtA, err := github_com_gogo_protobuf_proto2.Marshal(p)
 		if err != nil {
 			panic(err)
 		}
 		msg := &B{}
-		if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
+		if err := github_com_gogo_protobuf_proto2.Unmarshal(dAtA, msg); err != nil {
 			panic(err)
 		}
 		if err := p.VerboseEqual(msg); err != nil {
