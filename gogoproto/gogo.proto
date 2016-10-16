@@ -77,6 +77,8 @@ extend google.protobuf.FileOptions {
 	optional bool gogoproto_import = 63027;
 	optional bool protosizer_all = 63028;
 	optional bool compare_all = 63029;
+
+	optional bool unsafe_borrow_unmarshaler_all = 63030;
 }
 
 extend google.protobuf.MessageOptions {
@@ -107,6 +109,8 @@ extend google.protobuf.MessageOptions {
 
 	optional bool protosizer = 64028;
 	optional bool compare = 64029;
+
+	optional bool unsafe_borrow_unmarshaler = 64030;
 }
 
 extend google.protobuf.FieldOptions {

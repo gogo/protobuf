@@ -86,8 +86,9 @@ var overwriters []map[string]gogoproto.EnableFunc = []map[string]gogoproto.Enabl
 		"protosizer": gogoproto.IsProtoSizer,
 	},
 	{
-		"unmarshaler":        gogoproto.IsUnmarshaler,
-		"unsafe_unmarshaler": gogoproto.IsUnsafeUnmarshaler,
+		"unmarshaler":               gogoproto.IsUnmarshaler,
+		"unsafe_unmarshaler":        gogoproto.IsUnsafeUnmarshaler,
+		"unsafe_borrow_unmarshaler": gogoproto.IsUnsafeBorrowUnmarshaler,
 	},
 	{
 		"marshaler":        gogoproto.IsMarshaler,

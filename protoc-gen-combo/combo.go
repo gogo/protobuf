@@ -191,6 +191,12 @@ func main() {
 		"option (gogoproto.unsafe_unmarshaler_all) = true;",
 		"option (gogoproto.unsafe_marshaler_all) = false;",
 	})
+	m.Gen("./combos/unsafeborrowunmarshaler/", []string{
+		"option (gogoproto.unmarshaler_all) = false;",
+		"option (gogoproto.marshaler_all) = false;",
+		"option (gogoproto.unsafe_borrow_unmarshaler_all) = true;",
+		"option (gogoproto.unsafe_marshaler_all) = false;",
+	})
 	m.Gen("./combos/unsafeboth/", []string{
 		"option (gogoproto.unmarshaler_all) = false;",
 		"option (gogoproto.marshaler_all) = false;",

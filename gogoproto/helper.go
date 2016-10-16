@@ -321,6 +321,10 @@ func IsUnsafeUnmarshaler(file *google_protobuf.FileDescriptorProto, message *goo
 	return proto.GetBoolExtension(message.Options, E_UnsafeUnmarshaler, proto.GetBoolExtension(file.Options, E_UnsafeUnmarshalerAll, false))
 }
 
+func IsUnsafeBorrowUnmarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_UnsafeBorrowUnmarshaler, proto.GetBoolExtension(file.Options, E_UnsafeBorrowUnmarshalerAll, false))
+}
+
 func HasExtensionsMap(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_GoprotoExtensionsMap, proto.GetBoolExtension(file.Options, E_GoprotoExtensionsMapAll, true))
 }

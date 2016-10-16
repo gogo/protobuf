@@ -41,9 +41,17 @@ Or the following extensions:
 
   - unsafe_unmarshaler
   - unsafe_unmarshaler_all
+  - unsafe_borrow_unmarshaler
+  - unsafe_borrow_unmarshaler_all
 
-That is if you want to use the unsafe package in your generated code.
-The speed up using the unsafe package is not very significant.
+If you want to use the unsafe package in your generated code. The speed up
+of using the unsafe package alone is not very significant. However, using the
+unsafe borrowing unmarshaler (so named because it "borrows" the data in the
+incoming data array for use with strings) can significantly reduce the number
+of allocations performed during unmarshal and so speed up. You *must* create
+a copy of data and pass the copy to Unmarshal to use the borrowing
+unmarshaler - if you reuse the data array afterwards your strings will be
+mutated to contain garbage.
 
 The generation of unmarshalling tests are enabled using one of the following extensions:
 
@@ -188,12 +196,14 @@ import (
 type unmarshal struct {
 	*generator.Generator
 	unsafe bool
+	borrow bool
 	generator.PluginImports
 	atleastOne bool
 	ioPkg      generator.Single
 	mathPkg    generator.Single
 	unsafePkg  generator.Single
 	typesPkg   generator.Single
+	reflectPkg generator.Single
 	localName  string
 }
 
@@ -205,8 +215,15 @@ func NewUnsafeUnmarshal() *unmarshal {
 	return &unmarshal{unsafe: true}
 }
 
+func NewUnsafeBorrowUnmarshal() *unmarshal {
+	return &unmarshal{unsafe: true, borrow: true}
+}
+
 func (p *unmarshal) Name() string {
 	if p.unsafe {
+		if p.borrow {
+			return "unsafeborrowunmarshaler"
+		}
 		return "unsafeunmarshaler"
 	}
 	return "unmarshal"
@@ -337,7 +354,15 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.P(`}`)
 		cast, _ := p.GoType(nil, field)
 		cast = strings.Replace(cast, "*", "", 1)
-		p.P(varName, ` := `, cast, `(data[iNdEx:postStringIndex`, varName, `])`)
+		if p.borrow {
+			p.P(`var `, varName, ` `, cast)
+			p.P(`part := data[iNdEx:postStringIndex`, varName, `]`)
+			p.P(`source := (*`, p.reflectPkg.Use(), `.SliceHeader)(`, p.unsafePkg.Use(), `.Pointer(&part))`)
+			p.P(`hdr := (*`, p.reflectPkg.Use(), `.StringHeader)(`, p.unsafePkg.Use(), `.Pointer(&`, varName, `))`)
+			p.P(`hdr.Data, hdr.Len = source.Data, source.Len`)
+		} else {
+			p.P(varName, ` := `, cast, `(data[iNdEx:postStringIndex`, varName, `])`)
+		}
 		p.P(`iNdEx = postStringIndex`, varName)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		p.P(`var mapmsglen int`)
@@ -665,14 +690,22 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(data[iNdEx:postIndex])}`)
-		} else if repeated {
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(data[iNdEx:postIndex]))`)
-		} else if proto3 || !nullable {
-			p.P(`m.`, fieldname, ` = `, typ, `(data[iNdEx:postIndex])`)
+		if p.borrow {
+			p.P(`var s `, typ)
+			p.P(`part := data[iNdEx:postIndex]`)
+			p.P(`source := (*`, p.reflectPkg.Use(), `.SliceHeader)(`, p.unsafePkg.Use(), `.Pointer(&part))`)
+			p.P(`hdr := (*`, p.reflectPkg.Use(), `.StringHeader)(`, p.unsafePkg.Use(), `.Pointer(&s))`)
+			p.P(`hdr.Data, hdr.Len = source.Data, source.Len`)
 		} else {
 			p.P(`s := `, typ, `(data[iNdEx:postIndex])`)
+		}
+		if oneof {
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{s}`)
+		} else if repeated {
+			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, s)`)
+		} else if proto3 || !nullable {
+			p.P(`m.`, fieldname, ` = s`)
+		} else {
 			p.P(`m.`, fieldname, ` = &s`)
 		}
 		p.P(`iNdEx = postIndex`)
@@ -892,12 +925,16 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-iNdEx))`)
 				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[iNdEx:postIndex])`)
 			} else {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `[:0] , data[iNdEx:postIndex]...)`)
-				p.P(`if m.`, fieldname, ` == nil {`)
-				p.In()
-				p.P(`m.`, fieldname, ` = []byte{}`)
-				p.Out()
-				p.P(`}`)
+				if p.borrow {
+					p.P(`m.`, fieldname, ` = data[iNdEx:postIndex]`)
+				} else {
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `[:0] , data[iNdEx:postIndex]...)`)
+					p.P(`if m.`, fieldname, ` == nil {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = []byte{}`)
+					p.Out()
+					p.P(`}`)
+				}
 			}
 		} else {
 			_, ctyp, err := generator.GetCustomType(field)
@@ -1080,6 +1117,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
+	if p.borrow {
+		p.localName += "Borrow"
+	}
 	if p.unsafe {
 		p.localName += "Unsafe"
 	}
@@ -1088,6 +1128,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 	p.mathPkg = p.NewImport("math")
 	p.unsafePkg = p.NewImport("unsafe")
 	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
+	p.reflectPkg = p.NewImport("reflect")
 	fmtPkg := p.NewImport("fmt")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
@@ -1096,20 +1137,36 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 	for _, message := range file.Messages() {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		if p.unsafe {
+		switch {
+		case p.unsafe && p.borrow:
+			if !gogoproto.IsUnsafeBorrowUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				continue
+			}
+			if gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_borrow_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+			}
+			if gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_borrow_unmarshaler and unsafe_unmarshaler enabled for %v", ccTypeName))
+			}
+		case p.unsafe:
 			if !gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				continue
 			}
 			if gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
 			}
-		}
-		if !p.unsafe {
+			if gogoproto.IsUnsafeBorrowUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_unmarshaler and unsafe_borrow_unmarshaler enabled for %v", ccTypeName))
+			}
+		default:
 			if !gogoproto.IsUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				continue
 			}
 			if gogoproto.IsUnsafeUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				panic(fmt.Sprintf("unsafe_unmarshaler and unmarshaler enabled for %v", ccTypeName))
+			}
+			if gogoproto.IsUnsafeBorrowUnmarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+				panic(fmt.Sprintf("unsafe_borrow_unmarshaler and unmarshaler enabled for %v", ccTypeName))
 			}
 		}
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
@@ -1436,4 +1493,5 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 func init() {
 	generator.RegisterPlugin(NewUnmarshal())
 	generator.RegisterPlugin(NewUnsafeUnmarshal())
+	generator.RegisterPlugin(NewUnsafeBorrowUnmarshal())
 }
