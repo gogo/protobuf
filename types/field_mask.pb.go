@@ -563,7 +563,8 @@ func (m *FieldMask) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Paths = append(m.Paths, string(data[iNdEx:postIndex]))
+			s := string(data[iNdEx:postIndex])
+			m.Paths = append(m.Paths, s)
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

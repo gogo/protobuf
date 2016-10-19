@@ -37,9 +37,11 @@ regenerate:
 	cp uuid.go ./combos/unsafeboth/
 	cp uuid.go ./combos/unsafemarshaler/
 	cp uuid.go ./combos/unsafeunmarshaler/
+	cp uuid.go ./combos/unsafeborrowunmarshaler/
 	cp bug_test.go ./combos/both/
 	cp bug_test.go ./combos/marshaler/
 	cp bug_test.go ./combos/unmarshaler/
 	cp bug_test.go ./combos/unsafeboth/
 	cp bug_test.go ./combos/unsafemarshaler/
 	cp bug_test.go ./combos/unsafeunmarshaler/
+	cp bug_test.go ./combos/unsafeborrowunmarshaler/

@@ -38,3 +38,4 @@ regenerate:
 	cp mytypes.go ./combos/unsafeboth/ || true
 	cp mytypes.go ./combos/unsafemarshaler/ || true
 	cp mytypes.go ./combos/unsafeunmarshaler/ || true
+	cp mytypes.go ./combos/unsafeborrowunmarshaler/ || true

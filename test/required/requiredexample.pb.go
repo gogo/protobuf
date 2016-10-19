@@ -1147,7 +1147,8 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.TheRepeatedStrings = append(m.TheRepeatedStrings, string(data[iNdEx:postIndex]))
+			s := string(data[iNdEx:postIndex])
+			m.TheRepeatedStrings = append(m.TheRepeatedStrings, s)
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1474,7 +1475,8 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = string(data[iNdEx:postIndex])
+			s := string(data[iNdEx:postIndex])
+			m.Field14 = s
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00002000)
 		case 15:

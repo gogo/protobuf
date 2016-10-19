@@ -126,8 +126,9 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 	msg := &FloatingPoint{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -228,8 +229,9 @@ func BenchmarkCustomMapProtoUnmarshal(b *testing.B) {
 	msg := &CustomMap{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -330,8 +332,9 @@ func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
 	msg := &AllMaps{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -432,8 +435,9 @@ func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
 	msg := &AllMapsOrdered{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}

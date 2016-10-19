@@ -131,8 +131,9 @@ func BenchmarkMessageProtoUnmarshal(b *testing.B) {
 	msg := &Message{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -233,8 +234,9 @@ func BenchmarkNestedProtoUnmarshal(b *testing.B) {
 	msg := &Nested{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -335,8 +337,9 @@ func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
 	msg := &AllMaps{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -437,8 +440,9 @@ func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
 	msg := &AllMapsOrdered{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -539,8 +543,9 @@ func BenchmarkMessageWithMapProtoUnmarshal(b *testing.B) {
 	msg := &MessageWithMap{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -641,8 +646,9 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 	msg := &FloatingPoint{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -743,8 +749,9 @@ func BenchmarkUint128PairProtoUnmarshal(b *testing.B) {
 	msg := &Uint128Pair{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -845,8 +852,9 @@ func BenchmarkContainsNestedMapProtoUnmarshal(b *testing.B) {
 	msg := &ContainsNestedMap{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -947,8 +955,9 @@ func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
 	msg := &ContainsNestedMap_NestedMap{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
