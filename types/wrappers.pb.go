@@ -1689,7 +1689,8 @@ func (m *StringValue) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Value = string(data[iNdEx:postIndex])
+			s := string(data[iNdEx:postIndex])
+			m.Value = s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

@@ -129,8 +129,9 @@ func BenchmarkAProtoUnmarshal(b *testing.B) {
 	msg := &A{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -231,8 +232,9 @@ func BenchmarkBProtoUnmarshal(b *testing.B) {
 	msg := &B{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -333,8 +335,9 @@ func BenchmarkCProtoUnmarshal(b *testing.B) {
 	msg := &C{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -435,8 +438,9 @@ func BenchmarkUProtoUnmarshal(b *testing.B) {
 	msg := &U{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -537,8 +541,9 @@ func BenchmarkEProtoUnmarshal(b *testing.B) {
 	msg := &E{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -639,8 +644,9 @@ func BenchmarkRProtoUnmarshal(b *testing.B) {
 	msg := &R{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -741,8 +747,9 @@ func BenchmarkCastTypeProtoUnmarshal(b *testing.B) {
 	msg := &CastType{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}

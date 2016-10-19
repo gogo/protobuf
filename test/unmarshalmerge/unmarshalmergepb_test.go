@@ -98,8 +98,9 @@ func BenchmarkBigProtoUnmarshal(b *testing.B) {
 	msg := &Big{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -172,8 +173,9 @@ func BenchmarkBigUnsafeProtoUnmarshal(b *testing.B) {
 	msg := &BigUnsafe{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -246,8 +248,9 @@ func BenchmarkSubProtoUnmarshal(b *testing.B) {
 	msg := &Sub{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}
@@ -320,8 +323,9 @@ func BenchmarkIntMergeProtoUnmarshal(b *testing.B) {
 	msg := &IntMerge{}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		total += len(datas[i%10000])
-		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
+		data := datas[i%10000]
+		total += len(data)
+		if err := github_com_gogo_protobuf_proto.Unmarshal(data, msg); err != nil {
 			panic(err)
 		}
 	}

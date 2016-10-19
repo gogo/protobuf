@@ -458,7 +458,8 @@ func (m *Any) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.TypeUrl = string(data[iNdEx:postIndex])
+			s := string(data[iNdEx:postIndex])
+			m.TypeUrl = s
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {

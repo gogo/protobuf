@@ -172,7 +172,8 @@ func (m *Aproto3) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.B = string(data[iNdEx:postIndex])
+			s := string(data[iNdEx:postIndex])
+			m.B = s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

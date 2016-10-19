@@ -1580,7 +1580,8 @@ func (m *Value) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Kind = &Value_StringValue{string(data[iNdEx:postIndex])}
+			s := string(data[iNdEx:postIndex])
+			m.Kind = &Value_StringValue{s}
 			iNdEx = postIndex
 		case 4:
 			if wireType != 0 {

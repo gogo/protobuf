@@ -624,3 +624,12 @@ message Node {
 	repeated Node Children = 2;
 }
 
+message StringHeavy {
+  optional string name = 1;
+  optional string value = 2;
+  repeated string desc = 3;
+  optional float score = 4;
+  optional bool truth = 5;
+  optional bytes data = 6;
+}
+
