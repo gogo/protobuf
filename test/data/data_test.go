@@ -38,4 +38,3 @@ func TestData(t *testing.T) {
 		t.Fatalf("should be equal: %v", err)
 	}
 }
-
