@@ -33,7 +33,7 @@ import (
 )
 
 func TestData(t *testing.T) {
-	m := &M{[]MyMessage{{}, {}}, nil}
+	m := &MyMessage{}
 	if err := m.VerboseEqual(m); err != nil {
 		t.Fatalf("should be equal: %v", err)
 	}
