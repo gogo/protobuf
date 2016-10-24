@@ -547,7 +547,7 @@ func (es enumSymbol) GenerateAlias(g *Generator, pkg string) {
 	g.P("func (x ", s, ") String() string { return (", pkg, ".", s, ")(x).String() }")
 	if !es.proto3 {
 		g.P("func (x ", s, ") Enum() *", s, "{ return (*", s, ")((", pkg, ".", s, ")(x).Enum()) }")
-		g.P("func (x *", s, ") UnmarshalJSON(dAtA []byte) error { return (*", pkg, ".", s, ")(x).UnmarshalJSON(dAtA) }")
+		g.P("func (x *", s, ") UnmarshalJSON(data []byte) error { return (*", pkg, ".", s, ")(x).UnmarshalJSON(data) }")
 	}
 }
 
@@ -1573,9 +1573,9 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("}")
 	}
 	if !enum.proto3() {
-		g.P("func (x *", ccTypeName, ") UnmarshalJSON(dAtA []byte) error {")
+		g.P("func (x *", ccTypeName, ") UnmarshalJSON(data []byte) error {")
 		g.In()
-		g.P("value, err := ", g.Pkg["proto"], ".UnmarshalJSONEnum(", ccTypeName, `_value, dAtA, "`, ccTypeName, `")`)
+		g.P("value, err := ", g.Pkg["proto"], ".UnmarshalJSONEnum(", ccTypeName, `_value, data, "`, ccTypeName, `")`)
 		g.P("if err != nil {")
 		g.In()
 		g.P("return err")
