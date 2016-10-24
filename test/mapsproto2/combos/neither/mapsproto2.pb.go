@@ -75,8 +75,8 @@ func (x MapEnum) Enum() *MapEnum {
 func (x MapEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MapEnum_name, int32(x))
 }
-func (x *MapEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(MapEnum_value, dAtA, "MapEnum")
+func (x *MapEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(MapEnum_value, data, "MapEnum")
 	if err != nil {
 		return err
 	}

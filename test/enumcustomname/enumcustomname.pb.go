@@ -61,8 +61,8 @@ func (x MyCustomEnum) Enum() *MyCustomEnum {
 func (x MyCustomEnum) String() string {
 	return proto.EnumName(MyCustomEnum_name, int32(x))
 }
-func (x *MyCustomEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(MyCustomEnum_value, dAtA, "MyCustomEnum")
+func (x *MyCustomEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(MyCustomEnum_value, data, "MyCustomEnum")
 	if err != nil {
 		return err
 	}
@@ -95,8 +95,8 @@ func (x MyCustomUnprefixedEnum) Enum() *MyCustomUnprefixedEnum {
 func (x MyCustomUnprefixedEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MyCustomUnprefixedEnum_name, int32(x))
 }
-func (x *MyCustomUnprefixedEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(MyCustomUnprefixedEnum_value, dAtA, "MyCustomUnprefixedEnum")
+func (x *MyCustomUnprefixedEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(MyCustomUnprefixedEnum_value, data, "MyCustomUnprefixedEnum")
 	if err != nil {
 		return err
 	}
@@ -131,8 +131,8 @@ func (x MyEnumWithEnumStringer) Enum() *MyEnumWithEnumStringer {
 func (x MyEnumWithEnumStringer) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MyEnumWithEnumStringer_name, int32(x))
 }
-func (x *MyEnumWithEnumStringer) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(MyEnumWithEnumStringer_value, dAtA, "MyEnumWithEnumStringer")
+func (x *MyEnumWithEnumStringer) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(MyEnumWithEnumStringer_value, data, "MyEnumWithEnumStringer")
 	if err != nil {
 		return err
 	}

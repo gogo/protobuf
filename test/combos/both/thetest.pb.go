@@ -132,8 +132,8 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
-func (x *TheTestEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, dAtA, "TheTestEnum")
+func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
 	if err != nil {
 		return err
 	}
@@ -166,8 +166,8 @@ func (x AnotherTestEnum) Enum() *AnotherTestEnum {
 func (x AnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(AnotherTestEnum_name, int32(x))
 }
-func (x *AnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, dAtA, "AnotherTestEnum")
+func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, data, "AnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -202,8 +202,8 @@ func (x YetAnotherTestEnum) Enum() *YetAnotherTestEnum {
 func (x YetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetAnotherTestEnum_name, int32(x))
 }
-func (x *YetAnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(YetAnotherTestEnum_value, dAtA, "YetAnotherTestEnum")
+func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(YetAnotherTestEnum_value, data, "YetAnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -238,8 +238,8 @@ func (x YetYetAnotherTestEnum) Enum() *YetYetAnotherTestEnum {
 func (x YetYetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetYetAnotherTestEnum_name, int32(x))
 }
-func (x *YetYetAnotherTestEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(YetYetAnotherTestEnum_value, dAtA, "YetYetAnotherTestEnum")
+func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(YetYetAnotherTestEnum_value, data, "YetYetAnotherTestEnum")
 	if err != nil {
 		return err
 	}
@@ -269,8 +269,8 @@ func (x NestedDefinition_NestedEnum) Enum() *NestedDefinition_NestedEnum {
 func (x NestedDefinition_NestedEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(NestedDefinition_NestedEnum_name, int32(x))
 }
-func (x *NestedDefinition_NestedEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(NestedDefinition_NestedEnum_value, dAtA, "NestedDefinition_NestedEnum")
+func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(NestedDefinition_NestedEnum_value, data, "NestedDefinition_NestedEnum")
 	if err != nil {
 		return err
 	}

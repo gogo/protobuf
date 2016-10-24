@@ -61,8 +61,8 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
-func (x *TheTestEnum) UnmarshalJSON(dAtA []byte) error {
-	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, dAtA, "TheTestEnum")
+func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
 	if err != nil {
 		return err
 	}
