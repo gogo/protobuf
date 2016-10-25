@@ -143,78 +143,78 @@ func (this *SizeMessage) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (m *SizeMessage) Marshal() (data []byte, err error) {
+func (m *SizeMessage) Marshal() (dAtA []byte, err error) {
 	size := m.ProtoSize()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *SizeMessage) MarshalTo(data []byte) (int, error) {
+func (m *SizeMessage) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Size != nil {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintProtosize(data, i, uint64(*m.Size))
+		i = encodeVarintProtosize(dAtA, i, uint64(*m.Size))
 	}
 	if m.ProtoSize_ != nil {
-		data[i] = 0x10
+		dAtA[i] = 0x10
 		i++
-		i = encodeVarintProtosize(data, i, uint64(*m.ProtoSize_))
+		i = encodeVarintProtosize(dAtA, i, uint64(*m.ProtoSize_))
 	}
 	if m.Equal_ != nil {
-		data[i] = 0x18
+		dAtA[i] = 0x18
 		i++
 		if *m.Equal_ {
-			data[i] = 1
+			dAtA[i] = 1
 		} else {
-			data[i] = 0
+			dAtA[i] = 0
 		}
 		i++
 	}
 	if m.String_ != nil {
-		data[i] = 0x22
+		dAtA[i] = 0x22
 		i++
-		i = encodeVarintProtosize(data, i, uint64(len(*m.String_)))
-		i += copy(data[i:], *m.String_)
+		i = encodeVarintProtosize(dAtA, i, uint64(len(*m.String_)))
+		i += copy(dAtA[i:], *m.String_)
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func encodeFixed64Protosize(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Protosize(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Protosize(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Protosize(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintProtosize(data []byte, offset int, v uint64) int {
+func encodeVarintProtosize(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func NewPopulatedSizeMessage(r randyProtosize, easy bool) *SizeMessage {
@@ -273,7 +273,7 @@ func randStringProtosize(r randyProtosize) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedProtosize(r randyProtosize, maxFieldNumber int) (data []byte) {
+func randUnrecognizedProtosize(r randyProtosize, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -281,43 +281,43 @@ func randUnrecognizedProtosize(r randyProtosize, maxFieldNumber int) (data []byt
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldProtosize(data, r, fieldNumber, wire)
+		dAtA = randFieldProtosize(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldProtosize(data []byte, r randyProtosize, fieldNumber int, wire int) []byte {
+func randFieldProtosize(dAtA []byte, r randyProtosize, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateProtosize(data, uint64(key))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(key))
 		v6 := r.Int63()
 		if r.Intn(2) == 0 {
 			v6 *= -1
 		}
-		data = encodeVarintPopulateProtosize(data, uint64(v6))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(v6))
 	case 1:
-		data = encodeVarintPopulateProtosize(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateProtosize(data, uint64(key))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateProtosize(data, uint64(ll))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateProtosize(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateProtosize(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateProtosize(data []byte, v uint64) []byte {
+func encodeVarintPopulateProtosize(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *SizeMessage) ProtoSize() (n int) {
 	var l int
@@ -354,8 +354,8 @@ func sovProtosize(x uint64) (n int) {
 func sozProtosize(x uint64) (n int) {
 	return sovProtosize(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *SizeMessage) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *SizeMessage) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -367,7 +367,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -395,7 +395,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -415,7 +415,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -435,7 +435,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -456,7 +456,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -471,12 +471,12 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.String_ = &s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipProtosize(data[iNdEx:])
+			skippy, err := skipProtosize(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -486,7 +486,7 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -496,8 +496,8 @@ func (m *SizeMessage) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipProtosize(data []byte) (n int, err error) {
-	l := len(data)
+func skipProtosize(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -508,7 +508,7 @@ func skipProtosize(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -526,7 +526,7 @@ func skipProtosize(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -543,7 +543,7 @@ func skipProtosize(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -566,7 +566,7 @@ func skipProtosize(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -577,7 +577,7 @@ func skipProtosize(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipProtosize(data[start:])
+				next, err := skipProtosize(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

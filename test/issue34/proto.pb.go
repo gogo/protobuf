@@ -70,8 +70,8 @@ func init() {
 	proto.RegisterType((*Foo)(nil), "issue34.Foo")
 	proto.RegisterType((*FooWithRepeated)(nil), "issue34.FooWithRepeated")
 }
-func (m *Foo) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Foo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -83,7 +83,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -111,7 +111,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -125,14 +125,14 @@ func (m *Foo) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Bar = append(m.Bar[:0], data[iNdEx:postIndex]...)
+			m.Bar = append(m.Bar[:0], dAtA[iNdEx:postIndex]...)
 			if m.Bar == nil {
 				m.Bar = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipProto(data[iNdEx:])
+			skippy, err := skipProto(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -142,7 +142,7 @@ func (m *Foo) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -152,8 +152,8 @@ func (m *Foo) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *FooWithRepeated) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *FooWithRepeated) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -165,7 +165,7 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -193,7 +193,7 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -208,11 +208,11 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Bar = append(m.Bar, make([]byte, postIndex-iNdEx))
-			copy(m.Bar[len(m.Bar)-1], data[iNdEx:postIndex])
+			copy(m.Bar[len(m.Bar)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipProto(data[iNdEx:])
+			skippy, err := skipProto(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -222,7 +222,7 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -232,8 +232,8 @@ func (m *FooWithRepeated) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipProto(data []byte) (n int, err error) {
-	l := len(data)
+func skipProto(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -244,7 +244,7 @@ func skipProto(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -262,7 +262,7 @@ func skipProto(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -279,7 +279,7 @@ func skipProto(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -302,7 +302,7 @@ func skipProto(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -313,7 +313,7 @@ func skipProto(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipProto(data[start:])
+				next, err := skipProto(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

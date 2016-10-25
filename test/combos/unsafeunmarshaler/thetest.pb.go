@@ -20800,8 +20800,8 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -20844,8 +20844,8 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -21458,8 +21458,8 @@ func NewPopulatedNoExtensionsMap(r randyThetest, easy bool) *NoExtensionsMap {
 			if wire == 3 {
 				wire = 5
 			}
-			data := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), data)
+			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
+			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -21579,7 +21579,7 @@ func randStringThetest(r randyThetest) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (data []byte) {
+func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -21587,43 +21587,43 @@ func randUnrecognizedThetest(r randyThetest, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldThetest(data, r, fieldNumber, wire)
+		dAtA = randFieldThetest(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldThetest(data []byte, r randyThetest, fieldNumber int, wire int) []byte {
+func randFieldThetest(dAtA []byte, r randyThetest, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateThetest(data, uint64(key))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		v253 := r.Int63()
 		if r.Intn(2) == 0 {
 			v253 *= -1
 		}
-		data = encodeVarintPopulateThetest(data, uint64(v253))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v253))
 	case 1:
-		data = encodeVarintPopulateThetest(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateThetest(data, uint64(key))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateThetest(data, uint64(ll))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateThetest(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateThetest(data []byte, v uint64) []byte {
+func encodeVarintPopulateThetest(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *NidOptNative) Size() (n int) {
 	var l int
@@ -24473,8 +24473,8 @@ func (this *CustomNameNinEmbeddedStructUnion) SetValue(value interface{}) bool {
 	}
 	return true
 }
-func (m *NidOptNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidOptNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -24486,7 +24486,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -24509,7 +24509,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field1 = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			m.Field1 = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 2:
 			if wireType != 5 {
@@ -24518,7 +24518,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field2 = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			m.Field2 = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 3:
 			if wireType != 0 {
@@ -24532,7 +24532,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field3 |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24551,7 +24551,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field4 |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24570,7 +24570,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field5 |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24589,7 +24589,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field6 |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24608,7 +24608,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24629,7 +24629,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24645,7 +24645,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field9 = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			m.Field9 = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
@@ -24654,7 +24654,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field10 = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			m.Field10 = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
@@ -24663,7 +24663,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field11 = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			m.Field11 = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
@@ -24672,7 +24672,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field12 = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			m.Field12 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -24686,7 +24686,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24706,7 +24706,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24721,7 +24721,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = string(data[iNdEx:postIndex])
+			m.Field14 = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -24735,7 +24735,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24749,14 +24749,14 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -24766,7 +24766,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -24776,8 +24776,8 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -24789,7 +24789,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -24813,7 +24813,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = &v
 		case 2:
@@ -24824,7 +24824,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = &v
 		case 3:
@@ -24839,7 +24839,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24859,7 +24859,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24879,7 +24879,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24899,7 +24899,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24919,7 +24919,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24940,7 +24940,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -24958,7 +24958,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -24969,7 +24969,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -24980,7 +24980,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -24991,7 +24991,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -25006,7 +25006,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25027,7 +25027,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25042,7 +25042,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 		case 15:
@@ -25057,7 +25057,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25071,14 +25071,14 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -25088,7 +25088,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -25098,8 +25098,8 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidRepNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidRepNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -25111,7 +25111,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -25135,7 +25135,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = append(m.Field1, v)
 		case 2:
@@ -25146,7 +25146,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = append(m.Field2, v)
 		case 3:
@@ -25161,7 +25161,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25181,7 +25181,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25201,7 +25201,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25221,7 +25221,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25241,7 +25241,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25262,7 +25262,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25279,7 +25279,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field9 = append(m.Field9, v)
 		case 10:
@@ -25290,7 +25290,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field10 = append(m.Field10, v)
 		case 11:
@@ -25301,7 +25301,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field11 = append(m.Field11, v)
 		case 12:
@@ -25312,7 +25312,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field12 = append(m.Field12, v)
 		case 13:
@@ -25327,7 +25327,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25347,7 +25347,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25362,7 +25362,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = append(m.Field14, string(data[iNdEx:postIndex]))
+			m.Field14 = append(m.Field14, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -25376,7 +25376,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25391,11 +25391,11 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field15 = append(m.Field15, make([]byte, postIndex-iNdEx))
-			copy(m.Field15[len(m.Field15)-1], data[iNdEx:postIndex])
+			copy(m.Field15[len(m.Field15)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -25405,7 +25405,7 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -25415,8 +25415,8 @@ func (m *NidRepNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinRepNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinRepNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -25428,7 +25428,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -25452,7 +25452,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = append(m.Field1, v)
 		case 2:
@@ -25463,7 +25463,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = append(m.Field2, v)
 		case 3:
@@ -25478,7 +25478,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25498,7 +25498,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25518,7 +25518,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25538,7 +25538,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25558,7 +25558,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25579,7 +25579,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25596,7 +25596,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field9 = append(m.Field9, v)
 		case 10:
@@ -25607,7 +25607,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field10 = append(m.Field10, v)
 		case 11:
@@ -25618,7 +25618,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field11 = append(m.Field11, v)
 		case 12:
@@ -25629,7 +25629,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field12 = append(m.Field12, v)
 		case 13:
@@ -25644,7 +25644,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25664,7 +25664,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25679,7 +25679,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = append(m.Field14, string(data[iNdEx:postIndex]))
+			m.Field14 = append(m.Field14, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -25693,7 +25693,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -25708,11 +25708,11 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field15 = append(m.Field15, make([]byte, postIndex-iNdEx))
-			copy(m.Field15[len(m.Field15)-1], data[iNdEx:postIndex])
+			copy(m.Field15[len(m.Field15)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -25722,7 +25722,7 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -25732,8 +25732,8 @@ func (m *NinRepNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidRepPackedNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -25745,7 +25745,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -25771,7 +25771,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25790,7 +25790,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field1 = append(m.Field1, v)
 				}
@@ -25799,7 +25799,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field1 = append(m.Field1, v)
 			} else {
@@ -25815,7 +25815,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25834,7 +25834,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field2 = append(m.Field2, v)
 				}
@@ -25843,7 +25843,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field2 = append(m.Field2, v)
 			} else {
@@ -25859,7 +25859,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25882,7 +25882,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -25900,7 +25900,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25921,7 +25921,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25944,7 +25944,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -25962,7 +25962,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -25983,7 +25983,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26006,7 +26006,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26024,7 +26024,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26045,7 +26045,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26068,7 +26068,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26086,7 +26086,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26107,7 +26107,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26130,7 +26130,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26149,7 +26149,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26171,7 +26171,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26194,7 +26194,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26213,7 +26213,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26235,7 +26235,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26254,7 +26254,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -26263,7 +26263,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else {
@@ -26279,7 +26279,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26298,7 +26298,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -26307,7 +26307,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else {
@@ -26323,7 +26323,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26342,7 +26342,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -26351,7 +26351,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else {
@@ -26367,7 +26367,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26386,7 +26386,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -26395,7 +26395,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else {
@@ -26411,7 +26411,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26434,7 +26434,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26452,7 +26452,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26465,7 +26465,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -26475,7 +26475,7 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -26485,8 +26485,8 @@ func (m *NidRepPackedNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinRepPackedNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -26498,7 +26498,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -26524,7 +26524,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26543,7 +26543,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field1 = append(m.Field1, v)
 				}
@@ -26552,7 +26552,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field1 = append(m.Field1, v)
 			} else {
@@ -26568,7 +26568,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26587,7 +26587,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field2 = append(m.Field2, v)
 				}
@@ -26596,7 +26596,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field2 = append(m.Field2, v)
 			} else {
@@ -26612,7 +26612,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26635,7 +26635,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26653,7 +26653,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26674,7 +26674,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26697,7 +26697,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26715,7 +26715,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26736,7 +26736,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26759,7 +26759,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26777,7 +26777,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26798,7 +26798,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26821,7 +26821,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26839,7 +26839,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26860,7 +26860,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26883,7 +26883,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int32(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26902,7 +26902,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int32(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26924,7 +26924,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26947,7 +26947,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (uint64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -26966,7 +26966,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -26988,7 +26988,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27007,7 +27007,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -27016,7 +27016,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else {
@@ -27032,7 +27032,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27051,7 +27051,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+4 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -27060,7 +27060,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+4 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else {
@@ -27076,7 +27076,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27095,7 +27095,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -27104,7 +27104,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else {
@@ -27120,7 +27120,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27139,7 +27139,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx+8 > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -27148,7 +27148,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 				if iNdEx+8 > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else {
@@ -27164,7 +27164,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					packedLen |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27187,7 +27187,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						v |= (int(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -27205,7 +27205,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					v |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -27218,7 +27218,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -27228,7 +27228,7 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -27238,8 +27238,8 @@ func (m *NinRepPackedNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidOptStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -27251,7 +27251,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -27274,7 +27274,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field1 = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			m.Field1 = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 2:
 			if wireType != 5 {
@@ -27283,7 +27283,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field2 = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			m.Field2 = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 3:
 			if wireType != 2 {
@@ -27297,7 +27297,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27311,7 +27311,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Field3.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27327,7 +27327,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27341,7 +27341,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Field4.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field4.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27357,7 +27357,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field6 |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27376,7 +27376,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27397,7 +27397,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27411,7 +27411,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Field8.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field8.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27427,7 +27427,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27447,7 +27447,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27462,7 +27462,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = string(data[iNdEx:postIndex])
+			m.Field14 = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -27476,7 +27476,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27490,14 +27490,14 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -27507,7 +27507,7 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -27517,8 +27517,8 @@ func (m *NidOptStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -27530,7 +27530,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -27554,7 +27554,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = &v
 		case 2:
@@ -27565,7 +27565,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = &v
 		case 3:
@@ -27580,7 +27580,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27597,7 +27597,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if m.Field3 == nil {
 				m.Field3 = &NidOptNative{}
 			}
-			if err := m.Field3.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27613,7 +27613,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27630,7 +27630,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if m.Field4 == nil {
 				m.Field4 = &NinOptNative{}
 			}
-			if err := m.Field4.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field4.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27646,7 +27646,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27666,7 +27666,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27687,7 +27687,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27704,7 +27704,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if m.Field8 == nil {
 				m.Field8 = &NidOptNative{}
 			}
-			if err := m.Field8.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field8.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27720,7 +27720,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27741,7 +27741,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27756,7 +27756,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 		case 15:
@@ -27771,7 +27771,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27785,14 +27785,14 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -27802,7 +27802,7 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -27812,8 +27812,8 @@ func (m *NinOptStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidRepStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -27825,7 +27825,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -27849,7 +27849,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = append(m.Field1, v)
 		case 2:
@@ -27860,7 +27860,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = append(m.Field2, v)
 		case 3:
@@ -27875,7 +27875,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27890,7 +27890,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field3 = append(m.Field3, NidOptNative{})
-			if err := m.Field3[len(m.Field3)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3[len(m.Field3)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27906,7 +27906,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27921,7 +27921,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field4 = append(m.Field4, NinOptNative{})
-			if err := m.Field4[len(m.Field4)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field4[len(m.Field4)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -27937,7 +27937,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27957,7 +27957,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27978,7 +27978,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -27993,7 +27993,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field8 = append(m.Field8, NidOptNative{})
-			if err := m.Field8[len(m.Field8)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field8[len(m.Field8)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28009,7 +28009,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28029,7 +28029,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28044,7 +28044,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = append(m.Field14, string(data[iNdEx:postIndex]))
+			m.Field14 = append(m.Field14, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -28058,7 +28058,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28073,11 +28073,11 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field15 = append(m.Field15, make([]byte, postIndex-iNdEx))
-			copy(m.Field15[len(m.Field15)-1], data[iNdEx:postIndex])
+			copy(m.Field15[len(m.Field15)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28087,7 +28087,7 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28097,8 +28097,8 @@ func (m *NidRepStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinRepStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28110,7 +28110,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28134,7 +28134,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = append(m.Field1, v)
 		case 2:
@@ -28145,7 +28145,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = append(m.Field2, v)
 		case 3:
@@ -28160,7 +28160,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28175,7 +28175,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field3 = append(m.Field3, &NidOptNative{})
-			if err := m.Field3[len(m.Field3)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3[len(m.Field3)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28191,7 +28191,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28206,7 +28206,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field4 = append(m.Field4, &NinOptNative{})
-			if err := m.Field4[len(m.Field4)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field4[len(m.Field4)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28222,7 +28222,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28242,7 +28242,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28263,7 +28263,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28278,7 +28278,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field8 = append(m.Field8, &NidOptNative{})
-			if err := m.Field8[len(m.Field8)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field8[len(m.Field8)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28294,7 +28294,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28314,7 +28314,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28329,7 +28329,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = append(m.Field14, string(data[iNdEx:postIndex]))
+			m.Field14 = append(m.Field14, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -28343,7 +28343,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28358,11 +28358,11 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field15 = append(m.Field15, make([]byte, postIndex-iNdEx))
-			copy(m.Field15[len(m.Field15)-1], data[iNdEx:postIndex])
+			copy(m.Field15[len(m.Field15)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28372,7 +28372,7 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28382,8 +28382,8 @@ func (m *NinRepStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28395,7 +28395,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28423,7 +28423,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28440,7 +28440,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			if m.NidOptNative == nil {
 				m.NidOptNative = &NidOptNative{}
 			}
-			if err := m.NidOptNative.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NidOptNative.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28456,7 +28456,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28470,7 +28470,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Field200.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field200.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28486,7 +28486,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28496,7 +28496,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			m.Field210 = bool(v != 0)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28506,7 +28506,7 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28516,8 +28516,8 @@ func (m *NidEmbeddedStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28529,7 +28529,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28557,7 +28557,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28574,7 +28574,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			if m.NidOptNative == nil {
 				m.NidOptNative = &NidOptNative{}
 			}
-			if err := m.NidOptNative.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NidOptNative.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28590,7 +28590,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28607,7 +28607,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			if m.Field200 == nil {
 				m.Field200 = &NidOptNative{}
 			}
-			if err := m.Field200.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field200.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28623,7 +28623,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28634,7 +28634,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			m.Field210 = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28644,7 +28644,7 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28654,8 +28654,8 @@ func (m *NinEmbeddedStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidNestedStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28667,7 +28667,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28695,7 +28695,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28709,7 +28709,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Field1.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field1.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28725,7 +28725,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28740,13 +28740,13 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field2 = append(m.Field2, NidRepStruct{})
-			if err := m.Field2[len(m.Field2)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field2[len(m.Field2)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28756,7 +28756,7 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28766,8 +28766,8 @@ func (m *NidNestedStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinNestedStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28779,7 +28779,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28807,7 +28807,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28824,7 +28824,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 			if m.Field1 == nil {
 				m.Field1 = &NinOptStruct{}
 			}
-			if err := m.Field1.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field1.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28840,7 +28840,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28855,13 +28855,13 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Field2 = append(m.Field2, &NinRepStruct{})
-			if err := m.Field2[len(m.Field2)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field2[len(m.Field2)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28871,7 +28871,7 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28881,8 +28881,8 @@ func (m *NinNestedStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidOptCustom) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -28894,7 +28894,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -28922,7 +28922,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28936,7 +28936,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Id.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Id.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -28952,7 +28952,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -28966,13 +28966,13 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Value.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Value.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -28982,7 +28982,7 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -28992,8 +28992,8 @@ func (m *NidOptCustom) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomDash) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomDash) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29005,7 +29005,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29033,7 +29033,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29049,13 +29049,13 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom_dash_type.Bytes
 			m.Value = &v
-			if err := m.Value.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Value.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29065,7 +29065,7 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29075,8 +29075,8 @@ func (m *CustomDash) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptCustom) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29088,7 +29088,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29116,7 +29116,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29132,7 +29132,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.Id = &v
-			if err := m.Id.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Id.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29148,7 +29148,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29164,13 +29164,13 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.Value = &v
-			if err := m.Value.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Value.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29180,7 +29180,7 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29190,8 +29190,8 @@ func (m *NinOptCustom) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidRepCustom) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29203,7 +29203,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29231,7 +29231,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29247,7 +29247,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.Id = append(m.Id, v)
-			if err := m.Id[len(m.Id)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Id[len(m.Id)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29263,7 +29263,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29279,13 +29279,13 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.Value = append(m.Value, v)
-			if err := m.Value[len(m.Value)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Value[len(m.Value)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29295,7 +29295,7 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29305,8 +29305,8 @@ func (m *NidRepCustom) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinRepCustom) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29318,7 +29318,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29346,7 +29346,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29362,7 +29362,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.Id = append(m.Id, v)
-			if err := m.Id[len(m.Id)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Id[len(m.Id)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29378,7 +29378,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29394,13 +29394,13 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.Value = append(m.Value, v)
-			if err := m.Value[len(m.Value)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Value[len(m.Value)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29410,7 +29410,7 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29420,8 +29420,8 @@ func (m *NinRepCustom) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29433,7 +29433,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29457,7 +29457,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = &v
 		case 2:
@@ -29468,7 +29468,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = &v
 		case 3:
@@ -29483,7 +29483,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29503,7 +29503,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29523,7 +29523,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29543,7 +29543,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29563,7 +29563,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29584,7 +29584,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29599,7 +29599,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 		case 15:
@@ -29614,7 +29614,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29628,14 +29628,14 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29645,7 +29645,7 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29655,8 +29655,8 @@ func (m *NinOptNativeUnion) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptStructUnion) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29668,7 +29668,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29692,7 +29692,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = &v
 		case 2:
@@ -29703,7 +29703,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = &v
 		case 3:
@@ -29718,7 +29718,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29735,7 +29735,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if m.Field3 == nil {
 				m.Field3 = &NidOptNative{}
 			}
-			if err := m.Field3.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29751,7 +29751,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29768,7 +29768,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if m.Field4 == nil {
 				m.Field4 = &NinOptNative{}
 			}
-			if err := m.Field4.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field4.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29784,7 +29784,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29804,7 +29804,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29825,7 +29825,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29846,7 +29846,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29861,7 +29861,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 		case 15:
@@ -29876,7 +29876,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29890,14 +29890,14 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -29907,7 +29907,7 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -29917,8 +29917,8 @@ func (m *NinOptStructUnion) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -29930,7 +29930,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -29958,7 +29958,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -29975,7 +29975,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if m.NidOptNative == nil {
 				m.NidOptNative = &NidOptNative{}
 			}
-			if err := m.NidOptNative.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NidOptNative.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -29991,7 +29991,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30008,7 +30008,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if m.Field200 == nil {
 				m.Field200 = &NinOptNative{}
 			}
-			if err := m.Field200.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field200.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30024,7 +30024,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30035,7 +30035,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			m.Field210 = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30045,7 +30045,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30055,8 +30055,8 @@ func (m *NinEmbeddedStructUnion) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30068,7 +30068,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30096,7 +30096,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30113,7 +30113,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			if m.Field1 == nil {
 				m.Field1 = &NinOptNativeUnion{}
 			}
-			if err := m.Field1.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field1.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30129,7 +30129,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30146,7 +30146,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			if m.Field2 == nil {
 				m.Field2 = &NinOptStructUnion{}
 			}
-			if err := m.Field2.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field2.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30162,7 +30162,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30179,13 +30179,13 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			if m.Field3 == nil {
 				m.Field3 = &NinEmbeddedStructUnion{}
 			}
-			if err := m.Field3.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Field3.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30195,7 +30195,7 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30205,8 +30205,8 @@ func (m *NinNestedStructUnion) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Tree) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Tree) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30218,7 +30218,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30246,7 +30246,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30263,7 +30263,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 			if m.Or == nil {
 				m.Or = &OrBranch{}
 			}
-			if err := m.Or.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Or.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30279,7 +30279,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30296,7 +30296,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 			if m.And == nil {
 				m.And = &AndBranch{}
 			}
-			if err := m.And.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.And.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30312,7 +30312,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30329,13 +30329,13 @@ func (m *Tree) Unmarshal(data []byte) error {
 			if m.Leaf == nil {
 				m.Leaf = &Leaf{}
 			}
-			if err := m.Leaf.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Leaf.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30345,7 +30345,7 @@ func (m *Tree) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30355,8 +30355,8 @@ func (m *Tree) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *OrBranch) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *OrBranch) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30368,7 +30368,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30396,7 +30396,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30410,7 +30410,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Left.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Left.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30426,7 +30426,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30440,13 +30440,13 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Right.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Right.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30456,7 +30456,7 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30466,8 +30466,8 @@ func (m *OrBranch) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *AndBranch) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *AndBranch) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30479,7 +30479,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30507,7 +30507,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30521,7 +30521,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Left.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Left.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30537,7 +30537,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30551,13 +30551,13 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Right.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Right.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30567,7 +30567,7 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30577,8 +30577,8 @@ func (m *AndBranch) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Leaf) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Leaf) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30590,7 +30590,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30618,7 +30618,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Value |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30637,7 +30637,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30652,11 +30652,11 @@ func (m *Leaf) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StrValue = string(data[iNdEx:postIndex])
+			m.StrValue = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30666,7 +30666,7 @@ func (m *Leaf) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30676,8 +30676,8 @@ func (m *Leaf) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *DeepTree) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *DeepTree) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30689,7 +30689,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30717,7 +30717,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30734,7 +30734,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			if m.Down == nil {
 				m.Down = &ADeepBranch{}
 			}
-			if err := m.Down.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Down.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30750,7 +30750,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30767,7 +30767,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			if m.And == nil {
 				m.And = &AndDeepBranch{}
 			}
-			if err := m.And.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.And.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30783,7 +30783,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30800,13 +30800,13 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			if m.Leaf == nil {
 				m.Leaf = &DeepLeaf{}
 			}
-			if err := m.Leaf.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Leaf.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30816,7 +30816,7 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30826,8 +30826,8 @@ func (m *DeepTree) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *ADeepBranch) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *ADeepBranch) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30839,7 +30839,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30867,7 +30867,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30881,13 +30881,13 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Down.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Down.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -30897,7 +30897,7 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -30907,8 +30907,8 @@ func (m *ADeepBranch) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *AndDeepBranch) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -30920,7 +30920,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -30948,7 +30948,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30962,7 +30962,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Left.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Left.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -30978,7 +30978,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -30992,13 +30992,13 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Right.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Right.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31008,7 +31008,7 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31018,8 +31018,8 @@ func (m *AndDeepBranch) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *DeepLeaf) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *DeepLeaf) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31031,7 +31031,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31059,7 +31059,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31073,13 +31073,13 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.Tree.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Tree.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31089,7 +31089,7 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31099,8 +31099,8 @@ func (m *DeepLeaf) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Nil) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Nil) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31112,7 +31112,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31130,7 +31130,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 		switch fieldNum {
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31140,7 +31140,7 @@ func (m *Nil) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31150,8 +31150,8 @@ func (m *Nil) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidOptEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidOptEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31163,7 +31163,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31191,7 +31191,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field1 |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31200,7 +31200,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31210,7 +31210,7 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31220,8 +31220,8 @@ func (m *NidOptEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31233,7 +31233,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31261,7 +31261,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31281,7 +31281,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31301,7 +31301,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31311,7 +31311,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31321,7 +31321,7 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31331,8 +31331,8 @@ func (m *NinOptEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidRepEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31344,7 +31344,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31372,7 +31372,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31392,7 +31392,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31412,7 +31412,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31422,7 +31422,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31432,7 +31432,7 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31442,8 +31442,8 @@ func (m *NidRepEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinRepEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31455,7 +31455,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31483,7 +31483,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31503,7 +31503,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31523,7 +31523,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31533,7 +31533,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 			m.Field3 = append(m.Field3, v)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31543,7 +31543,7 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31553,8 +31553,8 @@ func (m *NinRepEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31566,7 +31566,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31594,7 +31594,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31614,7 +31614,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31634,7 +31634,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31644,7 +31644,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31654,7 +31654,7 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31664,8 +31664,8 @@ func (m *NinOptEnumDefault) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31677,7 +31677,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31705,7 +31705,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (AnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31725,7 +31725,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31745,7 +31745,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31755,7 +31755,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31765,7 +31765,7 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31775,8 +31775,8 @@ func (m *AnotherNinOptEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31788,7 +31788,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31816,7 +31816,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (AnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31836,7 +31836,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31856,7 +31856,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (YetYetAnotherTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31866,7 +31866,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31876,7 +31876,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31886,8 +31886,8 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Timer) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Timer) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31899,7 +31899,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -31922,7 +31922,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time1 = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			m.Time1 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 2:
 			if wireType != 1 {
@@ -31931,7 +31931,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time2 = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			m.Time2 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 3:
 			if wireType != 2 {
@@ -31945,7 +31945,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -31959,14 +31959,14 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Data = append(m.Data[:0], data[iNdEx:postIndex]...)
+			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
 			if m.Data == nil {
 				m.Data = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -31976,7 +31976,7 @@ func (m *Timer) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -31986,8 +31986,8 @@ func (m *Timer) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *MyExtendable) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *MyExtendable) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -31999,7 +31999,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32027,7 +32027,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32046,7 +32046,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -32056,11 +32056,11 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), data[iNdEx:iNdEx+skippy])
+				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -32070,7 +32070,7 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+				m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 				iNdEx += skippy
 			}
 		}
@@ -32081,8 +32081,8 @@ func (m *MyExtendable) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *OtherExtenable) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32094,7 +32094,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32122,7 +32122,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32142,7 +32142,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32162,7 +32162,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32179,7 +32179,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 			if m.M == nil {
 				m.M = &MyExtendable{}
 			}
-			if err := m.M.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.M.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -32194,7 +32194,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -32204,11 +32204,11 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), data[iNdEx:iNdEx+skippy])
+				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -32218,7 +32218,7 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+				m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 				iNdEx += skippy
 			}
 		}
@@ -32229,8 +32229,8 @@ func (m *OtherExtenable) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NestedDefinition) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32242,7 +32242,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32270,7 +32270,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32290,7 +32290,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (NestedDefinition_NestedEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32310,7 +32310,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32327,7 +32327,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 			if m.NNM == nil {
 				m.NNM = &NestedDefinition_NestedMessage_NestedNestedMsg{}
 			}
-			if err := m.NNM.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NNM.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -32343,7 +32343,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32360,13 +32360,13 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 			if m.NM == nil {
 				m.NM = &NestedDefinition_NestedMessage{}
 			}
-			if err := m.NM.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NM.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -32376,7 +32376,7 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -32386,8 +32386,8 @@ func (m *NestedDefinition) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32399,7 +32399,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32423,7 +32423,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.NestedField1 = &v
 		case 2:
@@ -32438,7 +32438,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32455,13 +32455,13 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 			if m.NNM == nil {
 				m.NNM = &NestedDefinition_NestedMessage_NestedNestedMsg{}
 			}
-			if err := m.NNM.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NNM.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -32471,7 +32471,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -32481,8 +32481,8 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32494,7 +32494,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32522,7 +32522,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32537,12 +32537,12 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.NestedNestedField1 = &s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -32552,7 +32552,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -32562,8 +32562,8 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(data []byte) 
 	}
 	return nil
 }
-func (m *NestedScope) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NestedScope) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32575,7 +32575,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32603,7 +32603,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32620,7 +32620,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 			if m.A == nil {
 				m.A = &NestedDefinition_NestedMessage_NestedNestedMsg{}
 			}
-			if err := m.A.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.A.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -32636,7 +32636,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (NestedDefinition_NestedEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32656,7 +32656,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32673,13 +32673,13 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 			if m.C == nil {
 				m.C = &NestedDefinition_NestedMessage{}
 			}
-			if err := m.C.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.C.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -32689,7 +32689,7 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -32699,8 +32699,8 @@ func (m *NestedScope) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -32712,7 +32712,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -32736,7 +32736,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field1 = &v
 		case 2:
@@ -32747,7 +32747,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field2 = &v
 		case 3:
@@ -32762,7 +32762,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32782,7 +32782,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32802,7 +32802,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32822,7 +32822,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32842,7 +32842,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32863,7 +32863,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32881,7 +32881,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -32892,7 +32892,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -32903,7 +32903,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -32914,7 +32914,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -32929,7 +32929,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32950,7 +32950,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32965,7 +32965,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 		case 15:
@@ -32980,7 +32980,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -32994,14 +32994,14 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -33011,7 +33011,7 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -33021,8 +33021,8 @@ func (m *NinOptNativeDefault) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomContainer) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomContainer) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -33034,7 +33034,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -33062,7 +33062,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33076,13 +33076,13 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.CustomStruct.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.CustomStruct.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -33092,7 +33092,7 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -33102,8 +33102,8 @@ func (m *CustomContainer) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -33115,7 +33115,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -33138,7 +33138,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldA = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldA = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 2:
 			if wireType != 5 {
@@ -33147,7 +33147,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldB = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldB = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 3:
 			if wireType != 0 {
@@ -33161,7 +33161,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.FieldC |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33180,7 +33180,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.FieldD |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33199,7 +33199,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.FieldE |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33218,7 +33218,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.FieldF |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33237,7 +33237,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33258,7 +33258,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33274,7 +33274,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldI = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldI = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
@@ -33283,7 +33283,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldJ = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldJ = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
@@ -33292,7 +33292,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldK = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldK = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
@@ -33301,7 +33301,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldL = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			m.FieldL = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -33315,7 +33315,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33335,7 +33335,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33350,7 +33350,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldN = string(data[iNdEx:postIndex])
+			m.FieldN = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -33364,7 +33364,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33378,14 +33378,14 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldO = append(m.FieldO[:0], data[iNdEx:postIndex]...)
+			m.FieldO = append(m.FieldO[:0], dAtA[iNdEx:postIndex]...)
 			if m.FieldO == nil {
 				m.FieldO = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -33395,7 +33395,7 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -33405,8 +33405,8 @@ func (m *CustomNameNidOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -33418,7 +33418,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -33442,7 +33442,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldA = &v
 		case 2:
@@ -33453,7 +33453,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldB = &v
 		case 3:
@@ -33468,7 +33468,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33488,7 +33488,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33508,7 +33508,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33528,7 +33528,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33548,7 +33548,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33569,7 +33569,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33587,7 +33587,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldI = &v
 		case 10:
@@ -33598,7 +33598,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldJ = &v
 		case 11:
@@ -33609,7 +33609,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldK = &v
 		case 12:
@@ -33620,7 +33620,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FielL = &v
 		case 13:
@@ -33635,7 +33635,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33656,7 +33656,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33671,7 +33671,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.FieldN = &s
 			iNdEx = postIndex
 		case 15:
@@ -33686,7 +33686,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33700,14 +33700,14 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldO = append(m.FieldO[:0], data[iNdEx:postIndex]...)
+			m.FieldO = append(m.FieldO[:0], dAtA[iNdEx:postIndex]...)
 			if m.FieldO == nil {
 				m.FieldO = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -33717,7 +33717,7 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -33727,8 +33727,8 @@ func (m *CustomNameNinOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -33740,7 +33740,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -33764,7 +33764,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldA = append(m.FieldA, v)
 		case 2:
@@ -33775,7 +33775,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldB = append(m.FieldB, v)
 		case 3:
@@ -33790,7 +33790,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33810,7 +33810,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33830,7 +33830,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33850,7 +33850,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33870,7 +33870,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33891,7 +33891,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33908,7 +33908,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldI = append(m.FieldI, v)
 		case 10:
@@ -33919,7 +33919,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldJ = append(m.FieldJ, v)
 		case 11:
@@ -33930,7 +33930,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldK = append(m.FieldK, v)
 		case 12:
@@ -33941,7 +33941,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldL = append(m.FieldL, v)
 		case 13:
@@ -33956,7 +33956,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33976,7 +33976,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -33991,7 +33991,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldN = append(m.FieldN, string(data[iNdEx:postIndex]))
+			m.FieldN = append(m.FieldN, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 15:
 			if wireType != 2 {
@@ -34005,7 +34005,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34020,11 +34020,11 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.FieldO = append(m.FieldO, make([]byte, postIndex-iNdEx))
-			copy(m.FieldO[len(m.FieldO)-1], data[iNdEx:postIndex])
+			copy(m.FieldO[len(m.FieldO)-1], dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34034,7 +34034,7 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -34044,8 +34044,8 @@ func (m *CustomNameNinRepNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34057,7 +34057,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34081,7 +34081,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if iNdEx+8 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 8
 			m.FieldA = &v
 		case 2:
@@ -34092,7 +34092,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if iNdEx+4 > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&data[iNdEx]))
+			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
 			iNdEx += 4
 			m.FieldB = &v
 		case 3:
@@ -34107,7 +34107,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34124,7 +34124,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if m.FieldC == nil {
 				m.FieldC = &NidOptNative{}
 			}
-			if err := m.FieldC.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldC.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34140,7 +34140,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34155,7 +34155,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.FieldD = append(m.FieldD, &NinOptNative{})
-			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34171,7 +34171,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34191,7 +34191,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34212,7 +34212,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34229,7 +34229,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if m.FieldG == nil {
 				m.FieldG = &NidOptNative{}
 			}
-			if err := m.FieldG.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldG.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34245,7 +34245,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34266,7 +34266,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34281,7 +34281,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.FieldI = &s
 			iNdEx = postIndex
 		case 15:
@@ -34296,7 +34296,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34310,14 +34310,14 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldJ = append(m.FieldJ[:0], data[iNdEx:postIndex]...)
+			m.FieldJ = append(m.FieldJ[:0], dAtA[iNdEx:postIndex]...)
 			if m.FieldJ == nil {
 				m.FieldJ = []byte{}
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34327,7 +34327,7 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -34337,8 +34337,8 @@ func (m *CustomNameNinStruct) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameCustomType) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34350,7 +34350,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34378,7 +34378,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34394,7 +34394,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.FieldA = &v
-			if err := m.FieldA.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldA.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34410,7 +34410,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34426,7 +34426,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.FieldB = &v
-			if err := m.FieldB.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldB.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34442,7 +34442,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34458,7 +34458,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v Uuid
 			m.FieldC = append(m.FieldC, v)
-			if err := m.FieldC[len(m.FieldC)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldC[len(m.FieldC)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34474,7 +34474,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34490,13 +34490,13 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			}
 			var v github_com_gogo_protobuf_test_custom.Uint128
 			m.FieldD = append(m.FieldD, v)
-			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldD[len(m.FieldD)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34506,7 +34506,7 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -34516,8 +34516,8 @@ func (m *CustomNameCustomType) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34529,7 +34529,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34557,7 +34557,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34574,7 +34574,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if m.NidOptNative == nil {
 				m.NidOptNative = &NidOptNative{}
 			}
-			if err := m.NidOptNative.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NidOptNative.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34590,7 +34590,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34607,7 +34607,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if m.FieldA == nil {
 				m.FieldA = &NinOptNative{}
 			}
-			if err := m.FieldA.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.FieldA.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34623,7 +34623,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34634,7 +34634,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			m.FieldB = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34644,7 +34644,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -34654,8 +34654,8 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *CustomNameEnum) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34667,7 +34667,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34695,7 +34695,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34715,7 +34715,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (TheTestEnum(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34725,7 +34725,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 			m.FieldB = append(m.FieldB, v)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34735,7 +34735,7 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -34745,8 +34745,8 @@ func (m *CustomNameEnum) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NoExtensionsMap) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34758,7 +34758,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34786,7 +34786,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34805,7 +34805,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -34815,11 +34815,11 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), data[iNdEx:iNdEx+skippy])
+				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(data[iNdEx:])
+				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
@@ -34829,7 +34829,7 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+				m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 				iNdEx += skippy
 			}
 		}
@@ -34840,8 +34840,8 @@ func (m *NoExtensionsMap) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Unrecognized) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Unrecognized) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34853,7 +34853,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34881,7 +34881,7 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34896,12 +34896,12 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field1 = &s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -34920,8 +34920,8 @@ func (m *Unrecognized) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -34933,7 +34933,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -34961,7 +34961,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -34976,7 +34976,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Embedded = append(m.Embedded, &UnrecognizedWithInner_Inner{})
-			if err := m.Embedded[len(m.Embedded)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Embedded[len(m.Embedded)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -34992,7 +34992,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35007,12 +35007,12 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field2 = &s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -35022,7 +35022,7 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -35032,8 +35032,8 @@ func (m *UnrecognizedWithInner) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *UnrecognizedWithInner_Inner) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -35045,7 +35045,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -35073,7 +35073,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35083,7 +35083,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -35102,8 +35102,8 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -35115,7 +35115,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -35143,7 +35143,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35157,7 +35157,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.UnrecognizedWithEmbed_Embedded.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.UnrecognizedWithEmbed_Embedded.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -35173,7 +35173,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35188,12 +35188,12 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field2 = &s
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -35203,7 +35203,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -35213,8 +35213,8 @@ func (m *UnrecognizedWithEmbed) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -35226,7 +35226,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -35254,7 +35254,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35264,7 +35264,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -35283,8 +35283,8 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *Node) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Node) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -35296,7 +35296,7 @@ func (m *Node) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -35324,7 +35324,7 @@ func (m *Node) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35339,7 +35339,7 @@ func (m *Node) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Label = &s
 			iNdEx = postIndex
 		case 2:
@@ -35354,7 +35354,7 @@ func (m *Node) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35369,13 +35369,13 @@ func (m *Node) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Children = append(m.Children, &Node{})
-			if err := m.Children[len(m.Children)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.Children[len(m.Children)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(data[iNdEx:])
+			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -35385,7 +35385,7 @@ func (m *Node) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -35395,8 +35395,8 @@ func (m *Node) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipThetestUnsafe(data []byte) (n int, err error) {
-	l := len(data)
+func skipThetestUnsafe(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -35407,7 +35407,7 @@ func skipThetestUnsafe(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -35425,7 +35425,7 @@ func skipThetestUnsafe(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -35442,7 +35442,7 @@ func skipThetestUnsafe(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -35465,7 +35465,7 @@ func skipThetestUnsafe(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -35476,7 +35476,7 @@ func skipThetestUnsafe(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipThetestUnsafe(data[start:])
+				next, err := skipThetestUnsafe(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

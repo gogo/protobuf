@@ -221,20 +221,20 @@ func _OneofStdTypes_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	switch x := m.OneOfStdTimes.(type) {
 	case *OneofStdTypes_Timestamp:
 		_ = b.EncodeVarint(1<<3 | proto.WireBytes)
-		data, err := github_com_gogo_protobuf_types.StdTimeMarshal(*x.Timestamp)
+		dAtA, err := github_com_gogo_protobuf_types.StdTimeMarshal(*x.Timestamp)
 		if err != nil {
 			return err
 		}
-		if err := b.EncodeRawBytes(data); err != nil {
+		if err := b.EncodeRawBytes(dAtA); err != nil {
 			return err
 		}
 	case *OneofStdTypes_Duration:
 		_ = b.EncodeVarint(2<<3 | proto.WireBytes)
-		data, err := github_com_gogo_protobuf_types.StdDurationMarshal(*x.Duration)
+		dAtA, err := github_com_gogo_protobuf_types.StdDurationMarshal(*x.Duration)
 		if err != nil {
 			return err
 		}
-		if err := b.EncodeRawBytes(data); err != nil {
+		if err := b.EncodeRawBytes(dAtA); err != nil {
 			return err
 		}
 	case nil:
@@ -993,7 +993,7 @@ func randStringStdtypes(r randyStdtypes) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedStdtypes(r randyStdtypes, maxFieldNumber int) (data []byte) {
+func randUnrecognizedStdtypes(r randyStdtypes, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -1001,43 +1001,43 @@ func randUnrecognizedStdtypes(r randyStdtypes, maxFieldNumber int) (data []byte)
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldStdtypes(data, r, fieldNumber, wire)
+		dAtA = randFieldStdtypes(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldStdtypes(data []byte, r randyStdtypes, fieldNumber int, wire int) []byte {
+func randFieldStdtypes(dAtA []byte, r randyStdtypes, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateStdtypes(data, uint64(key))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(key))
 		v14 := r.Int63()
 		if r.Intn(2) == 0 {
 			v14 *= -1
 		}
-		data = encodeVarintPopulateStdtypes(data, uint64(v14))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(v14))
 	case 1:
-		data = encodeVarintPopulateStdtypes(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateStdtypes(data, uint64(key))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateStdtypes(data, uint64(ll))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateStdtypes(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateStdtypes(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateStdtypes(data []byte, v uint64) []byte {
+func encodeVarintPopulateStdtypes(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *StdTypes) Size() (n int) {
 	var l int

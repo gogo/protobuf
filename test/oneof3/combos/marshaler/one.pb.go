@@ -2065,47 +2065,47 @@ func extensionToGoStringOne(m github_com_gogo_protobuf_proto.Message) string {
 	s += strings.Join(ss, ",") + "})"
 	return s
 }
-func (m *Subby) Marshal() (data []byte, err error) {
+func (m *Subby) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Subby) MarshalTo(data []byte) (int, error) {
+func (m *Subby) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if len(m.Sub) > 0 {
-		data[i] = 0xa
+		dAtA[i] = 0xa
 		i++
-		i = encodeVarintOne(data, i, uint64(len(m.Sub)))
-		i += copy(data[i:], m.Sub)
+		i = encodeVarintOne(dAtA, i, uint64(len(m.Sub)))
+		i += copy(dAtA[i:], m.Sub)
 	}
 	return i, nil
 }
 
-func (m *SampleOneOf) Marshal() (data []byte, err error) {
+func (m *SampleOneOf) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *SampleOneOf) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.TestOneof != nil {
-		nn1, err := m.TestOneof.MarshalTo(data[i:])
+		nn1, err := m.TestOneof.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -2114,129 +2114,129 @@ func (m *SampleOneOf) MarshalTo(data []byte) (int, error) {
 	return i, nil
 }
 
-func (m *SampleOneOf_Field1) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x9
+	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64One(data, i, uint64(math.Float64bits(float64(m.Field1))))
+	i = encodeFixed64One(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
 	return i, nil
 }
-func (m *SampleOneOf_Field2) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x15
+	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32One(data, i, uint32(math.Float32bits(float32(m.Field2))))
+	i = encodeFixed32One(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
 	return i, nil
 }
-func (m *SampleOneOf_Field3) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field3) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x18
+	dAtA[i] = 0x18
 	i++
-	i = encodeVarintOne(data, i, uint64(m.Field3))
+	i = encodeVarintOne(dAtA, i, uint64(m.Field3))
 	return i, nil
 }
-func (m *SampleOneOf_Field4) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field4) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x20
+	dAtA[i] = 0x20
 	i++
-	i = encodeVarintOne(data, i, uint64(m.Field4))
+	i = encodeVarintOne(dAtA, i, uint64(m.Field4))
 	return i, nil
 }
-func (m *SampleOneOf_Field5) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field5) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x28
+	dAtA[i] = 0x28
 	i++
-	i = encodeVarintOne(data, i, uint64(m.Field5))
+	i = encodeVarintOne(dAtA, i, uint64(m.Field5))
 	return i, nil
 }
-func (m *SampleOneOf_Field6) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field6) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x30
+	dAtA[i] = 0x30
 	i++
-	i = encodeVarintOne(data, i, uint64(m.Field6))
+	i = encodeVarintOne(dAtA, i, uint64(m.Field6))
 	return i, nil
 }
-func (m *SampleOneOf_Field7) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field7) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x38
+	dAtA[i] = 0x38
 	i++
-	i = encodeVarintOne(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	i = encodeVarintOne(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
 	return i, nil
 }
-func (m *SampleOneOf_Field8) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field8) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x40
+	dAtA[i] = 0x40
 	i++
-	i = encodeVarintOne(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	i = encodeVarintOne(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
 	return i, nil
 }
-func (m *SampleOneOf_Field9) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x4d
+	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32One(data, i, uint32(m.Field9))
+	i = encodeFixed32One(dAtA, i, uint32(m.Field9))
 	return i, nil
 }
-func (m *SampleOneOf_Field10) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x55
+	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32One(data, i, uint32(m.Field10))
+	i = encodeFixed32One(dAtA, i, uint32(m.Field10))
 	return i, nil
 }
-func (m *SampleOneOf_Field11) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x59
+	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64One(data, i, uint64(m.Field11))
+	i = encodeFixed64One(dAtA, i, uint64(m.Field11))
 	return i, nil
 }
-func (m *SampleOneOf_Field12) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x61
+	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64One(data, i, uint64(m.Field12))
+	i = encodeFixed64One(dAtA, i, uint64(m.Field12))
 	return i, nil
 }
-func (m *SampleOneOf_Field13) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field13) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x68
+	dAtA[i] = 0x68
 	i++
 	if m.Field13 {
-		data[i] = 1
+		dAtA[i] = 1
 	} else {
-		data[i] = 0
+		dAtA[i] = 0
 	}
 	i++
 	return i, nil
 }
-func (m *SampleOneOf_Field14) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field14) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	data[i] = 0x72
+	dAtA[i] = 0x72
 	i++
-	i = encodeVarintOne(data, i, uint64(len(m.Field14)))
-	i += copy(data[i:], m.Field14)
+	i = encodeVarintOne(dAtA, i, uint64(len(m.Field14)))
+	i += copy(dAtA[i:], m.Field14)
 	return i, nil
 }
-func (m *SampleOneOf_Field15) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_Field15) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	if m.Field15 != nil {
-		data[i] = 0x7a
+		dAtA[i] = 0x7a
 		i++
-		i = encodeVarintOne(data, i, uint64(len(m.Field15)))
-		i += copy(data[i:], m.Field15)
+		i = encodeVarintOne(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
 	}
 	return i, nil
 }
-func (m *SampleOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
+func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	if m.SubMessage != nil {
-		data[i] = 0x82
+		dAtA[i] = 0x82
 		i++
-		data[i] = 0x1
+		dAtA[i] = 0x1
 		i++
-		i = encodeVarintOne(data, i, uint64(m.SubMessage.Size()))
-		n2, err := m.SubMessage.MarshalTo(data[i:])
+		i = encodeVarintOne(dAtA, i, uint64(m.SubMessage.Size()))
+		n2, err := m.SubMessage.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -2244,31 +2244,31 @@ func (m *SampleOneOf_SubMessage) MarshalTo(data []byte) (int, error) {
 	}
 	return i, nil
 }
-func encodeFixed64One(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64One(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32One(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32One(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintOne(data []byte, offset int, v uint64) int {
+func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
@@ -2456,7 +2456,7 @@ func randStringOne(r randyOne) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedOne(r randyOne, maxFieldNumber int) (data []byte) {
+func randUnrecognizedOne(r randyOne, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -2464,43 +2464,43 @@ func randUnrecognizedOne(r randyOne, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldOne(data, r, fieldNumber, wire)
+		dAtA = randFieldOne(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldOne(data []byte, r randyOne, fieldNumber int, wire int) []byte {
+func randFieldOne(dAtA []byte, r randyOne, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateOne(data, uint64(key))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		v3 := r.Int63()
 		if r.Intn(2) == 0 {
 			v3 *= -1
 		}
-		data = encodeVarintPopulateOne(data, uint64(v3))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(v3))
 	case 1:
-		data = encodeVarintPopulateOne(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateOne(data, uint64(key))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateOne(data, uint64(ll))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateOne(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateOne(data []byte, v uint64) []byte {
+func encodeVarintPopulateOne(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Subby) Size() (n int) {
 	var l int

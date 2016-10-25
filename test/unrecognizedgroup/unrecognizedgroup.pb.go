@@ -980,116 +980,116 @@ func extensionToGoStringUnrecognizedgroup(m github_com_gogo_protobuf_proto.Messa
 	s += strings.Join(ss, ",") + "})"
 	return s
 }
-func (m *NewNoGroup) Marshal() (data []byte, err error) {
+func (m *NewNoGroup) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *NewNoGroup) MarshalTo(data []byte) (int, error) {
+func (m *NewNoGroup) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Field1 != nil {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintUnrecognizedgroup(data, i, uint64(*m.Field1))
+		i = encodeVarintUnrecognizedgroup(dAtA, i, uint64(*m.Field1))
 	}
 	if len(m.Field3) > 0 {
 		for _, num := range m.Field3 {
-			data[i] = 0x19
+			dAtA[i] = 0x19
 			i++
 			f1 := math.Float64bits(float64(num))
-			data[i] = uint8(f1)
+			dAtA[i] = uint8(f1)
 			i++
-			data[i] = uint8(f1 >> 8)
+			dAtA[i] = uint8(f1 >> 8)
 			i++
-			data[i] = uint8(f1 >> 16)
+			dAtA[i] = uint8(f1 >> 16)
 			i++
-			data[i] = uint8(f1 >> 24)
+			dAtA[i] = uint8(f1 >> 24)
 			i++
-			data[i] = uint8(f1 >> 32)
+			dAtA[i] = uint8(f1 >> 32)
 			i++
-			data[i] = uint8(f1 >> 40)
+			dAtA[i] = uint8(f1 >> 40)
 			i++
-			data[i] = uint8(f1 >> 48)
+			dAtA[i] = uint8(f1 >> 48)
 			i++
-			data[i] = uint8(f1 >> 56)
+			dAtA[i] = uint8(f1 >> 56)
 			i++
 		}
 	}
 	if m.A != nil {
-		data[i] = 0x2a
+		dAtA[i] = 0x2a
 		i++
-		i = encodeVarintUnrecognizedgroup(data, i, uint64(m.A.Size()))
-		n2, err := m.A.MarshalTo(data[i:])
+		i = encodeVarintUnrecognizedgroup(dAtA, i, uint64(m.A.Size()))
+		n2, err := m.A.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
 		i += n2
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func (m *A) Marshal() (data []byte, err error) {
+func (m *A) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *A) MarshalTo(data []byte) (int, error) {
+func (m *A) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.AField != nil {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintUnrecognizedgroup(data, i, uint64(*m.AField))
+		i = encodeVarintUnrecognizedgroup(dAtA, i, uint64(*m.AField))
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func encodeFixed64Unrecognizedgroup(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Unrecognizedgroup(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Unrecognizedgroup(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Unrecognizedgroup(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintUnrecognizedgroup(data []byte, offset int, v uint64) int {
+func encodeVarintUnrecognizedgroup(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
@@ -1249,7 +1249,7 @@ func randStringUnrecognizedgroup(r randyUnrecognizedgroup) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedUnrecognizedgroup(r randyUnrecognizedgroup, maxFieldNumber int) (data []byte) {
+func randUnrecognizedUnrecognizedgroup(r randyUnrecognizedgroup, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -1257,43 +1257,43 @@ func randUnrecognizedUnrecognizedgroup(r randyUnrecognizedgroup, maxFieldNumber 
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldUnrecognizedgroup(data, r, fieldNumber, wire)
+		dAtA = randFieldUnrecognizedgroup(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldUnrecognizedgroup(data []byte, r randyUnrecognizedgroup, fieldNumber int, wire int) []byte {
+func randFieldUnrecognizedgroup(dAtA []byte, r randyUnrecognizedgroup, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
 		v12 := r.Int63()
 		if r.Intn(2) == 0 {
 			v12 *= -1
 		}
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(v12))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(v12))
 	case 1:
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(ll))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateUnrecognizedgroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateUnrecognizedgroup(data []byte, v uint64) []byte {
+func encodeVarintPopulateUnrecognizedgroup(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *NewNoGroup) Size() (n int) {
 	var l int
@@ -1410,8 +1410,8 @@ func valueToStringUnrecognizedgroup(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *NewNoGroup) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NewNoGroup) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1423,7 +1423,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1451,7 +1451,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1468,14 +1468,14 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field3 = append(m.Field3, v2)
 		case 5:
@@ -1490,7 +1490,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1507,13 +1507,13 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			if m.A == nil {
 				m.A = &A{}
 			}
-			if err := m.A.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.A.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnrecognizedgroup(data[iNdEx:])
+			skippy, err := skipUnrecognizedgroup(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1523,7 +1523,7 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1533,8 +1533,8 @@ func (m *NewNoGroup) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *A) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *A) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1546,7 +1546,7 @@ func (m *A) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1574,7 +1574,7 @@ func (m *A) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1584,7 +1584,7 @@ func (m *A) Unmarshal(data []byte) error {
 			m.AField = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipUnrecognizedgroup(data[iNdEx:])
+			skippy, err := skipUnrecognizedgroup(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1594,7 +1594,7 @@ func (m *A) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1604,8 +1604,8 @@ func (m *A) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipUnrecognizedgroup(data []byte) (n int, err error) {
-	l := len(data)
+func skipUnrecognizedgroup(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -1616,7 +1616,7 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1634,7 +1634,7 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -1651,7 +1651,7 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1674,7 +1674,7 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -1685,7 +1685,7 @@ func skipUnrecognizedgroup(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipUnrecognizedgroup(data[start:])
+				next, err := skipUnrecognizedgroup(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

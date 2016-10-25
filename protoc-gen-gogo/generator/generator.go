@@ -2712,40 +2712,40 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				fieldWire[field] = wire
 				g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
-					g.P(`data, err := `, val, `.Marshal()`)
+					g.P(`dAtA, err := `, val, `.Marshal()`)
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 				} else if gogoproto.IsStdTime(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
-						g.P(`data, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
 					} else {
-						g.P(`data, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
 					}
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 					pre, post = "b.EncodeRawBytes(", ")"
 				} else if gogoproto.IsStdDuration(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
-						g.P(`data, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
 					} else {
-						g.P(`data, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
+						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
 					}
 					g.P(`if err != nil {`)
 					g.In()
 					g.P(`return err`)
 					g.Out()
 					g.P(`}`)
-					val = "data"
+					val = "dAtA"
 					pre, post = "b.EncodeRawBytes(", ")"
 				}
 				if !canFail {

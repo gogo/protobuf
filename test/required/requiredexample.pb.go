@@ -352,17 +352,17 @@ func init() {
 	proto.RegisterType((*NinOptNative)(nil), "required.NinOptNative")
 	proto.RegisterType((*NestedNinOptNative)(nil), "required.NestedNinOptNative")
 }
-func (m *RequiredExample) Marshal() (data []byte, err error) {
+func (m *RequiredExample) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *RequiredExample) MarshalTo(data []byte) (int, error) {
+func (m *RequiredExample) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -370,124 +370,124 @@ func (m *RequiredExample) MarshalTo(data []byte) (int, error) {
 	if m.TheRequiredString == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("theRequiredString")
 	} else {
-		data[i] = 0xa
+		dAtA[i] = 0xa
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheRequiredString)))
-		i += copy(data[i:], *m.TheRequiredString)
+		i = encodeVarintRequiredexample(dAtA, i, uint64(len(*m.TheRequiredString)))
+		i += copy(dAtA[i:], *m.TheRequiredString)
 	}
 	if m.TheOptionalString != nil {
-		data[i] = 0x12
+		dAtA[i] = 0x12
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.TheOptionalString)))
-		i += copy(data[i:], *m.TheOptionalString)
+		i = encodeVarintRequiredexample(dAtA, i, uint64(len(*m.TheOptionalString)))
+		i += copy(dAtA[i:], *m.TheOptionalString)
 	}
 	if len(m.TheRepeatedStrings) > 0 {
 		for _, s := range m.TheRepeatedStrings {
-			data[i] = 0x1a
+			dAtA[i] = 0x1a
 			i++
 			l = len(s)
 			for l >= 1<<7 {
-				data[i] = uint8(uint64(l)&0x7f | 0x80)
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
 				l >>= 7
 				i++
 			}
-			data[i] = uint8(l)
+			dAtA[i] = uint8(l)
 			i++
-			i += copy(data[i:], s)
+			i += copy(dAtA[i:], s)
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func (m *NidOptNative) Marshal() (data []byte, err error) {
+func (m *NidOptNative) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *NidOptNative) MarshalTo(data []byte) (int, error) {
+func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
-	data[i] = 0x9
+	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(float64(m.Field1))))
-	data[i] = 0x15
+	i = encodeFixed64Requiredexample(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
+	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(float32(m.Field2))))
-	data[i] = 0x18
+	i = encodeFixed32Requiredexample(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
+	dAtA[i] = 0x18
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field3))
-	data[i] = 0x20
+	i = encodeVarintRequiredexample(dAtA, i, uint64(m.Field3))
+	dAtA[i] = 0x20
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field4))
-	data[i] = 0x28
+	i = encodeVarintRequiredexample(dAtA, i, uint64(m.Field4))
+	dAtA[i] = 0x28
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field5))
-	data[i] = 0x30
+	i = encodeVarintRequiredexample(dAtA, i, uint64(m.Field5))
+	dAtA[i] = 0x30
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64(m.Field6))
-	data[i] = 0x38
+	i = encodeVarintRequiredexample(dAtA, i, uint64(m.Field6))
+	dAtA[i] = 0x38
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
-	data[i] = 0x40
+	i = encodeVarintRequiredexample(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	dAtA[i] = 0x40
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
-	data[i] = 0x4d
+	i = encodeVarintRequiredexample(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(m.Field9))
-	data[i] = 0x55
+	i = encodeFixed32Requiredexample(dAtA, i, uint32(m.Field9))
+	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32Requiredexample(data, i, uint32(m.Field10))
-	data[i] = 0x59
+	i = encodeFixed32Requiredexample(dAtA, i, uint32(m.Field10))
+	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(m.Field11))
-	data[i] = 0x61
+	i = encodeFixed64Requiredexample(dAtA, i, uint64(m.Field11))
+	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64Requiredexample(data, i, uint64(m.Field12))
-	data[i] = 0x68
+	i = encodeFixed64Requiredexample(dAtA, i, uint64(m.Field12))
+	dAtA[i] = 0x68
 	i++
 	if m.Field13 {
-		data[i] = 1
+		dAtA[i] = 1
 	} else {
-		data[i] = 0
+		dAtA[i] = 0
 	}
 	i++
-	data[i] = 0x72
+	dAtA[i] = 0x72
 	i++
-	i = encodeVarintRequiredexample(data, i, uint64(len(m.Field14)))
-	i += copy(data[i:], m.Field14)
+	i = encodeVarintRequiredexample(dAtA, i, uint64(len(m.Field14)))
+	i += copy(dAtA[i:], m.Field14)
 	if m.Field15 != nil {
-		data[i] = 0x7a
+		dAtA[i] = 0x7a
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
-		i += copy(data[i:], m.Field15)
+		i = encodeVarintRequiredexample(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func (m *NinOptNative) Marshal() (data []byte, err error) {
+func (m *NinOptNative) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
+func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -495,142 +495,142 @@ func (m *NinOptNative) MarshalTo(data []byte) (int, error) {
 	if m.Field1 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field1")
 	} else {
-		data[i] = 0x9
+		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(math.Float64bits(float64(*m.Field1))))
+		i = encodeFixed64Requiredexample(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
 	}
 	if m.Field2 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field2")
 	} else {
-		data[i] = 0x15
+		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(math.Float32bits(float32(*m.Field2))))
+		i = encodeFixed32Requiredexample(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
 	}
 	if m.Field3 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field3")
 	} else {
-		data[i] = 0x18
+		dAtA[i] = 0x18
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field3))
+		i = encodeVarintRequiredexample(dAtA, i, uint64(*m.Field3))
 	}
 	if m.Field4 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field4")
 	} else {
-		data[i] = 0x20
+		dAtA[i] = 0x20
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field4))
+		i = encodeVarintRequiredexample(dAtA, i, uint64(*m.Field4))
 	}
 	if m.Field5 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field5")
 	} else {
-		data[i] = 0x28
+		dAtA[i] = 0x28
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field5))
+		i = encodeVarintRequiredexample(dAtA, i, uint64(*m.Field5))
 	}
 	if m.Field6 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field6")
 	} else {
-		data[i] = 0x30
+		dAtA[i] = 0x30
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(*m.Field6))
+		i = encodeVarintRequiredexample(dAtA, i, uint64(*m.Field6))
 	}
 	if m.Field7 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field7")
 	} else {
-		data[i] = 0x38
+		dAtA[i] = 0x38
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+		i = encodeVarintRequiredexample(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
 	}
 	if m.Field8 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field8")
 	} else {
-		data[i] = 0x40
+		dAtA[i] = 0x40
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
+		i = encodeVarintRequiredexample(dAtA, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
 	}
 	if m.Field9 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field9")
 	} else {
-		data[i] = 0x4d
+		dAtA[i] = 0x4d
 		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field9))
+		i = encodeFixed32Requiredexample(dAtA, i, uint32(*m.Field9))
 	}
 	if m.Field10 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field10")
 	} else {
-		data[i] = 0x55
+		dAtA[i] = 0x55
 		i++
-		i = encodeFixed32Requiredexample(data, i, uint32(*m.Field10))
+		i = encodeFixed32Requiredexample(dAtA, i, uint32(*m.Field10))
 	}
 	if m.Field11 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field11")
 	} else {
-		data[i] = 0x59
+		dAtA[i] = 0x59
 		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field11))
+		i = encodeFixed64Requiredexample(dAtA, i, uint64(*m.Field11))
 	}
 	if m.Field12 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field12")
 	} else {
-		data[i] = 0x61
+		dAtA[i] = 0x61
 		i++
-		i = encodeFixed64Requiredexample(data, i, uint64(*m.Field12))
+		i = encodeFixed64Requiredexample(dAtA, i, uint64(*m.Field12))
 	}
 	if m.Field13 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field13")
 	} else {
-		data[i] = 0x68
+		dAtA[i] = 0x68
 		i++
 		if *m.Field13 {
-			data[i] = 1
+			dAtA[i] = 1
 		} else {
-			data[i] = 0
+			dAtA[i] = 0
 		}
 		i++
 	}
 	if m.Field14 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field14")
 	} else {
-		data[i] = 0x72
+		dAtA[i] = 0x72
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(*m.Field14)))
-		i += copy(data[i:], *m.Field14)
+		i = encodeVarintRequiredexample(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
 	}
 	if m.Field15 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("Field15")
 	} else {
-		data[i] = 0x7a
+		dAtA[i] = 0x7a
 		i++
-		i = encodeVarintRequiredexample(data, i, uint64(len(m.Field15)))
-		i += copy(data[i:], m.Field15)
+		i = encodeVarintRequiredexample(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func (m *NestedNinOptNative) Marshal() (data []byte, err error) {
+func (m *NestedNinOptNative) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *NestedNinOptNative) MarshalTo(data []byte) (int, error) {
+func (m *NestedNinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if len(m.NestedNinOpts) > 0 {
 		for _, msg := range m.NestedNinOpts {
-			data[i] = 0xa
+			dAtA[i] = 0xa
 			i++
-			i = encodeVarintRequiredexample(data, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(data[i:])
+			i = encodeVarintRequiredexample(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -638,36 +638,36 @@ func (m *NestedNinOptNative) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func encodeFixed64Requiredexample(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Requiredexample(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Requiredexample(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Requiredexample(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintRequiredexample(data []byte, offset int, v uint64) int {
+func encodeVarintRequiredexample(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func NewPopulatedRequiredExample(r randyRequiredexample, easy bool) *RequiredExample {
@@ -848,7 +848,7 @@ func randStringRequiredexample(r randyRequiredexample) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedRequiredexample(r randyRequiredexample, maxFieldNumber int) (data []byte) {
+func randUnrecognizedRequiredexample(r randyRequiredexample, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -856,43 +856,43 @@ func randUnrecognizedRequiredexample(r randyRequiredexample, maxFieldNumber int)
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldRequiredexample(data, r, fieldNumber, wire)
+		dAtA = randFieldRequiredexample(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldRequiredexample(data []byte, r randyRequiredexample, fieldNumber int, wire int) []byte {
+func randFieldRequiredexample(dAtA []byte, r randyRequiredexample, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
 		v22 := r.Int63()
 		if r.Intn(2) == 0 {
 			v22 *= -1
 		}
-		data = encodeVarintPopulateRequiredexample(data, uint64(v22))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(v22))
 	case 1:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateRequiredexample(data, uint64(ll))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateRequiredexample(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateRequiredexample(data []byte, v uint64) []byte {
+func encodeVarintPopulateRequiredexample(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *RequiredExample) Size() (n int) {
 	var l int
@@ -1029,9 +1029,9 @@ func sovRequiredexample(x uint64) (n int) {
 func sozRequiredexample(x uint64) (n int) {
 	return sovRequiredexample(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *RequiredExample) Unmarshal(data []byte) error {
+func (m *RequiredExample) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
-	l := len(data)
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1043,7 +1043,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1071,7 +1071,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1086,7 +1086,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.TheRequiredString = &s
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00000001)
@@ -1102,7 +1102,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1117,7 +1117,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.TheOptionalString = &s
 			iNdEx = postIndex
 		case 3:
@@ -1132,7 +1132,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1147,11 +1147,11 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.TheRepeatedStrings = append(m.TheRepeatedStrings, string(data[iNdEx:postIndex]))
+			m.TheRepeatedStrings = append(m.TheRepeatedStrings, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipRequiredexample(data[iNdEx:])
+			skippy, err := skipRequiredexample(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1161,7 +1161,7 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1174,9 +1174,9 @@ func (m *RequiredExample) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NidOptNative) Unmarshal(data []byte) error {
+func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
-	l := len(data)
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1188,7 +1188,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1213,14 +1213,14 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field1 = float64(math.Float64frombits(v))
 			hasFields[0] |= uint64(0x00000001)
 		case 2:
@@ -1232,10 +1232,10 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			v = uint32(data[iNdEx-4])
-			v |= uint32(data[iNdEx-3]) << 8
-			v |= uint32(data[iNdEx-2]) << 16
-			v |= uint32(data[iNdEx-1]) << 24
+			v = uint32(dAtA[iNdEx-4])
+			v |= uint32(dAtA[iNdEx-3]) << 8
+			v |= uint32(dAtA[iNdEx-2]) << 16
+			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field2 = float32(math.Float32frombits(v))
 			hasFields[0] |= uint64(0x00000002)
 		case 3:
@@ -1250,7 +1250,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field3 |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1270,7 +1270,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field4 |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1290,7 +1290,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field5 |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1310,7 +1310,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Field6 |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1330,7 +1330,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1352,7 +1352,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1371,10 +1371,10 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			m.Field9 = uint32(data[iNdEx-4])
-			m.Field9 |= uint32(data[iNdEx-3]) << 8
-			m.Field9 |= uint32(data[iNdEx-2]) << 16
-			m.Field9 |= uint32(data[iNdEx-1]) << 24
+			m.Field9 = uint32(dAtA[iNdEx-4])
+			m.Field9 |= uint32(dAtA[iNdEx-3]) << 8
+			m.Field9 |= uint32(dAtA[iNdEx-2]) << 16
+			m.Field9 |= uint32(dAtA[iNdEx-1]) << 24
 			hasFields[0] |= uint64(0x00000100)
 		case 10:
 			if wireType != 5 {
@@ -1385,10 +1385,10 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			m.Field10 = int32(data[iNdEx-4])
-			m.Field10 |= int32(data[iNdEx-3]) << 8
-			m.Field10 |= int32(data[iNdEx-2]) << 16
-			m.Field10 |= int32(data[iNdEx-1]) << 24
+			m.Field10 = int32(dAtA[iNdEx-4])
+			m.Field10 |= int32(dAtA[iNdEx-3]) << 8
+			m.Field10 |= int32(dAtA[iNdEx-2]) << 16
+			m.Field10 |= int32(dAtA[iNdEx-1]) << 24
 			hasFields[0] |= uint64(0x00000200)
 		case 11:
 			if wireType != 1 {
@@ -1399,14 +1399,14 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			m.Field11 = uint64(data[iNdEx-8])
-			m.Field11 |= uint64(data[iNdEx-7]) << 8
-			m.Field11 |= uint64(data[iNdEx-6]) << 16
-			m.Field11 |= uint64(data[iNdEx-5]) << 24
-			m.Field11 |= uint64(data[iNdEx-4]) << 32
-			m.Field11 |= uint64(data[iNdEx-3]) << 40
-			m.Field11 |= uint64(data[iNdEx-2]) << 48
-			m.Field11 |= uint64(data[iNdEx-1]) << 56
+			m.Field11 = uint64(dAtA[iNdEx-8])
+			m.Field11 |= uint64(dAtA[iNdEx-7]) << 8
+			m.Field11 |= uint64(dAtA[iNdEx-6]) << 16
+			m.Field11 |= uint64(dAtA[iNdEx-5]) << 24
+			m.Field11 |= uint64(dAtA[iNdEx-4]) << 32
+			m.Field11 |= uint64(dAtA[iNdEx-3]) << 40
+			m.Field11 |= uint64(dAtA[iNdEx-2]) << 48
+			m.Field11 |= uint64(dAtA[iNdEx-1]) << 56
 			hasFields[0] |= uint64(0x00000400)
 		case 12:
 			if wireType != 1 {
@@ -1417,14 +1417,14 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			m.Field12 = int64(data[iNdEx-8])
-			m.Field12 |= int64(data[iNdEx-7]) << 8
-			m.Field12 |= int64(data[iNdEx-6]) << 16
-			m.Field12 |= int64(data[iNdEx-5]) << 24
-			m.Field12 |= int64(data[iNdEx-4]) << 32
-			m.Field12 |= int64(data[iNdEx-3]) << 40
-			m.Field12 |= int64(data[iNdEx-2]) << 48
-			m.Field12 |= int64(data[iNdEx-1]) << 56
+			m.Field12 = int64(dAtA[iNdEx-8])
+			m.Field12 |= int64(dAtA[iNdEx-7]) << 8
+			m.Field12 |= int64(dAtA[iNdEx-6]) << 16
+			m.Field12 |= int64(dAtA[iNdEx-5]) << 24
+			m.Field12 |= int64(dAtA[iNdEx-4]) << 32
+			m.Field12 |= int64(dAtA[iNdEx-3]) << 40
+			m.Field12 |= int64(dAtA[iNdEx-2]) << 48
+			m.Field12 |= int64(dAtA[iNdEx-1]) << 56
 			hasFields[0] |= uint64(0x00000800)
 		case 13:
 			if wireType != 0 {
@@ -1438,7 +1438,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1459,7 +1459,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1474,7 +1474,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field14 = string(data[iNdEx:postIndex])
+			m.Field14 = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00002000)
 		case 15:
@@ -1489,7 +1489,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1503,7 +1503,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
@@ -1511,7 +1511,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			hasFields[0] |= uint64(0x00004000)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipRequiredexample(data[iNdEx:])
+			skippy, err := skipRequiredexample(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1521,7 +1521,7 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1576,9 +1576,9 @@ func (m *NidOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NinOptNative) Unmarshal(data []byte) error {
+func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
-	l := len(data)
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -1590,7 +1590,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -1615,14 +1615,14 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 			hasFields[0] |= uint64(0x00000001)
@@ -1635,10 +1635,10 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			v = uint32(data[iNdEx-4])
-			v |= uint32(data[iNdEx-3]) << 8
-			v |= uint32(data[iNdEx-2]) << 16
-			v |= uint32(data[iNdEx-1]) << 24
+			v = uint32(dAtA[iNdEx-4])
+			v |= uint32(dAtA[iNdEx-3]) << 8
+			v |= uint32(dAtA[iNdEx-2]) << 16
+			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 			hasFields[0] |= uint64(0x00000002)
@@ -1654,7 +1654,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1675,7 +1675,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1696,7 +1696,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1717,7 +1717,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1738,7 +1738,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1760,7 +1760,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1780,10 +1780,10 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			v = uint32(data[iNdEx-4])
-			v |= uint32(data[iNdEx-3]) << 8
-			v |= uint32(data[iNdEx-2]) << 16
-			v |= uint32(data[iNdEx-1]) << 24
+			v = uint32(dAtA[iNdEx-4])
+			v |= uint32(dAtA[iNdEx-3]) << 8
+			v |= uint32(dAtA[iNdEx-2]) << 16
+			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field9 = &v
 			hasFields[0] |= uint64(0x00000100)
 		case 10:
@@ -1795,10 +1795,10 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 4
-			v = int32(data[iNdEx-4])
-			v |= int32(data[iNdEx-3]) << 8
-			v |= int32(data[iNdEx-2]) << 16
-			v |= int32(data[iNdEx-1]) << 24
+			v = int32(dAtA[iNdEx-4])
+			v |= int32(dAtA[iNdEx-3]) << 8
+			v |= int32(dAtA[iNdEx-2]) << 16
+			v |= int32(dAtA[iNdEx-1]) << 24
 			m.Field10 = &v
 			hasFields[0] |= uint64(0x00000200)
 		case 11:
@@ -1810,14 +1810,14 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			v = uint64(data[iNdEx-8])
-			v |= uint64(data[iNdEx-7]) << 8
-			v |= uint64(data[iNdEx-6]) << 16
-			v |= uint64(data[iNdEx-5]) << 24
-			v |= uint64(data[iNdEx-4]) << 32
-			v |= uint64(data[iNdEx-3]) << 40
-			v |= uint64(data[iNdEx-2]) << 48
-			v |= uint64(data[iNdEx-1]) << 56
+			v = uint64(dAtA[iNdEx-8])
+			v |= uint64(dAtA[iNdEx-7]) << 8
+			v |= uint64(dAtA[iNdEx-6]) << 16
+			v |= uint64(dAtA[iNdEx-5]) << 24
+			v |= uint64(dAtA[iNdEx-4]) << 32
+			v |= uint64(dAtA[iNdEx-3]) << 40
+			v |= uint64(dAtA[iNdEx-2]) << 48
+			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field11 = &v
 			hasFields[0] |= uint64(0x00000400)
 		case 12:
@@ -1829,14 +1829,14 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			iNdEx += 8
-			v = int64(data[iNdEx-8])
-			v |= int64(data[iNdEx-7]) << 8
-			v |= int64(data[iNdEx-6]) << 16
-			v |= int64(data[iNdEx-5]) << 24
-			v |= int64(data[iNdEx-4]) << 32
-			v |= int64(data[iNdEx-3]) << 40
-			v |= int64(data[iNdEx-2]) << 48
-			v |= int64(data[iNdEx-1]) << 56
+			v = int64(dAtA[iNdEx-8])
+			v |= int64(dAtA[iNdEx-7]) << 8
+			v |= int64(dAtA[iNdEx-6]) << 16
+			v |= int64(dAtA[iNdEx-5]) << 24
+			v |= int64(dAtA[iNdEx-4]) << 32
+			v |= int64(dAtA[iNdEx-3]) << 40
+			v |= int64(dAtA[iNdEx-2]) << 48
+			v |= int64(dAtA[iNdEx-1]) << 56
 			m.Field12 = &v
 			hasFields[0] |= uint64(0x00000800)
 		case 13:
@@ -1851,7 +1851,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1873,7 +1873,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1888,7 +1888,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(data[iNdEx:postIndex])
+			s := string(dAtA[iNdEx:postIndex])
 			m.Field14 = &s
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00002000)
@@ -1904,7 +1904,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1918,7 +1918,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field15 = append(m.Field15[:0], data[iNdEx:postIndex]...)
+			m.Field15 = append(m.Field15[:0], dAtA[iNdEx:postIndex]...)
 			if m.Field15 == nil {
 				m.Field15 = []byte{}
 			}
@@ -1926,7 +1926,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			hasFields[0] |= uint64(0x00004000)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipRequiredexample(data[iNdEx:])
+			skippy, err := skipRequiredexample(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -1936,7 +1936,7 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1991,8 +1991,8 @@ func (m *NinOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func (m *NestedNinOptNative) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *NestedNinOptNative) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -2004,7 +2004,7 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -2032,7 +2032,7 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -2047,13 +2047,13 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.NestedNinOpts = append(m.NestedNinOpts, &NinOptNative{})
-			if err := m.NestedNinOpts[len(m.NestedNinOpts)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.NestedNinOpts[len(m.NestedNinOpts)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipRequiredexample(data[iNdEx:])
+			skippy, err := skipRequiredexample(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -2063,7 +2063,7 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2073,8 +2073,8 @@ func (m *NestedNinOptNative) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipRequiredexample(data []byte) (n int, err error) {
-	l := len(data)
+func skipRequiredexample(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -2085,7 +2085,7 @@ func skipRequiredexample(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -2103,7 +2103,7 @@ func skipRequiredexample(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -2120,7 +2120,7 @@ func skipRequiredexample(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -2143,7 +2143,7 @@ func skipRequiredexample(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -2154,7 +2154,7 @@ func skipRequiredexample(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipRequiredexample(data[start:])
+				next, err := skipRequiredexample(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}

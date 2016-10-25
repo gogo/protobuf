@@ -858,7 +858,7 @@ func randStringGroup(r randyGroup) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedGroup(r randyGroup, maxFieldNumber int) (data []byte) {
+func randUnrecognizedGroup(r randyGroup, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -866,43 +866,43 @@ func randUnrecognizedGroup(r randyGroup, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldGroup(data, r, fieldNumber, wire)
+		dAtA = randFieldGroup(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldGroup(data []byte, r randyGroup, fieldNumber int, wire int) []byte {
+func randFieldGroup(dAtA []byte, r randyGroup, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateGroup(data, uint64(key))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
 		v7 := r.Int63()
 		if r.Intn(2) == 0 {
 			v7 *= -1
 		}
-		data = encodeVarintPopulateGroup(data, uint64(v7))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(v7))
 	case 1:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateGroup(data, uint64(key))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateGroup(data, uint64(ll))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateGroup(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateGroup(data []byte, v uint64) []byte {
+func encodeVarintPopulateGroup(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (this *Groups1) String() string {
 	if this == nil {

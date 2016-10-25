@@ -75,8 +75,8 @@ The following message:
 
 given to the unmarshal plugin, will generate the following code:
 
-  func (m *B) Unmarshal(data []byte) error {
-	l := len(data)
+  func (m *B) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -84,7 +84,7 @@ given to the unmarshal plugin, will generate the following code:
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -103,7 +103,7 @@ given to the unmarshal plugin, will generate the following code:
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -114,7 +114,7 @@ given to the unmarshal plugin, will generate the following code:
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.A.Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.A.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -127,7 +127,7 @@ given to the unmarshal plugin, will generate the following code:
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -139,7 +139,7 @@ given to the unmarshal plugin, will generate the following code:
 				return io.ErrUnexpectedEOF
 			}
 			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
-			if err := m.G[len(m.G)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {
+			if err := m.G[len(m.G)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -153,14 +153,14 @@ given to the unmarshal plugin, will generate the following code:
 				}
 			}
 			iNdEx -= sizeOfWire
-			skippy, err := skip(data[iNdEx:])
+			skippy, err := skip(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -229,7 +229,7 @@ func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 	p.Out()
 	p.P(`}`)
-	p.P(`b := data[iNdEx]`)
+	p.P(`b := dAtA[iNdEx]`)
 	p.P(`iNdEx++`)
 	p.P(varName, ` |= (`, typName, `(b) & 0x7F) << shift`)
 	p.P(`if b < 0x80 {`)
@@ -248,10 +248,10 @@ func (p *unmarshal) decodeFixed32(varName string, typeName string) {
 	p.Out()
 	p.P(`}`)
 	p.P(`iNdEx += 4`)
-	p.P(varName, ` = `, typeName, `(data[iNdEx-4])`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-3]) << 8`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-2]) << 16`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-1]) << 24`)
+	p.P(varName, ` = `, typeName, `(dAtA[iNdEx-4])`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-3]) << 8`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-2]) << 16`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-1]) << 24`)
 }
 
 func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
@@ -260,7 +260,7 @@ func (p *unmarshal) unsafeFixed32(varName string, typeName string) {
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 	p.Out()
 	p.P(`}`)
-	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[iNdEx]))`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&dAtA[iNdEx]))`)
 	p.P(`iNdEx += 4`)
 }
 
@@ -271,14 +271,14 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.Out()
 	p.P(`}`)
 	p.P(`iNdEx += 8`)
-	p.P(varName, ` = `, typeName, `(data[iNdEx-8])`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-7]) << 8`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-6]) << 16`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-5]) << 24`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-4]) << 32`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-3]) << 40`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-2]) << 48`)
-	p.P(varName, ` |= `, typeName, `(data[iNdEx-1]) << 56`)
+	p.P(varName, ` = `, typeName, `(dAtA[iNdEx-8])`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-7]) << 8`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-6]) << 16`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-5]) << 24`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-4]) << 32`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-3]) << 40`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-2]) << 48`)
+	p.P(varName, ` |= `, typeName, `(dAtA[iNdEx-1]) << 56`)
 }
 
 func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
@@ -287,7 +287,7 @@ func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
 	p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 	p.Out()
 	p.P(`}`)
-	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&data[iNdEx]))`)
+	p.P(varName, ` = *(*`, typeName, `)(`, p.unsafePkg.Use(), `.Pointer(&dAtA[iNdEx]))`)
 	p.P(`iNdEx += 8`)
 }
 
@@ -337,7 +337,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.P(`}`)
 		cast, _ := p.GoType(nil, field)
 		cast = strings.Replace(cast, "*", "", 1)
-		p.P(varName, ` := `, cast, `(data[iNdEx:postStringIndex`, varName, `])`)
+		p.P(varName, ` := `, cast, `(dAtA[iNdEx:postStringIndex`, varName, `])`)
 		p.P(`iNdEx = postStringIndex`, varName)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		p.P(`var mapmsglen int`)
@@ -360,7 +360,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.P(`}`)
 		desc := p.ObjectNamed(field.GetTypeName())
 		msgname := p.TypeName(desc)
-		buf := `data[iNdEx:postmsgIndex]`
+		buf := `dAtA[iNdEx:postmsgIndex]`
 		if gogoproto.IsStdTime(field) {
 			p.P(varName, ` := new(time.Time)`)
 			p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(`, varName, `, `, buf, `); err != nil {`)
@@ -398,14 +398,14 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 			}
 			p.P(`var `, varName, `1 `, ctyp)
 			p.P(`var `, varName, ` = &`, varName, `1`)
-			p.P(`if err := `, varName, `.Unmarshal(data[iNdEx:postbytesIndex]); err != nil {`)
+			p.P(`if err := `, varName, `.Unmarshal(dAtA[iNdEx:postbytesIndex]); err != nil {`)
 			p.In()
 			p.P(`return err`)
 			p.Out()
 			p.P(`}`)
 		} else {
 			p.P(varName, ` := make([]byte, mapbyteLen)`)
-			p.P(`copy(`, varName, `, data[iNdEx:postbytesIndex])`)
+			p.P(`copy(`, varName, `, dAtA[iNdEx:postbytesIndex])`)
 		}
 		p.P(`iNdEx = postbytesIndex`)
 	case descriptor.FieldDescriptorProto_TYPE_UINT32:
@@ -666,13 +666,13 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(data[iNdEx:postIndex])}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(dAtA[iNdEx:postIndex])}`)
 		} else if repeated {
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(data[iNdEx:postIndex]))`)
+			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(dAtA[iNdEx:postIndex]))`)
 		} else if proto3 || !nullable {
-			p.P(`m.`, fieldname, ` = `, typ, `(data[iNdEx:postIndex])`)
+			p.P(`m.`, fieldname, ` = `, typ, `(dAtA[iNdEx:postIndex])`)
 		} else {
-			p.P(`s := `, typ, `(data[iNdEx:postIndex])`)
+			p.P(`s := `, typ, `(dAtA[iNdEx:postIndex])`)
 			p.P(`m.`, fieldname, ` = &s`)
 		}
 		p.P(`iNdEx = postIndex`)
@@ -695,7 +695,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		if oneof {
-			buf := `data[iNdEx:postIndex]`
+			buf := `dAtA[iNdEx:postIndex]`
 			if gogoproto.IsStdTime(field) {
 				if nullable {
 					p.P(`v := new(time.Time)`)
@@ -812,7 +812,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, msgname, `{})`)
 			}
 			varName := `m.` + fieldname + `[len(m.` + fieldname + `)-1]`
-			buf := `data[iNdEx:postIndex]`
+			buf := `dAtA[iNdEx:postIndex]`
 			if gogoproto.IsStdTime(field) {
 				if nullable {
 					p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(`, varName, `,`, buf, `); err != nil {`)
@@ -845,11 +845,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 			if gogoproto.IsStdTime(field) {
-				p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(m.`, fieldname, `, data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(m.`, fieldname, `, dAtA[iNdEx:postIndex]); err != nil {`)
 			} else if gogoproto.IsStdDuration(field) {
-				p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(m.`, fieldname, `, data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(m.`, fieldname, `, dAtA[iNdEx:postIndex]); err != nil {`)
 			} else {
-				p.P(`if err := m.`, fieldname, `.Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 			}
 			p.In()
 			p.P(`return err`)
@@ -857,11 +857,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`}`)
 		} else {
 			if gogoproto.IsStdTime(field) {
-				p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(&m.`, fieldname, `, data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := `, p.typesPkg.Use(), `.StdTimeUnmarshal(&m.`, fieldname, `, dAtA[iNdEx:postIndex]); err != nil {`)
 			} else if gogoproto.IsStdDuration(field) {
-				p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(&m.`, fieldname, `, data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(&m.`, fieldname, `, dAtA[iNdEx:postIndex]); err != nil {`)
 			} else {
-				p.P(`if err := m.`, fieldname, `.Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 			}
 			p.In()
 			p.P(`return err`)
@@ -886,13 +886,13 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if !gogoproto.IsCustomType(field) {
 			if oneof {
 				p.P(`v := make([]byte, postIndex-iNdEx)`)
-				p.P(`copy(v, data[iNdEx:postIndex])`)
+				p.P(`copy(v, dAtA[iNdEx:postIndex])`)
 				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
 			} else if repeated {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-iNdEx))`)
-				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], data[iNdEx:postIndex])`)
+				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], dAtA[iNdEx:postIndex])`)
 			} else {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `[:0] , data[iNdEx:postIndex]...)`)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `[:0] , dAtA[iNdEx:postIndex]...)`)
 				p.P(`if m.`, fieldname, ` == nil {`)
 				p.In()
 				p.P(`m.`, fieldname, ` = []byte{}`)
@@ -907,7 +907,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`var vv `, ctyp)
 				p.P(`v := &vv`)
-				p.P(`if err := v.Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 				p.In()
 				p.P(`return err`)
 				p.Out()
@@ -916,7 +916,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else if repeated {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-				p.P(`if err := m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 				p.In()
 				p.P(`return err`)
 				p.Out()
@@ -924,13 +924,13 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else if nullable {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = &v`)
-				p.P(`if err := m.`, fieldname, `.Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 				p.In()
 				p.P(`return err`)
 				p.Out()
 				p.P(`}`)
 			} else {
-				p.P(`if err := m.`, fieldname, `.Unmarshal(data[iNdEx:postIndex]); err != nil {`)
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
 				p.In()
 				p.P(`return err`)
 				p.Out()
@@ -1128,12 +1128,12 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		}
 		rfCount := len(rfMap)
 
-		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
+		p.P(`func (m *`, ccTypeName, `) Unmarshal(dAtA []byte) error {`)
 		p.In()
 		if rfCount > 0 {
 			p.P(`var hasFields [`, strconv.Itoa(1+(rfCount-1)/64), `]uint64`)
 		}
-		p.P(`l := len(data)`)
+		p.P(`l := len(dAtA)`)
 		p.P(`iNdEx := 0`)
 		p.P(`for iNdEx < l {`)
 		p.In()
@@ -1239,7 +1239,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 			p.P(`iNdEx-=sizeOfWire`)
-			p.P(`skippy, err := skip`, p.localName+`(data[iNdEx:])`)
+			p.P(`skippy, err := skip`, p.localName+`(dAtA[iNdEx:])`)
 			p.P(`if err != nil {`)
 			p.In()
 			p.P(`return err`)
@@ -1255,14 +1255,14 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 			p.Out()
 			p.P(`}`)
-			p.P(protoPkg.Use(), `.AppendExtension(m, int32(fieldNum), data[iNdEx:iNdEx+skippy])`)
+			p.P(protoPkg.Use(), `.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])`)
 			p.P(`iNdEx += skippy`)
 			p.Out()
 			p.P(`} else {`)
 			p.In()
 		}
 		p.P(`iNdEx=preIndex`)
-		p.P(`skippy, err := skip`, p.localName, `(data[iNdEx:])`)
+		p.P(`skippy, err := skip`, p.localName, `(dAtA[iNdEx:])`)
 		p.P(`if err != nil {`)
 		p.In()
 		p.P(`return err`)
@@ -1279,7 +1279,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
-			p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, data[iNdEx:iNdEx+skippy]...)`)
+			p.P(`m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)`)
 		}
 		p.P(`iNdEx += skippy`)
 		p.Out()
@@ -1326,8 +1326,8 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-	p.P(`func skip` + p.localName + `(data []byte) (n int, err error) {
-		l := len(data)
+	p.P(`func skip` + p.localName + `(dAtA []byte) (n int, err error) {
+		l := len(dAtA)
 		iNdEx := 0
 		for iNdEx < l {
 			var wire uint64
@@ -1338,7 +1338,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				if iNdEx >= l {
 					return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				wire |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -1356,7 +1356,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 						return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 					}
 					iNdEx++
-					if data[iNdEx-1] < 0x80 {
+					if dAtA[iNdEx-1] < 0x80 {
 						break
 					}
 				}
@@ -1373,7 +1373,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					if iNdEx >= l {
 						return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					length |= (int(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -1396,7 +1396,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 						if iNdEx >= l {
 							return 0, ` + p.ioPkg.Use() + `.ErrUnexpectedEOF
 						}
-						b := data[iNdEx]
+						b := dAtA[iNdEx]
 						iNdEx++
 						innerWire |= (uint64(b) & 0x7F) << shift
 						if b < 0x80 {
@@ -1407,7 +1407,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					if innerWireType == 4 {
 						break
 					}
-					next, err := skip` + p.localName + `(data[start:])
+					next, err := skip` + p.localName + `(dAtA[start:])
 					if err != nil {
 						return 0, err
 					}

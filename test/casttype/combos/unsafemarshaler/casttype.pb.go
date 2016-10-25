@@ -1081,7 +1081,7 @@ func randStringCasttype(r randyCasttype) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedCasttype(r randyCasttype, maxFieldNumber int) (data []byte) {
+func randUnrecognizedCasttype(r randyCasttype, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -1089,43 +1089,43 @@ func randUnrecognizedCasttype(r randyCasttype, maxFieldNumber int) (data []byte)
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldCasttype(data, r, fieldNumber, wire)
+		dAtA = randFieldCasttype(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldCasttype(data []byte, r randyCasttype, fieldNumber int, wire int) []byte {
+func randFieldCasttype(dAtA []byte, r randyCasttype, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
 		v16 := r.Int63()
 		if r.Intn(2) == 0 {
 			v16 *= -1
 		}
-		data = encodeVarintPopulateCasttype(data, uint64(v16))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(v16))
 	case 1:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateCasttype(data, uint64(ll))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateCasttype(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateCasttype(data []byte, v uint64) []byte {
+func encodeVarintPopulateCasttype(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Castaway) Size() (n int) {
 	var l int
@@ -1312,107 +1312,107 @@ func valueToStringCasttype(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *Castaway) Marshal() (data []byte, err error) {
+func (m *Castaway) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Castaway) MarshalTo(data []byte) (int, error) {
+func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Int32Ptr != nil {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintCasttype(data, i, uint64(*m.Int32Ptr))
+		i = encodeVarintCasttype(dAtA, i, uint64(*m.Int32Ptr))
 	}
-	data[i] = 0x10
+	dAtA[i] = 0x10
 	i++
-	i = encodeVarintCasttype(data, i, uint64(m.Int32))
+	i = encodeVarintCasttype(dAtA, i, uint64(m.Int32))
 	if m.MyUint64Ptr != nil {
-		data[i] = 0x18
+		dAtA[i] = 0x18
 		i++
-		i = encodeVarintCasttype(data, i, uint64(*m.MyUint64Ptr))
+		i = encodeVarintCasttype(dAtA, i, uint64(*m.MyUint64Ptr))
 	}
-	data[i] = 0x20
+	dAtA[i] = 0x20
 	i++
-	i = encodeVarintCasttype(data, i, uint64(m.MyUint64))
+	i = encodeVarintCasttype(dAtA, i, uint64(m.MyUint64))
 	if m.MyFloat32Ptr != nil {
-		data[i] = 0x2d
+		dAtA[i] = 0x2d
 		i++
-		i = encodeFixed32Casttype(data, i, uint32(math.Float32bits(float32(*m.MyFloat32Ptr))))
+		i = encodeFixed32Casttype(dAtA, i, uint32(math.Float32bits(float32(*m.MyFloat32Ptr))))
 	}
-	data[i] = 0x35
+	dAtA[i] = 0x35
 	i++
-	i = encodeFixed32Casttype(data, i, uint32(math.Float32bits(float32(m.MyFloat32))))
+	i = encodeFixed32Casttype(dAtA, i, uint32(math.Float32bits(float32(m.MyFloat32))))
 	if m.MyFloat64Ptr != nil {
-		data[i] = 0x39
+		dAtA[i] = 0x39
 		i++
-		i = encodeFixed64Casttype(data, i, uint64(math.Float64bits(float64(*m.MyFloat64Ptr))))
+		i = encodeFixed64Casttype(dAtA, i, uint64(math.Float64bits(float64(*m.MyFloat64Ptr))))
 	}
-	data[i] = 0x41
+	dAtA[i] = 0x41
 	i++
-	i = encodeFixed64Casttype(data, i, uint64(math.Float64bits(float64(m.MyFloat64))))
+	i = encodeFixed64Casttype(dAtA, i, uint64(math.Float64bits(float64(m.MyFloat64))))
 	if m.MyBytes != nil {
-		data[i] = 0x4a
+		dAtA[i] = 0x4a
 		i++
-		i = encodeVarintCasttype(data, i, uint64(len(m.MyBytes)))
-		i += copy(data[i:], m.MyBytes)
+		i = encodeVarintCasttype(dAtA, i, uint64(len(m.MyBytes)))
+		i += copy(dAtA[i:], m.MyBytes)
 	}
 	if m.NormalBytes != nil {
-		data[i] = 0x52
+		dAtA[i] = 0x52
 		i++
-		i = encodeVarintCasttype(data, i, uint64(len(m.NormalBytes)))
-		i += copy(data[i:], m.NormalBytes)
+		i = encodeVarintCasttype(dAtA, i, uint64(len(m.NormalBytes)))
+		i += copy(dAtA[i:], m.NormalBytes)
 	}
 	if len(m.MyUint64S) > 0 {
 		for _, num := range m.MyUint64S {
-			data[i] = 0x58
+			dAtA[i] = 0x58
 			i++
-			i = encodeVarintCasttype(data, i, uint64(num))
+			i = encodeVarintCasttype(dAtA, i, uint64(num))
 		}
 	}
 	if len(m.MyMap) > 0 {
 		for k := range m.MyMap {
-			data[i] = 0x62
+			dAtA[i] = 0x62
 			i++
 			v := m.MyMap[k]
 			mapSize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
-			i = encodeVarintCasttype(data, i, uint64(mapSize))
-			data[i] = 0xa
+			i = encodeVarintCasttype(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
 			i++
-			i = encodeVarintCasttype(data, i, uint64(len(k)))
-			i += copy(data[i:], k)
-			data[i] = 0x10
+			i = encodeVarintCasttype(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x10
 			i++
-			i = encodeVarintCasttype(data, i, uint64(v))
+			i = encodeVarintCasttype(dAtA, i, uint64(v))
 		}
 	}
 	if len(m.MyCustomMap) > 0 {
 		for k := range m.MyCustomMap {
-			data[i] = 0x6a
+			dAtA[i] = 0x6a
 			i++
 			v := m.MyCustomMap[k]
 			mapSize := 1 + len(k) + sovCasttype(uint64(len(k))) + 1 + sovCasttype(uint64(v))
-			i = encodeVarintCasttype(data, i, uint64(mapSize))
-			data[i] = 0xa
+			i = encodeVarintCasttype(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
 			i++
-			i = encodeVarintCasttype(data, i, uint64(len(k)))
-			i += copy(data[i:], k)
-			data[i] = 0x10
+			i = encodeVarintCasttype(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x10
 			i++
-			i = encodeVarintCasttype(data, i, uint64(v))
+			i = encodeVarintCasttype(dAtA, i, uint64(v))
 		}
 	}
 	if len(m.MyNullableMap) > 0 {
 		for k := range m.MyNullableMap {
-			data[i] = 0x72
+			dAtA[i] = 0x72
 			i++
 			v := m.MyNullableMap[k]
 			msgSize := 0
@@ -1421,15 +1421,15 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 				msgSize += 1 + sovCasttype(uint64(msgSize))
 			}
 			mapSize := 1 + sovCasttype(uint64(k)) + msgSize
-			i = encodeVarintCasttype(data, i, uint64(mapSize))
-			data[i] = 0x8
+			i = encodeVarintCasttype(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
 			i++
-			i = encodeVarintCasttype(data, i, uint64(k))
+			i = encodeVarintCasttype(dAtA, i, uint64(k))
 			if v != nil {
-				data[i] = 0x12
+				dAtA[i] = 0x12
 				i++
-				i = encodeVarintCasttype(data, i, uint64(v.Size()))
-				n1, err := v.MarshalTo(data[i:])
+				i = encodeVarintCasttype(dAtA, i, uint64(v.Size()))
+				n1, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -1439,7 +1439,7 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 	}
 	if len(m.MyEmbeddedMap) > 0 {
 		for k := range m.MyEmbeddedMap {
-			data[i] = 0x7a
+			dAtA[i] = 0x7a
 			i++
 			v := m.MyEmbeddedMap[k]
 			msgSize := 0
@@ -1448,14 +1448,14 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 				msgSize += 1 + sovCasttype(uint64(msgSize))
 			}
 			mapSize := 1 + sovCasttype(uint64(k)) + msgSize
-			i = encodeVarintCasttype(data, i, uint64(mapSize))
-			data[i] = 0x8
+			i = encodeVarintCasttype(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
 			i++
-			i = encodeVarintCasttype(data, i, uint64(k))
-			data[i] = 0x12
+			i = encodeVarintCasttype(dAtA, i, uint64(k))
+			dAtA[i] = 0x12
 			i++
-			i = encodeVarintCasttype(data, i, uint64((&v).Size()))
-			n2, err := (&v).MarshalTo(data[i:])
+			i = encodeVarintCasttype(dAtA, i, uint64((&v).Size()))
+			n2, err := (&v).MarshalTo(dAtA[i:])
 			if err != nil {
 				return 0, err
 			}
@@ -1463,62 +1463,62 @@ func (m *Castaway) MarshalTo(data []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func (m *Wilson) Marshal() (data []byte, err error) {
+func (m *Wilson) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Wilson) MarshalTo(data []byte) (int, error) {
+func (m *Wilson) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Int64 != nil {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintCasttype(data, i, uint64(*m.Int64))
+		i = encodeVarintCasttype(dAtA, i, uint64(*m.Int64))
 	}
 	if m.XXX_unrecognized != nil {
-		i += copy(data[i:], m.XXX_unrecognized)
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
 
-func encodeFixed64Casttype(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Casttype(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Casttype(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Casttype(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintCasttype(data []byte, offset int, v uint64) int {
+func encodeVarintCasttype(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 

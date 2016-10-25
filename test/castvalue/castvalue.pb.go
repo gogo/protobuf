@@ -688,7 +688,7 @@ func randStringCastvalue(r randyCastvalue) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedCastvalue(r randyCastvalue, maxFieldNumber int) (data []byte) {
+func randUnrecognizedCastvalue(r randyCastvalue, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -696,43 +696,43 @@ func randUnrecognizedCastvalue(r randyCastvalue, maxFieldNumber int) (data []byt
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldCastvalue(data, r, fieldNumber, wire)
+		dAtA = randFieldCastvalue(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldCastvalue(data []byte, r randyCastvalue, fieldNumber int, wire int) []byte {
+func randFieldCastvalue(dAtA []byte, r randyCastvalue, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateCastvalue(data, uint64(key))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
 		v5 := r.Int63()
 		if r.Intn(2) == 0 {
 			v5 *= -1
 		}
-		data = encodeVarintPopulateCastvalue(data, uint64(v5))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(v5))
 	case 1:
-		data = encodeVarintPopulateCastvalue(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateCastvalue(data, uint64(key))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateCastvalue(data, uint64(ll))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateCastvalue(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateCastvalue(data []byte, v uint64) []byte {
+func encodeVarintPopulateCastvalue(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Castaway) Size() (n int) {
 	var l int

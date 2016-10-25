@@ -3615,7 +3615,7 @@ func randStringTheproto3(r randyTheproto3) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedTheproto3(r randyTheproto3, maxFieldNumber int) (data []byte) {
+func randUnrecognizedTheproto3(r randyTheproto3, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -3623,43 +3623,43 @@ func randUnrecognizedTheproto3(r randyTheproto3, maxFieldNumber int) (data []byt
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldTheproto3(data, r, fieldNumber, wire)
+		dAtA = randFieldTheproto3(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldTheproto3(data []byte, r randyTheproto3, fieldNumber int, wire int) []byte {
+func randFieldTheproto3(dAtA []byte, r randyTheproto3, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(key))
 		v78 := r.Int63()
 		if r.Intn(2) == 0 {
 			v78 *= -1
 		}
-		data = encodeVarintPopulateTheproto3(data, uint64(v78))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(v78))
 	case 1:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateTheproto3(data, uint64(ll))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateTheproto3(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateTheproto3(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateTheproto3(data []byte, v uint64) []byte {
+func encodeVarintPopulateTheproto3(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Message) Size() (n int) {
 	var l int
