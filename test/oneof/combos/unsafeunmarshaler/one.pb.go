@@ -24,10 +24,11 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 import github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 
+import bytes "bytes"
+
 import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import compress_gzip "compress/gzip"
-import bytes "bytes"
 import io_ioutil "io/ioutil"
 
 import strings "strings"
@@ -89,6 +90,7 @@ type isAllTypesOneOf_TestOneof interface {
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	Size() int
+	Compare(interface{}) int
 }
 
 type AllTypesOneOf_Field1 struct {
@@ -570,12 +572,14 @@ type isTwoOneofs_One interface {
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	Size() int
+	Compare(interface{}) int
 }
 type isTwoOneofs_Two interface {
 	isTwoOneofs_Two()
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	Size() int
+	Compare(interface{}) int
 }
 
 type TwoOneofs_Field1 struct {
@@ -817,6 +821,7 @@ type isCustomOneof_Custom interface {
 	Equal(interface{}) bool
 	VerboseEqual(interface{}) error
 	Size() int
+	Compare(interface{}) int
 }
 
 type CustomOneof_Stringy struct {
@@ -974,6 +979,1017 @@ func init() {
 	proto.RegisterType((*AllTypesOneOf)(nil), "one.AllTypesOneOf")
 	proto.RegisterType((*TwoOneofs)(nil), "one.TwoOneofs")
 	proto.RegisterType((*CustomOneof)(nil), "one.CustomOneof")
+}
+func (this *Subby) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Subby)
+	if !ok {
+		that2, ok := that.(Subby)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Sub != nil && that1.Sub != nil {
+		if *this.Sub != *that1.Sub {
+			if *this.Sub < *that1.Sub {
+				return -1
+			}
+			return 1
+		}
+	} else if this.Sub != nil {
+		return 1
+	} else if that1.Sub != nil {
+		return -1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AllTypesOneOf) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.TestOneof == nil {
+		if this.TestOneof != nil {
+			return 1
+		}
+	} else if this.TestOneof == nil {
+		return -1
+	} else if c := this.TestOneof.Compare(that1.TestOneof); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field1) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field1)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != that1.Field1 {
+		if this.Field1 < that1.Field1 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field2) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field2)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field2 != that1.Field2 {
+		if this.Field2 < that1.Field2 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field3) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field3)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field3 != that1.Field3 {
+		if this.Field3 < that1.Field3 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field4) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field4)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field4)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field4 != that1.Field4 {
+		if this.Field4 < that1.Field4 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field5) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field5)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field5)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field5 != that1.Field5 {
+		if this.Field5 < that1.Field5 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field6) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field6)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field6)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field6 != that1.Field6 {
+		if this.Field6 < that1.Field6 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field7) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field7)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field7)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field7 != that1.Field7 {
+		if this.Field7 < that1.Field7 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field8) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field8)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field8)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field8 != that1.Field8 {
+		if this.Field8 < that1.Field8 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field9) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field9)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field9)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field9 != that1.Field9 {
+		if this.Field9 < that1.Field9 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field10) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field10)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field10)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field10 != that1.Field10 {
+		if this.Field10 < that1.Field10 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field11) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field11)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field11)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field11 != that1.Field11 {
+		if this.Field11 < that1.Field11 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field12) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field12)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field12)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field12 != that1.Field12 {
+		if this.Field12 < that1.Field12 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field13) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field13)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field13)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field13 != that1.Field13 {
+		if !this.Field13 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field14) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field14)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field14)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field14 != that1.Field14 {
+		if this.Field14 < that1.Field14 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *AllTypesOneOf_Field15) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_Field15)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_Field15)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *AllTypesOneOf_SubMessage) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*AllTypesOneOf_SubMessage)
+	if !ok {
+		that2, ok := that.(AllTypesOneOf_SubMessage)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.SubMessage.Compare(that1.SubMessage); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *TwoOneofs) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs)
+	if !ok {
+		that2, ok := that.(TwoOneofs)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.One == nil {
+		if this.One != nil {
+			return 1
+		}
+	} else if this.One == nil {
+		return -1
+	} else if c := this.One.Compare(that1.One); c != 0 {
+		return c
+	}
+	if that1.Two == nil {
+		if this.Two != nil {
+			return 1
+		}
+	} else if this.Two == nil {
+		return -1
+	} else if c := this.Two.Compare(that1.Two); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *TwoOneofs_Field1) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_Field1)
+	if !ok {
+		that2, ok := that.(TwoOneofs_Field1)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field1 != that1.Field1 {
+		if this.Field1 < that1.Field1 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *TwoOneofs_Field2) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_Field2)
+	if !ok {
+		that2, ok := that.(TwoOneofs_Field2)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field2 != that1.Field2 {
+		if this.Field2 < that1.Field2 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *TwoOneofs_Field3) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_Field3)
+	if !ok {
+		that2, ok := that.(TwoOneofs_Field3)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field3 != that1.Field3 {
+		if this.Field3 < that1.Field3 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *TwoOneofs_Field34) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_Field34)
+	if !ok {
+		that2, ok := that.(TwoOneofs_Field34)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Field34 != that1.Field34 {
+		if this.Field34 < that1.Field34 {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *TwoOneofs_Field35) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_Field35)
+	if !ok {
+		that2, ok := that.(TwoOneofs_Field35)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := bytes.Compare(this.Field35, that1.Field35); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *TwoOneofs_SubMessage2) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*TwoOneofs_SubMessage2)
+	if !ok {
+		that2, ok := that.(TwoOneofs_SubMessage2)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.SubMessage2.Compare(that1.SubMessage2); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomOneof) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomOneof)
+	if !ok {
+		that2, ok := that.(CustomOneof)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if that1.Custom == nil {
+		if this.Custom != nil {
+			return 1
+		}
+	} else if this.Custom == nil {
+		return -1
+	} else if c := this.Custom.Compare(that1.Custom); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomOneof_Stringy) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomOneof_Stringy)
+	if !ok {
+		that2, ok := that.(CustomOneof_Stringy)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Stringy != that1.Stringy {
+		if this.Stringy < that1.Stringy {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *CustomOneof_CustomType) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomOneof_CustomType)
+	if !ok {
+		that2, ok := that.(CustomOneof_CustomType)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if c := this.CustomType.Compare(that1.CustomType); c != 0 {
+		return c
+	}
+	return 0
+}
+func (this *CustomOneof_CastType) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomOneof_CastType)
+	if !ok {
+		that2, ok := that.(CustomOneof_CastType)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.CastType != that1.CastType {
+		if this.CastType < that1.CastType {
+			return -1
+		}
+		return 1
+	}
+	return 0
+}
+func (this *CustomOneof_MyCustomName) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*CustomOneof_MyCustomName)
+	if !ok {
+		that2, ok := that.(CustomOneof_MyCustomName)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.MyCustomName != that1.MyCustomName {
+		if this.MyCustomName < that1.MyCustomName {
+			return -1
+		}
+		return 1
+	}
+	return 0
 }
 func (this *Subby) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
