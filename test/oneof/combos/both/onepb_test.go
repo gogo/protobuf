@@ -596,7 +596,6 @@ func TestCustomOneofCompare(t *testing.T) {
 		t.Errorf("p2 = %#v", p2)
 	}
 }
-
 func TestOneDescription(t *testing.T) {
 	OneDescription()
 }
