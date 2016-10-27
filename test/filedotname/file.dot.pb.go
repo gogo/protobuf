@@ -437,7 +437,7 @@ func extensionToGoStringFileDot(m github_com_gogo_protobuf_proto.Message) string
 func NewPopulatedM(r randyFileDot, easy bool) *M {
 	this := &M{}
 	if r.Intn(10) != 0 {
-		v1 := randStringFileDot(r)
+		v1 := string(randStringFileDot(r))
 		this.A = &v1
 	}
 	if !easy && r.Intn(10) != 0 {

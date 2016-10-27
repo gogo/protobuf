@@ -871,7 +871,7 @@ func NewPopulatedBoolValue(r randyWrappers, easy bool) *BoolValue {
 
 func NewPopulatedStringValue(r randyWrappers, easy bool) *StringValue {
 	this := &StringValue{}
-	this.Value = randStringWrappers(r)
+	this.Value = string(randStringWrappers(r))
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this

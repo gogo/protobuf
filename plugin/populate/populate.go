@@ -387,7 +387,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(`}`)
 			}
 		} else if field.IsString() {
-			val := fmt.Sprintf("randString%v(r)", p.localName)
+			typName := generator.GoTypeToName(goTyp)
+			val := fmt.Sprintf("%s(randString%v(r))", typName, p.localName)
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)

@@ -385,7 +385,7 @@ func NewPopulatedFieldMask(r randyFieldMask, easy bool) *FieldMask {
 	v1 := r.Intn(10)
 	this.Paths = make([]string, v1)
 	for i := 0; i < v1; i++ {
-		this.Paths[i] = randStringFieldMask(r)
+		this.Paths[i] = string(randStringFieldMask(r))
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
