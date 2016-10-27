@@ -273,7 +273,7 @@ func encodeVarintAny(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedAny(r randyAny, easy bool) *Any {
 	this := &Any{}
-	this.TypeUrl = randStringAny(r)
+	this.TypeUrl = string(randStringAny(r))
 	v1 := r.Intn(100)
 	this.Value = make([]byte, v1)
 	for i := 0; i < v1; i++ {

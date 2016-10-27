@@ -93,49 +93,49 @@ type isAllTypesOneOf_TestOneof interface {
 }
 
 type AllTypesOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
 }
 type AllTypesOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
 }
 type AllTypesOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,json=field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
 }
 type AllTypesOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt,name=Field4,json=field4,oneof"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4,oneof"`
 }
 type AllTypesOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,json=field5,oneof"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,oneof"`
 }
 type AllTypesOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,json=field6,oneof"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,oneof"`
 }
 type AllTypesOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,json=field7,oneof"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,oneof"`
 }
 type AllTypesOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,json=field8,oneof"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,oneof"`
 }
 type AllTypesOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,json=field9,oneof"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,oneof"`
 }
 type AllTypesOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,json=field10,oneof"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,oneof"`
 }
 type AllTypesOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,json=field11,oneof"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,oneof"`
 }
 type AllTypesOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,json=field12,oneof"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,oneof"`
 }
 type AllTypesOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt,name=Field13,json=field13,oneof"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13,oneof"`
 }
 type AllTypesOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt,name=Field14,json=field14,oneof"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14,oneof"`
 }
 type AllTypesOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,json=field15,oneof"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,oneof"`
 }
 type AllTypesOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof"`
@@ -582,19 +582,19 @@ type isTwoOneofs_Two interface {
 }
 
 type TwoOneofs_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
 }
 type TwoOneofs_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
 }
 type TwoOneofs_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,json=field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
 }
 type TwoOneofs_Field34 struct {
-	Field34 string `protobuf:"bytes,34,opt,name=Field34,json=field34,oneof"`
+	Field34 string `protobuf:"bytes,34,opt,name=Field34,oneof"`
 }
 type TwoOneofs_Field35 struct {
-	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,json=field35,oneof"`
+	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,oneof"`
 }
 type TwoOneofs_SubMessage2 struct {
 	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2,json=subMessage2,oneof"`
@@ -824,16 +824,16 @@ type isCustomOneof_Custom interface {
 }
 
 type CustomOneof_Stringy struct {
-	Stringy string `protobuf:"bytes,34,opt,name=Stringy,json=stringy,oneof"`
+	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof"`
 }
 type CustomOneof_CustomType struct {
-	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,json=customType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
+	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
 }
 type CustomOneof_CastType struct {
-	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,json=castType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
+	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
 }
 type CustomOneof_MyCustomName struct {
-	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,json=customName,oneof"`
+	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof"`
 }
 
 func (*CustomOneof_Stringy) isCustomOneof_Custom()      {}
@@ -4453,7 +4453,7 @@ func extensionToGoStringOne(m github_com_gogo_protobuf_proto.Message) string {
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
 	if r.Intn(10) != 0 {
-		v1 := randStringOne(r)
+		v1 := string(randStringOne(r))
 		this.Sub = &v1
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -4596,7 +4596,7 @@ func NewPopulatedAllTypesOneOf_Field13(r randyOne, easy bool) *AllTypesOneOf_Fie
 }
 func NewPopulatedAllTypesOneOf_Field14(r randyOne, easy bool) *AllTypesOneOf_Field14 {
 	this := &AllTypesOneOf_Field14{}
-	this.Field14 = randStringOne(r)
+	this.Field14 = string(randStringOne(r))
 	return this
 }
 func NewPopulatedAllTypesOneOf_Field15(r randyOne, easy bool) *AllTypesOneOf_Field15 {
@@ -4665,7 +4665,7 @@ func NewPopulatedTwoOneofs_Field3(r randyOne, easy bool) *TwoOneofs_Field3 {
 }
 func NewPopulatedTwoOneofs_Field34(r randyOne, easy bool) *TwoOneofs_Field34 {
 	this := &TwoOneofs_Field34{}
-	this.Field34 = randStringOne(r)
+	this.Field34 = string(randStringOne(r))
 	return this
 }
 func NewPopulatedTwoOneofs_Field35(r randyOne, easy bool) *TwoOneofs_Field35 {
@@ -4703,7 +4703,7 @@ func NewPopulatedCustomOneof(r randyOne, easy bool) *CustomOneof {
 
 func NewPopulatedCustomOneof_Stringy(r randyOne, easy bool) *CustomOneof_Stringy {
 	this := &CustomOneof_Stringy{}
-	this.Stringy = randStringOne(r)
+	this.Stringy = string(randStringOne(r))
 	return this
 }
 func NewPopulatedCustomOneof_CustomType(r randyOne, easy bool) *CustomOneof_CustomType {

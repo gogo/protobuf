@@ -87,49 +87,49 @@ type isSampleOneOf_TestOneof interface {
 }
 
 type SampleOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,json=field1,proto3,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,proto3,oneof"`
 }
 type SampleOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,json=field2,proto3,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,proto3,oneof"`
 }
 type SampleOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,json=field3,proto3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,proto3,oneof"`
 }
 type SampleOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt,name=Field4,json=field4,proto3,oneof"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4,proto3,oneof"`
 }
 type SampleOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,json=field5,proto3,oneof"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,proto3,oneof"`
 }
 type SampleOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,json=field6,proto3,oneof"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,proto3,oneof"`
 }
 type SampleOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,json=field7,proto3,oneof"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,proto3,oneof"`
 }
 type SampleOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,json=field8,proto3,oneof"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,proto3,oneof"`
 }
 type SampleOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,json=field9,proto3,oneof"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,proto3,oneof"`
 }
 type SampleOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,json=field10,proto3,oneof"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,proto3,oneof"`
 }
 type SampleOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,json=field11,proto3,oneof"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,proto3,oneof"`
 }
 type SampleOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,json=field12,proto3,oneof"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,proto3,oneof"`
 }
 type SampleOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt,name=Field13,json=field13,proto3,oneof"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13,proto3,oneof"`
 }
 type SampleOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt,name=Field14,json=field14,proto3,oneof"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14,proto3,oneof"`
 }
 type SampleOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,json=field15,proto3,oneof"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,proto3,oneof"`
 }
 type SampleOneOf_SubMessage struct {
 	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof"`
@@ -2869,7 +2869,7 @@ func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
-	this.Sub = randStringOne(r)
+	this.Sub = string(randStringOne(r))
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -3008,7 +3008,7 @@ func NewPopulatedSampleOneOf_Field13(r randyOne, easy bool) *SampleOneOf_Field13
 }
 func NewPopulatedSampleOneOf_Field14(r randyOne, easy bool) *SampleOneOf_Field14 {
 	this := &SampleOneOf_Field14{}
-	this.Field14 = randStringOne(r)
+	this.Field14 = string(randStringOne(r))
 	return this
 }
 func NewPopulatedSampleOneOf_Field15(r randyOne, easy bool) *SampleOneOf_Field15 {

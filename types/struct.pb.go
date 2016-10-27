@@ -1007,7 +1007,7 @@ func NewPopulatedValue_NumberValue(r randyStruct, easy bool) *Value_NumberValue 
 }
 func NewPopulatedValue_StringValue(r randyStruct, easy bool) *Value_StringValue {
 	this := &Value_StringValue{}
-	this.StringValue = randStringStruct(r)
+	this.StringValue = string(randStringStruct(r))
 	return this
 }
 func NewPopulatedValue_BoolValue(r randyStruct, easy bool) *Value_BoolValue {
