@@ -32,44 +32,43 @@
 package proto_test
 
 import (
-	"strconv"
 	"testing"
 
 	"github.com/gogo/protobuf/proto"
 	tpb "github.com/gogo/protobuf/proto/proto3_proto"
-	"github.com/gogo/protobuf/types"
 )
 
 var (
 	blackhole []byte
 )
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkAny creates increasingly large arbitrary Any messages.  The type is always the
 // same.
-func BenchmarkAny(b *testing.B) {
-	data := make([]byte, 1<<20)
-	quantum := 1 << 10
-	for i := uint(0); i <= 10; i++ {
-		b.Run(strconv.Itoa(quantum<<i), func(b *testing.B) {
-			for k := 0; k < b.N; k++ {
-				inner := &tpb.Message{
-					Data: data[:quantum<<i],
-				}
-				outer, err := types.MarshalAny(inner)
-				if err != nil {
-					b.Error("wrong encode", err)
-				}
-				raw, err := proto.Marshal(&tpb.Message{
-					Anything: outer,
-				})
-				if err != nil {
-					b.Error("wrong encode", err)
-				}
-				blackhole = raw
-			}
-		})
-	}
-}
+// func BenchmarkAny(b *testing.B) {
+// 	data := make([]byte, 1<<20)
+// 	quantum := 1 << 10
+// 	for i := uint(0); i <= 10; i++ {
+// 		b.Run(strconv.Itoa(quantum<<i), func(b *testing.B) {
+// 			for k := 0; k < b.N; k++ {
+// 				inner := &tpb.Message{
+// 					Data: data[:quantum<<i],
+// 				}
+// 				outer, err := types.MarshalAny(inner)
+// 				if err != nil {
+// 					b.Error("wrong encode", err)
+// 				}
+// 				raw, err := proto.Marshal(&tpb.Message{
+// 					Anything: outer,
+// 				})
+// 				if err != nil {
+// 					b.Error("wrong encode", err)
+// 				}
+// 				blackhole = raw
+// 			}
+// 		})
+// 	}
+// }
 
 // BenchmarkEmpy measures the overhead of doing the minimal possible encode.
 func BenchmarkEmpy(b *testing.B) {
