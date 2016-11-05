@@ -32,7 +32,6 @@
 package proto_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/gogo/protobuf/proto"
@@ -44,137 +43,142 @@ var (
 	msgBlackhole   = new(tpb.Message)
 )
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkVarint32ArraySmall shows the performance on an array of small int32 fields (1 and
 // 2 bytes long).
-func BenchmarkVarint32ArraySmall(b *testing.B) {
-	for i := uint(1); i <= 10; i++ {
-		dist := genInt32Dist([7]int{0, 3, 1}, 1<<i)
-		raw, err := proto.Marshal(&tpb.Message{
-			ShortKey: dist,
-		})
-		if err != nil {
-			b.Error("wrong encode", err)
-		}
-		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
-			scratchBuf := proto.NewBuffer(nil)
-			b.ResetTimer()
-			for k := 0; k < b.N; k++ {
-				scratchBuf.SetBuf(raw)
-				msgBlackhole.Reset()
-				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
-					b.Error("wrong decode", err)
-				}
-			}
-		})
-	}
-}
+// func BenchmarkVarint32ArraySmall(b *testing.B) {
+// 	for i := uint(1); i <= 10; i++ {
+// 		dist := genInt32Dist([7]int{0, 3, 1}, 1<<i)
+// 		raw, err := proto.Marshal(&tpb.Message{
+// 			ShortKey: dist,
+// 		})
+// 		if err != nil {
+// 			b.Error("wrong encode", err)
+// 		}
+// 		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
+// 			scratchBuf := proto.NewBuffer(nil)
+// 			b.ResetTimer()
+// 			for k := 0; k < b.N; k++ {
+// 				scratchBuf.SetBuf(raw)
+// 				msgBlackhole.Reset()
+// 				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
+// 					b.Error("wrong decode", err)
+// 				}
+// 			}
+// 		})
+// 	}
+// }
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkVarint32ArrayLarge shows the performance on an array of large int32 fields (3 and
 // 4 bytes long, with a small number of 1, 2, 5 and 10 byte long versions).
-func BenchmarkVarint32ArrayLarge(b *testing.B) {
-	for i := uint(1); i <= 10; i++ {
-		dist := genInt32Dist([7]int{0, 1, 2, 4, 8, 1, 1}, 1<<i)
-		raw, err := proto.Marshal(&tpb.Message{
-			ShortKey: dist,
-		})
-		if err != nil {
-			b.Error("wrong encode", err)
-		}
-		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
-			scratchBuf := proto.NewBuffer(nil)
-			b.ResetTimer()
-			for k := 0; k < b.N; k++ {
-				scratchBuf.SetBuf(raw)
-				msgBlackhole.Reset()
-				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
-					b.Error("wrong decode", err)
-				}
-			}
-		})
-	}
-}
+// func BenchmarkVarint32ArrayLarge(b *testing.B) {
+// 	for i := uint(1); i <= 10; i++ {
+// 		dist := genInt32Dist([7]int{0, 1, 2, 4, 8, 1, 1}, 1<<i)
+// 		raw, err := proto.Marshal(&tpb.Message{
+// 			ShortKey: dist,
+// 		})
+// 		if err != nil {
+// 			b.Error("wrong encode", err)
+// 		}
+// 		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
+// 			scratchBuf := proto.NewBuffer(nil)
+// 			b.ResetTimer()
+// 			for k := 0; k < b.N; k++ {
+// 				scratchBuf.SetBuf(raw)
+// 				msgBlackhole.Reset()
+// 				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
+// 					b.Error("wrong decode", err)
+// 				}
+// 			}
+// 		})
+// 	}
+// }
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkVarint64ArraySmall shows the performance on an array of small int64 fields (1 and
 // 2 bytes long).
-func BenchmarkVarint64ArraySmall(b *testing.B) {
-	for i := uint(1); i <= 10; i++ {
-		dist := genUint64Dist([11]int{0, 3, 1}, 1<<i)
-		raw, err := proto.Marshal(&tpb.Message{
-			Key: dist,
-		})
-		if err != nil {
-			b.Error("wrong encode", err)
-		}
-		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
-			scratchBuf := proto.NewBuffer(nil)
-			b.ResetTimer()
-			for k := 0; k < b.N; k++ {
-				scratchBuf.SetBuf(raw)
-				msgBlackhole.Reset()
-				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
-					b.Error("wrong decode", err)
-				}
-			}
-		})
-	}
-}
+// func BenchmarkVarint64ArraySmall(b *testing.B) {
+// 	for i := uint(1); i <= 10; i++ {
+// 		dist := genUint64Dist([11]int{0, 3, 1}, 1<<i)
+// 		raw, err := proto.Marshal(&tpb.Message{
+// 			Key: dist,
+// 		})
+// 		if err != nil {
+// 			b.Error("wrong encode", err)
+// 		}
+// 		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
+// 			scratchBuf := proto.NewBuffer(nil)
+// 			b.ResetTimer()
+// 			for k := 0; k < b.N; k++ {
+// 				scratchBuf.SetBuf(raw)
+// 				msgBlackhole.Reset()
+// 				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
+// 					b.Error("wrong decode", err)
+// 				}
+// 			}
+// 		})
+// 	}
+// }
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkVarint64ArrayLarge shows the performance on an array of large int64 fields (6, 7,
 // and 8 bytes long with a small number of the other sizes).
-func BenchmarkVarint64ArrayLarge(b *testing.B) {
-	for i := uint(1); i <= 10; i++ {
-		dist := genUint64Dist([11]int{0, 1, 1, 2, 4, 8, 16, 32, 16, 1, 1}, 1<<i)
-		raw, err := proto.Marshal(&tpb.Message{
-			Key: dist,
-		})
-		if err != nil {
-			b.Error("wrong encode", err)
-		}
-		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
-			scratchBuf := proto.NewBuffer(nil)
-			b.ResetTimer()
-			for k := 0; k < b.N; k++ {
-				scratchBuf.SetBuf(raw)
-				msgBlackhole.Reset()
-				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
-					b.Error("wrong decode", err)
-				}
-			}
-		})
-	}
-}
+// func BenchmarkVarint64ArrayLarge(b *testing.B) {
+// 	for i := uint(1); i <= 10; i++ {
+// 		dist := genUint64Dist([11]int{0, 1, 1, 2, 4, 8, 16, 32, 16, 1, 1}, 1<<i)
+// 		raw, err := proto.Marshal(&tpb.Message{
+// 			Key: dist,
+// 		})
+// 		if err != nil {
+// 			b.Error("wrong encode", err)
+// 		}
+// 		b.Run(fmt.Sprintf("Len%v", len(dist)), func(b *testing.B) {
+// 			scratchBuf := proto.NewBuffer(nil)
+// 			b.ResetTimer()
+// 			for k := 0; k < b.N; k++ {
+// 				scratchBuf.SetBuf(raw)
+// 				msgBlackhole.Reset()
+// 				if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
+// 					b.Error("wrong decode", err)
+// 				}
+// 			}
+// 		})
+// 	}
+// }
 
+// Disabled this Benchmark because it is using features (b.Run) from go1.7 and gogoprotobuf still have compatibility with go1.5
 // BenchmarkVarint64ArrayMixed shows the performance of lots of small messages, each
 // containing a small number of large (3, 4, and 5 byte) repeated int64s.
-func BenchmarkVarint64ArrayMixed(b *testing.B) {
-	for i := uint(1); i <= 1<<5; i <<= 1 {
-		dist := genUint64Dist([11]int{0, 0, 0, 4, 6, 4, 0, 0, 0, 0, 0}, int(i))
-		// number of sub fields
-		for k := uint(1); k <= 1<<10; k <<= 2 {
-			msg := &tpb.Message{}
-			for m := uint(0); m < k; m++ {
-				msg.Children = append(msg.Children, &tpb.Message{
-					Key: dist,
-				})
-			}
-			raw, err := proto.Marshal(msg)
-			if err != nil {
-				b.Error("wrong encode", err)
-			}
-			b.Run(fmt.Sprintf("Fields%vLen%v", k, i), func(b *testing.B) {
-				scratchBuf := proto.NewBuffer(nil)
-				b.ResetTimer()
-				for k := 0; k < b.N; k++ {
-					scratchBuf.SetBuf(raw)
-					msgBlackhole.Reset()
-					if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
-						b.Error("wrong decode", err)
-					}
-				}
-			})
-		}
-	}
-}
+// func BenchmarkVarint64ArrayMixed(b *testing.B) {
+// 	for i := uint(1); i <= 1<<5; i <<= 1 {
+// 		dist := genUint64Dist([11]int{0, 0, 0, 4, 6, 4, 0, 0, 0, 0, 0}, int(i))
+// 		// number of sub fields
+// 		for k := uint(1); k <= 1<<10; k <<= 2 {
+// 			msg := &tpb.Message{}
+// 			for m := uint(0); m < k; m++ {
+// 				msg.Children = append(msg.Children, &tpb.Message{
+// 					Key: dist,
+// 				})
+// 			}
+// 			raw, err := proto.Marshal(msg)
+// 			if err != nil {
+// 				b.Error("wrong encode", err)
+// 			}
+// 			b.Run(fmt.Sprintf("Fields%vLen%v", k, i), func(b *testing.B) {
+// 				scratchBuf := proto.NewBuffer(nil)
+// 				b.ResetTimer()
+// 				for k := 0; k < b.N; k++ {
+// 					scratchBuf.SetBuf(raw)
+// 					msgBlackhole.Reset()
+// 					if err := scratchBuf.Unmarshal(msgBlackhole); err != nil {
+// 						b.Error("wrong decode", err)
+// 					}
+// 				}
+// 			})
+// 		}
+// 	}
+// }
 
 // genInt32Dist generates a slice of ints that will match the size distribution of dist.
 // A size of 6 corresponds to a max length varint32, which is 10 bytes.  The distribution
