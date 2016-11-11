@@ -668,7 +668,6 @@ func (g *Generator) CommandLineParameters(parameter string) {
 			}
 		}
 	}
-
 	if pluginList == "" {
 		return
 	}
@@ -1258,10 +1257,8 @@ func (g *Generator) generate(file *FileDescriptor) {
 		}
 		g.P()
 	}
-
 	// Reset on each file
 	g.writtenImports = make(map[string]bool)
-
 	for _, td := range g.file.imp {
 		g.generateImported(td)
 	}
