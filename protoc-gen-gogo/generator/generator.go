@@ -3019,8 +3019,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fullName = *g.file.Package + "." + fullName
 	}
 
-	if gogoproto.HasTypePrefix(g.file.FileDescriptorProto) {
-		fullName = gogoproto.GetTypePrefix(g.file.FileDescriptorProto) + "." + fullName
+	if gogoproto.HasRegisterTypePrefix(g.file.FileDescriptorProto) {
+		fullName = gogoproto.GetRegisterTypePrefix(g.file.FileDescriptorProto) + "." + fullName
 	}
 
 	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], ccTypeName, fullName)

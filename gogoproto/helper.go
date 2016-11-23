@@ -344,9 +344,9 @@ func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_proto
 	return proto.GetBoolExtension(message.Options, E_Compare, proto.GetBoolExtension(file.Options, E_CompareAll, false))
 }
 
-func GetTypePrefix(file *google_protobuf.FileDescriptorProto) string {
+func GetRegisterTypePrefix(file *google_protobuf.FileDescriptorProto) string {
 	if file != nil && file.Options != nil {
-		v, err := proto.GetExtension(file.Options, E_TypePrefix)
+		v, err := proto.GetExtension(file.Options, E_RegisterTypePrefix)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}
@@ -355,6 +355,6 @@ func GetTypePrefix(file *google_protobuf.FileDescriptorProto) string {
 	return ""
 }
 
-func HasTypePrefix(file *google_protobuf.FileDescriptorProto) bool {
-	return len(GetTypePrefix(file)) > 0
+func HasRegisterTypePrefix(file *google_protobuf.FileDescriptorProto) bool {
+	return len(GetRegisterTypePrefix(file)) > 0
 }
