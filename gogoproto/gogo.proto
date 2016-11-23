@@ -77,6 +77,8 @@ extend google.protobuf.FileOptions {
 	optional bool gogoproto_import = 63027;
 	optional bool protosizer_all = 63028;
 	optional bool compare_all = 63029;
+
+	optional string type_prefix = 63030;
 }
 
 extend google.protobuf.MessageOptions {

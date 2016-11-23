@@ -276,6 +276,14 @@ var E_CompareAll = &proto.ExtensionDesc{
 	Tag:           "varint,63029,opt,name=compare_all,json=compareAll",
 }
 
+var E_TypePrefix = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         63030,
+	Name:          "gogoproto.type_prefix",
+	Tag:           "bytes,63030,opt,name=type_prefix,json=typePrefix",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -572,6 +580,7 @@ func init() {
 	proto.RegisterExtension(E_GogoprotoImport)
 	proto.RegisterExtension(E_ProtosizerAll)
 	proto.RegisterExtension(E_CompareAll)
+	proto.RegisterExtension(E_TypePrefix)
 	proto.RegisterExtension(E_GoprotoGetters)
 	proto.RegisterExtension(E_GoprotoStringer)
 	proto.RegisterExtension(E_VerboseEqual)
