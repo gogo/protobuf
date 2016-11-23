@@ -1666,6 +1666,9 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		if pkg := obj.File().GetPackage(); pkg != "" {
 			enum += pkg + "."
 		}
+		if gogoproto.HasProtoRegisterPrefix(g.file.FileDescriptorProto) {
+			enum = gogoproto.GetProtoRegisterPrefix(g.file.FileDescriptorProto) + "." + enum
+		}
 		enum += CamelCaseSlice(obj.TypeName())
 	}
 	packed := ""
@@ -3019,8 +3022,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fullName = *g.file.Package + "." + fullName
 	}
 
-	if gogoproto.HasRegisterTypePrefix(g.file.FileDescriptorProto) {
-		fullName = gogoproto.GetRegisterTypePrefix(g.file.FileDescriptorProto) + "." + fullName
+	if gogoproto.HasProtoRegisterPrefix(g.file.FileDescriptorProto) {
+		fullName = gogoproto.GetProtoRegisterPrefix(g.file.FileDescriptorProto) + "." + fullName
 	}
 
 	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], ccTypeName, fullName)
@@ -3153,11 +3156,16 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 }
 
 func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
-	// // We always print the full (proto-world) package name here.
+	// We always print the full (proto-world) package name here.
 	pkg := enum.File().GetPackage()
 	if pkg != "" {
 		pkg += "."
 	}
+
+	if gogoproto.HasProtoRegisterPrefix(g.file.FileDescriptorProto) {
+		pkg = gogoproto.GetProtoRegisterPrefix(g.file.FileDescriptorProto) + "." + pkg
+	}
+
 	// The full type name
 	typeName := enum.TypeName()
 	// The full type name, CamelCased.

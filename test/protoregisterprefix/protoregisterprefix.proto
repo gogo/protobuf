@@ -2,8 +2,13 @@ syntax = "proto3";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-option (gogoproto.register_type_prefix) = "FooBar";
+option (gogoproto.proto_register_prefix) = "FooBar";
 
 message Foo {
     string bar = 1;
+}
+
+enum Bar {
+    UNKNOWN = 0;
+    FOO = 1;
 }

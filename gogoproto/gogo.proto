@@ -78,7 +78,7 @@ extend google.protobuf.FileOptions {
 	optional bool protosizer_all = 63028;
 	optional bool compare_all = 63029;
 
-	optional string register_type_prefix = 63030;
+	optional string proto_register_prefix = 63030;
 }
 
 extend google.protobuf.MessageOptions {
