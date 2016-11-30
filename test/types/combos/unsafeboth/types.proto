@@ -50,6 +50,7 @@ option (gogoproto.unsafe_marshaler_all) = true;
 option (gogoproto.unsafe_unmarshaler_all) = true;
 
 message KnownTypes {
+  option (gogoproto.compare) = true;
   google.protobuf.Duration dur = 1;
   google.protobuf.Timestamp ts = 2;
   google.protobuf.DoubleValue dbl = 3;
@@ -62,11 +63,14 @@ message KnownTypes {
   google.protobuf.StringValue str = 10;
   google.protobuf.BytesValue bytes = 11;
 
-  //google.protobuf.Struct st = 12;
-  //google.protobuf.Any an = 14;
+  // TODO uncomment this once https://github.com/gogo/protobuf/issues/197 is fixed
+  // google.protobuf.Struct st = 12;
+  // google.protobuf.Any an = 14;
 }
 
 message ProtoTypes {
+  // TODO this should be a compare_all at the top of the file once time.Time, time.Duration, oneof and map is supported by compare
+  option (gogoproto.compare) = true;
   google.protobuf.Timestamp nullableTimestamp = 1;
   google.protobuf.Duration nullableDuration = 2;
   google.protobuf.Timestamp timestamp = 3 [(gogoproto.nullable) = false];
@@ -81,6 +85,7 @@ message StdTypes {
 }
 
 message RepProtoTypes {
+  option (gogoproto.compare) = true;
   repeated google.protobuf.Timestamp nullableTimestamps = 1;
   repeated google.protobuf.Duration nullableDurations = 2;
   repeated google.protobuf.Timestamp timestamps = 3 [(gogoproto.nullable) = false];

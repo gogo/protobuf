@@ -136,3 +136,7 @@ func TurnOffGoExtensionsMap(msg *descriptor.DescriptorProto) {
 func TurnOffGoUnrecognized(msg *descriptor.DescriptorProto) {
 	SetBoolMessageOption(gogoproto.E_GoprotoUnrecognized, false)(msg)
 }
+
+func TurnOnCompare(msg *descriptor.DescriptorProto) {
+	SetBoolMessageOption(gogoproto.E_Compare, true)(msg)
+}

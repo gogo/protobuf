@@ -53,6 +53,15 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
 
 	for _, file := range files {
+		if strings.HasSuffix(file.GetName(), "struct.proto") {
+			// TODO struct can also get a compare method when
+			// https://github.com/gogo/protobuf/issues/221 is fixed
+			continue
+		}
+		vanity.TurnOnCompareAll(file)
+	}
+
+	for _, file := range files {
 		if strings.HasSuffix(file.GetName(), "timestamp.proto") ||
 			strings.HasSuffix(file.GetName(), "duration.proto") {
 			continue

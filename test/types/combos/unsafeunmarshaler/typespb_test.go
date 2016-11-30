@@ -1200,6 +1200,78 @@ func TestOneofStdTypesProtoCompactText(t *testing.T) {
 	}
 }
 
+func TestKnownTypesCompare(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedKnownTypes(popr, false)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &KnownTypes{}
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
+		panic(err)
+	}
+	if c := p.Compare(msg); c != 0 {
+		t.Fatalf("%#v !Compare %#v, since %d", msg, p, c)
+	}
+	p2 := NewPopulatedKnownTypes(popr, false)
+	c := p.Compare(p2)
+	c2 := p2.Compare(p)
+	if c != (-1 * c2) {
+		t.Errorf("p.Compare(p2) = %d", c)
+		t.Errorf("p2.Compare(p) = %d", c2)
+		t.Errorf("p = %#v", p)
+		t.Errorf("p2 = %#v", p2)
+	}
+}
+func TestProtoTypesCompare(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedProtoTypes(popr, false)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &ProtoTypes{}
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
+		panic(err)
+	}
+	if c := p.Compare(msg); c != 0 {
+		t.Fatalf("%#v !Compare %#v, since %d", msg, p, c)
+	}
+	p2 := NewPopulatedProtoTypes(popr, false)
+	c := p.Compare(p2)
+	c2 := p2.Compare(p)
+	if c != (-1 * c2) {
+		t.Errorf("p.Compare(p2) = %d", c)
+		t.Errorf("p2.Compare(p) = %d", c2)
+		t.Errorf("p = %#v", p)
+		t.Errorf("p2 = %#v", p2)
+	}
+}
+func TestRepProtoTypesCompare(t *testing.T) {
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
+	p := NewPopulatedRepProtoTypes(popr, false)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
+	if err != nil {
+		panic(err)
+	}
+	msg := &RepProtoTypes{}
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
+		panic(err)
+	}
+	if c := p.Compare(msg); c != 0 {
+		t.Fatalf("%#v !Compare %#v, since %d", msg, p, c)
+	}
+	p2 := NewPopulatedRepProtoTypes(popr, false)
+	c := p.Compare(p2)
+	c2 := p2.Compare(p)
+	if c != (-1 * c2) {
+		t.Errorf("p.Compare(p2) = %d", c)
+		t.Errorf("p2.Compare(p) = %d", c2)
+		t.Errorf("p = %#v", p)
+		t.Errorf("p2 = %#v", p2)
+	}
+}
 func TestKnownTypesVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedKnownTypes(popr, false)
