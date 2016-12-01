@@ -58,10 +58,10 @@ After that you can choose:
 
 ### Installation
 
-To install it, you must first have Go (at least version 1.3.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.5.4, 1.6.3 and 1.7.1 are continuously tested.
+To install it, you must first have Go (at least version 1.3.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.7.1 is continuously tested.
 
 Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
-Most versions from 2.3.1 should not give any problems, but 2.5.0, 2.6.1 and 3.0.2 are continuously tested.
+Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.1.0 are continuously tested.
 
 ### Speed
 
