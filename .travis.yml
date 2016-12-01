@@ -15,11 +15,11 @@ script:
 language: go
 
 go:
-  - 1.7.1
-  - 1.6.3
   - 1.5.4
+  - 1.6.3
+  - 1.7.1
 
 matrix:
   allow_failures:
-    - 1.6.3
-    - 1.5.4
+    - go: 1.5.4
+    - go: 1.6.3
