@@ -1865,7 +1865,7 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.Fail(err.Error())
 		}
 		if len(packageName) > 0 {
-			g.customImports = append(g.customImports, packageName)
+			g.addCustomImport(packageName)
 		}
 	case gogoproto.IsCastType(field):
 		var packageName string
@@ -1875,13 +1875,13 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.Fail(err.Error())
 		}
 		if len(packageName) > 0 {
-			g.customImports = append(g.customImports, packageName)
+			g.addCustomImport(packageName)
 		}
 	case gogoproto.IsStdTime(field):
-		g.customImports = append(g.customImports, "time")
+		g.addCustomImport("time")
 		typ = "time.Time"
 	case gogoproto.IsStdDuration(field):
-		g.customImports = append(g.customImports, "time")
+		g.addCustomImport("time")
 		typ = "time.Duration"
 	}
 	if needsStar(field, g.file.proto3 && field.Extendee == nil, message != nil && message.allowOneof()) {
@@ -1891,6 +1891,16 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		typ = "[]" + typ
 	}
 	return
+}
+
+// addCustomImport adds unique imports to the customImports list.
+func (g *Generator) addCustomImport(packageName string) {
+	for _, existing := range g.customImports {
+		if existing == packageName {
+			return
+		}
+	}
+	g.customImports = append(g.customImports, packageName)
 }
 
 // GoMapDescriptor is a full description of the map output struct.
@@ -1937,7 +1947,7 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 			g.Fail(err.Error())
 		}
 		if len(packageName) > 0 {
-			g.customImports = append(g.customImports, packageName)
+			g.addCustomImport(packageName)
 		}
 		m.GoType = typ
 		return m
