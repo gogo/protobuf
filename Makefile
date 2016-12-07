@@ -30,7 +30,11 @@
 
 all: clean install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install tests vet
+buildserverall: clean install regenerate install tests vet js
+
+js:
+	go get github.com/gopherjs/gopherjs
+	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 
 install:
 	go install ./proto
