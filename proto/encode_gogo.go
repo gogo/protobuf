@@ -197,7 +197,8 @@ func size_ref_struct_message(p *Properties, base structPointer) int {
 func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer) error {
 	var state errorState
 	ss := structPointer_GetStructPointer(base, p.field)
-	ss1 := structPointer_GetRefStructPointer(ss, field(0))
+	var zero field
+	ss1 := structPointer_GetRefStructPointer(ss, zero)
 	size := p.stype.Size()
 	l := structPointer_Len(base, p.field)
 	for i := 0; i < l; i++ {
@@ -234,7 +235,8 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 //TODO this is only copied, please fix this
 func size_slice_ref_struct_message(p *Properties, base structPointer) (n int) {
 	ss := structPointer_GetStructPointer(base, p.field)
-	ss1 := structPointer_GetRefStructPointer(ss, field(0))
+	var zero field
+	ss1 := structPointer_GetRefStructPointer(ss, zero)
 	size := p.stype.Size()
 	l := structPointer_Len(base, p.field)
 	n += l * len(p.tagcode)
