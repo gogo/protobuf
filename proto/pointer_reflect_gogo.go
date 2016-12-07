@@ -69,3 +69,17 @@ func structPointer_GetSliceHeader(p structPointer, f field) *reflect.SliceHeader
 func structPointer_Copy(oldptr structPointer, newptr structPointer, size int) {
 	panic("not implemented")
 }
+
+func structPointer_StructRefSlice(p structPointer, f field, size uintptr) *structRefSlice {
+	panic("not implemented")
+}
+
+type structRefSlice struct{}
+
+func (v *structRefSlice) Len() int {
+	panic("not implemented")
+}
+
+func (v *structRefSlice) Index(i int) structPointer {
+	panic("not implemented")
+}

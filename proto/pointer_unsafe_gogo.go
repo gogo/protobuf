@@ -105,3 +105,24 @@ func structPointer_Add(p structPointer, size field) structPointer {
 func structPointer_Len(p structPointer, f field) int {
 	return len(*(*[]interface{})(unsafe.Pointer(structPointer_GetRefStructPointer(p, f))))
 }
+
+func structPointer_StructRefSlice(p structPointer, f field, size uintptr) *structRefSlice {
+	return &structRefSlice{p: p, f: f, size: size}
+}
+
+// A structRefSlice represents a slice of structs (themselves submessages or groups).
+type structRefSlice struct {
+	p    structPointer
+	f    field
+	size uintptr
+}
+
+func (v *structRefSlice) Len() int {
+	return structPointer_Len(v.p, v.f)
+}
+
+func (v *structRefSlice) Index(i int) structPointer {
+	ss := structPointer_GetStructPointer(v.p, v.f)
+	ss1 := structPointer_GetRefStructPointer(ss, 0)
+	return structPointer_Add(ss1, field(uintptr(i)*v.size))
+}

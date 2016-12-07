@@ -32,10 +32,6 @@ all: clean install regenerate install tests errcheck vet
 
 buildserverall: clean install regenerate install tests vet js
 
-js:
-	go get github.com/gopherjs/gopherjs
-	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
-
 install:
 	go install ./proto
 	go install ./gogoproto
@@ -136,6 +132,10 @@ bench:
 
 contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
+
+js:
+	go get github.com/gopherjs/gopherjs
+	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 
 update:
 	(cd protobuf && make update)
