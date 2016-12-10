@@ -506,3 +506,33 @@ func TestClearAllExtensions(t *testing.T) {
 		t.Errorf("proto.HasExtension(%s): got true, want false", proto.MarshalTextString(m))
 	}
 }
+
+func TestMarshalRace(t *testing.T) {
+	// unregistered extension
+	desc := &proto.ExtensionDesc{
+		ExtendedType:  (*pb.MyMessage)(nil),
+		ExtensionType: (*bool)(nil),
+		Field:         101010100,
+		Name:          "emptyextension",
+		Tag:           "varint,0,opt",
+	}
+
+	m := &pb.MyMessage{Count: proto.Int32(4)}
+	if err := proto.SetExtension(m, desc, proto.Bool(true)); err != nil {
+		t.Errorf("proto.SetExtension(m, desc, true): got error %q, want nil", err)
+	}
+
+	errChan := make(chan error, 3)
+	for n := 3; n > 0; n-- {
+		go func() {
+			_, err := proto.Marshal(m)
+			errChan <- err
+		}()
+	}
+	for i := 0; i < 3; i++ {
+		err := <-errChan
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+}
