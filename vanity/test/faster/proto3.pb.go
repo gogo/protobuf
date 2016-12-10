@@ -39,6 +39,13 @@ func (m *Aproto3) String() string            { return proto.CompactTextString(m)
 func (*Aproto3) ProtoMessage()               {}
 func (*Aproto3) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0} }
 
+func (m *Aproto3) GetB() string {
+	if m != nil {
+		return m.B
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Aproto3)(nil), "vanity.Aproto3")
 }

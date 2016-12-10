@@ -85,9 +85,79 @@ func (m *Message) String() string            { return proto.CompactTextString(m)
 func (*Message) ProtoMessage()               {}
 func (*Message) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0} }
 
+func (m *Message) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Message) GetHilarity() Message_Humour {
+	if m != nil {
+		return m.Hilarity
+	}
+	return Message_UNKNOWN
+}
+
+func (m *Message) GetHeightInCm() uint32 {
+	if m != nil {
+		return m.HeightInCm
+	}
+	return 0
+}
+
+func (m *Message) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (m *Message) GetResultCount() int64 {
+	if m != nil {
+		return m.ResultCount
+	}
+	return 0
+}
+
+func (m *Message) GetTrueScotsman() bool {
+	if m != nil {
+		return m.TrueScotsman
+	}
+	return false
+}
+
+func (m *Message) GetScore() float32 {
+	if m != nil {
+		return m.Score
+	}
+	return 0
+}
+
+func (m *Message) GetKey() []uint64 {
+	if m != nil {
+		return m.Key
+	}
+	return nil
+}
+
+func (m *Message) GetShortKey() []int32 {
+	if m != nil {
+		return m.ShortKey
+	}
+	return nil
+}
+
 func (m *Message) GetNested() *Nested {
 	if m != nil {
 		return m.Nested
+	}
+	return nil
+}
+
+func (m *Message) GetRFunny() []Message_Humour {
+	if m != nil {
+		return m.RFunny
 	}
 	return nil
 }
@@ -150,6 +220,20 @@ func (m *Nested) Reset()                    { *m = Nested{} }
 func (m *Nested) String() string            { return proto.CompactTextString(m) }
 func (*Nested) ProtoMessage()               {}
 func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{1} }
+
+func (m *Nested) GetBunny() string {
+	if m != nil {
+		return m.Bunny
+	}
+	return ""
+}
+
+func (m *Nested) GetCute() bool {
+	if m != nil {
+		return m.Cute
+	}
+	return false
+}
 
 type MessageWithMap struct {
 	ByteMapping map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`

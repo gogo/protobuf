@@ -171,6 +171,13 @@ func (m *ConformanceRequest) GetJsonPayload() string {
 	return ""
 }
 
+func (m *ConformanceRequest) GetRequestedOutputFormat() WireFormat {
+	if m != nil {
+		return m.RequestedOutputFormat
+	}
+	return WireFormat_UNSPECIFIED
+}
+
 // XXX_OneofFuncs is for the internal use of the proto package.
 func (*ConformanceRequest) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
 	return _ConformanceRequest_OneofMarshaler, _ConformanceRequest_OneofUnmarshaler, _ConformanceRequest_OneofSizer, []interface{}{
@@ -645,6 +652,111 @@ func (m *TestAllTypes) GetOneofField() isTestAllTypes_OneofField {
 	return nil
 }
 
+func (m *TestAllTypes) GetOptionalInt32() int32 {
+	if m != nil {
+		return m.OptionalInt32
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalInt64() int64 {
+	if m != nil {
+		return m.OptionalInt64
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalUint32() uint32 {
+	if m != nil {
+		return m.OptionalUint32
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalUint64() uint64 {
+	if m != nil {
+		return m.OptionalUint64
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalSint32() int32 {
+	if m != nil {
+		return m.OptionalSint32
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalSint64() int64 {
+	if m != nil {
+		return m.OptionalSint64
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalFixed32() uint32 {
+	if m != nil {
+		return m.OptionalFixed32
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalFixed64() uint64 {
+	if m != nil {
+		return m.OptionalFixed64
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalSfixed32() int32 {
+	if m != nil {
+		return m.OptionalSfixed32
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalSfixed64() int64 {
+	if m != nil {
+		return m.OptionalSfixed64
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalFloat() float32 {
+	if m != nil {
+		return m.OptionalFloat
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalDouble() float64 {
+	if m != nil {
+		return m.OptionalDouble
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetOptionalBool() bool {
+	if m != nil {
+		return m.OptionalBool
+	}
+	return false
+}
+
+func (m *TestAllTypes) GetOptionalString() string {
+	if m != nil {
+		return m.OptionalString
+	}
+	return ""
+}
+
+func (m *TestAllTypes) GetOptionalBytes() []byte {
+	if m != nil {
+		return m.OptionalBytes
+	}
+	return nil
+}
+
 func (m *TestAllTypes) GetOptionalNestedMessage() *TestAllTypes_NestedMessage {
 	if m != nil {
 		return m.OptionalNestedMessage
@@ -659,9 +771,142 @@ func (m *TestAllTypes) GetOptionalForeignMessage() *ForeignMessage {
 	return nil
 }
 
+func (m *TestAllTypes) GetOptionalNestedEnum() TestAllTypes_NestedEnum {
+	if m != nil {
+		return m.OptionalNestedEnum
+	}
+	return TestAllTypes_FOO
+}
+
+func (m *TestAllTypes) GetOptionalForeignEnum() ForeignEnum {
+	if m != nil {
+		return m.OptionalForeignEnum
+	}
+	return ForeignEnum_FOREIGN_FOO
+}
+
+func (m *TestAllTypes) GetOptionalStringPiece() string {
+	if m != nil {
+		return m.OptionalStringPiece
+	}
+	return ""
+}
+
+func (m *TestAllTypes) GetOptionalCord() string {
+	if m != nil {
+		return m.OptionalCord
+	}
+	return ""
+}
+
 func (m *TestAllTypes) GetRecursiveMessage() *TestAllTypes {
 	if m != nil {
 		return m.RecursiveMessage
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedInt32() []int32 {
+	if m != nil {
+		return m.RepeatedInt32
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedInt64() []int64 {
+	if m != nil {
+		return m.RepeatedInt64
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedUint32() []uint32 {
+	if m != nil {
+		return m.RepeatedUint32
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedUint64() []uint64 {
+	if m != nil {
+		return m.RepeatedUint64
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedSint32() []int32 {
+	if m != nil {
+		return m.RepeatedSint32
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedSint64() []int64 {
+	if m != nil {
+		return m.RepeatedSint64
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedFixed32() []uint32 {
+	if m != nil {
+		return m.RepeatedFixed32
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedFixed64() []uint64 {
+	if m != nil {
+		return m.RepeatedFixed64
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedSfixed32() []int32 {
+	if m != nil {
+		return m.RepeatedSfixed32
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedSfixed64() []int64 {
+	if m != nil {
+		return m.RepeatedSfixed64
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedFloat() []float32 {
+	if m != nil {
+		return m.RepeatedFloat
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedDouble() []float64 {
+	if m != nil {
+		return m.RepeatedDouble
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedBool() []bool {
+	if m != nil {
+		return m.RepeatedBool
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedString() []string {
+	if m != nil {
+		return m.RepeatedString
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedBytes() [][]byte {
+	if m != nil {
+		return m.RepeatedBytes
 	}
 	return nil
 }
@@ -676,6 +921,34 @@ func (m *TestAllTypes) GetRepeatedNestedMessage() []*TestAllTypes_NestedMessage 
 func (m *TestAllTypes) GetRepeatedForeignMessage() []*ForeignMessage {
 	if m != nil {
 		return m.RepeatedForeignMessage
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedNestedEnum() []TestAllTypes_NestedEnum {
+	if m != nil {
+		return m.RepeatedNestedEnum
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedForeignEnum() []ForeignEnum {
+	if m != nil {
+		return m.RepeatedForeignEnum
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedStringPiece() []string {
+	if m != nil {
+		return m.RepeatedStringPiece
+	}
+	return nil
+}
+
+func (m *TestAllTypes) GetRepeatedCord() []string {
+	if m != nil {
+		return m.RepeatedCord
 	}
 	return nil
 }
@@ -1086,6 +1359,132 @@ func (m *TestAllTypes) GetRepeatedValue() []*google_protobuf3.Value {
 	return nil
 }
 
+func (m *TestAllTypes) GetFieldname1() int32 {
+	if m != nil {
+		return m.Fieldname1
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFieldName2() int32 {
+	if m != nil {
+		return m.FieldName2
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetXFieldName3() int32 {
+	if m != nil {
+		return m.XFieldName3
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField_Name4_() int32 {
+	if m != nil {
+		return m.Field_Name4_
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField0Name5() int32 {
+	if m != nil {
+		return m.Field0Name5
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField_0Name6() int32 {
+	if m != nil {
+		return m.Field_0Name6
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFieldName7() int32 {
+	if m != nil {
+		return m.FieldName7
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFieldName8() int32 {
+	if m != nil {
+		return m.FieldName8
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField_Name9() int32 {
+	if m != nil {
+		return m.Field_Name9
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField_Name10() int32 {
+	if m != nil {
+		return m.Field_Name10
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFIELD_NAME11() int32 {
+	if m != nil {
+		return m.FIELD_NAME11
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFIELDName12() int32 {
+	if m != nil {
+		return m.FIELDName12
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetXFieldName13() int32 {
+	if m != nil {
+		return m.XFieldName13
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetX_FieldName14() int32 {
+	if m != nil {
+		return m.X_FieldName14
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField_Name15() int32 {
+	if m != nil {
+		return m.Field_Name15
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetField__Name16() int32 {
+	if m != nil {
+		return m.Field__Name16
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFieldName17__() int32 {
+	if m != nil {
+		return m.FieldName17__
+	}
+	return 0
+}
+
+func (m *TestAllTypes) GetFieldName18__() int32 {
+	if m != nil {
+		return m.FieldName18__
+	}
+	return 0
+}
+
 // XXX_OneofFuncs is for the internal use of the proto package.
 func (*TestAllTypes) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
 	return _TestAllTypes_OneofMarshaler, _TestAllTypes_OneofUnmarshaler, _TestAllTypes_OneofSizer, []interface{}{
@@ -1271,6 +1670,13 @@ func (*TestAllTypes_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptorConformance, []int{2, 0}
 }
 
+func (m *TestAllTypes_NestedMessage) GetA() int32 {
+	if m != nil {
+		return m.A
+	}
+	return 0
+}
+
 func (m *TestAllTypes_NestedMessage) GetCorecursive() *TestAllTypes {
 	if m != nil {
 		return m.Corecursive
@@ -1286,6 +1692,13 @@ func (m *ForeignMessage) Reset()                    { *m = ForeignMessage{} }
 func (m *ForeignMessage) String() string            { return proto.CompactTextString(m) }
 func (*ForeignMessage) ProtoMessage()               {}
 func (*ForeignMessage) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{3} }
+
+func (m *ForeignMessage) GetC() int32 {
+	if m != nil {
+		return m.C
+	}
+	return 0
+}
 
 func init() {
 	proto.RegisterType((*ConformanceRequest)(nil), "conformance.ConformanceRequest")

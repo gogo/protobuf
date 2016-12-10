@@ -108,6 +108,20 @@ func (*Timestamp) ProtoMessage()               {}
 func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
 func (*Timestamp) XXX_WellKnownType() string   { return "Timestamp" }
 
+func (m *Timestamp) GetSeconds() int64 {
+	if m != nil {
+		return m.Seconds
+	}
+	return 0
+}
+
+func (m *Timestamp) GetNanos() int32 {
+	if m != nil {
+		return m.Nanos
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Timestamp)(nil), "google.protobuf.Timestamp")
 }

@@ -96,6 +96,20 @@ func (*Duration) ProtoMessage()               {}
 func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
 func (*Duration) XXX_WellKnownType() string   { return "Duration" }
 
+func (m *Duration) GetSeconds() int64 {
+	if m != nil {
+		return m.Seconds
+	}
+	return 0
+}
+
+func (m *Duration) GetNanos() int32 {
+	if m != nil {
+		return m.Nanos
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Duration)(nil), "google.protobuf.Duration")
 }

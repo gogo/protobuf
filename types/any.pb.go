@@ -141,6 +141,20 @@ func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
 func (*Any) XXX_WellKnownType() string   { return "Any" }
 
+func (m *Any) GetTypeUrl() string {
+	if m != nil {
+		return m.TypeUrl
+	}
+	return ""
+}
+
+func (m *Any) GetValue() []byte {
+	if m != nil {
+		return m.Value
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Any)(nil), "google.protobuf.Any")
 }

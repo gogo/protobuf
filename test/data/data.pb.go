@@ -45,6 +45,13 @@ func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
 
+func (m *MyMessage) GetMyData() uint32 {
+	if m != nil {
+		return m.MyData
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*MyMessage)(nil), "data.MyMessage")
 }

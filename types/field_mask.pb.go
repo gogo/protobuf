@@ -246,6 +246,13 @@ func (m *FieldMask) Reset()                    { *m = FieldMask{} }
 func (*FieldMask) ProtoMessage()               {}
 func (*FieldMask) Descriptor() ([]byte, []int) { return fileDescriptorFieldMask, []int{0} }
 
+func (m *FieldMask) GetPaths() []string {
+	if m != nil {
+		return m.Paths
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*FieldMask)(nil), "google.protobuf.FieldMask")
 }

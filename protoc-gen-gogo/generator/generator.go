@@ -2450,11 +2450,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			star = "*"
 		}
 
-		// In proto3, only generate getters for message fields and oneof fields.
-		if message.proto3() && *field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE && !oneof {
-			continue
-		}
-
 		// Only export getter symbols for basic types,
 		// and for messages and enums in the same package.
 		// Groups are not exported.
@@ -2519,7 +2514,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.Out()
 			g.P("}")
 		} else if !oneof {
-			g.P("if m != nil && m." + fname + " != nil {")
+			if message.proto3() {
+				g.P("if m != nil {")
+			} else {
+				g.P("if m != nil && m." + fname + " != nil {")
+			}
 			g.In()
 			g.P("return " + star + "m." + fname)
 			g.Out()
