@@ -1309,6 +1309,7 @@ var E_FieldA = &proto.ExtensionDesc{
 	Field:         100,
 	Name:          "test.FieldA",
 	Tag:           "fixed64,100,opt,name=FieldA",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldB = &proto.ExtensionDesc{
@@ -1317,6 +1318,7 @@ var E_FieldB = &proto.ExtensionDesc{
 	Field:         101,
 	Name:          "test.FieldB",
 	Tag:           "bytes,101,opt,name=FieldB",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldC = &proto.ExtensionDesc{
@@ -1325,6 +1327,7 @@ var E_FieldC = &proto.ExtensionDesc{
 	Field:         102,
 	Name:          "test.FieldC",
 	Tag:           "bytes,102,opt,name=FieldC",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldD = &proto.ExtensionDesc{
@@ -1333,6 +1336,7 @@ var E_FieldD = &proto.ExtensionDesc{
 	Field:         104,
 	Name:          "test.FieldD",
 	Tag:           "varint,104,rep,name=FieldD",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldE = &proto.ExtensionDesc{
@@ -1341,6 +1345,7 @@ var E_FieldE = &proto.ExtensionDesc{
 	Field:         105,
 	Name:          "test.FieldE",
 	Tag:           "bytes,105,rep,name=FieldE",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldA1 = &proto.ExtensionDesc{
@@ -1349,6 +1354,7 @@ var E_FieldA1 = &proto.ExtensionDesc{
 	Field:         100,
 	Name:          "test.FieldA1",
 	Tag:           "fixed64,100,opt,name=FieldA1",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldB1 = &proto.ExtensionDesc{
@@ -1357,6 +1363,7 @@ var E_FieldB1 = &proto.ExtensionDesc{
 	Field:         101,
 	Name:          "test.FieldB1",
 	Tag:           "bytes,101,opt,name=FieldB1",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 var E_FieldC1 = &proto.ExtensionDesc{
@@ -1365,6 +1372,7 @@ var E_FieldC1 = &proto.ExtensionDesc{
 	Field:         102,
 	Name:          "test.FieldC1",
 	Tag:           "bytes,102,opt,name=FieldC1",
+	Filename:      "combos/unsafeboth/thetest.proto",
 }
 
 func init() {

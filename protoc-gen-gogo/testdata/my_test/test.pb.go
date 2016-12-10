@@ -399,6 +399,7 @@ var E_ReplyExtensions_Time = &proto.ExtensionDesc{
 	Field:         101,
 	Name:          "my.test.ReplyExtensions.time",
 	Tag:           "fixed64,101,opt,name=time",
+	Filename:      "my_test/test.proto",
 }
 
 var E_ReplyExtensions_Carrot = &proto.ExtensionDesc{
@@ -407,6 +408,7 @@ var E_ReplyExtensions_Carrot = &proto.ExtensionDesc{
 	Field:         105,
 	Name:          "my.test.ReplyExtensions.carrot",
 	Tag:           "bytes,105,opt,name=carrot",
+	Filename:      "my_test/test.proto",
 }
 
 var E_ReplyExtensions_Donut = &proto.ExtensionDesc{
@@ -415,6 +417,7 @@ var E_ReplyExtensions_Donut = &proto.ExtensionDesc{
 	Field:         101,
 	Name:          "my.test.ReplyExtensions.donut",
 	Tag:           "bytes,101,opt,name=donut",
+	Filename:      "my_test/test.proto",
 }
 
 type OtherReplyExtensions struct {
@@ -847,6 +850,7 @@ var E_Tag = &proto.ExtensionDesc{
 	Field:         103,
 	Name:          "my.test.tag",
 	Tag:           "bytes,103,opt,name=tag",
+	Filename:      "my_test/test.proto",
 }
 
 var E_Donut = &proto.ExtensionDesc{
@@ -855,6 +859,7 @@ var E_Donut = &proto.ExtensionDesc{
 	Field:         106,
 	Name:          "my.test.donut",
 	Tag:           "bytes,106,opt,name=donut",
+	Filename:      "my_test/test.proto",
 }
 
 func init() {

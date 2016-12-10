@@ -3068,6 +3068,7 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	g.P("Field: ", field.Number, ",")
 	g.P(`Name: "`, extName, `",`)
 	g.P("Tag: ", tag, ",")
+	g.P(`Filename: "`, g.file.GetName(), `",`)
 
 	g.Out()
 	g.P("}")

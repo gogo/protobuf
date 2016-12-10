@@ -34,6 +34,7 @@ var E_Primary = &proto.ExtensionDesc{
 	Field:         51234,
 	Name:          "proto3extension.primary",
 	Tag:           "varint,51234,opt,name=primary",
+	Filename:      "proto3ext.proto",
 }
 
 var E_Index = &proto.ExtensionDesc{
@@ -42,6 +43,7 @@ var E_Index = &proto.ExtensionDesc{
 	Field:         51235,
 	Name:          "proto3extension.index",
 	Tag:           "varint,51235,opt,name=index",
+	Filename:      "proto3ext.proto",
 }
 
 func init() {

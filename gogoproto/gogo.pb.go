@@ -34,6 +34,7 @@ var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	Field:         62001,
 	Name:          "gogoproto.goproto_enum_prefix",
 	Tag:           "varint,62001,opt,name=goproto_enum_prefix,json=goprotoEnumPrefix",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoEnumStringer = &proto.ExtensionDesc{
@@ -42,6 +43,7 @@ var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 	Field:         62021,
 	Name:          "gogoproto.goproto_enum_stringer",
 	Tag:           "varint,62021,opt,name=goproto_enum_stringer,json=goprotoEnumStringer",
+	Filename:      "gogo.proto",
 }
 
 var E_EnumStringer = &proto.ExtensionDesc{
@@ -50,6 +52,7 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	Field:         62022,
 	Name:          "gogoproto.enum_stringer",
 	Tag:           "varint,62022,opt,name=enum_stringer,json=enumStringer",
+	Filename:      "gogo.proto",
 }
 
 var E_EnumCustomname = &proto.ExtensionDesc{
@@ -58,6 +61,7 @@ var E_EnumCustomname = &proto.ExtensionDesc{
 	Field:         62023,
 	Name:          "gogoproto.enum_customname",
 	Tag:           "bytes,62023,opt,name=enum_customname,json=enumCustomname",
+	Filename:      "gogo.proto",
 }
 
 var E_EnumvalueCustomname = &proto.ExtensionDesc{
@@ -66,6 +70,7 @@ var E_EnumvalueCustomname = &proto.ExtensionDesc{
 	Field:         66001,
 	Name:          "gogoproto.enumvalue_customname",
 	Tag:           "bytes,66001,opt,name=enumvalue_customname,json=enumvalueCustomname",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
@@ -74,6 +79,7 @@ var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	Field:         63001,
 	Name:          "gogoproto.goproto_getters_all",
 	Tag:           "varint,63001,opt,name=goproto_getters_all,json=goprotoGettersAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
@@ -82,6 +88,7 @@ var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 	Field:         63002,
 	Name:          "gogoproto.goproto_enum_prefix_all",
 	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all,json=goprotoEnumPrefixAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoStringerAll = &proto.ExtensionDesc{
@@ -90,6 +97,7 @@ var E_GoprotoStringerAll = &proto.ExtensionDesc{
 	Field:         63003,
 	Name:          "gogoproto.goproto_stringer_all",
 	Tag:           "varint,63003,opt,name=goproto_stringer_all,json=goprotoStringerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_VerboseEqualAll = &proto.ExtensionDesc{
@@ -98,6 +106,7 @@ var E_VerboseEqualAll = &proto.ExtensionDesc{
 	Field:         63004,
 	Name:          "gogoproto.verbose_equal_all",
 	Tag:           "varint,63004,opt,name=verbose_equal_all,json=verboseEqualAll",
+	Filename:      "gogo.proto",
 }
 
 var E_FaceAll = &proto.ExtensionDesc{
@@ -106,6 +115,7 @@ var E_FaceAll = &proto.ExtensionDesc{
 	Field:         63005,
 	Name:          "gogoproto.face_all",
 	Tag:           "varint,63005,opt,name=face_all,json=faceAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GostringAll = &proto.ExtensionDesc{
@@ -114,6 +124,7 @@ var E_GostringAll = &proto.ExtensionDesc{
 	Field:         63006,
 	Name:          "gogoproto.gostring_all",
 	Tag:           "varint,63006,opt,name=gostring_all,json=gostringAll",
+	Filename:      "gogo.proto",
 }
 
 var E_PopulateAll = &proto.ExtensionDesc{
@@ -122,6 +133,7 @@ var E_PopulateAll = &proto.ExtensionDesc{
 	Field:         63007,
 	Name:          "gogoproto.populate_all",
 	Tag:           "varint,63007,opt,name=populate_all,json=populateAll",
+	Filename:      "gogo.proto",
 }
 
 var E_StringerAll = &proto.ExtensionDesc{
@@ -130,6 +142,7 @@ var E_StringerAll = &proto.ExtensionDesc{
 	Field:         63008,
 	Name:          "gogoproto.stringer_all",
 	Tag:           "varint,63008,opt,name=stringer_all,json=stringerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_OnlyoneAll = &proto.ExtensionDesc{
@@ -138,6 +151,7 @@ var E_OnlyoneAll = &proto.ExtensionDesc{
 	Field:         63009,
 	Name:          "gogoproto.onlyone_all",
 	Tag:           "varint,63009,opt,name=onlyone_all,json=onlyoneAll",
+	Filename:      "gogo.proto",
 }
 
 var E_EqualAll = &proto.ExtensionDesc{
@@ -146,6 +160,7 @@ var E_EqualAll = &proto.ExtensionDesc{
 	Field:         63013,
 	Name:          "gogoproto.equal_all",
 	Tag:           "varint,63013,opt,name=equal_all,json=equalAll",
+	Filename:      "gogo.proto",
 }
 
 var E_DescriptionAll = &proto.ExtensionDesc{
@@ -154,6 +169,7 @@ var E_DescriptionAll = &proto.ExtensionDesc{
 	Field:         63014,
 	Name:          "gogoproto.description_all",
 	Tag:           "varint,63014,opt,name=description_all,json=descriptionAll",
+	Filename:      "gogo.proto",
 }
 
 var E_TestgenAll = &proto.ExtensionDesc{
@@ -162,6 +178,7 @@ var E_TestgenAll = &proto.ExtensionDesc{
 	Field:         63015,
 	Name:          "gogoproto.testgen_all",
 	Tag:           "varint,63015,opt,name=testgen_all,json=testgenAll",
+	Filename:      "gogo.proto",
 }
 
 var E_BenchgenAll = &proto.ExtensionDesc{
@@ -170,6 +187,7 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
 	Tag:           "varint,63016,opt,name=benchgen_all,json=benchgenAll",
+	Filename:      "gogo.proto",
 }
 
 var E_MarshalerAll = &proto.ExtensionDesc{
@@ -178,6 +196,7 @@ var E_MarshalerAll = &proto.ExtensionDesc{
 	Field:         63017,
 	Name:          "gogoproto.marshaler_all",
 	Tag:           "varint,63017,opt,name=marshaler_all,json=marshalerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_UnmarshalerAll = &proto.ExtensionDesc{
@@ -186,6 +205,7 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 	Field:         63018,
 	Name:          "gogoproto.unmarshaler_all",
 	Tag:           "varint,63018,opt,name=unmarshaler_all,json=unmarshalerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_StableMarshalerAll = &proto.ExtensionDesc{
@@ -194,6 +214,7 @@ var E_StableMarshalerAll = &proto.ExtensionDesc{
 	Field:         63019,
 	Name:          "gogoproto.stable_marshaler_all",
 	Tag:           "varint,63019,opt,name=stable_marshaler_all,json=stableMarshalerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_SizerAll = &proto.ExtensionDesc{
@@ -202,6 +223,7 @@ var E_SizerAll = &proto.ExtensionDesc{
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
 	Tag:           "varint,63020,opt,name=sizer_all,json=sizerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
@@ -210,6 +232,7 @@ var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 	Field:         63021,
 	Name:          "gogoproto.goproto_enum_stringer_all",
 	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all,json=goprotoEnumStringerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_EnumStringerAll = &proto.ExtensionDesc{
@@ -218,6 +241,7 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	Field:         63022,
 	Name:          "gogoproto.enum_stringer_all",
 	Tag:           "varint,63022,opt,name=enum_stringer_all,json=enumStringerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
@@ -226,6 +250,7 @@ var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
 	Field:         63023,
 	Name:          "gogoproto.unsafe_marshaler_all",
 	Tag:           "varint,63023,opt,name=unsafe_marshaler_all,json=unsafeMarshalerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
@@ -234,6 +259,7 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 	Field:         63024,
 	Name:          "gogoproto.unsafe_unmarshaler_all",
 	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all,json=unsafeUnmarshalerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
@@ -242,6 +268,7 @@ var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
 	Field:         63025,
 	Name:          "gogoproto.goproto_extensions_map_all",
 	Tag:           "varint,63025,opt,name=goproto_extensions_map_all,json=goprotoExtensionsMapAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
@@ -250,6 +277,7 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 	Field:         63026,
 	Name:          "gogoproto.goproto_unrecognized_all",
 	Tag:           "varint,63026,opt,name=goproto_unrecognized_all,json=goprotoUnrecognizedAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GogoprotoImport = &proto.ExtensionDesc{
@@ -258,6 +286,7 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
 	Tag:           "varint,63027,opt,name=gogoproto_import,json=gogoprotoImport",
+	Filename:      "gogo.proto",
 }
 
 var E_ProtosizerAll = &proto.ExtensionDesc{
@@ -266,6 +295,7 @@ var E_ProtosizerAll = &proto.ExtensionDesc{
 	Field:         63028,
 	Name:          "gogoproto.protosizer_all",
 	Tag:           "varint,63028,opt,name=protosizer_all,json=protosizerAll",
+	Filename:      "gogo.proto",
 }
 
 var E_CompareAll = &proto.ExtensionDesc{
@@ -274,6 +304,7 @@ var E_CompareAll = &proto.ExtensionDesc{
 	Field:         63029,
 	Name:          "gogoproto.compare_all",
 	Tag:           "varint,63029,opt,name=compare_all,json=compareAll",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
@@ -282,6 +313,7 @@ var E_GoprotoGetters = &proto.ExtensionDesc{
 	Field:         64001,
 	Name:          "gogoproto.goproto_getters",
 	Tag:           "varint,64001,opt,name=goproto_getters,json=goprotoGetters",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoStringer = &proto.ExtensionDesc{
@@ -290,6 +322,7 @@ var E_GoprotoStringer = &proto.ExtensionDesc{
 	Field:         64003,
 	Name:          "gogoproto.goproto_stringer",
 	Tag:           "varint,64003,opt,name=goproto_stringer,json=goprotoStringer",
+	Filename:      "gogo.proto",
 }
 
 var E_VerboseEqual = &proto.ExtensionDesc{
@@ -298,6 +331,7 @@ var E_VerboseEqual = &proto.ExtensionDesc{
 	Field:         64004,
 	Name:          "gogoproto.verbose_equal",
 	Tag:           "varint,64004,opt,name=verbose_equal,json=verboseEqual",
+	Filename:      "gogo.proto",
 }
 
 var E_Face = &proto.ExtensionDesc{
@@ -306,6 +340,7 @@ var E_Face = &proto.ExtensionDesc{
 	Field:         64005,
 	Name:          "gogoproto.face",
 	Tag:           "varint,64005,opt,name=face",
+	Filename:      "gogo.proto",
 }
 
 var E_Gostring = &proto.ExtensionDesc{
@@ -314,6 +349,7 @@ var E_Gostring = &proto.ExtensionDesc{
 	Field:         64006,
 	Name:          "gogoproto.gostring",
 	Tag:           "varint,64006,opt,name=gostring",
+	Filename:      "gogo.proto",
 }
 
 var E_Populate = &proto.ExtensionDesc{
@@ -322,6 +358,7 @@ var E_Populate = &proto.ExtensionDesc{
 	Field:         64007,
 	Name:          "gogoproto.populate",
 	Tag:           "varint,64007,opt,name=populate",
+	Filename:      "gogo.proto",
 }
 
 var E_Stringer = &proto.ExtensionDesc{
@@ -330,6 +367,7 @@ var E_Stringer = &proto.ExtensionDesc{
 	Field:         67008,
 	Name:          "gogoproto.stringer",
 	Tag:           "varint,67008,opt,name=stringer",
+	Filename:      "gogo.proto",
 }
 
 var E_Onlyone = &proto.ExtensionDesc{
@@ -338,6 +376,7 @@ var E_Onlyone = &proto.ExtensionDesc{
 	Field:         64009,
 	Name:          "gogoproto.onlyone",
 	Tag:           "varint,64009,opt,name=onlyone",
+	Filename:      "gogo.proto",
 }
 
 var E_Equal = &proto.ExtensionDesc{
@@ -346,6 +385,7 @@ var E_Equal = &proto.ExtensionDesc{
 	Field:         64013,
 	Name:          "gogoproto.equal",
 	Tag:           "varint,64013,opt,name=equal",
+	Filename:      "gogo.proto",
 }
 
 var E_Description = &proto.ExtensionDesc{
@@ -354,6 +394,7 @@ var E_Description = &proto.ExtensionDesc{
 	Field:         64014,
 	Name:          "gogoproto.description",
 	Tag:           "varint,64014,opt,name=description",
+	Filename:      "gogo.proto",
 }
 
 var E_Testgen = &proto.ExtensionDesc{
@@ -362,6 +403,7 @@ var E_Testgen = &proto.ExtensionDesc{
 	Field:         64015,
 	Name:          "gogoproto.testgen",
 	Tag:           "varint,64015,opt,name=testgen",
+	Filename:      "gogo.proto",
 }
 
 var E_Benchgen = &proto.ExtensionDesc{
@@ -370,6 +412,7 @@ var E_Benchgen = &proto.ExtensionDesc{
 	Field:         64016,
 	Name:          "gogoproto.benchgen",
 	Tag:           "varint,64016,opt,name=benchgen",
+	Filename:      "gogo.proto",
 }
 
 var E_Marshaler = &proto.ExtensionDesc{
@@ -378,6 +421,7 @@ var E_Marshaler = &proto.ExtensionDesc{
 	Field:         64017,
 	Name:          "gogoproto.marshaler",
 	Tag:           "varint,64017,opt,name=marshaler",
+	Filename:      "gogo.proto",
 }
 
 var E_Unmarshaler = &proto.ExtensionDesc{
@@ -386,6 +430,7 @@ var E_Unmarshaler = &proto.ExtensionDesc{
 	Field:         64018,
 	Name:          "gogoproto.unmarshaler",
 	Tag:           "varint,64018,opt,name=unmarshaler",
+	Filename:      "gogo.proto",
 }
 
 var E_StableMarshaler = &proto.ExtensionDesc{
@@ -394,6 +439,7 @@ var E_StableMarshaler = &proto.ExtensionDesc{
 	Field:         64019,
 	Name:          "gogoproto.stable_marshaler",
 	Tag:           "varint,64019,opt,name=stable_marshaler,json=stableMarshaler",
+	Filename:      "gogo.proto",
 }
 
 var E_Sizer = &proto.ExtensionDesc{
@@ -402,6 +448,7 @@ var E_Sizer = &proto.ExtensionDesc{
 	Field:         64020,
 	Name:          "gogoproto.sizer",
 	Tag:           "varint,64020,opt,name=sizer",
+	Filename:      "gogo.proto",
 }
 
 var E_UnsafeMarshaler = &proto.ExtensionDesc{
@@ -410,6 +457,7 @@ var E_UnsafeMarshaler = &proto.ExtensionDesc{
 	Field:         64023,
 	Name:          "gogoproto.unsafe_marshaler",
 	Tag:           "varint,64023,opt,name=unsafe_marshaler,json=unsafeMarshaler",
+	Filename:      "gogo.proto",
 }
 
 var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
@@ -418,6 +466,7 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 	Field:         64024,
 	Name:          "gogoproto.unsafe_unmarshaler",
 	Tag:           "varint,64024,opt,name=unsafe_unmarshaler,json=unsafeUnmarshaler",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
@@ -426,6 +475,7 @@ var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
 	Field:         64025,
 	Name:          "gogoproto.goproto_extensions_map",
 	Tag:           "varint,64025,opt,name=goproto_extensions_map,json=goprotoExtensionsMap",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoUnrecognized = &proto.ExtensionDesc{
@@ -434,6 +484,7 @@ var E_GoprotoUnrecognized = &proto.ExtensionDesc{
 	Field:         64026,
 	Name:          "gogoproto.goproto_unrecognized",
 	Tag:           "varint,64026,opt,name=goproto_unrecognized,json=goprotoUnrecognized",
+	Filename:      "gogo.proto",
 }
 
 var E_Protosizer = &proto.ExtensionDesc{
@@ -442,6 +493,7 @@ var E_Protosizer = &proto.ExtensionDesc{
 	Field:         64028,
 	Name:          "gogoproto.protosizer",
 	Tag:           "varint,64028,opt,name=protosizer",
+	Filename:      "gogo.proto",
 }
 
 var E_Compare = &proto.ExtensionDesc{
@@ -450,6 +502,7 @@ var E_Compare = &proto.ExtensionDesc{
 	Field:         64029,
 	Name:          "gogoproto.compare",
 	Tag:           "varint,64029,opt,name=compare",
+	Filename:      "gogo.proto",
 }
 
 var E_Nullable = &proto.ExtensionDesc{
@@ -458,6 +511,7 @@ var E_Nullable = &proto.ExtensionDesc{
 	Field:         65001,
 	Name:          "gogoproto.nullable",
 	Tag:           "varint,65001,opt,name=nullable",
+	Filename:      "gogo.proto",
 }
 
 var E_Embed = &proto.ExtensionDesc{
@@ -466,6 +520,7 @@ var E_Embed = &proto.ExtensionDesc{
 	Field:         65002,
 	Name:          "gogoproto.embed",
 	Tag:           "varint,65002,opt,name=embed",
+	Filename:      "gogo.proto",
 }
 
 var E_Customtype = &proto.ExtensionDesc{
@@ -474,6 +529,7 @@ var E_Customtype = &proto.ExtensionDesc{
 	Field:         65003,
 	Name:          "gogoproto.customtype",
 	Tag:           "bytes,65003,opt,name=customtype",
+	Filename:      "gogo.proto",
 }
 
 var E_Customname = &proto.ExtensionDesc{
@@ -482,6 +538,7 @@ var E_Customname = &proto.ExtensionDesc{
 	Field:         65004,
 	Name:          "gogoproto.customname",
 	Tag:           "bytes,65004,opt,name=customname",
+	Filename:      "gogo.proto",
 }
 
 var E_Jsontag = &proto.ExtensionDesc{
@@ -490,6 +547,7 @@ var E_Jsontag = &proto.ExtensionDesc{
 	Field:         65005,
 	Name:          "gogoproto.jsontag",
 	Tag:           "bytes,65005,opt,name=jsontag",
+	Filename:      "gogo.proto",
 }
 
 var E_Moretags = &proto.ExtensionDesc{
@@ -498,6 +556,7 @@ var E_Moretags = &proto.ExtensionDesc{
 	Field:         65006,
 	Name:          "gogoproto.moretags",
 	Tag:           "bytes,65006,opt,name=moretags",
+	Filename:      "gogo.proto",
 }
 
 var E_Casttype = &proto.ExtensionDesc{
@@ -506,6 +565,7 @@ var E_Casttype = &proto.ExtensionDesc{
 	Field:         65007,
 	Name:          "gogoproto.casttype",
 	Tag:           "bytes,65007,opt,name=casttype",
+	Filename:      "gogo.proto",
 }
 
 var E_Castkey = &proto.ExtensionDesc{
@@ -514,6 +574,7 @@ var E_Castkey = &proto.ExtensionDesc{
 	Field:         65008,
 	Name:          "gogoproto.castkey",
 	Tag:           "bytes,65008,opt,name=castkey",
+	Filename:      "gogo.proto",
 }
 
 var E_Castvalue = &proto.ExtensionDesc{
@@ -522,6 +583,7 @@ var E_Castvalue = &proto.ExtensionDesc{
 	Field:         65009,
 	Name:          "gogoproto.castvalue",
 	Tag:           "bytes,65009,opt,name=castvalue",
+	Filename:      "gogo.proto",
 }
 
 var E_Stdtime = &proto.ExtensionDesc{
@@ -530,6 +592,7 @@ var E_Stdtime = &proto.ExtensionDesc{
 	Field:         65010,
 	Name:          "gogoproto.stdtime",
 	Tag:           "varint,65010,opt,name=stdtime",
+	Filename:      "gogo.proto",
 }
 
 var E_Stdduration = &proto.ExtensionDesc{
@@ -538,6 +601,7 @@ var E_Stdduration = &proto.ExtensionDesc{
 	Field:         65011,
 	Name:          "gogoproto.stdduration",
 	Tag:           "varint,65011,opt,name=stdduration",
+	Filename:      "gogo.proto",
 }
 
 func init() {
