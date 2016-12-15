@@ -494,6 +494,18 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 			out.write(`null`)
 			return out.err
 		}
+
+		if m, ok := v.Interface().(interface {
+			MarshalJSON() ([]byte, error)
+		}); ok {
+			data, err := m.MarshalJSON()
+			if err != nil {
+				return err
+			}
+			out.write(string(data))
+			return nil
+		}
+
 		pm, ok := iface.(proto.Message)
 		if !ok {
 			if prop.CustomType == "" {
@@ -739,6 +751,14 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 	// Handle nested messages.
 	if targetType.Kind() == reflect.Struct {
+		if target.CanAddr() {
+			if m, ok := target.Addr().Interface().(interface {
+				UnmarshalJSON([]byte) error
+			}); ok {
+				return json.Unmarshal(inputValue, m)
+			}
+		}
+
 		var jsonFields map[string]json.RawMessage
 		if err := json.Unmarshal(inputValue, &jsonFields); err != nil {
 			return err

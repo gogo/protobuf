@@ -624,3 +624,26 @@ message Node {
 	repeated Node Children = 2;
 }
 
+message NonByteCustomType {
+  optional ProtoType Field1 = 1 [(gogoproto.customtype) = "T"];
+}
+
+message NidOptNonByteCustomType {
+	optional ProtoType Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.nullable) = false];
+}
+
+message NinOptNonByteCustomType {
+	optional ProtoType Field1 = 1 [(gogoproto.customtype) = "T"];
+}
+
+message NidRepNonByteCustomType {
+	repeated ProtoType Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.nullable) = false];
+}
+
+message NinRepNonByteCustomType {
+	repeated ProtoType Field1 = 1 [(gogoproto.customtype) = "T"];
+}
+
+message ProtoType {
+  optional string Field2 = 1;
+}

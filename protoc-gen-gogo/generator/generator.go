@@ -1769,7 +1769,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 
 func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf bool) bool {
 	if isRepeated(field) &&
-		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
+		(*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE || gogoproto.IsCustomType(field)) &&
 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) {
 		return false
 	}

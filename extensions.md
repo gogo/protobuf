@@ -37,7 +37,7 @@ You might also find that basic structs that started their life as part of an API
 <tr><td><b>Name</b></td><td><b>Option</b></td><td><b>Type</b></td><td><b>Description</b></td><td><b>Default</b></td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto">nullable</a></td><td> Field </td><td> bool </td><td> if false, a field is generated without a pointer (see warning below). </td><td> true </td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto">embed</a></td><td> Field </td><td> bool </td><td> if true, the field is generated as an embedded field. </td><td> false </td></tr>
-<tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto">customtype</a> </td><td> Field </td><td> string </td><td> It works with the Marshal and Unmarshal methods, to allow you to have your own types in your struct, but marshal to bytes. For example, custom.Uuid or custom.Fixed128 </td><td> goprotobuf type </td></tr>
+<tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto">customtype</a> </td><td> Field </td><td> string </td><td> It works with the Marshal and Unmarshal methods, to allow you to have your own types in your struct, but marshal to bytes. For example, custom.Uuid or custom.Fixed128. For more information please refer to the [CustomTypes](custom_types.md) document </td><td> goprotobuf type </td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> customname</a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated fieldname. This is especially useful when generated methods conflict with fieldnames. </td><td> goprotobuf field name </td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> casttype</a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated field type. It assumes that this type is castable to the original goprotobuf field type.  It currently does not support maps, structs or enums. </td><td> goprotobuf field type </td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> castkey </a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated fieldtype for a map key.  All generated code assumes that this type is castable to the protocol buffer field type.  Only supported on maps. </td><td> goprotobuf field type </td></tr>
@@ -49,16 +49,6 @@ You might also find that basic structs that started their life as part of an API
 </table>
 
 `Warning about nullable: according to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set.` 
-
-`Warning about customtype: It is your responsibility to test all cases of your marshaling, unmarshaling and size methods implemented for your custom type.`
-
-Issues with customtype include:
-  * <a href="https://github.com/gogo/protobuf/issues/199">A Bytes method is not allowed.<a/>
-  * <a href="https://github.com/gogo/protobuf/issues/132">Defining a customtype as a fake proto message is broken.</a>
-  * <a href="https://github.com/gogo/protobuf/issues/147">proto.Clone is broken.</a>
-  * <a href="https://github.com/gogo/protobuf/issues/125">Using a proto message as a customtype is not allowed.</a>
-  * <a href="https://github.com/gogo/protobuf/issues/200">cusomtype of type map can not UnmarshalText</a>
-  * <a href="https://github.com/gogo/protobuf/issues/201">customtype of type struct cannot jsonpb unmarshal</a>
 
 # Goprotobuf Compatibility 
 

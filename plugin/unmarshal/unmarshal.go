@@ -806,10 +806,13 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				} else {
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, time.Duration(0))`)
 				}
-			} else if nullable {
+			} else if nullable && !gogoproto.IsCustomType(field) {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
 			} else {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, msgname, `{})`)
+				goType, _ := p.GoType(nil, field)
+				// remove the slice from the type, i.e. []*T -> *T
+				goType = goType[2:]
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, goType, `{})`)
 			}
 			varName := `m.` + fieldname + `[len(m.` + fieldname + `)-1]`
 			buf := `dAtA[iNdEx:postIndex]`
@@ -840,7 +843,9 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else if gogoproto.IsStdDuration(field) {
 				p.P(`m.`, fieldname, ` = new(time.Duration)`)
 			} else {
-				p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+				goType, _ := p.GoType(nil, field)
+				// remove the star from the type
+				p.P(`m.`, fieldname, ` = &`, goType[1:], `{}`)
 			}
 			p.Out()
 			p.P(`}`)
@@ -869,6 +874,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`}`)
 		}
 		p.P(`iNdEx = postIndex`)
+
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		p.P(`var byteLen int`)
 		p.decodeVarint("byteLen", "int")
