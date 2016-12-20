@@ -1507,7 +1507,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		ccPrefix = ""
 	}
 
-	if (!gogoproto.IsEnumDropTypeDeclaration(enum.EnumDescriptorProto)) {
+	if !gogoproto.IsEnumDropTypeDeclaration(enum.EnumDescriptorProto) {
 		g.P("type ", ccTypeName, " int32")
 		g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
 		g.P("const (")
