@@ -30,7 +30,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	protoc-min-version --version="3.0.0" --gogo_out=\
+	protoc-min-version --version="3.0.0" --proto_path=$(GOPATH)/src:$(GOPATH)/src/github.com/gogo/protobuf/protobuf:. --gogo_out=\
 	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
