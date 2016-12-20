@@ -90,6 +90,14 @@ func IsCastValue(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsEnumDropTypeDeclaration(enum *google_protobuf.EnumDescriptorProto) bool {
+	return proto.GetBoolExtension(enum.Options, E_EnumDropTypeDeclaration, false)
+}
+
+func IsDropTypeDeclaration(message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_DropTypeDeclaration, false)
+}
+
 func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {
 	if field == nil {
 		return ""
@@ -242,7 +250,7 @@ func EnabledGoStringer(file *google_protobuf.FileDescriptorProto, message *googl
 }
 
 func HasGoGetters(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
-	return proto.GetBoolExtension(message.Options, E_GoprotoGetters, proto.GetBoolExtension(file.Options, E_GoprotoGettersAll, true))
+	return proto.GetBoolExtension(message.Options, E_GoprotoGetters, proto.GetBoolExtension(file.Options, E_GoprotoGettersAll, true)) && !IsDropTypeDeclaration(message)
 }
 
 func IsUnion(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {

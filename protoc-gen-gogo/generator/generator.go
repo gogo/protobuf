@@ -1506,23 +1506,27 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	if !gogoproto.EnabledGoEnumPrefix(enum.file, enum.EnumDescriptorProto) {
 		ccPrefix = ""
 	}
-	g.P("type ", ccTypeName, " int32")
-	g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
-	g.P("const (")
-	g.In()
-	for i, e := range enum.Value {
-		g.PrintComments(fmt.Sprintf("%s,%d,%d", enum.path, enumValuePath, i))
-		name := *e.Name
-		if gogoproto.IsEnumValueCustomName(e) {
-			name = gogoproto.GetEnumValueCustomName(e)
-		}
-		name = ccPrefix + name
 
-		g.P(name, " ", ccTypeName, " = ", e.Number)
-		g.file.addExport(enum, constOrVarSymbol{name, "const", ccTypeName})
+	if (!gogoproto.IsEnumDropTypeDeclaration(enum.EnumDescriptorProto)) {
+		g.P("type ", ccTypeName, " int32")
+		g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
+		g.P("const (")
+		g.In()
+		for i, e := range enum.Value {
+			g.PrintComments(fmt.Sprintf("%s,%d,%d", enum.path, enumValuePath, i))
+			name := *e.Name
+			if gogoproto.IsEnumValueCustomName(e) {
+				name = gogoproto.GetEnumValueCustomName(e)
+			}
+			name = ccPrefix + name
+
+			g.P(name, " ", ccTypeName, " = ", e.Number)
+			g.file.addExport(enum, constOrVarSymbol{name, "const", ccTypeName})
+		}
+		g.Out()
+		g.P(")")
 	}
-	g.Out()
-	g.P(")")
+
 	g.P("var ", ccTypeName, "_name = map[int32]string{")
 	g.In()
 	generated := make(map[int32]bool) // avoid duplicate values
@@ -2046,149 +2050,151 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	oneofTypeName := make(map[*descriptor.FieldDescriptorProto]string) // without star
 	oneofInsertPoints := make(map[int32]int)                           // oneof_index => offset of g.Buffer
 
-	g.PrintComments(message.path)
-	g.P("type ", ccTypeName, " struct {")
-	g.In()
+	if !gogoproto.IsDropTypeDeclaration(message.DescriptorProto) {
+		g.PrintComments(message.path)
+		g.P("type ", ccTypeName, " struct {")
+		g.In()
 
-	// allocNames finds a conflict-free variation of the given strings,
-	// consistently mutating their suffixes.
-	// It returns the same number of strings.
-	allocNames := func(ns ...string) []string {
-	Loop:
-		for {
-			for _, n := range ns {
-				if usedNames[n] {
-					for i := range ns {
-						ns[i] += "_"
-					}
-					continue Loop
-				}
-			}
-			for _, n := range ns {
-				usedNames[n] = true
-			}
-			return ns
-		}
-	}
-
-	for i, field := range message.Field {
-		// Allocate the getter and the field at the same time so name
-		// collisions create field/method consistent names.
-		// TODO: This allocation occurs based on the order of the fields
-		// in the proto file, meaning that a change in the field
-		// ordering can change generated Method/Field names.
-		base := CamelCase(*field.Name)
-		if gogoproto.IsCustomName(field) {
-			base = gogoproto.GetCustomName(field)
-		}
-		ns := allocNames(base, "Get"+base)
-		fieldName, fieldGetterName := ns[0], ns[1]
-		typename, wiretype := g.GoType(message, field)
-		jsonName := *field.Name
-		jsonTag := jsonName + ",omitempty"
-		repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
-		if !gogoproto.IsNullable(field) && !repeatedNativeType {
-			jsonTag = jsonName
-		}
-		gogoJsonTag := gogoproto.GetJsonTag(field)
-		if gogoJsonTag != nil {
-			jsonTag = *gogoJsonTag
-		}
-		gogoMoreTags := gogoproto.GetMoreTags(field)
-		moreTags := ""
-		if gogoMoreTags != nil {
-			moreTags = " " + *gogoMoreTags
-		}
-		tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
-		fieldNames[field] = fieldName
-		fieldGetterNames[field] = fieldGetterName
-		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
-			fieldName = ""
-		}
-
-		oneof := field.OneofIndex != nil && message.allowOneof()
-		if oneof && oneofFieldName[*field.OneofIndex] == "" {
-			odp := message.OneofDecl[int(*field.OneofIndex)]
-			fname := allocNames(CamelCase(odp.GetName()))[0]
-
-			// This is the first field of a oneof we haven't seen before.
-			// Generate the union field.
-			com := g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex))
-			if com {
-				g.P("//")
-			}
-			g.P("// Types that are valid to be assigned to ", fname, ":")
-			// Generate the rest of this comment later,
-			// when we've computed any disambiguation.
-			oneofInsertPoints[*field.OneofIndex] = g.Buffer.Len()
-
-			dname := "is" + ccTypeName + "_" + fname
-			oneofFieldName[*field.OneofIndex] = fname
-			oneofDisc[*field.OneofIndex] = dname
-			otag := `protobuf_oneof:"` + odp.GetName() + `"`
-			g.P(fname, " ", dname, " `", otag, "`")
-		}
-
-		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-			desc := g.ObjectNamed(field.GetTypeName())
-			if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
-				m := g.GoMapType(d, field)
-				typename = m.GoType
-				mapFieldTypes[field] = typename // record for the getter generation
-
-				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
-			}
-		}
-
-		fieldTypes[field] = typename
-
-		if oneof {
-			tname := ccTypeName + "_" + fieldName
-			// It is possible for this to collide with a message or enum
-			// nested in this message. Check for collisions.
+		// allocNames finds a conflict-free variation of the given strings,
+		// consistently mutating their suffixes.
+		// It returns the same number of strings.
+		allocNames := func(ns ...string) []string {
+		Loop:
 			for {
-				ok := true
-				for _, desc := range message.nested {
-					if CamelCaseSlice(desc.TypeName()) == tname {
-						ok = false
-						break
+				for _, n := range ns {
+					if usedNames[n] {
+						for i := range ns {
+							ns[i] += "_"
+						}
+						continue Loop
 					}
 				}
-				for _, enum := range message.enums {
-					if CamelCaseSlice(enum.TypeName()) == tname {
-						ok = false
-						break
-					}
+				for _, n := range ns {
+					usedNames[n] = true
 				}
-				if !ok {
-					tname += "_"
-					continue
-				}
-				break
+				return ns
+			}
+		}
+
+		for i, field := range message.Field {
+			// Allocate the getter and the field at the same time so name
+			// collisions create field/method consistent names.
+			// TODO: This allocation occurs based on the order of the fields
+			// in the proto file, meaning that a change in the field
+			// ordering can change generated Method/Field names.
+			base := CamelCase(*field.Name)
+			if gogoproto.IsCustomName(field) {
+				base = gogoproto.GetCustomName(field)
+			}
+			ns := allocNames(base, "Get"+base)
+			fieldName, fieldGetterName := ns[0], ns[1]
+			typename, wiretype := g.GoType(message, field)
+			jsonName := *field.Name
+			jsonTag := jsonName + ",omitempty"
+			repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
+			if !gogoproto.IsNullable(field) && !repeatedNativeType {
+				jsonTag = jsonName
+			}
+			gogoJsonTag := gogoproto.GetJsonTag(field)
+			if gogoJsonTag != nil {
+				jsonTag = *gogoJsonTag
+			}
+			gogoMoreTags := gogoproto.GetMoreTags(field)
+			moreTags := ""
+			if gogoMoreTags != nil {
+				moreTags = " " + *gogoMoreTags
+			}
+			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+			fieldNames[field] = fieldName
+			fieldGetterNames[field] = fieldGetterName
+			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
+				fieldName = ""
 			}
 
-			oneofTypeName[field] = tname
-			continue
-		}
+			oneof := field.OneofIndex != nil && message.allowOneof()
+			if oneof && oneofFieldName[*field.OneofIndex] == "" {
+				odp := message.OneofDecl[int(*field.OneofIndex)]
+				fname := allocNames(CamelCase(odp.GetName()))[0]
 
-		g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i))
-		g.P(fieldName, "\t", typename, "\t`", tag, "`")
-		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
-			g.RecordTypeUse(field.GetTypeName())
+				// This is the first field of a oneof we haven't seen before.
+				// Generate the union field.
+				com := g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex))
+				if com {
+					g.P("//")
+				}
+				g.P("// Types that are valid to be assigned to ", fname, ":")
+				// Generate the rest of this comment later,
+				// when we've computed any disambiguation.
+				oneofInsertPoints[*field.OneofIndex] = g.Buffer.Len()
+
+				dname := "is" + ccTypeName + "_" + fname
+				oneofFieldName[*field.OneofIndex] = fname
+				oneofDisc[*field.OneofIndex] = dname
+				otag := `protobuf_oneof:"` + odp.GetName() + `"`
+				g.P(fname, " ", dname, " `", otag, "`")
+			}
+
+			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+				desc := g.ObjectNamed(field.GetTypeName())
+				if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
+					m := g.GoMapType(d, field)
+					typename = m.GoType
+					mapFieldTypes[field] = typename // record for the getter generation
+
+					tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
+				}
+			}
+
+			fieldTypes[field] = typename
+
+			if oneof {
+				tname := ccTypeName + "_" + fieldName
+				// It is possible for this to collide with a message or enum
+				// nested in this message. Check for collisions.
+				for {
+					ok := true
+					for _, desc := range message.nested {
+						if CamelCaseSlice(desc.TypeName()) == tname {
+							ok = false
+							break
+						}
+					}
+					for _, enum := range message.enums {
+						if CamelCaseSlice(enum.TypeName()) == tname {
+							ok = false
+							break
+						}
+					}
+					if !ok {
+						tname += "_"
+						continue
+					}
+					break
+				}
+
+				oneofTypeName[field] = tname
+				continue
+			}
+
+			g.PrintComments(fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i))
+			g.P(fieldName, "\t", typename, "\t`", tag, "`")
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+				g.RecordTypeUse(field.GetTypeName())
+			}
 		}
-	}
-	if len(message.ExtensionRange) > 0 {
-		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
-			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `json:\"-\"`")
-		} else {
-			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
+		if len(message.ExtensionRange) > 0 {
+			if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(g.Pkg["proto"], ".XXX_InternalExtensions `json:\"-\"`")
+			} else {
+				g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
+			}
 		}
+		if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) && !message.proto3() {
+			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
+		}
+		g.Out()
+		g.P("}")
 	}
-	if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) && !message.proto3() {
-		g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
-	}
-	g.Out()
-	g.P("}")
 
 	// Update g.Buffer to list valid oneof types.
 	// We do this down here, after we've disambiguated the oneof type names.
