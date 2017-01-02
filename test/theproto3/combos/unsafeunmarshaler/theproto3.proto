@@ -162,3 +162,7 @@ message ContainsNestedMap {
 		map<string, double> NestedMapField = 1;
 	}
 }
+
+message NotPacked {
+	repeated int32 int32s = 1 [packed=false];
+}
