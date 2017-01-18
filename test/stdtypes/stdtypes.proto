@@ -42,6 +42,7 @@ option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.equal_all) = true;
+option (gogoproto.gostring_all) = true;
 option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.unsafe_marshaler_all) = false;
 option (gogoproto.unsafe_unmarshaler_all) = false;
