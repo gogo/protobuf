@@ -21,6 +21,13 @@ message Dropped {
     int32 age = 2;
 }
 
+message DroppedWithoutGetters {
+    option (gogoproto.drop_type_declaration) = true;
+    option (gogoproto.goproto_getters) = false;
+    int64 height = 1;
+    int64 width = 2;
+}
+
 message Kept {
     string name = 1;
     int32 age = 2;

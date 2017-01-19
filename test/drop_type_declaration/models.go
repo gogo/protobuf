@@ -9,10 +9,11 @@ func (d *Dropped) Drop() bool {
 	return true
 }
 
-func (d *Dropped) GetName() string {
-	return d.Name
+type DroppedWithoutGetters struct {
+	Width  int64
+	Height int64
 }
 
-func (d *Dropped) GetAge() int32 {
-	return d.Age
+func (d *DroppedWithoutGetters) GetHeight() int64 {
+	return d.Height
 }

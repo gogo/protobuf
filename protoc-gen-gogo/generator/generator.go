@@ -2050,44 +2050,45 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	oneofTypeName := make(map[*descriptor.FieldDescriptorProto]string) // without star
 	oneofInsertPoints := make(map[int32]int)                           // oneof_index => offset of g.Buffer
 
+	// allocNames finds a conflict-free variation of the given strings,
+	// consistently mutating their suffixes.
+	// It returns the same number of strings.
+	allocNames := func(ns ...string) []string {
+	Loop:
+		for {
+			for _, n := range ns {
+				if usedNames[n] {
+					for i := range ns {
+						ns[i] += "_"
+					}
+					continue Loop
+				}
+			}
+			for _, n := range ns {
+				usedNames[n] = true
+			}
+			return ns
+		}
+	}
+
+	for _, field := range message.Field {
+		base := CamelCase(*field.Name)
+		if gogoproto.IsCustomName(field) {
+			base = gogoproto.GetCustomName(field)
+		}
+		ns := allocNames(base, "Get"+base)
+		fieldName, fieldGetterName := ns[0], ns[1]
+		fieldNames[field] = fieldName
+		fieldGetterNames[field] = fieldGetterName
+	}
+
 	if !gogoproto.IsDropTypeDeclaration(message.DescriptorProto) {
 		g.PrintComments(message.path)
 		g.P("type ", ccTypeName, " struct {")
 		g.In()
 
-		// allocNames finds a conflict-free variation of the given strings,
-		// consistently mutating their suffixes.
-		// It returns the same number of strings.
-		allocNames := func(ns ...string) []string {
-		Loop:
-			for {
-				for _, n := range ns {
-					if usedNames[n] {
-						for i := range ns {
-							ns[i] += "_"
-						}
-						continue Loop
-					}
-				}
-				for _, n := range ns {
-					usedNames[n] = true
-				}
-				return ns
-			}
-		}
-
 		for i, field := range message.Field {
-			// Allocate the getter and the field at the same time so name
-			// collisions create field/method consistent names.
-			// TODO: This allocation occurs based on the order of the fields
-			// in the proto file, meaning that a change in the field
-			// ordering can change generated Method/Field names.
-			base := CamelCase(*field.Name)
-			if gogoproto.IsCustomName(field) {
-				base = gogoproto.GetCustomName(field)
-			}
-			ns := allocNames(base, "Get"+base)
-			fieldName, fieldGetterName := ns[0], ns[1]
+			fieldName := fieldNames[field]
 			typename, wiretype := g.GoType(message, field)
 			jsonName := *field.Name
 			jsonTag := jsonName + ",omitempty"
@@ -2105,8 +2106,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				moreTags = " " + *gogoMoreTags
 			}
 			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
-			fieldNames[field] = fieldName
-			fieldGetterNames[field] = fieldGetterName
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 				fieldName = ""
 			}
