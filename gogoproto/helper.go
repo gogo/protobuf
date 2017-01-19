@@ -343,3 +343,18 @@ func ImportsGoGoProto(file *google_protobuf.FileDescriptorProto) bool {
 func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Compare, proto.GetBoolExtension(file.Options, E_CompareAll, false))
 }
+
+func GetProtoRegisterPrefix(file *google_protobuf.FileDescriptorProto) string {
+	if file != nil && file.Options != nil {
+		v, err := proto.GetExtension(file.Options, E_ProtoRegisterPrefix)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+
+	return ""
+}
+
+func HasProtoRegisterPrefix(file *google_protobuf.FileDescriptorProto) bool {
+	return len(GetProtoRegisterPrefix(file)) > 0
+}
