@@ -23,7 +23,7 @@ See [BenchComparison](https://github.com/gogo/protobuf/blob/master/bench.md) for
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/plugin/marshalto"> unsafe_marshaler</a> </td><td> Message </td><td> bool </td><td> if true, a Marshal and MarshalTo method is generated for the specific message. The generated code uses the unsafe package. </td><td> false</td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/plugin/unmarshal">unsafe_unmarshaler</a></td><td> Message </td><td> bool </td><td> if true, an Unmarshal method is generated for the specific message. The generated code uses the unsafe package. </td><td> false</td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/plugin/marshalto">stable_marshaler</a></td><td> Message </td><td> bool </td><td> if true, a Marshal and MarshalTo method is generated for the specific message, but unlike marshaler the output is guaranteed to be deterministic, at the sacrifice of some speed</td><td> false </td></tr>
-<tr><td>typedecl (beta)</td><td> Message </td><td> bool </td><td> if false, type declaration of the message are excluded from output. </td><td> true </td></tr>
+<tr><td>typedecl (beta)</td><td> Message </td><td> bool </td><td> if false, type declaration of the message is excluded from the generated output. Requires the marshaler and unmarshaler to be generated.</td><td> true </td></tr>
 </table>
 
 # More Canonical Go Structures
@@ -44,7 +44,7 @@ You might also find that basic structs that started their life as part of an API
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> castkey </a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated fieldtype for a map key.  All generated code assumes that this type is castable to the protocol buffer field type.  Only supported on maps. </td><td> goprotobuf field type </td></tr>
 <tr><td><a href="http://godoc.org/github.com/gogo/protobuf/gogoproto"> castvalue </a> (beta) </td><td> Field </td><td> string </td><td> Changes the generated fieldtype for a map value.  All generated code assumes that this type is castable to the protocol buffer field type.  Only supported on maps. </td><td> goprotobuf field type </td></tr>
 <tr><td>enum_customname  (beta)</td><td> Enum </td><td> string </td><td>Sets the type name of an enum. If goproto_enum_prefix is enabled, this value will be used as a prefix when generating enum values.</td><td>goprotobuf enum type name. Helps with golint issues.</td></tr>
-<tr><td>enumdecl (beta)</td><td> Enum </td><td> bool </td><td> if false, type declaration of the enum are excluded from output. </td><td> true </td></tr>
+<tr><td>enumdecl (beta)</td><td> Enum </td><td> bool </td><td> if false, type declaration of the enum is excluded from the generated output. Requires the marshaler and unmarshaler to be generated. </td><td> true </td></tr>
 <tr><td>enumvalue_customname (beta) </td><td> Enum Value </td><td> string </td><td>Changes the generated enum name.  Helps with golint issues.</td><td>goprotobuf enum value name</td></tr>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/types/types.proto">stdtime</a></td><td> Timestamp Field </td><td> bool </td><td>Changes the Well Known Timestamp Type to time.Time</td><td>Timestamp</td></tr>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/types/types.proto">stdduration</a></td><td> Duration Field </td><td> bool </td><td>Changes the Well Known Duration Type to time.Duration</td><td>Duration</td></tr>
