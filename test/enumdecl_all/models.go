@@ -1,4 +1,4 @@
-package enumdroptypedeclaration
+package enumdeclall
 
 type MyEnum int32
 

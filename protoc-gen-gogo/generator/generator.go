@@ -1507,7 +1507,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		ccPrefix = ""
 	}
 
-	if !gogoproto.IsEnumDropTypeDeclaration(enum.EnumDescriptorProto) {
+	if gogoproto.HasEnumDecl(enum.file, enum.EnumDescriptorProto) {
 		g.P("type ", ccTypeName, " int32")
 		g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
 		g.P("const (")
@@ -2087,7 +2087,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fieldGetterNames[field] = fieldGetterName
 	}
 
-	if !gogoproto.IsDropTypeDeclaration(message.DescriptorProto) {
+	if gogoproto.HasTypeDecl(message.file, message.DescriptorProto) {
 		g.PrintComments(message.path)
 		g.P("type ", ccTypeName, " struct {")
 		g.In()

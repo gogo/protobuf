@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package droptypedeclaration;
+package enumdecl;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
@@ -15,20 +15,13 @@ option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.unsafe_marshaler_all) = false;
 option (gogoproto.unsafe_unmarshaler_all) = false;
 
-message Dropped {
-    option (gogoproto.drop_type_declaration) = true;
-    string name = 1;
-    int32 age = 2;
+enum MyEnum {
+    option (gogoproto.enumdecl) = false;
+    option (gogoproto.goproto_enum_prefix) = false;
+    A = 0;
+    B = 1;
 }
 
-message DroppedWithoutGetters {
-    option (gogoproto.drop_type_declaration) = true;
-    option (gogoproto.goproto_getters) = false;
-    int64 height = 1;
-    int64 width = 2;
-}
-
-message Kept {
-    string name = 1;
-    int32 age = 2;
+message Message {
+    MyEnum enumerated_field = 1;
 }

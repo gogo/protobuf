@@ -1,4 +1,4 @@
-package droptypedeclaration
+package typedeclall
 
 type Dropped struct {
 	Name string
