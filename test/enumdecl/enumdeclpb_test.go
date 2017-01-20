@@ -3,7 +3,7 @@
 // DO NOT EDIT!
 
 /*
-Package enumdroptypedeclaration is a generated protocol buffer package.
+Package enumdecl is a generated protocol buffer package.
 
 It is generated from these files:
 	enumdecl.proto
@@ -11,7 +11,7 @@ It is generated from these files:
 It has these top-level messages:
 	Message
 */
-package enumdroptypedeclaration
+package enumdecl
 
 import testing "testing"
 import math_rand "math/rand"

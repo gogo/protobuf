@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package typedeclall;
+package typedecl;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 

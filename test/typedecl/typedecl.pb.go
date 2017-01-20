@@ -33,11 +33,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
-type Dropped struct {
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Age  int32  `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
-}
-
 func (m *Dropped) Reset()                    { *m = Dropped{} }
 func (m *Dropped) String() string            { return proto.CompactTextString(m) }
 func (*Dropped) ProtoMessage()               {}
@@ -55,11 +50,6 @@ func (m *Dropped) GetAge() int32 {
 		return m.Age
 	}
 	return 0
-}
-
-type DroppedWithoutGetters struct {
-	Height int64 `protobuf:"varint,1,opt,name=height,proto3" json:"height,omitempty"`
-	Width  int64 `protobuf:"varint,2,opt,name=width,proto3" json:"width,omitempty"`
 }
 
 func (m *DroppedWithoutGetters) Reset()                    { *m = DroppedWithoutGetters{} }
