@@ -2393,6 +2393,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if gogoproto.IsProtoSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
 				g.P(`ProtoSize() int`)
 			}
+			if gogoproto.HasCompare(g.file.FileDescriptorProto, message.DescriptorProto) {
+				g.P(`Compare(interface{}) int`)
+			}
 			g.Out()
 			g.P("}")
 		}
