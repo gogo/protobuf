@@ -2072,6 +2072,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	for _, field := range message.Field {
+		// Allocate the getter and the field at the same time so name
+		// collisions create field/method consistent names.
+		// TODO: This allocation occurs based on the order of the fields
+		// in the proto file, meaning that a change in the field
+		// ordering can change generated Method/Field names.
 		base := CamelCase(*field.Name)
 		if gogoproto.IsCustomName(field) {
 			base = gogoproto.GetCustomName(field)
