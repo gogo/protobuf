@@ -103,6 +103,10 @@ regenerate:
 	make -C test/proto3extension regenerate
 	make -C test/stdtypes regenerate
 	make -C test/data regenerate
+	make -C test/typedecl regenerate
+	make -C test/enumdecl regenerate
+	make -C test/typedecl_all regenerate
+	make -C test/enumdecl_all regenerate
 	make gofmt
 
 tests:
