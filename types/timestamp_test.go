@@ -143,14 +143,12 @@ func BenchmarkStdTimeUnmarshal(b *testing.B) {
 	}
 
 	b.ReportAllocs()
-	b.RunParallel(func(pb *testing.PB) {
-		var t time.Time
-		for pb.Next() {
-			if err := StdTimeUnmarshal(&t, data); err != nil {
-				panic(err)
-			}
+	var t time.Time
+	for i := 0; i < b.N; i++ {
+		if err := StdTimeUnmarshal(&t, data); err != nil {
+			panic(err)
 		}
-	})
+	}
 }
 
 func TestStdTimeUnmarshalAllocs(t *testing.T) {
