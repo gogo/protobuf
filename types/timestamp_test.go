@@ -152,3 +152,20 @@ func BenchmarkStdTimeUnmarshal(b *testing.B) {
 		}
 	})
 }
+
+func TestStdTimeUnmarshalAllocs(t *testing.T) {
+	data, err := StdTimeMarshal(time.Time{})
+	if err != nil {
+		panic(err)
+	}
+
+	var tt time.Time
+	avg := testing.AllocsPerRun(1000, func() {
+		if err := StdTimeUnmarshal(&tt, data); err != nil {
+			t.Fatal(err)
+		}
+	})
+	if avg > 0 {
+		t.Fatal("unexpected allocs")
+	}
+}
