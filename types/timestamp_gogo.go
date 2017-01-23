@@ -29,6 +29,8 @@
 package types
 
 import (
+	"fmt"
+	"io"
 	"time"
 )
 
@@ -81,14 +83,104 @@ func StdTimeMarshalTo(t time.Time, data []byte) (int, error) {
 }
 
 func StdTimeUnmarshal(t *time.Time, data []byte) error {
-	ts := &Timestamp{}
-	if err := ts.Unmarshal(data); err != nil {
-		return err
-	}
-	tt, err := TimestampFromProto(ts)
+	tt, err := unmarshalTimestampToStdTime(data)
 	if err != nil {
 		return err
 	}
 	*t = tt
 	return nil
+}
+
+func unmarshalTimestampToStdTime(dAtA []byte) (time.Time, error) {
+	var (
+		seconds int64
+		nanos   int32
+	)
+
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return time.Time{}, ErrIntOverflowTimestamp
+			}
+			if iNdEx >= l {
+				return time.Time{}, io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return time.Time{}, fmt.Errorf("proto: Timestamp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return time.Time{}, fmt.Errorf("proto: Timestamp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return time.Time{}, fmt.Errorf("proto: wrong wireType = %d for field Seconds", wireType)
+			}
+			seconds = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return time.Time{}, ErrIntOverflowTimestamp
+				}
+				if iNdEx >= l {
+					return time.Time{}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				seconds |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return time.Time{}, fmt.Errorf("proto: wrong wireType = %d for field Nanos", wireType)
+			}
+			nanos = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return time.Time{}, ErrIntOverflowTimestamp
+				}
+				if iNdEx >= l {
+					return time.Time{}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				nanos |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTimestamp(dAtA[iNdEx:])
+			if err != nil {
+				return time.Time{}, err
+			}
+			if skippy < 0 {
+				return time.Time{}, ErrInvalidLengthTimestamp
+			}
+			if (iNdEx + skippy) > l {
+				return time.Time{}, io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return time.Time{}, io.ErrUnexpectedEOF
+	}
+	return time.Unix(seconds, int64(nanos)).UTC(), nil
 }
