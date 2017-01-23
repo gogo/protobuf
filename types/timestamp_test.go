@@ -137,18 +137,31 @@ func utcDate(year, month, day int) time.Time {
 }
 
 func BenchmarkStdTimeUnmarshal(b *testing.B) {
-	data, err := StdTimeMarshal(time.Time{})
-	if err != nil {
-		panic(err)
+	b.ReportAllocs()
+
+	for _, t := range []time.Time{
+		time.Time{},
+		time.Now(),
+	} {
+		name := "zero"
+		if !t.IsZero() {
+			name = "now"
+		}
+		b.Run(name, func(b *testing.B) {
+			data, err := StdTimeMarshal(time.Time{})
+			if err != nil {
+				panic(err)
+			}
+
+			var t time.Time
+			for i := 0; i < b.N; i++ {
+				if err := StdTimeUnmarshal(&t, data); err != nil {
+					panic(err)
+				}
+			}
+		})
 	}
 
-	b.ReportAllocs()
-	var t time.Time
-	for i := 0; i < b.N; i++ {
-		if err := StdTimeUnmarshal(&t, data); err != nil {
-			panic(err)
-		}
-	}
 }
 
 func TestStdTimeUnmarshalAllocs(t *testing.T) {
