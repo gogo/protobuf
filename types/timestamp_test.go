@@ -140,7 +140,7 @@ func BenchmarkStdTimeUnmarshal(b *testing.B) {
 	b.ReportAllocs()
 
 	for _, t := range []time.Time{
-		time.Time{},
+		{},
 		time.Now(),
 	} {
 		name := "zero"
@@ -166,7 +166,7 @@ func BenchmarkStdTimeUnmarshal(b *testing.B) {
 
 func TestStdTimeUnmarshalAllocs(t *testing.T) {
 	for _, in := range []time.Time{
-		time.Time{},
+		{},
 		time.Now(),
 	} {
 
