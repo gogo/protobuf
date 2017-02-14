@@ -442,12 +442,12 @@ func (d *Descriptor) Path() string {
 
 func (g *Generator) useTypes() string {
 	pkg := strings.Map(badToUnderscore, "github.com/gogo/protobuf/types")
-	g.customImports = append(g.customImports, newCustomImport("github.com/gogo/protobuf/types", ""))
+	g.customImports = append(g.customImports, "github.com/gogo/protobuf/types")
 	return pkg
 }
 
 func (g *Generator) useTime() string {
 	pkg := "time"
-	g.customImports = append(g.customImports, newCustomImport("time", ""))
+	g.customImports = append(g.customImports, "time")
 	return pkg
 }
