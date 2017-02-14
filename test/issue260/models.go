@@ -1,4 +1,4 @@
-package getterstypedecl
+package issue260
 
 import "time"
 

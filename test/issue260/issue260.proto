@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package getterstypedecl;
+package issue260;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
