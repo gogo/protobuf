@@ -1487,15 +1487,6 @@ func (g *Generator) generateImports() {
 	g.P("var _ = ", g.Pkg["proto"], ".Marshal")
 	g.P("var _ = ", g.Pkg["fmt"], ".Errorf")
 	g.P("var _ = ", g.Pkg["math"], ".Inf")
-	for _, s := range g.customImports {
-		if s.hasUnderscorableSymbol() {
-			stmt := fmt.Sprintf("var _ = %s.%s", s.Alias, s.UnderscorableSymbol)
-			if !g.writtenImports[stmt] {
-				g.P(stmt)
-				g.writtenImports[stmt] = true
-			}
-		}
-	}
 	g.P()
 }
 
@@ -1913,10 +1904,8 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.customImports = append(g.customImports, newCustomImport(packageName, ""))
 		}
 	case gogoproto.IsStdTime(field):
-		g.customImports = append(g.customImports, newCustomImport("time", "Now"))
 		typ = "time.Time"
 	case gogoproto.IsStdDuration(field):
-		g.customImports = append(g.customImports, newCustomImport("time", "Now"))
 		typ = "time.Duration"
 	}
 	if needsStar(field, g.file.proto3 && field.Extendee == nil, message != nil && message.allowOneof()) {
@@ -2759,6 +2748,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else if gogoproto.IsStdTime(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
+						g.useTime()
 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
 					} else {
 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
@@ -2773,6 +2763,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else if gogoproto.IsStdDuration(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
+						g.useTime()
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
 					} else {
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
