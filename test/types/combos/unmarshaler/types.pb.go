@@ -29,8 +29,8 @@ import google_protobuf1 "github.com/gogo/protobuf/types"
 import google_protobuf2 "github.com/gogo/protobuf/types"
 import google_protobuf3 "github.com/gogo/protobuf/types"
 
-import time "time"
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+import time "time"
 
 import io "io"
 

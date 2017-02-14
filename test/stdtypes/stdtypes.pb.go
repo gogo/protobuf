@@ -23,8 +23,8 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import _ "github.com/gogo/protobuf/types"
 import _ "github.com/gogo/protobuf/types"
 
-import time "time"
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+import time "time"
 
 import strings "strings"
 import reflect "reflect"

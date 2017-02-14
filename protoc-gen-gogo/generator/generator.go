@@ -1882,10 +1882,8 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 			g.customImports = append(g.customImports, packageName)
 		}
 	case gogoproto.IsStdTime(field):
-		g.customImports = append(g.customImports, "time")
 		typ = "time.Time"
 	case gogoproto.IsStdDuration(field):
-		g.customImports = append(g.customImports, "time")
 		typ = "time.Duration"
 	}
 	if needsStar(field, g.file.proto3 && field.Extendee == nil, message != nil && message.allowOneof()) {
@@ -2728,6 +2726,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else if gogoproto.IsStdTime(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
+						g.useTime()
 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
 					} else {
 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
@@ -2742,6 +2741,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else if gogoproto.IsStdDuration(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
+						g.useTime()
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
 					} else {
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
