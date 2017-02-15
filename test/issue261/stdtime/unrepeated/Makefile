@@ -27,5 +27,6 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	- make -C stdduration regenerate
-	- make -C stdtime regenerate
+	- make -C non-nullable regenerate
+	- make -C nullable regenerate
+
