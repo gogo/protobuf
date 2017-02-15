@@ -194,7 +194,6 @@ func (p *plugin) getFuncName(goTypName string) string {
 	case "time.NewPopulatedTime":
 		funcName = p.typesPkg.Use() + ".NewPopulatedStdTime"
 	case "time.NewPopulatedDuration":
-		p.typesPkg.Use()
 		funcName = p.typesPkg.Use() + ".NewPopulatedStdDuration"
 	}
 	return funcName
