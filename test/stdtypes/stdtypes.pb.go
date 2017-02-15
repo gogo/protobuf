@@ -23,8 +23,8 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import _ "github.com/gogo/protobuf/types"
 import _ "github.com/gogo/protobuf/types"
 
-import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 import time "time"
+import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
 import strings "strings"
 import reflect "reflect"
@@ -34,6 +34,7 @@ import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.

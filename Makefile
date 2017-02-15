@@ -105,6 +105,7 @@ regenerate:
 	make -C test/data regenerate
 	make -C test/typedecl regenerate
 	make -C test/issue260 regenerate
+	make -C test/issue262 regenerate
 	make -C test/enumdecl regenerate
 	make -C test/typedecl_all regenerate
 	make -C test/enumdecl_all regenerate
