@@ -28,6 +28,16 @@ message DroppedWithoutGetters {
     int64 height = 1;
     int64 width = 2;
     google.protobuf.Timestamp timestamp = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+    google.protobuf.Timestamp nullable_timestamp = 4 [(gogoproto.stdtime) = true];
+}
+
+message DroppedWithGetters {
+    option (gogoproto.typedecl) = false;
+    option (gogoproto.goproto_getters) = true;
+    int64 height = 1;
+    int64 width = 2;
+    google.protobuf.Timestamp timestamp = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+    google.protobuf.Timestamp nullable_timestamp = 4 [(gogoproto.stdtime) = true];
 }
 
 message Kept {

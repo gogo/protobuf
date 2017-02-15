@@ -17,3 +17,10 @@ type DroppedWithoutGetters struct {
 	Timestamp         time.Time  `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
 	NullableTimestamp *time.Time `protobuf:"bytes,4,opt,name=nullable_timestamp,json=nullableTimestamp,stdtime" json:"nullable_timestamp,omitempty"`
 }
+
+type DroppedWithGetters struct {
+	Width             int64
+	Height            int64
+	Timestamp         time.Time  `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
+	NullableTimestamp *time.Time `protobuf:"bytes,4,opt,name=nullable_timestamp,json=nullableTimestamp,stdtime" json:"nullable_timestamp,omitempty"`
+}

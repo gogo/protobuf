@@ -445,3 +445,9 @@ func (g *Generator) useTypes() string {
 	g.customImports = append(g.customImports, "github.com/gogo/protobuf/types")
 	return pkg
 }
+
+func (g *Generator) UseTime() string {
+	pkg := "time"
+	g.customImports = append(g.customImports, "time")
+	return pkg
+}
