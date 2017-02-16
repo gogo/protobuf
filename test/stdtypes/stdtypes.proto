@@ -35,43 +35,6 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
-option (gogoproto.testgen_all) = true;
-option (gogoproto.populate_all) = true;
-option (gogoproto.benchgen_all) = true;
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = true;
-option (gogoproto.equal_all) = true;
-option (gogoproto.verbose_equal_all) = true;
-option (gogoproto.unsafe_marshaler_all) = false;
-option (gogoproto.unsafe_unmarshaler_all) = false;
-
-message StdTypes {
-  google.protobuf.Timestamp nullableTimestamp = 1 [(gogoproto.stdtime) = true];
-  google.protobuf.Duration nullableDuration = 2 [(gogoproto.stdduration) = true];
-  google.protobuf.Timestamp timestamp = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  google.protobuf.Duration duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-}
-
-message RepStdTypes {
-  repeated google.protobuf.Timestamp nullableTimestamps = 1 [(gogoproto.stdtime) = true];
-  repeated google.protobuf.Duration nullableDurations = 2 [(gogoproto.stdduration) = true];
-  repeated google.protobuf.Timestamp timestamps = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-  repeated google.protobuf.Duration durations = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
-}
-
 message MapStdTypes {
-  map<int32,google.protobuf.Timestamp> nullableTimestamp = 1 [(gogoproto.stdtime) = true];
-  map<int32,google.protobuf.Timestamp> timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-
   map<int32,google.protobuf.Duration> nullableDuration = 3 [(gogoproto.stdduration) = true];
-  map<int32,google.protobuf.Duration> duration = 4 [(gogoproto.stdduration) = true, (gogoproto.nullable) = false];
 }
-
-message OneofStdTypes {
-  oneof OneOfStdTimes {
-    google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
-    google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
-  }
-}
-
