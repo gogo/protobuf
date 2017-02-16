@@ -36,7 +36,6 @@ import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
-var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
