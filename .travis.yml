@@ -24,4 +24,3 @@ matrix:
   allow_failures:
     - go: 1.5.4
     - go: 1.6.3
-    - go: 1.7.1
