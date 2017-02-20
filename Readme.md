@@ -5,7 +5,7 @@
 gogoprotobuf is a fork of <a href="https://github.com/golang/protobuf">golang/protobuf</a> with extra code generation features.
 
 This code generation is used to achieve:
-  
+
   - fast marshalling and unmarshalling
   - more canonical Go structures
   - goprotobuf compatibility
@@ -48,18 +48,18 @@ Please lets us know if you are using gogoprotobuf by posting on our <a href="htt
   - <a href="http://gophercon.sourcegraph.com/post/83747547505/writing-a-high-performance-database-in-go">gophercon</a>
   - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
 
-## Getting Started 
+## Getting Started
 
 There are several ways to use gogoprotobuf, but for all you need to install go and protoc.
 After that you can choose:
- 
+
   - Speed
   - More Speed and more generated code
   - Most Speed and most customization
 
 ### Installation
 
-To install it, you must first have Go (at least version 1.3.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.7.1 is continuously tested.
+To install it, you must first have Go (at least version 1.6.3) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).  Go 1.7.1 and 1.8 is continuously tested.
 
 Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
 Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.1.0 are continuously tested.
