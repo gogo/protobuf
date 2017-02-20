@@ -2745,7 +2745,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				} else if gogoproto.IsStdDuration(field) {
 					pkg := g.useTypes()
 					if gogoproto.IsNullable(field) {
-						g.UseTime()
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
 					} else {
 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
@@ -2869,8 +2868,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.P(`return true, err`)
 				g.Out()
 				g.P(`}`)
-				g.P(`c := new(time.Time)`)
-				g.UseTime()
+				g.P(`c := new(`, g.UseTime(), `.Time)`)
 				g.P(`if err2 := `, pkg, `.StdTimeUnmarshal(c, `, val, `); err2 != nil {`)
 				g.In()
 				g.P(`return true, err`)
@@ -2879,14 +2877,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				val = "c"
 			} else if gogoproto.IsStdDuration(field) {
 				pkg := g.useTypes()
-				g.UseTime()
 				g.P(`if err != nil {`)
 				g.In()
 				g.P(`return true, err`)
 				g.Out()
 				g.P(`}`)
-				g.P(`c := new(time.Duration)`)
-				g.UseTime()
+				g.P(`c := new(`, g.UseTime(), `.Duration)`)
 				g.P(`if err2 := `, pkg, `.StdDurationUnmarshal(c, `, val, `); err2 != nil {`)
 				g.In()
 				g.P(`return true, err`)
