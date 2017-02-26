@@ -735,10 +735,10 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 
 			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
 			// we need to explicitly record their use here.
-			if m.KeyField != m.KeyAliasField {
+			if gogoproto.IsCastKey(field) {
 				p.RecordTypeUse(m.KeyAliasField.GetTypeName())
 			}
-			if m.ValueField != m.ValueAliasField {
+			if gogoproto.IsCastValue(field) {
 				p.RecordTypeUse(m.ValueAliasField.GetTypeName())
 			}
 

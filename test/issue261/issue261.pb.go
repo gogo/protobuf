@@ -3,13 +3,13 @@
 // DO NOT EDIT!
 
 /*
-Package issue261 is a generated protocol buffer package.
+	Package issue261 is a generated protocol buffer package.
 
-It is generated from these files:
-	issue261.proto
+	It is generated from these files:
+		issue261.proto
 
-It has these top-level messages:
-	MapStdTypes
+	It has these top-level messages:
+		MapStdTypes
 */
 package issue261
 
@@ -21,8 +21,13 @@ import _ "github.com/gogo/protobuf/types"
 
 import time "time"
 
-import io "io"
+import strings "strings"
+import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+
+import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -41,7 +46,6 @@ type MapStdTypes struct {
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
-func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorIssue261, []int{0} }
 
@@ -54,6 +58,203 @@ func (m *MapStdTypes) GetNullableDuration() map[int32]*time.Duration {
 
 func init() {
 	proto.RegisterType((*MapStdTypes)(nil), "issue261.MapStdTypes")
+}
+func (this *MapStdTypes) Equal(that interface{}) bool {
+	if that == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	}
+
+	that1, ok := that.(*MapStdTypes)
+	if !ok {
+		that2, ok := that.(MapStdTypes)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return true
+		}
+		return false
+	} else if this == nil {
+		return false
+	}
+	if len(this.NullableDuration) != len(that1.NullableDuration) {
+		return false
+	}
+	for i := range this.NullableDuration {
+		if dthis, dthat := this.NullableDuration[i], that1.NullableDuration[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil) {
+			return false
+		}
+	}
+	return true
+}
+func (this *MapStdTypes) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&issue261.MapStdTypes{")
+	keysForNullableDuration := make([]int32, 0, len(this.NullableDuration))
+	for k := range this.NullableDuration {
+		keysForNullableDuration = append(keysForNullableDuration, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNullableDuration)
+	mapStringForNullableDuration := "map[int32]*time.Duration{"
+	for _, k := range keysForNullableDuration {
+		mapStringForNullableDuration += fmt.Sprintf("%#v: %#v,", k, this.NullableDuration[k])
+	}
+	mapStringForNullableDuration += "}"
+	if this.NullableDuration != nil {
+		s = append(s, "NullableDuration: "+mapStringForNullableDuration+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func valueToGoStringIssue261(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
+func (m *MapStdTypes) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.NullableDuration) > 0 {
+		for k := range m.NullableDuration {
+			dAtA[i] = 0x1a
+			i++
+			v := m.NullableDuration[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
+				msgSize += 1 + sovIssue261(uint64(msgSize))
+			}
+			mapSize := 1 + sovIssue261(uint64(k)) + msgSize
+			i = encodeVarintIssue261(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintIssue261(dAtA, i, uint64(k))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintIssue261(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
+				n1, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n1
+			}
+		}
+	}
+	return i, nil
+}
+
+func encodeFixed64Issue261(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Issue261(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintIssue261(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
+func (m *MapStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NullableDuration) > 0 {
+		for k, v := range m.NullableDuration {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
+				l += 1 + sovIssue261(uint64(l))
+			}
+			mapEntrySize := 1 + sovIssue261(uint64(k)) + l
+			n += mapEntrySize + 1 + sovIssue261(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func sovIssue261(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozIssue261(x uint64) (n int) {
+	return sovIssue261(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *MapStdTypes) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForNullableDuration := make([]int32, 0, len(this.NullableDuration))
+	for k := range this.NullableDuration {
+		keysForNullableDuration = append(keysForNullableDuration, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNullableDuration)
+	mapStringForNullableDuration := "map[int32]*time.Duration{"
+	for _, k := range keysForNullableDuration {
+		mapStringForNullableDuration += fmt.Sprintf("%v: %v,", k, this.NullableDuration[k])
+	}
+	mapStringForNullableDuration += "}"
+	s := strings.Join([]string{`&MapStdTypes{`,
+		`NullableDuration:` + mapStringForNullableDuration + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringIssue261(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -324,8 +525,8 @@ var (
 func init() { proto.RegisterFile("issue261.proto", fileDescriptorIssue261) }
 
 var fileDescriptorIssue261 = []byte{
-	// 224 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
+	// 266 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x32, 0x33, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,
 	0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3, 0xf3, 0xd3, 0xf3, 0xf5,
 	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0x94, 0x92, 0x4b, 0xcf,
@@ -337,6 +538,9 @@ var fileDescriptorIssue261 = []byte{
 	0x8a, 0xe3, 0x12, 0xc5, 0xaa, 0x41, 0x48, 0x80, 0x8b, 0x39, 0x3b, 0xb5, 0x52, 0x82, 0x51, 0x81,
 	0x51, 0x83, 0x35, 0x08, 0xc4, 0x14, 0xd2, 0xe7, 0x62, 0x2d, 0x4b, 0xcc, 0x29, 0x4d, 0x95, 0x60,
 	0x52, 0x60, 0xd4, 0xe0, 0x36, 0x92, 0xd4, 0x83, 0xf8, 0x44, 0x0f, 0xe6, 0x13, 0x3d, 0x98, 0x01,
-	0x41, 0x10, 0x75, 0x56, 0x4c, 0x16, 0x8c, 0x4e, 0x2c, 0x17, 0x1e, 0xc9, 0x31, 0x26, 0xb1, 0x81,
-	0xd5, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x30, 0xfd, 0x8a, 0x46, 0x01, 0x00, 0x00,
+	0x41, 0x10, 0x75, 0x56, 0x4c, 0x16, 0x8c, 0x4e, 0x3a, 0x17, 0x1e, 0xca, 0x31, 0xdc, 0x78, 0x28,
+	0xc7, 0xf0, 0xe1, 0xa1, 0x1c, 0x63, 0xc3, 0x23, 0x39, 0xc6, 0x15, 0x8f, 0xe4, 0x18, 0x4f, 0x3c,
+	0x92, 0x63, 0xbc, 0xf0, 0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x17, 0x8f, 0xe4, 0x18, 0x3e,
+	0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0x21, 0x89, 0x0d, 0x6c, 0x96, 0x31, 0x20, 0x00, 0x00,
+	0xff, 0xff, 0xf1, 0xf2, 0x28, 0x08, 0x6e, 0x01, 0x00, 0x00,
 }
