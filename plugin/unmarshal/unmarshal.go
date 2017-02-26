@@ -735,8 +735,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 
 			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
 			// we need to explicitly record their use here.
-			p.RecordTypeUse(m.KeyAliasField.GetTypeName())
-			p.RecordTypeUse(m.ValueAliasField.GetTypeName())
+			if m.KeyField != m.KeyAliasField {
+				p.RecordTypeUse(m.KeyAliasField.GetTypeName())
+			}
+			if m.ValueField != m.ValueAliasField {
+				p.RecordTypeUse(m.ValueAliasField.GetTypeName())
+			}
 
 			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
 			if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
