@@ -23,7 +23,7 @@ These projects use gogoprotobuf:
   - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a> - <a href="https://github.com/coreos/etcd/blob/master/etcdserver/etcdserverpb/etcdserver.proto">sample proto file</a>
   - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">blog</a>
   - <a href="http://badoo.com">badoo</a> - <a href="https://github.com/badoo/lsd/blob/32061f501c5eca9c76c596d790b450501ba27b2f/proto/lsd.proto">sample proto file</a>
-  - <a href="https://github.com/mesos/mesos-go">mesos-go</a> - <a href="https://github.com/mesos/mesos-go/blob/master/mesosproto/mesos.proto">sample proto file</a>
+  - <a href="https://github.com/mesos/mesos-go">mesos-go</a> - <a href="https://github.com/mesos/mesos-go/blob/f9e5fb7c2f50ab5f23299f26b6b07c5d6afdd252/api/v0/mesosproto/internal.proto">sample proto file</a>
   - <a href="https://github.com/mozilla-services/heka">heka</a> - <a href="https://github.com/mozilla-services/heka/commit/eb72fbf7d2d28249fbaf8d8dc6607f4eb6f03351">the switch from golang/protobuf to gogo/protobuf when it was still on code.google.com</a>
   - <a href="https://github.com/cockroachdb/cockroach">cockroachdb</a> - <a href="https://github.com/cockroachdb/cockroach/blob/651d54d393e391a30154e9117ab4b18d9ee6d845/roachpb/metadata.proto">sample proto file</a>
   - <a href="https://github.com/jbenet/go-ipfs">go-ipfs</a> - <a href="https://github.com/ipfs/go-ipfs/blob/2b6da0c024f28abeb16947fb452787196a6b56a2/merkledag/pb/merkledag.proto">sample proto file</a>
