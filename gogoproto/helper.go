@@ -352,6 +352,6 @@ func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_proto
 	return proto.GetBoolExtension(message.Options, E_Compare, proto.GetBoolExtension(file.Options, E_CompareAll, false))
 }
 
-func EnabledDualRegistration(file *google_protobuf.FileDescriptorProto) bool {
+func RegistersGolangProto(file *google_protobuf.FileDescriptorProto) bool {
 	return proto.GetBoolExtension(file.Options, E_GoprotoRegistration, false)
 }
