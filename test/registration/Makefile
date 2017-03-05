@@ -29,5 +29,4 @@
 test:
 	(protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. registration.proto)
 	cp registration_test.go.in registration_test.go
-	go get -u github.com/golang/protobuf/proto
 	go test ./...
