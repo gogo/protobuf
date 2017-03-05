@@ -3042,7 +3042,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], ccTypeName, fullName)
-	if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) && gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["golang_proto"], ccTypeName, fullName)
 	}
 }
@@ -3103,7 +3103,7 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	if mset {
 		// Generate a bit more code to register with message_set.go.
 		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
-		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) && gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 			g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["golang_proto"], fieldType, *field.Number, extName)
 		}
 	}
@@ -3156,7 +3156,7 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 	v := file.VarName()
 	g.P()
 	g.P("func init() { ", g.Pkg["proto"], ".RegisterFile(", strconv.Quote(*file.Name), ", ", v, ") }")
-	if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) && gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.P("func init() { ", g.Pkg["golang_proto"], ".RegisterFile(", strconv.Quote(*file.Name), ", ", v, ") }")
 	}
 	g.P("var ", v, " = []byte{")
@@ -3191,14 +3191,14 @@ func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
 	g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["proto"], pkg+ccTypeName, ccTypeName)
-	if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) && gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["golang_proto"], pkg+ccTypeName, ccTypeName)
 	}
 }
 
 func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
 	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
-	if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) && gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterExtension(%s)", g.Pkg["golang_proto"], ext.DescName())
 	}
 }
