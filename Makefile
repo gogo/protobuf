@@ -134,6 +134,7 @@ testall:
 	go get -u github.com/golang/protobuf/proto
 	make -C protoc-gen-gogo/testdata test
 	make -C vanity/test test
+	make -C test/registration test
 	make tests
 
 bench:
