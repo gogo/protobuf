@@ -32,7 +32,7 @@ GO_VERSION:=$(shell go version)
 
 all: clean install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install tests vet js
+buildserverall: clean install regenerate install testall vet js
 
 install:
 	go install ./proto
@@ -126,13 +126,8 @@ errcheck:
 	go get github.com/kisielk/errcheck
 	errcheck ./test/...
 
-drone:
-	sudo apt-get install protobuf-compiler
-	(cd $(GOPATH)/src/github.com/gogo/protobuf && make buildserverall)
-
 testall:
-	go get -u github.com/golang/protobuf/proto
-	make -C protoc-gen-gogo/testdata test
+	go get github.com/golang/protobuf/proto
 	make -C vanity/test test
 	make -C test/registration test
 	make tests
