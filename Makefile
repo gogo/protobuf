@@ -32,7 +32,7 @@ GO_VERSION:=$(shell go version)
 
 all: clean install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install testall vet js
+buildserverall: clean install regenerate install tests vet js
 
 install:
 	go install ./proto
