@@ -79,6 +79,7 @@ package test
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
+import unsafe "unsafe"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import fmt "fmt"
@@ -93,6 +94,10 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func TestNidOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptNative(popr, false)
@@ -167,6 +172,10 @@ func BenchmarkNidOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNative(popr, false)
@@ -241,6 +250,10 @@ func BenchmarkNinOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepNative(popr, false)
@@ -315,6 +328,10 @@ func BenchmarkNidRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepNative(popr, false)
@@ -389,6 +406,10 @@ func BenchmarkNinRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepPackedNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepPackedNative(popr, false)
@@ -463,6 +484,10 @@ func BenchmarkNidRepPackedNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepPackedNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepPackedNative(popr, false)
@@ -537,6 +562,10 @@ func BenchmarkNinRepPackedNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptStruct(popr, false)
@@ -611,6 +640,10 @@ func BenchmarkNidOptStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStruct(popr, false)
@@ -685,6 +718,10 @@ func BenchmarkNinOptStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepStruct(popr, false)
@@ -759,6 +796,10 @@ func BenchmarkNidRepStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepStruct(popr, false)
@@ -833,6 +874,10 @@ func BenchmarkNinRepStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidEmbeddedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
@@ -907,6 +952,10 @@ func BenchmarkNidEmbeddedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinEmbeddedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
@@ -981,6 +1030,10 @@ func BenchmarkNinEmbeddedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidNestedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidNestedStruct(popr, false)
@@ -1055,6 +1108,10 @@ func BenchmarkNidNestedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinNestedStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStruct(popr, false)
@@ -1129,6 +1186,10 @@ func BenchmarkNinNestedStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptCustom(popr, false)
@@ -1203,6 +1264,10 @@ func BenchmarkNidOptCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomDashProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomDash(popr, false)
@@ -1277,6 +1342,10 @@ func BenchmarkCustomDashProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptCustom(popr, false)
@@ -1351,6 +1420,10 @@ func BenchmarkNinOptCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepCustom(popr, false)
@@ -1425,6 +1498,10 @@ func BenchmarkNidRepCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepCustomProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepCustom(popr, false)
@@ -1499,6 +1576,10 @@ func BenchmarkNinRepCustomProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
@@ -1573,6 +1654,10 @@ func BenchmarkNinOptNativeUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptStructUnion(popr, false)
@@ -1647,6 +1732,10 @@ func BenchmarkNinOptStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinEmbeddedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
@@ -1721,6 +1810,10 @@ func BenchmarkNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinNestedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
@@ -1795,6 +1888,10 @@ func BenchmarkNinNestedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestTreeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTree(popr, false)
@@ -1869,6 +1966,10 @@ func BenchmarkTreeProtoUnmarshal(b *testing.B) {
 }
 
 func TestOrBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOrBranch(popr, false)
@@ -1943,6 +2044,10 @@ func BenchmarkOrBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestAndBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndBranch(popr, false)
@@ -2017,6 +2122,10 @@ func BenchmarkAndBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestLeafProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedLeaf(popr, false)
@@ -2091,6 +2200,10 @@ func BenchmarkLeafProtoUnmarshal(b *testing.B) {
 }
 
 func TestDeepTreeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepTree(popr, false)
@@ -2165,6 +2278,10 @@ func BenchmarkDeepTreeProtoUnmarshal(b *testing.B) {
 }
 
 func TestADeepBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedADeepBranch(popr, false)
@@ -2239,6 +2356,10 @@ func BenchmarkADeepBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestAndDeepBranchProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAndDeepBranch(popr, false)
@@ -2313,6 +2434,10 @@ func BenchmarkAndDeepBranchProtoUnmarshal(b *testing.B) {
 }
 
 func TestDeepLeafProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedDeepLeaf(popr, false)
@@ -2387,6 +2512,10 @@ func BenchmarkDeepLeafProtoUnmarshal(b *testing.B) {
 }
 
 func TestNilProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNil(popr, false)
@@ -2461,6 +2590,10 @@ func BenchmarkNilProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptEnum(popr, false)
@@ -2535,6 +2668,10 @@ func BenchmarkNidOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnum(popr, false)
@@ -2609,6 +2746,10 @@ func BenchmarkNinOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepEnum(popr, false)
@@ -2683,6 +2824,10 @@ func BenchmarkNidRepEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepEnum(popr, false)
@@ -2757,6 +2902,10 @@ func BenchmarkNinRepEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptEnumDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptEnumDefault(popr, false)
@@ -2831,6 +2980,10 @@ func BenchmarkNinOptEnumDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnum(popr, false)
@@ -2905,6 +3058,10 @@ func BenchmarkAnotherNinOptEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestAnotherNinOptEnumDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, false)
@@ -2979,6 +3136,10 @@ func BenchmarkAnotherNinOptEnumDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestTimerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTimer(popr, false)
@@ -3053,6 +3214,10 @@ func BenchmarkTimerProtoUnmarshal(b *testing.B) {
 }
 
 func TestMyExtendableProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMyExtendable(popr, false)
@@ -3127,6 +3292,10 @@ func BenchmarkMyExtendableProtoUnmarshal(b *testing.B) {
 }
 
 func TestOtherExtenableProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOtherExtenable(popr, false)
@@ -3201,6 +3370,10 @@ func BenchmarkOtherExtenableProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinitionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition(popr, false)
@@ -3275,6 +3448,10 @@ func BenchmarkNestedDefinitionProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessageProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, false)
@@ -3349,6 +3526,10 @@ func BenchmarkNestedDefinition_NestedMessageProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedDefinition_NestedMessage_NestedNestedMsgProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, false)
@@ -3423,6 +3604,10 @@ func BenchmarkNestedDefinition_NestedMessage_NestedNestedMsgProtoUnmarshal(b *te
 }
 
 func TestNestedScopeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNestedScope(popr, false)
@@ -3497,6 +3682,10 @@ func BenchmarkNestedScopeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNativeDefaultProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNativeDefault(popr, false)
@@ -3571,6 +3760,10 @@ func BenchmarkNinOptNativeDefaultProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomContainerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomContainer(popr, false)
@@ -3645,6 +3838,10 @@ func BenchmarkCustomContainerProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNidOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNidOptNative(popr, false)
@@ -3719,6 +3916,10 @@ func BenchmarkCustomNameNidOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinOptNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinOptNative(popr, false)
@@ -3793,6 +3994,10 @@ func BenchmarkCustomNameNinOptNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinRepNativeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinRepNative(popr, false)
@@ -3867,6 +4072,10 @@ func BenchmarkCustomNameNinRepNativeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinStructProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinStruct(popr, false)
@@ -3941,6 +4150,10 @@ func BenchmarkCustomNameNinStructProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameCustomType(popr, false)
@@ -4015,6 +4228,10 @@ func BenchmarkCustomNameCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameNinEmbeddedStructUnionProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
@@ -4089,6 +4306,10 @@ func BenchmarkCustomNameNinEmbeddedStructUnionProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomNameEnumProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomNameEnum(popr, false)
@@ -4163,6 +4384,10 @@ func BenchmarkCustomNameEnumProtoUnmarshal(b *testing.B) {
 }
 
 func TestNoExtensionsMapProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNoExtensionsMap(popr, false)
@@ -4237,6 +4462,10 @@ func BenchmarkNoExtensionsMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognized(popr, false)
@@ -4311,6 +4540,10 @@ func BenchmarkUnrecognizedProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithInnerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner(popr, false)
@@ -4385,6 +4618,10 @@ func BenchmarkUnrecognizedWithInnerProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithInner_InnerProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, false)
@@ -4459,6 +4696,10 @@ func BenchmarkUnrecognizedWithInner_InnerProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed(popr, false)
@@ -4533,6 +4774,10 @@ func BenchmarkUnrecognizedWithEmbedProtoUnmarshal(b *testing.B) {
 }
 
 func TestUnrecognizedWithEmbed_EmbeddedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, false)
@@ -4607,6 +4852,10 @@ func BenchmarkUnrecognizedWithEmbed_EmbeddedProtoUnmarshal(b *testing.B) {
 }
 
 func TestNodeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNode(popr, false)
@@ -4681,6 +4930,10 @@ func BenchmarkNodeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNonByteCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNonByteCustomType(popr, false)
@@ -4755,6 +5008,10 @@ func BenchmarkNonByteCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidOptNonByteCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidOptNonByteCustomType(popr, false)
@@ -4829,6 +5086,10 @@ func BenchmarkNidOptNonByteCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinOptNonByteCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinOptNonByteCustomType(popr, false)
@@ -4903,6 +5164,10 @@ func BenchmarkNinOptNonByteCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNidRepNonByteCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNidRepNonByteCustomType(popr, false)
@@ -4977,6 +5242,10 @@ func BenchmarkNidRepNonByteCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestNinRepNonByteCustomTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNinRepNonByteCustomType(popr, false)
@@ -5051,6 +5320,10 @@ func BenchmarkNinRepNonByteCustomTypeProtoUnmarshal(b *testing.B) {
 }
 
 func TestProtoTypeProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedProtoType(popr, false)
@@ -8865,6 +9138,10 @@ func TestProtoTypeProtoCompactText(t *testing.T) {
 }
 
 func TestNidOptNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -8889,6 +9166,10 @@ func TestNidOptNativeCompare(t *testing.T) {
 	}
 }
 func TestNinOptNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -8913,6 +9194,10 @@ func TestNinOptNativeCompare(t *testing.T) {
 	}
 }
 func TestNidRepNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -8937,6 +9222,10 @@ func TestNidRepNativeCompare(t *testing.T) {
 	}
 }
 func TestNinRepNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -8961,6 +9250,10 @@ func TestNinRepNativeCompare(t *testing.T) {
 	}
 }
 func TestNidRepPackedNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -8985,6 +9278,10 @@ func TestNidRepPackedNativeCompare(t *testing.T) {
 	}
 }
 func TestNinRepPackedNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9009,6 +9306,10 @@ func TestNinRepPackedNativeCompare(t *testing.T) {
 	}
 }
 func TestNidOptStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9033,6 +9334,10 @@ func TestNidOptStructCompare(t *testing.T) {
 	}
 }
 func TestNinOptStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9057,6 +9362,10 @@ func TestNinOptStructCompare(t *testing.T) {
 	}
 }
 func TestNidRepStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9081,6 +9390,10 @@ func TestNidRepStructCompare(t *testing.T) {
 	}
 }
 func TestNinRepStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9105,6 +9418,10 @@ func TestNinRepStructCompare(t *testing.T) {
 	}
 }
 func TestNidEmbeddedStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9129,6 +9446,10 @@ func TestNidEmbeddedStructCompare(t *testing.T) {
 	}
 }
 func TestNinEmbeddedStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9153,6 +9474,10 @@ func TestNinEmbeddedStructCompare(t *testing.T) {
 	}
 }
 func TestNidNestedStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9177,6 +9502,10 @@ func TestNidNestedStructCompare(t *testing.T) {
 	}
 }
 func TestNinNestedStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9201,6 +9530,10 @@ func TestNinNestedStructCompare(t *testing.T) {
 	}
 }
 func TestNidOptCustomCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9225,6 +9558,10 @@ func TestNidOptCustomCompare(t *testing.T) {
 	}
 }
 func TestCustomDashCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomDash(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9249,6 +9586,10 @@ func TestCustomDashCompare(t *testing.T) {
 	}
 }
 func TestNinOptCustomCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9273,6 +9614,10 @@ func TestNinOptCustomCompare(t *testing.T) {
 	}
 }
 func TestNidRepCustomCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9297,6 +9642,10 @@ func TestNidRepCustomCompare(t *testing.T) {
 	}
 }
 func TestNinRepCustomCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9321,6 +9670,10 @@ func TestNinRepCustomCompare(t *testing.T) {
 	}
 }
 func TestNinOptNativeUnionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9345,6 +9698,10 @@ func TestNinOptNativeUnionCompare(t *testing.T) {
 	}
 }
 func TestNinOptStructUnionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9369,6 +9726,10 @@ func TestNinOptStructUnionCompare(t *testing.T) {
 	}
 }
 func TestNinEmbeddedStructUnionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9393,6 +9754,10 @@ func TestNinEmbeddedStructUnionCompare(t *testing.T) {
 	}
 }
 func TestNinNestedStructUnionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9417,6 +9782,10 @@ func TestNinNestedStructUnionCompare(t *testing.T) {
 	}
 }
 func TestTreeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedTree(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9441,6 +9810,10 @@ func TestTreeCompare(t *testing.T) {
 	}
 }
 func TestOrBranchCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9465,6 +9838,10 @@ func TestOrBranchCompare(t *testing.T) {
 	}
 }
 func TestAndBranchCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9489,6 +9866,10 @@ func TestAndBranchCompare(t *testing.T) {
 	}
 }
 func TestLeafCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9513,6 +9894,10 @@ func TestLeafCompare(t *testing.T) {
 	}
 }
 func TestDeepTreeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9537,6 +9922,10 @@ func TestDeepTreeCompare(t *testing.T) {
 	}
 }
 func TestADeepBranchCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9561,6 +9950,10 @@ func TestADeepBranchCompare(t *testing.T) {
 	}
 }
 func TestAndDeepBranchCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9585,6 +9978,10 @@ func TestAndDeepBranchCompare(t *testing.T) {
 	}
 }
 func TestDeepLeafCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9609,6 +10006,10 @@ func TestDeepLeafCompare(t *testing.T) {
 	}
 }
 func TestNilCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNil(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9633,6 +10034,10 @@ func TestNilCompare(t *testing.T) {
 	}
 }
 func TestNidOptEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9657,6 +10062,10 @@ func TestNidOptEnumCompare(t *testing.T) {
 	}
 }
 func TestNinOptEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9681,6 +10090,10 @@ func TestNinOptEnumCompare(t *testing.T) {
 	}
 }
 func TestNidRepEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9705,6 +10118,10 @@ func TestNidRepEnumCompare(t *testing.T) {
 	}
 }
 func TestNinRepEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9729,6 +10146,10 @@ func TestNinRepEnumCompare(t *testing.T) {
 	}
 }
 func TestNinOptEnumDefaultCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnumDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9753,6 +10174,10 @@ func TestNinOptEnumDefaultCompare(t *testing.T) {
 	}
 }
 func TestAnotherNinOptEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAnotherNinOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9777,6 +10202,10 @@ func TestAnotherNinOptEnumCompare(t *testing.T) {
 	}
 }
 func TestAnotherNinOptEnumDefaultCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9801,6 +10230,10 @@ func TestAnotherNinOptEnumDefaultCompare(t *testing.T) {
 	}
 }
 func TestTimerCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9825,6 +10258,10 @@ func TestTimerCompare(t *testing.T) {
 	}
 }
 func TestMyExtendableCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9849,6 +10286,10 @@ func TestMyExtendableCompare(t *testing.T) {
 	}
 }
 func TestOtherExtenableCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9873,6 +10314,10 @@ func TestOtherExtenableCompare(t *testing.T) {
 	}
 }
 func TestNestedDefinitionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9897,6 +10342,10 @@ func TestNestedDefinitionCompare(t *testing.T) {
 	}
 }
 func TestNestedDefinition_NestedMessageCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9921,6 +10370,10 @@ func TestNestedDefinition_NestedMessageCompare(t *testing.T) {
 	}
 }
 func TestNestedDefinition_NestedMessage_NestedNestedMsgCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9945,6 +10398,10 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgCompare(t *testing.T) {
 	}
 }
 func TestNestedScopeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedScope(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9969,6 +10426,10 @@ func TestNestedScopeCompare(t *testing.T) {
 	}
 }
 func TestNinOptNativeDefaultCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -9993,6 +10454,10 @@ func TestNinOptNativeDefaultCompare(t *testing.T) {
 	}
 }
 func TestCustomContainerCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomContainer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10017,6 +10482,10 @@ func TestCustomContainerCompare(t *testing.T) {
 	}
 }
 func TestCustomNameNidOptNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNidOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10041,6 +10510,10 @@ func TestCustomNameNidOptNativeCompare(t *testing.T) {
 	}
 }
 func TestCustomNameNinOptNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10065,6 +10538,10 @@ func TestCustomNameNinOptNativeCompare(t *testing.T) {
 	}
 }
 func TestCustomNameNinRepNativeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10089,6 +10566,10 @@ func TestCustomNameNinRepNativeCompare(t *testing.T) {
 	}
 }
 func TestCustomNameNinStructCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10113,6 +10594,10 @@ func TestCustomNameNinStructCompare(t *testing.T) {
 	}
 }
 func TestCustomNameCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10137,6 +10622,10 @@ func TestCustomNameCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestCustomNameNinEmbeddedStructUnionCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10161,6 +10650,10 @@ func TestCustomNameNinEmbeddedStructUnionCompare(t *testing.T) {
 	}
 }
 func TestCustomNameEnumCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10185,6 +10678,10 @@ func TestCustomNameEnumCompare(t *testing.T) {
 	}
 }
 func TestNoExtensionsMapCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNoExtensionsMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10209,6 +10706,10 @@ func TestNoExtensionsMapCompare(t *testing.T) {
 	}
 }
 func TestUnrecognizedCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognized(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10233,6 +10734,10 @@ func TestUnrecognizedCompare(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithInnerCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithInner(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10257,6 +10762,10 @@ func TestUnrecognizedWithInnerCompare(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithInner_InnerCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10281,6 +10790,10 @@ func TestUnrecognizedWithInner_InnerCompare(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithEmbedCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithEmbed(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10305,6 +10818,10 @@ func TestUnrecognizedWithEmbedCompare(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithEmbed_EmbeddedCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10329,6 +10846,10 @@ func TestUnrecognizedWithEmbed_EmbeddedCompare(t *testing.T) {
 	}
 }
 func TestNodeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNode(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10353,6 +10874,10 @@ func TestNodeCompare(t *testing.T) {
 	}
 }
 func TestNonByteCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10377,6 +10902,10 @@ func TestNonByteCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestNidOptNonByteCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10401,6 +10930,10 @@ func TestNidOptNonByteCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestNinOptNonByteCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10425,6 +10958,10 @@ func TestNinOptNonByteCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestNidRepNonByteCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10449,6 +10986,10 @@ func TestNidRepNonByteCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestNinRepNonByteCustomTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10473,6 +11014,10 @@ func TestNinRepNonByteCustomTypeCompare(t *testing.T) {
 	}
 }
 func TestProtoTypeCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedProtoType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10500,6 +11045,10 @@ func TestThetestDescription(t *testing.T) {
 	ThetestDescription()
 }
 func TestNidOptNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10515,6 +11064,10 @@ func TestNidOptNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10530,6 +11083,10 @@ func TestNinOptNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10545,6 +11102,10 @@ func TestNidRepNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10560,6 +11121,10 @@ func TestNinRepNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepPackedNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepPackedNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10575,6 +11140,10 @@ func TestNidRepPackedNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepPackedNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepPackedNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10590,6 +11159,10 @@ func TestNinRepPackedNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidOptStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10605,6 +11178,10 @@ func TestNidOptStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10620,6 +11197,10 @@ func TestNinOptStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10635,6 +11216,10 @@ func TestNidRepStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10650,6 +11235,10 @@ func TestNinRepStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidEmbeddedStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidEmbeddedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10665,6 +11254,10 @@ func TestNidEmbeddedStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinEmbeddedStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10680,6 +11273,10 @@ func TestNinEmbeddedStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidNestedStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidNestedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10695,6 +11292,10 @@ func TestNidNestedStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinNestedStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinNestedStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10710,6 +11311,10 @@ func TestNinNestedStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidOptCustomVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10725,6 +11330,10 @@ func TestNidOptCustomVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomDashVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomDash(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10740,6 +11349,10 @@ func TestCustomDashVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptCustomVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10755,6 +11368,10 @@ func TestNinOptCustomVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepCustomVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10770,6 +11387,10 @@ func TestNidRepCustomVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepCustomVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepCustom(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10785,6 +11406,10 @@ func TestNinRepCustomVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptNativeUnionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10800,6 +11425,10 @@ func TestNinOptNativeUnionVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptStructUnionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10815,6 +11444,10 @@ func TestNinOptStructUnionVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinEmbeddedStructUnionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinEmbeddedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10830,6 +11463,10 @@ func TestNinEmbeddedStructUnionVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinNestedStructUnionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinNestedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10845,6 +11482,10 @@ func TestNinNestedStructUnionVerboseEqual(t *testing.T) {
 	}
 }
 func TestTreeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedTree(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10860,6 +11501,10 @@ func TestTreeVerboseEqual(t *testing.T) {
 	}
 }
 func TestOrBranchVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOrBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10875,6 +11520,10 @@ func TestOrBranchVerboseEqual(t *testing.T) {
 	}
 }
 func TestAndBranchVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAndBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10890,6 +11539,10 @@ func TestAndBranchVerboseEqual(t *testing.T) {
 	}
 }
 func TestLeafVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedLeaf(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10905,6 +11558,10 @@ func TestLeafVerboseEqual(t *testing.T) {
 	}
 }
 func TestDeepTreeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedDeepTree(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10920,6 +11577,10 @@ func TestDeepTreeVerboseEqual(t *testing.T) {
 	}
 }
 func TestADeepBranchVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedADeepBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10935,6 +11596,10 @@ func TestADeepBranchVerboseEqual(t *testing.T) {
 	}
 }
 func TestAndDeepBranchVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAndDeepBranch(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10950,6 +11615,10 @@ func TestAndDeepBranchVerboseEqual(t *testing.T) {
 	}
 }
 func TestDeepLeafVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedDeepLeaf(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10965,6 +11634,10 @@ func TestDeepLeafVerboseEqual(t *testing.T) {
 	}
 }
 func TestNilVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNil(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10980,6 +11653,10 @@ func TestNilVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidOptEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -10995,6 +11672,10 @@ func TestNidOptEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11010,6 +11691,10 @@ func TestNinOptEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11025,6 +11710,10 @@ func TestNidRepEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11040,6 +11729,10 @@ func TestNinRepEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptEnumDefaultVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptEnumDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11055,6 +11748,10 @@ func TestNinOptEnumDefaultVerboseEqual(t *testing.T) {
 	}
 }
 func TestAnotherNinOptEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAnotherNinOptEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11070,6 +11767,10 @@ func TestAnotherNinOptEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestAnotherNinOptEnumDefaultVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAnotherNinOptEnumDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11085,6 +11786,10 @@ func TestAnotherNinOptEnumDefaultVerboseEqual(t *testing.T) {
 	}
 }
 func TestTimerVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedTimer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11100,6 +11805,10 @@ func TestTimerVerboseEqual(t *testing.T) {
 	}
 }
 func TestMyExtendableVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMyExtendable(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11115,6 +11824,10 @@ func TestMyExtendableVerboseEqual(t *testing.T) {
 	}
 }
 func TestOtherExtenableVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOtherExtenable(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11130,6 +11843,10 @@ func TestOtherExtenableVerboseEqual(t *testing.T) {
 	}
 }
 func TestNestedDefinitionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11145,6 +11862,10 @@ func TestNestedDefinitionVerboseEqual(t *testing.T) {
 	}
 }
 func TestNestedDefinition_NestedMessageVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11160,6 +11881,10 @@ func TestNestedDefinition_NestedMessageVerboseEqual(t *testing.T) {
 	}
 }
 func TestNestedDefinition_NestedMessage_NestedNestedMsgVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedDefinition_NestedMessage_NestedNestedMsg(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11175,6 +11900,10 @@ func TestNestedDefinition_NestedMessage_NestedNestedMsgVerboseEqual(t *testing.T
 	}
 }
 func TestNestedScopeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNestedScope(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11190,6 +11919,10 @@ func TestNestedScopeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptNativeDefaultVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNativeDefault(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11205,6 +11938,10 @@ func TestNinOptNativeDefaultVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomContainerVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomContainer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11220,6 +11957,10 @@ func TestCustomContainerVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameNidOptNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNidOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11235,6 +11976,10 @@ func TestCustomNameNidOptNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameNinOptNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinOptNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11250,6 +11995,10 @@ func TestCustomNameNinOptNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameNinRepNativeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinRepNative(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11265,6 +12014,10 @@ func TestCustomNameNinRepNativeVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameNinStructVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinStruct(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11280,6 +12033,10 @@ func TestCustomNameNinStructVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11295,6 +12052,10 @@ func TestCustomNameCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameNinEmbeddedStructUnionVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameNinEmbeddedStructUnion(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11310,6 +12071,10 @@ func TestCustomNameNinEmbeddedStructUnionVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomNameEnumVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomNameEnum(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11325,6 +12090,10 @@ func TestCustomNameEnumVerboseEqual(t *testing.T) {
 	}
 }
 func TestNoExtensionsMapVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNoExtensionsMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11340,6 +12109,10 @@ func TestNoExtensionsMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestUnrecognizedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognized(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11355,6 +12128,10 @@ func TestUnrecognizedVerboseEqual(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithInnerVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithInner(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11370,6 +12147,10 @@ func TestUnrecognizedWithInnerVerboseEqual(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithInner_InnerVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithInner_Inner(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11385,6 +12166,10 @@ func TestUnrecognizedWithInner_InnerVerboseEqual(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithEmbedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithEmbed(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11400,6 +12185,10 @@ func TestUnrecognizedWithEmbedVerboseEqual(t *testing.T) {
 	}
 }
 func TestUnrecognizedWithEmbed_EmbeddedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUnrecognizedWithEmbed_Embedded(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11415,6 +12204,10 @@ func TestUnrecognizedWithEmbed_EmbeddedVerboseEqual(t *testing.T) {
 	}
 }
 func TestNodeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNode(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11430,6 +12223,10 @@ func TestNodeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNonByteCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11445,6 +12242,10 @@ func TestNonByteCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidOptNonByteCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidOptNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11460,6 +12261,10 @@ func TestNidOptNonByteCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinOptNonByteCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinOptNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11475,6 +12280,10 @@ func TestNinOptNonByteCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNidRepNonByteCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNidRepNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11490,6 +12299,10 @@ func TestNidRepNonByteCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestNinRepNonByteCustomTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNinRepNonByteCustomType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -11505,6 +12318,10 @@ func TestNinRepNonByteCustomTypeVerboseEqual(t *testing.T) {
 	}
 }
 func TestProtoTypeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedProtoType(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
