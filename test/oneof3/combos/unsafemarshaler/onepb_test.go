@@ -285,6 +285,10 @@ func TestOneDescription(t *testing.T) {
 	OneDescription()
 }
 func TestSubbyVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSubby(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -300,6 +304,10 @@ func TestSubbyVerboseEqual(t *testing.T) {
 	}
 }
 func TestSampleOneOfVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedSampleOneOf(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)

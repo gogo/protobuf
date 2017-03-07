@@ -742,6 +742,10 @@ func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestNotPackedProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, false)
@@ -1369,6 +1373,10 @@ func TestTheproto3Description(t *testing.T) {
 	Theproto3Description()
 }
 func TestMessageVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessage(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1384,6 +1392,10 @@ func TestMessageVerboseEqual(t *testing.T) {
 	}
 }
 func TestNestedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNested(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1399,6 +1411,10 @@ func TestNestedVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1414,6 +1430,10 @@ func TestAllMapsVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsOrderedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1429,6 +1449,10 @@ func TestAllMapsOrderedVerboseEqual(t *testing.T) {
 	}
 }
 func TestMessageWithMapVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessageWithMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1444,6 +1468,10 @@ func TestMessageWithMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestFloatingPointVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1459,6 +1487,10 @@ func TestFloatingPointVerboseEqual(t *testing.T) {
 	}
 }
 func TestUint128PairVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUint128Pair(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1474,6 +1506,10 @@ func TestUint128PairVerboseEqual(t *testing.T) {
 	}
 }
 func TestContainsNestedMapVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1489,6 +1525,10 @@ func TestContainsNestedMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestContainsNestedMap_NestedMapVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1504,6 +1544,10 @@ func TestContainsNestedMap_NestedMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestNotPackedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNotPacked(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)

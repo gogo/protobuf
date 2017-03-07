@@ -112,6 +112,10 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 }
 
 func TestCustomMapProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomMap(popr, false)
@@ -565,6 +569,10 @@ func TestMapsproto2Description(t *testing.T) {
 	Mapsproto2Description()
 }
 func TestFloatingPointVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -580,6 +588,10 @@ func TestFloatingPointVerboseEqual(t *testing.T) {
 	}
 }
 func TestCustomMapVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedCustomMap(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -595,6 +607,10 @@ func TestCustomMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -610,6 +626,10 @@ func TestAllMapsVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsOrderedVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)

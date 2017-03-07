@@ -151,6 +151,10 @@ func BenchmarkKnownTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestProtoTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedProtoTypes(popr, false)
@@ -185,6 +189,10 @@ func TestProtoTypesProto(t *testing.T) {
 }
 
 func TestProtoTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedProtoTypes(popr, false)
@@ -253,6 +261,10 @@ func BenchmarkProtoTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestStdTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedStdTypes(popr, false)
@@ -287,6 +299,10 @@ func TestStdTypesProto(t *testing.T) {
 }
 
 func TestStdTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedStdTypes(popr, false)
@@ -355,6 +371,10 @@ func BenchmarkStdTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestRepProtoTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedRepProtoTypes(popr, false)
@@ -389,6 +409,10 @@ func TestRepProtoTypesProto(t *testing.T) {
 }
 
 func TestRepProtoTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedRepProtoTypes(popr, false)
@@ -457,6 +481,10 @@ func BenchmarkRepProtoTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestRepStdTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedRepStdTypes(popr, false)
@@ -491,6 +519,10 @@ func TestRepStdTypesProto(t *testing.T) {
 }
 
 func TestRepStdTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedRepStdTypes(popr, false)
@@ -559,6 +591,10 @@ func BenchmarkRepStdTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestMapProtoTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMapProtoTypes(popr, false)
@@ -593,6 +629,10 @@ func TestMapProtoTypesProto(t *testing.T) {
 }
 
 func TestMapProtoTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMapProtoTypes(popr, false)
@@ -661,6 +701,10 @@ func BenchmarkMapProtoTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestMapStdTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMapStdTypes(popr, false)
@@ -695,6 +739,10 @@ func TestMapStdTypesProto(t *testing.T) {
 }
 
 func TestMapStdTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMapStdTypes(popr, false)
@@ -763,6 +811,10 @@ func BenchmarkMapStdTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestOneofProtoTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOneofProtoTypes(popr, false)
@@ -797,6 +849,10 @@ func TestOneofProtoTypesProto(t *testing.T) {
 }
 
 func TestOneofProtoTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOneofProtoTypes(popr, false)
@@ -865,6 +921,10 @@ func BenchmarkOneofProtoTypesProtoUnmarshal(b *testing.B) {
 }
 
 func TestOneofStdTypesProto(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOneofStdTypes(popr, false)
@@ -899,6 +959,10 @@ func TestOneofStdTypesProto(t *testing.T) {
 }
 
 func TestOneofStdTypesMarshalTo(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedOneofStdTypes(popr, false)
@@ -1462,6 +1526,10 @@ func TestOneofStdTypesProtoCompactText(t *testing.T) {
 }
 
 func TestKnownTypesCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedKnownTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1486,6 +1554,10 @@ func TestKnownTypesCompare(t *testing.T) {
 	}
 }
 func TestProtoTypesCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1510,6 +1582,10 @@ func TestProtoTypesCompare(t *testing.T) {
 	}
 }
 func TestRepProtoTypesCompare(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedRepProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1534,6 +1610,10 @@ func TestRepProtoTypesCompare(t *testing.T) {
 	}
 }
 func TestKnownTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedKnownTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1549,6 +1629,10 @@ func TestKnownTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestProtoTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1564,6 +1648,10 @@ func TestProtoTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestStdTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedStdTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1579,6 +1667,10 @@ func TestStdTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestRepProtoTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedRepProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1594,6 +1686,10 @@ func TestRepProtoTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestRepStdTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedRepStdTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1609,6 +1705,10 @@ func TestRepStdTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestMapProtoTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMapProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1624,6 +1724,10 @@ func TestMapProtoTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestMapStdTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMapStdTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1639,6 +1743,10 @@ func TestMapStdTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestOneofProtoTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOneofProtoTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
@@ -1654,6 +1762,10 @@ func TestOneofProtoTypesVerboseEqual(t *testing.T) {
 	}
 }
 func TestOneofStdTypesVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedOneofStdTypes(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)

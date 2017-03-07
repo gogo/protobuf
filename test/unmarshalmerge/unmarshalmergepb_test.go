@@ -569,6 +569,10 @@ func TestBigVerboseEqual(t *testing.T) {
 	}
 }
 func TestBigUnsafeVerboseEqual(t *testing.T) {
+	var bigendian uint32 = 0x01020304
+	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
+		t.Skip("unsafe does not work on big endian architectures")
+	}
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedBigUnsafe(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
