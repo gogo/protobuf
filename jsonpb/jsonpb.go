@@ -51,6 +51,7 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/types"
 )
 
 // Marshaler is a configurable object for converting between
@@ -427,6 +428,19 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 		}
 	}
 
+	if t, ok := v.Interface().(time.Time); ok {
+		ts, err := types.TimestampProto(t)
+		if err != nil {
+			return err
+		}
+		return m.marshalValue(out, prop, reflect.ValueOf(ts), indent)
+	}
+
+	if d, ok := v.Interface().(time.Duration); ok {
+		dur := types.DurationProto(d)
+		return m.marshalValue(out, prop, reflect.ValueOf(dur), indent)
+	}
+
 	// Handle enumerations.
 	if !m.EnumsAsInts && prop.Enum != "" {
 		// Unknown enum values will are stringified by the proto library as their
@@ -480,6 +494,18 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 			out.write(`null`)
 			return out.err
 		}
+
+		if m, ok := v.Interface().(interface {
+			MarshalJSON() ([]byte, error)
+		}); ok {
+			data, err := m.MarshalJSON()
+			if err != nil {
+				return err
+			}
+			out.write(string(data))
+			return nil
+		}
+
 		pm, ok := iface.(proto.Message)
 		if !ok {
 			if prop.CustomType == "" {
@@ -633,7 +659,14 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		case "Any":
 			return fmt.Errorf("unmarshaling Any not supported yet")
 		case "Duration":
-			unq, err := strconv.Unquote(string(inputValue))
+			ivStr := string(inputValue)
+			if ivStr == "null" {
+				target.Field(0).SetInt(0)
+				target.Field(1).SetInt(0)
+				return nil
+			}
+
+			unq, err := strconv.Unquote(ivStr)
 			if err != nil {
 				return err
 			}
@@ -648,7 +681,14 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			target.Field(1).SetInt(ns)
 			return nil
 		case "Timestamp":
-			unq, err := strconv.Unquote(string(inputValue))
+			ivStr := string(inputValue)
+			if ivStr == "null" {
+				target.Field(0).SetInt(0)
+				target.Field(1).SetInt(0)
+				return nil
+			}
+
+			unq, err := strconv.Unquote(ivStr)
 			if err != nil {
 				return err
 			}
@@ -656,13 +696,36 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			if err != nil {
 				return fmt.Errorf("bad Timestamp: %v", err)
 			}
-			ns := t.UnixNano()
-			s := ns / 1e9
-			ns %= 1e9
-			target.Field(0).SetInt(s)
-			target.Field(1).SetInt(ns)
+			target.Field(0).SetInt(int64(t.Unix()))
+			target.Field(1).SetInt(int64(t.Nanosecond()))
 			return nil
 		}
+	}
+
+	if t, ok := target.Addr().Interface().(*time.Time); ok {
+		ts := &types.Timestamp{}
+		if err := u.unmarshalValue(reflect.ValueOf(ts).Elem(), inputValue, prop); err != nil {
+			return err
+		}
+		tt, err := types.TimestampFromProto(ts)
+		if err != nil {
+			return err
+		}
+		*t = tt
+		return nil
+	}
+
+	if d, ok := target.Addr().Interface().(*time.Duration); ok {
+		dur := &types.Duration{}
+		if err := u.unmarshalValue(reflect.ValueOf(dur).Elem(), inputValue, prop); err != nil {
+			return err
+		}
+		dd, err := types.DurationFromProto(dur)
+		if err != nil {
+			return err
+		}
+		*d = dd
+		return nil
 	}
 
 	// Handle enums, which have an underlying type of int32,
@@ -688,6 +751,14 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 	// Handle nested messages.
 	if targetType.Kind() == reflect.Struct {
+		if target.CanAddr() {
+			if m, ok := target.Addr().Interface().(interface {
+				UnmarshalJSON([]byte) error
+			}); ok {
+				return json.Unmarshal(inputValue, m)
+			}
+		}
+
 		var jsonFields map[string]json.RawMessage
 		if err := json.Unmarshal(inputValue, &jsonFields); err != nil {
 			return err

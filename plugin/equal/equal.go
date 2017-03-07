@@ -147,12 +147,12 @@ and the following test code:
 	func TestBVerboseEqual(t *testing8.T) {
 		popr := math_rand8.New(math_rand8.NewSource(time8.Now().UnixNano()))
 		p := NewPopulatedB(popr, false)
-		data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+		dAtA, err := github_com_gogo_protobuf_proto2.Marshal(p)
 		if err != nil {
 			panic(err)
 		}
 		msg := &B{}
-		if err := github_com_gogo_protobuf_proto2.Unmarshal(data, msg); err != nil {
+		if err := github_com_gogo_protobuf_proto2.Unmarshal(dAtA, msg); err != nil {
 			panic(err)
 		}
 		if err := p.VerboseEqual(msg); err != nil {
@@ -306,9 +306,11 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
 	nullable := gogoproto.IsNullable(field)
+	isDuration := gogoproto.IsStdDuration(field)
+	isTimestamp := gogoproto.IsStdTime(field)
 	// oneof := field.OneofIndex != nil
 	if !repeated {
-		if ctype {
+		if ctype || isTimestamp {
 			if nullable {
 				p.P(`if that1.`, fieldname, ` == nil {`)
 				p.In()
@@ -325,6 +327,20 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.P(`} else if !this.`, fieldname, `.Equal(*that1.`, fieldname, `) {`)
 			} else {
 				p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+			}
+			p.In()
+			if verbose {
+				p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+			} else {
+				p.P(`return false`)
+			}
+			p.Out()
+			p.P(`}`)
+		} else if isDuration {
+			if nullable {
+				p.generateNullableField(fieldname, verbose)
+			} else {
+				p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 			}
 			p.In()
 			if verbose {
@@ -377,8 +393,20 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 		p.P(`}`)
 		p.P(`for i := range this.`, fieldname, ` {`)
 		p.In()
-		if ctype {
+		if ctype && !p.IsMap(field) {
 			p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+		} else if isTimestamp {
+			if nullable {
+				p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) {`)
+			} else {
+				p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+			}
+		} else if isDuration {
+			if nullable {
+				p.P(`if dthis, dthat := this.`, fieldname, `[i], that1.`, fieldname, `[i]; (dthis != nil && dthat != nil && *dthis != *dthat) || (dthis != nil && dthat == nil) || (dthis == nil && dthat != nil)  {`)
+			} else {
+				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+			}
 		} else {
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
@@ -408,7 +436,15 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 						}
 					}
 				} else if mapValue.IsBytes() {
-					p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
+					if ctype {
+						if nullable {
+							p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) { //nullable`)
+						} else {
+							p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) { //not nullable`)
+						}
+					} else {
+						p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `[i], that1.`, fieldname, `[i]) {`)
+					}
 				} else if mapValue.IsString() {
 					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
 				} else {

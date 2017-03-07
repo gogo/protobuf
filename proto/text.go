@@ -51,6 +51,7 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"time"
 )
 
 var (
@@ -508,17 +509,42 @@ func writeRaw(w *textWriter, b []byte) error {
 func (tm *TextMarshaler) writeAny(w *textWriter, v reflect.Value, props *Properties) error {
 	v = reflect.Indirect(v)
 
-	if props != nil && len(props.CustomType) > 0 {
-		custom, ok := v.Interface().(Marshaler)
-		if ok {
-			data, err := custom.Marshal()
+	if props != nil {
+		if len(props.CustomType) > 0 {
+			custom, ok := v.Interface().(Marshaler)
+			if ok {
+				data, err := custom.Marshal()
+				if err != nil {
+					return err
+				}
+				if err := writeString(w, string(data)); err != nil {
+					return err
+				}
+				return nil
+			}
+		} else if props.StdTime {
+			t, ok := v.Interface().(time.Time)
+			if !ok {
+				return fmt.Errorf("stdtime is not time.Time, but %T", v.Interface())
+			}
+			tproto, err := timestampProto(t)
 			if err != nil {
 				return err
 			}
-			if err := writeString(w, string(data)); err != nil {
-				return err
+			props.StdTime = false
+			err = tm.writeAny(w, reflect.ValueOf(tproto), props)
+			props.StdTime = true
+			return err
+		} else if props.StdDuration {
+			d, ok := v.Interface().(time.Duration)
+			if !ok {
+				return fmt.Errorf("stdtime is not time.Duration, but %T", v.Interface())
 			}
-			return nil
+			dproto := durationProto(d)
+			props.StdDuration = false
+			err := tm.writeAny(w, reflect.ValueOf(dproto), props)
+			props.StdDuration = true
+			return err
 		}
 	}
 

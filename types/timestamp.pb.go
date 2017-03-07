@@ -18,9 +18,6 @@ import fmt "fmt"
 import math "math"
 
 import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
-import strconv "strconv"
 import reflect "reflect"
 
 import io "io"
@@ -108,8 +105,61 @@ func (*Timestamp) ProtoMessage()               {}
 func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
 func (*Timestamp) XXX_WellKnownType() string   { return "Timestamp" }
 
+func (m *Timestamp) GetSeconds() int64 {
+	if m != nil {
+		return m.Seconds
+	}
+	return 0
+}
+
+func (m *Timestamp) GetNanos() int32 {
+	if m != nil {
+		return m.Nanos
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Timestamp)(nil), "google.protobuf.Timestamp")
+}
+func (this *Timestamp) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Timestamp)
+	if !ok {
+		that2, ok := that.(Timestamp)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Seconds != that1.Seconds {
+		if this.Seconds < that1.Seconds {
+			return -1
+		}
+		return 1
+	}
+	if this.Nanos != that1.Nanos {
+		if this.Nanos < that1.Nanos {
+			return -1
+		}
+		return 1
+	}
+	return 0
 }
 func (this *Timestamp) Equal(that interface{}) bool {
 	if that == nil {
@@ -163,77 +213,59 @@ func valueToGoStringTimestamp(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringTimestamp(m github_com_gogo_protobuf_proto.Message) string {
-	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
-	if e == nil {
-		return "nil"
-	}
-	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "})"
-	return s
-}
-func (m *Timestamp) Marshal() (data []byte, err error) {
+func (m *Timestamp) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Timestamp) MarshalTo(data []byte) (int, error) {
+func (m *Timestamp) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Seconds != 0 {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintTimestamp(data, i, uint64(m.Seconds))
+		i = encodeVarintTimestamp(dAtA, i, uint64(m.Seconds))
 	}
 	if m.Nanos != 0 {
-		data[i] = 0x10
+		dAtA[i] = 0x10
 		i++
-		i = encodeVarintTimestamp(data, i, uint64(m.Nanos))
+		i = encodeVarintTimestamp(dAtA, i, uint64(m.Nanos))
 	}
 	return i, nil
 }
 
-func encodeFixed64Timestamp(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Timestamp(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Timestamp(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Timestamp(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintTimestamp(data []byte, offset int, v uint64) int {
+func encodeVarintTimestamp(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func (m *Timestamp) Size() (n int) {
@@ -261,8 +293,8 @@ func sovTimestamp(x uint64) (n int) {
 func sozTimestamp(x uint64) (n int) {
 	return sovTimestamp(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *Timestamp) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Timestamp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -274,7 +306,7 @@ func (m *Timestamp) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -302,7 +334,7 @@ func (m *Timestamp) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Seconds |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -321,7 +353,7 @@ func (m *Timestamp) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Nanos |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -330,7 +362,7 @@ func (m *Timestamp) Unmarshal(data []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTimestamp(data[iNdEx:])
+			skippy, err := skipTimestamp(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -349,8 +381,8 @@ func (m *Timestamp) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipTimestamp(data []byte) (n int, err error) {
-	l := len(data)
+func skipTimestamp(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -361,7 +393,7 @@ func skipTimestamp(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -379,7 +411,7 @@ func skipTimestamp(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -396,7 +428,7 @@ func skipTimestamp(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -419,7 +451,7 @@ func skipTimestamp(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -430,7 +462,7 @@ func skipTimestamp(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipTimestamp(data[start:])
+				next, err := skipTimestamp(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -457,18 +489,18 @@ var (
 func init() { proto.RegisterFile("timestamp.proto", fileDescriptorTimestamp) }
 
 var fileDescriptorTimestamp = []byte{
-	// 202 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0xc9, 0xcc, 0x4d,
+	// 208 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0xc9, 0xcc, 0x4d,
 	0x2d, 0x2e, 0x49, 0xcc, 0x2d, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4f, 0xcf, 0xcf,
 	0x4f, 0xcf, 0x49, 0x85, 0xf0, 0x92, 0x4a, 0xd3, 0x94, 0xac, 0xb9, 0x38, 0x43, 0x60, 0x6a, 0x84,
 	0x24, 0xb8, 0xd8, 0x8b, 0x53, 0x93, 0xf3, 0xf3, 0x52, 0x8a, 0x25, 0x18, 0x15, 0x18, 0x35, 0x98,
 	0x83, 0x60, 0x5c, 0x21, 0x11, 0x2e, 0xd6, 0xbc, 0xc4, 0xbc, 0xfc, 0x62, 0x09, 0x26, 0x05, 0x46,
-	0x0d, 0xd6, 0x20, 0x08, 0xc7, 0xa9, 0xfe, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18, 0x3e,
-	0x3c, 0x94, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18,
-	0x1f, 0x3c, 0x92, 0x63, 0x7c, 0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23, 0x39, 0x46, 0x2e, 0xe1, 0xe4,
-	0xfc, 0x5c, 0x3d, 0x34, 0x7b, 0x9d, 0xf8, 0xe0, 0xb6, 0x06, 0x80, 0x84, 0x02, 0x18, 0xa3, 0x58,
-	0x4b, 0x2a, 0x0b, 0x52, 0x8b, 0x17, 0x30, 0x32, 0xfe, 0x60, 0x64, 0x5c, 0xc4, 0xc4, 0xec, 0x1e,
-	0xe0, 0xb4, 0x8a, 0x49, 0xce, 0x1d, 0xa2, 0x2d, 0x00, 0xaa, 0x4d, 0x2f, 0x3c, 0x35, 0x27, 0xc7,
-	0x3b, 0x2f, 0xbf, 0x3c, 0x2f, 0x04, 0xa4, 0x38, 0x89, 0x0d, 0x6c, 0x9e, 0x31, 0x20, 0x00, 0x00,
-	0xff, 0xff, 0xfd, 0x1c, 0xfa, 0x58, 0xe8, 0x00, 0x00, 0x00,
+	0x0d, 0xd6, 0x20, 0x08, 0xc7, 0xa9, 0x99, 0xf1, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18,
+	0x3e, 0x3c, 0x94, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4,
+	0x18, 0x1f, 0x3c, 0x92, 0x63, 0x7c, 0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23, 0x39, 0xc6, 0x15, 0x8f,
+	0xe5, 0x18, 0xb9, 0x84, 0x93, 0xf3, 0x73, 0xf5, 0xd0, 0x2c, 0x77, 0xe2, 0x83, 0x5b, 0x1d, 0x00,
+	0x12, 0x0a, 0x60, 0x8c, 0x62, 0x2d, 0xa9, 0x2c, 0x48, 0x2d, 0x5e, 0xc0, 0xc8, 0xf8, 0x83, 0x91,
+	0x71, 0x11, 0x13, 0xb3, 0x7b, 0x80, 0xd3, 0x2a, 0x26, 0x39, 0x77, 0x88, 0xb6, 0x00, 0xa8, 0x36,
+	0xbd, 0xf0, 0xd4, 0x9c, 0x1c, 0xef, 0xbc, 0xfc, 0xf2, 0xbc, 0x10, 0x90, 0xe2, 0x24, 0x36, 0xb0,
+	0x79, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x7c, 0x4d, 0xbd, 0x9c, 0xed, 0x00, 0x00, 0x00,
 }

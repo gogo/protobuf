@@ -18,9 +18,6 @@ import fmt "fmt"
 import math "math"
 
 import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
-import strconv "strconv"
 import reflect "reflect"
 
 import io "io"
@@ -96,8 +93,61 @@ func (*Duration) ProtoMessage()               {}
 func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
 func (*Duration) XXX_WellKnownType() string   { return "Duration" }
 
+func (m *Duration) GetSeconds() int64 {
+	if m != nil {
+		return m.Seconds
+	}
+	return 0
+}
+
+func (m *Duration) GetNanos() int32 {
+	if m != nil {
+		return m.Nanos
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Duration)(nil), "google.protobuf.Duration")
+}
+func (this *Duration) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Duration)
+	if !ok {
+		that2, ok := that.(Duration)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	if this.Seconds != that1.Seconds {
+		if this.Seconds < that1.Seconds {
+			return -1
+		}
+		return 1
+	}
+	if this.Nanos != that1.Nanos {
+		if this.Nanos < that1.Nanos {
+			return -1
+		}
+		return 1
+	}
+	return 0
 }
 func (this *Duration) Equal(that interface{}) bool {
 	if that == nil {
@@ -151,77 +201,59 @@ func valueToGoStringDuration(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringDuration(m github_com_gogo_protobuf_proto.Message) string {
-	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
-	if e == nil {
-		return "nil"
-	}
-	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "})"
-	return s
-}
-func (m *Duration) Marshal() (data []byte, err error) {
+func (m *Duration) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Duration) MarshalTo(data []byte) (int, error) {
+func (m *Duration) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
 	_ = l
 	if m.Seconds != 0 {
-		data[i] = 0x8
+		dAtA[i] = 0x8
 		i++
-		i = encodeVarintDuration(data, i, uint64(m.Seconds))
+		i = encodeVarintDuration(dAtA, i, uint64(m.Seconds))
 	}
 	if m.Nanos != 0 {
-		data[i] = 0x10
+		dAtA[i] = 0x10
 		i++
-		i = encodeVarintDuration(data, i, uint64(m.Nanos))
+		i = encodeVarintDuration(dAtA, i, uint64(m.Nanos))
 	}
 	return i, nil
 }
 
-func encodeFixed64Duration(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Duration(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Duration(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Duration(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintDuration(data []byte, offset int, v uint64) int {
+func encodeVarintDuration(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func (m *Duration) Size() (n int) {
@@ -249,8 +281,8 @@ func sovDuration(x uint64) (n int) {
 func sozDuration(x uint64) (n int) {
 	return sovDuration(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *Duration) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Duration) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -262,7 +294,7 @@ func (m *Duration) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -290,7 +322,7 @@ func (m *Duration) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Seconds |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -309,7 +341,7 @@ func (m *Duration) Unmarshal(data []byte) error {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				m.Nanos |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -318,7 +350,7 @@ func (m *Duration) Unmarshal(data []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipDuration(data[iNdEx:])
+			skippy, err := skipDuration(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -337,8 +369,8 @@ func (m *Duration) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipDuration(data []byte) (n int, err error) {
-	l := len(data)
+func skipDuration(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -349,7 +381,7 @@ func skipDuration(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -367,7 +399,7 @@ func skipDuration(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -384,7 +416,7 @@ func skipDuration(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -407,7 +439,7 @@ func skipDuration(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -418,7 +450,7 @@ func skipDuration(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipDuration(data[start:])
+				next, err := skipDuration(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -445,18 +477,18 @@ var (
 func init() { proto.RegisterFile("duration.proto", fileDescriptorDuration) }
 
 var fileDescriptorDuration = []byte{
-	// 198 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x4b, 0x29, 0x2d, 0x4a,
+	// 203 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4b, 0x29, 0x2d, 0x4a,
 	0x2c, 0xc9, 0xcc, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4f, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0x85, 0xf0, 0x92, 0x4a, 0xd3, 0x94, 0xac, 0xb8, 0x38, 0x5c, 0xa0, 0x4a, 0x84, 0x24,
 	0xb8, 0xd8, 0x8b, 0x53, 0x93, 0xf3, 0xf3, 0x52, 0x8a, 0x25, 0x18, 0x15, 0x18, 0x35, 0x98, 0x83,
 	0x60, 0x5c, 0x21, 0x11, 0x2e, 0xd6, 0xbc, 0xc4, 0xbc, 0xfc, 0x62, 0x09, 0x26, 0x05, 0x46, 0x0d,
-	0xd6, 0x20, 0x08, 0xc7, 0xa9, 0xfa, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18, 0x3e, 0x3c,
+	0xd6, 0x20, 0x08, 0xc7, 0xa9, 0xfe, 0xc2, 0x43, 0x39, 0x86, 0x1b, 0x0f, 0xe5, 0x18, 0x3e, 0x3c,
 	0x94, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f,
-	0x3c, 0x92, 0x63, 0x7c, 0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23, 0x39, 0x46, 0x2e, 0xe1, 0xe4, 0xfc,
-	0x5c, 0x3d, 0x34, 0x6b, 0x9d, 0x78, 0x61, 0x96, 0x06, 0x80, 0x44, 0x02, 0x18, 0xa3, 0x58, 0x4b,
-	0x2a, 0x0b, 0x52, 0x8b, 0x17, 0x30, 0x32, 0x2e, 0x62, 0x62, 0x76, 0x0f, 0x70, 0x5a, 0xc5, 0x24,
-	0xe7, 0x0e, 0xd1, 0x12, 0x00, 0xd5, 0xa2, 0x17, 0x9e, 0x9a, 0x93, 0xe3, 0x9d, 0x97, 0x5f, 0x9e,
-	0x17, 0x02, 0x52, 0x99, 0xc4, 0x06, 0x36, 0xcb, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x16, 0x32,
-	0xda, 0x86, 0xe2, 0x00, 0x00, 0x00,
+	0x3c, 0x92, 0x63, 0x7c, 0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23, 0x39, 0xc6, 0x15, 0x8f, 0xe5, 0x18,
+	0xb9, 0x84, 0x93, 0xf3, 0x73, 0xf5, 0xd0, 0xac, 0x76, 0xe2, 0x85, 0x59, 0x1c, 0x00, 0x12, 0x09,
+	0x60, 0x8c, 0x62, 0x2d, 0xa9, 0x2c, 0x48, 0x2d, 0x5e, 0xc0, 0xc8, 0xb8, 0x88, 0x89, 0xd9, 0x3d,
+	0xc0, 0x69, 0x15, 0x93, 0x9c, 0x3b, 0x44, 0x4b, 0x00, 0x54, 0x8b, 0x5e, 0x78, 0x6a, 0x4e, 0x8e,
+	0x77, 0x5e, 0x7e, 0x79, 0x5e, 0x08, 0x48, 0x65, 0x12, 0x1b, 0xd8, 0x2c, 0x63, 0x40, 0x00, 0x00,
+	0x00, 0xff, 0xff, 0xba, 0xfb, 0x15, 0xc9, 0xe6, 0x00, 0x00, 0x00,
 }

@@ -175,3 +175,7 @@ func TurnOffGoUnrecognizedAll(file *descriptor.FileDescriptorProto) {
 func TurnOffGogoImport(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_GogoprotoImport, false)(file)
 }
+
+func TurnOnCompareAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_CompareAll, true)(file)
+}

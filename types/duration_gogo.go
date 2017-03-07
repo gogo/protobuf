@@ -57,3 +57,44 @@ func (d *Duration) String() string {
 	}
 	return td.String()
 }
+
+func NewPopulatedStdDuration(r interface {
+	Int63() int64
+}, easy bool) *time.Duration {
+	dur := NewPopulatedDuration(r, easy)
+	d, err := DurationFromProto(dur)
+	if err != nil {
+		return nil
+	}
+	return &d
+}
+
+func SizeOfStdDuration(d time.Duration) int {
+	dur := DurationProto(d)
+	return dur.Size()
+}
+
+func StdDurationMarshal(d time.Duration) ([]byte, error) {
+	size := SizeOfStdDuration(d)
+	buf := make([]byte, size)
+	_, err := StdDurationMarshalTo(d, buf)
+	return buf, err
+}
+
+func StdDurationMarshalTo(d time.Duration, data []byte) (int, error) {
+	dur := DurationProto(d)
+	return dur.MarshalTo(data)
+}
+
+func StdDurationUnmarshal(d *time.Duration, data []byte) error {
+	dur := &Duration{}
+	if err := dur.Unmarshal(data); err != nil {
+		return err
+	}
+	dd, err := DurationFromProto(dur)
+	if err != nil {
+		return err
+	}
+	*d = dd
+	return nil
+}

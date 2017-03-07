@@ -18,9 +18,6 @@ import fmt "fmt"
 import math "math"
 
 import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
-import strconv "strconv"
 import reflect "reflect"
 
 import io "io"
@@ -55,6 +52,33 @@ func (*Empty) XXX_WellKnownType() string   { return "Empty" }
 
 func init() {
 	proto.RegisterType((*Empty)(nil), "google.protobuf.Empty")
+}
+func (this *Empty) Compare(that interface{}) int {
+	if that == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	}
+
+	that1, ok := that.(*Empty)
+	if !ok {
+		that2, ok := that.(Empty)
+		if ok {
+			that1 = &that2
+		} else {
+			return 1
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return 0
+		}
+		return 1
+	} else if this == nil {
+		return -1
+	}
+	return 0
 }
 func (this *Empty) Equal(that interface{}) bool {
 	if that == nil {
@@ -100,35 +124,17 @@ func valueToGoStringEmpty(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringEmpty(m github_com_gogo_protobuf_proto.Message) string {
-	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
-	if e == nil {
-		return "nil"
-	}
-	s := "proto.NewUnsafeXXX_InternalExtensions(map[int32]proto.Extension{"
-	keys := make([]int, 0, len(e))
-	for k := range e {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	ss := []string{}
-	for _, k := range keys {
-		ss = append(ss, strconv.Itoa(k)+": "+e[int32(k)].GoString())
-	}
-	s += strings.Join(ss, ",") + "})"
-	return s
-}
-func (m *Empty) Marshal() (data []byte, err error) {
+func (m *Empty) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
 	if err != nil {
 		return nil, err
 	}
-	return data[:n], nil
+	return dAtA[:n], nil
 }
 
-func (m *Empty) MarshalTo(data []byte) (int, error) {
+func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -136,31 +142,31 @@ func (m *Empty) MarshalTo(data []byte) (int, error) {
 	return i, nil
 }
 
-func encodeFixed64Empty(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
+func encodeFixed64Empty(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
 	return offset + 8
 }
-func encodeFixed32Empty(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
+func encodeFixed32Empty(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
 	return offset + 4
 }
-func encodeVarintEmpty(data []byte, offset int, v uint64) int {
+func encodeVarintEmpty(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
+		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
-	data[offset] = uint8(v)
+	dAtA[offset] = uint8(v)
 	return offset + 1
 }
 func NewPopulatedEmpty(r randyEmpty, easy bool) *Empty {
@@ -196,7 +202,7 @@ func randStringEmpty(r randyEmpty) string {
 	}
 	return string(tmps)
 }
-func randUnrecognizedEmpty(r randyEmpty, maxFieldNumber int) (data []byte) {
+func randUnrecognizedEmpty(r randyEmpty, maxFieldNumber int) (dAtA []byte) {
 	l := r.Intn(5)
 	for i := 0; i < l; i++ {
 		wire := r.Intn(4)
@@ -204,43 +210,43 @@ func randUnrecognizedEmpty(r randyEmpty, maxFieldNumber int) (data []byte) {
 			wire = 5
 		}
 		fieldNumber := maxFieldNumber + r.Intn(100)
-		data = randFieldEmpty(data, r, fieldNumber, wire)
+		dAtA = randFieldEmpty(dAtA, r, fieldNumber, wire)
 	}
-	return data
+	return dAtA
 }
-func randFieldEmpty(data []byte, r randyEmpty, fieldNumber int, wire int) []byte {
+func randFieldEmpty(dAtA []byte, r randyEmpty, fieldNumber int, wire int) []byte {
 	key := uint32(fieldNumber)<<3 | uint32(wire)
 	switch wire {
 	case 0:
-		data = encodeVarintPopulateEmpty(data, uint64(key))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(key))
 		v2 := r.Int63()
 		if r.Intn(2) == 0 {
 			v2 *= -1
 		}
-		data = encodeVarintPopulateEmpty(data, uint64(v2))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(v2))
 	case 1:
-		data = encodeVarintPopulateEmpty(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	case 2:
-		data = encodeVarintPopulateEmpty(data, uint64(key))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(key))
 		ll := r.Intn(100)
-		data = encodeVarintPopulateEmpty(data, uint64(ll))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(ll))
 		for j := 0; j < ll; j++ {
-			data = append(data, byte(r.Intn(256)))
+			dAtA = append(dAtA, byte(r.Intn(256)))
 		}
 	default:
-		data = encodeVarintPopulateEmpty(data, uint64(key))
-		data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+		dAtA = encodeVarintPopulateEmpty(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
 	}
-	return data
+	return dAtA
 }
-func encodeVarintPopulateEmpty(data []byte, v uint64) []byte {
+func encodeVarintPopulateEmpty(dAtA []byte, v uint64) []byte {
 	for v >= 1<<7 {
-		data = append(data, uint8(uint64(v)&0x7f|0x80))
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
 		v >>= 7
 	}
-	data = append(data, uint8(v))
-	return data
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
 }
 func (m *Empty) Size() (n int) {
 	var l int
@@ -278,8 +284,8 @@ func valueToStringEmpty(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *Empty) Unmarshal(data []byte) error {
-	l := len(data)
+func (m *Empty) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		preIndex := iNdEx
@@ -291,7 +297,7 @@ func (m *Empty) Unmarshal(data []byte) error {
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -309,7 +315,7 @@ func (m *Empty) Unmarshal(data []byte) error {
 		switch fieldNum {
 		default:
 			iNdEx = preIndex
-			skippy, err := skipEmpty(data[iNdEx:])
+			skippy, err := skipEmpty(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
@@ -328,8 +334,8 @@ func (m *Empty) Unmarshal(data []byte) error {
 	}
 	return nil
 }
-func skipEmpty(data []byte) (n int, err error) {
-	l := len(data)
+func skipEmpty(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
@@ -340,7 +346,7 @@ func skipEmpty(data []byte) (n int, err error) {
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
 			}
-			b := data[iNdEx]
+			b := dAtA[iNdEx]
 			iNdEx++
 			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
@@ -358,7 +364,7 @@ func skipEmpty(data []byte) (n int, err error) {
 					return 0, io.ErrUnexpectedEOF
 				}
 				iNdEx++
-				if data[iNdEx-1] < 0x80 {
+				if dAtA[iNdEx-1] < 0x80 {
 					break
 				}
 			}
@@ -375,7 +381,7 @@ func skipEmpty(data []byte) (n int, err error) {
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
 				}
-				b := data[iNdEx]
+				b := dAtA[iNdEx]
 				iNdEx++
 				length |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
@@ -398,7 +404,7 @@ func skipEmpty(data []byte) (n int, err error) {
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
 					}
-					b := data[iNdEx]
+					b := dAtA[iNdEx]
 					iNdEx++
 					innerWire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
@@ -409,7 +415,7 @@ func skipEmpty(data []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipEmpty(data[start:])
+				next, err := skipEmpty(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -436,16 +442,16 @@ var (
 func init() { proto.RegisterFile("empty.proto", fileDescriptorEmpty) }
 
 var fileDescriptorEmpty = []byte{
-	// 170 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0xcd, 0x2d, 0x28,
+	// 172 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0xcd, 0x2d, 0x28,
 	0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4f, 0xcf, 0xcf, 0x4f, 0xcf, 0x49, 0x85,
-	0xf0, 0x92, 0x4a, 0xd3, 0x94, 0xd8, 0xb9, 0x58, 0x5d, 0x41, 0xf2, 0x4e, 0xcd, 0x8c, 0x17, 0x1e,
+	0xf0, 0x92, 0x4a, 0xd3, 0x94, 0xd8, 0xb9, 0x58, 0x5d, 0x41, 0xf2, 0x4e, 0xed, 0x8c, 0x17, 0x1e,
 	0xca, 0x31, 0xdc, 0x78, 0x28, 0xc7, 0xf0, 0xe1, 0xa1, 0x1c, 0xe3, 0x8f, 0x87, 0x72, 0x8c, 0x0d,
 	0x8f, 0xe4, 0x18, 0x57, 0x3c, 0x92, 0x63, 0x3c, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6,
-	0x07, 0x8f, 0xe4, 0x18, 0x5f, 0x3c, 0x92, 0x63, 0xf8, 0xf0, 0x48, 0x8e, 0x91, 0x4b, 0x38, 0x39,
-	0x3f, 0x57, 0x0f, 0xcd, 0x30, 0x27, 0x2e, 0xb0, 0x51, 0x01, 0x20, 0x6e, 0x00, 0x63, 0x14, 0x6b,
-	0x49, 0x65, 0x41, 0x6a, 0xf1, 0x02, 0x46, 0xc6, 0x1f, 0x8c, 0x8c, 0x8b, 0x98, 0x98, 0xdd, 0x03,
-	0x9c, 0x56, 0x31, 0xc9, 0xb9, 0x43, 0xb4, 0x04, 0x40, 0xb5, 0xe8, 0x85, 0xa7, 0xe6, 0xe4, 0x78,
-	0xe7, 0xe5, 0x97, 0xe7, 0x85, 0x80, 0x14, 0x27, 0xb1, 0x81, 0xcd, 0x32, 0x06, 0x04, 0x00, 0x00,
-	0xff, 0xff, 0xb6, 0x8f, 0x29, 0x84, 0xb5, 0x00, 0x00, 0x00,
+	0x07, 0x8f, 0xe4, 0x18, 0x5f, 0x3c, 0x92, 0x63, 0xf8, 0x00, 0x12, 0x7f, 0x2c, 0xc7, 0xc8, 0x25,
+	0x9c, 0x9c, 0x9f, 0xab, 0x87, 0x66, 0xa0, 0x13, 0x17, 0xd8, 0xb8, 0x00, 0x10, 0x37, 0x80, 0x31,
+	0x8a, 0xb5, 0xa4, 0xb2, 0x20, 0xb5, 0x78, 0x01, 0x23, 0xe3, 0x0f, 0x46, 0xc6, 0x45, 0x4c, 0xcc,
+	0xee, 0x01, 0x4e, 0xab, 0x98, 0xe4, 0xdc, 0x21, 0x5a, 0x02, 0xa0, 0x5a, 0xf4, 0xc2, 0x53, 0x73,
+	0x72, 0xbc, 0xf3, 0xf2, 0xcb, 0xf3, 0x42, 0x40, 0x8a, 0x93, 0xd8, 0xc0, 0x66, 0x19, 0x03, 0x02,
+	0x00, 0x00, 0xff, 0xff, 0x97, 0x6c, 0x95, 0xdd, 0xb9, 0x00, 0x00, 0x00,
 }

@@ -46,8 +46,12 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 	"unicode/utf8"
 )
+
+// Error string emitted when deserializing Any and fields are already set
+const anyRepeatedlyUnpacked = "Any message unpacked multiple times, or %q already set"
 
 type ParseError struct {
 	Message string
@@ -513,8 +517,16 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 				if err != nil {
 					return p.errorf("failed to marshal message of type %q: %v", messageName, err)
 				}
+				if fieldSet["type_url"] {
+					return p.errorf(anyRepeatedlyUnpacked, "type_url")
+				}
+				if fieldSet["value"] {
+					return p.errorf(anyRepeatedlyUnpacked, "value")
+				}
 				sv.FieldByName("TypeUrl").SetString(extName)
 				sv.FieldByName("Value").SetBytes(b)
+				fieldSet["type_url"] = true
+				fieldSet["value"] = true
 				continue
 			}
 
@@ -586,7 +598,11 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 			props = oop.Prop
 			nv := reflect.New(oop.Type.Elem())
 			dst = nv.Elem().Field(0)
-			sv.Field(oop.Field).Set(nv)
+			field := sv.Field(oop.Field)
+			if !field.IsNil() {
+				return p.errorf("field '%s' would overwrite already parsed oneof '%s'", name, sv.Type().Field(oop.Field).Name)
+			}
+			field.Set(nv)
 		}
 		if !dst.IsValid() {
 			return p.errorf("unknown field name %q in %v", name, st)
@@ -782,6 +798,80 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 		}
 		return nil
 	}
+	if props.StdTime {
+		fv := v
+		p.back()
+		props.StdTime = false
+		tproto := &timestamp{}
+		err := p.readAny(reflect.ValueOf(tproto).Elem(), props)
+		props.StdTime = true
+		if err != nil {
+			return err
+		}
+		tim, err := timestampFromProto(tproto)
+		if err != nil {
+			return err
+		}
+		if props.Repeated {
+			t := reflect.TypeOf(v.Interface())
+			if t.Kind() == reflect.Slice {
+				if t.Elem().Kind() == reflect.Ptr {
+					ts := fv.Interface().([]*time.Time)
+					ts = append(ts, &tim)
+					fv.Set(reflect.ValueOf(ts))
+					return nil
+				} else {
+					ts := fv.Interface().([]time.Time)
+					ts = append(ts, tim)
+					fv.Set(reflect.ValueOf(ts))
+					return nil
+				}
+			}
+		}
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			v.Set(reflect.ValueOf(&tim))
+		} else {
+			v.Set(reflect.Indirect(reflect.ValueOf(&tim)))
+		}
+		return nil
+	}
+	if props.StdDuration {
+		fv := v
+		p.back()
+		props.StdDuration = false
+		dproto := &duration{}
+		err := p.readAny(reflect.ValueOf(dproto).Elem(), props)
+		props.StdDuration = true
+		if err != nil {
+			return err
+		}
+		dur, err := durationFromProto(dproto)
+		if err != nil {
+			return err
+		}
+		if props.Repeated {
+			t := reflect.TypeOf(v.Interface())
+			if t.Kind() == reflect.Slice {
+				if t.Elem().Kind() == reflect.Ptr {
+					ds := fv.Interface().([]*time.Duration)
+					ds = append(ds, &dur)
+					fv.Set(reflect.ValueOf(ds))
+					return nil
+				} else {
+					ds := fv.Interface().([]time.Duration)
+					ds = append(ds, dur)
+					fv.Set(reflect.ValueOf(ds))
+					return nil
+				}
+			}
+		}
+		if reflect.TypeOf(v.Interface()).Kind() == reflect.Ptr {
+			v.Set(reflect.ValueOf(&dur))
+		} else {
+			v.Set(reflect.Indirect(reflect.ValueOf(&dur)))
+		}
+		return nil
+	}
 	switch fv := v; fv.Kind() {
 	case reflect.Slice:
 		at := v.Type()
@@ -824,12 +914,12 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 		fv.Set(reflect.Append(fv, reflect.New(at.Elem()).Elem()))
 		return p.readAny(fv.Index(fv.Len()-1), props)
 	case reflect.Bool:
-		// Either "true", "false", 1 or 0.
+		// true/1/t/True or false/f/0/False.
 		switch tok.value {
-		case "true", "1":
+		case "true", "1", "t", "True":
 			fv.SetBool(true)
 			return nil
-		case "false", "0":
+		case "false", "0", "f", "False":
 			fv.SetBool(false)
 			return nil
 		}
