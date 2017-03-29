@@ -82,21 +82,19 @@ func TurnOffNullableForNativeTypesWithoutDefaultsOnly(field *descriptor.FieldDes
 	SetBoolFieldOption(gogoproto.E_Nullable, false)(field)
 }
 
-func SetBsonTagFieldOption(field *descriptor.FieldDescriptorProto) func(field *descriptor.FieldDescriptorProto) {
-	return func(field *descriptor.FieldDescriptorProto) {
-		if field.Options == nil {
-			field.Options = &descriptor.FieldOptions{}
+func SetBsonTagFieldOption(field *descriptor.FieldDescriptorProto) {
+	if field.Options == nil {
+		field.Options = &descriptor.FieldOptions{}
+	}
+	if v, err := proto.GetExtension(field.Options, gogoproto.E_Moretags); err == nil {
+		value := "bson: " + *field.Name + ",omitempty"
+		if v != nil {
+			value += v.(string)
 		}
-		if v, err := proto.GetExtension(field.Options, gogoproto.E_Moretags); err == nil {
-			value := "bson: " + *field.Name + ",omitempty"
-			if v != nil {
-				value += v.(string)
-			}
-			if setErr := proto.SetExtension(field.Options, gogoproto.E_Moretags, &value); setErr != nil {
-				panic(setErr)
-			}
-		} else {
-			panic(err)
+		if setErr := proto.SetExtension(field.Options, gogoproto.E_Moretags, &value); setErr != nil {
+			panic(setErr)
 		}
+	} else {
+		panic(err)
 	}
 }
