@@ -87,12 +87,12 @@ func SetBsonTagFieldOption(field *descriptor.FieldDescriptorProto) func(field *d
 		if field.Options == nil {
 			field.Options = &descriptor.FieldOptions{}
 		}
-		if v, err := gogoproto.GetExtension(field.Options, gogoproto.E_Moretags); err == nil {
+		if v, err := proto.GetExtension(field.Options, gogoproto.E_Moretags); err == nil {
 			value := "bson: " + field.Name + ",omitempty"
 			if v != nil {
 				value += v.(string)
 			}
-			if setErr := gogoproto.SetExtension(field.Options, gogoproto.E_Moretags, &value); setErr != nil {
+			if setErr := proto.SetExtension(field.Options, gogoproto.E_Moretags, &value); setErr != nil {
 				panic(setErr)
 			}
 		} else {

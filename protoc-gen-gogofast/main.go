@@ -41,7 +41,6 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOnMarshalerAll)
 	vanity.ForEachFile(files, vanity.TurnOnSizerAll)
 	vanity.ForEachFile(files, vanity.TurnOnUnmarshalerAll)
-	
 	vanity.ForEachFieldInFiles(files, vanity.SetBsonTagFieldOption)
 
 	resp := command.Generate(req)
