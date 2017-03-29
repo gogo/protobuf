@@ -122,11 +122,12 @@ extend google.protobuf.FieldOptions {
 	optional string customtype = 65003;
 	optional string customname = 65004;
 	optional string jsontag = 65005;
-	optional string moretags = 65006;
-	optional string casttype = 65007;
-	optional string castkey = 65008;
-	optional string castvalue = 65009;
+	optional string bsontag = 65006;
+	optional string moretags = 65007;
+	optional string casttype = 65008;
+	optional string castkey = 65009;
+	optional string castvalue = 65010;
 
-	optional bool stdtime = 65010;
-	optional bool stdduration = 65011;
+	optional bool stdtime = 65011;
+	optional bool stdduration = 65012;
 }
