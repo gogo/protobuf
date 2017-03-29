@@ -649,6 +649,15 @@ var E_Stdduration = &proto.ExtensionDesc{
 	Filename:      "gogo.proto",
 }
 
+var E_Bsontag = &proto.ExtensionDesc{
+	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         65012,
+	Name:          "gogoproto.bsontag",
+	Tag:           "bytes,65012,opt,name=bsontag",
+	Filename:      "gogo.proto",
+}
+
 func init() {
 	proto.RegisterExtension(E_GoprotoEnumPrefix)
 	proto.RegisterExtension(E_GoprotoEnumStringer)
@@ -719,6 +728,7 @@ func init() {
 	proto.RegisterExtension(E_Castvalue)
 	proto.RegisterExtension(E_Stdtime)
 	proto.RegisterExtension(E_Stdduration)
+	proto.RegisterExtension(E_Bsontag)
 }
 
 func init() { proto.RegisterFile("gogo.proto", fileDescriptorGogo) }
