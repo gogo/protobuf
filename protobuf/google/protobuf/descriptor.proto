@@ -382,7 +382,7 @@ message FileOptions {
   // Clients can define custom options in extensions of this message. See above.
   extensions 1000 to max;
 
-  reserved 38;
+  //reserved 38;
 }
 
 message MessageOptions {
@@ -440,7 +440,7 @@ message MessageOptions {
   // parser.
   optional bool map_entry = 7;
 
-  reserved 8;  // javalite_serializable
+  //reserved 8;  // javalite_serializable
 
 
   // The parser stores options it doesn't recognize here. See above.
@@ -538,7 +538,7 @@ message FieldOptions {
   // Clients can define custom options in extensions of this message. See above.
   extensions 1000 to max;
 
-  reserved 4;  // removed jtype
+  //reserved 4;  // removed jtype
 }
 
 message OneofOptions {
