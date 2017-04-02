@@ -34,6 +34,7 @@ import (
 	"errors"
 	"github.com/gogo/protobuf/proto"
 	"io"
+	"io/ioutil"
 )
 
 var (
@@ -92,7 +93,7 @@ func (this *varintWriter) Close() error {
 	return nil
 }
 
-func NewDelimitedReader(r io.Reader, maxSize int) ReadCloser {
+func NewDelimitedReader(r io.Reader, maxSize int) ReadSkipCloser {
 	var closer io.Closer
 	if c, ok := r.(io.Closer); ok {
 		closer = c
@@ -124,6 +125,17 @@ func (this *varintReader) ReadMsg(msg proto.Message) error {
 		return err
 	}
 	return proto.Unmarshal(buf, msg)
+}
+
+func (this *varintReader) SkipMsg() error {
+	length, err := binary.ReadUvarint(this.r)
+	if err != nil {
+		return err
+	} else if length < 0 {
+		return io.ErrShortBuffer
+	}
+	_, err = io.CopyN(ioutil.Discard, this.r, int64(length))
+	return err
 }
 
 func (this *varintReader) Close() error {

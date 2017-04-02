@@ -51,6 +51,16 @@ type ReadCloser interface {
 	io.Closer
 }
 
+type Skiper interface {
+	SkipMsg() error
+}
+
+type ReadSkipCloser interface {
+	Reader
+	Skiper
+	io.Closer
+}
+
 type marshaler interface {
 	MarshalTo(data []byte) (n int, err error)
 }

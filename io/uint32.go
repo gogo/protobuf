@@ -32,6 +32,7 @@ import (
 	"encoding/binary"
 	"github.com/gogo/protobuf/proto"
 	"io"
+	"io/ioutil"
 )
 
 func NewUint32DelimitedWriter(w io.Writer, byteOrder binary.ByteOrder) WriteCloser {
@@ -95,7 +96,7 @@ type uint32Reader struct {
 	maxSize   int
 }
 
-func NewUint32DelimitedReader(r io.Reader, byteOrder binary.ByteOrder, maxSize int) ReadCloser {
+func NewUint32DelimitedReader(r io.Reader, byteOrder binary.ByteOrder, maxSize int) ReadSkipCloser {
 	return &uint32Reader{r, byteOrder, make([]byte, 4), nil, maxSize}
 }
 
@@ -116,6 +117,18 @@ func (this *uint32Reader) ReadMsg(msg proto.Message) error {
 		return err
 	}
 	return proto.Unmarshal(this.buf[:length], msg)
+}
+
+func (this *uint32Reader) SkipMsg() error {
+	if _, err := io.ReadFull(this.r, this.lenBuf); err != nil {
+		return err
+	}
+	length := this.byteOrder.Uint32(this.lenBuf)
+	if length < 0 {
+		return io.ErrShortBuffer
+	}
+	_, err := io.CopyN(ioutil.Discard, this.r, int64(length))
+	return err
 }
 
 func (this *uint32Reader) Close() error {
