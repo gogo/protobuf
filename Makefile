@@ -118,6 +118,7 @@ regenerate:
 tests:
 	go build ./test/enumprefix
 	go test ./...
+	(cd test/stdtypes && make test)
 
 vet:
 	go vet ./...
