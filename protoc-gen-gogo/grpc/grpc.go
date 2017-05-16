@@ -40,6 +40,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gogo/protobuf/gogoproto"
 	pb "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
@@ -179,7 +180,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("}")
 	g.P()
 
-	hasNamedInstance := g.gen.Param["grpc-named-instance"] == "true"
+	hasNamedInstance := gogoproto.HasNamedInstances(service)
 
 	// Named client structure and factory
 	if hasNamedInstance {
