@@ -36,7 +36,6 @@ package grpcnamed
 
 import (
 	"fmt"
-	"path"
 	"strconv"
 	"strings"
 
@@ -104,20 +103,6 @@ func (g *grpc) P(args ...interface{}) { g.gen.P(args...) }
 
 // Generate generates code for the services in the given file.
 func (g *grpc) Generate(file *generator.FileDescriptor) {
-	if len(file.FileDescriptorProto.Service) == 0 {
-		return
-	}
-
-	g.P("// Reference imports to suppress errors if they are not otherwise used.")
-	g.P("var _ ", contextPkg, ".Context")
-	g.P("var _ ", grpcPkg, ".ClientConn")
-	g.P()
-
-	// Assert version compatibility.
-	g.P("// This is a compile-time assertion to ensure that this generated file")
-	g.P("// is compatible with the grpc package it is being compiled against.")
-	g.P("const _ = ", grpcPkg, ".SupportPackageIsVersion", generatedCodeVersion)
-	g.P()
 
 	for i, service := range file.FileDescriptorProto.Service {
 		g.generateService(file, service, i)
@@ -126,14 +111,7 @@ func (g *grpc) Generate(file *generator.FileDescriptor) {
 
 // GenerateImports generates the import declaration for this file.
 func (g *grpc) GenerateImports(file *generator.FileDescriptor) {
-	if len(file.FileDescriptorProto.Service) == 0 {
-		return
-	}
-	g.P("import (")
-	g.P(contextPkg, " ", strconv.Quote(path.Join(g.gen.ImportPrefix, contextPkgPath)))
-	g.P(grpcPkg, " ", strconv.Quote(path.Join(g.gen.ImportPrefix, grpcPkgPath)))
-	g.P(")")
-	g.P()
+
 }
 
 // reservedClientName records whether a client name is reserved on the client side.
@@ -145,7 +123,6 @@ func unexport(s string) string { return strings.ToLower(s[:1]) + s[1:] }
 
 // generateService generates all the code for the named service.
 func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.ServiceDescriptorProto, index int) {
-	path := fmt.Sprintf("6,%d", index) // 6 means service.
 
 	origServName := service.GetName()
 	fullServName := origServName
@@ -158,17 +135,8 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("// Client API for ", servName, " service")
 	g.P()
 
-	// Client interface.
-	g.P("type ", servName, "Client interface {")
-	for i, method := range service.Method {
-		g.gen.PrintComments(fmt.Sprintf("%s,2,%d", path, i)) // 2 means method in a service.
-		g.P(g.generateClientSignature(servName, method))
-	}
-	g.P("}")
-	g.P()
-
 	// Client structure.
-	g.P("type ", unexport(servName), "Client struct {")
+	g.P("type named", servName, "Client struct {")
 	g.P("cc *", grpcPkg, ".ClientConn")
 	g.P("name string")
 	g.P("}")
@@ -176,11 +144,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 
 	// NewClient factory.
 	g.P("func NewNamed", servName, "Client (name string, cc *", grpcPkg, ".ClientConn) ", servName, "Client {")
-	g.P("return &", unexport(servName), "Client{cc:cc, name:name}")
-	g.P("}")
-	g.P()
-	g.P("func New", servName, "Client (cc *", grpcPkg, ".ClientConn) ", servName, "Client {")
-	g.P("return NewNamed", servName, "Client(\"", fullServName, "\", cc)")
+	g.P("return &named", servName, "Client{cc:cc, name:name}")
 	g.P("}")
 	g.P()
 
@@ -207,14 +171,6 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 
 	// Server interface.
 	serverType := servName + "Server"
-	g.P("type ", serverType, " interface {")
-	for i, method := range service.Method {
-		g.gen.PrintComments(fmt.Sprintf("%s,2,%d", path, i)) // 2 means method in a service.
-		g.P(g.generateServerSignature(servName, method))
-	}
-	g.P("}")
-	g.P()
-
 	g.P("func _named", servName, "ServiceDesc(name string) *", grpcPkg, ".ServiceDesc {")
 	g.P("return &", grpcPkg, ".ServiceDesc{")
 	g.P("ServiceName: name,")
@@ -230,40 +186,29 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("s.RegisterService(_named", servName, "ServiceDesc(name), srv)")
 	g.P("}")
 	g.P()
-	g.P("func Register", servName, "Server(s *", grpcPkg, ".Server, srv ", serverType, ") {")
-	g.P("RegisterNamed", servName, "Server(s, srv, \"", fullServName, "\")")
-	g.P("}")
-	g.P()
-
-	// Server handler implementations.
-	var handlerNames []string
-	for _, method := range service.Method {
-		hname := g.generateServerMethod(servName, fullServName, method)
-		handlerNames = append(handlerNames, hname)
-	}
 
 	// Service descriptor.
 
 	g.P("var ", methodsDescVar, " = []", grpcPkg, ".MethodDesc{")
-	for i, method := range service.Method {
+	for _, method := range service.Method {
 		if method.GetServerStreaming() || method.GetClientStreaming() {
 			continue
 		}
 		g.P("{")
 		g.P("MethodName: ", strconv.Quote(method.GetName()), ",")
-		g.P("Handler: ", handlerNames[i], ",")
+		g.P("Handler: nil,")
 		g.P("},")
 	}
 	g.P("}")
 	g.P()
 	g.P("var ", streamsDescVar, " = []", grpcPkg, ".StreamDesc{")
-	for i, method := range service.Method {
+	for _, method := range service.Method {
 		if !method.GetServerStreaming() && !method.GetClientStreaming() {
 			continue
 		}
 		g.P("{")
 		g.P("StreamName: ", strconv.Quote(method.GetName()), ",")
-		g.P("Handler: ", handlerNames[i], ",")
+		g.P("Handler: nil,")
 		if method.GetServerStreaming() {
 			g.P("ServerStreams: true,")
 		}
@@ -297,10 +242,9 @@ func (g *grpc) generateClientSignature(servName string, method *pb.MethodDescrip
 func (g *grpc) generateClientMethod(servName string, method *pb.MethodDescriptorProto, descExpr string) {
 	sname := fmt.Sprintf(`"/"+c.name+"/%s"`, method.GetName())
 	methName := generator.CamelCase(method.GetName())
-	inType := g.typeName(method.GetInputType())
 	outType := g.typeName(method.GetOutputType())
 
-	g.P("func (c *", unexport(servName), "Client) ", g.generateClientSignature(servName, method), "{")
+	g.P("func (c *named", servName, "Client) ", g.generateClientSignature(servName, method), "{")
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		g.P("out := new(", outType, ")")
 		// TODO: Pass descExpr to Invoke.
@@ -323,53 +267,6 @@ func (g *grpc) generateClientMethod(servName string, method *pb.MethodDescriptor
 	g.P("}")
 	g.P()
 
-	genSend := method.GetClientStreaming()
-	genRecv := method.GetServerStreaming()
-	genCloseAndRecv := !method.GetServerStreaming()
-
-	// Stream auxiliary types and methods.
-	g.P("type ", servName, "_", methName, "Client interface {")
-	if genSend {
-		g.P("Send(*", inType, ") error")
-	}
-	if genRecv {
-		g.P("Recv() (*", outType, ", error)")
-	}
-	if genCloseAndRecv {
-		g.P("CloseAndRecv() (*", outType, ", error)")
-	}
-	g.P(grpcPkg, ".ClientStream")
-	g.P("}")
-	g.P()
-
-	g.P("type ", streamType, " struct {")
-	g.P(grpcPkg, ".ClientStream")
-	g.P("}")
-	g.P()
-
-	if genSend {
-		g.P("func (x *", streamType, ") Send(m *", inType, ") error {")
-		g.P("return x.ClientStream.SendMsg(m)")
-		g.P("}")
-		g.P()
-	}
-	if genRecv {
-		g.P("func (x *", streamType, ") Recv() (*", outType, ", error) {")
-		g.P("m := new(", outType, ")")
-		g.P("if err := x.ClientStream.RecvMsg(m); err != nil { return nil, err }")
-		g.P("return m, nil")
-		g.P("}")
-		g.P()
-	}
-	if genCloseAndRecv {
-		g.P("func (x *", streamType, ") CloseAndRecv() (*", outType, ", error) {")
-		g.P("if err := x.ClientStream.CloseSend(); err != nil { return nil, err }")
-		g.P("m := new(", outType, ")")
-		g.P("if err := x.ClientStream.RecvMsg(m); err != nil { return nil, err }")
-		g.P("return m, nil")
-		g.P("}")
-		g.P()
-	}
 }
 
 // generateServerSignature returns the server-side signature for a method.
