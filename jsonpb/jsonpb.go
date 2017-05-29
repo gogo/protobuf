@@ -206,7 +206,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 
 		// IsNil will panic on most value kinds.
 		switch value.Kind() {
-		case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
+		case reflect.Chan, reflect.Func, reflect.Interface:
 			if value.IsNil() {
 				continue
 			}
@@ -232,6 +232,10 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 				}
 			case reflect.String:
 				if value.Len() == 0 {
+					continue
+				}
+			case reflect.Map, reflect.Ptr, reflect.Slice:
+				if value.IsNil() {
 					continue
 				}
 			}
@@ -415,6 +419,12 @@ func (m *Marshaler) marshalField(out *errWriter, prop *proto.Properties, v refle
 func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v reflect.Value, indent string) error {
 
 	v = reflect.Indirect(v)
+
+	// Handle nil pointer
+	if v.Kind() == reflect.Invalid {
+		out.write("null")
+		return out.err
+	}
 
 	// Handle repeated elements.
 	if v.Kind() == reflect.Slice && v.Type().Elem().Kind() != reflect.Uint8 {
