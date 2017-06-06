@@ -2113,16 +2113,21 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if !gogoproto.IsNullable(field) && !repeatedNativeType {
 				jsonTag = jsonName
 			}
+			bsonTag := jsonTag
 			gogoJsonTag := gogoproto.GetJsonTag(field)
+			gogoBsonTag := gogoproto.GetBsonTag(field)
 			if gogoJsonTag != nil {
 				jsonTag = *gogoJsonTag
+			}
+			if gogoBsonTag != nil {
+				bsonTag = *gogoBsonTag
 			}
 			gogoMoreTags := gogoproto.GetMoreTags(field)
 			moreTags := ""
 			if gogoMoreTags != nil {
 				moreTags = " " + *gogoMoreTags
 			}
-			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+			tag := fmt.Sprintf("protobuf:%s json:%q bson:%q%s", g.goTag(message, field, wiretype), jsonTag, bsonTag, moreTags)
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 				fieldName = ""
 			}
@@ -2200,13 +2205,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		if len(message.ExtensionRange) > 0 {
 			if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
-				g.P(g.Pkg["proto"], ".XXX_InternalExtensions `json:\"-\"`")
+				g.P(g.Pkg["proto"], ".XXX_InternalExtensions `json:\"-\" bson:\"-\"`")
 			} else {
-				g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
+				g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\" bson:\"-\"`")
 			}
 		}
 		if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) && !message.proto3() {
-			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
+			g.P("XXX_unrecognized\t[]byte `json:\"-\" bson:\"-\"`")
 		}
 		g.Out()
 		g.P("}")

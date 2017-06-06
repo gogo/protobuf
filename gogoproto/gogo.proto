@@ -129,4 +129,6 @@ extend google.protobuf.FieldOptions {
 
 	optional bool stdtime = 65010;
 	optional bool stdduration = 65011;
+
+	optional string bsontag = 65012;
 }
