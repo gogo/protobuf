@@ -40,6 +40,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/pingcap/tidb">tidb</a> - Communication between <a href="https://github.com/pingcap/tipb/blob/master/generate-go.sh#L4">tidb</a> and <a href="https://github.com/pingcap/kvproto/blob/master/generate_go.sh#L3">tikv</a>
   - <a href="https://github.com/AsynkronIT/protoactor-go">protoactor-go</a> - <a href="https://github.com/AsynkronIT/protoactor-go/blob/master/protobuf/protoc-gen-protoactor/main.go">vanity command</a> that also generates actors from service definitions
   - <a href="https://containerd.io/">containerd</a> - <a href="https://github.com/containerd/containerd/tree/master/cmd/protoc-gen-gogoctrd">vanity command with custom field names</a> that conforms to the golang convention.
+  - <a href="https://github.com/heroiclabs/nakama">nakama</a>
 
 Please lets us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
