@@ -205,8 +205,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		}
 
 		//this is not a protobuf field
-		if !(valueField.Tag.Get("protobuf") != "" ||
-			valueField.Tag.Get("protobuf_oneof") != "") {
+		if valueField.Tag.Get("protobuf") == "" && valueField.Tag.Get("protobuf_oneof") == "" {
 			continue
 		}
 
