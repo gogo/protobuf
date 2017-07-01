@@ -684,3 +684,33 @@ func (m *dynamicMessage) UnmarshalJSONPB(jum *Unmarshaler, json []byte) error {
 	m.rawJson = string(json)
 	return nil
 }
+
+// customFieldMessage implements protobuf.Message but is not a normal generated message type.
+type customFieldMessage struct {
+	someField string //this is not a proto field
+}
+
+func (m *customFieldMessage) Reset() {
+	m.someField = "hello"
+}
+
+func (m *customFieldMessage) String() string {
+	return m.someField
+}
+
+func (m *customFieldMessage) ProtoMessage() {
+}
+
+func TestMarshallCustomField(t *testing.T) {
+	rawJson := `{}`
+	m := &customFieldMessage{
+		someField: "hello world",
+	}
+	str, err := marshaler.MarshalToString(m)
+	if err != nil {
+		t.Errorf("an unexpected error occurred when marshalling JSONPBMarshaler: %v", err)
+	}
+	if str != rawJson {
+		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, rawJson)
+	}
+}
