@@ -426,6 +426,7 @@ var marshalingTests = []struct {
 	{"BoolValue", marshaler, &pb.KnownTypes{Bool: &types.BoolValue{Value: true}}, `{"bool":true}`},
 	{"StringValue", marshaler, &pb.KnownTypes{Str: &types.StringValue{Value: "plush"}}, `{"str":"plush"}`},
 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
+	{"ignore non proto field", marshaler, &customFieldMessage{someField: "Ignore me"}, `{}`},
 }
 
 func TestMarshaling(t *testing.T) {
@@ -699,34 +700,4 @@ func (m *customFieldMessage) String() string {
 }
 
 func (m *customFieldMessage) ProtoMessage() {
-}
-
-func TestMarshallCustomField(t *testing.T) {
-	expected := `{}`
-	m := &customFieldMessage{
-		someField: "hello world",
-	}
-	str, err := marshaler.MarshalToString(m)
-	if err != nil {
-		t.Errorf("an unexpected error occurred when marshalling JSONPBMarshaler: %v", err)
-	}
-	if str != expected {
-		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, expected)
-	}
-}
-
-func TestRegression(t *testing.T) {
-	expected := `{"title":"Grand Poobah"}`
-	m := &pb.MsgWithOneof{
-		Union: &pb.MsgWithOneof_Title{
-			Title: "Grand Poobah",
-		},
-	}
-	str, err := marshaler.MarshalToString(m)
-	if err != nil {
-		t.Errorf("an unexpected error occurred when marshalling JSONPBMarshaler: %v", err)
-	}
-	if str != expected {
-		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, expected)
-	}
 }
