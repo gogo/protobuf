@@ -203,6 +203,12 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		if strings.HasPrefix(valueField.Name, "XXX_") {
 			continue
 		}
+		
+		//this is not a protobuf field
+		tag := valueField.Tag.Get("protobuf")
+		if tag == "" {
+			continue
+		}
 
 		// IsNil will panic on most value kinds.
 		switch value.Kind() {
