@@ -203,10 +203,10 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		if strings.HasPrefix(valueField.Name, "XXX_") {
 			continue
 		}
-		
+
 		//this is not a protobuf field
-		tag := valueField.Tag.Get("protobuf")
-		if tag == "" {
+		if !(valueField.Tag.Get("protobuf") != "" ||
+			valueField.Tag.Get("protobuf_oneof") != "") {
 			continue
 		}
 

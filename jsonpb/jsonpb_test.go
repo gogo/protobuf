@@ -702,7 +702,7 @@ func (m *customFieldMessage) ProtoMessage() {
 }
 
 func TestMarshallCustomField(t *testing.T) {
-	rawJson := `{}`
+	expected := `{}`
 	m := &customFieldMessage{
 		someField: "hello world",
 	}
@@ -710,7 +710,23 @@ func TestMarshallCustomField(t *testing.T) {
 	if err != nil {
 		t.Errorf("an unexpected error occurred when marshalling JSONPBMarshaler: %v", err)
 	}
-	if str != rawJson {
-		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, rawJson)
+	if str != expected {
+		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, expected)
+	}
+}
+
+func TestRegression(t *testing.T) {
+	expected := `{"title":"Grand Poobah"}`
+	m := &pb.MsgWithOneof{
+		Union: &pb.MsgWithOneof_Title{
+			Title: "Grand Poobah",
+		},
+	}
+	str, err := marshaler.MarshalToString(m)
+	if err != nil {
+		t.Errorf("an unexpected error occurred when marshalling JSONPBMarshaler: %v", err)
+	}
+	if str != expected {
+		t.Errorf("marshalling JSON produced incorrect output: got %s, wanted %s", str, expected)
 	}
 }
