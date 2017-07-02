@@ -426,7 +426,6 @@ var marshalingTests = []struct {
 	{"BoolValue", marshaler, &pb.KnownTypes{Bool: &types.BoolValue{Value: true}}, `{"bool":true}`},
 	{"StringValue", marshaler, &pb.KnownTypes{Str: &types.StringValue{Value: "plush"}}, `{"str":"plush"}`},
 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
-	{"ignore non proto field", marshaler, &customFieldMessage{someField: "Ignore me"}, `{}`},
 }
 
 func TestMarshaling(t *testing.T) {
@@ -684,20 +683,4 @@ func (m *dynamicMessage) MarshalJSONPB(jm *Marshaler) ([]byte, error) {
 func (m *dynamicMessage) UnmarshalJSONPB(jum *Unmarshaler, json []byte) error {
 	m.rawJson = string(json)
 	return nil
-}
-
-// customFieldMessage implements protobuf.Message but is not a normal generated message type.
-type customFieldMessage struct {
-	someField string //this is not a proto field
-}
-
-func (m *customFieldMessage) Reset() {
-	m.someField = "hello"
-}
-
-func (m *customFieldMessage) String() string {
-	return m.someField
-}
-
-func (m *customFieldMessage) ProtoMessage() {
 }
