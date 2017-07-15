@@ -47,7 +47,7 @@ Please lets us know if you are using gogoprotobuf by posting on our <a href="htt
 ### Mentioned
 
   - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">Cloudflare - go serialization talk - Albert Strasheim</a>
-  - <a href="http://gophercon.sourcegraph.com/post/83747547505/writing-a-high-performance-database-in-go">gophercon</a>
+  - <a href="https://youtu.be/4xB46Xl9O9Q?t=557">gophercon</a>
   - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
 
 ## Getting Started
