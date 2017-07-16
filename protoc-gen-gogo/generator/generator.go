@@ -2113,6 +2113,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if !gogoproto.IsNullable(field) && !repeatedNativeType {
 				jsonTag = jsonName
 			}
+			// for compat w/ jsonpb marshal/unmarshal
+			switch *field.Type {
+			case descriptor.FieldDescriptorProto_TYPE_INT64,
+				descriptor.FieldDescriptorProto_TYPE_UINT64:
+				jsonTag += ",string"
+			}
 			gogoJsonTag := gogoproto.GetJsonTag(field)
 			if gogoJsonTag != nil {
 				jsonTag = *gogoJsonTag
