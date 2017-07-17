@@ -112,6 +112,7 @@ regenerate:
 	make -C test/enumdecl regenerate
 	make -C test/typedecl_all regenerate
 	make -C test/enumdecl_all regenerate
+	make -C test/int64support regenerate
 	make gofmt
 
 tests:

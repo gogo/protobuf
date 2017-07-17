@@ -904,7 +904,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 	// Handle nested messages.
 	if targetType.Kind() == reflect.Struct {
-		if target.CanAddr() {
+		if prop != nil && len(prop.CustomType) > 0 && target.CanAddr() {
 			if m, ok := target.Addr().Interface().(interface {
 				UnmarshalJSON([]byte) error
 			}); ok {
