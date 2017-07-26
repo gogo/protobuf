@@ -310,7 +310,9 @@ func (p *unmarshal) declareMapField(varName string, customType bool, field *desc
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		p.P(`var `, varName, ` bool`)
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		p.P(`var `, varName, ` string`)
+		cast, _ := p.GoType(nil, field)
+		cast = strings.Replace(cast, "*", "", 1)
+		p.P(`var `, varName, ` `, cast)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if gogoproto.IsStdTime(field) {
 			p.P(varName, ` := new(time.Time)`)
