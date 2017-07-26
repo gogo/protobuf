@@ -321,7 +321,7 @@ func (p *unmarshal) declareMapField(varName string, customType bool, field *desc
 		} else {
 			desc := p.ObjectNamed(field.GetTypeName())
 			msgname := p.TypeName(desc)
-			p.P(varName, ` := &`, msgname, `{}`)
+			p.P(`var `, varName, ` *`, msgname)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		if customType {
@@ -418,6 +418,9 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		} else if gogoproto.IsStdDuration(field) {
 			p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(`, varName, `, `, buf, `); err != nil {`)
 		} else {
+			desc := p.ObjectNamed(field.GetTypeName())
+			msgname := p.TypeName(desc)
+			p.P(varName, ` = &`, msgname, `{}`)
 			p.P(`if err := `, varName, `.Unmarshal(`, buf, `); err != nil {`)
 		}
 		p.In()

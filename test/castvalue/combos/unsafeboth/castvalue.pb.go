@@ -74,7 +74,7 @@ func CastvalueDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_desc
 	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 3814 bytes of a gzipped FileDescriptorSet
-		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x5a, 0x5d, 0x70, 0xe3, 0xd6,
+		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xc4, 0x5a, 0x5d, 0x70, 0xe3, 0xd6,
 		0x75, 0x16, 0xf8, 0x23, 0x91, 0x87, 0x14, 0x05, 0x41, 0xb2, 0x96, 0x2b, 0xc7, 0x5c, 0xad, 0x62,
 		0x67, 0x65, 0x3b, 0x91, 0x32, 0xeb, 0xdd, 0xf5, 0x1a, 0xdb, 0xc4, 0x43, 0x51, 0x5c, 0x85, 0x5b,
 		0x49, 0x64, 0x40, 0x29, 0xde, 0x4d, 0x1f, 0x30, 0x10, 0x78, 0x49, 0x61, 0x17, 0x04, 0x10, 0x00,
@@ -1017,41 +1017,13 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.CastMapValueMessage == nil {
 				m.CastMapValueMessage = make(map[int32]MyWilson)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *Wilson
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowCastvalueUnsafe
@@ -1061,46 +1033,61 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowCastvalueUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowCastvalueUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowCastvalueUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &Wilson{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthCastvalueUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthCastvalueUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &Wilson{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.CastMapValueMessage[mapkey] = ((MyWilson)(*mapvalue))
-			} else {
-				var mapvalue MyWilson
-				m.CastMapValueMessage[mapkey] = mapvalue
 			}
+			m.CastMapValueMessage[mapkey] = ((MyWilson)(*mapvalue))
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -1128,41 +1115,13 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.CastMapValueMessageNullable == nil {
 				m.CastMapValueMessageNullable = make(map[int32]*MyWilson)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *Wilson
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowCastvalueUnsafe
@@ -1172,46 +1131,61 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowCastvalueUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowCastvalueUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowCastvalueUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &Wilson{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthCastvalueUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthCastvalueUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &Wilson{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.CastMapValueMessageNullable[mapkey] = ((*MyWilson)(mapvalue))
-			} else {
-				var mapvalue *MyWilson
-				m.CastMapValueMessageNullable[mapkey] = mapvalue
 			}
+			m.CastMapValueMessageNullable[mapkey] = ((*MyWilson)(mapvalue))
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1415,7 +1389,7 @@ func init() { proto.RegisterFile("combos/unsafeboth/castvalue.proto", fileDescri
 
 var fileDescriptorCastvalue = []byte{
 	// 358 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x8f, 0xbf, 0x4f, 0xfa, 0x50,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xa4, 0x8f, 0xbf, 0x4f, 0xfa, 0x50,
 	0x14, 0xc5, 0x7b, 0x69, 0xf8, 0x86, 0xef, 0xc3, 0x01, 0xab, 0x43, 0x83, 0xc9, 0xa5, 0xb2, 0xc8,
 	0xa0, 0x6d, 0x42, 0x88, 0x31, 0x8e, 0x18, 0x07, 0x13, 0x71, 0x60, 0xd0, 0x38, 0xbe, 0x92, 0x52,
 	0x88, 0xa5, 0x8f, 0xd0, 0x56, 0xd3, 0x8d, 0xc1, 0xc9, 0xbf, 0xc4, 0xd1, 0xd1, 0x51, 0x37, 0x46,

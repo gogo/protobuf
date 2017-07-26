@@ -4578,41 +4578,13 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.NullableTimestamp == nil {
 				m.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *google_protobuf2.Timestamp
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -4622,46 +4594,61 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &google_protobuf2.Timestamp{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &google_protobuf2.Timestamp{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.NullableTimestamp[mapkey] = mapvalue
-			} else {
-				var mapvalue *google_protobuf2.Timestamp
-				m.NullableTimestamp[mapkey] = mapvalue
 			}
+			m.NullableTimestamp[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -4689,41 +4676,13 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.Timestamp == nil {
 				m.Timestamp = make(map[int32]google_protobuf2.Timestamp)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *google_protobuf2.Timestamp
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -4733,46 +4692,61 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &google_protobuf2.Timestamp{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &google_protobuf2.Timestamp{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.Timestamp[mapkey] = *mapvalue
-			} else {
-				var mapvalue google_protobuf2.Timestamp
-				m.Timestamp[mapkey] = mapvalue
 			}
+			m.Timestamp[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -4800,41 +4774,13 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.NullableDuration == nil {
 				m.NullableDuration = make(map[int32]*google_protobuf1.Duration)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *google_protobuf1.Duration
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -4844,46 +4790,61 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &google_protobuf1.Duration{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &google_protobuf1.Duration{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.NullableDuration[mapkey] = mapvalue
-			} else {
-				var mapvalue *google_protobuf1.Duration
-				m.NullableDuration[mapkey] = mapvalue
 			}
+			m.NullableDuration[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -4911,41 +4872,13 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.Duration == nil {
 				m.Duration = make(map[int32]google_protobuf1.Duration)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			var mapvalue *google_protobuf1.Duration
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -4955,46 +4888,61 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					mapvalue = &google_protobuf1.Duration{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := &google_protobuf1.Duration{}
-				if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.Duration[mapkey] = *mapvalue
-			} else {
-				var mapvalue google_protobuf1.Duration
-				m.Duration[mapkey] = mapvalue
 			}
+			m.Duration[mapkey] = *mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -5072,41 +5020,13 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.NullableTimestamp == nil {
 				m.NullableTimestamp = make(map[int32]*time.Time)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			mapvalue := new(time.Time)
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -5116,46 +5036,60 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := new(time.Time)
-				if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.NullableTimestamp[mapkey] = mapvalue
-			} else {
-				var mapvalue = new(time.Time)
-				m.NullableTimestamp[mapkey] = mapvalue
 			}
+			m.NullableTimestamp[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -5183,41 +5117,13 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.Timestamp == nil {
 				m.Timestamp = make(map[int32]time.Time)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			mapvalue := new(time.Time)
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -5227,46 +5133,60 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := new(time.Time)
-				if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.Timestamp[mapkey] = *mapvalue
-			} else {
-				var mapvalue = new(time.Time)
-				m.Timestamp[mapkey] = *mapvalue
 			}
+			m.Timestamp[mapkey] = *mapvalue
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -5294,41 +5214,13 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.NullableDuration == nil {
 				m.NullableDuration = make(map[int32]*time.Duration)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			mapvalue := new(time.Duration)
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -5338,46 +5230,60 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := new(time.Duration)
-				if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.NullableDuration[mapkey] = mapvalue
-			} else {
-				var mapvalue = new(time.Duration)
-				m.NullableDuration[mapkey] = mapvalue
 			}
+			m.NullableDuration[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -5405,41 +5311,13 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var mapkey int32
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				mapkey |= (int32(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 			if m.Duration == nil {
 				m.Duration = make(map[int32]time.Duration)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey int32
+			mapvalue := new(time.Duration)
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowTypesUnsafe
@@ -5449,46 +5327,60 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapmsglen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (int32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					if iNdEx >= l {
+				} else {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTypesUnsafe
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					mapmsglen |= (int(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
+					if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
 					}
+					iNdEx = postmsgIndex
 				}
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				postmsgIndex := iNdEx + mapmsglen
-				if mapmsglen < 0 {
-					return ErrInvalidLengthTypesUnsafe
-				}
-				if postmsgIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				mapvalue := new(time.Duration)
-				if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
-					return err
-				}
-				iNdEx = postmsgIndex
-				m.Duration[mapkey] = *mapvalue
-			} else {
-				var mapvalue = new(time.Duration)
-				m.Duration[mapkey] = *mapvalue
 			}
+			m.Duration[mapkey] = *mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -5848,7 +5740,7 @@ func init() { proto.RegisterFile("combos/unsafeboth/types.proto", fileDescriptor
 
 var fileDescriptorTypes = []byte{
 	// 928 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x56, 0x4f, 0x8f, 0xdb, 0x44,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x56, 0x4f, 0x8f, 0xdb, 0x44,
 	0x1c, 0xdd, 0xb1, 0x9d, 0xb2, 0xfb, 0x5b, 0x2d, 0x6d, 0x2d, 0x81, 0x4c, 0x00, 0x67, 0x09, 0x97,
 	0xa5, 0x55, 0x1d, 0x48, 0xa2, 0x80, 0x16, 0x15, 0x8a, 0xb5, 0x6d, 0xb7, 0x54, 0xdb, 0xad, 0xd2,
 	0xb2, 0x02, 0x24, 0x10, 0x76, 0xe3, 0xa4, 0x11, 0x8e, 0x27, 0xb2, 0xc7, 0x54, 0xb9, 0xf1, 0x11,

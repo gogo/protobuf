@@ -191,51 +191,13 @@ func (m *M) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var keykey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowNopackage
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				keykey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			var stringLenmapkey uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowNopackage
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLenmapkey |= (uint64(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLenmapkey := int(stringLenmapkey)
-			if intStringLenmapkey < 0 {
-				return ErrInvalidLengthNopackage
-			}
-			postStringIndexmapkey := iNdEx + intStringLenmapkey
-			if postStringIndexmapkey > l {
-				return io.ErrUnexpectedEOF
-			}
-			mapkey := string(dAtA[iNdEx:postStringIndexmapkey])
-			iNdEx = postStringIndexmapkey
 			if m.F == nil {
 				m.F = make(map[string]float64)
 			}
-			if iNdEx < postIndex {
-				var valuekey uint64
+			var mapkey string
+			var mapvalue float64
+			for iNdEx < postIndex {
+				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return ErrIntOverflowNopackage
@@ -245,30 +207,56 @@ func (m *M) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					valuekey |= (uint64(b) & 0x7F) << shift
+					wire |= (uint64(b) & 0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				var mapvaluetemp uint64
-				if (iNdEx + 8) > l {
-					return io.ErrUnexpectedEOF
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowNopackage
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthNopackage
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else {
+					var mapvaluetemp uint64
+					if (iNdEx + 8) > l {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += 8
+					mapvaluetemp = uint64(dAtA[iNdEx-8])
+					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
+					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
+					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
+					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
+					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
+					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
+					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
+					mapvalue = math.Float64frombits(mapvaluetemp)
 				}
-				iNdEx += 8
-				mapvaluetemp = uint64(dAtA[iNdEx-8])
-				mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-				mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-				mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-				mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-				mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-				mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-				mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
-				mapvalue := math.Float64frombits(mapvaluetemp)
-				m.F[mapkey] = mapvalue
-			} else {
-				var mapvalue float64
-				m.F[mapkey] = mapvalue
 			}
+			m.F[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -400,7 +388,7 @@ func init() { proto.RegisterFile("nopackage.proto", fileDescriptorNopackage) }
 
 var fileDescriptorNopackage = []byte{
 	// 134 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcf, 0xcb, 0x2f, 0x48,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xe2, 0xcf, 0xcb, 0x2f, 0x48,
 	0x4c, 0xce, 0x4e, 0x4c, 0x4f, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x57, 0x0a, 0xe2, 0x62, 0xf4,
 	0x15, 0x12, 0xe7, 0x62, 0x4c, 0x93, 0x60, 0x54, 0x60, 0xd6, 0xe0, 0x36, 0xe2, 0xd4, 0xf3, 0xd5,
 	0x73, 0x73, 0xcd, 0x2b, 0x29, 0xaa, 0x0c, 0x62, 0x4c, 0x93, 0x32, 0xe1, 0x62, 0x83, 0x70, 0x84,
