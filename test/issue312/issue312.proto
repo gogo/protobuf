@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package issue312;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.testgen_all) = true;
+
+message TaskInfo {
+     optional Labels labels = 10;
+}
+
+message Labels {
+  repeated Label labels = 1 [(gogoproto.nullable) = false];
+}
+
+message Label {
+  required string key = 1 [(gogoproto.nullable) = false];
+  optional string value = 2;
+}
