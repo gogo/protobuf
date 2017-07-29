@@ -9,8 +9,6 @@ It is generated from these files:
 
 It has these top-level messages:
 	TaskInfo
-	Labels
-	Label
 */
 package issue312
 
@@ -35,9 +33,46 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
+type TaskState int32
+
+const (
+	TaskState_TASK_STAGING  TaskState = 6
+	TaskState_TASK_STARTING TaskState = 0
+	TaskState_TASK_RUNNING  TaskState = 1
+)
+
+var TaskState_name = map[int32]string{
+	6: "TASK_STAGING",
+	0: "TASK_STARTING",
+	1: "TASK_RUNNING",
+}
+var TaskState_value = map[string]int32{
+	"TASK_STAGING":  6,
+	"TASK_STARTING": 0,
+	"TASK_RUNNING":  1,
+}
+
+func (x TaskState) Enum() *TaskState {
+	p := new(TaskState)
+	*p = x
+	return p
+}
+func (x TaskState) String() string {
+	return proto.EnumName(TaskState_name, int32(x))
+}
+func (x *TaskState) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(TaskState_value, data, "TaskState")
+	if err != nil {
+		return err
+	}
+	*x = TaskState(value)
+	return nil
+}
+func (TaskState) EnumDescriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{0} }
+
 type TaskInfo struct {
-	Labels           *Labels `protobuf:"bytes,10,opt,name=labels" json:"labels,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	State            *TaskState `protobuf:"varint,10,req,name=state,enum=issue312.TaskState" json:"state,omitempty"`
+	XXX_unrecognized []byte     `json:"-"`
 }
 
 func (m *TaskInfo) Reset()                    { *m = TaskInfo{} }
@@ -45,59 +80,16 @@ func (m *TaskInfo) String() string            { return proto.CompactTextString(m
 func (*TaskInfo) ProtoMessage()               {}
 func (*TaskInfo) Descriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{0} }
 
-func (m *TaskInfo) GetLabels() *Labels {
-	if m != nil {
-		return m.Labels
+func (m *TaskInfo) GetState() TaskState {
+	if m != nil && m.State != nil {
+		return *m.State
 	}
-	return nil
-}
-
-type Labels struct {
-	Labels           []Label `protobuf:"bytes,1,rep,name=labels" json:"labels"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *Labels) Reset()                    { *m = Labels{} }
-func (m *Labels) String() string            { return proto.CompactTextString(m) }
-func (*Labels) ProtoMessage()               {}
-func (*Labels) Descriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{1} }
-
-func (m *Labels) GetLabels() []Label {
-	if m != nil {
-		return m.Labels
-	}
-	return nil
-}
-
-type Label struct {
-	Key              string  `protobuf:"bytes,1,req,name=key" json:"key"`
-	Value            *string `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *Label) Reset()                    { *m = Label{} }
-func (m *Label) String() string            { return proto.CompactTextString(m) }
-func (*Label) ProtoMessage()               {}
-func (*Label) Descriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{2} }
-
-func (m *Label) GetKey() string {
-	if m != nil {
-		return m.Key
-	}
-	return ""
-}
-
-func (m *Label) GetValue() string {
-	if m != nil && m.Value != nil {
-		return *m.Value
-	}
-	return ""
+	return TaskState_TASK_STAGING
 }
 
 func init() {
 	proto.RegisterType((*TaskInfo)(nil), "issue312.TaskInfo")
-	proto.RegisterType((*Labels)(nil), "issue312.Labels")
-	proto.RegisterType((*Label)(nil), "issue312.Label")
+	proto.RegisterEnum("issue312.TaskState", TaskState_name, TaskState_value)
 }
 func (this *TaskInfo) Equal(that interface{}) bool {
 	if that == nil {
@@ -124,87 +116,13 @@ func (this *TaskInfo) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if !this.Labels.Equal(that1.Labels) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *Labels) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Labels)
-	if !ok {
-		that2, ok := that.(Labels)
-		if ok {
-			that1 = &that2
-		} else {
+	if this.State != nil && that1.State != nil {
+		if *this.State != *that1.State {
 			return false
 		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
+	} else if this.State != nil {
 		return false
-	} else if this == nil {
-		return false
-	}
-	if len(this.Labels) != len(that1.Labels) {
-		return false
-	}
-	for i := range this.Labels {
-		if !this.Labels[i].Equal(&that1.Labels[i]) {
-			return false
-		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *Label) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*Label)
-	if !ok {
-		that2, ok := that.(Label)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.Key != that1.Key {
-		return false
-	}
-	if this.Value != nil && that1.Value != nil {
-		if *this.Value != *that1.Value {
-			return false
-		}
-	} else if this.Value != nil {
-		return false
-	} else if that1.Value != nil {
+	} else if that1.State != nil {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -218,39 +136,8 @@ func (this *TaskInfo) GoString() string {
 	}
 	s := make([]string, 0, 5)
 	s = append(s, "&issue312.TaskInfo{")
-	if this.Labels != nil {
-		s = append(s, "Labels: "+fmt.Sprintf("%#v", this.Labels)+",\n")
-	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Labels) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&issue312.Labels{")
-	if this.Labels != nil {
-		s = append(s, "Labels: "+fmt.Sprintf("%#v", this.Labels)+",\n")
-	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Label) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&issue312.Label{")
-	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
-	if this.Value != nil {
-		s = append(s, "Value: "+valueToGoStringIssue312(this.Value, "string")+",\n")
+	if this.State != nil {
+		s = append(s, "State: "+valueToGoStringIssue312(this.State, "issue312.TaskState")+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
@@ -268,40 +155,10 @@ func valueToGoStringIssue312(v interface{}, typ string) string {
 }
 func NewPopulatedTaskInfo(r randyIssue312, easy bool) *TaskInfo {
 	this := &TaskInfo{}
-	if r.Intn(10) != 0 {
-		this.Labels = NewPopulatedLabels(r, easy)
-	}
+	v1 := TaskState([]int32{6, 0, 1}[r.Intn(3)])
+	this.State = &v1
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedIssue312(r, 11)
-	}
-	return this
-}
-
-func NewPopulatedLabels(r randyIssue312, easy bool) *Labels {
-	this := &Labels{}
-	if r.Intn(10) != 0 {
-		v1 := r.Intn(5)
-		this.Labels = make([]Label, v1)
-		for i := 0; i < v1; i++ {
-			v2 := NewPopulatedLabel(r, easy)
-			this.Labels[i] = *v2
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedIssue312(r, 2)
-	}
-	return this
-}
-
-func NewPopulatedLabel(r randyIssue312, easy bool) *Label {
-	this := &Label{}
-	this.Key = string(randStringIssue312(r))
-	if r.Intn(10) != 0 {
-		v3 := string(randStringIssue312(r))
-		this.Value = &v3
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedIssue312(r, 3)
 	}
 	return this
 }
@@ -325,9 +182,9 @@ func randUTF8RuneIssue312(r randyIssue312) rune {
 	return rune(ru + 61)
 }
 func randStringIssue312(r randyIssue312) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	v2 := r.Intn(100)
+	tmps := make([]rune, v2)
+	for i := 0; i < v2; i++ {
 		tmps[i] = randUTF8RuneIssue312(r)
 	}
 	return string(tmps)
@@ -349,11 +206,11 @@ func randFieldIssue312(dAtA []byte, r randyIssue312, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
-		v5 := r.Int63()
+		v3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			v3 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(v3))
 	case 1:
 		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -382,18 +239,17 @@ func encodeVarintPopulateIssue312(dAtA []byte, v uint64) []byte {
 func init() { proto.RegisterFile("issue312.proto", fileDescriptorIssue312) }
 
 var fileDescriptorIssue312 = []byte{
-	// 199 bytes of a gzipped FileDescriptorProto
+	// 180 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x36, 0x34, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,
 	0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3, 0xf3, 0xd3, 0xf3, 0xf5,
-	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0x54, 0x32, 0xe1, 0xe2,
-	0x08, 0x49, 0x2c, 0xce, 0xf6, 0xcc, 0x4b, 0xcb, 0x17, 0xd2, 0xe0, 0x62, 0xcb, 0x49, 0x4c, 0x4a,
-	0xcd, 0x29, 0x96, 0xe0, 0x52, 0x60, 0xd4, 0xe0, 0x36, 0x12, 0xd0, 0x83, 0xdb, 0xe2, 0x03, 0x16,
-	0x0f, 0x82, 0xca, 0x2b, 0x99, 0x73, 0xb1, 0x41, 0x44, 0x84, 0x74, 0xe1, 0x7a, 0x18, 0x15, 0x98,
-	0x35, 0xb8, 0x8d, 0xf8, 0xd1, 0xf4, 0x38, 0xb1, 0x9c, 0xb8, 0x27, 0xcf, 0x00, 0xd7, 0x68, 0xca,
-	0xc5, 0x0a, 0x16, 0x16, 0x12, 0xe3, 0x62, 0xce, 0x4e, 0xad, 0x94, 0x60, 0x54, 0x60, 0xd2, 0xe0,
-	0x84, 0xaa, 0x01, 0x09, 0x08, 0x89, 0x70, 0xb1, 0x96, 0x25, 0xe6, 0x94, 0xa6, 0x4a, 0x30, 0x29,
-	0x30, 0x6a, 0x70, 0x06, 0x41, 0x38, 0x4e, 0x02, 0x1f, 0x1e, 0xca, 0x31, 0xfe, 0x78, 0x28, 0xc7,
-	0xb8, 0xe2, 0x91, 0x1c, 0xe3, 0x8e, 0x47, 0x72, 0x8c, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xcf,
-	0x8c, 0x08, 0x98, 0x01, 0x01, 0x00, 0x00,
+	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0x54, 0x32, 0xe5, 0xe2,
+	0x08, 0x49, 0x2c, 0xce, 0xf6, 0xcc, 0x4b, 0xcb, 0x17, 0xd2, 0xe4, 0x62, 0x2d, 0x2e, 0x49, 0x2c,
+	0x49, 0x95, 0xe0, 0x52, 0x60, 0xd2, 0xe0, 0x33, 0x12, 0xd6, 0x83, 0x5b, 0x02, 0x52, 0x12, 0x0c,
+	0x92, 0x0a, 0x82, 0xa8, 0xd0, 0x72, 0xe2, 0xe2, 0x84, 0x8b, 0x09, 0x09, 0x70, 0xf1, 0x84, 0x38,
+	0x06, 0x7b, 0xc7, 0x07, 0x87, 0x38, 0xba, 0x7b, 0xfa, 0xb9, 0x0b, 0xb0, 0x09, 0x09, 0x72, 0xf1,
+	0xc2, 0x44, 0x82, 0x42, 0x40, 0x42, 0x0c, 0x70, 0x45, 0x41, 0xa1, 0x7e, 0x7e, 0x20, 0x11, 0x46,
+	0x27, 0xa9, 0x0f, 0x0f, 0xe5, 0x18, 0x7f, 0x3c, 0x94, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0x71, 0xc7,
+	0x23, 0x39, 0xc6, 0x28, 0xb8, 0x2f, 0x00, 0x01, 0x00, 0x00, 0xff, 0xff, 0x1a, 0x98, 0xd7, 0xc7,
+	0xe0, 0x00, 0x00, 0x00,
 }
