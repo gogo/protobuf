@@ -10,10 +10,6 @@ option (gogoproto.populate_all) = true;
 option (gogoproto.equal_all) = true;
 option (gogoproto.testgen_all) = true;
 
-message TaskInfo {
-  required TaskState state = 10;
-}
-
 enum TaskState {
   TASK_STAGING = 6;
   TASK_STARTING = 0;

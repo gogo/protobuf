@@ -11,10 +11,7 @@ option (gogoproto.populate_all) = true;
 option (gogoproto.equal_all) = true;
 option (gogoproto.testgen_all) = true;
 
-
-message Event {
-  message Subtype {
-    required TaskState state = 4;
-  }
-  optional Subtype subtype = 2;
+message Subtype {
+  optional issue312.TaskState state = 4;
 }
+
