@@ -98,11 +98,12 @@ package gostring
 
 import (
 	"fmt"
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
 
 type gostring struct {
@@ -246,7 +247,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				if field.IsEnum() {
 					if nullable && !repeated && !proto3 {
 						goTyp, _ := p.GoType(message, field)
-						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, packageName, ".", generator.GoTypeToName(goTyp), `"`, `) + ",\n")`)
+						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, `) + ",\n")`)
 					} else {
 						p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
 					}

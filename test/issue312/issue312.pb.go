@@ -8,7 +8,6 @@ It is generated from these files:
 	issue312.proto
 
 It has these top-level messages:
-	TaskInfo
 */
 package issue312
 
@@ -16,11 +15,6 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
-
-import bytes "bytes"
-
-import strings "strings"
-import reflect "reflect"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -70,186 +64,22 @@ func (x *TaskState) UnmarshalJSON(data []byte) error {
 }
 func (TaskState) EnumDescriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{0} }
 
-type TaskInfo struct {
-	State            *TaskState `protobuf:"varint,10,req,name=state,enum=issue312.TaskState" json:"state,omitempty"`
-	XXX_unrecognized []byte     `json:"-"`
-}
-
-func (m *TaskInfo) Reset()                    { *m = TaskInfo{} }
-func (m *TaskInfo) String() string            { return proto.CompactTextString(m) }
-func (*TaskInfo) ProtoMessage()               {}
-func (*TaskInfo) Descriptor() ([]byte, []int) { return fileDescriptorIssue312, []int{0} }
-
-func (m *TaskInfo) GetState() TaskState {
-	if m != nil && m.State != nil {
-		return *m.State
-	}
-	return TaskState_TASK_STAGING
-}
-
 func init() {
-	proto.RegisterType((*TaskInfo)(nil), "issue312.TaskInfo")
 	proto.RegisterEnum("issue312.TaskState", TaskState_name, TaskState_value)
-}
-func (this *TaskInfo) Equal(that interface{}) bool {
-	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	}
-
-	that1, ok := that.(*TaskInfo)
-	if !ok {
-		that2, ok := that.(TaskInfo)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
-	} else if this == nil {
-		return false
-	}
-	if this.State != nil && that1.State != nil {
-		if *this.State != *that1.State {
-			return false
-		}
-	} else if this.State != nil {
-		return false
-	} else if that1.State != nil {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
-func (this *TaskInfo) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&issue312.TaskInfo{")
-	if this.State != nil {
-		s = append(s, "State: "+valueToGoStringIssue312(this.State, "issue312.TaskState")+",\n")
-	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringIssue312(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
-}
-func NewPopulatedTaskInfo(r randyIssue312, easy bool) *TaskInfo {
-	this := &TaskInfo{}
-	v1 := TaskState([]int32{6, 0, 1}[r.Intn(3)])
-	this.State = &v1
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedIssue312(r, 11)
-	}
-	return this
-}
-
-type randyIssue312 interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneIssue312(r randyIssue312) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringIssue312(r randyIssue312) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
-		tmps[i] = randUTF8RuneIssue312(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedIssue312(r randyIssue312, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldIssue312(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldIssue312(dAtA []byte, r randyIssue312, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
-		v3 := r.Int63()
-		if r.Intn(2) == 0 {
-			v3 *= -1
-		}
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(v3))
-	case 1:
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateIssue312(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateIssue312(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
 }
 
 func init() { proto.RegisterFile("issue312.proto", fileDescriptorIssue312) }
 
 var fileDescriptorIssue312 = []byte{
-	// 180 bytes of a gzipped FileDescriptorProto
+	// 147 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x36, 0x34, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,
 	0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3, 0xf3, 0xd3, 0xf3, 0xf5,
-	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0x54, 0x32, 0xe5, 0xe2,
-	0x08, 0x49, 0x2c, 0xce, 0xf6, 0xcc, 0x4b, 0xcb, 0x17, 0xd2, 0xe4, 0x62, 0x2d, 0x2e, 0x49, 0x2c,
-	0x49, 0x95, 0xe0, 0x52, 0x60, 0xd2, 0xe0, 0x33, 0x12, 0xd6, 0x83, 0x5b, 0x02, 0x52, 0x12, 0x0c,
-	0x92, 0x0a, 0x82, 0xa8, 0xd0, 0x72, 0xe2, 0xe2, 0x84, 0x8b, 0x09, 0x09, 0x70, 0xf1, 0x84, 0x38,
-	0x06, 0x7b, 0xc7, 0x07, 0x87, 0x38, 0xba, 0x7b, 0xfa, 0xb9, 0x0b, 0xb0, 0x09, 0x09, 0x72, 0xf1,
-	0xc2, 0x44, 0x82, 0x42, 0x40, 0x42, 0x0c, 0x70, 0x45, 0x41, 0xa1, 0x7e, 0x7e, 0x20, 0x11, 0x46,
-	0x27, 0xa9, 0x0f, 0x0f, 0xe5, 0x18, 0x7f, 0x3c, 0x94, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0x71, 0xc7,
-	0x23, 0x39, 0xc6, 0x28, 0xb8, 0x2f, 0x00, 0x01, 0x00, 0x00, 0xff, 0xff, 0x1a, 0x98, 0xd7, 0xc7,
-	0xe0, 0x00, 0x00, 0x00,
+	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0xd4, 0x72, 0xe2, 0xe2,
+	0x0c, 0x49, 0x2c, 0xce, 0x0e, 0x2e, 0x49, 0x2c, 0x49, 0x15, 0x12, 0xe0, 0xe2, 0x09, 0x71, 0x0c,
+	0xf6, 0x8e, 0x0f, 0x0e, 0x71, 0x74, 0xf7, 0xf4, 0x73, 0x17, 0x60, 0x13, 0x12, 0xe4, 0xe2, 0x85,
+	0x89, 0x04, 0x85, 0x80, 0x84, 0x18, 0xe0, 0x8a, 0x82, 0x42, 0xfd, 0xfc, 0x40, 0x22, 0x8c, 0x4e,
+	0x52, 0x1f, 0x1e, 0xca, 0x31, 0xfe, 0x78, 0x28, 0xc7, 0xb8, 0xe2, 0x91, 0x1c, 0xe3, 0x8e, 0x47,
+	0x72, 0x8c, 0x51, 0x70, 0xe7, 0x00, 0x02, 0x00, 0x00, 0xff, 0xff, 0xaf, 0xdd, 0xde, 0x2a, 0xa9,
+	0x00, 0x00, 0x00,
 }
