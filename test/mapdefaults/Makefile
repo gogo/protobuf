@@ -27,5 +27,6 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
+	go install github.com/gogo/protobuf/protoc-min-version
 	go install github.com/gogo/protobuf/protoc-gen-gogofast
-	protoc  --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. map.proto
+	protoc-min-version --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. map.proto
