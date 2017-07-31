@@ -19006,10 +19006,18 @@ func (this *NidRepStruct) GoString() string {
 		s = append(s, "Field2: "+fmt.Sprintf("%#v", this.Field2)+",\n")
 	}
 	if this.Field3 != nil {
-		s = append(s, "Field3: "+fmt.Sprintf("%#v", this.Field3)+",\n")
+		vs := make([]*NidOptNative, len(this.Field3))
+		for i := range vs {
+			vs[i] = &this.Field3[i]
+		}
+		s = append(s, "Field3: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	if this.Field4 != nil {
-		s = append(s, "Field4: "+fmt.Sprintf("%#v", this.Field4)+",\n")
+		vs := make([]*NinOptNative, len(this.Field4))
+		for i := range vs {
+			vs[i] = &this.Field4[i]
+		}
+		s = append(s, "Field4: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	if this.Field6 != nil {
 		s = append(s, "Field6: "+fmt.Sprintf("%#v", this.Field6)+",\n")
@@ -19018,7 +19026,11 @@ func (this *NidRepStruct) GoString() string {
 		s = append(s, "Field7: "+fmt.Sprintf("%#v", this.Field7)+",\n")
 	}
 	if this.Field8 != nil {
-		s = append(s, "Field8: "+fmt.Sprintf("%#v", this.Field8)+",\n")
+		vs := make([]*NidOptNative, len(this.Field8))
+		for i := range vs {
+			vs[i] = &this.Field8[i]
+		}
+		s = append(s, "Field8: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	if this.Field13 != nil {
 		s = append(s, "Field13: "+fmt.Sprintf("%#v", this.Field13)+",\n")
@@ -19123,7 +19135,11 @@ func (this *NidNestedStruct) GoString() string {
 	s = append(s, "&test.NidNestedStruct{")
 	s = append(s, "Field1: "+strings.Replace(this.Field1.GoString(), `&`, ``, 1)+",\n")
 	if this.Field2 != nil {
-		s = append(s, "Field2: "+fmt.Sprintf("%#v", this.Field2)+",\n")
+		vs := make([]*NidRepStruct, len(this.Field2))
+		for i := range vs {
+			vs[i] = &this.Field2[i]
+		}
+		s = append(s, "Field2: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
