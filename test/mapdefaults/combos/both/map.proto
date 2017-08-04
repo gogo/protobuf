@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2015, The GoGo Authors. All rights reserved.
+// Copyright (c) 2017, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -57,4 +57,14 @@ option (gogoproto.unsafe_unmarshaler_all) = false;
 
 message MapTest {
     map<string, string> str_str = 1;
+}
+
+message FakeMap {
+    repeated FakeMapEntry entries = 1;
+}
+
+message FakeMapEntry {
+    string key = 1;
+    string value = 2;
+    string other = 3;
 }

@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2015, The GoGo Authors. All rights reserved.
+// Copyright (c) 2017, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -35,17 +35,30 @@ import (
 )
 
 func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
-	// The follow message is generated via python:
-	//
-	// map = MapTest()
-	// msg.str_str['foo'] = ''
-	// msg.str_str[''] = 'bar'
-	// msg.str_str['as'] = 'df'
-	// print repr(msg.SerializeToString())
-	serializedMsg := []byte("\n\x08\n\x02as\x12\x02df\n\x05\x12\x03bar\n\x05\n\x03foo")
+	fm := &FakeMap{
+		Entries: []*FakeMapEntry{
+			{
+				Key:   "foo",
+				Value: "",
+			},
+			{
+				Key:   "",
+				Value: "bar",
+			},
+			{
+				Key:   "as",
+				Value: "df",
+			},
+		},
+	}
+
+	serializedMsg, err := proto.Marshal(fm)
+	if err != nil {
+		t.Fatalf("Failed to serialize msg: %s", err)
+	}
 
 	msg := MapTest{}
-	err := proto.Unmarshal(serializedMsg, &msg)
+	err = proto.Unmarshal(serializedMsg, &msg)
 
 	if err != nil {
 		t.Fatalf("Unexpected error: %s", err)
@@ -82,15 +95,27 @@ func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
 }
 
 func TestUnmarshalImplicitDefaultKeyValue2(t *testing.T) {
-	// The follow message is generated via python:
-	//
-	// map = MapTest()
-	// msg.str_str[''] = ''
-	// print repr(msg.SerializeToString())
-	serializedMsg := []byte("\n\x00")
+	fm := &FakeMap{
+		Entries: []*FakeMapEntry{
+			{
+				Key:   "",
+				Value: "",
+			},
+		},
+	}
+
+	serializedMsg, err := proto.Marshal(fm)
+	if err != nil {
+		t.Fatalf("Failed to serialize msg: %s", err)
+	}
+
+	// Sanity check
+	if string(serializedMsg) != "\n\x00" {
+		t.Fatal("Serialized bytes mismatched")
+	}
 
 	msg := MapTest{}
-	err := proto.Unmarshal(serializedMsg, &msg)
+	err = proto.Unmarshal(serializedMsg, &msg)
 
 	if err != nil {
 		t.Fatalf("Unexpected error: %s", err)
@@ -106,6 +131,50 @@ func TestUnmarshalImplicitDefaultKeyValue2(t *testing.T) {
 		t.Fatal("\"\" not found in StrStr map.")
 	}
 	if val != "" {
-		t.Fatalf("Unexpected value for \"foo\": %s", val)
+		t.Fatalf("Unexpected value for \"\": %s", val)
+	}
+}
+
+func TestUnmarshalIgnoreUnknownField(t *testing.T) {
+	fm := &FakeMap{
+		Entries: []*FakeMapEntry{
+			{
+				Key:   "key",
+				Value: "value",
+				Other: "other",
+			},
+		},
+	}
+
+	serializedMsg, err := proto.Marshal(fm)
+	if err != nil {
+		t.Fatalf("Failed to serialize msg: %s", err)
+	}
+
+	msg := &MapTest{}
+	err = proto.Unmarshal(serializedMsg, msg)
+
+	if err != nil {
+		var pb proto.Message = msg
+		_, ok := pb.(proto.Unmarshaler)
+		if !ok {
+			// non-codegen implementation returns error when extra tags are
+			// present.
+			return
+		}
+		t.Fatalf("Unexpected error: %s", err)
+	}
+
+	strStr := msg.StrStr
+	if len(strStr) != 1 {
+		t.Fatal("StrStr map should have 1 key/value pairs")
+	}
+
+	val, ok := strStr["key"]
+	if !ok {
+		t.Fatal("\"key\" not found in StrStr map.")
+	}
+	if val != "value" {
+		t.Fatalf("Unexpected value for \"value\": %s", val)
 	}
 }

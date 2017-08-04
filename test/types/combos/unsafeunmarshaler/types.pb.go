@@ -3837,6 +3837,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue *google_protobuf2.Timestamp
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -3899,6 +3900,19 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NullableTimestamp[mapkey] = mapvalue
@@ -3935,6 +3949,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := &google_protobuf2.Timestamp{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -3997,6 +4012,19 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Timestamp[mapkey] = *mapvalue
@@ -4033,6 +4061,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue *google_protobuf1.Duration
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4095,6 +4124,19 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NullableDuration[mapkey] = mapvalue
@@ -4131,6 +4173,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := &google_protobuf1.Duration{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4193,6 +4236,19 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Duration[mapkey] = *mapvalue
@@ -4279,6 +4335,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := new(time.Time)
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4340,6 +4397,19 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NullableTimestamp[mapkey] = mapvalue
@@ -4376,6 +4446,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := new(time.Time)
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4437,6 +4508,19 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Timestamp[mapkey] = *mapvalue
@@ -4473,6 +4557,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := new(time.Duration)
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4534,6 +4619,19 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NullableDuration[mapkey] = mapvalue
@@ -4570,6 +4668,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := new(time.Duration)
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -4631,6 +4730,19 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTypesUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Duration[mapkey] = *mapvalue

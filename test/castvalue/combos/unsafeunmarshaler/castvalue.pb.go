@@ -897,6 +897,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := &Wilson{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -959,6 +960,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.CastMapValueMessage[mapkey] = ((MyWilson)(*mapvalue))
@@ -995,6 +1009,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue *Wilson
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -1057,6 +1072,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCastvalueUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.CastMapValueMessageNullable[mapkey] = ((*MyWilson)(mapvalue))

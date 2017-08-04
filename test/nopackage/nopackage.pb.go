@@ -197,6 +197,7 @@ func (m *M) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -254,6 +255,19 @@ func (m *M) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
 					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipNopackage(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthNopackage
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.F[mapkey] = mapvalue

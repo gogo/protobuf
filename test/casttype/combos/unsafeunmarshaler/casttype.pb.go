@@ -1672,6 +1672,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -1729,6 +1730,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCasttypeUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.MyMap[mapkey] = mapvalue
@@ -1765,6 +1779,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey github_com_gogo_protobuf_test_casttype.MyStringType
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -1822,6 +1837,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCasttypeUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(mapkey)] = ((github_com_gogo_protobuf_test_casttype.MyUint64Type)(mapvalue))
@@ -1858,6 +1886,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue *Wilson
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -1920,6 +1949,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCasttypeUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(mapkey)] = mapvalue
@@ -1956,6 +1998,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := &Wilson{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -2018,6 +2061,19 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthCasttypeUnsafe
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(mapkey)] = *mapvalue

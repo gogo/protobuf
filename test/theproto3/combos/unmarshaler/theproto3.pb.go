@@ -5132,6 +5132,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue *Nested
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5194,6 +5195,19 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Terrain[mapkey] = mapvalue
@@ -5263,6 +5277,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue *test.NinOptEnum
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5325,6 +5340,19 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Proto2Value[mapkey] = mapvalue
@@ -5490,6 +5518,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5547,6 +5576,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
 					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToDoubleMap[mapkey] = mapvalue
@@ -5583,6 +5625,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5636,6 +5679,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
 					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToFloatMap[mapkey] = mapvalue
@@ -5672,6 +5728,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5718,6 +5775,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Int32Map[mapkey] = mapvalue
@@ -5754,6 +5824,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5800,6 +5871,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Int64Map[mapkey] = mapvalue
@@ -5836,6 +5920,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey uint32
 			var mapvalue uint32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5882,6 +5967,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Uint32Map[mapkey] = mapvalue
@@ -5918,6 +6016,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey uint64
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -5964,6 +6063,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Uint64Map[mapkey] = mapvalue
@@ -6000,6 +6112,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6052,6 +6165,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapvaluetemp = int32((uint32(mapvaluetemp) >> 1) ^ uint32(((mapvaluetemp&1)<<31)>>31))
 					mapvalue = int32(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sint32Map[mapkey] = mapvalue
@@ -6088,6 +6214,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6140,6 +6267,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapvaluetemp = (mapvaluetemp >> 1) ^ uint64((int64(mapvaluetemp&1)<<63)>>63)
 					mapvalue = int64(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sint64Map[mapkey] = mapvalue
@@ -6176,6 +6316,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey uint32
 			var mapvalue uint32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6210,6 +6351,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
 					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
 					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Fixed32Map[mapkey] = mapvalue
@@ -6246,6 +6400,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6280,6 +6435,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue |= int32(dAtA[iNdEx-3]) << 8
 					mapvalue |= int32(dAtA[iNdEx-2]) << 16
 					mapvalue |= int32(dAtA[iNdEx-1]) << 24
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sfixed32Map[mapkey] = mapvalue
@@ -6316,6 +6484,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey uint64
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6358,6 +6527,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
 					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
 					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Fixed64Map[mapkey] = mapvalue
@@ -6394,6 +6576,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6436,6 +6619,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue |= int64(dAtA[iNdEx-3]) << 40
 					mapvalue |= int64(dAtA[iNdEx-2]) << 48
 					mapvalue |= int64(dAtA[iNdEx-1]) << 56
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sfixed64Map[mapkey] = mapvalue
@@ -6472,6 +6668,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey bool
 			var mapvalue bool
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6522,6 +6719,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 						}
 					}
 					mapvalue = bool(mapvaluetemp != 0)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.BoolMap[mapkey] = mapvalue
@@ -6558,6 +6768,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue string
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6626,6 +6837,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
 					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringMap[mapkey] = mapvalue
@@ -6662,6 +6886,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			mapvalue := []byte{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6731,6 +6956,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue = make([]byte, mapbyteLen)
 					copy(mapvalue, dAtA[iNdEx:postbytesIndex])
 					iNdEx = postbytesIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToBytesMap[mapkey] = mapvalue
@@ -6767,6 +7005,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue MapEnum
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6824,6 +7063,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToEnumMap[mapkey] = mapvalue
@@ -6860,6 +7112,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue *FloatingPoint
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -6933,6 +7186,19 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToMsgMap[mapkey] = mapvalue
@@ -7019,6 +7285,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7076,6 +7343,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
 					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToDoubleMap[mapkey] = mapvalue
@@ -7112,6 +7392,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7165,6 +7446,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
 					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToFloatMap[mapkey] = mapvalue
@@ -7201,6 +7495,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7247,6 +7542,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Int32Map[mapkey] = mapvalue
@@ -7283,6 +7591,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7329,6 +7638,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Int64Map[mapkey] = mapvalue
@@ -7365,6 +7687,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey uint32
 			var mapvalue uint32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7411,6 +7734,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Uint32Map[mapkey] = mapvalue
@@ -7447,6 +7783,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey uint64
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7493,6 +7830,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Uint64Map[mapkey] = mapvalue
@@ -7529,6 +7879,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7581,6 +7932,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapvaluetemp = int32((uint32(mapvaluetemp) >> 1) ^ uint32(((mapvaluetemp&1)<<31)>>31))
 					mapvalue = int32(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sint32Map[mapkey] = mapvalue
@@ -7617,6 +7981,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7669,6 +8034,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapvaluetemp = (mapvaluetemp >> 1) ^ uint64((int64(mapvaluetemp&1)<<63)>>63)
 					mapvalue = int64(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sint64Map[mapkey] = mapvalue
@@ -7705,6 +8083,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey uint32
 			var mapvalue uint32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7739,6 +8118,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
 					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
 					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Fixed32Map[mapkey] = mapvalue
@@ -7775,6 +8167,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue int32
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7809,6 +8202,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue |= int32(dAtA[iNdEx-3]) << 8
 					mapvalue |= int32(dAtA[iNdEx-2]) << 16
 					mapvalue |= int32(dAtA[iNdEx-1]) << 24
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sfixed32Map[mapkey] = mapvalue
@@ -7845,6 +8251,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey uint64
 			var mapvalue uint64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7887,6 +8294,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
 					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
 					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Fixed64Map[mapkey] = mapvalue
@@ -7923,6 +8343,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue int64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -7965,6 +8386,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue |= int64(dAtA[iNdEx-3]) << 40
 					mapvalue |= int64(dAtA[iNdEx-2]) << 48
 					mapvalue |= int64(dAtA[iNdEx-1]) << 56
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.Sfixed64Map[mapkey] = mapvalue
@@ -8001,6 +8435,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey bool
 			var mapvalue bool
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8051,6 +8486,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 						}
 					}
 					mapvalue = bool(mapvaluetemp != 0)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.BoolMap[mapkey] = mapvalue
@@ -8087,6 +8535,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue string
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8155,6 +8604,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
 					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringMap[mapkey] = mapvalue
@@ -8191,6 +8653,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			mapvalue := []byte{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8260,6 +8723,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue = make([]byte, mapbyteLen)
 					copy(mapvalue, dAtA[iNdEx:postbytesIndex])
 					iNdEx = postbytesIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToBytesMap[mapkey] = mapvalue
@@ -8296,6 +8772,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue MapEnum
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8353,6 +8830,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToEnumMap[mapkey] = mapvalue
@@ -8389,6 +8879,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue *FloatingPoint
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8462,6 +8953,19 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.StringToMsgMap[mapkey] = mapvalue
@@ -8548,6 +9052,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			var mapvalue string
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8605,6 +9110,19 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					}
 					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
 					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NameMapping[mapkey] = mapvalue
@@ -8641,6 +9159,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var mapkey int64
 			var mapvalue *FloatingPoint
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8706,6 +9225,19 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.MsgMapping[mapkey] = mapvalue
@@ -8742,6 +9274,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var mapkey bool
 			mapvalue := []byte{}
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -8802,6 +9335,19 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					mapvalue = make([]byte, mapbyteLen)
 					copy(mapvalue, dAtA[iNdEx:postbytesIndex])
 					iNdEx = postbytesIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.ByteMapping[mapkey] = mapvalue
@@ -9118,6 +9664,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 			var mapkey string
 			var mapvalue float64
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -9175,6 +9722,19 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
 					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTheproto3
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NestedMapField[mapkey] = mapvalue

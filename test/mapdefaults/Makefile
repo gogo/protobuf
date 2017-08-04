@@ -1,6 +1,6 @@
 # Protocol Buffers for Go with Gadgets
 #
-# Copyright (c) 2015, The GoGo Authors. All rights reserved.
+# Copyright (c) 2017, The GoGo Authors. All rights reserved.
 # http://github.com/gogo/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,5 +29,5 @@
 regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-combo
 	go install github.com/gogo/protobuf/protoc-gen-gogofast
-	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. map.proto
+	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogo_out=. map.proto
 	find combos -type d -not -name combos -exec cp map_test.go.in {}/map_test.go \;

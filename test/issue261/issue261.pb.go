@@ -316,6 +316,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var mapkey int32
 			mapvalue := new(time.Duration)
 			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
@@ -377,6 +378,19 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return err
 					}
 					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipIssue261(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthIssue261
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
 				}
 			}
 			m.NullableDuration[mapkey] = mapvalue
