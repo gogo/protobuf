@@ -45,7 +45,7 @@ option (gogoproto.description_all) = true;
 option (gogoproto.testgen_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
+option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 
 option (gogoproto.goproto_enum_stringer_all) = false;

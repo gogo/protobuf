@@ -5163,7 +5163,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -5294,7 +5294,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -5532,7 +5532,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
@@ -5625,7 +5625,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint32
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
@@ -5703,7 +5703,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -5785,7 +5785,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -5867,7 +5867,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -5949,7 +5949,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -6034,7 +6034,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkeytemp = int32((uint32(mapkeytemp) >> 1) ^ uint32(((mapkeytemp&1)<<31)>>31))
 					mapkey = int32(mapkeytemp)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -6122,7 +6122,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
 					mapkey = int64(mapkeytemp)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -6201,7 +6201,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapkey |= uint32(dAtA[iNdEx-3]) << 8
 					mapkey |= uint32(dAtA[iNdEx-2]) << 16
 					mapkey |= uint32(dAtA[iNdEx-1]) << 24
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -6271,7 +6271,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapkey |= int32(dAtA[iNdEx-3]) << 8
 					mapkey |= int32(dAtA[iNdEx-2]) << 16
 					mapkey |= int32(dAtA[iNdEx-1]) << 24
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -6345,7 +6345,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapkey |= uint64(dAtA[iNdEx-3]) << 40
 					mapkey |= uint64(dAtA[iNdEx-2]) << 48
 					mapkey |= uint64(dAtA[iNdEx-1]) << 56
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -6423,7 +6423,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapkey |= int64(dAtA[iNdEx-3]) << 40
 					mapkey |= int64(dAtA[iNdEx-2]) << 48
 					mapkey |= int64(dAtA[iNdEx-1]) << 56
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -6505,7 +6505,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 						}
 					}
 					mapkey = bool(mapkeytemp != 0)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -6600,7 +6600,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -6704,7 +6704,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -6809,7 +6809,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -6902,7 +6902,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -7061,7 +7061,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
@@ -7154,7 +7154,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint32
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
@@ -7232,7 +7232,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -7314,7 +7314,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -7396,7 +7396,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -7478,7 +7478,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -7563,7 +7563,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkeytemp = int32((uint32(mapkeytemp) >> 1) ^ uint32(((mapkeytemp&1)<<31)>>31))
 					mapkey = int32(mapkeytemp)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -7651,7 +7651,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
 					mapkey = int64(mapkeytemp)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -7730,7 +7730,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapkey |= uint32(dAtA[iNdEx-3]) << 8
 					mapkey |= uint32(dAtA[iNdEx-2]) << 16
 					mapkey |= uint32(dAtA[iNdEx-1]) << 24
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -7800,7 +7800,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapkey |= int32(dAtA[iNdEx-3]) << 8
 					mapkey |= int32(dAtA[iNdEx-2]) << 16
 					mapkey |= int32(dAtA[iNdEx-1]) << 24
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -7874,7 +7874,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapkey |= uint64(dAtA[iNdEx-3]) << 40
 					mapkey |= uint64(dAtA[iNdEx-2]) << 48
 					mapkey |= uint64(dAtA[iNdEx-1]) << 56
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -7952,7 +7952,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapkey |= int64(dAtA[iNdEx-3]) << 40
 					mapkey |= int64(dAtA[iNdEx-2]) << 48
 					mapkey |= int64(dAtA[iNdEx-1]) << 56
-				} else {
+				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -8034,7 +8034,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 						}
 					}
 					mapkey = bool(mapkeytemp != 0)
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8129,7 +8129,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8233,7 +8233,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8338,7 +8338,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
 							return ErrIntOverflowTheproto3
@@ -8431,7 +8431,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8579,7 +8579,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8675,7 +8675,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					}
 					mapkeytemp = (mapkeytemp >> 1) ^ uint64((int64(mapkeytemp&1)<<63)>>63)
 					mapkey = int64(mapkeytemp)
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -8775,7 +8775,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 						}
 					}
 					mapkey = bool(mapkeytemp != 0)
-				} else {
+				} else if fieldNum == 2 {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
@@ -9160,7 +9160,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF

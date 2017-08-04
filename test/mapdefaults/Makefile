@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-min-version
+	go install github.com/gogo/protobuf/protoc-gen-combo
 	go install github.com/gogo/protobuf/protoc-gen-gogofast
-	protoc-min-version --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. map.proto
+	protoc-gen-combo --version="3.0.0" --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. map.proto
+	find combos -type d -not -name combos -exec cp map_test.go.in {}/map_test.go \;

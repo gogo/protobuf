@@ -239,7 +239,7 @@ func (m *M) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapvaluetemp uint64
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF

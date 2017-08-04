@@ -808,7 +808,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.In()
 			p.mapField("mapkey", false, m.KeyAliasField)
 			p.Out()
-			p.P(`} else {`)
+			p.P(`} else if fieldNum == 2 {`)
 			p.In()
 			p.mapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.Out()

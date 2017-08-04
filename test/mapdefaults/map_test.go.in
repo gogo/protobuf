@@ -30,6 +30,8 @@ package mapdefaults
 
 import (
 	"testing"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
@@ -43,13 +45,13 @@ func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
 	serializedMsg := []byte("\n\x08\n\x02as\x12\x02df\n\x05\x12\x03bar\n\x05\n\x03foo")
 
 	msg := MapTest{}
-	err := msg.Unmarshal(serializedMsg)
+	err := proto.Unmarshal(serializedMsg, &msg)
 
 	if err != nil {
 		t.Fatalf("Unexpected error: %s", err)
 	}
 
-	strStr := msg.GetStrStr()
+	strStr := msg.StrStr
 	if len(strStr) != 3 {
 		t.Fatal("StrStr map should have 3 key/value pairs")
 	}
@@ -88,13 +90,13 @@ func TestUnmarshalImplicitDefaultKeyValue2(t *testing.T) {
 	serializedMsg := []byte("\n\x00")
 
 	msg := MapTest{}
-	err := msg.Unmarshal(serializedMsg)
+	err := proto.Unmarshal(serializedMsg, &msg)
 
 	if err != nil {
 		t.Fatalf("Unexpected error: %s", err)
 	}
 
-	strStr := msg.GetStrStr()
+	strStr := msg.StrStr
 	if len(strStr) != 1 {
 		t.Fatal("StrStr map should have 1 key/value pairs")
 	}

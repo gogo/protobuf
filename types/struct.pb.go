@@ -1397,7 +1397,7 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 					}
 					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
 					iNdEx = postStringIndexmapkey
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {

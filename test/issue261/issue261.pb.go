@@ -347,7 +347,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 							break
 						}
 					}
-				} else {
+				} else if fieldNum == 2 {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
