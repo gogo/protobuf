@@ -4680,7 +4680,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				m.Timestamp = make(map[int32]google_protobuf2.Timestamp)
 			}
 			var mapkey int32
-			var mapvalue *google_protobuf2.Timestamp
+			mapvalue := &google_protobuf2.Timestamp{}
 			for iNdEx < postIndex {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
@@ -4876,7 +4876,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				m.Duration = make(map[int32]google_protobuf1.Duration)
 			}
 			var mapkey int32
-			var mapvalue *google_protobuf1.Duration
+			mapvalue := &google_protobuf1.Duration{}
 			for iNdEx < postIndex {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {

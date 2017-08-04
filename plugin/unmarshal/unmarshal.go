@@ -291,7 +291,7 @@ func (p *unmarshal) unsafeFixed64(varName string, typeName string) {
 	p.P(`iNdEx += 8`)
 }
 
-func (p *unmarshal) declareMapField(varName string, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) declareMapField(varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, ` float64`)
@@ -321,7 +321,11 @@ func (p *unmarshal) declareMapField(varName string, customType bool, field *desc
 		} else {
 			desc := p.ObjectNamed(field.GetTypeName())
 			msgname := p.TypeName(desc)
-			p.P(`var `, varName, ` *`, msgname)
+			if nullable {
+				p.P(`var `, varName, ` *`, msgname)
+			} else {
+				p.P(varName, ` := &`, msgname, `{}`)
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		if customType {
@@ -795,8 +799,8 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 
-			p.declareMapField("mapkey", false, m.KeyAliasField)
-			p.declareMapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.declareMapField("mapkey", false, false, m.KeyAliasField)
+			p.declareMapField("mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.P(`for iNdEx < postIndex {`)
 			p.In()
 

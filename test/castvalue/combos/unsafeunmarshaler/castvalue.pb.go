@@ -895,7 +895,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				m.CastMapValueMessage = make(map[int32]MyWilson)
 			}
 			var mapkey int32
-			var mapvalue *Wilson
+			mapvalue := &Wilson{}
 			for iNdEx < postIndex {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {

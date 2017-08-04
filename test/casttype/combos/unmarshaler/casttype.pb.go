@@ -1953,7 +1953,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				m.MyEmbeddedMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson)
 			}
 			var mapkey int32
-			var mapvalue *Wilson
+			mapvalue := &Wilson{}
 			for iNdEx < postIndex {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
