@@ -83,6 +83,7 @@ regenerate:
 	make -C test/oneof regenerate
 	make -C test/oneof3 regenerate
 	make -C test/theproto3 regenerate
+	make -C test/mapdefaults regenerate
 	make -C test/mapsproto2 regenerate
 	make -C test/issue42order regenerate
 	make -C proto generate-test-pbs
