@@ -135,3 +135,54 @@ func TestTimestampString(t *testing.T) {
 func utcDate(year, month, day int) time.Time {
 	return time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
 }
+
+func BenchmarkStdTimeUnmarshal(b *testing.B) {
+	b.ReportAllocs()
+
+	for _, t := range []time.Time{
+		{},
+		time.Now(),
+	} {
+		name := "zero"
+		if !t.IsZero() {
+			name = "now"
+		}
+		b.Run(name, func(b *testing.B) {
+			data, err := StdTimeMarshal(time.Time{})
+			if err != nil {
+				panic(err)
+			}
+
+			var t time.Time
+			for i := 0; i < b.N; i++ {
+				if err := StdTimeUnmarshal(&t, data); err != nil {
+					panic(err)
+				}
+			}
+		})
+	}
+
+}
+
+func TestStdTimeUnmarshalAllocs(t *testing.T) {
+	for _, in := range []time.Time{
+		{},
+		time.Now(),
+	} {
+
+		data, err := StdTimeMarshal(in)
+		if err != nil {
+			panic(err)
+		}
+
+		var tt time.Time
+		avg := testing.AllocsPerRun(1000, func() {
+			if err := StdTimeUnmarshal(&tt, data); err != nil {
+				t.Fatal(err)
+			}
+		})
+		if avg > 0 {
+			t.Fatalf("unexpected allocs for %v", in)
+		}
+	}
+}
