@@ -723,7 +723,13 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 	// Allocate memory for pointer fields.
 	if targetType.Kind() == reflect.Ptr {
+		// If input value is "null" and target is a pointer type, then the field should be treated as not set
+		// UNLESS the target is structpb.Value, in which case it should be set to structpb.NullValue.
+		if string(inputValue) == "null" && targetType != reflect.TypeOf(&types.Value{}) {
+			return nil
+		}
 		target.Set(reflect.New(targetType.Elem()))
+
 		return u.unmarshalValue(target.Elem(), inputValue, prop)
 	}
 
@@ -731,15 +737,11 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		return jsu.UnmarshalJSONPB(u, []byte(inputValue))
 	}
 
-	// Handle well-known types.
+	// Handle well-known types that are not pointers.
 	if w, ok := target.Addr().Interface().(isWkt); ok {
 		switch w.XXX_WellKnownType() {
 		case "DoubleValue", "FloatValue", "Int64Value", "UInt64Value",
 			"Int32Value", "UInt32Value", "BoolValue", "StringValue", "BytesValue":
-			// "Wrappers use the same representation in JSON
-			//  as the wrapped primitive type, except that null is allowed."
-			// encoding/json will turn JSON `null` into Go `nil`,
-			// so we don't have to do any extra work.
 			return u.unmarshalValue(target.Field(0), inputValue, prop)
 		case "Any":
 			// Use json.RawMessage pointer type instead of value to support pre-1.8 version.
@@ -800,21 +802,16 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 			return nil
 		case "Duration":
-			ivStr := string(inputValue)
-			if ivStr == "null" {
-				target.Field(0).SetInt(0)
-				target.Field(1).SetInt(0)
-				return nil
-			}
-
-			unq, err := strconv.Unquote(ivStr)
+			unq, err := strconv.Unquote(string(inputValue))
 			if err != nil {
 				return err
 			}
+
 			d, err := time.ParseDuration(unq)
 			if err != nil {
 				return fmt.Errorf("bad Duration: %v", err)
 			}
+
 			ns := d.Nanoseconds()
 			s := ns / 1e9
 			ns %= 1e9
@@ -822,29 +819,20 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			target.Field(1).SetInt(ns)
 			return nil
 		case "Timestamp":
-			ivStr := string(inputValue)
-			if ivStr == "null" {
-				target.Field(0).SetInt(0)
-				target.Field(1).SetInt(0)
-				return nil
-			}
-
-			unq, err := strconv.Unquote(ivStr)
+			unq, err := strconv.Unquote(string(inputValue))
 			if err != nil {
 				return err
 			}
+
 			t, err := time.Parse(time.RFC3339Nano, unq)
 			if err != nil {
 				return fmt.Errorf("bad Timestamp: %v", err)
 			}
+
 			target.Field(0).SetInt(t.Unix())
 			target.Field(1).SetInt(int64(t.Nanosecond()))
 			return nil
 		case "Struct":
-			if string(inputValue) == "null" {
-				// Interpret a null struct as empty.
-				return nil
-			}
 			var m map[string]json.RawMessage
 			if err := json.Unmarshal(inputValue, &m); err != nil {
 				return fmt.Errorf("bad StructValue: %v", err)
@@ -859,14 +847,11 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			}
 			return nil
 		case "ListValue":
-			if string(inputValue) == "null" {
-				// Interpret a null ListValue as empty.
-				return nil
-			}
 			var s []json.RawMessage
 			if err := json.Unmarshal(inputValue, &s); err != nil {
 				return fmt.Errorf("bad ListValue: %v", err)
 			}
+
 			target.Field(0).Set(reflect.ValueOf(make([]*types.Value, len(s), len(s))))
 			for i, sv := range s {
 				if err := u.unmarshalValue(target.Field(0).Index(i), sv, prop); err != nil {
