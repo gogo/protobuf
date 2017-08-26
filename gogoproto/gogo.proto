@@ -130,3 +130,7 @@ extend google.protobuf.FieldOptions {
 	optional bool stdtime = 65010;
 	optional bool stdduration = 65011;
 }
+
+extend google.protobuf.ServiceOptions{
+	optional bool goproto_named_instances = 67001;
+}

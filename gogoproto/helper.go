@@ -355,3 +355,7 @@ func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_proto
 func RegistersGolangProto(file *google_protobuf.FileDescriptorProto) bool {
 	return proto.GetBoolExtension(file.Options, E_GoprotoRegistration, false)
 }
+
+func HasNamedInstances(service *google_protobuf.ServiceDescriptorProto) bool {
+	return proto.GetBoolExtension(service.Options, E_GoprotoNamedInstances, false)
+}
