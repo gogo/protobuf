@@ -15,7 +15,6 @@ script:
 language: go
 
 go:
-  - 1.7.1
   - 1.8.3
   - 1.9
 
