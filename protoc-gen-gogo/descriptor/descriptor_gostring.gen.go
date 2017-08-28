@@ -11,6 +11,7 @@ It has these top-level messages:
 	FileDescriptorSet
 	FileDescriptorProto
 	DescriptorProto
+	ExtensionRangeOptions
 	FieldDescriptorProto
 	OneofDescriptorProto
 	EnumDescriptorProto
@@ -154,13 +155,16 @@ func (this *DescriptorProto_ExtensionRange) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 6)
+	s := make([]string, 0, 7)
 	s = append(s, "&descriptor.DescriptorProto_ExtensionRange{")
 	if this.Start != nil {
 		s = append(s, "Start: "+valueToGoStringDescriptor(this.Start, "int32")+",\n")
 	}
 	if this.End != nil {
 		s = append(s, "End: "+valueToGoStringDescriptor(this.End, "int32")+",\n")
+	}
+	if this.Options != nil {
+		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
@@ -180,6 +184,22 @@ func (this *DescriptorProto_ReservedRange) GoString() string {
 	if this.End != nil {
 		s = append(s, "End: "+valueToGoStringDescriptor(this.End, "int32")+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ExtensionRangeOptions) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&descriptor.ExtensionRangeOptions{")
+	if this.UninterpretedOption != nil {
+		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
+	}
+	s = append(s, "XXX_InternalExtensions: "+extensionToGoStringDescriptor(this)+",\n")
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -343,7 +363,7 @@ func (this *FileOptions) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 21)
+	s := make([]string, 0, 23)
 	s = append(s, "&descriptor.FileOptions{")
 	if this.JavaPackage != nil {
 		s = append(s, "JavaPackage: "+valueToGoStringDescriptor(this.JavaPackage, "string")+",\n")
@@ -375,6 +395,9 @@ func (this *FileOptions) GoString() string {
 	if this.PyGenericServices != nil {
 		s = append(s, "PyGenericServices: "+valueToGoStringDescriptor(this.PyGenericServices, "bool")+",\n")
 	}
+	if this.PhpGenericServices != nil {
+		s = append(s, "PhpGenericServices: "+valueToGoStringDescriptor(this.PhpGenericServices, "bool")+",\n")
+	}
 	if this.Deprecated != nil {
 		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
 	}
@@ -392,6 +415,9 @@ func (this *FileOptions) GoString() string {
 	}
 	if this.PhpClassPrefix != nil {
 		s = append(s, "PhpClassPrefix: "+valueToGoStringDescriptor(this.PhpClassPrefix, "string")+",\n")
+	}
+	if this.PhpNamespace != nil {
+		s = append(s, "PhpNamespace: "+valueToGoStringDescriptor(this.PhpNamespace, "string")+",\n")
 	}
 	if this.UninterpretedOption != nil {
 		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
