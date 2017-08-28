@@ -151,7 +151,7 @@ contributors:
 
 js:
 ifeq (go1.9, $(findstring go1.9, $(GO_VERSION)))
-	go get github.com/gopherjs/gopherjs
+	go get -u github.com/gopherjs/gopherjs
 	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 endif
 
