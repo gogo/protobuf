@@ -2210,6 +2210,15 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		g.Out()
 		g.P("}")
+	} else {
+		// Even if the type does not need to be generated, we need to iterate
+		// over all its fields to be able to mark as used any imported types
+		// used by those fields.
+		for _, field := range message.Field {
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+				g.RecordTypeUse(field.GetTypeName())
+			}
+		}
 	}
 
 	// Update g.Buffer to list valid oneof types.
