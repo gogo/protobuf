@@ -43,24 +43,39 @@ type MixMatch struct {
 
 func (this *MixMatch) Regenerate() {
 	fmt.Printf("mixbench\n")
-	uuidData, err := ioutil.ReadFile("../uuid.go")
-	if err != nil {
-		panic(err)
+
+	for from, to := range map[string]string{
+		"../uuid.go": "./testdata/uuid.go",
+		"../t.go":    "./testdata/t.go",
+	} {
+		if data, err := ioutil.ReadFile(from); err != nil {
+			panic(err)
+		} else {
+			content := string(data)
+			for i, old := range this.Old {
+				println("Replacing", old, "with", this.New[i])
+				content = strings.Replace(content, old, this.New[i], -1)
+			}
+			if err = ioutil.WriteFile(to, []byte(content), 0666); err != nil {
+				panic(err)
+			}
+		}
 	}
-	if err = ioutil.WriteFile("./testdata/uuid.go", uuidData, 0666); err != nil {
-		panic(err)
-	}
+
 	data, err := ioutil.ReadFile("../thetest.proto")
 	if err != nil {
 		panic(err)
 	}
 	content := string(data)
 	for i, old := range this.Old {
+		println("Replacing", old, "with", this.New[i])
 		content = strings.Replace(content, old, this.New[i], -1)
 	}
+
 	if err = ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
 		panic(err)
 	}
+
 	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../protobuf/:../../../../../:.", "./testdata/thetest.proto")
 	fmt.Printf("regenerating\n")
 	out, err := regenerate.CombinedOutput()
@@ -120,6 +135,15 @@ func NewMixMatch(marshaler, unmarshaler, unsafe_marshaler, unsafe_unmarshaler bo
 		mm.Old = append(mm.Old, "option (gogoproto.unsafe_unmarshaler_all) = true;")
 		mm.New = append(mm.New, "option (gogoproto.unsafe_unmarshaler_all) = false;")
 	}
+
+	if marshaler || unsafe_marshaler ||
+		unmarshaler || unsafe_unmarshaler {
+		mm.Old = append(mm.Old, "/*MarshalTo")
+		mm.New = append(mm.New, "")
+		mm.Old = append(mm.Old, "MarshalTo*/")
+		mm.New = append(mm.New, "")
+	}
+
 	return mm
 }
 
@@ -131,8 +155,8 @@ func main() {
 	NewMixMatch(false, false, false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
 	NewMixMatch(false, false, true, true).Bench("ProtoUnmarshal", "unsafe_unmarshaler.txt")
 	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
-	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp marshal.txt unsafe_marshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unsafe_unmarshaler.txt")
+	fmt.Println("benchcmp marshal.txt marshaler.txt")
+	fmt.Println("benchcmp unmarshal.txt unmarshaler.txt")
+	fmt.Println("benchcmp marshal.txt unsafe_marshaler.txt")
+	fmt.Println("benchcmp unmarshal.txt unsafe_unmarshaler.txt")
 }

@@ -82,6 +82,9 @@ extend google.protobuf.FileOptions {
     optional bool enumdecl_all = 63031;
 
 	optional bool goproto_registration = 63032;
+
+	optional bool binary_marshaler_all = 63033;
+	optional bool binary_unmarshaler_all = 63034;
 }
 
 extend google.protobuf.MessageOptions {
@@ -114,6 +117,9 @@ extend google.protobuf.MessageOptions {
 	optional bool compare = 64029;
 
 	optional bool typedecl = 64030;
+
+	optional bool binary_marshaler = 64031;
+	optional bool binary_unmarshaler = 64032;
 }
 
 extend google.protobuf.FieldOptions {

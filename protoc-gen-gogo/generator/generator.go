@@ -62,6 +62,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
+	"io/ioutil"
 )
 
 // generatedCodeVersion indicates a version of the generated code.
@@ -674,7 +675,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
+	gogoPluginNames := []string{"unmarshal", "binaryunmarshaler", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "binarymarshaler", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -1244,6 +1245,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.customImports = make([]string, 0)
 	g.file = g.FileOf(file.FileDescriptorProto)
 	g.usedPackages = make(map[string]bool)
+	g.indent = ""
 
 	if g.file.index == 0 {
 		// For one file in the package, assert version compatibility.
@@ -1301,11 +1303,47 @@ func (g *Generator) generate(file *FileDescriptor) {
 		// Print out the bad code with line numbers.
 		// This should never happen in practice, but it can while changing generated code,
 		// so consider this a debugging aid.
+
+		line := 1
+		var errorLine, errorCharacter int
+		var errorMessage string
+		if _, scanError := fmt.Sscanf(err.Error(), "%d:%d: %s", &errorLine, &errorCharacter, &errorMessage); scanError == nil {
+			line = errorLine - 25
+		}
+
+		if line < 0 {
+			line = 0
+		}
+
+		stopLine := line + 50
+
 		var src bytes.Buffer
 		s := bufio.NewScanner(bytes.NewReader(raw))
-		for line := 1; s.Scan(); line++ {
-			fmt.Fprintf(&src, "%5d\t%s\n", line, s.Bytes())
+		for ignore := 0; s.Scan() && ignore < line; ignore++ {
+
 		}
+
+		for ; s.Scan(); line++ {
+			fmt.Fprintf(&src, "%5d\t%s", line, s.Bytes())
+			if line == errorLine {
+				fmt.Fprint(&src, " // <----")
+			}
+			fmt.Fprint(&src, "\n")
+
+			if line > stopLine {
+				fmt.Fprintln(&src, "---- SNIP - TOO MANY LINES ----")
+				break
+			}
+		}
+
+		if debugFile, debugFileError := ioutil.TempFile("", "protoc-gen-gogo"); debugFileError == nil {
+			debugFile.Write(raw)
+			debugFile.Close()
+			fmt.Fprintln(&src, "Data dumped in file: ", debugFile.Name())
+		} else {
+			fmt.Fprintln(&src, "Unable to dump compiled code to temp file.", debugFileError)
+		}
+
 		if serr := s.Err(); serr != nil {
 			g.Fail("bad Go source code was generated:", err.Error(), "\n"+string(raw))
 		} else {
@@ -2415,7 +2453,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.P(`VerboseEqual(interface{}) error`)
 			}
 			if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
-				gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+				gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+				gogoproto.IsBinaryMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 				g.P(`MarshalTo([]byte) (int, error)`)
 			}
 			if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {

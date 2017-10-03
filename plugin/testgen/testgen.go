@@ -348,7 +348,9 @@ func (p *testProto) Generate(imports generator.PluginImports, file *generator.Fi
 		}
 
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
-			if gogoproto.IsMarshaler(file.FileDescriptorProto, message.DescriptorProto) || gogoproto.IsUnsafeMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
+			if gogoproto.IsMarshaler(file.FileDescriptorProto, message.DescriptorProto) ||
+				gogoproto.IsUnsafeMarshaler(file.FileDescriptorProto, message.DescriptorProto) ||
+				gogoproto.IsBinaryMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				p.P(`func Test`, ccTypeName, `MarshalTo(t *`, testingPkg.Use(), `.T) {`)
 				p.In()
 				if hasUnsafe {
