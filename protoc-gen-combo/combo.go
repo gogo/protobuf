@@ -70,6 +70,10 @@ func (this MixMatch) Gen(folder string, news []string) {
 		panic(err)
 	}
 	args := append(this.Args, filepath.Join(folder, this.Filename))
+
+	fmt.Println("Running: protoc ")
+	fmt.Println(args)
+
 	var regenerate = exec.Command("protoc", args...)
 	out, err := regenerate.CombinedOutput()
 

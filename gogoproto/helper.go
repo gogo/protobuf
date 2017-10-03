@@ -329,6 +329,14 @@ func IsUnsafeUnmarshaler(file *google_protobuf.FileDescriptorProto, message *goo
 	return proto.GetBoolExtension(message.Options, E_UnsafeUnmarshaler, proto.GetBoolExtension(file.Options, E_UnsafeUnmarshalerAll, false))
 }
 
+func IsBinaryMarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_BinaryMarshaler, proto.GetBoolExtension(file.Options, E_BinaryMarshalerAll, false))
+}
+
+func IsBinaryUnmarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_BinaryUnmarshaler, proto.GetBoolExtension(file.Options, E_BinaryUnmarshalerAll, false))
+}
+
 func HasExtensionsMap(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_GoprotoExtensionsMap, proto.GetBoolExtension(file.Options, E_GoprotoExtensionsMapAll, true))
 }

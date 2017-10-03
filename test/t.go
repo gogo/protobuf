@@ -41,6 +41,12 @@ func (r T) Marshal() ([]byte, error) {
 	return proto.Marshal(r.protoType())
 }
 
+/*MarshalTo
+func (r *T) MarshalTo(data []byte) (n int, err error) {
+	return r.protoType().MarshalTo(data)
+}
+MarshalTo*/
+
 func (r *T) Unmarshal(data []byte) error {
 	pr := &ProtoType{}
 	err := proto.Unmarshal(data, pr)
