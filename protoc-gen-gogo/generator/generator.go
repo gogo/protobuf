@@ -1181,6 +1181,9 @@ func (g *Generator) addInitf(stmt string, a ...interface{}) {
 
 func (g *Generator) PrintImport(alias, pkg string) {
 	statement := "import " + alias + " " + strconv.Quote(pkg)
+	if alias == pkg[strings.LastIndex(pkg, "/")+1:] {
+		statement = "import " + strconv.Quote(pkg)
+	}
 	if g.writtenImports[statement] {
 		return
 	}
