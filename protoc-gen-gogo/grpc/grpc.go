@@ -129,11 +129,15 @@ func (g *grpc) GenerateImports(file *generator.FileDescriptor) {
 	if len(file.FileDescriptorProto.Service) == 0 {
 		return
 	}
-	g.P("import (")
-	g.P(contextPkg, " ", strconv.Quote(path.Join(g.gen.ImportPrefix, contextPkgPath)))
-	g.P(grpcPkg, " ", strconv.Quote(path.Join(g.gen.ImportPrefix, grpcPkgPath)))
-	g.P(")")
-	g.P()
+	grpcImports := []string{
+		path.Join(g.gen.ImportPrefix, contextPkgPath),
+		path.Join(g.gen.ImportPrefix, grpcPkgPath),
+	}
+	imports := generator.NewPluginImports(g.gen)
+	for _, i := range grpcImports {
+		imports.NewImport(i).Use()
+	}
+	imports.GenerateImports(file)
 }
 
 // reservedClientName records whether a client name is reserved on the client side.
