@@ -1183,30 +1183,6 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	}
 
 	if p.atleastOne {
-		p.P(`func encodeFixed64`, p.localName, `(dAtA []byte, offset int, v uint64) int {`)
-		p.In()
-		p.P(`dAtA[offset] = uint8(v)`)
-		p.P(`dAtA[offset+1] = uint8(v >> 8)`)
-		p.P(`dAtA[offset+2] = uint8(v >> 16)`)
-		p.P(`dAtA[offset+3] = uint8(v >> 24)`)
-		p.P(`dAtA[offset+4] = uint8(v >> 32)`)
-		p.P(`dAtA[offset+5] = uint8(v >> 40)`)
-		p.P(`dAtA[offset+6] = uint8(v >> 48)`)
-		p.P(`dAtA[offset+7] = uint8(v >> 56)`)
-		p.P(`return offset+8`)
-		p.Out()
-		p.P(`}`)
-
-		p.P(`func encodeFixed32`, p.localName, `(dAtA []byte, offset int, v uint32) int {`)
-		p.In()
-		p.P(`dAtA[offset] = uint8(v)`)
-		p.P(`dAtA[offset+1] = uint8(v >> 8)`)
-		p.P(`dAtA[offset+2] = uint8(v >> 16)`)
-		p.P(`dAtA[offset+3] = uint8(v >> 24)`)
-		p.P(`return offset+4`)
-		p.Out()
-		p.P(`}`)
-
 		p.P(`func encodeVarint`, p.localName, `(dAtA []byte, offset int, v uint64) int {`)
 		p.In()
 		p.P(`for v >= 1<<7 {`)
