@@ -45,6 +45,7 @@ Equal returns true iff protocol buffers a and b are equal.
 The arguments must both be pointers to protocol buffer structs.
 
 Equality is defined in this way:
+ For Equal:
   - Two messages are equal iff they are the same type,
     corresponding fields are equal, unknown field sets
     are equal, and extensions sets are equal.
@@ -67,9 +68,22 @@ Equality is defined in this way:
     fields are equal.
   - Every other combination of things are not equal.
 
+ For EqualIgnoreOrder:
+  - Same as above, except two repeated fields are equal iff their lengths
+    are the same and they contain the same elements, possibly in a
+    different order.
+
 The return value is undefined if a and b are not protocol buffers.
 */
 func Equal(a, b Message) bool {
+	return equalHelper(a, b, false)
+}
+
+func EqualIgnoreOrder(a, b Message) bool {
+	return equalHelper(a, b, true)
+}
+
+func equalHelper(a Message, b Message, ignoreOrder bool) bool {
 	if a == nil || b == nil {
 		return a == b
 	}
@@ -89,11 +103,11 @@ func Equal(a, b Message) bool {
 	if v1.Kind() != reflect.Struct {
 		return false
 	}
-	return equalStruct(v1, v2)
+	return equalStruct(v1, v2, ignoreOrder)
 }
 
 // v1 and v2 are known to have the same type.
-func equalStruct(v1, v2 reflect.Value) bool {
+func equalStruct(v1 reflect.Value, v2 reflect.Value, ignoreOrder bool) bool {
 	sprop := GetProperties(v1.Type())
 	for i := 0; i < v1.NumField(); i++ {
 		f := v1.Type().Field(i)
@@ -120,21 +134,23 @@ func equalStruct(v1, v2 reflect.Value) bool {
 			}
 			f1, f2 = f1.Elem(), f2.Elem()
 		}
-		if !equalAny(f1, f2, sprop.Prop[i]) {
+		if !equalAny(f1, f2, sprop.Prop[i], ignoreOrder) {
 			return false
 		}
 	}
 
 	if em1 := v1.FieldByName("XXX_InternalExtensions"); em1.IsValid() {
 		em2 := v2.FieldByName("XXX_InternalExtensions")
-		if !equalExtensions(v1.Type(), em1.Interface().(XXX_InternalExtensions), em2.Interface().(XXX_InternalExtensions)) {
+		if !equalExtensions(v1.Type(), em1.Interface().(XXX_InternalExtensions),
+			em2.Interface().(XXX_InternalExtensions), ignoreOrder) {
 			return false
 		}
 	}
 
 	if em1 := v1.FieldByName("XXX_extensions"); em1.IsValid() {
 		em2 := v2.FieldByName("XXX_extensions")
-		if !equalExtMap(v1.Type(), em1.Interface().(map[int32]Extension), em2.Interface().(map[int32]Extension)) {
+		if !equalExtMap(v1.Type(), em1.Interface().(map[int32]Extension),
+			em2.Interface().(map[int32]Extension), ignoreOrder) {
 			return false
 		}
 	}
@@ -155,11 +171,11 @@ func equalStruct(v1, v2 reflect.Value) bool {
 
 // v1 and v2 are known to have the same type.
 // prop may be nil.
-func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
+func equalAny(v1, v2 reflect.Value, prop *Properties, ignoreOrder bool) bool {
 	if v1.Type() == protoMessageType {
 		m1, _ := v1.Interface().(Message)
 		m2, _ := v2.Interface().(Message)
-		return Equal(m1, m2)
+		return equalHelper(m1, m2, ignoreOrder)
 	}
 	switch v1.Kind() {
 	case reflect.Bool:
@@ -178,7 +194,7 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 		if e1.Type() != e2.Type() {
 			return false
 		}
-		return equalAny(e1, e2, nil)
+		return equalAny(e1, e2, nil, ignoreOrder)
 	case reflect.Map:
 		if v1.Len() != v2.Len() {
 			return false
@@ -189,7 +205,7 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 				// This key was not found in the second map.
 				return false
 			}
-			if !equalAny(v1.MapIndex(key), val2, nil) {
+			if !equalAny(v1.MapIndex(key), val2, nil, ignoreOrder) {
 				return false
 			}
 		}
@@ -202,7 +218,7 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 		if v1.IsNil() != v2.IsNil() {
 			return false
 		}
-		return equalAny(v1.Elem(), v2.Elem(), prop)
+		return equalAny(v1.Elem(), v2.Elem(), prop, ignoreOrder)
 	case reflect.Slice:
 		if v1.Type().Elem().Kind() == reflect.Uint8 {
 			// short circuit: []byte
@@ -221,16 +237,35 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 		if v1.Len() != v2.Len() {
 			return false
 		}
+
+		if ignoreOrder {
+			crossedOut := make(map[int]bool)
+			for i := 0; i < v1.Len(); i++ {
+				found := false
+				for j := 0; j < v2.Len(); j++ {
+					if equalAny(v1.Index(i), v2.Index(j), prop, ignoreOrder) && !crossedOut[j] {
+						crossedOut[j] = true
+						found = true
+					}
+				}
+				if !found {
+					return false
+				}
+			}
+			return true
+		}
+
 		for i := 0; i < v1.Len(); i++ {
-			if !equalAny(v1.Index(i), v2.Index(i), prop) {
+			if !equalAny(v1.Index(i), v2.Index(i), prop, ignoreOrder) {
 				return false
 			}
 		}
 		return true
+
 	case reflect.String:
 		return v1.Interface().(string) == v2.Interface().(string)
 	case reflect.Struct:
-		return equalStruct(v1, v2)
+		return equalStruct(v1, v2, ignoreOrder)
 	case reflect.Uint32, reflect.Uint64:
 		return v1.Uint() == v2.Uint()
 	}
@@ -242,13 +277,13 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 
 // base is the struct type that the extensions are based on.
 // x1 and x2 are InternalExtensions.
-func equalExtensions(base reflect.Type, x1, x2 XXX_InternalExtensions) bool {
+func equalExtensions(base reflect.Type, x1, x2 XXX_InternalExtensions, ignoreOrder bool) bool {
 	em1, _ := x1.extensionsRead()
 	em2, _ := x2.extensionsRead()
-	return equalExtMap(base, em1, em2)
+	return equalExtMap(base, em1, em2, ignoreOrder)
 }
 
-func equalExtMap(base reflect.Type, em1, em2 map[int32]Extension) bool {
+func equalExtMap(base reflect.Type, em1, em2 map[int32]Extension, ignoreOrder bool) bool {
 	if len(em1) != len(em2) {
 		return false
 	}
@@ -263,7 +298,7 @@ func equalExtMap(base reflect.Type, em1, em2 map[int32]Extension) bool {
 
 		if m1 != nil && m2 != nil {
 			// Both are unencoded.
-			if !equalAny(reflect.ValueOf(m1), reflect.ValueOf(m2), nil) {
+			if !equalAny(reflect.ValueOf(m1), reflect.ValueOf(m2), nil, ignoreOrder) {
 				return false
 			}
 			continue
@@ -291,7 +326,7 @@ func equalExtMap(base reflect.Type, em1, em2 map[int32]Extension) bool {
 			log.Printf("proto: badly encoded extension %d of %v: %v", extNum, base, err)
 			return false
 		}
-		if !equalAny(reflect.ValueOf(m1), reflect.ValueOf(m2), nil) {
+		if !equalAny(reflect.ValueOf(m1), reflect.ValueOf(m2), nil, ignoreOrder) {
 			return false
 		}
 	}
