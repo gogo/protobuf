@@ -36,6 +36,7 @@ import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import io "io"
+import encoding_binary "encoding/binary"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -3569,15 +3570,8 @@ func (m *FloatingPoint) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.F = &v2
 		default:
@@ -4246,15 +4240,8 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
@@ -4353,11 +4340,8 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvaluetemp = uint32(dAtA[iNdEx-4])
-					mapvaluetemp |= uint32(dAtA[iNdEx-3]) << 8
-					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
-					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
@@ -5017,20 +5001,14 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = uint32(dAtA[iNdEx-4])
-					mapkey |= uint32(dAtA[iNdEx-3]) << 8
-					mapkey |= uint32(dAtA[iNdEx-2]) << 16
-					mapkey |= uint32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = uint32(dAtA[iNdEx-4])
-					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
-					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
-					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -5101,20 +5079,14 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = int32(dAtA[iNdEx-4])
-					mapkey |= int32(dAtA[iNdEx-3]) << 8
-					mapkey |= int32(dAtA[iNdEx-2]) << 16
-					mapkey |= int32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = int32(dAtA[iNdEx-4])
-					mapvalue |= int32(dAtA[iNdEx-3]) << 8
-					mapvalue |= int32(dAtA[iNdEx-2]) << 16
-					mapvalue |= int32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -5185,28 +5157,14 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = uint64(dAtA[iNdEx-8])
-					mapkey |= uint64(dAtA[iNdEx-7]) << 8
-					mapkey |= uint64(dAtA[iNdEx-6]) << 16
-					mapkey |= uint64(dAtA[iNdEx-5]) << 24
-					mapkey |= uint64(dAtA[iNdEx-4]) << 32
-					mapkey |= uint64(dAtA[iNdEx-3]) << 40
-					mapkey |= uint64(dAtA[iNdEx-2]) << 48
-					mapkey |= uint64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = uint64(dAtA[iNdEx-8])
-					mapvalue |= uint64(dAtA[iNdEx-7]) << 8
-					mapvalue |= uint64(dAtA[iNdEx-6]) << 16
-					mapvalue |= uint64(dAtA[iNdEx-5]) << 24
-					mapvalue |= uint64(dAtA[iNdEx-4]) << 32
-					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
-					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
-					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -5277,28 +5235,14 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = int64(dAtA[iNdEx-8])
-					mapkey |= int64(dAtA[iNdEx-7]) << 8
-					mapkey |= int64(dAtA[iNdEx-6]) << 16
-					mapkey |= int64(dAtA[iNdEx-5]) << 24
-					mapkey |= int64(dAtA[iNdEx-4]) << 32
-					mapkey |= int64(dAtA[iNdEx-3]) << 40
-					mapkey |= int64(dAtA[iNdEx-2]) << 48
-					mapkey |= int64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = int64(dAtA[iNdEx-8])
-					mapvalue |= int64(dAtA[iNdEx-7]) << 8
-					mapvalue |= int64(dAtA[iNdEx-6]) << 16
-					mapvalue |= int64(dAtA[iNdEx-5]) << 24
-					mapvalue |= int64(dAtA[iNdEx-4]) << 32
-					mapvalue |= int64(dAtA[iNdEx-3]) << 40
-					mapvalue |= int64(dAtA[iNdEx-2]) << 48
-					mapvalue |= int64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -6014,15 +5958,8 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
@@ -6121,11 +6058,8 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvaluetemp = uint32(dAtA[iNdEx-4])
-					mapvaluetemp |= uint32(dAtA[iNdEx-3]) << 8
-					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
-					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
@@ -6785,20 +6719,14 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = uint32(dAtA[iNdEx-4])
-					mapkey |= uint32(dAtA[iNdEx-3]) << 8
-					mapkey |= uint32(dAtA[iNdEx-2]) << 16
-					mapkey |= uint32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = uint32(dAtA[iNdEx-4])
-					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
-					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
-					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -6869,20 +6797,14 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = int32(dAtA[iNdEx-4])
-					mapkey |= int32(dAtA[iNdEx-3]) << 8
-					mapkey |= int32(dAtA[iNdEx-2]) << 16
-					mapkey |= int32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = int32(dAtA[iNdEx-4])
-					mapvalue |= int32(dAtA[iNdEx-3]) << 8
-					mapvalue |= int32(dAtA[iNdEx-2]) << 16
-					mapvalue |= int32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -6953,28 +6875,14 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = uint64(dAtA[iNdEx-8])
-					mapkey |= uint64(dAtA[iNdEx-7]) << 8
-					mapkey |= uint64(dAtA[iNdEx-6]) << 16
-					mapkey |= uint64(dAtA[iNdEx-5]) << 24
-					mapkey |= uint64(dAtA[iNdEx-4]) << 32
-					mapkey |= uint64(dAtA[iNdEx-3]) << 40
-					mapkey |= uint64(dAtA[iNdEx-2]) << 48
-					mapkey |= uint64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = uint64(dAtA[iNdEx-8])
-					mapvalue |= uint64(dAtA[iNdEx-7]) << 8
-					mapvalue |= uint64(dAtA[iNdEx-6]) << 16
-					mapvalue |= uint64(dAtA[iNdEx-5]) << 24
-					mapvalue |= uint64(dAtA[iNdEx-4]) << 32
-					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
-					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
-					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])
@@ -7045,28 +6953,14 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = int64(dAtA[iNdEx-8])
-					mapkey |= int64(dAtA[iNdEx-7]) << 8
-					mapkey |= int64(dAtA[iNdEx-6]) << 16
-					mapkey |= int64(dAtA[iNdEx-5]) << 24
-					mapkey |= int64(dAtA[iNdEx-4]) << 32
-					mapkey |= int64(dAtA[iNdEx-3]) << 40
-					mapkey |= int64(dAtA[iNdEx-2]) << 48
-					mapkey |= int64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = int64(dAtA[iNdEx-8])
-					mapvalue |= int64(dAtA[iNdEx-7]) << 8
-					mapvalue |= int64(dAtA[iNdEx-6]) << 16
-					mapvalue |= int64(dAtA[iNdEx-5]) << 24
-					mapvalue |= int64(dAtA[iNdEx-4]) << 32
-					mapvalue |= int64(dAtA[iNdEx-3]) << 40
-					mapvalue |= int64(dAtA[iNdEx-2]) << 48
-					mapvalue |= int64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
 					skippy, err := skipMapsproto2(dAtA[iNdEx:])

@@ -27,6 +27,8 @@ import io_ioutil "io/ioutil"
 import strings "strings"
 import reflect "reflect"
 
+import encoding_binary "encoding/binary"
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -2113,14 +2115,16 @@ func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field3) MarshalTo(dAtA []byte) (int, error) {
@@ -2169,28 +2173,32 @@ func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(m.Field9))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(m.Field10))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(m.Field11))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(m.Field12))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field13) MarshalTo(dAtA []byte) (int, error) {
@@ -2238,24 +2246,6 @@ func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
 		i += n2
 	}
 	return i, nil
-}
-func encodeFixed64One(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32One(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
 }
 func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {

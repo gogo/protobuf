@@ -27,6 +27,8 @@ import io_ioutil "io/ioutil"
 import strings "strings"
 import reflect "reflect"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -2115,14 +2117,16 @@ func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field3) MarshalTo(dAtA []byte) (int, error) {
@@ -2171,28 +2175,32 @@ func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(m.Field9))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32One(dAtA, i, uint32(m.Field10))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	i += 4
 	return i, nil
 }
 func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(m.Field11))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64One(dAtA, i, uint64(m.Field12))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	i += 8
 	return i, nil
 }
 func (m *SampleOneOf_Field13) MarshalTo(dAtA []byte) (int, error) {
@@ -2240,24 +2248,6 @@ func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
 		i += n2
 	}
 	return i, nil
-}
-func encodeFixed64One(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32One(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
 }
 func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
@@ -2939,15 +2929,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.TestOneof = &SampleOneOf_Field1{float64(math.Float64frombits(v))}
 		case 2:
 			if wireType != 5 {
@@ -2957,11 +2940,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.TestOneof = &SampleOneOf_Field2{float32(math.Float32frombits(v))}
 		case 3:
 			if wireType != 0 {
@@ -3093,11 +3073,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.TestOneof = &SampleOneOf_Field9{v}
 		case 10:
 			if wireType != 5 {
@@ -3107,11 +3084,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = int32(dAtA[iNdEx-4])
-			v |= int32(dAtA[iNdEx-3]) << 8
-			v |= int32(dAtA[iNdEx-2]) << 16
-			v |= int32(dAtA[iNdEx-1]) << 24
 			m.TestOneof = &SampleOneOf_Field10{v}
 		case 11:
 			if wireType != 1 {
@@ -3121,15 +3095,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.TestOneof = &SampleOneOf_Field11{v}
 		case 12:
 			if wireType != 1 {
@@ -3139,15 +3106,8 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = int64(dAtA[iNdEx-8])
-			v |= int64(dAtA[iNdEx-7]) << 8
-			v |= int64(dAtA[iNdEx-6]) << 16
-			v |= int64(dAtA[iNdEx-5]) << 24
-			v |= int64(dAtA[iNdEx-4]) << 32
-			v |= int64(dAtA[iNdEx-3]) << 40
-			v |= int64(dAtA[iNdEx-2]) << 48
-			v |= int64(dAtA[iNdEx-1]) << 56
 			m.TestOneof = &SampleOneOf_Field12{v}
 		case 13:
 			if wireType != 0 {

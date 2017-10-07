@@ -50,13 +50,9 @@ func bench(folder, rgx string, outFileName string) {
 func main() {
 	bench("./test/combos/both/", "ProtoMarshal", "./test/mixbench/marshaler.txt")
 	bench("./test/", "ProtoMarshal", "./test/mixbench/marshal.txt")
-	bench("./test/combos/unsafeboth/", "ProtoMarshal", "./test/mixbench/unsafe_marshaler.txt")
 	bench("./test/combos/both/", "ProtoUnmarshal", "./test/mixbench/unmarshaler.txt")
 	bench("./test/", "ProtoUnmarshal", "./test/mixbench/unmarshal.txt")
-	bench("./test/combos/unsafeboth/", "ProtoUnmarshal", "./test/mixbench/unsafe_unmarshaler.txt")
 	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
 	fmt.Println("benchcmp ./test/mixbench/marshal.txt ./test/mixbench/marshaler.txt")
 	fmt.Println("benchcmp ./test/mixbench/unmarshal.txt ./test/mixbench/unmarshaler.txt")
-	fmt.Println("benchcmp ./test/mixbench/marshal.txt ./test/mixbench/unsafe_marshaler.txt")
-	fmt.Println("benchcmp ./test/mixbench/unmarshal.txt ./test/mixbench/unsafe_unmarshaler.txt")
 }
