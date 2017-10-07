@@ -715,7 +715,7 @@ var pkgNamesInUse = make(map[string][]*FileDescriptor)
 // Pkg is the candidate name.  If f is nil, it's a builtin package like "proto" and
 // has no file descriptor.
 func RegisterUniquePackageName(pkg string, f *FileDescriptor) string {
-	// Only make pkg names unique if they are non-standard lib
+	// Only make pkg names unique if they are builtin
 	if f != nil {
 		// Convert dots to underscores before finding a unique alias.
 		pkg = strings.Map(badToUnderscore, pkg)
