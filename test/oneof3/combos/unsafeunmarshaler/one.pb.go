@@ -28,7 +28,7 @@ import strings "strings"
 import reflect "reflect"
 
 import io "io"
-import unsafe "unsafe"
+import encoding_binary "encoding/binary"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -2626,7 +2626,7 @@ func (m *Subby) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowOneUnsafe
+				return ErrIntOverflowOne
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -2654,7 +2654,7 @@ func (m *Subby) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2668,7 +2668,7 @@ func (m *Subby) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -2678,12 +2678,12 @@ func (m *Subby) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipOneUnsafe(dAtA[iNdEx:])
+			skippy, err := skipOne(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -2705,7 +2705,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowOneUnsafe
+				return ErrIntOverflowOne
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -2730,24 +2730,24 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.TestOneof = &SampleOneOf_Field1{v}
+			m.TestOneof = &SampleOneOf_Field1{float64(math.Float64frombits(v))}
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.TestOneof = &SampleOneOf_Field2{v}
+			m.TestOneof = &SampleOneOf_Field2{float32(math.Float32frombits(v))}
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -2755,7 +2755,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2775,7 +2775,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2795,7 +2795,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2815,7 +2815,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2835,7 +2835,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2856,7 +2856,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2875,10 +2875,10 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.TestOneof = &SampleOneOf_Field9{v}
 		case 10:
@@ -2886,10 +2886,10 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.TestOneof = &SampleOneOf_Field10{v}
 		case 11:
@@ -2897,10 +2897,10 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.TestOneof = &SampleOneOf_Field11{v}
 		case 12:
@@ -2908,10 +2908,10 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.TestOneof = &SampleOneOf_Field12{v}
 		case 13:
@@ -2921,7 +2921,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2942,7 +2942,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2956,7 +2956,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -2971,7 +2971,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2984,7 +2984,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -3001,7 +3001,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowOneUnsafe
+					return ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3014,7 +3014,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3028,12 +3028,12 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipOneUnsafe(dAtA[iNdEx:])
+			skippy, err := skipOne(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthOneUnsafe
+				return ErrInvalidLengthOne
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3047,14 +3047,14 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipOneUnsafe(dAtA []byte) (n int, err error) {
+func skipOne(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowOneUnsafe
+				return 0, ErrIntOverflowOne
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -3071,7 +3071,7 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowOneUnsafe
+					return 0, ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -3089,7 +3089,7 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowOneUnsafe
+					return 0, ErrIntOverflowOne
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -3103,7 +3103,7 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthOneUnsafe
+				return 0, ErrInvalidLengthOne
 			}
 			return iNdEx, nil
 		case 3:
@@ -3112,7 +3112,7 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowOneUnsafe
+						return 0, ErrIntOverflowOne
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -3128,7 +3128,7 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipOneUnsafe(dAtA[start:])
+				next, err := skipOne(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -3148,8 +3148,8 @@ func skipOneUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthOneUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowOneUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthOne = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowOne   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeunmarshaler/one.proto", fileDescriptorOne) }

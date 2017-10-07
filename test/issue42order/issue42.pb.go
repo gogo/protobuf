@@ -18,6 +18,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -103,7 +105,8 @@ func (m *UnorderedFields) MarshalTo(dAtA []byte) (int, error) {
 	if m.B != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Issue42(dAtA, i, uint64(*m.B))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.B))
+		i += 8
 	}
 	if m.A != nil {
 		dAtA[i] = 0x50
@@ -134,7 +137,8 @@ func (m *OrderedFields) MarshalTo(dAtA []byte) (int, error) {
 	if m.B != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Issue42(dAtA, i, uint64(*m.B))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.B))
+		i += 8
 	}
 	if m.A != nil {
 		dAtA[i] = 0x50
@@ -364,15 +368,8 @@ func (m *UnorderedFields) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.B = &v
 		case 10:
 			if wireType != 0 {
@@ -453,15 +450,8 @@ func (m *OrderedFields) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.B = &v
 		case 10:
 			if wireType != 0 {

@@ -40,7 +40,7 @@ import strings "strings"
 import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import unsafe "unsafe"
+import encoding_binary "encoding/binary"
 
 import io "io"
 
@@ -3236,6 +3236,1166 @@ func valueToGoStringTheproto3(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+func (m *Message) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Message) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Name) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Name)))
+		i += copy(dAtA[i:], m.Name)
+	}
+	if m.Hilarity != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.Hilarity))
+	}
+	if m.HeightInCm != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.HeightInCm))
+	}
+	if len(m.Data) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Data)))
+		i += copy(dAtA[i:], m.Data)
+	}
+	if len(m.Key) > 0 {
+		dAtA2 := make([]byte, len(m.Key)*10)
+		var j1 int
+		for _, num := range m.Key {
+			for num >= 1<<7 {
+				dAtA2[j1] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j1++
+			}
+			dAtA2[j1] = uint8(num)
+			j1++
+		}
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(j1))
+		i += copy(dAtA[i:], dAtA2[:j1])
+	}
+	if m.Nested != nil {
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.Nested.Size()))
+		n3, err := m.Nested.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
+	}
+	if m.ResultCount != 0 {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.ResultCount))
+	}
+	if m.TrueScotsman {
+		dAtA[i] = 0x40
+		i++
+		if m.TrueScotsman {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Score != 0 {
+		dAtA[i] = 0x4d
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Score))))
+		i += 4
+	}
+	if len(m.Terrain) > 0 {
+		for k := range m.Terrain {
+			dAtA[i] = 0x52
+			i++
+			v := m.Terrain[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovTheproto3(uint64(msgSize))
+			}
+			mapSize := 1 + sovTheproto3(uint64(k)) + msgSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
+				n4, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n4
+			}
+		}
+	}
+	if m.Proto2Field != nil {
+		dAtA[i] = 0x5a
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.Proto2Field.Size()))
+		n5, err := m.Proto2Field.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
+	}
+	if len(m.Proto2Value) > 0 {
+		for k := range m.Proto2Value {
+			dAtA[i] = 0x6a
+			i++
+			v := m.Proto2Value[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovTheproto3(uint64(msgSize))
+			}
+			mapSize := 1 + sovTheproto3(uint64(k)) + msgSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
+				n6, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n6
+			}
+		}
+	}
+	return i, nil
+}
+
+func (m *Nested) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Nested) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Bunny) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Bunny)))
+		i += copy(dAtA[i:], m.Bunny)
+	}
+	return i, nil
+}
+
+func (m *AllMaps) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.StringToDoubleMap) > 0 {
+		for k := range m.StringToDoubleMap {
+			dAtA[i] = 0xa
+			i++
+			v := m.StringToDoubleMap[k]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			i += 8
+		}
+	}
+	if len(m.StringToFloatMap) > 0 {
+		for k := range m.StringToFloatMap {
+			dAtA[i] = 0x12
+			i++
+			v := m.StringToFloatMap[k]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
+			i += 4
+		}
+	}
+	if len(m.Int32Map) > 0 {
+		for k := range m.Int32Map {
+			dAtA[i] = 0x1a
+			i++
+			v := m.Int32Map[k]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Int64Map) > 0 {
+		for k := range m.Int64Map {
+			dAtA[i] = 0x22
+			i++
+			v := m.Int64Map[k]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Uint32Map) > 0 {
+		for k := range m.Uint32Map {
+			dAtA[i] = 0x2a
+			i++
+			v := m.Uint32Map[k]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Uint64Map) > 0 {
+		for k := range m.Uint64Map {
+			dAtA[i] = 0x32
+			i++
+			v := m.Uint64Map[k]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Sint32Map) > 0 {
+		for k := range m.Sint32Map {
+			dAtA[i] = 0x3a
+			i++
+			v := m.Sint32Map[k]
+			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(k)<<1)^uint32((k>>31))))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(v)<<1)^uint32((v>>31))))
+		}
+	}
+	if len(m.Sint64Map) > 0 {
+		for k := range m.Sint64Map {
+			dAtA[i] = 0x42
+			i++
+			v := m.Sint64Map[k]
+			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(v)<<1)^uint64((v>>63))))
+		}
+	}
+	if len(m.Fixed32Map) > 0 {
+		for k := range m.Fixed32Map {
+			dAtA[i] = 0x4a
+			i++
+			v := m.Fixed32Map[k]
+			mapSize := 1 + 4 + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xd
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			i += 4
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			i += 4
+		}
+	}
+	if len(m.Sfixed32Map) > 0 {
+		for k := range m.Sfixed32Map {
+			dAtA[i] = 0x52
+			i++
+			v := m.Sfixed32Map[k]
+			mapSize := 1 + 4 + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xd
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			i += 4
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			i += 4
+		}
+	}
+	if len(m.Fixed64Map) > 0 {
+		for k := range m.Fixed64Map {
+			dAtA[i] = 0x5a
+			i++
+			v := m.Fixed64Map[k]
+			mapSize := 1 + 8 + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x9
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			i += 8
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			i += 8
+		}
+	}
+	if len(m.Sfixed64Map) > 0 {
+		for k := range m.Sfixed64Map {
+			dAtA[i] = 0x62
+			i++
+			v := m.Sfixed64Map[k]
+			mapSize := 1 + 8 + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x9
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			i += 8
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			i += 8
+		}
+	}
+	if len(m.BoolMap) > 0 {
+		for k := range m.BoolMap {
+			dAtA[i] = 0x6a
+			i++
+			v := m.BoolMap[k]
+			mapSize := 1 + 1 + 1 + 1
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			if k {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+			dAtA[i] = 0x10
+			i++
+			if v {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.StringMap) > 0 {
+		for k := range m.StringMap {
+			dAtA[i] = 0x72
+			i++
+			v := m.StringMap[k]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+			i += copy(dAtA[i:], v)
+		}
+	}
+	if len(m.StringToBytesMap) > 0 {
+		for k := range m.StringToBytesMap {
+			dAtA[i] = 0x7a
+			i++
+			v := m.StringToBytesMap[k]
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			if len(v) > 0 {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+				i += copy(dAtA[i:], v)
+			}
+		}
+	}
+	if len(m.StringToEnumMap) > 0 {
+		for k := range m.StringToEnumMap {
+			dAtA[i] = 0x82
+			i++
+			dAtA[i] = 0x1
+			i++
+			v := m.StringToEnumMap[k]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.StringToMsgMap) > 0 {
+		for k := range m.StringToMsgMap {
+			dAtA[i] = 0x8a
+			i++
+			dAtA[i] = 0x1
+			i++
+			v := m.StringToMsgMap[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovTheproto3(uint64(msgSize))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + msgSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
+				n7, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n7
+			}
+		}
+	}
+	return i, nil
+}
+
+func (m *AllMapsOrdered) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.StringToDoubleMap) > 0 {
+		keysForStringToDoubleMap := make([]string, 0, len(m.StringToDoubleMap))
+		for k := range m.StringToDoubleMap {
+			keysForStringToDoubleMap = append(keysForStringToDoubleMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
+		for _, k := range keysForStringToDoubleMap {
+			dAtA[i] = 0xa
+			i++
+			v := m.StringToDoubleMap[string(k)]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			i += 8
+		}
+	}
+	if len(m.StringToFloatMap) > 0 {
+		keysForStringToFloatMap := make([]string, 0, len(m.StringToFloatMap))
+		for k := range m.StringToFloatMap {
+			keysForStringToFloatMap = append(keysForStringToFloatMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
+		for _, k := range keysForStringToFloatMap {
+			dAtA[i] = 0x12
+			i++
+			v := m.StringToFloatMap[string(k)]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
+			i += 4
+		}
+	}
+	if len(m.Int32Map) > 0 {
+		keysForInt32Map := make([]int32, 0, len(m.Int32Map))
+		for k := range m.Int32Map {
+			keysForInt32Map = append(keysForInt32Map, int32(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
+		for _, k := range keysForInt32Map {
+			dAtA[i] = 0x1a
+			i++
+			v := m.Int32Map[int32(k)]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Int64Map) > 0 {
+		keysForInt64Map := make([]int64, 0, len(m.Int64Map))
+		for k := range m.Int64Map {
+			keysForInt64Map = append(keysForInt64Map, int64(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
+		for _, k := range keysForInt64Map {
+			dAtA[i] = 0x22
+			i++
+			v := m.Int64Map[int64(k)]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Uint32Map) > 0 {
+		keysForUint32Map := make([]uint32, 0, len(m.Uint32Map))
+		for k := range m.Uint32Map {
+			keysForUint32Map = append(keysForUint32Map, uint32(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
+		for _, k := range keysForUint32Map {
+			dAtA[i] = 0x2a
+			i++
+			v := m.Uint32Map[uint32(k)]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Uint64Map) > 0 {
+		keysForUint64Map := make([]uint64, 0, len(m.Uint64Map))
+		for k := range m.Uint64Map {
+			keysForUint64Map = append(keysForUint64Map, uint64(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
+		for _, k := range keysForUint64Map {
+			dAtA[i] = 0x32
+			i++
+			v := m.Uint64Map[uint64(k)]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.Sint32Map) > 0 {
+		keysForSint32Map := make([]int32, 0, len(m.Sint32Map))
+		for k := range m.Sint32Map {
+			keysForSint32Map = append(keysForSint32Map, int32(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
+		for _, k := range keysForSint32Map {
+			dAtA[i] = 0x3a
+			i++
+			v := m.Sint32Map[int32(k)]
+			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(k)<<1)^uint32((k>>31))))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(v)<<1)^uint32((v>>31))))
+		}
+	}
+	if len(m.Sint64Map) > 0 {
+		keysForSint64Map := make([]int64, 0, len(m.Sint64Map))
+		for k := range m.Sint64Map {
+			keysForSint64Map = append(keysForSint64Map, int64(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
+		for _, k := range keysForSint64Map {
+			dAtA[i] = 0x42
+			i++
+			v := m.Sint64Map[int64(k)]
+			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(v)<<1)^uint64((v>>63))))
+		}
+	}
+	if len(m.Fixed32Map) > 0 {
+		keysForFixed32Map := make([]uint32, 0, len(m.Fixed32Map))
+		for k := range m.Fixed32Map {
+			keysForFixed32Map = append(keysForFixed32Map, uint32(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
+		for _, k := range keysForFixed32Map {
+			dAtA[i] = 0x4a
+			i++
+			v := m.Fixed32Map[uint32(k)]
+			mapSize := 1 + 4 + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xd
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			i += 4
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			i += 4
+		}
+	}
+	if len(m.Sfixed32Map) > 0 {
+		keysForSfixed32Map := make([]int32, 0, len(m.Sfixed32Map))
+		for k := range m.Sfixed32Map {
+			keysForSfixed32Map = append(keysForSfixed32Map, int32(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
+		for _, k := range keysForSfixed32Map {
+			dAtA[i] = 0x52
+			i++
+			v := m.Sfixed32Map[int32(k)]
+			mapSize := 1 + 4 + 1 + 4
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xd
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			i += 4
+			dAtA[i] = 0x15
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			i += 4
+		}
+	}
+	if len(m.Fixed64Map) > 0 {
+		keysForFixed64Map := make([]uint64, 0, len(m.Fixed64Map))
+		for k := range m.Fixed64Map {
+			keysForFixed64Map = append(keysForFixed64Map, uint64(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
+		for _, k := range keysForFixed64Map {
+			dAtA[i] = 0x5a
+			i++
+			v := m.Fixed64Map[uint64(k)]
+			mapSize := 1 + 8 + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x9
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			i += 8
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			i += 8
+		}
+	}
+	if len(m.Sfixed64Map) > 0 {
+		keysForSfixed64Map := make([]int64, 0, len(m.Sfixed64Map))
+		for k := range m.Sfixed64Map {
+			keysForSfixed64Map = append(keysForSfixed64Map, int64(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
+		for _, k := range keysForSfixed64Map {
+			dAtA[i] = 0x62
+			i++
+			v := m.Sfixed64Map[int64(k)]
+			mapSize := 1 + 8 + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x9
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			i += 8
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			i += 8
+		}
+	}
+	if len(m.BoolMap) > 0 {
+		keysForBoolMap := make([]bool, 0, len(m.BoolMap))
+		for k := range m.BoolMap {
+			keysForBoolMap = append(keysForBoolMap, bool(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
+		for _, k := range keysForBoolMap {
+			dAtA[i] = 0x6a
+			i++
+			v := m.BoolMap[bool(k)]
+			mapSize := 1 + 1 + 1 + 1
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			if k {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+			dAtA[i] = 0x10
+			i++
+			if v {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.StringMap) > 0 {
+		keysForStringMap := make([]string, 0, len(m.StringMap))
+		for k := range m.StringMap {
+			keysForStringMap = append(keysForStringMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
+		for _, k := range keysForStringMap {
+			dAtA[i] = 0x72
+			i++
+			v := m.StringMap[string(k)]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+			i += copy(dAtA[i:], v)
+		}
+	}
+	if len(m.StringToBytesMap) > 0 {
+		keysForStringToBytesMap := make([]string, 0, len(m.StringToBytesMap))
+		for k := range m.StringToBytesMap {
+			keysForStringToBytesMap = append(keysForStringToBytesMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
+		for _, k := range keysForStringToBytesMap {
+			dAtA[i] = 0x7a
+			i++
+			v := m.StringToBytesMap[string(k)]
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			if len(v) > 0 {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+				i += copy(dAtA[i:], v)
+			}
+		}
+	}
+	if len(m.StringToEnumMap) > 0 {
+		keysForStringToEnumMap := make([]string, 0, len(m.StringToEnumMap))
+		for k := range m.StringToEnumMap {
+			keysForStringToEnumMap = append(keysForStringToEnumMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
+		for _, k := range keysForStringToEnumMap {
+			dAtA[i] = 0x82
+			i++
+			dAtA[i] = 0x1
+			i++
+			v := m.StringToEnumMap[string(k)]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(v))
+		}
+	}
+	if len(m.StringToMsgMap) > 0 {
+		keysForStringToMsgMap := make([]string, 0, len(m.StringToMsgMap))
+		for k := range m.StringToMsgMap {
+			keysForStringToMsgMap = append(keysForStringToMsgMap, string(k))
+		}
+		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
+		for _, k := range keysForStringToMsgMap {
+			dAtA[i] = 0x8a
+			i++
+			dAtA[i] = 0x1
+			i++
+			v := m.StringToMsgMap[string(k)]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovTheproto3(uint64(msgSize))
+			}
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + msgSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
+				n8, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n8
+			}
+		}
+	}
+	return i, nil
+}
+
+func (m *MessageWithMap) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MessageWithMap) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.NameMapping) > 0 {
+		for k := range m.NameMapping {
+			dAtA[i] = 0xa
+			i++
+			v := m.NameMapping[k]
+			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + len(v) + sovTheproto3(uint64(len(v)))
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(k))
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+			i += copy(dAtA[i:], v)
+		}
+	}
+	if len(m.MsgMapping) > 0 {
+		for k := range m.MsgMapping {
+			dAtA[i] = 0x12
+			i++
+			v := m.MsgMapping[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.Size()
+				msgSize += 1 + sovTheproto3(uint64(msgSize))
+			}
+			mapSize := 1 + sozTheproto3(uint64(k)) + msgSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
+				n9, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n9
+			}
+		}
+	}
+	if len(m.ByteMapping) > 0 {
+		for k := range m.ByteMapping {
+			dAtA[i] = 0x1a
+			i++
+			v := m.ByteMapping[k]
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
+			}
+			mapSize := 1 + 1 + byteSize
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			if k {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+			if len(v) > 0 {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
+				i += copy(dAtA[i:], v)
+			}
+		}
+	}
+	return i, nil
+}
+
+func (m *FloatingPoint) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *FloatingPoint) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.F != 0 {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.F))))
+		i += 8
+	}
+	return i, nil
+}
+
+func (m *Uint128Pair) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Uint128Pair) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintTheproto3(dAtA, i, uint64(m.Left.Size()))
+	n10, err := m.Left.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n10
+	if m.Right != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintTheproto3(dAtA, i, uint64(m.Right.Size()))
+		n11, err := m.Right.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n11
+	}
+	return i, nil
+}
+
+func (m *ContainsNestedMap) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ContainsNestedMap) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	return i, nil
+}
+
+func (m *ContainsNestedMap_NestedMap) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ContainsNestedMap_NestedMap) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.NestedMapField) > 0 {
+		for k := range m.NestedMapField {
+			dAtA[i] = 0xa
+			i++
+			v := m.NestedMapField[k]
+			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
+			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x11
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			i += 8
+		}
+	}
+	return i, nil
+}
+
+func (m *NotPacked) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NotPacked) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Key) > 0 {
+		for _, num := range m.Key {
+			dAtA[i] = 0x28
+			i++
+			i = encodeVarintTheproto3(dAtA, i, uint64(num))
+		}
+	}
+	return i, nil
+}
+
+func encodeFixed64Theproto3(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Theproto3(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintTheproto3(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
 func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 	this := &Message{}
 	this.Name = string(randStringTheproto3(r))
@@ -3246,6 +4406,14 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 	for i := 0; i < v1; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
+	v2 := r.Intn(10)
+	this.Key = make([]uint64, v2)
+	for i := 0; i < v2; i++ {
+		this.Key[i] = uint64(uint64(r.Uint32()))
+	}
+	if r.Intn(10) != 0 {
+		this.Nested = NewPopulatedNested(r, easy)
+	}
 	this.ResultCount = int64(r.Int63())
 	if r.Intn(2) == 0 {
 		this.ResultCount *= -1
@@ -3254,14 +4422,6 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 	this.Score = float32(r.Float32())
 	if r.Intn(2) == 0 {
 		this.Score *= -1
-	}
-	v2 := r.Intn(10)
-	this.Key = make([]uint64, v2)
-	for i := 0; i < v2; i++ {
-		this.Key[i] = uint64(uint64(r.Uint32()))
-	}
-	if r.Intn(10) != 0 {
-		this.Nested = NewPopulatedNested(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v3 := r.Intn(10)
@@ -3809,15 +4969,6 @@ func (m *Message) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTheproto3(uint64(l))
 	}
-	if m.ResultCount != 0 {
-		n += 1 + sovTheproto3(uint64(m.ResultCount))
-	}
-	if m.TrueScotsman {
-		n += 2
-	}
-	if m.Score != 0 {
-		n += 5
-	}
 	if len(m.Key) > 0 {
 		l = 0
 		for _, e := range m.Key {
@@ -3828,6 +4979,15 @@ func (m *Message) Size() (n int) {
 	if m.Nested != nil {
 		l = m.Nested.Size()
 		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	if m.ResultCount != 0 {
+		n += 1 + sovTheproto3(uint64(m.ResultCount))
+	}
+	if m.TrueScotsman {
+		n += 2
+	}
+	if m.Score != 0 {
+		n += 5
 	}
 	if len(m.Terrain) > 0 {
 		for k, v := range m.Terrain {
@@ -4307,11 +5467,11 @@ func (this *Message) String() string {
 		`Hilarity:` + fmt.Sprintf("%v", this.Hilarity) + `,`,
 		`HeightInCm:` + fmt.Sprintf("%v", this.HeightInCm) + `,`,
 		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
+		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
 		`ResultCount:` + fmt.Sprintf("%v", this.ResultCount) + `,`,
 		`TrueScotsman:` + fmt.Sprintf("%v", this.TrueScotsman) + `,`,
 		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,
-		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
-		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
 		`Terrain:` + mapStringForTerrain + `,`,
 		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "test.NinOptNative", 1) + `,`,
 		`Proto2Value:` + mapStringForProto2Value + `,`,
@@ -4831,1145 +5991,6 @@ func valueToStringTheproto3(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *Message) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Message) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Name) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Name)))
-		i += copy(dAtA[i:], m.Name)
-	}
-	if m.Hilarity != 0 {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.Hilarity))
-	}
-	if m.HeightInCm != 0 {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.HeightInCm))
-	}
-	if len(m.Data) > 0 {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
-	if len(m.Key) > 0 {
-		dAtA2 := make([]byte, len(m.Key)*10)
-		var j1 int
-		for _, num := range m.Key {
-			for num >= 1<<7 {
-				dAtA2[j1] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j1++
-			}
-			dAtA2[j1] = uint8(num)
-			j1++
-		}
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(j1))
-		i += copy(dAtA[i:], dAtA2[:j1])
-	}
-	if m.Nested != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.Nested.Size()))
-		n3, err := m.Nested.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n3
-	}
-	if m.ResultCount != 0 {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.ResultCount))
-	}
-	if m.TrueScotsman {
-		dAtA[i] = 0x40
-		i++
-		if m.TrueScotsman {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Score != 0 {
-		dAtA[i] = 0x4d
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = m.Score
-		i += 4
-	}
-	if len(m.Terrain) > 0 {
-		for k := range m.Terrain {
-			dAtA[i] = 0x52
-			i++
-			v := m.Terrain[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTheproto3(uint64(msgSize))
-			}
-			mapSize := 1 + sovTheproto3(uint64(k)) + msgSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n4, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n4
-			}
-		}
-	}
-	if m.Proto2Field != nil {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.Proto2Field.Size()))
-		n5, err := m.Proto2Field.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n5
-	}
-	if len(m.Proto2Value) > 0 {
-		for k := range m.Proto2Value {
-			dAtA[i] = 0x6a
-			i++
-			v := m.Proto2Value[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTheproto3(uint64(msgSize))
-			}
-			mapSize := 1 + sovTheproto3(uint64(k)) + msgSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n6, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n6
-			}
-		}
-	}
-	return i, nil
-}
-
-func (m *Nested) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Nested) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Bunny) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(len(m.Bunny)))
-		i += copy(dAtA[i:], m.Bunny)
-	}
-	return i, nil
-}
-
-func (m *AllMaps) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.StringToDoubleMap) > 0 {
-		for k := range m.StringToDoubleMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringToDoubleMap[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(math.Float64bits(float64(v))))
-		}
-	}
-	if len(m.StringToFloatMap) > 0 {
-		for k := range m.StringToFloatMap {
-			dAtA[i] = 0x12
-			i++
-			v := m.StringToFloatMap[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(math.Float32bits(float32(v))))
-		}
-	}
-	if len(m.Int32Map) > 0 {
-		for k := range m.Int32Map {
-			dAtA[i] = 0x1a
-			i++
-			v := m.Int32Map[k]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Int64Map) > 0 {
-		for k := range m.Int64Map {
-			dAtA[i] = 0x22
-			i++
-			v := m.Int64Map[k]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Uint32Map) > 0 {
-		for k := range m.Uint32Map {
-			dAtA[i] = 0x2a
-			i++
-			v := m.Uint32Map[k]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Uint64Map) > 0 {
-		for k := range m.Uint64Map {
-			dAtA[i] = 0x32
-			i++
-			v := m.Uint64Map[k]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Sint32Map) > 0 {
-		for k := range m.Sint32Map {
-			dAtA[i] = 0x3a
-			i++
-			v := m.Sint32Map[k]
-			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(k)<<1)^uint32((k>>31))))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(v)<<1)^uint32((v>>31))))
-		}
-	}
-	if len(m.Sint64Map) > 0 {
-		for k := range m.Sint64Map {
-			dAtA[i] = 0x42
-			i++
-			v := m.Sint64Map[k]
-			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(v)<<1)^uint64((v>>63))))
-		}
-	}
-	if len(m.Fixed32Map) > 0 {
-		for k := range m.Fixed32Map {
-			dAtA[i] = 0x4a
-			i++
-			v := m.Fixed32Map[k]
-			mapSize := 1 + 4 + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xd
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(k))
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(v))
-		}
-	}
-	if len(m.Sfixed32Map) > 0 {
-		for k := range m.Sfixed32Map {
-			dAtA[i] = 0x52
-			i++
-			v := m.Sfixed32Map[k]
-			mapSize := 1 + 4 + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xd
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(k))
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(v))
-		}
-	}
-	if len(m.Fixed64Map) > 0 {
-		for k := range m.Fixed64Map {
-			dAtA[i] = 0x5a
-			i++
-			v := m.Fixed64Map[k]
-			mapSize := 1 + 8 + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x9
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Sfixed64Map) > 0 {
-		for k := range m.Sfixed64Map {
-			dAtA[i] = 0x62
-			i++
-			v := m.Sfixed64Map[k]
-			mapSize := 1 + 8 + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x9
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.BoolMap) > 0 {
-		for k := range m.BoolMap {
-			dAtA[i] = 0x6a
-			i++
-			v := m.BoolMap[k]
-			mapSize := 1 + 1 + 1 + 1
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			if k {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-			dAtA[i] = 0x10
-			i++
-			if v {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.StringMap) > 0 {
-		for k := range m.StringMap {
-			dAtA[i] = 0x72
-			i++
-			v := m.StringMap[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
-	}
-	if len(m.StringToBytesMap) > 0 {
-		for k := range m.StringToBytesMap {
-			dAtA[i] = 0x7a
-			i++
-			v := m.StringToBytesMap[k]
-			byteSize := 0
-			if len(v) > 0 {
-				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
-			}
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if len(v) > 0 {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-				i += copy(dAtA[i:], v)
-			}
-		}
-	}
-	if len(m.StringToEnumMap) > 0 {
-		for k := range m.StringToEnumMap {
-			dAtA[i] = 0x82
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.StringToEnumMap[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.StringToMsgMap) > 0 {
-		for k := range m.StringToMsgMap {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.StringToMsgMap[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTheproto3(uint64(msgSize))
-			}
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + msgSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n7, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n7
-			}
-		}
-	}
-	return i, nil
-}
-
-func (m *AllMapsOrdered) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.StringToDoubleMap) > 0 {
-		keysForStringToDoubleMap := make([]string, 0, len(m.StringToDoubleMap))
-		for k := range m.StringToDoubleMap {
-			keysForStringToDoubleMap = append(keysForStringToDoubleMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
-		for _, k := range keysForStringToDoubleMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringToDoubleMap[string(k)]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(math.Float64bits(float64(v))))
-		}
-	}
-	if len(m.StringToFloatMap) > 0 {
-		keysForStringToFloatMap := make([]string, 0, len(m.StringToFloatMap))
-		for k := range m.StringToFloatMap {
-			keysForStringToFloatMap = append(keysForStringToFloatMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
-		for _, k := range keysForStringToFloatMap {
-			dAtA[i] = 0x12
-			i++
-			v := m.StringToFloatMap[string(k)]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(math.Float32bits(float32(v))))
-		}
-	}
-	if len(m.Int32Map) > 0 {
-		keysForInt32Map := make([]int32, 0, len(m.Int32Map))
-		for k := range m.Int32Map {
-			keysForInt32Map = append(keysForInt32Map, int32(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
-		for _, k := range keysForInt32Map {
-			dAtA[i] = 0x1a
-			i++
-			v := m.Int32Map[int32(k)]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Int64Map) > 0 {
-		keysForInt64Map := make([]int64, 0, len(m.Int64Map))
-		for k := range m.Int64Map {
-			keysForInt64Map = append(keysForInt64Map, int64(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
-		for _, k := range keysForInt64Map {
-			dAtA[i] = 0x22
-			i++
-			v := m.Int64Map[int64(k)]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Uint32Map) > 0 {
-		keysForUint32Map := make([]uint32, 0, len(m.Uint32Map))
-		for k := range m.Uint32Map {
-			keysForUint32Map = append(keysForUint32Map, uint32(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
-		for _, k := range keysForUint32Map {
-			dAtA[i] = 0x2a
-			i++
-			v := m.Uint32Map[uint32(k)]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Uint64Map) > 0 {
-		keysForUint64Map := make([]uint64, 0, len(m.Uint64Map))
-		for k := range m.Uint64Map {
-			keysForUint64Map = append(keysForUint64Map, uint64(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
-		for _, k := range keysForUint64Map {
-			dAtA[i] = 0x32
-			i++
-			v := m.Uint64Map[uint64(k)]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Sint32Map) > 0 {
-		keysForSint32Map := make([]int32, 0, len(m.Sint32Map))
-		for k := range m.Sint32Map {
-			keysForSint32Map = append(keysForSint32Map, int32(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
-		for _, k := range keysForSint32Map {
-			dAtA[i] = 0x3a
-			i++
-			v := m.Sint32Map[int32(k)]
-			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(k)<<1)^uint32((k>>31))))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint32(v)<<1)^uint32((v>>31))))
-		}
-	}
-	if len(m.Sint64Map) > 0 {
-		keysForSint64Map := make([]int64, 0, len(m.Sint64Map))
-		for k := range m.Sint64Map {
-			keysForSint64Map = append(keysForSint64Map, int64(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
-		for _, k := range keysForSint64Map {
-			dAtA[i] = 0x42
-			i++
-			v := m.Sint64Map[int64(k)]
-			mapSize := 1 + sozTheproto3(uint64(k)) + 1 + sozTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(v)<<1)^uint64((v>>63))))
-		}
-	}
-	if len(m.Fixed32Map) > 0 {
-		keysForFixed32Map := make([]uint32, 0, len(m.Fixed32Map))
-		for k := range m.Fixed32Map {
-			keysForFixed32Map = append(keysForFixed32Map, uint32(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
-		for _, k := range keysForFixed32Map {
-			dAtA[i] = 0x4a
-			i++
-			v := m.Fixed32Map[uint32(k)]
-			mapSize := 1 + 4 + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xd
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(k))
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(v))
-		}
-	}
-	if len(m.Sfixed32Map) > 0 {
-		keysForSfixed32Map := make([]int32, 0, len(m.Sfixed32Map))
-		for k := range m.Sfixed32Map {
-			keysForSfixed32Map = append(keysForSfixed32Map, int32(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
-		for _, k := range keysForSfixed32Map {
-			dAtA[i] = 0x52
-			i++
-			v := m.Sfixed32Map[int32(k)]
-			mapSize := 1 + 4 + 1 + 4
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xd
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(k))
-			dAtA[i] = 0x15
-			i++
-			i = encodeFixed32Theproto3(dAtA, i, uint32(v))
-		}
-	}
-	if len(m.Fixed64Map) > 0 {
-		keysForFixed64Map := make([]uint64, 0, len(m.Fixed64Map))
-		for k := range m.Fixed64Map {
-			keysForFixed64Map = append(keysForFixed64Map, uint64(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
-		for _, k := range keysForFixed64Map {
-			dAtA[i] = 0x5a
-			i++
-			v := m.Fixed64Map[uint64(k)]
-			mapSize := 1 + 8 + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x9
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.Sfixed64Map) > 0 {
-		keysForSfixed64Map := make([]int64, 0, len(m.Sfixed64Map))
-		for k := range m.Sfixed64Map {
-			keysForSfixed64Map = append(keysForSfixed64Map, int64(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
-		for _, k := range keysForSfixed64Map {
-			dAtA[i] = 0x62
-			i++
-			v := m.Sfixed64Map[int64(k)]
-			mapSize := 1 + 8 + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x9
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.BoolMap) > 0 {
-		keysForBoolMap := make([]bool, 0, len(m.BoolMap))
-		for k := range m.BoolMap {
-			keysForBoolMap = append(keysForBoolMap, bool(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
-		for _, k := range keysForBoolMap {
-			dAtA[i] = 0x6a
-			i++
-			v := m.BoolMap[bool(k)]
-			mapSize := 1 + 1 + 1 + 1
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			if k {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-			dAtA[i] = 0x10
-			i++
-			if v {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.StringMap) > 0 {
-		keysForStringMap := make([]string, 0, len(m.StringMap))
-		for k := range m.StringMap {
-			keysForStringMap = append(keysForStringMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
-			dAtA[i] = 0x72
-			i++
-			v := m.StringMap[string(k)]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
-	}
-	if len(m.StringToBytesMap) > 0 {
-		keysForStringToBytesMap := make([]string, 0, len(m.StringToBytesMap))
-		for k := range m.StringToBytesMap {
-			keysForStringToBytesMap = append(keysForStringToBytesMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
-		for _, k := range keysForStringToBytesMap {
-			dAtA[i] = 0x7a
-			i++
-			v := m.StringToBytesMap[string(k)]
-			byteSize := 0
-			if len(v) > 0 {
-				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
-			}
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + byteSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if len(v) > 0 {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-				i += copy(dAtA[i:], v)
-			}
-		}
-	}
-	if len(m.StringToEnumMap) > 0 {
-		keysForStringToEnumMap := make([]string, 0, len(m.StringToEnumMap))
-		for k := range m.StringToEnumMap {
-			keysForStringToEnumMap = append(keysForStringToEnumMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
-		for _, k := range keysForStringToEnumMap {
-			dAtA[i] = 0x82
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.StringToEnumMap[string(k)]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + sovTheproto3(uint64(v))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(v))
-		}
-	}
-	if len(m.StringToMsgMap) > 0 {
-		keysForStringToMsgMap := make([]string, 0, len(m.StringToMsgMap))
-		for k := range m.StringToMsgMap {
-			keysForStringToMsgMap = append(keysForStringToMsgMap, string(k))
-		}
-		github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
-		for _, k := range keysForStringToMsgMap {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.StringToMsgMap[string(k)]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTheproto3(uint64(msgSize))
-			}
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + msgSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n8, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n8
-			}
-		}
-	}
-	return i, nil
-}
-
-func (m *MessageWithMap) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MessageWithMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.NameMapping) > 0 {
-		for k := range m.NameMapping {
-			dAtA[i] = 0xa
-			i++
-			v := m.NameMapping[k]
-			mapSize := 1 + sovTheproto3(uint64(k)) + 1 + len(v) + sovTheproto3(uint64(len(v)))
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
-	}
-	if len(m.MsgMapping) > 0 {
-		for k := range m.MsgMapping {
-			dAtA[i] = 0x12
-			i++
-			v := m.MsgMapping[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTheproto3(uint64(msgSize))
-			}
-			mapSize := 1 + sozTheproto3(uint64(k)) + msgSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64((uint64(k)<<1)^uint64((k>>63))))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n9, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n9
-			}
-		}
-	}
-	if len(m.ByteMapping) > 0 {
-		for k := range m.ByteMapping {
-			dAtA[i] = 0x1a
-			i++
-			v := m.ByteMapping[k]
-			byteSize := 0
-			if len(v) > 0 {
-				byteSize = 1 + len(v) + sovTheproto3(uint64(len(v)))
-			}
-			mapSize := 1 + 1 + byteSize
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			if k {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-			if len(v) > 0 {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTheproto3(dAtA, i, uint64(len(v)))
-				i += copy(dAtA[i:], v)
-			}
-		}
-	}
-	return i, nil
-}
-
-func (m *FloatingPoint) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *FloatingPoint) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.F != 0 {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = m.F
-		i += 8
-	}
-	return i, nil
-}
-
-func (m *Uint128Pair) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Uint128Pair) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintTheproto3(dAtA, i, uint64(m.Left.Size()))
-	n10, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n10
-	if m.Right != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTheproto3(dAtA, i, uint64(m.Right.Size()))
-		n11, err := m.Right.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n11
-	}
-	return i, nil
-}
-
-func (m *ContainsNestedMap) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ContainsNestedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	return i, nil
-}
-
-func (m *ContainsNestedMap_NestedMap) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ContainsNestedMap_NestedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.NestedMapField) > 0 {
-		for k := range m.NestedMapField {
-			dAtA[i] = 0xa
-			i++
-			v := m.NestedMapField[k]
-			mapSize := 1 + len(k) + sovTheproto3(uint64(len(k))) + 1 + 8
-			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x11
-			i++
-			i = encodeFixed64Theproto3(dAtA, i, uint64(math.Float64bits(float64(v))))
-		}
-	}
-	return i, nil
-}
-
-func (m *NotPacked) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NotPacked) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Key) > 0 {
-		for _, num := range m.Key {
-			dAtA[i] = 0x28
-			i++
-			i = encodeVarintTheproto3(dAtA, i, uint64(num))
-		}
-	}
-	return i, nil
-}
-
-func encodeFixed64Theproto3(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Theproto3(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintTheproto3(dAtA []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return offset + 1
-}
 func (m *Message) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5978,7 +5999,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -6006,7 +6027,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6020,7 +6041,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -6035,7 +6056,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			m.Hilarity = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6054,7 +6075,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			m.HeightInCm = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6073,7 +6094,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6086,7 +6107,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -6102,7 +6123,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6119,7 +6140,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6132,7 +6153,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthTheproto3Unsafe
+					return ErrInvalidLengthTheproto3
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -6142,7 +6163,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6166,7 +6187,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6179,7 +6200,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6199,7 +6220,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			m.ResultCount = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6218,7 +6239,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6235,11 +6256,13 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Score", wireType)
 			}
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Score = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
+			m.Score = float32(math.Float32frombits(v))
 		case 10:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Terrain", wireType)
@@ -6247,7 +6270,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6260,7 +6283,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6276,7 +6299,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6292,7 +6315,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6308,7 +6331,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6321,11 +6344,11 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -6337,12 +6360,12 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -6359,7 +6382,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6372,7 +6395,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6392,7 +6415,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6405,7 +6428,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6421,7 +6444,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6437,7 +6460,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6453,7 +6476,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6466,11 +6489,11 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -6482,12 +6505,12 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -6499,12 +6522,12 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -6526,7 +6549,7 @@ func (m *Nested) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -6554,7 +6577,7 @@ func (m *Nested) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6568,7 +6591,7 @@ func (m *Nested) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -6578,12 +6601,12 @@ func (m *Nested) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -6605,7 +6628,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -6633,7 +6656,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6646,7 +6669,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6662,7 +6685,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6679,7 +6702,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6693,7 +6716,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -6706,24 +6729,17 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -6740,7 +6756,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6753,7 +6769,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6769,7 +6785,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6786,7 +6802,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6800,7 +6816,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -6813,20 +6829,17 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvaluetemp = uint32(dAtA[iNdEx-4])
-					mapvaluetemp |= uint32(dAtA[iNdEx-3]) << 8
-					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
-					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -6843,7 +6856,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6856,7 +6869,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6872,7 +6885,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6888,7 +6901,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6903,7 +6916,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6917,12 +6930,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -6939,7 +6952,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -6952,7 +6965,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -6968,7 +6981,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -6984,7 +6997,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -6999,7 +7012,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7013,12 +7026,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7035,7 +7048,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7048,7 +7061,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7064,7 +7077,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7080,7 +7093,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7095,7 +7108,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7109,12 +7122,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7131,7 +7144,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7144,7 +7157,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7160,7 +7173,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7176,7 +7189,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7191,7 +7204,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7205,12 +7218,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7227,7 +7240,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7240,7 +7253,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7256,7 +7269,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7273,7 +7286,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapkeytemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7291,7 +7304,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7307,12 +7320,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue = int32(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7329,7 +7342,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7342,7 +7355,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7358,7 +7371,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7375,7 +7388,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapkeytemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7393,7 +7406,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7409,12 +7422,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue = int64(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7431,7 +7444,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7444,7 +7457,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7460,7 +7473,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7477,28 +7490,22 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = uint32(dAtA[iNdEx-4])
-					mapkey |= uint32(dAtA[iNdEx-3]) << 8
-					mapkey |= uint32(dAtA[iNdEx-2]) << 16
-					mapkey |= uint32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = uint32(dAtA[iNdEx-4])
-					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
-					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
-					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7515,7 +7522,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7528,7 +7535,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7544,7 +7551,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7561,28 +7568,22 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = int32(dAtA[iNdEx-4])
-					mapkey |= int32(dAtA[iNdEx-3]) << 8
-					mapkey |= int32(dAtA[iNdEx-2]) << 16
-					mapkey |= int32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = int32(dAtA[iNdEx-4])
-					mapvalue |= int32(dAtA[iNdEx-3]) << 8
-					mapvalue |= int32(dAtA[iNdEx-2]) << 16
-					mapvalue |= int32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7599,7 +7600,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7612,7 +7613,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7628,7 +7629,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7645,36 +7646,22 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = uint64(dAtA[iNdEx-8])
-					mapkey |= uint64(dAtA[iNdEx-7]) << 8
-					mapkey |= uint64(dAtA[iNdEx-6]) << 16
-					mapkey |= uint64(dAtA[iNdEx-5]) << 24
-					mapkey |= uint64(dAtA[iNdEx-4]) << 32
-					mapkey |= uint64(dAtA[iNdEx-3]) << 40
-					mapkey |= uint64(dAtA[iNdEx-2]) << 48
-					mapkey |= uint64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = uint64(dAtA[iNdEx-8])
-					mapvalue |= uint64(dAtA[iNdEx-7]) << 8
-					mapvalue |= uint64(dAtA[iNdEx-6]) << 16
-					mapvalue |= uint64(dAtA[iNdEx-5]) << 24
-					mapvalue |= uint64(dAtA[iNdEx-4]) << 32
-					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
-					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
-					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7691,7 +7678,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7704,7 +7691,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7720,7 +7707,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7737,36 +7724,22 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = int64(dAtA[iNdEx-8])
-					mapkey |= int64(dAtA[iNdEx-7]) << 8
-					mapkey |= int64(dAtA[iNdEx-6]) << 16
-					mapkey |= int64(dAtA[iNdEx-5]) << 24
-					mapkey |= int64(dAtA[iNdEx-4]) << 32
-					mapkey |= int64(dAtA[iNdEx-3]) << 40
-					mapkey |= int64(dAtA[iNdEx-2]) << 48
-					mapkey |= int64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = int64(dAtA[iNdEx-8])
-					mapvalue |= int64(dAtA[iNdEx-7]) << 8
-					mapvalue |= int64(dAtA[iNdEx-6]) << 16
-					mapvalue |= int64(dAtA[iNdEx-5]) << 24
-					mapvalue |= int64(dAtA[iNdEx-4]) << 32
-					mapvalue |= int64(dAtA[iNdEx-3]) << 40
-					mapvalue |= int64(dAtA[iNdEx-2]) << 48
-					mapvalue |= int64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7783,7 +7756,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7796,7 +7769,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7812,7 +7785,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7829,7 +7802,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapkeytemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7846,7 +7819,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7861,12 +7834,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					mapvalue = bool(mapvaluetemp != 0)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -7883,7 +7856,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -7896,7 +7869,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -7912,7 +7885,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -7929,7 +7902,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7943,7 +7916,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -7955,7 +7928,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -7969,7 +7942,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapvalue := int(stringLenmapvalue)
 					if intStringLenmapvalue < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
 					if postStringIndexmapvalue > l {
@@ -7979,12 +7952,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					iNdEx = postStringIndexmapvalue
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8001,7 +7974,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8014,7 +7987,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8030,7 +8003,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8047,7 +8020,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8061,7 +8034,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -8073,7 +8046,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8087,7 +8060,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intMapbyteLen := int(mapbyteLen)
 					if intMapbyteLen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postbytesIndex := iNdEx + intMapbyteLen
 					if postbytesIndex > l {
@@ -8098,12 +8071,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					iNdEx = postbytesIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8120,7 +8093,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8133,7 +8106,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8149,7 +8122,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8166,7 +8139,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8180,7 +8153,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -8191,7 +8164,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8205,12 +8178,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8227,7 +8200,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8240,7 +8213,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8256,7 +8229,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8273,7 +8246,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8287,7 +8260,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -8299,7 +8272,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8312,11 +8285,11 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -8328,12 +8301,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8345,12 +8318,12 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -8372,7 +8345,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -8400,7 +8373,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8413,7 +8386,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8429,7 +8402,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8446,7 +8419,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8460,7 +8433,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -8473,24 +8446,17 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8507,7 +8473,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8520,7 +8486,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8536,7 +8502,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8553,7 +8519,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8567,7 +8533,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -8580,20 +8546,17 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvaluetemp = uint32(dAtA[iNdEx-4])
-					mapvaluetemp |= uint32(dAtA[iNdEx-3]) << 8
-					mapvaluetemp |= uint32(dAtA[iNdEx-2]) << 16
-					mapvaluetemp |= uint32(dAtA[iNdEx-1]) << 24
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8610,7 +8573,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8623,7 +8586,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8639,7 +8602,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8655,7 +8618,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8670,7 +8633,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8684,12 +8647,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8706,7 +8669,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8719,7 +8682,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8735,7 +8698,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8751,7 +8714,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8766,7 +8729,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8780,12 +8743,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8802,7 +8765,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8815,7 +8778,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8831,7 +8794,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8847,7 +8810,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8862,7 +8825,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8876,12 +8839,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8898,7 +8861,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -8911,7 +8874,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -8927,7 +8890,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -8943,7 +8906,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8958,7 +8921,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -8972,12 +8935,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -8994,7 +8957,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9007,7 +8970,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9023,7 +8986,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9040,7 +9003,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapkeytemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9058,7 +9021,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9074,12 +9037,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue = int32(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9096,7 +9059,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9109,7 +9072,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9125,7 +9088,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9142,7 +9105,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapkeytemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9160,7 +9123,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9176,12 +9139,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue = int64(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9198,7 +9161,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9211,7 +9174,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9227,7 +9190,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9244,28 +9207,22 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = uint32(dAtA[iNdEx-4])
-					mapkey |= uint32(dAtA[iNdEx-3]) << 8
-					mapkey |= uint32(dAtA[iNdEx-2]) << 16
-					mapkey |= uint32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = uint32(dAtA[iNdEx-4])
-					mapvalue |= uint32(dAtA[iNdEx-3]) << 8
-					mapvalue |= uint32(dAtA[iNdEx-2]) << 16
-					mapvalue |= uint32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9282,7 +9239,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9295,7 +9252,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9311,7 +9268,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9328,28 +9285,22 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapkey = int32(dAtA[iNdEx-4])
-					mapkey |= int32(dAtA[iNdEx-3]) << 8
-					mapkey |= int32(dAtA[iNdEx-2]) << 16
-					mapkey |= int32(dAtA[iNdEx-1]) << 24
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					mapvalue = int32(dAtA[iNdEx-4])
-					mapvalue |= int32(dAtA[iNdEx-3]) << 8
-					mapvalue |= int32(dAtA[iNdEx-2]) << 16
-					mapvalue |= int32(dAtA[iNdEx-1]) << 24
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9366,7 +9317,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9379,7 +9330,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9395,7 +9346,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9412,36 +9363,22 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = uint64(dAtA[iNdEx-8])
-					mapkey |= uint64(dAtA[iNdEx-7]) << 8
-					mapkey |= uint64(dAtA[iNdEx-6]) << 16
-					mapkey |= uint64(dAtA[iNdEx-5]) << 24
-					mapkey |= uint64(dAtA[iNdEx-4]) << 32
-					mapkey |= uint64(dAtA[iNdEx-3]) << 40
-					mapkey |= uint64(dAtA[iNdEx-2]) << 48
-					mapkey |= uint64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = uint64(dAtA[iNdEx-8])
-					mapvalue |= uint64(dAtA[iNdEx-7]) << 8
-					mapvalue |= uint64(dAtA[iNdEx-6]) << 16
-					mapvalue |= uint64(dAtA[iNdEx-5]) << 24
-					mapvalue |= uint64(dAtA[iNdEx-4]) << 32
-					mapvalue |= uint64(dAtA[iNdEx-3]) << 40
-					mapvalue |= uint64(dAtA[iNdEx-2]) << 48
-					mapvalue |= uint64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9458,7 +9395,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9471,7 +9408,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9487,7 +9424,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9504,36 +9441,22 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapkey = int64(dAtA[iNdEx-8])
-					mapkey |= int64(dAtA[iNdEx-7]) << 8
-					mapkey |= int64(dAtA[iNdEx-6]) << 16
-					mapkey |= int64(dAtA[iNdEx-5]) << 24
-					mapkey |= int64(dAtA[iNdEx-4]) << 32
-					mapkey |= int64(dAtA[iNdEx-3]) << 40
-					mapkey |= int64(dAtA[iNdEx-2]) << 48
-					mapkey |= int64(dAtA[iNdEx-1]) << 56
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvalue = int64(dAtA[iNdEx-8])
-					mapvalue |= int64(dAtA[iNdEx-7]) << 8
-					mapvalue |= int64(dAtA[iNdEx-6]) << 16
-					mapvalue |= int64(dAtA[iNdEx-5]) << 24
-					mapvalue |= int64(dAtA[iNdEx-4]) << 32
-					mapvalue |= int64(dAtA[iNdEx-3]) << 40
-					mapvalue |= int64(dAtA[iNdEx-2]) << 48
-					mapvalue |= int64(dAtA[iNdEx-1]) << 56
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9550,7 +9473,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9563,7 +9486,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9579,7 +9502,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9596,7 +9519,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapkeytemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9613,7 +9536,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapvaluetemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9628,12 +9551,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					mapvalue = bool(mapvaluetemp != 0)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9650,7 +9573,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9663,7 +9586,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9679,7 +9602,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9696,7 +9619,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9710,7 +9633,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -9722,7 +9645,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9736,7 +9659,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapvalue := int(stringLenmapvalue)
 					if intStringLenmapvalue < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
 					if postStringIndexmapvalue > l {
@@ -9746,12 +9669,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					iNdEx = postStringIndexmapvalue
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9768,7 +9691,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9781,7 +9704,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9797,7 +9720,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9814,7 +9737,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9828,7 +9751,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -9840,7 +9763,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9854,7 +9777,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intMapbyteLen := int(mapbyteLen)
 					if intMapbyteLen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postbytesIndex := iNdEx + intMapbyteLen
 					if postbytesIndex > l {
@@ -9865,12 +9788,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					iNdEx = postbytesIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9887,7 +9810,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -9900,7 +9823,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -9916,7 +9839,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -9933,7 +9856,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9947,7 +9870,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -9958,7 +9881,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -9972,12 +9895,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -9994,7 +9917,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10007,7 +9930,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -10023,7 +9946,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10040,7 +9963,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10054,7 +9977,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -10066,7 +9989,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10079,11 +10002,11 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -10095,12 +10018,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -10112,12 +10035,12 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10139,7 +10062,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10167,7 +10090,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10180,7 +10103,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -10196,7 +10119,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10212,7 +10135,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10228,7 +10151,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					var stringLenmapvalue uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10242,7 +10165,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapvalue := int(stringLenmapvalue)
 					if intStringLenmapvalue < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
 					if postStringIndexmapvalue > l {
@@ -10252,12 +10175,12 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					iNdEx = postStringIndexmapvalue
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -10274,7 +10197,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10287,7 +10210,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -10303,7 +10226,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10320,7 +10243,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					var mapkeytemp uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10338,7 +10261,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10351,11 +10274,11 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -10367,12 +10290,12 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -10389,7 +10312,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10402,7 +10325,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -10418,7 +10341,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10435,7 +10358,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					var mapkeytemp int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10452,7 +10375,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					var mapbyteLen uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10466,7 +10389,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					}
 					intMapbyteLen := int(mapbyteLen)
 					if intMapbyteLen < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postbytesIndex := iNdEx + intMapbyteLen
 					if postbytesIndex > l {
@@ -10477,12 +10400,12 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 					iNdEx = postbytesIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -10494,12 +10417,12 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10521,7 +10444,7 @@ func (m *FloatingPoint) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10546,19 +10469,21 @@ func (m *FloatingPoint) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field F", wireType)
 			}
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.F = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
+			m.F = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10580,7 +10505,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10608,7 +10533,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10621,7 +10546,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -10638,7 +10563,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10651,7 +10576,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -10665,12 +10590,12 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10692,7 +10617,7 @@ func (m *ContainsNestedMap) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10715,12 +10640,12 @@ func (m *ContainsNestedMap) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10742,7 +10667,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10770,7 +10695,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTheproto3Unsafe
+					return ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -10783,7 +10708,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -10799,7 +10724,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10816,7 +10741,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10830,7 +10755,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -10843,24 +10768,17 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+					skippy, err := skipTheproto3(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTheproto3Unsafe
+						return ErrInvalidLengthTheproto3
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -10872,12 +10790,12 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -10899,7 +10817,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTheproto3Unsafe
+				return ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -10925,7 +10843,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10942,7 +10860,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTheproto3Unsafe
+						return ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -10955,7 +10873,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthTheproto3Unsafe
+					return ErrInvalidLengthTheproto3
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -10965,7 +10883,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTheproto3Unsafe
+							return ErrIntOverflowTheproto3
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -10984,12 +10902,12 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTheproto3Unsafe(dAtA[iNdEx:])
+			skippy, err := skipTheproto3(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTheproto3Unsafe
+				return ErrInvalidLengthTheproto3
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -11003,14 +10921,14 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
+func skipTheproto3(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowTheproto3Unsafe
+				return 0, ErrIntOverflowTheproto3
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -11027,7 +10945,7 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTheproto3Unsafe
+					return 0, ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -11045,7 +10963,7 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTheproto3Unsafe
+					return 0, ErrIntOverflowTheproto3
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -11059,7 +10977,7 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthTheproto3Unsafe
+				return 0, ErrInvalidLengthTheproto3
 			}
 			return iNdEx, nil
 		case 3:
@@ -11068,7 +10986,7 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowTheproto3Unsafe
+						return 0, ErrIntOverflowTheproto3
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -11084,7 +11002,7 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipTheproto3Unsafe(dAtA[start:])
+				next, err := skipTheproto3(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -11104,8 +11022,8 @@ func skipTheproto3Unsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthTheproto3Unsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowTheproto3Unsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthTheproto3 = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowTheproto3   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeboth/theproto3.proto", fileDescriptorTheproto3) }

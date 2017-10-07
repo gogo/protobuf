@@ -28,6 +28,8 @@ import io_ioutil "io/ioutil"
 import strings "strings"
 import reflect "reflect"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1001,22 +1003,8 @@ func (m *NewNoGroup) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x19
 			i++
 			f1 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f1)
-			i++
-			dAtA[i] = uint8(f1 >> 8)
-			i++
-			dAtA[i] = uint8(f1 >> 16)
-			i++
-			dAtA[i] = uint8(f1 >> 24)
-			i++
-			dAtA[i] = uint8(f1 >> 32)
-			i++
-			dAtA[i] = uint8(f1 >> 40)
-			i++
-			dAtA[i] = uint8(f1 >> 48)
-			i++
-			dAtA[i] = uint8(f1 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f1))
+			i += 8
 		}
 	}
 	if m.A != nil {
@@ -1461,15 +1449,8 @@ func (m *NewNoGroup) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field3 = append(m.Field3, v2)
 			} else if wireType == 2 {
@@ -1500,15 +1481,8 @@ func (m *NewNoGroup) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field3 = append(m.Field3, v2)
 				}

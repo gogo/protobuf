@@ -97,6 +97,8 @@ import strings "strings"
 import sort "sort"
 import reflect "reflect"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -20330,10 +20332,12 @@ func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
 	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
 	dAtA[i] = 0x18
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field3))
@@ -20354,16 +20358,20 @@ func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
 	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(m.Field9))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	i += 4
 	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(m.Field10))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	i += 4
 	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.Field11))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	i += 8
 	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.Field12))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	i += 8
 	dAtA[i] = 0x68
 	i++
 	if m.Field13 {
@@ -20406,12 +20414,14 @@ func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
 	}
 	if m.Field3 != nil {
 		dAtA[i] = 0x18
@@ -20446,22 +20456,26 @@ func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field9 != nil {
 		dAtA[i] = 0x4d
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.Field9))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		i += 4
 	}
 	if m.Field10 != nil {
 		dAtA[i] = 0x55
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.Field10))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		i += 4
 	}
 	if m.Field11 != nil {
 		dAtA[i] = 0x59
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.Field11))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		i += 8
 	}
 	if m.Field12 != nil {
 		dAtA[i] = 0x61
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.Field12))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		i += 8
 	}
 	if m.Field13 != nil {
 		dAtA[i] = 0x68
@@ -20511,22 +20525,8 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f1 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f1)
-			i++
-			dAtA[i] = uint8(f1 >> 8)
-			i++
-			dAtA[i] = uint8(f1 >> 16)
-			i++
-			dAtA[i] = uint8(f1 >> 24)
-			i++
-			dAtA[i] = uint8(f1 >> 32)
-			i++
-			dAtA[i] = uint8(f1 >> 40)
-			i++
-			dAtA[i] = uint8(f1 >> 48)
-			i++
-			dAtA[i] = uint8(f1 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f1))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -20534,14 +20534,8 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f2 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f2)
-			i++
-			dAtA[i] = uint8(f2 >> 8)
-			i++
-			dAtA[i] = uint8(f2 >> 16)
-			i++
-			dAtA[i] = uint8(f2 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f2))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -20604,72 +20598,32 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field9 {
 			dAtA[i] = 0x4d
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field10) > 0 {
 		for _, num := range m.Field10 {
 			dAtA[i] = 0x55
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field11) > 0 {
 		for _, num := range m.Field11 {
 			dAtA[i] = 0x59
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field12) > 0 {
 		for _, num := range m.Field12 {
 			dAtA[i] = 0x61
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field13) > 0 {
@@ -20733,22 +20687,8 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f5 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f5)
-			i++
-			dAtA[i] = uint8(f5 >> 8)
-			i++
-			dAtA[i] = uint8(f5 >> 16)
-			i++
-			dAtA[i] = uint8(f5 >> 24)
-			i++
-			dAtA[i] = uint8(f5 >> 32)
-			i++
-			dAtA[i] = uint8(f5 >> 40)
-			i++
-			dAtA[i] = uint8(f5 >> 48)
-			i++
-			dAtA[i] = uint8(f5 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f5))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -20756,14 +20696,8 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f6 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f6)
-			i++
-			dAtA[i] = uint8(f6 >> 8)
-			i++
-			dAtA[i] = uint8(f6 >> 16)
-			i++
-			dAtA[i] = uint8(f6 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f6))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -20826,72 +20760,32 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field9 {
 			dAtA[i] = 0x4d
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field10) > 0 {
 		for _, num := range m.Field10 {
 			dAtA[i] = 0x55
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field11) > 0 {
 		for _, num := range m.Field11 {
 			dAtA[i] = 0x59
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field12) > 0 {
 		for _, num := range m.Field12 {
 			dAtA[i] = 0x61
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field13) > 0 {
@@ -20956,22 +20850,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
 		for _, num := range m.Field1 {
 			f9 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f9)
-			i++
-			dAtA[i] = uint8(f9 >> 8)
-			i++
-			dAtA[i] = uint8(f9 >> 16)
-			i++
-			dAtA[i] = uint8(f9 >> 24)
-			i++
-			dAtA[i] = uint8(f9 >> 32)
-			i++
-			dAtA[i] = uint8(f9 >> 40)
-			i++
-			dAtA[i] = uint8(f9 >> 48)
-			i++
-			dAtA[i] = uint8(f9 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f9))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -20980,14 +20860,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
 		for _, num := range m.Field2 {
 			f10 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f10)
-			i++
-			dAtA[i] = uint8(f10 >> 8)
-			i++
-			dAtA[i] = uint8(f10 >> 16)
-			i++
-			dAtA[i] = uint8(f10 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f10))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -21101,14 +20975,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
 		for _, num := range m.Field9 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field10) > 0 {
@@ -21116,14 +20984,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
 		for _, num := range m.Field10 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field11) > 0 {
@@ -21131,22 +20993,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
 		for _, num := range m.Field11 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field12) > 0 {
@@ -21154,22 +21002,8 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
 		for _, num := range m.Field12 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field13) > 0 {
@@ -21212,22 +21046,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
 		for _, num := range m.Field1 {
 			f25 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f25)
-			i++
-			dAtA[i] = uint8(f25 >> 8)
-			i++
-			dAtA[i] = uint8(f25 >> 16)
-			i++
-			dAtA[i] = uint8(f25 >> 24)
-			i++
-			dAtA[i] = uint8(f25 >> 32)
-			i++
-			dAtA[i] = uint8(f25 >> 40)
-			i++
-			dAtA[i] = uint8(f25 >> 48)
-			i++
-			dAtA[i] = uint8(f25 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f25))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -21236,14 +21056,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
 		for _, num := range m.Field2 {
 			f26 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f26)
-			i++
-			dAtA[i] = uint8(f26 >> 8)
-			i++
-			dAtA[i] = uint8(f26 >> 16)
-			i++
-			dAtA[i] = uint8(f26 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f26))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -21357,14 +21171,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
 		for _, num := range m.Field9 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field10) > 0 {
@@ -21372,14 +21180,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
 		for _, num := range m.Field10 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.Field11) > 0 {
@@ -21387,22 +21189,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
 		for _, num := range m.Field11 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field12) > 0 {
@@ -21410,22 +21198,8 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
 		for _, num := range m.Field12 {
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.Field13) > 0 {
@@ -21464,10 +21238,12 @@ func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
 	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
 	dAtA[i] = 0x1a
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
@@ -21540,12 +21316,14 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
 	}
 	if m.Field3 != nil {
 		dAtA[i] = 0x1a
@@ -21635,22 +21413,8 @@ func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f47 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f47)
-			i++
-			dAtA[i] = uint8(f47 >> 8)
-			i++
-			dAtA[i] = uint8(f47 >> 16)
-			i++
-			dAtA[i] = uint8(f47 >> 24)
-			i++
-			dAtA[i] = uint8(f47 >> 32)
-			i++
-			dAtA[i] = uint8(f47 >> 40)
-			i++
-			dAtA[i] = uint8(f47 >> 48)
-			i++
-			dAtA[i] = uint8(f47 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f47))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -21658,14 +21422,8 @@ func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f48 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f48)
-			i++
-			dAtA[i] = uint8(f48 >> 8)
-			i++
-			dAtA[i] = uint8(f48 >> 16)
-			i++
-			dAtA[i] = uint8(f48 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f48))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -21786,22 +21544,8 @@ func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f50 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f50)
-			i++
-			dAtA[i] = uint8(f50 >> 8)
-			i++
-			dAtA[i] = uint8(f50 >> 16)
-			i++
-			dAtA[i] = uint8(f50 >> 24)
-			i++
-			dAtA[i] = uint8(f50 >> 32)
-			i++
-			dAtA[i] = uint8(f50 >> 40)
-			i++
-			dAtA[i] = uint8(f50 >> 48)
-			i++
-			dAtA[i] = uint8(f50 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f50))
+			i += 8
 		}
 	}
 	if len(m.Field2) > 0 {
@@ -21809,14 +21553,8 @@ func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f51 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f51)
-			i++
-			dAtA[i] = uint8(f51 >> 8)
-			i++
-			dAtA[i] = uint8(f51 >> 16)
-			i++
-			dAtA[i] = uint8(f51 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f51))
+			i += 4
 		}
 	}
 	if len(m.Field3) > 0 {
@@ -22324,12 +22062,14 @@ func (m *NinOptNativeUnion) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
 	}
 	if m.Field3 != nil {
 		dAtA[i] = 0x18
@@ -22397,12 +22137,14 @@ func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
 	}
 	if m.Field3 != nil {
 		dAtA[i] = 0x1a
@@ -23157,10 +22899,12 @@ func (m *Timer) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.Time1))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time1))
+	i += 8
 	dAtA[i] = 0x11
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.Time2))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time2))
+	i += 8
 	if m.Data != nil {
 		dAtA[i] = 0x1a
 		i++
@@ -23319,7 +23063,8 @@ func (m *NestedDefinition_NestedMessage) MarshalTo(dAtA []byte) (int, error) {
 	if m.NestedField1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.NestedField1))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.NestedField1))
+		i += 8
 	}
 	if m.NNM != nil {
 		dAtA[i] = 0x12
@@ -23428,12 +23173,14 @@ func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.Field1))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.Field2))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
 	}
 	if m.Field3 != nil {
 		dAtA[i] = 0x18
@@ -23468,22 +23215,26 @@ func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field9 != nil {
 		dAtA[i] = 0x4d
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.Field9))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		i += 4
 	}
 	if m.Field10 != nil {
 		dAtA[i] = 0x55
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.Field10))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		i += 4
 	}
 	if m.Field11 != nil {
 		dAtA[i] = 0x59
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.Field11))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		i += 8
 	}
 	if m.Field12 != nil {
 		dAtA[i] = 0x61
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.Field12))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		i += 8
 	}
 	if m.Field13 != nil {
 		dAtA[i] = 0x68
@@ -23559,10 +23310,12 @@ func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(m.FieldA))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FieldA))))
+	i += 8
 	dAtA[i] = 0x15
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(m.FieldB))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.FieldB))))
+	i += 4
 	dAtA[i] = 0x18
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.FieldC))
@@ -23583,16 +23336,20 @@ func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.FieldH)<<1)^uint64((m.FieldH>>63))))
 	dAtA[i] = 0x4d
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(m.FieldI))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldI))
+	i += 4
 	dAtA[i] = 0x55
 	i++
-	i = encodeFixed32Thetest(dAtA, i, uint32(m.FieldJ))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldJ))
+	i += 4
 	dAtA[i] = 0x59
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.FieldK))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldK))
+	i += 8
 	dAtA[i] = 0x61
 	i++
-	i = encodeFixed64Thetest(dAtA, i, uint64(m.FieldL))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldL))
+	i += 8
 	dAtA[i] = 0x68
 	i++
 	if m.FieldM {
@@ -23635,12 +23392,14 @@ func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldA != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.FieldA))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		i += 8
 	}
 	if m.FieldB != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.FieldB))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		i += 4
 	}
 	if m.FieldC != nil {
 		dAtA[i] = 0x18
@@ -23675,22 +23434,26 @@ func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldI != nil {
 		dAtA[i] = 0x4d
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.FieldI))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldI))
+		i += 4
 	}
 	if m.FieldJ != nil {
 		dAtA[i] = 0x55
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(*m.FieldJ))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldJ))
+		i += 4
 	}
 	if m.FieldK != nil {
 		dAtA[i] = 0x59
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.FieldK))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FieldK))
+		i += 8
 	}
 	if m.FielL != nil {
 		dAtA[i] = 0x61
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(*m.FielL))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FielL))
+		i += 8
 	}
 	if m.FieldM != nil {
 		dAtA[i] = 0x68
@@ -23740,22 +23503,8 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f92 := math.Float64bits(float64(num))
-			dAtA[i] = uint8(f92)
-			i++
-			dAtA[i] = uint8(f92 >> 8)
-			i++
-			dAtA[i] = uint8(f92 >> 16)
-			i++
-			dAtA[i] = uint8(f92 >> 24)
-			i++
-			dAtA[i] = uint8(f92 >> 32)
-			i++
-			dAtA[i] = uint8(f92 >> 40)
-			i++
-			dAtA[i] = uint8(f92 >> 48)
-			i++
-			dAtA[i] = uint8(f92 >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f92))
+			i += 8
 		}
 	}
 	if len(m.FieldB) > 0 {
@@ -23763,14 +23512,8 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f93 := math.Float32bits(float32(num))
-			dAtA[i] = uint8(f93)
-			i++
-			dAtA[i] = uint8(f93 >> 8)
-			i++
-			dAtA[i] = uint8(f93 >> 16)
-			i++
-			dAtA[i] = uint8(f93 >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f93))
+			i += 4
 		}
 	}
 	if len(m.FieldC) > 0 {
@@ -23833,72 +23576,32 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.FieldI {
 			dAtA[i] = 0x4d
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.FieldJ) > 0 {
 		for _, num := range m.FieldJ {
 			dAtA[i] = 0x55
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
 		}
 	}
 	if len(m.FieldK) > 0 {
 		for _, num := range m.FieldK {
 			dAtA[i] = 0x59
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.FieldL) > 0 {
 		for _, num := range m.FieldL {
 			dAtA[i] = 0x61
 			i++
-			dAtA[i] = uint8(num)
-			i++
-			dAtA[i] = uint8(num >> 8)
-			i++
-			dAtA[i] = uint8(num >> 16)
-			i++
-			dAtA[i] = uint8(num >> 24)
-			i++
-			dAtA[i] = uint8(num >> 32)
-			i++
-			dAtA[i] = uint8(num >> 40)
-			i++
-			dAtA[i] = uint8(num >> 48)
-			i++
-			dAtA[i] = uint8(num >> 56)
-			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
 		}
 	}
 	if len(m.FieldM) > 0 {
@@ -23960,12 +23663,14 @@ func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldA != nil {
 		dAtA[i] = 0x9
 		i++
-		i = encodeFixed64Thetest(dAtA, i, uint64(math.Float64bits(float64(*m.FieldA))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		i += 8
 	}
 	if m.FieldB != nil {
 		dAtA[i] = 0x15
 		i++
-		i = encodeFixed32Thetest(dAtA, i, uint32(math.Float32bits(float32(*m.FieldB))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		i += 4
 	}
 	if m.FieldC != nil {
 		dAtA[i] = 0x1a
@@ -30062,15 +29767,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
@@ -30080,11 +29778,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 0 {
@@ -30212,11 +29907,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Field9 = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field9 = uint32(dAtA[iNdEx-4])
-			m.Field9 |= uint32(dAtA[iNdEx-3]) << 8
-			m.Field9 |= uint32(dAtA[iNdEx-2]) << 16
-			m.Field9 |= uint32(dAtA[iNdEx-1]) << 24
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
@@ -30225,11 +29917,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Field10 = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field10 = int32(dAtA[iNdEx-4])
-			m.Field10 |= int32(dAtA[iNdEx-3]) << 8
-			m.Field10 |= int32(dAtA[iNdEx-2]) << 16
-			m.Field10 |= int32(dAtA[iNdEx-1]) << 24
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
@@ -30238,15 +29927,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Field11 = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field11 = uint64(dAtA[iNdEx-8])
-			m.Field11 |= uint64(dAtA[iNdEx-7]) << 8
-			m.Field11 |= uint64(dAtA[iNdEx-6]) << 16
-			m.Field11 |= uint64(dAtA[iNdEx-5]) << 24
-			m.Field11 |= uint64(dAtA[iNdEx-4]) << 32
-			m.Field11 |= uint64(dAtA[iNdEx-3]) << 40
-			m.Field11 |= uint64(dAtA[iNdEx-2]) << 48
-			m.Field11 |= uint64(dAtA[iNdEx-1]) << 56
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
@@ -30255,15 +29937,8 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Field12 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field12 = int64(dAtA[iNdEx-8])
-			m.Field12 |= int64(dAtA[iNdEx-7]) << 8
-			m.Field12 |= int64(dAtA[iNdEx-6]) << 16
-			m.Field12 |= int64(dAtA[iNdEx-5]) << 24
-			m.Field12 |= int64(dAtA[iNdEx-4]) << 32
-			m.Field12 |= int64(dAtA[iNdEx-3]) << 40
-			m.Field12 |= int64(dAtA[iNdEx-2]) << 48
-			m.Field12 |= int64(dAtA[iNdEx-1]) << 56
 		case 13:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field13", wireType)
@@ -30403,15 +30078,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 		case 2:
@@ -30422,11 +30090,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 		case 3:
@@ -30560,11 +30225,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field9 = &v
 		case 10:
 			if wireType != 5 {
@@ -30574,11 +30236,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = int32(dAtA[iNdEx-4])
-			v |= int32(dAtA[iNdEx-3]) << 8
-			v |= int32(dAtA[iNdEx-2]) << 16
-			v |= int32(dAtA[iNdEx-1]) << 24
 			m.Field10 = &v
 		case 11:
 			if wireType != 1 {
@@ -30588,15 +30247,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field11 = &v
 		case 12:
 			if wireType != 1 {
@@ -30606,15 +30258,8 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = int64(dAtA[iNdEx-8])
-			v |= int64(dAtA[iNdEx-7]) << 8
-			v |= int64(dAtA[iNdEx-6]) << 16
-			v |= int64(dAtA[iNdEx-5]) << 24
-			v |= int64(dAtA[iNdEx-4]) << 32
-			v |= int64(dAtA[iNdEx-3]) << 40
-			v |= int64(dAtA[iNdEx-2]) << 48
-			v |= int64(dAtA[iNdEx-1]) << 56
 			m.Field12 = &v
 		case 13:
 			if wireType != 0 {
@@ -30755,15 +30400,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -30794,15 +30432,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -30815,11 +30446,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -30850,11 +30478,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -31243,11 +30868,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -31277,11 +30899,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					m.Field9 = append(m.Field9, v)
 				}
 			} else {
@@ -31293,11 +30912,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = int32(dAtA[iNdEx-4])
-				v |= int32(dAtA[iNdEx-3]) << 8
-				v |= int32(dAtA[iNdEx-2]) << 16
-				v |= int32(dAtA[iNdEx-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -31327,11 +30943,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = int32(dAtA[iNdEx-4])
-					v |= int32(dAtA[iNdEx-3]) << 8
-					v |= int32(dAtA[iNdEx-2]) << 16
-					v |= int32(dAtA[iNdEx-1]) << 24
 					m.Field10 = append(m.Field10, v)
 				}
 			} else {
@@ -31343,15 +30956,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -31381,15 +30987,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					m.Field11 = append(m.Field11, v)
 				}
 			} else {
@@ -31401,15 +31000,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = int64(dAtA[iNdEx-8])
-				v |= int64(dAtA[iNdEx-7]) << 8
-				v |= int64(dAtA[iNdEx-6]) << 16
-				v |= int64(dAtA[iNdEx-5]) << 24
-				v |= int64(dAtA[iNdEx-4]) << 32
-				v |= int64(dAtA[iNdEx-3]) << 40
-				v |= int64(dAtA[iNdEx-2]) << 48
-				v |= int64(dAtA[iNdEx-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -31439,15 +31031,8 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = int64(dAtA[iNdEx-8])
-					v |= int64(dAtA[iNdEx-7]) << 8
-					v |= int64(dAtA[iNdEx-6]) << 16
-					v |= int64(dAtA[iNdEx-5]) << 24
-					v |= int64(dAtA[iNdEx-4]) << 32
-					v |= int64(dAtA[iNdEx-3]) << 40
-					v |= int64(dAtA[iNdEx-2]) << 48
-					v |= int64(dAtA[iNdEx-1]) << 56
 					m.Field12 = append(m.Field12, v)
 				}
 			} else {
@@ -31630,15 +31215,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -31669,15 +31247,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -31690,11 +31261,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -31725,11 +31293,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -32118,11 +31683,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -32152,11 +31714,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					m.Field9 = append(m.Field9, v)
 				}
 			} else {
@@ -32168,11 +31727,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = int32(dAtA[iNdEx-4])
-				v |= int32(dAtA[iNdEx-3]) << 8
-				v |= int32(dAtA[iNdEx-2]) << 16
-				v |= int32(dAtA[iNdEx-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -32202,11 +31758,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = int32(dAtA[iNdEx-4])
-					v |= int32(dAtA[iNdEx-3]) << 8
-					v |= int32(dAtA[iNdEx-2]) << 16
-					v |= int32(dAtA[iNdEx-1]) << 24
 					m.Field10 = append(m.Field10, v)
 				}
 			} else {
@@ -32218,15 +31771,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -32256,15 +31802,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					m.Field11 = append(m.Field11, v)
 				}
 			} else {
@@ -32276,15 +31815,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = int64(dAtA[iNdEx-8])
-				v |= int64(dAtA[iNdEx-7]) << 8
-				v |= int64(dAtA[iNdEx-6]) << 16
-				v |= int64(dAtA[iNdEx-5]) << 24
-				v |= int64(dAtA[iNdEx-4]) << 32
-				v |= int64(dAtA[iNdEx-3]) << 40
-				v |= int64(dAtA[iNdEx-2]) << 48
-				v |= int64(dAtA[iNdEx-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -32314,15 +31846,8 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = int64(dAtA[iNdEx-8])
-					v |= int64(dAtA[iNdEx-7]) << 8
-					v |= int64(dAtA[iNdEx-6]) << 16
-					v |= int64(dAtA[iNdEx-5]) << 24
-					v |= int64(dAtA[iNdEx-4]) << 32
-					v |= int64(dAtA[iNdEx-3]) << 40
-					v |= int64(dAtA[iNdEx-2]) << 48
-					v |= int64(dAtA[iNdEx-1]) << 56
 					m.Field12 = append(m.Field12, v)
 				}
 			} else {
@@ -32505,15 +32030,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -32544,15 +32062,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -32565,11 +32076,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -32600,11 +32108,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -32993,11 +32498,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33027,11 +32529,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					m.Field9 = append(m.Field9, v)
 				}
 			} else {
@@ -33043,11 +32542,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = int32(dAtA[iNdEx-4])
-				v |= int32(dAtA[iNdEx-3]) << 8
-				v |= int32(dAtA[iNdEx-2]) << 16
-				v |= int32(dAtA[iNdEx-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33077,11 +32573,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = int32(dAtA[iNdEx-4])
-					v |= int32(dAtA[iNdEx-3]) << 8
-					v |= int32(dAtA[iNdEx-2]) << 16
-					v |= int32(dAtA[iNdEx-1]) << 24
 					m.Field10 = append(m.Field10, v)
 				}
 			} else {
@@ -33093,15 +32586,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33131,15 +32617,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					m.Field11 = append(m.Field11, v)
 				}
 			} else {
@@ -33151,15 +32630,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = int64(dAtA[iNdEx-8])
-				v |= int64(dAtA[iNdEx-7]) << 8
-				v |= int64(dAtA[iNdEx-6]) << 16
-				v |= int64(dAtA[iNdEx-5]) << 24
-				v |= int64(dAtA[iNdEx-4]) << 32
-				v |= int64(dAtA[iNdEx-3]) << 40
-				v |= int64(dAtA[iNdEx-2]) << 48
-				v |= int64(dAtA[iNdEx-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33189,15 +32661,8 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = int64(dAtA[iNdEx-8])
-					v |= int64(dAtA[iNdEx-7]) << 8
-					v |= int64(dAtA[iNdEx-6]) << 16
-					v |= int64(dAtA[iNdEx-5]) << 24
-					v |= int64(dAtA[iNdEx-4]) << 32
-					v |= int64(dAtA[iNdEx-3]) << 40
-					v |= int64(dAtA[iNdEx-2]) << 48
-					v |= int64(dAtA[iNdEx-1]) << 56
 					m.Field12 = append(m.Field12, v)
 				}
 			} else {
@@ -33322,15 +32787,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -33361,15 +32819,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -33382,11 +32833,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -33417,11 +32865,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -33810,11 +33255,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33844,11 +33286,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					m.Field9 = append(m.Field9, v)
 				}
 			} else {
@@ -33860,11 +33299,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = int32(dAtA[iNdEx-4])
-				v |= int32(dAtA[iNdEx-3]) << 8
-				v |= int32(dAtA[iNdEx-2]) << 16
-				v |= int32(dAtA[iNdEx-1]) << 24
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33894,11 +33330,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = int32(dAtA[iNdEx-4])
-					v |= int32(dAtA[iNdEx-3]) << 8
-					v |= int32(dAtA[iNdEx-2]) << 16
-					v |= int32(dAtA[iNdEx-1]) << 24
 					m.Field10 = append(m.Field10, v)
 				}
 			} else {
@@ -33910,15 +33343,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -33948,15 +33374,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					m.Field11 = append(m.Field11, v)
 				}
 			} else {
@@ -33968,15 +33387,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = int64(dAtA[iNdEx-8])
-				v |= int64(dAtA[iNdEx-7]) << 8
-				v |= int64(dAtA[iNdEx-6]) << 16
-				v |= int64(dAtA[iNdEx-5]) << 24
-				v |= int64(dAtA[iNdEx-4]) << 32
-				v |= int64(dAtA[iNdEx-3]) << 40
-				v |= int64(dAtA[iNdEx-2]) << 48
-				v |= int64(dAtA[iNdEx-1]) << 56
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -34006,15 +33418,8 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = int64(dAtA[iNdEx-8])
-					v |= int64(dAtA[iNdEx-7]) << 8
-					v |= int64(dAtA[iNdEx-6]) << 16
-					v |= int64(dAtA[iNdEx-5]) << 24
-					v |= int64(dAtA[iNdEx-4]) << 32
-					v |= int64(dAtA[iNdEx-3]) << 40
-					v |= int64(dAtA[iNdEx-2]) << 48
-					v |= int64(dAtA[iNdEx-1]) << 56
 					m.Field12 = append(m.Field12, v)
 				}
 			} else {
@@ -34141,15 +33546,8 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
@@ -34159,11 +33557,8 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 2 {
@@ -34434,15 +33829,8 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 		case 2:
@@ -34453,11 +33841,8 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 		case 3:
@@ -34739,15 +34124,8 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -34778,15 +34156,8 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -34799,11 +34170,8 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -34834,11 +34202,8 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -35241,15 +34606,8 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
@@ -35280,15 +34638,8 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
 				}
@@ -35301,11 +34652,8 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
@@ -35336,11 +34684,8 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
 				}
@@ -36783,15 +36128,8 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 		case 2:
@@ -36802,11 +36140,8 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 		case 3:
@@ -37030,15 +36365,8 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 		case 2:
@@ -37049,11 +36377,8 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 		case 3:
@@ -39525,15 +38850,8 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Time1 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Time1 = int64(dAtA[iNdEx-8])
-			m.Time1 |= int64(dAtA[iNdEx-7]) << 8
-			m.Time1 |= int64(dAtA[iNdEx-6]) << 16
-			m.Time1 |= int64(dAtA[iNdEx-5]) << 24
-			m.Time1 |= int64(dAtA[iNdEx-4]) << 32
-			m.Time1 |= int64(dAtA[iNdEx-3]) << 40
-			m.Time1 |= int64(dAtA[iNdEx-2]) << 48
-			m.Time1 |= int64(dAtA[iNdEx-1]) << 56
 		case 2:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Time2", wireType)
@@ -39542,15 +38860,8 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.Time2 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Time2 = int64(dAtA[iNdEx-8])
-			m.Time2 |= int64(dAtA[iNdEx-7]) << 8
-			m.Time2 |= int64(dAtA[iNdEx-6]) << 16
-			m.Time2 |= int64(dAtA[iNdEx-5]) << 24
-			m.Time2 |= int64(dAtA[iNdEx-4]) << 32
-			m.Time2 |= int64(dAtA[iNdEx-3]) << 40
-			m.Time2 |= int64(dAtA[iNdEx-2]) << 48
-			m.Time2 |= int64(dAtA[iNdEx-1]) << 56
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
@@ -40041,15 +39352,8 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.NestedField1 = &v
 		case 2:
 			if wireType != 2 {
@@ -40361,15 +39665,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
 		case 2:
@@ -40380,11 +39677,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
 		case 3:
@@ -40518,11 +39812,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.Field9 = &v
 		case 10:
 			if wireType != 5 {
@@ -40532,11 +39823,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = int32(dAtA[iNdEx-4])
-			v |= int32(dAtA[iNdEx-3]) << 8
-			v |= int32(dAtA[iNdEx-2]) << 16
-			v |= int32(dAtA[iNdEx-1]) << 24
 			m.Field10 = &v
 		case 11:
 			if wireType != 1 {
@@ -40546,15 +39834,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.Field11 = &v
 		case 12:
 			if wireType != 1 {
@@ -40564,15 +39845,8 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = int64(dAtA[iNdEx-8])
-			v |= int64(dAtA[iNdEx-7]) << 8
-			v |= int64(dAtA[iNdEx-6]) << 16
-			v |= int64(dAtA[iNdEx-5]) << 24
-			v |= int64(dAtA[iNdEx-4]) << 32
-			v |= int64(dAtA[iNdEx-3]) << 40
-			v |= int64(dAtA[iNdEx-2]) << 48
-			v |= int64(dAtA[iNdEx-1]) << 56
 			m.Field12 = &v
 		case 13:
 			if wireType != 0 {
@@ -40796,15 +40070,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.FieldA = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
@@ -40814,11 +40081,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.FieldB = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 0 {
@@ -40946,11 +40210,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.FieldI = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.FieldI = uint32(dAtA[iNdEx-4])
-			m.FieldI |= uint32(dAtA[iNdEx-3]) << 8
-			m.FieldI |= uint32(dAtA[iNdEx-2]) << 16
-			m.FieldI |= uint32(dAtA[iNdEx-1]) << 24
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldJ", wireType)
@@ -40959,11 +40220,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.FieldJ = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.FieldJ = int32(dAtA[iNdEx-4])
-			m.FieldJ |= int32(dAtA[iNdEx-3]) << 8
-			m.FieldJ |= int32(dAtA[iNdEx-2]) << 16
-			m.FieldJ |= int32(dAtA[iNdEx-1]) << 24
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldK", wireType)
@@ -40972,15 +40230,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.FieldK = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.FieldK = uint64(dAtA[iNdEx-8])
-			m.FieldK |= uint64(dAtA[iNdEx-7]) << 8
-			m.FieldK |= uint64(dAtA[iNdEx-6]) << 16
-			m.FieldK |= uint64(dAtA[iNdEx-5]) << 24
-			m.FieldK |= uint64(dAtA[iNdEx-4]) << 32
-			m.FieldK |= uint64(dAtA[iNdEx-3]) << 40
-			m.FieldK |= uint64(dAtA[iNdEx-2]) << 48
-			m.FieldK |= uint64(dAtA[iNdEx-1]) << 56
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldL", wireType)
@@ -40989,15 +40240,8 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.FieldL = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.FieldL = int64(dAtA[iNdEx-8])
-			m.FieldL |= int64(dAtA[iNdEx-7]) << 8
-			m.FieldL |= int64(dAtA[iNdEx-6]) << 16
-			m.FieldL |= int64(dAtA[iNdEx-5]) << 24
-			m.FieldL |= int64(dAtA[iNdEx-4]) << 32
-			m.FieldL |= int64(dAtA[iNdEx-3]) << 40
-			m.FieldL |= int64(dAtA[iNdEx-2]) << 48
-			m.FieldL |= int64(dAtA[iNdEx-1]) << 56
 		case 13:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldM", wireType)
@@ -41137,15 +40381,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.FieldA = &v2
 		case 2:
@@ -41156,11 +40393,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.FieldB = &v2
 		case 3:
@@ -41294,11 +40528,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.FieldI = &v
 		case 10:
 			if wireType != 5 {
@@ -41308,11 +40539,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = int32(dAtA[iNdEx-4])
-			v |= int32(dAtA[iNdEx-3]) << 8
-			v |= int32(dAtA[iNdEx-2]) << 16
-			v |= int32(dAtA[iNdEx-1]) << 24
 			m.FieldJ = &v
 		case 11:
 			if wireType != 1 {
@@ -41322,15 +40550,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.FieldK = &v
 		case 12:
 			if wireType != 1 {
@@ -41340,15 +40561,8 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = int64(dAtA[iNdEx-8])
-			v |= int64(dAtA[iNdEx-7]) << 8
-			v |= int64(dAtA[iNdEx-6]) << 16
-			v |= int64(dAtA[iNdEx-5]) << 24
-			v |= int64(dAtA[iNdEx-4]) << 32
-			v |= int64(dAtA[iNdEx-3]) << 40
-			v |= int64(dAtA[iNdEx-2]) << 48
-			v |= int64(dAtA[iNdEx-1]) << 56
 			m.FielL = &v
 		case 13:
 			if wireType != 0 {
@@ -41489,15 +40703,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				v2 := float64(math.Float64frombits(v))
 				m.FieldA = append(m.FieldA, v2)
 			} else if wireType == 2 {
@@ -41528,15 +40735,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					v2 := float64(math.Float64frombits(v))
 					m.FieldA = append(m.FieldA, v2)
 				}
@@ -41549,11 +40749,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				v2 := float32(math.Float32frombits(v))
 				m.FieldB = append(m.FieldB, v2)
 			} else if wireType == 2 {
@@ -41584,11 +40781,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					v2 := float32(math.Float32frombits(v))
 					m.FieldB = append(m.FieldB, v2)
 				}
@@ -41977,11 +41171,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = uint32(dAtA[iNdEx-4])
-				v |= uint32(dAtA[iNdEx-3]) << 8
-				v |= uint32(dAtA[iNdEx-2]) << 16
-				v |= uint32(dAtA[iNdEx-1]) << 24
 				m.FieldI = append(m.FieldI, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -42011,11 +41202,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = uint32(dAtA[iNdEx-4])
-					v |= uint32(dAtA[iNdEx-3]) << 8
-					v |= uint32(dAtA[iNdEx-2]) << 16
-					v |= uint32(dAtA[iNdEx-1]) << 24
 					m.FieldI = append(m.FieldI, v)
 				}
 			} else {
@@ -42027,11 +41215,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				v = int32(dAtA[iNdEx-4])
-				v |= int32(dAtA[iNdEx-3]) << 8
-				v |= int32(dAtA[iNdEx-2]) << 16
-				v |= int32(dAtA[iNdEx-1]) << 24
 				m.FieldJ = append(m.FieldJ, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -42061,11 +41246,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					v = int32(dAtA[iNdEx-4])
-					v |= int32(dAtA[iNdEx-3]) << 8
-					v |= int32(dAtA[iNdEx-2]) << 16
-					v |= int32(dAtA[iNdEx-1]) << 24
 					m.FieldJ = append(m.FieldJ, v)
 				}
 			} else {
@@ -42077,15 +41259,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = uint64(dAtA[iNdEx-8])
-				v |= uint64(dAtA[iNdEx-7]) << 8
-				v |= uint64(dAtA[iNdEx-6]) << 16
-				v |= uint64(dAtA[iNdEx-5]) << 24
-				v |= uint64(dAtA[iNdEx-4]) << 32
-				v |= uint64(dAtA[iNdEx-3]) << 40
-				v |= uint64(dAtA[iNdEx-2]) << 48
-				v |= uint64(dAtA[iNdEx-1]) << 56
 				m.FieldK = append(m.FieldK, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -42115,15 +41290,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = uint64(dAtA[iNdEx-8])
-					v |= uint64(dAtA[iNdEx-7]) << 8
-					v |= uint64(dAtA[iNdEx-6]) << 16
-					v |= uint64(dAtA[iNdEx-5]) << 24
-					v |= uint64(dAtA[iNdEx-4]) << 32
-					v |= uint64(dAtA[iNdEx-3]) << 40
-					v |= uint64(dAtA[iNdEx-2]) << 48
-					v |= uint64(dAtA[iNdEx-1]) << 56
 					m.FieldK = append(m.FieldK, v)
 				}
 			} else {
@@ -42135,15 +41303,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				v = int64(dAtA[iNdEx-8])
-				v |= int64(dAtA[iNdEx-7]) << 8
-				v |= int64(dAtA[iNdEx-6]) << 16
-				v |= int64(dAtA[iNdEx-5]) << 24
-				v |= int64(dAtA[iNdEx-4]) << 32
-				v |= int64(dAtA[iNdEx-3]) << 40
-				v |= int64(dAtA[iNdEx-2]) << 48
-				v |= int64(dAtA[iNdEx-1]) << 56
 				m.FieldL = append(m.FieldL, v)
 			} else if wireType == 2 {
 				var packedLen int
@@ -42173,15 +41334,8 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					v = int64(dAtA[iNdEx-8])
-					v |= int64(dAtA[iNdEx-7]) << 8
-					v |= int64(dAtA[iNdEx-6]) << 16
-					v |= int64(dAtA[iNdEx-5]) << 24
-					v |= int64(dAtA[iNdEx-4]) << 32
-					v |= int64(dAtA[iNdEx-3]) << 40
-					v |= int64(dAtA[iNdEx-2]) << 48
-					v |= int64(dAtA[iNdEx-1]) << 56
 					m.FieldL = append(m.FieldL, v)
 				}
 			} else {
@@ -42366,15 +41520,8 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := float64(math.Float64frombits(v))
 			m.FieldA = &v2
 		case 2:
@@ -42385,11 +41532,8 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := float32(math.Float32frombits(v))
 			m.FieldB = &v2
 		case 3:

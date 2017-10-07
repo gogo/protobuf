@@ -18,9 +18,9 @@ package one
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
-import unsafe "unsafe"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
+import unsafe "unsafe"
 import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
@@ -33,10 +33,6 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func TestSubbyProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedSubby(popr, false)
@@ -71,10 +67,6 @@ func TestSubbyProto(t *testing.T) {
 }
 
 func TestAllTypesOneOfProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllTypesOneOf(popr, false)
@@ -109,10 +101,6 @@ func TestAllTypesOneOfProto(t *testing.T) {
 }
 
 func TestTwoOneofsProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedTwoOneofs(popr, false)
@@ -147,10 +135,6 @@ func TestTwoOneofsProto(t *testing.T) {
 }
 
 func TestCustomOneofProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCustomOneof(popr, false)

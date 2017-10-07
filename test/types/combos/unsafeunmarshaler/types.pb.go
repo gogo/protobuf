@@ -2671,7 +2671,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -2699,7 +2699,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2712,7 +2712,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2732,7 +2732,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2745,7 +2745,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2765,7 +2765,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2778,7 +2778,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2798,7 +2798,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2811,7 +2811,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2831,7 +2831,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2844,7 +2844,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2864,7 +2864,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2877,7 +2877,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2897,7 +2897,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2910,7 +2910,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2930,7 +2930,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2943,7 +2943,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2963,7 +2963,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2976,7 +2976,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2996,7 +2996,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3009,7 +3009,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3029,7 +3029,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3042,7 +3042,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3057,12 +3057,12 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3084,7 +3084,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3112,7 +3112,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3125,7 +3125,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3145,7 +3145,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3158,7 +3158,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3178,7 +3178,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3191,7 +3191,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3208,7 +3208,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3221,7 +3221,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3233,12 +3233,12 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3260,7 +3260,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3288,7 +3288,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3301,7 +3301,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3321,7 +3321,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3334,7 +3334,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3354,7 +3354,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3367,7 +3367,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3384,7 +3384,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3397,7 +3397,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3409,12 +3409,12 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3436,7 +3436,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3464,7 +3464,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3477,7 +3477,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3495,7 +3495,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3508,7 +3508,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3526,7 +3526,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3539,7 +3539,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3557,7 +3557,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3570,7 +3570,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3583,12 +3583,12 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3610,7 +3610,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3638,7 +3638,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3651,7 +3651,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3669,7 +3669,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3682,7 +3682,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3700,7 +3700,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3713,7 +3713,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3731,7 +3731,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3744,7 +3744,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3757,12 +3757,12 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3784,7 +3784,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3812,7 +3812,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3825,7 +3825,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3841,7 +3841,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -3857,7 +3857,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -3873,7 +3873,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -3886,11 +3886,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -3902,12 +3902,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -3924,7 +3924,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3937,7 +3937,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3953,7 +3953,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -3969,7 +3969,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -3985,7 +3985,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -3998,11 +3998,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4014,12 +4014,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4036,7 +4036,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4049,7 +4049,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4065,7 +4065,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4081,7 +4081,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4097,7 +4097,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4110,11 +4110,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4126,12 +4126,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4148,7 +4148,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4161,7 +4161,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4177,7 +4177,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4193,7 +4193,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4209,7 +4209,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4222,11 +4222,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4238,12 +4238,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4255,12 +4255,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4282,7 +4282,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4310,7 +4310,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4323,7 +4323,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4339,7 +4339,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4355,7 +4355,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4371,7 +4371,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4384,11 +4384,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4399,12 +4399,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4421,7 +4421,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4434,7 +4434,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4450,7 +4450,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4466,7 +4466,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4482,7 +4482,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4495,11 +4495,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4510,12 +4510,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4532,7 +4532,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4545,7 +4545,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4561,7 +4561,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4577,7 +4577,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4593,7 +4593,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4606,11 +4606,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4621,12 +4621,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4643,7 +4643,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4656,7 +4656,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4672,7 +4672,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4688,7 +4688,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4704,7 +4704,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4717,11 +4717,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4732,12 +4732,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4749,12 +4749,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4776,7 +4776,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4804,7 +4804,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4817,7 +4817,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4836,7 +4836,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4849,7 +4849,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4863,12 +4863,12 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4890,7 +4890,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4918,7 +4918,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4931,7 +4931,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4950,7 +4950,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4963,7 +4963,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4977,12 +4977,12 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4996,14 +4996,14 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipTypesUnsafe(dAtA []byte) (n int, err error) {
+func skipTypes(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowTypesUnsafe
+				return 0, ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -5020,7 +5020,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTypesUnsafe
+					return 0, ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -5038,7 +5038,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTypesUnsafe
+					return 0, ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -5052,7 +5052,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthTypesUnsafe
+				return 0, ErrInvalidLengthTypes
 			}
 			return iNdEx, nil
 		case 3:
@@ -5061,7 +5061,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowTypesUnsafe
+						return 0, ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -5077,7 +5077,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipTypesUnsafe(dAtA[start:])
+				next, err := skipTypes(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -5097,8 +5097,8 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthTypesUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowTypesUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthTypes = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowTypes   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeunmarshaler/types.proto", fileDescriptorTypes) }

@@ -2012,659 +2012,6 @@ func (this *OneofStdTypes_Duration) Equal(that interface{}) bool {
 	}
 	return true
 }
-func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
-	this := &KnownTypes{}
-	if r.Intn(10) != 0 {
-		this.Dur = google_protobuf1.NewPopulatedDuration(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Ts = google_protobuf2.NewPopulatedTimestamp(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Dbl = google_protobuf3.NewPopulatedDoubleValue(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Flt = google_protobuf3.NewPopulatedFloatValue(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.I64 = google_protobuf3.NewPopulatedInt64Value(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.U64 = google_protobuf3.NewPopulatedUInt64Value(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.I32 = google_protobuf3.NewPopulatedInt32Value(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.U32 = google_protobuf3.NewPopulatedUInt32Value(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Bool = google_protobuf3.NewPopulatedBoolValue(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Str = google_protobuf3.NewPopulatedStringValue(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.Bytes = google_protobuf3.NewPopulatedBytesValue(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
-	this := &ProtoTypes{}
-	if r.Intn(10) != 0 {
-		this.NullableTimestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.NullableDuration = google_protobuf1.NewPopulatedDuration(r, easy)
-	}
-	v1 := google_protobuf2.NewPopulatedTimestamp(r, easy)
-	this.Timestamp = *v1
-	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
-	this.Duration = *v2
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
-	this := &StdTypes{}
-	if r.Intn(10) != 0 {
-		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-	}
-	if r.Intn(10) != 0 {
-		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-	}
-	v3 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-	this.Timestamp = *v3
-	v4 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-	this.Duration = *v4
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
-	this := &RepProtoTypes{}
-	if r.Intn(10) != 0 {
-		v5 := r.Intn(5)
-		this.NullableTimestamps = make([]*google_protobuf2.Timestamp, v5)
-		for i := 0; i < v5; i++ {
-			this.NullableTimestamps[i] = google_protobuf2.NewPopulatedTimestamp(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v6 := r.Intn(5)
-		this.NullableDurations = make([]*google_protobuf1.Duration, v6)
-		for i := 0; i < v6; i++ {
-			this.NullableDurations[i] = google_protobuf1.NewPopulatedDuration(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v7 := r.Intn(5)
-		this.Timestamps = make([]google_protobuf2.Timestamp, v7)
-		for i := 0; i < v7; i++ {
-			v8 := google_protobuf2.NewPopulatedTimestamp(r, easy)
-			this.Timestamps[i] = *v8
-		}
-	}
-	if r.Intn(10) != 0 {
-		v9 := r.Intn(5)
-		this.Durations = make([]google_protobuf1.Duration, v9)
-		for i := 0; i < v9; i++ {
-			v10 := google_protobuf1.NewPopulatedDuration(r, easy)
-			this.Durations[i] = *v10
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
-	this := &RepStdTypes{}
-	if r.Intn(10) != 0 {
-		v11 := r.Intn(5)
-		this.NullableTimestamps = make([]*time.Time, v11)
-		for i := 0; i < v11; i++ {
-			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v12 := r.Intn(5)
-		this.NullableDurations = make([]*time.Duration, v12)
-		for i := 0; i < v12; i++ {
-			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v13 := r.Intn(5)
-		this.Timestamps = make([]time.Time, v13)
-		for i := 0; i < v13; i++ {
-			v14 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-			this.Timestamps[i] = *v14
-		}
-	}
-	if r.Intn(10) != 0 {
-		v15 := r.Intn(5)
-		this.Durations = make([]time.Duration, v15)
-		for i := 0; i < v15; i++ {
-			v16 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-			this.Durations[i] = *v16
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
-	this := &MapProtoTypes{}
-	if r.Intn(10) != 0 {
-		v17 := r.Intn(10)
-		this.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
-		for i := 0; i < v17; i++ {
-			this.NullableTimestamp[int32(r.Int31())] = google_protobuf2.NewPopulatedTimestamp(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v18 := r.Intn(10)
-		this.Timestamp = make(map[int32]google_protobuf2.Timestamp)
-		for i := 0; i < v18; i++ {
-			this.Timestamp[int32(r.Int31())] = *google_protobuf2.NewPopulatedTimestamp(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v19 := r.Intn(10)
-		this.NullableDuration = make(map[int32]*google_protobuf1.Duration)
-		for i := 0; i < v19; i++ {
-			this.NullableDuration[int32(r.Int31())] = google_protobuf1.NewPopulatedDuration(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v20 := r.Intn(10)
-		this.Duration = make(map[int32]google_protobuf1.Duration)
-		for i := 0; i < v20; i++ {
-			this.Duration[int32(r.Int31())] = *google_protobuf1.NewPopulatedDuration(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
-	this := &MapStdTypes{}
-	if r.Intn(10) != 0 {
-		v21 := r.Intn(10)
-		this.NullableTimestamp = make(map[int32]*time.Time)
-		for i := 0; i < v21; i++ {
-			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v22 := r.Intn(10)
-		this.Timestamp = make(map[int32]time.Time)
-		for i := 0; i < v22; i++ {
-			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v23 := r.Intn(10)
-		this.NullableDuration = make(map[int32]*time.Duration)
-		for i := 0; i < v23; i++ {
-			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-		}
-	}
-	if r.Intn(10) != 0 {
-		v24 := r.Intn(10)
-		this.Duration = make(map[int32]time.Duration)
-		for i := 0; i < v24; i++ {
-			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
-	this := &OneofProtoTypes{}
-	oneofNumber_OneOfProtoTimes := []int32{1, 2}[r.Intn(2)]
-	switch oneofNumber_OneOfProtoTimes {
-	case 1:
-		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Timestamp(r, easy)
-	case 2:
-		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Duration(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedOneofProtoTypes_Timestamp(r randyTypes, easy bool) *OneofProtoTypes_Timestamp {
-	this := &OneofProtoTypes_Timestamp{}
-	this.Timestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
-	return this
-}
-func NewPopulatedOneofProtoTypes_Duration(r randyTypes, easy bool) *OneofProtoTypes_Duration {
-	this := &OneofProtoTypes_Duration{}
-	this.Duration = google_protobuf1.NewPopulatedDuration(r, easy)
-	return this
-}
-func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
-	this := &OneofStdTypes{}
-	oneofNumber_OneOfStdTimes := []int32{1, 2}[r.Intn(2)]
-	switch oneofNumber_OneOfStdTimes {
-	case 1:
-		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Timestamp(r, easy)
-	case 2:
-		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedOneofStdTypes_Timestamp(r randyTypes, easy bool) *OneofStdTypes_Timestamp {
-	this := &OneofStdTypes_Timestamp{}
-	this.Timestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-	return this
-}
-func NewPopulatedOneofStdTypes_Duration(r randyTypes, easy bool) *OneofStdTypes_Duration {
-	this := &OneofStdTypes_Duration{}
-	this.Duration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
-	return this
-}
-
-type randyTypes interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneTypes(r randyTypes) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringTypes(r randyTypes) string {
-	v25 := r.Intn(100)
-	tmps := make([]rune, v25)
-	for i := 0; i < v25; i++ {
-		tmps[i] = randUTF8RuneTypes(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedTypes(r randyTypes, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldTypes(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldTypes(dAtA []byte, r randyTypes, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
-		v26 := r.Int63()
-		if r.Intn(2) == 0 {
-			v26 *= -1
-		}
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(v26))
-	case 1:
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateTypes(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
-func (m *KnownTypes) Size() (n int) {
-	var l int
-	_ = l
-	if m.Dur != nil {
-		l = m.Dur.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Ts != nil {
-		l = m.Ts.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Dbl != nil {
-		l = m.Dbl.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Flt != nil {
-		l = m.Flt.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.I64 != nil {
-		l = m.I64.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.U64 != nil {
-		l = m.U64.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.I32 != nil {
-		l = m.I32.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.U32 != nil {
-		l = m.U32.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Bool != nil {
-		l = m.Bool.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Str != nil {
-		l = m.Str.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.Bytes != nil {
-		l = m.Bytes.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	return n
-}
-
-func (m *ProtoTypes) Size() (n int) {
-	var l int
-	_ = l
-	if m.NullableTimestamp != nil {
-		l = m.NullableTimestamp.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.NullableDuration != nil {
-		l = m.NullableDuration.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	l = m.Timestamp.Size()
-	n += 1 + l + sovTypes(uint64(l))
-	l = m.Duration.Size()
-	n += 1 + l + sovTypes(uint64(l))
-	return n
-}
-
-func (m *StdTypes) Size() (n int) {
-	var l int
-	_ = l
-	if m.NullableTimestamp != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp)
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	if m.NullableDuration != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration)
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)
-	n += 1 + l + sovTypes(uint64(l))
-	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration)
-	n += 1 + l + sovTypes(uint64(l))
-	return n
-}
-
-func (m *RepProtoTypes) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NullableTimestamps) > 0 {
-		for _, e := range m.NullableTimestamps {
-			l = e.Size()
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.NullableDurations) > 0 {
-		for _, e := range m.NullableDurations {
-			l = e.Size()
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.Timestamps) > 0 {
-		for _, e := range m.Timestamps {
-			l = e.Size()
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.Durations) > 0 {
-		for _, e := range m.Durations {
-			l = e.Size()
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *RepStdTypes) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NullableTimestamps) > 0 {
-		for _, e := range m.NullableTimestamps {
-			l = github_com_gogo_protobuf_types.SizeOfStdTime(*e)
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.NullableDurations) > 0 {
-		for _, e := range m.NullableDurations {
-			l = github_com_gogo_protobuf_types.SizeOfStdDuration(*e)
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.Timestamps) > 0 {
-		for _, e := range m.Timestamps {
-			l = github_com_gogo_protobuf_types.SizeOfStdTime(e)
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	if len(m.Durations) > 0 {
-		for _, e := range m.Durations {
-			l = github_com_gogo_protobuf_types.SizeOfStdDuration(e)
-			n += 1 + l + sovTypes(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *MapProtoTypes) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NullableTimestamp) > 0 {
-		for k, v := range m.NullableTimestamp {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-				l += 1 + sovTypes(uint64(l))
-			}
-			mapEntrySize := 1 + sovTypes(uint64(k)) + l
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Timestamp) > 0 {
-		for k, v := range m.Timestamp {
-			_ = k
-			_ = v
-			l = v.Size()
-			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.NullableDuration) > 0 {
-		for k, v := range m.NullableDuration {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-				l += 1 + sovTypes(uint64(l))
-			}
-			mapEntrySize := 1 + sovTypes(uint64(k)) + l
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Duration) > 0 {
-		for k, v := range m.Duration {
-			_ = k
-			_ = v
-			l = v.Size()
-			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	return n
-}
-
-func (m *MapStdTypes) Size() (n int) {
-	var l int
-	_ = l
-	if len(m.NullableTimestamp) > 0 {
-		for k, v := range m.NullableTimestamp {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = github_com_gogo_protobuf_types.SizeOfStdTime(*v)
-				l += 1 + sovTypes(uint64(l))
-			}
-			mapEntrySize := 1 + sovTypes(uint64(k)) + l
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Timestamp) > 0 {
-		for k, v := range m.Timestamp {
-			_ = k
-			_ = v
-			l = github_com_gogo_protobuf_types.SizeOfStdTime(v)
-			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.NullableDuration) > 0 {
-		for k, v := range m.NullableDuration {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
-				l += 1 + sovTypes(uint64(l))
-			}
-			mapEntrySize := 1 + sovTypes(uint64(k)) + l
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	if len(m.Duration) > 0 {
-		for k, v := range m.Duration {
-			_ = k
-			_ = v
-			l = github_com_gogo_protobuf_types.SizeOfStdDuration(v)
-			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
-			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
-		}
-	}
-	return n
-}
-
-func (m *OneofProtoTypes) Size() (n int) {
-	var l int
-	_ = l
-	if m.OneOfProtoTimes != nil {
-		n += m.OneOfProtoTimes.Size()
-	}
-	return n
-}
-
-func (m *OneofProtoTypes_Timestamp) Size() (n int) {
-	var l int
-	_ = l
-	if m.Timestamp != nil {
-		l = m.Timestamp.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	return n
-}
-func (m *OneofProtoTypes_Duration) Size() (n int) {
-	var l int
-	_ = l
-	if m.Duration != nil {
-		l = m.Duration.Size()
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	return n
-}
-func (m *OneofStdTypes) Size() (n int) {
-	var l int
-	_ = l
-	if m.OneOfStdTimes != nil {
-		n += m.OneOfStdTimes.Size()
-	}
-	return n
-}
-
-func (m *OneofStdTypes_Timestamp) Size() (n int) {
-	var l int
-	_ = l
-	if m.Timestamp != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.Timestamp)
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	return n
-}
-func (m *OneofStdTypes_Duration) Size() (n int) {
-	var l int
-	_ = l
-	if m.Duration != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration)
-		n += 1 + l + sovTypes(uint64(l))
-	}
-	return n
-}
-
-func sovTypes(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozTypes(x uint64) (n int) {
-	return sovTypes(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
 func (m *KnownTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -3410,6 +2757,659 @@ func encodeVarintTypes(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return offset + 1
 }
+func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
+	this := &KnownTypes{}
+	if r.Intn(10) != 0 {
+		this.Dur = google_protobuf1.NewPopulatedDuration(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Ts = google_protobuf2.NewPopulatedTimestamp(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Dbl = google_protobuf3.NewPopulatedDoubleValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Flt = google_protobuf3.NewPopulatedFloatValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.I64 = google_protobuf3.NewPopulatedInt64Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.U64 = google_protobuf3.NewPopulatedUInt64Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.I32 = google_protobuf3.NewPopulatedInt32Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.U32 = google_protobuf3.NewPopulatedUInt32Value(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Bool = google_protobuf3.NewPopulatedBoolValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Str = google_protobuf3.NewPopulatedStringValue(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.Bytes = google_protobuf3.NewPopulatedBytesValue(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
+	this := &ProtoTypes{}
+	if r.Intn(10) != 0 {
+		this.NullableTimestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.NullableDuration = google_protobuf1.NewPopulatedDuration(r, easy)
+	}
+	v1 := google_protobuf2.NewPopulatedTimestamp(r, easy)
+	this.Timestamp = *v1
+	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
+	this.Duration = *v2
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
+	this := &StdTypes{}
+	if r.Intn(10) != 0 {
+		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+	}
+	if r.Intn(10) != 0 {
+		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+	}
+	v3 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+	this.Timestamp = *v3
+	v4 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+	this.Duration = *v4
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
+	this := &RepProtoTypes{}
+	if r.Intn(10) != 0 {
+		v5 := r.Intn(5)
+		this.NullableTimestamps = make([]*google_protobuf2.Timestamp, v5)
+		for i := 0; i < v5; i++ {
+			this.NullableTimestamps[i] = google_protobuf2.NewPopulatedTimestamp(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v6 := r.Intn(5)
+		this.NullableDurations = make([]*google_protobuf1.Duration, v6)
+		for i := 0; i < v6; i++ {
+			this.NullableDurations[i] = google_protobuf1.NewPopulatedDuration(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v7 := r.Intn(5)
+		this.Timestamps = make([]google_protobuf2.Timestamp, v7)
+		for i := 0; i < v7; i++ {
+			v8 := google_protobuf2.NewPopulatedTimestamp(r, easy)
+			this.Timestamps[i] = *v8
+		}
+	}
+	if r.Intn(10) != 0 {
+		v9 := r.Intn(5)
+		this.Durations = make([]google_protobuf1.Duration, v9)
+		for i := 0; i < v9; i++ {
+			v10 := google_protobuf1.NewPopulatedDuration(r, easy)
+			this.Durations[i] = *v10
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
+	this := &RepStdTypes{}
+	if r.Intn(10) != 0 {
+		v11 := r.Intn(5)
+		this.NullableTimestamps = make([]*time.Time, v11)
+		for i := 0; i < v11; i++ {
+			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v12 := r.Intn(5)
+		this.NullableDurations = make([]*time.Duration, v12)
+		for i := 0; i < v12; i++ {
+			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v13 := r.Intn(5)
+		this.Timestamps = make([]time.Time, v13)
+		for i := 0; i < v13; i++ {
+			v14 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+			this.Timestamps[i] = *v14
+		}
+	}
+	if r.Intn(10) != 0 {
+		v15 := r.Intn(5)
+		this.Durations = make([]time.Duration, v15)
+		for i := 0; i < v15; i++ {
+			v16 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+			this.Durations[i] = *v16
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
+	this := &MapProtoTypes{}
+	if r.Intn(10) != 0 {
+		v17 := r.Intn(10)
+		this.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
+		for i := 0; i < v17; i++ {
+			this.NullableTimestamp[int32(r.Int31())] = google_protobuf2.NewPopulatedTimestamp(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v18 := r.Intn(10)
+		this.Timestamp = make(map[int32]google_protobuf2.Timestamp)
+		for i := 0; i < v18; i++ {
+			this.Timestamp[int32(r.Int31())] = *google_protobuf2.NewPopulatedTimestamp(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v19 := r.Intn(10)
+		this.NullableDuration = make(map[int32]*google_protobuf1.Duration)
+		for i := 0; i < v19; i++ {
+			this.NullableDuration[int32(r.Int31())] = google_protobuf1.NewPopulatedDuration(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v20 := r.Intn(10)
+		this.Duration = make(map[int32]google_protobuf1.Duration)
+		for i := 0; i < v20; i++ {
+			this.Duration[int32(r.Int31())] = *google_protobuf1.NewPopulatedDuration(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
+	this := &MapStdTypes{}
+	if r.Intn(10) != 0 {
+		v21 := r.Intn(10)
+		this.NullableTimestamp = make(map[int32]*time.Time)
+		for i := 0; i < v21; i++ {
+			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v22 := r.Intn(10)
+		this.Timestamp = make(map[int32]time.Time)
+		for i := 0; i < v22; i++ {
+			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v23 := r.Intn(10)
+		this.NullableDuration = make(map[int32]*time.Duration)
+		for i := 0; i < v23; i++ {
+			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+		}
+	}
+	if r.Intn(10) != 0 {
+		v24 := r.Intn(10)
+		this.Duration = make(map[int32]time.Duration)
+		for i := 0; i < v24; i++ {
+			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
+	this := &OneofProtoTypes{}
+	oneofNumber_OneOfProtoTimes := []int32{1, 2}[r.Intn(2)]
+	switch oneofNumber_OneOfProtoTimes {
+	case 1:
+		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Timestamp(r, easy)
+	case 2:
+		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Duration(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOneofProtoTypes_Timestamp(r randyTypes, easy bool) *OneofProtoTypes_Timestamp {
+	this := &OneofProtoTypes_Timestamp{}
+	this.Timestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
+	return this
+}
+func NewPopulatedOneofProtoTypes_Duration(r randyTypes, easy bool) *OneofProtoTypes_Duration {
+	this := &OneofProtoTypes_Duration{}
+	this.Duration = google_protobuf1.NewPopulatedDuration(r, easy)
+	return this
+}
+func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
+	this := &OneofStdTypes{}
+	oneofNumber_OneOfStdTimes := []int32{1, 2}[r.Intn(2)]
+	switch oneofNumber_OneOfStdTimes {
+	case 1:
+		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Timestamp(r, easy)
+	case 2:
+		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedOneofStdTypes_Timestamp(r randyTypes, easy bool) *OneofStdTypes_Timestamp {
+	this := &OneofStdTypes_Timestamp{}
+	this.Timestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+	return this
+}
+func NewPopulatedOneofStdTypes_Duration(r randyTypes, easy bool) *OneofStdTypes_Duration {
+	this := &OneofStdTypes_Duration{}
+	this.Duration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
+	return this
+}
+
+type randyTypes interface {
+	Float32() float32
+	Float64() float64
+	Int63() int64
+	Int31() int32
+	Uint32() uint32
+	Intn(n int) int
+}
+
+func randUTF8RuneTypes(r randyTypes) rune {
+	ru := r.Intn(62)
+	if ru < 10 {
+		return rune(ru + 48)
+	} else if ru < 36 {
+		return rune(ru + 55)
+	}
+	return rune(ru + 61)
+}
+func randStringTypes(r randyTypes) string {
+	v25 := r.Intn(100)
+	tmps := make([]rune, v25)
+	for i := 0; i < v25; i++ {
+		tmps[i] = randUTF8RuneTypes(r)
+	}
+	return string(tmps)
+}
+func randUnrecognizedTypes(r randyTypes, maxFieldNumber int) (dAtA []byte) {
+	l := r.Intn(5)
+	for i := 0; i < l; i++ {
+		wire := r.Intn(4)
+		if wire == 3 {
+			wire = 5
+		}
+		fieldNumber := maxFieldNumber + r.Intn(100)
+		dAtA = randFieldTypes(dAtA, r, fieldNumber, wire)
+	}
+	return dAtA
+}
+func randFieldTypes(dAtA []byte, r randyTypes, fieldNumber int, wire int) []byte {
+	key := uint32(fieldNumber)<<3 | uint32(wire)
+	switch wire {
+	case 0:
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
+		v26 := r.Int63()
+		if r.Intn(2) == 0 {
+			v26 *= -1
+		}
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(v26))
+	case 1:
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	case 2:
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
+		ll := r.Intn(100)
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(ll))
+		for j := 0; j < ll; j++ {
+			dAtA = append(dAtA, byte(r.Intn(256)))
+		}
+	default:
+		dAtA = encodeVarintPopulateTypes(dAtA, uint64(key))
+		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
+	}
+	return dAtA
+}
+func encodeVarintPopulateTypes(dAtA []byte, v uint64) []byte {
+	for v >= 1<<7 {
+		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
+		v >>= 7
+	}
+	dAtA = append(dAtA, uint8(v))
+	return dAtA
+}
+func (m *KnownTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.Dur != nil {
+		l = m.Dur.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Ts != nil {
+		l = m.Ts.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Dbl != nil {
+		l = m.Dbl.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Flt != nil {
+		l = m.Flt.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.I64 != nil {
+		l = m.I64.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.U64 != nil {
+		l = m.U64.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.I32 != nil {
+		l = m.I32.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.U32 != nil {
+		l = m.U32.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Bool != nil {
+		l = m.Bool.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Str != nil {
+		l = m.Str.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.Bytes != nil {
+		l = m.Bytes.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+
+func (m *ProtoTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.NullableTimestamp != nil {
+		l = m.NullableTimestamp.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.NullableDuration != nil {
+		l = m.NullableDuration.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = m.Timestamp.Size()
+	n += 1 + l + sovTypes(uint64(l))
+	l = m.Duration.Size()
+	n += 1 + l + sovTypes(uint64(l))
+	return n
+}
+
+func (m *StdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.NullableTimestamp != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp)
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	if m.NullableDuration != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration)
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)
+	n += 1 + l + sovTypes(uint64(l))
+	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration)
+	n += 1 + l + sovTypes(uint64(l))
+	return n
+}
+
+func (m *RepProtoTypes) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NullableTimestamps) > 0 {
+		for _, e := range m.NullableTimestamps {
+			l = e.Size()
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.NullableDurations) > 0 {
+		for _, e := range m.NullableDurations {
+			l = e.Size()
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.Timestamps) > 0 {
+		for _, e := range m.Timestamps {
+			l = e.Size()
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.Durations) > 0 {
+		for _, e := range m.Durations {
+			l = e.Size()
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *RepStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NullableTimestamps) > 0 {
+		for _, e := range m.NullableTimestamps {
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(*e)
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.NullableDurations) > 0 {
+		for _, e := range m.NullableDurations {
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(*e)
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.Timestamps) > 0 {
+		for _, e := range m.Timestamps {
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(e)
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if len(m.Durations) > 0 {
+		for _, e := range m.Durations {
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(e)
+			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *MapProtoTypes) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NullableTimestamp) > 0 {
+		for k, v := range m.NullableTimestamp {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+				l += 1 + sovTypes(uint64(l))
+			}
+			mapEntrySize := 1 + sovTypes(uint64(k)) + l
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Timestamp) > 0 {
+		for k, v := range m.Timestamp {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.NullableDuration) > 0 {
+		for k, v := range m.NullableDuration {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.Size()
+				l += 1 + sovTypes(uint64(l))
+			}
+			mapEntrySize := 1 + sovTypes(uint64(k)) + l
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Duration) > 0 {
+		for k, v := range m.Duration {
+			_ = k
+			_ = v
+			l = v.Size()
+			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *MapStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if len(m.NullableTimestamp) > 0 {
+		for k, v := range m.NullableTimestamp {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = github_com_gogo_protobuf_types.SizeOfStdTime(*v)
+				l += 1 + sovTypes(uint64(l))
+			}
+			mapEntrySize := 1 + sovTypes(uint64(k)) + l
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Timestamp) > 0 {
+		for k, v := range m.Timestamp {
+			_ = k
+			_ = v
+			l = github_com_gogo_protobuf_types.SizeOfStdTime(v)
+			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.NullableDuration) > 0 {
+		for k, v := range m.NullableDuration {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
+				l += 1 + sovTypes(uint64(l))
+			}
+			mapEntrySize := 1 + sovTypes(uint64(k)) + l
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	if len(m.Duration) > 0 {
+		for k, v := range m.Duration {
+			_ = k
+			_ = v
+			l = github_com_gogo_protobuf_types.SizeOfStdDuration(v)
+			mapEntrySize := 1 + sovTypes(uint64(k)) + 1 + l + sovTypes(uint64(l))
+			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
+		}
+	}
+	return n
+}
+
+func (m *OneofProtoTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.OneOfProtoTimes != nil {
+		n += m.OneOfProtoTimes.Size()
+	}
+	return n
+}
+
+func (m *OneofProtoTypes_Timestamp) Size() (n int) {
+	var l int
+	_ = l
+	if m.Timestamp != nil {
+		l = m.Timestamp.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+func (m *OneofProtoTypes_Duration) Size() (n int) {
+	var l int
+	_ = l
+	if m.Duration != nil {
+		l = m.Duration.Size()
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+func (m *OneofStdTypes) Size() (n int) {
+	var l int
+	_ = l
+	if m.OneOfStdTimes != nil {
+		n += m.OneOfStdTimes.Size()
+	}
+	return n
+}
+
+func (m *OneofStdTypes_Timestamp) Size() (n int) {
+	var l int
+	_ = l
+	if m.Timestamp != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.Timestamp)
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+func (m *OneofStdTypes_Duration) Size() (n int) {
+	var l int
+	_ = l
+	if m.Duration != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration)
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+
+func sovTypes(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozTypes(x uint64) (n int) {
+	return sovTypes(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3418,7 +3418,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3446,7 +3446,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3459,7 +3459,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3479,7 +3479,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3492,7 +3492,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3512,7 +3512,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3525,7 +3525,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3545,7 +3545,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3558,7 +3558,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3578,7 +3578,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3591,7 +3591,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3611,7 +3611,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3624,7 +3624,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3644,7 +3644,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3657,7 +3657,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3677,7 +3677,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3690,7 +3690,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3710,7 +3710,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3723,7 +3723,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3743,7 +3743,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3756,7 +3756,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3776,7 +3776,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3789,7 +3789,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3804,12 +3804,12 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -3831,7 +3831,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -3859,7 +3859,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3872,7 +3872,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3892,7 +3892,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3905,7 +3905,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3925,7 +3925,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3938,7 +3938,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3955,7 +3955,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -3968,7 +3968,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -3980,12 +3980,12 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4007,7 +4007,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4035,7 +4035,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4048,7 +4048,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4068,7 +4068,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4081,7 +4081,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4101,7 +4101,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4114,7 +4114,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4131,7 +4131,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4144,7 +4144,7 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4156,12 +4156,12 @@ func (m *StdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4183,7 +4183,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4211,7 +4211,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4224,7 +4224,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4242,7 +4242,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4255,7 +4255,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4273,7 +4273,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4286,7 +4286,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4304,7 +4304,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4317,7 +4317,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4330,12 +4330,12 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4357,7 +4357,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4385,7 +4385,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4398,7 +4398,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4416,7 +4416,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4429,7 +4429,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4447,7 +4447,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4460,7 +4460,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4478,7 +4478,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4491,7 +4491,7 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4504,12 +4504,12 @@ func (m *RepStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -4531,7 +4531,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -4559,7 +4559,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4572,7 +4572,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4588,7 +4588,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4604,7 +4604,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4620,7 +4620,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4633,11 +4633,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4649,12 +4649,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4671,7 +4671,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4684,7 +4684,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4700,7 +4700,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4716,7 +4716,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4732,7 +4732,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4745,11 +4745,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4761,12 +4761,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4783,7 +4783,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4796,7 +4796,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4812,7 +4812,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4828,7 +4828,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4844,7 +4844,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4857,11 +4857,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4873,12 +4873,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -4895,7 +4895,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -4908,7 +4908,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -4924,7 +4924,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -4940,7 +4940,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4956,7 +4956,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -4969,11 +4969,11 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -4985,12 +4985,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -5002,12 +5002,12 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -5029,7 +5029,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -5057,7 +5057,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5070,7 +5070,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5086,7 +5086,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -5102,7 +5102,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5118,7 +5118,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5131,11 +5131,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -5146,12 +5146,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -5168,7 +5168,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5181,7 +5181,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5197,7 +5197,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -5213,7 +5213,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5229,7 +5229,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5242,11 +5242,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -5257,12 +5257,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -5279,7 +5279,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5292,7 +5292,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5308,7 +5308,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -5324,7 +5324,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5340,7 +5340,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5353,11 +5353,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -5368,12 +5368,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -5390,7 +5390,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5403,7 +5403,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5419,7 +5419,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowTypesUnsafe
+						return ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -5435,7 +5435,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5451,7 +5451,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowTypesUnsafe
+							return ErrIntOverflowTypes
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -5464,11 +5464,11 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -5479,12 +5479,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+					skippy, err := skipTypes(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthTypesUnsafe
+						return ErrInvalidLengthTypes
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -5496,12 +5496,12 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -5523,7 +5523,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -5551,7 +5551,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5564,7 +5564,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5583,7 +5583,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5596,7 +5596,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5610,12 +5610,12 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -5637,7 +5637,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowTypesUnsafe
+				return ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -5665,7 +5665,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5678,7 +5678,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5697,7 +5697,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowTypesUnsafe
+					return ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -5710,7 +5710,7 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -5724,12 +5724,12 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipTypesUnsafe(dAtA[iNdEx:])
+			skippy, err := skipTypes(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthTypesUnsafe
+				return ErrInvalidLengthTypes
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -5743,14 +5743,14 @@ func (m *OneofStdTypes) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipTypesUnsafe(dAtA []byte) (n int, err error) {
+func skipTypes(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowTypesUnsafe
+				return 0, ErrIntOverflowTypes
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -5767,7 +5767,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTypesUnsafe
+					return 0, ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -5785,7 +5785,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowTypesUnsafe
+					return 0, ErrIntOverflowTypes
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -5799,7 +5799,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthTypesUnsafe
+				return 0, ErrInvalidLengthTypes
 			}
 			return iNdEx, nil
 		case 3:
@@ -5808,7 +5808,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowTypesUnsafe
+						return 0, ErrIntOverflowTypes
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -5824,7 +5824,7 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipTypesUnsafe(dAtA[start:])
+				next, err := skipTypes(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -5844,8 +5844,8 @@ func skipTypesUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthTypesUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowTypesUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthTypes = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowTypes   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeboth/types.proto", fileDescriptorTypes) }

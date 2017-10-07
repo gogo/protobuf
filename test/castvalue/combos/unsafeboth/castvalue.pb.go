@@ -623,6 +623,132 @@ func valueToGoStringCastvalue(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+func (m *Castaway) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.CastMapValueMessage) > 0 {
+		for k := range m.CastMapValueMessage {
+			dAtA[i] = 0xa
+			i++
+			v := m.CastMapValueMessage[k]
+			msgSize := 0
+			if ((*Wilson)(&v)) != nil {
+				msgSize = ((*Wilson)(&v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
+			}
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
+			i = encodeVarintCastvalue(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintCastvalue(dAtA, i, uint64(k))
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintCastvalue(dAtA, i, uint64(((*Wilson)(&v)).Size()))
+			n1, err := ((*Wilson)(&v)).MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n1
+		}
+	}
+	if len(m.CastMapValueMessageNullable) > 0 {
+		for k := range m.CastMapValueMessageNullable {
+			dAtA[i] = 0x12
+			i++
+			v := m.CastMapValueMessageNullable[k]
+			msgSize := 0
+			if ((*Wilson)(v)) != nil {
+				msgSize = ((*Wilson)(v)).Size()
+				msgSize += 1 + sovCastvalue(uint64(msgSize))
+			}
+			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
+			i = encodeVarintCastvalue(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintCastvalue(dAtA, i, uint64(k))
+			if ((*Wilson)(v)) != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintCastvalue(dAtA, i, uint64(((*Wilson)(v)).Size()))
+				n2, err := ((*Wilson)(v)).MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n2
+			}
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Wilson) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Wilson) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Int64 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintCastvalue(dAtA, i, uint64(*m.Int64))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Castvalue(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Castvalue(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintCastvalue(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
 func NewPopulatedCastaway(r randyCastvalue, easy bool) *Castaway {
 	this := &Castaway{}
 	if r.Intn(10) != 0 {
@@ -839,132 +965,6 @@ func valueToStringCastvalue(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *Castaway) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.CastMapValueMessage) > 0 {
-		for k := range m.CastMapValueMessage {
-			dAtA[i] = 0xa
-			i++
-			v := m.CastMapValueMessage[k]
-			msgSize := 0
-			if ((*Wilson)(&v)) != nil {
-				msgSize = ((*Wilson)(&v)).Size()
-				msgSize += 1 + sovCastvalue(uint64(msgSize))
-			}
-			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
-			i = encodeVarintCastvalue(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintCastvalue(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintCastvalue(dAtA, i, uint64(((*Wilson)(&v)).Size()))
-			n1, err := ((*Wilson)(&v)).MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n1
-		}
-	}
-	if len(m.CastMapValueMessageNullable) > 0 {
-		for k := range m.CastMapValueMessageNullable {
-			dAtA[i] = 0x12
-			i++
-			v := m.CastMapValueMessageNullable[k]
-			msgSize := 0
-			if ((*Wilson)(v)) != nil {
-				msgSize = ((*Wilson)(v)).Size()
-				msgSize += 1 + sovCastvalue(uint64(msgSize))
-			}
-			mapSize := 1 + sovCastvalue(uint64(k)) + msgSize
-			i = encodeVarintCastvalue(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintCastvalue(dAtA, i, uint64(k))
-			if ((*Wilson)(v)) != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintCastvalue(dAtA, i, uint64(((*Wilson)(v)).Size()))
-				n2, err := ((*Wilson)(v)).MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
-				}
-				i += n2
-			}
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Wilson) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Wilson) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Int64 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintCastvalue(dAtA, i, uint64(*m.Int64))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func encodeFixed64Castvalue(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Castvalue(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintCastvalue(dAtA []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return offset + 1
-}
 func (m *Castaway) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -973,7 +973,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowCastvalueUnsafe
+				return ErrIntOverflowCastvalue
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -1001,7 +1001,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
+					return ErrIntOverflowCastvalue
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1014,7 +1014,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
+				return ErrInvalidLengthCastvalue
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -1030,7 +1030,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCastvalueUnsafe
+						return ErrIntOverflowCastvalue
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1046,7 +1046,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCastvalueUnsafe
+							return ErrIntOverflowCastvalue
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1062,7 +1062,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCastvalueUnsafe
+							return ErrIntOverflowCastvalue
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1075,11 +1075,11 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -1091,12 +1091,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCastvalue(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -1113,7 +1113,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
+					return ErrIntOverflowCastvalue
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1126,7 +1126,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
+				return ErrInvalidLengthCastvalue
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -1142,7 +1142,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCastvalueUnsafe
+						return ErrIntOverflowCastvalue
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1158,7 +1158,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCastvalueUnsafe
+							return ErrIntOverflowCastvalue
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1174,7 +1174,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCastvalueUnsafe
+							return ErrIntOverflowCastvalue
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1187,11 +1187,11 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -1203,12 +1203,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCastvalue(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCastvalueUnsafe
+						return ErrInvalidLengthCastvalue
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -1220,12 +1220,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+			skippy, err := skipCastvalue(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
+				return ErrInvalidLengthCastvalue
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1248,7 +1248,7 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowCastvalueUnsafe
+				return ErrIntOverflowCastvalue
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -1276,7 +1276,7 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCastvalueUnsafe
+					return ErrIntOverflowCastvalue
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1291,12 +1291,12 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			m.Int64 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipCastvalueUnsafe(dAtA[iNdEx:])
+			skippy, err := skipCastvalue(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthCastvalueUnsafe
+				return ErrInvalidLengthCastvalue
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -1311,14 +1311,14 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
+func skipCastvalue(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowCastvalueUnsafe
+				return 0, ErrIntOverflowCastvalue
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -1335,7 +1335,7 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowCastvalueUnsafe
+					return 0, ErrIntOverflowCastvalue
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -1353,7 +1353,7 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowCastvalueUnsafe
+					return 0, ErrIntOverflowCastvalue
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -1367,7 +1367,7 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthCastvalueUnsafe
+				return 0, ErrInvalidLengthCastvalue
 			}
 			return iNdEx, nil
 		case 3:
@@ -1376,7 +1376,7 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowCastvalueUnsafe
+						return 0, ErrIntOverflowCastvalue
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -1392,7 +1392,7 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipCastvalueUnsafe(dAtA[start:])
+				next, err := skipCastvalue(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -1412,8 +1412,8 @@ func skipCastvalueUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthCastvalueUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowCastvalueUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthCastvalue = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowCastvalue   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeboth/castvalue.proto", fileDescriptorCastvalue) }

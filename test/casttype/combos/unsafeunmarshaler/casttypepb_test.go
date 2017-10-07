@@ -16,9 +16,9 @@ package casttype
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
-import unsafe "unsafe"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
+import unsafe "unsafe"
 import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
@@ -31,10 +31,6 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func TestCastawayProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedCastaway(popr, false)
@@ -109,10 +105,6 @@ func BenchmarkCastawayProtoUnmarshal(b *testing.B) {
 }
 
 func TestWilsonProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedWilson(popr, false)

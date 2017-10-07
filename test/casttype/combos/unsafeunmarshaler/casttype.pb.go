@@ -31,6 +31,7 @@ import reflect "reflect"
 import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import io "io"
+import encoding_binary "encoding/binary"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -1354,7 +1355,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowCasttypeUnsafe
+				return ErrIntOverflowCasttype
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -1382,7 +1383,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1402,7 +1403,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			m.Int32 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1421,7 +1422,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1441,7 +1442,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			m.MyUint64 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1461,11 +1462,8 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			v2 := github_com_gogo_protobuf_test_casttype.MyFloat32Type(math.Float32frombits(v))
 			m.MyFloat32Ptr = &v2
 		case 6:
@@ -1476,11 +1474,8 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			v = uint32(dAtA[iNdEx-4])
-			v |= uint32(dAtA[iNdEx-3]) << 8
-			v |= uint32(dAtA[iNdEx-2]) << 16
-			v |= uint32(dAtA[iNdEx-1]) << 24
 			m.MyFloat32 = github_com_gogo_protobuf_test_casttype.MyFloat32Type(math.Float32frombits(v))
 		case 7:
 			if wireType != 1 {
@@ -1490,15 +1485,8 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			v2 := github_com_gogo_protobuf_test_casttype.MyFloat64Type(math.Float64frombits(v))
 			m.MyFloat64Ptr = &v2
 		case 8:
@@ -1509,15 +1497,8 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			v = uint64(dAtA[iNdEx-8])
-			v |= uint64(dAtA[iNdEx-7]) << 8
-			v |= uint64(dAtA[iNdEx-6]) << 16
-			v |= uint64(dAtA[iNdEx-5]) << 24
-			v |= uint64(dAtA[iNdEx-4]) << 32
-			v |= uint64(dAtA[iNdEx-3]) << 40
-			v |= uint64(dAtA[iNdEx-2]) << 48
-			v |= uint64(dAtA[iNdEx-1]) << 56
 			m.MyFloat64 = github_com_gogo_protobuf_test_casttype.MyFloat64Type(math.Float64frombits(v))
 		case 9:
 			if wireType != 2 {
@@ -1526,7 +1507,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1539,7 +1520,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -1557,7 +1538,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1570,7 +1551,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -1586,7 +1567,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1603,7 +1584,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1616,7 +1597,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthCasttypeUnsafe
+					return ErrInvalidLengthCasttype
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -1626,7 +1607,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1650,7 +1631,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1663,7 +1644,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -1679,7 +1660,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1696,7 +1677,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1710,7 +1691,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -1721,7 +1702,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1735,12 +1716,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCasttype(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -1757,7 +1738,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1770,7 +1751,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -1786,7 +1767,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1803,7 +1784,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var stringLenmapkey uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1817,7 +1798,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 					intStringLenmapkey := int(stringLenmapkey)
 					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
 					if postStringIndexmapkey > l {
@@ -1828,7 +1809,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				} else if fieldNum == 2 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1842,12 +1823,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					}
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCasttype(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -1864,7 +1845,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1877,7 +1858,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -1893,7 +1874,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -1909,7 +1890,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1925,7 +1906,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -1938,11 +1919,11 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -1954,12 +1935,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCasttype(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -1976,7 +1957,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -1989,7 +1970,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -2005,7 +1986,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				var wire uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowCasttypeUnsafe
+						return ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -2021,7 +2002,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				if fieldNum == 1 {
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -2037,7 +2018,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					var mapmsglen int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowCasttypeUnsafe
+							return ErrIntOverflowCasttype
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -2050,11 +2031,11 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						}
 					}
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					postmsgIndex := iNdEx + mapmsglen
 					if mapmsglen < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
@@ -2066,12 +2047,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					iNdEx = postmsgIndex
 				} else {
 					iNdEx = entryPreIndex
-					skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+					skippy, err := skipCasttype(dAtA[iNdEx:])
 					if err != nil {
 						return err
 					}
 					if skippy < 0 {
-						return ErrInvalidLengthCasttypeUnsafe
+						return ErrInvalidLengthCasttype
 					}
 					if (iNdEx + skippy) > postIndex {
 						return io.ErrUnexpectedEOF
@@ -2088,7 +2069,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2102,7 +2083,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -2113,12 +2094,12 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+			skippy, err := skipCasttype(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -2141,7 +2122,7 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowCasttypeUnsafe
+				return ErrIntOverflowCasttype
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -2169,7 +2150,7 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowCasttypeUnsafe
+					return ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -2184,12 +2165,12 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			m.Int64 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipCasttypeUnsafe(dAtA[iNdEx:])
+			skippy, err := skipCasttype(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthCasttypeUnsafe
+				return ErrInvalidLengthCasttype
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -2204,14 +2185,14 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
+func skipCasttype(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowCasttypeUnsafe
+				return 0, ErrIntOverflowCasttype
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -2228,7 +2209,7 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowCasttypeUnsafe
+					return 0, ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -2246,7 +2227,7 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowCasttypeUnsafe
+					return 0, ErrIntOverflowCasttype
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -2260,7 +2241,7 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthCasttypeUnsafe
+				return 0, ErrInvalidLengthCasttype
 			}
 			return iNdEx, nil
 		case 3:
@@ -2269,7 +2250,7 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowCasttypeUnsafe
+						return 0, ErrIntOverflowCasttype
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -2285,7 +2266,7 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipCasttypeUnsafe(dAtA[start:])
+				next, err := skipCasttype(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -2305,8 +2286,8 @@ func skipCasttypeUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthCasttypeUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowCasttypeUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthCasttype = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowCasttype   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeunmarshaler/casttype.proto", fileDescriptorCasttype) }

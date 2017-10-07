@@ -16,6 +16,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -76,7 +78,8 @@ func (m *M) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x11
 			i++
-			i = encodeFixed64Nopackage(dAtA, i, uint64(math.Float64bits(float64(v))))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			i += 8
 		}
 	}
 	return i, nil
@@ -245,15 +248,8 @@ func (m *M) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex

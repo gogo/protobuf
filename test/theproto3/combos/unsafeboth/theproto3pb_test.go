@@ -23,9 +23,9 @@ package theproto3
 import testing "testing"
 import math_rand "math/rand"
 import time "time"
-import unsafe "unsafe"
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
+import unsafe "unsafe"
 import fmt "fmt"
 import go_parser "go/parser"
 import proto "github.com/gogo/protobuf/proto"
@@ -39,10 +39,6 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func TestMessageProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, false)
@@ -77,10 +73,6 @@ func TestMessageProto(t *testing.T) {
 }
 
 func TestMessageMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, false)
@@ -149,10 +141,6 @@ func BenchmarkMessageProtoUnmarshal(b *testing.B) {
 }
 
 func TestNestedProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, false)
@@ -187,10 +175,6 @@ func TestNestedProto(t *testing.T) {
 }
 
 func TestNestedMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, false)
@@ -259,10 +243,6 @@ func BenchmarkNestedProtoUnmarshal(b *testing.B) {
 }
 
 func TestAllMapsProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, false)
@@ -297,10 +277,6 @@ func TestAllMapsProto(t *testing.T) {
 }
 
 func TestAllMapsMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, false)
@@ -369,10 +345,6 @@ func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
 }
 
 func TestAllMapsOrderedProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, false)
@@ -407,10 +379,6 @@ func TestAllMapsOrderedProto(t *testing.T) {
 }
 
 func TestAllMapsOrderedMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, false)
@@ -479,10 +447,6 @@ func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
 }
 
 func TestMessageWithMapProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, false)
@@ -517,10 +481,6 @@ func TestMessageWithMapProto(t *testing.T) {
 }
 
 func TestMessageWithMapMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, false)
@@ -589,10 +549,6 @@ func BenchmarkMessageWithMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestFloatingPointProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, false)
@@ -627,10 +583,6 @@ func TestFloatingPointProto(t *testing.T) {
 }
 
 func TestFloatingPointMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, false)
@@ -699,10 +651,6 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 }
 
 func TestUint128PairProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, false)
@@ -737,10 +685,6 @@ func TestUint128PairProto(t *testing.T) {
 }
 
 func TestUint128PairMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, false)
@@ -809,10 +753,6 @@ func BenchmarkUint128PairProtoUnmarshal(b *testing.B) {
 }
 
 func TestContainsNestedMapProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, false)
@@ -847,10 +787,6 @@ func TestContainsNestedMapProto(t *testing.T) {
 }
 
 func TestContainsNestedMapMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, false)
@@ -919,10 +855,6 @@ func BenchmarkContainsNestedMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestContainsNestedMap_NestedMapProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
@@ -957,10 +889,6 @@ func TestContainsNestedMap_NestedMapProto(t *testing.T) {
 }
 
 func TestContainsNestedMap_NestedMapMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
@@ -1029,10 +957,6 @@ func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
 }
 
 func TestNotPackedProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, false)
@@ -1067,10 +991,6 @@ func TestNotPackedProto(t *testing.T) {
 }
 
 func TestNotPackedMarshalTo(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, false)

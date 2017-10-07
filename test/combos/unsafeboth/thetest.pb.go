@@ -97,7 +97,7 @@ import strings "strings"
 import sort "sort"
 import reflect "reflect"
 
-import unsafe "unsafe"
+import encoding_binary "encoding/binary"
 
 import io "io"
 
@@ -20315,6 +20315,4009 @@ func extensionToGoStringThetest(m github_com_gogo_protobuf_proto.Message) string
 	s += strings.Join(ss, ",") + "})"
 	return s
 }
+func (m *NidOptNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x9
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
+	dAtA[i] = 0x15
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
+	dAtA[i] = 0x18
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field3))
+	dAtA[i] = 0x20
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field4))
+	dAtA[i] = 0x28
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field5))
+	dAtA[i] = 0x30
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field6))
+	dAtA[i] = 0x38
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	dAtA[i] = 0x40
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
+	dAtA[i] = 0x4d
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	i += 4
+	dAtA[i] = 0x55
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	i += 4
+	dAtA[i] = 0x59
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	i += 8
+	dAtA[i] = 0x61
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	i += 8
+	dAtA[i] = 0x68
+	i++
+	if m.Field13 {
+		dAtA[i] = 1
+	} else {
+		dAtA[i] = 0
+	}
+	i++
+	dAtA[i] = 0x72
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(len(m.Field14)))
+	i += copy(dAtA[i:], m.Field14)
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+	}
+	if m.Field8 != nil {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
+	}
+	if m.Field9 != nil {
+		dAtA[i] = 0x4d
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		i += 4
+	}
+	if m.Field10 != nil {
+		dAtA[i] = 0x55
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		i += 4
+	}
+	if m.Field11 != nil {
+		dAtA[i] = 0x59
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		i += 8
+	}
+	if m.Field12 != nil {
+		dAtA[i] = 0x61
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		i += 8
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.Field13 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
+	}
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x9
+			i++
+			f1 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f1))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x15
+			i++
+			f2 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f2))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, num := range m.Field3 {
+			dAtA[i] = 0x18
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field4) > 0 {
+		for _, num := range m.Field4 {
+			dAtA[i] = 0x20
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field5) > 0 {
+		for _, num := range m.Field5 {
+			dAtA[i] = 0x28
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field6) > 0 {
+		for _, num := range m.Field6 {
+			dAtA[i] = 0x30
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			dAtA[i] = 0x38
+			i++
+			x3 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x3 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x3)&0x7f | 0x80)
+				x3 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x3)
+			i++
+		}
+	}
+	if len(m.Field8) > 0 {
+		for _, num := range m.Field8 {
+			dAtA[i] = 0x40
+			i++
+			x4 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x4 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x4)&0x7f | 0x80)
+				x4 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x4)
+			i++
+		}
+	}
+	if len(m.Field9) > 0 {
+		for _, num := range m.Field9 {
+			dAtA[i] = 0x4d
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field10) > 0 {
+		for _, num := range m.Field10 {
+			dAtA[i] = 0x55
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field11) > 0 {
+		for _, num := range m.Field11 {
+			dAtA[i] = 0x59
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field12) > 0 {
+		for _, num := range m.Field12 {
+			dAtA[i] = 0x61
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field13) > 0 {
+		for _, b := range m.Field13 {
+			dAtA[i] = 0x68
+			i++
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.Field14) > 0 {
+		for _, s := range m.Field14 {
+			dAtA[i] = 0x72
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if len(m.Field15) > 0 {
+		for _, b := range m.Field15 {
+			dAtA[i] = 0x7a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x9
+			i++
+			f5 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f5))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x15
+			i++
+			f6 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f6))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, num := range m.Field3 {
+			dAtA[i] = 0x18
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field4) > 0 {
+		for _, num := range m.Field4 {
+			dAtA[i] = 0x20
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field5) > 0 {
+		for _, num := range m.Field5 {
+			dAtA[i] = 0x28
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field6) > 0 {
+		for _, num := range m.Field6 {
+			dAtA[i] = 0x30
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			dAtA[i] = 0x38
+			i++
+			x7 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x7 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x7)&0x7f | 0x80)
+				x7 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x7)
+			i++
+		}
+	}
+	if len(m.Field8) > 0 {
+		for _, num := range m.Field8 {
+			dAtA[i] = 0x40
+			i++
+			x8 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x8 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x8)&0x7f | 0x80)
+				x8 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x8)
+			i++
+		}
+	}
+	if len(m.Field9) > 0 {
+		for _, num := range m.Field9 {
+			dAtA[i] = 0x4d
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field10) > 0 {
+		for _, num := range m.Field10 {
+			dAtA[i] = 0x55
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field11) > 0 {
+		for _, num := range m.Field11 {
+			dAtA[i] = 0x59
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field12) > 0 {
+		for _, num := range m.Field12 {
+			dAtA[i] = 0x61
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field13) > 0 {
+		for _, b := range m.Field13 {
+			dAtA[i] = 0x68
+			i++
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.Field14) > 0 {
+		for _, s := range m.Field14 {
+			dAtA[i] = 0x72
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if len(m.Field15) > 0 {
+		for _, b := range m.Field15 {
+			dAtA[i] = 0x7a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepPackedNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
+		for _, num := range m.Field1 {
+			f9 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f9))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
+		for _, num := range m.Field2 {
+			f10 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f10))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		dAtA12 := make([]byte, len(m.Field3)*10)
+		var j11 int
+		for _, num1 := range m.Field3 {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA12[j11] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j11++
+			}
+			dAtA12[j11] = uint8(num)
+			j11++
+		}
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j11))
+		i += copy(dAtA[i:], dAtA12[:j11])
+	}
+	if len(m.Field4) > 0 {
+		dAtA14 := make([]byte, len(m.Field4)*10)
+		var j13 int
+		for _, num1 := range m.Field4 {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA14[j13] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j13++
+			}
+			dAtA14[j13] = uint8(num)
+			j13++
+		}
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j13))
+		i += copy(dAtA[i:], dAtA14[:j13])
+	}
+	if len(m.Field5) > 0 {
+		dAtA16 := make([]byte, len(m.Field5)*10)
+		var j15 int
+		for _, num := range m.Field5 {
+			for num >= 1<<7 {
+				dAtA16[j15] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j15++
+			}
+			dAtA16[j15] = uint8(num)
+			j15++
+		}
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j15))
+		i += copy(dAtA[i:], dAtA16[:j15])
+	}
+	if len(m.Field6) > 0 {
+		dAtA18 := make([]byte, len(m.Field6)*10)
+		var j17 int
+		for _, num := range m.Field6 {
+			for num >= 1<<7 {
+				dAtA18[j17] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j17++
+			}
+			dAtA18[j17] = uint8(num)
+			j17++
+		}
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j17))
+		i += copy(dAtA[i:], dAtA18[:j17])
+	}
+	if len(m.Field7) > 0 {
+		dAtA19 := make([]byte, len(m.Field7)*5)
+		var j20 int
+		for _, num := range m.Field7 {
+			x21 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x21 >= 1<<7 {
+				dAtA19[j20] = uint8(uint64(x21)&0x7f | 0x80)
+				j20++
+				x21 >>= 7
+			}
+			dAtA19[j20] = uint8(x21)
+			j20++
+		}
+		dAtA[i] = 0x3a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j20))
+		i += copy(dAtA[i:], dAtA19[:j20])
+	}
+	if len(m.Field8) > 0 {
+		var j22 int
+		dAtA24 := make([]byte, len(m.Field8)*10)
+		for _, num := range m.Field8 {
+			x23 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x23 >= 1<<7 {
+				dAtA24[j22] = uint8(uint64(x23)&0x7f | 0x80)
+				j22++
+				x23 >>= 7
+			}
+			dAtA24[j22] = uint8(x23)
+			j22++
+		}
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j22))
+		i += copy(dAtA[i:], dAtA24[:j22])
+	}
+	if len(m.Field9) > 0 {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
+		for _, num := range m.Field9 {
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field10) > 0 {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
+		for _, num := range m.Field10 {
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field11) > 0 {
+		dAtA[i] = 0x5a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
+		for _, num := range m.Field11 {
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field12) > 0 {
+		dAtA[i] = 0x62
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
+		for _, num := range m.Field12 {
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field13) > 0 {
+		dAtA[i] = 0x6a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field13)))
+		for _, b := range m.Field13 {
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepPackedNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
+		for _, num := range m.Field1 {
+			f25 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f25))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
+		for _, num := range m.Field2 {
+			f26 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f26))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		dAtA28 := make([]byte, len(m.Field3)*10)
+		var j27 int
+		for _, num1 := range m.Field3 {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA28[j27] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j27++
+			}
+			dAtA28[j27] = uint8(num)
+			j27++
+		}
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j27))
+		i += copy(dAtA[i:], dAtA28[:j27])
+	}
+	if len(m.Field4) > 0 {
+		dAtA30 := make([]byte, len(m.Field4)*10)
+		var j29 int
+		for _, num1 := range m.Field4 {
+			num := uint64(num1)
+			for num >= 1<<7 {
+				dAtA30[j29] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j29++
+			}
+			dAtA30[j29] = uint8(num)
+			j29++
+		}
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j29))
+		i += copy(dAtA[i:], dAtA30[:j29])
+	}
+	if len(m.Field5) > 0 {
+		dAtA32 := make([]byte, len(m.Field5)*10)
+		var j31 int
+		for _, num := range m.Field5 {
+			for num >= 1<<7 {
+				dAtA32[j31] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j31++
+			}
+			dAtA32[j31] = uint8(num)
+			j31++
+		}
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j31))
+		i += copy(dAtA[i:], dAtA32[:j31])
+	}
+	if len(m.Field6) > 0 {
+		dAtA34 := make([]byte, len(m.Field6)*10)
+		var j33 int
+		for _, num := range m.Field6 {
+			for num >= 1<<7 {
+				dAtA34[j33] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j33++
+			}
+			dAtA34[j33] = uint8(num)
+			j33++
+		}
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j33))
+		i += copy(dAtA[i:], dAtA34[:j33])
+	}
+	if len(m.Field7) > 0 {
+		dAtA35 := make([]byte, len(m.Field7)*5)
+		var j36 int
+		for _, num := range m.Field7 {
+			x37 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x37 >= 1<<7 {
+				dAtA35[j36] = uint8(uint64(x37)&0x7f | 0x80)
+				j36++
+				x37 >>= 7
+			}
+			dAtA35[j36] = uint8(x37)
+			j36++
+		}
+		dAtA[i] = 0x3a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j36))
+		i += copy(dAtA[i:], dAtA35[:j36])
+	}
+	if len(m.Field8) > 0 {
+		var j38 int
+		dAtA40 := make([]byte, len(m.Field8)*10)
+		for _, num := range m.Field8 {
+			x39 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x39 >= 1<<7 {
+				dAtA40[j38] = uint8(uint64(x39)&0x7f | 0x80)
+				j38++
+				x39 >>= 7
+			}
+			dAtA40[j38] = uint8(x39)
+			j38++
+		}
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(j38))
+		i += copy(dAtA[i:], dAtA40[:j38])
+	}
+	if len(m.Field9) > 0 {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
+		for _, num := range m.Field9 {
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field10) > 0 {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
+		for _, num := range m.Field10 {
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.Field11) > 0 {
+		dAtA[i] = 0x5a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
+		for _, num := range m.Field11 {
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field12) > 0 {
+		dAtA[i] = 0x62
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
+		for _, num := range m.Field12 {
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.Field13) > 0 {
+		dAtA[i] = 0x6a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field13)))
+		for _, b := range m.Field13 {
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidOptStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x9
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	i += 8
+	dAtA[i] = 0x15
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	i += 4
+	dAtA[i] = 0x1a
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
+	n41, err := m.Field3.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n41
+	dAtA[i] = 0x22
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
+	n42, err := m.Field4.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n42
+	dAtA[i] = 0x30
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field6))
+	dAtA[i] = 0x38
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
+	dAtA[i] = 0x42
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
+	n43, err := m.Field8.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n43
+	dAtA[i] = 0x68
+	i++
+	if m.Field13 {
+		dAtA[i] = 1
+	} else {
+		dAtA[i] = 0
+	}
+	i++
+	dAtA[i] = 0x72
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(len(m.Field14)))
+	i += copy(dAtA[i:], m.Field14)
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
+		n44, err := m.Field3.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n44
+	}
+	if m.Field4 != nil {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
+		n45, err := m.Field4.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n45
+	}
+	if m.Field6 != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+	}
+	if m.Field8 != nil {
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
+		n46, err := m.Field8.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n46
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.Field13 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
+	}
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x9
+			i++
+			f47 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f47))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x15
+			i++
+			f48 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f48))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, msg := range m.Field3 {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field4) > 0 {
+		for _, msg := range m.Field4 {
+			dAtA[i] = 0x22
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field6) > 0 {
+		for _, num := range m.Field6 {
+			dAtA[i] = 0x30
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			dAtA[i] = 0x38
+			i++
+			x49 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x49 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x49)&0x7f | 0x80)
+				x49 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x49)
+			i++
+		}
+	}
+	if len(m.Field8) > 0 {
+		for _, msg := range m.Field8 {
+			dAtA[i] = 0x42
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field13) > 0 {
+		for _, b := range m.Field13 {
+			dAtA[i] = 0x68
+			i++
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.Field14) > 0 {
+		for _, s := range m.Field14 {
+			dAtA[i] = 0x72
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if len(m.Field15) > 0 {
+		for _, b := range m.Field15 {
+			dAtA[i] = 0x7a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x9
+			i++
+			f50 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f50))
+			i += 8
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x15
+			i++
+			f51 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f51))
+			i += 4
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, msg := range m.Field3 {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field4) > 0 {
+		for _, msg := range m.Field4 {
+			dAtA[i] = 0x22
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field6) > 0 {
+		for _, num := range m.Field6 {
+			dAtA[i] = 0x30
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field7) > 0 {
+		for _, num := range m.Field7 {
+			dAtA[i] = 0x38
+			i++
+			x52 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x52 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x52)&0x7f | 0x80)
+				x52 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x52)
+			i++
+		}
+	}
+	if len(m.Field8) > 0 {
+		for _, msg := range m.Field8 {
+			dAtA[i] = 0x42
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Field13) > 0 {
+		for _, b := range m.Field13 {
+			dAtA[i] = 0x68
+			i++
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.Field14) > 0 {
+		for _, s := range m.Field14 {
+			dAtA[i] = 0x72
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if len(m.Field15) > 0 {
+		for _, b := range m.Field15 {
+			dAtA[i] = 0x7a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidEmbeddedStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
+		n53, err := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n53
+	}
+	dAtA[i] = 0xc2
+	i++
+	dAtA[i] = 0xc
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
+	n54, err := m.Field200.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n54
+	dAtA[i] = 0x90
+	i++
+	dAtA[i] = 0xd
+	i++
+	if m.Field210 {
+		dAtA[i] = 1
+	} else {
+		dAtA[i] = 0
+	}
+	i++
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinEmbeddedStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
+		n55, err := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n55
+	}
+	if m.Field200 != nil {
+		dAtA[i] = 0xc2
+		i++
+		dAtA[i] = 0xc
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
+		n56, err := m.Field200.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n56
+	}
+	if m.Field210 != nil {
+		dAtA[i] = 0x90
+		i++
+		dAtA[i] = 0xd
+		i++
+		if *m.Field210 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidNestedStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidNestedStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+	n57, err := m.Field1.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n57
+	if len(m.Field2) > 0 {
+		for _, msg := range m.Field2 {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinNestedStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinNestedStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+		n58, err := m.Field1.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n58
+	}
+	if len(m.Field2) > 0 {
+		for _, msg := range m.Field2 {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidOptCustom) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidOptCustom) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
+	n59, err := m.Id.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n59
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
+	n60, err := m.Value.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n60
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomDash) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomDash) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Value != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
+		n61, err := m.Value.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n61
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptCustom) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptCustom) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Id != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
+		n62, err := m.Id.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n62
+	}
+	if m.Value != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
+		n63, err := m.Value.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n63
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepCustom) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepCustom) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		for _, msg := range m.Id {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Value) > 0 {
+		for _, msg := range m.Value {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepCustom) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepCustom) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		for _, msg := range m.Id {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Value) > 0 {
+		for _, msg := range m.Value {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptNativeUnion) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptNativeUnion) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.Field13 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
+	}
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptStructUnion) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
+		n64, err := m.Field3.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n64
+	}
+	if m.Field4 != nil {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
+		n65, err := m.Field4.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n65
+	}
+	if m.Field6 != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.Field13 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
+	}
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinEmbeddedStructUnion) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
+		n66, err := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n66
+	}
+	if m.Field200 != nil {
+		dAtA[i] = 0xc2
+		i++
+		dAtA[i] = 0xc
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
+		n67, err := m.Field200.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n67
+	}
+	if m.Field210 != nil {
+		dAtA[i] = 0x90
+		i++
+		dAtA[i] = 0xd
+		i++
+		if *m.Field210 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinNestedStructUnion) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinNestedStructUnion) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+		n68, err := m.Field1.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n68
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field2.Size()))
+		n69, err := m.Field2.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n69
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
+		n70, err := m.Field3.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n70
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Tree) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Tree) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Or != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Or.Size()))
+		n71, err := m.Or.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n71
+	}
+	if m.And != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
+		n72, err := m.And.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n72
+	}
+	if m.Leaf != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
+		n73, err := m.Leaf.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n73
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *OrBranch) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *OrBranch) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
+	n74, err := m.Left.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n74
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
+	n75, err := m.Right.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n75
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *AndBranch) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AndBranch) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
+	n76, err := m.Left.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n76
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
+	n77, err := m.Right.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n77
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Leaf) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Leaf) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x8
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Value))
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(len(m.StrValue)))
+	i += copy(dAtA[i:], m.StrValue)
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *DeepTree) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeepTree) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Down != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
+		n78, err := m.Down.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n78
+	}
+	if m.And != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
+		n79, err := m.And.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n79
+	}
+	if m.Leaf != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
+		n80, err := m.Leaf.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n80
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *ADeepBranch) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ADeepBranch) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
+	n81, err := m.Down.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n81
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *AndDeepBranch) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AndDeepBranch) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
+	n82, err := m.Left.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n82
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
+	n83, err := m.Right.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n83
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *DeepLeaf) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeepLeaf) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Tree.Size()))
+	n84, err := m.Tree.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n84
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Nil) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Nil) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidOptEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidOptEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x8
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field1))
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, num := range m.Field3 {
+			dAtA[i] = 0x18
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, num := range m.Field1 {
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field2) > 0 {
+		for _, num := range m.Field2 {
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.Field3) > 0 {
+		for _, num := range m.Field3 {
+			dAtA[i] = 0x18
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptEnumDefault) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptEnumDefault) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *AnotherNinOptEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AnotherNinOptEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *AnotherNinOptEnumDefault) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AnotherNinOptEnumDefault) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Timer) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Timer) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x9
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time1))
+	i += 8
+	dAtA[i] = 0x11
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time2))
+	i += 8
+	if m.Data != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Data)))
+		i += copy(dAtA[i:], m.Data)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *MyExtendable) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MyExtendable) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *OtherExtenable) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *OtherExtenable) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.M != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.M.Size()))
+		n85, err := m.M.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n85
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field13))
+	}
+	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedDefinition) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NestedDefinition) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.EnumField != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.EnumField))
+	}
+	if m.NNM != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
+		n86, err := m.NNM.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n86
+	}
+	if m.NM != nil {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NM.Size()))
+		n87, err := m.NM.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n87
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedDefinition_NestedMessage) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NestedDefinition_NestedMessage) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NestedField1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.NestedField1))
+		i += 8
+	}
+	if m.NNM != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
+		n88, err := m.NNM.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n88
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NestedNestedField1 != nil {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.NestedNestedField1)))
+		i += copy(dAtA[i:], *m.NestedNestedField1)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NestedScope) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NestedScope) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.A != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.A.Size()))
+		n89, err := m.A.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n89
+	}
+	if m.B != nil {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.B))
+	}
+	if m.C != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.C.Size()))
+		n90, err := m.C.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n90
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptNativeDefault) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		i += 8
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		i += 4
+	}
+	if m.Field3 != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
+	}
+	if m.Field4 != nil {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
+	}
+	if m.Field5 != nil {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
+	}
+	if m.Field6 != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
+	}
+	if m.Field7 != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
+	}
+	if m.Field8 != nil {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
+	}
+	if m.Field9 != nil {
+		dAtA[i] = 0x4d
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		i += 4
+	}
+	if m.Field10 != nil {
+		dAtA[i] = 0x55
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		i += 4
+	}
+	if m.Field11 != nil {
+		dAtA[i] = 0x59
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		i += 8
+	}
+	if m.Field12 != nil {
+		dAtA[i] = 0x61
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		i += 8
+	}
+	if m.Field13 != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.Field13 {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Field14 != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
+		i += copy(dAtA[i:], *m.Field14)
+	}
+	if m.Field15 != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
+		i += copy(dAtA[i:], m.Field15)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomContainer) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomContainer) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.CustomStruct.Size()))
+	n91, err := m.CustomStruct.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n91
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameNidOptNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0x9
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FieldA))))
+	i += 8
+	dAtA[i] = 0x15
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.FieldB))))
+	i += 4
+	dAtA[i] = 0x18
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.FieldC))
+	dAtA[i] = 0x20
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.FieldD))
+	dAtA[i] = 0x28
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.FieldE))
+	dAtA[i] = 0x30
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.FieldF))
+	dAtA[i] = 0x38
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.FieldG)<<1)^uint32((m.FieldG>>31))))
+	dAtA[i] = 0x40
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.FieldH)<<1)^uint64((m.FieldH>>63))))
+	dAtA[i] = 0x4d
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldI))
+	i += 4
+	dAtA[i] = 0x55
+	i++
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldJ))
+	i += 4
+	dAtA[i] = 0x59
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldK))
+	i += 8
+	dAtA[i] = 0x61
+	i++
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldL))
+	i += 8
+	dAtA[i] = 0x68
+	i++
+	if m.FieldM {
+		dAtA[i] = 1
+	} else {
+		dAtA[i] = 0
+	}
+	i++
+	dAtA[i] = 0x72
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldN)))
+	i += copy(dAtA[i:], m.FieldN)
+	if m.FieldO != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldO)))
+		i += copy(dAtA[i:], m.FieldO)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameNinOptNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.FieldA != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		i += 8
+	}
+	if m.FieldB != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		i += 4
+	}
+	if m.FieldC != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldC))
+	}
+	if m.FieldD != nil {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldD))
+	}
+	if m.FieldE != nil {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldE))
+	}
+	if m.FieldF != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldF))
+	}
+	if m.FieldG != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.FieldG)<<1)^uint32((*m.FieldG>>31))))
+	}
+	if m.FieldH != nil {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.FieldH)<<1)^uint64((*m.FieldH>>63))))
+	}
+	if m.FieldI != nil {
+		dAtA[i] = 0x4d
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldI))
+		i += 4
+	}
+	if m.FieldJ != nil {
+		dAtA[i] = 0x55
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldJ))
+		i += 4
+	}
+	if m.FieldK != nil {
+		dAtA[i] = 0x59
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FieldK))
+		i += 8
+	}
+	if m.FielL != nil {
+		dAtA[i] = 0x61
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FielL))
+		i += 8
+	}
+	if m.FieldM != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.FieldM {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.FieldN != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.FieldN)))
+		i += copy(dAtA[i:], *m.FieldN)
+	}
+	if m.FieldO != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldO)))
+		i += copy(dAtA[i:], m.FieldO)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameNinRepNative) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.FieldA) > 0 {
+		for _, num := range m.FieldA {
+			dAtA[i] = 0x9
+			i++
+			f92 := math.Float64bits(float64(num))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f92))
+			i += 8
+		}
+	}
+	if len(m.FieldB) > 0 {
+		for _, num := range m.FieldB {
+			dAtA[i] = 0x15
+			i++
+			f93 := math.Float32bits(float32(num))
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f93))
+			i += 4
+		}
+	}
+	if len(m.FieldC) > 0 {
+		for _, num := range m.FieldC {
+			dAtA[i] = 0x18
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.FieldD) > 0 {
+		for _, num := range m.FieldD {
+			dAtA[i] = 0x20
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.FieldE) > 0 {
+		for _, num := range m.FieldE {
+			dAtA[i] = 0x28
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.FieldF) > 0 {
+		for _, num := range m.FieldF {
+			dAtA[i] = 0x30
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if len(m.FieldG) > 0 {
+		for _, num := range m.FieldG {
+			dAtA[i] = 0x38
+			i++
+			x94 := (uint32(num) << 1) ^ uint32((num >> 31))
+			for x94 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x94)&0x7f | 0x80)
+				x94 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x94)
+			i++
+		}
+	}
+	if len(m.FieldH) > 0 {
+		for _, num := range m.FieldH {
+			dAtA[i] = 0x40
+			i++
+			x95 := (uint64(num) << 1) ^ uint64((num >> 63))
+			for x95 >= 1<<7 {
+				dAtA[i] = uint8(uint64(x95)&0x7f | 0x80)
+				x95 >>= 7
+				i++
+			}
+			dAtA[i] = uint8(x95)
+			i++
+		}
+	}
+	if len(m.FieldI) > 0 {
+		for _, num := range m.FieldI {
+			dAtA[i] = 0x4d
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.FieldJ) > 0 {
+		for _, num := range m.FieldJ {
+			dAtA[i] = 0x55
+			i++
+			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			i += 4
+		}
+	}
+	if len(m.FieldK) > 0 {
+		for _, num := range m.FieldK {
+			dAtA[i] = 0x59
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.FieldL) > 0 {
+		for _, num := range m.FieldL {
+			dAtA[i] = 0x61
+			i++
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			i += 8
+		}
+	}
+	if len(m.FieldM) > 0 {
+		for _, b := range m.FieldM {
+			dAtA[i] = 0x68
+			i++
+			if b {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if len(m.FieldN) > 0 {
+		for _, s := range m.FieldN {
+			dAtA[i] = 0x72
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if len(m.FieldO) > 0 {
+		for _, b := range m.FieldO {
+			dAtA[i] = 0x7a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
+			i += copy(dAtA[i:], b)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameNinStruct) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.FieldA != nil {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		i += 8
+	}
+	if m.FieldB != nil {
+		dAtA[i] = 0x15
+		i++
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		i += 4
+	}
+	if m.FieldC != nil {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.FieldC.Size()))
+		n96, err := m.FieldC.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n96
+	}
+	if len(m.FieldD) > 0 {
+		for _, msg := range m.FieldD {
+			dAtA[i] = 0x22
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.FieldE != nil {
+		dAtA[i] = 0x30
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldE))
+	}
+	if m.FieldF != nil {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.FieldF)<<1)^uint32((*m.FieldF>>31))))
+	}
+	if m.FieldG != nil {
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.FieldG.Size()))
+		n97, err := m.FieldG.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n97
+	}
+	if m.FieldH != nil {
+		dAtA[i] = 0x68
+		i++
+		if *m.FieldH {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.FieldI != nil {
+		dAtA[i] = 0x72
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.FieldI)))
+		i += copy(dAtA[i:], *m.FieldI)
+	}
+	if m.FieldJ != nil {
+		dAtA[i] = 0x7a
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldJ)))
+		i += copy(dAtA[i:], m.FieldJ)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.FieldA != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
+		n98, err := m.FieldA.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n98
+	}
+	if m.FieldB != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.FieldB.Size()))
+		n99, err := m.FieldB.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n99
+	}
+	if len(m.FieldC) > 0 {
+		for _, msg := range m.FieldC {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.FieldD) > 0 {
+		for _, msg := range m.FieldD {
+			dAtA[i] = 0x22
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameNinEmbeddedStructUnion) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.NidOptNative != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
+		n100, err := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n100
+	}
+	if m.FieldA != nil {
+		dAtA[i] = 0xc2
+		i++
+		dAtA[i] = 0xc
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
+		n101, err := m.FieldA.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n101
+	}
+	if m.FieldB != nil {
+		dAtA[i] = 0x90
+		i++
+		dAtA[i] = 0xd
+		i++
+		if *m.FieldB {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CustomNameEnum) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CustomNameEnum) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.FieldA != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldA))
+	}
+	if len(m.FieldB) > 0 {
+		for _, num := range m.FieldB {
+			dAtA[i] = 0x10
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(num))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NoExtensionsMap) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NoExtensionsMap) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	if m.XXX_extensions != nil {
+		i += copy(dAtA[i:], m.XXX_extensions)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Unrecognized) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Unrecognized) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field1)))
+		i += copy(dAtA[i:], *m.Field1)
+	}
+	return i, nil
+}
+
+func (m *UnrecognizedWithInner) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UnrecognizedWithInner) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Embedded) > 0 {
+		for _, msg := range m.Embedded {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.Field2 != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
+		i += copy(dAtA[i:], *m.Field2)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *UnrecognizedWithInner_Inner) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UnrecognizedWithInner_Inner) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	return i, nil
+}
+
+func (m *UnrecognizedWithEmbed) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UnrecognizedWithEmbed) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.UnrecognizedWithEmbed_Embedded.Size()))
+	n102, err := m.UnrecognizedWithEmbed_Embedded.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n102
+	if m.Field2 != nil {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
+		i += copy(dAtA[i:], *m.Field2)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *UnrecognizedWithEmbed_Embedded) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UnrecognizedWithEmbed_Embedded) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
+	}
+	return i, nil
+}
+
+func (m *Node) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Node) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Label != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Label)))
+		i += copy(dAtA[i:], *m.Label)
+	}
+	if len(m.Children) > 0 {
+		for _, msg := range m.Children {
+			dAtA[i] = 0x12
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NonByteCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+		n103, err := m.Field1.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n103
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidOptNonByteCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+	n104, err := m.Field1.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
+	}
+	i += n104
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinOptNonByteCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field1 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
+		n105, err := m.Field1.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n105
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NidRepNonByteCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NidRepNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, msg := range m.Field1 {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *NinRepNonByteCustomType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *NinRepNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Field1) > 0 {
+		for _, msg := range m.Field1 {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *ProtoType) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ProtoType) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Field2 != nil {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
+		i += copy(dAtA[i:], *m.Field2)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeFixed64Thetest(dAtA []byte, offset int, v uint64) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	dAtA[offset+4] = uint8(v >> 32)
+	dAtA[offset+5] = uint8(v >> 40)
+	dAtA[offset+6] = uint8(v >> 48)
+	dAtA[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Thetest(dAtA []byte, offset int, v uint32) int {
+	dAtA[offset] = uint8(v)
+	dAtA[offset+1] = uint8(v >> 8)
+	dAtA[offset+2] = uint8(v >> 16)
+	dAtA[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintThetest(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
 func NewPopulatedNidOptNative(r randyThetest, easy bool) *NidOptNative {
 	this := &NidOptNative{}
 	this.Field1 = float64(r.Float64())
@@ -21845,6 +25848,9 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 	this := &OtherExtenable{}
 	if r.Intn(10) != 0 {
+		this.M = NewPopulatedMyExtendable(r, easy)
+	}
+	if r.Intn(10) != 0 {
 		v172 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v172 *= -1
@@ -21857,9 +25863,6 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 			v173 *= -1
 		}
 		this.Field13 = &v173
-	}
-	if r.Intn(10) != 0 {
-		this.M = NewPopulatedMyExtendable(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 		l := r.Intn(5)
@@ -23852,15 +27855,15 @@ func (m *MyExtendable) Size() (n int) {
 func (m *OtherExtenable) Size() (n int) {
 	var l int
 	_ = l
+	if m.M != nil {
+		l = m.M.Size()
+		n += 1 + l + sovThetest(uint64(l))
+	}
 	if m.Field2 != nil {
 		n += 1 + sovThetest(uint64(*m.Field2))
 	}
 	if m.Field13 != nil {
 		n += 1 + sovThetest(uint64(*m.Field13))
-	}
-	if m.M != nil {
-		l = m.M.Size()
-		n += 1 + l + sovThetest(uint64(l))
 	}
 	n += github_com_gogo_protobuf_proto.SizeOfInternalExtension(m)
 	if m.XXX_unrecognized != nil {
@@ -25089,9 +29092,9 @@ func (this *OtherExtenable) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&OtherExtenable{`,
+		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
-		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
 		`XXX_InternalExtensions:` + github_com_gogo_protobuf_proto.StringFromInternalExtension(this) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -25727,3995 +29730,6 @@ func (this *CustomNameNinEmbeddedStructUnion) SetValue(value interface{}) bool {
 	}
 	return true
 }
-func (m *NidOptNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x9
-	i++
-	*(*float64)(unsafe.Pointer(&dAtA[i])) = m.Field1
-	i += 8
-	dAtA[i] = 0x15
-	i++
-	*(*float32)(unsafe.Pointer(&dAtA[i])) = m.Field2
-	i += 4
-	dAtA[i] = 0x18
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field3))
-	dAtA[i] = 0x20
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field4))
-	dAtA[i] = 0x28
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field5))
-	dAtA[i] = 0x30
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field6))
-	dAtA[i] = 0x38
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
-	dAtA[i] = 0x40
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
-	dAtA[i] = 0x4d
-	i++
-	*(*uint32)(unsafe.Pointer(&dAtA[i])) = m.Field9
-	i += 4
-	dAtA[i] = 0x55
-	i++
-	*(*int32)(unsafe.Pointer(&dAtA[i])) = m.Field10
-	i += 4
-	dAtA[i] = 0x59
-	i++
-	*(*uint64)(unsafe.Pointer(&dAtA[i])) = m.Field11
-	i += 8
-	dAtA[i] = 0x61
-	i++
-	*(*int64)(unsafe.Pointer(&dAtA[i])) = m.Field12
-	i += 8
-	dAtA[i] = 0x68
-	i++
-	if m.Field13 {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i++
-	dAtA[i] = 0x72
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(len(m.Field14)))
-	i += copy(dAtA[i:], m.Field14)
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.Field1
-		i += 8
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.Field2
-		i += 4
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.Field4 != nil {
-		dAtA[i] = 0x20
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
-	}
-	if m.Field5 != nil {
-		dAtA[i] = 0x28
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
-	}
-	if m.Field6 != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
-	}
-	if m.Field7 != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
-	}
-	if m.Field8 != nil {
-		dAtA[i] = 0x40
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
-	}
-	if m.Field9 != nil {
-		dAtA[i] = 0x4d
-		i++
-		*(*uint32)(unsafe.Pointer(&dAtA[i])) = *m.Field9
-		i += 4
-	}
-	if m.Field10 != nil {
-		dAtA[i] = 0x55
-		i++
-		*(*int32)(unsafe.Pointer(&dAtA[i])) = *m.Field10
-		i += 4
-	}
-	if m.Field11 != nil {
-		dAtA[i] = 0x59
-		i++
-		*(*uint64)(unsafe.Pointer(&dAtA[i])) = *m.Field11
-		i += 8
-	}
-	if m.Field12 != nil {
-		dAtA[i] = 0x61
-		i++
-		*(*int64)(unsafe.Pointer(&dAtA[i])) = *m.Field12
-		i += 8
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.Field13 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Field14 != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
-		i += copy(dAtA[i:], *m.Field14)
-	}
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x9
-			i++
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x15
-			i++
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, num := range m.Field3 {
-			dAtA[i] = 0x18
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field4) > 0 {
-		for _, num := range m.Field4 {
-			dAtA[i] = 0x20
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field5) > 0 {
-		for _, num := range m.Field5 {
-			dAtA[i] = 0x28
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field6) > 0 {
-		for _, num := range m.Field6 {
-			dAtA[i] = 0x30
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			dAtA[i] = 0x38
-			i++
-			x1 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x1 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x1)&0x7f | 0x80)
-				x1 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x1)
-			i++
-		}
-	}
-	if len(m.Field8) > 0 {
-		for _, num := range m.Field8 {
-			dAtA[i] = 0x40
-			i++
-			x2 := (uint64(num) << 1) ^ uint64((num >> 63))
-			for x2 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x2)&0x7f | 0x80)
-				x2 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x2)
-			i++
-		}
-	}
-	if len(m.Field9) > 0 {
-		for _, num := range m.Field9 {
-			dAtA[i] = 0x4d
-			i++
-			*(*uint32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field10) > 0 {
-		for _, num := range m.Field10 {
-			dAtA[i] = 0x55
-			i++
-			*(*int32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field11) > 0 {
-		for _, num := range m.Field11 {
-			dAtA[i] = 0x59
-			i++
-			*(*uint64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field12) > 0 {
-		for _, num := range m.Field12 {
-			dAtA[i] = 0x61
-			i++
-			*(*int64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field13) > 0 {
-		for _, b := range m.Field13 {
-			dAtA[i] = 0x68
-			i++
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.Field14) > 0 {
-		for _, s := range m.Field14 {
-			dAtA[i] = 0x72
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
-		}
-	}
-	if len(m.Field15) > 0 {
-		for _, b := range m.Field15 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
-			i += copy(dAtA[i:], b)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x9
-			i++
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x15
-			i++
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, num := range m.Field3 {
-			dAtA[i] = 0x18
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field4) > 0 {
-		for _, num := range m.Field4 {
-			dAtA[i] = 0x20
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field5) > 0 {
-		for _, num := range m.Field5 {
-			dAtA[i] = 0x28
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field6) > 0 {
-		for _, num := range m.Field6 {
-			dAtA[i] = 0x30
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			dAtA[i] = 0x38
-			i++
-			x3 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x3 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x3)&0x7f | 0x80)
-				x3 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x3)
-			i++
-		}
-	}
-	if len(m.Field8) > 0 {
-		for _, num := range m.Field8 {
-			dAtA[i] = 0x40
-			i++
-			x4 := (uint64(num) << 1) ^ uint64((num >> 63))
-			for x4 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x4)&0x7f | 0x80)
-				x4 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x4)
-			i++
-		}
-	}
-	if len(m.Field9) > 0 {
-		for _, num := range m.Field9 {
-			dAtA[i] = 0x4d
-			i++
-			*(*uint32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field10) > 0 {
-		for _, num := range m.Field10 {
-			dAtA[i] = 0x55
-			i++
-			*(*int32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field11) > 0 {
-		for _, num := range m.Field11 {
-			dAtA[i] = 0x59
-			i++
-			*(*uint64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field12) > 0 {
-		for _, num := range m.Field12 {
-			dAtA[i] = 0x61
-			i++
-			*(*int64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field13) > 0 {
-		for _, b := range m.Field13 {
-			dAtA[i] = 0x68
-			i++
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.Field14) > 0 {
-		for _, s := range m.Field14 {
-			dAtA[i] = 0x72
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
-		}
-	}
-	if len(m.Field15) > 0 {
-		for _, b := range m.Field15 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
-			i += copy(dAtA[i:], b)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepPackedNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
-		for _, num := range m.Field1 {
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
-		for _, num := range m.Field2 {
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		dAtA6 := make([]byte, len(m.Field3)*10)
-		var j5 int
-		for _, num1 := range m.Field3 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA6[j5] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j5++
-			}
-			dAtA6[j5] = uint8(num)
-			j5++
-		}
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j5))
-		i += copy(dAtA[i:], dAtA6[:j5])
-	}
-	if len(m.Field4) > 0 {
-		dAtA8 := make([]byte, len(m.Field4)*10)
-		var j7 int
-		for _, num1 := range m.Field4 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA8[j7] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j7++
-			}
-			dAtA8[j7] = uint8(num)
-			j7++
-		}
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j7))
-		i += copy(dAtA[i:], dAtA8[:j7])
-	}
-	if len(m.Field5) > 0 {
-		dAtA10 := make([]byte, len(m.Field5)*10)
-		var j9 int
-		for _, num := range m.Field5 {
-			for num >= 1<<7 {
-				dAtA10[j9] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j9++
-			}
-			dAtA10[j9] = uint8(num)
-			j9++
-		}
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j9))
-		i += copy(dAtA[i:], dAtA10[:j9])
-	}
-	if len(m.Field6) > 0 {
-		dAtA12 := make([]byte, len(m.Field6)*10)
-		var j11 int
-		for _, num := range m.Field6 {
-			for num >= 1<<7 {
-				dAtA12[j11] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j11++
-			}
-			dAtA12[j11] = uint8(num)
-			j11++
-		}
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j11))
-		i += copy(dAtA[i:], dAtA12[:j11])
-	}
-	if len(m.Field7) > 0 {
-		dAtA13 := make([]byte, len(m.Field7)*5)
-		var j14 int
-		for _, num := range m.Field7 {
-			x15 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x15 >= 1<<7 {
-				dAtA13[j14] = uint8(uint64(x15)&0x7f | 0x80)
-				j14++
-				x15 >>= 7
-			}
-			dAtA13[j14] = uint8(x15)
-			j14++
-		}
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j14))
-		i += copy(dAtA[i:], dAtA13[:j14])
-	}
-	if len(m.Field8) > 0 {
-		var j16 int
-		dAtA18 := make([]byte, len(m.Field8)*10)
-		for _, num := range m.Field8 {
-			x17 := (uint64(num) << 1) ^ uint64((num >> 63))
-			for x17 >= 1<<7 {
-				dAtA18[j16] = uint8(uint64(x17)&0x7f | 0x80)
-				j16++
-				x17 >>= 7
-			}
-			dAtA18[j16] = uint8(x17)
-			j16++
-		}
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j16))
-		i += copy(dAtA[i:], dAtA18[:j16])
-	}
-	if len(m.Field9) > 0 {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
-		for _, num := range m.Field9 {
-			*(*uint32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field10) > 0 {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
-		for _, num := range m.Field10 {
-			*(*int32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field11) > 0 {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
-		for _, num := range m.Field11 {
-			*(*uint64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field12) > 0 {
-		dAtA[i] = 0x62
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
-		for _, num := range m.Field12 {
-			*(*int64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field13) > 0 {
-		dAtA[i] = 0x6a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field13)))
-		for _, b := range m.Field13 {
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepPackedNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
-		for _, num := range m.Field1 {
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
-		for _, num := range m.Field2 {
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		dAtA20 := make([]byte, len(m.Field3)*10)
-		var j19 int
-		for _, num1 := range m.Field3 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA20[j19] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j19++
-			}
-			dAtA20[j19] = uint8(num)
-			j19++
-		}
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j19))
-		i += copy(dAtA[i:], dAtA20[:j19])
-	}
-	if len(m.Field4) > 0 {
-		dAtA22 := make([]byte, len(m.Field4)*10)
-		var j21 int
-		for _, num1 := range m.Field4 {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA22[j21] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j21++
-			}
-			dAtA22[j21] = uint8(num)
-			j21++
-		}
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j21))
-		i += copy(dAtA[i:], dAtA22[:j21])
-	}
-	if len(m.Field5) > 0 {
-		dAtA24 := make([]byte, len(m.Field5)*10)
-		var j23 int
-		for _, num := range m.Field5 {
-			for num >= 1<<7 {
-				dAtA24[j23] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j23++
-			}
-			dAtA24[j23] = uint8(num)
-			j23++
-		}
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j23))
-		i += copy(dAtA[i:], dAtA24[:j23])
-	}
-	if len(m.Field6) > 0 {
-		dAtA26 := make([]byte, len(m.Field6)*10)
-		var j25 int
-		for _, num := range m.Field6 {
-			for num >= 1<<7 {
-				dAtA26[j25] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j25++
-			}
-			dAtA26[j25] = uint8(num)
-			j25++
-		}
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j25))
-		i += copy(dAtA[i:], dAtA26[:j25])
-	}
-	if len(m.Field7) > 0 {
-		dAtA27 := make([]byte, len(m.Field7)*5)
-		var j28 int
-		for _, num := range m.Field7 {
-			x29 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x29 >= 1<<7 {
-				dAtA27[j28] = uint8(uint64(x29)&0x7f | 0x80)
-				j28++
-				x29 >>= 7
-			}
-			dAtA27[j28] = uint8(x29)
-			j28++
-		}
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j28))
-		i += copy(dAtA[i:], dAtA27[:j28])
-	}
-	if len(m.Field8) > 0 {
-		var j30 int
-		dAtA32 := make([]byte, len(m.Field8)*10)
-		for _, num := range m.Field8 {
-			x31 := (uint64(num) << 1) ^ uint64((num >> 63))
-			for x31 >= 1<<7 {
-				dAtA32[j30] = uint8(uint64(x31)&0x7f | 0x80)
-				j30++
-				x31 >>= 7
-			}
-			dAtA32[j30] = uint8(x31)
-			j30++
-		}
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(j30))
-		i += copy(dAtA[i:], dAtA32[:j30])
-	}
-	if len(m.Field9) > 0 {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
-		for _, num := range m.Field9 {
-			*(*uint32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field10) > 0 {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
-		for _, num := range m.Field10 {
-			*(*int32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field11) > 0 {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
-		for _, num := range m.Field11 {
-			*(*uint64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field12) > 0 {
-		dAtA[i] = 0x62
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
-		for _, num := range m.Field12 {
-			*(*int64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field13) > 0 {
-		dAtA[i] = 0x6a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field13)))
-		for _, b := range m.Field13 {
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidOptStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x9
-	i++
-	*(*float64)(unsafe.Pointer(&dAtA[i])) = m.Field1
-	i += 8
-	dAtA[i] = 0x15
-	i++
-	*(*float32)(unsafe.Pointer(&dAtA[i])) = m.Field2
-	i += 4
-	dAtA[i] = 0x1a
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-	n33, err := m.Field3.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n33
-	dAtA[i] = 0x22
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-	n34, err := m.Field4.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n34
-	dAtA[i] = 0x30
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field6))
-	dAtA[i] = 0x38
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
-	dAtA[i] = 0x42
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
-	n35, err := m.Field8.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n35
-	dAtA[i] = 0x68
-	i++
-	if m.Field13 {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i++
-	dAtA[i] = 0x72
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(len(m.Field14)))
-	i += copy(dAtA[i:], m.Field14)
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.Field1
-		i += 8
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.Field2
-		i += 4
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n36, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n36
-	}
-	if m.Field4 != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-		n37, err := m.Field4.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n37
-	}
-	if m.Field6 != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
-	}
-	if m.Field7 != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
-	}
-	if m.Field8 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
-		n38, err := m.Field8.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n38
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.Field13 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Field14 != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
-		i += copy(dAtA[i:], *m.Field14)
-	}
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x9
-			i++
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x15
-			i++
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, msg := range m.Field3 {
-			dAtA[i] = 0x1a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field4) > 0 {
-		for _, msg := range m.Field4 {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field6) > 0 {
-		for _, num := range m.Field6 {
-			dAtA[i] = 0x30
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			dAtA[i] = 0x38
-			i++
-			x39 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x39 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x39)&0x7f | 0x80)
-				x39 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x39)
-			i++
-		}
-	}
-	if len(m.Field8) > 0 {
-		for _, msg := range m.Field8 {
-			dAtA[i] = 0x42
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field13) > 0 {
-		for _, b := range m.Field13 {
-			dAtA[i] = 0x68
-			i++
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.Field14) > 0 {
-		for _, s := range m.Field14 {
-			dAtA[i] = 0x72
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
-		}
-	}
-	if len(m.Field15) > 0 {
-		for _, b := range m.Field15 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
-			i += copy(dAtA[i:], b)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x9
-			i++
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x15
-			i++
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, msg := range m.Field3 {
-			dAtA[i] = 0x1a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field4) > 0 {
-		for _, msg := range m.Field4 {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field6) > 0 {
-		for _, num := range m.Field6 {
-			dAtA[i] = 0x30
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field7) > 0 {
-		for _, num := range m.Field7 {
-			dAtA[i] = 0x38
-			i++
-			x40 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x40 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x40)&0x7f | 0x80)
-				x40 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x40)
-			i++
-		}
-	}
-	if len(m.Field8) > 0 {
-		for _, msg := range m.Field8 {
-			dAtA[i] = 0x42
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Field13) > 0 {
-		for _, b := range m.Field13 {
-			dAtA[i] = 0x68
-			i++
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.Field14) > 0 {
-		for _, s := range m.Field14 {
-			dAtA[i] = 0x72
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
-		}
-	}
-	if len(m.Field15) > 0 {
-		for _, b := range m.Field15 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
-			i += copy(dAtA[i:], b)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidEmbeddedStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NidOptNative != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n41, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n41
-	}
-	dAtA[i] = 0xc2
-	i++
-	dAtA[i] = 0xc
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-	n42, err := m.Field200.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n42
-	dAtA[i] = 0x90
-	i++
-	dAtA[i] = 0xd
-	i++
-	if m.Field210 {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i++
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinEmbeddedStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NidOptNative != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n43, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n43
-	}
-	if m.Field200 != nil {
-		dAtA[i] = 0xc2
-		i++
-		dAtA[i] = 0xc
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-		n44, err := m.Field200.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n44
-	}
-	if m.Field210 != nil {
-		dAtA[i] = 0x90
-		i++
-		dAtA[i] = 0xd
-		i++
-		if *m.Field210 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidNestedStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidNestedStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-	n45, err := m.Field1.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n45
-	if len(m.Field2) > 0 {
-		for _, msg := range m.Field2 {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinNestedStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinNestedStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n46, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n46
-	}
-	if len(m.Field2) > 0 {
-		for _, msg := range m.Field2 {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidOptCustom) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidOptCustom) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
-	n47, err := m.Id.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n47
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-	n48, err := m.Value.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n48
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomDash) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomDash) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Value != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-		n49, err := m.Value.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n49
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptCustom) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptCustom) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Id != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
-		n50, err := m.Id.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n50
-	}
-	if m.Value != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-		n51, err := m.Value.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n51
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepCustom) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepCustom) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Id) > 0 {
-		for _, msg := range m.Id {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Value) > 0 {
-		for _, msg := range m.Value {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepCustom) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepCustom) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Id) > 0 {
-		for _, msg := range m.Id {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Value) > 0 {
-		for _, msg := range m.Value {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptNativeUnion) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptNativeUnion) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.Field1
-		i += 8
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.Field2
-		i += 4
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.Field4 != nil {
-		dAtA[i] = 0x20
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
-	}
-	if m.Field5 != nil {
-		dAtA[i] = 0x28
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
-	}
-	if m.Field6 != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.Field13 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Field14 != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
-		i += copy(dAtA[i:], *m.Field14)
-	}
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptStructUnion) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.Field1
-		i += 8
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.Field2
-		i += 4
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n52, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n52
-	}
-	if m.Field4 != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-		n53, err := m.Field4.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n53
-	}
-	if m.Field6 != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
-	}
-	if m.Field7 != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.Field13 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Field14 != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
-		i += copy(dAtA[i:], *m.Field14)
-	}
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinEmbeddedStructUnion) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NidOptNative != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n54, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n54
-	}
-	if m.Field200 != nil {
-		dAtA[i] = 0xc2
-		i++
-		dAtA[i] = 0xc
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-		n55, err := m.Field200.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n55
-	}
-	if m.Field210 != nil {
-		dAtA[i] = 0x90
-		i++
-		dAtA[i] = 0xd
-		i++
-		if *m.Field210 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinNestedStructUnion) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinNestedStructUnion) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n56, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n56
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field2.Size()))
-		n57, err := m.Field2.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n57
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n58, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n58
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Tree) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Tree) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Or != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Or.Size()))
-		n59, err := m.Or.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n59
-	}
-	if m.And != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
-		n60, err := m.And.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n60
-	}
-	if m.Leaf != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
-		n61, err := m.Leaf.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n61
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *OrBranch) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *OrBranch) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n62, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n62
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n63, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n63
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *AndBranch) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AndBranch) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n64, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n64
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n65, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n65
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Leaf) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Leaf) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x8
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Value))
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(len(m.StrValue)))
-	i += copy(dAtA[i:], m.StrValue)
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *DeepTree) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DeepTree) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Down != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
-		n66, err := m.Down.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n66
-	}
-	if m.And != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
-		n67, err := m.And.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n67
-	}
-	if m.Leaf != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
-		n68, err := m.Leaf.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n68
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *ADeepBranch) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ADeepBranch) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
-	n69, err := m.Down.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n69
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *AndDeepBranch) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AndDeepBranch) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n70, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n70
-	dAtA[i] = 0x12
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n71, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n71
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *DeepLeaf) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DeepLeaf) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Tree.Size()))
-	n72, err := m.Tree.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n72
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Nil) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Nil) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidOptEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidOptEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x8
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field1))
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, num := range m.Field3 {
-			dAtA[i] = 0x18
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, num := range m.Field1 {
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field2) > 0 {
-		for _, num := range m.Field2 {
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.Field3) > 0 {
-		for _, num := range m.Field3 {
-			dAtA[i] = 0x18
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptEnumDefault) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptEnumDefault) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *AnotherNinOptEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AnotherNinOptEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *AnotherNinOptEnumDefault) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AnotherNinOptEnumDefault) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Timer) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Timer) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x9
-	i++
-	*(*int64)(unsafe.Pointer(&dAtA[i])) = m.Time1
-	i += 8
-	dAtA[i] = 0x11
-	i++
-	*(*int64)(unsafe.Pointer(&dAtA[i])) = m.Time2
-	i += 8
-	if m.Data != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *MyExtendable) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MyExtendable) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *OtherExtenable) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *OtherExtenable) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.M != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.M.Size()))
-		n73, err := m.M.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n73
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field2))
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field13))
-	}
-	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NestedDefinition) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NestedDefinition) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.EnumField != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.EnumField))
-	}
-	if m.NNM != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
-		n74, err := m.NNM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n74
-	}
-	if m.NM != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NM.Size()))
-		n75, err := m.NM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n75
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NestedDefinition_NestedMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NestedDefinition_NestedMessage) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NestedField1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*uint64)(unsafe.Pointer(&dAtA[i])) = *m.NestedField1
-		i += 8
-	}
-	if m.NNM != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
-		n76, err := m.NNM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n76
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NestedNestedField1 != nil {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.NestedNestedField1)))
-		i += copy(dAtA[i:], *m.NestedNestedField1)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NestedScope) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NestedScope) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.A != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.A.Size()))
-		n77, err := m.A.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n77
-	}
-	if m.B != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.B))
-	}
-	if m.C != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.C.Size()))
-		n78, err := m.C.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n78
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptNativeDefault) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.Field1
-		i += 8
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.Field2
-		i += 4
-	}
-	if m.Field3 != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field3))
-	}
-	if m.Field4 != nil {
-		dAtA[i] = 0x20
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field4))
-	}
-	if m.Field5 != nil {
-		dAtA[i] = 0x28
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field5))
-	}
-	if m.Field6 != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field6))
-	}
-	if m.Field7 != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.Field7)<<1)^uint32((*m.Field7>>31))))
-	}
-	if m.Field8 != nil {
-		dAtA[i] = 0x40
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.Field8)<<1)^uint64((*m.Field8>>63))))
-	}
-	if m.Field9 != nil {
-		dAtA[i] = 0x4d
-		i++
-		*(*uint32)(unsafe.Pointer(&dAtA[i])) = *m.Field9
-		i += 4
-	}
-	if m.Field10 != nil {
-		dAtA[i] = 0x55
-		i++
-		*(*int32)(unsafe.Pointer(&dAtA[i])) = *m.Field10
-		i += 4
-	}
-	if m.Field11 != nil {
-		dAtA[i] = 0x59
-		i++
-		*(*uint64)(unsafe.Pointer(&dAtA[i])) = *m.Field11
-		i += 8
-	}
-	if m.Field12 != nil {
-		dAtA[i] = 0x61
-		i++
-		*(*int64)(unsafe.Pointer(&dAtA[i])) = *m.Field12
-		i += 8
-	}
-	if m.Field13 != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.Field13 {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.Field14 != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field14)))
-		i += copy(dAtA[i:], *m.Field14)
-	}
-	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomContainer) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomContainer) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.CustomStruct.Size()))
-	n79, err := m.CustomStruct.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n79
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameNidOptNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0x9
-	i++
-	*(*float64)(unsafe.Pointer(&dAtA[i])) = m.FieldA
-	i += 8
-	dAtA[i] = 0x15
-	i++
-	*(*float32)(unsafe.Pointer(&dAtA[i])) = m.FieldB
-	i += 4
-	dAtA[i] = 0x18
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.FieldC))
-	dAtA[i] = 0x20
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.FieldD))
-	dAtA[i] = 0x28
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.FieldE))
-	dAtA[i] = 0x30
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.FieldF))
-	dAtA[i] = 0x38
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64((uint32(m.FieldG)<<1)^uint32((m.FieldG>>31))))
-	dAtA[i] = 0x40
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.FieldH)<<1)^uint64((m.FieldH>>63))))
-	dAtA[i] = 0x4d
-	i++
-	*(*uint32)(unsafe.Pointer(&dAtA[i])) = m.FieldI
-	i += 4
-	dAtA[i] = 0x55
-	i++
-	*(*int32)(unsafe.Pointer(&dAtA[i])) = m.FieldJ
-	i += 4
-	dAtA[i] = 0x59
-	i++
-	*(*uint64)(unsafe.Pointer(&dAtA[i])) = m.FieldK
-	i += 8
-	dAtA[i] = 0x61
-	i++
-	*(*int64)(unsafe.Pointer(&dAtA[i])) = m.FieldL
-	i += 8
-	dAtA[i] = 0x68
-	i++
-	if m.FieldM {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i++
-	dAtA[i] = 0x72
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldN)))
-	i += copy(dAtA[i:], m.FieldN)
-	if m.FieldO != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldO)))
-		i += copy(dAtA[i:], m.FieldO)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameNinOptNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.FieldA != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.FieldA
-		i += 8
-	}
-	if m.FieldB != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.FieldB
-		i += 4
-	}
-	if m.FieldC != nil {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldC))
-	}
-	if m.FieldD != nil {
-		dAtA[i] = 0x20
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldD))
-	}
-	if m.FieldE != nil {
-		dAtA[i] = 0x28
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldE))
-	}
-	if m.FieldF != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldF))
-	}
-	if m.FieldG != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.FieldG)<<1)^uint32((*m.FieldG>>31))))
-	}
-	if m.FieldH != nil {
-		dAtA[i] = 0x40
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint64(*m.FieldH)<<1)^uint64((*m.FieldH>>63))))
-	}
-	if m.FieldI != nil {
-		dAtA[i] = 0x4d
-		i++
-		*(*uint32)(unsafe.Pointer(&dAtA[i])) = *m.FieldI
-		i += 4
-	}
-	if m.FieldJ != nil {
-		dAtA[i] = 0x55
-		i++
-		*(*int32)(unsafe.Pointer(&dAtA[i])) = *m.FieldJ
-		i += 4
-	}
-	if m.FieldK != nil {
-		dAtA[i] = 0x59
-		i++
-		*(*uint64)(unsafe.Pointer(&dAtA[i])) = *m.FieldK
-		i += 8
-	}
-	if m.FielL != nil {
-		dAtA[i] = 0x61
-		i++
-		*(*int64)(unsafe.Pointer(&dAtA[i])) = *m.FielL
-		i += 8
-	}
-	if m.FieldM != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.FieldM {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.FieldN != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.FieldN)))
-		i += copy(dAtA[i:], *m.FieldN)
-	}
-	if m.FieldO != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldO)))
-		i += copy(dAtA[i:], m.FieldO)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameNinRepNative) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.FieldA) > 0 {
-		for _, num := range m.FieldA {
-			dAtA[i] = 0x9
-			i++
-			*(*float64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.FieldB) > 0 {
-		for _, num := range m.FieldB {
-			dAtA[i] = 0x15
-			i++
-			*(*float32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.FieldC) > 0 {
-		for _, num := range m.FieldC {
-			dAtA[i] = 0x18
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.FieldD) > 0 {
-		for _, num := range m.FieldD {
-			dAtA[i] = 0x20
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.FieldE) > 0 {
-		for _, num := range m.FieldE {
-			dAtA[i] = 0x28
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.FieldF) > 0 {
-		for _, num := range m.FieldF {
-			dAtA[i] = 0x30
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if len(m.FieldG) > 0 {
-		for _, num := range m.FieldG {
-			dAtA[i] = 0x38
-			i++
-			x80 := (uint32(num) << 1) ^ uint32((num >> 31))
-			for x80 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x80)&0x7f | 0x80)
-				x80 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x80)
-			i++
-		}
-	}
-	if len(m.FieldH) > 0 {
-		for _, num := range m.FieldH {
-			dAtA[i] = 0x40
-			i++
-			x81 := (uint64(num) << 1) ^ uint64((num >> 63))
-			for x81 >= 1<<7 {
-				dAtA[i] = uint8(uint64(x81)&0x7f | 0x80)
-				x81 >>= 7
-				i++
-			}
-			dAtA[i] = uint8(x81)
-			i++
-		}
-	}
-	if len(m.FieldI) > 0 {
-		for _, num := range m.FieldI {
-			dAtA[i] = 0x4d
-			i++
-			*(*uint32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.FieldJ) > 0 {
-		for _, num := range m.FieldJ {
-			dAtA[i] = 0x55
-			i++
-			*(*int32)(unsafe.Pointer(&dAtA[i])) = num
-			i += 4
-		}
-	}
-	if len(m.FieldK) > 0 {
-		for _, num := range m.FieldK {
-			dAtA[i] = 0x59
-			i++
-			*(*uint64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.FieldL) > 0 {
-		for _, num := range m.FieldL {
-			dAtA[i] = 0x61
-			i++
-			*(*int64)(unsafe.Pointer(&dAtA[i])) = num
-			i += 8
-		}
-	}
-	if len(m.FieldM) > 0 {
-		for _, b := range m.FieldM {
-			dAtA[i] = 0x68
-			i++
-			if b {
-				dAtA[i] = 1
-			} else {
-				dAtA[i] = 0
-			}
-			i++
-		}
-	}
-	if len(m.FieldN) > 0 {
-		for _, s := range m.FieldN {
-			dAtA[i] = 0x72
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
-		}
-	}
-	if len(m.FieldO) > 0 {
-		for _, b := range m.FieldO {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(len(b)))
-			i += copy(dAtA[i:], b)
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameNinStruct) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.FieldA != nil {
-		dAtA[i] = 0x9
-		i++
-		*(*float64)(unsafe.Pointer(&dAtA[i])) = *m.FieldA
-		i += 8
-	}
-	if m.FieldB != nil {
-		dAtA[i] = 0x15
-		i++
-		*(*float32)(unsafe.Pointer(&dAtA[i])) = *m.FieldB
-		i += 4
-	}
-	if m.FieldC != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.FieldC.Size()))
-		n82, err := m.FieldC.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n82
-	}
-	if len(m.FieldD) > 0 {
-		for _, msg := range m.FieldD {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.FieldE != nil {
-		dAtA[i] = 0x30
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldE))
-	}
-	if m.FieldF != nil {
-		dAtA[i] = 0x38
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64((uint32(*m.FieldF)<<1)^uint32((*m.FieldF>>31))))
-	}
-	if m.FieldG != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.FieldG.Size()))
-		n83, err := m.FieldG.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n83
-	}
-	if m.FieldH != nil {
-		dAtA[i] = 0x68
-		i++
-		if *m.FieldH {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.FieldI != nil {
-		dAtA[i] = 0x72
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.FieldI)))
-		i += copy(dAtA[i:], *m.FieldI)
-	}
-	if m.FieldJ != nil {
-		dAtA[i] = 0x7a
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(m.FieldJ)))
-		i += copy(dAtA[i:], m.FieldJ)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.FieldA != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
-		n84, err := m.FieldA.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n84
-	}
-	if m.FieldB != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.FieldB.Size()))
-		n85, err := m.FieldB.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n85
-	}
-	if len(m.FieldC) > 0 {
-		for _, msg := range m.FieldC {
-			dAtA[i] = 0x1a
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.FieldD) > 0 {
-		for _, msg := range m.FieldD {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameNinEmbeddedStructUnion) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.NidOptNative != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n86, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n86
-	}
-	if m.FieldA != nil {
-		dAtA[i] = 0xc2
-		i++
-		dAtA[i] = 0xc
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
-		n87, err := m.FieldA.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n87
-	}
-	if m.FieldB != nil {
-		dAtA[i] = 0x90
-		i++
-		dAtA[i] = 0xd
-		i++
-		if *m.FieldB {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i++
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *CustomNameEnum) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CustomNameEnum) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.FieldA != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.FieldA))
-	}
-	if len(m.FieldB) > 0 {
-		for _, num := range m.FieldB {
-			dAtA[i] = 0x10
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(num))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NoExtensionsMap) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NoExtensionsMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	if m.XXX_extensions != nil {
-		i += copy(dAtA[i:], m.XXX_extensions)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *Unrecognized) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Unrecognized) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field1)))
-		i += copy(dAtA[i:], *m.Field1)
-	}
-	return i, nil
-}
-
-func (m *UnrecognizedWithInner) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *UnrecognizedWithInner) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Embedded) > 0 {
-		for _, msg := range m.Embedded {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.Field2 != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
-		i += copy(dAtA[i:], *m.Field2)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *UnrecognizedWithInner_Inner) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *UnrecognizedWithInner_Inner) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	return i, nil
-}
-
-func (m *UnrecognizedWithEmbed) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *UnrecognizedWithEmbed) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.UnrecognizedWithEmbed_Embedded.Size()))
-	n88, err := m.UnrecognizedWithEmbed_Embedded.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n88
-	if m.Field2 != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
-		i += copy(dAtA[i:], *m.Field2)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *UnrecognizedWithEmbed_Embedded) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *UnrecognizedWithEmbed_Embedded) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
-	}
-	return i, nil
-}
-
-func (m *Node) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Node) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Label != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Label)))
-		i += copy(dAtA[i:], *m.Label)
-	}
-	if len(m.Children) > 0 {
-		for _, msg := range m.Children {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NonByteCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n89, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n89
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidOptNonByteCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-	n90, err := m.Field1.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
-	}
-	i += n90
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinOptNonByteCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field1 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n91, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n91
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NidRepNonByteCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NidRepNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, msg := range m.Field1 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *NinRepNonByteCustomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NinRepNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Field1) > 0 {
-		for _, msg := range m.Field1 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintThetest(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func (m *ProtoType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ProtoType) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Field2 != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintThetest(dAtA, i, uint64(len(*m.Field2)))
-		i += copy(dAtA[i:], *m.Field2)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
-}
-
-func encodeFixed64Thetest(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Thetest(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintThetest(dAtA []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return offset + 1
-}
 func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -29724,7 +29738,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -29749,20 +29763,24 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field1 = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
+			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field2 = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
+			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -29770,7 +29788,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			m.Field3 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29789,7 +29807,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			m.Field4 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29808,7 +29826,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			m.Field5 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29827,7 +29845,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			m.Field6 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29846,7 +29864,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29867,7 +29885,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29885,37 +29903,41 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
-			if iNdEx+4 > l {
+			m.Field9 = 0
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field9 = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Field9 = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
-			if iNdEx+4 > l {
+			m.Field10 = 0
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field10 = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Field10 = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
-			if iNdEx+8 > l {
+			m.Field11 = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field11 = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Field11 = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
-			if iNdEx+8 > l {
+			m.Field12 = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field12 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Field12 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -29924,7 +29946,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29944,7 +29966,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29958,7 +29980,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -29973,7 +29995,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -29986,7 +30008,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -29999,12 +30021,12 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -30027,7 +30049,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -30052,24 +30074,26 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field1 = &v
+			v2 := float64(math.Float64frombits(v))
+			m.Field1 = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field2 = &v
+			v2 := float32(math.Float32frombits(v))
+			m.Field2 = &v2
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -30077,7 +30101,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30097,7 +30121,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30117,7 +30141,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30137,7 +30161,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30157,7 +30181,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30178,7 +30202,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30198,10 +30222,10 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -30209,10 +30233,10 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -30220,10 +30244,10 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -30231,10 +30255,10 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -30244,7 +30268,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30265,7 +30289,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30279,7 +30303,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -30295,7 +30319,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -30308,7 +30332,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -30321,12 +30345,12 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -30349,7 +30373,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -30372,18 +30396,19 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30396,38 +30421,40 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30440,20 +30467,21 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -30463,7 +30491,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30480,7 +30508,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30493,7 +30521,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30503,7 +30531,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30525,7 +30553,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30542,7 +30570,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30555,7 +30583,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30565,7 +30593,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30587,7 +30615,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30604,7 +30632,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30617,7 +30645,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30627,7 +30655,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30649,7 +30677,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30666,7 +30694,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30679,7 +30707,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30689,7 +30717,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30711,7 +30739,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30729,7 +30757,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30742,7 +30770,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30752,7 +30780,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30775,7 +30803,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30793,7 +30821,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30806,7 +30834,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30816,7 +30844,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -30837,17 +30865,17 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		case 9:
 			if wireType == 5 {
 				var v uint32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30860,7 +30888,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30868,10 +30896,10 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -30881,17 +30909,17 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		case 10:
 			if wireType == 5 {
 				var v int32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30904,7 +30932,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30912,10 +30940,10 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -30925,17 +30953,17 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		case 11:
 			if wireType == 1 {
 				var v uint64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30948,7 +30976,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -30956,10 +30984,10 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -30969,17 +30997,17 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 		case 12:
 			if wireType == 1 {
 				var v int64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -30992,7 +31020,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31000,10 +31028,10 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -31015,7 +31043,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31032,7 +31060,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31045,7 +31073,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31055,7 +31083,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31079,7 +31107,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -31093,7 +31121,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -31108,7 +31136,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -31121,7 +31149,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -31132,12 +31160,12 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -31160,7 +31188,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -31183,18 +31211,19 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31207,38 +31236,40 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31251,20 +31282,21 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -31274,7 +31306,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31291,7 +31323,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31304,7 +31336,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31314,7 +31346,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31336,7 +31368,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31353,7 +31385,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31366,7 +31398,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31376,7 +31408,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31398,7 +31430,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31415,7 +31447,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31428,7 +31460,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31438,7 +31470,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31460,7 +31492,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31477,7 +31509,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31490,7 +31522,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31500,7 +31532,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31522,7 +31554,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31540,7 +31572,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31553,7 +31585,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31563,7 +31595,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31586,7 +31618,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31604,7 +31636,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31617,7 +31649,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31627,7 +31659,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31648,17 +31680,17 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		case 9:
 			if wireType == 5 {
 				var v uint32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31671,7 +31703,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31679,10 +31711,10 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -31692,17 +31724,17 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		case 10:
 			if wireType == 5 {
 				var v int32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31715,7 +31747,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31723,10 +31755,10 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -31736,17 +31768,17 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		case 11:
 			if wireType == 1 {
 				var v uint64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31759,7 +31791,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31767,10 +31799,10 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -31780,17 +31812,17 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 		case 12:
 			if wireType == 1 {
 				var v int64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31803,7 +31835,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31811,10 +31843,10 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -31826,7 +31858,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31843,7 +31875,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -31856,7 +31888,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -31866,7 +31898,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -31890,7 +31922,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -31904,7 +31936,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -31919,7 +31951,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -31932,7 +31964,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -31943,12 +31975,12 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -31971,7 +32003,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -31994,18 +32026,19 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32018,38 +32051,40 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32062,20 +32097,21 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -32085,7 +32121,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32102,7 +32138,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32115,7 +32151,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32125,7 +32161,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32147,7 +32183,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32164,7 +32200,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32177,7 +32213,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32187,7 +32223,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32209,7 +32245,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32226,7 +32262,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32239,7 +32275,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32249,7 +32285,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32271,7 +32307,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32288,7 +32324,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32301,7 +32337,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32311,7 +32347,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32333,7 +32369,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32351,7 +32387,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32364,7 +32400,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32374,7 +32410,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32397,7 +32433,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32415,7 +32451,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32428,7 +32464,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32438,7 +32474,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32459,17 +32495,17 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 9:
 			if wireType == 5 {
 				var v uint32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32482,7 +32518,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32490,10 +32526,10 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -32503,17 +32539,17 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 10:
 			if wireType == 5 {
 				var v int32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32526,7 +32562,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32534,10 +32570,10 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -32547,17 +32583,17 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 11:
 			if wireType == 1 {
 				var v uint64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32570,7 +32606,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32578,10 +32614,10 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -32591,17 +32627,17 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 12:
 			if wireType == 1 {
 				var v int64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32614,7 +32650,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32622,10 +32658,10 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -32637,7 +32673,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32654,7 +32690,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32667,7 +32703,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32677,7 +32713,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32696,12 +32732,12 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -32724,7 +32760,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -32747,18 +32783,19 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32771,38 +32808,40 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32815,20 +32854,21 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -32838,7 +32878,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32855,7 +32895,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32868,7 +32908,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32878,7 +32918,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32900,7 +32940,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32917,7 +32957,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32930,7 +32970,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -32940,7 +32980,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -32962,7 +33002,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32979,7 +33019,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -32992,7 +33032,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33002,7 +33042,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -33024,7 +33064,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33041,7 +33081,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33054,7 +33094,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33064,7 +33104,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -33086,7 +33126,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33104,7 +33144,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33117,7 +33157,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33127,7 +33167,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -33150,7 +33190,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33168,7 +33208,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33181,7 +33221,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33191,7 +33231,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -33212,17 +33252,17 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 9:
 			if wireType == 5 {
 				var v uint32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33235,7 +33275,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33243,10 +33283,10 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -33256,17 +33296,17 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 10:
 			if wireType == 5 {
 				var v int32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33279,7 +33319,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33287,10 +33327,10 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -33300,17 +33340,17 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 11:
 			if wireType == 1 {
 				var v uint64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33323,7 +33363,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33331,10 +33371,10 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -33344,17 +33384,17 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 		case 12:
 			if wireType == 1 {
 				var v int64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33367,7 +33407,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33375,10 +33415,10 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -33390,7 +33430,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33407,7 +33447,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -33420,7 +33460,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -33430,7 +33470,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -33449,12 +33489,12 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -33477,7 +33517,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -33502,20 +33542,24 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field1 = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
+			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field2 = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
+			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -33523,7 +33567,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33536,7 +33580,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33553,7 +33597,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33566,7 +33610,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33583,7 +33627,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			m.Field6 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33602,7 +33646,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33623,7 +33667,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33636,7 +33680,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33653,7 +33697,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33673,7 +33717,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33687,7 +33731,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -33702,7 +33746,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33715,7 +33759,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -33728,12 +33772,12 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -33756,7 +33800,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -33781,24 +33825,26 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field1 = &v
+			v2 := float64(math.Float64frombits(v))
+			m.Field1 = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field2 = &v
+			v2 := float32(math.Float32frombits(v))
+			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -33806,7 +33852,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33819,7 +33865,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33839,7 +33885,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33852,7 +33898,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33872,7 +33918,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33892,7 +33938,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33913,7 +33959,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33926,7 +33972,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -33946,7 +33992,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33967,7 +34013,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -33981,7 +34027,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -33997,7 +34043,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34010,7 +34056,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -34023,12 +34069,12 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -34051,7 +34097,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -34074,18 +34120,19 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34098,38 +34145,40 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34142,20 +34191,21 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -34167,7 +34217,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34180,7 +34230,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34198,7 +34248,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34211,7 +34261,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34227,7 +34277,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34244,7 +34294,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34257,7 +34307,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34267,7 +34317,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34289,7 +34339,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34307,7 +34357,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34320,7 +34370,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34330,7 +34380,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34355,7 +34405,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34368,7 +34418,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34384,7 +34434,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34401,7 +34451,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34414,7 +34464,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34424,7 +34474,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34448,7 +34498,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34462,7 +34512,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -34477,7 +34527,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34490,7 +34540,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -34501,12 +34551,12 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -34529,7 +34579,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -34552,18 +34602,19 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.Field1 = append(m.Field1, v)
+				v2 := float64(math.Float64frombits(v))
+				m.Field1 = append(m.Field1, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34576,38 +34627,40 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.Field1 = append(m.Field1, v)
+					v2 := float64(math.Float64frombits(v))
+					m.Field1 = append(m.Field1, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.Field2 = append(m.Field2, v)
+				v2 := float32(math.Float32frombits(v))
+				m.Field2 = append(m.Field2, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34620,20 +34673,21 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.Field2 = append(m.Field2, v)
+					v2 := float32(math.Float32frombits(v))
+					m.Field2 = append(m.Field2, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
@@ -34645,7 +34699,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34658,7 +34712,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34676,7 +34730,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34689,7 +34743,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34705,7 +34759,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34722,7 +34776,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34735,7 +34789,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34745,7 +34799,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34767,7 +34821,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34785,7 +34839,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34798,7 +34852,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34808,7 +34862,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34833,7 +34887,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34846,7 +34900,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -34862,7 +34916,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34879,7 +34933,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -34892,7 +34946,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -34902,7 +34956,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -34926,7 +34980,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34940,7 +34994,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -34955,7 +35009,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -34968,7 +35022,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -34979,12 +35033,12 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35007,7 +35061,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35035,7 +35089,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35048,7 +35102,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35068,7 +35122,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35081,7 +35135,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35098,7 +35152,7 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35113,12 +35167,12 @@ func (m *NidEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			m.Field210 = bool(v != 0)
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35141,7 +35195,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35169,7 +35223,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35182,7 +35236,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35202,7 +35256,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35215,7 +35269,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35235,7 +35289,7 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35251,12 +35305,12 @@ func (m *NinEmbeddedStruct) Unmarshal(dAtA []byte) error {
 			m.Field210 = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35279,7 +35333,7 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35307,7 +35361,7 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35320,7 +35374,7 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35337,7 +35391,7 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35350,7 +35404,7 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35363,12 +35417,12 @@ func (m *NidNestedStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35391,7 +35445,7 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35419,7 +35473,7 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35432,7 +35486,7 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35452,7 +35506,7 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35465,7 +35519,7 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -35478,12 +35532,12 @@ func (m *NinNestedStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35506,7 +35560,7 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35534,7 +35588,7 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35547,7 +35601,7 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35564,7 +35618,7 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35577,7 +35631,7 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35589,12 +35643,12 @@ func (m *NidOptCustom) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35617,7 +35671,7 @@ func (m *CustomDash) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35645,7 +35699,7 @@ func (m *CustomDash) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35658,7 +35712,7 @@ func (m *CustomDash) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35672,12 +35726,12 @@ func (m *CustomDash) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35700,7 +35754,7 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35728,7 +35782,7 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35741,7 +35795,7 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35760,7 +35814,7 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35773,7 +35827,7 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35787,12 +35841,12 @@ func (m *NinOptCustom) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35815,7 +35869,7 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35843,7 +35897,7 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35856,7 +35910,7 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35875,7 +35929,7 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35888,7 +35942,7 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35902,12 +35956,12 @@ func (m *NidRepCustom) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -35930,7 +35984,7 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -35958,7 +36012,7 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -35971,7 +36025,7 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -35990,7 +36044,7 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36003,7 +36057,7 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -36017,12 +36071,12 @@ func (m *NinRepCustom) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36045,7 +36099,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -36070,24 +36124,26 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field1 = &v
+			v2 := float64(math.Float64frombits(v))
+			m.Field1 = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field2 = &v
+			v2 := float32(math.Float32frombits(v))
+			m.Field2 = &v2
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -36095,7 +36151,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36115,7 +36171,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36135,7 +36191,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36155,7 +36211,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36175,7 +36231,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36196,7 +36252,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36210,7 +36266,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -36226,7 +36282,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36239,7 +36295,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -36252,12 +36308,12 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36280,7 +36336,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -36305,24 +36361,26 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field1 = &v
+			v2 := float64(math.Float64frombits(v))
+			m.Field1 = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field2 = &v
+			v2 := float32(math.Float32frombits(v))
+			m.Field2 = &v2
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -36330,7 +36388,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36343,7 +36401,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36363,7 +36421,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36376,7 +36434,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36396,7 +36454,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36416,7 +36474,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36437,7 +36495,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36458,7 +36516,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36472,7 +36530,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -36488,7 +36546,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36501,7 +36559,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -36514,12 +36572,12 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36542,7 +36600,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -36570,7 +36628,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36583,7 +36641,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36603,7 +36661,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36616,7 +36674,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36636,7 +36694,7 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36652,12 +36710,12 @@ func (m *NinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			m.Field210 = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36680,7 +36738,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -36708,7 +36766,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36721,7 +36779,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36741,7 +36799,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36754,7 +36812,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36774,7 +36832,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36787,7 +36845,7 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36802,12 +36860,12 @@ func (m *NinNestedStructUnion) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36830,7 +36888,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -36858,7 +36916,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36871,7 +36929,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36891,7 +36949,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36904,7 +36962,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36924,7 +36982,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -36937,7 +36995,7 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -36952,12 +37010,12 @@ func (m *Tree) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -36980,7 +37038,7 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37008,7 +37066,7 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37021,7 +37079,7 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37038,7 +37096,7 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37051,7 +37109,7 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37063,12 +37121,12 @@ func (m *OrBranch) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37091,7 +37149,7 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37119,7 +37177,7 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37132,7 +37190,7 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37149,7 +37207,7 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37162,7 +37220,7 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37174,12 +37232,12 @@ func (m *AndBranch) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37202,7 +37260,7 @@ func (m *Leaf) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37230,7 +37288,7 @@ func (m *Leaf) Unmarshal(dAtA []byte) error {
 			m.Value = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37249,7 +37307,7 @@ func (m *Leaf) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37263,7 +37321,7 @@ func (m *Leaf) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -37273,12 +37331,12 @@ func (m *Leaf) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37301,7 +37359,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37329,7 +37387,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37342,7 +37400,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37362,7 +37420,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37375,7 +37433,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37395,7 +37453,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37408,7 +37466,7 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37423,12 +37481,12 @@ func (m *DeepTree) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37451,7 +37509,7 @@ func (m *ADeepBranch) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37479,7 +37537,7 @@ func (m *ADeepBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37492,7 +37550,7 @@ func (m *ADeepBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37504,12 +37562,12 @@ func (m *ADeepBranch) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37532,7 +37590,7 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37560,7 +37618,7 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37573,7 +37631,7 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37590,7 +37648,7 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37603,7 +37661,7 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37615,12 +37673,12 @@ func (m *AndDeepBranch) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37643,7 +37701,7 @@ func (m *DeepLeaf) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37671,7 +37729,7 @@ func (m *DeepLeaf) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37684,7 +37742,7 @@ func (m *DeepLeaf) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -37696,12 +37754,12 @@ func (m *DeepLeaf) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37724,7 +37782,7 @@ func (m *Nil) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37747,12 +37805,12 @@ func (m *Nil) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37775,7 +37833,7 @@ func (m *NidOptEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37803,7 +37861,7 @@ func (m *NidOptEnum) Unmarshal(dAtA []byte) error {
 			m.Field1 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37817,12 +37875,12 @@ func (m *NidOptEnum) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37845,7 +37903,7 @@ func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37873,7 +37931,7 @@ func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
 			var v TheTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37893,7 +37951,7 @@ func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
 			var v YetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37913,7 +37971,7 @@ func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
 			var v YetYetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -37928,12 +37986,12 @@ func (m *NinOptEnum) Unmarshal(dAtA []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -37956,7 +38014,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -37982,7 +38040,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var v TheTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -37999,7 +38057,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38012,7 +38070,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38022,7 +38080,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					var v TheTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38044,7 +38102,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var v YetAnotherTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38061,7 +38119,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38074,7 +38132,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38084,7 +38142,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					var v YetAnotherTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38106,7 +38164,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var v YetYetAnotherTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38123,7 +38181,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38136,7 +38194,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38146,7 +38204,7 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 					var v YetYetAnotherTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38165,12 +38223,12 @@ func (m *NidRepEnum) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38193,7 +38251,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38219,7 +38277,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var v TheTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38236,7 +38294,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38249,7 +38307,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38259,7 +38317,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					var v TheTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38281,7 +38339,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var v YetAnotherTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38298,7 +38356,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38311,7 +38369,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38321,7 +38379,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					var v YetAnotherTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38343,7 +38401,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var v YetYetAnotherTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38360,7 +38418,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -38373,7 +38431,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -38383,7 +38441,7 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 					var v YetYetAnotherTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -38402,12 +38460,12 @@ func (m *NinRepEnum) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38430,7 +38488,7 @@ func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38458,7 +38516,7 @@ func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v TheTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38478,7 +38536,7 @@ func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v YetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38498,7 +38556,7 @@ func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v YetYetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38513,12 +38571,12 @@ func (m *NinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38541,7 +38599,7 @@ func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38569,7 +38627,7 @@ func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
 			var v AnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38589,7 +38647,7 @@ func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
 			var v YetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38609,7 +38667,7 @@ func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
 			var v YetYetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38624,12 +38682,12 @@ func (m *AnotherNinOptEnum) Unmarshal(dAtA []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38652,7 +38710,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38680,7 +38738,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v AnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38700,7 +38758,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v YetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38720,7 +38778,7 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			var v YetYetAnotherTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38735,12 +38793,12 @@ func (m *AnotherNinOptEnumDefault) Unmarshal(dAtA []byte) error {
 			m.Field3 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38763,7 +38821,7 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38788,19 +38846,21 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Time1", wireType)
 			}
-			if iNdEx+8 > l {
+			m.Time1 = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time1 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Time1 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 2:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Time2", wireType)
 			}
-			if iNdEx+8 > l {
+			m.Time2 = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time2 = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.Time2 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 3:
 			if wireType != 2 {
@@ -38809,7 +38869,7 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38822,7 +38882,7 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -38835,12 +38895,12 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -38863,7 +38923,7 @@ func (m *MyExtendable) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38891,7 +38951,7 @@ func (m *MyExtendable) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38915,12 +38975,12 @@ func (m *MyExtendable) Unmarshal(dAtA []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -38929,12 +38989,12 @@ func (m *MyExtendable) Unmarshal(dAtA []byte) error {
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -38958,7 +39018,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -38986,7 +39046,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -38999,7 +39059,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39019,7 +39079,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39039,7 +39099,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39063,12 +39123,12 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -39077,12 +39137,12 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -39106,7 +39166,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39134,7 +39194,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39154,7 +39214,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 			var v NestedDefinition_NestedEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39174,7 +39234,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39187,7 +39247,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39207,7 +39267,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39220,7 +39280,7 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39235,12 +39295,12 @@ func (m *NestedDefinition) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39263,7 +39323,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39289,10 +39349,10 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field NestedField1", wireType)
 			}
 			var v uint64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.NestedField1 = &v
 		case 2:
@@ -39302,7 +39362,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39315,7 +39375,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39330,12 +39390,12 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39358,7 +39418,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(dAtA []byte) 
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39386,7 +39446,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(dAtA []byte) 
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39400,7 +39460,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(dAtA []byte) 
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -39411,12 +39471,12 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(dAtA []byte) 
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39439,7 +39499,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39467,7 +39527,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39480,7 +39540,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39500,7 +39560,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 			var v NestedDefinition_NestedEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39520,7 +39580,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39533,7 +39593,7 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39548,12 +39608,12 @@ func (m *NestedScope) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39576,7 +39636,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39601,24 +39661,26 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field1", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.Field1 = &v
+			v2 := float64(math.Float64frombits(v))
+			m.Field1 = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field2", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.Field2 = &v
+			v2 := float32(math.Float32frombits(v))
+			m.Field2 = &v2
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field3", wireType)
@@ -39626,7 +39688,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39646,7 +39708,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39666,7 +39728,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39686,7 +39748,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39706,7 +39768,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39727,7 +39789,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39747,10 +39809,10 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field9", wireType)
 			}
 			var v uint32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -39758,10 +39820,10 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field10", wireType)
 			}
 			var v int32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -39769,10 +39831,10 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field11", wireType)
 			}
 			var v uint64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -39780,10 +39842,10 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field Field12", wireType)
 			}
 			var v int64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -39793,7 +39855,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39814,7 +39876,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39828,7 +39890,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -39844,7 +39906,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39857,7 +39919,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -39870,12 +39932,12 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39898,7 +39960,7 @@ func (m *CustomContainer) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -39926,7 +39988,7 @@ func (m *CustomContainer) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -39939,7 +40001,7 @@ func (m *CustomContainer) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -39951,12 +40013,12 @@ func (m *CustomContainer) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -39979,7 +40041,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -40004,20 +40066,24 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldA", wireType)
 			}
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldA = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
+			m.FieldA = float64(math.Float64frombits(v))
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldB", wireType)
 			}
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldB = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
+			m.FieldB = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldC", wireType)
@@ -40025,7 +40091,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			m.FieldC = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40044,7 +40110,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			m.FieldD = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40063,7 +40129,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			m.FieldE = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40082,7 +40148,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			m.FieldF = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40101,7 +40167,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40122,7 +40188,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40140,37 +40206,41 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldI", wireType)
 			}
-			if iNdEx+4 > l {
+			m.FieldI = 0
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldI = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.FieldI = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldJ", wireType)
 			}
-			if iNdEx+4 > l {
+			m.FieldJ = 0
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldJ = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.FieldJ = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldK", wireType)
 			}
-			if iNdEx+8 > l {
+			m.FieldK = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldK = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.FieldK = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldL", wireType)
 			}
-			if iNdEx+8 > l {
+			m.FieldL = 0
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldL = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			m.FieldL = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -40179,7 +40249,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40199,7 +40269,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40213,7 +40283,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -40228,7 +40298,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40241,7 +40311,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -40254,12 +40324,12 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -40282,7 +40352,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -40307,24 +40377,26 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldA", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.FieldA = &v
+			v2 := float64(math.Float64frombits(v))
+			m.FieldA = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldB", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.FieldB = &v
+			v2 := float32(math.Float32frombits(v))
+			m.FieldB = &v2
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldC", wireType)
@@ -40332,7 +40404,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40352,7 +40424,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40372,7 +40444,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40392,7 +40464,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40412,7 +40484,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40433,7 +40505,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40453,10 +40525,10 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldI", wireType)
 			}
 			var v uint32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.FieldI = &v
 		case 10:
@@ -40464,10 +40536,10 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldJ", wireType)
 			}
 			var v int32
-			if iNdEx+4 > l {
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.FieldJ = &v
 		case 11:
@@ -40475,10 +40547,10 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldK", wireType)
 			}
 			var v uint64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.FieldK = &v
 		case 12:
@@ -40486,10 +40558,10 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 				return fmt.Errorf("proto: wrong wireType = %d for field FielL", wireType)
 			}
 			var v int64
-			if iNdEx+8 > l {
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.FielL = &v
 		case 13:
@@ -40499,7 +40571,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40520,7 +40592,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40534,7 +40606,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -40550,7 +40622,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -40563,7 +40635,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -40576,12 +40648,12 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -40604,7 +40676,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -40627,18 +40699,19 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType == 1 {
-				var v float64
-				if iNdEx+8 > l {
+				var v uint64
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
-				m.FieldA = append(m.FieldA, v)
+				v2 := float64(math.Float64frombits(v))
+				m.FieldA = append(m.FieldA, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40651,38 +40724,40 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float64
-					if iNdEx+8 > l {
+					var v uint64
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					m.FieldA = append(m.FieldA, v)
+					v2 := float64(math.Float64frombits(v))
+					m.FieldA = append(m.FieldA, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldA", wireType)
 			}
 		case 2:
 			if wireType == 5 {
-				var v float32
-				if iNdEx+4 > l {
+				var v uint32
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
-				m.FieldB = append(m.FieldB, v)
+				v2 := float32(math.Float32frombits(v))
+				m.FieldB = append(m.FieldB, v2)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40695,20 +40770,21 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				for iNdEx < postIndex {
-					var v float32
-					if iNdEx+4 > l {
+					var v uint32
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
-					m.FieldB = append(m.FieldB, v)
+					v2 := float32(math.Float32frombits(v))
+					m.FieldB = append(m.FieldB, v2)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldB", wireType)
@@ -40718,7 +40794,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40735,7 +40811,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40748,7 +40824,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -40758,7 +40834,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -40780,7 +40856,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40797,7 +40873,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40810,7 +40886,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -40820,7 +40896,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v int64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -40842,7 +40918,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40859,7 +40935,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40872,7 +40948,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -40882,7 +40958,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -40904,7 +40980,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40921,7 +40997,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40934,7 +41010,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -40944,7 +41020,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -40966,7 +41042,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v int32
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40984,7 +41060,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -40997,7 +41073,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41007,7 +41083,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v int32
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -41030,7 +41106,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41048,7 +41124,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41061,7 +41137,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41071,7 +41147,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v uint64
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -41092,17 +41168,17 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		case 9:
 			if wireType == 5 {
 				var v uint32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.FieldI = append(m.FieldI, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41115,7 +41191,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41123,10 +41199,10 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.FieldI = append(m.FieldI, v)
 				}
@@ -41136,17 +41212,17 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		case 10:
 			if wireType == 5 {
 				var v int32
-				if iNdEx+4 > l {
+				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.FieldJ = append(m.FieldJ, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41159,7 +41235,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41167,10 +41243,10 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int32
-					if iNdEx+4 > l {
+					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int32)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.FieldJ = append(m.FieldJ, v)
 				}
@@ -41180,17 +41256,17 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		case 11:
 			if wireType == 1 {
 				var v uint64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.FieldK = append(m.FieldK, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41203,7 +41279,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41211,10 +41287,10 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v uint64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*uint64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.FieldK = append(m.FieldK, v)
 				}
@@ -41224,17 +41300,17 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 		case 12:
 			if wireType == 1 {
 				var v int64
-				if iNdEx+8 > l {
+				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.FieldL = append(m.FieldL, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41247,7 +41323,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41255,10 +41331,10 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				}
 				for iNdEx < postIndex {
 					var v int64
-					if iNdEx+8 > l {
+					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = *(*int64)(unsafe.Pointer(&dAtA[iNdEx]))
+					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.FieldL = append(m.FieldL, v)
 				}
@@ -41270,7 +41346,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var v int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41287,7 +41363,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -41300,7 +41376,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -41310,7 +41386,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					var v int
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -41334,7 +41410,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41348,7 +41424,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -41363,7 +41439,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41376,7 +41452,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41387,12 +41463,12 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -41415,7 +41491,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -41440,24 +41516,26 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			if wireType != 1 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldA", wireType)
 			}
-			var v float64
-			if iNdEx+8 > l {
+			var v uint64
+			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float64)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
-			m.FieldA = &v
+			v2 := float64(math.Float64frombits(v))
+			m.FieldA = &v2
 		case 2:
 			if wireType != 5 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldB", wireType)
 			}
-			var v float32
-			if iNdEx+4 > l {
+			var v uint32
+			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = *(*float32)(unsafe.Pointer(&dAtA[iNdEx]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
-			m.FieldB = &v
+			v2 := float32(math.Float32frombits(v))
+			m.FieldB = &v2
 		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FieldC", wireType)
@@ -41465,7 +41543,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41478,7 +41556,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -41498,7 +41576,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41511,7 +41589,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -41529,7 +41607,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41549,7 +41627,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var v int32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41570,7 +41648,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41583,7 +41661,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -41603,7 +41681,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41624,7 +41702,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41638,7 +41716,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -41654,7 +41732,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41667,7 +41745,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41680,12 +41758,12 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -41708,7 +41786,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -41736,7 +41814,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41749,7 +41827,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41768,7 +41846,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41781,7 +41859,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41800,7 +41878,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41813,7 +41891,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41832,7 +41910,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 			var byteLen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41845,7 +41923,7 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if byteLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + byteLen
 			if postIndex > l {
@@ -41859,12 +41937,12 @@ func (m *CustomNameCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -41887,7 +41965,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -41915,7 +41993,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41928,7 +42006,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -41948,7 +42026,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41961,7 +42039,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -41981,7 +42059,7 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			var v int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -41997,12 +42075,12 @@ func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(dAtA []byte) error {
 			m.FieldB = &b
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42025,7 +42103,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42053,7 +42131,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 			var v TheTestEnum
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42071,7 +42149,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 				var v TheTestEnum
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -42088,7 +42166,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return ErrIntOverflowThetestUnsafe
+						return ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return io.ErrUnexpectedEOF
@@ -42101,7 +42179,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 					}
 				}
 				if packedLen < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
@@ -42111,7 +42189,7 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 					var v TheTestEnum
 					for shift := uint(0); ; shift += 7 {
 						if shift >= 64 {
-							return ErrIntOverflowThetestUnsafe
+							return ErrIntOverflowThetest
 						}
 						if iNdEx >= l {
 							return io.ErrUnexpectedEOF
@@ -42130,12 +42208,12 @@ func (m *CustomNameEnum) Unmarshal(dAtA []byte) error {
 			}
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42158,7 +42236,7 @@ func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42186,7 +42264,7 @@ func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
 			var v int64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42210,12 +42288,12 @@ func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
 					}
 				}
 				iNdEx -= sizeOfWire
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -42224,12 +42302,12 @@ func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
-				skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+				skippy, err := skipThetest(dAtA[iNdEx:])
 				if err != nil {
 					return err
 				}
 				if skippy < 0 {
-					return ErrInvalidLengthThetestUnsafe
+					return ErrInvalidLengthThetest
 				}
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
@@ -42253,7 +42331,7 @@ func (m *Unrecognized) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42281,7 +42359,7 @@ func (m *Unrecognized) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42295,7 +42373,7 @@ func (m *Unrecognized) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -42306,12 +42384,12 @@ func (m *Unrecognized) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42333,7 +42411,7 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42361,7 +42439,7 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42374,7 +42452,7 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -42392,7 +42470,7 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42406,7 +42484,7 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -42417,12 +42495,12 @@ func (m *UnrecognizedWithInner) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42445,7 +42523,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42473,7 +42551,7 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42488,12 +42566,12 @@ func (m *UnrecognizedWithInner_Inner) Unmarshal(dAtA []byte) error {
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42515,7 +42593,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42543,7 +42621,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42556,7 +42634,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -42573,7 +42651,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42587,7 +42665,7 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -42598,12 +42676,12 @@ func (m *UnrecognizedWithEmbed) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42626,7 +42704,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42654,7 +42732,7 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(dAtA []byte) error {
 			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42669,12 +42747,12 @@ func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(dAtA []byte) error {
 			m.Field1 = &v
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42696,7 +42774,7 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42724,7 +42802,7 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42738,7 +42816,7 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -42754,7 +42832,7 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42767,7 +42845,7 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -42780,12 +42858,12 @@ func (m *Node) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42808,7 +42886,7 @@ func (m *NonByteCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42836,7 +42914,7 @@ func (m *NonByteCustomType) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42849,7 +42927,7 @@ func (m *NonByteCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -42864,12 +42942,12 @@ func (m *NonByteCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42892,7 +42970,7 @@ func (m *NidOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -42920,7 +42998,7 @@ func (m *NidOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -42933,7 +43011,7 @@ func (m *NidOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -42945,12 +43023,12 @@ func (m *NidOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -42973,7 +43051,7 @@ func (m *NinOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -43001,7 +43079,7 @@ func (m *NinOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -43014,7 +43092,7 @@ func (m *NinOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -43029,12 +43107,12 @@ func (m *NinOptNonByteCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -43057,7 +43135,7 @@ func (m *NidRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -43085,7 +43163,7 @@ func (m *NidRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -43098,7 +43176,7 @@ func (m *NidRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -43111,12 +43189,12 @@ func (m *NidRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -43139,7 +43217,7 @@ func (m *NinRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -43167,7 +43245,7 @@ func (m *NinRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -43180,7 +43258,7 @@ func (m *NinRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			if msglen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + msglen
 			if postIndex > l {
@@ -43193,12 +43271,12 @@ func (m *NinRepNonByteCustomType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -43221,7 +43299,7 @@ func (m *ProtoType) Unmarshal(dAtA []byte) error {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return ErrIntOverflowThetestUnsafe
+				return ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return io.ErrUnexpectedEOF
@@ -43249,7 +43327,7 @@ func (m *ProtoType) Unmarshal(dAtA []byte) error {
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return ErrIntOverflowThetestUnsafe
+					return ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
@@ -43263,7 +43341,7 @@ func (m *ProtoType) Unmarshal(dAtA []byte) error {
 			}
 			intStringLen := int(stringLen)
 			if intStringLen < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			postIndex := iNdEx + intStringLen
 			if postIndex > l {
@@ -43274,12 +43352,12 @@ func (m *ProtoType) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
-			skippy, err := skipThetestUnsafe(dAtA[iNdEx:])
+			skippy, err := skipThetest(dAtA[iNdEx:])
 			if err != nil {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthThetestUnsafe
+				return ErrInvalidLengthThetest
 			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
@@ -43294,14 +43372,14 @@ func (m *ProtoType) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func skipThetestUnsafe(dAtA []byte) (n int, err error) {
+func skipThetest(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
 			if shift >= 64 {
-				return 0, ErrIntOverflowThetestUnsafe
+				return 0, ErrIntOverflowThetest
 			}
 			if iNdEx >= l {
 				return 0, io.ErrUnexpectedEOF
@@ -43318,7 +43396,7 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 		case 0:
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowThetestUnsafe
+					return 0, ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -43336,7 +43414,7 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 			var length int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
-					return 0, ErrIntOverflowThetestUnsafe
+					return 0, ErrIntOverflowThetest
 				}
 				if iNdEx >= l {
 					return 0, io.ErrUnexpectedEOF
@@ -43350,7 +43428,7 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 			}
 			iNdEx += length
 			if length < 0 {
-				return 0, ErrInvalidLengthThetestUnsafe
+				return 0, ErrInvalidLengthThetest
 			}
 			return iNdEx, nil
 		case 3:
@@ -43359,7 +43437,7 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 				var start int = iNdEx
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
-						return 0, ErrIntOverflowThetestUnsafe
+						return 0, ErrIntOverflowThetest
 					}
 					if iNdEx >= l {
 						return 0, io.ErrUnexpectedEOF
@@ -43375,7 +43453,7 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 				if innerWireType == 4 {
 					break
 				}
-				next, err := skipThetestUnsafe(dAtA[start:])
+				next, err := skipThetest(dAtA[start:])
 				if err != nil {
 					return 0, err
 				}
@@ -43395,8 +43473,8 @@ func skipThetestUnsafe(dAtA []byte) (n int, err error) {
 }
 
 var (
-	ErrInvalidLengthThetestUnsafe = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowThetestUnsafe   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthThetest = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowThetest   = fmt.Errorf("proto: integer overflow")
 )
 
 func init() { proto.RegisterFile("combos/unsafeboth/thetest.proto", fileDescriptorThetest) }
