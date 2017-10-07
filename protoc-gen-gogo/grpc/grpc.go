@@ -36,7 +36,6 @@ package grpc
 
 import (
 	"fmt"
-	"path"
 	"strconv"
 	"strings"
 
@@ -129,12 +128,8 @@ func (g *grpc) GenerateImports(file *generator.FileDescriptor) {
 	if len(file.FileDescriptorProto.Service) == 0 {
 		return
 	}
-	grpcImports := []string{
-		path.Join(g.gen.ImportPrefix, contextPkgPath),
-		path.Join(g.gen.ImportPrefix, grpcPkgPath),
-	}
 	imports := generator.NewPluginImports(g.gen)
-	for _, i := range grpcImports {
+	for _, i := range []string{contextPkgPath, grpcPkgPath} {
 		imports.NewImport(i).Use()
 	}
 	imports.GenerateImports(file)
