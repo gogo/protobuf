@@ -18,10 +18,12 @@ package unmarshalmerge
 import testing "testing"
 import rand "math/rand"
 import time "time"
+
 import unsafe "unsafe"
+import fmt "fmt"
+
 import proto "github.com/gogo/protobuf/proto"
 import jsonpb "github.com/gogo/protobuf/jsonpb"
-import fmt "fmt"
 import parser "go/parser"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
@@ -106,10 +108,6 @@ func BenchmarkBigProtoUnmarshal(b *testing.B) {
 }
 
 func TestBigUnsafeProto(t *testing.T) {
-	var bigendian uint32 = 0x01020304
-	if *(*byte)(unsafe.Pointer(&bigendian)) == 1 {
-		t.Skip("unsafe does not work on big endian architectures")
-	}
 	seed := time.Now().UnixNano()
 	popr := rand.New(rand.NewSource(seed))
 	p := NewPopulatedBigUnsafe(popr, false)

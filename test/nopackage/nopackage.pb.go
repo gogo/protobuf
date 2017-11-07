@@ -16,6 +16,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import encoding_binary "encoding/binary"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -76,30 +78,13 @@ func (m *M) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x11
 			i++
-			i = encodeFixed64Nopackage(dAtA, i, uint64(math.Float64bits(float64(v))))
+			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			i += 8
 		}
 	}
 	return i, nil
 }
 
-func encodeFixed64Nopackage(dAtA []byte, offset int, v uint64) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	dAtA[offset+4] = uint8(v >> 32)
-	dAtA[offset+5] = uint8(v >> 40)
-	dAtA[offset+6] = uint8(v >> 48)
-	dAtA[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Nopackage(dAtA []byte, offset int, v uint32) int {
-	dAtA[offset] = uint8(v)
-	dAtA[offset+1] = uint8(v >> 8)
-	dAtA[offset+2] = uint8(v >> 16)
-	dAtA[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
 func encodeVarintNopackage(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
@@ -245,15 +230,8 @@ func (m *M) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
+					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
-					mapvaluetemp = uint64(dAtA[iNdEx-8])
-					mapvaluetemp |= uint64(dAtA[iNdEx-7]) << 8
-					mapvaluetemp |= uint64(dAtA[iNdEx-6]) << 16
-					mapvaluetemp |= uint64(dAtA[iNdEx-5]) << 24
-					mapvaluetemp |= uint64(dAtA[iNdEx-4]) << 32
-					mapvaluetemp |= uint64(dAtA[iNdEx-3]) << 40
-					mapvaluetemp |= uint64(dAtA[iNdEx-2]) << 48
-					mapvaluetemp |= uint64(dAtA[iNdEx-1]) << 56
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
 					iNdEx = entryPreIndex

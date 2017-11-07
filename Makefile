@@ -144,8 +144,9 @@ testall:
 	make tests
 
 bench:
+	go get golang.org/x/tools/cmd/benchcmp
 	(cd test/mixbench && go build .)
-	(cd test/mixbench && ./mixbench)
+	./test/mixbench/mixbench
 
 contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
