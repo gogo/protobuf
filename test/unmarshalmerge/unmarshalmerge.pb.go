@@ -26,7 +26,7 @@ import strings "strings"
 import reflect "reflect"
 
 import io "io"
-import encoding_binary "encoding/binary"
+import binary "encoding/binary"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -1321,7 +1321,7 @@ func (m *IntMerge) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Fixed64 = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Fixed64 = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 8:
 			if wireType != 5 {
@@ -1331,7 +1331,7 @@ func (m *IntMerge) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Fixed32 = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.Fixed32 = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 9:
 			if wireType != 5 {
@@ -1341,7 +1341,7 @@ func (m *IntMerge) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Sfixed32 = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.Sfixed32 = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			hasFields[0] |= uint64(0x00000008)
 		case 10:
@@ -1352,7 +1352,7 @@ func (m *IntMerge) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Sfixed64 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Sfixed64 = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 11:
 			if wireType != 0 {

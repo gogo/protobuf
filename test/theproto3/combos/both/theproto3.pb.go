@@ -39,7 +39,7 @@ import strings "strings"
 import reflect "reflect"
 import sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import encoding_binary "encoding/binary"
+import binary "encoding/binary"
 
 import io "io"
 
@@ -3318,7 +3318,7 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 	if m.Score != 0 {
 		dAtA[i] = 0x4d
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Score))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Score))))
 		i += 4
 	}
 	if len(m.Terrain) > 0 {
@@ -3440,7 +3440,7 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
 			i += 8
 		}
 	}
@@ -3457,7 +3457,7 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
 			i += 4
 		}
 	}
@@ -3560,11 +3560,11 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0xd
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
 			i += 4
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
 			i += 4
 		}
 	}
@@ -3577,11 +3577,11 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0xd
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
 			i += 4
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
 			i += 4
 		}
 	}
@@ -3594,11 +3594,11 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0x9
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
 			i += 8
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
 			i += 8
 		}
 	}
@@ -3611,11 +3611,11 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0x9
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
 			i += 8
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
 			i += 8
 		}
 	}
@@ -3768,7 +3768,7 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
 			i += 8
 		}
 	}
@@ -3790,7 +3790,7 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(v))))
 			i += 4
 		}
 	}
@@ -3928,11 +3928,11 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0xd
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
 			i += 4
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
 			i += 4
 		}
 	}
@@ -3950,11 +3950,11 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0xd
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(k))
 			i += 4
 			dAtA[i] = 0x15
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(v))
 			i += 4
 		}
 	}
@@ -3972,11 +3972,11 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0x9
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
 			i += 8
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
 			i += 8
 		}
 	}
@@ -3994,11 +3994,11 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintTheproto3(dAtA, i, uint64(mapSize))
 			dAtA[i] = 0x9
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(k))
 			i += 8
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(v))
 			i += 8
 		}
 	}
@@ -4249,7 +4249,7 @@ func (m *FloatingPoint) MarshalTo(dAtA []byte) (int, error) {
 	if m.F != 0 {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.F))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.F))))
 		i += 8
 	}
 	return i, nil
@@ -4337,7 +4337,7 @@ func (m *ContainsNestedMap_NestedMap) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], k)
 			dAtA[i] = 0x11
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(v))))
 			i += 8
 		}
 	}
@@ -6242,7 +6242,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Score = float32(math.Float32frombits(v))
 		case 10:
@@ -6711,7 +6711,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvaluetemp = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
@@ -6811,7 +6811,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvaluetemp = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
@@ -7472,13 +7472,13 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapkey = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvalue = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else {
 					iNdEx = entryPreIndex
@@ -7550,13 +7550,13 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapkey = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvalue = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else {
 					iNdEx = entryPreIndex
@@ -7628,13 +7628,13 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapkey = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvalue = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else {
 					iNdEx = entryPreIndex
@@ -7706,13 +7706,13 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapkey = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvalue = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else {
 					iNdEx = entryPreIndex
@@ -8428,7 +8428,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvaluetemp = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {
@@ -8528,7 +8528,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvaluetemp = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvaluetemp = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					mapvalue = math.Float32frombits(mapvaluetemp)
 				} else {
@@ -9189,13 +9189,13 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapkey = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvalue = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else {
 					iNdEx = entryPreIndex
@@ -9267,13 +9267,13 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapkey = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else if fieldNum == 2 {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					mapvalue = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 				} else {
 					iNdEx = entryPreIndex
@@ -9345,13 +9345,13 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapkey = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvalue = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else {
 					iNdEx = entryPreIndex
@@ -9423,13 +9423,13 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapkey = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapkey = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else if fieldNum == 2 {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvalue = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 				} else {
 					iNdEx = entryPreIndex
@@ -10455,7 +10455,7 @@ func (m *FloatingPoint) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.F = float64(math.Float64frombits(v))
 		default:
@@ -10750,7 +10750,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvaluetemp = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					mapvaluetemp = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					mapvalue = math.Float64frombits(mapvaluetemp)
 				} else {

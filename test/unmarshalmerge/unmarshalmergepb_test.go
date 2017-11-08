@@ -18,12 +18,10 @@ package unmarshalmerge
 import testing "testing"
 import rand "math/rand"
 import time "time"
-
-import unsafe "unsafe"
-import fmt "fmt"
-
 import proto "github.com/gogo/protobuf/proto"
 import jsonpb "github.com/gogo/protobuf/jsonpb"
+import unsafe "unsafe"
+import fmt "fmt"
 import parser "go/parser"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
