@@ -13,13 +13,13 @@ It has these top-level messages:
 */
 package proto
 
-import proto "github.com/gogo/protobuf/proto"
+import proto1 "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
+var _ = proto1.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
@@ -27,14 +27,14 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
 	*Bar `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
 }
 
 func (m *Foo) Reset()                    { *m = Foo{} }
-func (m *Foo) String() string            { return proto.CompactTextString(m) }
+func (m *Foo) String() string            { return proto1.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{0} }
 
@@ -46,7 +46,7 @@ type Bar struct {
 }
 
 func (m *Bar) Reset()                    { *m = Bar{} }
-func (m *Bar) String() string            { return proto.CompactTextString(m) }
+func (m *Bar) String() string            { return proto1.CompactTextString(m) }
 func (*Bar) ProtoMessage()               {}
 func (*Bar) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{1} }
 
@@ -87,14 +87,14 @@ func (m *Bar) GetB() bool {
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*Bar) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+func (*Bar) XXX_OneofFuncs() (func(msg proto1.Message, b *proto1.Buffer) error, func(msg proto1.Message, tag, wire int, b *proto1.Buffer) (bool, error), func(msg proto1.Message) (n int), []interface{}) {
 	return _Bar_OneofMarshaler, _Bar_OneofUnmarshaler, _Bar_OneofSizer, []interface{}{
 		(*Bar_A)(nil),
 		(*Bar_B)(nil),
 	}
 }
 
-func _Bar_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+func _Bar_OneofMarshaler(msg proto1.Message, b *proto1.Buffer) error {
 	m := msg.(*Bar)
 	// pick
 	switch x := m.Pick.(type) {
@@ -103,14 +103,14 @@ func _Bar_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 		if x.A {
 			t = 1
 		}
-		_ = b.EncodeVarint(11<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(11<<3 | proto1.WireVarint)
 		_ = b.EncodeVarint(t)
 	case *Bar_B:
 		t := uint64(0)
 		if x.B {
 			t = 1
 		}
-		_ = b.EncodeVarint(12<<3 | proto.WireVarint)
+		_ = b.EncodeVarint(12<<3 | proto1.WireVarint)
 		_ = b.EncodeVarint(t)
 	case nil:
 	default:
@@ -119,19 +119,19 @@ func _Bar_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	return nil
 }
 
-func _Bar_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+func _Bar_OneofUnmarshaler(msg proto1.Message, tag, wire int, b *proto1.Buffer) (bool, error) {
 	m := msg.(*Bar)
 	switch tag {
 	case 11: // pick.a
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
+		if wire != proto1.WireVarint {
+			return true, proto1.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
 		m.Pick = &Bar_A{x != 0}
 		return true, err
 	case 12: // pick.b
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
+		if wire != proto1.WireVarint {
+			return true, proto1.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
 		m.Pick = &Bar_B{x != 0}
@@ -141,15 +141,15 @@ func _Bar_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (b
 	}
 }
 
-func _Bar_OneofSizer(msg proto.Message) (n int) {
+func _Bar_OneofSizer(msg proto1.Message) (n int) {
 	m := msg.(*Bar)
 	// pick
 	switch x := m.Pick.(type) {
 	case *Bar_A:
-		n += proto.SizeVarint(11<<3 | proto.WireVarint)
+		n += proto1.SizeVarint(11<<3 | proto1.WireVarint)
 		n += 1
 	case *Bar_B:
-		n += proto.SizeVarint(12<<3 | proto.WireVarint)
+		n += proto1.SizeVarint(12<<3 | proto1.WireVarint)
 		n += 1
 	case nil:
 	default:
@@ -159,8 +159,8 @@ func _Bar_OneofSizer(msg proto.Message) (n int) {
 }
 
 func init() {
-	proto.RegisterType((*Foo)(nil), "proto.Foo")
-	proto.RegisterType((*Bar)(nil), "proto.Bar")
+	proto1.RegisterType((*Foo)(nil), "proto.Foo")
+	proto1.RegisterType((*Bar)(nil), "proto.Bar")
 }
 func (this *Foo) Equal(that interface{}) bool {
 	if that == nil {
@@ -396,7 +396,7 @@ func encodeVarintPopulateOneofembed(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("oneofembed.proto", fileDescriptorOneofembed) }
+func init() { proto1.RegisterFile("oneofembed.proto", fileDescriptorOneofembed) }
 
 var fileDescriptorOneofembed = []byte{
 	// 171 bytes of a gzipped FileDescriptorProto

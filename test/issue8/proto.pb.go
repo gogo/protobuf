@@ -12,7 +12,7 @@ It has these top-level messages:
 */
 package proto
 
-import proto "github.com/gogo/protobuf/proto"
+import proto1 "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
@@ -22,7 +22,7 @@ import bytes "bytes"
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
+var _ = proto1.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
@@ -30,7 +30,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
 	Bar              *uint64 `protobuf:"varint,1,req,name=bar" json:"bar,omitempty"`
@@ -38,7 +38,7 @@ type Foo struct {
 }
 
 func (m *Foo) Reset()                    { *m = Foo{} }
-func (m *Foo) String() string            { return proto.CompactTextString(m) }
+func (m *Foo) String() string            { return proto1.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
 
@@ -50,7 +50,7 @@ func (m *Foo) GetBar() uint64 {
 }
 
 func init() {
-	proto.RegisterType((*Foo)(nil), "proto.Foo")
+	proto1.RegisterType((*Foo)(nil), "proto.Foo")
 }
 func (this *Foo) Equal(that interface{}) bool {
 	if that == nil {
@@ -241,7 +241,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("bar")
+		return proto1.NewRequiredNotSetError("bar")
 	}
 
 	if iNdEx > l {
@@ -354,7 +354,7 @@ var (
 	ErrIntOverflowProto   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("proto.proto", fileDescriptorProto) }
+func init() { proto1.RegisterFile("proto.proto", fileDescriptorProto) }
 
 var fileDescriptorProto = []byte{
 	// 109 bytes of a gzipped FileDescriptorProto
