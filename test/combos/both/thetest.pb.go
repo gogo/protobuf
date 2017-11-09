@@ -84,12 +84,11 @@ import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custo
 import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
 import bytes "bytes"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import compress_gzip "compress/gzip"
-import io_ioutil "io/ioutil"
+import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import gzip "compress/gzip"
+import ioutil "io/ioutil"
 
 import strconv "strconv"
 
@@ -97,7 +96,7 @@ import strings "strings"
 import sort "sort"
 import reflect "reflect"
 
-import encoding_binary "encoding/binary"
+import binary "encoding/binary"
 
 import io "io"
 
@@ -4823,8 +4822,8 @@ func (this *MyExtendable) Compare(that interface{}) int {
 	} else if that1.Field1 != nil {
 		return -1
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	extkeys := make([]int32, 0, len(thismap)+len(thatmap))
 	for k := range thismap {
 		extkeys = append(extkeys, k)
@@ -4834,7 +4833,7 @@ func (this *MyExtendable) Compare(that interface{}) int {
 			extkeys = append(extkeys, k)
 		}
 	}
-	github_com_gogo_protobuf_sortkeys.Int32s(extkeys)
+	sortkeys.Int32s(extkeys)
 	for _, k := range extkeys {
 		if v, ok := thismap[k]; ok {
 			if v2, ok := thatmap[k]; ok {
@@ -4905,8 +4904,8 @@ func (this *OtherExtenable) Compare(that interface{}) int {
 	if c := this.M.Compare(that1.M); c != 0 {
 		return c
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	extkeys := make([]int32, 0, len(thismap)+len(thatmap))
 	for k := range thismap {
 		extkeys = append(extkeys, k)
@@ -4916,7 +4915,7 @@ func (this *OtherExtenable) Compare(that interface{}) int {
 			extkeys = append(extkeys, k)
 		}
 	}
-	github_com_gogo_protobuf_sortkeys.Int32s(extkeys)
+	sortkeys.Int32s(extkeys)
 	for _, k := range extkeys {
 		if v, ok := thismap[k]; ok {
 			if v2, ok := thatmap[k]; ok {
@@ -6763,212 +6762,212 @@ func (this *ProtoType) Compare(that interface{}) int {
 	}
 	return 0
 }
-func (this *NidOptNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidOptNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepPackedNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepPackedNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepPackedNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepPackedNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidOptStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidOptStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidEmbeddedStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidEmbeddedStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinEmbeddedStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinEmbeddedStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidNestedStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidNestedStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinNestedStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinNestedStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidOptCustom) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidOptCustom) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomDash) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomDash) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptCustom) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptCustom) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepCustom) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepCustom) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepCustom) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepCustom) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptNativeUnion) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptNativeUnion) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptStructUnion) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptStructUnion) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinEmbeddedStructUnion) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinEmbeddedStructUnion) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinNestedStructUnion) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinNestedStructUnion) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Tree) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Tree) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *OrBranch) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *OrBranch) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *AndBranch) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *AndBranch) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Leaf) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Leaf) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *DeepTree) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *DeepTree) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *ADeepBranch) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *ADeepBranch) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *AndDeepBranch) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *AndDeepBranch) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *DeepLeaf) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *DeepLeaf) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Nil) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Nil) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidOptEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidOptEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptEnumDefault) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptEnumDefault) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *AnotherNinOptEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *AnotherNinOptEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *AnotherNinOptEnumDefault) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *AnotherNinOptEnumDefault) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Timer) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Timer) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *MyExtendable) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *MyExtendable) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *OtherExtenable) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *OtherExtenable) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NestedDefinition) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NestedDefinition) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NestedDefinition_NestedMessage) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NestedDefinition_NestedMessage) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NestedScope) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NestedScope) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptNativeDefault) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptNativeDefault) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomContainer) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomContainer) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameNidOptNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameNidOptNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameNinOptNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameNinOptNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameNinRepNative) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameNinRepNative) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameNinStruct) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameNinStruct) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameNinEmbeddedStructUnion) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameNinEmbeddedStructUnion) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *CustomNameEnum) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *CustomNameEnum) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NoExtensionsMap) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NoExtensionsMap) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Unrecognized) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Unrecognized) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *UnrecognizedWithInner) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *UnrecognizedWithInner) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *UnrecognizedWithInner_Inner) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *UnrecognizedWithInner_Inner) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *UnrecognizedWithEmbed) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *UnrecognizedWithEmbed) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *UnrecognizedWithEmbed_Embedded) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *UnrecognizedWithEmbed_Embedded) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *Node) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *Node) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NonByteCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NonByteCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidOptNonByteCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidOptNonByteCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinOptNonByteCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinOptNonByteCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NidRepNonByteCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NidRepNonByteCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *NinRepNonByteCustomType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *NinRepNonByteCustomType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func (this *ProtoType) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+func (this *ProtoType) Description() (desc *descriptor.FileDescriptorSet) {
 	return ThetestDescription()
 }
-func ThetestDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
-	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
+func ThetestDescription() (desc *descriptor.FileDescriptorSet) {
+	d := &descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 6619 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x7c, 0x6b, 0x6c, 0x1c, 0xd7,
@@ -7387,15 +7386,15 @@ func ThetestDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descri
 		0x00, 0xff, 0xff, 0xaa, 0x81, 0x18, 0x04, 0xd6, 0x66, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := compress_gzip.NewReader(r)
+	gzipr, err := gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := io_ioutil.ReadAll(gzipr)
+	ungzipped, err := ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
+	if err := proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -12591,8 +12590,8 @@ func (this *MyExtendable) VerboseEqual(that interface{}) error {
 	} else if that1.Field1 != nil {
 		return fmt.Errorf("Field1 this(%v) Not Equal that(%v)", this.Field1, that1.Field1)
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	for k, v := range thismap {
 		if v2, ok := thatmap[k]; ok {
 			if !v.Equal(&v2) {
@@ -12646,8 +12645,8 @@ func (this *MyExtendable) Equal(that interface{}) bool {
 	} else if that1.Field1 != nil {
 		return false
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	for k, v := range thismap {
 		if v2, ok := thatmap[k]; ok {
 			if !v.Equal(&v2) {
@@ -12713,8 +12712,8 @@ func (this *OtherExtenable) VerboseEqual(that interface{}) error {
 	if !this.M.Equal(that1.M) {
 		return fmt.Errorf("M this(%v) Not Equal that(%v)", this.M, that1.M)
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	for k, v := range thismap {
 		if v2, ok := thatmap[k]; ok {
 			if !v.Equal(&v2) {
@@ -12780,8 +12779,8 @@ func (this *OtherExtenable) Equal(that interface{}) bool {
 	if !this.M.Equal(that1.M) {
 		return false
 	}
-	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
-	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
+	thismap := proto.GetUnsafeExtensionsMap(this)
+	thatmap := proto.GetUnsafeExtensionsMap(that1)
 	for k, v := range thismap {
 		if v2, ok := thatmap[k]; ok {
 			if !v.Equal(&v2) {
@@ -15837,7 +15836,7 @@ func (this *ProtoType) Equal(that interface{}) bool {
 }
 
 type NidOptNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() int32
@@ -15855,11 +15854,11 @@ type NidOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NidOptNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptNative) TestProto() proto.Message {
 	return NewNidOptNativeFromFace(this)
 }
 
@@ -15944,7 +15943,7 @@ func NewNidOptNativeFromFace(that NidOptNativeFace) *NidOptNative {
 }
 
 type NinOptNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -15962,11 +15961,11 @@ type NinOptNativeFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNative) TestProto() proto.Message {
 	return NewNinOptNativeFromFace(this)
 }
 
@@ -16051,7 +16050,7 @@ func NewNinOptNativeFromFace(that NinOptNativeFace) *NinOptNative {
 }
 
 type NidRepNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -16069,11 +16068,11 @@ type NidRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepNative) TestProto() proto.Message {
 	return NewNidRepNativeFromFace(this)
 }
 
@@ -16158,7 +16157,7 @@ func NewNidRepNativeFromFace(that NidRepNativeFace) *NidRepNative {
 }
 
 type NinRepNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -16176,11 +16175,11 @@ type NinRepNativeFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepNative) TestProto() proto.Message {
 	return NewNinRepNativeFromFace(this)
 }
 
@@ -16265,7 +16264,7 @@ func NewNinRepNativeFromFace(that NinRepNativeFace) *NinRepNative {
 }
 
 type NidRepPackedNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -16281,11 +16280,11 @@ type NidRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NidRepPackedNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepPackedNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepPackedNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepPackedNative) TestProto() proto.Message {
 	return NewNidRepPackedNativeFromFace(this)
 }
 
@@ -16360,7 +16359,7 @@ func NewNidRepPackedNativeFromFace(that NidRepPackedNativeFace) *NidRepPackedNat
 }
 
 type NinRepPackedNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []int32
@@ -16376,11 +16375,11 @@ type NinRepPackedNativeFace interface {
 	GetField13() []bool
 }
 
-func (this *NinRepPackedNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepPackedNative) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepPackedNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepPackedNative) TestProto() proto.Message {
 	return NewNinRepPackedNativeFromFace(this)
 }
 
@@ -16455,7 +16454,7 @@ func NewNinRepPackedNativeFromFace(that NinRepPackedNativeFace) *NinRepPackedNat
 }
 
 type NidOptStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() float64
 	GetField2() float32
 	GetField3() NidOptNative
@@ -16468,11 +16467,11 @@ type NidOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NidOptStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NidOptStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptStruct) TestProto() proto.Message {
 	return NewNidOptStructFromFace(this)
 }
 
@@ -16532,7 +16531,7 @@ func NewNidOptStructFromFace(that NidOptStructFace) *NidOptStruct {
 }
 
 type NinOptStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -16545,11 +16544,11 @@ type NinOptStructFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptStruct) TestProto() proto.Message {
 	return NewNinOptStructFromFace(this)
 }
 
@@ -16609,7 +16608,7 @@ func NewNinOptStructFromFace(that NinOptStructFace) *NinOptStruct {
 }
 
 type NidRepStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []NidOptNative
@@ -16622,11 +16621,11 @@ type NidRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NidRepStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepStruct) TestProto() proto.Message {
 	return NewNidRepStructFromFace(this)
 }
 
@@ -16686,7 +16685,7 @@ func NewNidRepStructFromFace(that NidRepStructFace) *NidRepStruct {
 }
 
 type NinRepStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []float64
 	GetField2() []float32
 	GetField3() []*NidOptNative
@@ -16699,11 +16698,11 @@ type NinRepStructFace interface {
 	GetField15() [][]byte
 }
 
-func (this *NinRepStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepStruct) TestProto() proto.Message {
 	return NewNinRepStructFromFace(this)
 }
 
@@ -16763,17 +16762,17 @@ func NewNinRepStructFromFace(that NinRepStructFace) *NinRepStruct {
 }
 
 type NidEmbeddedStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() NidOptNative
 	GetField210() bool
 }
 
-func (this *NidEmbeddedStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidEmbeddedStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NidEmbeddedStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidEmbeddedStruct) TestProto() proto.Message {
 	return NewNidEmbeddedStructFromFace(this)
 }
 
@@ -16798,17 +16797,17 @@ func NewNidEmbeddedStructFromFace(that NidEmbeddedStructFace) *NidEmbeddedStruct
 }
 
 type NinEmbeddedStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NidOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinEmbeddedStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NinEmbeddedStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinEmbeddedStruct) TestProto() proto.Message {
 	return NewNinEmbeddedStructFromFace(this)
 }
 
@@ -16833,16 +16832,16 @@ func NewNinEmbeddedStructFromFace(that NinEmbeddedStructFace) *NinEmbeddedStruct
 }
 
 type NidNestedStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() NidOptStruct
 	GetField2() []NidRepStruct
 }
 
-func (this *NidNestedStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidNestedStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NidNestedStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidNestedStruct) TestProto() proto.Message {
 	return NewNidNestedStructFromFace(this)
 }
 
@@ -16862,16 +16861,16 @@ func NewNidNestedStructFromFace(that NidNestedStructFace) *NidNestedStruct {
 }
 
 type NinNestedStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *NinOptStruct
 	GetField2() []*NinRepStruct
 }
 
-func (this *NinNestedStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinNestedStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *NinNestedStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinNestedStruct) TestProto() proto.Message {
 	return NewNinNestedStructFromFace(this)
 }
 
@@ -16891,16 +16890,16 @@ func NewNinNestedStructFromFace(that NinNestedStructFace) *NinNestedStruct {
 }
 
 type NidOptCustomFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetId() Uuid
 	GetValue() github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NidOptCustom) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptCustom) Proto() proto.Message {
 	return this
 }
 
-func (this *NidOptCustom) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptCustom) TestProto() proto.Message {
 	return NewNidOptCustomFromFace(this)
 }
 
@@ -16920,15 +16919,15 @@ func NewNidOptCustomFromFace(that NidOptCustomFace) *NidOptCustom {
 }
 
 type CustomDashFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetValue() *github_com_gogo_protobuf_test_custom_dash_type.Bytes
 }
 
-func (this *CustomDash) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomDash) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomDash) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomDash) TestProto() proto.Message {
 	return NewCustomDashFromFace(this)
 }
 
@@ -16943,16 +16942,16 @@ func NewCustomDashFromFace(that CustomDashFace) *CustomDash {
 }
 
 type NinOptCustomFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetId() *Uuid
 	GetValue() *github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NinOptCustom) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptCustom) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptCustom) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptCustom) TestProto() proto.Message {
 	return NewNinOptCustomFromFace(this)
 }
 
@@ -16972,16 +16971,16 @@ func NewNinOptCustomFromFace(that NinOptCustomFace) *NinOptCustom {
 }
 
 type NidRepCustomFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetId() []Uuid
 	GetValue() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NidRepCustom) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepCustom) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepCustom) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepCustom) TestProto() proto.Message {
 	return NewNidRepCustomFromFace(this)
 }
 
@@ -17001,16 +17000,16 @@ func NewNidRepCustomFromFace(that NidRepCustomFace) *NidRepCustom {
 }
 
 type NinRepCustomFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetId() []Uuid
 	GetValue() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *NinRepCustom) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepCustom) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepCustom) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepCustom) TestProto() proto.Message {
 	return NewNinRepCustomFromFace(this)
 }
 
@@ -17030,7 +17029,7 @@ func NewNinRepCustomFromFace(that NinRepCustomFace) *NinRepCustom {
 }
 
 type NinOptNativeUnionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *int32
@@ -17042,11 +17041,11 @@ type NinOptNativeUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptNativeUnion) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNativeUnion) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptNativeUnion) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNativeUnion) TestProto() proto.Message {
 	return NewNinOptNativeUnionFromFace(this)
 }
 
@@ -17101,7 +17100,7 @@ func NewNinOptNativeUnionFromFace(that NinOptNativeUnionFace) *NinOptNativeUnion
 }
 
 type NinOptStructUnionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *float64
 	GetField2() *float32
 	GetField3() *NidOptNative
@@ -17113,11 +17112,11 @@ type NinOptStructUnionFace interface {
 	GetField15() []byte
 }
 
-func (this *NinOptStructUnion) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptStructUnion) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptStructUnion) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptStructUnion) TestProto() proto.Message {
 	return NewNinOptStructUnionFromFace(this)
 }
 
@@ -17172,17 +17171,17 @@ func NewNinOptStructUnionFromFace(that NinOptStructUnionFace) *NinOptStructUnion
 }
 
 type NinEmbeddedStructUnionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNidOptNative() *NidOptNative
 	GetField200() *NinOptNative
 	GetField210() *bool
 }
 
-func (this *NinEmbeddedStructUnion) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinEmbeddedStructUnion) Proto() proto.Message {
 	return this
 }
 
-func (this *NinEmbeddedStructUnion) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinEmbeddedStructUnion) TestProto() proto.Message {
 	return NewNinEmbeddedStructUnionFromFace(this)
 }
 
@@ -17207,17 +17206,17 @@ func NewNinEmbeddedStructUnionFromFace(that NinEmbeddedStructUnionFace) *NinEmbe
 }
 
 type NinNestedStructUnionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *NinOptNativeUnion
 	GetField2() *NinOptStructUnion
 	GetField3() *NinEmbeddedStructUnion
 }
 
-func (this *NinNestedStructUnion) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinNestedStructUnion) Proto() proto.Message {
 	return this
 }
 
-func (this *NinNestedStructUnion) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinNestedStructUnion) TestProto() proto.Message {
 	return NewNinNestedStructUnionFromFace(this)
 }
 
@@ -17242,17 +17241,17 @@ func NewNinNestedStructUnionFromFace(that NinNestedStructUnionFace) *NinNestedSt
 }
 
 type TreeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetOr() *OrBranch
 	GetAnd() *AndBranch
 	GetLeaf() *Leaf
 }
 
-func (this *Tree) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Tree) Proto() proto.Message {
 	return this
 }
 
-func (this *Tree) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Tree) TestProto() proto.Message {
 	return NewTreeFromFace(this)
 }
 
@@ -17277,16 +17276,16 @@ func NewTreeFromFace(that TreeFace) *Tree {
 }
 
 type OrBranchFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *OrBranch) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *OrBranch) Proto() proto.Message {
 	return this
 }
 
-func (this *OrBranch) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *OrBranch) TestProto() proto.Message {
 	return NewOrBranchFromFace(this)
 }
 
@@ -17306,16 +17305,16 @@ func NewOrBranchFromFace(that OrBranchFace) *OrBranch {
 }
 
 type AndBranchFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetLeft() Tree
 	GetRight() Tree
 }
 
-func (this *AndBranch) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *AndBranch) Proto() proto.Message {
 	return this
 }
 
-func (this *AndBranch) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *AndBranch) TestProto() proto.Message {
 	return NewAndBranchFromFace(this)
 }
 
@@ -17335,16 +17334,16 @@ func NewAndBranchFromFace(that AndBranchFace) *AndBranch {
 }
 
 type LeafFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetValue() int64
 	GetStrValue() string
 }
 
-func (this *Leaf) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Leaf) Proto() proto.Message {
 	return this
 }
 
-func (this *Leaf) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Leaf) TestProto() proto.Message {
 	return NewLeafFromFace(this)
 }
 
@@ -17364,17 +17363,17 @@ func NewLeafFromFace(that LeafFace) *Leaf {
 }
 
 type DeepTreeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetDown() *ADeepBranch
 	GetAnd() *AndDeepBranch
 	GetLeaf() *DeepLeaf
 }
 
-func (this *DeepTree) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *DeepTree) Proto() proto.Message {
 	return this
 }
 
-func (this *DeepTree) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *DeepTree) TestProto() proto.Message {
 	return NewDeepTreeFromFace(this)
 }
 
@@ -17399,15 +17398,15 @@ func NewDeepTreeFromFace(that DeepTreeFace) *DeepTree {
 }
 
 type ADeepBranchFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetDown() DeepTree
 }
 
-func (this *ADeepBranch) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *ADeepBranch) Proto() proto.Message {
 	return this
 }
 
-func (this *ADeepBranch) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *ADeepBranch) TestProto() proto.Message {
 	return NewADeepBranchFromFace(this)
 }
 
@@ -17422,16 +17421,16 @@ func NewADeepBranchFromFace(that ADeepBranchFace) *ADeepBranch {
 }
 
 type AndDeepBranchFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetLeft() DeepTree
 	GetRight() DeepTree
 }
 
-func (this *AndDeepBranch) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *AndDeepBranch) Proto() proto.Message {
 	return this
 }
 
-func (this *AndDeepBranch) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *AndDeepBranch) TestProto() proto.Message {
 	return NewAndDeepBranchFromFace(this)
 }
 
@@ -17451,15 +17450,15 @@ func NewAndDeepBranchFromFace(that AndDeepBranchFace) *AndDeepBranch {
 }
 
 type DeepLeafFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetTree() Tree
 }
 
-func (this *DeepLeaf) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *DeepLeaf) Proto() proto.Message {
 	return this
 }
 
-func (this *DeepLeaf) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *DeepLeaf) TestProto() proto.Message {
 	return NewDeepLeafFromFace(this)
 }
 
@@ -17474,14 +17473,14 @@ func NewDeepLeafFromFace(that DeepLeafFace) *DeepLeaf {
 }
 
 type NilFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 }
 
-func (this *Nil) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Nil) Proto() proto.Message {
 	return this
 }
 
-func (this *Nil) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Nil) TestProto() proto.Message {
 	return NewNilFromFace(this)
 }
 
@@ -17491,15 +17490,15 @@ func NewNilFromFace(that NilFace) *Nil {
 }
 
 type NidOptEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() TheTestEnum
 }
 
-func (this *NidOptEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *NidOptEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptEnum) TestProto() proto.Message {
 	return NewNidOptEnumFromFace(this)
 }
 
@@ -17514,17 +17513,17 @@ func NewNidOptEnumFromFace(that NidOptEnumFace) *NidOptEnum {
 }
 
 type NinOptEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *TheTestEnum
 	GetField2() *YetAnotherTestEnum
 	GetField3() *YetYetAnotherTestEnum
 }
 
-func (this *NinOptEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptEnum) TestProto() proto.Message {
 	return NewNinOptEnumFromFace(this)
 }
 
@@ -17549,17 +17548,17 @@ func NewNinOptEnumFromFace(that NinOptEnumFace) *NinOptEnum {
 }
 
 type NidRepEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []TheTestEnum
 	GetField2() []YetAnotherTestEnum
 	GetField3() []YetYetAnotherTestEnum
 }
 
-func (this *NidRepEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepEnum) TestProto() proto.Message {
 	return NewNidRepEnumFromFace(this)
 }
 
@@ -17584,17 +17583,17 @@ func NewNidRepEnumFromFace(that NidRepEnumFace) *NidRepEnum {
 }
 
 type NinRepEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []TheTestEnum
 	GetField2() []YetAnotherTestEnum
 	GetField3() []YetYetAnotherTestEnum
 }
 
-func (this *NinRepEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepEnum) TestProto() proto.Message {
 	return NewNinRepEnumFromFace(this)
 }
 
@@ -17619,17 +17618,17 @@ func NewNinRepEnumFromFace(that NinRepEnumFace) *NinRepEnum {
 }
 
 type AnotherNinOptEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *AnotherTestEnum
 	GetField2() *YetAnotherTestEnum
 	GetField3() *YetYetAnotherTestEnum
 }
 
-func (this *AnotherNinOptEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *AnotherNinOptEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *AnotherNinOptEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *AnotherNinOptEnum) TestProto() proto.Message {
 	return NewAnotherNinOptEnumFromFace(this)
 }
 
@@ -17654,17 +17653,17 @@ func NewAnotherNinOptEnumFromFace(that AnotherNinOptEnumFace) *AnotherNinOptEnum
 }
 
 type TimerFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetTime1() int64
 	GetTime2() int64
 	GetData() []byte
 }
 
-func (this *Timer) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Timer) Proto() proto.Message {
 	return this
 }
 
-func (this *Timer) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Timer) TestProto() proto.Message {
 	return NewTimerFromFace(this)
 }
 
@@ -17689,18 +17688,18 @@ func NewTimerFromFace(that TimerFace) *Timer {
 }
 
 type NestedDefinitionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *int64
 	GetEnumField() *NestedDefinition_NestedEnum
 	GetNNM() *NestedDefinition_NestedMessage_NestedNestedMsg
 	GetNM() *NestedDefinition_NestedMessage
 }
 
-func (this *NestedDefinition) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition) Proto() proto.Message {
 	return this
 }
 
-func (this *NestedDefinition) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition) TestProto() proto.Message {
 	return NewNestedDefinitionFromFace(this)
 }
 
@@ -17730,16 +17729,16 @@ func NewNestedDefinitionFromFace(that NestedDefinitionFace) *NestedDefinition {
 }
 
 type NestedDefinition_NestedMessageFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNestedField1() *uint64
 	GetNNM() *NestedDefinition_NestedMessage_NestedNestedMsg
 }
 
-func (this *NestedDefinition_NestedMessage) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition_NestedMessage) Proto() proto.Message {
 	return this
 }
 
-func (this *NestedDefinition_NestedMessage) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition_NestedMessage) TestProto() proto.Message {
 	return NewNestedDefinition_NestedMessageFromFace(this)
 }
 
@@ -17759,15 +17758,15 @@ func NewNestedDefinition_NestedMessageFromFace(that NestedDefinition_NestedMessa
 }
 
 type NestedDefinition_NestedMessage_NestedNestedMsgFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNestedNestedField1() *string
 }
 
-func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Proto() proto.Message {
 	return this
 }
 
-func (this *NestedDefinition_NestedMessage_NestedNestedMsg) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedDefinition_NestedMessage_NestedNestedMsg) TestProto() proto.Message {
 	return NewNestedDefinition_NestedMessage_NestedNestedMsgFromFace(this)
 }
 
@@ -17782,17 +17781,17 @@ func NewNestedDefinition_NestedMessage_NestedNestedMsgFromFace(that NestedDefini
 }
 
 type NestedScopeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetA() *NestedDefinition_NestedMessage_NestedNestedMsg
 	GetB() *NestedDefinition_NestedEnum
 	GetC() *NestedDefinition_NestedMessage
 }
 
-func (this *NestedScope) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedScope) Proto() proto.Message {
 	return this
 }
 
-func (this *NestedScope) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NestedScope) TestProto() proto.Message {
 	return NewNestedScopeFromFace(this)
 }
 
@@ -17817,15 +17816,15 @@ func NewNestedScopeFromFace(that NestedScopeFace) *NestedScope {
 }
 
 type CustomContainerFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetCustomStruct() NidOptCustom
 }
 
-func (this *CustomContainer) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomContainer) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomContainer) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomContainer) TestProto() proto.Message {
 	return NewCustomContainerFromFace(this)
 }
 
@@ -17840,7 +17839,7 @@ func NewCustomContainerFromFace(that CustomContainerFace) *CustomContainer {
 }
 
 type CustomNameNidOptNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() float64
 	GetFieldB() float32
 	GetFieldC() int32
@@ -17858,11 +17857,11 @@ type CustomNameNidOptNativeFace interface {
 	GetFieldO() []byte
 }
 
-func (this *CustomNameNidOptNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNidOptNative) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameNidOptNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNidOptNative) TestProto() proto.Message {
 	return NewCustomNameNidOptNativeFromFace(this)
 }
 
@@ -17947,7 +17946,7 @@ func NewCustomNameNidOptNativeFromFace(that CustomNameNidOptNativeFace) *CustomN
 }
 
 type CustomNameNinOptNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() *float64
 	GetFieldB() *float32
 	GetFieldC() *int32
@@ -17965,11 +17964,11 @@ type CustomNameNinOptNativeFace interface {
 	GetFieldO() []byte
 }
 
-func (this *CustomNameNinOptNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinOptNative) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameNinOptNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinOptNative) TestProto() proto.Message {
 	return NewCustomNameNinOptNativeFromFace(this)
 }
 
@@ -18054,7 +18053,7 @@ func NewCustomNameNinOptNativeFromFace(that CustomNameNinOptNativeFace) *CustomN
 }
 
 type CustomNameNinRepNativeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() []float64
 	GetFieldB() []float32
 	GetFieldC() []int32
@@ -18072,11 +18071,11 @@ type CustomNameNinRepNativeFace interface {
 	GetFieldO() [][]byte
 }
 
-func (this *CustomNameNinRepNative) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinRepNative) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameNinRepNative) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinRepNative) TestProto() proto.Message {
 	return NewCustomNameNinRepNativeFromFace(this)
 }
 
@@ -18161,7 +18160,7 @@ func NewCustomNameNinRepNativeFromFace(that CustomNameNinRepNativeFace) *CustomN
 }
 
 type CustomNameNinStructFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() *float64
 	GetFieldB() *float32
 	GetFieldC() *NidOptNative
@@ -18174,11 +18173,11 @@ type CustomNameNinStructFace interface {
 	GetFieldJ() []byte
 }
 
-func (this *CustomNameNinStruct) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinStruct) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameNinStruct) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinStruct) TestProto() proto.Message {
 	return NewCustomNameNinStructFromFace(this)
 }
 
@@ -18238,18 +18237,18 @@ func NewCustomNameNinStructFromFace(that CustomNameNinStructFace) *CustomNameNin
 }
 
 type CustomNameCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() *Uuid
 	GetFieldB() *github_com_gogo_protobuf_test_custom.Uint128
 	GetFieldC() []Uuid
 	GetFieldD() []github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *CustomNameCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameCustomType) TestProto() proto.Message {
 	return NewCustomNameCustomTypeFromFace(this)
 }
 
@@ -18279,17 +18278,17 @@ func NewCustomNameCustomTypeFromFace(that CustomNameCustomTypeFace) *CustomNameC
 }
 
 type CustomNameNinEmbeddedStructUnionFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetNidOptNative() *NidOptNative
 	GetFieldA() *NinOptNative
 	GetFieldB() *bool
 }
 
-func (this *CustomNameNinEmbeddedStructUnion) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinEmbeddedStructUnion) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameNinEmbeddedStructUnion) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameNinEmbeddedStructUnion) TestProto() proto.Message {
 	return NewCustomNameNinEmbeddedStructUnionFromFace(this)
 }
 
@@ -18314,16 +18313,16 @@ func NewCustomNameNinEmbeddedStructUnionFromFace(that CustomNameNinEmbeddedStruc
 }
 
 type CustomNameEnumFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetFieldA() *TheTestEnum
 	GetFieldB() []TheTestEnum
 }
 
-func (this *CustomNameEnum) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameEnum) Proto() proto.Message {
 	return this
 }
 
-func (this *CustomNameEnum) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *CustomNameEnum) TestProto() proto.Message {
 	return NewCustomNameEnumFromFace(this)
 }
 
@@ -18343,15 +18342,15 @@ func NewCustomNameEnumFromFace(that CustomNameEnumFace) *CustomNameEnum {
 }
 
 type UnrecognizedFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *string
 }
 
-func (this *Unrecognized) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Unrecognized) Proto() proto.Message {
 	return this
 }
 
-func (this *Unrecognized) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Unrecognized) TestProto() proto.Message {
 	return NewUnrecognizedFromFace(this)
 }
 
@@ -18366,16 +18365,16 @@ func NewUnrecognizedFromFace(that UnrecognizedFace) *Unrecognized {
 }
 
 type UnrecognizedWithInnerFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetEmbedded() []*UnrecognizedWithInner_Inner
 	GetField2() *string
 }
 
-func (this *UnrecognizedWithInner) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithInner) Proto() proto.Message {
 	return this
 }
 
-func (this *UnrecognizedWithInner) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithInner) TestProto() proto.Message {
 	return NewUnrecognizedWithInnerFromFace(this)
 }
 
@@ -18395,15 +18394,15 @@ func NewUnrecognizedWithInnerFromFace(that UnrecognizedWithInnerFace) *Unrecogni
 }
 
 type UnrecognizedWithInner_InnerFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *uint32
 }
 
-func (this *UnrecognizedWithInner_Inner) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithInner_Inner) Proto() proto.Message {
 	return this
 }
 
-func (this *UnrecognizedWithInner_Inner) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithInner_Inner) TestProto() proto.Message {
 	return NewUnrecognizedWithInner_InnerFromFace(this)
 }
 
@@ -18418,16 +18417,16 @@ func NewUnrecognizedWithInner_InnerFromFace(that UnrecognizedWithInner_InnerFace
 }
 
 type UnrecognizedWithEmbedFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetUnrecognizedWithEmbed_Embedded() UnrecognizedWithEmbed_Embedded
 	GetField2() *string
 }
 
-func (this *UnrecognizedWithEmbed) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithEmbed) Proto() proto.Message {
 	return this
 }
 
-func (this *UnrecognizedWithEmbed) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithEmbed) TestProto() proto.Message {
 	return NewUnrecognizedWithEmbedFromFace(this)
 }
 
@@ -18447,15 +18446,15 @@ func NewUnrecognizedWithEmbedFromFace(that UnrecognizedWithEmbedFace) *Unrecogni
 }
 
 type UnrecognizedWithEmbed_EmbeddedFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *uint32
 }
 
-func (this *UnrecognizedWithEmbed_Embedded) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithEmbed_Embedded) Proto() proto.Message {
 	return this
 }
 
-func (this *UnrecognizedWithEmbed_Embedded) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *UnrecognizedWithEmbed_Embedded) TestProto() proto.Message {
 	return NewUnrecognizedWithEmbed_EmbeddedFromFace(this)
 }
 
@@ -18470,16 +18469,16 @@ func NewUnrecognizedWithEmbed_EmbeddedFromFace(that UnrecognizedWithEmbed_Embedd
 }
 
 type NodeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetLabel() *string
 	GetChildren() []*Node
 }
 
-func (this *Node) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *Node) Proto() proto.Message {
 	return this
 }
 
-func (this *Node) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *Node) TestProto() proto.Message {
 	return NewNodeFromFace(this)
 }
 
@@ -18499,15 +18498,15 @@ func NewNodeFromFace(that NodeFace) *Node {
 }
 
 type NonByteCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *T
 }
 
-func (this *NonByteCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NonByteCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *NonByteCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NonByteCustomType) TestProto() proto.Message {
 	return NewNonByteCustomTypeFromFace(this)
 }
 
@@ -18522,15 +18521,15 @@ func NewNonByteCustomTypeFromFace(that NonByteCustomTypeFace) *NonByteCustomType
 }
 
 type NidOptNonByteCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() T
 }
 
-func (this *NidOptNonByteCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptNonByteCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *NidOptNonByteCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidOptNonByteCustomType) TestProto() proto.Message {
 	return NewNidOptNonByteCustomTypeFromFace(this)
 }
 
@@ -18545,15 +18544,15 @@ func NewNidOptNonByteCustomTypeFromFace(that NidOptNonByteCustomTypeFace) *NidOp
 }
 
 type NinOptNonByteCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() *T
 }
 
-func (this *NinOptNonByteCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNonByteCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *NinOptNonByteCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinOptNonByteCustomType) TestProto() proto.Message {
 	return NewNinOptNonByteCustomTypeFromFace(this)
 }
 
@@ -18568,15 +18567,15 @@ func NewNinOptNonByteCustomTypeFromFace(that NinOptNonByteCustomTypeFace) *NinOp
 }
 
 type NidRepNonByteCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []T
 }
 
-func (this *NidRepNonByteCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepNonByteCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *NidRepNonByteCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NidRepNonByteCustomType) TestProto() proto.Message {
 	return NewNidRepNonByteCustomTypeFromFace(this)
 }
 
@@ -18591,15 +18590,15 @@ func NewNidRepNonByteCustomTypeFromFace(that NidRepNonByteCustomTypeFace) *NidRe
 }
 
 type NinRepNonByteCustomTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField1() []T
 }
 
-func (this *NinRepNonByteCustomType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepNonByteCustomType) Proto() proto.Message {
 	return this
 }
 
-func (this *NinRepNonByteCustomType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *NinRepNonByteCustomType) TestProto() proto.Message {
 	return NewNinRepNonByteCustomTypeFromFace(this)
 }
 
@@ -18614,15 +18613,15 @@ func NewNinRepNonByteCustomTypeFromFace(that NinRepNonByteCustomTypeFace) *NinRe
 }
 
 type ProtoTypeFace interface {
-	Proto() github_com_gogo_protobuf_proto.Message
+	Proto() proto.Message
 	GetField2() *string
 }
 
-func (this *ProtoType) Proto() github_com_gogo_protobuf_proto.Message {
+func (this *ProtoType) Proto() proto.Message {
 	return this
 }
 
-func (this *ProtoType) TestProto() github_com_gogo_protobuf_proto.Message {
+func (this *ProtoType) TestProto() proto.Message {
 	return NewProtoTypeFromFace(this)
 }
 
@@ -20299,8 +20298,8 @@ func valueToGoStringThetest(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func extensionToGoStringThetest(m github_com_gogo_protobuf_proto.Message) string {
-	e := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(m)
+func extensionToGoStringThetest(m proto.Message) string {
+	e := proto.GetUnsafeExtensionsMap(m)
 	if e == nil {
 		return "nil"
 	}
@@ -20334,11 +20333,11 @@ func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
 	i += 8
 	dAtA[i] = 0x15
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
 	i += 4
 	dAtA[i] = 0x18
 	i++
@@ -20360,19 +20359,19 @@ func (m *NidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
 	dAtA[i] = 0x4d
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
 	i += 4
 	dAtA[i] = 0x55
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
 	i += 4
 	dAtA[i] = 0x59
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
 	i += 8
 	dAtA[i] = 0x61
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
 	i += 8
 	dAtA[i] = 0x68
 	i++
@@ -20416,13 +20415,13 @@ func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
 		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
 		i += 4
 	}
 	if m.Field3 != nil {
@@ -20458,25 +20457,25 @@ func (m *NinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field9 != nil {
 		dAtA[i] = 0x4d
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
 		i += 4
 	}
 	if m.Field10 != nil {
 		dAtA[i] = 0x55
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
 		i += 4
 	}
 	if m.Field11 != nil {
 		dAtA[i] = 0x59
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
 		i += 8
 	}
 	if m.Field12 != nil {
 		dAtA[i] = 0x61
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
 		i += 8
 	}
 	if m.Field13 != nil {
@@ -20527,7 +20526,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f1 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f1))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f1))
 			i += 8
 		}
 	}
@@ -20536,7 +20535,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f2 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f2))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f2))
 			i += 4
 		}
 	}
@@ -20600,7 +20599,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field9 {
 			dAtA[i] = 0x4d
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20608,7 +20607,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field10 {
 			dAtA[i] = 0x55
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20616,7 +20615,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field11 {
 			dAtA[i] = 0x59
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -20624,7 +20623,7 @@ func (m *NidRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field12 {
 			dAtA[i] = 0x61
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -20689,7 +20688,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f5 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f5))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f5))
 			i += 8
 		}
 	}
@@ -20698,7 +20697,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f6 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f6))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f6))
 			i += 4
 		}
 	}
@@ -20762,7 +20761,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field9 {
 			dAtA[i] = 0x4d
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20770,7 +20769,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field10 {
 			dAtA[i] = 0x55
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20778,7 +20777,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field11 {
 			dAtA[i] = 0x59
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -20786,7 +20785,7 @@ func (m *NinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.Field12 {
 			dAtA[i] = 0x61
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -20852,7 +20851,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
 		for _, num := range m.Field1 {
 			f9 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f9))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f9))
 			i += 8
 		}
 	}
@@ -20862,7 +20861,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
 		for _, num := range m.Field2 {
 			f10 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f10))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f10))
 			i += 4
 		}
 	}
@@ -20977,7 +20976,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
 		for _, num := range m.Field9 {
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20986,7 +20985,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
 		for _, num := range m.Field10 {
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -20995,7 +20994,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
 		for _, num := range m.Field11 {
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -21004,7 +21003,7 @@ func (m *NidRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
 		for _, num := range m.Field12 {
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -21048,7 +21047,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field1)*8))
 		for _, num := range m.Field1 {
 			f25 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f25))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f25))
 			i += 8
 		}
 	}
@@ -21058,7 +21057,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field2)*4))
 		for _, num := range m.Field2 {
 			f26 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f26))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f26))
 			i += 4
 		}
 	}
@@ -21173,7 +21172,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field9)*4))
 		for _, num := range m.Field9 {
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -21182,7 +21181,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field10)*4))
 		for _, num := range m.Field10 {
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -21191,7 +21190,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field11)*8))
 		for _, num := range m.Field11 {
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -21200,7 +21199,7 @@ func (m *NinRepPackedNative) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(len(m.Field12)*8))
 		for _, num := range m.Field12 {
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -21240,11 +21239,11 @@ func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
 	i += 8
 	dAtA[i] = 0x15
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
 	i += 4
 	dAtA[i] = 0x1a
 	i++
@@ -21318,13 +21317,13 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
 		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
 		i += 4
 	}
 	if m.Field3 != nil {
@@ -21415,7 +21414,7 @@ func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f47 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f47))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f47))
 			i += 8
 		}
 	}
@@ -21424,7 +21423,7 @@ func (m *NidRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f48 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f48))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f48))
 			i += 4
 		}
 	}
@@ -21546,7 +21545,7 @@ func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f50 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f50))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f50))
 			i += 8
 		}
 	}
@@ -21555,7 +21554,7 @@ func (m *NinRepStruct) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f51 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f51))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f51))
 			i += 4
 		}
 	}
@@ -22064,13 +22063,13 @@ func (m *NinOptNativeUnion) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
 		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
 		i += 4
 	}
 	if m.Field3 != nil {
@@ -22139,13 +22138,13 @@ func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
 		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
 		i += 4
 	}
 	if m.Field3 != nil {
@@ -22901,11 +22900,11 @@ func (m *Timer) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time1))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time1))
 	i += 8
 	dAtA[i] = 0x11
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time2))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Time2))
 	i += 8
 	if m.Data != nil {
 		dAtA[i] = 0x1a
@@ -22939,7 +22938,7 @@ func (m *MyExtendable) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(*m.Field1))
 	}
-	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
+	n, err := proto.EncodeInternalExtension(m, dAtA[i:])
 	if err != nil {
 		return 0, err
 	}
@@ -22985,7 +22984,7 @@ func (m *OtherExtenable) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(*m.Field13))
 	}
-	n, err := github_com_gogo_protobuf_proto.EncodeInternalExtension(m, dAtA[i:])
+	n, err := proto.EncodeInternalExtension(m, dAtA[i:])
 	if err != nil {
 		return 0, err
 	}
@@ -23065,7 +23064,7 @@ func (m *NestedDefinition_NestedMessage) MarshalTo(dAtA []byte) (int, error) {
 	if m.NestedField1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.NestedField1))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.NestedField1))
 		i += 8
 	}
 	if m.NNM != nil {
@@ -23175,13 +23174,13 @@ func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field1 != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.Field1))))
 		i += 8
 	}
 	if m.Field2 != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.Field2))))
 		i += 4
 	}
 	if m.Field3 != nil {
@@ -23217,25 +23216,25 @@ func (m *NinOptNativeDefault) MarshalTo(dAtA []byte) (int, error) {
 	if m.Field9 != nil {
 		dAtA[i] = 0x4d
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field9))
 		i += 4
 	}
 	if m.Field10 != nil {
 		dAtA[i] = 0x55
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.Field10))
 		i += 4
 	}
 	if m.Field11 != nil {
 		dAtA[i] = 0x59
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field11))
 		i += 8
 	}
 	if m.Field12 != nil {
 		dAtA[i] = 0x61
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.Field12))
 		i += 8
 	}
 	if m.Field13 != nil {
@@ -23312,11 +23311,11 @@ func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	_ = l
 	dAtA[i] = 0x9
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FieldA))))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.FieldA))))
 	i += 8
 	dAtA[i] = 0x15
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.FieldB))))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.FieldB))))
 	i += 4
 	dAtA[i] = 0x18
 	i++
@@ -23338,19 +23337,19 @@ func (m *CustomNameNidOptNative) MarshalTo(dAtA []byte) (int, error) {
 	i = encodeVarintThetest(dAtA, i, uint64((uint64(m.FieldH)<<1)^uint64((m.FieldH>>63))))
 	dAtA[i] = 0x4d
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldI))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldI))
 	i += 4
 	dAtA[i] = 0x55
 	i++
-	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldJ))
+	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.FieldJ))
 	i += 4
 	dAtA[i] = 0x59
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldK))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldK))
 	i += 8
 	dAtA[i] = 0x61
 	i++
-	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldL))
+	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.FieldL))
 	i += 8
 	dAtA[i] = 0x68
 	i++
@@ -23394,13 +23393,13 @@ func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldA != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
 		i += 8
 	}
 	if m.FieldB != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
 		i += 4
 	}
 	if m.FieldC != nil {
@@ -23436,25 +23435,25 @@ func (m *CustomNameNinOptNative) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldI != nil {
 		dAtA[i] = 0x4d
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldI))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldI))
 		i += 4
 	}
 	if m.FieldJ != nil {
 		dAtA[i] = 0x55
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldJ))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(*m.FieldJ))
 		i += 4
 	}
 	if m.FieldK != nil {
 		dAtA[i] = 0x59
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FieldK))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FieldK))
 		i += 8
 	}
 	if m.FielL != nil {
 		dAtA[i] = 0x61
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FielL))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(*m.FielL))
 		i += 8
 	}
 	if m.FieldM != nil {
@@ -23505,7 +23504,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x9
 			i++
 			f92 := math.Float64bits(float64(num))
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(f92))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(f92))
 			i += 8
 		}
 	}
@@ -23514,7 +23513,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x15
 			i++
 			f93 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f93))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(f93))
 			i += 4
 		}
 	}
@@ -23578,7 +23577,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.FieldI {
 			dAtA[i] = 0x4d
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -23586,7 +23585,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.FieldJ {
 			dAtA[i] = 0x55
 			i++
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
+			binary.LittleEndian.PutUint32(dAtA[i:], uint32(num))
 			i += 4
 		}
 	}
@@ -23594,7 +23593,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.FieldK {
 			dAtA[i] = 0x59
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -23602,7 +23601,7 @@ func (m *CustomNameNinRepNative) MarshalTo(dAtA []byte) (int, error) {
 		for _, num := range m.FieldL {
 			dAtA[i] = 0x61
 			i++
-			encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
+			binary.LittleEndian.PutUint64(dAtA[i:], uint64(num))
 			i += 8
 		}
 	}
@@ -23665,13 +23664,13 @@ func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
 	if m.FieldA != nil {
 		dAtA[i] = 0x9
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
+		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.FieldA))))
 		i += 8
 	}
 	if m.FieldB != nil {
 		dAtA[i] = 0x15
 		i++
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
+		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.FieldB))))
 		i += 4
 	}
 	if m.FieldC != nil {
@@ -25820,7 +25819,7 @@ func NewPopulatedMyExtendable(r randyThetest, easy bool) *MyExtendable {
 				wire = 5
 			}
 			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
+			proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -25864,7 +25863,7 @@ func NewPopulatedOtherExtenable(r randyThetest, easy bool) *OtherExtenable {
 				wire = 5
 			}
 			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
+			proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -26478,7 +26477,7 @@ func NewPopulatedNoExtensionsMap(r randyThetest, easy bool) *NoExtensionsMap {
 				wire = 5
 			}
 			dAtA := randFieldThetest(nil, r, fieldNumber, wire)
-			github_com_gogo_protobuf_proto.SetRawExtension(this, int32(fieldNumber), dAtA)
+			proto.SetRawExtension(this, int32(fieldNumber), dAtA)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -27829,7 +27828,7 @@ func (m *MyExtendable) Size() (n int) {
 	if m.Field1 != nil {
 		n += 1 + sovThetest(uint64(*m.Field1))
 	}
-	n += github_com_gogo_protobuf_proto.SizeOfInternalExtension(m)
+	n += proto.SizeOfInternalExtension(m)
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -27849,7 +27848,7 @@ func (m *OtherExtenable) Size() (n int) {
 	if m.Field13 != nil {
 		n += 1 + sovThetest(uint64(*m.Field13))
 	}
-	n += github_com_gogo_protobuf_proto.SizeOfInternalExtension(m)
+	n += proto.SizeOfInternalExtension(m)
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -29065,7 +29064,7 @@ func (this *MyExtendable) String() string {
 	}
 	s := strings.Join([]string{`&MyExtendable{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
-		`XXX_InternalExtensions:` + github_com_gogo_protobuf_proto.StringFromInternalExtension(this) + `,`,
+		`XXX_InternalExtensions:` + proto.StringFromInternalExtension(this) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -29079,7 +29078,7 @@ func (this *OtherExtenable) String() string {
 		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
-		`XXX_InternalExtensions:` + github_com_gogo_protobuf_proto.StringFromInternalExtension(this) + `,`,
+		`XXX_InternalExtensions:` + proto.StringFromInternalExtension(this) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -29311,7 +29310,7 @@ func (this *NoExtensionsMap) String() string {
 	}
 	s := strings.Join([]string{`&NoExtensionsMap{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
-		`XXX_extensions:` + github_com_gogo_protobuf_proto.StringFromExtensionsBytes(this.XXX_extensions) + `,`,
+		`XXX_extensions:` + proto.StringFromExtensionsBytes(this.XXX_extensions) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -29751,7 +29750,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
@@ -29762,7 +29761,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
@@ -29891,7 +29890,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field9 = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.Field9 = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
@@ -29901,7 +29900,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field10 = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.Field10 = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
@@ -29911,7 +29910,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field11 = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Field11 = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
@@ -29921,7 +29920,7 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Field12 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Field12 = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -30062,7 +30061,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
@@ -30074,7 +30073,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
@@ -30209,7 +30208,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -30220,7 +30219,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -30231,7 +30230,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -30242,7 +30241,7 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -30384,7 +30383,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -30416,7 +30415,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -30430,7 +30429,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -30462,7 +30461,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -30852,7 +30851,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
@@ -30883,7 +30882,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -30896,7 +30895,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
@@ -30927,7 +30926,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -30940,7 +30939,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
@@ -30971,7 +30970,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -30984,7 +30983,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
@@ -31015,7 +31014,7 @@ func (m *NidRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -31199,7 +31198,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -31231,7 +31230,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -31245,7 +31244,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -31277,7 +31276,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -31667,7 +31666,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
@@ -31698,7 +31697,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -31711,7 +31710,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
@@ -31742,7 +31741,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -31755,7 +31754,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
@@ -31786,7 +31785,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -31799,7 +31798,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
@@ -31830,7 +31829,7 @@ func (m *NinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -32014,7 +32013,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -32046,7 +32045,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -32060,7 +32059,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -32092,7 +32091,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -32482,7 +32481,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
@@ -32513,7 +32512,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -32526,7 +32525,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
@@ -32557,7 +32556,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -32570,7 +32569,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
@@ -32601,7 +32600,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -32614,7 +32613,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
@@ -32645,7 +32644,7 @@ func (m *NidRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -32771,7 +32770,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -32803,7 +32802,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -32817,7 +32816,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -32849,7 +32848,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -33239,7 +33238,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field9 = append(m.Field9, v)
 			} else if wireType == 2 {
@@ -33270,7 +33269,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field9 = append(m.Field9, v)
 				}
@@ -33283,7 +33282,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.Field10 = append(m.Field10, v)
 			} else if wireType == 2 {
@@ -33314,7 +33313,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.Field10 = append(m.Field10, v)
 				}
@@ -33327,7 +33326,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field11 = append(m.Field11, v)
 			} else if wireType == 2 {
@@ -33358,7 +33357,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field11 = append(m.Field11, v)
 				}
@@ -33371,7 +33370,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.Field12 = append(m.Field12, v)
 			} else if wireType == 2 {
@@ -33402,7 +33401,7 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.Field12 = append(m.Field12, v)
 				}
@@ -33530,7 +33529,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field1 = float64(math.Float64frombits(v))
 		case 2:
@@ -33541,7 +33540,7 @@ func (m *NidOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field2 = float32(math.Float32frombits(v))
 		case 3:
@@ -33813,7 +33812,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
@@ -33825,7 +33824,7 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
@@ -34108,7 +34107,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -34140,7 +34139,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -34154,7 +34153,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -34186,7 +34185,7 @@ func (m *NidRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -34590,7 +34589,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.Field1 = append(m.Field1, v2)
@@ -34622,7 +34621,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.Field1 = append(m.Field1, v2)
@@ -34636,7 +34635,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.Field2 = append(m.Field2, v2)
@@ -34668,7 +34667,7 @@ func (m *NinRepStruct) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.Field2 = append(m.Field2, v2)
@@ -36112,7 +36111,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
@@ -36124,7 +36123,7 @@ func (m *NinOptNativeUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
@@ -36349,7 +36348,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
@@ -36361,7 +36360,7 @@ func (m *NinOptStructUnion) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
@@ -38834,7 +38833,7 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time1 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Time1 = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 2:
 			if wireType != 1 {
@@ -38844,7 +38843,7 @@ func (m *Timer) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Time2 = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.Time2 = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 3:
 			if wireType != 2 {
@@ -38969,7 +38968,7 @@ func (m *MyExtendable) Unmarshal(dAtA []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
+				proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
@@ -39117,7 +39116,7 @@ func (m *OtherExtenable) Unmarshal(dAtA []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
+				proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex
@@ -39336,7 +39335,7 @@ func (m *NestedDefinition_NestedMessage) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.NestedField1 = &v
 		case 2:
@@ -39649,7 +39648,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.Field1 = &v2
@@ -39661,7 +39660,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.Field2 = &v2
@@ -39796,7 +39795,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field9 = &v
 		case 10:
@@ -39807,7 +39806,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.Field10 = &v
 		case 11:
@@ -39818,7 +39817,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field11 = &v
 		case 12:
@@ -39829,7 +39828,7 @@ func (m *NinOptNativeDefault) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.Field12 = &v
 		case 13:
@@ -40054,7 +40053,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.FieldA = float64(math.Float64frombits(v))
 		case 2:
@@ -40065,7 +40064,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.FieldB = float32(math.Float32frombits(v))
 		case 3:
@@ -40194,7 +40193,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldI = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.FieldI = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 10:
 			if wireType != 5 {
@@ -40204,7 +40203,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldJ = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			m.FieldJ = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 		case 11:
 			if wireType != 1 {
@@ -40214,7 +40213,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldK = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.FieldK = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 12:
 			if wireType != 1 {
@@ -40224,7 +40223,7 @@ func (m *CustomNameNidOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FieldL = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			m.FieldL = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 		case 13:
 			if wireType != 0 {
@@ -40365,7 +40364,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.FieldA = &v2
@@ -40377,7 +40376,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.FieldB = &v2
@@ -40512,7 +40511,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.FieldI = &v
 		case 10:
@@ -40523,7 +40522,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.FieldJ = &v
 		case 11:
@@ -40534,7 +40533,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.FieldK = &v
 		case 12:
@@ -40545,7 +40544,7 @@ func (m *CustomNameNinOptNative) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.FielL = &v
 		case 13:
@@ -40687,7 +40686,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				v2 := float64(math.Float64frombits(v))
 				m.FieldA = append(m.FieldA, v2)
@@ -40719,7 +40718,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					v2 := float64(math.Float64frombits(v))
 					m.FieldA = append(m.FieldA, v2)
@@ -40733,7 +40732,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				v2 := float32(math.Float32frombits(v))
 				m.FieldB = append(m.FieldB, v2)
@@ -40765,7 +40764,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					v2 := float32(math.Float32frombits(v))
 					m.FieldB = append(m.FieldB, v2)
@@ -41155,7 +41154,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.FieldI = append(m.FieldI, v)
 			} else if wireType == 2 {
@@ -41186,7 +41185,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.FieldI = append(m.FieldI, v)
 				}
@@ -41199,7 +41198,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 4) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+				v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 				iNdEx += 4
 				m.FieldJ = append(m.FieldJ, v)
 			} else if wireType == 2 {
@@ -41230,7 +41229,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 4) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+					v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 					iNdEx += 4
 					m.FieldJ = append(m.FieldJ, v)
 				}
@@ -41243,7 +41242,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.FieldK = append(m.FieldK, v)
 			} else if wireType == 2 {
@@ -41274,7 +41273,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.FieldK = append(m.FieldK, v)
 				}
@@ -41287,7 +41286,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 				if (iNdEx + 8) > l {
 					return io.ErrUnexpectedEOF
 				}
-				v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+				v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 				iNdEx += 8
 				m.FieldL = append(m.FieldL, v)
 			} else if wireType == 2 {
@@ -41318,7 +41317,7 @@ func (m *CustomNameNinRepNative) Unmarshal(dAtA []byte) error {
 					if (iNdEx + 8) > l {
 						return io.ErrUnexpectedEOF
 					}
-					v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+					v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 					iNdEx += 8
 					m.FieldL = append(m.FieldL, v)
 				}
@@ -41504,7 +41503,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := float64(math.Float64frombits(v))
 			m.FieldA = &v2
@@ -41516,7 +41515,7 @@ func (m *CustomNameNinStruct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := float32(math.Float32frombits(v))
 			m.FieldB = &v2
@@ -42282,7 +42281,7 @@ func (m *NoExtensionsMap) Unmarshal(dAtA []byte) error {
 				if (iNdEx + skippy) > l {
 					return io.ErrUnexpectedEOF
 				}
-				github_com_gogo_protobuf_proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
+				proto.AppendExtension(m, int32(fieldNum), dAtA[iNdEx:iNdEx+skippy])
 				iNdEx += skippy
 			} else {
 				iNdEx = preIndex

@@ -23,7 +23,7 @@ import time "time"
 import strings "strings"
 import reflect "reflect"
 
-import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+import types "github.com/gogo/protobuf/types"
 
 import io "io"
 
@@ -127,8 +127,8 @@ func (m *TimeFail) MarshalTo(dAtA []byte) (int, error) {
 	if m.TimeTest != nil {
 		dAtA[i] = 0xa
 		i++
-		i = encodeVarintTimefail(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.TimeTest)))
-		n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.TimeTest, dAtA[i:])
+		i = encodeVarintTimefail(dAtA, i, uint64(types.SizeOfStdTime(*m.TimeTest)))
+		n1, err := types.StdTimeMarshalTo(*m.TimeTest, dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
@@ -150,7 +150,7 @@ func (m *TimeFail) Size() (n int) {
 	var l int
 	_ = l
 	if m.TimeTest != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.TimeTest)
+		l = types.SizeOfStdTime(*m.TimeTest)
 		n += 1 + l + sovTimefail(uint64(l))
 	}
 	return n
@@ -245,7 +245,7 @@ func (m *TimeFail) Unmarshal(dAtA []byte) error {
 			if m.TimeTest == nil {
 				m.TimeTest = new(time.Time)
 			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.TimeTest, dAtA[iNdEx:postIndex]); err != nil {
+			if err := types.StdTimeUnmarshal(m.TimeTest, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

@@ -22,9 +22,9 @@ import time "time"
 
 import strings "strings"
 import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+import sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+import types "github.com/gogo/protobuf/types"
 
 import io "io"
 
@@ -103,7 +103,7 @@ func (this *MapStdTypes) GoString() string {
 	for k := range this.NullableDuration {
 		keysForNullableDuration = append(keysForNullableDuration, k)
 	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForNullableDuration)
+	sortkeys.Int32s(keysForNullableDuration)
 	mapStringForNullableDuration := "map[int32]*time.Duration{"
 	for _, k := range keysForNullableDuration {
 		mapStringForNullableDuration += fmt.Sprintf("%#v: %#v,", k, this.NullableDuration[k])
@@ -145,7 +145,7 @@ func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
 			v := m.NullableDuration[k]
 			msgSize := 0
 			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
+				msgSize = types.SizeOfStdDuration(*v)
 				msgSize += 1 + sovIssue261(uint64(msgSize))
 			}
 			mapSize := 1 + sovIssue261(uint64(k)) + msgSize
@@ -156,8 +156,8 @@ func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
 			if v != nil {
 				dAtA[i] = 0x12
 				i++
-				i = encodeVarintIssue261(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
-				n1, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
+				i = encodeVarintIssue261(dAtA, i, uint64(types.SizeOfStdDuration(*v)))
+				n1, err := types.StdDurationMarshalTo(*v, dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
@@ -186,7 +186,7 @@ func (m *MapStdTypes) Size() (n int) {
 			_ = v
 			l = 0
 			if v != nil {
-				l = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
+				l = types.SizeOfStdDuration(*v)
 				l += 1 + sovIssue261(uint64(l))
 			}
 			mapEntrySize := 1 + sovIssue261(uint64(k)) + l
@@ -217,7 +217,7 @@ func (this *MapStdTypes) String() string {
 	for k := range this.NullableDuration {
 		keysForNullableDuration = append(keysForNullableDuration, k)
 	}
-	github_com_gogo_protobuf_sortkeys.Int32s(keysForNullableDuration)
+	sortkeys.Int32s(keysForNullableDuration)
 	mapStringForNullableDuration := "map[int32]*time.Duration{"
 	for _, k := range keysForNullableDuration {
 		mapStringForNullableDuration += fmt.Sprintf("%v: %v,", k, this.NullableDuration[k])
@@ -356,7 +356,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
+					if err := types.StdDurationUnmarshal(mapvalue, dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}
 					iNdEx = postmsgIndex
