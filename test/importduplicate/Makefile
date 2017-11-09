@@ -29,3 +29,4 @@
 regenerate:
 	(protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. importduplicate.proto)
 	(protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. sortkeys/sortable.proto)
+	(protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. proto/proto.proto)

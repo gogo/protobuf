@@ -24,7 +24,9 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
-import google_protobuf "github.com/gogo/protobuf/types"
+import google_protobuf1 "github.com/gogo/protobuf/types"
+import google_protobuf2 "github.com/gogo/protobuf/types"
+import google_protobuf3 "github.com/gogo/protobuf/types"
 
 import time "time"
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
@@ -46,17 +48,17 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type KnownTypes struct {
-	Dur   *google_protobuf.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	Ts    *google_protobuf.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Dbl   *google_protobuf.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt   *google_protobuf.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64   *google_protobuf.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64   *google_protobuf.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32   *google_protobuf.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32   *google_protobuf.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool  *google_protobuf.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str   *google_protobuf.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes *google_protobuf.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	Dur   *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	Ts    *google_protobuf2.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Dbl   *google_protobuf3.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt   *google_protobuf3.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64   *google_protobuf3.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64   *google_protobuf3.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32   *google_protobuf3.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32   *google_protobuf3.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool  *google_protobuf3.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str   *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
 }
 
 func (m *KnownTypes) Reset()                    { *m = KnownTypes{} }
@@ -64,77 +66,77 @@ func (m *KnownTypes) String() string            { return proto.CompactTextString
 func (*KnownTypes) ProtoMessage()               {}
 func (*KnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
 
-func (m *KnownTypes) GetDur() *google_protobuf.Duration {
+func (m *KnownTypes) GetDur() *google_protobuf1.Duration {
 	if m != nil {
 		return m.Dur
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetTs() *google_protobuf.Timestamp {
+func (m *KnownTypes) GetTs() *google_protobuf2.Timestamp {
 	if m != nil {
 		return m.Ts
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetDbl() *google_protobuf.DoubleValue {
+func (m *KnownTypes) GetDbl() *google_protobuf3.DoubleValue {
 	if m != nil {
 		return m.Dbl
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetFlt() *google_protobuf.FloatValue {
+func (m *KnownTypes) GetFlt() *google_protobuf3.FloatValue {
 	if m != nil {
 		return m.Flt
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetI64() *google_protobuf.Int64Value {
+func (m *KnownTypes) GetI64() *google_protobuf3.Int64Value {
 	if m != nil {
 		return m.I64
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetU64() *google_protobuf.UInt64Value {
+func (m *KnownTypes) GetU64() *google_protobuf3.UInt64Value {
 	if m != nil {
 		return m.U64
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetI32() *google_protobuf.Int32Value {
+func (m *KnownTypes) GetI32() *google_protobuf3.Int32Value {
 	if m != nil {
 		return m.I32
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetU32() *google_protobuf.UInt32Value {
+func (m *KnownTypes) GetU32() *google_protobuf3.UInt32Value {
 	if m != nil {
 		return m.U32
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetBool() *google_protobuf.BoolValue {
+func (m *KnownTypes) GetBool() *google_protobuf3.BoolValue {
 	if m != nil {
 		return m.Bool
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetStr() *google_protobuf.StringValue {
+func (m *KnownTypes) GetStr() *google_protobuf3.StringValue {
 	if m != nil {
 		return m.Str
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetBytes() *google_protobuf.BytesValue {
+func (m *KnownTypes) GetBytes() *google_protobuf3.BytesValue {
 	if m != nil {
 		return m.Bytes
 	}
@@ -142,10 +144,10 @@ func (m *KnownTypes) GetBytes() *google_protobuf.BytesValue {
 }
 
 type ProtoTypes struct {
-	NullableTimestamp *google_protobuf.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *google_protobuf.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
-	Timestamp         google_protobuf.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
-	Duration          google_protobuf.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	NullableTimestamp *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
+	NullableDuration  *google_protobuf1.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
+	Timestamp         google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
+	Duration          google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
 }
 
 func (m *ProtoTypes) Reset()                    { *m = ProtoTypes{} }
@@ -153,32 +155,32 @@ func (m *ProtoTypes) String() string            { return proto.CompactTextString
 func (*ProtoTypes) ProtoMessage()               {}
 func (*ProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{1} }
 
-func (m *ProtoTypes) GetNullableTimestamp() *google_protobuf.Timestamp {
+func (m *ProtoTypes) GetNullableTimestamp() *google_protobuf2.Timestamp {
 	if m != nil {
 		return m.NullableTimestamp
 	}
 	return nil
 }
 
-func (m *ProtoTypes) GetNullableDuration() *google_protobuf.Duration {
+func (m *ProtoTypes) GetNullableDuration() *google_protobuf1.Duration {
 	if m != nil {
 		return m.NullableDuration
 	}
 	return nil
 }
 
-func (m *ProtoTypes) GetTimestamp() google_protobuf.Timestamp {
+func (m *ProtoTypes) GetTimestamp() google_protobuf2.Timestamp {
 	if m != nil {
 		return m.Timestamp
 	}
-	return google_protobuf.Timestamp{}
+	return google_protobuf2.Timestamp{}
 }
 
-func (m *ProtoTypes) GetDuration() google_protobuf.Duration {
+func (m *ProtoTypes) GetDuration() google_protobuf1.Duration {
 	if m != nil {
 		return m.Duration
 	}
-	return google_protobuf.Duration{}
+	return google_protobuf1.Duration{}
 }
 
 type StdTypes struct {
@@ -222,10 +224,10 @@ func (m *StdTypes) GetDuration() time.Duration {
 }
 
 type RepProtoTypes struct {
-	NullableTimestamps []*google_protobuf.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*google_protobuf.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
-	Timestamps         []google_protobuf.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
-	Durations          []google_protobuf.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	NullableTimestamps []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
+	NullableDurations  []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
+	Timestamps         []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
+	Durations          []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
 }
 
 func (m *RepProtoTypes) Reset()                    { *m = RepProtoTypes{} }
@@ -233,28 +235,28 @@ func (m *RepProtoTypes) String() string            { return proto.CompactTextStr
 func (*RepProtoTypes) ProtoMessage()               {}
 func (*RepProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
 
-func (m *RepProtoTypes) GetNullableTimestamps() []*google_protobuf.Timestamp {
+func (m *RepProtoTypes) GetNullableTimestamps() []*google_protobuf2.Timestamp {
 	if m != nil {
 		return m.NullableTimestamps
 	}
 	return nil
 }
 
-func (m *RepProtoTypes) GetNullableDurations() []*google_protobuf.Duration {
+func (m *RepProtoTypes) GetNullableDurations() []*google_protobuf1.Duration {
 	if m != nil {
 		return m.NullableDurations
 	}
 	return nil
 }
 
-func (m *RepProtoTypes) GetTimestamps() []google_protobuf.Timestamp {
+func (m *RepProtoTypes) GetTimestamps() []google_protobuf2.Timestamp {
 	if m != nil {
 		return m.Timestamps
 	}
 	return nil
 }
 
-func (m *RepProtoTypes) GetDurations() []google_protobuf.Duration {
+func (m *RepProtoTypes) GetDurations() []google_protobuf1.Duration {
 	if m != nil {
 		return m.Durations
 	}
@@ -302,10 +304,10 @@ func (m *RepStdTypes) GetDurations() []time.Duration {
 }
 
 type MapProtoTypes struct {
-	NullableTimestamp map[int32]*google_protobuf.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]google_protobuf.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*google_protobuf.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]google_protobuf.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp         map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration  map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration          map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 }
 
 func (m *MapProtoTypes) Reset()                    { *m = MapProtoTypes{} }
@@ -313,28 +315,28 @@ func (m *MapProtoTypes) String() string            { return proto.CompactTextStr
 func (*MapProtoTypes) ProtoMessage()               {}
 func (*MapProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
 
-func (m *MapProtoTypes) GetNullableTimestamp() map[int32]*google_protobuf.Timestamp {
+func (m *MapProtoTypes) GetNullableTimestamp() map[int32]*google_protobuf2.Timestamp {
 	if m != nil {
 		return m.NullableTimestamp
 	}
 	return nil
 }
 
-func (m *MapProtoTypes) GetTimestamp() map[int32]google_protobuf.Timestamp {
+func (m *MapProtoTypes) GetTimestamp() map[int32]google_protobuf2.Timestamp {
 	if m != nil {
 		return m.Timestamp
 	}
 	return nil
 }
 
-func (m *MapProtoTypes) GetNullableDuration() map[int32]*google_protobuf.Duration {
+func (m *MapProtoTypes) GetNullableDuration() map[int32]*google_protobuf1.Duration {
 	if m != nil {
 		return m.NullableDuration
 	}
 	return nil
 }
 
-func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf.Duration {
+func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf1.Duration {
 	if m != nil {
 		return m.Duration
 	}
@@ -402,10 +404,10 @@ type isOneofProtoTypes_OneOfProtoTimes interface {
 }
 
 type OneofProtoTypes_Timestamp struct {
-	Timestamp *google_protobuf.Timestamp `protobuf:"bytes,1,opt,name=timestamp,oneof"`
+	Timestamp *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=timestamp,oneof"`
 }
 type OneofProtoTypes_Duration struct {
-	Duration *google_protobuf.Duration `protobuf:"bytes,2,opt,name=duration,oneof"`
+	Duration *google_protobuf1.Duration `protobuf:"bytes,2,opt,name=duration,oneof"`
 }
 
 func (*OneofProtoTypes_Timestamp) isOneofProtoTypes_OneOfProtoTimes() {}
@@ -418,14 +420,14 @@ func (m *OneofProtoTypes) GetOneOfProtoTimes() isOneofProtoTypes_OneOfProtoTimes
 	return nil
 }
 
-func (m *OneofProtoTypes) GetTimestamp() *google_protobuf.Timestamp {
+func (m *OneofProtoTypes) GetTimestamp() *google_protobuf2.Timestamp {
 	if x, ok := m.GetOneOfProtoTimes().(*OneofProtoTypes_Timestamp); ok {
 		return x.Timestamp
 	}
 	return nil
 }
 
-func (m *OneofProtoTypes) GetDuration() *google_protobuf.Duration {
+func (m *OneofProtoTypes) GetDuration() *google_protobuf1.Duration {
 	if x, ok := m.GetOneOfProtoTimes().(*OneofProtoTypes_Duration); ok {
 		return x.Duration
 	}
@@ -468,7 +470,7 @@ func _OneofProtoTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *prot
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(google_protobuf.Timestamp)
+		msg := new(google_protobuf2.Timestamp)
 		err := b.DecodeMessage(msg)
 		m.OneOfProtoTimes = &OneofProtoTypes_Timestamp{msg}
 		return true, err
@@ -476,7 +478,7 @@ func _OneofProtoTypes_OneofUnmarshaler(msg proto.Message, tag, wire int, b *prot
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(google_protobuf.Duration)
+		msg := new(google_protobuf1.Duration)
 		err := b.DecodeMessage(msg)
 		m.OneOfProtoTimes = &OneofProtoTypes_Duration{msg}
 		return true, err
@@ -2742,37 +2744,37 @@ func encodeVarintTypes(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 	this := &KnownTypes{}
 	if r.Intn(10) != 0 {
-		this.Dur = google_protobuf.NewPopulatedDuration(r, easy)
+		this.Dur = google_protobuf1.NewPopulatedDuration(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Ts = google_protobuf.NewPopulatedTimestamp(r, easy)
+		this.Ts = google_protobuf2.NewPopulatedTimestamp(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Dbl = google_protobuf.NewPopulatedDoubleValue(r, easy)
+		this.Dbl = google_protobuf3.NewPopulatedDoubleValue(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Flt = google_protobuf.NewPopulatedFloatValue(r, easy)
+		this.Flt = google_protobuf3.NewPopulatedFloatValue(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.I64 = google_protobuf.NewPopulatedInt64Value(r, easy)
+		this.I64 = google_protobuf3.NewPopulatedInt64Value(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.U64 = google_protobuf.NewPopulatedUInt64Value(r, easy)
+		this.U64 = google_protobuf3.NewPopulatedUInt64Value(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.I32 = google_protobuf.NewPopulatedInt32Value(r, easy)
+		this.I32 = google_protobuf3.NewPopulatedInt32Value(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.U32 = google_protobuf.NewPopulatedUInt32Value(r, easy)
+		this.U32 = google_protobuf3.NewPopulatedUInt32Value(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Bool = google_protobuf.NewPopulatedBoolValue(r, easy)
+		this.Bool = google_protobuf3.NewPopulatedBoolValue(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Str = google_protobuf.NewPopulatedStringValue(r, easy)
+		this.Str = google_protobuf3.NewPopulatedStringValue(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.Bytes = google_protobuf.NewPopulatedBytesValue(r, easy)
+		this.Bytes = google_protobuf3.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2782,14 +2784,14 @@ func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	this := &ProtoTypes{}
 	if r.Intn(10) != 0 {
-		this.NullableTimestamp = google_protobuf.NewPopulatedTimestamp(r, easy)
+		this.NullableTimestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
 	}
 	if r.Intn(10) != 0 {
-		this.NullableDuration = google_protobuf.NewPopulatedDuration(r, easy)
+		this.NullableDuration = google_protobuf1.NewPopulatedDuration(r, easy)
 	}
-	v1 := google_protobuf.NewPopulatedTimestamp(r, easy)
+	v1 := google_protobuf2.NewPopulatedTimestamp(r, easy)
 	this.Timestamp = *v1
-	v2 := google_protobuf.NewPopulatedDuration(r, easy)
+	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
 	this.Duration = *v2
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2817,31 +2819,31 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 	this := &RepProtoTypes{}
 	if r.Intn(10) != 0 {
 		v5 := r.Intn(5)
-		this.NullableTimestamps = make([]*google_protobuf.Timestamp, v5)
+		this.NullableTimestamps = make([]*google_protobuf2.Timestamp, v5)
 		for i := 0; i < v5; i++ {
-			this.NullableTimestamps[i] = google_protobuf.NewPopulatedTimestamp(r, easy)
+			this.NullableTimestamps[i] = google_protobuf2.NewPopulatedTimestamp(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v6 := r.Intn(5)
-		this.NullableDurations = make([]*google_protobuf.Duration, v6)
+		this.NullableDurations = make([]*google_protobuf1.Duration, v6)
 		for i := 0; i < v6; i++ {
-			this.NullableDurations[i] = google_protobuf.NewPopulatedDuration(r, easy)
+			this.NullableDurations[i] = google_protobuf1.NewPopulatedDuration(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v7 := r.Intn(5)
-		this.Timestamps = make([]google_protobuf.Timestamp, v7)
+		this.Timestamps = make([]google_protobuf2.Timestamp, v7)
 		for i := 0; i < v7; i++ {
-			v8 := google_protobuf.NewPopulatedTimestamp(r, easy)
+			v8 := google_protobuf2.NewPopulatedTimestamp(r, easy)
 			this.Timestamps[i] = *v8
 		}
 	}
 	if r.Intn(10) != 0 {
 		v9 := r.Intn(5)
-		this.Durations = make([]google_protobuf.Duration, v9)
+		this.Durations = make([]google_protobuf1.Duration, v9)
 		for i := 0; i < v9; i++ {
-			v10 := google_protobuf.NewPopulatedDuration(r, easy)
+			v10 := google_protobuf1.NewPopulatedDuration(r, easy)
 			this.Durations[i] = *v10
 		}
 	}
@@ -2891,30 +2893,30 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 	this := &MapProtoTypes{}
 	if r.Intn(10) != 0 {
 		v17 := r.Intn(10)
-		this.NullableTimestamp = make(map[int32]*google_protobuf.Timestamp)
+		this.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
 		for i := 0; i < v17; i++ {
-			this.NullableTimestamp[int32(r.Int31())] = google_protobuf.NewPopulatedTimestamp(r, easy)
+			this.NullableTimestamp[int32(r.Int31())] = google_protobuf2.NewPopulatedTimestamp(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v18 := r.Intn(10)
-		this.Timestamp = make(map[int32]google_protobuf.Timestamp)
+		this.Timestamp = make(map[int32]google_protobuf2.Timestamp)
 		for i := 0; i < v18; i++ {
-			this.Timestamp[int32(r.Int31())] = *google_protobuf.NewPopulatedTimestamp(r, easy)
+			this.Timestamp[int32(r.Int31())] = *google_protobuf2.NewPopulatedTimestamp(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v19 := r.Intn(10)
-		this.NullableDuration = make(map[int32]*google_protobuf.Duration)
+		this.NullableDuration = make(map[int32]*google_protobuf1.Duration)
 		for i := 0; i < v19; i++ {
-			this.NullableDuration[int32(r.Int31())] = google_protobuf.NewPopulatedDuration(r, easy)
+			this.NullableDuration[int32(r.Int31())] = google_protobuf1.NewPopulatedDuration(r, easy)
 		}
 	}
 	if r.Intn(10) != 0 {
 		v20 := r.Intn(10)
-		this.Duration = make(map[int32]google_protobuf.Duration)
+		this.Duration = make(map[int32]google_protobuf1.Duration)
 		for i := 0; i < v20; i++ {
-			this.Duration[int32(r.Int31())] = *google_protobuf.NewPopulatedDuration(r, easy)
+			this.Duration[int32(r.Int31())] = *google_protobuf1.NewPopulatedDuration(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -2973,12 +2975,12 @@ func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
 
 func NewPopulatedOneofProtoTypes_Timestamp(r randyTypes, easy bool) *OneofProtoTypes_Timestamp {
 	this := &OneofProtoTypes_Timestamp{}
-	this.Timestamp = google_protobuf.NewPopulatedTimestamp(r, easy)
+	this.Timestamp = google_protobuf2.NewPopulatedTimestamp(r, easy)
 	return this
 }
 func NewPopulatedOneofProtoTypes_Duration(r randyTypes, easy bool) *OneofProtoTypes_Duration {
 	this := &OneofProtoTypes_Duration{}
-	this.Duration = google_protobuf.NewPopulatedDuration(r, easy)
+	this.Duration = google_protobuf1.NewPopulatedDuration(r, easy)
 	return this
 }
 func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
@@ -3448,7 +3450,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Dur == nil {
-				m.Dur = &google_protobuf.Duration{}
+				m.Dur = &google_protobuf1.Duration{}
 			}
 			if err := m.Dur.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3481,7 +3483,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Ts == nil {
-				m.Ts = &google_protobuf.Timestamp{}
+				m.Ts = &google_protobuf2.Timestamp{}
 			}
 			if err := m.Ts.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3514,7 +3516,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Dbl == nil {
-				m.Dbl = &google_protobuf.DoubleValue{}
+				m.Dbl = &google_protobuf3.DoubleValue{}
 			}
 			if err := m.Dbl.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3547,7 +3549,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Flt == nil {
-				m.Flt = &google_protobuf.FloatValue{}
+				m.Flt = &google_protobuf3.FloatValue{}
 			}
 			if err := m.Flt.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3580,7 +3582,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.I64 == nil {
-				m.I64 = &google_protobuf.Int64Value{}
+				m.I64 = &google_protobuf3.Int64Value{}
 			}
 			if err := m.I64.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3613,7 +3615,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.U64 == nil {
-				m.U64 = &google_protobuf.UInt64Value{}
+				m.U64 = &google_protobuf3.UInt64Value{}
 			}
 			if err := m.U64.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3646,7 +3648,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.I32 == nil {
-				m.I32 = &google_protobuf.Int32Value{}
+				m.I32 = &google_protobuf3.Int32Value{}
 			}
 			if err := m.I32.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3679,7 +3681,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.U32 == nil {
-				m.U32 = &google_protobuf.UInt32Value{}
+				m.U32 = &google_protobuf3.UInt32Value{}
 			}
 			if err := m.U32.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3712,7 +3714,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Bool == nil {
-				m.Bool = &google_protobuf.BoolValue{}
+				m.Bool = &google_protobuf3.BoolValue{}
 			}
 			if err := m.Bool.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3745,7 +3747,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Str == nil {
-				m.Str = &google_protobuf.StringValue{}
+				m.Str = &google_protobuf3.StringValue{}
 			}
 			if err := m.Str.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3778,7 +3780,7 @@ func (m *KnownTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Bytes == nil {
-				m.Bytes = &google_protobuf.BytesValue{}
+				m.Bytes = &google_protobuf3.BytesValue{}
 			}
 			if err := m.Bytes.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3861,7 +3863,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableTimestamp == nil {
-				m.NullableTimestamp = &google_protobuf.Timestamp{}
+				m.NullableTimestamp = &google_protobuf2.Timestamp{}
 			}
 			if err := m.NullableTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -3894,7 +3896,7 @@ func (m *ProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableDuration == nil {
-				m.NullableDuration = &google_protobuf.Duration{}
+				m.NullableDuration = &google_protobuf1.Duration{}
 			}
 			if err := m.NullableDuration.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -4212,7 +4214,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableTimestamps = append(m.NullableTimestamps, &google_protobuf.Timestamp{})
+			m.NullableTimestamps = append(m.NullableTimestamps, &google_protobuf2.Timestamp{})
 			if err := m.NullableTimestamps[len(m.NullableTimestamps)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -4243,7 +4245,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NullableDurations = append(m.NullableDurations, &google_protobuf.Duration{})
+			m.NullableDurations = append(m.NullableDurations, &google_protobuf1.Duration{})
 			if err := m.NullableDurations[len(m.NullableDurations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -4274,7 +4276,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Timestamps = append(m.Timestamps, google_protobuf.Timestamp{})
+			m.Timestamps = append(m.Timestamps, google_protobuf2.Timestamp{})
 			if err := m.Timestamps[len(m.Timestamps)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -4305,7 +4307,7 @@ func (m *RepProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Durations = append(m.Durations, google_protobuf.Duration{})
+			m.Durations = append(m.Durations, google_protobuf1.Duration{})
 			if err := m.Durations[len(m.Durations)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -4561,10 +4563,10 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableTimestamp == nil {
-				m.NullableTimestamp = make(map[int32]*google_protobuf.Timestamp)
+				m.NullableTimestamp = make(map[int32]*google_protobuf2.Timestamp)
 			}
 			var mapkey int32
-			var mapvalue *google_protobuf.Timestamp
+			var mapvalue *google_protobuf2.Timestamp
 			for iNdEx < postIndex {
 				entryPreIndex := iNdEx
 				var wire uint64
@@ -4624,7 +4626,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = &google_protobuf.Timestamp{}
+					mapvalue = &google_protobuf2.Timestamp{}
 					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}
@@ -4673,10 +4675,10 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Timestamp == nil {
-				m.Timestamp = make(map[int32]google_protobuf.Timestamp)
+				m.Timestamp = make(map[int32]google_protobuf2.Timestamp)
 			}
 			var mapkey int32
-			mapvalue := &google_protobuf.Timestamp{}
+			mapvalue := &google_protobuf2.Timestamp{}
 			for iNdEx < postIndex {
 				entryPreIndex := iNdEx
 				var wire uint64
@@ -4736,7 +4738,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = &google_protobuf.Timestamp{}
+					mapvalue = &google_protobuf2.Timestamp{}
 					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}
@@ -4785,10 +4787,10 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.NullableDuration == nil {
-				m.NullableDuration = make(map[int32]*google_protobuf.Duration)
+				m.NullableDuration = make(map[int32]*google_protobuf1.Duration)
 			}
 			var mapkey int32
-			var mapvalue *google_protobuf.Duration
+			var mapvalue *google_protobuf1.Duration
 			for iNdEx < postIndex {
 				entryPreIndex := iNdEx
 				var wire uint64
@@ -4848,7 +4850,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = &google_protobuf.Duration{}
+					mapvalue = &google_protobuf1.Duration{}
 					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}
@@ -4897,10 +4899,10 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Duration == nil {
-				m.Duration = make(map[int32]google_protobuf.Duration)
+				m.Duration = make(map[int32]google_protobuf1.Duration)
 			}
 			var mapkey int32
-			mapvalue := &google_protobuf.Duration{}
+			mapvalue := &google_protobuf1.Duration{}
 			for iNdEx < postIndex {
 				entryPreIndex := iNdEx
 				var wire uint64
@@ -4960,7 +4962,7 @@ func (m *MapProtoTypes) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					mapvalue = &google_protobuf.Duration{}
+					mapvalue = &google_protobuf1.Duration{}
 					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}
@@ -5552,7 +5554,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			v := &google_protobuf.Timestamp{}
+			v := &google_protobuf2.Timestamp{}
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -5584,7 +5586,7 @@ func (m *OneofProtoTypes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			v := &google_protobuf.Duration{}
+			v := &google_protobuf1.Duration{}
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

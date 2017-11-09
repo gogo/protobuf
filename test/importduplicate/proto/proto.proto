@@ -27,19 +27,15 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 syntax = "proto3";
-package importduplicate;
+package proto;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/gogo/protobuf/test/importduplicate/sortkeys/sortable.proto";
-import "github.com/gogo/protobuf/test/importduplicate/proto/proto.proto";
 
 option (gogoproto.testgen_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.equal_all) = true;
 option (gogoproto.gostring_all) = true;
 
-message MapAndSortKeys {
-  sortkeys.Object key = 1;
-  map<int32,string> keyValue = 2;
-  proto.Subject value = 3;
+message Subject {
+
 }

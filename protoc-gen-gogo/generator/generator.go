@@ -715,26 +715,36 @@ var pkgNamesInUse = make(map[string][]*FileDescriptor)
 // Pkg is the candidate name.  If f is nil, it's a builtin package like "proto" and
 // has no file descriptor.
 func RegisterUniquePackageName(pkg string, f *FileDescriptor) string {
-	// Ensure that package names across multiple imports are unique.
 	if f == nil {
+		// For builtin and standard lib packages, try to use the last
+		// component of the package path if possible.
 		pkg = pkg[strings.LastIndex(pkg, "/")+1:]
-		for i := 0; pkgNamesInUse[pkg] != nil; i++ {
-			if i > 0 {
-				pkg = pkg + strconv.Itoa(i)
-			}
-		}
-		return pkg
 	}
 
 	// Convert dots to underscores before finding a unique alias.
 	pkg = strings.Map(badToUnderscore, pkg)
-	for _, ptr := range pkgNamesInUse[pkg] {
+
+	var i = -1
+	var ptr *FileDescriptor = nil
+	for i, ptr = range pkgNamesInUse[pkg] {
 		if ptr == f {
-			return pkg
+			if i == 0 {
+				return pkg
+			}
+			return pkg + strconv.Itoa(i)
 		}
 	}
+
 	pkgNamesInUse[pkg] = append(pkgNamesInUse[pkg], f)
-	uniquePackageName[f.FileDescriptorProto] = pkg
+	i += 1
+
+	if i > 0 {
+		pkg = pkg + strconv.Itoa(i)
+	}
+
+	if f != nil {
+		uniquePackageName[f.FileDescriptorProto] = pkg
+	}
 	return pkg
 }
 

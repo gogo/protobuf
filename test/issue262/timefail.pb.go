@@ -174,7 +174,7 @@ func (this *TimeFail) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&TimeFail{`,
-		`TimeTest:` + strings.Replace(fmt.Sprintf("%v", this.TimeTest), "Timestamp", "google_protobuf.Timestamp", 1) + `,`,
+		`TimeTest:` + strings.Replace(fmt.Sprintf("%v", this.TimeTest), "Timestamp", "google_protobuf1.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
