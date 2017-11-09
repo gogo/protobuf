@@ -724,23 +724,14 @@ func RegisterUniquePackageName(pkg string, f *FileDescriptor) string {
 	// Convert dots to underscores before finding a unique alias.
 	pkg = strings.Map(badToUnderscore, pkg)
 
-	var i = -1
 	var ptr *FileDescriptor = nil
-	for i, ptr = range pkgNamesInUse[pkg] {
+	for _, ptr = range pkgNamesInUse[pkg] {
 		if ptr == f {
-			if i == 0 {
-				return pkg
-			}
-			return pkg + strconv.Itoa(i)
+			return pkg
 		}
 	}
 
 	pkgNamesInUse[pkg] = append(pkgNamesInUse[pkg], f)
-	i += 1
-
-	if i > 0 {
-		pkg = pkg + strconv.Itoa(i)
-	}
 
 	if f != nil {
 		uniquePackageName[f.FileDescriptorProto] = pkg
