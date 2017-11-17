@@ -95,10 +95,14 @@ Other binaries are also included:
 Installing any of these binaries is easy.  Simply run:
 
     go get github.com/gogo/protobuf/proto
-    go get github.com/gogo/protobuf/{binary}
+    go get github.com/gogo/protobuf/protoc-gen-gogo{fast|faster|slick}
     go get github.com/gogo/protobuf/gogoproto
 
 These binaries allow you to use gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md).
+
+To generate the code, you also need to set the include path properly.
+
+    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf --gogo{fast|faster|slick}_out=. myproto.proto
 
 ### Most Speed and most customization
 
