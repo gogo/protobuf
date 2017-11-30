@@ -106,6 +106,10 @@ To generate the code, you also need to set the include path properly.
 
 Note that in the protoc command, {binary} does not contain the initial prefix of "protoc-gen". 
 
+To use the gogoprotobuf extensions, you'll also need to provide the following include path in your `protoc` invocation:
+
+    -I=$GOPATH/src/github.com/gogo/protobuf
+
 ### Most Speed and most customization
 
 Customizing the fields of the messages to be the fields that you actually want to use removes the need to copy between the structs you use and structs you use to serialize.
