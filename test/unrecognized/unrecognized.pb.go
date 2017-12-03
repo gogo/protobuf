@@ -523,10 +523,7 @@ func (this *A) VerboseEqual(that interface{}) error {
 }
 func (this *A) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*A)
@@ -539,10 +536,7 @@ func (this *A) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -606,10 +600,7 @@ func (this *B) VerboseEqual(that interface{}) error {
 }
 func (this *B) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*B)
@@ -622,10 +613,7 @@ func (this *B) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -684,10 +672,7 @@ func (this *D) VerboseEqual(that interface{}) error {
 }
 func (this *D) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*D)
@@ -700,10 +685,7 @@ func (this *D) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -805,10 +787,7 @@ func (this *C) VerboseEqual(that interface{}) error {
 }
 func (this *C) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*C)
@@ -821,10 +800,7 @@ func (this *C) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -931,10 +907,7 @@ func (this *U) VerboseEqual(that interface{}) error {
 }
 func (this *U) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*U)
@@ -947,10 +920,7 @@ func (this *U) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1019,10 +989,7 @@ func (this *UnoM) VerboseEqual(that interface{}) error {
 }
 func (this *UnoM) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UnoM)
@@ -1035,10 +1002,7 @@ func (this *UnoM) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1107,10 +1071,7 @@ func (this *OldA) VerboseEqual(that interface{}) error {
 }
 func (this *OldA) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldA)
@@ -1123,10 +1084,7 @@ func (this *OldA) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1187,10 +1145,7 @@ func (this *OldB) VerboseEqual(that interface{}) error {
 }
 func (this *OldB) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldB)
@@ -1203,10 +1158,7 @@ func (this *OldB) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1297,10 +1249,7 @@ func (this *OldC) VerboseEqual(that interface{}) error {
 }
 func (this *OldC) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldC)
@@ -1313,10 +1262,7 @@ func (this *OldC) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1418,10 +1364,7 @@ func (this *OldU) VerboseEqual(that interface{}) error {
 }
 func (this *OldU) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldU)
@@ -1434,10 +1377,7 @@ func (this *OldU) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1512,10 +1452,7 @@ func (this *OldUnoM) VerboseEqual(that interface{}) error {
 }
 func (this *OldUnoM) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldUnoM)
@@ -1528,10 +1465,7 @@ func (this *OldUnoM) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
