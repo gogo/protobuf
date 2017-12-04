@@ -535,10 +535,7 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 }
 func (this *FloatingPoint) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*FloatingPoint)
@@ -551,10 +548,7 @@ func (this *FloatingPoint) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -636,10 +630,7 @@ func (this *CustomMap) VerboseEqual(that interface{}) error {
 }
 func (this *CustomMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomMap)
@@ -652,10 +643,7 @@ func (this *CustomMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -864,10 +852,7 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 }
 func (this *AllMaps) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AllMaps)
@@ -880,10 +865,7 @@ func (this *AllMaps) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1196,10 +1178,7 @@ func (this *AllMapsOrdered) VerboseEqual(that interface{}) error {
 }
 func (this *AllMapsOrdered) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AllMapsOrdered)
@@ -1212,10 +1191,7 @@ func (this *AllMapsOrdered) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

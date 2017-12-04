@@ -434,10 +434,7 @@ func (this *NewNoGroup) VerboseEqual(that interface{}) error {
 }
 func (this *NewNoGroup) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NewNoGroup)
@@ -450,10 +447,7 @@ func (this *NewNoGroup) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -523,10 +517,7 @@ func (this *A) VerboseEqual(that interface{}) error {
 }
 func (this *A) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*A)
@@ -539,10 +530,7 @@ func (this *A) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -615,10 +603,7 @@ func (this *OldWithGroup) VerboseEqual(that interface{}) error {
 }
 func (this *OldWithGroup) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldWithGroup)
@@ -631,10 +616,7 @@ func (this *OldWithGroup) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -724,10 +706,7 @@ func (this *OldWithGroup_Group1) VerboseEqual(that interface{}) error {
 }
 func (this *OldWithGroup_Group1) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldWithGroup_Group1)
@@ -740,10 +719,7 @@ func (this *OldWithGroup_Group1) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -827,10 +803,7 @@ func (this *OldWithGroup_Group2) VerboseEqual(that interface{}) error {
 }
 func (this *OldWithGroup_Group2) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OldWithGroup_Group2)
@@ -843,10 +816,7 @@ func (this *OldWithGroup_Group2) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

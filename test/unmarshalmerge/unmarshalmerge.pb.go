@@ -249,10 +249,7 @@ func (this *Big) VerboseEqual(that interface{}) error {
 }
 func (this *Big) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Big)
@@ -265,10 +262,7 @@ func (this *Big) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -333,10 +327,7 @@ func (this *BigUnsafe) VerboseEqual(that interface{}) error {
 }
 func (this *BigUnsafe) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*BigUnsafe)
@@ -349,10 +340,7 @@ func (this *BigUnsafe) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -414,10 +402,7 @@ func (this *Sub) VerboseEqual(that interface{}) error {
 }
 func (this *Sub) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Sub)
@@ -430,10 +415,7 @@ func (this *Sub) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -516,10 +498,7 @@ func (this *IntMerge) VerboseEqual(that interface{}) error {
 }
 func (this *IntMerge) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*IntMerge)
@@ -532,10 +511,7 @@ func (this *IntMerge) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

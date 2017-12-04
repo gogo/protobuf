@@ -531,10 +531,7 @@ func (this *BytesValue) Compare(that interface{}) int {
 }
 func (this *DoubleValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*DoubleValue)
@@ -547,10 +544,7 @@ func (this *DoubleValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -561,10 +555,7 @@ func (this *DoubleValue) Equal(that interface{}) bool {
 }
 func (this *FloatValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*FloatValue)
@@ -577,10 +568,7 @@ func (this *FloatValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -591,10 +579,7 @@ func (this *FloatValue) Equal(that interface{}) bool {
 }
 func (this *Int64Value) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Int64Value)
@@ -607,10 +592,7 @@ func (this *Int64Value) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -621,10 +603,7 @@ func (this *Int64Value) Equal(that interface{}) bool {
 }
 func (this *UInt64Value) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UInt64Value)
@@ -637,10 +616,7 @@ func (this *UInt64Value) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -651,10 +627,7 @@ func (this *UInt64Value) Equal(that interface{}) bool {
 }
 func (this *Int32Value) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Int32Value)
@@ -667,10 +640,7 @@ func (this *Int32Value) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -681,10 +651,7 @@ func (this *Int32Value) Equal(that interface{}) bool {
 }
 func (this *UInt32Value) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UInt32Value)
@@ -697,10 +664,7 @@ func (this *UInt32Value) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -711,10 +675,7 @@ func (this *UInt32Value) Equal(that interface{}) bool {
 }
 func (this *BoolValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*BoolValue)
@@ -727,10 +688,7 @@ func (this *BoolValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -741,10 +699,7 @@ func (this *BoolValue) Equal(that interface{}) bool {
 }
 func (this *StringValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*StringValue)
@@ -757,10 +712,7 @@ func (this *StringValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -771,10 +723,7 @@ func (this *StringValue) Equal(that interface{}) bool {
 }
 func (this *BytesValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*BytesValue)
@@ -787,10 +736,7 @@ func (this *BytesValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

@@ -848,10 +848,7 @@ func (this *Subby) VerboseEqual(that interface{}) error {
 }
 func (this *Subby) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Subby)
@@ -864,10 +861,7 @@ func (this *Subby) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1394,10 +1388,7 @@ func (this *SampleOneOf_SubMessage) VerboseEqual(that interface{}) error {
 }
 func (this *SampleOneOf) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf)
@@ -1410,10 +1401,7 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1430,10 +1418,7 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field1)
@@ -1446,10 +1431,7 @@ func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1460,10 +1442,7 @@ func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field2)
@@ -1476,10 +1455,7 @@ func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1490,10 +1466,7 @@ func (this *SampleOneOf_Field2) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field3)
@@ -1506,10 +1479,7 @@ func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1520,10 +1490,7 @@ func (this *SampleOneOf_Field3) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field4)
@@ -1536,10 +1503,7 @@ func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1550,10 +1514,7 @@ func (this *SampleOneOf_Field4) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field5)
@@ -1566,10 +1527,7 @@ func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1580,10 +1538,7 @@ func (this *SampleOneOf_Field5) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field6)
@@ -1596,10 +1551,7 @@ func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1610,10 +1562,7 @@ func (this *SampleOneOf_Field6) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field7)
@@ -1626,10 +1575,7 @@ func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1640,10 +1586,7 @@ func (this *SampleOneOf_Field7) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field8)
@@ -1656,10 +1599,7 @@ func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1670,10 +1610,7 @@ func (this *SampleOneOf_Field8) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field9)
@@ -1686,10 +1623,7 @@ func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1700,10 +1634,7 @@ func (this *SampleOneOf_Field9) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field10)
@@ -1716,10 +1647,7 @@ func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1730,10 +1658,7 @@ func (this *SampleOneOf_Field10) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field11)
@@ -1746,10 +1671,7 @@ func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1760,10 +1682,7 @@ func (this *SampleOneOf_Field11) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field12)
@@ -1776,10 +1695,7 @@ func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1790,10 +1706,7 @@ func (this *SampleOneOf_Field12) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field13)
@@ -1806,10 +1719,7 @@ func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1820,10 +1730,7 @@ func (this *SampleOneOf_Field13) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field14)
@@ -1836,10 +1743,7 @@ func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1850,10 +1754,7 @@ func (this *SampleOneOf_Field14) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_Field15)
@@ -1866,10 +1767,7 @@ func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1880,10 +1778,7 @@ func (this *SampleOneOf_Field15) Equal(that interface{}) bool {
 }
 func (this *SampleOneOf_SubMessage) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*SampleOneOf_SubMessage)
@@ -1896,10 +1791,7 @@ func (this *SampleOneOf_SubMessage) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

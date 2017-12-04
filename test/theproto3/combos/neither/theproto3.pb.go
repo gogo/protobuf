@@ -877,10 +877,7 @@ func (this *Message) VerboseEqual(that interface{}) error {
 }
 func (this *Message) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Message)
@@ -893,10 +890,7 @@ func (this *Message) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -985,10 +979,7 @@ func (this *Nested) VerboseEqual(that interface{}) error {
 }
 func (this *Nested) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Nested)
@@ -1001,10 +992,7 @@ func (this *Nested) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1178,10 +1166,7 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 }
 func (this *AllMaps) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AllMaps)
@@ -1194,10 +1179,7 @@ func (this *AllMaps) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1504,10 +1486,7 @@ func (this *AllMapsOrdered) VerboseEqual(that interface{}) error {
 }
 func (this *AllMapsOrdered) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AllMapsOrdered)
@@ -1520,10 +1499,7 @@ func (this *AllMapsOrdered) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1718,10 +1694,7 @@ func (this *MessageWithMap) VerboseEqual(that interface{}) error {
 }
 func (this *MessageWithMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*MessageWithMap)
@@ -1734,10 +1707,7 @@ func (this *MessageWithMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1799,10 +1769,7 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 }
 func (this *FloatingPoint) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*FloatingPoint)
@@ -1815,10 +1782,7 @@ func (this *FloatingPoint) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1866,10 +1830,7 @@ func (this *Uint128Pair) VerboseEqual(that interface{}) error {
 }
 func (this *Uint128Pair) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Uint128Pair)
@@ -1882,10 +1843,7 @@ func (this *Uint128Pair) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1930,10 +1888,7 @@ func (this *ContainsNestedMap) VerboseEqual(that interface{}) error {
 }
 func (this *ContainsNestedMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ContainsNestedMap)
@@ -1946,10 +1901,7 @@ func (this *ContainsNestedMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1992,10 +1944,7 @@ func (this *ContainsNestedMap_NestedMap) VerboseEqual(that interface{}) error {
 }
 func (this *ContainsNestedMap_NestedMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ContainsNestedMap_NestedMap)
@@ -2008,10 +1957,7 @@ func (this *ContainsNestedMap_NestedMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -2062,10 +2008,7 @@ func (this *NotPacked) VerboseEqual(that interface{}) error {
 }
 func (this *NotPacked) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NotPacked)
@@ -2078,10 +2021,7 @@ func (this *NotPacked) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
