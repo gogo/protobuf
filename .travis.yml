@@ -1,7 +1,7 @@
 env:
   - PROTOBUF_VERSION=2.6.1
   - PROTOBUF_VERSION=3.0.2
-  - PROTOBUF_VERSION=3.4.0 CHECK_DIFF=1
+  - PROTOBUF_VERSION=3.5.0.1 CHECK_DIFF=1
 
 before_install:
   - ./install-protobuf.sh
