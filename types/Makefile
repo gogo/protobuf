@@ -37,3 +37,12 @@ regenerate:
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/struct.proto
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/wrappers.proto
 	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/field_mask.proto
+	protoc-min-version --version="3.0.0" --gogotypes_out=. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/source_context.proto
+	protoc-min-version --version="3.0.0" --gogotypes_out=\
+	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/source_context.proto=github.com/gogo/protobuf/types,\
+	:. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/type.proto
+	protoc-min-version --version="3.0.0" --gogotypes_out=\
+	Mgoogle/protobuf/type.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/source_context.proto=github.com/gogo/protobuf/types,\
+	:. -I=../protobuf/google/protobuf ../protobuf/google/protobuf/api.proto
