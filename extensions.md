@@ -113,9 +113,36 @@ Other serialization formats like xml and json typically use reflect to marshal a
 <table>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/tags/tags.proto">jsontag</a> (beta) </td><td> Field </td><td> string </td><td> if set, the json tag value between the double quotes is replaced with this string </td><td> fieldname </td></tr>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/tags/tags.proto">moretags</a> (beta) </td><td> Field </td><td> string </td><td> if set, this string is appended to the tag string </td><td> empty </td></tr>
+<tr><td> bsontag (beta) </td><td> Message </td><td> bool </td><td> if set true, all the fields in the message will add default bson tag, which value is same with json property in protobuf tag or json tag if the property not exist.</td><td> empty </td></tr>
 </table>
 
 <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/xmFnqAS6MIc">Here is a longer explanation of jsontag and moretags</a>
+
+## bsontag Notes
+When we need go struct, which protobuf generated, to support the bson serialization, within the gogoprotobuf, we can use `moretags`.
+
+However in general, the value of `bson` tag is consistent with the `json` tag, so we only need to control whether the generator automatically adds `bson` tag by a switch, which defaults to false.
+
+Currently, three switches have been added,
+1. The generator CMD parameter
+```
+Protoc - gofast_out = bsontag:. My. Proto
+```
+2. The file option
+```
+Option (gogoproto bsontag_all) = true;
+```
+3. The message option
+```
+Option (gogoproto bsontag) = true;
+```
+
+The bson tag will check from the command line parameter to the message option, and the settings will override the previous one.
+
+The specific value of the bson tag can be specified by `moretags`, eg. `moretags = "bson:\"fieldName\ "`, if `moretags` is not specified, then will automatically generate value for bson tag:
+
+  1. First get the `json` attribute in `protobuf` tag, and if it exists, use the value;
+  2. If the above does not exist, the value of the `json` tag is used.
 
 # File Options 
 
@@ -148,6 +175,7 @@ Each of the boolean message and enum extensions also have a file extension:
   * `benchgen_all`
   * `enumdecl_all`
   * `typedecl_all`
+  * `bsontag_all`
 
 Each of these are the same as their Message Option counterparts, except they apply to all messages in the file.  Their Message option counterparts can also be used to overwrite their effect.
 

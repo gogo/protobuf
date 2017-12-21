@@ -2128,7 +2128,29 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if gogoMoreTags != nil {
 				moreTags = " " + *gogoMoreTags
 			}
-			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+
+			enableBsontag := false
+			bsontagParam, ok := g.Param["bsontag"]
+			if ok && bsontagParam != "false" { // enable the bsontag iff user add the bsontag parameter, and not set to false.
+				enableBsontag = true
+			}
+
+			bsonTag := ""
+			if gogoproto.IsBsonTag(message.file, message.DescriptorProto, enableBsontag) {
+				if !strings.Contains(moreTags, "bson") {
+					if json := field.GetJsonName(); json != "" && json != field.GetName() {
+						bsonTag = json + ",omitempty"
+					} else {
+						bsonTag = jsonTag
+					}
+				}
+			}
+
+			if len(bsonTag) > 0 {
+				bsonTag = fmt.Sprintf(" bson:%q", bsonTag)
+			}
+
+			tag := fmt.Sprintf("protobuf:%s json:%q%s%s", g.goTag(message, field, wiretype), jsonTag, bsonTag, moreTags)
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 				fieldName = ""
 			}
