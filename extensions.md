@@ -50,9 +50,9 @@ You might also find that basic structs that started their life as part of an API
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/types/types.proto">stdduration</a></td><td> Duration Field </td><td> bool </td><td>Changes the Well Known Duration Type to time.Duration</td><td>Duration</td></tr>
 </table>
 
-`Warning about nullable: according to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set.` 
+`Warning about nullable: according to the Protocol Buffer specification, you should be able to tell whether a field is set or unset. With the option nullable=false this feature is lost, since your non-nullable fields will always be set.`
 
-# Goprotobuf Compatibility 
+# Goprotobuf Compatibility
 
 Gogoprotobuf is compatible with Goprotobuf, because it is compatible with protocol buffers (see the section on tests below).
 
@@ -112,12 +112,13 @@ Other serialization formats like xml and json typically use reflect to marshal a
 
 <table>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/tags/tags.proto">jsontag</a> (beta) </td><td> Field </td><td> string </td><td> if set, the json tag value between the double quotes is replaced with this string </td><td> fieldname </td></tr>
+<tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/copyjsontags/copyjsontags.proto">copyjsontags</a> (beta) </td><td> Message </td><td> string </td><td> a comma-separated list of tags to copy to json tag value from </td><td> empty </td></tr>
 <tr><td><a href="https://github.com/gogo/protobuf/blob/master/test/tags/tags.proto">moretags</a> (beta) </td><td> Field </td><td> string </td><td> if set, this string is appended to the tag string </td><td> empty </td></tr>
 </table>
 
 <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/xmFnqAS6MIc">Here is a longer explanation of jsontag and moretags</a>
 
-# File Options 
+# File Options
 
 Each of the boolean message and enum extensions also have a file extension:
 
@@ -148,12 +149,13 @@ Each of the boolean message and enum extensions also have a file extension:
   * `benchgen_all`
   * `enumdecl_all`
   * `typedecl_all`
+  * `copyjsontags_all`
 
 Each of these are the same as their Message Option counterparts, except they apply to all messages in the file.  Their Message option counterparts can also be used to overwrite their effect.
 
 # Tests
 
-  * The normal barrage of tests are run with: `make tests` 
+  * The normal barrage of tests are run with: `make tests`
   * A few weird tests: `make testall`
   * Tests for compatibility with [golang/protobuf](https://github.com/golang/protobuf) are handled by a different project [harmonytests](https://github.com/gogo/harmonytests), since it requires goprotobuf.
   * Cross version tests are made with [Travis CI](https://travis-ci.org/gogo/protobuf).
