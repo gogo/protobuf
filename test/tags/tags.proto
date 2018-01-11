@@ -33,12 +33,13 @@ package tags;
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.populate_all) = true;
+option (gogoproto.yamltags_all) = true;
 
 message Outside {
-	optional Inside Inside = 1 [(gogoproto.embed) = true, (gogoproto.jsontag) = ""];
+	optional Inside Inside = 1 [(gogoproto.embed) = true, (gogoproto.jsontag) = "", (gogoproto.yamltag) = ""];
 	optional string Field2 = 2 [(gogoproto.jsontag) = "MyField2", (gogoproto.moretags) = "xml:\",comment\""];
 }
 
 message Inside {
-	optional string Field1 = 1 [(gogoproto.jsontag) = "MyField1", (gogoproto.moretags) = "xml:\",chardata\""];
+	optional string Field1 = 1 [(gogoproto.jsontag) = "MyField1", (gogoproto.moretags) = "xml:\",chardata\"", (gogoproto.yamltag) = "HelloField1"];
 }

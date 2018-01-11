@@ -239,6 +239,19 @@ func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetYamlTag(field *google_protobuf.FieldDescriptorProto) *string {
+	if field == nil {
+		return nil
+	}
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Yamltag)
+		if err == nil && v.(*string) != nil {
+			return (v.(*string))
+		}
+	}
+	return nil
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
@@ -327,6 +340,10 @@ func IsUnsafeMarshaler(file *google_protobuf.FileDescriptorProto, message *googl
 
 func IsUnsafeUnmarshaler(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_UnsafeUnmarshaler, proto.GetBoolExtension(file.Options, E_UnsafeUnmarshalerAll, false))
+}
+
+func IsYamlTags(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Yamltags, proto.GetBoolExtension(file.Options, E_YamltagsAll, false))
 }
 
 func HasExtensionsMap(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
