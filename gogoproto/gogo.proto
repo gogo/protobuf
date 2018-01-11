@@ -83,6 +83,8 @@ extend google.protobuf.FileOptions {
     optional bool enumdecl_all = 63031;
 
 	optional bool goproto_registration = 63032;
+
+	optional bool yamltags_all = 63033;
 }
 
 extend google.protobuf.MessageOptions {
@@ -115,6 +117,8 @@ extend google.protobuf.MessageOptions {
 	optional bool compare = 64029;
 
 	optional bool typedecl = 64030;
+
+	optional bool yamltags = 64031;
 }
 
 extend google.protobuf.FieldOptions {
@@ -130,4 +134,6 @@ extend google.protobuf.FieldOptions {
 
 	optional bool stdtime = 65010;
 	optional bool stdduration = 65011;
+
+	optional string yamltag = 65012;
 }

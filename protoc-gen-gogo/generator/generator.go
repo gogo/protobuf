@@ -2119,16 +2119,24 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			if !gogoproto.IsNullable(field) && !repeatedNativeType {
 				jsonTag = jsonName
 			}
+			yamlString := ""
+			if gogoproto.IsYamlTags(message.file, message.DescriptorProto) {
+				yamlString = fmt.Sprintf(" yaml:%q", jsonTag)
+			}
 			gogoJsonTag := gogoproto.GetJsonTag(field)
 			if gogoJsonTag != nil {
 				jsonTag = *gogoJsonTag
+			}
+			gogoYamlTag := gogoproto.GetYamlTag(field)
+			if gogoYamlTag != nil {
+				yamlString = fmt.Sprintf(" yaml:%q", *gogoYamlTag)
 			}
 			gogoMoreTags := gogoproto.GetMoreTags(field)
 			moreTags := ""
 			if gogoMoreTags != nil {
 				moreTags = " " + *gogoMoreTags
 			}
-			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+			tag := fmt.Sprintf("protobuf:%s json:%q%s%s", g.goTag(message, field, wiretype), jsonTag, yamlString, moreTags)
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 				fieldName = ""
 			}
