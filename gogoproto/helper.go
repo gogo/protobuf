@@ -355,3 +355,7 @@ func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_proto
 func RegistersGolangProto(file *google_protobuf.FileDescriptorProto) bool {
 	return proto.GetBoolExtension(file.Options, E_GoprotoRegistration, false)
 }
+
+func CopyJsonTags(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) string {
+	return proto.GetStringExtension(message.Options, E_Copyjsontags, proto.GetStringExtension(file.Options, E_CopyjsontagsAll, ""))
+}
