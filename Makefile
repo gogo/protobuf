@@ -79,6 +79,7 @@ regenerate:
 	make -C test/enumcustomname regenerate
 	make -C test/packed regenerate
 	make -C test/protosize regenerate
+	make -C test/copyjsontags regenerate
 	make -C test/tags regenerate
 	make -C test/oneof regenerate
 	make -C test/oneof3 regenerate
