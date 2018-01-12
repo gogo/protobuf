@@ -32,7 +32,8 @@ package copyjsontags;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-option (gogoproto.copyjsontags_all) = "yaml,xml";
+option (gogoproto.copyjsontagto_all) = "yaml,xml";
+option (gogoproto.copyjsontagnameto_all) = "bson";
 
 message Outside {
 	optional Inside inside = 1;
