@@ -37,7 +37,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 
 	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	pb "github.com/gogo/protobuf/proto/testdata"
+	pb "github.com/gogo/protobuf/proto/test_proto"
 )
 
 var cloneTestMessage = &pb.MyMessage{
@@ -72,7 +72,7 @@ func init() {
 func TestClone(t *testing.T) {
 	m := proto.Clone(cloneTestMessage).(*pb.MyMessage)
 	if !proto.Equal(m, cloneTestMessage) {
-		t.Errorf("Clone(%v) = %v", cloneTestMessage, m)
+		t.Fatalf("Clone(%v) = %v", cloneTestMessage, m)
 	}
 
 	// Verify it was a deep copy.

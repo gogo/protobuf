@@ -36,7 +36,7 @@ import (
 
 	. "github.com/gogo/protobuf/proto"
 	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	pb "github.com/gogo/protobuf/proto/testdata"
+	pb "github.com/gogo/protobuf/proto/test_proto"
 )
 
 // Four identical base messages.

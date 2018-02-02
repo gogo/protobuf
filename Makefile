@@ -62,7 +62,7 @@ regenerate:
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C protoc-gen-gogo/testdata regenerate
 	make -C gogoproto regenerate
-	make -C proto/testdata regenerate
+	make -C proto/test_proto regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
 	make -C _conformance regenerate
 	make -C types regenerate
