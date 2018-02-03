@@ -59,6 +59,30 @@ func init() {
 
 }
 
+// non-pointer custom message
+type nonptrMessage struct{ x int }
+
+func (m nonptrMessage) ProtoMessage()  {}
+func (m nonptrMessage) Reset()         {}
+func (m nonptrMessage) String() string { return "" }
+
+func (m nonptrMessage) Marshal() ([]byte, error) {
+	return []byte{42}, nil
+}
+
+// custom message embedding a proto.Message
+type messageWithEmbedding struct {
+	*pb.OtherMessage
+}
+
+func (m *messageWithEmbedding) ProtoMessage()  {}
+func (m *messageWithEmbedding) Reset()         {}
+func (m *messageWithEmbedding) String() string { return "" }
+
+func (m *messageWithEmbedding) Marshal() ([]byte, error) {
+	return []byte{42}, nil
+}
+
 var SizeTests = []struct {
 	desc string
 	pb   Message
@@ -146,6 +170,8 @@ var SizeTests = []struct {
 	{"oneof group", &pb.Oneof{Union: &pb.Oneof_FGroup{FGroup: &pb.Oneof_F_Group{X: Int32(52)}}}},
 	{"oneof largest tag", &pb.Oneof{Union: &pb.Oneof_F_Largest_Tag{F_Largest_Tag: 1}}},
 	{"multiple oneofs", &pb.Oneof{Union: &pb.Oneof_F_Int32{F_Int32: 1}, Tormato: &pb.Oneof_Value{Value: 2}}},
+	{"non-pointer message", nonptrMessage{}},
+	{"custom message with embedding", &messageWithEmbedding{&pb.OtherMessage{}}},
 }
 
 func TestSize(t *testing.T) {
