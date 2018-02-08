@@ -191,11 +191,11 @@ const (
 
 var YetAnotherTestEnum_name = map[int32]string{
 	0: "AA",
-	1: "BB",
+	1: "BetterYetBB",
 }
 var YetAnotherTestEnum_value = map[string]int32{
-	"AA": 0,
-	"BB": 1,
+	"AA":          0,
+	"BetterYetBB": 1,
 }
 
 func (x YetAnotherTestEnum) Enum() *YetAnotherTestEnum {
@@ -227,11 +227,11 @@ const (
 
 var YetYetAnotherTestEnum_name = map[int32]string{
 	0: "CC",
-	1: "DD",
+	1: "BetterYetDD",
 }
 var YetYetAnotherTestEnum_value = map[string]int32{
-	"CC": 0,
-	"DD": 1,
+	"CC":          0,
+	"BetterYetDD": 1,
 }
 
 func (x YetYetAnotherTestEnum) Enum() *YetYetAnotherTestEnum {
