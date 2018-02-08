@@ -1,5 +1,28 @@
 URL="https://raw.githubusercontent.com/google/protobuf/master/src/google/protobuf/"
 
+regenerate:
+	go install github.com/gogo/protobuf/protoc-gen-gogotypes
+	go install github.com/gogo/protobuf/protoc-min-version
+
+	protoc-min-version \
+	--version="3.0.0" \
+	--gogotypes_out=../types/ \
+	-I=. \
+	google/protobuf/any.proto \
+	google/protobuf/type.proto \
+	google/protobuf/empty.proto \
+	google/protobuf/api.proto \
+	google/protobuf/timestamp.proto \
+	google/protobuf/duration.proto \
+	google/protobuf/struct.proto \
+	google/protobuf/wrappers.proto \
+	google/protobuf/field_mask.proto \
+	google/protobuf/source_context.proto
+
+	mv ../types/google/protobuf/*.pb.go ../types/
+	rmdir ../types/google/protobuf
+	rmdir ../types/google
+
 update:
 	go install github.com/gogo/protobuf/gogoreplace
 
