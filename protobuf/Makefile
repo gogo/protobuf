@@ -19,9 +19,9 @@ regenerate:
 	google/protobuf/field_mask.proto \
 	google/protobuf/source_context.proto
 
-	mv ../types/google/protobuf/*.pb.go ../types/
-	rmdir ../types/google/protobuf
-	rmdir ../types/google
+	mv ../types/google/protobuf/*.pb.go ../types/ || true
+	rmdir ../types/google/protobuf || true
+	rmdir ../types/google || true
 
 update:
 	go install github.com/gogo/protobuf/gogoreplace
