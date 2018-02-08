@@ -7510,10 +7510,7 @@ func (this *NidOptNative) VerboseEqual(that interface{}) error {
 }
 func (this *NidOptNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidOptNative)
@@ -7526,10 +7523,7 @@ func (this *NidOptNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -7744,10 +7738,7 @@ func (this *NinOptNative) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptNative)
@@ -7760,10 +7751,7 @@ func (this *NinOptNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -8053,10 +8041,7 @@ func (this *NidRepNative) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepNative)
@@ -8069,10 +8054,7 @@ func (this *NidRepNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -8353,10 +8335,7 @@ func (this *NinRepNative) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepNative)
@@ -8369,10 +8348,7 @@ func (this *NinRepNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -8637,10 +8613,7 @@ func (this *NidRepPackedNative) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepPackedNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepPackedNative)
@@ -8653,10 +8626,7 @@ func (this *NidRepPackedNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -8905,10 +8875,7 @@ func (this *NinRepPackedNative) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepPackedNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepPackedNative)
@@ -8921,10 +8888,7 @@ func (this *NinRepPackedNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9099,10 +9063,7 @@ func (this *NidOptStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NidOptStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidOptStruct)
@@ -9115,10 +9076,7 @@ func (this *NidOptStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9255,10 +9213,7 @@ func (this *NinOptStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptStruct)
@@ -9271,10 +9226,7 @@ func (this *NinOptStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9461,10 +9413,7 @@ func (this *NidRepStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepStruct)
@@ -9477,10 +9426,7 @@ func (this *NidRepStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9681,10 +9627,7 @@ func (this *NinRepStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepStruct)
@@ -9697,10 +9640,7 @@ func (this *NinRepStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9830,10 +9770,7 @@ func (this *NidEmbeddedStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidEmbeddedStruct)
@@ -9846,10 +9783,7 @@ func (this *NidEmbeddedStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -9914,10 +9848,7 @@ func (this *NinEmbeddedStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NinEmbeddedStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinEmbeddedStruct)
@@ -9930,10 +9861,7 @@ func (this *NinEmbeddedStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10000,10 +9928,7 @@ func (this *NidNestedStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NidNestedStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidNestedStruct)
@@ -10016,10 +9941,7 @@ func (this *NidNestedStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10082,10 +10004,7 @@ func (this *NinNestedStruct) VerboseEqual(that interface{}) error {
 }
 func (this *NinNestedStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinNestedStruct)
@@ -10098,10 +10017,7 @@ func (this *NinNestedStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10159,10 +10075,7 @@ func (this *NidOptCustom) VerboseEqual(that interface{}) error {
 }
 func (this *NidOptCustom) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidOptCustom)
@@ -10175,10 +10088,7 @@ func (this *NidOptCustom) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10232,10 +10142,7 @@ func (this *CustomDash) VerboseEqual(that interface{}) error {
 }
 func (this *CustomDash) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomDash)
@@ -10248,10 +10155,7 @@ func (this *CustomDash) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10313,10 +10217,7 @@ func (this *NinOptCustom) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptCustom) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptCustom)
@@ -10329,10 +10230,7 @@ func (this *NinOptCustom) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10403,10 +10301,7 @@ func (this *NidRepCustom) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepCustom) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepCustom)
@@ -10419,10 +10314,7 @@ func (this *NidRepCustom) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10495,10 +10387,7 @@ func (this *NinRepCustom) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepCustom) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepCustom)
@@ -10511,10 +10400,7 @@ func (this *NinRepCustom) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10646,10 +10532,7 @@ func (this *NinOptNativeUnion) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptNativeUnion) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptNativeUnion)
@@ -10662,10 +10545,7 @@ func (this *NinOptNativeUnion) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10844,10 +10724,7 @@ func (this *NinOptStructUnion) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptStructUnion) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptStructUnion)
@@ -10860,10 +10737,7 @@ func (this *NinOptStructUnion) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -10982,10 +10856,7 @@ func (this *NinEmbeddedStructUnion) VerboseEqual(that interface{}) error {
 }
 func (this *NinEmbeddedStructUnion) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinEmbeddedStructUnion)
@@ -10998,10 +10869,7 @@ func (this *NinEmbeddedStructUnion) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11066,10 +10934,7 @@ func (this *NinNestedStructUnion) VerboseEqual(that interface{}) error {
 }
 func (this *NinNestedStructUnion) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinNestedStructUnion)
@@ -11082,10 +10947,7 @@ func (this *NinNestedStructUnion) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11144,10 +11006,7 @@ func (this *Tree) VerboseEqual(that interface{}) error {
 }
 func (this *Tree) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Tree)
@@ -11160,10 +11019,7 @@ func (this *Tree) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11219,10 +11075,7 @@ func (this *OrBranch) VerboseEqual(that interface{}) error {
 }
 func (this *OrBranch) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OrBranch)
@@ -11235,10 +11088,7 @@ func (this *OrBranch) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11291,10 +11141,7 @@ func (this *AndBranch) VerboseEqual(that interface{}) error {
 }
 func (this *AndBranch) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AndBranch)
@@ -11307,10 +11154,7 @@ func (this *AndBranch) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11363,10 +11207,7 @@ func (this *Leaf) VerboseEqual(that interface{}) error {
 }
 func (this *Leaf) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Leaf)
@@ -11379,10 +11220,7 @@ func (this *Leaf) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11438,10 +11276,7 @@ func (this *DeepTree) VerboseEqual(that interface{}) error {
 }
 func (this *DeepTree) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*DeepTree)
@@ -11454,10 +11289,7 @@ func (this *DeepTree) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11510,10 +11342,7 @@ func (this *ADeepBranch) VerboseEqual(that interface{}) error {
 }
 func (this *ADeepBranch) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ADeepBranch)
@@ -11526,10 +11355,7 @@ func (this *ADeepBranch) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11579,10 +11405,7 @@ func (this *AndDeepBranch) VerboseEqual(that interface{}) error {
 }
 func (this *AndDeepBranch) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AndDeepBranch)
@@ -11595,10 +11418,7 @@ func (this *AndDeepBranch) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11648,10 +11468,7 @@ func (this *DeepLeaf) VerboseEqual(that interface{}) error {
 }
 func (this *DeepLeaf) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*DeepLeaf)
@@ -11664,10 +11481,7 @@ func (this *DeepLeaf) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11711,10 +11525,7 @@ func (this *Nil) VerboseEqual(that interface{}) error {
 }
 func (this *Nil) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Nil)
@@ -11727,10 +11538,7 @@ func (this *Nil) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11774,10 +11582,7 @@ func (this *NidOptEnum) VerboseEqual(that interface{}) error {
 }
 func (this *NidOptEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidOptEnum)
@@ -11790,10 +11595,7 @@ func (this *NidOptEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11864,10 +11666,7 @@ func (this *NinOptEnum) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptEnum)
@@ -11880,10 +11679,7 @@ func (this *NinOptEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -11975,10 +11771,7 @@ func (this *NidRepEnum) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepEnum)
@@ -11991,10 +11784,7 @@ func (this *NidRepEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12083,10 +11873,7 @@ func (this *NinRepEnum) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepEnum)
@@ -12099,10 +11886,7 @@ func (this *NinRepEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12194,10 +11978,7 @@ func (this *NinOptEnumDefault) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptEnumDefault) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptEnumDefault)
@@ -12210,10 +11991,7 @@ func (this *NinOptEnumDefault) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12308,10 +12086,7 @@ func (this *AnotherNinOptEnum) VerboseEqual(that interface{}) error {
 }
 func (this *AnotherNinOptEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AnotherNinOptEnum)
@@ -12324,10 +12099,7 @@ func (this *AnotherNinOptEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12422,10 +12194,7 @@ func (this *AnotherNinOptEnumDefault) VerboseEqual(that interface{}) error {
 }
 func (this *AnotherNinOptEnumDefault) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*AnotherNinOptEnumDefault)
@@ -12438,10 +12207,7 @@ func (this *AnotherNinOptEnumDefault) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12518,10 +12284,7 @@ func (this *Timer) VerboseEqual(that interface{}) error {
 }
 func (this *Timer) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Timer)
@@ -12534,10 +12297,7 @@ func (this *Timer) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12612,10 +12372,7 @@ func (this *MyExtendable) VerboseEqual(that interface{}) error {
 }
 func (this *MyExtendable) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*MyExtendable)
@@ -12628,10 +12385,7 @@ func (this *MyExtendable) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12734,10 +12488,7 @@ func (this *OtherExtenable) VerboseEqual(that interface{}) error {
 }
 func (this *OtherExtenable) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OtherExtenable)
@@ -12750,10 +12501,7 @@ func (this *OtherExtenable) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12855,10 +12603,7 @@ func (this *NestedDefinition) VerboseEqual(that interface{}) error {
 }
 func (this *NestedDefinition) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NestedDefinition)
@@ -12871,10 +12616,7 @@ func (this *NestedDefinition) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -12951,10 +12693,7 @@ func (this *NestedDefinition_NestedMessage) VerboseEqual(that interface{}) error
 }
 func (this *NestedDefinition_NestedMessage) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NestedDefinition_NestedMessage)
@@ -12967,10 +12706,7 @@ func (this *NestedDefinition_NestedMessage) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13032,10 +12768,7 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) VerboseEqual(that in
 }
 func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NestedDefinition_NestedMessage_NestedNestedMsg)
@@ -13048,10 +12781,7 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Equal(that interface
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13116,10 +12846,7 @@ func (this *NestedScope) VerboseEqual(that interface{}) error {
 }
 func (this *NestedScope) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NestedScope)
@@ -13132,10 +12859,7 @@ func (this *NestedScope) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13320,10 +13044,7 @@ func (this *NinOptNativeDefault) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptNativeDefault) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptNativeDefault)
@@ -13336,10 +13057,7 @@ func (this *NinOptNativeDefault) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13512,10 +13230,7 @@ func (this *CustomContainer) VerboseEqual(that interface{}) error {
 }
 func (this *CustomContainer) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomContainer)
@@ -13528,10 +13243,7 @@ func (this *CustomContainer) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13620,10 +13332,7 @@ func (this *CustomNameNidOptNative) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameNidOptNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameNidOptNative)
@@ -13636,10 +13345,7 @@ func (this *CustomNameNidOptNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -13854,10 +13560,7 @@ func (this *CustomNameNinOptNative) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameNinOptNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameNinOptNative)
@@ -13870,10 +13573,7 @@ func (this *CustomNameNinOptNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14163,10 +13863,7 @@ func (this *CustomNameNinRepNative) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameNinRepNative) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameNinRepNative)
@@ -14179,10 +13876,7 @@ func (this *CustomNameNinRepNative) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14414,10 +14108,7 @@ func (this *CustomNameNinStruct) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameNinStruct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameNinStruct)
@@ -14430,10 +14121,7 @@ func (this *CustomNameNinStruct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14575,10 +14263,7 @@ func (this *CustomNameCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameCustomType)
@@ -14591,10 +14276,7 @@ func (this *CustomNameCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14680,10 +14362,7 @@ func (this *CustomNameNinEmbeddedStructUnion) VerboseEqual(that interface{}) err
 }
 func (this *CustomNameNinEmbeddedStructUnion) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameNinEmbeddedStructUnion)
@@ -14696,10 +14375,7 @@ func (this *CustomNameNinEmbeddedStructUnion) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14772,10 +14448,7 @@ func (this *CustomNameEnum) VerboseEqual(that interface{}) error {
 }
 func (this *CustomNameEnum) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*CustomNameEnum)
@@ -14788,10 +14461,7 @@ func (this *CustomNameEnum) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14861,10 +14531,7 @@ func (this *NoExtensionsMap) VerboseEqual(that interface{}) error {
 }
 func (this *NoExtensionsMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NoExtensionsMap)
@@ -14877,10 +14544,7 @@ func (this *NoExtensionsMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -14939,10 +14603,7 @@ func (this *Unrecognized) VerboseEqual(that interface{}) error {
 }
 func (this *Unrecognized) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Unrecognized)
@@ -14955,10 +14616,7 @@ func (this *Unrecognized) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15022,10 +14680,7 @@ func (this *UnrecognizedWithInner) VerboseEqual(that interface{}) error {
 }
 func (this *UnrecognizedWithInner) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UnrecognizedWithInner)
@@ -15038,10 +14693,7 @@ func (this *UnrecognizedWithInner) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15105,10 +14757,7 @@ func (this *UnrecognizedWithInner_Inner) VerboseEqual(that interface{}) error {
 }
 func (this *UnrecognizedWithInner_Inner) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UnrecognizedWithInner_Inner)
@@ -15121,10 +14770,7 @@ func (this *UnrecognizedWithInner_Inner) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15183,10 +14829,7 @@ func (this *UnrecognizedWithEmbed) VerboseEqual(that interface{}) error {
 }
 func (this *UnrecognizedWithEmbed) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UnrecognizedWithEmbed)
@@ -15199,10 +14842,7 @@ func (this *UnrecognizedWithEmbed) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15261,10 +14901,7 @@ func (this *UnrecognizedWithEmbed_Embedded) VerboseEqual(that interface{}) error
 }
 func (this *UnrecognizedWithEmbed_Embedded) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*UnrecognizedWithEmbed_Embedded)
@@ -15277,10 +14914,7 @@ func (this *UnrecognizedWithEmbed_Embedded) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15344,10 +14978,7 @@ func (this *Node) VerboseEqual(that interface{}) error {
 }
 func (this *Node) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Node)
@@ -15360,10 +14991,7 @@ func (this *Node) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15428,10 +15056,7 @@ func (this *NonByteCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *NonByteCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NonByteCustomType)
@@ -15444,10 +15069,7 @@ func (this *NonByteCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15498,10 +15120,7 @@ func (this *NidOptNonByteCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *NidOptNonByteCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidOptNonByteCustomType)
@@ -15514,10 +15133,7 @@ func (this *NidOptNonByteCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15568,10 +15184,7 @@ func (this *NinOptNonByteCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *NinOptNonByteCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinOptNonByteCustomType)
@@ -15584,10 +15197,7 @@ func (this *NinOptNonByteCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15643,10 +15253,7 @@ func (this *NidRepNonByteCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *NidRepNonByteCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NidRepNonByteCustomType)
@@ -15659,10 +15266,7 @@ func (this *NidRepNonByteCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15719,10 +15323,7 @@ func (this *NinRepNonByteCustomType) VerboseEqual(that interface{}) error {
 }
 func (this *NinRepNonByteCustomType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*NinRepNonByteCustomType)
@@ -15735,10 +15336,7 @@ func (this *NinRepNonByteCustomType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -15796,10 +15394,7 @@ func (this *ProtoType) VerboseEqual(that interface{}) error {
 }
 func (this *ProtoType) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ProtoType)
@@ -15812,10 +15407,7 @@ func (this *ProtoType) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

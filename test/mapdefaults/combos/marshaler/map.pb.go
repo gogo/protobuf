@@ -377,10 +377,7 @@ func (this *MapTest) VerboseEqual(that interface{}) error {
 }
 func (this *MapTest) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*MapTest)
@@ -393,10 +390,7 @@ func (this *MapTest) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -447,10 +441,7 @@ func (this *FakeMap) VerboseEqual(that interface{}) error {
 }
 func (this *FakeMap) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*FakeMap)
@@ -463,10 +454,7 @@ func (this *FakeMap) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -518,10 +506,7 @@ func (this *FakeMapEntry) VerboseEqual(that interface{}) error {
 }
 func (this *FakeMapEntry) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*FakeMapEntry)
@@ -534,10 +519,7 @@ func (this *FakeMapEntry) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

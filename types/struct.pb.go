@@ -361,10 +361,7 @@ func (x NullValue) String() string {
 }
 func (this *Struct) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Struct)
@@ -377,10 +374,7 @@ func (this *Struct) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -396,10 +390,7 @@ func (this *Struct) Equal(that interface{}) bool {
 }
 func (this *Value) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value)
@@ -412,10 +403,7 @@ func (this *Value) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -432,10 +420,7 @@ func (this *Value) Equal(that interface{}) bool {
 }
 func (this *Value_NullValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_NullValue)
@@ -448,10 +433,7 @@ func (this *Value_NullValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -462,10 +444,7 @@ func (this *Value_NullValue) Equal(that interface{}) bool {
 }
 func (this *Value_NumberValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_NumberValue)
@@ -478,10 +457,7 @@ func (this *Value_NumberValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -492,10 +468,7 @@ func (this *Value_NumberValue) Equal(that interface{}) bool {
 }
 func (this *Value_StringValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_StringValue)
@@ -508,10 +481,7 @@ func (this *Value_StringValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -522,10 +492,7 @@ func (this *Value_StringValue) Equal(that interface{}) bool {
 }
 func (this *Value_BoolValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_BoolValue)
@@ -538,10 +505,7 @@ func (this *Value_BoolValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -552,10 +516,7 @@ func (this *Value_BoolValue) Equal(that interface{}) bool {
 }
 func (this *Value_StructValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_StructValue)
@@ -568,10 +529,7 @@ func (this *Value_StructValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -582,10 +540,7 @@ func (this *Value_StructValue) Equal(that interface{}) bool {
 }
 func (this *Value_ListValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Value_ListValue)
@@ -598,10 +553,7 @@ func (this *Value_ListValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -612,10 +564,7 @@ func (this *Value_ListValue) Equal(that interface{}) bool {
 }
 func (this *ListValue) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ListValue)
@@ -628,10 +577,7 @@ func (this *ListValue) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

@@ -389,10 +389,7 @@ func (this *Groups1) VerboseEqual(that interface{}) error {
 }
 func (this *Groups1) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Groups1)
@@ -405,10 +402,7 @@ func (this *Groups1) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -475,10 +469,7 @@ func (this *Groups1_G) VerboseEqual(that interface{}) error {
 }
 func (this *Groups1_G) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Groups1_G)
@@ -491,10 +482,7 @@ func (this *Groups1_G) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -556,10 +544,7 @@ func (this *Groups2) VerboseEqual(that interface{}) error {
 }
 func (this *Groups2) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Groups2)
@@ -572,10 +557,7 @@ func (this *Groups2) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -636,10 +618,7 @@ func (this *Groups2_G) VerboseEqual(that interface{}) error {
 }
 func (this *Groups2_G) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*Groups2_G)
@@ -652,10 +631,7 @@ func (this *Groups2_G) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}

@@ -894,10 +894,7 @@ func (this *KnownTypes) VerboseEqual(that interface{}) error {
 }
 func (this *KnownTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*KnownTypes)
@@ -910,10 +907,7 @@ func (this *KnownTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -993,10 +987,7 @@ func (this *ProtoTypes) VerboseEqual(that interface{}) error {
 }
 func (this *ProtoTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*ProtoTypes)
@@ -1009,10 +1000,7 @@ func (this *ProtoTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1081,10 +1069,7 @@ func (this *StdTypes) VerboseEqual(that interface{}) error {
 }
 func (this *StdTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*StdTypes)
@@ -1097,10 +1082,7 @@ func (this *StdTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1189,10 +1171,7 @@ func (this *RepProtoTypes) VerboseEqual(that interface{}) error {
 }
 func (this *RepProtoTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*RepProtoTypes)
@@ -1205,10 +1184,7 @@ func (this *RepProtoTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1307,10 +1283,7 @@ func (this *RepStdTypes) VerboseEqual(that interface{}) error {
 }
 func (this *RepStdTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*RepStdTypes)
@@ -1323,10 +1296,7 @@ func (this *RepStdTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1429,10 +1399,7 @@ func (this *MapProtoTypes) VerboseEqual(that interface{}) error {
 }
 func (this *MapProtoTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*MapProtoTypes)
@@ -1445,10 +1412,7 @@ func (this *MapProtoTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1551,10 +1515,7 @@ func (this *MapStdTypes) VerboseEqual(that interface{}) error {
 }
 func (this *MapStdTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*MapStdTypes)
@@ -1567,10 +1528,7 @@ func (this *MapStdTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1706,10 +1664,7 @@ func (this *OneofProtoTypes_Duration) VerboseEqual(that interface{}) error {
 }
 func (this *OneofProtoTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofProtoTypes)
@@ -1722,10 +1677,7 @@ func (this *OneofProtoTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1742,10 +1694,7 @@ func (this *OneofProtoTypes) Equal(that interface{}) bool {
 }
 func (this *OneofProtoTypes_Timestamp) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofProtoTypes_Timestamp)
@@ -1758,10 +1707,7 @@ func (this *OneofProtoTypes_Timestamp) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1772,10 +1718,7 @@ func (this *OneofProtoTypes_Timestamp) Equal(that interface{}) bool {
 }
 func (this *OneofProtoTypes_Duration) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofProtoTypes_Duration)
@@ -1788,10 +1731,7 @@ func (this *OneofProtoTypes_Duration) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1908,10 +1848,7 @@ func (this *OneofStdTypes_Duration) VerboseEqual(that interface{}) error {
 }
 func (this *OneofStdTypes) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofStdTypes)
@@ -1924,10 +1861,7 @@ func (this *OneofStdTypes) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1944,10 +1878,7 @@ func (this *OneofStdTypes) Equal(that interface{}) bool {
 }
 func (this *OneofStdTypes_Timestamp) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofStdTypes_Timestamp)
@@ -1960,10 +1891,7 @@ func (this *OneofStdTypes_Timestamp) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
@@ -1978,10 +1906,7 @@ func (this *OneofStdTypes_Timestamp) Equal(that interface{}) bool {
 }
 func (this *OneofStdTypes_Duration) Equal(that interface{}) bool {
 	if that == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	}
 
 	that1, ok := that.(*OneofStdTypes_Duration)
@@ -1994,10 +1919,7 @@ func (this *OneofStdTypes_Duration) Equal(that interface{}) bool {
 		}
 	}
 	if that1 == nil {
-		if this == nil {
-			return true
-		}
-		return false
+		return this == nil
 	} else if this == nil {
 		return false
 	}
