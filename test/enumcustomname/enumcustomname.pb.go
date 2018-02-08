@@ -44,12 +44,12 @@ const (
 )
 
 var MyCustomEnum_name = map[int32]string{
-	0: "A",
+	0: "MyBetterNameA",
 	1: "B",
 }
 var MyCustomEnum_value = map[string]int32{
-	"A": 0,
-	"B": 1,
+	"MyBetterNameA": 0,
+	"B":             1,
 }
 
 func (x MyCustomEnum) Enum() *MyCustomEnum {
@@ -78,12 +78,12 @@ const (
 )
 
 var MyCustomUnprefixedEnum_name = map[int32]string{
-	0: "UNPREFIXED_A",
+	0: "MyBetterNameUnprefixedA",
 	1: "UNPREFIXED_B",
 }
 var MyCustomUnprefixedEnum_value = map[string]int32{
-	"UNPREFIXED_A": 0,
-	"UNPREFIXED_B": 1,
+	"MyBetterNameUnprefixedA": 0,
+	"UNPREFIXED_B":            1,
 }
 
 func (x MyCustomUnprefixedEnum) Enum() *MyCustomUnprefixedEnum {
@@ -114,12 +114,12 @@ const (
 )
 
 var MyEnumWithEnumStringer_name = map[int32]string{
-	0: "STRINGER_A",
+	0: "EnumValueStringerA",
 	1: "STRINGER_B",
 }
 var MyEnumWithEnumStringer_value = map[string]int32{
-	"STRINGER_A": 0,
-	"STRINGER_B": 1,
+	"EnumValueStringerA": 0,
+	"STRINGER_B":         1,
 }
 
 func (x MyEnumWithEnumStringer) Enum() *MyEnumWithEnumStringer {
