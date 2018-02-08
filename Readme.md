@@ -53,6 +53,7 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="http://www.slideshare.net/albertstrasheim/serialization-in-go">Cloudflare - go serialization talk - Albert Strasheim</a>
   - <a href="https://youtu.be/4xB46Xl9O9Q?t=557">GopherCon 2014 Writing High Performance Databases in Go by Ben Johnson</a>
   - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
+  - <a href="http://agniva.me/go/2017/11/18/gogoproto.html">Go faster with gogoproto - Agniva De Sarker</a>
 
 ## Getting Started
 
@@ -114,7 +115,7 @@ To use proto files from "google/protobuf" you need to add additional args to pro
     Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
     Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:. \
     myproto.proto
-    
+
 Note that in the protoc command, {binary} does not contain the initial prefix of "protoc-gen".
 
 ### Most Speed and most customization
