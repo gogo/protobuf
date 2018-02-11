@@ -54,6 +54,7 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="https://youtu.be/4xB46Xl9O9Q?t=557">GopherCon 2014 Writing High Performance Databases in Go by Ben Johnson</a>
   - <a href="https://github.com/alecthomas/go_serialization_benchmarks">alecthomas' go serialization benchmarks</a>
   - <a href="http://agniva.me/go/2017/11/18/gogoproto.html">Go faster with gogoproto - Agniva De Sarker</a>
+  - <a href="https://www.youtube.com/watch?v=CY9T020HLP8">Evolution of protobuf (Gource Visualization) - Landon Wilkins</a> 
 
 ## Getting Started
 
