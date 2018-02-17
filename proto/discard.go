@@ -139,7 +139,7 @@ func discardLegacy(m Message) {
 
 	// For proto2 messages, only discard unknown fields in message extensions
 	// that have been accessed via GetExtension.
-	if em, ok := extendable(m); ok {
+	if em, err := extendable(m); err == nil {
 		// Ignore lock since discardLegacy is not concurrency safe.
 		emm, _ := em.extensionsRead()
 		for _, mx := range emm {

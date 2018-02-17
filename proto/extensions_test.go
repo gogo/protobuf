@@ -34,8 +34,10 @@ package proto_test
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"reflect"
 	"sort"
+	"strings"
 	"testing"
 
 	"github.com/gogo/protobuf/proto"
@@ -60,6 +62,17 @@ func TestGetExtensionsWithMissingExtensions(t *testing.T) {
 	}
 	if exts[1] != nil {
 		t.Errorf("ext2 in returned extensions: %T %v", exts[1], exts[1])
+	}
+}
+
+func TestGetExtensionWithEmptyBuffer(t *testing.T) {
+	// Make sure that GetExtension returns an error if its
+	// undecoded buffer is empty.
+	msg := &pb.MyMessage{}
+	proto.SetRawExtension(msg, pb.E_Ext_More.Field, []byte{})
+	_, err := proto.GetExtension(msg, pb.E_Ext_More)
+	if want := io.ErrUnexpectedEOF; err != want {
+		t.Errorf("unexpected error in GetExtension from empty buffer: got %v, want %v", err, want)
 	}
 }
 
@@ -286,6 +299,44 @@ func TestGetExtensionDefaults(t *testing.T) {
 	}
 }
 
+func TestNilMessage(t *testing.T) {
+	name := "nil interface"
+	if got, err := proto.GetExtension(nil, pb.E_Ext_More); err == nil {
+		t.Errorf("%s: got %T %v, expected to fail", name, got, got)
+	} else if !strings.Contains(err.Error(), "extendable") {
+		t.Errorf("%s: got error %v, expected not-extendable error", name, err)
+	}
+
+	// Regression tests: all functions of the Extension API
+	// used to panic when passed (*M)(nil), where M is a concrete message
+	// type.  Now they handle this gracefully as a no-op or reported error.
+	var nilMsg *pb.MyMessage
+	desc := pb.E_Ext_More
+
+	isNotExtendable := func(err error) bool {
+		return strings.Contains(fmt.Sprint(err), "not extendable")
+	}
+
+	if proto.HasExtension(nilMsg, desc) {
+		t.Error("HasExtension(nil) = true")
+	}
+
+	if _, err := proto.GetExtensions(nilMsg, []*proto.ExtensionDesc{desc}); !isNotExtendable(err) {
+		t.Errorf("GetExtensions(nil) = %q (wrong error)", err)
+	}
+
+	if _, err := proto.ExtensionDescs(nilMsg); !isNotExtendable(err) {
+		t.Errorf("ExtensionDescs(nil) = %q (wrong error)", err)
+	}
+
+	if err := proto.SetExtension(nilMsg, desc, nil); !isNotExtendable(err) {
+		t.Errorf("SetExtension(nil) = %q (wrong error)", err)
+	}
+
+	proto.ClearExtension(nilMsg, desc) // no-op
+	proto.ClearAllExtensions(nilMsg)   // no-op
+}
+
 func TestExtensionsRoundTrip(t *testing.T) {
 	msg := &pb.MyMessage{}
 	ext1 := &pb.Ext{
@@ -310,7 +361,7 @@ func TestExtensionsRoundTrip(t *testing.T) {
 	}
 	x, ok := e.(*pb.Ext)
 	if !ok {
-		t.Errorf("e has type %T, expected testdata.Ext", e)
+		t.Errorf("e has type %T, expected test_proto.Ext", e)
 	} else if *x.Data != "there" {
 		t.Errorf("SetExtension failed to overwrite, got %+v, not 'there'", x)
 	}
@@ -401,8 +452,13 @@ func TestMarshalUnmarshalRepeatedExtension(t *testing.T) {
 		if ext == nil {
 			t.Fatalf("[%s] Invalid extension", test.name)
 		}
-		if !reflect.DeepEqual(ext, test.ext) {
-			t.Errorf("[%s] Wrong value for ComplexExtension: got: %v want: %v\n", test.name, ext, test.ext)
+		if len(ext) != len(test.ext) {
+			t.Errorf("[%s] Wrong length of ComplexExtension: got: %v want: %v\n", test.name, len(ext), len(test.ext))
+		}
+		for i := range test.ext {
+			if !proto.Equal(ext[i], test.ext[i]) {
+				t.Errorf("[%s] Wrong value for ComplexExtension[%d]: got: %v want: %v\n", test.name, i, ext[i], test.ext[i])
+			}
 		}
 	}
 }
@@ -476,7 +532,7 @@ func TestUnmarshalRepeatingNonRepeatedExtension(t *testing.T) {
 		if ext == nil {
 			t.Fatalf("[%s] Invalid extension", test.name)
 		}
-		if !reflect.DeepEqual(*ext, want) {
+		if !proto.Equal(ext, &want) {
 			t.Errorf("[%s] Wrong value for ComplexExtension: got: %v want: %v\n", test.name, ext, want)
 		}
 	}
@@ -508,28 +564,35 @@ func TestClearAllExtensions(t *testing.T) {
 }
 
 func TestMarshalRace(t *testing.T) {
-	// unregistered extension
-	desc := &proto.ExtensionDesc{
-		ExtendedType:  (*pb.MyMessage)(nil),
-		ExtensionType: (*bool)(nil),
-		Field:         101010100,
-		Name:          "emptyextension",
-		Tag:           "varint,0,opt",
-	}
-
+	ext := &pb.Ext{}
 	m := &pb.MyMessage{Count: proto.Int32(4)}
-	if err := proto.SetExtension(m, desc, proto.Bool(true)); err != nil {
-		t.Errorf("proto.SetExtension(m, desc, true): got error %q, want nil", err)
+	if err := proto.SetExtension(m, pb.E_Ext_More, ext); err != nil {
+		t.Fatalf("proto.SetExtension(m, desc, true): got error %q, want nil", err)
 	}
 
-	errChan := make(chan error, 3)
+	b, err := proto.Marshal(m)
+	if err != nil {
+		t.Fatalf("Could not marshal message: %v", err)
+	}
+	if err := proto.Unmarshal(b, m); err != nil {
+		t.Fatalf("Could not unmarshal message: %v", err)
+	}
+	// after Unmarshal, the extension is in undecoded form.
+	// GetExtension will decode it lazily. Make sure this does
+	// not race against Marshal.
+
+	errChan := make(chan error, 6)
 	for n := 3; n > 0; n-- {
 		go func() {
 			_, err := proto.Marshal(m)
 			errChan <- err
 		}()
+		go func() {
+			_, err := proto.GetExtension(m, pb.E_Ext_More)
+			errChan <- err
+		}()
 	}
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 6; i++ {
 		err := <-errChan
 		if err != nil {
 			t.Fatal(err)

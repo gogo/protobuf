@@ -97,14 +97,29 @@ func (n notLocker) Unlock() {}
 // extendable returns the extendableProto interface for the given generated proto message.
 // If the proto message has the old extension format, it returns a wrapper that implements
 // the extendableProto interface.
-func extendable(p interface{}) (extendableProto, bool) {
-	if ep, ok := p.(extendableProto); ok {
-		return ep, ok
+func extendable(p interface{}) (extendableProto, error) {
+	switch p := p.(type) {
+	case extendableProto:
+		if isNilPtr(p) {
+			return nil, fmt.Errorf("proto: nil %T is not extendable", p)
+		}
+		return p, nil
+	case extendableProtoV1:
+		if isNilPtr(p) {
+			return nil, fmt.Errorf("proto: nil %T is not extendable", p)
+		}
+		return extensionAdapter{p}, nil
 	}
-	if ep, ok := p.(extendableProtoV1); ok {
-		return extensionAdapter{ep}, ok
-	}
-	return nil, false
+	// Don't allocate a specific error containing %T:
+	// this is the hot path for Clone and MarshalText.
+	return nil, errNotExtendable
+}
+
+var errNotExtendable = errors.New("proto: not an extendable proto.Message")
+
+func isNilPtr(x interface{}) bool {
+	v := reflect.ValueOf(x)
+	return v.Kind() == reflect.Ptr && v.IsNil()
 }
 
 // XXX_InternalExtensions is an internal representation of proto extensions.
@@ -198,8 +213,8 @@ func SetRawExtension(base Message, id int32, b []byte) {
 		*ext = append(*ext, b...)
 		return
 	}
-	epb, ok := extendable(base)
-	if !ok {
+	epb, err := extendable(base)
+	if err != nil {
 		return
 	}
 	extmap := epb.extensionsWrite()
@@ -366,8 +381,8 @@ func HasExtension(pb Message, extension *ExtensionDesc) bool {
 		return false
 	}
 	// TODO: Check types, field numbers, etc.?
-	epb, ok := extendable(pb)
-	if !ok {
+	epb, err := extendable(pb)
+	if err != nil {
 		return false
 	}
 	extmap, mu := epb.extensionsRead()
@@ -375,7 +390,7 @@ func HasExtension(pb Message, extension *ExtensionDesc) bool {
 		return false
 	}
 	mu.Lock()
-	_, ok = extmap[extension.Field]
+	_, ok := extmap[extension.Field]
 	mu.Unlock()
 	return ok
 }
@@ -413,8 +428,8 @@ func clearExtension(pb Message, fieldNum int32) {
 		}
 		return
 	}
-	epb, ok := extendable(pb)
-	if !ok {
+	epb, err := extendable(pb)
+	if err != nil {
 		return
 	}
 	// TODO: Check types, field numbers, etc.?
@@ -447,12 +462,12 @@ func GetExtension(pb Message, extension *ExtensionDesc) (interface{}, error) {
 		}
 		return defaultExtensionValue(extension)
 	}
-	epb, ok := extendable(pb)
-	if !ok {
-		return nil, errors.New("proto: not an extendable proto")
-	}
-	if err := checkExtensionTypes(epb, extension); err != nil {
+	epb, err := extendable(pb)
+	if err != nil {
 		return nil, err
+	}
+	if cerr := checkExtensionTypes(epb, extension); cerr != nil {
+		return nil, cerr
 	}
 
 	emap, mu := epb.extensionsRead()
@@ -581,9 +596,9 @@ func GetExtensions(pb Message, es []*ExtensionDesc) (extensions []interface{}, e
 // For non-registered extensions, ExtensionDescs returns an incomplete descriptor containing
 // just the Field field, which defines the extension's field number.
 func ExtensionDescs(pb Message) ([]*ExtensionDesc, error) {
-	epb, ok := extendable(pb)
-	if !ok {
-		return nil, fmt.Errorf("proto: %T is not an extendable proto.Message", pb)
+	epb, err := extendable(pb)
+	if err != nil {
+		return nil, err
 	}
 	registeredExtensions := RegisteredExtensions(pb)
 
@@ -624,9 +639,9 @@ func SetExtension(pb Message, extension *ExtensionDesc, value interface{}) error
 		*ext = append(*ext, p.buf...)
 		return nil
 	}
-	epb, ok := extendable(pb)
-	if !ok {
-		return errors.New("proto: not an extendable proto")
+	epb, err := extendable(pb)
+	if err != nil {
+		return err
 	}
 	if err := checkExtensionTypes(epb, extension); err != nil {
 		return err
@@ -656,8 +671,8 @@ func ClearAllExtensions(pb Message) {
 		*ext = []byte{}
 		return
 	}
-	epb, ok := extendable(pb)
-	if !ok {
+	epb, err := extendable(pb)
+	if err != nil {
 		return
 	}
 	m := epb.extensionsWrite()

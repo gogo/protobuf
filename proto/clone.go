@@ -113,7 +113,7 @@ func mergeStruct(out, in reflect.Value) {
 		bIn := emIn.GetExtensions()
 		bOut := emOut.GetExtensions()
 		*bOut = append(*bOut, *bIn...)
-	} else if emIn, ok := extendable(in.Addr().Interface()); ok {
+	} else if emIn, err := extendable(in.Addr().Interface()); err == nil {
 		emOut, _ := extendable(out.Addr().Interface())
 		mIn, muIn := emIn.extensionsRead()
 		if mIn != nil {
