@@ -45,6 +45,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/go-graphite">carbonzipper stack</a>
   - <a href="https://sendgrid.com/">sendgrid</a>
   - <a href="https://github.com/zero-os/0-stor">zero-os/0-stor</a>
+  - <a href="https://github.com/spacemeshos/go-spacemesh">go-spacemesh</a>
 
 Please let us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
