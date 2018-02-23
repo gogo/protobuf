@@ -38,6 +38,7 @@ package proto
 import (
 	"errors"
 	"fmt"
+	"io"
 	"reflect"
 	"strconv"
 	"sync"
@@ -169,8 +170,6 @@ type extensionRange interface {
 	ExtensionRangeArray() []ExtensionRange
 }
 
-var extendableProtoType = reflect.TypeOf((*extendableProto)(nil)).Elem()
-var extendableProtoV1Type = reflect.TypeOf((*extendableProtoV1)(nil)).Elem()
 var extendableBytesType = reflect.TypeOf((*extensionsBytes)(nil)).Elem()
 var extensionRangeType = reflect.TypeOf((*extensionRange)(nil)).Elem()
 
@@ -282,80 +281,6 @@ func extensionProperties(ed *ExtensionDesc) *Properties {
 	prop.Init(reflect.TypeOf(ed.ExtensionType), "unknown_name", ed.Tag, nil)
 	extProp.m[key] = prop
 	return prop
-}
-
-// encode encodes any unmarshaled (unencoded) extensions in e.
-func encodeExtensions(e *XXX_InternalExtensions) error {
-	m, mu := e.extensionsRead()
-	if m == nil {
-		return nil // fast path
-	}
-	mu.Lock()
-	defer mu.Unlock()
-	return encodeExtensionsMap(m)
-}
-
-// encode encodes any unmarshaled (unencoded) extensions in e.
-func encodeExtensionsMap(m map[int32]Extension) error {
-	for k, e := range m {
-		if e.value == nil || e.desc == nil {
-			// Extension is only in its encoded form.
-			continue
-		}
-
-		// We don't skip extensions that have an encoded form set,
-		// because the extension value may have been mutated after
-		// the last time this function was called.
-
-		et := reflect.TypeOf(e.desc.ExtensionType)
-		props := extensionProperties(e.desc)
-
-		p := NewBuffer(nil)
-		// If e.value has type T, the encoder expects a *struct{ X T }.
-		// Pass a *T with a zero field and hope it all works out.
-		x := reflect.New(et)
-		x.Elem().Set(reflect.ValueOf(e.value))
-		if err := props.enc(p, props, toStructPointer(x)); err != nil {
-			return err
-		}
-		e.enc = p.buf
-		m[k] = e
-	}
-	return nil
-}
-
-func extensionsSize(e *XXX_InternalExtensions) (n int) {
-	m, mu := e.extensionsRead()
-	if m == nil {
-		return 0
-	}
-	mu.Lock()
-	defer mu.Unlock()
-	return extensionsMapSize(m)
-}
-
-func extensionsMapSize(m map[int32]Extension) (n int) {
-	for _, e := range m {
-		if e.value == nil || e.desc == nil {
-			// Extension is only in its encoded form.
-			n += len(e.enc)
-			continue
-		}
-
-		// We don't skip extensions that have an encoded form set,
-		// because the extension value may have been mutated after
-		// the last time this function was called.
-
-		et := reflect.TypeOf(e.desc.ExtensionType)
-		props := extensionProperties(e.desc)
-
-		// If e.value has type T, the encoder expects a *struct{ X T }.
-		// Pass a *T with a zero field and hope it all works out.
-		x := reflect.New(et)
-		x.Elem().Set(reflect.ValueOf(e.value))
-		n += props.size(props, toStructPointer(x))
-	}
-	return
 }
 
 // HasExtension returns whether the given extension is present in pb.
@@ -545,31 +470,28 @@ func defaultExtensionValue(extension *ExtensionDesc) (interface{}, error) {
 
 // decodeExtension decodes an extension encoded in b.
 func decodeExtension(b []byte, extension *ExtensionDesc) (interface{}, error) {
-	o := NewBuffer(b)
-
 	t := reflect.TypeOf(extension.ExtensionType)
-
-	props := extensionProperties(extension)
+	unmarshal := typeUnmarshaler(t, extension.Tag)
 
 	// t is a pointer to a struct, pointer to basic type or a slice.
-	// Allocate a "field" to store the pointer/slice itself; the
-	// pointer/slice will be stored here. We pass
-	// the address of this field to props.dec.
-	// This passes a zero field and a *t and lets props.dec
-	// interpret it as a *struct{ x t }.
+	// Allocate space to store the pointer/slice.
 	value := reflect.New(t).Elem()
 
+	var err error
 	for {
-		// Discard wire type and field number varint. It isn't needed.
-		if _, err := o.DecodeVarint(); err != nil {
+		x, n := decodeVarint(b)
+		if n == 0 {
+			return nil, io.ErrUnexpectedEOF
+		}
+		b = b[n:]
+		wire := int(x) & 7
+
+		b, err = unmarshal(b, valToPointer(value.Addr()), wire)
+		if err != nil {
 			return nil, err
 		}
 
-		if err := props.dec(o, props, toStructPointer(value.Addr())); err != nil {
-			return nil, err
-		}
-
-		if o.index >= len(o.buf) {
+		if len(b) == 0 {
 			break
 		}
 	}
@@ -579,9 +501,13 @@ func decodeExtension(b []byte, extension *ExtensionDesc) (interface{}, error) {
 // GetExtensions returns a slice of the extensions present in pb that are also listed in es.
 // The returned slice has the same length as es; missing extensions will appear as nil elements.
 func GetExtensions(pb Message, es []*ExtensionDesc) (extensions []interface{}, err error) {
+	epb, err := extendable(pb)
+	if err != nil {
+		return nil, err
+	}
 	extensions = make([]interface{}, len(es))
 	for i, e := range es {
-		extensions[i], err = GetExtension(pb, e)
+		extensions[i], err = GetExtension(epb, e)
 		if err == ErrMissingExtension {
 			err = nil
 		}
@@ -629,13 +555,10 @@ func SetExtension(pb Message, extension *ExtensionDesc, value interface{}) error
 		ClearExtension(pb, extension)
 		ext := epb.GetExtensions()
 		et := reflect.TypeOf(extension.ExtensionType)
-		props := extensionProperties(extension)
 		p := NewBuffer(nil)
 		x := reflect.New(et)
 		x.Elem().Set(reflect.ValueOf(value))
-		if err := props.enc(p, props, toStructPointer(x)); err != nil {
-			return err
-		}
+		panic("encode extension")
 		*ext = append(*ext, p.buf...)
 		return nil
 	}

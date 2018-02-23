@@ -64,11 +64,8 @@ func (this *Extension) Compare(that *Extension) int {
 }
 
 func SizeOfInternalExtension(m extendableProto) (n int) {
-	return SizeOfExtensionMap(m.extensionsWrite())
-}
-
-func SizeOfExtensionMap(m map[int32]Extension) (n int) {
-	return extensionsMapSize(m)
+	info := getMarshalInfo(reflect.TypeOf(m))
+	return info.sizeV1Extensions(m.extensionsWrite())
 }
 
 type sortableMapElem struct {
@@ -122,27 +119,17 @@ func EncodeInternalExtension(m extendableProto, data []byte) (n int, err error) 
 }
 
 func EncodeExtensionMap(m map[int32]Extension, data []byte) (n int, err error) {
-	if err := encodeExtensionsMap(m); err != nil {
-		return 0, err
-	}
-	keys := make([]int, 0, len(m))
-	for k := range m {
-		keys = append(keys, int(k))
-	}
-	sort.Ints(keys)
-	for _, k := range keys {
-		n += copy(data[n:], m[int32(k)].enc)
-	}
-	return n, nil
+	panic("todo")
 }
 
 func GetRawExtension(m map[int32]Extension, id int32) ([]byte, error) {
 	if m[id].value == nil || m[id].desc == nil {
 		return m[id].enc, nil
 	}
-	if err := encodeExtensionsMap(m); err != nil {
-		return nil, err
-	}
+	panic("todo")
+	// if err := encodeExtensionsMap(m); err != nil {
+	// 	return nil, err
+	// }
 	return m[id].enc, nil
 }
 
@@ -218,35 +205,12 @@ func AppendExtension(e Message, tag int32, buf []byte) {
 	}
 }
 
-func encodeExtension(e *Extension) error {
-	if e.value == nil || e.desc == nil {
-		// Extension is only in its encoded form.
-		return nil
-	}
-	// We don't skip extensions that have an encoded form set,
-	// because the extension value may have been mutated after
-	// the last time this function was called.
-
-	et := reflect.TypeOf(e.desc.ExtensionType)
-	props := extensionProperties(e.desc)
-
-	p := NewBuffer(nil)
-	// If e.value has type T, the encoder expects a *struct{ X T }.
-	// Pass a *T with a zero field and hope it all works out.
-	x := reflect.New(et)
-	x.Elem().Set(reflect.ValueOf(e.value))
-	if err := props.enc(p, props, toStructPointer(x)); err != nil {
-		return err
-	}
-	e.enc = p.buf
-	return nil
-}
-
 func (this Extension) GoString() string {
 	if this.enc == nil {
-		if err := encodeExtension(&this); err != nil {
-			panic(err)
-		}
+		panic("todo encode")
+		// if err := encodeExtension(&this); err != nil {
+		// 	panic(err)
+		// }
 	}
 	return fmt.Sprintf("proto.NewExtension(%#v)", this.enc)
 }
