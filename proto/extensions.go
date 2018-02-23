@@ -70,12 +70,6 @@ type extendableProtoV1 interface {
 	ExtensionMap() map[int32]Extension
 }
 
-type extensionsBytes interface {
-	Message
-	ExtensionRangeArray() []ExtensionRange
-	GetExtensions() *[]byte
-}
-
 // extensionAdapter is a wrapper around extendableProtoV1 that implements extendableProto.
 type extensionAdapter struct {
 	extendableProtoV1
@@ -110,6 +104,8 @@ func extendable(p interface{}) (extendableProto, error) {
 			return nil, fmt.Errorf("proto: nil %T is not extendable", p)
 		}
 		return extensionAdapter{p}, nil
+	case extensionsBytes:
+		return slowExtensionAdapter{p}, nil
 	}
 	// Don't allocate a specific error containing %T:
 	// this is the hot path for Clone and MarshalText.
@@ -165,14 +161,6 @@ func (e *XXX_InternalExtensions) extensionsRead() (map[int32]Extension, sync.Loc
 	return e.p.extensionMap, &e.p.mu
 }
 
-type extensionRange interface {
-	Message
-	ExtensionRangeArray() []ExtensionRange
-}
-
-var extendableBytesType = reflect.TypeOf((*extensionsBytes)(nil)).Elem()
-var extensionRangeType = reflect.TypeOf((*extensionRange)(nil)).Elem()
-
 // ExtensionDesc represents an extension specification.
 // Used in generated code from the protocol compiler.
 type ExtensionDesc struct {
@@ -221,7 +209,7 @@ func SetRawExtension(base Message, id int32, b []byte) {
 }
 
 // isExtensionField returns true iff the given field number is in an extension range.
-func isExtensionField(pb extensionRange, field int32) bool {
+func isExtensionField(pb extendableProto, field int32) bool {
 	for _, er := range pb.ExtensionRangeArray() {
 		if er.Start <= field && field <= er.End {
 			return true
@@ -236,6 +224,9 @@ func checkExtensionTypes(pb extendableProto, extension *ExtensionDesc) error {
 	// Check the extended type.
 	if ea, ok := pbi.(extensionAdapter); ok {
 		pbi = ea.extendableProtoV1
+	}
+	if ea, ok := pbi.(slowExtensionAdapter); ok {
+		pbi = ea.extensionsBytes
 	}
 	if a, b := reflect.TypeOf(pbi), reflect.TypeOf(extension.ExtendedType); a != b {
 		return errors.New("proto: bad extended type; " + b.String() + " does not extend " + a.String())
@@ -320,33 +311,13 @@ func HasExtension(pb Message, extension *ExtensionDesc) bool {
 	return ok
 }
 
-func deleteExtension(pb extensionsBytes, theFieldNum int32, offset int) int {
-	ext := pb.GetExtensions()
-	for offset < len(*ext) {
-		tag, n1 := DecodeVarint((*ext)[offset:])
-		fieldNum := int32(tag >> 3)
-		wireType := int(tag & 0x7)
-		n2, err := size((*ext)[offset+n1:], wireType)
-		if err != nil {
-			panic(err)
-		}
-		newOffset := offset + n1 + n2
-		if fieldNum == theFieldNum {
-			*ext = append((*ext)[:offset], (*ext)[newOffset:]...)
-			return offset
-		}
-		offset = newOffset
-	}
-	return -1
-}
-
 // ClearExtension removes the given extension from pb.
 func ClearExtension(pb Message, extension *ExtensionDesc) {
 	clearExtension(pb, extension.Field)
 }
 
 func clearExtension(pb Message, fieldNum int32) {
-	if epb, doki := pb.(extensionsBytes); doki {
+	if epb, ok := pb.(extensionsBytes); ok {
 		offset := 0
 		for offset != -1 {
 			offset = deleteExtension(epb, fieldNum, offset)
@@ -367,26 +338,9 @@ func clearExtension(pb Message, fieldNum int32) {
 func GetExtension(pb Message, extension *ExtensionDesc) (interface{}, error) {
 	if epb, doki := pb.(extensionsBytes); doki {
 		ext := epb.GetExtensions()
-		o := 0
-		for o < len(*ext) {
-			tag, n := DecodeVarint((*ext)[o:])
-			fieldNum := int32(tag >> 3)
-			wireType := int(tag & 0x7)
-			l, err := size((*ext)[o+n:], wireType)
-			if err != nil {
-				return nil, err
-			}
-			if int32(fieldNum) == extension.Field {
-				v, err := decodeExtension((*ext)[o:o+n+l], extension)
-				if err != nil {
-					return nil, err
-				}
-				return v, nil
-			}
-			o += n + l
-		}
-		return defaultExtensionValue(extension)
+		return decodeExtensionFromBytes(extension, *ext)
 	}
+
 	epb, err := extendable(pb)
 	if err != nil {
 		return nil, err
@@ -551,15 +505,13 @@ func ExtensionDescs(pb Message) ([]*ExtensionDesc, error) {
 
 // SetExtension sets the specified extension of pb to the specified value.
 func SetExtension(pb Message, extension *ExtensionDesc, value interface{}) error {
-	if epb, doki := pb.(extensionsBytes); doki {
-		ClearExtension(pb, extension)
-		ext := epb.GetExtensions()
-		et := reflect.TypeOf(extension.ExtensionType)
-		p := NewBuffer(nil)
-		x := reflect.New(et)
-		x.Elem().Set(reflect.ValueOf(value))
-		panic("encode extension")
-		*ext = append(*ext, p.buf...)
+	if epb, ok := pb.(extensionsBytes); ok {
+		newb, err := encodeExtension(extension, value)
+		if err != nil {
+			return err
+		}
+		bb := epb.GetExtensions()
+		*bb = append(*bb, newb...)
 		return nil
 	}
 	epb, err := extendable(pb)

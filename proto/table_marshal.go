@@ -64,6 +64,8 @@ type marshalInfo struct {
 	hasmarshaler bool                       // has custom marshaler
 	sync.RWMutex                            // protect extElems map, also for initialization
 	extElems     map[int32]*marshalElemInfo // info of extension elements
+
+	bytesExtensions field // offset of XXX_extensions where the field type is []byte
 }
 
 // marshalFieldInfo is the information used for marshaling a field of a message.
@@ -192,6 +194,10 @@ func (u *marshalInfo) size(ptr pointer) int {
 		m := *ptr.offset(u.v1extensions).toOldExtensions()
 		n += u.sizeV1Extensions(m)
 	}
+	if u.bytesExtensions.IsValid() {
+		s := *ptr.offset(u.bytesExtensions).toBytes()
+		n += len(s)
+	}
 	if u.unrecognized.IsValid() {
 		s := *ptr.offset(u.unrecognized).toBytes()
 		n += len(s)
@@ -250,6 +256,10 @@ func (u *marshalInfo) marshal(b []byte, ptr pointer, deterministic bool) ([]byte
 			return b, err
 		}
 	}
+	if u.bytesExtensions.IsValid() {
+		s := *ptr.offset(u.bytesExtensions).toBytes()
+		b = append(b, s...)
+	}
 	for _, f := range u.fields {
 		if f.required && errreq == nil {
 			if ptr.offset(f.field).getPointer().isNil() {
@@ -298,6 +308,7 @@ func (u *marshalInfo) computeMarshalInfo() {
 	u.unrecognized = invalidField
 	u.extensions = invalidField
 	u.v1extensions = invalidField
+	u.bytesExtensions = invalidField
 	u.sizecache = invalidField
 
 	// If the message can marshal itself, let it do it, for compatibility.
@@ -331,7 +342,11 @@ func (u *marshalInfo) computeMarshalInfo() {
 			u.extensions = toField(&f)
 			u.messageset = f.Tag.Get("protobuf_messageset") == "1"
 		case "XXX_extensions":
-			u.v1extensions = toField(&f)
+			if f.Type.Kind() == reflect.Map {
+				u.v1extensions = toField(&f)
+			} else {
+				u.bytesExtensions = toField(&f)
+			}
 		case "XXX_NoUnkeyedLiteral":
 			// nothing to do
 		default:

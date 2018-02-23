@@ -79,6 +79,8 @@ type unmarshalInfo struct {
 	oldExtensions   field                         // offset of old-form extensions field (of type map[int]Extension)
 	extensionRanges []ExtensionRange              // if non-nil, implies extensions field is valid
 	isMessageSet    bool                          // if true, implies extensions field is valid
+
+	bytesExtensions field // offset of XXX_extensions with type []byte
 }
 
 // An unmarshaler takes a stream of bytes and a pointer to a field of a message.
@@ -250,6 +252,10 @@ func (u *unmarshalInfo) unmarshal(m pointer, b []byte) error {
 					z = &e.enc
 					break
 				}
+				if u.bytesExtensions.IsValid() {
+					z = m.offset(u.bytesExtensions).toBytes()
+					break
+				}
 				panic("no extensions field available")
 			}
 		}
@@ -332,6 +338,7 @@ func (u *unmarshalInfo) computeUnmarshalInfo() {
 	u.unrecognized = invalidField
 	u.extensions = invalidField
 	u.oldExtensions = invalidField
+	u.bytesExtensions = invalidField
 
 	// List of the generated type and offset for each oneof field.
 	type oneofField struct {
@@ -368,11 +375,14 @@ func (u *unmarshalInfo) computeUnmarshalInfo() {
 		}
 		if f.Name == "XXX_extensions" {
 			// An older form of the extensions field.
-			if f.Type != reflect.TypeOf((map[int32]Extension)(nil)) {
-				panic("bad type for XXX_extensions field: " + f.Type.Name())
+			if f.Type == reflect.TypeOf((map[int32]Extension)(nil)) {
+				u.oldExtensions = toField(&f)
+				continue
+			} else if f.Type == reflect.TypeOf(([]byte)(nil)) {
+				u.bytesExtensions = toField(&f)
+				continue
 			}
-			u.oldExtensions = toField(&f)
-			continue
+			panic("bad type for XXX_extensions field: " + f.Type.Name())
 		}
 		if f.Name == "XXX_NoUnkeyedLiteral" || f.Name == "XXX_sizecache" {
 			continue
@@ -455,7 +465,7 @@ func (u *unmarshalInfo) computeUnmarshalInfo() {
 	// Get extension ranges, if any.
 	fn = reflect.Zero(reflect.PtrTo(t)).MethodByName("ExtensionRangeArray")
 	if fn.IsValid() {
-		if !u.extensions.IsValid() && !u.oldExtensions.IsValid() {
+		if !u.extensions.IsValid() && !u.oldExtensions.IsValid() && !u.bytesExtensions.IsValid() {
 			panic("a message with extensions, but no extensions field in " + t.Name())
 		}
 		u.extensionRanges = fn.Call(nil)[0].Interface().([]ExtensionRange)

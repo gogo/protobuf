@@ -478,7 +478,7 @@ func (tm *TextMarshaler) writeStruct(w *textWriter, sv reflect.Value) error {
 		pv = reflect.New(sv.Type())
 		pv.Elem().Set(sv)
 	}
-	if pv.Type().Implements(extensionRangeType) {
+	if _, err := extendable(pv.Interface()); err == nil {
 		if err := tm.writeExtensions(w, pv); err != nil {
 			return err
 		}

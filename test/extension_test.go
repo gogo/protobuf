@@ -29,11 +29,12 @@
 package test
 
 import (
-	"github.com/gogo/protobuf/proto"
 	"math"
 	math_rand "math/rand"
 	"testing"
 	"time"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 //func SetRawExtension(base extendableProto, id int32, b []byte) {
@@ -54,7 +55,7 @@ func check(t *testing.T, m extendable, fieldA float64, ext *proto.ExtensionDesc)
 	}
 	fieldA2Interface, err := proto.GetExtension(m, ext)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	fieldA2 := fieldA2Interface.(*float64)
 	if fieldA != *fieldA2 {
@@ -62,7 +63,7 @@ func check(t *testing.T, m extendable, fieldA float64, ext *proto.ExtensionDesc)
 	}
 	fieldA3Interface, err := proto.GetUnsafeExtension(m, ext.Field)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	fieldA3 := fieldA3Interface.(*float64)
 	if fieldA != *fieldA3 {
@@ -97,7 +98,7 @@ func TestExtensionsMyExtendable(t *testing.T) {
 	m := NewPopulatedMyExtendable(extr, false)
 	err := proto.SetExtension(m, E_FieldA, &fieldA)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	check(t, m, fieldA, E_FieldA)
 	proto.SetRawExtension(m, 100, fieldABytes)
@@ -108,7 +109,7 @@ func TestExtensionsNoExtensionsMapSetExtension(t *testing.T) {
 	m := NewPopulatedNoExtensionsMap(extr, false)
 	err := proto.SetExtension(m, E_FieldA1, &fieldA)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	check(t, m, fieldA, E_FieldA1)
 }
@@ -123,7 +124,7 @@ func TestUnsafeExtension(t *testing.T) {
 	m := NewPopulatedMyExtendable(extr, false)
 	err := proto.SetUnsafeExtension(m, E_FieldA.Field, &fieldA)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 	check(t, m, fieldA, E_FieldA)
 }
@@ -133,11 +134,11 @@ func TestGetExtensionStability(t *testing.T) {
 	check := func(m *NoExtensionsMap) bool {
 		ext1, err := proto.GetExtension(m, E_FieldB1)
 		if err != nil {
-			t.Fatalf("GetExtension() failed: %s", err)
+			t.Fatalf("GetExtension() 1 failed: %v", err)
 		}
 		ext2, err := proto.GetExtension(m, E_FieldB1)
 		if err != nil {
-			t.Fatalf("GetExtension() failed: %s", err)
+			t.Fatalf("GetExtension() 2 failed: %v", err)
 		}
 		return ext1.(*NinOptNative).Equal(ext2)
 	}
