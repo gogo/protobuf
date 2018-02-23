@@ -140,3 +140,8 @@ It works the same as golang/protobuf, simply specify the plugin.
 Here is an example using gofast:
 
     protoc --gofast_out=plugins=grpc:. my.proto
+
+See [https://github.com/gogo/grpc-example](https://github.com/gogo/grpc-example) for an example of using gRPC with gogoprotobuf and the wider grpc-ecosystem.
+
+
+  
