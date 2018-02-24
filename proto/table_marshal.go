@@ -545,6 +545,8 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 	packed := false
 	proto3 := false
 	ctype := false
+	isTime := false
+	isDuration := false
 	for i := 2; i < len(tags); i++ {
 		if tags[i] == "packed" {
 			packed = true
@@ -554,6 +556,12 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 		}
 		if strings.HasPrefix(tags[i], "customtype=") {
 			ctype = true
+		}
+		if tags[i] == "stdtime" {
+			isTime = true
+		}
+		if tags[i] == "stdduration" {
+			isDuration = true
 		}
 	}
 	if !proto3 && !pointer && !slice {
@@ -569,7 +577,35 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 				return makeCustomPtrMarshaler(getMarshalInfo(t))
 			}
 			return makeCustomMarshaler(getMarshalInfo(t))
+		} else {
+			panic(fmt.Sprintf("custom type: type: %v, does not implement the proto.custom interface", t))
 		}
+	}
+
+	if isTime {
+		if pointer {
+			if slice {
+				return makeTimePtrSliceMarshaler(getMarshalInfo(t))
+			}
+			return makeTimePtrMarshaler(getMarshalInfo(t))
+		}
+		if slice {
+			return makeTimeSliceMarshaler(getMarshalInfo(t))
+		}
+		return makeTimeMarshaler(getMarshalInfo(t))
+	}
+
+	if isDuration {
+		if pointer {
+			if slice {
+				return makeDurationPtrSliceMarshaler(getMarshalInfo(t))
+			}
+			return makeDurationPtrMarshaler(getMarshalInfo(t))
+		}
+		if slice {
+			return makeDurationSliceMarshaler(getMarshalInfo(t))
+		}
+		return makeDurationMarshaler(getMarshalInfo(t))
 	}
 
 	switch t.Kind() {
@@ -2242,6 +2278,12 @@ func makeMapMarshaler(f *reflect.StructField) (sizer, marshaler) {
 	valTags := strings.Split(f.Tag.Get("protobuf_val"), ",")
 	for _, t := range tags {
 		if strings.HasPrefix(t, "customtype=") {
+			valTags = append(valTags, t)
+		}
+		if t == "stdtime" {
+			valTags = append(valTags, t)
+		}
+		if t == "stdduration" {
 			valTags = append(valTags, t)
 		}
 	}

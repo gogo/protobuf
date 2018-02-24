@@ -519,12 +519,20 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	encoding := tagArray[0]
 	name := "unknown"
 	ctype := false
+	isTime := false
+	isDuration := false
 	for _, tag := range tagArray[3:] {
 		if strings.HasPrefix(tag, "name=") {
 			name = tag[5:]
 		}
 		if strings.HasPrefix(tag, "customtype=") {
 			ctype = true
+		}
+		if tag == "stdtime" {
+			isTime = true
+		}
+		if tag == "stdduration" {
+			isDuration = true
 		}
 	}
 
@@ -540,19 +548,49 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 		t = t.Elem()
 	}
 
+	if ctype {
+		if reflect.PtrTo(t).Implements(customType) {
+			if slice {
+				return makeUnmarshalCustomSlice(getUnmarshalInfo(t), name)
+			}
+			if pointer {
+				return makeUnmarshalCustomPtr(getUnmarshalInfo(t), name)
+			}
+			return makeUnmarshalCustom(getUnmarshalInfo(t), name)
+		} else {
+			panic(fmt.Sprintf("custom type: type: %v, does not implement the proto.custom interface", t))
+		}
+	}
+
+	if isTime {
+		if pointer {
+			if slice {
+				return makeUnmarshalTimePtrSlice(getUnmarshalInfo(t), name)
+			}
+			return makeUnmarshalTimePtr(getUnmarshalInfo(t), name)
+		}
+		if slice {
+			return makeUnmarshalTimeSlice(getUnmarshalInfo(t), name)
+		}
+		return makeUnmarshalTime(getUnmarshalInfo(t), name)
+	}
+
+	if isDuration {
+		if pointer {
+			if slice {
+				return makeUnmarshalDurationPtrSlice(getUnmarshalInfo(t), name)
+			}
+			return makeUnmarshalDurationPtr(getUnmarshalInfo(t), name)
+		}
+		if slice {
+			return makeUnmarshalDurationSlice(getUnmarshalInfo(t), name)
+		}
+		return makeUnmarshalDuration(getUnmarshalInfo(t), name)
+	}
+
 	// We'll never have both pointer and slice for basic types.
 	if pointer && slice && t.Kind() != reflect.Struct {
 		panic("both pointer and slice for basic type in " + t.Name())
-	}
-
-	if ctype && reflect.PtrTo(t).Implements(customType) {
-		if slice {
-			return makeUnmarshalCustomSlice(getUnmarshalInfo(t), name)
-		}
-		if pointer {
-			return makeUnmarshalCustomPtr(getUnmarshalInfo(t), name)
-		}
-		return makeUnmarshalCustom(getUnmarshalInfo(t), name)
 	}
 
 	switch t.Kind() {
@@ -1742,6 +1780,12 @@ func makeUnmarshalMap(f *reflect.StructField) unmarshaler {
 	valTags := strings.Split(f.Tag.Get("protobuf_val"), ",")
 	for _, t := range tagArray {
 		if strings.HasPrefix(t, "customtype=") {
+			valTags = append(valTags, t)
+		}
+		if t == "stdtime" {
+			valTags = append(valTags, t)
+		}
+		if t == "stdduration" {
 			valTags = append(valTags, t)
 		}
 	}
