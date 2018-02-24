@@ -53,7 +53,6 @@ func makeMessageRefSliceMarshaler(u *marshalInfo) (sizer, marshaler) {
 				elem := s.Index(i)
 				e := elem.Interface()
 				v := toAddrPointer(&e, false)
-				v = v.getRef()
 				siz := u.size(v)
 				n += siz + SizeVarint(uint64(siz)) + tagsize
 			}

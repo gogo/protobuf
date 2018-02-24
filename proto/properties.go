@@ -154,10 +154,9 @@ type Properties struct {
 	StdTime     bool
 	StdDuration bool
 
-	stype  reflect.Type      // set for struct types only
-	sstype reflect.Type      // set for slices of structs types only
-	ctype  reflect.Type      // set for custom types only
-	sprop  *StructProperties // set for struct types only
+	stype reflect.Type      // set for struct types only
+	ctype reflect.Type      // set for custom types only
+	sprop *StructProperties // set for struct types only
 
 	mtype    reflect.Type // set for map types only
 	mkeyprop *Properties  // set for map types only
@@ -284,7 +283,7 @@ var protoMessageType = reflect.TypeOf((*Message)(nil)).Elem()
 func (p *Properties) setFieldProps(typ reflect.Type, f *reflect.StructField, lockGetProp bool) {
 	isMap := typ.Kind() == reflect.Map
 	if len(p.CustomType) > 0 && !isMap {
-		p.setCustomEncAndDec(typ)
+		p.ctype = typ
 		p.setTag(lockGetProp)
 		return
 	}
@@ -308,10 +307,10 @@ func (p *Properties) setFieldProps(typ reflect.Type, f *reflect.StructField, loc
 		case reflect.Ptr:
 			switch t3 := t2.Elem(); t3.Kind() {
 			case reflect.Struct:
-				p.stype = t2.Elem()
+				p.stype = t3
 			}
 		case reflect.Struct:
-			p.setSliceOfNonPointerStructs(t1)
+			p.stype = t2
 		}
 
 	case reflect.Map:
