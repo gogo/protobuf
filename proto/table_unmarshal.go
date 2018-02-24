@@ -680,7 +680,13 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	case reflect.Struct:
 		// message or group field
 		if !pointer {
-			panic(fmt.Sprintf("message/group field %s:%s without pointer", t, encoding))
+			switch encoding {
+			case "bytes":
+				if slice {
+					return makeUnmarshalMessageSlice(getUnmarshalInfo(t), name)
+				}
+				return makeUnmarshalMessage(getUnmarshalInfo(t), name)
+			}
 		}
 		switch encoding {
 		case "bytes":

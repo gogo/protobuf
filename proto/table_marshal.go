@@ -784,10 +784,17 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 			}
 			return makeGroupMarshaler(getMarshalInfo(t))
 		case "bytes":
-			if slice {
-				return makeMessageSliceMarshaler(getMarshalInfo(t))
+			if pointer {
+				if slice {
+					return makeMessageSliceMarshaler(getMarshalInfo(t))
+				}
+				return makeMessageMarshaler(getMarshalInfo(t))
+			} else {
+				if slice {
+					return makeMessageRefSliceMarshaler(getMarshalInfo(t))
+				}
+				return makeMessageRefMarshaler(getMarshalInfo(t))
 			}
-			return makeMessageMarshaler(getMarshalInfo(t))
 		}
 	}
 	panic(fmt.Sprintf("unknown or mismatched type: type: %v, wire type: %v", t, encoding))
@@ -2188,7 +2195,6 @@ func makeMessageSliceMarshaler(u *marshalInfo) (sizer, marshaler) {
 				siz := u.cachedsize(v)
 				b = appendVarint(b, uint64(siz))
 				b, err = u.marshal(b, v, deterministic)
-
 				if err != nil {
 					if _, ok := err.(*RequiredNotSetError); ok {
 						// Required field in submessage is not set.
