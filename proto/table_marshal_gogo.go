@@ -28,6 +28,10 @@
 
 package proto
 
+import (
+	"reflect"
+)
+
 // makeMessageRefMarshaler differs a bit from makeMessageMarshaler
 // It marshal a message T instead of a *T
 func makeMessageRefMarshaler(u *marshalInfo) (sizer, marshaler) {
@@ -87,5 +91,49 @@ func makeMessageRefSliceMarshaler(u *marshalInfo) (sizer, marshaler) {
 			}
 
 			return b, errreq
+		}
+}
+
+func makeCustomPtrMarshaler(u *marshalInfo) (sizer, marshaler) {
+	return func(ptr pointer, tagsize int) int {
+			if ptr.isNil() {
+				return 0
+			}
+			m := ptr.asPointerTo(reflect.PtrTo(u.typ)).Elem().Interface().(custom)
+			siz := m.Size()
+			return tagsize + SizeVarint(uint64(siz)) + siz
+		}, func(b []byte, ptr pointer, wiretag uint64, deterministic bool) ([]byte, error) {
+			if ptr.isNil() {
+				return b, nil
+			}
+			m := ptr.asPointerTo(reflect.PtrTo(u.typ)).Elem().Interface().(custom)
+			siz := m.Size()
+			buf, err := m.Marshal()
+			if err != nil {
+				return nil, err
+			}
+			b = appendVarint(b, wiretag)
+			b = appendVarint(b, uint64(siz))
+			b = append(b, buf...)
+			return b, nil
+		}
+}
+
+func makeCustomMarshaler(u *marshalInfo) (sizer, marshaler) {
+	return func(ptr pointer, tagsize int) int {
+			m := ptr.asPointerTo(u.typ).Interface().(custom)
+			siz := m.Size()
+			return tagsize + SizeVarint(uint64(siz)) + siz
+		}, func(b []byte, ptr pointer, wiretag uint64, deterministic bool) ([]byte, error) {
+			m := ptr.asPointerTo(u.typ).Interface().(custom)
+			siz := m.Size()
+			buf, err := m.Marshal()
+			if err != nil {
+				return nil, err
+			}
+			b = appendVarint(b, wiretag)
+			b = appendVarint(b, uint64(siz))
+			b = append(b, buf...)
+			return b, nil
 		}
 }

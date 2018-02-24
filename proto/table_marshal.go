@@ -544,6 +544,7 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 
 	packed := false
 	proto3 := false
+	ctype := false
 	for i := 2; i < len(tags); i++ {
 		if tags[i] == "packed" {
 			packed = true
@@ -551,9 +552,22 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 		if tags[i] == "proto3" {
 			proto3 = true
 		}
+		if strings.HasPrefix(tags[i], "customtype=") {
+			ctype = true
+		}
 	}
 	if !proto3 && !pointer && !slice {
 		nozero = false
+	}
+
+	if ctype && reflect.PtrTo(t).Implements(customType) {
+		if slice {
+			return makeMessageRefSliceMarshaler(getMarshalInfo(t))
+		}
+		if pointer {
+			return makeCustomPtrMarshaler(getMarshalInfo(t))
+		}
+		return makeCustomMarshaler(getMarshalInfo(t))
 	}
 
 	switch t.Kind() {

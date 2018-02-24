@@ -518,9 +518,13 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	tagArray := strings.Split(tags, ",")
 	encoding := tagArray[0]
 	name := "unknown"
+	ctype := false
 	for _, tag := range tagArray[3:] {
 		if strings.HasPrefix(tag, "name=") {
 			name = tag[5:]
+		}
+		if strings.HasPrefix(tag, "customtype=") {
+			ctype = true
 		}
 	}
 
@@ -539,6 +543,16 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	// We'll never have both pointer and slice for basic types.
 	if pointer && slice && t.Kind() != reflect.Struct {
 		panic("both pointer and slice for basic type in " + t.Name())
+	}
+
+	if ctype && reflect.PtrTo(t).Implements(customType) {
+		if slice {
+			return makeUnmarshalCustomSlice(getUnmarshalInfo(t), name)
+		}
+		if pointer {
+			return makeUnmarshalCustomPtr(getUnmarshalInfo(t), name)
+		}
+		return makeUnmarshalCustom(getUnmarshalInfo(t), name)
 	}
 
 	switch t.Kind() {

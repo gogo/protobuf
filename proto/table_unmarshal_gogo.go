@@ -93,3 +93,73 @@ func makeUnmarshalMessageSlice(sub *unmarshalInfo, name string) unmarshaler {
 		return b[x:], err
 	}
 }
+
+func makeUnmarshalCustomPtr(sub *unmarshalInfo, name string) unmarshaler {
+	return func(b []byte, f pointer, w int) ([]byte, error) {
+		if w != WireBytes {
+			return nil, errInternalBadWireType
+		}
+		x, n := decodeVarint(b)
+		if n == 0 {
+			return nil, io.ErrUnexpectedEOF
+		}
+		b = b[n:]
+		if x > uint64(len(b)) {
+			return nil, io.ErrUnexpectedEOF
+		}
+
+		s := f.asPointerTo(reflect.PtrTo(sub.typ)).Elem()
+		s.Set(reflect.New(sub.typ))
+		m := s.Interface().(custom)
+		if err := m.Unmarshal(b[:x]); err != nil {
+			return nil, err
+		}
+		return b[x:], nil
+	}
+}
+
+func makeUnmarshalCustomSlice(sub *unmarshalInfo, name string) unmarshaler {
+	return func(b []byte, f pointer, w int) ([]byte, error) {
+		if w != WireBytes {
+			return nil, errInternalBadWireType
+		}
+		x, n := decodeVarint(b)
+		if n == 0 {
+			return nil, io.ErrUnexpectedEOF
+		}
+		b = b[n:]
+		if x > uint64(len(b)) {
+			return nil, io.ErrUnexpectedEOF
+		}
+		m := reflect.New(sub.typ)
+		c := m.Interface().(custom)
+		if err := c.Unmarshal(b[:x]); err != nil {
+			return nil, err
+		}
+		v := valToPointer(m)
+		f.appendRef(v, sub.typ)
+		return b[x:], nil
+	}
+}
+
+func makeUnmarshalCustom(sub *unmarshalInfo, name string) unmarshaler {
+	return func(b []byte, f pointer, w int) ([]byte, error) {
+		if w != WireBytes {
+			return nil, errInternalBadWireType
+		}
+		x, n := decodeVarint(b)
+		if n == 0 {
+			return nil, io.ErrUnexpectedEOF
+		}
+		b = b[n:]
+		if x > uint64(len(b)) {
+			return nil, io.ErrUnexpectedEOF
+		}
+
+		m := f.asPointerTo(sub.typ).Interface().(custom)
+		if err := m.Unmarshal(b[:x]); err != nil {
+			return nil, err
+		}
+		return b[x:], nil
+	}
+}
