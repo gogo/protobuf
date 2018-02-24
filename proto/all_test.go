@@ -1713,6 +1713,28 @@ func TestExtensionMarshalOrder(t *testing.T) {
 	}
 }
 
+func TestExtensionMapFieldMarshalDeterministic(t *testing.T) {
+	m := &MyMessage{Count: Int(123)}
+	if err := SetExtension(m, E_Ext_More, &Ext{MapField: map[int32]int32{1: 1, 2: 2, 3: 3, 4: 4}}); err != nil {
+		t.Fatalf("SetExtension: %v", err)
+	}
+	marshal := func(m Message) []byte {
+		var b Buffer
+		b.SetDeterministic(true)
+		if err := b.Marshal(m); err != nil {
+			t.Fatalf("Marshal failed: %v", err)
+		}
+		return b.Bytes()
+	}
+
+	want := marshal(m)
+	for i := 0; i < 100; i++ {
+		if got := marshal(m); !bytes.Equal(got, want) {
+			t.Errorf("Marshal produced inconsistent output with determinism enabled (pass %d).\n got %v\nwant %v", i, got, want)
+		}
+	}
+}
+
 // Many extensions, because small maps might not iterate differently on each iteration.
 var exts = []*ExtensionDesc{
 	E_X201,
@@ -2028,6 +2050,32 @@ func TestMapFieldMarshal(t *testing.T) {
 	t.Logf("FYI b: %q", b)
 
 	(new(Buffer)).DebugPrint("Dump of b", b)
+}
+
+func TestMapFieldDeterministicMarshal(t *testing.T) {
+	m := &MessageWithMap{
+		NameMapping: map[int32]string{
+			1: "Rob",
+			4: "Ian",
+			8: "Dave",
+		},
+	}
+
+	marshal := func(m Message) []byte {
+		var b Buffer
+		b.SetDeterministic(true)
+		if err := b.Marshal(m); err != nil {
+			t.Fatalf("Marshal failed: %v", err)
+		}
+		return b.Bytes()
+	}
+
+	want := marshal(m)
+	for i := 0; i < 10; i++ {
+		if got := marshal(m); !bytes.Equal(got, want) {
+			t.Errorf("Marshal produced inconsistent output with determinism enabled (pass %d).\n got %v\nwant %v", i, got, want)
+		}
+	}
 }
 
 func TestMapFieldRoundTrips(t *testing.T) {
