@@ -1738,8 +1738,15 @@ func makeUnmarshalMap(f *reflect.StructField) unmarshaler {
 	t := f.Type
 	kt := t.Key()
 	vt := t.Elem()
+	tagArray := strings.Split(f.Tag.Get("protobuf"), ",")
+	valTags := strings.Split(f.Tag.Get("protobuf_val"), ",")
+	for _, t := range tagArray {
+		if strings.HasPrefix(t, "customtype=") {
+			valTags = append(valTags, t)
+		}
+	}
 	unmarshalKey := typeUnmarshaler(kt, f.Tag.Get("protobuf_key"))
-	unmarshalVal := typeUnmarshaler(vt, f.Tag.Get("protobuf_val"))
+	unmarshalVal := typeUnmarshaler(vt, strings.Join(valTags, ","))
 	return func(b []byte, f pointer, w int) ([]byte, error) {
 		// The map entry is a submessage. Figure out how big it is.
 		if w != WireBytes {

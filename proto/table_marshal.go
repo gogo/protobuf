@@ -560,14 +560,16 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 		nozero = false
 	}
 
-	if ctype && reflect.PtrTo(t).Implements(customType) {
-		if slice {
-			return makeMessageRefSliceMarshaler(getMarshalInfo(t))
+	if ctype {
+		if reflect.PtrTo(t).Implements(customType) {
+			if slice {
+				return makeMessageRefSliceMarshaler(getMarshalInfo(t))
+			}
+			if pointer {
+				return makeCustomPtrMarshaler(getMarshalInfo(t))
+			}
+			return makeCustomMarshaler(getMarshalInfo(t))
 		}
-		if pointer {
-			return makeCustomPtrMarshaler(getMarshalInfo(t))
-		}
-		return makeCustomMarshaler(getMarshalInfo(t))
 	}
 
 	switch t.Kind() {
@@ -2235,8 +2237,14 @@ func makeMapMarshaler(f *reflect.StructField) (sizer, marshaler) {
 	t := f.Type
 	keyType := t.Key()
 	valType := t.Elem()
+	tags := strings.Split(f.Tag.Get("protobuf"), ",")
 	keyTags := strings.Split(f.Tag.Get("protobuf_key"), ",")
 	valTags := strings.Split(f.Tag.Get("protobuf_val"), ",")
+	for _, t := range tags {
+		if strings.HasPrefix(t, "customtype=") {
+			valTags = append(valTags, t)
+		}
+	}
 	keySizer, keyMarshaler := typeMarshaler(keyType, keyTags, false, false) // don't omit zero value in map
 	valSizer, valMarshaler := typeMarshaler(valType, valTags, false, false) // don't omit zero value in map
 	keyWireTag := 1<<3 | wiretype(keyTags[0])
