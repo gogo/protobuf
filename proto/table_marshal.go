@@ -310,6 +310,7 @@ func (u *marshalInfo) computeMarshalInfo() {
 	u.v1extensions = invalidField
 	u.bytesExtensions = invalidField
 	u.sizecache = invalidField
+	isOneofMessage := false
 
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
@@ -319,17 +320,14 @@ func (u *marshalInfo) computeMarshalInfo() {
 		return
 	}
 
-	// get oneof implementers
-	var oneofImplementers []interface{}
-	if m, ok := reflect.Zero(reflect.PtrTo(t)).Interface().(oneofMessage); ok {
-		_, _, _, oneofImplementers = m.XXX_OneofFuncs()
-	}
-
 	n := t.NumField()
 
 	// deal with XXX fields first
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
+		if f.Tag.Get("protobuf_oneof") != "" {
+			isOneofMessage = true
+		}
 		if !strings.HasPrefix(f.Name, "XXX_") {
 			continue
 		}
@@ -353,6 +351,13 @@ func (u *marshalInfo) computeMarshalInfo() {
 			panic("unknown XXX field: " + f.Name)
 		}
 		n--
+	}
+
+	// get oneof implementers
+	var oneofImplementers []interface{}
+	// gogo: isOneofMessage is needed for embedded oneof messages, without a marshaler and unmarshaler
+	if m, ok := reflect.Zero(reflect.PtrTo(t)).Interface().(oneofMessage); ok && isOneofMessage {
+		_, _, _, oneofImplementers = m.XXX_OneofFuncs()
 	}
 
 	// normal fields

@@ -433,7 +433,8 @@ func (u *unmarshalInfo) computeUnmarshalInfo() {
 	// Find any types associated with oneof fields.
 	// TODO: XXX_OneofFuncs returns more info than we need.  Get rid of some of it?
 	fn := reflect.Zero(reflect.PtrTo(t)).MethodByName("XXX_OneofFuncs")
-	if fn.IsValid() {
+	// gogo: len(oneofFields) > 0 is needed for embedded oneof messages, without a marshaler and unmarshaler
+	if fn.IsValid() && len(oneofFields) > 0 {
 		res := fn.Call(nil)[3] // last return value from XXX_OneofFuncs: []interface{}
 		for i := res.Len() - 1; i >= 0; i-- {
 			v := res.Index(i)                             // interface{}
