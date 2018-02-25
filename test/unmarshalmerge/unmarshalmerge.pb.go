@@ -40,14 +40,30 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Big struct {
-	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
-	Number           *int64 `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Sub                  *Sub     `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
+	Number               *int64   `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Big) Reset()                    { *m = Big{} }
 func (*Big) ProtoMessage()               {}
 func (*Big) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{0} }
+func (m *Big) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Big.Marshal(b, m, deterministic)
+}
+func (dst *Big) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Big.Merge(dst, src)
+}
+func (m *Big) XXX_Size() int {
+	return xxx_messageInfo_Big.Size(m)
+}
+func (m *Big) XXX_DiscardUnknown() {
+	xxx_messageInfo_Big.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Big proto.InternalMessageInfo
 
 func (m *Big) GetSub() *Sub {
 	if m != nil {
@@ -64,14 +80,30 @@ func (m *Big) GetNumber() int64 {
 }
 
 type BigUnsafe struct {
-	Sub              *Sub   `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
-	Number           *int64 `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Sub                  *Sub     `protobuf:"bytes,1,opt,name=Sub" json:"Sub,omitempty"`
+	Number               *int64   `protobuf:"varint,2,opt,name=Number" json:"Number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *BigUnsafe) Reset()                    { *m = BigUnsafe{} }
 func (*BigUnsafe) ProtoMessage()               {}
 func (*BigUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{1} }
+func (m *BigUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BigUnsafe.Marshal(b, m, deterministic)
+}
+func (dst *BigUnsafe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BigUnsafe.Merge(dst, src)
+}
+func (m *BigUnsafe) XXX_Size() int {
+	return xxx_messageInfo_BigUnsafe.Size(m)
+}
+func (m *BigUnsafe) XXX_DiscardUnknown() {
+	xxx_messageInfo_BigUnsafe.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BigUnsafe proto.InternalMessageInfo
 
 func (m *BigUnsafe) GetSub() *Sub {
 	if m != nil {
@@ -88,13 +120,29 @@ func (m *BigUnsafe) GetNumber() int64 {
 }
 
 type Sub struct {
-	SubNumber        *int64 `protobuf:"varint,1,opt,name=SubNumber" json:"SubNumber,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	SubNumber            *int64   `protobuf:"varint,1,opt,name=SubNumber" json:"SubNumber,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Sub) Reset()                    { *m = Sub{} }
 func (*Sub) ProtoMessage()               {}
 func (*Sub) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{2} }
+func (m *Sub) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Sub.Marshal(b, m, deterministic)
+}
+func (dst *Sub) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Sub.Merge(dst, src)
+}
+func (m *Sub) XXX_Size() int {
+	return xxx_messageInfo_Sub.Size(m)
+}
+func (m *Sub) XXX_DiscardUnknown() {
+	xxx_messageInfo_Sub.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Sub proto.InternalMessageInfo
 
 func (m *Sub) GetSubNumber() int64 {
 	if m != nil && m.SubNumber != nil {
@@ -104,23 +152,39 @@ func (m *Sub) GetSubNumber() int64 {
 }
 
 type IntMerge struct {
-	Int64            int64  `protobuf:"varint,1,req,name=Int64" json:"Int64"`
-	Int32            int32  `protobuf:"varint,2,opt,name=Int32" json:"Int32"`
-	Sint32           int32  `protobuf:"zigzag32,3,req,name=Sint32" json:"Sint32"`
-	Sint64           int64  `protobuf:"zigzag64,4,opt,name=Sint64" json:"Sint64"`
-	Uint64           uint64 `protobuf:"varint,5,opt,name=Uint64" json:"Uint64"`
-	Uint32           uint32 `protobuf:"varint,6,req,name=Uint32" json:"Uint32"`
-	Fixed64          uint64 `protobuf:"fixed64,7,opt,name=Fixed64" json:"Fixed64"`
-	Fixed32          uint32 `protobuf:"fixed32,8,opt,name=Fixed32" json:"Fixed32"`
-	Sfixed32         int32  `protobuf:"fixed32,9,req,name=Sfixed32" json:"Sfixed32"`
-	Sfixed64         int64  `protobuf:"fixed64,10,opt,name=Sfixed64" json:"Sfixed64"`
-	Bool             bool   `protobuf:"varint,11,opt,name=Bool" json:"Bool"`
-	XXX_unrecognized []byte `json:"-"`
+	Int64                int64    `protobuf:"varint,1,req,name=Int64" json:"Int64"`
+	Int32                int32    `protobuf:"varint,2,opt,name=Int32" json:"Int32"`
+	Sint32               int32    `protobuf:"zigzag32,3,req,name=Sint32" json:"Sint32"`
+	Sint64               int64    `protobuf:"zigzag64,4,opt,name=Sint64" json:"Sint64"`
+	Uint64               uint64   `protobuf:"varint,5,opt,name=Uint64" json:"Uint64"`
+	Uint32               uint32   `protobuf:"varint,6,req,name=Uint32" json:"Uint32"`
+	Fixed64              uint64   `protobuf:"fixed64,7,opt,name=Fixed64" json:"Fixed64"`
+	Fixed32              uint32   `protobuf:"fixed32,8,opt,name=Fixed32" json:"Fixed32"`
+	Sfixed32             int32    `protobuf:"fixed32,9,req,name=Sfixed32" json:"Sfixed32"`
+	Sfixed64             int64    `protobuf:"fixed64,10,opt,name=Sfixed64" json:"Sfixed64"`
+	Bool                 bool     `protobuf:"varint,11,opt,name=Bool" json:"Bool"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *IntMerge) Reset()                    { *m = IntMerge{} }
 func (*IntMerge) ProtoMessage()               {}
 func (*IntMerge) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{3} }
+func (m *IntMerge) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_IntMerge.Marshal(b, m, deterministic)
+}
+func (dst *IntMerge) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IntMerge.Merge(dst, src)
+}
+func (m *IntMerge) XXX_Size() int {
+	return xxx_messageInfo_IntMerge.Size(m)
+}
+func (m *IntMerge) XXX_DiscardUnknown() {
+	xxx_messageInfo_IntMerge.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IntMerge proto.InternalMessageInfo
 
 func (m *IntMerge) GetInt64() int64 {
 	if m != nil {

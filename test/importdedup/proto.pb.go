@@ -32,15 +32,34 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Object struct {
-	CustomField      *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
-	SubObject        *subpkg.SubObject                                            `protobuf:"bytes,2,opt,name=SubObject" json:"SubObject,omitempty"`
-	XXX_unrecognized []byte                                                       `json:"-"`
+	CustomField          *github_com_gogo_protobuf_test_importdedup_subpkg.CustomType `protobuf:"bytes,1,opt,name=CustomField,customtype=github.com/gogo/protobuf/test/importdedup/subpkg.CustomType" json:"CustomField,omitempty"`
+	SubObject            *subpkg.SubObject                                            `protobuf:"bytes,2,opt,name=SubObject" json:"SubObject,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                     `json:"-"`
+	XXX_unrecognized     []byte                                                       `json:"-"`
+	XXX_sizecache        int32                                                        `json:"-"`
 }
 
 func (m *Object) Reset()                    { *m = Object{} }
 func (m *Object) String() string            { return proto.CompactTextString(m) }
 func (*Object) ProtoMessage()               {}
 func (*Object) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Object) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Object.Unmarshal(m, b)
+}
+func (m *Object) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Object.Marshal(b, m, deterministic)
+}
+func (dst *Object) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Object.Merge(dst, src)
+}
+func (m *Object) XXX_Size() int {
+	return xxx_messageInfo_Object.Size(m)
+}
+func (m *Object) XXX_DiscardUnknown() {
+	xxx_messageInfo_Object.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Object proto.InternalMessageInfo
 
 func (m *Object) GetSubObject() *subpkg.SubObject {
 	if m != nil {

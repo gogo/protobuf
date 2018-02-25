@@ -31,13 +31,26 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Object struct {
-	Type TypeIdentifier `protobuf:"varint,1,opt,name=type,proto3,casttype=TypeIdentifier" json:"type,omitempty"`
+	Type                 TypeIdentifier `protobuf:"varint,1,opt,name=type,proto3,casttype=TypeIdentifier" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *Object) Reset()                    { *m = Object{} }
 func (m *Object) String() string            { return proto.CompactTextString(m) }
 func (*Object) ProtoMessage()               {}
 func (*Object) Descriptor() ([]byte, []int) { return fileDescriptorIssue330, []int{0} }
+func (dst *Object) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Object.Merge(dst, src)
+}
+func (m *Object) XXX_Size() int {
+	return xxx_messageInfo_Object.Size(m)
+}
+func (m *Object) XXX_DiscardUnknown() {
+	xxx_messageInfo_Object.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Object proto.InternalMessageInfo
 
 func (m *Object) GetType() TypeIdentifier {
 	if m != nil {

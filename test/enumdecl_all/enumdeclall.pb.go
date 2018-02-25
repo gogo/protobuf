@@ -68,12 +68,25 @@ func (MyOtherEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorEnumd
 type Message struct {
 	EnumeratedField      MyEnum      `protobuf:"varint,1,opt,name=enumerated_field,json=enumeratedField,proto3,enum=enumdeclall.MyEnum" json:"enumerated_field,omitempty"`
 	OtherenumeratedField MyOtherEnum `protobuf:"varint,2,opt,name=otherenumerated_field,json=otherenumeratedField,proto3,enum=enumdeclall.MyOtherEnum" json:"otherenumerated_field,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *Message) Reset()                    { *m = Message{} }
 func (m *Message) String() string            { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()               {}
 func (*Message) Descriptor() ([]byte, []int) { return fileDescriptorEnumdeclall, []int{0} }
+func (dst *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(dst, src)
+}
+func (m *Message) XXX_Size() int {
+	return xxx_messageInfo_Message.Size(m)
+}
+func (m *Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Message proto.InternalMessageInfo
 
 func (m *Message) GetEnumeratedField() MyEnum {
 	if m != nil {

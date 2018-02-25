@@ -36,6 +36,17 @@ func (m *Dropped) Reset()                    { *m = Dropped{} }
 func (m *Dropped) String() string            { return proto.CompactTextString(m) }
 func (*Dropped) ProtoMessage()               {}
 func (*Dropped) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{0} }
+func (dst *Dropped) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Dropped.Merge(dst, src)
+}
+func (m *Dropped) XXX_Size() int {
+	return xxx_messageInfo_Dropped.Size(m)
+}
+func (m *Dropped) XXX_DiscardUnknown() {
+	xxx_messageInfo_Dropped.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Dropped proto.InternalMessageInfo
 
 func (m *Dropped) GetName() string {
 	if m != nil {
@@ -55,16 +66,40 @@ func (m *DroppedWithoutGetters) Reset()                    { *m = DroppedWithout
 func (m *DroppedWithoutGetters) String() string            { return proto.CompactTextString(m) }
 func (*DroppedWithoutGetters) ProtoMessage()               {}
 func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{1} }
+func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
+}
+func (m *DroppedWithoutGetters) XXX_Size() int {
+	return xxx_messageInfo_DroppedWithoutGetters.Size(m)
+}
+func (m *DroppedWithoutGetters) XXX_DiscardUnknown() {
+	xxx_messageInfo_DroppedWithoutGetters.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DroppedWithoutGetters proto.InternalMessageInfo
 
 type Kept struct {
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Age  int32  `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Age                  int32    `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Kept) Reset()                    { *m = Kept{} }
 func (m *Kept) String() string            { return proto.CompactTextString(m) }
 func (*Kept) ProtoMessage()               {}
 func (*Kept) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{2} }
+func (dst *Kept) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Kept.Merge(dst, src)
+}
+func (m *Kept) XXX_Size() int {
+	return xxx_messageInfo_Kept.Size(m)
+}
+func (m *Kept) XXX_DiscardUnknown() {
+	xxx_messageInfo_Kept.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Kept proto.InternalMessageInfo
 
 func (m *Kept) GetName() string {
 	if m != nil {

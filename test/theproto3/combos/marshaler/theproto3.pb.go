@@ -98,116 +98,246 @@ var Message_Humour_value = map[string]int32{
 func (Message_Humour) EnumDescriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{0, 0} }
 
 type Message struct {
-	Name         string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Hilarity     Message_Humour             `protobuf:"varint,2,opt,name=hilarity,proto3,enum=theproto3.Message_Humour" json:"hilarity,omitempty"`
-	HeightInCm   uint32                     `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
-	Data         []byte                     `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	ResultCount  int64                      `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
-	TrueScotsman bool                       `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
-	Score        float32                    `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
-	Key          []uint64                   `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
-	Nested       *Nested                    `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
-	Terrain      map[int64]*Nested          `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Proto2Field  *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
-	Proto2Value  map[int64]*test.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Name                 string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Hilarity             Message_Humour             `protobuf:"varint,2,opt,name=hilarity,proto3,enum=theproto3.Message_Humour" json:"hilarity,omitempty"`
+	HeightInCm           uint32                     `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
+	Data                 []byte                     `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	ResultCount          int64                      `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
+	TrueScotsman         bool                       `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
+	Score                float32                    `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
+	Key                  []uint64                   `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
+	Nested               *Nested                    `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
+	Terrain              map[int64]*Nested          `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Proto2Field          *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
+	Proto2Value          map[int64]*test.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_sizecache        int32                      `json:"-"`
 }
 
 func (m *Message) Reset()                    { *m = Message{} }
 func (*Message) ProtoMessage()               {}
 func (*Message) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{0} }
+func (m *Message) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Message.Unmarshal(m, b)
+}
+func (dst *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(dst, src)
+}
+func (m *Message) XXX_Size() int {
+	return xxx_messageInfo_Message.Size(m)
+}
+func (m *Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Message proto.InternalMessageInfo
 
 type Nested struct {
-	Bunny string `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
+	Bunny                string   `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Nested) Reset()                    { *m = Nested{} }
 func (*Nested) ProtoMessage()               {}
 func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{1} }
+func (m *Nested) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Nested.Unmarshal(m, b)
+}
+func (dst *Nested) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nested.Merge(dst, src)
+}
+func (m *Nested) XXX_Size() int {
+	return xxx_messageInfo_Nested.Size(m)
+}
+func (m *Nested) XXX_DiscardUnknown() {
+	xxx_messageInfo_Nested.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Nested proto.InternalMessageInfo
 
 type AllMaps struct {
-	StringToDoubleMap map[string]float64        `protobuf:"bytes,1,rep,name=StringToDoubleMap" json:"StringToDoubleMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	StringToFloatMap  map[string]float32        `protobuf:"bytes,2,rep,name=StringToFloatMap" json:"StringToFloatMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Int32Map          map[int32]int32           `protobuf:"bytes,3,rep,name=Int32Map" json:"Int32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Int64Map          map[int64]int64           `protobuf:"bytes,4,rep,name=Int64Map" json:"Int64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Uint32Map         map[uint32]uint32         `protobuf:"bytes,5,rep,name=Uint32Map" json:"Uint32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Uint64Map         map[uint64]uint64         `protobuf:"bytes,6,rep,name=Uint64Map" json:"Uint64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Sint32Map         map[int32]int32           `protobuf:"bytes,7,rep,name=Sint32Map" json:"Sint32Map,omitempty" protobuf_key:"zigzag32,1,opt,name=key,proto3" protobuf_val:"zigzag32,2,opt,name=value,proto3"`
-	Sint64Map         map[int64]int64           `protobuf:"bytes,8,rep,name=Sint64Map" json:"Sint64Map,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"zigzag64,2,opt,name=value,proto3"`
-	Fixed32Map        map[uint32]uint32         `protobuf:"bytes,9,rep,name=Fixed32Map" json:"Fixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Sfixed32Map       map[int32]int32           `protobuf:"bytes,10,rep,name=Sfixed32Map" json:"Sfixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Fixed64Map        map[uint64]uint64         `protobuf:"bytes,11,rep,name=Fixed64Map" json:"Fixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	Sfixed64Map       map[int64]int64           `protobuf:"bytes,12,rep,name=Sfixed64Map" json:"Sfixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	BoolMap           map[bool]bool             `protobuf:"bytes,13,rep,name=BoolMap" json:"BoolMap,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	StringMap         map[string]string         `protobuf:"bytes,14,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringToBytesMap  map[string][]byte         `protobuf:"bytes,15,rep,name=StringToBytesMap" json:"StringToBytesMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringToEnumMap   map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
-	StringToMsgMap    map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	StringToDoubleMap    map[string]float64        `protobuf:"bytes,1,rep,name=StringToDoubleMap" json:"StringToDoubleMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	StringToFloatMap     map[string]float32        `protobuf:"bytes,2,rep,name=StringToFloatMap" json:"StringToFloatMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Int32Map             map[int32]int32           `protobuf:"bytes,3,rep,name=Int32Map" json:"Int32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Int64Map             map[int64]int64           `protobuf:"bytes,4,rep,name=Int64Map" json:"Int64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Uint32Map            map[uint32]uint32         `protobuf:"bytes,5,rep,name=Uint32Map" json:"Uint32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Uint64Map            map[uint64]uint64         `protobuf:"bytes,6,rep,name=Uint64Map" json:"Uint64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Sint32Map            map[int32]int32           `protobuf:"bytes,7,rep,name=Sint32Map" json:"Sint32Map,omitempty" protobuf_key:"zigzag32,1,opt,name=key,proto3" protobuf_val:"zigzag32,2,opt,name=value,proto3"`
+	Sint64Map            map[int64]int64           `protobuf:"bytes,8,rep,name=Sint64Map" json:"Sint64Map,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"zigzag64,2,opt,name=value,proto3"`
+	Fixed32Map           map[uint32]uint32         `protobuf:"bytes,9,rep,name=Fixed32Map" json:"Fixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Sfixed32Map          map[int32]int32           `protobuf:"bytes,10,rep,name=Sfixed32Map" json:"Sfixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Fixed64Map           map[uint64]uint64         `protobuf:"bytes,11,rep,name=Fixed64Map" json:"Fixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	Sfixed64Map          map[int64]int64           `protobuf:"bytes,12,rep,name=Sfixed64Map" json:"Sfixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	BoolMap              map[bool]bool             `protobuf:"bytes,13,rep,name=BoolMap" json:"BoolMap,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	StringMap            map[string]string         `protobuf:"bytes,14,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringToBytesMap     map[string][]byte         `protobuf:"bytes,15,rep,name=StringToBytesMap" json:"StringToBytesMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
+	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
 func (m *AllMaps) Reset()                    { *m = AllMaps{} }
 func (*AllMaps) ProtoMessage()               {}
 func (*AllMaps) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{2} }
+func (m *AllMaps) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
+}
+func (dst *AllMaps) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMaps.Merge(dst, src)
+}
+func (m *AllMaps) XXX_Size() int {
+	return xxx_messageInfo_AllMaps.Size(m)
+}
+func (m *AllMaps) XXX_DiscardUnknown() {
+	xxx_messageInfo_AllMaps.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AllMaps proto.InternalMessageInfo
 
 type AllMapsOrdered struct {
-	StringToDoubleMap map[string]float64        `protobuf:"bytes,1,rep,name=StringToDoubleMap" json:"StringToDoubleMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	StringToFloatMap  map[string]float32        `protobuf:"bytes,2,rep,name=StringToFloatMap" json:"StringToFloatMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Int32Map          map[int32]int32           `protobuf:"bytes,3,rep,name=Int32Map" json:"Int32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Int64Map          map[int64]int64           `protobuf:"bytes,4,rep,name=Int64Map" json:"Int64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Uint32Map         map[uint32]uint32         `protobuf:"bytes,5,rep,name=Uint32Map" json:"Uint32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Uint64Map         map[uint64]uint64         `protobuf:"bytes,6,rep,name=Uint64Map" json:"Uint64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	Sint32Map         map[int32]int32           `protobuf:"bytes,7,rep,name=Sint32Map" json:"Sint32Map,omitempty" protobuf_key:"zigzag32,1,opt,name=key,proto3" protobuf_val:"zigzag32,2,opt,name=value,proto3"`
-	Sint64Map         map[int64]int64           `protobuf:"bytes,8,rep,name=Sint64Map" json:"Sint64Map,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"zigzag64,2,opt,name=value,proto3"`
-	Fixed32Map        map[uint32]uint32         `protobuf:"bytes,9,rep,name=Fixed32Map" json:"Fixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Sfixed32Map       map[int32]int32           `protobuf:"bytes,10,rep,name=Sfixed32Map" json:"Sfixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
-	Fixed64Map        map[uint64]uint64         `protobuf:"bytes,11,rep,name=Fixed64Map" json:"Fixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	Sfixed64Map       map[int64]int64           `protobuf:"bytes,12,rep,name=Sfixed64Map" json:"Sfixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
-	BoolMap           map[bool]bool             `protobuf:"bytes,13,rep,name=BoolMap" json:"BoolMap,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	StringMap         map[string]string         `protobuf:"bytes,14,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringToBytesMap  map[string][]byte         `protobuf:"bytes,15,rep,name=StringToBytesMap" json:"StringToBytesMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	StringToEnumMap   map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
-	StringToMsgMap    map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	StringToDoubleMap    map[string]float64        `protobuf:"bytes,1,rep,name=StringToDoubleMap" json:"StringToDoubleMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	StringToFloatMap     map[string]float32        `protobuf:"bytes,2,rep,name=StringToFloatMap" json:"StringToFloatMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Int32Map             map[int32]int32           `protobuf:"bytes,3,rep,name=Int32Map" json:"Int32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Int64Map             map[int64]int64           `protobuf:"bytes,4,rep,name=Int64Map" json:"Int64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Uint32Map            map[uint32]uint32         `protobuf:"bytes,5,rep,name=Uint32Map" json:"Uint32Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Uint64Map            map[uint64]uint64         `protobuf:"bytes,6,rep,name=Uint64Map" json:"Uint64Map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Sint32Map            map[int32]int32           `protobuf:"bytes,7,rep,name=Sint32Map" json:"Sint32Map,omitempty" protobuf_key:"zigzag32,1,opt,name=key,proto3" protobuf_val:"zigzag32,2,opt,name=value,proto3"`
+	Sint64Map            map[int64]int64           `protobuf:"bytes,8,rep,name=Sint64Map" json:"Sint64Map,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"zigzag64,2,opt,name=value,proto3"`
+	Fixed32Map           map[uint32]uint32         `protobuf:"bytes,9,rep,name=Fixed32Map" json:"Fixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Sfixed32Map          map[int32]int32           `protobuf:"bytes,10,rep,name=Sfixed32Map" json:"Sfixed32Map,omitempty" protobuf_key:"fixed32,1,opt,name=key,proto3" protobuf_val:"fixed32,2,opt,name=value,proto3"`
+	Fixed64Map           map[uint64]uint64         `protobuf:"bytes,11,rep,name=Fixed64Map" json:"Fixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	Sfixed64Map          map[int64]int64           `protobuf:"bytes,12,rep,name=Sfixed64Map" json:"Sfixed64Map,omitempty" protobuf_key:"fixed64,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	BoolMap              map[bool]bool             `protobuf:"bytes,13,rep,name=BoolMap" json:"BoolMap,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	StringMap            map[string]string         `protobuf:"bytes,14,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringToBytesMap     map[string][]byte         `protobuf:"bytes,15,rep,name=StringToBytesMap" json:"StringToBytesMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
+	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
 func (m *AllMapsOrdered) Reset()                    { *m = AllMapsOrdered{} }
 func (*AllMapsOrdered) ProtoMessage()               {}
 func (*AllMapsOrdered) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{3} }
+func (m *AllMapsOrdered) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
+}
+func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
+}
+func (m *AllMapsOrdered) XXX_Size() int {
+	return xxx_messageInfo_AllMapsOrdered.Size(m)
+}
+func (m *AllMapsOrdered) XXX_DiscardUnknown() {
+	xxx_messageInfo_AllMapsOrdered.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AllMapsOrdered proto.InternalMessageInfo
 
 type MessageWithMap struct {
-	NameMapping map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	MsgMapping  map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	ByteMapping map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NameMapping          map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	MsgMapping           map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	ByteMapping          map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MessageWithMap) Reset()                    { *m = MessageWithMap{} }
 func (*MessageWithMap) ProtoMessage()               {}
 func (*MessageWithMap) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{4} }
+func (m *MessageWithMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
+}
+func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageWithMap.Merge(dst, src)
+}
+func (m *MessageWithMap) XXX_Size() int {
+	return xxx_messageInfo_MessageWithMap.Size(m)
+}
+func (m *MessageWithMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_MessageWithMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MessageWithMap proto.InternalMessageInfo
 
 type FloatingPoint struct {
-	F float64 `protobuf:"fixed64,1,opt,name=f,proto3" json:"f,omitempty"`
+	F                    float64  `protobuf:"fixed64,1,opt,name=f,proto3" json:"f,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FloatingPoint) Reset()                    { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage()               {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{5} }
+func (m *FloatingPoint) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+}
+func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FloatingPoint.Merge(dst, src)
+}
+func (m *FloatingPoint) XXX_Size() int {
+	return xxx_messageInfo_FloatingPoint.Size(m)
+}
+func (m *FloatingPoint) XXX_DiscardUnknown() {
+	xxx_messageInfo_FloatingPoint.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FloatingPoint proto.InternalMessageInfo
 
 type Uint128Pair struct {
-	Left  github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
-	Right *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
+	Left                 github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
+	Right                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
+	XXX_sizecache        int32                                         `json:"-"`
 }
 
 func (m *Uint128Pair) Reset()                    { *m = Uint128Pair{} }
 func (*Uint128Pair) ProtoMessage()               {}
 func (*Uint128Pair) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{6} }
+func (m *Uint128Pair) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Uint128Pair.Unmarshal(m, b)
+}
+func (dst *Uint128Pair) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Uint128Pair.Merge(dst, src)
+}
+func (m *Uint128Pair) XXX_Size() int {
+	return xxx_messageInfo_Uint128Pair.Size(m)
+}
+func (m *Uint128Pair) XXX_DiscardUnknown() {
+	xxx_messageInfo_Uint128Pair.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Uint128Pair proto.InternalMessageInfo
 
 type ContainsNestedMap struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ContainsNestedMap) Reset()                    { *m = ContainsNestedMap{} }
 func (*ContainsNestedMap) ProtoMessage()               {}
 func (*ContainsNestedMap) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{7} }
+func (m *ContainsNestedMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ContainsNestedMap.Unmarshal(m, b)
+}
+func (dst *ContainsNestedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ContainsNestedMap.Merge(dst, src)
+}
+func (m *ContainsNestedMap) XXX_Size() int {
+	return xxx_messageInfo_ContainsNestedMap.Size(m)
+}
+func (m *ContainsNestedMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_ContainsNestedMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ContainsNestedMap proto.InternalMessageInfo
 
 type ContainsNestedMap_NestedMap struct {
-	NestedMapField map[string]float64 `protobuf:"bytes,1,rep,name=NestedMapField" json:"NestedMapField,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	NestedMapField       map[string]float64 `protobuf:"bytes,1,rep,name=NestedMapField" json:"NestedMapField,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *ContainsNestedMap_NestedMap) Reset()      { *m = ContainsNestedMap_NestedMap{} }
@@ -215,25 +345,95 @@ func (*ContainsNestedMap_NestedMap) ProtoMessage() {}
 func (*ContainsNestedMap_NestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptorTheproto3, []int{7, 0}
 }
+func (m *ContainsNestedMap_NestedMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ContainsNestedMap_NestedMap.Unmarshal(m, b)
+}
+func (dst *ContainsNestedMap_NestedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ContainsNestedMap_NestedMap.Merge(dst, src)
+}
+func (m *ContainsNestedMap_NestedMap) XXX_Size() int {
+	return xxx_messageInfo_ContainsNestedMap_NestedMap.Size(m)
+}
+func (m *ContainsNestedMap_NestedMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_ContainsNestedMap_NestedMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ContainsNestedMap_NestedMap proto.InternalMessageInfo
 
 type NotPacked struct {
-	Key []uint64 `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
+	Key                  []uint64 `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NotPacked) Reset()                    { *m = NotPacked{} }
 func (*NotPacked) ProtoMessage()               {}
 func (*NotPacked) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{8} }
+func (m *NotPacked) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NotPacked.Unmarshal(m, b)
+}
+func (dst *NotPacked) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NotPacked.Merge(dst, src)
+}
+func (m *NotPacked) XXX_Size() int {
+	return xxx_messageInfo_NotPacked.Size(m)
+}
+func (m *NotPacked) XXX_DiscardUnknown() {
+	xxx_messageInfo_NotPacked.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NotPacked proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Message)(nil), "theproto3.Message")
+	proto.RegisterMapType((map[int64]*test.NinOptEnum)(nil), "theproto3.Message.Proto2ValueEntry")
+	proto.RegisterMapType((map[int64]*Nested)(nil), "theproto3.Message.TerrainEntry")
 	proto.RegisterType((*Nested)(nil), "theproto3.Nested")
 	proto.RegisterType((*AllMaps)(nil), "theproto3.AllMaps")
+	proto.RegisterMapType((map[bool]bool)(nil), "theproto3.AllMaps.BoolMapEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "theproto3.AllMaps.Fixed32MapEntry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "theproto3.AllMaps.Fixed64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMaps.Int32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMaps.Int64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMaps.Sfixed32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMaps.Sfixed64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMaps.Sint32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMaps.Sint64MapEntry")
+	proto.RegisterMapType((map[string]string)(nil), "theproto3.AllMaps.StringMapEntry")
+	proto.RegisterMapType((map[string][]byte)(nil), "theproto3.AllMaps.StringToBytesMapEntry")
+	proto.RegisterMapType((map[string]float64)(nil), "theproto3.AllMaps.StringToDoubleMapEntry")
+	proto.RegisterMapType((map[string]MapEnum)(nil), "theproto3.AllMaps.StringToEnumMapEntry")
+	proto.RegisterMapType((map[string]float32)(nil), "theproto3.AllMaps.StringToFloatMapEntry")
+	proto.RegisterMapType((map[string]*FloatingPoint)(nil), "theproto3.AllMaps.StringToMsgMapEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "theproto3.AllMaps.Uint32MapEntry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "theproto3.AllMaps.Uint64MapEntry")
 	proto.RegisterType((*AllMapsOrdered)(nil), "theproto3.AllMapsOrdered")
+	proto.RegisterMapType((map[bool]bool)(nil), "theproto3.AllMapsOrdered.BoolMapEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "theproto3.AllMapsOrdered.Fixed32MapEntry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "theproto3.AllMapsOrdered.Fixed64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMapsOrdered.Int32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMapsOrdered.Int64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMapsOrdered.Sfixed32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMapsOrdered.Sfixed64MapEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "theproto3.AllMapsOrdered.Sint32MapEntry")
+	proto.RegisterMapType((map[int64]int64)(nil), "theproto3.AllMapsOrdered.Sint64MapEntry")
+	proto.RegisterMapType((map[string]string)(nil), "theproto3.AllMapsOrdered.StringMapEntry")
+	proto.RegisterMapType((map[string][]byte)(nil), "theproto3.AllMapsOrdered.StringToBytesMapEntry")
+	proto.RegisterMapType((map[string]float64)(nil), "theproto3.AllMapsOrdered.StringToDoubleMapEntry")
+	proto.RegisterMapType((map[string]MapEnum)(nil), "theproto3.AllMapsOrdered.StringToEnumMapEntry")
+	proto.RegisterMapType((map[string]float32)(nil), "theproto3.AllMapsOrdered.StringToFloatMapEntry")
+	proto.RegisterMapType((map[string]*FloatingPoint)(nil), "theproto3.AllMapsOrdered.StringToMsgMapEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "theproto3.AllMapsOrdered.Uint32MapEntry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "theproto3.AllMapsOrdered.Uint64MapEntry")
 	proto.RegisterType((*MessageWithMap)(nil), "theproto3.MessageWithMap")
+	proto.RegisterMapType((map[bool][]byte)(nil), "theproto3.MessageWithMap.ByteMappingEntry")
+	proto.RegisterMapType((map[int64]*FloatingPoint)(nil), "theproto3.MessageWithMap.MsgMappingEntry")
+	proto.RegisterMapType((map[int32]string)(nil), "theproto3.MessageWithMap.NameMappingEntry")
 	proto.RegisterType((*FloatingPoint)(nil), "theproto3.FloatingPoint")
 	proto.RegisterType((*Uint128Pair)(nil), "theproto3.Uint128Pair")
 	proto.RegisterType((*ContainsNestedMap)(nil), "theproto3.ContainsNestedMap")
 	proto.RegisterType((*ContainsNestedMap_NestedMap)(nil), "theproto3.ContainsNestedMap.NestedMap")
+	proto.RegisterMapType((map[string]float64)(nil), "theproto3.ContainsNestedMap.NestedMap.NestedMapFieldEntry")
 	proto.RegisterType((*NotPacked)(nil), "theproto3.NotPacked")
 	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)

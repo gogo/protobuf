@@ -139,13 +139,26 @@ type Any struct {
 	//
 	TypeUrl string `protobuf:"bytes,1,opt,name=type_url,json=typeUrl,proto3" json:"type_url,omitempty"`
 	// Must be a valid serialized protocol buffer of the above specified type.
-	Value []byte `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Value                []byte   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Any) Reset()                    { *m = Any{} }
 func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
 func (*Any) XXX_WellKnownType() string   { return "Any" }
+func (dst *Any) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Any.Merge(dst, src)
+}
+func (m *Any) XXX_Size() int {
+	return xxx_messageInfo_Any.Size(m)
+}
+func (m *Any) XXX_DiscardUnknown() {
+	xxx_messageInfo_Any.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Any proto.InternalMessageInfo
 
 func (m *Any) GetTypeUrl() string {
 	if m != nil {

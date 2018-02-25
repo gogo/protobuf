@@ -34,12 +34,25 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Object struct {
-	OptionalNumber *int64 `protobuf:"varint,1,opt,name=optional_number,json=optionalNumber" json:"optional_number,omitempty"`
+	OptionalNumber       *int64   `protobuf:"varint,1,opt,name=optional_number,json=optionalNumber" json:"optional_number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Object) Reset()                    { *m = Object{} }
 func (*Object) ProtoMessage()               {}
 func (*Object) Descriptor() ([]byte, []int) { return fileDescriptorObject, []int{0} }
+func (dst *Object) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Object.Merge(dst, src)
+}
+func (m *Object) XXX_Size() int {
+	return xxx_messageInfo_Object.Size(m)
+}
+func (m *Object) XXX_DiscardUnknown() {
+	xxx_messageInfo_Object.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Object proto.InternalMessageInfo
 
 func (m *Object) GetOptionalNumber() int64 {
 	if m != nil && m.OptionalNumber != nil {

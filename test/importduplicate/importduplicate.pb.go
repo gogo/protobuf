@@ -35,15 +35,34 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapAndSortKeys struct {
-	Key      *sortkeys.Object `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	KeyValue map[int32]string `protobuf:"bytes,2,rep,name=keyValue" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Value    *proto1.Subject  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Key                  *sortkeys.Object `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
+	KeyValue             map[int32]string `protobuf:"bytes,2,rep,name=keyValue" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Value                *proto1.Subject  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *MapAndSortKeys) Reset()                    { *m = MapAndSortKeys{} }
 func (m *MapAndSortKeys) String() string            { return proto.CompactTextString(m) }
 func (*MapAndSortKeys) ProtoMessage()               {}
 func (*MapAndSortKeys) Descriptor() ([]byte, []int) { return fileDescriptorImportduplicate, []int{0} }
+func (m *MapAndSortKeys) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapAndSortKeys.Unmarshal(m, b)
+}
+func (m *MapAndSortKeys) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MapAndSortKeys.Marshal(b, m, deterministic)
+}
+func (dst *MapAndSortKeys) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapAndSortKeys.Merge(dst, src)
+}
+func (m *MapAndSortKeys) XXX_Size() int {
+	return xxx_messageInfo_MapAndSortKeys.Size(m)
+}
+func (m *MapAndSortKeys) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapAndSortKeys.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapAndSortKeys proto.InternalMessageInfo
 
 func (m *MapAndSortKeys) GetKey() *sortkeys.Object {
 	if m != nil {
@@ -68,6 +87,7 @@ func (m *MapAndSortKeys) GetValue() *proto1.Subject {
 
 func init() {
 	proto.RegisterType((*MapAndSortKeys)(nil), "importduplicate.MapAndSortKeys")
+	proto.RegisterMapType((map[int32]string)(nil), "importduplicate.MapAndSortKeys.KeyValueEntry")
 }
 func (this *MapAndSortKeys) Equal(that interface{}) bool {
 	if that == nil {

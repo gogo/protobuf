@@ -34,20 +34,13 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
+func TestUnmarshalIgnoreUnknownField(t *testing.T) {
 	fm := &FakeMap{
 		Entries: []*FakeMapEntry{
 			{
-				Key:   "foo",
-				Value: "",
-			},
-			{
-				Key:   "",
-				Value: "bar",
-			},
-			{
-				Key:   "as",
-				Value: "df",
+				Key:   "key",
+				Value: "value",
+				Other: "other",
 			},
 		},
 	}
@@ -57,67 +50,17 @@ func TestUnmarshalImplicitDefaultKeyValue1(t *testing.T) {
 		t.Fatalf("Failed to serialize msg: %s", err)
 	}
 
-	msg := MapTest{}
-	err = proto.Unmarshal(serializedMsg, &msg)
+	msg := &MapTest{}
+	err = proto.Unmarshal(serializedMsg, msg)
 
 	if err != nil {
-		t.Fatalf("Unexpected error: %s", err)
-	}
-
-	strStr := msg.StrStr
-	if len(strStr) != 3 {
-		t.Fatal("StrStr map should have 3 key/value pairs")
-	}
-
-	val, ok := strStr["foo"]
-	if !ok {
-		t.Fatal("\"foo\" not found in StrStr map.")
-	}
-	if val != "" {
-		t.Fatalf("Unexpected value for \"foo\": %s", val)
-	}
-
-	val, ok = strStr[""]
-	if !ok {
-		t.Fatal("\"\" not found in StrStr map.")
-	}
-	if val != "bar" {
-		t.Fatalf("Unexpected value for \"\": %s", val)
-	}
-
-	val, ok = strStr["as"]
-	if !ok {
-		t.Fatal("\"as\" not found in StrStr map.")
-	}
-	if val != "df" {
-		t.Fatalf("Unexpected value for \"as\": %s", val)
-	}
-}
-
-func TestUnmarshalImplicitDefaultKeyValue2(t *testing.T) {
-	fm := &FakeMap{
-		Entries: []*FakeMapEntry{
-			{
-				Key:   "",
-				Value: "",
-			},
-		},
-	}
-
-	serializedMsg, err := proto.Marshal(fm)
-	if err != nil {
-		t.Fatalf("Failed to serialize msg: %s", err)
-	}
-
-	// Sanity check
-	if string(serializedMsg) != "\n\x00" {
-		t.Fatal("Serialized bytes mismatched")
-	}
-
-	msg := MapTest{}
-	err = proto.Unmarshal(serializedMsg, &msg)
-
-	if err != nil {
+		var pb proto.Message = msg
+		_, ok := pb.(proto.Unmarshaler)
+		if !ok {
+			// non-codegen implementation returns error when extra tags are
+			// present.
+			return
+		}
 		t.Fatalf("Unexpected error: %s", err)
 	}
 
@@ -126,11 +69,11 @@ func TestUnmarshalImplicitDefaultKeyValue2(t *testing.T) {
 		t.Fatal("StrStr map should have 1 key/value pairs")
 	}
 
-	val, ok := strStr[""]
+	val, ok := strStr["key"]
 	if !ok {
-		t.Fatal("\"\" not found in StrStr map.")
+		t.Fatal("\"key\" not found in StrStr map.")
 	}
-	if val != "" {
-		t.Fatalf("Unexpected value for \"\": %s", val)
+	if val != "value" {
+		t.Fatalf("Unexpected value for \"value\": %s", val)
 	}
 }

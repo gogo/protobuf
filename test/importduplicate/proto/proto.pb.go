@@ -32,12 +32,31 @@ var _ = math.Inf
 const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subject struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Subject) Reset()                    { *m = Subject{} }
 func (m *Subject) String() string            { return proto1.CompactTextString(m) }
 func (*Subject) ProtoMessage()               {}
 func (*Subject) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Subject) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Subject.Unmarshal(m, b)
+}
+func (m *Subject) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Subject.Marshal(b, m, deterministic)
+}
+func (dst *Subject) XXX_Merge(src proto1.Message) {
+	xxx_messageInfo_Subject.Merge(dst, src)
+}
+func (m *Subject) XXX_Size() int {
+	return xxx_messageInfo_Subject.Size(m)
+}
+func (m *Subject) XXX_DiscardUnknown() {
+	xxx_messageInfo_Subject.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Subject proto1.InternalMessageInfo
 
 func init() {
 	proto1.RegisterType((*Subject)(nil), "proto.Subject")

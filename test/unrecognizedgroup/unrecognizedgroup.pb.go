@@ -43,42 +43,89 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type NewNoGroup struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
-	A                *A        `protobuf:"bytes,5,opt,name=A" json:"A,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field3               []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
+	A                    *A        `protobuf:"bytes,5,opt,name=A" json:"A,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NewNoGroup) Reset()                    { *m = NewNoGroup{} }
 func (*NewNoGroup) ProtoMessage()               {}
 func (*NewNoGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{0} }
+func (dst *NewNoGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NewNoGroup.Merge(dst, src)
+}
+func (m *NewNoGroup) XXX_Size() int {
+	return xxx_messageInfo_NewNoGroup.Size(m)
+}
+func (m *NewNoGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_NewNoGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NewNoGroup proto.InternalMessageInfo
 
 type A struct {
-	AField           *int64 `protobuf:"varint,1,opt,name=AField" json:"AField,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	AField               *int64   `protobuf:"varint,1,opt,name=AField" json:"AField,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *A) Reset()                    { *m = A{} }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{1} }
+func (dst *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(dst, src)
+}
+func (m *A) XXX_Size() int {
+	return xxx_messageInfo_A.Size(m)
+}
+func (m *A) XXX_DiscardUnknown() {
+	xxx_messageInfo_A.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_A proto.InternalMessageInfo
 
 type OldWithGroup struct {
-	Field1           *int64               `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Group1           *OldWithGroup_Group1 `protobuf:"group,2,opt,name=Group1,json=group1" json:"group1,omitempty"`
-	Field3           []float64            `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
-	Group2           *OldWithGroup_Group2 `protobuf:"group,4,opt,name=Group2,json=group2" json:"group2,omitempty"`
-	XXX_unrecognized []byte               `json:"-"`
+	Field1               *int64               `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Group1               *OldWithGroup_Group1 `protobuf:"group,2,opt,name=Group1,json=group1" json:"group1,omitempty"`
+	Field3               []float64            `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
+	Group2               *OldWithGroup_Group2 `protobuf:"group,4,opt,name=Group2,json=group2" json:"group2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *OldWithGroup) Reset()                    { *m = OldWithGroup{} }
 func (*OldWithGroup) ProtoMessage()               {}
 func (*OldWithGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{2} }
+func (m *OldWithGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldWithGroup.Unmarshal(m, b)
+}
+func (m *OldWithGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldWithGroup.Marshal(b, m, deterministic)
+}
+func (dst *OldWithGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OldWithGroup.Merge(dst, src)
+}
+func (m *OldWithGroup) XXX_Size() int {
+	return xxx_messageInfo_OldWithGroup.Size(m)
+}
+func (m *OldWithGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_OldWithGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OldWithGroup proto.InternalMessageInfo
 
 type OldWithGroup_Group1 struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *int32    `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *int32    `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               []float64 `protobuf:"fixed64,3,rep,name=Field3" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *OldWithGroup_Group1) Reset()      { *m = OldWithGroup_Group1{} }
@@ -86,11 +133,30 @@ func (*OldWithGroup_Group1) ProtoMessage() {}
 func (*OldWithGroup_Group1) Descriptor() ([]byte, []int) {
 	return fileDescriptorUnrecognizedgroup, []int{2, 0}
 }
+func (m *OldWithGroup_Group1) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldWithGroup_Group1.Unmarshal(m, b)
+}
+func (m *OldWithGroup_Group1) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldWithGroup_Group1.Marshal(b, m, deterministic)
+}
+func (dst *OldWithGroup_Group1) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OldWithGroup_Group1.Merge(dst, src)
+}
+func (m *OldWithGroup_Group1) XXX_Size() int {
+	return xxx_messageInfo_OldWithGroup_Group1.Size(m)
+}
+func (m *OldWithGroup_Group1) XXX_DiscardUnknown() {
+	xxx_messageInfo_OldWithGroup_Group1.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OldWithGroup_Group1 proto.InternalMessageInfo
 
 type OldWithGroup_Group2 struct {
-	Field1           *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               *int64    `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               []float64 `protobuf:"fixed64,2,rep,name=Field2" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *OldWithGroup_Group2) Reset()      { *m = OldWithGroup_Group2{} }
@@ -98,6 +164,23 @@ func (*OldWithGroup_Group2) ProtoMessage() {}
 func (*OldWithGroup_Group2) Descriptor() ([]byte, []int) {
 	return fileDescriptorUnrecognizedgroup, []int{2, 1}
 }
+func (m *OldWithGroup_Group2) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldWithGroup_Group2.Unmarshal(m, b)
+}
+func (m *OldWithGroup_Group2) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldWithGroup_Group2.Marshal(b, m, deterministic)
+}
+func (dst *OldWithGroup_Group2) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OldWithGroup_Group2.Merge(dst, src)
+}
+func (m *OldWithGroup_Group2) XXX_Size() int {
+	return xxx_messageInfo_OldWithGroup_Group2.Size(m)
+}
+func (m *OldWithGroup_Group2) XXX_DiscardUnknown() {
+	xxx_messageInfo_OldWithGroup_Group2.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OldWithGroup_Group2 proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*NewNoGroup)(nil), "unrecognizedgroup.NewNoGroup")

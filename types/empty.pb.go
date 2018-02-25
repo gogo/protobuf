@@ -42,12 +42,25 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 //
 // The JSON representation for `Empty` is empty JSON object `{}`.
 type Empty struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
 func (*Empty) XXX_WellKnownType() string   { return "Empty" }
+func (dst *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(dst, src)
+}
+func (m *Empty) XXX_Size() int {
+	return xxx_messageInfo_Empty.Size(m)
+}
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Empty)(nil), "google.protobuf.Empty")

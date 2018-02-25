@@ -40,33 +40,82 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapTest struct {
-	StrStr map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *MapTest) Reset()                    { *m = MapTest{} }
 func (*MapTest) ProtoMessage()               {}
 func (*MapTest) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{0} }
+func (m *MapTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapTest.Unmarshal(m, b)
+}
+func (dst *MapTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapTest.Merge(dst, src)
+}
+func (m *MapTest) XXX_Size() int {
+	return xxx_messageInfo_MapTest.Size(m)
+}
+func (m *MapTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapTest proto.InternalMessageInfo
 
 type FakeMap struct {
-	Entries []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
+	Entries              []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *FakeMap) Reset()                    { *m = FakeMap{} }
 func (*FakeMap) ProtoMessage()               {}
 func (*FakeMap) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{1} }
+func (m *FakeMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
+}
+func (dst *FakeMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMap.Merge(dst, src)
+}
+func (m *FakeMap) XXX_Size() int {
+	return xxx_messageInfo_FakeMap.Size(m)
+}
+func (m *FakeMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_FakeMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FakeMap proto.InternalMessageInfo
 
 type FakeMapEntry struct {
-	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Other string `protobuf:"bytes,3,opt,name=other,proto3" json:"other,omitempty"`
+	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value                string   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Other                string   `protobuf:"bytes,3,opt,name=other,proto3" json:"other,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FakeMapEntry) Reset()                    { *m = FakeMapEntry{} }
 func (*FakeMapEntry) ProtoMessage()               {}
 func (*FakeMapEntry) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{2} }
+func (m *FakeMapEntry) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
+}
+func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
+}
+func (m *FakeMapEntry) XXX_Size() int {
+	return xxx_messageInfo_FakeMapEntry.Size(m)
+}
+func (m *FakeMapEntry) XXX_DiscardUnknown() {
+	xxx_messageInfo_FakeMapEntry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FakeMapEntry proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*MapTest)(nil), "mapdefaults.MapTest")
+	proto.RegisterMapType((map[string]string)(nil), "mapdefaults.MapTest.StrStrEntry")
 	proto.RegisterType((*FakeMap)(nil), "mapdefaults.FakeMap")
 	proto.RegisterType((*FakeMapEntry)(nil), "mapdefaults.FakeMapEntry")
 }

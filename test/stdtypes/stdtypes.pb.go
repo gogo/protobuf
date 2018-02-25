@@ -44,16 +44,35 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type StdTypes struct {
-	NullableTimestamp *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	Timestamp         time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration          time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *StdTypes) Reset()                    { *m = StdTypes{} }
 func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
 func (*StdTypes) ProtoMessage()               {}
 func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{0} }
+func (m *StdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
+}
+func (m *StdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
+}
+func (dst *StdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StdTypes.Merge(dst, src)
+}
+func (m *StdTypes) XXX_Size() int {
+	return xxx_messageInfo_StdTypes.Size(m)
+}
+func (m *StdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_StdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StdTypes proto.InternalMessageInfo
 
 func (m *StdTypes) GetNullableTimestamp() *time.Time {
 	if m != nil {
@@ -84,16 +103,35 @@ func (m *StdTypes) GetDuration() time.Duration {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps         []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations          []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
 func (m *RepStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepStdTypes) ProtoMessage()               {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{1} }
+func (m *RepStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
+}
+func (m *RepStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepStdTypes.Merge(dst, src)
+}
+func (m *RepStdTypes) XXX_Size() int {
+	return xxx_messageInfo_RepStdTypes.Size(m)
+}
+func (m *RepStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepStdTypes proto.InternalMessageInfo
 
 func (m *RepStdTypes) GetNullableTimestamps() []*time.Time {
 	if m != nil {
@@ -124,16 +162,35 @@ func (m *RepStdTypes) GetDurations() []time.Duration {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
 func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{2} }
+func (m *MapStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
+}
+func (m *MapStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+}
+func (m *MapStdTypes) XXX_Size() int {
+	return xxx_messageInfo_MapStdTypes.Size(m)
+}
+func (m *MapStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapStdTypes proto.InternalMessageInfo
 
 func (m *MapStdTypes) GetNullableTimestamp() map[int32]*time.Time {
 	if m != nil {
@@ -167,13 +224,32 @@ type OneofStdTypes struct {
 	// Types that are valid to be assigned to OneOfStdTimes:
 	//	*OneofStdTypes_Timestamp
 	//	*OneofStdTypes_Duration
-	OneOfStdTimes isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	OneOfStdTimes        isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
 func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofStdTypes) ProtoMessage()               {}
 func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{3} }
+func (m *OneofStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
+}
+func (m *OneofStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
+}
+func (m *OneofStdTypes) XXX_Size() int {
+	return xxx_messageInfo_OneofStdTypes.Size(m)
+}
+func (m *OneofStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofStdTypes proto.InternalMessageInfo
 
 type isOneofStdTypes_OneOfStdTimes interface {
 	isOneofStdTypes_OneOfStdTimes()
@@ -311,6 +387,10 @@ func init() {
 	proto.RegisterType((*StdTypes)(nil), "stdtypes.StdTypes")
 	proto.RegisterType((*RepStdTypes)(nil), "stdtypes.RepStdTypes")
 	proto.RegisterType((*MapStdTypes)(nil), "stdtypes.MapStdTypes")
+	proto.RegisterMapType((map[int32]time.Duration)(nil), "stdtypes.MapStdTypes.DurationEntry")
+	proto.RegisterMapType((map[int32]*time.Duration)(nil), "stdtypes.MapStdTypes.NullableDurationEntry")
+	proto.RegisterMapType((map[int32]*time.Time)(nil), "stdtypes.MapStdTypes.NullableTimestampEntry")
+	proto.RegisterMapType((map[int32]time.Time)(nil), "stdtypes.MapStdTypes.TimestampEntry")
 	proto.RegisterType((*OneofStdTypes)(nil), "stdtypes.OneofStdTypes")
 }
 func (this *StdTypes) VerboseEqual(that interface{}) error {

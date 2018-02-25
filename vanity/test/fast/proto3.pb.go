@@ -30,13 +30,26 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Aproto3 struct {
-	B string `protobuf:"bytes,1,opt,name=B,proto3" json:"B,omitempty"`
+	B                    string   `protobuf:"bytes,1,opt,name=B,proto3" json:"B,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Aproto3) Reset()                    { *m = Aproto3{} }
 func (m *Aproto3) String() string            { return proto.CompactTextString(m) }
 func (*Aproto3) ProtoMessage()               {}
 func (*Aproto3) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0} }
+func (dst *Aproto3) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Aproto3.Merge(dst, src)
+}
+func (m *Aproto3) XXX_Size() int {
+	return xxx_messageInfo_Aproto3.Size(m)
+}
+func (m *Aproto3) XXX_DiscardUnknown() {
+	xxx_messageInfo_Aproto3.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Aproto3 proto.InternalMessageInfo
 
 func (m *Aproto3) GetB() string {
 	if m != nil {

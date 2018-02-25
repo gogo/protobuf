@@ -286,498 +286,1090 @@ func (NestedDefinition_NestedEnum) EnumDescriptor() ([]byte, []int) {
 }
 
 type NidOptNative struct {
-	Field1           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	Field2           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	Field3           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
-	Field4           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
-	Field5           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
-	Field6           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	Field7           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	Field8           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
-	Field9           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
-	Field10          int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
-	Field11          uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
-	Field12          int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
-	Field13          bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	Field14          string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	Field15          []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1               float64  `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	Field2               float32  `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	Field3               int32    `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
+	Field4               int64    `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
+	Field5               uint32   `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
+	Field6               uint64   `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	Field7               int32    `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	Field8               int64    `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
+	Field9               uint32   `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
+	Field10              int32    `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
+	Field11              uint64   `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
+	Field12              int64    `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
+	Field13              bool     `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	Field14              string   `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	Field15              []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
 func (*NidOptNative) ProtoMessage()               {}
 func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{0} }
+func (m *NidOptNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
+}
+func (dst *NidOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptNative.Merge(dst, src)
+}
+func (m *NidOptNative) XXX_Size() int {
+	return xxx_messageInfo_NidOptNative.Size(m)
+}
+func (m *NidOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptNative proto.InternalMessageInfo
 
 type NinOptNative struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field1               *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4               *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field5               *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	Field6               *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7               *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field8               *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
+	Field9               *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
+	Field10              *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
+	Field11              *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
+	Field12              *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
+	Field13              *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14              *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15              []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
 func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{1} }
+func (m *NinOptNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
+}
+func (dst *NinOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNative.Merge(dst, src)
+}
+func (m *NinOptNative) XXX_Size() int {
+	return xxx_messageInfo_NinOptNative.Size(m)
+}
+func (m *NinOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptNative proto.InternalMessageInfo
 
 type NidRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14              []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15              [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NidRepNative) Reset()                    { *m = NidRepNative{} }
 func (*NidRepNative) ProtoMessage()               {}
 func (*NidRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{2} }
+func (m *NidRepNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
+}
+func (dst *NidRepNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepNative.Merge(dst, src)
+}
+func (m *NidRepNative) XXX_Size() int {
+	return xxx_messageInfo_NidRepNative.Size(m)
+}
+func (m *NidRepNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepNative proto.InternalMessageInfo
 
 type NinRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14              []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15              [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepNative) Reset()                    { *m = NinRepNative{} }
 func (*NinRepNative) ProtoMessage()               {}
 func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{3} }
+func (m *NinRepNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
+}
+func (dst *NinRepNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNative.Merge(dst, src)
+}
+func (m *NinRepNative) XXX_Size() int {
+	return xxx_messageInfo_NinRepNative.Size(m)
+}
+func (m *NinRepNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepNative proto.InternalMessageInfo
 
 type NidRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NidRepPackedNative) Reset()                    { *m = NidRepPackedNative{} }
 func (*NidRepPackedNative) ProtoMessage()               {}
 func (*NidRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{4} }
+func (m *NidRepPackedNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
+}
+func (dst *NidRepPackedNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepPackedNative.Merge(dst, src)
+}
+func (m *NidRepPackedNative) XXX_Size() int {
+	return xxx_messageInfo_NidRepPackedNative.Size(m)
+}
+func (m *NidRepPackedNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepPackedNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepPackedNative proto.InternalMessageInfo
 
 type NinRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNative{} }
 func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{5} }
+func (m *NinRepPackedNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+}
+func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
+}
+func (m *NinRepPackedNative) XXX_Size() int {
+	return xxx_messageInfo_NinRepPackedNative.Size(m)
+}
+func (m *NinRepPackedNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepPackedNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepPackedNative proto.InternalMessageInfo
 
 type NidOptStruct struct {
-	Field1           float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	Field2           float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	Field3           NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3"`
-	Field4           NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4"`
-	Field6           uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	Field7           int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	Field8           NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8"`
-	Field13          bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	Field14          string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	Field15          []byte       `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
-	XXX_unrecognized []byte       `json:"-"`
+	Field1               float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	Field2               float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	Field3               NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3"`
+	Field4               NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4"`
+	Field6               uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	Field7               int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	Field8               NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8"`
+	Field13              bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	Field14              string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	Field15              []byte       `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
+	XXX_sizecache        int32        `json:"-"`
 }
 
 func (m *NidOptStruct) Reset()                    { *m = NidOptStruct{} }
 func (*NidOptStruct) ProtoMessage()               {}
 func (*NidOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{6} }
+func (m *NidOptStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
+}
+func (dst *NidOptStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptStruct.Merge(dst, src)
+}
+func (m *NidOptStruct) XXX_Size() int {
+	return xxx_messageInfo_NidOptStruct.Size(m)
+}
+func (m *NidOptStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptStruct proto.InternalMessageInfo
 
 type NinOptStruct struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field8           *NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	Field1               *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4               *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field6               *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7               *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field8               *NidOptNative `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
+	Field13              *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14              *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15              []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *NinOptStruct) Reset()                    { *m = NinOptStruct{} }
 func (*NinOptStruct) ProtoMessage()               {}
 func (*NinOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{7} }
+func (m *NinOptStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
+}
+func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptStruct.Merge(dst, src)
+}
+func (m *NinOptStruct) XXX_Size() int {
+	return xxx_messageInfo_NinOptStruct.Size(m)
+}
+func (m *NinOptStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptStruct proto.InternalMessageInfo
 
 type NidRepStruct struct {
-	Field1           []float64      `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32      `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3"`
-	Field4           []NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4"`
-	Field6           []uint64       `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32        `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8"`
-	Field13          []bool         `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string       `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte       `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte         `json:"-"`
+	Field1               []float64      `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32      `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3"`
+	Field4               []NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4"`
+	Field6               []uint64       `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32        `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8"`
+	Field13              []bool         `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14              []string       `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15              [][]byte       `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *NidRepStruct) Reset()                    { *m = NidRepStruct{} }
 func (*NidRepStruct) ProtoMessage()               {}
 func (*NidRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{8} }
+func (m *NidRepStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
+}
+func (dst *NidRepStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepStruct.Merge(dst, src)
+}
+func (m *NidRepStruct) XXX_Size() int {
+	return xxx_messageInfo_NidRepStruct.Size(m)
+}
+func (m *NidRepStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepStruct proto.InternalMessageInfo
 
 type NinRepStruct struct {
-	Field1           []float64       `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32       `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []*NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field6           []uint64        `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32         `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []*NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field13          []bool          `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	Field14          []string        `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	Field15          [][]byte        `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Field1               []float64       `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32       `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []*NidOptNative `protobuf:"bytes,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4               []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field6               []uint64        `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32         `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []*NidOptNative `protobuf:"bytes,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field13              []bool          `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	Field14              []string        `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	Field15              [][]byte        `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *NinRepStruct) Reset()                    { *m = NinRepStruct{} }
 func (*NinRepStruct) ProtoMessage()               {}
 func (*NinRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{9} }
+func (m *NinRepStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
+}
+func (dst *NinRepStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepStruct.Merge(dst, src)
+}
+func (m *NinRepStruct) XXX_Size() int {
+	return xxx_messageInfo_NinRepStruct.Size(m)
+}
+func (m *NinRepStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepStruct proto.InternalMessageInfo
 
 type NidEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200"`
-	Field210         bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210"`
-	XXX_unrecognized []byte       `json:"-"`
+	*NidOptNative        `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200             NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200"`
+	Field210             bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210"`
+	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
+	XXX_sizecache        int32        `json:"-"`
 }
 
 func (m *NidEmbeddedStruct) Reset()                    { *m = NidEmbeddedStruct{} }
 func (*NidEmbeddedStruct) ProtoMessage()               {}
 func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{10} }
+func (m *NidEmbeddedStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
+}
+func (dst *NidEmbeddedStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidEmbeddedStruct.Merge(dst, src)
+}
+func (m *NidEmbeddedStruct) XXX_Size() int {
+	return xxx_messageInfo_NidEmbeddedStruct.Size(m)
+}
+func (m *NidEmbeddedStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidEmbeddedStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidEmbeddedStruct proto.InternalMessageInfo
 
 type NinEmbeddedStruct struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	*NidOptNative        `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200             *NidOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	Field210             *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *NinEmbeddedStruct) Reset()                    { *m = NinEmbeddedStruct{} }
 func (*NinEmbeddedStruct) ProtoMessage()               {}
 func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{11} }
+func (m *NinEmbeddedStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
+}
+func (dst *NinEmbeddedStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinEmbeddedStruct.Merge(dst, src)
+}
+func (m *NinEmbeddedStruct) XXX_Size() int {
+	return xxx_messageInfo_NinEmbeddedStruct.Size(m)
+}
+func (m *NinEmbeddedStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinEmbeddedStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinEmbeddedStruct proto.InternalMessageInfo
 
 type NidNestedStruct struct {
-	Field1           NidOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1"`
-	Field2           []NidRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2"`
-	XXX_unrecognized []byte         `json:"-"`
+	Field1               NidOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1"`
+	Field2               []NidRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *NidNestedStruct) Reset()                    { *m = NidNestedStruct{} }
 func (*NidNestedStruct) ProtoMessage()               {}
 func (*NidNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{12} }
+func (m *NidNestedStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
+}
+func (dst *NidNestedStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidNestedStruct.Merge(dst, src)
+}
+func (m *NidNestedStruct) XXX_Size() int {
+	return xxx_messageInfo_NidNestedStruct.Size(m)
+}
+func (m *NidNestedStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidNestedStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidNestedStruct proto.InternalMessageInfo
 
 type NinNestedStruct struct {
-	Field1           *NinOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           []*NinRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Field1               *NinOptStruct   `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               []*NinRepStruct `protobuf:"bytes,2,rep,name=Field2" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *NinNestedStruct) Reset()                    { *m = NinNestedStruct{} }
 func (*NinNestedStruct) ProtoMessage()               {}
 func (*NinNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{13} }
+func (m *NinNestedStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
+}
+func (dst *NinNestedStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinNestedStruct.Merge(dst, src)
+}
+func (m *NinNestedStruct) XXX_Size() int {
+	return xxx_messageInfo_NinNestedStruct.Size(m)
+}
+func (m *NinNestedStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinNestedStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinNestedStruct proto.InternalMessageInfo
 
 type NidOptCustom struct {
-	Id               Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id"`
-	Value            github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
-	XXX_unrecognized []byte                                       `json:"-"`
+	Id                   Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id"`
+	Value                github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	XXX_NoUnkeyedLiteral struct{}                                     `json:"-"`
+	XXX_unrecognized     []byte                                       `json:"-"`
+	XXX_sizecache        int32                                        `json:"-"`
 }
 
 func (m *NidOptCustom) Reset()                    { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage()               {}
 func (*NidOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{14} }
+func (m *NidOptCustom) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
+}
+func (dst *NidOptCustom) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptCustom.Merge(dst, src)
+}
+func (m *NidOptCustom) XXX_Size() int {
+	return xxx_messageInfo_NidOptCustom.Size(m)
+}
+func (m *NidOptCustom) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptCustom.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptCustom proto.InternalMessageInfo
 
 type CustomDash struct {
-	Value            *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                                `json:"-"`
+	Value                *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
+	XXX_unrecognized     []byte                                                `json:"-"`
+	XXX_sizecache        int32                                                 `json:"-"`
 }
 
 func (m *CustomDash) Reset()                    { *m = CustomDash{} }
 func (*CustomDash) ProtoMessage()               {}
 func (*CustomDash) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{15} }
+func (m *CustomDash) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
+}
+func (dst *CustomDash) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomDash.Merge(dst, src)
+}
+func (m *CustomDash) XXX_Size() int {
+	return xxx_messageInfo_CustomDash.Size(m)
+}
+func (m *CustomDash) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomDash.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomDash proto.InternalMessageInfo
 
 type NinOptCustom struct {
-	Id               *Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value            *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                        `json:"-"`
+	Id                   *Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	Value                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
+	XXX_unrecognized     []byte                                        `json:"-"`
+	XXX_sizecache        int32                                         `json:"-"`
 }
 
 func (m *NinOptCustom) Reset()                    { *m = NinOptCustom{} }
 func (*NinOptCustom) ProtoMessage()               {}
 func (*NinOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{16} }
+func (m *NinOptCustom) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
+}
+func (dst *NinOptCustom) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptCustom.Merge(dst, src)
+}
+func (m *NinOptCustom) XXX_Size() int {
+	return xxx_messageInfo_NinOptCustom.Size(m)
+}
+func (m *NinOptCustom) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptCustom.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptCustom proto.InternalMessageInfo
 
 type NidRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
-	XXX_unrecognized []byte                                         `json:"-"`
+	Id                   []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id"`
+	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
 }
 
 func (m *NidRepCustom) Reset()                    { *m = NidRepCustom{} }
 func (*NidRepCustom) ProtoMessage()               {}
 func (*NidRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{17} }
+func (m *NidRepCustom) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
+}
+func (dst *NidRepCustom) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepCustom.Merge(dst, src)
+}
+func (m *NidRepCustom) XXX_Size() int {
+	return xxx_messageInfo_NidRepCustom.Size(m)
+}
+func (m *NidRepCustom) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepCustom.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepCustom proto.InternalMessageInfo
 
 type NinRepCustom struct {
-	Id               []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value            []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
-	XXX_unrecognized []byte                                         `json:"-"`
+	Id                   []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
 }
 
 func (m *NinRepCustom) Reset()                    { *m = NinRepCustom{} }
 func (*NinRepCustom) ProtoMessage()               {}
 func (*NinRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{18} }
+func (m *NinRepCustom) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
+}
+func (dst *NinRepCustom) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepCustom.Merge(dst, src)
+}
+func (m *NinRepCustom) XXX_Size() int {
+	return xxx_messageInfo_NinRepCustom.Size(m)
+}
+func (m *NinRepCustom) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepCustom.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepCustom proto.InternalMessageInfo
 
 type NinOptNativeUnion struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field1               *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4               *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field5               *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	Field6               *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field13              *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14              *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15              []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinOptNativeUnion) Reset()                    { *m = NinOptNativeUnion{} }
 func (*NinOptNativeUnion) ProtoMessage()               {}
 func (*NinOptNativeUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{19} }
+func (m *NinOptNativeUnion) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
+}
+func (dst *NinOptNativeUnion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNativeUnion.Merge(dst, src)
+}
+func (m *NinOptNativeUnion) XXX_Size() int {
+	return xxx_messageInfo_NinOptNativeUnion.Size(m)
+}
+func (m *NinOptNativeUnion) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptNativeUnion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptNativeUnion proto.InternalMessageInfo
 
 type NinOptStructUnion struct {
-	Field1           *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	Field4           *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
-	Field6           *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	Field13          *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	Field14          *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	Field1               *float64      `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *float32      `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               *NidOptNative `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	Field4               *NinOptNative `protobuf:"bytes,4,opt,name=Field4" json:"Field4,omitempty"`
+	Field6               *uint64       `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	Field7               *int32        `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	Field13              *bool         `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	Field14              *string       `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	Field15              []byte        `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *NinOptStructUnion) Reset()                    { *m = NinOptStructUnion{} }
 func (*NinOptStructUnion) ProtoMessage()               {}
 func (*NinOptStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{20} }
+func (m *NinOptStructUnion) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
+}
+func (dst *NinOptStructUnion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptStructUnion.Merge(dst, src)
+}
+func (m *NinOptStructUnion) XXX_Size() int {
+	return xxx_messageInfo_NinOptStructUnion.Size(m)
+}
+func (m *NinOptStructUnion) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptStructUnion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptStructUnion proto.InternalMessageInfo
 
 type NinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	Field200         *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	Field210         *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	*NidOptNative        `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	Field200             *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	Field210             *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *NinEmbeddedStructUnion) Reset()                    { *m = NinEmbeddedStructUnion{} }
 func (*NinEmbeddedStructUnion) ProtoMessage()               {}
 func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{21} }
+func (m *NinEmbeddedStructUnion) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
+}
+func (dst *NinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinEmbeddedStructUnion.Merge(dst, src)
+}
+func (m *NinEmbeddedStructUnion) XXX_Size() int {
+	return xxx_messageInfo_NinEmbeddedStructUnion.Size(m)
+}
+func (m *NinEmbeddedStructUnion) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinEmbeddedStructUnion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinEmbeddedStructUnion proto.InternalMessageInfo
 
 type NinNestedStructUnion struct {
-	Field1           *NinOptNativeUnion      `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	Field2           *NinOptStructUnion      `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
-	Field3           *NinEmbeddedStructUnion `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	Field1               *NinOptNativeUnion      `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field2               *NinOptStructUnion      `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	Field3               *NinEmbeddedStructUnion `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *NinNestedStructUnion) Reset()                    { *m = NinNestedStructUnion{} }
 func (*NinNestedStructUnion) ProtoMessage()               {}
 func (*NinNestedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{22} }
+func (m *NinNestedStructUnion) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
+}
+func (dst *NinNestedStructUnion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinNestedStructUnion.Merge(dst, src)
+}
+func (m *NinNestedStructUnion) XXX_Size() int {
+	return xxx_messageInfo_NinNestedStructUnion.Size(m)
+}
+func (m *NinNestedStructUnion) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinNestedStructUnion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinNestedStructUnion proto.InternalMessageInfo
 
 type Tree struct {
-	Or               *OrBranch  `protobuf:"bytes,1,opt,name=Or" json:"Or,omitempty"`
-	And              *AndBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
-	Leaf             *Leaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
-	XXX_unrecognized []byte     `json:"-"`
+	Or                   *OrBranch  `protobuf:"bytes,1,opt,name=Or" json:"Or,omitempty"`
+	And                  *AndBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
+	Leaf                 *Leaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *Tree) Reset()                    { *m = Tree{} }
 func (*Tree) ProtoMessage()               {}
 func (*Tree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{23} }
+func (m *Tree) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Tree.Unmarshal(m, b)
+}
+func (dst *Tree) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Tree.Merge(dst, src)
+}
+func (m *Tree) XXX_Size() int {
+	return xxx_messageInfo_Tree.Size(m)
+}
+func (m *Tree) XXX_DiscardUnknown() {
+	xxx_messageInfo_Tree.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Tree proto.InternalMessageInfo
 
 type OrBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
-	XXX_unrecognized []byte `json:"-"`
+	Left                 Tree     `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right                Tree     `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *OrBranch) Reset()                    { *m = OrBranch{} }
 func (*OrBranch) ProtoMessage()               {}
 func (*OrBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{24} }
+func (m *OrBranch) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
+}
+func (dst *OrBranch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OrBranch.Merge(dst, src)
+}
+func (m *OrBranch) XXX_Size() int {
+	return xxx_messageInfo_OrBranch.Size(m)
+}
+func (m *OrBranch) XXX_DiscardUnknown() {
+	xxx_messageInfo_OrBranch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OrBranch proto.InternalMessageInfo
 
 type AndBranch struct {
-	Left             Tree   `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            Tree   `protobuf:"bytes,2,opt,name=Right" json:"Right"`
-	XXX_unrecognized []byte `json:"-"`
+	Left                 Tree     `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right                Tree     `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *AndBranch) Reset()                    { *m = AndBranch{} }
 func (*AndBranch) ProtoMessage()               {}
 func (*AndBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{25} }
+func (m *AndBranch) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
+}
+func (dst *AndBranch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AndBranch.Merge(dst, src)
+}
+func (m *AndBranch) XXX_Size() int {
+	return xxx_messageInfo_AndBranch.Size(m)
+}
+func (m *AndBranch) XXX_DiscardUnknown() {
+	xxx_messageInfo_AndBranch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AndBranch proto.InternalMessageInfo
 
 type Leaf struct {
-	Value            int64  `protobuf:"varint,1,opt,name=Value" json:"Value"`
-	StrValue         string `protobuf:"bytes,2,opt,name=StrValue" json:"StrValue"`
-	XXX_unrecognized []byte `json:"-"`
+	Value                int64    `protobuf:"varint,1,opt,name=Value" json:"Value"`
+	StrValue             string   `protobuf:"bytes,2,opt,name=StrValue" json:"StrValue"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Leaf) Reset()                    { *m = Leaf{} }
 func (*Leaf) ProtoMessage()               {}
 func (*Leaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{26} }
+func (m *Leaf) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Leaf.Unmarshal(m, b)
+}
+func (dst *Leaf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Leaf.Merge(dst, src)
+}
+func (m *Leaf) XXX_Size() int {
+	return xxx_messageInfo_Leaf.Size(m)
+}
+func (m *Leaf) XXX_DiscardUnknown() {
+	xxx_messageInfo_Leaf.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Leaf proto.InternalMessageInfo
 
 type DeepTree struct {
-	Down             *ADeepBranch   `protobuf:"bytes,1,opt,name=Down" json:"Down,omitempty"`
-	And              *AndDeepBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
-	Leaf             *DeepLeaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
-	XXX_unrecognized []byte         `json:"-"`
+	Down                 *ADeepBranch   `protobuf:"bytes,1,opt,name=Down" json:"Down,omitempty"`
+	And                  *AndDeepBranch `protobuf:"bytes,2,opt,name=And" json:"And,omitempty"`
+	Leaf                 *DeepLeaf      `protobuf:"bytes,3,opt,name=Leaf" json:"Leaf,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *DeepTree) Reset()                    { *m = DeepTree{} }
 func (*DeepTree) ProtoMessage()               {}
 func (*DeepTree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{27} }
+func (m *DeepTree) Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
+}
+func (dst *DeepTree) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeepTree.Merge(dst, src)
+}
+func (m *DeepTree) XXX_Size() int {
+	return xxx_messageInfo_DeepTree.Size(m)
+}
+func (m *DeepTree) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeepTree.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeepTree proto.InternalMessageInfo
 
 type ADeepBranch struct {
-	Down             DeepTree `protobuf:"bytes,2,opt,name=Down" json:"Down"`
-	XXX_unrecognized []byte   `json:"-"`
+	Down                 DeepTree `protobuf:"bytes,2,opt,name=Down" json:"Down"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ADeepBranch) Reset()                    { *m = ADeepBranch{} }
 func (*ADeepBranch) ProtoMessage()               {}
 func (*ADeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{28} }
+func (m *ADeepBranch) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
+}
+func (dst *ADeepBranch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ADeepBranch.Merge(dst, src)
+}
+func (m *ADeepBranch) XXX_Size() int {
+	return xxx_messageInfo_ADeepBranch.Size(m)
+}
+func (m *ADeepBranch) XXX_DiscardUnknown() {
+	xxx_messageInfo_ADeepBranch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ADeepBranch proto.InternalMessageInfo
 
 type AndDeepBranch struct {
-	Left             DeepTree `protobuf:"bytes,1,opt,name=Left" json:"Left"`
-	Right            DeepTree `protobuf:"bytes,2,opt,name=Right" json:"Right"`
-	XXX_unrecognized []byte   `json:"-"`
+	Left                 DeepTree `protobuf:"bytes,1,opt,name=Left" json:"Left"`
+	Right                DeepTree `protobuf:"bytes,2,opt,name=Right" json:"Right"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *AndDeepBranch) Reset()                    { *m = AndDeepBranch{} }
 func (*AndDeepBranch) ProtoMessage()               {}
 func (*AndDeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{29} }
+func (m *AndDeepBranch) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
+}
+func (dst *AndDeepBranch) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AndDeepBranch.Merge(dst, src)
+}
+func (m *AndDeepBranch) XXX_Size() int {
+	return xxx_messageInfo_AndDeepBranch.Size(m)
+}
+func (m *AndDeepBranch) XXX_DiscardUnknown() {
+	xxx_messageInfo_AndDeepBranch.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AndDeepBranch proto.InternalMessageInfo
 
 type DeepLeaf struct {
-	Tree             Tree   `protobuf:"bytes,1,opt,name=Tree" json:"Tree"`
-	XXX_unrecognized []byte `json:"-"`
+	Tree                 Tree     `protobuf:"bytes,1,opt,name=Tree" json:"Tree"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *DeepLeaf) Reset()                    { *m = DeepLeaf{} }
 func (*DeepLeaf) ProtoMessage()               {}
 func (*DeepLeaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{30} }
+func (m *DeepLeaf) Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
+}
+func (dst *DeepLeaf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeepLeaf.Merge(dst, src)
+}
+func (m *DeepLeaf) XXX_Size() int {
+	return xxx_messageInfo_DeepLeaf.Size(m)
+}
+func (m *DeepLeaf) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeepLeaf.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeepLeaf proto.InternalMessageInfo
 
 type Nil struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Nil) Reset()                    { *m = Nil{} }
 func (*Nil) ProtoMessage()               {}
 func (*Nil) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{31} }
+func (m *Nil) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Nil.Unmarshal(m, b)
+}
+func (dst *Nil) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nil.Merge(dst, src)
+}
+func (m *Nil) XXX_Size() int {
+	return xxx_messageInfo_Nil.Size(m)
+}
+func (m *Nil) XXX_DiscardUnknown() {
+	xxx_messageInfo_Nil.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Nil proto.InternalMessageInfo
 
 type NidOptEnum struct {
-	Field1           TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1"`
-	XXX_unrecognized []byte      `json:"-"`
+	Field1               TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *NidOptEnum) Reset()                    { *m = NidOptEnum{} }
 func (*NidOptEnum) ProtoMessage()               {}
 func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{32} }
+func (m *NidOptEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
+}
+func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptEnum.Merge(dst, src)
+}
+func (m *NidOptEnum) XXX_Size() int {
+	return xxx_messageInfo_NidOptEnum.Size(m)
+}
+func (m *NidOptEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptEnum proto.InternalMessageInfo
 
 type NinOptEnum struct {
-	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Field1               *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2               *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3               *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *NinOptEnum) Reset()                    { *m = NinOptEnum{} }
 func (*NinOptEnum) ProtoMessage()               {}
 func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{33} }
+func (m *NinOptEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
+}
+func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptEnum.Merge(dst, src)
+}
+func (m *NinOptEnum) XXX_Size() int {
+	return xxx_messageInfo_NinOptEnum.Size(m)
+}
+func (m *NinOptEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptEnum proto.InternalMessageInfo
 
 type NidRepEnum struct {
-	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	Field1               []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2               []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3               []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *NidRepEnum) Reset()                    { *m = NidRepEnum{} }
 func (*NidRepEnum) ProtoMessage()               {}
 func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{34} }
+func (m *NidRepEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
+}
+func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepEnum.Merge(dst, src)
+}
+func (m *NidRepEnum) XXX_Size() int {
+	return xxx_messageInfo_NidRepEnum.Size(m)
+}
+func (m *NidRepEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepEnum proto.InternalMessageInfo
 
 type NinRepEnum struct {
-	Field1           []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	Field2           []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                  `json:"-"`
+	Field1               []TheTestEnum           `protobuf:"varint,1,rep,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	Field2               []YetAnotherTestEnum    `protobuf:"varint,2,rep,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3               []YetYetAnotherTestEnum `protobuf:"varint,3,rep,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *NinRepEnum) Reset()                    { *m = NinRepEnum{} }
 func (*NinRepEnum) ProtoMessage()               {}
 func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{35} }
+func (m *NinRepEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
+}
+func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepEnum.Merge(dst, src)
+}
+func (m *NinRepEnum) XXX_Size() int {
+	return xxx_messageInfo_NinRepEnum.Size(m)
+}
+func (m *NinRepEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepEnum proto.InternalMessageInfo
 
 type NinOptEnumDefault struct {
-	Field1           *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Field1               *TheTestEnum           `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum,def=2" json:"Field1,omitempty"`
+	Field2               *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
+	Field3               *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *NinOptEnumDefault) Reset()                    { *m = NinOptEnumDefault{} }
 func (*NinOptEnumDefault) ProtoMessage()               {}
 func (*NinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{36} }
+func (m *NinOptEnumDefault) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
+}
+func (dst *NinOptEnumDefault) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptEnumDefault.Merge(dst, src)
+}
+func (m *NinOptEnumDefault) XXX_Size() int {
+	return xxx_messageInfo_NinOptEnumDefault.Size(m)
+}
+func (m *NinOptEnumDefault) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptEnumDefault.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptEnumDefault proto.InternalMessageInfo
 
 const Default_NinOptEnumDefault_Field1 TheTestEnum = C
 const Default_NinOptEnumDefault_Field2 YetAnotherTestEnum = BetterYetBB
@@ -805,26 +1397,58 @@ func (m *NinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 }
 
 type AnotherNinOptEnum struct {
-	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Field1               *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum" json:"Field1,omitempty"`
+	Field2               *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum" json:"Field2,omitempty"`
+	Field3               *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *AnotherNinOptEnum) Reset()                    { *m = AnotherNinOptEnum{} }
 func (*AnotherNinOptEnum) ProtoMessage()               {}
 func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{37} }
+func (m *AnotherNinOptEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
+}
+func (dst *AnotherNinOptEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnotherNinOptEnum.Merge(dst, src)
+}
+func (m *AnotherNinOptEnum) XXX_Size() int {
+	return xxx_messageInfo_AnotherNinOptEnum.Size(m)
+}
+func (m *AnotherNinOptEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnotherNinOptEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnotherNinOptEnum proto.InternalMessageInfo
 
 type AnotherNinOptEnumDefault struct {
-	Field1           *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
-	Field2           *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
-	Field3           *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Field1               *AnotherTestEnum       `protobuf:"varint,1,opt,name=Field1,enum=test.AnotherTestEnum,def=11" json:"Field1,omitempty"`
+	Field2               *YetAnotherTestEnum    `protobuf:"varint,2,opt,name=Field2,enum=test.YetAnotherTestEnum,def=1" json:"Field2,omitempty"`
+	Field3               *YetYetAnotherTestEnum `protobuf:"varint,3,opt,name=Field3,enum=test.YetYetAnotherTestEnum,def=0" json:"Field3,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *AnotherNinOptEnumDefault) Reset()                    { *m = AnotherNinOptEnumDefault{} }
 func (*AnotherNinOptEnumDefault) ProtoMessage()               {}
 func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{38} }
+func (m *AnotherNinOptEnumDefault) Unmarshal(b []byte) error {
+	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
+}
+func (dst *AnotherNinOptEnumDefault) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AnotherNinOptEnumDefault.Merge(dst, src)
+}
+func (m *AnotherNinOptEnumDefault) XXX_Size() int {
+	return xxx_messageInfo_AnotherNinOptEnumDefault.Size(m)
+}
+func (m *AnotherNinOptEnumDefault) XXX_DiscardUnknown() {
+	xxx_messageInfo_AnotherNinOptEnumDefault.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AnotherNinOptEnumDefault proto.InternalMessageInfo
 
 const Default_AnotherNinOptEnumDefault_Field1 AnotherTestEnum = E
 const Default_AnotherNinOptEnumDefault_Field2 YetAnotherTestEnum = BetterYetBB
@@ -852,20 +1476,38 @@ func (m *AnotherNinOptEnumDefault) GetField3() YetYetAnotherTestEnum {
 }
 
 type Timer struct {
-	Time1            int64  `protobuf:"fixed64,1,opt,name=Time1" json:"Time1"`
-	Time2            int64  `protobuf:"fixed64,2,opt,name=Time2" json:"Time2"`
-	Data             []byte `protobuf:"bytes,3,opt,name=Data" json:"Data"`
-	XXX_unrecognized []byte `json:"-"`
+	Time1                int64    `protobuf:"fixed64,1,opt,name=Time1" json:"Time1"`
+	Time2                int64    `protobuf:"fixed64,2,opt,name=Time2" json:"Time2"`
+	Data                 []byte   `protobuf:"bytes,3,opt,name=Data" json:"Data"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Timer) Reset()                    { *m = Timer{} }
 func (*Timer) ProtoMessage()               {}
 func (*Timer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{39} }
+func (m *Timer) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Timer.Unmarshal(m, b)
+}
+func (dst *Timer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Timer.Merge(dst, src)
+}
+func (m *Timer) XXX_Size() int {
+	return xxx_messageInfo_Timer.Size(m)
+}
+func (m *Timer) XXX_DiscardUnknown() {
+	xxx_messageInfo_Timer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Timer proto.InternalMessageInfo
 
 type MyExtendable struct {
-	Field1                       *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1                       *int64   `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *MyExtendable) Reset()                    { *m = MyExtendable{} }
@@ -879,13 +1521,29 @@ var extRange_MyExtendable = []proto.ExtensionRange{
 func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyExtendable
 }
+func (m *MyExtendable) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyExtendable.Unmarshal(m, b)
+}
+func (dst *MyExtendable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyExtendable.Merge(dst, src)
+}
+func (m *MyExtendable) XXX_Size() int {
+	return xxx_messageInfo_MyExtendable.Size(m)
+}
+func (m *MyExtendable) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyExtendable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyExtendable proto.InternalMessageInfo
 
 type OtherExtenable struct {
 	Field2                       *int64        `protobuf:"varint,2,opt,name=Field2" json:"Field2,omitempty"`
 	Field13                      *int64        `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
 	M                            *MyExtendable `protobuf:"bytes,1,opt,name=M" json:"M,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{}      `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *OtherExtenable) Reset()                    { *m = OtherExtenable{} }
@@ -900,23 +1558,55 @@ var extRange_OtherExtenable = []proto.ExtensionRange{
 func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherExtenable
 }
+func (m *OtherExtenable) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OtherExtenable.Unmarshal(m, b)
+}
+func (dst *OtherExtenable) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OtherExtenable.Merge(dst, src)
+}
+func (m *OtherExtenable) XXX_Size() int {
+	return xxx_messageInfo_OtherExtenable.Size(m)
+}
+func (m *OtherExtenable) XXX_DiscardUnknown() {
+	xxx_messageInfo_OtherExtenable.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OtherExtenable proto.InternalMessageInfo
 
 type NestedDefinition struct {
-	Field1           *int64                                          `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	EnumField        *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=EnumField,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt,name=NNM" json:"NNM,omitempty"`
-	NM               *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt,name=NM" json:"NM,omitempty"`
-	XXX_unrecognized []byte                                          `json:"-"`
+	Field1               *int64                                          `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	EnumField            *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=EnumField,enum=test.NestedDefinition_NestedEnum" json:"EnumField,omitempty"`
+	NNM                  *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,3,opt,name=NNM" json:"NNM,omitempty"`
+	NM                   *NestedDefinition_NestedMessage                 `protobuf:"bytes,4,opt,name=NM" json:"NM,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
 }
 
 func (m *NestedDefinition) Reset()                    { *m = NestedDefinition{} }
 func (*NestedDefinition) ProtoMessage()               {}
 func (*NestedDefinition) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{42} }
+func (m *NestedDefinition) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
+}
+func (dst *NestedDefinition) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedDefinition.Merge(dst, src)
+}
+func (m *NestedDefinition) XXX_Size() int {
+	return xxx_messageInfo_NestedDefinition.Size(m)
+}
+func (m *NestedDefinition) XXX_DiscardUnknown() {
+	xxx_messageInfo_NestedDefinition.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NestedDefinition proto.InternalMessageInfo
 
 type NestedDefinition_NestedMessage struct {
-	NestedField1     *uint64                                         `protobuf:"fixed64,1,opt,name=NestedField1" json:"NestedField1,omitempty"`
-	NNM              *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt,name=NNM" json:"NNM,omitempty"`
-	XXX_unrecognized []byte                                          `json:"-"`
+	NestedField1         *uint64                                         `protobuf:"fixed64,1,opt,name=NestedField1" json:"NestedField1,omitempty"`
+	NNM                  *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,2,opt,name=NNM" json:"NNM,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
 }
 
 func (m *NestedDefinition_NestedMessage) Reset()      { *m = NestedDefinition_NestedMessage{} }
@@ -924,10 +1614,26 @@ func (*NestedDefinition_NestedMessage) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{42, 0}
 }
+func (m *NestedDefinition_NestedMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
+}
+func (dst *NestedDefinition_NestedMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedDefinition_NestedMessage.Merge(dst, src)
+}
+func (m *NestedDefinition_NestedMessage) XXX_Size() int {
+	return xxx_messageInfo_NestedDefinition_NestedMessage.Size(m)
+}
+func (m *NestedDefinition_NestedMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_NestedDefinition_NestedMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NestedDefinition_NestedMessage proto.InternalMessageInfo
 
 type NestedDefinition_NestedMessage_NestedNestedMsg struct {
-	NestedNestedField1 *string `protobuf:"bytes,10,opt,name=NestedNestedField1" json:"NestedNestedField1,omitempty"`
-	XXX_unrecognized   []byte  `json:"-"`
+	NestedNestedField1   *string  `protobuf:"bytes,10,opt,name=NestedNestedField1" json:"NestedNestedField1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Reset() {
@@ -937,40 +1643,86 @@ func (*NestedDefinition_NestedMessage_NestedNestedMsg) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{42, 0, 0}
 }
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
+}
+func (dst *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Merge(dst, src)
+}
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Size() int {
+	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Size(m)
+}
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_DiscardUnknown() {
+	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg proto.InternalMessageInfo
 
 type NestedScope struct {
-	A                *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
-	B                *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=B,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
-	C                *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt,name=C" json:"C,omitempty"`
-	XXX_unrecognized []byte                                          `json:"-"`
+	A                    *NestedDefinition_NestedMessage_NestedNestedMsg `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
+	B                    *NestedDefinition_NestedEnum                    `protobuf:"varint,2,opt,name=B,enum=test.NestedDefinition_NestedEnum" json:"B,omitempty"`
+	C                    *NestedDefinition_NestedMessage                 `protobuf:"bytes,3,opt,name=C" json:"C,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                        `json:"-"`
+	XXX_unrecognized     []byte                                          `json:"-"`
+	XXX_sizecache        int32                                           `json:"-"`
 }
 
 func (m *NestedScope) Reset()                    { *m = NestedScope{} }
 func (*NestedScope) ProtoMessage()               {}
 func (*NestedScope) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{43} }
+func (m *NestedScope) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
+}
+func (dst *NestedScope) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedScope.Merge(dst, src)
+}
+func (m *NestedScope) XXX_Size() int {
+	return xxx_messageInfo_NestedScope.Size(m)
+}
+func (m *NestedScope) XXX_DiscardUnknown() {
+	xxx_messageInfo_NestedScope.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NestedScope proto.InternalMessageInfo
 
 type NinOptNativeDefault struct {
-	Field1           *float64 `protobuf:"fixed64,1,opt,name=Field1,def=1234.1234" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.12341" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,opt,name=Field3,def=1234" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,opt,name=Field4,def=1234" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,opt,name=Field5,def=1234" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,opt,name=Field6,def=1234" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,opt,name=Field7,def=1234" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,opt,name=Field8,def=1234" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,opt,name=Field9,def=1234" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,opt,name=Field10,def=1234" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,opt,name=Field11,def=1234" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,opt,name=Field12,def=1234" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,opt,name=Field13,def=1" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,opt,name=Field14,def=1234" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field1               *float64 `protobuf:"fixed64,1,opt,name=Field1,def=1234.1234" json:"Field1,omitempty"`
+	Field2               *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.12341" json:"Field2,omitempty"`
+	Field3               *int32   `protobuf:"varint,3,opt,name=Field3,def=1234" json:"Field3,omitempty"`
+	Field4               *int64   `protobuf:"varint,4,opt,name=Field4,def=1234" json:"Field4,omitempty"`
+	Field5               *uint32  `protobuf:"varint,5,opt,name=Field5,def=1234" json:"Field5,omitempty"`
+	Field6               *uint64  `protobuf:"varint,6,opt,name=Field6,def=1234" json:"Field6,omitempty"`
+	Field7               *int32   `protobuf:"zigzag32,7,opt,name=Field7,def=1234" json:"Field7,omitempty"`
+	Field8               *int64   `protobuf:"zigzag64,8,opt,name=Field8,def=1234" json:"Field8,omitempty"`
+	Field9               *uint32  `protobuf:"fixed32,9,opt,name=Field9,def=1234" json:"Field9,omitempty"`
+	Field10              *int32   `protobuf:"fixed32,10,opt,name=Field10,def=1234" json:"Field10,omitempty"`
+	Field11              *uint64  `protobuf:"fixed64,11,opt,name=Field11,def=1234" json:"Field11,omitempty"`
+	Field12              *int64   `protobuf:"fixed64,12,opt,name=Field12,def=1234" json:"Field12,omitempty"`
+	Field13              *bool    `protobuf:"varint,13,opt,name=Field13,def=1" json:"Field13,omitempty"`
+	Field14              *string  `protobuf:"bytes,14,opt,name=Field14,def=1234" json:"Field14,omitempty"`
+	Field15              []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinOptNativeDefault) Reset()                    { *m = NinOptNativeDefault{} }
 func (*NinOptNativeDefault) ProtoMessage()               {}
 func (*NinOptNativeDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{44} }
+func (m *NinOptNativeDefault) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
+}
+func (dst *NinOptNativeDefault) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNativeDefault.Merge(dst, src)
+}
+func (m *NinOptNativeDefault) XXX_Size() int {
+	return xxx_messageInfo_NinOptNativeDefault.Size(m)
+}
+func (m *NinOptNativeDefault) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptNativeDefault.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptNativeDefault proto.InternalMessageInfo
 
 const Default_NinOptNativeDefault_Field1 float64 = 1234.1234
 const Default_NinOptNativeDefault_Field2 float32 = 1234.12341
@@ -1093,118 +1845,216 @@ func (m *NinOptNativeDefault) GetField15() []byte {
 }
 
 type CustomContainer struct {
-	CustomStruct     NidOptCustom `protobuf:"bytes,1,opt,name=CustomStruct" json:"CustomStruct"`
-	XXX_unrecognized []byte       `json:"-"`
+	CustomStruct         NidOptCustom `protobuf:"bytes,1,opt,name=CustomStruct" json:"CustomStruct"`
+	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
+	XXX_sizecache        int32        `json:"-"`
 }
 
 func (m *CustomContainer) Reset()                    { *m = CustomContainer{} }
 func (*CustomContainer) ProtoMessage()               {}
 func (*CustomContainer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{45} }
+func (m *CustomContainer) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
+}
+func (dst *CustomContainer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomContainer.Merge(dst, src)
+}
+func (m *CustomContainer) XXX_Size() int {
+	return xxx_messageInfo_CustomContainer.Size(m)
+}
+func (m *CustomContainer) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomContainer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomContainer proto.InternalMessageInfo
 
 type CustomNameNidOptNative struct {
-	FieldA           float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
-	FieldB           float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
-	FieldC           int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
-	FieldD           int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
-	FieldE           uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
-	FieldF           uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
-	FieldG           int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
-	FieldH           int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
-	FieldI           uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
-	FieldJ           int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
-	FieldK           uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
-	FieldL           int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
-	FieldM           bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
-	FieldN           string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
-	FieldO           []byte  `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
-	XXX_unrecognized []byte  `json:"-"`
+	FieldA               float64  `protobuf:"fixed64,1,opt,name=Field1" json:"Field1"`
+	FieldB               float32  `protobuf:"fixed32,2,opt,name=Field2" json:"Field2"`
+	FieldC               int32    `protobuf:"varint,3,opt,name=Field3" json:"Field3"`
+	FieldD               int64    `protobuf:"varint,4,opt,name=Field4" json:"Field4"`
+	FieldE               uint32   `protobuf:"varint,5,opt,name=Field5" json:"Field5"`
+	FieldF               uint64   `protobuf:"varint,6,opt,name=Field6" json:"Field6"`
+	FieldG               int32    `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7"`
+	FieldH               int64    `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8"`
+	FieldI               uint32   `protobuf:"fixed32,9,opt,name=Field9" json:"Field9"`
+	FieldJ               int32    `protobuf:"fixed32,10,opt,name=Field10" json:"Field10"`
+	FieldK               uint64   `protobuf:"fixed64,11,opt,name=Field11" json:"Field11"`
+	FieldL               int64    `protobuf:"fixed64,12,opt,name=Field12" json:"Field12"`
+	FieldM               bool     `protobuf:"varint,13,opt,name=Field13" json:"Field13"`
+	FieldN               string   `protobuf:"bytes,14,opt,name=Field14" json:"Field14"`
+	FieldO               []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CustomNameNidOptNative) Reset()                    { *m = CustomNameNidOptNative{} }
 func (*CustomNameNidOptNative) ProtoMessage()               {}
 func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{46} }
+func (m *CustomNameNidOptNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
+}
+func (dst *CustomNameNidOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameNidOptNative.Merge(dst, src)
+}
+func (m *CustomNameNidOptNative) XXX_Size() int {
+	return xxx_messageInfo_CustomNameNidOptNative.Size(m)
+}
+func (m *CustomNameNidOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameNidOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameNidOptNative proto.InternalMessageInfo
 
 type CustomNameNinOptNative struct {
-	FieldA           *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	FieldB           *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	FieldC           *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
-	FieldD           *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
-	FieldE           *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
-	FieldF           *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	FieldG           *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	FieldH           *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
-	FieldI           *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
-	FieldJ           *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
-	FieldK           *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
-	FielL            *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
-	FieldM           *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	FieldN           *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	FieldO           []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	FieldA               *float64 `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	FieldB               *float32 `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	FieldC               *int32   `protobuf:"varint,3,opt,name=Field3" json:"Field3,omitempty"`
+	FieldD               *int64   `protobuf:"varint,4,opt,name=Field4" json:"Field4,omitempty"`
+	FieldE               *uint32  `protobuf:"varint,5,opt,name=Field5" json:"Field5,omitempty"`
+	FieldF               *uint64  `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	FieldG               *int32   `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	FieldH               *int64   `protobuf:"zigzag64,8,opt,name=Field8" json:"Field8,omitempty"`
+	FieldI               *uint32  `protobuf:"fixed32,9,opt,name=Field9" json:"Field9,omitempty"`
+	FieldJ               *int32   `protobuf:"fixed32,10,opt,name=Field10" json:"Field10,omitempty"`
+	FieldK               *uint64  `protobuf:"fixed64,11,opt,name=Field11" json:"Field11,omitempty"`
+	FielL                *int64   `protobuf:"fixed64,12,opt,name=Field12" json:"Field12,omitempty"`
+	FieldM               *bool    `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	FieldN               *string  `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	FieldO               []byte   `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CustomNameNinOptNative) Reset()                    { *m = CustomNameNinOptNative{} }
 func (*CustomNameNinOptNative) ProtoMessage()               {}
 func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{47} }
+func (m *CustomNameNinOptNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
+}
+func (dst *CustomNameNinOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameNinOptNative.Merge(dst, src)
+}
+func (m *CustomNameNinOptNative) XXX_Size() int {
+	return xxx_messageInfo_CustomNameNinOptNative.Size(m)
+}
+func (m *CustomNameNinOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameNinOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameNinOptNative proto.InternalMessageInfo
 
 type CustomNameNinRepNative struct {
-	FieldA           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	FieldB           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	FieldC           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	FieldD           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	FieldE           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	FieldF           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	FieldG           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	FieldH           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	FieldI           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	FieldJ           []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	FieldK           []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	FieldL           []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	FieldM           []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	FieldN           []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
-	FieldO           [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	FieldA               []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	FieldB               []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	FieldC               []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	FieldD               []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	FieldE               []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	FieldF               []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	FieldG               []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	FieldH               []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	FieldI               []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	FieldJ               []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	FieldK               []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	FieldL               []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	FieldM               []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	FieldN               []string  `protobuf:"bytes,14,rep,name=Field14" json:"Field14,omitempty"`
+	FieldO               [][]byte  `protobuf:"bytes,15,rep,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *CustomNameNinRepNative) Reset()                    { *m = CustomNameNinRepNative{} }
 func (*CustomNameNinRepNative) ProtoMessage()               {}
 func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{48} }
+func (m *CustomNameNinRepNative) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
+}
+func (dst *CustomNameNinRepNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameNinRepNative.Merge(dst, src)
+}
+func (m *CustomNameNinRepNative) XXX_Size() int {
+	return xxx_messageInfo_CustomNameNinRepNative.Size(m)
+}
+func (m *CustomNameNinRepNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameNinRepNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameNinRepNative proto.InternalMessageInfo
 
 type CustomNameNinStruct struct {
-	FieldA           *float64        `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
-	FieldB           *float32        `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
-	FieldC           *NidOptNative   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
-	FieldD           []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
-	FieldE           *uint64         `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
-	FieldF           *int32          `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
-	FieldG           *NidOptNative   `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
-	FieldH           *bool           `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
-	FieldI           *string         `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
-	FieldJ           []byte          `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	FieldA               *float64        `protobuf:"fixed64,1,opt,name=Field1" json:"Field1,omitempty"`
+	FieldB               *float32        `protobuf:"fixed32,2,opt,name=Field2" json:"Field2,omitempty"`
+	FieldC               *NidOptNative   `protobuf:"bytes,3,opt,name=Field3" json:"Field3,omitempty"`
+	FieldD               []*NinOptNative `protobuf:"bytes,4,rep,name=Field4" json:"Field4,omitempty"`
+	FieldE               *uint64         `protobuf:"varint,6,opt,name=Field6" json:"Field6,omitempty"`
+	FieldF               *int32          `protobuf:"zigzag32,7,opt,name=Field7" json:"Field7,omitempty"`
+	FieldG               *NidOptNative   `protobuf:"bytes,8,opt,name=Field8" json:"Field8,omitempty"`
+	FieldH               *bool           `protobuf:"varint,13,opt,name=Field13" json:"Field13,omitempty"`
+	FieldI               *string         `protobuf:"bytes,14,opt,name=Field14" json:"Field14,omitempty"`
+	FieldJ               []byte          `protobuf:"bytes,15,opt,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *CustomNameNinStruct) Reset()                    { *m = CustomNameNinStruct{} }
 func (*CustomNameNinStruct) ProtoMessage()               {}
 func (*CustomNameNinStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{49} }
+func (m *CustomNameNinStruct) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
+}
+func (dst *CustomNameNinStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameNinStruct.Merge(dst, src)
+}
+func (m *CustomNameNinStruct) XXX_Size() int {
+	return xxx_messageInfo_CustomNameNinStruct.Size(m)
+}
+func (m *CustomNameNinStruct) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameNinStruct.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameNinStruct proto.InternalMessageInfo
 
 type CustomNameCustomType struct {
-	FieldA           *Uuid                                          `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	FieldB           *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
-	FieldC           []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,customtype=Uuid" json:"Ids,omitempty"`
-	FieldD           []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
-	XXX_unrecognized []byte                                         `json:"-"`
+	FieldA               *Uuid                                          `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
+	FieldB               *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	FieldC               []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,customtype=Uuid" json:"Ids,omitempty"`
+	FieldD               []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
 }
 
 func (m *CustomNameCustomType) Reset()                    { *m = CustomNameCustomType{} }
 func (*CustomNameCustomType) ProtoMessage()               {}
 func (*CustomNameCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{50} }
+func (m *CustomNameCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
+}
+func (dst *CustomNameCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameCustomType.Merge(dst, src)
+}
+func (m *CustomNameCustomType) XXX_Size() int {
+	return xxx_messageInfo_CustomNameCustomType.Size(m)
+}
+func (m *CustomNameCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameCustomType proto.InternalMessageInfo
 
 type CustomNameNinEmbeddedStructUnion struct {
-	*NidOptNative    `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
-	FieldA           *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
-	FieldB           *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	*NidOptNative        `protobuf:"bytes,1,opt,name=Field1,embedded=Field1" json:"Field1,omitempty"`
+	FieldA               *NinOptNative `protobuf:"bytes,200,opt,name=Field200" json:"Field200,omitempty"`
+	FieldB               *bool         `protobuf:"varint,210,opt,name=Field210" json:"Field210,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *CustomNameNinEmbeddedStructUnion) Reset()      { *m = CustomNameNinEmbeddedStructUnion{} }
@@ -1212,21 +2062,53 @@ func (*CustomNameNinEmbeddedStructUnion) ProtoMessage() {}
 func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{51}
 }
+func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
+}
+func (dst *CustomNameNinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Merge(dst, src)
+}
+func (m *CustomNameNinEmbeddedStructUnion) XXX_Size() int {
+	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Size(m)
+}
+func (m *CustomNameNinEmbeddedStructUnion) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameNinEmbeddedStructUnion proto.InternalMessageInfo
 
 type CustomNameEnum struct {
-	FieldA           *TheTestEnum  `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
-	FieldB           []TheTestEnum `protobuf:"varint,2,rep,name=Field2,enum=test.TheTestEnum" json:"Field2,omitempty"`
-	XXX_unrecognized []byte        `json:"-"`
+	FieldA               *TheTestEnum  `protobuf:"varint,1,opt,name=Field1,enum=test.TheTestEnum" json:"Field1,omitempty"`
+	FieldB               []TheTestEnum `protobuf:"varint,2,rep,name=Field2,enum=test.TheTestEnum" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *CustomNameEnum) Reset()                    { *m = CustomNameEnum{} }
 func (*CustomNameEnum) ProtoMessage()               {}
 func (*CustomNameEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{52} }
+func (m *CustomNameEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
+}
+func (dst *CustomNameEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomNameEnum.Merge(dst, src)
+}
+func (m *CustomNameEnum) XXX_Size() int {
+	return xxx_messageInfo_CustomNameEnum.Size(m)
+}
+func (m *CustomNameEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomNameEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomNameEnum proto.InternalMessageInfo
 
 type NoExtensionsMap struct {
-	Field1           *int64 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
-	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               *int64   `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_extensions       []byte   `protobuf:"bytes,0,opt" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NoExtensionsMap) Reset()                    { *m = NoExtensionsMap{} }
@@ -1246,27 +2128,75 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 	}
 	return &m.XXX_extensions
 }
+func (m *NoExtensionsMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NoExtensionsMap.Unmarshal(m, b)
+}
+func (dst *NoExtensionsMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NoExtensionsMap.Merge(dst, src)
+}
+func (m *NoExtensionsMap) XXX_Size() int {
+	return xxx_messageInfo_NoExtensionsMap.Size(m)
+}
+func (m *NoExtensionsMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_NoExtensionsMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NoExtensionsMap proto.InternalMessageInfo
 
 type Unrecognized struct {
-	Field1 *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1               *string  `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Unrecognized) Reset()                    { *m = Unrecognized{} }
 func (*Unrecognized) ProtoMessage()               {}
 func (*Unrecognized) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{54} }
+func (m *Unrecognized) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
+}
+func (dst *Unrecognized) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Unrecognized.Merge(dst, src)
+}
+func (m *Unrecognized) XXX_Size() int {
+	return xxx_messageInfo_Unrecognized.Size(m)
+}
+func (m *Unrecognized) XXX_DiscardUnknown() {
+	xxx_messageInfo_Unrecognized.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Unrecognized proto.InternalMessageInfo
 
 type UnrecognizedWithInner struct {
-	Embedded         []*UnrecognizedWithInner_Inner `protobuf:"bytes,1,rep,name=embedded" json:"embedded,omitempty"`
-	Field2           *string                        `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
-	XXX_unrecognized []byte                         `json:"-"`
+	Embedded             []*UnrecognizedWithInner_Inner `protobuf:"bytes,1,rep,name=embedded" json:"embedded,omitempty"`
+	Field2               *string                        `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                       `json:"-"`
+	XXX_unrecognized     []byte                         `json:"-"`
+	XXX_sizecache        int32                          `json:"-"`
 }
 
 func (m *UnrecognizedWithInner) Reset()                    { *m = UnrecognizedWithInner{} }
 func (*UnrecognizedWithInner) ProtoMessage()               {}
 func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{55} }
+func (m *UnrecognizedWithInner) Unmarshal(b []byte) error {
+	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
+}
+func (dst *UnrecognizedWithInner) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnrecognizedWithInner.Merge(dst, src)
+}
+func (m *UnrecognizedWithInner) XXX_Size() int {
+	return xxx_messageInfo_UnrecognizedWithInner.Size(m)
+}
+func (m *UnrecognizedWithInner) XXX_DiscardUnknown() {
+	xxx_messageInfo_UnrecognizedWithInner.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UnrecognizedWithInner proto.InternalMessageInfo
 
 type UnrecognizedWithInner_Inner struct {
-	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1               *uint32  `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *UnrecognizedWithInner_Inner) Reset()      { *m = UnrecognizedWithInner_Inner{} }
@@ -1274,19 +2204,51 @@ func (*UnrecognizedWithInner_Inner) ProtoMessage() {}
 func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{55, 0}
 }
+func (m *UnrecognizedWithInner_Inner) Unmarshal(b []byte) error {
+	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
+}
+func (dst *UnrecognizedWithInner_Inner) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnrecognizedWithInner_Inner.Merge(dst, src)
+}
+func (m *UnrecognizedWithInner_Inner) XXX_Size() int {
+	return xxx_messageInfo_UnrecognizedWithInner_Inner.Size(m)
+}
+func (m *UnrecognizedWithInner_Inner) XXX_DiscardUnknown() {
+	xxx_messageInfo_UnrecognizedWithInner_Inner.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UnrecognizedWithInner_Inner proto.InternalMessageInfo
 
 type UnrecognizedWithEmbed struct {
 	UnrecognizedWithEmbed_Embedded `protobuf:"bytes,1,opt,name=embedded,embedded=embedded" json:"embedded"`
-	Field2                         *string `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
-	XXX_unrecognized               []byte  `json:"-"`
+	Field2                         *string  `protobuf:"bytes,2,opt,name=Field2" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral           struct{} `json:"-"`
+	XXX_unrecognized               []byte   `json:"-"`
+	XXX_sizecache                  int32    `json:"-"`
 }
 
 func (m *UnrecognizedWithEmbed) Reset()                    { *m = UnrecognizedWithEmbed{} }
 func (*UnrecognizedWithEmbed) ProtoMessage()               {}
 func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{56} }
+func (m *UnrecognizedWithEmbed) Unmarshal(b []byte) error {
+	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
+}
+func (dst *UnrecognizedWithEmbed) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnrecognizedWithEmbed.Merge(dst, src)
+}
+func (m *UnrecognizedWithEmbed) XXX_Size() int {
+	return xxx_messageInfo_UnrecognizedWithEmbed.Size(m)
+}
+func (m *UnrecognizedWithEmbed) XXX_DiscardUnknown() {
+	xxx_messageInfo_UnrecognizedWithEmbed.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UnrecognizedWithEmbed proto.InternalMessageInfo
 
 type UnrecognizedWithEmbed_Embedded struct {
-	Field1 *uint32 `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	Field1               *uint32  `protobuf:"varint,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
@@ -1294,70 +2256,196 @@ func (*UnrecognizedWithEmbed_Embedded) ProtoMessage() {}
 func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{56, 0}
 }
+func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(b []byte) error {
+	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
+}
+func (dst *UnrecognizedWithEmbed_Embedded) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Merge(dst, src)
+}
+func (m *UnrecognizedWithEmbed_Embedded) XXX_Size() int {
+	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Size(m)
+}
+func (m *UnrecognizedWithEmbed_Embedded) XXX_DiscardUnknown() {
+	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UnrecognizedWithEmbed_Embedded proto.InternalMessageInfo
 
 type Node struct {
-	Label            *string `protobuf:"bytes,1,opt,name=Label" json:"Label,omitempty"`
-	Children         []*Node `protobuf:"bytes,2,rep,name=Children" json:"Children,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Label                *string  `protobuf:"bytes,1,opt,name=Label" json:"Label,omitempty"`
+	Children             []*Node  `protobuf:"bytes,2,rep,name=Children" json:"Children,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Node) Reset()                    { *m = Node{} }
 func (*Node) ProtoMessage()               {}
 func (*Node) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{57} }
+func (m *Node) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Node.Unmarshal(m, b)
+}
+func (dst *Node) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Node.Merge(dst, src)
+}
+func (m *Node) XXX_Size() int {
+	return xxx_messageInfo_Node.Size(m)
+}
+func (m *Node) XXX_DiscardUnknown() {
+	xxx_messageInfo_Node.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Node proto.InternalMessageInfo
 
 type NonByteCustomType struct {
-	Field1           *T     `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               *T       `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NonByteCustomType) Reset()                    { *m = NonByteCustomType{} }
 func (*NonByteCustomType) ProtoMessage()               {}
 func (*NonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{58} }
+func (m *NonByteCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
+}
+func (dst *NonByteCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NonByteCustomType.Merge(dst, src)
+}
+func (m *NonByteCustomType) XXX_Size() int {
+	return xxx_messageInfo_NonByteCustomType.Size(m)
+}
+func (m *NonByteCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NonByteCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NonByteCustomType proto.InternalMessageInfo
 
 type NidOptNonByteCustomType struct {
-	Field1           T      `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               T        `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NidOptNonByteCustomType) Reset()                    { *m = NidOptNonByteCustomType{} }
 func (*NidOptNonByteCustomType) ProtoMessage()               {}
 func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{59} }
+func (m *NidOptNonByteCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
+}
+func (dst *NidOptNonByteCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptNonByteCustomType.Merge(dst, src)
+}
+func (m *NidOptNonByteCustomType) XXX_Size() int {
+	return xxx_messageInfo_NidOptNonByteCustomType.Size(m)
+}
+func (m *NidOptNonByteCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptNonByteCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptNonByteCustomType proto.InternalMessageInfo
 
 type NinOptNonByteCustomType struct {
-	Field1           *T     `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               *T       `protobuf:"bytes,1,opt,name=Field1,customtype=T" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinOptNonByteCustomType) Reset()                    { *m = NinOptNonByteCustomType{} }
 func (*NinOptNonByteCustomType) ProtoMessage()               {}
 func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{60} }
+func (m *NinOptNonByteCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
+}
+func (dst *NinOptNonByteCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNonByteCustomType.Merge(dst, src)
+}
+func (m *NinOptNonByteCustomType) XXX_Size() int {
+	return xxx_messageInfo_NinOptNonByteCustomType.Size(m)
+}
+func (m *NinOptNonByteCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptNonByteCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptNonByteCustomType proto.InternalMessageInfo
 
 type NidRepNonByteCustomType struct {
-	Field1           []T    `protobuf:"bytes,1,rep,name=Field1,customtype=T" json:"Field1"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               []T      `protobuf:"bytes,1,rep,name=Field1,customtype=T" json:"Field1"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NidRepNonByteCustomType) Reset()                    { *m = NidRepNonByteCustomType{} }
 func (*NidRepNonByteCustomType) ProtoMessage()               {}
 func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{61} }
+func (m *NidRepNonByteCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
+}
+func (dst *NidRepNonByteCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepNonByteCustomType.Merge(dst, src)
+}
+func (m *NidRepNonByteCustomType) XXX_Size() int {
+	return xxx_messageInfo_NidRepNonByteCustomType.Size(m)
+}
+func (m *NidRepNonByteCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidRepNonByteCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidRepNonByteCustomType proto.InternalMessageInfo
 
 type NinRepNonByteCustomType struct {
-	Field1           []T    `protobuf:"bytes,1,rep,name=Field1,customtype=T" json:"Field1,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Field1               []T      `protobuf:"bytes,1,rep,name=Field1,customtype=T" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinRepNonByteCustomType) Reset()                    { *m = NinRepNonByteCustomType{} }
 func (*NinRepNonByteCustomType) ProtoMessage()               {}
 func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{62} }
+func (m *NinRepNonByteCustomType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
+}
+func (dst *NinRepNonByteCustomType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNonByteCustomType.Merge(dst, src)
+}
+func (m *NinRepNonByteCustomType) XXX_Size() int {
+	return xxx_messageInfo_NinRepNonByteCustomType.Size(m)
+}
+func (m *NinRepNonByteCustomType) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepNonByteCustomType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepNonByteCustomType proto.InternalMessageInfo
 
 type ProtoType struct {
-	Field2           *string `protobuf:"bytes,1,opt,name=Field2" json:"Field2,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field2               *string  `protobuf:"bytes,1,opt,name=Field2" json:"Field2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ProtoType) Reset()                    { *m = ProtoType{} }
 func (*ProtoType) ProtoMessage()               {}
 func (*ProtoType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{63} }
+func (m *ProtoType) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
+}
+func (dst *ProtoType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoType.Merge(dst, src)
+}
+func (m *ProtoType) XXX_Size() int {
+	return xxx_messageInfo_ProtoType.Size(m)
+}
+func (m *ProtoType) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProtoType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProtoType proto.InternalMessageInfo
 
 var E_FieldA = &proto.ExtensionDesc{
 	ExtendedType:  (*MyExtendable)(nil),

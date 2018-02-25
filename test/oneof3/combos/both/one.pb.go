@@ -42,12 +42,25 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subby struct {
-	Sub string `protobuf:"bytes,1,opt,name=sub,proto3" json:"sub,omitempty"`
+	Sub                  string   `protobuf:"bytes,1,opt,name=sub,proto3" json:"sub,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Subby) Reset()                    { *m = Subby{} }
 func (*Subby) ProtoMessage()               {}
 func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
+func (dst *Subby) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subby.Merge(dst, src)
+}
+func (m *Subby) XXX_Size() int {
+	return xxx_messageInfo_Subby.Size(m)
+}
+func (m *Subby) XXX_DiscardUnknown() {
+	xxx_messageInfo_Subby.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Subby proto.InternalMessageInfo
 
 type SampleOneOf struct {
 	// Types that are valid to be assigned to TestOneof:
@@ -67,12 +80,25 @@ type SampleOneOf struct {
 	//	*SampleOneOf_Field14
 	//	*SampleOneOf_Field15
 	//	*SampleOneOf_SubMessage
-	TestOneof isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
+	TestOneof            isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *SampleOneOf) Reset()                    { *m = SampleOneOf{} }
 func (*SampleOneOf) ProtoMessage()               {}
 func (*SampleOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
+func (dst *SampleOneOf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SampleOneOf.Merge(dst, src)
+}
+func (m *SampleOneOf) XXX_Size() int {
+	return xxx_messageInfo_SampleOneOf.Size(m)
+}
+func (m *SampleOneOf) XXX_DiscardUnknown() {
+	xxx_messageInfo_SampleOneOf.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SampleOneOf proto.InternalMessageInfo
 
 type isSampleOneOf_TestOneof interface {
 	isSampleOneOf_TestOneof()

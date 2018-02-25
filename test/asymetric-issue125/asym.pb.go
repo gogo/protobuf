@@ -34,23 +34,52 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type M struct {
-	Arr              []MyType `protobuf:"bytes,1,rep,name=arr,customtype=MyType" json:"arr"`
-	XXX_unrecognized []byte   `json:"-"`
+	Arr                  []MyType `protobuf:"bytes,1,rep,name=arr,customtype=MyType" json:"arr"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *M) Reset()                    { *m = M{} }
 func (m *M) String() string            { return proto.CompactTextString(m) }
 func (*M) ProtoMessage()               {}
 func (*M) Descriptor() ([]byte, []int) { return fileDescriptorAsym, []int{0} }
+func (dst *M) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_M.Merge(dst, src)
+}
+func (m *M) XXX_Size() int {
+	return xxx_messageInfo_M.Size(m)
+}
+func (m *M) XXX_DiscardUnknown() {
+	xxx_messageInfo_M.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_M proto.InternalMessageInfo
 
 type MyType struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MyType) Reset()                    { *m = MyType{} }
 func (m *MyType) String() string            { return proto.CompactTextString(m) }
 func (*MyType) ProtoMessage()               {}
 func (*MyType) Descriptor() ([]byte, []int) { return fileDescriptorAsym, []int{1} }
+func (m *MyType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyType.Marshal(b, m, deterministic)
+}
+func (dst *MyType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyType.Merge(dst, src)
+}
+func (m *MyType) XXX_Size() int {
+	return xxx_messageInfo_MyType.Size(m)
+}
+func (m *MyType) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyType proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*M)(nil), "asym.M")

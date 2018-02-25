@@ -235,12 +235,25 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 // paths.
 type FieldMask struct {
 	// The set of field mask paths.
-	Paths []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
+	Paths                []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FieldMask) Reset()                    { *m = FieldMask{} }
 func (*FieldMask) ProtoMessage()               {}
 func (*FieldMask) Descriptor() ([]byte, []int) { return fileDescriptorFieldMask, []int{0} }
+func (dst *FieldMask) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FieldMask.Merge(dst, src)
+}
+func (m *FieldMask) XXX_Size() int {
+	return xxx_messageInfo_FieldMask.Size(m)
+}
+func (m *FieldMask) XXX_DiscardUnknown() {
+	xxx_messageInfo_FieldMask.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FieldMask proto.InternalMessageInfo
 
 func (m *FieldMask) GetPaths() []string {
 	if m != nil {

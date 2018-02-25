@@ -34,12 +34,25 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MyMessage struct {
-	MyData uint32 `protobuf:"varint,1,opt,name=my_data,json=myData,proto3" json:"my_data,omitempty"`
+	MyData               uint32   `protobuf:"varint,1,opt,name=my_data,json=myData,proto3" json:"my_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
+func (dst *MyMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage.Merge(dst, src)
+}
+func (m *MyMessage) XXX_Size() int {
+	return xxx_messageInfo_MyMessage.Size(m)
+}
+func (m *MyMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessage proto.InternalMessageInfo
 
 func (m *MyMessage) GetMyData() uint32 {
 	if m != nil {

@@ -30,15 +30,34 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Outside struct {
-	*Inside          `protobuf:"bytes,1,opt,name=Inside,embedded=Inside" json:""`
-	Field2           *string `protobuf:"bytes,2,opt,name=Field2" json:"MyField2" xml:",comment"`
-	XXX_unrecognized []byte  `json:"-"`
+	*Inside              `protobuf:"bytes,1,opt,name=Inside,embedded=Inside" json:""`
+	Field2               *string  `protobuf:"bytes,2,opt,name=Field2" json:"MyField2" xml:",comment"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Outside) Reset()                    { *m = Outside{} }
 func (m *Outside) String() string            { return proto.CompactTextString(m) }
 func (*Outside) ProtoMessage()               {}
 func (*Outside) Descriptor() ([]byte, []int) { return fileDescriptorTags, []int{0} }
+func (m *Outside) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Outside.Unmarshal(m, b)
+}
+func (m *Outside) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Outside.Marshal(b, m, deterministic)
+}
+func (dst *Outside) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Outside.Merge(dst, src)
+}
+func (m *Outside) XXX_Size() int {
+	return xxx_messageInfo_Outside.Size(m)
+}
+func (m *Outside) XXX_DiscardUnknown() {
+	xxx_messageInfo_Outside.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Outside proto.InternalMessageInfo
 
 func (m *Outside) GetField2() string {
 	if m != nil && m.Field2 != nil {
@@ -48,14 +67,33 @@ func (m *Outside) GetField2() string {
 }
 
 type Inside struct {
-	Field1           *string `protobuf:"bytes,1,opt,name=Field1" json:"MyField1" xml:",chardata"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1               *string  `protobuf:"bytes,1,opt,name=Field1" json:"MyField1" xml:",chardata"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Inside) Reset()                    { *m = Inside{} }
 func (m *Inside) String() string            { return proto.CompactTextString(m) }
 func (*Inside) ProtoMessage()               {}
 func (*Inside) Descriptor() ([]byte, []int) { return fileDescriptorTags, []int{1} }
+func (m *Inside) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Inside.Unmarshal(m, b)
+}
+func (m *Inside) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Inside.Marshal(b, m, deterministic)
+}
+func (dst *Inside) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Inside.Merge(dst, src)
+}
+func (m *Inside) XXX_Size() int {
+	return xxx_messageInfo_Inside.Size(m)
+}
+func (m *Inside) XXX_DiscardUnknown() {
+	xxx_messageInfo_Inside.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Inside proto.InternalMessageInfo
 
 func (m *Inside) GetField1() string {
 	if m != nil && m.Field1 != nil {

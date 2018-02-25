@@ -41,12 +41,25 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapStdTypes struct {
-	NullableDuration map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorIssue261, []int{0} }
+func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+}
+func (m *MapStdTypes) XXX_Size() int {
+	return xxx_messageInfo_MapStdTypes.Size(m)
+}
+func (m *MapStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapStdTypes proto.InternalMessageInfo
 
 func (m *MapStdTypes) GetNullableDuration() map[int32]*time.Duration {
 	if m != nil {
@@ -57,6 +70,7 @@ func (m *MapStdTypes) GetNullableDuration() map[int32]*time.Duration {
 
 func init() {
 	proto.RegisterType((*MapStdTypes)(nil), "issue261.MapStdTypes")
+	proto.RegisterMapType((map[int32]*time.Duration)(nil), "issue261.MapStdTypes.NullableDurationEntry")
 }
 func (this *MapStdTypes) Equal(that interface{}) bool {
 	if that == nil {

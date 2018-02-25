@@ -71,7 +71,7 @@ func makeMessageRefSliceMarshaler(u *marshalInfo) (sizer, marshaler) {
 				e := elem.Interface()
 				v := toAddrPointer(&e, false)
 				b = appendVarint(b, wiretag)
-				siz := u.cachedsize(v)
+				siz := u.size(v)
 				b = appendVarint(b, uint64(siz))
 				b, err = u.marshal(b, v, deterministic)
 

@@ -32,14 +32,30 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
-	Bar              []byte `protobuf:"bytes,1,opt,name=bar" json:"bar,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Bar                  []byte   `protobuf:"bytes,1,opt,name=bar" json:"bar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Foo) Reset()                    { *m = Foo{} }
 func (m *Foo) String() string            { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Foo) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
+}
+func (dst *Foo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Foo.Merge(dst, src)
+}
+func (m *Foo) XXX_Size() int {
+	return xxx_messageInfo_Foo.Size(m)
+}
+func (m *Foo) XXX_DiscardUnknown() {
+	xxx_messageInfo_Foo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Foo proto.InternalMessageInfo
 
 func (m *Foo) GetBar() []byte {
 	if m != nil {
@@ -49,14 +65,30 @@ func (m *Foo) GetBar() []byte {
 }
 
 type FooWithRepeated struct {
-	Bar              [][]byte `protobuf:"bytes,1,rep,name=bar" json:"bar,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Bar                  [][]byte `protobuf:"bytes,1,rep,name=bar" json:"bar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FooWithRepeated) Reset()                    { *m = FooWithRepeated{} }
 func (m *FooWithRepeated) String() string            { return proto.CompactTextString(m) }
 func (*FooWithRepeated) ProtoMessage()               {}
 func (*FooWithRepeated) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{1} }
+func (m *FooWithRepeated) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FooWithRepeated.Marshal(b, m, deterministic)
+}
+func (dst *FooWithRepeated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FooWithRepeated.Merge(dst, src)
+}
+func (m *FooWithRepeated) XXX_Size() int {
+	return xxx_messageInfo_FooWithRepeated.Size(m)
+}
+func (m *FooWithRepeated) XXX_DiscardUnknown() {
+	xxx_messageInfo_FooWithRepeated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FooWithRepeated proto.InternalMessageInfo
 
 func (m *FooWithRepeated) GetBar() [][]byte {
 	if m != nil {

@@ -128,12 +128,31 @@ type ConformanceRequest struct {
 	Payload isConformanceRequest_Payload `protobuf_oneof:"payload"`
 	// Which format should the testee serialize its message to?
 	RequestedOutputFormat WireFormat `protobuf:"varint,3,opt,name=requested_output_format,json=requestedOutputFormat,proto3,enum=conformance.WireFormat" json:"requested_output_format,omitempty"`
+	XXX_NoUnkeyedLiteral  struct{}   `json:"-"`
+	XXX_sizecache         int32      `json:"-"`
 }
 
 func (m *ConformanceRequest) Reset()                    { *m = ConformanceRequest{} }
 func (m *ConformanceRequest) String() string            { return proto.CompactTextString(m) }
 func (*ConformanceRequest) ProtoMessage()               {}
 func (*ConformanceRequest) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{0} }
+func (m *ConformanceRequest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ConformanceRequest.Unmarshal(m, b)
+}
+func (m *ConformanceRequest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ConformanceRequest.Marshal(b, m, deterministic)
+}
+func (dst *ConformanceRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ConformanceRequest.Merge(dst, src)
+}
+func (m *ConformanceRequest) XXX_Size() int {
+	return xxx_messageInfo_ConformanceRequest.Size(m)
+}
+func (m *ConformanceRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ConformanceRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ConformanceRequest proto.InternalMessageInfo
 
 type isConformanceRequest_Payload interface {
 	isConformanceRequest_Payload()
@@ -252,13 +271,32 @@ type ConformanceResponse struct {
 	//	*ConformanceResponse_ProtobufPayload
 	//	*ConformanceResponse_JsonPayload
 	//	*ConformanceResponse_Skipped
-	Result isConformanceResponse_Result `protobuf_oneof:"result"`
+	Result               isConformanceResponse_Result `protobuf_oneof:"result"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
 }
 
 func (m *ConformanceResponse) Reset()                    { *m = ConformanceResponse{} }
 func (m *ConformanceResponse) String() string            { return proto.CompactTextString(m) }
 func (*ConformanceResponse) ProtoMessage()               {}
 func (*ConformanceResponse) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{1} }
+func (m *ConformanceResponse) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ConformanceResponse.Unmarshal(m, b)
+}
+func (m *ConformanceResponse) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ConformanceResponse.Marshal(b, m, deterministic)
+}
+func (dst *ConformanceResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ConformanceResponse.Merge(dst, src)
+}
+func (m *ConformanceResponse) XXX_Size() int {
+	return xxx_messageInfo_ConformanceResponse.Size(m)
+}
+func (m *ConformanceResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ConformanceResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ConformanceResponse proto.InternalMessageInfo
 
 type isConformanceResponse_Result interface {
 	isConformanceResponse_Result()
@@ -577,30 +615,49 @@ type TestAllTypes struct {
 	RepeatedValue         []*google_protobuf3.Value       `protobuf:"bytes,316,rep,name=repeated_value,json=repeatedValue" json:"repeated_value,omitempty"`
 	// Test field-name-to-JSON-name convention.
 	// (protobuf says names can be any valid C/C++ identifier.)
-	Fieldname1    int32 `protobuf:"varint,401,opt,name=fieldname1,proto3" json:"fieldname1,omitempty"`
-	FieldName2    int32 `protobuf:"varint,402,opt,name=field_name2,json=fieldName2,proto3" json:"field_name2,omitempty"`
-	XFieldName3   int32 `protobuf:"varint,403,opt,name=_field_name3,json=FieldName3,proto3" json:"_field_name3,omitempty"`
-	Field_Name4_  int32 `protobuf:"varint,404,opt,name=field__name4_,json=fieldName4,proto3" json:"field__name4_,omitempty"`
-	Field0Name5   int32 `protobuf:"varint,405,opt,name=field0name5,proto3" json:"field0name5,omitempty"`
-	Field_0Name6  int32 `protobuf:"varint,406,opt,name=field_0_name6,json=field0Name6,proto3" json:"field_0_name6,omitempty"`
-	FieldName7    int32 `protobuf:"varint,407,opt,name=fieldName7,proto3" json:"fieldName7,omitempty"`
-	FieldName8    int32 `protobuf:"varint,408,opt,name=FieldName8,proto3" json:"FieldName8,omitempty"`
-	Field_Name9   int32 `protobuf:"varint,409,opt,name=field_Name9,json=fieldName9,proto3" json:"field_Name9,omitempty"`
-	Field_Name10  int32 `protobuf:"varint,410,opt,name=Field_Name10,json=FieldName10,proto3" json:"Field_Name10,omitempty"`
-	FIELD_NAME11  int32 `protobuf:"varint,411,opt,name=FIELD_NAME11,json=FIELDNAME11,proto3" json:"FIELD_NAME11,omitempty"`
-	FIELDName12   int32 `protobuf:"varint,412,opt,name=FIELD_name12,json=FIELDName12,proto3" json:"FIELD_name12,omitempty"`
-	XFieldName13  int32 `protobuf:"varint,413,opt,name=__field_name13,json=FieldName13,proto3" json:"__field_name13,omitempty"`
-	X_FieldName14 int32 `protobuf:"varint,414,opt,name=__Field_name14,json=FieldName14,proto3" json:"__Field_name14,omitempty"`
-	Field_Name15  int32 `protobuf:"varint,415,opt,name=field__name15,json=fieldName15,proto3" json:"field__name15,omitempty"`
-	Field__Name16 int32 `protobuf:"varint,416,opt,name=field__Name16,json=fieldName16,proto3" json:"field__Name16,omitempty"`
-	FieldName17__ int32 `protobuf:"varint,417,opt,name=field_name17__,json=fieldName17,proto3" json:"field_name17__,omitempty"`
-	FieldName18__ int32 `protobuf:"varint,418,opt,name=Field_name18__,json=FieldName18,proto3" json:"Field_name18__,omitempty"`
+	Fieldname1           int32    `protobuf:"varint,401,opt,name=fieldname1,proto3" json:"fieldname1,omitempty"`
+	FieldName2           int32    `protobuf:"varint,402,opt,name=field_name2,json=fieldName2,proto3" json:"field_name2,omitempty"`
+	XFieldName3          int32    `protobuf:"varint,403,opt,name=_field_name3,json=FieldName3,proto3" json:"_field_name3,omitempty"`
+	Field_Name4_         int32    `protobuf:"varint,404,opt,name=field__name4_,json=fieldName4,proto3" json:"field__name4_,omitempty"`
+	Field0Name5          int32    `protobuf:"varint,405,opt,name=field0name5,proto3" json:"field0name5,omitempty"`
+	Field_0Name6         int32    `protobuf:"varint,406,opt,name=field_0_name6,json=field0Name6,proto3" json:"field_0_name6,omitempty"`
+	FieldName7           int32    `protobuf:"varint,407,opt,name=fieldName7,proto3" json:"fieldName7,omitempty"`
+	FieldName8           int32    `protobuf:"varint,408,opt,name=FieldName8,proto3" json:"FieldName8,omitempty"`
+	Field_Name9          int32    `protobuf:"varint,409,opt,name=field_Name9,json=fieldName9,proto3" json:"field_Name9,omitempty"`
+	Field_Name10         int32    `protobuf:"varint,410,opt,name=Field_Name10,json=FieldName10,proto3" json:"Field_Name10,omitempty"`
+	FIELD_NAME11         int32    `protobuf:"varint,411,opt,name=FIELD_NAME11,json=FIELDNAME11,proto3" json:"FIELD_NAME11,omitempty"`
+	FIELDName12          int32    `protobuf:"varint,412,opt,name=FIELD_name12,json=FIELDName12,proto3" json:"FIELD_name12,omitempty"`
+	XFieldName13         int32    `protobuf:"varint,413,opt,name=__field_name13,json=FieldName13,proto3" json:"__field_name13,omitempty"`
+	X_FieldName14        int32    `protobuf:"varint,414,opt,name=__Field_name14,json=FieldName14,proto3" json:"__Field_name14,omitempty"`
+	Field_Name15         int32    `protobuf:"varint,415,opt,name=field__name15,json=fieldName15,proto3" json:"field__name15,omitempty"`
+	Field__Name16        int32    `protobuf:"varint,416,opt,name=field__Name16,json=fieldName16,proto3" json:"field__Name16,omitempty"`
+	FieldName17__        int32    `protobuf:"varint,417,opt,name=field_name17__,json=fieldName17,proto3" json:"field_name17__,omitempty"`
+	FieldName18__        int32    `protobuf:"varint,418,opt,name=Field_name18__,json=FieldName18,proto3" json:"Field_name18__,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TestAllTypes) Reset()                    { *m = TestAllTypes{} }
 func (m *TestAllTypes) String() string            { return proto.CompactTextString(m) }
 func (*TestAllTypes) ProtoMessage()               {}
 func (*TestAllTypes) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{2} }
+func (m *TestAllTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_TestAllTypes.Unmarshal(m, b)
+}
+func (m *TestAllTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TestAllTypes.Marshal(b, m, deterministic)
+}
+func (dst *TestAllTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TestAllTypes.Merge(dst, src)
+}
+func (m *TestAllTypes) XXX_Size() int {
+	return xxx_messageInfo_TestAllTypes.Size(m)
+}
+func (m *TestAllTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_TestAllTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TestAllTypes proto.InternalMessageInfo
 
 type isTestAllTypes_OneofField interface {
 	isTestAllTypes_OneofField()
@@ -1658,8 +1715,10 @@ func _TestAllTypes_OneofSizer(msg proto.Message) (n int) {
 }
 
 type TestAllTypes_NestedMessage struct {
-	A           int32         `protobuf:"varint,1,opt,name=a,proto3" json:"a,omitempty"`
-	Corecursive *TestAllTypes `protobuf:"bytes,2,opt,name=corecursive" json:"corecursive,omitempty"`
+	A                    int32         `protobuf:"varint,1,opt,name=a,proto3" json:"a,omitempty"`
+	Corecursive          *TestAllTypes `protobuf:"bytes,2,opt,name=corecursive" json:"corecursive,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *TestAllTypes_NestedMessage) Reset()         { *m = TestAllTypes_NestedMessage{} }
@@ -1668,6 +1727,23 @@ func (*TestAllTypes_NestedMessage) ProtoMessage()    {}
 func (*TestAllTypes_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptorConformance, []int{2, 0}
 }
+func (m *TestAllTypes_NestedMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_TestAllTypes_NestedMessage.Unmarshal(m, b)
+}
+func (m *TestAllTypes_NestedMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TestAllTypes_NestedMessage.Marshal(b, m, deterministic)
+}
+func (dst *TestAllTypes_NestedMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TestAllTypes_NestedMessage.Merge(dst, src)
+}
+func (m *TestAllTypes_NestedMessage) XXX_Size() int {
+	return xxx_messageInfo_TestAllTypes_NestedMessage.Size(m)
+}
+func (m *TestAllTypes_NestedMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_TestAllTypes_NestedMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TestAllTypes_NestedMessage proto.InternalMessageInfo
 
 func (m *TestAllTypes_NestedMessage) GetA() int32 {
 	if m != nil {
@@ -1684,13 +1760,32 @@ func (m *TestAllTypes_NestedMessage) GetCorecursive() *TestAllTypes {
 }
 
 type ForeignMessage struct {
-	C int32 `protobuf:"varint,1,opt,name=c,proto3" json:"c,omitempty"`
+	C                    int32    `protobuf:"varint,1,opt,name=c,proto3" json:"c,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ForeignMessage) Reset()                    { *m = ForeignMessage{} }
 func (m *ForeignMessage) String() string            { return proto.CompactTextString(m) }
 func (*ForeignMessage) ProtoMessage()               {}
 func (*ForeignMessage) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{3} }
+func (m *ForeignMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ForeignMessage.Unmarshal(m, b)
+}
+func (m *ForeignMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ForeignMessage.Marshal(b, m, deterministic)
+}
+func (dst *ForeignMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ForeignMessage.Merge(dst, src)
+}
+func (m *ForeignMessage) XXX_Size() int {
+	return xxx_messageInfo_ForeignMessage.Size(m)
+}
+func (m *ForeignMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_ForeignMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ForeignMessage proto.InternalMessageInfo
 
 func (m *ForeignMessage) GetC() int32 {
 	if m != nil {
@@ -1703,6 +1798,25 @@ func init() {
 	proto.RegisterType((*ConformanceRequest)(nil), "conformance.ConformanceRequest")
 	proto.RegisterType((*ConformanceResponse)(nil), "conformance.ConformanceResponse")
 	proto.RegisterType((*TestAllTypes)(nil), "conformance.TestAllTypes")
+	proto.RegisterMapType((map[bool]bool)(nil), "conformance.TestAllTypes.MapBoolBoolEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "conformance.TestAllTypes.MapFixed32Fixed32Entry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "conformance.TestAllTypes.MapFixed64Fixed64Entry")
+	proto.RegisterMapType((map[int32]float64)(nil), "conformance.TestAllTypes.MapInt32DoubleEntry")
+	proto.RegisterMapType((map[int32]float32)(nil), "conformance.TestAllTypes.MapInt32FloatEntry")
+	proto.RegisterMapType((map[int32]int32)(nil), "conformance.TestAllTypes.MapInt32Int32Entry")
+	proto.RegisterMapType((map[int64]int64)(nil), "conformance.TestAllTypes.MapInt64Int64Entry")
+	proto.RegisterMapType((map[int32]int32)(nil), "conformance.TestAllTypes.MapSfixed32Sfixed32Entry")
+	proto.RegisterMapType((map[int64]int64)(nil), "conformance.TestAllTypes.MapSfixed64Sfixed64Entry")
+	proto.RegisterMapType((map[int32]int32)(nil), "conformance.TestAllTypes.MapSint32Sint32Entry")
+	proto.RegisterMapType((map[int64]int64)(nil), "conformance.TestAllTypes.MapSint64Sint64Entry")
+	proto.RegisterMapType((map[string][]byte)(nil), "conformance.TestAllTypes.MapStringBytesEntry")
+	proto.RegisterMapType((map[string]ForeignEnum)(nil), "conformance.TestAllTypes.MapStringForeignEnumEntry")
+	proto.RegisterMapType((map[string]*ForeignMessage)(nil), "conformance.TestAllTypes.MapStringForeignMessageEntry")
+	proto.RegisterMapType((map[string]TestAllTypes_NestedEnum)(nil), "conformance.TestAllTypes.MapStringNestedEnumEntry")
+	proto.RegisterMapType((map[string]*TestAllTypes_NestedMessage)(nil), "conformance.TestAllTypes.MapStringNestedMessageEntry")
+	proto.RegisterMapType((map[string]string)(nil), "conformance.TestAllTypes.MapStringStringEntry")
+	proto.RegisterMapType((map[uint32]uint32)(nil), "conformance.TestAllTypes.MapUint32Uint32Entry")
+	proto.RegisterMapType((map[uint64]uint64)(nil), "conformance.TestAllTypes.MapUint64Uint64Entry")
 	proto.RegisterType((*TestAllTypes_NestedMessage)(nil), "conformance.TestAllTypes.NestedMessage")
 	proto.RegisterType((*ForeignMessage)(nil), "conformance.ForeignMessage")
 	proto.RegisterEnum("conformance.WireFormat", WireFormat_name, WireFormat_value)

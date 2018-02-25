@@ -48,23 +48,39 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type KnownTypes struct {
-	Dur   *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	Ts    *google_protobuf2.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Dbl   *google_protobuf3.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt   *google_protobuf3.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64   *google_protobuf3.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64   *google_protobuf3.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32   *google_protobuf3.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32   *google_protobuf3.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool  *google_protobuf3.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str   *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	Dur                  *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	Ts                   *google_protobuf2.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Dbl                  *google_protobuf3.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt                  *google_protobuf3.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64                  *google_protobuf3.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64                  *google_protobuf3.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32                  *google_protobuf3.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32                  *google_protobuf3.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool                 *google_protobuf3.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str                  *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes                *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *KnownTypes) Reset()                    { *m = KnownTypes{} }
 func (m *KnownTypes) String() string            { return proto.CompactTextString(m) }
 func (*KnownTypes) ProtoMessage()               {}
 func (*KnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
+func (m *KnownTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_KnownTypes.Marshal(b, m, deterministic)
+}
+func (dst *KnownTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KnownTypes.Merge(dst, src)
+}
+func (m *KnownTypes) XXX_Size() int {
+	return xxx_messageInfo_KnownTypes.Size(m)
+}
+func (m *KnownTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_KnownTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KnownTypes proto.InternalMessageInfo
 
 func (m *KnownTypes) GetDur() *google_protobuf1.Duration {
 	if m != nil {
@@ -144,16 +160,32 @@ func (m *KnownTypes) GetBytes() *google_protobuf3.BytesValue {
 }
 
 type ProtoTypes struct {
-	NullableTimestamp *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *google_protobuf1.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
-	Timestamp         google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
-	Duration          google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	NullableTimestamp    *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *google_protobuf1.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
+	Timestamp            google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
+	Duration             google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
+	XXX_sizecache        int32                       `json:"-"`
 }
 
 func (m *ProtoTypes) Reset()                    { *m = ProtoTypes{} }
 func (m *ProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*ProtoTypes) ProtoMessage()               {}
 func (*ProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{1} }
+func (m *ProtoTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProtoTypes.Marshal(b, m, deterministic)
+}
+func (dst *ProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoTypes.Merge(dst, src)
+}
+func (m *ProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_ProtoTypes.Size(m)
+}
+func (m *ProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProtoTypes proto.InternalMessageInfo
 
 func (m *ProtoTypes) GetNullableTimestamp() *google_protobuf2.Timestamp {
 	if m != nil {
@@ -184,16 +216,32 @@ func (m *ProtoTypes) GetDuration() google_protobuf1.Duration {
 }
 
 type StdTypes struct {
-	NullableTimestamp *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	Timestamp         time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration          time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *StdTypes) Reset()                    { *m = StdTypes{} }
 func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
 func (*StdTypes) ProtoMessage()               {}
 func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+func (m *StdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
+}
+func (dst *StdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StdTypes.Merge(dst, src)
+}
+func (m *StdTypes) XXX_Size() int {
+	return xxx_messageInfo_StdTypes.Size(m)
+}
+func (m *StdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_StdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StdTypes proto.InternalMessageInfo
 
 func (m *StdTypes) GetNullableTimestamp() *time.Time {
 	if m != nil {
@@ -224,16 +272,32 @@ func (m *StdTypes) GetDuration() time.Duration {
 }
 
 type RepProtoTypes struct {
-	NullableTimestamps []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
-	Timestamps         []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
-	Durations          []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	NullableTimestamps   []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
+	Timestamps           []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
+	Durations            []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *RepProtoTypes) Reset()                    { *m = RepProtoTypes{} }
 func (m *RepProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepProtoTypes) ProtoMessage()               {}
 func (*RepProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
+func (m *RepProtoTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RepProtoTypes.Marshal(b, m, deterministic)
+}
+func (dst *RepProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepProtoTypes.Merge(dst, src)
+}
+func (m *RepProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_RepProtoTypes.Size(m)
+}
+func (m *RepProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepProtoTypes proto.InternalMessageInfo
 
 func (m *RepProtoTypes) GetNullableTimestamps() []*google_protobuf2.Timestamp {
 	if m != nil {
@@ -264,16 +328,32 @@ func (m *RepProtoTypes) GetDurations() []google_protobuf1.Duration {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps         []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations          []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
 func (m *RepStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepStdTypes) ProtoMessage()               {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
+func (m *RepStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepStdTypes.Merge(dst, src)
+}
+func (m *RepStdTypes) XXX_Size() int {
+	return xxx_messageInfo_RepStdTypes.Size(m)
+}
+func (m *RepStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepStdTypes proto.InternalMessageInfo
 
 func (m *RepStdTypes) GetNullableTimestamps() []*time.Time {
 	if m != nil {
@@ -304,16 +384,32 @@ func (m *RepStdTypes) GetDurations() []time.Duration {
 }
 
 type MapProtoTypes struct {
-	NullableTimestamp map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp            map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration             map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
+	XXX_sizecache        int32                                 `json:"-"`
 }
 
 func (m *MapProtoTypes) Reset()                    { *m = MapProtoTypes{} }
 func (m *MapProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapProtoTypes) ProtoMessage()               {}
 func (*MapProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
+func (m *MapProtoTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MapProtoTypes.Marshal(b, m, deterministic)
+}
+func (dst *MapProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapProtoTypes.Merge(dst, src)
+}
+func (m *MapProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_MapProtoTypes.Size(m)
+}
+func (m *MapProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapProtoTypes proto.InternalMessageInfo
 
 func (m *MapProtoTypes) GetNullableTimestamp() map[int32]*google_protobuf2.Timestamp {
 	if m != nil {
@@ -344,16 +440,32 @@ func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf1.Duration {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
 func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
+func (m *MapStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+}
+func (m *MapStdTypes) XXX_Size() int {
+	return xxx_messageInfo_MapStdTypes.Size(m)
+}
+func (m *MapStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapStdTypes proto.InternalMessageInfo
 
 func (m *MapStdTypes) GetNullableTimestamp() map[int32]*time.Time {
 	if m != nil {
@@ -387,13 +499,29 @@ type OneofProtoTypes struct {
 	// Types that are valid to be assigned to OneOfProtoTimes:
 	//	*OneofProtoTypes_Timestamp
 	//	*OneofProtoTypes_Duration
-	OneOfProtoTimes isOneofProtoTypes_OneOfProtoTimes `protobuf_oneof:"OneOfProtoTimes"`
+	OneOfProtoTimes      isOneofProtoTypes_OneOfProtoTimes `protobuf_oneof:"OneOfProtoTimes"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
 func (m *OneofProtoTypes) Reset()                    { *m = OneofProtoTypes{} }
 func (m *OneofProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofProtoTypes) ProtoMessage()               {}
 func (*OneofProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{7} }
+func (m *OneofProtoTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OneofProtoTypes.Marshal(b, m, deterministic)
+}
+func (dst *OneofProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofProtoTypes.Merge(dst, src)
+}
+func (m *OneofProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_OneofProtoTypes.Size(m)
+}
+func (m *OneofProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofProtoTypes proto.InternalMessageInfo
 
 type isOneofProtoTypes_OneOfProtoTimes interface {
 	isOneofProtoTypes_OneOfProtoTimes()
@@ -511,13 +639,29 @@ type OneofStdTypes struct {
 	// Types that are valid to be assigned to OneOfStdTimes:
 	//	*OneofStdTypes_Timestamp
 	//	*OneofStdTypes_Duration
-	OneOfStdTimes isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	OneOfStdTimes        isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
 func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofStdTypes) ProtoMessage()               {}
 func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{8} }
+func (m *OneofStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
+}
+func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
+}
+func (m *OneofStdTypes) XXX_Size() int {
+	return xxx_messageInfo_OneofStdTypes.Size(m)
+}
+func (m *OneofStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofStdTypes proto.InternalMessageInfo
 
 type isOneofStdTypes_OneOfStdTimes interface {
 	isOneofStdTypes_OneOfStdTimes()
@@ -658,7 +802,15 @@ func init() {
 	proto.RegisterType((*RepProtoTypes)(nil), "types.RepProtoTypes")
 	proto.RegisterType((*RepStdTypes)(nil), "types.RepStdTypes")
 	proto.RegisterType((*MapProtoTypes)(nil), "types.MapProtoTypes")
+	proto.RegisterMapType((map[int32]google_protobuf1.Duration)(nil), "types.MapProtoTypes.DurationEntry")
+	proto.RegisterMapType((map[int32]*google_protobuf1.Duration)(nil), "types.MapProtoTypes.NullableDurationEntry")
+	proto.RegisterMapType((map[int32]*google_protobuf2.Timestamp)(nil), "types.MapProtoTypes.NullableTimestampEntry")
+	proto.RegisterMapType((map[int32]google_protobuf2.Timestamp)(nil), "types.MapProtoTypes.TimestampEntry")
 	proto.RegisterType((*MapStdTypes)(nil), "types.MapStdTypes")
+	proto.RegisterMapType((map[int32]time.Duration)(nil), "types.MapStdTypes.DurationEntry")
+	proto.RegisterMapType((map[int32]*time.Duration)(nil), "types.MapStdTypes.NullableDurationEntry")
+	proto.RegisterMapType((map[int32]*time.Time)(nil), "types.MapStdTypes.NullableTimestampEntry")
+	proto.RegisterMapType((map[int32]time.Time)(nil), "types.MapStdTypes.TimestampEntry")
 	proto.RegisterType((*OneofProtoTypes)(nil), "types.OneofProtoTypes")
 	proto.RegisterType((*OneofStdTypes)(nil), "types.OneofStdTypes")
 }

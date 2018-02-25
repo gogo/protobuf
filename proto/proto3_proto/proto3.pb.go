@@ -61,30 +61,49 @@ func (x Message_Humour) String() string {
 func (Message_Humour) EnumDescriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0, 0} }
 
 type Message struct {
-	Name         string                             `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Hilarity     Message_Humour                     `protobuf:"varint,2,opt,name=hilarity,proto3,enum=proto3_proto.Message_Humour" json:"hilarity,omitempty"`
-	HeightInCm   uint32                             `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
-	Data         []byte                             `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	ResultCount  int64                              `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
-	TrueScotsman bool                               `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
-	Score        float32                            `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
-	Key          []uint64                           `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
-	ShortKey     []int32                            `protobuf:"varint,19,rep,packed,name=short_key,json=shortKey" json:"short_key,omitempty"`
-	Nested       *Nested                            `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
-	RFunny       []Message_Humour                   `protobuf:"varint,16,rep,packed,name=r_funny,json=rFunny,enum=proto3_proto.Message_Humour" json:"r_funny,omitempty"`
-	Terrain      map[string]*Nested                 `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Proto2Field  *test_proto.SubDefaults            `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
-	Proto2Value  map[string]*test_proto.SubDefaults `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Anything     *google_protobuf.Any               `protobuf:"bytes,14,opt,name=anything" json:"anything,omitempty"`
-	ManyThings   []*google_protobuf.Any             `protobuf:"bytes,15,rep,name=many_things,json=manyThings" json:"many_things,omitempty"`
-	Submessage   *Message                           `protobuf:"bytes,17,opt,name=submessage" json:"submessage,omitempty"`
-	Children     []*Message                         `protobuf:"bytes,18,rep,name=children" json:"children,omitempty"`
+	Name                 string                             `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Hilarity             Message_Humour                     `protobuf:"varint,2,opt,name=hilarity,proto3,enum=proto3_proto.Message_Humour" json:"hilarity,omitempty"`
+	HeightInCm           uint32                             `protobuf:"varint,3,opt,name=height_in_cm,json=heightInCm,proto3" json:"height_in_cm,omitempty"`
+	Data                 []byte                             `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	ResultCount          int64                              `protobuf:"varint,7,opt,name=result_count,json=resultCount,proto3" json:"result_count,omitempty"`
+	TrueScotsman         bool                               `protobuf:"varint,8,opt,name=true_scotsman,json=trueScotsman,proto3" json:"true_scotsman,omitempty"`
+	Score                float32                            `protobuf:"fixed32,9,opt,name=score,proto3" json:"score,omitempty"`
+	Key                  []uint64                           `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
+	ShortKey             []int32                            `protobuf:"varint,19,rep,packed,name=short_key,json=shortKey" json:"short_key,omitempty"`
+	Nested               *Nested                            `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
+	RFunny               []Message_Humour                   `protobuf:"varint,16,rep,packed,name=r_funny,json=rFunny,enum=proto3_proto.Message_Humour" json:"r_funny,omitempty"`
+	Terrain              map[string]*Nested                 `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Proto2Field          *test_proto.SubDefaults            `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
+	Proto2Value          map[string]*test_proto.SubDefaults `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Anything             *google_protobuf.Any               `protobuf:"bytes,14,opt,name=anything" json:"anything,omitempty"`
+	ManyThings           []*google_protobuf.Any             `protobuf:"bytes,15,rep,name=many_things,json=manyThings" json:"many_things,omitempty"`
+	Submessage           *Message                           `protobuf:"bytes,17,opt,name=submessage" json:"submessage,omitempty"`
+	Children             []*Message                         `protobuf:"bytes,18,rep,name=children" json:"children,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
+	XXX_sizecache        int32                              `json:"-"`
 }
 
 func (m *Message) Reset()                    { *m = Message{} }
 func (m *Message) String() string            { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()               {}
 func (*Message) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0} }
+func (m *Message) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Message.Unmarshal(m, b)
+}
+func (m *Message) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
+}
+func (dst *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(dst, src)
+}
+func (m *Message) XXX_Size() int {
+	return xxx_messageInfo_Message.Size(m)
+}
+func (m *Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Message proto.InternalMessageInfo
 
 func (m *Message) GetName() string {
 	if m != nil {
@@ -213,14 +232,33 @@ func (m *Message) GetChildren() []*Message {
 }
 
 type Nested struct {
-	Bunny string `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
-	Cute  bool   `protobuf:"varint,2,opt,name=cute,proto3" json:"cute,omitempty"`
+	Bunny                string   `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
+	Cute                 bool     `protobuf:"varint,2,opt,name=cute,proto3" json:"cute,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Nested) Reset()                    { *m = Nested{} }
 func (m *Nested) String() string            { return proto.CompactTextString(m) }
 func (*Nested) ProtoMessage()               {}
 func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{1} }
+func (m *Nested) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Nested.Unmarshal(m, b)
+}
+func (m *Nested) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Nested.Marshal(b, m, deterministic)
+}
+func (dst *Nested) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nested.Merge(dst, src)
+}
+func (m *Nested) XXX_Size() int {
+	return xxx_messageInfo_Nested.Size(m)
+}
+func (m *Nested) XXX_DiscardUnknown() {
+	xxx_messageInfo_Nested.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Nested proto.InternalMessageInfo
 
 func (m *Nested) GetBunny() string {
 	if m != nil {
@@ -237,13 +275,32 @@ func (m *Nested) GetCute() bool {
 }
 
 type MessageWithMap struct {
-	ByteMapping map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ByteMapping          map[bool][]byte `protobuf:"bytes,1,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *MessageWithMap) Reset()                    { *m = MessageWithMap{} }
 func (m *MessageWithMap) String() string            { return proto.CompactTextString(m) }
 func (*MessageWithMap) ProtoMessage()               {}
 func (*MessageWithMap) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{2} }
+func (m *MessageWithMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
+}
+func (m *MessageWithMap) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MessageWithMap.Marshal(b, m, deterministic)
+}
+func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageWithMap.Merge(dst, src)
+}
+func (m *MessageWithMap) XXX_Size() int {
+	return xxx_messageInfo_MessageWithMap.Size(m)
+}
+func (m *MessageWithMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_MessageWithMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MessageWithMap proto.InternalMessageInfo
 
 func (m *MessageWithMap) GetByteMapping() map[bool][]byte {
 	if m != nil {
@@ -253,13 +310,32 @@ func (m *MessageWithMap) GetByteMapping() map[bool][]byte {
 }
 
 type IntMap struct {
-	Rtt map[int32]int32 `protobuf:"bytes,1,rep,name=rtt" json:"rtt,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	Rtt                  map[int32]int32 `protobuf:"bytes,1,rep,name=rtt" json:"rtt,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *IntMap) Reset()                    { *m = IntMap{} }
 func (m *IntMap) String() string            { return proto.CompactTextString(m) }
 func (*IntMap) ProtoMessage()               {}
 func (*IntMap) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{3} }
+func (m *IntMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_IntMap.Unmarshal(m, b)
+}
+func (m *IntMap) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_IntMap.Marshal(b, m, deterministic)
+}
+func (dst *IntMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IntMap.Merge(dst, src)
+}
+func (m *IntMap) XXX_Size() int {
+	return xxx_messageInfo_IntMap.Size(m)
+}
+func (m *IntMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_IntMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IntMap proto.InternalMessageInfo
 
 func (m *IntMap) GetRtt() map[int32]int32 {
 	if m != nil {
@@ -269,13 +345,32 @@ func (m *IntMap) GetRtt() map[int32]int32 {
 }
 
 type IntMaps struct {
-	Maps []*IntMap `protobuf:"bytes,1,rep,name=maps" json:"maps,omitempty"`
+	Maps                 []*IntMap `protobuf:"bytes,1,rep,name=maps" json:"maps,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *IntMaps) Reset()                    { *m = IntMaps{} }
 func (m *IntMaps) String() string            { return proto.CompactTextString(m) }
 func (*IntMaps) ProtoMessage()               {}
 func (*IntMaps) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{4} }
+func (m *IntMaps) Unmarshal(b []byte) error {
+	return xxx_messageInfo_IntMaps.Unmarshal(m, b)
+}
+func (m *IntMaps) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_IntMaps.Marshal(b, m, deterministic)
+}
+func (dst *IntMaps) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IntMaps.Merge(dst, src)
+}
+func (m *IntMaps) XXX_Size() int {
+	return xxx_messageInfo_IntMaps.Size(m)
+}
+func (m *IntMaps) XXX_DiscardUnknown() {
+	xxx_messageInfo_IntMaps.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IntMaps proto.InternalMessageInfo
 
 func (m *IntMaps) GetMaps() []*IntMap {
 	if m != nil {
@@ -286,9 +381,13 @@ func (m *IntMaps) GetMaps() []*IntMap {
 
 func init() {
 	proto.RegisterType((*Message)(nil), "proto3_proto.Message")
+	proto.RegisterMapType((map[string]*test_proto.SubDefaults)(nil), "proto3_proto.Message.Proto2ValueEntry")
+	proto.RegisterMapType((map[string]*Nested)(nil), "proto3_proto.Message.TerrainEntry")
 	proto.RegisterType((*Nested)(nil), "proto3_proto.Nested")
 	proto.RegisterType((*MessageWithMap)(nil), "proto3_proto.MessageWithMap")
+	proto.RegisterMapType((map[bool][]byte)(nil), "proto3_proto.MessageWithMap.ByteMappingEntry")
 	proto.RegisterType((*IntMap)(nil), "proto3_proto.IntMap")
+	proto.RegisterMapType((map[int32]int32)(nil), "proto3_proto.IntMap.RttEntry")
 	proto.RegisterType((*IntMaps)(nil), "proto3_proto.IntMaps")
 	proto.RegisterEnum("proto3_proto.Message_Humour", Message_Humour_name, Message_Humour_value)
 }

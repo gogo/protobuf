@@ -31,13 +31,29 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type TestRequest struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TestRequest) Reset()                    { *m = TestRequest{} }
 func (m *TestRequest) String() string            { return proto.CompactTextString(m) }
 func (*TestRequest) ProtoMessage()               {}
 func (*TestRequest) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
+func (m *TestRequest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TestRequest.Marshal(b, m, deterministic)
+}
+func (dst *TestRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TestRequest.Merge(dst, src)
+}
+func (m *TestRequest) XXX_Size() int {
+	return xxx_messageInfo_TestRequest.Size(m)
+}
+func (m *TestRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_TestRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TestRequest proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*TestRequest)(nil), "empty.TestRequest")

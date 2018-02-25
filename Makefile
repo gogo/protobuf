@@ -123,6 +123,7 @@ regenerate:
 tests:
 	go build ./test/enumprefix
 	go test ./...
+	go test -tags=appengine ./...
 	(cd test/stdtypes && make test)
 
 vet:

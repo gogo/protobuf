@@ -43,24 +43,58 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Castaway struct {
 	CastMapValueMessage         map[int32]MyWilson  `protobuf:"bytes,1,rep,name=CastMapValueMessage,castvalue=MyWilson,castvaluetype=castvalue.Wilson" json:"CastMapValueMessage" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	CastMapValueMessageNullable map[int32]*MyWilson `protobuf:"bytes,2,rep,name=CastMapValueMessageNullable,castvalue=MyWilson,castvaluetype=castvalue.Wilson" json:"CastMapValueMessageNullable,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral        struct{}            `json:"-"`
 	XXX_unrecognized            []byte              `json:"-"`
+	XXX_sizecache               int32               `json:"-"`
 }
 
 func (m *Castaway) Reset()                    { *m = Castaway{} }
 func (*Castaway) ProtoMessage()               {}
 func (*Castaway) Descriptor() ([]byte, []int) { return fileDescriptorCastvalue, []int{0} }
+func (m *Castaway) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
+}
+func (dst *Castaway) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Castaway.Merge(dst, src)
+}
+func (m *Castaway) XXX_Size() int {
+	return xxx_messageInfo_Castaway.Size(m)
+}
+func (m *Castaway) XXX_DiscardUnknown() {
+	xxx_messageInfo_Castaway.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Castaway proto.InternalMessageInfo
 
 type Wilson struct {
-	Int64            *int64 `protobuf:"varint,1,opt,name=Int64" json:"Int64,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Int64                *int64   `protobuf:"varint,1,opt,name=Int64" json:"Int64,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Wilson) Reset()                    { *m = Wilson{} }
 func (*Wilson) ProtoMessage()               {}
 func (*Wilson) Descriptor() ([]byte, []int) { return fileDescriptorCastvalue, []int{1} }
+func (m *Wilson) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)
+}
+func (dst *Wilson) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Wilson.Merge(dst, src)
+}
+func (m *Wilson) XXX_Size() int {
+	return xxx_messageInfo_Wilson.Size(m)
+}
+func (m *Wilson) XXX_DiscardUnknown() {
+	xxx_messageInfo_Wilson.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Wilson proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Castaway)(nil), "castvalue.Castaway")
+	proto.RegisterMapType((map[int32]MyWilson)(nil), "castvalue.Castaway.CastMapValueMessageEntry")
+	proto.RegisterMapType((map[int32]*MyWilson)(nil), "castvalue.Castaway.CastMapValueMessageNullableEntry")
 	proto.RegisterType((*Wilson)(nil), "castvalue.Wilson")
 }
 func (this *Castaway) Description() (desc *descriptor.FileDescriptorSet) {

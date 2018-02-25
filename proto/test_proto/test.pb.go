@@ -305,14 +305,33 @@ func (x *RepeatedEnum_Color) UnmarshalJSON(data []byte) error {
 func (RepeatedEnum_Color) EnumDescriptor() ([]byte, []int) { return fileDescriptorTest, []int{23, 0} }
 
 type GoEnum struct {
-	Foo              *FOO   `protobuf:"varint,1,req,name=foo,enum=test_proto.FOO" json:"foo,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Foo                  *FOO     `protobuf:"varint,1,req,name=foo,enum=test_proto.FOO" json:"foo,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoEnum) Reset()                    { *m = GoEnum{} }
 func (m *GoEnum) String() string            { return proto.CompactTextString(m) }
 func (*GoEnum) ProtoMessage()               {}
 func (*GoEnum) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{0} }
+func (m *GoEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoEnum.Unmarshal(m, b)
+}
+func (m *GoEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoEnum.Marshal(b, m, deterministic)
+}
+func (dst *GoEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoEnum.Merge(dst, src)
+}
+func (m *GoEnum) XXX_Size() int {
+	return xxx_messageInfo_GoEnum.Size(m)
+}
+func (m *GoEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoEnum proto.InternalMessageInfo
 
 func (m *GoEnum) GetFoo() FOO {
 	if m != nil && m.Foo != nil {
@@ -322,15 +341,34 @@ func (m *GoEnum) GetFoo() FOO {
 }
 
 type GoTestField struct {
-	Label            *string `protobuf:"bytes,1,req,name=Label" json:"Label,omitempty"`
-	Type             *string `protobuf:"bytes,2,req,name=Type" json:"Type,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Label                *string  `protobuf:"bytes,1,req,name=Label" json:"Label,omitempty"`
+	Type                 *string  `protobuf:"bytes,2,req,name=Type" json:"Type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoTestField) Reset()                    { *m = GoTestField{} }
 func (m *GoTestField) String() string            { return proto.CompactTextString(m) }
 func (*GoTestField) ProtoMessage()               {}
 func (*GoTestField) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{1} }
+func (m *GoTestField) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTestField.Unmarshal(m, b)
+}
+func (m *GoTestField) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTestField.Marshal(b, m, deterministic)
+}
+func (dst *GoTestField) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTestField.Merge(dst, src)
+}
+func (m *GoTestField) XXX_Size() int {
+	return xxx_messageInfo_GoTestField.Size(m)
+}
+func (m *GoTestField) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTestField.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTestField proto.InternalMessageInfo
 
 func (m *GoTestField) GetLabel() string {
 	if m != nil && m.Label != nil {
@@ -436,13 +474,32 @@ type GoTest struct {
 	Requiredgroup            *GoTest_RequiredGroup   `protobuf:"group,70,req,name=RequiredGroup,json=requiredgroup" json:"requiredgroup,omitempty"`
 	Repeatedgroup            []*GoTest_RepeatedGroup `protobuf:"group,80,rep,name=RepeatedGroup,json=repeatedgroup" json:"repeatedgroup,omitempty"`
 	Optionalgroup            *GoTest_OptionalGroup   `protobuf:"group,90,opt,name=OptionalGroup,json=optionalgroup" json:"optionalgroup,omitempty"`
+	XXX_NoUnkeyedLiteral     struct{}                `json:"-"`
 	XXX_unrecognized         []byte                  `json:"-"`
+	XXX_sizecache            int32                   `json:"-"`
 }
 
 func (m *GoTest) Reset()                    { *m = GoTest{} }
 func (m *GoTest) String() string            { return proto.CompactTextString(m) }
 func (*GoTest) ProtoMessage()               {}
 func (*GoTest) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{2} }
+func (m *GoTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTest.Unmarshal(m, b)
+}
+func (m *GoTest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTest.Marshal(b, m, deterministic)
+}
+func (dst *GoTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTest.Merge(dst, src)
+}
+func (m *GoTest) XXX_Size() int {
+	return xxx_messageInfo_GoTest.Size(m)
+}
+func (m *GoTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTest proto.InternalMessageInfo
 
 const Default_GoTest_F_BoolDefaulted bool = true
 const Default_GoTest_F_Int32Defaulted int32 = 32
@@ -1038,14 +1095,33 @@ func (m *GoTest) GetOptionalgroup() *GoTest_OptionalGroup {
 
 // Required, repeated, and optional groups.
 type GoTest_RequiredGroup struct {
-	RequiredField    *string `protobuf:"bytes,71,req,name=RequiredField" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField        *string  `protobuf:"bytes,71,req,name=RequiredField" json:"RequiredField,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoTest_RequiredGroup) Reset()                    { *m = GoTest_RequiredGroup{} }
 func (m *GoTest_RequiredGroup) String() string            { return proto.CompactTextString(m) }
 func (*GoTest_RequiredGroup) ProtoMessage()               {}
 func (*GoTest_RequiredGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{2, 0} }
+func (m *GoTest_RequiredGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTest_RequiredGroup.Unmarshal(m, b)
+}
+func (m *GoTest_RequiredGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTest_RequiredGroup.Marshal(b, m, deterministic)
+}
+func (dst *GoTest_RequiredGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTest_RequiredGroup.Merge(dst, src)
+}
+func (m *GoTest_RequiredGroup) XXX_Size() int {
+	return xxx_messageInfo_GoTest_RequiredGroup.Size(m)
+}
+func (m *GoTest_RequiredGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTest_RequiredGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTest_RequiredGroup proto.InternalMessageInfo
 
 func (m *GoTest_RequiredGroup) GetRequiredField() string {
 	if m != nil && m.RequiredField != nil {
@@ -1055,14 +1131,33 @@ func (m *GoTest_RequiredGroup) GetRequiredField() string {
 }
 
 type GoTest_RepeatedGroup struct {
-	RequiredField    *string `protobuf:"bytes,81,req,name=RequiredField" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField        *string  `protobuf:"bytes,81,req,name=RequiredField" json:"RequiredField,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoTest_RepeatedGroup) Reset()                    { *m = GoTest_RepeatedGroup{} }
 func (m *GoTest_RepeatedGroup) String() string            { return proto.CompactTextString(m) }
 func (*GoTest_RepeatedGroup) ProtoMessage()               {}
 func (*GoTest_RepeatedGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{2, 1} }
+func (m *GoTest_RepeatedGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTest_RepeatedGroup.Unmarshal(m, b)
+}
+func (m *GoTest_RepeatedGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTest_RepeatedGroup.Marshal(b, m, deterministic)
+}
+func (dst *GoTest_RepeatedGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTest_RepeatedGroup.Merge(dst, src)
+}
+func (m *GoTest_RepeatedGroup) XXX_Size() int {
+	return xxx_messageInfo_GoTest_RepeatedGroup.Size(m)
+}
+func (m *GoTest_RepeatedGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTest_RepeatedGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTest_RepeatedGroup proto.InternalMessageInfo
 
 func (m *GoTest_RepeatedGroup) GetRequiredField() string {
 	if m != nil && m.RequiredField != nil {
@@ -1072,14 +1167,33 @@ func (m *GoTest_RepeatedGroup) GetRequiredField() string {
 }
 
 type GoTest_OptionalGroup struct {
-	RequiredField    *string `protobuf:"bytes,91,req,name=RequiredField" json:"RequiredField,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequiredField        *string  `protobuf:"bytes,91,req,name=RequiredField" json:"RequiredField,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoTest_OptionalGroup) Reset()                    { *m = GoTest_OptionalGroup{} }
 func (m *GoTest_OptionalGroup) String() string            { return proto.CompactTextString(m) }
 func (*GoTest_OptionalGroup) ProtoMessage()               {}
 func (*GoTest_OptionalGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{2, 2} }
+func (m *GoTest_OptionalGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTest_OptionalGroup.Unmarshal(m, b)
+}
+func (m *GoTest_OptionalGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTest_OptionalGroup.Marshal(b, m, deterministic)
+}
+func (dst *GoTest_OptionalGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTest_OptionalGroup.Merge(dst, src)
+}
+func (m *GoTest_OptionalGroup) XXX_Size() int {
+	return xxx_messageInfo_GoTest_OptionalGroup.Size(m)
+}
+func (m *GoTest_OptionalGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTest_OptionalGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTest_OptionalGroup proto.InternalMessageInfo
 
 func (m *GoTest_OptionalGroup) GetRequiredField() string {
 	if m != nil && m.RequiredField != nil {
@@ -1090,14 +1204,33 @@ func (m *GoTest_OptionalGroup) GetRequiredField() string {
 
 // For testing a group containing a required field.
 type GoTestRequiredGroupField struct {
-	Group            *GoTestRequiredGroupField_Group `protobuf:"group,1,req,name=Group,json=group" json:"group,omitempty"`
-	XXX_unrecognized []byte                          `json:"-"`
+	Group                *GoTestRequiredGroupField_Group `protobuf:"group,1,req,name=Group,json=group" json:"group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                        `json:"-"`
+	XXX_unrecognized     []byte                          `json:"-"`
+	XXX_sizecache        int32                           `json:"-"`
 }
 
 func (m *GoTestRequiredGroupField) Reset()                    { *m = GoTestRequiredGroupField{} }
 func (m *GoTestRequiredGroupField) String() string            { return proto.CompactTextString(m) }
 func (*GoTestRequiredGroupField) ProtoMessage()               {}
 func (*GoTestRequiredGroupField) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{3} }
+func (m *GoTestRequiredGroupField) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTestRequiredGroupField.Unmarshal(m, b)
+}
+func (m *GoTestRequiredGroupField) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTestRequiredGroupField.Marshal(b, m, deterministic)
+}
+func (dst *GoTestRequiredGroupField) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTestRequiredGroupField.Merge(dst, src)
+}
+func (m *GoTestRequiredGroupField) XXX_Size() int {
+	return xxx_messageInfo_GoTestRequiredGroupField.Size(m)
+}
+func (m *GoTestRequiredGroupField) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTestRequiredGroupField.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTestRequiredGroupField proto.InternalMessageInfo
 
 func (m *GoTestRequiredGroupField) GetGroup() *GoTestRequiredGroupField_Group {
 	if m != nil {
@@ -1107,8 +1240,10 @@ func (m *GoTestRequiredGroupField) GetGroup() *GoTestRequiredGroupField_Group {
 }
 
 type GoTestRequiredGroupField_Group struct {
-	Field            *int32 `protobuf:"varint,2,req,name=Field" json:"Field,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Field                *int32   `protobuf:"varint,2,req,name=Field" json:"Field,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoTestRequiredGroupField_Group) Reset()         { *m = GoTestRequiredGroupField_Group{} }
@@ -1117,6 +1252,23 @@ func (*GoTestRequiredGroupField_Group) ProtoMessage()    {}
 func (*GoTestRequiredGroupField_Group) Descriptor() ([]byte, []int) {
 	return fileDescriptorTest, []int{3, 0}
 }
+func (m *GoTestRequiredGroupField_Group) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoTestRequiredGroupField_Group.Unmarshal(m, b)
+}
+func (m *GoTestRequiredGroupField_Group) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoTestRequiredGroupField_Group.Marshal(b, m, deterministic)
+}
+func (dst *GoTestRequiredGroupField_Group) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoTestRequiredGroupField_Group.Merge(dst, src)
+}
+func (m *GoTestRequiredGroupField_Group) XXX_Size() int {
+	return xxx_messageInfo_GoTestRequiredGroupField_Group.Size(m)
+}
+func (m *GoTestRequiredGroupField_Group) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoTestRequiredGroupField_Group.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoTestRequiredGroupField_Group proto.InternalMessageInfo
 
 func (m *GoTestRequiredGroupField_Group) GetField() int32 {
 	if m != nil && m.Field != nil {
@@ -1129,18 +1281,37 @@ func (m *GoTestRequiredGroupField_Group) GetField() int32 {
 // Numbers are all big, larger than tag numbers in GoTestField,
 // the message used in the corresponding test.
 type GoSkipTest struct {
-	SkipInt32        *int32                `protobuf:"varint,11,req,name=skip_int32,json=skipInt32" json:"skip_int32,omitempty"`
-	SkipFixed32      *uint32               `protobuf:"fixed32,12,req,name=skip_fixed32,json=skipFixed32" json:"skip_fixed32,omitempty"`
-	SkipFixed64      *uint64               `protobuf:"fixed64,13,req,name=skip_fixed64,json=skipFixed64" json:"skip_fixed64,omitempty"`
-	SkipString       *string               `protobuf:"bytes,14,req,name=skip_string,json=skipString" json:"skip_string,omitempty"`
-	Skipgroup        *GoSkipTest_SkipGroup `protobuf:"group,15,req,name=SkipGroup,json=skipgroup" json:"skipgroup,omitempty"`
-	XXX_unrecognized []byte                `json:"-"`
+	SkipInt32            *int32                `protobuf:"varint,11,req,name=skip_int32,json=skipInt32" json:"skip_int32,omitempty"`
+	SkipFixed32          *uint32               `protobuf:"fixed32,12,req,name=skip_fixed32,json=skipFixed32" json:"skip_fixed32,omitempty"`
+	SkipFixed64          *uint64               `protobuf:"fixed64,13,req,name=skip_fixed64,json=skipFixed64" json:"skip_fixed64,omitempty"`
+	SkipString           *string               `protobuf:"bytes,14,req,name=skip_string,json=skipString" json:"skip_string,omitempty"`
+	Skipgroup            *GoSkipTest_SkipGroup `protobuf:"group,15,req,name=SkipGroup,json=skipgroup" json:"skipgroup,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
 }
 
 func (m *GoSkipTest) Reset()                    { *m = GoSkipTest{} }
 func (m *GoSkipTest) String() string            { return proto.CompactTextString(m) }
 func (*GoSkipTest) ProtoMessage()               {}
 func (*GoSkipTest) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{4} }
+func (m *GoSkipTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoSkipTest.Unmarshal(m, b)
+}
+func (m *GoSkipTest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoSkipTest.Marshal(b, m, deterministic)
+}
+func (dst *GoSkipTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoSkipTest.Merge(dst, src)
+}
+func (m *GoSkipTest) XXX_Size() int {
+	return xxx_messageInfo_GoSkipTest.Size(m)
+}
+func (m *GoSkipTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoSkipTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoSkipTest proto.InternalMessageInfo
 
 func (m *GoSkipTest) GetSkipInt32() int32 {
 	if m != nil && m.SkipInt32 != nil {
@@ -1178,15 +1349,34 @@ func (m *GoSkipTest) GetSkipgroup() *GoSkipTest_SkipGroup {
 }
 
 type GoSkipTest_SkipGroup struct {
-	GroupInt32       *int32  `protobuf:"varint,16,req,name=group_int32,json=groupInt32" json:"group_int32,omitempty"`
-	GroupString      *string `protobuf:"bytes,17,req,name=group_string,json=groupString" json:"group_string,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	GroupInt32           *int32   `protobuf:"varint,16,req,name=group_int32,json=groupInt32" json:"group_int32,omitempty"`
+	GroupString          *string  `protobuf:"bytes,17,req,name=group_string,json=groupString" json:"group_string,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GoSkipTest_SkipGroup) Reset()                    { *m = GoSkipTest_SkipGroup{} }
 func (m *GoSkipTest_SkipGroup) String() string            { return proto.CompactTextString(m) }
 func (*GoSkipTest_SkipGroup) ProtoMessage()               {}
 func (*GoSkipTest_SkipGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{4, 0} }
+func (m *GoSkipTest_SkipGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GoSkipTest_SkipGroup.Unmarshal(m, b)
+}
+func (m *GoSkipTest_SkipGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GoSkipTest_SkipGroup.Marshal(b, m, deterministic)
+}
+func (dst *GoSkipTest_SkipGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GoSkipTest_SkipGroup.Merge(dst, src)
+}
+func (m *GoSkipTest_SkipGroup) XXX_Size() int {
+	return xxx_messageInfo_GoSkipTest_SkipGroup.Size(m)
+}
+func (m *GoSkipTest_SkipGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_GoSkipTest_SkipGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GoSkipTest_SkipGroup proto.InternalMessageInfo
 
 func (m *GoSkipTest_SkipGroup) GetGroupInt32() int32 {
 	if m != nil && m.GroupInt32 != nil {
@@ -1205,14 +1395,33 @@ func (m *GoSkipTest_SkipGroup) GetGroupString() string {
 // For testing packed/non-packed decoder switching.
 // A serialized instance of one should be deserializable as the other.
 type NonPackedTest struct {
-	A                []int32 `protobuf:"varint,1,rep,name=a" json:"a,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	A                    []int32  `protobuf:"varint,1,rep,name=a" json:"a,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NonPackedTest) Reset()                    { *m = NonPackedTest{} }
 func (m *NonPackedTest) String() string            { return proto.CompactTextString(m) }
 func (*NonPackedTest) ProtoMessage()               {}
 func (*NonPackedTest) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{5} }
+func (m *NonPackedTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NonPackedTest.Unmarshal(m, b)
+}
+func (m *NonPackedTest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NonPackedTest.Marshal(b, m, deterministic)
+}
+func (dst *NonPackedTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NonPackedTest.Merge(dst, src)
+}
+func (m *NonPackedTest) XXX_Size() int {
+	return xxx_messageInfo_NonPackedTest.Size(m)
+}
+func (m *NonPackedTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_NonPackedTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NonPackedTest proto.InternalMessageInfo
 
 func (m *NonPackedTest) GetA() []int32 {
 	if m != nil {
@@ -1222,14 +1431,33 @@ func (m *NonPackedTest) GetA() []int32 {
 }
 
 type PackedTest struct {
-	B                []int32 `protobuf:"varint,1,rep,packed,name=b" json:"b,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	B                    []int32  `protobuf:"varint,1,rep,packed,name=b" json:"b,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *PackedTest) Reset()                    { *m = PackedTest{} }
 func (m *PackedTest) String() string            { return proto.CompactTextString(m) }
 func (*PackedTest) ProtoMessage()               {}
 func (*PackedTest) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{6} }
+func (m *PackedTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_PackedTest.Unmarshal(m, b)
+}
+func (m *PackedTest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PackedTest.Marshal(b, m, deterministic)
+}
+func (dst *PackedTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PackedTest.Merge(dst, src)
+}
+func (m *PackedTest) XXX_Size() int {
+	return xxx_messageInfo_PackedTest.Size(m)
+}
+func (m *PackedTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PackedTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PackedTest proto.InternalMessageInfo
 
 func (m *PackedTest) GetB() []int32 {
 	if m != nil {
@@ -1240,14 +1468,33 @@ func (m *PackedTest) GetB() []int32 {
 
 type MaxTag struct {
 	// Maximum possible tag number.
-	LastField        *string `protobuf:"bytes,536870911,opt,name=last_field,json=lastField" json:"last_field,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	LastField            *string  `protobuf:"bytes,536870911,opt,name=last_field,json=lastField" json:"last_field,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MaxTag) Reset()                    { *m = MaxTag{} }
 func (m *MaxTag) String() string            { return proto.CompactTextString(m) }
 func (*MaxTag) ProtoMessage()               {}
 func (*MaxTag) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{7} }
+func (m *MaxTag) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MaxTag.Unmarshal(m, b)
+}
+func (m *MaxTag) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MaxTag.Marshal(b, m, deterministic)
+}
+func (dst *MaxTag) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MaxTag.Merge(dst, src)
+}
+func (m *MaxTag) XXX_Size() int {
+	return xxx_messageInfo_MaxTag.Size(m)
+}
+func (m *MaxTag) XXX_DiscardUnknown() {
+	xxx_messageInfo_MaxTag.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MaxTag proto.InternalMessageInfo
 
 func (m *MaxTag) GetLastField() string {
 	if m != nil && m.LastField != nil {
@@ -1257,15 +1504,34 @@ func (m *MaxTag) GetLastField() string {
 }
 
 type OldMessage struct {
-	Nested           *OldMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
-	Num              *int32             `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Nested               *OldMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
+	Num                  *int32             `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *OldMessage) Reset()                    { *m = OldMessage{} }
 func (m *OldMessage) String() string            { return proto.CompactTextString(m) }
 func (*OldMessage) ProtoMessage()               {}
 func (*OldMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{8} }
+func (m *OldMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldMessage.Unmarshal(m, b)
+}
+func (m *OldMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldMessage.Marshal(b, m, deterministic)
+}
+func (dst *OldMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OldMessage.Merge(dst, src)
+}
+func (m *OldMessage) XXX_Size() int {
+	return xxx_messageInfo_OldMessage.Size(m)
+}
+func (m *OldMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_OldMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OldMessage proto.InternalMessageInfo
 
 func (m *OldMessage) GetNested() *OldMessage_Nested {
 	if m != nil {
@@ -1282,14 +1548,33 @@ func (m *OldMessage) GetNum() int32 {
 }
 
 type OldMessage_Nested struct {
-	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Name                 *string  `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *OldMessage_Nested) Reset()                    { *m = OldMessage_Nested{} }
 func (m *OldMessage_Nested) String() string            { return proto.CompactTextString(m) }
 func (*OldMessage_Nested) ProtoMessage()               {}
 func (*OldMessage_Nested) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{8, 0} }
+func (m *OldMessage_Nested) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldMessage_Nested.Unmarshal(m, b)
+}
+func (m *OldMessage_Nested) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldMessage_Nested.Marshal(b, m, deterministic)
+}
+func (dst *OldMessage_Nested) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OldMessage_Nested.Merge(dst, src)
+}
+func (m *OldMessage_Nested) XXX_Size() int {
+	return xxx_messageInfo_OldMessage_Nested.Size(m)
+}
+func (m *OldMessage_Nested) XXX_DiscardUnknown() {
+	xxx_messageInfo_OldMessage_Nested.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OldMessage_Nested proto.InternalMessageInfo
 
 func (m *OldMessage_Nested) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1303,14 +1588,33 @@ func (m *OldMessage_Nested) GetName() string {
 type NewMessage struct {
 	Nested *NewMessage_Nested `protobuf:"bytes,1,opt,name=nested" json:"nested,omitempty"`
 	// This is an int32 in OldMessage.
-	Num              *int64 `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Num                  *int64   `protobuf:"varint,2,opt,name=num" json:"num,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NewMessage) Reset()                    { *m = NewMessage{} }
 func (m *NewMessage) String() string            { return proto.CompactTextString(m) }
 func (*NewMessage) ProtoMessage()               {}
 func (*NewMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{9} }
+func (m *NewMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NewMessage.Unmarshal(m, b)
+}
+func (m *NewMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NewMessage.Marshal(b, m, deterministic)
+}
+func (dst *NewMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NewMessage.Merge(dst, src)
+}
+func (m *NewMessage) XXX_Size() int {
+	return xxx_messageInfo_NewMessage.Size(m)
+}
+func (m *NewMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_NewMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NewMessage proto.InternalMessageInfo
 
 func (m *NewMessage) GetNested() *NewMessage_Nested {
 	if m != nil {
@@ -1327,15 +1631,34 @@ func (m *NewMessage) GetNum() int64 {
 }
 
 type NewMessage_Nested struct {
-	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	FoodGroup        *string `protobuf:"bytes,2,opt,name=food_group,json=foodGroup" json:"food_group,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Name                 *string  `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	FoodGroup            *string  `protobuf:"bytes,2,opt,name=food_group,json=foodGroup" json:"food_group,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NewMessage_Nested) Reset()                    { *m = NewMessage_Nested{} }
 func (m *NewMessage_Nested) String() string            { return proto.CompactTextString(m) }
 func (*NewMessage_Nested) ProtoMessage()               {}
 func (*NewMessage_Nested) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{9, 0} }
+func (m *NewMessage_Nested) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NewMessage_Nested.Unmarshal(m, b)
+}
+func (m *NewMessage_Nested) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NewMessage_Nested.Marshal(b, m, deterministic)
+}
+func (dst *NewMessage_Nested) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NewMessage_Nested.Merge(dst, src)
+}
+func (m *NewMessage_Nested) XXX_Size() int {
+	return xxx_messageInfo_NewMessage_Nested.Size(m)
+}
+func (m *NewMessage_Nested) XXX_DiscardUnknown() {
+	xxx_messageInfo_NewMessage_Nested.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NewMessage_Nested proto.InternalMessageInfo
 
 func (m *NewMessage_Nested) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1352,16 +1675,35 @@ func (m *NewMessage_Nested) GetFoodGroup() string {
 }
 
 type InnerMessage struct {
-	Host             *string `protobuf:"bytes,1,req,name=host" json:"host,omitempty"`
-	Port             *int32  `protobuf:"varint,2,opt,name=port,def=4000" json:"port,omitempty"`
-	Connected        *bool   `protobuf:"varint,3,opt,name=connected" json:"connected,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Host                 *string  `protobuf:"bytes,1,req,name=host" json:"host,omitempty"`
+	Port                 *int32   `protobuf:"varint,2,opt,name=port,def=4000" json:"port,omitempty"`
+	Connected            *bool    `protobuf:"varint,3,opt,name=connected" json:"connected,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *InnerMessage) Reset()                    { *m = InnerMessage{} }
 func (m *InnerMessage) String() string            { return proto.CompactTextString(m) }
 func (*InnerMessage) ProtoMessage()               {}
 func (*InnerMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{10} }
+func (m *InnerMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_InnerMessage.Unmarshal(m, b)
+}
+func (m *InnerMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_InnerMessage.Marshal(b, m, deterministic)
+}
+func (dst *InnerMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InnerMessage.Merge(dst, src)
+}
+func (m *InnerMessage) XXX_Size() int {
+	return xxx_messageInfo_InnerMessage.Size(m)
+}
+func (m *InnerMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_InnerMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InnerMessage proto.InternalMessageInfo
 
 const Default_InnerMessage_Port int32 = 4000
 
@@ -1391,8 +1733,10 @@ type OtherMessage struct {
 	Value                        []byte        `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
 	Weight                       *float32      `protobuf:"fixed32,3,opt,name=weight" json:"weight,omitempty"`
 	Inner                        *InnerMessage `protobuf:"bytes,4,opt,name=inner" json:"inner,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{}      `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *OtherMessage) Reset()                    { *m = OtherMessage{} }
@@ -1407,6 +1751,23 @@ var extRange_OtherMessage = []proto.ExtensionRange{
 func (*OtherMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherMessage
 }
+func (m *OtherMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OtherMessage.Unmarshal(m, b)
+}
+func (m *OtherMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OtherMessage.Marshal(b, m, deterministic)
+}
+func (dst *OtherMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OtherMessage.Merge(dst, src)
+}
+func (m *OtherMessage) XXX_Size() int {
+	return xxx_messageInfo_OtherMessage.Size(m)
+}
+func (m *OtherMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_OtherMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OtherMessage proto.InternalMessageInfo
 
 func (m *OtherMessage) GetKey() int64 {
 	if m != nil && m.Key != nil {
@@ -1438,13 +1799,32 @@ func (m *OtherMessage) GetInner() *InnerMessage {
 
 type RequiredInnerMessage struct {
 	LeoFinallyWonAnOscar *InnerMessage `protobuf:"bytes,1,req,name=leo_finally_won_an_oscar,json=leoFinallyWonAnOscar" json:"leo_finally_won_an_oscar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
 }
 
 func (m *RequiredInnerMessage) Reset()                    { *m = RequiredInnerMessage{} }
 func (m *RequiredInnerMessage) String() string            { return proto.CompactTextString(m) }
 func (*RequiredInnerMessage) ProtoMessage()               {}
 func (*RequiredInnerMessage) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{12} }
+func (m *RequiredInnerMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_RequiredInnerMessage.Unmarshal(m, b)
+}
+func (m *RequiredInnerMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RequiredInnerMessage.Marshal(b, m, deterministic)
+}
+func (dst *RequiredInnerMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RequiredInnerMessage.Merge(dst, src)
+}
+func (m *RequiredInnerMessage) XXX_Size() int {
+	return xxx_messageInfo_RequiredInnerMessage.Size(m)
+}
+func (m *RequiredInnerMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_RequiredInnerMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RequiredInnerMessage proto.InternalMessageInfo
 
 func (m *RequiredInnerMessage) GetLeoFinallyWonAnOscar() *InnerMessage {
 	if m != nil {
@@ -1467,8 +1847,10 @@ type MyMessage struct {
 	// This field becomes [][]byte in the generated code.
 	RepBytes                     [][]byte `protobuf:"bytes,10,rep,name=rep_bytes,json=repBytes" json:"rep_bytes,omitempty"`
 	Bigfloat                     *float64 `protobuf:"fixed64,11,opt,name=bigfloat" json:"bigfloat,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
@@ -1483,6 +1865,23 @@ var extRange_MyMessage = []proto.ExtensionRange{
 func (*MyMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyMessage
 }
+func (m *MyMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
+}
+func (m *MyMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
+}
+func (dst *MyMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage.Merge(dst, src)
+}
+func (m *MyMessage) XXX_Size() int {
+	return xxx_messageInfo_MyMessage.Size(m)
+}
+func (m *MyMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessage proto.InternalMessageInfo
 
 func (m *MyMessage) GetCount() int32 {
 	if m != nil && m.Count != nil {
@@ -1569,14 +1968,33 @@ func (m *MyMessage) GetBigfloat() float64 {
 }
 
 type MyMessage_SomeGroup struct {
-	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field,json=groupField" json:"group_field,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	GroupField           *int32   `protobuf:"varint,9,opt,name=group_field,json=groupField" json:"group_field,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MyMessage_SomeGroup) Reset()                    { *m = MyMessage_SomeGroup{} }
 func (m *MyMessage_SomeGroup) String() string            { return proto.CompactTextString(m) }
 func (*MyMessage_SomeGroup) ProtoMessage()               {}
 func (*MyMessage_SomeGroup) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{13, 0} }
+func (m *MyMessage_SomeGroup) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyMessage_SomeGroup.Unmarshal(m, b)
+}
+func (m *MyMessage_SomeGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyMessage_SomeGroup.Marshal(b, m, deterministic)
+}
+func (dst *MyMessage_SomeGroup) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage_SomeGroup.Merge(dst, src)
+}
+func (m *MyMessage_SomeGroup) XXX_Size() int {
+	return xxx_messageInfo_MyMessage_SomeGroup.Size(m)
+}
+func (m *MyMessage_SomeGroup) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessage_SomeGroup.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessage_SomeGroup proto.InternalMessageInfo
 
 func (m *MyMessage_SomeGroup) GetGroupField() int32 {
 	if m != nil && m.GroupField != nil {
@@ -1586,15 +2004,34 @@ func (m *MyMessage_SomeGroup) GetGroupField() int32 {
 }
 
 type Ext struct {
-	Data             *string         `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	MapField         map[int32]int32 `protobuf:"bytes,2,rep,name=map_field,json=mapField" json:"map_field,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	XXX_unrecognized []byte          `json:"-"`
+	Data                 *string         `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
+	MapField             map[int32]int32 `protobuf:"bytes,2,rep,name=map_field,json=mapField" json:"map_field,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *Ext) Reset()                    { *m = Ext{} }
 func (m *Ext) String() string            { return proto.CompactTextString(m) }
 func (*Ext) ProtoMessage()               {}
 func (*Ext) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{14} }
+func (m *Ext) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Ext.Unmarshal(m, b)
+}
+func (m *Ext) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Ext.Marshal(b, m, deterministic)
+}
+func (dst *Ext) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Ext.Merge(dst, src)
+}
+func (m *Ext) XXX_Size() int {
+	return xxx_messageInfo_Ext.Size(m)
+}
+func (m *Ext) XXX_DiscardUnknown() {
+	xxx_messageInfo_Ext.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Ext proto.InternalMessageInfo
 
 func (m *Ext) GetData() string {
 	if m != nil && m.Data != nil {
@@ -1638,16 +2075,35 @@ var E_Ext_Number = &proto.ExtensionDesc{
 }
 
 type ComplexExtension struct {
-	First            *int32  `protobuf:"varint,1,opt,name=first" json:"first,omitempty"`
-	Second           *int32  `protobuf:"varint,2,opt,name=second" json:"second,omitempty"`
-	Third            []int32 `protobuf:"varint,3,rep,name=third" json:"third,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	First                *int32   `protobuf:"varint,1,opt,name=first" json:"first,omitempty"`
+	Second               *int32   `protobuf:"varint,2,opt,name=second" json:"second,omitempty"`
+	Third                []int32  `protobuf:"varint,3,rep,name=third" json:"third,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ComplexExtension) Reset()                    { *m = ComplexExtension{} }
 func (m *ComplexExtension) String() string            { return proto.CompactTextString(m) }
 func (*ComplexExtension) ProtoMessage()               {}
 func (*ComplexExtension) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{15} }
+func (m *ComplexExtension) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ComplexExtension.Unmarshal(m, b)
+}
+func (m *ComplexExtension) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ComplexExtension.Marshal(b, m, deterministic)
+}
+func (dst *ComplexExtension) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ComplexExtension.Merge(dst, src)
+}
+func (m *ComplexExtension) XXX_Size() int {
+	return xxx_messageInfo_ComplexExtension.Size(m)
+}
+func (m *ComplexExtension) XXX_DiscardUnknown() {
+	xxx_messageInfo_ComplexExtension.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ComplexExtension proto.InternalMessageInfo
 
 func (m *ComplexExtension) GetFirst() int32 {
 	if m != nil && m.First != nil {
@@ -1671,8 +2127,10 @@ func (m *ComplexExtension) GetThird() []int32 {
 }
 
 type DefaultsMessage struct {
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *DefaultsMessage) Reset()                    { *m = DefaultsMessage{} }
@@ -1687,10 +2145,29 @@ var extRange_DefaultsMessage = []proto.ExtensionRange{
 func (*DefaultsMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_DefaultsMessage
 }
+func (m *DefaultsMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_DefaultsMessage.Unmarshal(m, b)
+}
+func (m *DefaultsMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DefaultsMessage.Marshal(b, m, deterministic)
+}
+func (dst *DefaultsMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DefaultsMessage.Merge(dst, src)
+}
+func (m *DefaultsMessage) XXX_Size() int {
+	return xxx_messageInfo_DefaultsMessage.Size(m)
+}
+func (m *DefaultsMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_DefaultsMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DefaultsMessage proto.InternalMessageInfo
 
 type MyMessageSet struct {
-	proto.XXX_InternalExtensions `json:"-"`
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
+	proto.XXX_InternalExtensions `protobuf_messageset:"1" json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *MyMessageSet) Reset()                    { *m = MyMessageSet{} }
@@ -1698,12 +2175,6 @@ func (m *MyMessageSet) String() string            { return proto.CompactTextStri
 func (*MyMessageSet) ProtoMessage()               {}
 func (*MyMessageSet) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{17} }
 
-func (m *MyMessageSet) Marshal() ([]byte, error) {
-	return proto.MarshalMessageSet(&m.XXX_InternalExtensions)
-}
-func (m *MyMessageSet) Unmarshal(buf []byte) error {
-	return proto.UnmarshalMessageSet(buf, &m.XXX_InternalExtensions)
-}
 func (m *MyMessageSet) MarshalJSON() ([]byte, error) {
 	return proto.MarshalMessageSetJSON(&m.XXX_InternalExtensions)
 }
@@ -1711,8 +2182,7 @@ func (m *MyMessageSet) UnmarshalJSON(buf []byte) error {
 	return proto.UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)
 }
 
-// ensure MyMessageSet satisfies proto.Marshaler and proto.Unmarshaler
-var _ proto.Marshaler = (*MyMessageSet)(nil)
+// ensure MyMessageSet satisfies proto.Unmarshaler
 var _ proto.Unmarshaler = (*MyMessageSet)(nil)
 
 var extRange_MyMessageSet = []proto.ExtensionRange{
@@ -1722,25 +2192,80 @@ var extRange_MyMessageSet = []proto.ExtensionRange{
 func (*MyMessageSet) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyMessageSet
 }
+func (m *MyMessageSet) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyMessageSet.Unmarshal(m, b)
+}
+func (m *MyMessageSet) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyMessageSet.Marshal(b, m, deterministic)
+}
+func (dst *MyMessageSet) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessageSet.Merge(dst, src)
+}
+func (m *MyMessageSet) XXX_Size() int {
+	return xxx_messageInfo_MyMessageSet.Size(m)
+}
+func (m *MyMessageSet) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessageSet.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessageSet proto.InternalMessageInfo
 
 type Empty struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (m *Empty) String() string            { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{18} }
+func (m *Empty) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Empty.Unmarshal(m, b)
+}
+func (m *Empty) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
+}
+func (dst *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(dst, src)
+}
+func (m *Empty) XXX_Size() int {
+	return xxx_messageInfo_Empty.Size(m)
+}
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 type MessageList struct {
-	Message          []*MessageList_Message `protobuf:"group,1,rep,name=Message,json=message" json:"message,omitempty"`
-	XXX_unrecognized []byte                 `json:"-"`
+	Message              []*MessageList_Message `protobuf:"group,1,rep,name=Message,json=message" json:"message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
+	XXX_unrecognized     []byte                 `json:"-"`
+	XXX_sizecache        int32                  `json:"-"`
 }
 
 func (m *MessageList) Reset()                    { *m = MessageList{} }
 func (m *MessageList) String() string            { return proto.CompactTextString(m) }
 func (*MessageList) ProtoMessage()               {}
 func (*MessageList) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{19} }
+func (m *MessageList) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MessageList.Unmarshal(m, b)
+}
+func (m *MessageList) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MessageList.Marshal(b, m, deterministic)
+}
+func (dst *MessageList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageList.Merge(dst, src)
+}
+func (m *MessageList) XXX_Size() int {
+	return xxx_messageInfo_MessageList.Size(m)
+}
+func (m *MessageList) XXX_DiscardUnknown() {
+	xxx_messageInfo_MessageList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MessageList proto.InternalMessageInfo
 
 func (m *MessageList) GetMessage() []*MessageList_Message {
 	if m != nil {
@@ -1750,15 +2275,34 @@ func (m *MessageList) GetMessage() []*MessageList_Message {
 }
 
 type MessageList_Message struct {
-	Name             *string `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
-	Count            *int32  `protobuf:"varint,3,req,name=count" json:"count,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Name                 *string  `protobuf:"bytes,2,req,name=name" json:"name,omitempty"`
+	Count                *int32   `protobuf:"varint,3,req,name=count" json:"count,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MessageList_Message) Reset()                    { *m = MessageList_Message{} }
 func (m *MessageList_Message) String() string            { return proto.CompactTextString(m) }
 func (*MessageList_Message) ProtoMessage()               {}
 func (*MessageList_Message) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{19, 0} }
+func (m *MessageList_Message) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MessageList_Message.Unmarshal(m, b)
+}
+func (m *MessageList_Message) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MessageList_Message.Marshal(b, m, deterministic)
+}
+func (dst *MessageList_Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageList_Message.Merge(dst, src)
+}
+func (m *MessageList_Message) XXX_Size() int {
+	return xxx_messageInfo_MessageList_Message.Size(m)
+}
+func (m *MessageList_Message) XXX_DiscardUnknown() {
+	xxx_messageInfo_MessageList_Message.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MessageList_Message proto.InternalMessageInfo
 
 func (m *MessageList_Message) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1775,15 +2319,34 @@ func (m *MessageList_Message) GetCount() int32 {
 }
 
 type Strings struct {
-	StringField      *string `protobuf:"bytes,1,opt,name=string_field,json=stringField" json:"string_field,omitempty"`
-	BytesField       []byte  `protobuf:"bytes,2,opt,name=bytes_field,json=bytesField" json:"bytes_field,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	StringField          *string  `protobuf:"bytes,1,opt,name=string_field,json=stringField" json:"string_field,omitempty"`
+	BytesField           []byte   `protobuf:"bytes,2,opt,name=bytes_field,json=bytesField" json:"bytes_field,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Strings) Reset()                    { *m = Strings{} }
 func (m *Strings) String() string            { return proto.CompactTextString(m) }
 func (*Strings) ProtoMessage()               {}
 func (*Strings) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{20} }
+func (m *Strings) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Strings.Unmarshal(m, b)
+}
+func (m *Strings) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Strings.Marshal(b, m, deterministic)
+}
+func (dst *Strings) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Strings.Merge(dst, src)
+}
+func (m *Strings) XXX_Size() int {
+	return xxx_messageInfo_Strings.Size(m)
+}
+func (m *Strings) XXX_DiscardUnknown() {
+	xxx_messageInfo_Strings.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Strings proto.InternalMessageInfo
 
 func (m *Strings) GetStringField() string {
 	if m != nil && m.StringField != nil {
@@ -1823,14 +2386,33 @@ type Defaults struct {
 	// Sub-message.
 	Sub *SubDefaults `protobuf:"bytes,18,opt,name=sub" json:"sub,omitempty"`
 	// Redundant but explicit defaults.
-	StrZero          *string `protobuf:"bytes,19,opt,name=str_zero,json=strZero,def=" json:"str_zero,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	StrZero              *string  `protobuf:"bytes,19,opt,name=str_zero,json=strZero,def=" json:"str_zero,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Defaults) Reset()                    { *m = Defaults{} }
 func (m *Defaults) String() string            { return proto.CompactTextString(m) }
 func (*Defaults) ProtoMessage()               {}
 func (*Defaults) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{21} }
+func (m *Defaults) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Defaults.Unmarshal(m, b)
+}
+func (m *Defaults) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Defaults.Marshal(b, m, deterministic)
+}
+func (dst *Defaults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Defaults.Merge(dst, src)
+}
+func (m *Defaults) XXX_Size() int {
+	return xxx_messageInfo_Defaults.Size(m)
+}
+func (m *Defaults) XXX_DiscardUnknown() {
+	xxx_messageInfo_Defaults.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Defaults proto.InternalMessageInfo
 
 const Default_Defaults_F_Bool bool = true
 const Default_Defaults_F_Int32 int32 = 32
@@ -1987,14 +2569,33 @@ func (m *Defaults) GetStrZero() string {
 }
 
 type SubDefaults struct {
-	N                *int64 `protobuf:"varint,1,opt,name=n,def=7" json:"n,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	N                    *int64   `protobuf:"varint,1,opt,name=n,def=7" json:"n,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *SubDefaults) Reset()                    { *m = SubDefaults{} }
 func (m *SubDefaults) String() string            { return proto.CompactTextString(m) }
 func (*SubDefaults) ProtoMessage()               {}
 func (*SubDefaults) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{22} }
+func (m *SubDefaults) Unmarshal(b []byte) error {
+	return xxx_messageInfo_SubDefaults.Unmarshal(m, b)
+}
+func (m *SubDefaults) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SubDefaults.Marshal(b, m, deterministic)
+}
+func (dst *SubDefaults) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubDefaults.Merge(dst, src)
+}
+func (m *SubDefaults) XXX_Size() int {
+	return xxx_messageInfo_SubDefaults.Size(m)
+}
+func (m *SubDefaults) XXX_DiscardUnknown() {
+	xxx_messageInfo_SubDefaults.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SubDefaults proto.InternalMessageInfo
 
 const Default_SubDefaults_N int64 = 7
 
@@ -2006,14 +2607,33 @@ func (m *SubDefaults) GetN() int64 {
 }
 
 type RepeatedEnum struct {
-	Color            []RepeatedEnum_Color `protobuf:"varint,1,rep,name=color,enum=test_proto.RepeatedEnum_Color" json:"color,omitempty"`
-	XXX_unrecognized []byte               `json:"-"`
+	Color                []RepeatedEnum_Color `protobuf:"varint,1,rep,name=color,enum=test_proto.RepeatedEnum_Color" json:"color,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *RepeatedEnum) Reset()                    { *m = RepeatedEnum{} }
 func (m *RepeatedEnum) String() string            { return proto.CompactTextString(m) }
 func (*RepeatedEnum) ProtoMessage()               {}
 func (*RepeatedEnum) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{23} }
+func (m *RepeatedEnum) Unmarshal(b []byte) error {
+	return xxx_messageInfo_RepeatedEnum.Unmarshal(m, b)
+}
+func (m *RepeatedEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RepeatedEnum.Marshal(b, m, deterministic)
+}
+func (dst *RepeatedEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepeatedEnum.Merge(dst, src)
+}
+func (m *RepeatedEnum) XXX_Size() int {
+	return xxx_messageInfo_RepeatedEnum.Size(m)
+}
+func (m *RepeatedEnum) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepeatedEnum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepeatedEnum proto.InternalMessageInfo
 
 func (m *RepeatedEnum) GetColor() []RepeatedEnum_Color {
 	if m != nil {
@@ -2023,20 +2643,39 @@ func (m *RepeatedEnum) GetColor() []RepeatedEnum_Color {
 }
 
 type MoreRepeated struct {
-	Bools            []bool   `protobuf:"varint,1,rep,name=bools" json:"bools,omitempty"`
-	BoolsPacked      []bool   `protobuf:"varint,2,rep,packed,name=bools_packed,json=boolsPacked" json:"bools_packed,omitempty"`
-	Ints             []int32  `protobuf:"varint,3,rep,name=ints" json:"ints,omitempty"`
-	IntsPacked       []int32  `protobuf:"varint,4,rep,packed,name=ints_packed,json=intsPacked" json:"ints_packed,omitempty"`
-	Int64SPacked     []int64  `protobuf:"varint,7,rep,packed,name=int64s_packed,json=int64sPacked" json:"int64s_packed,omitempty"`
-	Strings          []string `protobuf:"bytes,5,rep,name=strings" json:"strings,omitempty"`
-	Fixeds           []uint32 `protobuf:"fixed32,6,rep,name=fixeds" json:"fixeds,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Bools                []bool   `protobuf:"varint,1,rep,name=bools" json:"bools,omitempty"`
+	BoolsPacked          []bool   `protobuf:"varint,2,rep,packed,name=bools_packed,json=boolsPacked" json:"bools_packed,omitempty"`
+	Ints                 []int32  `protobuf:"varint,3,rep,name=ints" json:"ints,omitempty"`
+	IntsPacked           []int32  `protobuf:"varint,4,rep,packed,name=ints_packed,json=intsPacked" json:"ints_packed,omitempty"`
+	Int64SPacked         []int64  `protobuf:"varint,7,rep,packed,name=int64s_packed,json=int64sPacked" json:"int64s_packed,omitempty"`
+	Strings              []string `protobuf:"bytes,5,rep,name=strings" json:"strings,omitempty"`
+	Fixeds               []uint32 `protobuf:"fixed32,6,rep,name=fixeds" json:"fixeds,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MoreRepeated) Reset()                    { *m = MoreRepeated{} }
 func (m *MoreRepeated) String() string            { return proto.CompactTextString(m) }
 func (*MoreRepeated) ProtoMessage()               {}
 func (*MoreRepeated) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{24} }
+func (m *MoreRepeated) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MoreRepeated.Unmarshal(m, b)
+}
+func (m *MoreRepeated) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MoreRepeated.Marshal(b, m, deterministic)
+}
+func (dst *MoreRepeated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MoreRepeated.Merge(dst, src)
+}
+func (m *MoreRepeated) XXX_Size() int {
+	return xxx_messageInfo_MoreRepeated.Size(m)
+}
+func (m *MoreRepeated) XXX_DiscardUnknown() {
+	xxx_messageInfo_MoreRepeated.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MoreRepeated proto.InternalMessageInfo
 
 func (m *MoreRepeated) GetBools() []bool {
 	if m != nil {
@@ -2088,14 +2727,33 @@ func (m *MoreRepeated) GetFixeds() []uint32 {
 }
 
 type GroupOld struct {
-	G                *GroupOld_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	G                    *GroupOld_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *GroupOld) Reset()                    { *m = GroupOld{} }
 func (m *GroupOld) String() string            { return proto.CompactTextString(m) }
 func (*GroupOld) ProtoMessage()               {}
 func (*GroupOld) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{25} }
+func (m *GroupOld) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupOld.Unmarshal(m, b)
+}
+func (m *GroupOld) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupOld.Marshal(b, m, deterministic)
+}
+func (dst *GroupOld) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupOld.Merge(dst, src)
+}
+func (m *GroupOld) XXX_Size() int {
+	return xxx_messageInfo_GroupOld.Size(m)
+}
+func (m *GroupOld) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupOld.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupOld proto.InternalMessageInfo
 
 func (m *GroupOld) GetG() *GroupOld_G {
 	if m != nil {
@@ -2105,14 +2763,33 @@ func (m *GroupOld) GetG() *GroupOld_G {
 }
 
 type GroupOld_G struct {
-	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GroupOld_G) Reset()                    { *m = GroupOld_G{} }
 func (m *GroupOld_G) String() string            { return proto.CompactTextString(m) }
 func (*GroupOld_G) ProtoMessage()               {}
 func (*GroupOld_G) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{25, 0} }
+func (m *GroupOld_G) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupOld_G.Unmarshal(m, b)
+}
+func (m *GroupOld_G) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupOld_G.Marshal(b, m, deterministic)
+}
+func (dst *GroupOld_G) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupOld_G.Merge(dst, src)
+}
+func (m *GroupOld_G) XXX_Size() int {
+	return xxx_messageInfo_GroupOld_G.Size(m)
+}
+func (m *GroupOld_G) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupOld_G.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupOld_G proto.InternalMessageInfo
 
 func (m *GroupOld_G) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -2122,14 +2799,33 @@ func (m *GroupOld_G) GetX() int32 {
 }
 
 type GroupNew struct {
-	G                *GroupNew_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	G                    *GroupNew_G `protobuf:"group,101,opt,name=G,json=g" json:"g,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *GroupNew) Reset()                    { *m = GroupNew{} }
 func (m *GroupNew) String() string            { return proto.CompactTextString(m) }
 func (*GroupNew) ProtoMessage()               {}
 func (*GroupNew) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{26} }
+func (m *GroupNew) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupNew.Unmarshal(m, b)
+}
+func (m *GroupNew) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupNew.Marshal(b, m, deterministic)
+}
+func (dst *GroupNew) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupNew.Merge(dst, src)
+}
+func (m *GroupNew) XXX_Size() int {
+	return xxx_messageInfo_GroupNew.Size(m)
+}
+func (m *GroupNew) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupNew.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupNew proto.InternalMessageInfo
 
 func (m *GroupNew) GetG() *GroupNew_G {
 	if m != nil {
@@ -2139,15 +2835,34 @@ func (m *GroupNew) GetG() *GroupNew_G {
 }
 
 type GroupNew_G struct {
-	X                *int32 `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
-	Y                *int32 `protobuf:"varint,3,opt,name=y" json:"y,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,2,opt,name=x" json:"x,omitempty"`
+	Y                    *int32   `protobuf:"varint,3,opt,name=y" json:"y,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *GroupNew_G) Reset()                    { *m = GroupNew_G{} }
 func (m *GroupNew_G) String() string            { return proto.CompactTextString(m) }
 func (*GroupNew_G) ProtoMessage()               {}
 func (*GroupNew_G) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{26, 0} }
+func (m *GroupNew_G) Unmarshal(b []byte) error {
+	return xxx_messageInfo_GroupNew_G.Unmarshal(m, b)
+}
+func (m *GroupNew_G) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GroupNew_G.Marshal(b, m, deterministic)
+}
+func (dst *GroupNew_G) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupNew_G.Merge(dst, src)
+}
+func (m *GroupNew_G) XXX_Size() int {
+	return xxx_messageInfo_GroupNew_G.Size(m)
+}
+func (m *GroupNew_G) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupNew_G.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupNew_G proto.InternalMessageInfo
 
 func (m *GroupNew_G) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -2164,15 +2879,34 @@ func (m *GroupNew_G) GetY() int32 {
 }
 
 type FloatingPoint struct {
-	F                *float64 `protobuf:"fixed64,1,req,name=f" json:"f,omitempty"`
-	Exact            *bool    `protobuf:"varint,2,opt,name=exact" json:"exact,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	F                    *float64 `protobuf:"fixed64,1,req,name=f" json:"f,omitempty"`
+	Exact                *bool    `protobuf:"varint,2,opt,name=exact" json:"exact,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FloatingPoint) Reset()                    { *m = FloatingPoint{} }
 func (m *FloatingPoint) String() string            { return proto.CompactTextString(m) }
 func (*FloatingPoint) ProtoMessage()               {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{27} }
+func (m *FloatingPoint) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+}
+func (m *FloatingPoint) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
+}
+func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FloatingPoint.Merge(dst, src)
+}
+func (m *FloatingPoint) XXX_Size() int {
+	return xxx_messageInfo_FloatingPoint.Size(m)
+}
+func (m *FloatingPoint) XXX_DiscardUnknown() {
+	xxx_messageInfo_FloatingPoint.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FloatingPoint proto.InternalMessageInfo
 
 func (m *FloatingPoint) GetF() float64 {
 	if m != nil && m.F != nil {
@@ -2189,17 +2923,36 @@ func (m *FloatingPoint) GetExact() bool {
 }
 
 type MessageWithMap struct {
-	NameMapping      map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	MsgMapping       map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ByteMapping      map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	StrToStr         map[string]string        `protobuf:"bytes,4,rep,name=str_to_str,json=strToStr" json:"str_to_str,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_unrecognized []byte                   `json:"-"`
+	NameMapping          map[int32]string         `protobuf:"bytes,1,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MsgMapping           map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ByteMapping          map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StrToStr             map[string]string        `protobuf:"bytes,4,rep,name=str_to_str,json=strToStr" json:"str_to_str,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MessageWithMap) Reset()                    { *m = MessageWithMap{} }
 func (m *MessageWithMap) String() string            { return proto.CompactTextString(m) }
 func (*MessageWithMap) ProtoMessage()               {}
 func (*MessageWithMap) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{28} }
+func (m *MessageWithMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
+}
+func (m *MessageWithMap) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MessageWithMap.Marshal(b, m, deterministic)
+}
+func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageWithMap.Merge(dst, src)
+}
+func (m *MessageWithMap) XXX_Size() int {
+	return xxx_messageInfo_MessageWithMap.Size(m)
+}
+func (m *MessageWithMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_MessageWithMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MessageWithMap proto.InternalMessageInfo
 
 func (m *MessageWithMap) GetNameMapping() map[int32]string {
 	if m != nil {
@@ -2251,14 +3004,33 @@ type Oneof struct {
 	Union isOneof_Union `protobuf_oneof:"union"`
 	// Types that are valid to be assigned to Tormato:
 	//	*Oneof_Value
-	Tormato          isOneof_Tormato `protobuf_oneof:"tormato"`
-	XXX_unrecognized []byte          `json:"-"`
+	Tormato              isOneof_Tormato `protobuf_oneof:"tormato"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *Oneof) Reset()                    { *m = Oneof{} }
 func (m *Oneof) String() string            { return proto.CompactTextString(m) }
 func (*Oneof) ProtoMessage()               {}
 func (*Oneof) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{29} }
+func (m *Oneof) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Oneof.Unmarshal(m, b)
+}
+func (m *Oneof) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Oneof.Marshal(b, m, deterministic)
+}
+func (dst *Oneof) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Oneof.Merge(dst, src)
+}
+func (m *Oneof) XXX_Size() int {
+	return xxx_messageInfo_Oneof.Size(m)
+}
+func (m *Oneof) XXX_DiscardUnknown() {
+	xxx_messageInfo_Oneof.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Oneof proto.InternalMessageInfo
 
 type isOneof_Union interface {
 	isOneof_Union()
@@ -2797,14 +3569,33 @@ func _Oneof_OneofSizer(msg proto.Message) (n int) {
 }
 
 type Oneof_F_Group struct {
-	X                *int32 `protobuf:"varint,17,opt,name=x" json:"x,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	X                    *int32   `protobuf:"varint,17,opt,name=x" json:"x,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Oneof_F_Group) Reset()                    { *m = Oneof_F_Group{} }
 func (m *Oneof_F_Group) String() string            { return proto.CompactTextString(m) }
 func (*Oneof_F_Group) ProtoMessage()               {}
 func (*Oneof_F_Group) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{29, 0} }
+func (m *Oneof_F_Group) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Oneof_F_Group.Unmarshal(m, b)
+}
+func (m *Oneof_F_Group) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Oneof_F_Group.Marshal(b, m, deterministic)
+}
+func (dst *Oneof_F_Group) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Oneof_F_Group.Merge(dst, src)
+}
+func (m *Oneof_F_Group) XXX_Size() int {
+	return xxx_messageInfo_Oneof_F_Group.Size(m)
+}
+func (m *Oneof_F_Group) XXX_DiscardUnknown() {
+	xxx_messageInfo_Oneof_F_Group.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Oneof_F_Group proto.InternalMessageInfo
 
 func (m *Oneof_F_Group) GetX() int32 {
 	if m != nil && m.X != nil {
@@ -2824,14 +3615,33 @@ type Communique struct {
 	//	*Communique_TempC
 	//	*Communique_Col
 	//	*Communique_Msg
-	Union            isCommunique_Union `protobuf_oneof:"union"`
-	XXX_unrecognized []byte             `json:"-"`
+	Union                isCommunique_Union `protobuf_oneof:"union"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *Communique) Reset()                    { *m = Communique{} }
 func (m *Communique) String() string            { return proto.CompactTextString(m) }
 func (*Communique) ProtoMessage()               {}
 func (*Communique) Descriptor() ([]byte, []int) { return fileDescriptorTest, []int{30} }
+func (m *Communique) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Communique.Unmarshal(m, b)
+}
+func (m *Communique) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Communique.Marshal(b, m, deterministic)
+}
+func (dst *Communique) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Communique.Merge(dst, src)
+}
+func (m *Communique) XXX_Size() int {
+	return xxx_messageInfo_Communique.Size(m)
+}
+func (m *Communique) XXX_DiscardUnknown() {
+	xxx_messageInfo_Communique.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Communique proto.InternalMessageInfo
 
 type isCommunique_Union interface {
 	isCommunique_Union()
@@ -3835,6 +4645,7 @@ func init() {
 	proto.RegisterType((*MyMessage)(nil), "test_proto.MyMessage")
 	proto.RegisterType((*MyMessage_SomeGroup)(nil), "test_proto.MyMessage.SomeGroup")
 	proto.RegisterType((*Ext)(nil), "test_proto.Ext")
+	proto.RegisterMapType((map[int32]int32)(nil), "test_proto.Ext.MapFieldEntry")
 	proto.RegisterType((*ComplexExtension)(nil), "test_proto.ComplexExtension")
 	proto.RegisterType((*DefaultsMessage)(nil), "test_proto.DefaultsMessage")
 	proto.RegisterType((*MyMessageSet)(nil), "test_proto.MyMessageSet")
@@ -3852,6 +4663,10 @@ func init() {
 	proto.RegisterType((*GroupNew_G)(nil), "test_proto.GroupNew.G")
 	proto.RegisterType((*FloatingPoint)(nil), "test_proto.FloatingPoint")
 	proto.RegisterType((*MessageWithMap)(nil), "test_proto.MessageWithMap")
+	proto.RegisterMapType((map[bool][]byte)(nil), "test_proto.MessageWithMap.ByteMappingEntry")
+	proto.RegisterMapType((map[int64]*FloatingPoint)(nil), "test_proto.MessageWithMap.MsgMappingEntry")
+	proto.RegisterMapType((map[int32]string)(nil), "test_proto.MessageWithMap.NameMappingEntry")
+	proto.RegisterMapType((map[string]string)(nil), "test_proto.MessageWithMap.StrToStrEntry")
 	proto.RegisterType((*Oneof)(nil), "test_proto.Oneof")
 	proto.RegisterType((*Oneof_F_Group)(nil), "test_proto.Oneof.F_Group")
 	proto.RegisterType((*Communique)(nil), "test_proto.Communique")
