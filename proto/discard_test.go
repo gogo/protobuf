@@ -63,14 +63,14 @@ func TestDiscardUnknown(t *testing.T) {
 	}, {
 		desc: "OneOf",
 		in: &pb.Communique{
-			Union: &pb.Communique_Msg{&pb.Strings{
+			Union: &pb.Communique_Msg{Msg: &pb.Strings{
 				StringField:      proto.String("123"),
 				XXX_unrecognized: []byte("blah"),
 			}},
 			XXX_unrecognized: []byte("blah"),
 		},
 		want: &pb.Communique{
-			Union: &pb.Communique_Msg{&pb.Strings{StringField: proto.String("123")}},
+			Union: &pb.Communique_Msg{Msg: &pb.Strings{StringField: proto.String("123")}},
 		},
 	}, {
 		desc: "Map",

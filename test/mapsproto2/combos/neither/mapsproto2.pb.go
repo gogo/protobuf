@@ -214,9 +214,6 @@ func (*AllMapsOrdered) Descriptor() ([]byte, []int) { return fileDescriptorMapsp
 func (m *AllMapsOrdered) Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
 }
-func (m *AllMapsOrdered) Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
-}
 func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
 }

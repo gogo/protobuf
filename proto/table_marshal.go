@@ -417,12 +417,12 @@ func (u *marshalInfo) getExtElemInfo(desc *ExtensionDesc) *marshalElemInfo {
 		panic("tag is not an integer")
 	}
 	wt := wiretype(tags[0])
-	sizer, marshaler := typeMarshaler(t, tags, false, false)
+	sizr, marshalr := typeMarshaler(t, tags, false, false)
 	e = &marshalElemInfo{
 		wiretag:   uint64(tag)<<3 | wt,
 		tagsize:   SizeVarint(uint64(tag) << 3),
-		sizer:     sizer,
-		marshaler: marshaler,
+		sizer:     sizr,
+		marshaler: marshalr,
 		isptr:     t.Kind() == reflect.Ptr,
 	}
 
@@ -476,12 +476,12 @@ func (fi *marshalFieldInfo) computeOneofFieldInfo(f *reflect.StructField, oneofI
 			panic("tag is not an integer")
 		}
 		wt := wiretype(tags[0])
-		sizer, marshaler := typeMarshaler(sf.Type, tags, false, true) // oneof should not omit any zero value
+		sizr, marshalr := typeMarshaler(sf.Type, tags, false, true) // oneof should not omit any zero value
 		fi.oneofElems[t.Elem()] = &marshalElemInfo{
 			wiretag:   uint64(tag)<<3 | wt,
 			tagsize:   SizeVarint(uint64(tag) << 3),
-			sizer:     sizer,
-			marshaler: marshaler,
+			sizer:     sizr,
+			marshaler: marshalr,
 		}
 	}
 }
@@ -2714,8 +2714,8 @@ func Marshal(pb Message) ([]byte, error) {
 // This is an alternative entry point. It is not necessary to use
 // a Buffer for most applications.
 func (p *Buffer) Marshal(pb Message) error {
-	var err error
 	if m, ok := pb.(newMarshaler); ok {
+		var err error
 		siz := m.XXX_Size()
 		// make sure buf has enough capacity
 		if newCap := len(p.buf) + siz; newCap > cap(p.buf) {
@@ -2741,6 +2741,7 @@ func (p *Buffer) Marshal(pb Message) error {
 	if newCap := len(p.buf) + siz; newCap > cap(p.buf) {
 		p.buf = append(make([]byte, 0, newCap), p.buf...)
 	}
+	var err error
 	p.buf, err = info.Marshal(p.buf, pb, p.deterministic)
 	return err
 }

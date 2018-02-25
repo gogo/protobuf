@@ -181,23 +181,23 @@ func (di *discardInfo) computeDiscardInfo() {
 			case !isPointer:
 				panic(fmt.Sprintf("message field %s without pointer", tf))
 			case isSlice: // E.g., []*pb.T
-				di := getDiscardInfo(tf)
+				discardInfo := getDiscardInfo(tf)
 				dfi.discard = func(src pointer) {
 					sps := src.getPointerSlice()
 					if sps != nil {
 						for _, sp := range sps {
 							if !sp.isNil() {
-								di.discard(sp)
+								discardInfo.discard(sp)
 							}
 						}
 					}
 				}
 			default: // E.g., *pb.T
-				di := getDiscardInfo(tf)
+				discardInfo := getDiscardInfo(tf)
 				dfi.discard = func(src pointer) {
 					sp := src.getPointer()
 					if !sp.isNil() {
-						di.discard(sp)
+						discardInfo.discard(sp)
 					}
 				}
 			}

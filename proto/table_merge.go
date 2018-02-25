@@ -533,7 +533,7 @@ func (mi *mergeInfo) computeMergeInfo() {
 			case !isPointer:
 				panic(fmt.Sprintf("message field %s without pointer", tf))
 			case isSlice: // E.g., []*pb.T
-				mi := getMergeInfo(tf)
+				mergeInfo := getMergeInfo(tf)
 				mfi.merge = func(dst, src pointer) {
 					sps := src.getPointerSlice()
 					if sps != nil {
@@ -542,7 +542,7 @@ func (mi *mergeInfo) computeMergeInfo() {
 							var dp pointer
 							if !sp.isNil() {
 								dp = valToPointer(reflect.New(tf))
-								mi.merge(dp, sp)
+								mergeInfo.merge(dp, sp)
 							}
 							dps = append(dps, dp)
 						}
@@ -553,7 +553,7 @@ func (mi *mergeInfo) computeMergeInfo() {
 					}
 				}
 			default: // E.g., *pb.T
-				mi := getMergeInfo(tf)
+				mergeInfo := getMergeInfo(tf)
 				mfi.merge = func(dst, src pointer) {
 					sp := src.getPointer()
 					if !sp.isNil() {
@@ -562,7 +562,7 @@ func (mi *mergeInfo) computeMergeInfo() {
 							dp = valToPointer(reflect.New(tf))
 							dst.setPointer(dp)
 						}
-						mi.merge(dp, sp)
+						mergeInfo.merge(dp, sp)
 					}
 				}
 			}

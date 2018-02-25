@@ -2445,7 +2445,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	if !gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) &&
-		!gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+		!gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) &&
+		!gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 		g.P("func (m *", ccTypeName, ") Marshal(b []byte, deterministic bool) ([]byte, error) {")
 		g.In()
 		g.P("return xxx_messageInfo_", ccTypeName, ".Marshal(b, m, deterministic)")
@@ -2573,7 +2574,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.P(`VerboseEqual(interface{}) error`)
 			}
 			if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
-				gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+				gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+				gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 				g.P(`MarshalTo([]byte) (int, error)`)
 			}
 			if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
