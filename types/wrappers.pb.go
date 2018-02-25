@@ -51,6 +51,7 @@ type DoubleValue struct {
 	// The double value.
 	Value                float64  `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -84,6 +85,7 @@ type FloatValue struct {
 	// The float value.
 	Value                float32  `protobuf:"fixed32,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -117,6 +119,7 @@ type Int64Value struct {
 	// The int64 value.
 	Value                int64    `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -150,6 +153,7 @@ type UInt64Value struct {
 	// The uint64 value.
 	Value                uint64   `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -183,6 +187,7 @@ type Int32Value struct {
 	// The int32 value.
 	Value                int32    `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -216,6 +221,7 @@ type UInt32Value struct {
 	// The uint32 value.
 	Value                uint32   `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -249,6 +255,7 @@ type BoolValue struct {
 	// The bool value.
 	Value                bool     `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -282,6 +289,7 @@ type StringValue struct {
 	// The string value.
 	Value                string   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -315,6 +323,7 @@ type BytesValue struct {
 	// The bytes value.
 	Value                []byte   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -383,6 +392,9 @@ func (this *DoubleValue) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *FloatValue) Compare(that interface{}) int {
@@ -415,6 +427,9 @@ func (this *FloatValue) Compare(that interface{}) int {
 			return -1
 		}
 		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
 	}
 	return 0
 }
@@ -449,6 +464,9 @@ func (this *Int64Value) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *UInt64Value) Compare(that interface{}) int {
@@ -481,6 +499,9 @@ func (this *UInt64Value) Compare(that interface{}) int {
 			return -1
 		}
 		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
 	}
 	return 0
 }
@@ -515,6 +536,9 @@ func (this *Int32Value) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *UInt32Value) Compare(that interface{}) int {
@@ -547,6 +571,9 @@ func (this *UInt32Value) Compare(that interface{}) int {
 			return -1
 		}
 		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
 	}
 	return 0
 }
@@ -581,6 +608,9 @@ func (this *BoolValue) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *StringValue) Compare(that interface{}) int {
@@ -614,6 +644,9 @@ func (this *StringValue) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *BytesValue) Compare(that interface{}) int {
@@ -644,6 +677,9 @@ func (this *BytesValue) Compare(that interface{}) int {
 	if c := bytes.Compare(this.Value, that1.Value); c != 0 {
 		return c
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *DoubleValue) Equal(that interface{}) bool {
@@ -666,6 +702,9 @@ func (this *DoubleValue) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Value != that1.Value {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -692,6 +731,9 @@ func (this *FloatValue) Equal(that interface{}) bool {
 	if this.Value != that1.Value {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Int64Value) Equal(that interface{}) bool {
@@ -714,6 +756,9 @@ func (this *Int64Value) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Value != that1.Value {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -740,6 +785,9 @@ func (this *UInt64Value) Equal(that interface{}) bool {
 	if this.Value != that1.Value {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Int32Value) Equal(that interface{}) bool {
@@ -762,6 +810,9 @@ func (this *Int32Value) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Value != that1.Value {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -788,6 +839,9 @@ func (this *UInt32Value) Equal(that interface{}) bool {
 	if this.Value != that1.Value {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *BoolValue) Equal(that interface{}) bool {
@@ -810,6 +864,9 @@ func (this *BoolValue) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Value != that1.Value {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -836,6 +893,9 @@ func (this *StringValue) Equal(that interface{}) bool {
 	if this.Value != that1.Value {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *BytesValue) Equal(that interface{}) bool {
@@ -860,6 +920,9 @@ func (this *BytesValue) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Value, that1.Value) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *DoubleValue) GoString() string {
@@ -869,6 +932,9 @@ func (this *DoubleValue) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.DoubleValue{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -879,6 +945,9 @@ func (this *FloatValue) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.FloatValue{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -889,6 +958,9 @@ func (this *Int64Value) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.Int64Value{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -899,6 +971,9 @@ func (this *UInt64Value) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.UInt64Value{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -909,6 +984,9 @@ func (this *Int32Value) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.Int32Value{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -919,6 +997,9 @@ func (this *UInt32Value) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.UInt32Value{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -929,6 +1010,9 @@ func (this *BoolValue) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.BoolValue{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -939,6 +1023,9 @@ func (this *StringValue) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.StringValue{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -949,6 +1036,9 @@ func (this *BytesValue) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.BytesValue{")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -981,6 +1071,11 @@ func (m *DoubleValue) MarshalTo(dAtA []byte) (int, error) {
 		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Value))))
 		i += 8
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1005,6 +1100,11 @@ func (m *FloatValue) MarshalTo(dAtA []byte) (int, error) {
 		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Value))))
 		i += 4
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1027,6 +1127,11 @@ func (m *Int64Value) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -1051,6 +1156,11 @@ func (m *UInt64Value) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1074,6 +1184,11 @@ func (m *Int32Value) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1096,6 +1211,11 @@ func (m *UInt32Value) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -1125,6 +1245,11 @@ func (m *BoolValue) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1148,6 +1273,11 @@ func (m *StringValue) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintWrappers(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -1173,6 +1303,11 @@ func (m *BytesValue) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintWrappers(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1192,6 +1327,9 @@ func NewPopulatedDoubleValue(r randyWrappers, easy bool) *DoubleValue {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1203,6 +1341,9 @@ func NewPopulatedFloatValue(r randyWrappers, easy bool) *FloatValue {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1214,6 +1355,9 @@ func NewPopulatedInt64Value(r randyWrappers, easy bool) *Int64Value {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1222,6 +1366,9 @@ func NewPopulatedUInt64Value(r randyWrappers, easy bool) *UInt64Value {
 	this := &UInt64Value{}
 	this.Value = uint64(uint64(r.Uint32()))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1233,6 +1380,9 @@ func NewPopulatedInt32Value(r randyWrappers, easy bool) *Int32Value {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1241,6 +1391,9 @@ func NewPopulatedUInt32Value(r randyWrappers, easy bool) *UInt32Value {
 	this := &UInt32Value{}
 	this.Value = uint32(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1249,6 +1402,9 @@ func NewPopulatedBoolValue(r randyWrappers, easy bool) *BoolValue {
 	this := &BoolValue{}
 	this.Value = bool(bool(r.Intn(2) == 0))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1257,6 +1413,9 @@ func NewPopulatedStringValue(r randyWrappers, easy bool) *StringValue {
 	this := &StringValue{}
 	this.Value = string(randStringWrappers(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1269,6 +1428,9 @@ func NewPopulatedBytesValue(r randyWrappers, easy bool) *BytesValue {
 		this.Value[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
+		}
 	}
 	return this
 }
@@ -1351,6 +1513,11 @@ func (m *DoubleValue) Size() (n int) {
 	if m.Value != 0 {
 		n += 9
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1359,6 +1526,11 @@ func (m *FloatValue) Size() (n int) {
 	_ = l
 	if m.Value != 0 {
 		n += 5
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1369,6 +1541,11 @@ func (m *Int64Value) Size() (n int) {
 	if m.Value != 0 {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1377,6 +1554,11 @@ func (m *UInt64Value) Size() (n int) {
 	_ = l
 	if m.Value != 0 {
 		n += 1 + sovWrappers(uint64(m.Value))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1387,6 +1569,11 @@ func (m *Int32Value) Size() (n int) {
 	if m.Value != 0 {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1396,6 +1583,11 @@ func (m *UInt32Value) Size() (n int) {
 	if m.Value != 0 {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1404,6 +1596,11 @@ func (m *BoolValue) Size() (n int) {
 	_ = l
 	if m.Value {
 		n += 2
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1415,6 +1612,11 @@ func (m *StringValue) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovWrappers(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1424,6 +1626,11 @@ func (m *BytesValue) Size() (n int) {
 	l = len(m.Value)
 	if l > 0 {
 		n += 1 + l + sovWrappers(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1447,6 +1654,7 @@ func (this *DoubleValue) String() string {
 	}
 	s := strings.Join([]string{`&DoubleValue{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1457,6 +1665,7 @@ func (this *FloatValue) String() string {
 	}
 	s := strings.Join([]string{`&FloatValue{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1467,6 +1676,7 @@ func (this *Int64Value) String() string {
 	}
 	s := strings.Join([]string{`&Int64Value{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1477,6 +1687,7 @@ func (this *UInt64Value) String() string {
 	}
 	s := strings.Join([]string{`&UInt64Value{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1487,6 +1698,7 @@ func (this *Int32Value) String() string {
 	}
 	s := strings.Join([]string{`&Int32Value{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1497,6 +1709,7 @@ func (this *UInt32Value) String() string {
 	}
 	s := strings.Join([]string{`&UInt32Value{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1507,6 +1720,7 @@ func (this *BoolValue) String() string {
 	}
 	s := strings.Join([]string{`&BoolValue{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1517,6 +1731,7 @@ func (this *StringValue) String() string {
 	}
 	s := strings.Join([]string{`&StringValue{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1527,6 +1742,7 @@ func (this *BytesValue) String() string {
 	}
 	s := strings.Join([]string{`&BytesValue{`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1591,6 +1807,7 @@ func (m *DoubleValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1652,6 +1869,7 @@ func (m *FloatValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1721,6 +1939,7 @@ func (m *Int64Value) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1790,6 +2009,7 @@ func (m *UInt64Value) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1859,6 +2079,7 @@ func (m *Int32Value) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1928,6 +2149,7 @@ func (m *UInt32Value) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1998,6 +2220,7 @@ func (m *BoolValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2077,6 +2300,7 @@ func (m *StringValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2158,6 +2382,7 @@ func (m *BytesValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

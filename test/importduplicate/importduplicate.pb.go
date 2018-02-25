@@ -19,6 +19,8 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import sortkeys "github.com/gogo/protobuf/test/importduplicate/sortkeys"
 import proto1 "github.com/gogo/protobuf/test/importduplicate/proto"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 import sortkeys1 "github.com/gogo/protobuf/sortkeys"
@@ -39,6 +41,7 @@ type MapAndSortKeys struct {
 	KeyValue             map[int32]string `protobuf:"bytes,2,rep,name=keyValue" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Value                *proto1.Subject  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32            `json:"-"`
 }
 
@@ -122,6 +125,9 @@ func (this *MapAndSortKeys) Equal(that interface{}) bool {
 	if !this.Value.Equal(that1.Value) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *MapAndSortKeys) GoString() string {
@@ -148,6 +154,9 @@ func (this *MapAndSortKeys) GoString() string {
 	}
 	if this.Value != nil {
 		s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -176,6 +185,9 @@ func NewPopulatedMapAndSortKeys(r randyImportduplicate, easy bool) *MapAndSortKe
 		this.Value = proto1.NewPopulatedSubject(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedImportduplicate(r, 4)
+		}
 	}
 	return this
 }

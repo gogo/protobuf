@@ -112,6 +112,7 @@ type Message struct {
 	Proto2Field          *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
 	Proto2Value          map[int64]*test.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
+	XXX_unrecognized     []byte                     `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                      `json:"-"`
 }
 
@@ -136,6 +137,7 @@ var xxx_messageInfo_Message proto.InternalMessageInfo
 type Nested struct {
 	Bunny                string   `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -176,6 +178,7 @@ type AllMaps struct {
 	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
 	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                     `json:"-"`
 }
 
@@ -216,6 +219,7 @@ type AllMapsOrdered struct {
 	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
 	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                     `json:"-"`
 }
 
@@ -242,6 +246,7 @@ type MessageWithMap struct {
 	MsgMapping           map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	ByteMapping          map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
 }
 
@@ -266,6 +271,7 @@ var xxx_messageInfo_MessageWithMap proto.InternalMessageInfo
 type FloatingPoint struct {
 	F                    float64  `protobuf:"fixed64,1,opt,name=f,proto3" json:"f,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -291,6 +297,7 @@ type Uint128Pair struct {
 	Left                 github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
 	Right                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
+	XXX_unrecognized     []byte                                        `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                                         `json:"-"`
 }
 
@@ -314,6 +321,7 @@ var xxx_messageInfo_Uint128Pair proto.InternalMessageInfo
 
 type ContainsNestedMap struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -338,6 +346,7 @@ var xxx_messageInfo_ContainsNestedMap proto.InternalMessageInfo
 type ContainsNestedMap_NestedMap struct {
 	NestedMapField       map[string]float64 `protobuf:"bytes,1,rep,name=NestedMapField" json:"NestedMapField,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32              `json:"-"`
 }
 
@@ -364,6 +373,7 @@ var xxx_messageInfo_ContainsNestedMap_NestedMap proto.InternalMessageInfo
 type NotPacked struct {
 	Key                  []uint64 `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -1076,6 +1086,9 @@ func (this *Message) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Proto2Value this[%v](%v) Not Equal that[%v](%v)", i, this.Proto2Value[i], i, that1.Proto2Value[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Message) Equal(that interface{}) bool {
@@ -1148,6 +1161,9 @@ func (this *Message) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Nested) VerboseEqual(that interface{}) error {
@@ -1178,6 +1194,9 @@ func (this *Nested) VerboseEqual(that interface{}) error {
 	if this.Bunny != that1.Bunny {
 		return fmt.Errorf("Bunny this(%v) Not Equal that(%v)", this.Bunny, that1.Bunny)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Nested) Equal(that interface{}) bool {
@@ -1200,6 +1219,9 @@ func (this *Nested) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Bunny != that1.Bunny {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1365,6 +1387,9 @@ func (this *AllMaps) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("StringToMsgMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToMsgMap[i], i, that1.StringToMsgMap[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *AllMaps) Equal(that interface{}) bool {
@@ -1521,6 +1546,9 @@ func (this *AllMaps) Equal(that interface{}) bool {
 		if !this.StringToMsgMap[i].Equal(that1.StringToMsgMap[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -1685,6 +1713,9 @@ func (this *AllMapsOrdered) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("StringToMsgMap this[%v](%v) Not Equal that[%v](%v)", i, this.StringToMsgMap[i], i, that1.StringToMsgMap[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *AllMapsOrdered) Equal(that interface{}) bool {
@@ -1842,6 +1873,9 @@ func (this *AllMapsOrdered) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *MessageWithMap) VerboseEqual(that interface{}) error {
@@ -1893,6 +1927,9 @@ func (this *MessageWithMap) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("ByteMapping this[%v](%v) Not Equal that[%v](%v)", i, this.ByteMapping[i], i, that1.ByteMapping[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MessageWithMap) Equal(that interface{}) bool {
@@ -1938,6 +1975,9 @@ func (this *MessageWithMap) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *FloatingPoint) VerboseEqual(that interface{}) error {
@@ -1968,6 +2008,9 @@ func (this *FloatingPoint) VerboseEqual(that interface{}) error {
 	if this.F != that1.F {
 		return fmt.Errorf("F this(%v) Not Equal that(%v)", this.F, that1.F)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *FloatingPoint) Equal(that interface{}) bool {
@@ -1990,6 +2033,9 @@ func (this *FloatingPoint) Equal(that interface{}) bool {
 		return false
 	}
 	if this.F != that1.F {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -2029,6 +2075,9 @@ func (this *Uint128Pair) VerboseEqual(that interface{}) error {
 	} else if !this.Right.Equal(*that1.Right) {
 		return fmt.Errorf("Right this(%v) Not Equal that(%v)", this.Right, that1.Right)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Uint128Pair) Equal(that interface{}) bool {
@@ -2060,6 +2109,9 @@ func (this *Uint128Pair) Equal(that interface{}) bool {
 	} else if !this.Right.Equal(*that1.Right) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *ContainsNestedMap) VerboseEqual(that interface{}) error {
@@ -2087,6 +2139,9 @@ func (this *ContainsNestedMap) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt.Errorf("that is type *ContainsNestedMap but is not nil && this == nil")
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *ContainsNestedMap) Equal(that interface{}) bool {
@@ -2106,6 +2161,9 @@ func (this *ContainsNestedMap) Equal(that interface{}) bool {
 	if that1 == nil {
 		return this == nil
 	} else if this == nil {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -2143,6 +2201,9 @@ func (this *ContainsNestedMap_NestedMap) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("NestedMapField this[%v](%v) Not Equal that[%v](%v)", i, this.NestedMapField[i], i, that1.NestedMapField[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *ContainsNestedMap_NestedMap) Equal(that interface{}) bool {
@@ -2171,6 +2232,9 @@ func (this *ContainsNestedMap_NestedMap) Equal(that interface{}) bool {
 		if this.NestedMapField[i] != that1.NestedMapField[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -2207,6 +2271,9 @@ func (this *NotPacked) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Key this[%v](%v) Not Equal that[%v](%v)", i, this.Key[i], i, that1.Key[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *NotPacked) Equal(that interface{}) bool {
@@ -2235,6 +2302,9 @@ func (this *NotPacked) Equal(that interface{}) bool {
 		if this.Key[i] != that1.Key[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -2785,6 +2855,9 @@ func (this *Message) GoString() string {
 	if this.Proto2Value != nil {
 		s = append(s, "Proto2Value: "+mapStringForProto2Value+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -2795,6 +2868,9 @@ func (this *Nested) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&theproto3.Nested{")
 	s = append(s, "Bunny: "+fmt.Sprintf("%#v", this.Bunny)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3024,6 +3100,9 @@ func (this *AllMaps) GoString() string {
 	mapStringForStringToMsgMap += "}"
 	if this.StringToMsgMap != nil {
 		s = append(s, "StringToMsgMap: "+mapStringForStringToMsgMap+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -3255,6 +3334,9 @@ func (this *AllMapsOrdered) GoString() string {
 	if this.StringToMsgMap != nil {
 		s = append(s, "StringToMsgMap: "+mapStringForStringToMsgMap+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3303,6 +3385,9 @@ func (this *MessageWithMap) GoString() string {
 	if this.ByteMapping != nil {
 		s = append(s, "ByteMapping: "+mapStringForByteMapping+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3313,6 +3398,9 @@ func (this *FloatingPoint) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&theproto3.FloatingPoint{")
 	s = append(s, "F: "+fmt.Sprintf("%#v", this.F)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3324,6 +3412,9 @@ func (this *Uint128Pair) GoString() string {
 	s = append(s, "&theproto3.Uint128Pair{")
 	s = append(s, "Left: "+fmt.Sprintf("%#v", this.Left)+",\n")
 	s = append(s, "Right: "+fmt.Sprintf("%#v", this.Right)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3333,6 +3424,9 @@ func (this *ContainsNestedMap) GoString() string {
 	}
 	s := make([]string, 0, 4)
 	s = append(s, "&theproto3.ContainsNestedMap{")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3355,6 +3449,9 @@ func (this *ContainsNestedMap_NestedMap) GoString() string {
 	if this.NestedMapField != nil {
 		s = append(s, "NestedMapField: "+mapStringForNestedMapField+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3365,6 +3462,9 @@ func (this *NotPacked) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&theproto3.NotPacked{")
 	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -3421,6 +3521,9 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 14)
+		}
 	}
 	return this
 }
@@ -3429,6 +3532,9 @@ func NewPopulatedNested(r randyTheproto3, easy bool) *Nested {
 	this := &Nested{}
 	this.Bunny = string(randStringTheproto3(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
+		}
 	}
 	return this
 }
@@ -3597,6 +3703,9 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
+		}
 	}
 	return this
 }
@@ -3765,6 +3874,9 @@ func NewPopulatedAllMapsOrdered(r randyTheproto3, easy bool) *AllMapsOrdered {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
+		}
 	}
 	return this
 }
@@ -3798,6 +3910,9 @@ func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 4)
+		}
 	}
 	return this
 }
@@ -3809,6 +3924,9 @@ func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
 		this.F *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
+		}
 	}
 	return this
 }
@@ -3819,6 +3937,9 @@ func NewPopulatedUint128Pair(r randyTheproto3, easy bool) *Uint128Pair {
 	this.Left = *v74
 	this.Right = github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 3)
+		}
 	}
 	return this
 }
@@ -3826,6 +3947,9 @@ func NewPopulatedUint128Pair(r randyTheproto3, easy bool) *Uint128Pair {
 func NewPopulatedContainsNestedMap(r randyTheproto3, easy bool) *ContainsNestedMap {
 	this := &ContainsNestedMap{}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 1)
+		}
 	}
 	return this
 }
@@ -3844,6 +3968,9 @@ func NewPopulatedContainsNestedMap_NestedMap(r randyTheproto3, easy bool) *Conta
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
+		}
 	}
 	return this
 }
@@ -3856,6 +3983,9 @@ func NewPopulatedNotPacked(r randyTheproto3, easy bool) *NotPacked {
 		this.Key[i] = uint64(uint64(r.Uint32()))
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 6)
+		}
 	}
 	return this
 }
@@ -3999,6 +4129,11 @@ func (m *Message) Size() (n int) {
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -4008,6 +4143,11 @@ func (m *Nested) Size() (n int) {
 	l = len(m.Bunny)
 	if l > 0 {
 		n += 1 + l + sovTheproto3(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -4158,6 +4298,11 @@ func (m *AllMaps) Size() (n int) {
 			}
 			mapEntrySize := 1 + len(k) + sovTheproto3(uint64(len(k))) + l
 			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -4311,6 +4456,11 @@ func (m *AllMapsOrdered) Size() (n int) {
 			n += mapEntrySize + 2 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -4350,6 +4500,11 @@ func (m *MessageWithMap) Size() (n int) {
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -4358,6 +4513,11 @@ func (m *FloatingPoint) Size() (n int) {
 	_ = l
 	if m.F != 0 {
 		n += 9
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -4371,12 +4531,22 @@ func (m *Uint128Pair) Size() (n int) {
 		l = m.Right.Size()
 		n += 1 + l + sovTheproto3(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
 func (m *ContainsNestedMap) Size() (n int) {
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -4391,6 +4561,11 @@ func (m *ContainsNestedMap_NestedMap) Size() (n int) {
 			n += mapEntrySize + 1 + sovTheproto3(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -4400,6 +4575,11 @@ func (m *NotPacked) Size() (n int) {
 	if len(m.Key) > 0 {
 		for _, e := range m.Key {
 			n += 1 + sovTheproto3(uint64(e))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -4455,6 +4635,7 @@ func (this *Message) String() string {
 		`Terrain:` + mapStringForTerrain + `,`,
 		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "test.NinOptNative", 1) + `,`,
 		`Proto2Value:` + mapStringForProto2Value + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4465,6 +4646,7 @@ func (this *Nested) String() string {
 	}
 	s := strings.Join([]string{`&Nested{`,
 		`Bunny:` + fmt.Sprintf("%v", this.Bunny) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4661,6 +4843,7 @@ func (this *AllMaps) String() string {
 		`StringToBytesMap:` + mapStringForStringToBytesMap + `,`,
 		`StringToEnumMap:` + mapStringForStringToEnumMap + `,`,
 		`StringToMsgMap:` + mapStringForStringToMsgMap + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4857,6 +5040,7 @@ func (this *AllMapsOrdered) String() string {
 		`StringToBytesMap:` + mapStringForStringToBytesMap + `,`,
 		`StringToEnumMap:` + mapStringForStringToEnumMap + `,`,
 		`StringToMsgMap:` + mapStringForStringToMsgMap + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4899,6 +5083,7 @@ func (this *MessageWithMap) String() string {
 		`NameMapping:` + mapStringForNameMapping + `,`,
 		`MsgMapping:` + mapStringForMsgMapping + `,`,
 		`ByteMapping:` + mapStringForByteMapping + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4909,6 +5094,7 @@ func (this *FloatingPoint) String() string {
 	}
 	s := strings.Join([]string{`&FloatingPoint{`,
 		`F:` + fmt.Sprintf("%v", this.F) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4920,6 +5106,7 @@ func (this *Uint128Pair) String() string {
 	s := strings.Join([]string{`&Uint128Pair{`,
 		`Left:` + fmt.Sprintf("%v", this.Left) + `,`,
 		`Right:` + fmt.Sprintf("%v", this.Right) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4929,6 +5116,7 @@ func (this *ContainsNestedMap) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ContainsNestedMap{`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4949,6 +5137,7 @@ func (this *ContainsNestedMap_NestedMap) String() string {
 	mapStringForNestedMapField += "}"
 	s := strings.Join([]string{`&ContainsNestedMap_NestedMap{`,
 		`NestedMapField:` + mapStringForNestedMapField + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4959,6 +5148,7 @@ func (this *NotPacked) String() string {
 	}
 	s := strings.Join([]string{`&NotPacked{`,
 		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -5512,6 +5702,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -5591,6 +5782,7 @@ func (m *Nested) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -7308,6 +7500,7 @@ func (m *AllMaps) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9025,6 +9218,7 @@ func (m *AllMapsOrdered) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9407,6 +9601,7 @@ func (m *MessageWithMap) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9468,6 +9663,7 @@ func (m *FloatingPoint) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9580,6 +9776,7 @@ func (m *Uint128Pair) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9630,6 +9827,7 @@ func (m *ContainsNestedMap) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9780,6 +9978,7 @@ func (m *ContainsNestedMap_NestedMap) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -9892,6 +10091,7 @@ func (m *NotPacked) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

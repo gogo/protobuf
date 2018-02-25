@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -47,6 +49,7 @@ func (MyEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorEnumdecl, 
 type Message struct {
 	EnumeratedField      MyEnum   `protobuf:"varint,1,opt,name=enumerated_field,json=enumeratedField,proto3,enum=enumdecl.MyEnum" json:"enumerated_field,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -105,6 +108,9 @@ func (this *Message) VerboseEqual(that interface{}) error {
 	if this.EnumeratedField != that1.EnumeratedField {
 		return fmt.Errorf("EnumeratedField this(%v) Not Equal that(%v)", this.EnumeratedField, that1.EnumeratedField)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Message) Equal(that interface{}) bool {
@@ -129,6 +135,9 @@ func (this *Message) Equal(that interface{}) bool {
 	if this.EnumeratedField != that1.EnumeratedField {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (m *Message) Marshal() (dAtA []byte, err error) {
@@ -151,6 +160,11 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintEnumdecl(dAtA, i, uint64(m.EnumeratedField))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -167,6 +181,9 @@ func NewPopulatedMessage(r randyEnumdecl, easy bool) *Message {
 	this := &Message{}
 	this.EnumeratedField = MyEnum([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedEnumdecl(r, 2)
+		}
 	}
 	return this
 }
@@ -249,6 +266,11 @@ func (m *Message) Size() (n int) {
 	if m.EnumeratedField != 0 {
 		n += 1 + sovEnumdecl(uint64(m.EnumeratedField))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -325,6 +347,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

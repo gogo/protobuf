@@ -31,81 +31,89 @@
 
 package proto_test
 
-// func TestDiscardUnknown(t *testing.T) {
-// 	tests := []struct {
-// 		desc     string
-// 		in, want proto.Message
-// 	}{{
-// 		desc: "Nil",
-// 		in:   nil, want: nil, // Should not panic
-// 	}, {
-// 		desc: "NilPtr",
-// 		in:   (*proto3pb.Message)(nil), want: (*proto3pb.Message)(nil), // Should not panic
-// 	}, {
-// 		desc: "Nested",
-// 		in: &proto3pb.Message{
-// 			Name:             "Aaron",
-// 			Nested:           &proto3pb.Nested{Cute: true, XXX_unrecognized: []byte("blah")},
-// 			XXX_unrecognized: []byte("blah"),
-// 		},
-// 		want: &proto3pb.Message{
-// 			Name:   "Aaron",
-// 			Nested: &proto3pb.Nested{Cute: true},
-// 		},
-// 	}, {
-// 		desc: "OneOf",
-// 		in: &pb.Communique{
-// 			Union: &pb.Communique_Msg{&pb.Strings{
-// 				StringField:      proto.String("123"),
-// 				XXX_unrecognized: []byte("blah"),
-// 			}},
-// 			XXX_unrecognized: []byte("blah"),
-// 		},
-// 		want: &pb.Communique{
-// 			Union: &pb.Communique_Msg{&pb.Strings{StringField: proto.String("123")}},
-// 		},
-// 	}, {
-// 		desc: "Map",
-// 		in: &pb.MessageWithMap{MsgMapping: map[int64]*pb.FloatingPoint{
-// 			0x4002: &pb.FloatingPoint{
-// 				Exact:            proto.Bool(true),
-// 				XXX_unrecognized: []byte("blah"),
-// 			},
-// 		}},
-// 		want: &pb.MessageWithMap{MsgMapping: map[int64]*pb.FloatingPoint{
-// 			0x4002: &pb.FloatingPoint{Exact: proto.Bool(true)},
-// 		}},
-// 	}, {
-// 		desc: "Extension",
-// 		in: func() proto.Message {
-// 			m := &pb.MyMessage{
-// 				Count: proto.Int32(42),
-// 				Somegroup: &pb.MyMessage_SomeGroup{
-// 					GroupField:       proto.Int32(6),
-// 					XXX_unrecognized: []byte("blah"),
-// 				},
-// 				XXX_unrecognized: []byte("blah"),
-// 			}
-// 			proto.SetExtension(m, pb.E_Ext_More, &pb.Ext{
-// 				Data:             proto.String("extension"),
-// 				XXX_unrecognized: []byte("blah"),
-// 			})
-// 			return m
-// 		}(),
-// 		want: func() proto.Message {
-// 			m := &pb.MyMessage{
-// 				Count:     proto.Int32(42),
-// 				Somegroup: &pb.MyMessage_SomeGroup{GroupField: proto.Int32(6)},
-// 			}
-// 			proto.SetExtension(m, pb.E_Ext_More, &pb.Ext{Data: proto.String("extension")})
-// 			return m
-// 		}(),
-// 	}}
+import (
+	"testing"
 
-// 	for _, tt := range tests {
-// 		proto.DiscardUnknown(tt.in)
-// 		if !proto.Equal(tt.in, tt.want) {
-// 			t.Errorf("test %s, expected unknown fields to be discarde\ngot  %v\nwant %v", tt.desc, tt.in, tt.want)
-// 		}
-// 	}
-// }
+	"github.com/gogo/protobuf/proto"
+	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
+	pb "github.com/gogo/protobuf/proto/test_proto"
+)
+
+func TestDiscardUnknown(t *testing.T) {
+	tests := []struct {
+		desc     string
+		in, want proto.Message
+	}{{
+		desc: "Nil",
+		in:   nil, want: nil, // Should not panic
+	}, {
+		desc: "NilPtr",
+		in:   (*proto3pb.Message)(nil), want: (*proto3pb.Message)(nil), // Should not panic
+	}, {
+		desc: "Nested",
+		in: &proto3pb.Message{
+			Name:             "Aaron",
+			Nested:           &proto3pb.Nested{Cute: true, XXX_unrecognized: []byte("blah")},
+			XXX_unrecognized: []byte("blah"),
+		},
+		want: &proto3pb.Message{
+			Name:   "Aaron",
+			Nested: &proto3pb.Nested{Cute: true},
+		},
+	}, {
+		desc: "OneOf",
+		in: &pb.Communique{
+			Union: &pb.Communique_Msg{&pb.Strings{
+				StringField:      proto.String("123"),
+				XXX_unrecognized: []byte("blah"),
+			}},
+			XXX_unrecognized: []byte("blah"),
+		},
+		want: &pb.Communique{
+			Union: &pb.Communique_Msg{&pb.Strings{StringField: proto.String("123")}},
+		},
+	}, {
+		desc: "Map",
+		in: &pb.MessageWithMap{MsgMapping: map[int64]*pb.FloatingPoint{
+			0x4002: {
+				Exact:            proto.Bool(true),
+				XXX_unrecognized: []byte("blah"),
+			},
+		}},
+		want: &pb.MessageWithMap{MsgMapping: map[int64]*pb.FloatingPoint{
+			0x4002: {Exact: proto.Bool(true)},
+		}},
+	}, {
+		desc: "Extension",
+		in: func() proto.Message {
+			m := &pb.MyMessage{
+				Count: proto.Int32(42),
+				Somegroup: &pb.MyMessage_SomeGroup{
+					GroupField:       proto.Int32(6),
+					XXX_unrecognized: []byte("blah"),
+				},
+				XXX_unrecognized: []byte("blah"),
+			}
+			proto.SetExtension(m, pb.E_Ext_More, &pb.Ext{
+				Data:             proto.String("extension"),
+				XXX_unrecognized: []byte("blah"),
+			})
+			return m
+		}(),
+		want: func() proto.Message {
+			m := &pb.MyMessage{
+				Count:     proto.Int32(42),
+				Somegroup: &pb.MyMessage_SomeGroup{GroupField: proto.Int32(6)},
+			}
+			proto.SetExtension(m, pb.E_Ext_More, &pb.Ext{Data: proto.String("extension")})
+			return m
+		}(),
+	}}
+
+	for _, tt := range tests {
+		proto.DiscardUnknown(tt.in)
+		if !proto.Equal(tt.in, tt.want) {
+			t.Errorf("test %s, expected unknown fields to be discarde\ngot  %v\nwant %v", tt.desc, tt.in, tt.want)
+		}
+	}
+}

@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -69,6 +71,7 @@ type Message struct {
 	EnumeratedField      MyEnum      `protobuf:"varint,1,opt,name=enumerated_field,json=enumeratedField,proto3,enum=enumdeclall.MyEnum" json:"enumerated_field,omitempty"`
 	OtherenumeratedField MyOtherEnum `protobuf:"varint,2,opt,name=otherenumerated_field,json=otherenumeratedField,proto3,enum=enumdeclall.MyOtherEnum" json:"otherenumerated_field,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32       `json:"-"`
 }
 
@@ -138,6 +141,9 @@ func (this *Message) VerboseEqual(that interface{}) error {
 	if this.OtherenumeratedField != that1.OtherenumeratedField {
 		return fmt.Errorf("OtherenumeratedField this(%v) Not Equal that(%v)", this.OtherenumeratedField, that1.OtherenumeratedField)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Message) Equal(that interface{}) bool {
@@ -163,6 +169,9 @@ func (this *Message) Equal(that interface{}) bool {
 		return false
 	}
 	if this.OtherenumeratedField != that1.OtherenumeratedField {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -192,6 +201,11 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintEnumdeclall(dAtA, i, uint64(m.OtherenumeratedField))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -209,6 +223,9 @@ func NewPopulatedMessage(r randyEnumdeclall, easy bool) *Message {
 	this.EnumeratedField = MyEnum([]int32{0, 1}[r.Intn(2)])
 	this.OtherenumeratedField = MyOtherEnum([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedEnumdeclall(r, 3)
+		}
 	}
 	return this
 }
@@ -293,6 +310,11 @@ func (m *Message) Size() (n int) {
 	}
 	if m.OtherenumeratedField != 0 {
 		n += 1 + sovEnumdeclall(uint64(m.OtherenumeratedField))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -389,6 +411,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

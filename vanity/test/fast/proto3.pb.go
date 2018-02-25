@@ -32,6 +32,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Aproto3 struct {
 	B                    string   `protobuf:"bytes,1,opt,name=B,proto3" json:"B,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -82,6 +83,11 @@ func (m *Aproto3) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintProto3(dAtA, i, uint64(len(m.B)))
 		i += copy(dAtA[i:], m.B)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -100,6 +106,11 @@ func (m *Aproto3) Size() (n int) {
 	l = len(m.B)
 	if l > 0 {
 		n += 1 + l + sovProto3(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -187,6 +198,7 @@ func (m *Aproto3) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

@@ -18,6 +18,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto1.Marshal
 var _ = fmt.Errorf
@@ -32,6 +34,7 @@ const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Foo struct {
 	*Bar                 `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -63,6 +66,7 @@ type Bar struct {
 	//	*Bar_B
 	Pick                 isBar_Pick `protobuf_oneof:"pick"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32      `json:"-"`
 }
 
@@ -222,6 +226,9 @@ func (this *Foo) Equal(that interface{}) bool {
 	if !this.Bar.Equal(that1.Bar) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Bar) Equal(that interface{}) bool {
@@ -250,6 +257,9 @@ func (this *Bar) Equal(that interface{}) bool {
 	} else if this.Pick == nil {
 		return false
 	} else if !this.Pick.Equal(that1.Pick) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -308,6 +318,9 @@ func NewPopulatedFoo(r randyOneofembed, easy bool) *Foo {
 		this.Bar = NewPopulatedBar(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto1.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 2)
+		}
 	}
 	return this
 }
@@ -322,6 +335,9 @@ func NewPopulatedBar(r randyOneofembed, easy bool) *Bar {
 		this.Pick = NewPopulatedBar_B(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto1.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 13)
+		}
 	}
 	return this
 }

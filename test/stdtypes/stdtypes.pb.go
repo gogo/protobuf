@@ -25,6 +25,8 @@ import _ "github.com/gogo/protobuf/types"
 import time "time"
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 import sortkeys "github.com/gogo/protobuf/sortkeys"
@@ -49,6 +51,7 @@ type StdTypes struct {
 	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
 	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32          `json:"-"`
 }
 
@@ -108,6 +111,7 @@ type RepStdTypes struct {
 	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
 	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32            `json:"-"`
 }
 
@@ -167,6 +171,7 @@ type MapStdTypes struct {
 	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
 }
 
@@ -226,6 +231,7 @@ type OneofStdTypes struct {
 	//	*OneofStdTypes_Duration
 	OneOfStdTimes        isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                         `json:"-"`
 }
 
@@ -440,6 +446,9 @@ func (this *StdTypes) VerboseEqual(that interface{}) error {
 	if this.Duration != that1.Duration {
 		return fmt.Errorf("Duration this(%v) Not Equal that(%v)", this.Duration, that1.Duration)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *StdTypes) Equal(that interface{}) bool {
@@ -481,6 +490,9 @@ func (this *StdTypes) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Duration != that1.Duration {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -542,6 +554,9 @@ func (this *RepStdTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Durations this[%v](%v) Not Equal that[%v](%v)", i, this.Durations[i], i, that1.Durations[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *RepStdTypes) Equal(that interface{}) bool {
@@ -594,6 +609,9 @@ func (this *RepStdTypes) Equal(that interface{}) bool {
 		if this.Durations[i] != that1.Durations[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -654,6 +672,9 @@ func (this *MapStdTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Duration this[%v](%v) Not Equal that[%v](%v)", i, this.Duration[i], i, that1.Duration[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MapStdTypes) Equal(that interface{}) bool {
@@ -707,6 +728,9 @@ func (this *MapStdTypes) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OneofStdTypes) VerboseEqual(that interface{}) error {
@@ -742,6 +766,9 @@ func (this *OneofStdTypes) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("this.OneOfStdTimes == nil && that1.OneOfStdTimes != nil")
 	} else if err := this.OneOfStdTimes.VerboseEqual(that1.OneOfStdTimes); err != nil {
 		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -843,6 +870,9 @@ func (this *OneofStdTypes) Equal(that interface{}) bool {
 	} else if !this.OneOfStdTimes.Equal(that1.OneOfStdTimes) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OneofStdTypes_Timestamp) Equal(that interface{}) bool {
@@ -913,6 +943,9 @@ func (this *StdTypes) GoString() string {
 	s = append(s, "NullableDuration: "+fmt.Sprintf("%#v", this.NullableDuration)+",\n")
 	s = append(s, "Timestamp: "+fmt.Sprintf("%#v", this.Timestamp)+",\n")
 	s = append(s, "Duration: "+fmt.Sprintf("%#v", this.Duration)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -926,6 +959,9 @@ func (this *RepStdTypes) GoString() string {
 	s = append(s, "NullableDurations: "+fmt.Sprintf("%#v", this.NullableDurations)+",\n")
 	s = append(s, "Timestamps: "+fmt.Sprintf("%#v", this.Timestamps)+",\n")
 	s = append(s, "Durations: "+fmt.Sprintf("%#v", this.Durations)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -987,6 +1023,9 @@ func (this *MapStdTypes) GoString() string {
 	if this.Duration != nil {
 		s = append(s, "Duration: "+mapStringForDuration+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -998,6 +1037,9 @@ func (this *OneofStdTypes) GoString() string {
 	s = append(s, "&stdtypes.OneofStdTypes{")
 	if this.OneOfStdTimes != nil {
 		s = append(s, "OneOfStdTimes: "+fmt.Sprintf("%#v", this.OneOfStdTimes)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -1039,6 +1081,9 @@ func NewPopulatedStdTypes(r randyStdtypes, easy bool) *StdTypes {
 	v2 := types.NewPopulatedStdDuration(r, easy)
 	this.Duration = *v2
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStdtypes(r, 5)
+		}
 	}
 	return this
 }
@@ -1076,6 +1121,9 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStdtypes(r, 5)
+		}
 	}
 	return this
 }
@@ -1111,6 +1159,9 @@ func NewPopulatedMapStdTypes(r randyStdtypes, easy bool) *MapStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStdtypes(r, 5)
+		}
 	}
 	return this
 }
@@ -1125,6 +1176,9 @@ func NewPopulatedOneofStdTypes(r randyStdtypes, easy bool) *OneofStdTypes {
 		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStdtypes(r, 3)
+		}
 	}
 	return this
 }
@@ -1227,6 +1281,11 @@ func (m *StdTypes) Size() (n int) {
 	n += 1 + l + sovStdtypes(uint64(l))
 	l = types.SizeOfStdDuration(m.Duration)
 	n += 1 + l + sovStdtypes(uint64(l))
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1255,6 +1314,11 @@ func (m *RepStdTypes) Size() (n int) {
 		for _, e := range m.Durations {
 			l = types.SizeOfStdDuration(e)
 			n += 1 + l + sovStdtypes(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -1307,6 +1371,11 @@ func (m *MapStdTypes) Size() (n int) {
 			n += mapEntrySize + 1 + sovStdtypes(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1315,6 +1384,11 @@ func (m *OneofStdTypes) Size() (n int) {
 	_ = l
 	if m.OneOfStdTimes != nil {
 		n += m.OneOfStdTimes.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }

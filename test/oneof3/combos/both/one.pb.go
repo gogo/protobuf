@@ -44,6 +44,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Subby struct {
 	Sub                  string   `protobuf:"bytes,1,opt,name=sub,proto3" json:"sub,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -82,6 +83,7 @@ type SampleOneOf struct {
 	//	*SampleOneOf_SubMessage
 	TestOneof            isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
 	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32                   `json:"-"`
 }
 
@@ -870,6 +872,9 @@ func (this *Subby) VerboseEqual(that interface{}) error {
 	if this.Sub != that1.Sub {
 		return fmt.Errorf("Sub this(%v) Not Equal that(%v)", this.Sub, that1.Sub)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *Subby) Equal(that interface{}) bool {
@@ -892,6 +897,9 @@ func (this *Subby) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Sub != that1.Sub {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -929,6 +937,9 @@ func (this *SampleOneOf) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("this.TestOneof == nil && that1.TestOneof != nil")
 	} else if err := this.TestOneof.VerboseEqual(that1.TestOneof); err != nil {
 		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -1440,6 +1451,9 @@ func (this *SampleOneOf) Equal(that interface{}) bool {
 	} else if !this.TestOneof.Equal(that1.TestOneof) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *SampleOneOf_Field1) Equal(that interface{}) bool {
@@ -1833,6 +1847,9 @@ func (this *Subby) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&one.Subby{")
 	s = append(s, "Sub: "+fmt.Sprintf("%#v", this.Sub)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1844,6 +1861,9 @@ func (this *SampleOneOf) GoString() string {
 	s = append(s, "&one.SampleOneOf{")
 	if this.TestOneof != nil {
 		s = append(s, "TestOneof: "+fmt.Sprintf("%#v", this.TestOneof)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -2005,6 +2025,11 @@ func (m *Subby) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintOne(dAtA, i, uint64(len(m.Sub)))
 		i += copy(dAtA[i:], m.Sub)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2029,6 +2054,11 @@ func (m *SampleOneOf) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += nn1
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -2182,6 +2212,9 @@ func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
 	this.Sub = string(randStringOne(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOne(r, 2)
+		}
 	}
 	return this
 }
@@ -2224,6 +2257,9 @@ func NewPopulatedSampleOneOf(r randyOne, easy bool) *SampleOneOf {
 		this.TestOneof = NewPopulatedSampleOneOf_SubMessage(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOne(r, 17)
+		}
 	}
 	return this
 }
@@ -2416,6 +2452,11 @@ func (m *Subby) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovOne(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -2424,6 +2465,11 @@ func (m *SampleOneOf) Size() (n int) {
 	_ = l
 	if m.TestOneof != nil {
 		n += m.TestOneof.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -2551,6 +2597,7 @@ func (this *Subby) String() string {
 	}
 	s := strings.Join([]string{`&Subby{`,
 		`Sub:` + fmt.Sprintf("%v", this.Sub) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2561,6 +2608,7 @@ func (this *SampleOneOf) String() string {
 	}
 	s := strings.Join([]string{`&SampleOneOf{`,
 		`TestOneof:` + fmt.Sprintf("%v", this.TestOneof) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2803,6 +2851,7 @@ func (m *Subby) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -3153,6 +3202,7 @@ func (m *SampleOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

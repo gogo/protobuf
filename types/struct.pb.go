@@ -20,6 +20,8 @@ import math "math"
 
 import strconv "strconv"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 import sortkeys "github.com/gogo/protobuf/sortkeys"
@@ -72,6 +74,7 @@ type Struct struct {
 	// Unordered map of dynamically typed values.
 	Fields               map[string]*Value `protobuf:"bytes,1,rep,name=fields" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32             `json:"-"`
 }
 
@@ -116,6 +119,7 @@ type Value struct {
 	//	*Value_ListValue
 	Kind                 isValue_Kind `protobuf_oneof:"kind"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32        `json:"-"`
 }
 
@@ -359,6 +363,7 @@ type ListValue struct {
 	// Repeated field of dynamically typed values.
 	Values               []*Value `protobuf:"bytes,1,rep,name=values" json:"values,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -426,6 +431,9 @@ func (this *Struct) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Value) Equal(that interface{}) bool {
@@ -454,6 +462,9 @@ func (this *Value) Equal(that interface{}) bool {
 	} else if this.Kind == nil {
 		return false
 	} else if !this.Kind.Equal(that1.Kind) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -629,6 +640,9 @@ func (this *ListValue) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Struct) GoString() string {
@@ -650,6 +664,9 @@ func (this *Struct) GoString() string {
 	if this.Fields != nil {
 		s = append(s, "Fields: "+mapStringForFields+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -661,6 +678,9 @@ func (this *Value) GoString() string {
 	s = append(s, "&types.Value{")
 	if this.Kind != nil {
 		s = append(s, "Kind: "+fmt.Sprintf("%#v", this.Kind)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -722,6 +742,9 @@ func (this *ListValue) GoString() string {
 	if this.Values != nil {
 		s = append(s, "Values: "+fmt.Sprintf("%#v", this.Values)+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -776,6 +799,11 @@ func (m *Struct) MarshalTo(dAtA []byte) (int, error) {
 			}
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -800,6 +828,11 @@ func (m *Value) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += nn2
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -894,6 +927,11 @@ func (m *ListValue) MarshalTo(dAtA []byte) (int, error) {
 			i += n
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -916,6 +954,9 @@ func NewPopulatedStruct(r randyStruct, easy bool) *Struct {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
+		}
 	}
 	return this
 }
@@ -938,6 +979,9 @@ func NewPopulatedValue(r randyStruct, easy bool) *Value {
 		this.Kind = NewPopulatedValue_ListValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStruct(r, 7)
+		}
 	}
 	return this
 }
@@ -985,6 +1029,9 @@ func NewPopulatedListValue(r randyStruct, easy bool) *ListValue {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
+		}
 	}
 	return this
 }
@@ -1077,6 +1124,11 @@ func (m *Struct) Size() (n int) {
 			n += mapEntrySize + 1 + sovStruct(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1085,6 +1137,11 @@ func (m *Value) Size() (n int) {
 	_ = l
 	if m.Kind != nil {
 		n += m.Kind.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1141,6 +1198,11 @@ func (m *ListValue) Size() (n int) {
 			n += 1 + l + sovStruct(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1173,6 +1235,7 @@ func (this *Struct) String() string {
 	mapStringForFields += "}"
 	s := strings.Join([]string{`&Struct{`,
 		`Fields:` + mapStringForFields + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1183,6 +1246,7 @@ func (this *Value) String() string {
 	}
 	s := strings.Join([]string{`&Value{`,
 		`Kind:` + fmt.Sprintf("%v", this.Kind) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1253,6 +1317,7 @@ func (this *ListValue) String() string {
 	}
 	s := strings.Join([]string{`&ListValue{`,
 		`Values:` + strings.Replace(fmt.Sprintf("%v", this.Values), "Value", "Value", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1429,6 +1494,7 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1624,6 +1690,7 @@ func (m *Value) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1705,6 +1772,7 @@ func (m *ListValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

@@ -16,6 +16,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -237,6 +239,7 @@ type FieldMask struct {
 	// The set of field mask paths.
 	Paths                []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -304,6 +307,9 @@ func (this *FieldMask) Compare(that interface{}) int {
 			return 1
 		}
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *FieldMask) Equal(that interface{}) bool {
@@ -333,6 +339,9 @@ func (this *FieldMask) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *FieldMask) GoString() string {
@@ -342,6 +351,9 @@ func (this *FieldMask) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.FieldMask{")
 	s = append(s, "Paths: "+fmt.Sprintf("%#v", this.Paths)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -383,6 +395,11 @@ func (m *FieldMask) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -403,6 +420,9 @@ func NewPopulatedFieldMask(r randyFieldMask, easy bool) *FieldMask {
 		this.Paths[i] = string(randStringFieldMask(r))
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedFieldMask(r, 2)
+		}
 	}
 	return this
 }
@@ -488,6 +508,11 @@ func (m *FieldMask) Size() (n int) {
 			n += 1 + l + sovFieldMask(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -510,6 +535,7 @@ func (this *FieldMask) String() string {
 	}
 	s := strings.Join([]string{`&FieldMask{`,
 		`Paths:` + fmt.Sprintf("%v", this.Paths) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -592,6 +618,7 @@ func (m *FieldMask) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

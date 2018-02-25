@@ -16,6 +16,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -121,6 +123,7 @@ type Timestamp struct {
 	// inclusive.
 	Nanos                int32    `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -194,6 +197,9 @@ func (this *Timestamp) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Timestamp) Equal(that interface{}) bool {
@@ -221,6 +227,9 @@ func (this *Timestamp) Equal(that interface{}) bool {
 	if this.Nanos != that1.Nanos {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Timestamp) GoString() string {
@@ -231,6 +240,9 @@ func (this *Timestamp) GoString() string {
 	s = append(s, "&types.Timestamp{")
 	s = append(s, "Seconds: "+fmt.Sprintf("%#v", this.Seconds)+",\n")
 	s = append(s, "Nanos: "+fmt.Sprintf("%#v", this.Nanos)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -267,6 +279,11 @@ func (m *Timestamp) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTimestamp(dAtA, i, uint64(m.Nanos))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -287,6 +304,11 @@ func (m *Timestamp) Size() (n int) {
 	}
 	if m.Nanos != 0 {
 		n += 1 + sovTimestamp(uint64(m.Nanos))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -383,6 +405,7 @@ func (m *Timestamp) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

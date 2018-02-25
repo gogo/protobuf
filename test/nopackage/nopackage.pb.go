@@ -34,6 +34,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type M struct {
 	F                    map[string]float64 `protobuf:"bytes,1,rep,name=f" json:"f,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `protobuf_unrecognized:"proto3" json:"-"`
 	XXX_sizecache        int32              `json:"-"`
 }
 
@@ -96,6 +97,11 @@ func (m *M) MarshalTo(dAtA []byte) (int, error) {
 			i += 8
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -117,6 +123,11 @@ func (m *M) Size() (n int) {
 			_ = v
 			mapEntrySize := 1 + len(k) + sovNopackage(uint64(len(k))) + 1 + 8
 			n += mapEntrySize + 1 + sovNopackage(uint64(mapEntrySize))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -276,6 +287,7 @@ func (m *M) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
