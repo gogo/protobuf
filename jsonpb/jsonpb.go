@@ -73,6 +73,10 @@ type Marshaler struct {
 	// Whether to use the original (.proto) name for fields.
 	OrigName bool
 
+	// Whether to embed as the standard JSON marshaller, and to flatten messages
+	// if the field has no JSON name.
+	EmbedAsStdJSON bool
+
 	// A custom URL resolver to use when marshaling Any messages to JSON.
 	// If unset, the default resolution strategy is to extract the
 	// fully-qualified type name from the type URL and pass that to
@@ -236,6 +240,30 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		out.write("\n")
 	}
 
+	if err := m.marshalObjectFields(out, v, s, indent, typeURL); err != nil {
+		return err
+	}
+
+	if m.Indent != "" {
+		out.write("\n")
+		out.write(indent)
+	}
+	out.write("}")
+	return out.err
+}
+
+func isEmbeddedAndFlattened(protobufTag, jsonTag string) bool {
+	if !strings.Contains(protobufTag, "embedded=") {
+		return false
+	}
+
+	if jsonTag == "" || strings.HasPrefix(jsonTag, ",") {
+		return true
+	}
+	return false
+}
+
+func (m *Marshaler) marshalObjectFields(out *errWriter, v proto.Message, s reflect.Value, indent, typeURL string) error {
 	firstField := true
 
 	if typeURL != "" {
@@ -321,7 +349,15 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 				}
 			}
 		}
-		if err := m.marshalField(out, prop, value, indent); err != nil {
+		var err error
+		if protobufTag, jsonTag := valueField.Tag.Get("protobuf"), valueField.Tag.Get("json"); m.EmbedAsStdJSON &&
+			value.Kind() == reflect.Struct && isEmbeddedAndFlattened(protobufTag, jsonTag) {
+			message, _ := value.Interface().(proto.Message)
+			err = m.marshalObjectFields(out, message, value, indent, typeURL)
+		} else {
+			err = m.marshalField(out, prop, value, indent)
+		}
+		if err != nil {
 			return err
 		}
 		firstField = false
@@ -364,11 +400,6 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 
 	}
 
-	if m.Indent != "" {
-		out.write("\n")
-		out.write(indent)
-	}
-	out.write("}")
 	return out.err
 }
 
@@ -1003,20 +1034,39 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		}
 
 		sprops := proto.GetProperties(targetType)
-		for i := 0; i < target.NumField(); i++ {
-			ft := target.Type().Field(i)
-			if strings.HasPrefix(ft.Name, "XXX_") {
-				continue
-			}
-			valueForField, ok := consumeField(sprops.Prop[i])
-			if !ok {
-				continue
-			}
+		var unmarshalFields func(reflect.Value, *proto.StructProperties) (error, bool)
+		unmarshalFields = func(localTarget reflect.Value, props *proto.StructProperties) (err error, foundField bool) {
+			for i := 0; i < localTarget.NumField(); i++ {
+				ft := localTarget.Type().Field(i)
+				if strings.HasPrefix(ft.Name, "XXX_") {
+					continue
+				}
+				var processedField bool
+				if protobufTag, jsonTag := ft.Tag.Get("protobuf"), ft.Tag.Get("json"); localTarget.Field(i).Kind() == reflect.Struct &&
+					isEmbeddedAndFlattened(protobufTag, jsonTag) {
+					err, processedField = unmarshalFields(localTarget.Field(i), proto.GetProperties(localTarget.Field(i).Type()))
+					if err != nil {
+						return
+					}
+				}
+				if !processedField {
+					valueForField, ok := consumeField(props.Prop[i])
+					if !ok {
+						continue
+					}
 
-			if err := u.unmarshalValue(target.Field(i), valueForField, sprops.Prop[i]); err != nil {
-				return err
+					foundField = true
+					if err = u.unmarshalValue(localTarget.Field(i), valueForField, props.Prop[i]); err != nil {
+						return
+					}
+				}
 			}
+			return
 		}
+		if err, _ := unmarshalFields(target, sprops); err != nil {
+			return err
+		}
+
 		// Check for any oneof fields.
 		if len(jsonFields) > 0 {
 			for _, oop := range sprops.OneofTypes {
