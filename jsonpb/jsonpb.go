@@ -350,12 +350,25 @@ func (m *Marshaler) marshalObjectFields(out *errWriter, v proto.Message, s refle
 			}
 		}
 		var err error
+		marshalField := func() error { return m.marshalField(out, prop, value, indent) }
 		if protobufTag, jsonTag := valueField.Tag.Get("protobuf"), valueField.Tag.Get("json"); m.EmbedAsStdJSON &&
-			value.Kind() == reflect.Struct && isEmbeddedAndFlattened(protobufTag, jsonTag) {
-			message, _ := value.Interface().(proto.Message)
-			err = m.marshalObjectFields(out, message, value, indent, typeURL)
+			isEmbeddedAndFlattened(protobufTag, jsonTag) {
+			switch value.Kind() {
+			case reflect.Struct:
+				message, _ := value.Interface().(proto.Message)
+				err = m.marshalObjectFields(out, message, value, indent, typeURL)
+			case reflect.Ptr:
+				if value.IsNil() { // nil pointer
+					continue
+				}
+				valueContent := reflect.Indirect(value)
+				message, _ := valueContent.Interface().(proto.Message)
+				err = m.marshalObjectFields(out, message, valueContent, indent, typeURL)
+			default:
+				err = marshalField()
+			}
 		} else {
-			err = m.marshalField(out, prop, value, indent)
+			err = marshalField()
 		}
 		if err != nil {
 			return err
@@ -1042,11 +1055,22 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 					continue
 				}
 				var processedField bool
-				if protobufTag, jsonTag := ft.Tag.Get("protobuf"), ft.Tag.Get("json"); localTarget.Field(i).Kind() == reflect.Struct &&
-					isEmbeddedAndFlattened(protobufTag, jsonTag) {
-					err, processedField = unmarshalFields(localTarget.Field(i), proto.GetProperties(localTarget.Field(i).Type()))
-					if err != nil {
-						return
+				if protobufTag, jsonTag := ft.Tag.Get("protobuf"), ft.Tag.Get("json"); isEmbeddedAndFlattened(protobufTag, jsonTag) {
+					switch localTarget.Field(i).Kind() {
+					case reflect.Struct:
+						err, processedField = unmarshalFields(localTarget.Field(i), proto.GetProperties(localTarget.Field(i).Type()))
+						if err != nil {
+							return
+						}
+					case reflect.Ptr:
+						content := reflect.New(localTarget.Field(i).Type().Elem())
+						err, processedField = unmarshalFields(reflect.Indirect(content), proto.GetProperties(localTarget.Field(i).Type().Elem()))
+						if err != nil {
+							return
+						}
+						if processedField {
+							localTarget.Field(i).Set(content)
+						}
 					}
 				}
 				if !processedField {

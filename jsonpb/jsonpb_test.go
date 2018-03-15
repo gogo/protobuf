@@ -325,10 +325,15 @@ var (
 		`"dNinf":"-Infinity"` +
 		`}`
 
-	postcode              = "1016BR"
-	postcodeStruct        = pb.Address{Town: pb.Town{Postcode: &postcode}}
-	postcodeJSON          = fmt.Sprintf(`{"town":{"postcode":"%s"}}`, postcode)
-	flattenedPostcodeJSON = fmt.Sprintf(`{"postcode":"%s"}`, postcode)
+	postcode = "1016BR"
+
+	townStruct        = pb.Address{Town: pb.Town{Postcode: &postcode}}
+	townJSON          = fmt.Sprintf(`{"town":{"postcode":"%s"}}`, postcode)
+	flattenedTownJSON = fmt.Sprintf(`{"postcode":"%s"}`, postcode)
+
+	buildingStruct        = pb.Building{Town: &pb.Town{Postcode: &postcode}}
+	buildingJSON          = fmt.Sprintf(`{"town":{"postcode":"%s"}}`, postcode)
+	flattenedBuildingJSON = fmt.Sprintf(`{"postcode":"%s"}`, postcode)
 )
 
 func init() {
@@ -376,8 +381,10 @@ var marshalingTests = []struct {
 	{"empty repeated emitted", Marshaler{EmitDefaults: true}, &pb.SimpleSlice3{}, `{"slices":[]}`},
 	{"empty map emitted", Marshaler{EmitDefaults: true}, &pb.SimpleMap3{}, `{"stringy":{}}`},
 	{"nested struct null", Marshaler{EmitDefaults: true}, &pb.SimpleNull3{}, `{"simple":null}`},
-	{"nested embedded struct", marshaler, &postcodeStruct, postcodeJSON},
-	{"nested flattened embedded struct", Marshaler{EmbedAsStdJSON: true}, &postcodeStruct, flattenedPostcodeJSON},
+	{"nested embedded struct", marshaler, &townStruct, townJSON},
+	{"nested optional embedded struct", marshaler, &buildingStruct, buildingJSON},
+	{"nested flattened embedded struct", Marshaler{EmbedAsStdJSON: true}, &townStruct, flattenedTownJSON},
+	{"nested optional flattened embedded struct", Marshaler{EmbedAsStdJSON: true}, &buildingStruct, flattenedBuildingJSON},
 	{"map<int64, int32>", marshaler, &pb.Mappy{Nummy: map[int64]int32{1: 2, 3: 4}}, `{"nummy":{"1":2,"3":4}}`},
 	{"map<int64, int32>", marshalerAllOptions, &pb.Mappy{Nummy: map[int64]int32{1: 2, 3: 4}}, nummyPrettyJSON},
 	{"map<string, string>", marshaler,
@@ -578,8 +585,10 @@ var unmarshalingTests = []struct {
 			}}}},
 		}}}},
 	}}}},
-	{"nested embedded struct", Unmarshaler{}, postcodeJSON, &postcodeStruct},
-	{"nested embedded struct", Unmarshaler{}, flattenedPostcodeJSON, &postcodeStruct},
+	{"nested embedded struct", Unmarshaler{}, townJSON, &townStruct},
+	{"nested optional embedded struct", Unmarshaler{}, buildingJSON, &buildingStruct},
+	{"nested flattened embedded struct", Unmarshaler{}, flattenedTownJSON, &townStruct},
+	{"nested optional flattened embedded struct", Unmarshaler{}, flattenedBuildingJSON, &buildingStruct},
 	{"null ListValue", Unmarshaler{}, `{"lv": null}`, &pb.KnownTypes{Lv: nil}},
 	{"empty ListValue", Unmarshaler{}, `{"lv": []}`, &pb.KnownTypes{Lv: &types.ListValue{}}},
 	{"basic ListValue", Unmarshaler{}, `{"lv": ["x", null, 3, true]}`, &pb.KnownTypes{Lv: &types.ListValue{Values: []*types.Value{

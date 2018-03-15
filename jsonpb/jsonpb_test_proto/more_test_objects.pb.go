@@ -25,6 +25,7 @@ It has these top-level messages:
 	KnownTypes
 	Town
 	Address
+	Building
 */
 package jsonpb
 

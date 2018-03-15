@@ -159,3 +159,8 @@ message Address {
   required Town town = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false, (gogoproto.jsontag) = ""];
   required string street = 2;
 }
+
+message Building {
+  optional Town town = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = true, (gogoproto.jsontag) = ""];
+  required string company = 2;
+}
