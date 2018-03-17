@@ -477,7 +477,7 @@ func TestUnmarshalRepeatingNonRepeatedExtension(t *testing.T) {
 			t.Fatalf("[%s] Invalid extension", test.name)
 		}
 		if !reflect.DeepEqual(*ext, want) {
-			t.Errorf("[%s] Wrong value for ComplexExtension: got: %v want: %v\n", test.name, ext, want)
+			t.Errorf("[%s] Wrong value for ComplexExtension: got: %v want: %v\n", test.name, ext, &want)
 		}
 	}
 }
