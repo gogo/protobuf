@@ -154,7 +154,7 @@ contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
 
 js:
-ifeq (go1.9, $(findstring go1.9, $(GO_VERSION)))
+ifeq (go1.10, $(findstring go1.10, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
 	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 endif
