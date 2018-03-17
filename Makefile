@@ -118,6 +118,7 @@ regenerate:
 	make -C test/int64support regenerate
 	make -C test/issue322 regenerate
 	make -C test/issue330 regenerate
+	make -C test/importcustom-issue389 regenerate
 	make gofmt
 
 tests:
