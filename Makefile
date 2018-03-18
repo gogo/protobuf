@@ -120,6 +120,7 @@ regenerate:
 	make -C test/issue322 regenerate
 	make -C test/issue330 regenerate
 	make -C test/importcustom-issue389 regenerate
+	make -C test/merge regenerate
 	make gofmt
 
 tests:

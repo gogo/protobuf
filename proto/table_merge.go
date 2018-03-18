@@ -531,7 +531,10 @@ func (mi *mergeInfo) computeMergeInfo() {
 		case reflect.Struct:
 			switch {
 			case !isPointer:
-				panic(fmt.Sprintf("message field %s without pointer", tf))
+				mergeInfo := getMergeInfo(tf)
+				mfi.merge = func(dst, src pointer) {
+					mergeInfo.merge(dst, src)
+				}
 			case isSlice: // E.g., []*pb.T
 				mergeInfo := getMergeInfo(tf)
 				mfi.merge = func(dst, src pointer) {
