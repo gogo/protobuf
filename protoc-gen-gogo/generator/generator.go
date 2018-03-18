@@ -2069,7 +2069,7 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		if !gogoproto.IsNullable(m.ValueAliasField) {
 			valType = strings.TrimPrefix(valType, "*")
 		}
-		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
 			g.RecordTypeUse(m.ValueAliasField.GetTypeName())
 		}
 	default:
@@ -2294,7 +2294,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
 			g.PrintComments(fieldFullPath)
 			g.P(Annotate(message.file, fieldFullPath, fieldName), "\t", typename, "\t`", tag, "`")
-			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 		}
@@ -2326,7 +2326,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		// over all its fields to be able to mark as used any imported types
 		// used by those fields.
 		for _, field := range message.Field {
-			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 		}
@@ -2596,7 +2596,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			tag := "protobuf:" + g.goTag(message, field, wiretype)
 			fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
 			g.P("type ", Annotate(message.file, fieldFullPath, oneofTypeName[field]), " struct{ ", Annotate(message.file, fieldFullPath, fieldNames[field]), " ", fieldTypes[field], " `", tag, "` }")
-			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 		}
