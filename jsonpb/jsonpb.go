@@ -151,15 +151,33 @@ type isWkt interface {
 	XXX_WellKnownType() string
 }
 
-func isEmbeddedAndFlattened(protobufTag, jsonTag string) bool {
-	if !strings.Contains(protobufTag, "embedded=") {
+func isEmbeddedAndFlattened(tag reflect.StructTag) bool {
+	if !strings.Contains(tag.Get("protobuf"), "embedded=") {
 		return false
 	}
 
+	jsonTag := tag.Get("json")
 	if jsonTag == "" || strings.HasPrefix(jsonTag, ",") {
 		return true
 	}
 	return false
+}
+
+func (m *Marshaler) marshalEmbeddedAndFlattened(out *errWriter, value reflect.Value, indent, typeURL string, defaultMarshaller func() error) error {
+	switch value.Kind() {
+	case reflect.Struct:
+		message, _ := value.Interface().(proto.Message)
+		return m.marshalObjectFields(out, message, value, indent, typeURL)
+	case reflect.Ptr:
+		if value.IsNil() { // nil pointer
+			return nil
+		}
+		valueContent := reflect.Indirect(value)
+		message, _ := valueContent.Interface().(proto.Message)
+		return m.marshalObjectFields(out, message, valueContent, indent, typeURL)
+	default:
+		return defaultMarshaller()
+	}
 }
 
 // marshalObject writes a struct to the Writer.
@@ -349,30 +367,18 @@ func (m *Marshaler) marshalObjectFields(out *errWriter, v proto.Message, s refle
 				}
 			}
 		}
-		var err error
+
 		marshalField := func() error { return m.marshalField(out, prop, value, indent) }
-		if protobufTag, jsonTag := valueField.Tag.Get("protobuf"), valueField.Tag.Get("json"); m.EmbedAsStdJSON &&
-			isEmbeddedAndFlattened(protobufTag, jsonTag) {
-			switch value.Kind() {
-			case reflect.Struct:
-				message, _ := value.Interface().(proto.Message)
-				err = m.marshalObjectFields(out, message, value, indent, typeURL)
-			case reflect.Ptr:
-				if value.IsNil() { // nil pointer
-					continue
-				}
-				valueContent := reflect.Indirect(value)
-				message, _ := valueContent.Interface().(proto.Message)
-				err = m.marshalObjectFields(out, message, valueContent, indent, typeURL)
-			default:
-				err = marshalField()
-			}
+		var err error
+		if m.EmbedAsStdJSON && isEmbeddedAndFlattened(valueField.Tag) {
+			err = m.marshalEmbeddedAndFlattened(out, value, indent, typeURL, marshalField)
 		} else {
 			err = marshalField()
 		}
 		if err != nil {
 			return err
 		}
+
 		firstField = false
 	}
 
@@ -1055,7 +1061,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 					continue
 				}
 				var processedField bool
-				if protobufTag, jsonTag := ft.Tag.Get("protobuf"), ft.Tag.Get("json"); isEmbeddedAndFlattened(protobufTag, jsonTag) {
+				if isEmbeddedAndFlattened(ft.Tag) {
 					switch localTarget.Field(i).Kind() {
 					case reflect.Struct:
 						err, processedField = unmarshalFields(localTarget.Field(i), proto.GetProperties(localTarget.Field(i).Type()))
