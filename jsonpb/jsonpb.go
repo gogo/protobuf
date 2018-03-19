@@ -151,6 +151,17 @@ type isWkt interface {
 	XXX_WellKnownType() string
 }
 
+func isEmbeddedAndFlattened(protobufTag, jsonTag string) bool {
+	if !strings.Contains(protobufTag, "embedded=") {
+		return false
+	}
+
+	if jsonTag == "" || strings.HasPrefix(jsonTag, ",") {
+		return true
+	}
+	return false
+}
+
 // marshalObject writes a struct to the Writer.
 func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeURL string) error {
 	if jsm, ok := v.(JSONPBMarshaler); ok {
@@ -250,17 +261,6 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 	}
 	out.write("}")
 	return out.err
-}
-
-func isEmbeddedAndFlattened(protobufTag, jsonTag string) bool {
-	if !strings.Contains(protobufTag, "embedded=") {
-		return false
-	}
-
-	if jsonTag == "" || strings.HasPrefix(jsonTag, ",") {
-		return true
-	}
-	return false
 }
 
 func (m *Marshaler) marshalObjectFields(out *errWriter, v proto.Message, s reflect.Value, indent, typeURL string) error {
