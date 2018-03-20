@@ -58,6 +58,7 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="https://www.youtube.com/watch?v=CY9T020HLP8">Evolution of protobuf (Gource Visualization) - Landon Wilkins</a>
   - <a href="https://fosdem.org/2018/schedule/event/gopherjs/">Creating GopherJS Apps with gRPC-Web - Johan Brandhorst</a>
   - <a href="https://jbrandhorst.com/post/gogoproto/">So you want to use GoGo Protobuf - Johan Brandhorst</a>
+  - <a href="https://jbrandhorst.com/post/grpc-errors/">Advanced gRPC Error Usage - Johan Brandhorst</a>
 
 ## Getting Started
 
