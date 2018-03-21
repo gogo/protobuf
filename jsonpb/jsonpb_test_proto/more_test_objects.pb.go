@@ -23,6 +23,9 @@ It has these top-level messages:
 	Real
 	Complex
 	KnownTypes
+	Town
+	Address
+	Building
 */
 package jsonpb
 

@@ -73,6 +73,10 @@ type Marshaler struct {
 	// Whether to use the original (.proto) name for fields.
 	OrigName bool
 
+	// Whether to embed as the standard JSON marshaller, and to flatten messages
+	// if the field has no JSON name.
+	EmbedAsStdJSON bool
+
 	// A custom URL resolver to use when marshaling Any messages to JSON.
 	// If unset, the default resolution strategy is to extract the
 	// fully-qualified type name from the type URL and pass that to
@@ -145,6 +149,35 @@ func (s int32Slice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
 type isWkt interface {
 	XXX_WellKnownType() string
+}
+
+func isEmbeddedAndFlattened(tag reflect.StructTag) bool {
+	if !strings.Contains(tag.Get("protobuf"), "embedded=") {
+		return false
+	}
+
+	jsonTag := tag.Get("json")
+	if jsonTag == "" || strings.HasPrefix(jsonTag, ",") {
+		return true
+	}
+	return false
+}
+
+func (m *Marshaler) marshalEmbeddedAndFlattened(out *errWriter, value reflect.Value, indent, typeURL string, defaultMarshaller func() error) error {
+	switch value.Kind() {
+	case reflect.Struct:
+		message, _ := value.Interface().(proto.Message)
+		return m.marshalObjectFields(out, message, value, indent, typeURL)
+	case reflect.Ptr:
+		if value.IsNil() { // nil pointer
+			return nil
+		}
+		valueContent := reflect.Indirect(value)
+		message, _ := valueContent.Interface().(proto.Message)
+		return m.marshalObjectFields(out, message, valueContent, indent, typeURL)
+	default:
+		return defaultMarshaller()
+	}
 }
 
 // marshalObject writes a struct to the Writer.
@@ -236,6 +269,19 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		out.write("\n")
 	}
 
+	if err := m.marshalObjectFields(out, v, s, indent, typeURL); err != nil {
+		return err
+	}
+
+	if m.Indent != "" {
+		out.write("\n")
+		out.write(indent)
+	}
+	out.write("}")
+	return out.err
+}
+
+func (m *Marshaler) marshalObjectFields(out *errWriter, v proto.Message, s reflect.Value, indent, typeURL string) error {
 	firstField := true
 
 	if typeURL != "" {
@@ -321,9 +367,18 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 				}
 			}
 		}
-		if err := m.marshalField(out, prop, value, indent); err != nil {
+
+		marshalField := func() error { return m.marshalField(out, prop, value, indent) }
+		var err error
+		if m.EmbedAsStdJSON && isEmbeddedAndFlattened(valueField.Tag) {
+			err = m.marshalEmbeddedAndFlattened(out, value, indent, typeURL, marshalField)
+		} else {
+			err = marshalField()
+		}
+		if err != nil {
 			return err
 		}
+
 		firstField = false
 	}
 
@@ -364,11 +419,6 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 
 	}
 
-	if m.Indent != "" {
-		out.write("\n")
-		out.write(indent)
-	}
-	out.write("}")
 	return out.err
 }
 
@@ -1003,20 +1053,50 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		}
 
 		sprops := proto.GetProperties(targetType)
-		for i := 0; i < target.NumField(); i++ {
-			ft := target.Type().Field(i)
-			if strings.HasPrefix(ft.Name, "XXX_") {
-				continue
-			}
-			valueForField, ok := consumeField(sprops.Prop[i])
-			if !ok {
-				continue
-			}
+		var unmarshalFields func(reflect.Value, *proto.StructProperties) (error, bool)
+		unmarshalFields = func(localTarget reflect.Value, props *proto.StructProperties) (err error, foundField bool) {
+			for i := 0; i < localTarget.NumField(); i++ {
+				ft := localTarget.Type().Field(i)
+				if strings.HasPrefix(ft.Name, "XXX_") {
+					continue
+				}
+				var processedField bool
+				if isEmbeddedAndFlattened(ft.Tag) {
+					switch localTarget.Field(i).Kind() {
+					case reflect.Struct:
+						err, processedField = unmarshalFields(localTarget.Field(i), proto.GetProperties(localTarget.Field(i).Type()))
+						if err != nil {
+							return
+						}
+					case reflect.Ptr:
+						content := reflect.New(localTarget.Field(i).Type().Elem())
+						err, processedField = unmarshalFields(reflect.Indirect(content), proto.GetProperties(localTarget.Field(i).Type().Elem()))
+						if err != nil {
+							return
+						}
+						if processedField {
+							localTarget.Field(i).Set(content)
+						}
+					}
+				}
+				if !processedField {
+					valueForField, ok := consumeField(props.Prop[i])
+					if !ok {
+						continue
+					}
 
-			if err := u.unmarshalValue(target.Field(i), valueForField, sprops.Prop[i]); err != nil {
-				return err
+					foundField = true
+					if err = u.unmarshalValue(localTarget.Field(i), valueForField, props.Prop[i]); err != nil {
+						return
+					}
+				}
 			}
+			return
 		}
+		if err, _ := unmarshalFields(target, sprops); err != nil {
+			return err
+		}
+
 		// Check for any oneof fields.
 		if len(jsonFields) > 0 {
 			for _, oop := range sprops.OneofTypes {
