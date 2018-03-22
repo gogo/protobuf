@@ -28,8 +28,12 @@
 
 package gogoproto
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import proto "github.com/gogo/protobuf/proto"
+import (
+	"strings"
+
+	proto "github.com/gogo/protobuf/proto"
+	google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+)
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)
@@ -354,4 +358,19 @@ func HasCompare(file *google_protobuf.FileDescriptorProto, message *google_proto
 
 func RegistersGolangProto(file *google_protobuf.FileDescriptorProto) bool {
 	return proto.GetBoolExtension(file.Options, E_GoprotoRegistration, false)
+}
+
+func CopyJsonTagTo(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) []string {
+	return splitCommaSeparated(proto.GetStringExtension(message.Options, E_Copyjsontagto, proto.GetStringExtension(file.Options, E_CopyjsontagtoAll, "")))
+}
+
+func CopyJsonTagNameTo(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) []string {
+	return splitCommaSeparated(proto.GetStringExtension(message.Options, E_Copyjsontagnameto, proto.GetStringExtension(file.Options, E_CopyjsontagnametoAll, "")))
+}
+
+func splitCommaSeparated(s string) []string {
+	if s == "" {
+		return nil
+	}
+	return strings.Split(s, ",")
 }

@@ -2110,6 +2110,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("type ", ccTypeName, " struct {")
 		g.In()
 
+		copyJsonTagTo := gogoproto.CopyJsonTagTo(message.file, message.DescriptorProto)
+		copyJsonTagNameTo := gogoproto.CopyJsonTagNameTo(message.file, message.DescriptorProto)
+
 		for i, field := range message.Field {
 			fieldName := fieldNames[field]
 			typename, wiretype := g.GoType(message, field)
@@ -2127,6 +2130,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			moreTags := ""
 			if gogoMoreTags != nil {
 				moreTags = " " + *gogoMoreTags
+			}
+			for _, copyJsonTagName := range copyJsonTagNameTo {
+				moreTags = fmt.Sprintf("%s %s:%q", moreTags, copyJsonTagName, jsonName)
+			}
+			for _, copyJsonTag := range copyJsonTagTo {
+				moreTags = fmt.Sprintf("%s %s:%q", moreTags, copyJsonTag, jsonTag)
 			}
 			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
