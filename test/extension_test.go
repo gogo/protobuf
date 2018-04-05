@@ -106,9 +106,25 @@ func TestExtensionsMyExtendable(t *testing.T) {
 }
 
 func TestExtensionsNoExtensionsMapSetExtension(t *testing.T) {
-	m := NewPopulatedNoExtensionsMap(extr, false)
-	err := proto.SetExtension(m, E_FieldA1, &fieldA)
+	mm := NewPopulatedMyExtendable(extr, false)
+	for {
+		_, err := proto.GetExtension(mm, E_FieldA)
+		if err == proto.ErrMissingExtension {
+			// make sure the field that we are going to try to set is not set,
+			// since the random generator is not smart enough to generate the correct wire type for a defined extended field.
+			break
+		}
+		mm = NewPopulatedMyExtendable(extr, false)
+	}
+	data, err := proto.Marshal(mm)
 	if err != nil {
+		t.Fatal(err)
+	}
+	m := &NoExtensionsMap{}
+	if err := proto.Unmarshal(data, m); err != nil {
+		t.Fatal(err)
+	}
+	if err := proto.SetExtension(m, E_FieldA1, &fieldA); err != nil {
 		t.Fatal(err)
 	}
 	check(t, m, fieldA, E_FieldA1)
