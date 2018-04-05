@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -32,12 +34,32 @@ var _ = math.Inf
 const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subject struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Subject) Reset()                    { *m = Subject{} }
 func (m *Subject) String() string            { return proto1.CompactTextString(m) }
 func (*Subject) ProtoMessage()               {}
 func (*Subject) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Subject) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Subject.Unmarshal(m, b)
+}
+func (m *Subject) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Subject.Marshal(b, m, deterministic)
+}
+func (dst *Subject) XXX_Merge(src proto1.Message) {
+	xxx_messageInfo_Subject.Merge(dst, src)
+}
+func (m *Subject) XXX_Size() int {
+	return xxx_messageInfo_Subject.Size(m)
+}
+func (m *Subject) XXX_DiscardUnknown() {
+	xxx_messageInfo_Subject.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Subject proto1.InternalMessageInfo
 
 func init() {
 	proto1.RegisterType((*Subject)(nil), "proto.Subject")
@@ -61,6 +83,9 @@ func (this *Subject) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Subject) GoString() string {
@@ -69,6 +94,9 @@ func (this *Subject) GoString() string {
 	}
 	s := make([]string, 0, 4)
 	s = append(s, "&proto.Subject{")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -83,6 +111,9 @@ func valueToGoStringProto(v interface{}, typ string) string {
 func NewPopulatedSubject(r randyProto, easy bool) *Subject {
 	this := &Subject{}
 	if !easy && r.Intn(10) != 0 {
+		if proto1.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedProto(r, 1)
+		}
 	}
 	return this
 }

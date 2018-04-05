@@ -38,14 +38,27 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type OneofTest struct {
 	// Types that are valid to be assigned to Union:
 	//	*OneofTest_I
-	Union            isOneofTest_Union `protobuf_oneof:"union"`
-	XXX_unrecognized []byte            `json:"-"`
+	Union                isOneofTest_Union `protobuf_oneof:"union"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *OneofTest) Reset()                    { *m = OneofTest{} }
 func (m *OneofTest) String() string            { return proto.CompactTextString(m) }
 func (*OneofTest) ProtoMessage()               {}
 func (*OneofTest) Descriptor() ([]byte, []int) { return fileDescriptorIssue322, []int{0} }
+func (dst *OneofTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofTest.Merge(dst, src)
+}
+func (m *OneofTest) XXX_Size() int {
+	return xxx_messageInfo_OneofTest.Size(m)
+}
+func (m *OneofTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofTest proto.InternalMessageInfo
 
 const Default_OneofTest_I int32 = 4
 

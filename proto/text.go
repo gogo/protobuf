@@ -57,7 +57,6 @@ import (
 var (
 	newline         = []byte("\n")
 	spaces          = []byte("                                        ")
-	gtNewline       = []byte(">\n")
 	endBraceNewline = []byte("}\n")
 	backslashN      = []byte{'\\', 'n'}
 	backslashR      = []byte{'\\', 'r'}
@@ -276,6 +275,10 @@ func (tm *TextMarshaler) writeStruct(w *textWriter, sv reflect.Value) error {
 		props := sprops.Prop[i]
 		name := st.Field(i).Name
 
+		if name == "XXX_NoUnkeyedLiteral" {
+			continue
+		}
+
 		if strings.HasPrefix(name, "XXX_") {
 			// There are two XXX_ fields:
 			//   XXX_unrecognized []byte
@@ -475,7 +478,7 @@ func (tm *TextMarshaler) writeStruct(w *textWriter, sv reflect.Value) error {
 		pv = reflect.New(sv.Type())
 		pv.Elem().Set(sv)
 	}
-	if pv.Type().Implements(extensionRangeType) {
+	if _, err := extendable(pv.Interface()); err == nil {
 		if err := tm.writeExtensions(w, pv); err != nil {
 			return err
 		}
@@ -605,6 +608,19 @@ func (tm *TextMarshaler) writeAny(w *textWriter, v reflect.Value, props *Propert
 			}
 		}
 		w.indent()
+		if v.CanAddr() {
+			// Calling v.Interface on a struct causes the reflect package to
+			// copy the entire struct. This is racy with the new Marshaler
+			// since we atomically update the XXX_sizecache.
+			//
+			// Thus, we retrieve a pointer to the struct if possible to avoid
+			// a race since v.Interface on the pointer doesn't copy the struct.
+			//
+			// If v is not addressable, then we are not worried about a race
+			// since it implies that the binary Marshaler cannot possibly be
+			// mutating this value.
+			v = v.Addr()
+		}
 		if etm, ok := v.Interface().(encoding.TextMarshaler); ok {
 			text, err := etm.MarshalText()
 			if err != nil {
@@ -613,8 +629,13 @@ func (tm *TextMarshaler) writeAny(w *textWriter, v reflect.Value, props *Propert
 			if _, err = w.Write(text); err != nil {
 				return err
 			}
-		} else if err := tm.writeStruct(w, v); err != nil {
-			return err
+		} else {
+			if v.Kind() == reflect.Ptr {
+				v = v.Elem()
+			}
+			if err := tm.writeStruct(w, v); err != nil {
+				return err
+			}
 		}
 		w.unindent()
 		if err := w.WriteByte(ket); err != nil {

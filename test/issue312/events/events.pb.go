@@ -35,14 +35,33 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subtype struct {
-	State            *issue312.TaskState `protobuf:"varint,4,opt,name=state,enum=issue312.TaskState" json:"state,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	State                *issue312.TaskState `protobuf:"varint,4,opt,name=state,enum=issue312.TaskState" json:"state,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
 }
 
 func (m *Subtype) Reset()                    { *m = Subtype{} }
 func (m *Subtype) String() string            { return proto.CompactTextString(m) }
 func (*Subtype) ProtoMessage()               {}
 func (*Subtype) Descriptor() ([]byte, []int) { return fileDescriptorEvents, []int{0} }
+func (m *Subtype) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Subtype.Unmarshal(m, b)
+}
+func (m *Subtype) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Subtype.Marshal(b, m, deterministic)
+}
+func (dst *Subtype) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subtype.Merge(dst, src)
+}
+func (m *Subtype) XXX_Size() int {
+	return xxx_messageInfo_Subtype.Size(m)
+}
+func (m *Subtype) XXX_DiscardUnknown() {
+	xxx_messageInfo_Subtype.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Subtype proto.InternalMessageInfo
 
 func (m *Subtype) GetState() issue312.TaskState {
 	if m != nil && m.State != nil {

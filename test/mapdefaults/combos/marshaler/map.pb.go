@@ -40,33 +40,85 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapTest struct {
-	StrStr map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *MapTest) Reset()                    { *m = MapTest{} }
 func (*MapTest) ProtoMessage()               {}
 func (*MapTest) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{0} }
+func (m *MapTest) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapTest.Unmarshal(m, b)
+}
+func (dst *MapTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapTest.Merge(dst, src)
+}
+func (m *MapTest) XXX_Size() int {
+	return xxx_messageInfo_MapTest.Size(m)
+}
+func (m *MapTest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapTest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapTest proto.InternalMessageInfo
 
 type FakeMap struct {
-	Entries []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
+	Entries              []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *FakeMap) Reset()                    { *m = FakeMap{} }
 func (*FakeMap) ProtoMessage()               {}
 func (*FakeMap) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{1} }
+func (m *FakeMap) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
+}
+func (dst *FakeMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMap.Merge(dst, src)
+}
+func (m *FakeMap) XXX_Size() int {
+	return xxx_messageInfo_FakeMap.Size(m)
+}
+func (m *FakeMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_FakeMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FakeMap proto.InternalMessageInfo
 
 type FakeMapEntry struct {
-	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Other string `protobuf:"bytes,3,opt,name=other,proto3" json:"other,omitempty"`
+	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value                string   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Other                string   `protobuf:"bytes,3,opt,name=other,proto3" json:"other,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *FakeMapEntry) Reset()                    { *m = FakeMapEntry{} }
 func (*FakeMapEntry) ProtoMessage()               {}
 func (*FakeMapEntry) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{2} }
+func (m *FakeMapEntry) Unmarshal(b []byte) error {
+	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
+}
+func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
+}
+func (m *FakeMapEntry) XXX_Size() int {
+	return xxx_messageInfo_FakeMapEntry.Size(m)
+}
+func (m *FakeMapEntry) XXX_DiscardUnknown() {
+	xxx_messageInfo_FakeMapEntry.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FakeMapEntry proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*MapTest)(nil), "mapdefaults.MapTest")
+	proto.RegisterMapType((map[string]string)(nil), "mapdefaults.MapTest.StrStrEntry")
 	proto.RegisterType((*FakeMap)(nil), "mapdefaults.FakeMap")
 	proto.RegisterType((*FakeMapEntry)(nil), "mapdefaults.FakeMapEntry")
 }
@@ -375,6 +427,9 @@ func (this *MapTest) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("StrStr this[%v](%v) Not Equal that[%v](%v)", i, this.StrStr[i], i, that1.StrStr[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MapTest) Equal(that interface{}) bool {
@@ -403,6 +458,9 @@ func (this *MapTest) Equal(that interface{}) bool {
 		if this.StrStr[i] != that1.StrStr[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -439,6 +497,9 @@ func (this *FakeMap) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Entries this[%v](%v) Not Equal that[%v](%v)", i, this.Entries[i], i, that1.Entries[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *FakeMap) Equal(that interface{}) bool {
@@ -467,6 +528,9 @@ func (this *FakeMap) Equal(that interface{}) bool {
 		if !this.Entries[i].Equal(that1.Entries[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -504,6 +568,9 @@ func (this *FakeMapEntry) VerboseEqual(that interface{}) error {
 	if this.Other != that1.Other {
 		return fmt.Errorf("Other this(%v) Not Equal that(%v)", this.Other, that1.Other)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *FakeMapEntry) Equal(that interface{}) bool {
@@ -534,6 +601,9 @@ func (this *FakeMapEntry) Equal(that interface{}) bool {
 	if this.Other != that1.Other {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *MapTest) GoString() string {
@@ -555,6 +625,9 @@ func (this *MapTest) GoString() string {
 	if this.StrStr != nil {
 		s = append(s, "StrStr: "+mapStringForStrStr+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -566,6 +639,9 @@ func (this *FakeMap) GoString() string {
 	s = append(s, "&mapdefaults.FakeMap{")
 	if this.Entries != nil {
 		s = append(s, "Entries: "+fmt.Sprintf("%#v", this.Entries)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -579,6 +655,9 @@ func (this *FakeMapEntry) GoString() string {
 	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
 	s = append(s, "Other: "+fmt.Sprintf("%#v", this.Other)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -622,6 +701,11 @@ func (m *MapTest) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], v)
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -650,6 +734,11 @@ func (m *FakeMap) MarshalTo(dAtA []byte) (int, error) {
 				return 0, err
 			}
 			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
 		}
 	}
 	return i, nil
@@ -688,6 +777,11 @@ func (m *FakeMapEntry) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintMap(dAtA, i, uint64(len(m.Other)))
 		i += copy(dAtA[i:], m.Other)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -710,6 +804,9 @@ func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedMap(r, 2)
+		}
 	}
 	return this
 }
@@ -724,6 +821,9 @@ func NewPopulatedFakeMap(r randyMap, easy bool) *FakeMap {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedMap(r, 2)
+		}
 	}
 	return this
 }
@@ -734,6 +834,9 @@ func NewPopulatedFakeMapEntry(r randyMap, easy bool) *FakeMapEntry {
 	this.Value = string(randStringMap(r))
 	this.Other = string(randStringMap(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedMap(r, 4)
+		}
 	}
 	return this
 }
@@ -821,6 +924,11 @@ func (m *MapTest) Size() (n int) {
 			n += mapEntrySize + 1 + sovMap(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -831,6 +939,11 @@ func (m *FakeMap) Size() (n int) {
 		for _, e := range m.Entries {
 			l = e.Size()
 			n += 1 + l + sovMap(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -850,6 +963,11 @@ func (m *FakeMapEntry) Size() (n int) {
 	l = len(m.Other)
 	if l > 0 {
 		n += 1 + l + sovMap(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -883,6 +1001,7 @@ func (this *MapTest) String() string {
 	mapStringForStrStr += "}"
 	s := strings.Join([]string{`&MapTest{`,
 		`StrStr:` + mapStringForStrStr + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -893,6 +1012,7 @@ func (this *FakeMap) String() string {
 	}
 	s := strings.Join([]string{`&FakeMap{`,
 		`Entries:` + strings.Replace(fmt.Sprintf("%v", this.Entries), "FakeMapEntry", "FakeMapEntry", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -905,6 +1025,7 @@ func (this *FakeMapEntry) String() string {
 		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
 		`Other:` + fmt.Sprintf("%v", this.Other) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s

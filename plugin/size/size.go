@@ -631,7 +631,15 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
 			p.P(`if m.XXX_unrecognized != nil {`)
 			p.In()
+			if gogoproto.IsProto3(file.FileDescriptorProto) {
+				p.P("if ", protoPkg.Use(), ".Proto3UnknownFields {")
+				p.In()
+			}
 			p.P(`n+=len(m.XXX_unrecognized)`)
+			if gogoproto.IsProto3(file.FileDescriptorProto) {
+				p.Out()
+				p.P("}")
+			}
 			p.Out()
 			p.P(`}`)
 		}

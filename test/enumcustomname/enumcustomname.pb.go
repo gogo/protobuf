@@ -155,13 +155,32 @@ type OnlyEnums struct {
 	YetYetAnotherTestEnum          *test.YetYetAnotherTestEnum `protobuf:"varint,10,opt,name=yet_yet_another_test_enum,json=yetYetAnotherTestEnum,enum=test.YetYetAnotherTestEnum" json:"yet_yet_another_test_enum,omitempty"`
 	YetYetAnotherTestEnumDefaultCc *test.YetYetAnotherTestEnum `protobuf:"varint,11,opt,name=yet_yet_another_test_enum_default_cc,json=yetYetAnotherTestEnumDefaultCc,enum=test.YetYetAnotherTestEnum,def=0" json:"yet_yet_another_test_enum_default_cc,omitempty"`
 	YetYetAnotherTestEnumDefaultDd *test.YetYetAnotherTestEnum `protobuf:"varint,12,opt,name=yet_yet_another_test_enum_default_dd,json=yetYetAnotherTestEnumDefaultDd,enum=test.YetYetAnotherTestEnum,def=1" json:"yet_yet_another_test_enum_default_dd,omitempty"`
+	XXX_NoUnkeyedLiteral           struct{}                    `json:"-"`
 	XXX_unrecognized               []byte                      `json:"-"`
+	XXX_sizecache                  int32                       `json:"-"`
 }
 
 func (m *OnlyEnums) Reset()                    { *m = OnlyEnums{} }
 func (m *OnlyEnums) String() string            { return proto.CompactTextString(m) }
 func (*OnlyEnums) ProtoMessage()               {}
 func (*OnlyEnums) Descriptor() ([]byte, []int) { return fileDescriptorEnumcustomname, []int{0} }
+func (m *OnlyEnums) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OnlyEnums.Unmarshal(m, b)
+}
+func (m *OnlyEnums) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OnlyEnums.Marshal(b, m, deterministic)
+}
+func (dst *OnlyEnums) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OnlyEnums.Merge(dst, src)
+}
+func (m *OnlyEnums) XXX_Size() int {
+	return xxx_messageInfo_OnlyEnums.Size(m)
+}
+func (m *OnlyEnums) XXX_DiscardUnknown() {
+	xxx_messageInfo_OnlyEnums.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OnlyEnums proto.InternalMessageInfo
 
 const Default_OnlyEnums_MyEnumDefaultA MyCustomEnum = MyCustomEnum_MyBetterNameA
 const Default_OnlyEnums_MyEnumDefaultB MyCustomEnum = MyCustomEnum_B

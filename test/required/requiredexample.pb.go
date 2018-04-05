@@ -36,16 +36,29 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type RequiredExample struct {
-	TheRequiredString  *string  `protobuf:"bytes,1,req,name=theRequiredString" json:"theRequiredString,omitempty"`
-	TheOptionalString  *string  `protobuf:"bytes,2,opt,name=theOptionalString" json:"theOptionalString,omitempty"`
-	TheRepeatedStrings []string `protobuf:"bytes,3,rep,name=theRepeatedStrings" json:"theRepeatedStrings,omitempty"`
-	XXX_unrecognized   []byte   `json:"-"`
+	TheRequiredString    *string  `protobuf:"bytes,1,req,name=theRequiredString" json:"theRequiredString,omitempty"`
+	TheOptionalString    *string  `protobuf:"bytes,2,opt,name=theOptionalString" json:"theOptionalString,omitempty"`
+	TheRepeatedStrings   []string `protobuf:"bytes,3,rep,name=theRepeatedStrings" json:"theRepeatedStrings,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *RequiredExample) Reset()                    { *m = RequiredExample{} }
 func (m *RequiredExample) String() string            { return proto.CompactTextString(m) }
 func (*RequiredExample) ProtoMessage()               {}
 func (*RequiredExample) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{0} }
+func (dst *RequiredExample) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RequiredExample.Merge(dst, src)
+}
+func (m *RequiredExample) XXX_Size() int {
+	return xxx_messageInfo_RequiredExample.Size(m)
+}
+func (m *RequiredExample) XXX_DiscardUnknown() {
+	xxx_messageInfo_RequiredExample.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RequiredExample proto.InternalMessageInfo
 
 func (m *RequiredExample) GetTheRequiredString() string {
 	if m != nil && m.TheRequiredString != nil {
@@ -69,28 +82,41 @@ func (m *RequiredExample) GetTheRepeatedStrings() []string {
 }
 
 type NidOptNative struct {
-	Field1           float64 `protobuf:"fixed64,1,req,name=Field1" json:"Field1"`
-	Field2           float32 `protobuf:"fixed32,2,req,name=Field2" json:"Field2"`
-	Field3           int32   `protobuf:"varint,3,req,name=Field3" json:"Field3"`
-	Field4           int64   `protobuf:"varint,4,req,name=Field4" json:"Field4"`
-	Field5           uint32  `protobuf:"varint,5,req,name=Field5" json:"Field5"`
-	Field6           uint64  `protobuf:"varint,6,req,name=Field6" json:"Field6"`
-	Field7           int32   `protobuf:"zigzag32,7,req,name=Field7" json:"Field7"`
-	Field8           int64   `protobuf:"zigzag64,8,req,name=Field8" json:"Field8"`
-	Field9           uint32  `protobuf:"fixed32,9,req,name=Field9" json:"Field9"`
-	Field10          int32   `protobuf:"fixed32,10,req,name=Field10" json:"Field10"`
-	Field11          uint64  `protobuf:"fixed64,11,req,name=Field11" json:"Field11"`
-	Field12          int64   `protobuf:"fixed64,12,req,name=Field12" json:"Field12"`
-	Field13          bool    `protobuf:"varint,13,req,name=Field13" json:"Field13"`
-	Field14          string  `protobuf:"bytes,14,req,name=Field14" json:"Field14"`
-	Field15          []byte  `protobuf:"bytes,15,req,name=Field15" json:"Field15"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1               float64  `protobuf:"fixed64,1,req,name=Field1" json:"Field1"`
+	Field2               float32  `protobuf:"fixed32,2,req,name=Field2" json:"Field2"`
+	Field3               int32    `protobuf:"varint,3,req,name=Field3" json:"Field3"`
+	Field4               int64    `protobuf:"varint,4,req,name=Field4" json:"Field4"`
+	Field5               uint32   `protobuf:"varint,5,req,name=Field5" json:"Field5"`
+	Field6               uint64   `protobuf:"varint,6,req,name=Field6" json:"Field6"`
+	Field7               int32    `protobuf:"zigzag32,7,req,name=Field7" json:"Field7"`
+	Field8               int64    `protobuf:"zigzag64,8,req,name=Field8" json:"Field8"`
+	Field9               uint32   `protobuf:"fixed32,9,req,name=Field9" json:"Field9"`
+	Field10              int32    `protobuf:"fixed32,10,req,name=Field10" json:"Field10"`
+	Field11              uint64   `protobuf:"fixed64,11,req,name=Field11" json:"Field11"`
+	Field12              int64    `protobuf:"fixed64,12,req,name=Field12" json:"Field12"`
+	Field13              bool     `protobuf:"varint,13,req,name=Field13" json:"Field13"`
+	Field14              string   `protobuf:"bytes,14,req,name=Field14" json:"Field14"`
+	Field15              []byte   `protobuf:"bytes,15,req,name=Field15" json:"Field15"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
 func (m *NidOptNative) String() string            { return proto.CompactTextString(m) }
 func (*NidOptNative) ProtoMessage()               {}
 func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{1} }
+func (dst *NidOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptNative.Merge(dst, src)
+}
+func (m *NidOptNative) XXX_Size() int {
+	return xxx_messageInfo_NidOptNative.Size(m)
+}
+func (m *NidOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NidOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NidOptNative proto.InternalMessageInfo
 
 func (m *NidOptNative) GetField1() float64 {
 	if m != nil {
@@ -198,28 +224,41 @@ func (m *NidOptNative) GetField15() []byte {
 }
 
 type NinOptNative struct {
-	Field1           *float64 `protobuf:"fixed64,1,req,name=Field1" json:"Field1,omitempty"`
-	Field2           *float32 `protobuf:"fixed32,2,req,name=Field2" json:"Field2,omitempty"`
-	Field3           *int32   `protobuf:"varint,3,req,name=Field3" json:"Field3,omitempty"`
-	Field4           *int64   `protobuf:"varint,4,req,name=Field4" json:"Field4,omitempty"`
-	Field5           *uint32  `protobuf:"varint,5,req,name=Field5" json:"Field5,omitempty"`
-	Field6           *uint64  `protobuf:"varint,6,req,name=Field6" json:"Field6,omitempty"`
-	Field7           *int32   `protobuf:"zigzag32,7,req,name=Field7" json:"Field7,omitempty"`
-	Field8           *int64   `protobuf:"zigzag64,8,req,name=Field8" json:"Field8,omitempty"`
-	Field9           *uint32  `protobuf:"fixed32,9,req,name=Field9" json:"Field9,omitempty"`
-	Field10          *int32   `protobuf:"fixed32,10,req,name=Field10" json:"Field10,omitempty"`
-	Field11          *uint64  `protobuf:"fixed64,11,req,name=Field11" json:"Field11,omitempty"`
-	Field12          *int64   `protobuf:"fixed64,12,req,name=Field12" json:"Field12,omitempty"`
-	Field13          *bool    `protobuf:"varint,13,req,name=Field13" json:"Field13,omitempty"`
-	Field14          *string  `protobuf:"bytes,14,req,name=Field14" json:"Field14,omitempty"`
-	Field15          []byte   `protobuf:"bytes,15,req,name=Field15" json:"Field15,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	Field1               *float64 `protobuf:"fixed64,1,req,name=Field1" json:"Field1,omitempty"`
+	Field2               *float32 `protobuf:"fixed32,2,req,name=Field2" json:"Field2,omitempty"`
+	Field3               *int32   `protobuf:"varint,3,req,name=Field3" json:"Field3,omitempty"`
+	Field4               *int64   `protobuf:"varint,4,req,name=Field4" json:"Field4,omitempty"`
+	Field5               *uint32  `protobuf:"varint,5,req,name=Field5" json:"Field5,omitempty"`
+	Field6               *uint64  `protobuf:"varint,6,req,name=Field6" json:"Field6,omitempty"`
+	Field7               *int32   `protobuf:"zigzag32,7,req,name=Field7" json:"Field7,omitempty"`
+	Field8               *int64   `protobuf:"zigzag64,8,req,name=Field8" json:"Field8,omitempty"`
+	Field9               *uint32  `protobuf:"fixed32,9,req,name=Field9" json:"Field9,omitempty"`
+	Field10              *int32   `protobuf:"fixed32,10,req,name=Field10" json:"Field10,omitempty"`
+	Field11              *uint64  `protobuf:"fixed64,11,req,name=Field11" json:"Field11,omitempty"`
+	Field12              *int64   `protobuf:"fixed64,12,req,name=Field12" json:"Field12,omitempty"`
+	Field13              *bool    `protobuf:"varint,13,req,name=Field13" json:"Field13,omitempty"`
+	Field14              *string  `protobuf:"bytes,14,req,name=Field14" json:"Field14,omitempty"`
+	Field15              []byte   `protobuf:"bytes,15,req,name=Field15" json:"Field15,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
 func (m *NinOptNative) String() string            { return proto.CompactTextString(m) }
 func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{2} }
+func (dst *NinOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNative.Merge(dst, src)
+}
+func (m *NinOptNative) XXX_Size() int {
+	return xxx_messageInfo_NinOptNative.Size(m)
+}
+func (m *NinOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinOptNative proto.InternalMessageInfo
 
 func (m *NinOptNative) GetField1() float64 {
 	if m != nil && m.Field1 != nil {
@@ -327,8 +366,10 @@ func (m *NinOptNative) GetField15() []byte {
 }
 
 type NestedNinOptNative struct {
-	NestedNinOpts    []*NinOptNative `protobuf:"bytes,1,rep,name=NestedNinOpts" json:"NestedNinOpts,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	NestedNinOpts        []*NinOptNative `protobuf:"bytes,1,rep,name=NestedNinOpts" json:"NestedNinOpts,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *NestedNinOptNative) Reset()         { *m = NestedNinOptNative{} }
@@ -337,6 +378,17 @@ func (*NestedNinOptNative) ProtoMessage()    {}
 func (*NestedNinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptorRequiredexample, []int{3}
 }
+func (dst *NestedNinOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedNinOptNative.Merge(dst, src)
+}
+func (m *NestedNinOptNative) XXX_Size() int {
+	return xxx_messageInfo_NestedNinOptNative.Size(m)
+}
+func (m *NestedNinOptNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NestedNinOptNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NestedNinOptNative proto.InternalMessageInfo
 
 func (m *NestedNinOptNative) GetNestedNinOpts() []*NinOptNative {
 	if m != nil {

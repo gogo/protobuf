@@ -31,6 +31,8 @@ import google_protobuf3 "github.com/gogo/protobuf/types"
 import time "time"
 import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
+import bytes "bytes"
+
 import types1 "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -46,23 +48,40 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type KnownTypes struct {
-	Dur   *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	Ts    *google_protobuf2.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Dbl   *google_protobuf3.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt   *google_protobuf3.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64   *google_protobuf3.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64   *google_protobuf3.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32   *google_protobuf3.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32   *google_protobuf3.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool  *google_protobuf3.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str   *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	Dur                  *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	Ts                   *google_protobuf2.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Dbl                  *google_protobuf3.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt                  *google_protobuf3.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64                  *google_protobuf3.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64                  *google_protobuf3.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32                  *google_protobuf3.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32                  *google_protobuf3.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool                 *google_protobuf3.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str                  *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes                *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *KnownTypes) Reset()                    { *m = KnownTypes{} }
 func (m *KnownTypes) String() string            { return proto.CompactTextString(m) }
 func (*KnownTypes) ProtoMessage()               {}
 func (*KnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
+func (m *KnownTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_KnownTypes.Unmarshal(m, b)
+}
+func (dst *KnownTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KnownTypes.Merge(dst, src)
+}
+func (m *KnownTypes) XXX_Size() int {
+	return xxx_messageInfo_KnownTypes.Size(m)
+}
+func (m *KnownTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_KnownTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KnownTypes proto.InternalMessageInfo
 
 func (m *KnownTypes) GetDur() *google_protobuf1.Duration {
 	if m != nil {
@@ -142,16 +161,33 @@ func (m *KnownTypes) GetBytes() *google_protobuf3.BytesValue {
 }
 
 type ProtoTypes struct {
-	NullableTimestamp *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *google_protobuf1.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
-	Timestamp         google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
-	Duration          google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	NullableTimestamp    *google_protobuf2.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *google_protobuf1.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
+	Timestamp            google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
+	Duration             google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
+	XXX_unrecognized     []byte                      `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                       `json:"-"`
 }
 
 func (m *ProtoTypes) Reset()                    { *m = ProtoTypes{} }
 func (m *ProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*ProtoTypes) ProtoMessage()               {}
 func (*ProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{1} }
+func (m *ProtoTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProtoTypes.Unmarshal(m, b)
+}
+func (dst *ProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoTypes.Merge(dst, src)
+}
+func (m *ProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_ProtoTypes.Size(m)
+}
+func (m *ProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProtoTypes proto.InternalMessageInfo
 
 func (m *ProtoTypes) GetNullableTimestamp() *google_protobuf2.Timestamp {
 	if m != nil {
@@ -182,16 +218,33 @@ func (m *ProtoTypes) GetDuration() google_protobuf1.Duration {
 }
 
 type StdTypes struct {
-	NullableTimestamp *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration  *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	Timestamp         time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration          time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *StdTypes) Reset()                    { *m = StdTypes{} }
 func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
 func (*StdTypes) ProtoMessage()               {}
 func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+func (m *StdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
+}
+func (dst *StdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StdTypes.Merge(dst, src)
+}
+func (m *StdTypes) XXX_Size() int {
+	return xxx_messageInfo_StdTypes.Size(m)
+}
+func (m *StdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_StdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StdTypes proto.InternalMessageInfo
 
 func (m *StdTypes) GetNullableTimestamp() *time.Time {
 	if m != nil {
@@ -222,16 +275,33 @@ func (m *StdTypes) GetDuration() time.Duration {
 }
 
 type RepProtoTypes struct {
-	NullableTimestamps []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
-	Timestamps         []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
-	Durations          []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	NullableTimestamps   []*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*google_protobuf1.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
+	Timestamps           []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
+	Durations            []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *RepProtoTypes) Reset()                    { *m = RepProtoTypes{} }
 func (m *RepProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepProtoTypes) ProtoMessage()               {}
 func (*RepProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
+func (m *RepProtoTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_RepProtoTypes.Unmarshal(m, b)
+}
+func (dst *RepProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepProtoTypes.Merge(dst, src)
+}
+func (m *RepProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_RepProtoTypes.Size(m)
+}
+func (m *RepProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepProtoTypes proto.InternalMessageInfo
 
 func (m *RepProtoTypes) GetNullableTimestamps() []*google_protobuf2.Timestamp {
 	if m != nil {
@@ -262,16 +332,33 @@ func (m *RepProtoTypes) GetDurations() []google_protobuf1.Duration {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations  []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps         []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations          []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
 func (m *RepStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepStdTypes) ProtoMessage()               {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
+func (m *RepStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
+}
+func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepStdTypes.Merge(dst, src)
+}
+func (m *RepStdTypes) XXX_Size() int {
+	return xxx_messageInfo_RepStdTypes.Size(m)
+}
+func (m *RepStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_RepStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RepStdTypes proto.InternalMessageInfo
 
 func (m *RepStdTypes) GetNullableTimestamps() []*time.Time {
 	if m != nil {
@@ -302,16 +389,33 @@ func (m *RepStdTypes) GetDurations() []time.Duration {
 }
 
 type MapProtoTypes struct {
-	NullableTimestamp map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*google_protobuf2.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp            map[int32]google_protobuf2.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration             map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
+	XXX_unrecognized     []byte                                `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                                 `json:"-"`
 }
 
 func (m *MapProtoTypes) Reset()                    { *m = MapProtoTypes{} }
 func (m *MapProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapProtoTypes) ProtoMessage()               {}
 func (*MapProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
+func (m *MapProtoTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapProtoTypes.Unmarshal(m, b)
+}
+func (dst *MapProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapProtoTypes.Merge(dst, src)
+}
+func (m *MapProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_MapProtoTypes.Size(m)
+}
+func (m *MapProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapProtoTypes proto.InternalMessageInfo
 
 func (m *MapProtoTypes) GetNullableTimestamp() map[int32]*google_protobuf2.Timestamp {
 	if m != nil {
@@ -342,16 +446,33 @@ func (m *MapProtoTypes) GetDuration() map[int32]google_protobuf1.Duration {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp         map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration  map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration          map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 }
 
 func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
 func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
+func (m *MapStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
+}
+func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+}
+func (m *MapStdTypes) XXX_Size() int {
+	return xxx_messageInfo_MapStdTypes.Size(m)
+}
+func (m *MapStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MapStdTypes proto.InternalMessageInfo
 
 func (m *MapStdTypes) GetNullableTimestamp() map[int32]*time.Time {
 	if m != nil {
@@ -385,13 +506,30 @@ type OneofProtoTypes struct {
 	// Types that are valid to be assigned to OneOfProtoTimes:
 	//	*OneofProtoTypes_Timestamp
 	//	*OneofProtoTypes_Duration
-	OneOfProtoTimes isOneofProtoTypes_OneOfProtoTimes `protobuf_oneof:"OneOfProtoTimes"`
+	OneOfProtoTimes      isOneofProtoTypes_OneOfProtoTimes `protobuf_oneof:"OneOfProtoTimes"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
 func (m *OneofProtoTypes) Reset()                    { *m = OneofProtoTypes{} }
 func (m *OneofProtoTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofProtoTypes) ProtoMessage()               {}
 func (*OneofProtoTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{7} }
+func (m *OneofProtoTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OneofProtoTypes.Unmarshal(m, b)
+}
+func (dst *OneofProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofProtoTypes.Merge(dst, src)
+}
+func (m *OneofProtoTypes) XXX_Size() int {
+	return xxx_messageInfo_OneofProtoTypes.Size(m)
+}
+func (m *OneofProtoTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofProtoTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofProtoTypes proto.InternalMessageInfo
 
 type isOneofProtoTypes_OneOfProtoTimes interface {
 	isOneofProtoTypes_OneOfProtoTimes()
@@ -510,13 +648,30 @@ type OneofStdTypes struct {
 	// Types that are valid to be assigned to OneOfStdTimes:
 	//	*OneofStdTypes_Timestamp
 	//	*OneofStdTypes_Duration
-	OneOfStdTimes isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	OneOfStdTimes        isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
 func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofStdTypes) ProtoMessage()               {}
 func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{8} }
+func (m *OneofStdTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
+}
+func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
+}
+func (m *OneofStdTypes) XXX_Size() int {
+	return xxx_messageInfo_OneofStdTypes.Size(m)
+}
+func (m *OneofStdTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_OneofStdTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OneofStdTypes proto.InternalMessageInfo
 
 type isOneofStdTypes_OneOfStdTimes interface {
 	isOneofStdTypes_OneOfStdTimes()
@@ -658,7 +813,15 @@ func init() {
 	proto.RegisterType((*RepProtoTypes)(nil), "types.RepProtoTypes")
 	proto.RegisterType((*RepStdTypes)(nil), "types.RepStdTypes")
 	proto.RegisterType((*MapProtoTypes)(nil), "types.MapProtoTypes")
+	proto.RegisterMapType((map[int32]google_protobuf1.Duration)(nil), "types.MapProtoTypes.DurationEntry")
+	proto.RegisterMapType((map[int32]*google_protobuf1.Duration)(nil), "types.MapProtoTypes.NullableDurationEntry")
+	proto.RegisterMapType((map[int32]*google_protobuf2.Timestamp)(nil), "types.MapProtoTypes.NullableTimestampEntry")
+	proto.RegisterMapType((map[int32]google_protobuf2.Timestamp)(nil), "types.MapProtoTypes.TimestampEntry")
 	proto.RegisterType((*MapStdTypes)(nil), "types.MapStdTypes")
+	proto.RegisterMapType((map[int32]time.Duration)(nil), "types.MapStdTypes.DurationEntry")
+	proto.RegisterMapType((map[int32]*time.Duration)(nil), "types.MapStdTypes.NullableDurationEntry")
+	proto.RegisterMapType((map[int32]*time.Time)(nil), "types.MapStdTypes.NullableTimestampEntry")
+	proto.RegisterMapType((map[int32]time.Time)(nil), "types.MapStdTypes.TimestampEntry")
 	proto.RegisterType((*OneofProtoTypes)(nil), "types.OneofProtoTypes")
 	proto.RegisterType((*OneofStdTypes)(nil), "types.OneofStdTypes")
 }
@@ -720,6 +883,9 @@ func (this *KnownTypes) Compare(that interface{}) int {
 	if c := this.Bytes.Compare(that1.Bytes); c != 0 {
 		return c
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *ProtoTypes) Compare(that interface{}) int {
@@ -757,6 +923,9 @@ func (this *ProtoTypes) Compare(that interface{}) int {
 		return c
 	}
 	if c := this.Duration.Compare(&that1.Duration); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
 	}
 	return 0
@@ -830,6 +999,9 @@ func (this *RepProtoTypes) Compare(that interface{}) int {
 			return c
 		}
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *KnownTypes) VerboseEqual(that interface{}) error {
@@ -890,6 +1062,9 @@ func (this *KnownTypes) VerboseEqual(that interface{}) error {
 	if !this.Bytes.Equal(that1.Bytes) {
 		return fmt.Errorf("Bytes this(%v) Not Equal that(%v)", this.Bytes, that1.Bytes)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *KnownTypes) Equal(that interface{}) bool {
@@ -944,6 +1119,9 @@ func (this *KnownTypes) Equal(that interface{}) bool {
 	if !this.Bytes.Equal(that1.Bytes) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *ProtoTypes) VerboseEqual(that interface{}) error {
@@ -983,6 +1161,9 @@ func (this *ProtoTypes) VerboseEqual(that interface{}) error {
 	if !this.Duration.Equal(&that1.Duration) {
 		return fmt.Errorf("Duration this(%v) Not Equal that(%v)", this.Duration, that1.Duration)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *ProtoTypes) Equal(that interface{}) bool {
@@ -1014,6 +1195,9 @@ func (this *ProtoTypes) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Duration.Equal(&that1.Duration) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1065,6 +1249,9 @@ func (this *StdTypes) VerboseEqual(that interface{}) error {
 	if this.Duration != that1.Duration {
 		return fmt.Errorf("Duration this(%v) Not Equal that(%v)", this.Duration, that1.Duration)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *StdTypes) Equal(that interface{}) bool {
@@ -1106,6 +1293,9 @@ func (this *StdTypes) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Duration != that1.Duration {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1167,6 +1357,9 @@ func (this *RepProtoTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Durations this[%v](%v) Not Equal that[%v](%v)", i, this.Durations[i], i, that1.Durations[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *RepProtoTypes) Equal(that interface{}) bool {
@@ -1219,6 +1412,9 @@ func (this *RepProtoTypes) Equal(that interface{}) bool {
 		if !this.Durations[i].Equal(&that1.Durations[i]) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -1279,6 +1475,9 @@ func (this *RepStdTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Durations this[%v](%v) Not Equal that[%v](%v)", i, this.Durations[i], i, that1.Durations[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *RepStdTypes) Equal(that interface{}) bool {
@@ -1331,6 +1530,9 @@ func (this *RepStdTypes) Equal(that interface{}) bool {
 		if this.Durations[i] != that1.Durations[i] {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -1395,6 +1597,9 @@ func (this *MapProtoTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Duration this[%v](%v) Not Equal that[%v](%v)", i, this.Duration[i], i, that1.Duration[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MapProtoTypes) Equal(that interface{}) bool {
@@ -1451,6 +1656,9 @@ func (this *MapProtoTypes) Equal(that interface{}) bool {
 		if !(&a).Equal(&b) {
 			return false
 		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
 	}
 	return true
 }
@@ -1511,6 +1719,9 @@ func (this *MapStdTypes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Duration this[%v](%v) Not Equal that[%v](%v)", i, this.Duration[i], i, that1.Duration[i])
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MapStdTypes) Equal(that interface{}) bool {
@@ -1564,6 +1775,9 @@ func (this *MapStdTypes) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OneofProtoTypes) VerboseEqual(that interface{}) error {
@@ -1599,6 +1813,9 @@ func (this *OneofProtoTypes) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("this.OneOfProtoTimes == nil && that1.OneOfProtoTimes != nil")
 	} else if err := this.OneOfProtoTimes.VerboseEqual(that1.OneOfProtoTimes); err != nil {
 		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -1690,6 +1907,9 @@ func (this *OneofProtoTypes) Equal(that interface{}) bool {
 	} else if !this.OneOfProtoTimes.Equal(that1.OneOfProtoTimes) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *OneofProtoTypes_Timestamp) Equal(that interface{}) bool {
@@ -1773,6 +1993,9 @@ func (this *OneofStdTypes) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("this.OneOfStdTimes == nil && that1.OneOfStdTimes != nil")
 	} else if err := this.OneOfStdTimes.VerboseEqual(that1.OneOfStdTimes); err != nil {
 		return err
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
 	}
 	return nil
 }
@@ -1872,6 +2095,9 @@ func (this *OneofStdTypes) Equal(that interface{}) bool {
 	} else if this.OneOfStdTimes == nil {
 		return false
 	} else if !this.OneOfStdTimes.Equal(that1.OneOfStdTimes) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -2059,6 +2285,11 @@ func (m *KnownTypes) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n11
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2113,6 +2344,11 @@ func (m *ProtoTypes) MarshalTo(dAtA []byte) (int, error) {
 		return 0, err
 	}
 	i += n15
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2167,6 +2403,11 @@ func (m *StdTypes) MarshalTo(dAtA []byte) (int, error) {
 		return 0, err
 	}
 	i += n19
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2233,6 +2474,11 @@ func (m *RepProtoTypes) MarshalTo(dAtA []byte) (int, error) {
 			i += n
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2297,6 +2543,11 @@ func (m *RepStdTypes) MarshalTo(dAtA []byte) (int, error) {
 				return 0, err
 			}
 			i += n
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
 		}
 	}
 	return i, nil
@@ -2421,6 +2672,11 @@ func (m *MapProtoTypes) MarshalTo(dAtA []byte) (int, error) {
 			i += n23
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2543,6 +2799,11 @@ func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
 			i += n27
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -2567,6 +2828,11 @@ func (m *OneofProtoTypes) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += nn28
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -2620,6 +2886,11 @@ func (m *OneofStdTypes) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += nn31
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -2697,6 +2968,9 @@ func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 		this.Bytes = google_protobuf3.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 12)
+		}
 	}
 	return this
 }
@@ -2714,6 +2988,9 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
 	this.Duration = *v2
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2731,6 +3008,9 @@ func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 	v4 := types1.NewPopulatedStdDuration(r, easy)
 	this.Duration = *v4
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2768,6 +3048,9 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2805,6 +3088,9 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2840,6 +3126,9 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2875,6 +3164,9 @@ func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
+		}
 	}
 	return this
 }
@@ -2889,6 +3181,9 @@ func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
 		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Duration(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
+		}
 	}
 	return this
 }
@@ -2913,6 +3208,9 @@ func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
 		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
+		}
 	}
 	return this
 }
@@ -3047,6 +3345,11 @@ func (m *KnownTypes) Size() (n int) {
 		l = m.Bytes.Size()
 		n += 1 + l + sovTypes(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3065,6 +3368,11 @@ func (m *ProtoTypes) Size() (n int) {
 	n += 1 + l + sovTypes(uint64(l))
 	l = m.Duration.Size()
 	n += 1 + l + sovTypes(uint64(l))
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3083,6 +3391,11 @@ func (m *StdTypes) Size() (n int) {
 	n += 1 + l + sovTypes(uint64(l))
 	l = types1.SizeOfStdDuration(m.Duration)
 	n += 1 + l + sovTypes(uint64(l))
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3113,6 +3426,11 @@ func (m *RepProtoTypes) Size() (n int) {
 			n += 1 + l + sovTypes(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3141,6 +3459,11 @@ func (m *RepStdTypes) Size() (n int) {
 		for _, e := range m.Durations {
 			l = types1.SizeOfStdDuration(e)
 			n += 1 + l + sovTypes(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -3193,6 +3516,11 @@ func (m *MapProtoTypes) Size() (n int) {
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3243,6 +3571,11 @@ func (m *MapStdTypes) Size() (n int) {
 			n += mapEntrySize + 1 + sovTypes(uint64(mapEntrySize))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -3251,6 +3584,11 @@ func (m *OneofProtoTypes) Size() (n int) {
 	_ = l
 	if m.OneOfProtoTimes != nil {
 		n += m.OneOfProtoTimes.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -3278,6 +3616,11 @@ func (m *OneofStdTypes) Size() (n int) {
 	_ = l
 	if m.OneOfStdTimes != nil {
 		n += m.OneOfStdTimes.Size()
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }

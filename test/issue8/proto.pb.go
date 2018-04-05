@@ -33,14 +33,30 @@ var _ = math.Inf
 const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
-	Bar              *uint64 `protobuf:"varint,1,req,name=bar" json:"bar,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Bar                  *uint64  `protobuf:"varint,1,req,name=bar" json:"bar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Foo) Reset()                    { *m = Foo{} }
 func (m *Foo) String() string            { return proto1.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Foo) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
+}
+func (dst *Foo) XXX_Merge(src proto1.Message) {
+	xxx_messageInfo_Foo.Merge(dst, src)
+}
+func (m *Foo) XXX_Size() int {
+	return xxx_messageInfo_Foo.Size(m)
+}
+func (m *Foo) XXX_DiscardUnknown() {
+	xxx_messageInfo_Foo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Foo proto1.InternalMessageInfo
 
 func (m *Foo) GetBar() uint64 {
 	if m != nil && m.Bar != nil {

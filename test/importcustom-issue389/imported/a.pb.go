@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -31,13 +33,27 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type A struct {
-	F1 string `protobuf:"bytes,1,opt,name=f1,proto3" json:"f1,omitempty"`
+	F1                   string   `protobuf:"bytes,1,opt,name=f1,proto3" json:"f1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *A) Reset()                    { *m = A{} }
 func (m *A) String() string            { return proto.CompactTextString(m) }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorA, []int{0} }
+func (dst *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(dst, src)
+}
+func (m *A) XXX_Size() int {
+	return xxx_messageInfo_A.Size(m)
+}
+func (m *A) XXX_DiscardUnknown() {
+	xxx_messageInfo_A.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_A proto.InternalMessageInfo
 
 func (m *A) GetF1() string {
 	if m != nil {
@@ -71,6 +87,9 @@ func (this *A) Equal(that interface{}) bool {
 	if this.F1 != that1.F1 {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (m *A) Marshal() (dAtA []byte, err error) {
@@ -94,6 +113,11 @@ func (m *A) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintA(dAtA, i, uint64(len(m.F1)))
 		i += copy(dAtA[i:], m.F1)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -110,6 +134,9 @@ func NewPopulatedA(r randyA, easy bool) *A {
 	this := &A{}
 	this.F1 = string(randStringA(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedA(r, 2)
+		}
 	}
 	return this
 }
@@ -192,6 +219,11 @@ func (m *A) Size() (n int) {
 	l = len(m.F1)
 	if l > 0 {
 		n += 1 + l + sovA(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -279,6 +311,7 @@ func (m *A) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

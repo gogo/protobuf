@@ -48,34 +48,73 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type A struct {
-	Description      string                             `protobuf:"bytes,1,opt,name=Description" json:"Description"`
-	Number           int64                              `protobuf:"varint,2,opt,name=Number" json:"Number"`
-	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
-	XXX_unrecognized []byte                             `json:"-"`
+	Description          string                             `protobuf:"bytes,1,opt,name=Description" json:"Description"`
+	Number               int64                              `protobuf:"varint,2,opt,name=Number" json:"Number"`
+	Id                   github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
+	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
+	XXX_unrecognized     []byte                             `json:"-"`
+	XXX_sizecache        int32                              `json:"-"`
 }
 
 func (m *A) Reset()                    { *m = A{} }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{0} }
+func (dst *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(dst, src)
+}
+func (m *A) XXX_Size() int {
+	return xxx_messageInfo_A.Size(m)
+}
+func (m *A) XXX_DiscardUnknown() {
+	xxx_messageInfo_A.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_A proto.InternalMessageInfo
 
 type B struct {
-	A                `protobuf:"bytes,1,opt,name=A,embedded=A" json:"A"`
-	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
-	XXX_unrecognized []byte                                         `json:"-"`
+	A                    `protobuf:"bytes,1,opt,name=A,embedded=A" json:"A"`
+	G                    []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
+	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
+	XXX_unrecognized     []byte                                         `json:"-"`
+	XXX_sizecache        int32                                          `json:"-"`
 }
 
 func (m *B) Reset()                    { *m = B{} }
 func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{1} }
+func (dst *B) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_B.Merge(dst, src)
+}
+func (m *B) XXX_Size() int {
+	return xxx_messageInfo_B.Size(m)
+}
+func (m *B) XXX_DiscardUnknown() {
+	xxx_messageInfo_B.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_B proto.InternalMessageInfo
 
 type C struct {
-	MySize           *int64 `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	MySize               *int64   `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *C) Reset()                    { *m = C{} }
 func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{2} }
+func (dst *C) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C.Merge(dst, src)
+}
+func (m *C) XXX_Size() int {
+	return xxx_messageInfo_C.Size(m)
+}
+func (m *C) XXX_DiscardUnknown() {
+	xxx_messageInfo_C.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_C proto.InternalMessageInfo
 
 func (m *C) GetMySize() int64 {
 	if m != nil && m.MySize != nil {
@@ -85,14 +124,27 @@ func (m *C) GetMySize() int64 {
 }
 
 type U struct {
-	A                *A     `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
-	B                *B     `protobuf:"bytes,2,opt,name=B" json:"B,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	A                    *A       `protobuf:"bytes,1,opt,name=A" json:"A,omitempty"`
+	B                    *B       `protobuf:"bytes,2,opt,name=B" json:"B,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *U) Reset()                    { *m = U{} }
 func (*U) ProtoMessage()               {}
 func (*U) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{3} }
+func (dst *U) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_U.Merge(dst, src)
+}
+func (m *U) XXX_Size() int {
+	return xxx_messageInfo_U.Size(m)
+}
+func (m *U) XXX_DiscardUnknown() {
+	xxx_messageInfo_U.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_U proto.InternalMessageInfo
 
 func (m *U) GetA() *A {
 	if m != nil {
@@ -109,8 +161,10 @@ func (m *U) GetB() *B {
 }
 
 type E struct {
-	XXX_extensions   []byte `protobuf:"bytes,0,opt" json:"-"`
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_extensions       []byte   `protobuf:"bytes,0,opt" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *E) Reset()                    { *m = E{} }
@@ -130,14 +184,38 @@ func (m *E) GetExtensions() *[]byte {
 	}
 	return &m.XXX_extensions
 }
+func (dst *E) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_E.Merge(dst, src)
+}
+func (m *E) XXX_Size() int {
+	return xxx_messageInfo_E.Size(m)
+}
+func (m *E) XXX_DiscardUnknown() {
+	xxx_messageInfo_E.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_E proto.InternalMessageInfo
 
 type R struct {
-	Recognized *uint32 `protobuf:"varint,1,opt,name=recognized" json:"recognized,omitempty"`
+	Recognized           *uint32  `protobuf:"varint,1,opt,name=recognized" json:"recognized,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *R) Reset()                    { *m = R{} }
 func (*R) ProtoMessage()               {}
 func (*R) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{5} }
+func (dst *R) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_R.Merge(dst, src)
+}
+func (m *R) XXX_Size() int {
+	return xxx_messageInfo_R.Size(m)
+}
+func (m *R) XXX_DiscardUnknown() {
+	xxx_messageInfo_R.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_R proto.InternalMessageInfo
 
 func (m *R) GetRecognized() uint32 {
 	if m != nil && m.Recognized != nil {
@@ -147,13 +225,26 @@ func (m *R) GetRecognized() uint32 {
 }
 
 type CastType struct {
-	Int32            *int32 `protobuf:"varint,1,opt,name=Int32,casttype=int32" json:"Int32,omitempty"`
-	XXX_unrecognized []byte `json:"-"`
+	Int32                *int32   `protobuf:"varint,1,opt,name=Int32,casttype=int32" json:"Int32,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CastType) Reset()                    { *m = CastType{} }
 func (*CastType) ProtoMessage()               {}
 func (*CastType) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{6} }
+func (dst *CastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CastType.Merge(dst, src)
+}
+func (m *CastType) XXX_Size() int {
+	return xxx_messageInfo_CastType.Size(m)
+}
+func (m *CastType) XXX_DiscardUnknown() {
+	xxx_messageInfo_CastType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CastType proto.InternalMessageInfo
 
 func (m *CastType) GetInt32() int32 {
 	if m != nil && m.Int32 != nil {

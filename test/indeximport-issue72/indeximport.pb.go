@@ -34,14 +34,27 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type IndexQueries struct {
-	Queries          []*index.IndexQuery `protobuf:"bytes,1,rep,name=Queries" json:"Queries,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	Queries              []*index.IndexQuery `protobuf:"bytes,1,rep,name=Queries" json:"Queries,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
+	XXX_unrecognized     []byte              `json:"-"`
+	XXX_sizecache        int32               `json:"-"`
 }
 
 func (m *IndexQueries) Reset()                    { *m = IndexQueries{} }
 func (m *IndexQueries) String() string            { return proto.CompactTextString(m) }
 func (*IndexQueries) ProtoMessage()               {}
 func (*IndexQueries) Descriptor() ([]byte, []int) { return fileDescriptorIndeximport, []int{0} }
+func (dst *IndexQueries) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IndexQueries.Merge(dst, src)
+}
+func (m *IndexQueries) XXX_Size() int {
+	return xxx_messageInfo_IndexQueries.Size(m)
+}
+func (m *IndexQueries) XXX_DiscardUnknown() {
+	xxx_messageInfo_IndexQueries.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IndexQueries proto.InternalMessageInfo
 
 func (m *IndexQueries) GetQueries() []*index.IndexQuery {
 	if m != nil {

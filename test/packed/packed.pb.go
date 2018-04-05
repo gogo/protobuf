@@ -35,26 +35,42 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type NinRepNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepNative) Reset()                    { *m = NinRepNative{} }
 func (m *NinRepNative) String() string            { return proto.CompactTextString(m) }
 func (*NinRepNative) ProtoMessage()               {}
 func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{0} }
+func (m *NinRepNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
+}
+func (dst *NinRepNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNative.Merge(dst, src)
+}
+func (m *NinRepNative) XXX_Size() int {
+	return xxx_messageInfo_NinRepNative.Size(m)
+}
+func (m *NinRepNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepNative proto.InternalMessageInfo
 
 func (m *NinRepNative) GetField1() []float64 {
 	if m != nil {
@@ -148,26 +164,42 @@ func (m *NinRepNative) GetField13() []bool {
 }
 
 type NinRepPackedNative struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNative{} }
 func (m *NinRepPackedNative) String() string            { return proto.CompactTextString(m) }
 func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{1} }
+func (m *NinRepPackedNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
+}
+func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
+}
+func (m *NinRepPackedNative) XXX_Size() int {
+	return xxx_messageInfo_NinRepPackedNative.Size(m)
+}
+func (m *NinRepPackedNative) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepPackedNative.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepPackedNative proto.InternalMessageInfo
 
 func (m *NinRepPackedNative) GetField1() []float64 {
 	if m != nil {
@@ -261,26 +293,42 @@ func (m *NinRepPackedNative) GetField13() []bool {
 }
 
 type NinRepNativeUnsafe struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepNativeUnsafe) Reset()                    { *m = NinRepNativeUnsafe{} }
 func (m *NinRepNativeUnsafe) String() string            { return proto.CompactTextString(m) }
 func (*NinRepNativeUnsafe) ProtoMessage()               {}
 func (*NinRepNativeUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{2} }
+func (m *NinRepNativeUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinRepNativeUnsafe.Marshal(b, m, deterministic)
+}
+func (dst *NinRepNativeUnsafe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNativeUnsafe.Merge(dst, src)
+}
+func (m *NinRepNativeUnsafe) XXX_Size() int {
+	return xxx_messageInfo_NinRepNativeUnsafe.Size(m)
+}
+func (m *NinRepNativeUnsafe) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepNativeUnsafe.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepNativeUnsafe proto.InternalMessageInfo
 
 func (m *NinRepNativeUnsafe) GetField1() []float64 {
 	if m != nil {
@@ -374,26 +422,42 @@ func (m *NinRepNativeUnsafe) GetField13() []bool {
 }
 
 type NinRepPackedNativeUnsafe struct {
-	Field1           []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
-	Field2           []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
-	Field3           []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
-	Field4           []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
-	Field5           []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
-	Field6           []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
-	Field7           []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
-	Field8           []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
-	Field9           []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
-	Field10          []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
-	Field11          []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
-	Field12          []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
-	Field13          []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Field1               []float64 `protobuf:"fixed64,1,rep,packed,name=Field1" json:"Field1,omitempty"`
+	Field2               []float32 `protobuf:"fixed32,2,rep,packed,name=Field2" json:"Field2,omitempty"`
+	Field3               []int32   `protobuf:"varint,3,rep,packed,name=Field3" json:"Field3,omitempty"`
+	Field4               []int64   `protobuf:"varint,4,rep,packed,name=Field4" json:"Field4,omitempty"`
+	Field5               []uint32  `protobuf:"varint,5,rep,packed,name=Field5" json:"Field5,omitempty"`
+	Field6               []uint64  `protobuf:"varint,6,rep,packed,name=Field6" json:"Field6,omitempty"`
+	Field7               []int32   `protobuf:"zigzag32,7,rep,packed,name=Field7" json:"Field7,omitempty"`
+	Field8               []int64   `protobuf:"zigzag64,8,rep,packed,name=Field8" json:"Field8,omitempty"`
+	Field9               []uint32  `protobuf:"fixed32,9,rep,packed,name=Field9" json:"Field9,omitempty"`
+	Field10              []int32   `protobuf:"fixed32,10,rep,packed,name=Field10" json:"Field10,omitempty"`
+	Field11              []uint64  `protobuf:"fixed64,11,rep,packed,name=Field11" json:"Field11,omitempty"`
+	Field12              []int64   `protobuf:"fixed64,12,rep,packed,name=Field12" json:"Field12,omitempty"`
+	Field13              []bool    `protobuf:"varint,13,rep,packed,name=Field13" json:"Field13,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *NinRepPackedNativeUnsafe) Reset()                    { *m = NinRepPackedNativeUnsafe{} }
 func (m *NinRepPackedNativeUnsafe) String() string            { return proto.CompactTextString(m) }
 func (*NinRepPackedNativeUnsafe) ProtoMessage()               {}
 func (*NinRepPackedNativeUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{3} }
+func (m *NinRepPackedNativeUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinRepPackedNativeUnsafe.Marshal(b, m, deterministic)
+}
+func (dst *NinRepPackedNativeUnsafe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNativeUnsafe.Merge(dst, src)
+}
+func (m *NinRepPackedNativeUnsafe) XXX_Size() int {
+	return xxx_messageInfo_NinRepPackedNativeUnsafe.Size(m)
+}
+func (m *NinRepPackedNativeUnsafe) XXX_DiscardUnknown() {
+	xxx_messageInfo_NinRepPackedNativeUnsafe.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NinRepPackedNativeUnsafe proto.InternalMessageInfo
 
 func (m *NinRepPackedNativeUnsafe) GetField1() []float64 {
 	if m != nil {

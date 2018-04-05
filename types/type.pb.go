@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strconv "strconv"
 
 import strings "strings"
@@ -171,12 +173,26 @@ type Type struct {
 	// The source context.
 	SourceContext *SourceContext `protobuf:"bytes,5,opt,name=source_context,json=sourceContext" json:"source_context,omitempty"`
 	// The source syntax.
-	Syntax Syntax `protobuf:"varint,6,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	Syntax               Syntax   `protobuf:"varint,6,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Type) Reset()                    { *m = Type{} }
 func (*Type) ProtoMessage()               {}
 func (*Type) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{0} }
+func (dst *Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Type.Merge(dst, src)
+}
+func (m *Type) XXX_Size() int {
+	return xxx_messageInfo_Type.Size(m)
+}
+func (m *Type) XXX_DiscardUnknown() {
+	xxx_messageInfo_Type.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Type proto.InternalMessageInfo
 
 func (m *Type) GetName() string {
 	if m != nil {
@@ -247,12 +263,26 @@ type Field struct {
 	// The field JSON name.
 	JsonName string `protobuf:"bytes,10,opt,name=json_name,json=jsonName,proto3" json:"json_name,omitempty"`
 	// The string value of the default value of this field. Proto2 syntax only.
-	DefaultValue string `protobuf:"bytes,11,opt,name=default_value,json=defaultValue,proto3" json:"default_value,omitempty"`
+	DefaultValue         string   `protobuf:"bytes,11,opt,name=default_value,json=defaultValue,proto3" json:"default_value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Field) Reset()                    { *m = Field{} }
 func (*Field) ProtoMessage()               {}
 func (*Field) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{1} }
+func (dst *Field) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Field.Merge(dst, src)
+}
+func (m *Field) XXX_Size() int {
+	return xxx_messageInfo_Field.Size(m)
+}
+func (m *Field) XXX_DiscardUnknown() {
+	xxx_messageInfo_Field.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Field proto.InternalMessageInfo
 
 func (m *Field) GetKind() Field_Kind {
 	if m != nil {
@@ -339,12 +369,26 @@ type Enum struct {
 	// The source context.
 	SourceContext *SourceContext `protobuf:"bytes,4,opt,name=source_context,json=sourceContext" json:"source_context,omitempty"`
 	// The source syntax.
-	Syntax Syntax `protobuf:"varint,5,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	Syntax               Syntax   `protobuf:"varint,5,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Enum) Reset()                    { *m = Enum{} }
 func (*Enum) ProtoMessage()               {}
 func (*Enum) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{2} }
+func (dst *Enum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Enum.Merge(dst, src)
+}
+func (m *Enum) XXX_Size() int {
+	return xxx_messageInfo_Enum.Size(m)
+}
+func (m *Enum) XXX_DiscardUnknown() {
+	xxx_messageInfo_Enum.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Enum proto.InternalMessageInfo
 
 func (m *Enum) GetName() string {
 	if m != nil {
@@ -392,12 +436,26 @@ type EnumValue struct {
 	// Enum value number.
 	Number int32 `protobuf:"varint,2,opt,name=number,proto3" json:"number,omitempty"`
 	// Protocol buffer options.
-	Options []*Option `protobuf:"bytes,3,rep,name=options" json:"options,omitempty"`
+	Options              []*Option `protobuf:"bytes,3,rep,name=options" json:"options,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *EnumValue) Reset()                    { *m = EnumValue{} }
 func (*EnumValue) ProtoMessage()               {}
 func (*EnumValue) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{3} }
+func (dst *EnumValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EnumValue.Merge(dst, src)
+}
+func (m *EnumValue) XXX_Size() int {
+	return xxx_messageInfo_EnumValue.Size(m)
+}
+func (m *EnumValue) XXX_DiscardUnknown() {
+	xxx_messageInfo_EnumValue.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EnumValue proto.InternalMessageInfo
 
 func (m *EnumValue) GetName() string {
 	if m != nil {
@@ -436,12 +494,26 @@ type Option struct {
 	// the corresponding wrapper type defined in google/protobuf/wrappers.proto
 	// should be used. If the value is an enum, it should be stored as an int32
 	// value using the google.protobuf.Int32Value type.
-	Value *Any `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	Value                *Any     `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Option) Reset()                    { *m = Option{} }
 func (*Option) ProtoMessage()               {}
 func (*Option) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{4} }
+func (dst *Option) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Option.Merge(dst, src)
+}
+func (m *Option) XXX_Size() int {
+	return xxx_messageInfo_Option.Size(m)
+}
+func (m *Option) XXX_DiscardUnknown() {
+	xxx_messageInfo_Option.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Option proto.InternalMessageInfo
 
 func (m *Option) GetName() string {
 	if m != nil {
@@ -546,6 +618,9 @@ func (this *Type) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Field) Compare(that interface{}) int {
@@ -638,6 +713,9 @@ func (this *Field) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Enum) Compare(that interface{}) int {
@@ -702,6 +780,9 @@ func (this *Enum) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *EnumValue) Compare(that interface{}) int {
@@ -752,6 +833,9 @@ func (this *EnumValue) Compare(that interface{}) int {
 			return c
 		}
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Option) Compare(that interface{}) int {
@@ -786,6 +870,9 @@ func (this *Option) Compare(that interface{}) int {
 		return 1
 	}
 	if c := this.Value.Compare(that1.Value); c != 0 {
+		return c
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
 	}
 	return 0
@@ -863,6 +950,9 @@ func (this *Type) Equal(that interface{}) bool {
 	if this.Syntax != that1.Syntax {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Field) Equal(that interface{}) bool {
@@ -919,6 +1009,9 @@ func (this *Field) Equal(that interface{}) bool {
 	if this.DefaultValue != that1.DefaultValue {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Enum) Equal(that interface{}) bool {
@@ -965,6 +1058,9 @@ func (this *Enum) Equal(that interface{}) bool {
 	if this.Syntax != that1.Syntax {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *EnumValue) Equal(that interface{}) bool {
@@ -1000,6 +1096,9 @@ func (this *EnumValue) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Option) Equal(that interface{}) bool {
@@ -1027,6 +1126,9 @@ func (this *Option) Equal(that interface{}) bool {
 	if !this.Value.Equal(that1.Value) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Type) GoString() string {
@@ -1047,6 +1149,9 @@ func (this *Type) GoString() string {
 		s = append(s, "SourceContext: "+fmt.Sprintf("%#v", this.SourceContext)+",\n")
 	}
 	s = append(s, "Syntax: "+fmt.Sprintf("%#v", this.Syntax)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1068,6 +1173,9 @@ func (this *Field) GoString() string {
 	}
 	s = append(s, "JsonName: "+fmt.Sprintf("%#v", this.JsonName)+",\n")
 	s = append(s, "DefaultValue: "+fmt.Sprintf("%#v", this.DefaultValue)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1088,6 +1196,9 @@ func (this *Enum) GoString() string {
 		s = append(s, "SourceContext: "+fmt.Sprintf("%#v", this.SourceContext)+",\n")
 	}
 	s = append(s, "Syntax: "+fmt.Sprintf("%#v", this.Syntax)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1102,6 +1213,9 @@ func (this *EnumValue) GoString() string {
 	if this.Options != nil {
 		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
 	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1114,6 +1228,9 @@ func (this *Option) GoString() string {
 	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
 	if this.Value != nil {
 		s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -1201,6 +1318,11 @@ func (m *Type) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintType(dAtA, i, uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1285,6 +1407,11 @@ func (m *Field) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintType(dAtA, i, uint64(len(m.DefaultValue)))
 		i += copy(dAtA[i:], m.DefaultValue)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1348,6 +1475,11 @@ func (m *Enum) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintType(dAtA, i, uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1389,6 +1521,11 @@ func (m *EnumValue) MarshalTo(dAtA []byte) (int, error) {
 			i += n
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -1422,6 +1559,11 @@ func (m *Option) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += n3
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
 	}
 	return i, nil
 }
@@ -1462,6 +1604,9 @@ func NewPopulatedType(r randyType, easy bool) *Type {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedType(r, 7)
+		}
 	}
 	return this
 }
@@ -1491,6 +1636,9 @@ func NewPopulatedField(r randyType, easy bool) *Field {
 	this.JsonName = string(randStringType(r))
 	this.DefaultValue = string(randStringType(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedType(r, 12)
+		}
 	}
 	return this
 }
@@ -1517,6 +1665,9 @@ func NewPopulatedEnum(r randyType, easy bool) *Enum {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedType(r, 6)
+		}
 	}
 	return this
 }
@@ -1536,6 +1687,9 @@ func NewPopulatedEnumValue(r randyType, easy bool) *EnumValue {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedType(r, 4)
+		}
 	}
 	return this
 }
@@ -1547,6 +1701,9 @@ func NewPopulatedOption(r randyType, easy bool) *Option {
 		this.Value = NewPopulatedAny(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedType(r, 3)
+		}
 	}
 	return this
 }
@@ -1655,6 +1812,11 @@ func (m *Type) Size() (n int) {
 	if m.Syntax != 0 {
 		n += 1 + sovType(uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1698,6 +1860,11 @@ func (m *Field) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovType(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1727,6 +1894,11 @@ func (m *Enum) Size() (n int) {
 	if m.Syntax != 0 {
 		n += 1 + sovType(uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1746,6 +1918,11 @@ func (m *EnumValue) Size() (n int) {
 			n += 1 + l + sovType(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -1759,6 +1936,11 @@ func (m *Option) Size() (n int) {
 	if m.Value != nil {
 		l = m.Value.Size()
 		n += 1 + l + sovType(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -1787,6 +1969,7 @@ func (this *Type) String() string {
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
 		`SourceContext:` + strings.Replace(fmt.Sprintf("%v", this.SourceContext), "SourceContext", "SourceContext", 1) + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1806,6 +1989,7 @@ func (this *Field) String() string {
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
 		`JsonName:` + fmt.Sprintf("%v", this.JsonName) + `,`,
 		`DefaultValue:` + fmt.Sprintf("%v", this.DefaultValue) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1820,6 +2004,7 @@ func (this *Enum) String() string {
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
 		`SourceContext:` + strings.Replace(fmt.Sprintf("%v", this.SourceContext), "SourceContext", "SourceContext", 1) + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1832,6 +2017,7 @@ func (this *EnumValue) String() string {
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Number:` + fmt.Sprintf("%v", this.Number) + `,`,
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1843,6 +2029,7 @@ func (this *Option) String() string {
 	s := strings.Join([]string{`&Option{`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Value:` + strings.Replace(fmt.Sprintf("%v", this.Value), "Any", "Any", 1) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2068,6 +2255,7 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2361,6 +2549,7 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2554,6 +2743,7 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2683,6 +2873,7 @@ func (m *EnumValue) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2795,6 +2986,7 @@ func (m *Option) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

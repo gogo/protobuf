@@ -32,13 +32,27 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type M struct {
-	F map[string]float64 `protobuf:"bytes,1,rep,name=f" json:"f,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	F                    map[string]float64 `protobuf:"bytes,1,rep,name=f" json:"f,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *M) Reset()                    { *m = M{} }
 func (m *M) String() string            { return proto.CompactTextString(m) }
 func (*M) ProtoMessage()               {}
 func (*M) Descriptor() ([]byte, []int) { return fileDescriptorNopackage, []int{0} }
+func (dst *M) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_M.Merge(dst, src)
+}
+func (m *M) XXX_Size() int {
+	return xxx_messageInfo_M.Size(m)
+}
+func (m *M) XXX_DiscardUnknown() {
+	xxx_messageInfo_M.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_M proto.InternalMessageInfo
 
 func (m *M) GetF() map[string]float64 {
 	if m != nil {
@@ -49,6 +63,7 @@ func (m *M) GetF() map[string]float64 {
 
 func init() {
 	proto.RegisterType((*M)(nil), "M")
+	proto.RegisterMapType((map[string]float64)(nil), "M.FEntry")
 }
 func (m *M) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
@@ -82,6 +97,11 @@ func (m *M) MarshalTo(dAtA []byte) (int, error) {
 			i += 8
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -103,6 +123,11 @@ func (m *M) Size() (n int) {
 			_ = v
 			mapEntrySize := 1 + len(k) + sovNopackage(uint64(len(k))) + 1 + 8
 			n += mapEntrySize + 1 + sovNopackage(uint64(mapEntrySize))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
 		}
 	}
 	return n
@@ -262,6 +287,7 @@ func (m *M) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

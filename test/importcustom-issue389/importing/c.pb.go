@@ -20,6 +20,8 @@ import _ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
 
 import github_com_gogo_protobuf_test_importcustom_issue389_imported "github.com/gogo/protobuf/test/importcustom-issue389/imported"
 
+import bytes "bytes"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -34,13 +36,27 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type C struct {
-	F2 *github_com_gogo_protobuf_test_importcustom_issue389_imported.B `protobuf:"bytes,1,opt,name=f2,customtype=github.com/gogo/protobuf/test/importcustom-issue389/imported.B" json:"f2,omitempty"`
+	F2                   *github_com_gogo_protobuf_test_importcustom_issue389_imported.B `protobuf:"bytes,1,opt,name=f2,customtype=github.com/gogo/protobuf/test/importcustom-issue389/imported.B" json:"f2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                                                        `json:"-"`
+	XXX_unrecognized     []byte                                                          `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32                                                           `json:"-"`
 }
 
 func (m *C) Reset()                    { *m = C{} }
 func (m *C) String() string            { return proto.CompactTextString(m) }
 func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorC, []int{0} }
+func (dst *C) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C.Merge(dst, src)
+}
+func (m *C) XXX_Size() int {
+	return xxx_messageInfo_C.Size(m)
+}
+func (m *C) XXX_DiscardUnknown() {
+	xxx_messageInfo_C.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_C proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*C)(nil), "importing.C")
@@ -71,6 +87,9 @@ func (this *C) Equal(that interface{}) bool {
 	} else if !this.F2.Equal(*that1.F2) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (m *C) Marshal() (dAtA []byte, err error) {
@@ -98,6 +117,11 @@ func (m *C) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n1
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -116,6 +140,9 @@ func NewPopulatedC(r randyC, easy bool) *C {
 		this.F2 = github_com_gogo_protobuf_test_importcustom_issue389_imported.NewPopulatedB(r)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedC(r, 2)
+		}
 	}
 	return this
 }
@@ -198,6 +225,11 @@ func (m *C) Size() (n int) {
 	if m.F2 != nil {
 		l = m.F2.Size()
 		n += 1 + l + sovC(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -289,6 +321,7 @@ func (m *C) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

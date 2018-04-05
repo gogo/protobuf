@@ -29,13 +29,32 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type SubObject struct {
-	XXX_unrecognized []byte `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *SubObject) Reset()                    { *m = SubObject{} }
 func (m *SubObject) String() string            { return proto.CompactTextString(m) }
 func (*SubObject) ProtoMessage()               {}
 func (*SubObject) Descriptor() ([]byte, []int) { return fileDescriptorSubproto, []int{0} }
+func (m *SubObject) Unmarshal(b []byte) error {
+	return xxx_messageInfo_SubObject.Unmarshal(m, b)
+}
+func (m *SubObject) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SubObject.Marshal(b, m, deterministic)
+}
+func (dst *SubObject) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubObject.Merge(dst, src)
+}
+func (m *SubObject) XXX_Size() int {
+	return xxx_messageInfo_SubObject.Size(m)
+}
+func (m *SubObject) XXX_DiscardUnknown() {
+	xxx_messageInfo_SubObject.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SubObject proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*SubObject)(nil), "subpkg.SubObject")

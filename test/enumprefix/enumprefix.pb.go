@@ -30,14 +30,33 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MyMessage struct {
-	TheField         test.TheTestEnum `protobuf:"varint,1,opt,name=TheField,enum=test.TheTestEnum" json:"TheField"`
-	XXX_unrecognized []byte           `json:"-"`
+	TheField             test.TheTestEnum `protobuf:"varint,1,opt,name=TheField,enum=test.TheTestEnum" json:"TheField"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (m *MyMessage) String() string            { return proto.CompactTextString(m) }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorEnumprefix, []int{0} }
+func (m *MyMessage) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
+}
+func (m *MyMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
+}
+func (dst *MyMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage.Merge(dst, src)
+}
+func (m *MyMessage) XXX_Size() int {
+	return xxx_messageInfo_MyMessage.Size(m)
+}
+func (m *MyMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessage proto.InternalMessageInfo
 
 func (m *MyMessage) GetTheField() test.TheTestEnum {
 	if m != nil {

@@ -40,12 +40,25 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type TimeFail struct {
-	TimeTest *time.Time `protobuf:"bytes,1,opt,name=time_test,json=timeTest,stdtime" json:"time_test,omitempty"`
+	TimeTest             *time.Time `protobuf:"bytes,1,opt,name=time_test,json=timeTest,stdtime" json:"time_test,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TimeFail) Reset()                    { *m = TimeFail{} }
 func (*TimeFail) ProtoMessage()               {}
 func (*TimeFail) Descriptor() ([]byte, []int) { return fileDescriptorTimefail, []int{0} }
+func (dst *TimeFail) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TimeFail.Merge(dst, src)
+}
+func (m *TimeFail) XXX_Size() int {
+	return xxx_messageInfo_TimeFail.Size(m)
+}
+func (m *TimeFail) XXX_DiscardUnknown() {
+	xxx_messageInfo_TimeFail.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TimeFail proto.InternalMessageInfo
 
 func (m *TimeFail) GetTimeTest() *time.Time {
 	if m != nil {
