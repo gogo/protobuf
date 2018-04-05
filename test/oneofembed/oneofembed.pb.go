@@ -18,6 +18,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto1.Marshal
 var _ = fmt.Errorf
@@ -30,25 +32,65 @@ var _ = math.Inf
 const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
-	*Bar `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
+	*Bar                 `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Foo) Reset()                    { *m = Foo{} }
 func (m *Foo) String() string            { return proto1.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{0} }
+func (m *Foo) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Foo.Unmarshal(m, b)
+}
+func (m *Foo) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
+}
+func (dst *Foo) XXX_Merge(src proto1.Message) {
+	xxx_messageInfo_Foo.Merge(dst, src)
+}
+func (m *Foo) XXX_Size() int {
+	return xxx_messageInfo_Foo.Size(m)
+}
+func (m *Foo) XXX_DiscardUnknown() {
+	xxx_messageInfo_Foo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Foo proto1.InternalMessageInfo
 
 type Bar struct {
 	// Types that are valid to be assigned to Pick:
 	//	*Bar_A
 	//	*Bar_B
-	Pick isBar_Pick `protobuf_oneof:"pick"`
+	Pick                 isBar_Pick `protobuf_oneof:"pick"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *Bar) Reset()                    { *m = Bar{} }
 func (m *Bar) String() string            { return proto1.CompactTextString(m) }
 func (*Bar) ProtoMessage()               {}
 func (*Bar) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{1} }
+func (m *Bar) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Bar.Unmarshal(m, b)
+}
+func (m *Bar) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Bar.Marshal(b, m, deterministic)
+}
+func (dst *Bar) XXX_Merge(src proto1.Message) {
+	xxx_messageInfo_Bar.Merge(dst, src)
+}
+func (m *Bar) XXX_Size() int {
+	return xxx_messageInfo_Bar.Size(m)
+}
+func (m *Bar) XXX_DiscardUnknown() {
+	xxx_messageInfo_Bar.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Bar proto1.InternalMessageInfo
 
 type isBar_Pick interface {
 	isBar_Pick()
@@ -184,6 +226,9 @@ func (this *Foo) Equal(that interface{}) bool {
 	if !this.Bar.Equal(that1.Bar) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Bar) Equal(that interface{}) bool {
@@ -212,6 +257,9 @@ func (this *Bar) Equal(that interface{}) bool {
 	} else if this.Pick == nil {
 		return false
 	} else if !this.Pick.Equal(that1.Pick) {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -270,6 +318,9 @@ func NewPopulatedFoo(r randyOneofembed, easy bool) *Foo {
 		this.Bar = NewPopulatedBar(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto1.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 2)
+		}
 	}
 	return this
 }
@@ -284,6 +335,9 @@ func NewPopulatedBar(r randyOneofembed, easy bool) *Bar {
 		this.Pick = NewPopulatedBar_B(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto1.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 13)
+		}
 	}
 	return this
 }

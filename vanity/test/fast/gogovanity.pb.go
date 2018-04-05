@@ -31,16 +31,29 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type B struct {
-	String_          *string `protobuf:"bytes,1,opt,name=String" json:"String,omitempty"`
-	Int64            *int64  `protobuf:"varint,2,opt,name=Int64" json:"Int64,omitempty"`
-	Int32            *int32  `protobuf:"varint,3,opt,name=Int32,def=1234" json:"Int32,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	String_              *string  `protobuf:"bytes,1,opt,name=String" json:"String,omitempty"`
+	Int64                *int64   `protobuf:"varint,2,opt,name=Int64" json:"Int64,omitempty"`
+	Int32                *int32   `protobuf:"varint,3,opt,name=Int32,def=1234" json:"Int32,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *B) Reset()                    { *m = B{} }
 func (m *B) String() string            { return proto.CompactTextString(m) }
 func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorGogovanity, []int{0} }
+func (dst *B) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_B.Merge(dst, src)
+}
+func (m *B) XXX_Size() int {
+	return xxx_messageInfo_B.Size(m)
+}
+func (m *B) XXX_DiscardUnknown() {
+	xxx_messageInfo_B.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_B proto.InternalMessageInfo
 
 const Default_B_Int32 int32 = 1234
 

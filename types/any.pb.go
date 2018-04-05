@@ -178,13 +178,27 @@ type Any struct {
 	//
 	TypeUrl string `protobuf:"bytes,1,opt,name=type_url,json=typeUrl,proto3" json:"type_url,omitempty"`
 	// Must be a valid serialized protocol buffer of the above specified type.
-	Value []byte `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Value                []byte   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Any) Reset()                    { *m = Any{} }
 func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
 func (*Any) XXX_WellKnownType() string   { return "Any" }
+func (dst *Any) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Any.Merge(dst, src)
+}
+func (m *Any) XXX_Size() int {
+	return xxx_messageInfo_Any.Size(m)
+}
+func (m *Any) XXX_DiscardUnknown() {
+	xxx_messageInfo_Any.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Any proto.InternalMessageInfo
 
 func (m *Any) GetTypeUrl() string {
 	if m != nil {
@@ -240,6 +254,9 @@ func (this *Any) Compare(that interface{}) int {
 	if c := bytes.Compare(this.Value, that1.Value); c != 0 {
 		return c
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Any) Equal(that interface{}) bool {
@@ -267,6 +284,9 @@ func (this *Any) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Value, that1.Value) {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Any) GoString() string {
@@ -277,6 +297,9 @@ func (this *Any) GoString() string {
 	s = append(s, "&types.Any{")
 	s = append(s, "TypeUrl: "+fmt.Sprintf("%#v", this.TypeUrl)+",\n")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -315,6 +338,11 @@ func (m *Any) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintAny(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -336,6 +364,9 @@ func NewPopulatedAny(r randyAny, easy bool) *Any {
 		this.Value[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedAny(r, 3)
+		}
 	}
 	return this
 }
@@ -423,6 +454,11 @@ func (m *Any) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovAny(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -446,6 +482,7 @@ func (this *Any) String() string {
 	s := strings.Join([]string{`&Any{`,
 		`TypeUrl:` + fmt.Sprintf("%v", this.TypeUrl) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -559,6 +596,7 @@ func (m *Any) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -22,12 +24,26 @@ var _ = math.Inf
 type SourceContext struct {
 	// The path-qualified name of the .proto file that contained the associated
 	// protobuf element.  For example: `"google/protobuf/source_context.proto"`.
-	FileName string `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	FileName             string   `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *SourceContext) Reset()                    { *m = SourceContext{} }
 func (*SourceContext) ProtoMessage()               {}
 func (*SourceContext) Descriptor() ([]byte, []int) { return fileDescriptorSourceContext, []int{0} }
+func (dst *SourceContext) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SourceContext.Merge(dst, src)
+}
+func (m *SourceContext) XXX_Size() int {
+	return xxx_messageInfo_SourceContext.Size(m)
+}
+func (m *SourceContext) XXX_DiscardUnknown() {
+	xxx_messageInfo_SourceContext.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SourceContext proto.InternalMessageInfo
 
 func (m *SourceContext) GetFileName() string {
 	if m != nil {
@@ -73,6 +89,9 @@ func (this *SourceContext) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *SourceContext) Equal(that interface{}) bool {
@@ -97,6 +116,9 @@ func (this *SourceContext) Equal(that interface{}) bool {
 	if this.FileName != that1.FileName {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *SourceContext) GoString() string {
@@ -106,6 +128,9 @@ func (this *SourceContext) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.SourceContext{")
 	s = append(s, "FileName: "+fmt.Sprintf("%#v", this.FileName)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -138,6 +163,11 @@ func (m *SourceContext) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintSourceContext(dAtA, i, uint64(len(m.FileName)))
 		i += copy(dAtA[i:], m.FileName)
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -154,6 +184,9 @@ func NewPopulatedSourceContext(r randySourceContext, easy bool) *SourceContext {
 	this := &SourceContext{}
 	this.FileName = string(randStringSourceContext(r))
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedSourceContext(r, 2)
+		}
 	}
 	return this
 }
@@ -237,6 +270,11 @@ func (m *SourceContext) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovSourceContext(uint64(l))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -259,6 +297,7 @@ func (this *SourceContext) String() string {
 	}
 	s := strings.Join([]string{`&SourceContext{`,
 		`FileName:` + fmt.Sprintf("%v", this.FileName) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -341,6 +380,7 @@ func (m *SourceContext) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

@@ -34,15 +34,28 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type UnorderedFields struct {
-	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
-	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	A                    *int64   `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
+	B                    *uint64  `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *UnorderedFields) Reset()                    { *m = UnorderedFields{} }
 func (m *UnorderedFields) String() string            { return proto.CompactTextString(m) }
 func (*UnorderedFields) ProtoMessage()               {}
 func (*UnorderedFields) Descriptor() ([]byte, []int) { return fileDescriptorIssue42, []int{0} }
+func (dst *UnorderedFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnorderedFields.Merge(dst, src)
+}
+func (m *UnorderedFields) XXX_Size() int {
+	return xxx_messageInfo_UnorderedFields.Size(m)
+}
+func (m *UnorderedFields) XXX_DiscardUnknown() {
+	xxx_messageInfo_UnorderedFields.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UnorderedFields proto.InternalMessageInfo
 
 func (m *UnorderedFields) GetA() int64 {
 	if m != nil && m.A != nil {
@@ -59,15 +72,28 @@ func (m *UnorderedFields) GetB() uint64 {
 }
 
 type OrderedFields struct {
-	B                *uint64 `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
-	A                *int64  `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	B                    *uint64  `protobuf:"fixed64,1,opt,name=B" json:"B,omitempty"`
+	A                    *int64   `protobuf:"varint,10,opt,name=A" json:"A,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *OrderedFields) Reset()                    { *m = OrderedFields{} }
 func (m *OrderedFields) String() string            { return proto.CompactTextString(m) }
 func (*OrderedFields) ProtoMessage()               {}
 func (*OrderedFields) Descriptor() ([]byte, []int) { return fileDescriptorIssue42, []int{1} }
+func (dst *OrderedFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OrderedFields.Merge(dst, src)
+}
+func (m *OrderedFields) XXX_Size() int {
+	return xxx_messageInfo_OrderedFields.Size(m)
+}
+func (m *OrderedFields) XXX_DiscardUnknown() {
+	xxx_messageInfo_OrderedFields.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OrderedFields proto.InternalMessageInfo
 
 func (m *OrderedFields) GetB() uint64 {
 	if m != nil && m.B != nil {

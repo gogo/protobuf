@@ -33,15 +33,28 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type IndexQuery struct {
-	Key              *string `protobuf:"bytes,1,opt,name=Key" json:"Key,omitempty"`
-	Value            *string `protobuf:"bytes,2,opt,name=Value" json:"Value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Key                  *string  `protobuf:"bytes,1,opt,name=Key" json:"Key,omitempty"`
+	Value                *string  `protobuf:"bytes,2,opt,name=Value" json:"Value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *IndexQuery) Reset()                    { *m = IndexQuery{} }
 func (m *IndexQuery) String() string            { return proto.CompactTextString(m) }
 func (*IndexQuery) ProtoMessage()               {}
 func (*IndexQuery) Descriptor() ([]byte, []int) { return fileDescriptorIndex, []int{0} }
+func (dst *IndexQuery) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IndexQuery.Merge(dst, src)
+}
+func (m *IndexQuery) XXX_Size() int {
+	return xxx_messageInfo_IndexQuery.Size(m)
+}
+func (m *IndexQuery) XXX_DiscardUnknown() {
+	xxx_messageInfo_IndexQuery.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IndexQuery proto.InternalMessageInfo
 
 func (m *IndexQuery) GetKey() string {
 	if m != nil && m.Key != nil {

@@ -33,16 +33,29 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type SizeMessage struct {
-	Size_            *int64  `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
-	Equal_           *bool   `protobuf:"varint,2,opt,name=Equal" json:"Equal,omitempty"`
-	String_          *string `protobuf:"bytes,3,opt,name=String" json:"String,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Size_                *int64   `protobuf:"varint,1,opt,name=size" json:"size,omitempty"`
+	Equal_               *bool    `protobuf:"varint,2,opt,name=Equal" json:"Equal,omitempty"`
+	String_              *string  `protobuf:"bytes,3,opt,name=String" json:"String,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *SizeMessage) Reset()                    { *m = SizeMessage{} }
 func (m *SizeMessage) String() string            { return proto.CompactTextString(m) }
 func (*SizeMessage) ProtoMessage()               {}
 func (*SizeMessage) Descriptor() ([]byte, []int) { return fileDescriptorSizeunderscore, []int{0} }
+func (dst *SizeMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SizeMessage.Merge(dst, src)
+}
+func (m *SizeMessage) XXX_Size() int {
+	return xxx_messageInfo_SizeMessage.Size(m)
+}
+func (m *SizeMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_SizeMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SizeMessage proto.InternalMessageInfo
 
 func (m *SizeMessage) GetSize_() int64 {
 	if m != nil && m.Size_ != nil {

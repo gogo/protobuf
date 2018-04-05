@@ -1153,7 +1153,15 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
 			p.P(`if m.XXX_unrecognized != nil {`)
 			p.In()
+			if gogoproto.IsProto3(file.FileDescriptorProto) {
+				p.P("if ", p.protoPkg.Use(), ".Proto3UnknownFields {")
+				p.In()
+			}
 			p.P(`i+=copy(dAtA[i:], m.XXX_unrecognized)`)
+			if gogoproto.IsProto3(file.FileDescriptorProto) {
+				p.Out()
+				p.P("}")
+			}
 			p.Out()
 			p.P(`}`)
 		}

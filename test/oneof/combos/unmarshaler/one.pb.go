@@ -46,13 +46,29 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subby struct {
-	Sub              *string `protobuf:"bytes,1,opt,name=sub" json:"sub,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Sub                  *string  `protobuf:"bytes,1,opt,name=sub" json:"sub,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Subby) Reset()                    { *m = Subby{} }
 func (*Subby) ProtoMessage()               {}
 func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
+func (m *Subby) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
+}
+func (dst *Subby) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subby.Merge(dst, src)
+}
+func (m *Subby) XXX_Size() int {
+	return xxx_messageInfo_Subby.Size(m)
+}
+func (m *Subby) XXX_DiscardUnknown() {
+	xxx_messageInfo_Subby.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Subby proto.InternalMessageInfo
 
 type AllTypesOneOf struct {
 	// Types that are valid to be assigned to TestOneof:
@@ -72,13 +88,29 @@ type AllTypesOneOf struct {
 	//	*AllTypesOneOf_Field14
 	//	*AllTypesOneOf_Field15
 	//	*AllTypesOneOf_SubMessage
-	TestOneof        isAllTypesOneOf_TestOneof `protobuf_oneof:"test_oneof"`
-	XXX_unrecognized []byte                    `json:"-"`
+	TestOneof            isAllTypesOneOf_TestOneof `protobuf_oneof:"test_oneof"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
 func (m *AllTypesOneOf) Reset()                    { *m = AllTypesOneOf{} }
 func (*AllTypesOneOf) ProtoMessage()               {}
 func (*AllTypesOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
+func (m *AllTypesOneOf) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AllTypesOneOf.Marshal(b, m, deterministic)
+}
+func (dst *AllTypesOneOf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllTypesOneOf.Merge(dst, src)
+}
+func (m *AllTypesOneOf) XXX_Size() int {
+	return xxx_messageInfo_AllTypesOneOf.Size(m)
+}
+func (m *AllTypesOneOf) XXX_DiscardUnknown() {
+	xxx_messageInfo_AllTypesOneOf.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AllTypesOneOf proto.InternalMessageInfo
 
 type isAllTypesOneOf_TestOneof interface {
 	isAllTypesOneOf_TestOneof()
@@ -553,13 +585,29 @@ type TwoOneofs struct {
 	//	*TwoOneofs_Field34
 	//	*TwoOneofs_Field35
 	//	*TwoOneofs_SubMessage2
-	Two              isTwoOneofs_Two `protobuf_oneof:"two"`
-	XXX_unrecognized []byte          `json:"-"`
+	Two                  isTwoOneofs_Two `protobuf_oneof:"two"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *TwoOneofs) Reset()                    { *m = TwoOneofs{} }
 func (*TwoOneofs) ProtoMessage()               {}
 func (*TwoOneofs) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{2} }
+func (m *TwoOneofs) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TwoOneofs.Marshal(b, m, deterministic)
+}
+func (dst *TwoOneofs) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TwoOneofs.Merge(dst, src)
+}
+func (m *TwoOneofs) XXX_Size() int {
+	return xxx_messageInfo_TwoOneofs.Size(m)
+}
+func (m *TwoOneofs) XXX_DiscardUnknown() {
+	xxx_messageInfo_TwoOneofs.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TwoOneofs proto.InternalMessageInfo
 
 type isTwoOneofs_One interface {
 	isTwoOneofs_One()
@@ -800,13 +848,29 @@ type CustomOneof struct {
 	//	*CustomOneof_CustomType
 	//	*CustomOneof_CastType
 	//	*CustomOneof_MyCustomName
-	Custom           isCustomOneof_Custom `protobuf_oneof:"custom"`
-	XXX_unrecognized []byte               `json:"-"`
+	Custom               isCustomOneof_Custom `protobuf_oneof:"custom"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *CustomOneof) Reset()                    { *m = CustomOneof{} }
 func (*CustomOneof) ProtoMessage()               {}
 func (*CustomOneof) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{3} }
+func (m *CustomOneof) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomOneof.Marshal(b, m, deterministic)
+}
+func (dst *CustomOneof) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomOneof.Merge(dst, src)
+}
+func (m *CustomOneof) XXX_Size() int {
+	return xxx_messageInfo_CustomOneof.Size(m)
+}
+func (m *CustomOneof) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomOneof.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomOneof proto.InternalMessageInfo
 
 type isCustomOneof_Custom interface {
 	isCustomOneof_Custom()

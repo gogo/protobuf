@@ -62,7 +62,8 @@ regenerate:
 	make -C protoc-gen-gogo/plugin regenerate
 	make -C protoc-gen-gogo/testdata regenerate
 	make -C gogoproto regenerate
-	make -C proto/testdata regenerate
+	make -C proto/test_proto regenerate
+	make -C proto/proto3_proto regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
 	make -C _conformance regenerate
 	make -C protobuf regenerate
@@ -119,6 +120,7 @@ regenerate:
 	make -C test/issue322 regenerate
 	make -C test/issue330 regenerate
 	make -C test/importcustom-issue389 regenerate
+	make -C test/merge regenerate
 	make gofmt
 
 tests:

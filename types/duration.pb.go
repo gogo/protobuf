@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -88,13 +90,27 @@ type Duration struct {
 	// of one second or more, a non-zero value for the `nanos` field must be
 	// of the same sign as the `seconds` field. Must be from -999,999,999
 	// to +999,999,999 inclusive.
-	Nanos int32 `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	Nanos                int32    `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Duration) Reset()                    { *m = Duration{} }
 func (*Duration) ProtoMessage()               {}
 func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
 func (*Duration) XXX_WellKnownType() string   { return "Duration" }
+func (dst *Duration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Duration.Merge(dst, src)
+}
+func (m *Duration) XXX_Size() int {
+	return xxx_messageInfo_Duration.Size(m)
+}
+func (m *Duration) XXX_DiscardUnknown() {
+	xxx_messageInfo_Duration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Duration proto.InternalMessageInfo
 
 func (m *Duration) GetSeconds() int64 {
 	if m != nil {
@@ -153,6 +169,9 @@ func (this *Duration) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Duration) Equal(that interface{}) bool {
@@ -180,6 +199,9 @@ func (this *Duration) Equal(that interface{}) bool {
 	if this.Nanos != that1.Nanos {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Duration) GoString() string {
@@ -190,6 +212,9 @@ func (this *Duration) GoString() string {
 	s = append(s, "&types.Duration{")
 	s = append(s, "Seconds: "+fmt.Sprintf("%#v", this.Seconds)+",\n")
 	s = append(s, "Nanos: "+fmt.Sprintf("%#v", this.Nanos)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -226,6 +251,11 @@ func (m *Duration) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintDuration(dAtA, i, uint64(m.Nanos))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -246,6 +276,11 @@ func (m *Duration) Size() (n int) {
 	}
 	if m.Nanos != 0 {
 		n += 1 + sovDuration(uint64(m.Nanos))
+	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
 	}
 	return n
 }
@@ -342,6 +377,7 @@ func (m *Duration) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

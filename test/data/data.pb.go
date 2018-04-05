@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -34,12 +36,26 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MyMessage struct {
-	MyData uint32 `protobuf:"varint,1,opt,name=my_data,json=myData,proto3" json:"my_data,omitempty"`
+	MyData               uint32   `protobuf:"varint,1,opt,name=my_data,json=myData,proto3" json:"my_data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
+func (dst *MyMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage.Merge(dst, src)
+}
+func (m *MyMessage) XXX_Size() int {
+	return xxx_messageInfo_MyMessage.Size(m)
+}
+func (m *MyMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_MyMessage.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MyMessage proto.InternalMessageInfo
 
 func (m *MyMessage) GetMyData() uint32 {
 	if m != nil {
@@ -79,6 +95,9 @@ func (this *MyMessage) VerboseEqual(that interface{}) error {
 	if this.MyData != that1.MyData {
 		return fmt.Errorf("MyData this(%v) Not Equal that(%v)", this.MyData, that1.MyData)
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
 	return nil
 }
 func (this *MyMessage) Equal(that interface{}) bool {
@@ -103,6 +122,9 @@ func (this *MyMessage) Equal(that interface{}) bool {
 	if this.MyData != that1.MyData {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *MyMessage) GoString() string {
@@ -112,6 +134,9 @@ func (this *MyMessage) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&data.MyMessage{")
 	s = append(s, "MyData: "+fmt.Sprintf("%#v", this.MyData)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -143,6 +168,11 @@ func (m *MyMessage) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintData(dAtA, i, uint64(m.MyData))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -159,6 +189,9 @@ func NewPopulatedMyMessage(r randyData, easy bool) *MyMessage {
 	this := &MyMessage{}
 	this.MyData = uint32(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedData(r, 2)
+		}
 	}
 	return this
 }
@@ -241,6 +274,11 @@ func (m *MyMessage) Size() (n int) {
 	if m.MyData != 0 {
 		n += 1 + sovData(uint64(m.MyData))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -263,6 +301,7 @@ func (this *MyMessage) String() string {
 	}
 	s := strings.Join([]string{`&MyMessage{`,
 		`MyData:` + fmt.Sprintf("%v", this.MyData) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -335,6 +374,7 @@ func (m *MyMessage) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

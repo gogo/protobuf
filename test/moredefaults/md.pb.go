@@ -33,14 +33,33 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MoreDefaultsB struct {
-	Field1           *string `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Field1               *string  `protobuf:"bytes,1,opt,name=Field1" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MoreDefaultsB) Reset()                    { *m = MoreDefaultsB{} }
 func (m *MoreDefaultsB) String() string            { return proto.CompactTextString(m) }
 func (*MoreDefaultsB) ProtoMessage()               {}
 func (*MoreDefaultsB) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{0} }
+func (m *MoreDefaultsB) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MoreDefaultsB.Unmarshal(m, b)
+}
+func (m *MoreDefaultsB) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MoreDefaultsB.Marshal(b, m, deterministic)
+}
+func (dst *MoreDefaultsB) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MoreDefaultsB.Merge(dst, src)
+}
+func (m *MoreDefaultsB) XXX_Size() int {
+	return xxx_messageInfo_MoreDefaultsB.Size(m)
+}
+func (m *MoreDefaultsB) XXX_DiscardUnknown() {
+	xxx_messageInfo_MoreDefaultsB.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MoreDefaultsB proto.InternalMessageInfo
 
 func (m *MoreDefaultsB) GetField1() string {
 	if m != nil && m.Field1 != nil {
@@ -50,19 +69,38 @@ func (m *MoreDefaultsB) GetField1() string {
 }
 
 type MoreDefaultsA struct {
-	Field1           *int64         `protobuf:"varint,1,opt,name=Field1,def=1234" json:"Field1,omitempty"`
-	Field2           int64          `protobuf:"varint,2,opt,name=Field2" json:"Field2"`
-	B1               *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1" json:"B1,omitempty"`
-	B2               MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2" json:"B2"`
-	A1               *test.A        `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
-	A2               test.A         `protobuf:"bytes,6,opt,name=A2" json:"A2"`
-	XXX_unrecognized []byte         `json:"-"`
+	Field1               *int64         `protobuf:"varint,1,opt,name=Field1,def=1234" json:"Field1,omitempty"`
+	Field2               int64          `protobuf:"varint,2,opt,name=Field2" json:"Field2"`
+	B1                   *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1" json:"B1,omitempty"`
+	B2                   MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2" json:"B2"`
+	A1                   *test.A        `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
+	A2                   test.A         `protobuf:"bytes,6,opt,name=A2" json:"A2"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *MoreDefaultsA) Reset()                    { *m = MoreDefaultsA{} }
 func (m *MoreDefaultsA) String() string            { return proto.CompactTextString(m) }
 func (*MoreDefaultsA) ProtoMessage()               {}
 func (*MoreDefaultsA) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{1} }
+func (m *MoreDefaultsA) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MoreDefaultsA.Unmarshal(m, b)
+}
+func (m *MoreDefaultsA) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MoreDefaultsA.Marshal(b, m, deterministic)
+}
+func (dst *MoreDefaultsA) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MoreDefaultsA.Merge(dst, src)
+}
+func (m *MoreDefaultsA) XXX_Size() int {
+	return xxx_messageInfo_MoreDefaultsA.Size(m)
+}
+func (m *MoreDefaultsA) XXX_DiscardUnknown() {
+	xxx_messageInfo_MoreDefaultsA.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MoreDefaultsA proto.InternalMessageInfo
 
 const Default_MoreDefaultsA_Field1 int64 = 1234
 

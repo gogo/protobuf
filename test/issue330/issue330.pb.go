@@ -17,6 +17,8 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import bytes "bytes"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -31,13 +33,27 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Object struct {
-	Type TypeIdentifier `protobuf:"varint,1,opt,name=type,proto3,casttype=TypeIdentifier" json:"type,omitempty"`
+	Type                 TypeIdentifier `protobuf:"varint,1,opt,name=type,proto3,casttype=TypeIdentifier" json:"type,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *Object) Reset()                    { *m = Object{} }
 func (m *Object) String() string            { return proto.CompactTextString(m) }
 func (*Object) ProtoMessage()               {}
 func (*Object) Descriptor() ([]byte, []int) { return fileDescriptorIssue330, []int{0} }
+func (dst *Object) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Object.Merge(dst, src)
+}
+func (m *Object) XXX_Size() int {
+	return xxx_messageInfo_Object.Size(m)
+}
+func (m *Object) XXX_DiscardUnknown() {
+	xxx_messageInfo_Object.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Object proto.InternalMessageInfo
 
 func (m *Object) GetType() TypeIdentifier {
 	if m != nil {
@@ -71,6 +87,9 @@ func (this *Object) Equal(that interface{}) bool {
 	if this.Type != that1.Type {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (m *Object) Marshal() (dAtA []byte, err error) {
@@ -93,6 +112,11 @@ func (m *Object) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintIssue330(dAtA, i, uint64(m.Type))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -109,6 +133,9 @@ func NewPopulatedObject(r randyIssue330, easy bool) *Object {
 	this := &Object{}
 	this.Type = TypeIdentifier(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedIssue330(r, 2)
+		}
 	}
 	return this
 }
@@ -191,6 +218,11 @@ func (m *Object) Size() (n int) {
 	if m.Type != 0 {
 		n += 1 + sovIssue330(uint64(m.Type))
 	}
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -267,6 +299,7 @@ func (m *Object) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

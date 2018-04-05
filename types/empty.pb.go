@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -27,12 +29,26 @@ var _ = math.Inf
 //
 // The JSON representation for `Empty` is empty JSON object `{}`.
 type Empty struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
 func (*Empty) XXX_WellKnownType() string   { return "Empty" }
+func (dst *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(dst, src)
+}
+func (m *Empty) XXX_Size() int {
+	return xxx_messageInfo_Empty.Size(m)
+}
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 func (*Empty) XXX_MessageName() string {
 	return "google.protobuf.Empty"
@@ -65,6 +81,9 @@ func (this *Empty) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Empty) Equal(that interface{}) bool {
@@ -86,6 +105,9 @@ func (this *Empty) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Empty) GoString() string {
@@ -94,6 +116,9 @@ func (this *Empty) GoString() string {
 	}
 	s := make([]string, 0, 4)
 	s = append(s, "&types.Empty{")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -120,6 +145,11 @@ func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			i += copy(dAtA[i:], m.XXX_unrecognized)
+		}
+	}
 	return i, nil
 }
 
@@ -135,6 +165,9 @@ func encodeVarintEmpty(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedEmpty(r randyEmpty, easy bool) *Empty {
 	this := &Empty{}
 	if !easy && r.Intn(10) != 0 {
+		if proto.Proto3UnknownFields {
+			this.XXX_unrecognized = randUnrecognizedEmpty(r, 1)
+		}
 	}
 	return this
 }
@@ -214,6 +247,11 @@ func encodeVarintPopulateEmpty(dAtA []byte, v uint64) []byte {
 func (m *Empty) Size() (n int) {
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		if proto.Proto3UnknownFields {
+			n += len(m.XXX_unrecognized)
+		}
+	}
 	return n
 }
 
@@ -235,6 +273,7 @@ func (this *Empty) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Empty{`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -288,6 +327,7 @@ func (m *Empty) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

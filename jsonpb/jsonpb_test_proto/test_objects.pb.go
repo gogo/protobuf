@@ -58,25 +58,44 @@ func (Widget_Color) EnumDescriptor() ([]byte, []int) { return fileDescriptorTest
 
 // Test message for holding primitive types.
 type Simple struct {
-	OBool            *bool    `protobuf:"varint,1,opt,name=o_bool,json=oBool" json:"o_bool,omitempty"`
-	OInt32           *int32   `protobuf:"varint,2,opt,name=o_int32,json=oInt32" json:"o_int32,omitempty"`
-	OInt64           *int64   `protobuf:"varint,3,opt,name=o_int64,json=oInt64" json:"o_int64,omitempty"`
-	OUint32          *uint32  `protobuf:"varint,4,opt,name=o_uint32,json=oUint32" json:"o_uint32,omitempty"`
-	OUint64          *uint64  `protobuf:"varint,5,opt,name=o_uint64,json=oUint64" json:"o_uint64,omitempty"`
-	OSint32          *int32   `protobuf:"zigzag32,6,opt,name=o_sint32,json=oSint32" json:"o_sint32,omitempty"`
-	OSint64          *int64   `protobuf:"zigzag64,7,opt,name=o_sint64,json=oSint64" json:"o_sint64,omitempty"`
-	OFloat           *float32 `protobuf:"fixed32,8,opt,name=o_float,json=oFloat" json:"o_float,omitempty"`
-	ODouble          *float64 `protobuf:"fixed64,9,opt,name=o_double,json=oDouble" json:"o_double,omitempty"`
-	OString          *string  `protobuf:"bytes,10,opt,name=o_string,json=oString" json:"o_string,omitempty"`
-	OBytes           []byte   `protobuf:"bytes,11,opt,name=o_bytes,json=oBytes" json:"o_bytes,omitempty"`
-	OCastBytes       Bytes    `protobuf:"bytes,12,opt,name=o_cast_bytes,json=oCastBytes,casttype=Bytes" json:"o_cast_bytes,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	OBool                *bool    `protobuf:"varint,1,opt,name=o_bool,json=oBool" json:"o_bool,omitempty"`
+	OInt32               *int32   `protobuf:"varint,2,opt,name=o_int32,json=oInt32" json:"o_int32,omitempty"`
+	OInt64               *int64   `protobuf:"varint,3,opt,name=o_int64,json=oInt64" json:"o_int64,omitempty"`
+	OUint32              *uint32  `protobuf:"varint,4,opt,name=o_uint32,json=oUint32" json:"o_uint32,omitempty"`
+	OUint64              *uint64  `protobuf:"varint,5,opt,name=o_uint64,json=oUint64" json:"o_uint64,omitempty"`
+	OSint32              *int32   `protobuf:"zigzag32,6,opt,name=o_sint32,json=oSint32" json:"o_sint32,omitempty"`
+	OSint64              *int64   `protobuf:"zigzag64,7,opt,name=o_sint64,json=oSint64" json:"o_sint64,omitempty"`
+	OFloat               *float32 `protobuf:"fixed32,8,opt,name=o_float,json=oFloat" json:"o_float,omitempty"`
+	ODouble              *float64 `protobuf:"fixed64,9,opt,name=o_double,json=oDouble" json:"o_double,omitempty"`
+	OString              *string  `protobuf:"bytes,10,opt,name=o_string,json=oString" json:"o_string,omitempty"`
+	OBytes               []byte   `protobuf:"bytes,11,opt,name=o_bytes,json=oBytes" json:"o_bytes,omitempty"`
+	OCastBytes           Bytes    `protobuf:"bytes,12,opt,name=o_cast_bytes,json=oCastBytes,casttype=Bytes" json:"o_cast_bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Simple) Reset()                    { *m = Simple{} }
 func (m *Simple) String() string            { return proto.CompactTextString(m) }
 func (*Simple) ProtoMessage()               {}
 func (*Simple) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{0} }
+func (m *Simple) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Simple.Unmarshal(m, b)
+}
+func (m *Simple) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Simple.Marshal(b, m, deterministic)
+}
+func (dst *Simple) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Simple.Merge(dst, src)
+}
+func (m *Simple) XXX_Size() int {
+	return xxx_messageInfo_Simple.Size(m)
+}
+func (m *Simple) XXX_DiscardUnknown() {
+	xxx_messageInfo_Simple.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Simple proto.InternalMessageInfo
 
 func (m *Simple) GetOBool() bool {
 	if m != nil && m.OBool != nil {
@@ -164,19 +183,38 @@ func (m *Simple) GetOCastBytes() Bytes {
 
 // Test message for holding special non-finites primitives.
 type NonFinites struct {
-	FNan             *float32 `protobuf:"fixed32,1,opt,name=f_nan,json=fNan" json:"f_nan,omitempty"`
-	FPinf            *float32 `protobuf:"fixed32,2,opt,name=f_pinf,json=fPinf" json:"f_pinf,omitempty"`
-	FNinf            *float32 `protobuf:"fixed32,3,opt,name=f_ninf,json=fNinf" json:"f_ninf,omitempty"`
-	DNan             *float64 `protobuf:"fixed64,4,opt,name=d_nan,json=dNan" json:"d_nan,omitempty"`
-	DPinf            *float64 `protobuf:"fixed64,5,opt,name=d_pinf,json=dPinf" json:"d_pinf,omitempty"`
-	DNinf            *float64 `protobuf:"fixed64,6,opt,name=d_ninf,json=dNinf" json:"d_ninf,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
+	FNan                 *float32 `protobuf:"fixed32,1,opt,name=f_nan,json=fNan" json:"f_nan,omitempty"`
+	FPinf                *float32 `protobuf:"fixed32,2,opt,name=f_pinf,json=fPinf" json:"f_pinf,omitempty"`
+	FNinf                *float32 `protobuf:"fixed32,3,opt,name=f_ninf,json=fNinf" json:"f_ninf,omitempty"`
+	DNan                 *float64 `protobuf:"fixed64,4,opt,name=d_nan,json=dNan" json:"d_nan,omitempty"`
+	DPinf                *float64 `protobuf:"fixed64,5,opt,name=d_pinf,json=dPinf" json:"d_pinf,omitempty"`
+	DNinf                *float64 `protobuf:"fixed64,6,opt,name=d_ninf,json=dNinf" json:"d_ninf,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *NonFinites) Reset()                    { *m = NonFinites{} }
 func (m *NonFinites) String() string            { return proto.CompactTextString(m) }
 func (*NonFinites) ProtoMessage()               {}
 func (*NonFinites) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{1} }
+func (m *NonFinites) Unmarshal(b []byte) error {
+	return xxx_messageInfo_NonFinites.Unmarshal(m, b)
+}
+func (m *NonFinites) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NonFinites.Marshal(b, m, deterministic)
+}
+func (dst *NonFinites) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NonFinites.Merge(dst, src)
+}
+func (m *NonFinites) XXX_Size() int {
+	return xxx_messageInfo_NonFinites.Size(m)
+}
+func (m *NonFinites) XXX_DiscardUnknown() {
+	xxx_messageInfo_NonFinites.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_NonFinites proto.InternalMessageInfo
 
 func (m *NonFinites) GetFNan() float32 {
 	if m != nil && m.FNan != nil {
@@ -222,24 +260,43 @@ func (m *NonFinites) GetDNinf() float64 {
 
 // Test message for holding repeated primitives.
 type Repeats struct {
-	RBool            []bool    `protobuf:"varint,1,rep,name=r_bool,json=rBool" json:"r_bool,omitempty"`
-	RInt32           []int32   `protobuf:"varint,2,rep,name=r_int32,json=rInt32" json:"r_int32,omitempty"`
-	RInt64           []int64   `protobuf:"varint,3,rep,name=r_int64,json=rInt64" json:"r_int64,omitempty"`
-	RUint32          []uint32  `protobuf:"varint,4,rep,name=r_uint32,json=rUint32" json:"r_uint32,omitempty"`
-	RUint64          []uint64  `protobuf:"varint,5,rep,name=r_uint64,json=rUint64" json:"r_uint64,omitempty"`
-	RSint32          []int32   `protobuf:"zigzag32,6,rep,name=r_sint32,json=rSint32" json:"r_sint32,omitempty"`
-	RSint64          []int64   `protobuf:"zigzag64,7,rep,name=r_sint64,json=rSint64" json:"r_sint64,omitempty"`
-	RFloat           []float32 `protobuf:"fixed32,8,rep,name=r_float,json=rFloat" json:"r_float,omitempty"`
-	RDouble          []float64 `protobuf:"fixed64,9,rep,name=r_double,json=rDouble" json:"r_double,omitempty"`
-	RString          []string  `protobuf:"bytes,10,rep,name=r_string,json=rString" json:"r_string,omitempty"`
-	RBytes           [][]byte  `protobuf:"bytes,11,rep,name=r_bytes,json=rBytes" json:"r_bytes,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	RBool                []bool    `protobuf:"varint,1,rep,name=r_bool,json=rBool" json:"r_bool,omitempty"`
+	RInt32               []int32   `protobuf:"varint,2,rep,name=r_int32,json=rInt32" json:"r_int32,omitempty"`
+	RInt64               []int64   `protobuf:"varint,3,rep,name=r_int64,json=rInt64" json:"r_int64,omitempty"`
+	RUint32              []uint32  `protobuf:"varint,4,rep,name=r_uint32,json=rUint32" json:"r_uint32,omitempty"`
+	RUint64              []uint64  `protobuf:"varint,5,rep,name=r_uint64,json=rUint64" json:"r_uint64,omitempty"`
+	RSint32              []int32   `protobuf:"zigzag32,6,rep,name=r_sint32,json=rSint32" json:"r_sint32,omitempty"`
+	RSint64              []int64   `protobuf:"zigzag64,7,rep,name=r_sint64,json=rSint64" json:"r_sint64,omitempty"`
+	RFloat               []float32 `protobuf:"fixed32,8,rep,name=r_float,json=rFloat" json:"r_float,omitempty"`
+	RDouble              []float64 `protobuf:"fixed64,9,rep,name=r_double,json=rDouble" json:"r_double,omitempty"`
+	RString              []string  `protobuf:"bytes,10,rep,name=r_string,json=rString" json:"r_string,omitempty"`
+	RBytes               [][]byte  `protobuf:"bytes,11,rep,name=r_bytes,json=rBytes" json:"r_bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *Repeats) Reset()                    { *m = Repeats{} }
 func (m *Repeats) String() string            { return proto.CompactTextString(m) }
 func (*Repeats) ProtoMessage()               {}
 func (*Repeats) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{2} }
+func (m *Repeats) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Repeats.Unmarshal(m, b)
+}
+func (m *Repeats) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Repeats.Marshal(b, m, deterministic)
+}
+func (dst *Repeats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Repeats.Merge(dst, src)
+}
+func (m *Repeats) XXX_Size() int {
+	return xxx_messageInfo_Repeats.Size(m)
+}
+func (m *Repeats) XXX_DiscardUnknown() {
+	xxx_messageInfo_Repeats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Repeats proto.InternalMessageInfo
 
 func (m *Repeats) GetRBool() []bool {
 	if m != nil {
@@ -320,19 +377,38 @@ func (m *Repeats) GetRBytes() [][]byte {
 
 // Test message for holding enums and nested messages.
 type Widget struct {
-	Color            *Widget_Color  `protobuf:"varint,1,opt,name=color,enum=jsonpb.Widget_Color" json:"color,omitempty"`
-	RColor           []Widget_Color `protobuf:"varint,2,rep,name=r_color,json=rColor,enum=jsonpb.Widget_Color" json:"r_color,omitempty"`
-	Simple           *Simple        `protobuf:"bytes,10,opt,name=simple" json:"simple,omitempty"`
-	RSimple          []*Simple      `protobuf:"bytes,11,rep,name=r_simple,json=rSimple" json:"r_simple,omitempty"`
-	Repeats          *Repeats       `protobuf:"bytes,20,opt,name=repeats" json:"repeats,omitempty"`
-	RRepeats         []*Repeats     `protobuf:"bytes,21,rep,name=r_repeats,json=rRepeats" json:"r_repeats,omitempty"`
-	XXX_unrecognized []byte         `json:"-"`
+	Color                *Widget_Color  `protobuf:"varint,1,opt,name=color,enum=jsonpb.Widget_Color" json:"color,omitempty"`
+	RColor               []Widget_Color `protobuf:"varint,2,rep,name=r_color,json=rColor,enum=jsonpb.Widget_Color" json:"r_color,omitempty"`
+	Simple               *Simple        `protobuf:"bytes,10,opt,name=simple" json:"simple,omitempty"`
+	RSimple              []*Simple      `protobuf:"bytes,11,rep,name=r_simple,json=rSimple" json:"r_simple,omitempty"`
+	Repeats              *Repeats       `protobuf:"bytes,20,opt,name=repeats" json:"repeats,omitempty"`
+	RRepeats             []*Repeats     `protobuf:"bytes,21,rep,name=r_repeats,json=rRepeats" json:"r_repeats,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *Widget) Reset()                    { *m = Widget{} }
 func (m *Widget) String() string            { return proto.CompactTextString(m) }
 func (*Widget) ProtoMessage()               {}
 func (*Widget) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{3} }
+func (m *Widget) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Widget.Unmarshal(m, b)
+}
+func (m *Widget) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Widget.Marshal(b, m, deterministic)
+}
+func (dst *Widget) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Widget.Merge(dst, src)
+}
+func (m *Widget) XXX_Size() int {
+	return xxx_messageInfo_Widget.Size(m)
+}
+func (m *Widget) XXX_DiscardUnknown() {
+	xxx_messageInfo_Widget.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Widget proto.InternalMessageInfo
 
 func (m *Widget) GetColor() Widget_Color {
 	if m != nil && m.Color != nil {
@@ -377,15 +453,34 @@ func (m *Widget) GetRRepeats() []*Repeats {
 }
 
 type Maps struct {
-	MInt64Str        map[int64]string `protobuf:"bytes,1,rep,name=m_int64_str,json=mInt64Str" json:"m_int64_str,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	MBoolSimple      map[bool]*Simple `protobuf:"bytes,2,rep,name=m_bool_simple,json=mBoolSimple" json:"m_bool_simple,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_unrecognized []byte           `json:"-"`
+	MInt64Str            map[int64]string `protobuf:"bytes,1,rep,name=m_int64_str,json=mInt64Str" json:"m_int64_str,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MBoolSimple          map[bool]*Simple `protobuf:"bytes,2,rep,name=m_bool_simple,json=mBoolSimple" json:"m_bool_simple,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *Maps) Reset()                    { *m = Maps{} }
 func (m *Maps) String() string            { return proto.CompactTextString(m) }
 func (*Maps) ProtoMessage()               {}
 func (*Maps) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{4} }
+func (m *Maps) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Maps.Unmarshal(m, b)
+}
+func (m *Maps) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Maps.Marshal(b, m, deterministic)
+}
+func (dst *Maps) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Maps.Merge(dst, src)
+}
+func (m *Maps) XXX_Size() int {
+	return xxx_messageInfo_Maps.Size(m)
+}
+func (m *Maps) XXX_DiscardUnknown() {
+	xxx_messageInfo_Maps.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Maps proto.InternalMessageInfo
 
 func (m *Maps) GetMInt64Str() map[int64]string {
 	if m != nil {
@@ -407,14 +502,33 @@ type MsgWithOneof struct {
 	//	*MsgWithOneof_Salary
 	//	*MsgWithOneof_Country
 	//	*MsgWithOneof_HomeAddress
-	Union            isMsgWithOneof_Union `protobuf_oneof:"union"`
-	XXX_unrecognized []byte               `json:"-"`
+	Union                isMsgWithOneof_Union `protobuf_oneof:"union"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *MsgWithOneof) Reset()                    { *m = MsgWithOneof{} }
 func (m *MsgWithOneof) String() string            { return proto.CompactTextString(m) }
 func (*MsgWithOneof) ProtoMessage()               {}
 func (*MsgWithOneof) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{5} }
+func (m *MsgWithOneof) Unmarshal(b []byte) error {
+	return xxx_messageInfo_MsgWithOneof.Unmarshal(m, b)
+}
+func (m *MsgWithOneof) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MsgWithOneof.Marshal(b, m, deterministic)
+}
+func (dst *MsgWithOneof) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgWithOneof.Merge(dst, src)
+}
+func (m *MsgWithOneof) XXX_Size() int {
+	return xxx_messageInfo_MsgWithOneof.Size(m)
+}
+func (m *MsgWithOneof) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgWithOneof.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgWithOneof proto.InternalMessageInfo
 
 type isMsgWithOneof_Union interface {
 	isMsgWithOneof_Union()
@@ -570,8 +684,10 @@ func _MsgWithOneof_OneofSizer(msg proto.Message) (n int) {
 
 type Real struct {
 	Value                        *float64 `protobuf:"fixed64,1,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *Real) Reset()                    { *m = Real{} }
@@ -586,6 +702,23 @@ var extRange_Real = []proto.ExtensionRange{
 func (*Real) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_Real
 }
+func (m *Real) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Real.Unmarshal(m, b)
+}
+func (m *Real) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Real.Marshal(b, m, deterministic)
+}
+func (dst *Real) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Real.Merge(dst, src)
+}
+func (m *Real) XXX_Size() int {
+	return xxx_messageInfo_Real.Size(m)
+}
+func (m *Real) XXX_DiscardUnknown() {
+	xxx_messageInfo_Real.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Real proto.InternalMessageInfo
 
 func (m *Real) GetValue() float64 {
 	if m != nil && m.Value != nil {
@@ -596,8 +729,10 @@ func (m *Real) GetValue() float64 {
 
 type Complex struct {
 	Imaginary                    *float64 `protobuf:"fixed64,1,opt,name=imaginary" json:"imaginary,omitempty"`
+	XXX_NoUnkeyedLiteral         struct{} `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
+	XXX_sizecache                int32  `json:"-"`
 }
 
 func (m *Complex) Reset()                    { *m = Complex{} }
@@ -612,6 +747,23 @@ var extRange_Complex = []proto.ExtensionRange{
 func (*Complex) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_Complex
 }
+func (m *Complex) Unmarshal(b []byte) error {
+	return xxx_messageInfo_Complex.Unmarshal(m, b)
+}
+func (m *Complex) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Complex.Marshal(b, m, deterministic)
+}
+func (dst *Complex) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Complex.Merge(dst, src)
+}
+func (m *Complex) XXX_Size() int {
+	return xxx_messageInfo_Complex.Size(m)
+}
+func (m *Complex) XXX_DiscardUnknown() {
+	xxx_messageInfo_Complex.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Complex proto.InternalMessageInfo
 
 func (m *Complex) GetImaginary() float64 {
 	if m != nil && m.Imaginary != nil {
@@ -630,28 +782,47 @@ var E_Complex_RealExtension = &proto.ExtensionDesc{
 }
 
 type KnownTypes struct {
-	An               *google_protobuf.Any          `protobuf:"bytes,14,opt,name=an" json:"an,omitempty"`
-	Dur              *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	St               *google_protobuf2.Struct      `protobuf:"bytes,12,opt,name=st" json:"st,omitempty"`
-	Ts               *google_protobuf3.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Lv               *google_protobuf2.ListValue   `protobuf:"bytes,15,opt,name=lv" json:"lv,omitempty"`
-	Val              *google_protobuf2.Value       `protobuf:"bytes,16,opt,name=val" json:"val,omitempty"`
-	Dbl              *google_protobuf4.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt              *google_protobuf4.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64              *google_protobuf4.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64              *google_protobuf4.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32              *google_protobuf4.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32              *google_protobuf4.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool             *google_protobuf4.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str              *google_protobuf4.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes            *google_protobuf4.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
-	XXX_unrecognized []byte                        `json:"-"`
+	An                   *google_protobuf.Any          `protobuf:"bytes,14,opt,name=an" json:"an,omitempty"`
+	Dur                  *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	St                   *google_protobuf2.Struct      `protobuf:"bytes,12,opt,name=st" json:"st,omitempty"`
+	Ts                   *google_protobuf3.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Lv                   *google_protobuf2.ListValue   `protobuf:"bytes,15,opt,name=lv" json:"lv,omitempty"`
+	Val                  *google_protobuf2.Value       `protobuf:"bytes,16,opt,name=val" json:"val,omitempty"`
+	Dbl                  *google_protobuf4.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt                  *google_protobuf4.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64                  *google_protobuf4.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64                  *google_protobuf4.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32                  *google_protobuf4.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32                  *google_protobuf4.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool                 *google_protobuf4.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str                  *google_protobuf4.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes                *google_protobuf4.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
+	XXX_sizecache        int32                         `json:"-"`
 }
 
 func (m *KnownTypes) Reset()                    { *m = KnownTypes{} }
 func (m *KnownTypes) String() string            { return proto.CompactTextString(m) }
 func (*KnownTypes) ProtoMessage()               {}
 func (*KnownTypes) Descriptor() ([]byte, []int) { return fileDescriptorTestObjects, []int{8} }
+func (m *KnownTypes) Unmarshal(b []byte) error {
+	return xxx_messageInfo_KnownTypes.Unmarshal(m, b)
+}
+func (m *KnownTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_KnownTypes.Marshal(b, m, deterministic)
+}
+func (dst *KnownTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KnownTypes.Merge(dst, src)
+}
+func (m *KnownTypes) XXX_Size() int {
+	return xxx_messageInfo_KnownTypes.Size(m)
+}
+func (m *KnownTypes) XXX_DiscardUnknown() {
+	xxx_messageInfo_KnownTypes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KnownTypes proto.InternalMessageInfo
 
 func (m *KnownTypes) GetAn() *google_protobuf.Any {
 	if m != nil {
@@ -773,6 +944,8 @@ func init() {
 	proto.RegisterType((*Repeats)(nil), "jsonpb.Repeats")
 	proto.RegisterType((*Widget)(nil), "jsonpb.Widget")
 	proto.RegisterType((*Maps)(nil), "jsonpb.Maps")
+	proto.RegisterMapType((map[bool]*Simple)(nil), "jsonpb.Maps.MBoolSimpleEntry")
+	proto.RegisterMapType((map[int64]string)(nil), "jsonpb.Maps.MInt64StrEntry")
 	proto.RegisterType((*MsgWithOneof)(nil), "jsonpb.MsgWithOneof")
 	proto.RegisterType((*Real)(nil), "jsonpb.Real")
 	proto.RegisterType((*Complex)(nil), "jsonpb.Complex")

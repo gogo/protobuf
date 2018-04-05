@@ -645,7 +645,15 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				p.P(`if !easy && r.Intn(10) != 0 {`)
 				p.In()
 				if gogoproto.HasUnrecognized(file.FileDescriptorProto, message.DescriptorProto) {
+					if gogoproto.IsProto3(file.FileDescriptorProto) {
+						p.P("if ", protoPkg.Use(), ".Proto3UnknownFields {")
+						p.In()
+					}
 					p.P(`this.XXX_unrecognized = randUnrecognized`, p.localName, `(r, `, strconv.Itoa(int(maxFieldNumber+1)), `)`)
+					if gogoproto.IsProto3(file.FileDescriptorProto) {
+						p.Out()
+						p.P("}")
+					}
 				}
 				p.Out()
 				p.P(`}`)

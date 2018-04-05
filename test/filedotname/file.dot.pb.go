@@ -37,13 +37,32 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type M struct {
-	A                *string `protobuf:"bytes,1,opt,name=a" json:"a,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	A                    *string  `protobuf:"bytes,1,opt,name=a" json:"a,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *M) Reset()                    { *m = M{} }
 func (*M) ProtoMessage()               {}
 func (*M) Descriptor() ([]byte, []int) { return fileDescriptorFileDot, []int{0} }
+func (m *M) Unmarshal(b []byte) error {
+	return xxx_messageInfo_M.Unmarshal(m, b)
+}
+func (m *M) Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_M.Marshal(b, m, deterministic)
+}
+func (dst *M) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_M.Merge(dst, src)
+}
+func (m *M) XXX_Size() int {
+	return xxx_messageInfo_M.Size(m)
+}
+func (m *M) XXX_DiscardUnknown() {
+	xxx_messageInfo_M.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_M proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*M)(nil), "filedotname.M")
