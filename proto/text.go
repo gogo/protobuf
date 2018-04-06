@@ -176,11 +176,6 @@ func writeName(w *textWriter, props *Properties) error {
 	return nil
 }
 
-// raw is the interface satisfied by RawMessage.
-type raw interface {
-	Bytes() []byte
-}
-
 func requiresQuotes(u string) bool {
 	// When type URL contains any characters except [0-9A-Za-z./\-]*, it must be quoted.
 	for _, ch := range u {
@@ -449,12 +444,6 @@ func (tm *TextMarshaler) writeStruct(w *textWriter, sv reflect.Value) error {
 			if err := w.WriteByte(' '); err != nil {
 				return err
 			}
-		}
-		if b, ok := fv.Interface().(raw); ok {
-			if err := writeRaw(w, b.Bytes()); err != nil {
-				return err
-			}
-			continue
 		}
 
 		if len(props.Enum) > 0 {
