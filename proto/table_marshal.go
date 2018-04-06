@@ -41,6 +41,7 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
+	"unicode/utf8"
 )
 
 // a sizer takes a pointer to a field and the size of its tag, computes the size of
@@ -2065,6 +2066,9 @@ func appendBoolPackedSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byt
 }
 func appendStringValue(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	v := *ptr.toString()
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
+	}
 	b = appendVarint(b, wiretag)
 	b = appendVarint(b, uint64(len(v)))
 	b = append(b, v...)
@@ -2074,6 +2078,9 @@ func appendStringValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]b
 	v := *ptr.toString()
 	if v == "" {
 		return b, nil
+	}
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
 	}
 	b = appendVarint(b, wiretag)
 	b = appendVarint(b, uint64(len(v)))
@@ -2086,6 +2093,9 @@ func appendStringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, err
 		return b, nil
 	}
 	v := *p
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
+	}
 	b = appendVarint(b, wiretag)
 	b = appendVarint(b, uint64(len(v)))
 	b = append(b, v...)
@@ -2094,6 +2104,9 @@ func appendStringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, err
 func appendStringSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	s := *ptr.toStringSlice()
 	for _, v := range s {
+		if !utf8.ValidString(v) {
+			return nil, errInvalidUTF8
+		}
 		b = appendVarint(b, wiretag)
 		b = appendVarint(b, uint64(len(v)))
 		b = append(b, v...)

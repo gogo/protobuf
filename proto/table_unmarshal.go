@@ -41,6 +41,7 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
+	"unicode/utf8"
 )
 
 // Unmarshal is the entry point from the generated .pb.go files.
@@ -1583,6 +1584,9 @@ func unmarshalStringValue(b []byte, f pointer, w int) ([]byte, error) {
 		return nil, io.ErrUnexpectedEOF
 	}
 	v := string(b[:x])
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
+	}
 	*f.toString() = v
 	return b[x:], nil
 }
@@ -1600,6 +1604,9 @@ func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
 		return nil, io.ErrUnexpectedEOF
 	}
 	v := string(b[:x])
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
+	}
 	*f.toStringPtr() = &v
 	return b[x:], nil
 }
@@ -1617,6 +1624,9 @@ func unmarshalStringSlice(b []byte, f pointer, w int) ([]byte, error) {
 		return nil, io.ErrUnexpectedEOF
 	}
 	v := string(b[:x])
+	if !utf8.ValidString(v) {
+		return nil, errInvalidUTF8
+	}
 	s := f.toStringSlice()
 	*s = append(*s, v)
 	return b[x:], nil
