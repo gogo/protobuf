@@ -181,11 +181,10 @@ func (u *unmarshalInfo) unmarshal(m pointer, b []byte) error {
 				rnse = r
 				continue
 			}
-			if err == errInternalBadWireType {
-				err = fmt.Errorf("proto: bad wiretype for field at offset %d of type %s: got wiretype %d",
-					f.field, u.typ, wire)
+			if err == nil || err != errInternalBadWireType {
+				return err
 			}
-			return err
+			// Fragments with bad wire type are treated as unknown fields.
 		}
 
 		// Unknown tag.
@@ -757,7 +756,7 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 
 func unmarshalInt64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -771,7 +770,7 @@ func unmarshalInt64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalInt64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -808,7 +807,7 @@ func unmarshalInt64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -823,7 +822,7 @@ func unmarshalInt64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalSint64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -837,7 +836,7 @@ func unmarshalSint64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalSint64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -874,7 +873,7 @@ func unmarshalSint64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -889,7 +888,7 @@ func unmarshalSint64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalUint64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -903,7 +902,7 @@ func unmarshalUint64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalUint64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -940,7 +939,7 @@ func unmarshalUint64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -955,7 +954,7 @@ func unmarshalUint64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalInt32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -969,7 +968,7 @@ func unmarshalInt32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalInt32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1005,7 +1004,7 @@ func unmarshalInt32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1019,7 +1018,7 @@ func unmarshalInt32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalSint32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1033,7 +1032,7 @@ func unmarshalSint32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalSint32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1069,7 +1068,7 @@ func unmarshalSint32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1083,7 +1082,7 @@ func unmarshalSint32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalUint32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1097,7 +1096,7 @@ func unmarshalUint32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalUint32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1134,7 +1133,7 @@ func unmarshalUint32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1149,7 +1148,7 @@ func unmarshalUint32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixed64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1161,7 +1160,7 @@ func unmarshalFixed64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixed64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1195,7 +1194,7 @@ func unmarshalFixed64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1208,7 +1207,7 @@ func unmarshalFixed64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixedS64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1220,7 +1219,7 @@ func unmarshalFixedS64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixedS64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1254,7 +1253,7 @@ func unmarshalFixedS64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1267,7 +1266,7 @@ func unmarshalFixedS64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixed32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1279,7 +1278,7 @@ func unmarshalFixed32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixed32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1313,7 +1312,7 @@ func unmarshalFixed32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1326,7 +1325,7 @@ func unmarshalFixed32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixedS32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1338,7 +1337,7 @@ func unmarshalFixedS32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFixedS32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1371,7 +1370,7 @@ func unmarshalFixedS32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1383,7 +1382,7 @@ func unmarshalFixedS32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalBoolValue(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	// Note: any length varint is allowed, even though any sane
 	// encoder will use one byte.
@@ -1400,7 +1399,7 @@ func unmarshalBoolValue(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalBoolPtr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1436,7 +1435,7 @@ func unmarshalBoolSlice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireVarint {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1450,7 +1449,7 @@ func unmarshalBoolSlice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFloat64Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1462,7 +1461,7 @@ func unmarshalFloat64Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFloat64Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1496,7 +1495,7 @@ func unmarshalFloat64Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed64 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 8 {
 		return nil, io.ErrUnexpectedEOF
@@ -1509,7 +1508,7 @@ func unmarshalFloat64Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFloat32Value(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1521,7 +1520,7 @@ func unmarshalFloat32Value(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalFloat32Ptr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1555,7 +1554,7 @@ func unmarshalFloat32Slice(b []byte, f pointer, w int) ([]byte, error) {
 		return res, nil
 	}
 	if w != WireFixed32 {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	if len(b) < 4 {
 		return nil, io.ErrUnexpectedEOF
@@ -1568,7 +1567,7 @@ func unmarshalFloat32Slice(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalStringValue(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1588,7 +1587,7 @@ func unmarshalStringValue(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1608,7 +1607,7 @@ func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalStringSlice(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1631,7 +1630,7 @@ var emptyBuf [0]byte
 
 func unmarshalBytesValue(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1652,7 +1651,7 @@ func unmarshalBytesValue(b []byte, f pointer, w int) ([]byte, error) {
 
 func unmarshalBytesSlice(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
-		return nil, errInternalBadWireType
+		return b, errInternalBadWireType
 	}
 	x, n := decodeVarint(b)
 	if n == 0 {
@@ -1671,7 +1670,7 @@ func unmarshalBytesSlice(b []byte, f pointer, w int) ([]byte, error) {
 func makeUnmarshalMessagePtr(sub *unmarshalInfo, name string) unmarshaler {
 	return func(b []byte, f pointer, w int) ([]byte, error) {
 		if w != WireBytes {
-			return nil, errInternalBadWireType
+			return b, errInternalBadWireType
 		}
 		x, n := decodeVarint(b)
 		if n == 0 {
@@ -1705,7 +1704,7 @@ func makeUnmarshalMessagePtr(sub *unmarshalInfo, name string) unmarshaler {
 func makeUnmarshalMessageSlicePtr(sub *unmarshalInfo, name string) unmarshaler {
 	return func(b []byte, f pointer, w int) ([]byte, error) {
 		if w != WireBytes {
-			return nil, errInternalBadWireType
+			return b, errInternalBadWireType
 		}
 		x, n := decodeVarint(b)
 		if n == 0 {
@@ -1732,7 +1731,7 @@ func makeUnmarshalMessageSlicePtr(sub *unmarshalInfo, name string) unmarshaler {
 func makeUnmarshalGroupPtr(sub *unmarshalInfo, name string) unmarshaler {
 	return func(b []byte, f pointer, w int) ([]byte, error) {
 		if w != WireStartGroup {
-			return nil, errInternalBadWireType
+			return b, errInternalBadWireType
 		}
 		x, y := findEndGroup(b)
 		if x < 0 {
@@ -1758,7 +1757,7 @@ func makeUnmarshalGroupPtr(sub *unmarshalInfo, name string) unmarshaler {
 func makeUnmarshalGroupSlicePtr(sub *unmarshalInfo, name string) unmarshaler {
 	return func(b []byte, f pointer, w int) ([]byte, error) {
 		if w != WireStartGroup {
-			return nil, errInternalBadWireType
+			return b, errInternalBadWireType
 		}
 		x, y := findEndGroup(b)
 		if x < 0 {
